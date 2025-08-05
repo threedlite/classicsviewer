@@ -150,5 +150,54 @@ This script:
 - Applies proportional mapping to fix them
 - Reports which texts were fixed
 
+## Quick Deployment Instructions
+
+To rebuild and deploy the app from scratch:
+
+```bash
+# 1. Build the database (takes ~5 minutes)
+cd data-prep
+python3 create_perseus_database.py
+
+# 2. Create compressed OBB file
+mv perseus_texts.db output/
+cd output
+zip -9 main.1.com.classicsviewer.app.debug.obb perseus_texts.db
+cd ../..
+
+# 3. Build debug APK
+chmod +x gradlew  # Only needed once
+./gradlew assembleDebug
+
+# 4. Deploy to phone
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb shell mkdir -p /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
+adb push data-prep/output/main.1.com.classicsviewer.app.debug.obb /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
+adb shell pm clear com.classicsviewer.app.debug
+```
+
+### Important Notes:
+- The database build creates a ~786MB SQLite file that gets compressed to ~171MB
+- **ALWAYS** redeploy the OBB when reinstalling the APK (Android removes OBB on uninstall)
+- The `pm clear` command ensures the app starts fresh with language selection
+- First launch after deployment extracts the database (takes ~2 seconds with progress dialog)
+- The APK build shows Kotlin warnings but these can be ignored
+
+### One-Line Deployment (if scripts exist):
+```bash
+# For complete rebuild and deployment:
+./build_and_deploy.sh
+
+# For database-only updates:
+./deploy_database_only.sh
+```
+
+### Troubleshooting:
+- **"./gradlew: No such file or directory"**: Run `chmod +x gradlew` first
+- **"adb: command not found"**: Ensure Android SDK platform-tools are in your PATH
+- **App crashes on startup**: Check logs with `adb logcat | grep "Pre-packaged database"` for schema mismatches
+- **No authors shown**: Force language reselection with `adb shell pm clear com.classicsviewer.app.debug`
+- **Wrong directory errors**: Always run commands from project root unless `cd` is specified
+
 
 
