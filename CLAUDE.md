@@ -137,18 +137,23 @@ Some Perseus texts (especially prose works) have translations that use section n
    - Mapping: Section 1 → Lines 1-4, Section 2 → Lines 5-8, etc.
    - Result: Full translation coverage across all 866 lines
 
-### Manual Fix (if needed)
-If translations aren't properly aligned after import:
-```bash
-cd data-prep
-python3 fix_alignment_post_import.py
-```
 
-This script:
-- Creates a backup of the database
-- Identifies texts with alignment issues
-- Applies proportional mapping to fix them
-- Reports which texts were fixed
+## Database Creation Process
+
+The database build uses pre-extracted Wiktionary data for morphological analysis:
+
+### Wiktionary Data Pipeline
+1. **Greek Pages Extraction** (if regenerating from scratch):
+   ```bash
+   python3 wiktionary-processing/extract_all_greek_pages.py
+   ```
+   - Extracts ~124k Greek pages from 1.4GB Wiktionary dump into 46MB cache
+   - All subsequent scripts use this cache for efficiency
+
+2. **Pre-extracted Files Used**:
+   - `greek_inflection_of_mappings.json` - 15,592 inflection mappings
+   - `ancient_greek_declension_mappings.json` - 37,119 declension patterns
+   - `ancient_greek_all_morphology_correct.json` - Complete morphological data
 
 ## Quick Deployment Instructions
 
@@ -158,6 +163,8 @@ To rebuild and deploy the app from scratch:
 # 1. Build the database (takes ~5 minutes)
 cd data-prep
 python3 create_perseus_database.py
+# Or for full build with all enhancements:
+# python3 build_database.py
 
 # 2. Create compressed OBB file
 mv perseus_texts.db output/

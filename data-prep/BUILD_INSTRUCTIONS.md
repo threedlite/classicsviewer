@@ -62,31 +62,40 @@ This single command runs the complete build process (~10-15 minutes):
 
 The build process uses pre-extracted Wiktionary data. If you need to re-extract:
 
-1. **Extract English Wiktionary inflections**
+1. **Extract Greek pages from English Wiktionary** (FIRST STEP - creates cache)
+   ```bash
+   python3 wiktionary-processing/extract_all_greek_pages.py
+   ```
+   - Input: `enwiktionary-latest-pages-articles.xml.bz2` (1.4GB)
+   - Output: `all_greek_wiktionary_pages.json` (46MB, ~124k pages)
+   - This creates a searchable cache of just Greek-related pages
+   - All subsequent scripts use this cache instead of the full dump
+
+2. **Extract English Wiktionary inflections** (uses Greek pages cache)
    ```bash
    python3 wiktionary-processing/extract_inflection_of_template.py
    ```
    Creates: `wiktionary-processing/greek_inflection_of_mappings.json`
 
-2. **Extract Greek Wiktionary morphological forms**
+3. **Extract Greek Wiktionary morphological forms**
    ```bash
    python3 wiktionary-processing/extract_greek_wiktionary_fixed.py
    ```
    Creates: `wiktionary-processing/ancient_greek_all_morphology_correct.json`
 
-3. **Extract all Ancient Greek forms** (NEW)
+4. **Extract all Ancient Greek forms** (uses Greek pages cache)
    ```bash
    python3 wiktionary-processing/extract_all_ancient_greek_forms.py
    ```
    Creates: `wiktionary-processing/ancient_greek_all_forms.json`
 
-4. **Generate declension mappings**
+5. **Generate declension mappings**
    ```bash
    python3 wiktionary-processing/extract_declension_mappings.py
    ```
    Creates: `wiktionary-processing/ancient_greek_declension_mappings.json`
 
-5. **Build main database**
+6. **Build main database**
    ```bash
    python3 create_perseus_database.py
    ```

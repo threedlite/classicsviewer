@@ -6,19 +6,24 @@ This directory contains all scripts and tools for preparing the Perseus Digital 
 
 The data preparation process:
 1. Parses XML texts from Perseus Digital Library repositories
-2. Creates a SQLite database with texts, translations, and metadata
-3. Applies translation alignment fixes for section-based texts
-4. Generates compressed OBB (Opaque Binary Blob) files for Android deployment
+2. Extracts LSJ (Greek) and Lewis & Short (Latin) dictionaries
+3. **Extracts morphological data from Wiktionary** for enhanced lemmatization
+4. Creates a SQLite database with texts, translations, dictionary, and morphology
+5. Applies translation alignment fixes for section-based texts
+6. Generates compressed OBB (Opaque Binary Blob) files for Android deployment
 
 ## Database Schema
 
 The database contains the following main tables:
 - `authors`: Author metadata
-- `books`: Book/work metadata with translation flags
+- `works`: Works by each author
+- `books`: Book divisions within works
 - `text_lines`: Original Greek/Latin text lines
-- `translation_lines`: English translations aligned to text lines
+- `translation_segments`: English translations aligned to line ranges
 - `dictionary_entries`: LSJ/Lewis & Short dictionary entries
-- `morphology`: Morphological analysis data
+- `lemma_map`: Basic word-to-lemma mappings
+- `lemma_map_full`: Enhanced Wiktionary morphological mappings
+- `word_forms`: Word occurrences with lemma references
 
 ## Key Scripts
 
@@ -43,11 +48,46 @@ Post-import script to fix translation alignments if needed:
 - Creates database backup before changes
 - Safe detection criteria (only fixes texts where sections < 50% of lines)
 
+## Wiktionary Data Extraction
+
+The database build process uses pre-extracted Wiktionary data to enhance lemmatization:
+
+### Pre-extracted Wiktionary Files Used:
+1. **`wiktionary-processing/greek_inflection_of_mappings.json`** (470KB)
+   - Maps inflected forms to their lemmas using {{inflection of}} templates
+   - Example: μῆνιν → μῆνις (accusative singular)
+
+2. **`wiktionary-processing/ancient_greek_declension_mappings.json`** (2.7MB)
+   - Comprehensive declension patterns from Greek Wiktionary
+   - 37,119 form-to-lemma mappings with full morphological details
+
+3. **`wiktionary-processing/ancient_greek_all_morphology_correct.json`** (11MB)
+   - Complete morphological data including verb conjugations
+   - Used by `add_inflection_mappings.py` during build
+
+### Wiktionary Processing Pipeline (if regenerating):
+```bash
+# Step 1: Extract Greek pages from Wiktionary dump (only Greek-related pages)
+python3 wiktionary-processing/extract_all_greek_pages.py
+# Input: enwiktionary-latest-pages-articles.xml.bz2 (1.4GB)
+# Output: all_greek_wiktionary_pages.json (46MB, 124k pages)
+
+# Step 2: Extract specific data from the Greek pages cache
+python3 wiktionary-processing/extract_inflection_of_template.py
+python3 wiktionary-processing/extract_declension_mappings.py
+python3 wiktionary-processing/extract_all_ancient_greek_forms.py
+```
+
+The two-stage approach (dump → Greek cache → specific extractions) is much more efficient than repeatedly parsing the 1.4GB Wiktionary dump.
+
 ## Building the Database
 
 ```bash
-# Full build from scratch
+# Full build from scratch (uses pre-extracted Wiktionary data)
 python3 create_perseus_database.py
+
+# Or use the master build script for complete processing:
+python3 build_database.py
 
 # The database will be created in output/perseus_texts.db
 # Size: ~786MB uncompressed
