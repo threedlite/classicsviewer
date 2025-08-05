@@ -1,0 +1,67 @@
+GOOGLE PLAY STORE LISTING INFORMATION
+=====================================
+
+App Name: Classics Viewer
+
+Short Description (80 chars max):
+Read Ancient Greek & Latin texts with integrated dictionary and morphology
+
+Full Description (4000 chars max):
+Classics Viewer is a powerful reader app for ancient Greek and Latin texts, designed for students, scholars, and enthusiasts of classical literature. Access the complete Perseus Digital Library collection offline on your Android device.
+
+KEY FEATURES:
+• Complete Perseus Digital Library texts - works by Homer, Plato, Virgil, Cicero, and hundreds more
+• Integrated LSJ (Greek) and Lewis & Short (Latin) dictionaries
+• Morphological analysis for every word
+• Click any word for instant dictionary lookup
+• Find all occurrences of a word across the entire corpus
+• Support for multiple translations
+• Dark mode for comfortable reading
+• 100% offline - no internet connection required
+• Fast full-text search across all works
+
+TEXTS INCLUDED:
+• Greek: Homer, Hesiod, Plato, Aristotle, Sophocles, Euripides, Herodotus, Thucydides, and more
+• Latin: Virgil, Horace, Ovid, Cicero, Caesar, Livy, Tacitus, and more
+• English translations for most major works
+
+PERFECT FOR:
+• University classics courses
+• High school Latin/Greek students
+• Independent learners
+• Researchers needing offline access
+• Anyone interested in classical literature
+
+The app includes a one-time download of the complete database (approximately 750MB when extracted). All features work completely offline after initial setup.
+
+App Category: Education
+
+Content Rating: Everyone
+
+Tags:
+- classics
+- latin
+- ancient greek
+- perseus
+- dictionary
+- education
+- offline
+- texts
+- homer
+- plato
+- virgil
+- morphology
+- literature
+- digital library
+- reference
+
+Contact Email: [YOUR EMAIL]
+Website: [YOUR WEBSITE]
+Privacy Policy URL: [YOUR PRIVACY POLICY URL]
+
+Graphics needed:
+✓ App icon: 512x512 PNG (already exists)
+✓ Feature graphic: 1024x500 PNG (created)
+✓ Screenshots: 2-8 phone screenshots (already captured)
+- Optional: 7" and 10" tablet screenshots
+- Optional: Promo video

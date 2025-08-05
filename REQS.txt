@@ -1,0 +1,10 @@
+# Classics Viewer
+
+Requirements
+
+1. 100% local operation on phone; no internet access or other permissions required. Able to run in airplane mode.
+2. User can select language (Greek or Latin), then Author (e.g. Homer), then Work (e.g. Iliad), then Book (e.g. Book 1), then Line number range (e.g. 1-99, 100-199, 200-299, 300-399, etc.), then it will display the text of those lines in an easy to read format, numbered and scrollable, with arrows to go to the next or previous page. 
+3. While viewing text, any word can be clicked on and the definition (from LSJ) will appear on a new activity page, with a link to go back.
+4. From the word definition page, there is also an option to list all of the lemma's occurrances in the entire corpus for that language, listed by author, work, book, and line, and dispaying the line text.
+
+

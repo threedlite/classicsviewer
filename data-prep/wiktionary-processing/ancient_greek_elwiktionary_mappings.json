@@ -1,0 +1,6926 @@
+{
+  "metadata": {
+    "source": "Greek Wiktionary (Wikimedia Foundation)",
+    "source_file": "../../data-sources/elwiktionary-latest-pages-articles.xml.bz2",
+    "extraction_date": "2025-08-04",
+    "license": "Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)",
+    "total_pages_processed": 1610605,
+    "inflection_pages_found": 1265,
+    "total_mappings": 864,
+    "description": "Ancient Greek inflection relationships extracted from Greek Wiktionary"
+  },
+  "mappings": [
+    {
+      "word_form": "τριχα",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τρίχα",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "πατερασ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρας",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "μητερα",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρα",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "πατερ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πάτερ",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "φυλακασ",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλακας",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "γεροντασ",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέροντας",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "ξυνωριδα",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ξυνωρίδα",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "βασιλεασ",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλέας",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "χρηματα",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρήματα",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "ποδασ",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόδας",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "παννυχιδα",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παννυχίδα",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "κυνοδοντασ",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδοντας",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "τριχασ",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τρίχας",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "δυναμει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δυνάμει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "βασει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βάσει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "μελανιασ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μελανίας",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αιγεσ",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἶγες",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "φθογγοι",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγοι",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "λεξεισ",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξεις",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "ποταμοι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποταμοί",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "χαριν",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάριν",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "πατρι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατρί",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "μητρι",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητρί",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "δουλων",
+      "lemma": "δουλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δούλων",
+      "debug_lemma": "δοῦλος"
+    },
+    {
+      "word_form": "στρατιασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιάς",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "μυρτου",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύρτου",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "μυρτα",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύρτα",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "μυρτων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύρτων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "βικουσ",
+      "lemma": "βικοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βίκους",
+      "debug_lemma": "βῖκος"
+    },
+    {
+      "word_form": "δημου",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δήμου",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημων",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δήμων",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημουσ",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δήμους",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "χειρα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χείρα",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "τοπουσ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τόπους",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "φθογγου",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγου",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "φθογγων",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγων",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "φθογγουσ",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγους",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "παππου",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πάππου",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κοσμουσ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κόσμους",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "κουρου",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κούρου",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κουρων",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κούρων",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κουρουσ",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κούρους",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κρινου",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κρίνου",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "φθογγε",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγε",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "παππασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πάππας",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "μαγειρεια",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μαγειρεῖα",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ανδροσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνδρός",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρι",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνδρί",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "πατερα",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρα",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατροσ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατρός",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "μητροσ",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητρός",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "αγαλματοσ",
+      "lemma": "αγαλμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ἀγάλματος",
+      "debug_lemma": "άγαλμα"
+    },
+    {
+      "word_form": "οικων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἴκων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "φιλησει",
+      "lemma": "χφιλησω",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φιλήσει",
+      "debug_lemma": "χ+=φιλήσω"
+    },
+    {
+      "word_form": "χειρε",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χεῖρε",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "αχεων",
+      "lemma": "αχοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ἀχέων",
+      "debug_lemma": "ἄχος"
+    },
+    {
+      "word_form": "κληρουχιασ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κληρουχίας",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "κοινωνιασ",
+      "lemma": "κοινωνια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοινωνίας",
+      "debug_lemma": "κοινωνία"
+    },
+    {
+      "word_form": "νηστειασ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νηστείας",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "πετρασ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πέτρας",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "τεκνογονιασ",
+      "lemma": "τεκνογονια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τεκνογονίας",
+      "debug_lemma": "τεκνογονία"
+    },
+    {
+      "word_form": "φλογασ",
+      "lemma": "φλογα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλόγας",
+      "debug_lemma": "φλόγα"
+    },
+    {
+      "word_form": "τριχεσ",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τρίχες",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "φλογεσ",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλόγες",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "ηνια",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἡνία",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "πιστωσει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πιστώσει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ταξει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάξει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ταξεισ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάξεις",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "υπεξαιρεσει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υπεξαιρέσει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ανδρων",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνδρῶν",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "συγγραφεων",
+      "lemma": "συγγραφευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγραφέων",
+      "debug_lemma": "συγγραφεύς"
+    },
+    {
+      "word_form": "υιου",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱοῦ",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "γεροντων",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γερόντων",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "υιον",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱόν",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "ανδρεσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρες",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "φωτα",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φῶτα",
+      "debug_lemma": "φῶς"
+    },
+    {
+      "word_form": "θινεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θῖνες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "φωτοσ",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φωτός",
+      "debug_lemma": "φῶς"
+    },
+    {
+      "word_form": "φωτι",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φωτί",
+      "debug_lemma": "φῶς"
+    },
+    {
+      "word_form": "φωσι",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φωσί",
+      "debug_lemma": "φῶς"
+    },
+    {
+      "word_form": "φωσιν",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φωσίν",
+      "debug_lemma": "φῶς"
+    },
+    {
+      "word_form": "αγωγοι",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγωγοί",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "ωτα",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὦτα",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ηματα",
+      "lemma": "ημαρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ἤματα",
+      "debug_lemma": "ἦμαρ"
+    },
+    {
+      "word_form": "ανδρασι",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνδράσι",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "νικων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νικῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "γησ",
+      "lemma": "γη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γῆς",
+      "debug_lemma": "γῆ"
+    },
+    {
+      "word_form": "παιδεσ",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παῖδες",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "ανδρασ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρας",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνερ",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ασμασι",
+      "lemma": "ασμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ᾄσμασι",
+      "debug_lemma": "ᾆσμα"
+    },
+    {
+      "word_form": "ασματων",
+      "lemma": "ασμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ᾀσμάτων",
+      "debug_lemma": "ᾆσμα"
+    },
+    {
+      "word_form": "ασματα",
+      "lemma": "ασμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ᾄσματα",
+      "debug_lemma": "ᾆσμα"
+    },
+    {
+      "word_form": "ασματι",
+      "lemma": "ασμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ᾄσματι",
+      "debug_lemma": "ᾆσμα"
+    },
+    {
+      "word_form": "ασματοσ",
+      "lemma": "ασμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ᾄσματος",
+      "debug_lemma": "ᾆσμα"
+    },
+    {
+      "word_form": "ασματοκαμπτου",
+      "lemma": "ασματοκαμπτησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "ᾀσματοκάμπτου",
+      "debug_lemma": "ᾀσματοκάμπτης"
+    },
+    {
+      "word_form": "μηνι",
+      "lemma": "μηνισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "μῆνι",
+      "debug_lemma": "μῆνις"
+    },
+    {
+      "word_form": "μηνιν",
+      "lemma": "μηνισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μῆνιν",
+      "debug_lemma": "μῆνις"
+    },
+    {
+      "word_form": "μηνιι",
+      "lemma": "μηνισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "μήνιι",
+      "debug_lemma": "μῆνις"
+    },
+    {
+      "word_form": "μηνιοσ",
+      "lemma": "μηνισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "μήνιος",
+      "debug_lemma": "μῆνις"
+    },
+    {
+      "word_form": "μηνιδι",
+      "lemma": "μηνισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "μήνιδι",
+      "debug_lemma": "μῆνις"
+    },
+    {
+      "word_form": "μηνιδοσ",
+      "lemma": "μηνισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:λέξης",
+      "debug_title": "μήνιδος",
+      "debug_lemma": "μῆνις"
+    },
+    {
+      "word_form": "δημογεροντεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δημογέροντες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "διακενα",
+      "lemma": "διακενον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "διάκενα",
+      "debug_lemma": "διάκενον"
+    },
+    {
+      "word_form": "ταπητεσ",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπητες",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "αλωπεκεσ",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεκες",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "ταξεων",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάξεων",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "νησου",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νήσου",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "νησων",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νήσων",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "ποδων",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποδῶν",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποσιν",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποσίν",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "φυλακα",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλακα",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "κονιποδεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κονίποδες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "κωνωπασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωπας",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "συνωριδα",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συνωρίδα",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "πατερεσ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρες",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "μητερεσ",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρες",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "φυλακεσ",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλακες",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "προμητορεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "προμήτορες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "σταυρων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σταυρῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "γυναικα",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναῖκα",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "χρηματων",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρημάτων",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "χειροσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χειρός",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "συγγραφεωσ",
+      "lemma": "συγγραφευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγραφέως",
+      "debug_lemma": "συγγραφεύς"
+    },
+    {
+      "word_form": "χρωματων",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρωμάτων",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "λεξεων",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξεων",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "λημματων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λημμάτων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ποδοσ",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποδός",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ελπιδα",
+      "lemma": "ελπισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐλπίδα",
+      "debug_lemma": "ἐλπίς"
+    },
+    {
+      "word_form": "γυναικοσ",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναικός",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "παιδαγωγοι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παιδαγωγοί",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "λογω",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λόγῳ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "βιασ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βίας",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κτηματων",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτημάτων",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "χρηματοσ",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρήματος",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "σηματοσ",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σήματος",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "κτηματοσ",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτήματος",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "σηματα",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σήματα",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "κτηματα",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτήματα",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "θυμοι",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμοί",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "γεωργοι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γεωργοί",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "θυμουσ",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμούς",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "νευρου",
+      "lemma": "νευρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεύρου",
+      "debug_lemma": "νεῦρον"
+    },
+    {
+      "word_form": "νευρων",
+      "lemma": "νευρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεύρων",
+      "debug_lemma": "νεῦρον"
+    },
+    {
+      "word_form": "λεξεωσ",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξεως",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "δυναμεων",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δυνάμεων",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "τμησεων",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμήσεων",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "τμησεισ",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμήσεις",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "δυναμεωσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δυνάμεως",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ταξεωσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάξεως",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "τμησεωσ",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμήσεως",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "κλισεωσ",
+      "lemma": "κλισισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλίσεως",
+      "debug_lemma": "κλίσῐς"
+    },
+    {
+      "word_form": "πολεωσ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόλεως",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κλησεωσ",
+      "lemma": "κλησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλήσεως",
+      "debug_lemma": "κλῆσῐς"
+    },
+    {
+      "word_form": "κλυσεωσ",
+      "lemma": "κλυσισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλύσεως",
+      "debug_lemma": "κλύσῐς"
+    },
+    {
+      "word_form": "φθογγον",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγον",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "μηνοσ",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μηνός",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μυρτον",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύρτον",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ποδα",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόδα",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "τιμων",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τιμῶν",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "μανιων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μανιῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "μηνεσ",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μῆνες",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "πελεκανε",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πελεκᾶνε",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "φαρμακων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φαρμάκων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "λουτριδεσ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λουτρίδες",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "κληρουχια",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κληρουχίᾳ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "κληρουχιαισ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κληρουχίαις",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "αστρασι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀστράσι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "αστρασιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀστράσιν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "δαι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δαί",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "δαι",
+      "lemma": "κειμτουελλειπτικου",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δαΐ",
+      "debug_lemma": "κείμ=''του ελλειπτικού''"
+    },
+    {
+      "word_form": "βασιλεισ",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλεῖς",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "ωτοσ",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὠτός",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ερμαι",
+      "lemma": "κειμτουανδρικουκυριουονοματοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "Ἑρμαῖ",
+      "debug_lemma": "κείμ=του ανδρικού κυρίου ονόματος"
+    },
+    {
+      "word_form": "βασιλεων",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλέων",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "κυνοσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνός",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "φαρμακου",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φαρμάκου",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "συμβουλου",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συμβούλου",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ραγδαιοτητα",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥαγδαιότητα",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "νεφων",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεφῶν",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "ηλιου",
+      "lemma": "ηλιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἡλίου",
+      "debug_lemma": "ἥλιος"
+    },
+    {
+      "word_form": "αιδουσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰδοῦς",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αιδοοσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰδόος",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αιδω",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰδῶ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αιδοι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰδοῖ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ιερεα",
+      "lemma": "ιερευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱερέα",
+      "debug_lemma": "ἱερεύς"
+    },
+    {
+      "word_form": "ιερευ",
+      "lemma": "ιερευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱερεῦ",
+      "debug_lemma": "ἱερεύς"
+    },
+    {
+      "word_form": "ιερει",
+      "lemma": "ιερευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱερεῖ",
+      "debug_lemma": "ἱερεύς"
+    },
+    {
+      "word_form": "ιερεισ",
+      "lemma": "ιερευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱερεῖς",
+      "debug_lemma": "ἱερεύς"
+    },
+    {
+      "word_form": "αραξασ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀράξας",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αραχνη",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀράχνη",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αραχνησ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀράχνης",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "κλεουσ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλέους",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "βουφορβον",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβόν",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβων",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβῶν",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβου",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβοῦ",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβω",
+      "lemma": "γα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβῷ",
+      "debug_lemma": "γ=α"
+    },
+    {
+      "word_form": "βουφορβοισ",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβοῖς",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβουσ",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβούς",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβε",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβέ",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβοι",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβοί",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβω",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβώ",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "βουφορβοιν",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βουφορβοῖν",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "προσκηνιων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "προσκηνίων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "αργυρω",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀργύρῳ",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "αργυρω",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀργύρω",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "αργυροιν",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀργύροιν",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "κρηνησ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κρήνης",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "κρηνην",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κρήνην",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "κρηνη",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κρήνῃ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ακολοι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄκολοι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "απατησ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπάτης",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "μυρτω",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύρτῳ",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "μυρτω",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύρτω",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "παππων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παππῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "παππα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πάππᾳ",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κρατει",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κράτει",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "φυτων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φυτῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "αρρενοσ",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρρενος",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "αρρενα",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρρενα",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "αρρενασ",
+      "lemma": "γαθ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρρενας",
+      "debug_lemma": "γ=αθ"
+    },
+    {
+      "word_form": "χρονω",
+      "lemma": "χρονοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρόνῳ",
+      "debug_lemma": "χρόνος"
+    },
+    {
+      "word_form": "οργησ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀργῆς",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "βασιλεα",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλέα",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "πολεσι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόλεσι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ιστοριαν",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστορίαν",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ιστοριασ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστορίας",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ιστορια",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστορίᾳ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ιστοριαι",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστορίαι",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "ιστοριων",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστοριῶν",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "ιστοριαισ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστορίαις",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "ιστοριαιν",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱστορίαιν",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "πτυοφιν",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πτυόφιν",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ιλιοφι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "Ἰλιόφι",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "εαροσ",
+      "lemma": "πγ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔαρος",
+      "debug_lemma": "π=γ"
+    },
+    {
+      "word_form": "ηροσ",
+      "lemma": "πγ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἦρος",
+      "debug_lemma": "π=γ"
+    },
+    {
+      "word_form": "εαρι",
+      "lemma": "πδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔαρι",
+      "debug_lemma": "π=δ"
+    },
+    {
+      "word_form": "ηρι",
+      "lemma": "πδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἦρι",
+      "debug_lemma": "π=δ"
+    },
+    {
+      "word_form": "θεοφιν",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θεόφιν",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "θεοφι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θεόφι",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αντιθεσει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀντιθέσει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αμοιβη",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀμοιβῇ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "αγκυρα",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγκύρᾳ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ζημια",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ζημίᾳ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "παραδειγματι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παραδείγματι",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "πληρωμη",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πληρωμῇ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "εμφανισει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐμφανίσει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "χρημασι",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρήμασι",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "υφηγεσια",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὑφηγεσίᾳ",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ευκαιρια",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "εὐκαιρία",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "πολει",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόλει",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "δυναμεσι",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δυνάμεσι",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "κεφαλησ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κεφαλῆς",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "ταξεσι",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάξεσι",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "ταξιν",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάξιν",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "λογοισ",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λόγοις",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "αρχησ",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀρχῆς",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "πνευματι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πνεύματι",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "μνηματι",
+      "lemma": "μνημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μνήματι",
+      "debug_lemma": "μνῆμα"
+    },
+    {
+      "word_form": "υιω",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱῷ",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "μνημασι",
+      "lemma": "μνημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μνήμασι",
+      "debug_lemma": "μνῆμα"
+    },
+    {
+      "word_form": "ζωην",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ζωήν",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "χειρι",
+      "lemma": "αεν",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χειρί",
+      "debug_lemma": "α=εν"
+    },
+    {
+      "word_form": "χειρεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χεῖρες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "χειρων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χειρῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "χερσι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χερσί",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "χερσιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χερσίν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "χειρασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χεῖρας",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "χεροιν",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χεροῖν",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "χερων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χερῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονοματι",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνόματι",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ονομασι",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνόμασι",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ονομασιν",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνόμασιν",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "θανατω",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θανάτῳ",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "θανατον",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θάνατον",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κωνωποσ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωπος",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κωνωπα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωπα",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κωνωπεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωπες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "κωνωπων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κωνώπων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "κωνωπι",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωπι",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "κωνωψι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωψι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "κωνωψιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωψιν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "κωνωπε",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κώνωπε",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "κωνωποιν",
+      "lemma": "αδ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κωνώποιν",
+      "debug_lemma": "α=δ"
+    },
+    {
+      "word_form": "ρωθωνεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωνες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ρωθωνοσ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωνος",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ρωθωνι",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωνι",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ρωθωσι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωσι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ρωθωσιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωσιν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ρωθωνα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωνα",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ρωθωνων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥωθώνων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ρωθωνασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥώθωνας",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οδοντοσ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντος",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οδοντι",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντι",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οδοντα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντα",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οδοντεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οδοντων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οδουσι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδοῦσι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οδουσιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδοῦσιν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οδοντασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντας",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυχοσ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυχος",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ονυχι",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυχι",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ονυχα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυχα",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ονυχεσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυχες",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυχων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνύχων",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυξι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυξι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυξιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυξιν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυχεσσι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνύχεσσι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυχεσσιν",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνύχεσσιν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "ονυχασ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄνυχας",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "στρατιαι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιαί",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "στρατιασ",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιᾶς",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "στρατια",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιᾷ",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "στρατιαν",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιάν",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "στρατιων",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιῶν",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "στρατιαισ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στρατιαῖς",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οικου",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἴκου",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οικω",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἴκῳ",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οικον",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἶκον",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οικοι",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἶκοι",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οικε",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἶκε",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "οικοισ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἴκοις",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "οικουσ",
+      "lemma": "απ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἴκους",
+      "debug_lemma": "α=π"
+    },
+    {
+      "word_form": "θριξι",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θριξί",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "θριξιν",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θριξίν",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "τριχι",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τριχί",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "τριχοσ",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τριχός",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "τριχων",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τριχῶν",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "τριχεσι",
+      "lemma": "θριξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τρίχεσι",
+      "debug_lemma": "θρίξ"
+    },
+    {
+      "word_form": "μετωποισ",
+      "lemma": "μετωπον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μετώποις",
+      "debug_lemma": "μέτωπον"
+    },
+    {
+      "word_form": "στηθεσι",
+      "lemma": "στηθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στήθεσι",
+      "debug_lemma": "στῆθος"
+    },
+    {
+      "word_form": "στηθεσιν",
+      "lemma": "στηθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στήθεσιν",
+      "debug_lemma": "στῆθος"
+    },
+    {
+      "word_form": "κροταφοισ",
+      "lemma": "κροταφοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κροτάφοις",
+      "debug_lemma": "κρόταφος"
+    },
+    {
+      "word_form": "βλεφαροισ",
+      "lemma": "βλεφαρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βλεφάροις",
+      "debug_lemma": "βλέφαρον"
+    },
+    {
+      "word_form": "φρεσι",
+      "lemma": "φρην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φρεσί",
+      "debug_lemma": "φρήν"
+    },
+    {
+      "word_form": "φρεσιν",
+      "lemma": "φρην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φρεσίν",
+      "debug_lemma": "φρήν"
+    },
+    {
+      "word_form": "φρασι",
+      "lemma": "φρην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φρασί",
+      "debug_lemma": "φρήν"
+    },
+    {
+      "word_form": "φρασιν",
+      "lemma": "φρην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φρασίν",
+      "debug_lemma": "φρήν"
+    },
+    {
+      "word_form": "μυκτηρσι",
+      "lemma": "μυκτηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μυκτῆρσι",
+      "debug_lemma": "μυκτήρ"
+    },
+    {
+      "word_form": "μυκτηρσιν",
+      "lemma": "μυκτηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μυκτῆρσιν",
+      "debug_lemma": "μυκτήρ"
+    },
+    {
+      "word_form": "στομασι",
+      "lemma": "στομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στόμασι",
+      "debug_lemma": "στόμα"
+    },
+    {
+      "word_form": "στομασιν",
+      "lemma": "στομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "στόμασιν",
+      "debug_lemma": "στόμα"
+    },
+    {
+      "word_form": "ωσι",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὠσί",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ωσιν",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὠσίν",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ωτων",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὤτων",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ωτι",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὠτί",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ωτε",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὦτε",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "ωτοιν",
+      "lemma": "ουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὤτοιν",
+      "debug_lemma": "οὖς"
+    },
+    {
+      "word_form": "χειλεσι",
+      "lemma": "χειλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χείλεσι",
+      "debug_lemma": "χεῖλος"
+    },
+    {
+      "word_form": "χειλεσιν",
+      "lemma": "χειλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χείλεσιν",
+      "debug_lemma": "χεῖλος"
+    },
+    {
+      "word_form": "γονασι",
+      "lemma": "γονυ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γόνασι",
+      "debug_lemma": "γόνυ"
+    },
+    {
+      "word_form": "γονασιν",
+      "lemma": "γονυ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γόνασιν",
+      "debug_lemma": "γόνυ"
+    },
+    {
+      "word_form": "ομφαλοισ",
+      "lemma": "ομφαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀμφαλοῖς",
+      "debug_lemma": "ὀμφαλός"
+    },
+    {
+      "word_form": "ραχεσι",
+      "lemma": "ραχισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥάχεσι",
+      "debug_lemma": "ῥάχις"
+    },
+    {
+      "word_form": "ραχεσιν",
+      "lemma": "ραχισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥάχεσιν",
+      "debug_lemma": "ῥάχις"
+    },
+    {
+      "word_form": "τραχηλοισ",
+      "lemma": "τραχηλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τραχήλοις",
+      "debug_lemma": "τράχηλος"
+    },
+    {
+      "word_form": "αστραγαλοισ",
+      "lemma": "αστραγαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀστραγάλοις",
+      "debug_lemma": "ἀστράγαλος"
+    },
+    {
+      "word_form": "μυλαισ",
+      "lemma": "μυλη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μύλαις",
+      "debug_lemma": "μύλη"
+    },
+    {
+      "word_form": "μυλων",
+      "lemma": "μυλη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μυλῶν",
+      "debug_lemma": "μύλη"
+    },
+    {
+      "word_form": "μηλοισ",
+      "lemma": "μηλον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μήλοις",
+      "debug_lemma": "μῆλον"
+    },
+    {
+      "word_form": "μηλοισι",
+      "lemma": "μηλον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μήλοισι",
+      "debug_lemma": "μῆλον"
+    },
+    {
+      "word_form": "μηλοισιν",
+      "lemma": "μηλον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μήλοισιν",
+      "debug_lemma": "μῆλον"
+    },
+    {
+      "word_form": "μαλα",
+      "lemma": "μαλον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μᾶλα",
+      "debug_lemma": "μᾶλον"
+    },
+    {
+      "word_form": "μελεσι",
+      "lemma": "μελοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μέλεσι",
+      "debug_lemma": "μέλος"
+    },
+    {
+      "word_form": "μελεσιν",
+      "lemma": "μελοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μέλεσιν",
+      "debug_lemma": "μέλος"
+    },
+    {
+      "word_form": "οικτιρμοισ",
+      "lemma": "οικτιρμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οἰκτιρμοῖς",
+      "debug_lemma": "οἰκτιρμός"
+    },
+    {
+      "word_form": "βελεσι",
+      "lemma": "βελοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βέλεσι",
+      "debug_lemma": "βέλος"
+    },
+    {
+      "word_form": "βελεσιν",
+      "lemma": "βελοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βέλεσιν",
+      "debug_lemma": "βέλος"
+    },
+    {
+      "word_form": "τελεσι",
+      "lemma": "τελοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τέλεσι",
+      "debug_lemma": "τέλος"
+    },
+    {
+      "word_form": "τελεσιν",
+      "lemma": "τελοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τέλεσιν",
+      "debug_lemma": "τέλος"
+    },
+    {
+      "word_form": "κλεεσι",
+      "lemma": "κλεοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλέεσι",
+      "debug_lemma": "κλέος"
+    },
+    {
+      "word_form": "κλεεσιν",
+      "lemma": "κλεοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλέεσιν",
+      "debug_lemma": "κλέος"
+    },
+    {
+      "word_form": "λεξεσι",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξεσι",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "λεξεσιν",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξεσιν",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "λεξει",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξει",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "παιδοσ",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παιδός",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παιδα",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παῖδα",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παι",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παῖ",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παιδων",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παίδων",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παισι",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παισί",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παισιν",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παισίν",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παιδεσσι",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παίδεσσι",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "παιδασ",
+      "lemma": "παισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "παῖδας",
+      "debug_lemma": "παῖς"
+    },
+    {
+      "word_form": "αρεταισι",
+      "lemma": "αρετα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀρεταῖσι",
+      "debug_lemma": "ἀρετά"
+    },
+    {
+      "word_form": "αρεταισιν",
+      "lemma": "αρετα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀρεταῖσιν",
+      "debug_lemma": "ἀρετά"
+    },
+    {
+      "word_form": "αρεταισ",
+      "lemma": "αρετη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀρεταῖς",
+      "debug_lemma": "ἀρετή"
+    },
+    {
+      "word_form": "ποσι",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποσί",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "μηκει",
+      "lemma": "μηκοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μήκει",
+      "debug_lemma": "μῆκος"
+    },
+    {
+      "word_form": "πλατει",
+      "lemma": "πλατοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πλάτει",
+      "debug_lemma": "πλάτος"
+    },
+    {
+      "word_form": "πλασματι",
+      "lemma": "πλασμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πλάσματι",
+      "debug_lemma": "πλάσμα"
+    },
+    {
+      "word_form": "πυγαν",
+      "lemma": "πυγα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πυγάν",
+      "debug_lemma": "πυγά"
+    },
+    {
+      "word_form": "ταφω",
+      "lemma": "ταφοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάφῳ",
+      "debug_lemma": "τάφος"
+    },
+    {
+      "word_form": "ταφοισ",
+      "lemma": "ταφοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάφοις",
+      "debug_lemma": "τάφος"
+    },
+    {
+      "word_form": "ποδεσσι",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόδεσσι",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποδεσσιν",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόδεσσιν",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποδι",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποδί",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποδεσ",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόδες",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποδε",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόδε",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποδοιν",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποδοῖν",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποδοιιν",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποδοῖιν",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποσσι",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποσσί",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "ποσσιν",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ποσσίν",
+      "debug_lemma": "πούς"
+    },
+    {
+      "word_form": "θυμω",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμῷ",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "θυμοισ",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμοῖς",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "θυμον",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμόν",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "θυμου",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμοῦ",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "θυμων",
+      "lemma": "θυμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "θυμῶν",
+      "debug_lemma": "θυμός"
+    },
+    {
+      "word_form": "ηλιω",
+      "lemma": "ηλιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἡλίῳ",
+      "debug_lemma": "ἥλιος"
+    },
+    {
+      "word_form": "ηλιον",
+      "lemma": "ηλιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἥλιον",
+      "debug_lemma": "ἥλιος"
+    },
+    {
+      "word_form": "νησον",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νῆσον",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "νησω",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νήσῳ",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "νησοι",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νῆσοι",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "νησε",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νῆσε",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "νησοισ",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νήσοις",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "νησουσ",
+      "lemma": "νησοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νήσους",
+      "debug_lemma": "νῆσος"
+    },
+    {
+      "word_form": "δυναμεσιν",
+      "lemma": "απλ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δυνάμεσιν",
+      "debug_lemma": "α=πλ"
+    },
+    {
+      "word_form": "βασεσι",
+      "lemma": "βασισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βάσεσι",
+      "debug_lemma": "βάσις"
+    },
+    {
+      "word_form": "βασεσιν",
+      "lemma": "βασισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βάσεσιν",
+      "debug_lemma": "βάσις"
+    },
+    {
+      "word_form": "αναξι",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄναξι",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "αναξιν",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄναξιν",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτοσ",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνακτος",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτι",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνακτι",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτα",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνακτα",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτεσ",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνακτες",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτων",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνάκτων",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτασ",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνακτας",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ανακτοιν",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνάκτοιν",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "ομμασι",
+      "lemma": "ομμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄμμασι",
+      "debug_lemma": "ὄμμα"
+    },
+    {
+      "word_form": "ομμασιν",
+      "lemma": "ομμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄμμασιν",
+      "debug_lemma": "ὄμμα"
+    },
+    {
+      "word_form": "ομματα",
+      "lemma": "ομμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄμματα",
+      "debug_lemma": "ὄμμα"
+    },
+    {
+      "word_form": "ομματων",
+      "lemma": "ομμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀμμάτων",
+      "debug_lemma": "ὄμμα"
+    },
+    {
+      "word_form": "ομματοσ",
+      "lemma": "ομμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄμματος",
+      "debug_lemma": "ὄμμα"
+    },
+    {
+      "word_form": "ομματι",
+      "lemma": "ομμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄμματι",
+      "debug_lemma": "ὄμμα"
+    },
+    {
+      "word_form": "φωτων",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φώτων",
+      "debug_lemma": "φῶς"
+    },
+    {
+      "word_form": "οφθαλμου",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῦ",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμω",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμῷ",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοιο",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῖο",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμον",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμόν",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμε",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμέ",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοι",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοί",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμων",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμῶν",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοισ",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῖς",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοισι",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῖσι",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοισιν",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῖσιν",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμουσ",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμούς",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοιν",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῖν",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "οφθαλμοιιν",
+      "lemma": "οφθαλμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφθαλμοῖιν",
+      "debug_lemma": "ὀφθαλμός"
+    },
+    {
+      "word_form": "χαρισι",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάρισι",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαρισιν",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάρισιν",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτεσσι",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χαρίτεσσι",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτεσσιν",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χαρίτεσσιν",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτοσ",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάριτος",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτι",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάριτι",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτα",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάριτα",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαρι",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάρι",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτεσ",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάριτες",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτων",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χαρίτων",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "χαριτασ",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χάριτας",
+      "debug_lemma": "χάρις"
+    },
+    {
+      "word_form": "ανδρα",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρα",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρασιν",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνδράσιν",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρε",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρε",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδροιν",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνδροῖν",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρεσι",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρεσι",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρεσιν",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρεσιν",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρεσσι",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρεσσι",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανδρεσσιν",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνδρεσσιν",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανεροσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρος",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερι",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρι",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερα",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρα",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερεσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρες",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερων",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρων",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερασ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρας",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ανερε",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνέρε",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "τανδροσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τἀνδρός",
+      "debug_lemma": "ἁνήρ"
+    },
+    {
+      "word_form": "τωνδροσ",
+      "lemma": "ωνηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τὠνδρός",
+      "debug_lemma": "ὡνήρ"
+    },
+    {
+      "word_form": "ωνδρεσ",
+      "lemma": "ωνηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὧνδρες",
+      "debug_lemma": "ὡνήρ"
+    },
+    {
+      "word_form": "τανδρι",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τἀνδρί",
+      "debug_lemma": "ἁνήρ"
+    },
+    {
+      "word_form": "τωνδρι",
+      "lemma": "ωνηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τὠνδρί",
+      "debug_lemma": "ὡνήρ"
+    },
+    {
+      "word_form": "υιε",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱέ",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "υιοι",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱοί",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "υιων",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱῶν",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "υιοισ",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱοῖς",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "υιουσ",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱούς",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "υιοιν",
+      "lemma": "υιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱοῖν",
+      "debug_lemma": "υἱός"
+    },
+    {
+      "word_form": "γυναικι",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναικί",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναι",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γύναι",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναικεσ",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναῖκες",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναικων",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναικῶν",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναιξι",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναιξί",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναιξιν",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναιξίν",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναικασ",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναῖκας",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναικε",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναῖκε",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "γυναικοιν",
+      "lemma": "γυνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυναικοῖν",
+      "debug_lemma": "γυνή"
+    },
+    {
+      "word_form": "τωνδρεσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τὦνδρες",
+      "debug_lemma": "ἀνήρ"
+    },
+    {
+      "word_form": "ειρηνησ",
+      "lemma": "ειρηνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "εἰρήνης",
+      "debug_lemma": "εἰρήνη"
+    },
+    {
+      "word_form": "ειρηνην",
+      "lemma": "ειρηνη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "εἰρήνην",
+      "debug_lemma": "εἰρήνη"
+    },
+    {
+      "word_form": "βρωσιν",
+      "lemma": "βρωσισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βρῶσιν",
+      "debug_lemma": "βρῶσις"
+    },
+    {
+      "word_form": "ποσιν",
+      "lemma": "ποσισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πόσιν",
+      "debug_lemma": "πόσις"
+    },
+    {
+      "word_form": "αιωνασ",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶνας",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωνων",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰώνων",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωνοσ",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶνος",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωνα",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶνα",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωνι",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶνι",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωνεσ",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶνες",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωσι",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶσι",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "αιωσιν",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰῶσιν",
+      "debug_lemma": "αἰών"
+    },
+    {
+      "word_form": "μητρασι",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητράσι",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητρασιν",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητράσιν",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητερασ",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρας",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητερων",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρων",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητερ",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μῆτερ",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητερι",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρι",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητεροσ",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρος",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "μητερε",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μητέρε",
+      "debug_lemma": "μήτηρ"
+    },
+    {
+      "word_form": "σπιλαδα",
+      "lemma": "αε",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σπιλάδα",
+      "debug_lemma": "α=ε"
+    },
+    {
+      "word_form": "ιερησ",
+      "lemma": "ιερευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱερῆς",
+      "debug_lemma": "ἱερεύς"
+    },
+    {
+      "word_form": "τμησει",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμήσει",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "τμησιν",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμῆσιν",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "τμησεσι",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμήσεσι",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "τμησεσιν",
+      "lemma": "τμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τμήσεσιν",
+      "debug_lemma": "τμῆσῐς"
+    },
+    {
+      "word_form": "κλησεσι",
+      "lemma": "κλησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλήσεσι",
+      "debug_lemma": "κλῆσῐς"
+    },
+    {
+      "word_form": "κλησεσιν",
+      "lemma": "κλησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλήσεσιν",
+      "debug_lemma": "κλῆσῐς"
+    },
+    {
+      "word_form": "κλησει",
+      "lemma": "κλησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλήσει",
+      "debug_lemma": "κλῆσῐς"
+    },
+    {
+      "word_form": "κλισει",
+      "lemma": "κλισισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλίσει",
+      "debug_lemma": "κλίσῐς"
+    },
+    {
+      "word_form": "κλυσει",
+      "lemma": "κλυσισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλύσει",
+      "debug_lemma": "κλύσῐς"
+    },
+    {
+      "word_form": "κλησιν",
+      "lemma": "κλησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κλῆσιν",
+      "debug_lemma": "κλῆσῐς"
+    },
+    {
+      "word_form": "μνημασιν",
+      "lemma": "μνημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μνήμασιν",
+      "debug_lemma": "μνῆμα"
+    },
+    {
+      "word_form": "κτημασι",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτήμασι",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "κτημασιν",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτήμασιν",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "κτηματι",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτήματι",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "ϝεργαλεια",
+      "lemma": "ϝεργαλειον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝεργαλεῖα",
+      "debug_lemma": "ϝεργαλεῖον"
+    },
+    {
+      "word_form": "εργαλεια",
+      "lemma": "εργαλειον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐργαλεῖα",
+      "debug_lemma": "ἐργαλεῖον"
+    },
+    {
+      "word_form": "ξιφει",
+      "lemma": "ξιφοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ξίφει",
+      "debug_lemma": "ξίφος"
+    },
+    {
+      "word_form": "γραφησ",
+      "lemma": "γραφη",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γραφῆς",
+      "debug_lemma": "γραφή"
+    },
+    {
+      "word_form": "γραφεισ",
+      "lemma": "γραφευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γραφεῖς",
+      "debug_lemma": "γραφεύς"
+    },
+    {
+      "word_form": "αιγοσ",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰγός",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγι",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰγί",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγα",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἶγα",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγων",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰγῶν",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγασ",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἶγας",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "τεκνογονιαν",
+      "lemma": "τεκνογονια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τεκνογονίαν",
+      "debug_lemma": "τεκνογονία"
+    },
+    {
+      "word_form": "αιξι",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰξί",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιξιν",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰξίν",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγεσι",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἴγεσι",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγεσιν",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἴγεσιν",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγεσσι",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἴγεσσι",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγεσσιν",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἴγεσσιν",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγε",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἶγε",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "αιγοιν",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἰγοῖν",
+      "debug_lemma": "αἴξ"
+    },
+    {
+      "word_form": "γυποσ",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυπός",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυπι",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυπί",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυπα",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γῦπα",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυπεσ",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γῦπες",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυπων",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυπῶν",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυψι",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυψί",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυψιν",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυψίν",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυπασ",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γῦπας",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυπε",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γῦπε",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "γυποιν",
+      "lemma": "γυψ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γυποῖν",
+      "debug_lemma": "γύψ"
+    },
+    {
+      "word_form": "φλογοσ",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλογός",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "φλογι",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλογί",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "φλογων",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλογῶν",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "φλοξι",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλοξί",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "φλοξιν",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλοξίν",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "φλογε",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλόγε",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "φλογοιν",
+      "lemma": "φλοξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φλογοῖν",
+      "debug_lemma": "φλόξ"
+    },
+    {
+      "word_form": "εριδοσ",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριδος",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδι",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριδι",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριν",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριν",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδα",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριδα",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "ερι",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρι",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδεσ",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριδες",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδων",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐρίδων",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "ερισι",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρισι",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "ερισιν",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρισιν",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδασ",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριδας",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδε",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔριδε",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "εριδοιν",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐρίδοιν",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "ερεισ",
+      "lemma": "ερισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρεις",
+      "debug_lemma": "ἔρις"
+    },
+    {
+      "word_form": "ερωτοσ",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωτος",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτι",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωτι",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτα",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωτα",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτεσ",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωτες",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτων",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐρώτων",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωσι",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωσι",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωσιν",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωσιν",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτασ",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωτας",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτε",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἔρωτε",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "ερωτοιν",
+      "lemma": "ερωσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἐρώτοιν",
+      "debug_lemma": "ἔρως"
+    },
+    {
+      "word_form": "φυλακοσ",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλακος",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "φυλακι",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλακι",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "φυλακων",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φυλάκων",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "φυλαξι",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλαξι",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "φυλαξιν",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλαξιν",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "φυλακοιν",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φυλάκοιν",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "φυλακε",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φύλακε",
+      "debug_lemma": "φύλαξ"
+    },
+    {
+      "word_form": "αλωπεκοσ",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεκος",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεκι",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεκι",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεκα",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεκα",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεκων",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλωπέκων",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεξι",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεξι",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεξιν",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεξιν",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεκασ",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεκας",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεκε",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλώπεκε",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "αλωπεκοιν",
+      "lemma": "αλωπηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀλωπέκοιν",
+      "debug_lemma": "ἀλώπηξ"
+    },
+    {
+      "word_form": "νεοθηγοσ",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγος",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγι",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγι",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγα",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγα",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγεσ",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγες",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγων",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθήγων",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηξι",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆξι",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηξιν",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆξιν",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγασ",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγας",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγε",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγε",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "νεοθηγοιν",
+      "lemma": "νεοθηξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεοθῆγοιν",
+      "debug_lemma": "νεοθήξ"
+    },
+    {
+      "word_form": "απορρωγοσ",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγος",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγι",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγι",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγα",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγα",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγεσ",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγες",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγων",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρώγων",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωξι",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶξι",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωξιν",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶξιν",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγασ",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγας",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγε",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγε",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "απορρωγοιν",
+      "lemma": "απορρωξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀπορρῶγοιν",
+      "debug_lemma": "ἀπορρώξ"
+    },
+    {
+      "word_form": "ιμαντοσ",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντος",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντι",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντι",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντα",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντα",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντεσ",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντες",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντων",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντων",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμασι",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμᾶσι",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμασιν",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμᾶσιν",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντασ",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντας",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντε",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντε",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "ιμαντοιν",
+      "lemma": "ιμασ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἱμάντοιν",
+      "debug_lemma": "ἱμάς"
+    },
+    {
+      "word_form": "γεροντοσ",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέροντος",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γεροντι",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέροντι",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γεροντα",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέροντα",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γερον",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέρον",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γεροντεσ",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέροντες",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γερουσι",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέρουσι",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γερουσιν",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέρουσιν",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γεροντε",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γέροντε",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "γεροντοιν",
+      "lemma": "γερων",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γερόντοιν",
+      "debug_lemma": "γέρων"
+    },
+    {
+      "word_form": "οδοντε",
+      "lemma": "οδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντε",
+      "debug_lemma": "ὀδούς"
+    },
+    {
+      "word_form": "οδοντοιν",
+      "lemma": "οδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀδόντοιν",
+      "debug_lemma": "ὀδούς"
+    },
+    {
+      "word_form": "κυνοδοντοσ",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδοντος",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδοντι",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδοντι",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδοντα",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδοντα",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδοντεσ",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδοντες",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδοντων",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνοδόντων",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδουσι",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδουσι",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδουσιν",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδουσιν",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδοντε",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνόδοντε",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κυνοδοντοιν",
+      "lemma": "κυνοδουσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κυνοδόντοιν",
+      "debug_lemma": "κυνόδους"
+    },
+    {
+      "word_form": "κηρι",
+      "lemma": "κηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κῆρι",
+      "debug_lemma": "κῆρ"
+    },
+    {
+      "word_form": "υδει",
+      "lemma": "υδωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὕδει",
+      "debug_lemma": "ὕδωρ"
+    },
+    {
+      "word_form": "υδασιν",
+      "lemma": "υδωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὕδασιν",
+      "debug_lemma": "ὕδωρ"
+    },
+    {
+      "word_form": "υδατεσσι",
+      "lemma": "υδωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὑδάτεσσι",
+      "debug_lemma": "ὕδωρ"
+    },
+    {
+      "word_form": "υδατεσσιν",
+      "lemma": "υδωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὑδάτεσσιν",
+      "debug_lemma": "ὕδωρ"
+    },
+    {
+      "word_form": "καρδιασ",
+      "lemma": "καρδια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "καρδίας",
+      "debug_lemma": "καρδία"
+    },
+    {
+      "word_form": "καρδιαν",
+      "lemma": "καρδια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "καρδίαν",
+      "debug_lemma": "καρδία"
+    },
+    {
+      "word_form": "καρδιαι",
+      "lemma": "καρδια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "καρδίαι",
+      "debug_lemma": "καρδία"
+    },
+    {
+      "word_form": "καρδιων",
+      "lemma": "καρδια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "καρδιῶν",
+      "debug_lemma": "καρδία"
+    },
+    {
+      "word_form": "καρδιαισ",
+      "lemma": "καρδια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "καρδίαις",
+      "debug_lemma": "καρδία"
+    },
+    {
+      "word_form": "κραδιαν",
+      "lemma": "κραδια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κραδίαν",
+      "debug_lemma": "κραδία"
+    },
+    {
+      "word_form": "ανθρωπου",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώπου",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωπω",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώπῳ",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωπον",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνθρωπον",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωπε",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνθρωπε",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωποι",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνθρωποι",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωπων",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώπων",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωποισ",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώποις",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωπουσ",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώπους",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωποιν",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώποιν",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωποιο",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώποιο",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωποισι",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώποισι",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ανθρωποισιν",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀνθρώποισιν",
+      "debug_lemma": "ἄνθρωπος"
+    },
+    {
+      "word_form": "ϝανακτοσ",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτος",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακοσ",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακος",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτι",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτι",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτει",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτει",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτα",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτα",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανα",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνα",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτεσ",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτες",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακεσ",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακες",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτων",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάκτων",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακων",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάκων",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτασ",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτας",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝαναξι",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάναξι",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝαναϙων",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάϙων",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝαναϙοιν",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάϙοιν",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακοι",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάκοι",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝαναξιν",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάναξιν",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτε",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακτε",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακτοιν",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάκτοιν",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακοιν",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝανάκοιν",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "ϝανακε",
+      "lemma": "ϝαναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ϝάνακε",
+      "debug_lemma": "ϝάναξ"
+    },
+    {
+      "word_form": "σιω",
+      "lemma": "σιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σιώ",
+      "debug_lemma": "σιός"
+    },
+    {
+      "word_form": "σιου",
+      "lemma": "σιοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σιοῦ",
+      "debug_lemma": "σιός"
+    },
+    {
+      "word_form": "κουρω",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κούρῳ",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κουρον",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοῦρον",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κουρε",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοῦρε",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κουροι",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοῦροι",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "κουροισ",
+      "lemma": "κουροσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κούροις",
+      "debug_lemma": "κοῦρος"
+    },
+    {
+      "word_form": "ανακτε",
+      "lemma": "αναξ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄνακτε",
+      "debug_lemma": "ἄναξ"
+    },
+    {
+      "word_form": "διακενου",
+      "lemma": "διακενον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "διακένου",
+      "debug_lemma": "διάκενον"
+    },
+    {
+      "word_form": "διακενων",
+      "lemma": "διακενον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "διακένων",
+      "debug_lemma": "διάκενον"
+    },
+    {
+      "word_form": "διακενοισ",
+      "lemma": "διακενον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "διακένοις",
+      "debug_lemma": "διάκενον"
+    },
+    {
+      "word_form": "διακενω",
+      "lemma": "διακενον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "διακένῳ",
+      "debug_lemma": "διάκενον"
+    },
+    {
+      "word_form": "σηματι",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σήματι",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "σημασι",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σήμασι",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "σημασιν",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σήμασιν",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "σηματε",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σήματε",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "σηματοιν",
+      "lemma": "σημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σημάτοιν",
+      "debug_lemma": "σῆμα"
+    },
+    {
+      "word_form": "σαματοσ",
+      "lemma": "σαμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σάματος",
+      "debug_lemma": "σᾶμα"
+    },
+    {
+      "word_form": "σαμασιν",
+      "lemma": "σαμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "σάμασιν",
+      "debug_lemma": "σᾶμα"
+    },
+    {
+      "word_form": "ρηματοσ",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήματος",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρηματι",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήματι",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρηματα",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήματα",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρηματων",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥημάτων",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρημασι",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήμασι",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρημασιν",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήμασιν",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρηματε",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήματε",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "ρηματοιν",
+      "lemma": "ρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥημάτοιν",
+      "debug_lemma": "ῥῆμα"
+    },
+    {
+      "word_form": "δημω",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δήμῳ",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημον",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δῆμον",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημε",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δῆμε",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημοι",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δῆμοι",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημοισ",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δήμοις",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "δημοιν",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "δήμοιν",
+      "debug_lemma": "δῆμος"
+    },
+    {
+      "word_form": "πατεροσ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρος",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατερι",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρι",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατερεσσι",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρεσσι",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατερων",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατέρων",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατρασι",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατράσι",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατρων",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατρῶν",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "πατρασιν",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πατράσιν",
+      "debug_lemma": "πατήρ"
+    },
+    {
+      "word_form": "λεξιν",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξιν",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "λεξι",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λέξι",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "λεξεοιν",
+      "lemma": "λεξισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "λεξέοιν",
+      "debug_lemma": "λέξις"
+    },
+    {
+      "word_form": "αγχιστειασ",
+      "lemma": "αγχιστεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγχιστείας",
+      "debug_lemma": "ἀγχιστεία"
+    },
+    {
+      "word_form": "αγχιστειαν",
+      "lemma": "αγχιστεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγχιστείαν",
+      "debug_lemma": "ἀγχιστεία"
+    },
+    {
+      "word_form": "αγχιστειαι",
+      "lemma": "αγχιστεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγχιστεῖαι",
+      "debug_lemma": "ἀγχιστεία"
+    },
+    {
+      "word_form": "αγχιστειων",
+      "lemma": "αγχιστεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγχιστειῶν",
+      "debug_lemma": "ἀγχιστεία"
+    },
+    {
+      "word_form": "αγχιστειαισ",
+      "lemma": "αγχιστεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγχιστείαις",
+      "debug_lemma": "ἀγχιστεία"
+    },
+    {
+      "word_form": "αγχιστειαιν",
+      "lemma": "αγχιστεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀγχιστείαιν",
+      "debug_lemma": "ἀγχιστεία"
+    },
+    {
+      "word_form": "κοινωνιαν",
+      "lemma": "κοινωνια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοινωνίαν",
+      "debug_lemma": "κοινωνία"
+    },
+    {
+      "word_form": "κοινωνιων",
+      "lemma": "κοινωνια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοινωνιῶν",
+      "debug_lemma": "κοινωνία"
+    },
+    {
+      "word_form": "κοινωνιαι",
+      "lemma": "κοινωνια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοινωνίαι",
+      "debug_lemma": "κοινωνία"
+    },
+    {
+      "word_form": "κοινωνιαισ",
+      "lemma": "κοινωνια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοινωνίαις",
+      "debug_lemma": "κοινωνία"
+    },
+    {
+      "word_form": "κοινωνιαιν",
+      "lemma": "κοινωνια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κοινωνίαιν",
+      "debug_lemma": "κοινωνία"
+    },
+    {
+      "word_form": "συγγενειασ",
+      "lemma": "συγγενεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγενείας",
+      "debug_lemma": "συγγένεια"
+    },
+    {
+      "word_form": "συγγενειαν",
+      "lemma": "συγγενεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγένειαν",
+      "debug_lemma": "συγγένεια"
+    },
+    {
+      "word_form": "συγγενειων",
+      "lemma": "συγγενεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγενειῶν",
+      "debug_lemma": "συγγένεια"
+    },
+    {
+      "word_form": "συγγενειαισ",
+      "lemma": "συγγενεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγενείαις",
+      "debug_lemma": "συγγένεια"
+    },
+    {
+      "word_form": "συγγενειαι",
+      "lemma": "συγγενεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγένειαι",
+      "debug_lemma": "συγγένεια"
+    },
+    {
+      "word_form": "συγγενειαιν",
+      "lemma": "συγγενεια",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "συγγενείαιν",
+      "debug_lemma": "συγγένεια"
+    },
+    {
+      "word_form": "αρτου",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτου",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτω",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτῳ",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτον",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτον",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτε",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτε",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτοι",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτοι",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτων",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτων",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτοισ",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτοις",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αρτοιν",
+      "lemma": "αρτοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἄρτοιν",
+      "debug_lemma": "ἄρτος"
+    },
+    {
+      "word_form": "αιματοσ",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἵματος",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιματι",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἵματι",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιματα",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἵματα",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιματων",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἱμάτων",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιμασι",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἵμασι",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιμασιν",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἵμασιν",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιματε",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἵματε",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "αιματοιν",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "αἱμάτοιν",
+      "debug_lemma": "αἷμα"
+    },
+    {
+      "word_form": "κτηματε",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτήματε",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "κτηματοιν",
+      "lemma": "κτημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "κτημάτοιν",
+      "debug_lemma": "κτῆμα"
+    },
+    {
+      "word_form": "ονοματοσ",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνόματος",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ονοματα",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνόματα",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ονοματων",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνομάτων",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ονοματε",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνόματε",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ονοματοιν",
+      "lemma": "ονομα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀνομάτοιν",
+      "debug_lemma": "ὄνομα"
+    },
+    {
+      "word_form": "ρητοροσ",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορος",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορι",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορι",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορα",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορα",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορεσ",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορες",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορων",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητόρων",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορσι",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορσι",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορσιν",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορσιν",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορασ",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορας",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητορε",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥήτορε",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητοροιν",
+      "lemma": "ρητωρ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητόροιν",
+      "debug_lemma": "ῥήτωρ"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλου",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδασκάλου",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλω",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδασκάλῳ",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλον",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδάσκαλον",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλε",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδάσκαλε",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλοι",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδάσκαλοι",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλων",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδασκάλων",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλοισ",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδασκάλοις",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλουσ",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδασκάλους",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "ρητοροδιδασκαλοιν",
+      "lemma": "ρητοροδιδασκαλοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ῥητοροδιδασκάλοιν",
+      "debug_lemma": "ῥητοροδιδάσκαλος"
+    },
+    {
+      "word_form": "μηνι",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μηνί",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μηνα",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μῆνα",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μηνων",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μηνῶν",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μησι",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μησί",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μησιν",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μησίν",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μηνασ",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μῆνας",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μηνε",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μῆνε",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "μηνοιν",
+      "lemma": "μην",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "μηνοῖν",
+      "debug_lemma": "μήν"
+    },
+    {
+      "word_form": "ουρανοισ",
+      "lemma": "ουρανοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οὐρανοῖς",
+      "debug_lemma": "οὐρανός"
+    },
+    {
+      "word_form": "ουρανω",
+      "lemma": "ουρανοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "οὐρανῷ",
+      "debug_lemma": "οὐρανός"
+    },
+    {
+      "word_form": "οφειληματα",
+      "lemma": "οφειλημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφειλήματα",
+      "debug_lemma": "ὀφείλημα"
+    },
+    {
+      "word_form": "οφειλεταισ",
+      "lemma": "οφειλετησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὀφειλέταις",
+      "debug_lemma": "ὀφειλέτης"
+    },
+    {
+      "word_form": "πειρασμον",
+      "lemma": "πειρασμοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "πειρασμόν",
+      "debug_lemma": "πειρασμός"
+    },
+    {
+      "word_form": "ταπητοσ",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπητος",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπητα",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπητα",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπητι",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπητι",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπητων",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ταπήτων",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπησι",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπησι",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπησιν",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπησιν",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπητε",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "τάπητε",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "ταπητοιν",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ταπήτοιν",
+      "debug_lemma": "τάπης"
+    },
+    {
+      "word_form": "χρημασιν",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρήμασιν",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "χρηματι",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρήματι",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "χρηματοιν",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρημάτοιν",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "χρηματε",
+      "lemma": "χρημα",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "χρήματε",
+      "debug_lemma": "χρῆμα"
+    },
+    {
+      "word_form": "γναθου",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθου",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθων",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθων",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "νευρα",
+      "lemma": "νευρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεῦρα",
+      "debug_lemma": "νεῦρον"
+    },
+    {
+      "word_form": "νευρω",
+      "lemma": "νευρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεύρῳ",
+      "debug_lemma": "νεῦρον"
+    },
+    {
+      "word_form": "νευροισ",
+      "lemma": "νευρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεύροις",
+      "debug_lemma": "νεῦρον"
+    },
+    {
+      "word_form": "νευροιν",
+      "lemma": "νευρον",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "νεύροιν",
+      "debug_lemma": "νεῦρον"
+    },
+    {
+      "word_form": "υιεοσ",
+      "lemma": "υιυσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "υἱέος",
+      "debug_lemma": "υἱύς"
+    },
+    {
+      "word_form": "φθογγω",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγῳ",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "φθογγοισ",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγοις",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "φθογγοιν",
+      "lemma": "φθογγοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "φθόγγοιν",
+      "debug_lemma": "φθόγγος"
+    },
+    {
+      "word_form": "βασιλεωσ",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλέως",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "βασιλει",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλεῖ",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "βασιλευ",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλεῦ",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "βασιλησ",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "βασιλῆς",
+      "debug_lemma": "βασιλεύς"
+    },
+    {
+      "word_form": "γναθε",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθε",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθοι",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθοι",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθουσ",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθους",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθον",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθον",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθω",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθῳ",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθοισ",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθοις",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "γναθοιν",
+      "lemma": "γναθοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "γνάθοιν",
+      "debug_lemma": "γνάθος"
+    },
+    {
+      "word_form": "ολβου",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβου",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβω",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβῳ",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβον",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβον",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβε",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβε",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβοι",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβοι",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβων",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβων",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβοισ",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβοις",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβουσ",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβους",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "ολβοιν",
+      "lemma": "ολβοσ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ὄλβοιν",
+      "debug_lemma": "ὄλβος"
+    },
+    {
+      "word_form": "αριθμησι",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσι",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησει",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσει",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησεωσ",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσεως",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησιν",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀρίθμησιν",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησεισ",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσεις",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησεων",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσεων",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησεσι",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσεσι",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησεσιν",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμήσεσιν",
+      "debug_lemma": "ἀρίθμησις"
+    },
+    {
+      "word_form": "αριθμησεοιν",
+      "lemma": "αριθμησισ",
+      "confidence": 1.0,
+      "source": "elwiktionary:κλ",
+      "debug_title": "ἀριθμησέοιν",
+      "debug_lemma": "ἀρίθμησις"
+    }
+  ]
+}

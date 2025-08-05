@@ -1,0 +1,32 @@
+{
+    "data_sources": {
+        "greek": "../data-sources/canonical-greekLit/data",
+        "latin": "../data-sources/canonical-latinLit/data",
+        "dictionaries": "../data-sources/canonical-pdlrefwk/data"
+    },
+    "output": {
+        "database": "output/perseus.db",
+        "compressed": "output/perseus.db.gz"
+    },
+    "processing": {
+        "batch_size": 1000,
+        "max_workers": 4,
+        "test_mode_limit": 5
+    },
+    "text_processing": {
+        "normalize_unicode": true,
+        "preserve_line_breaks": true,
+        "extract_speakers": true
+    },
+    "indexing": {
+        "min_word_length": 2,
+        "skip_common_words": false,
+        "build_lemma_index": true
+    },
+    "database": {
+        "page_size": 4096,
+        "cache_size": 10000,
+        "journal_mode": "WAL",
+        "synchronous": "NORMAL"
+    }
+}

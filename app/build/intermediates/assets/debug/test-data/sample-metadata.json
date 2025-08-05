@@ -1,0 +1,21 @@
+{
+  "description": "Minimal test dataset for debugging Classics Viewer",
+  "greek_samples": [
+    {
+      "author": "Homer",
+      "work": "Iliad",
+      "book": 1,
+      "lines": "1-5",
+      "text": "Sample Greek text for testing"
+    }
+  ],
+  "latin_samples": [
+    {
+      "author": "Virgil", 
+      "work": "Aeneid",
+      "book": 1,
+      "lines": "1-5",
+      "text": "Sample Latin text for testing"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_text_viewer.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_text_viewer.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_license.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_license.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/dialog_line_range.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/dialog_line_range.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/fragment_text_page.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/fragment_text_page.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_dictionary.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_dictionary.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_database_extraction.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_database_extraction.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_text_viewer_pager.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_text_viewer_pager.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/item_text_line_with_speaker.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/item_text_line_with_speaker.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_lemma_occurrences.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_lemma_occurrences.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_settings.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/item_text.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/item_text.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/toolbar_with_breadcrumb.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/toolbar_with_breadcrumb.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/item_language.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/item_language.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/item_text_line.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/item_text_line.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_list.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_list.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/item_occurrence.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/item_occurrence.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/activity_main.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.classicsviewer.app-mergeDebugResources-40:/layout/item_translation_segment.xml",
+        "source": "com.classicsviewer.app-main-43:/layout/item_translation_segment.xml"
+    }
+]

@@ -1,0 +1,716 @@
+Extracting all Greek pages from Wiktionary dump...
+Source: /home/user/classics-viewer/data-sources/enwiktionary-latest-pages-articles.xml.bz2
+Output: all_greek_wiktionary_pages.json
+
+  Processed 100,000 Wiktionary pages...
+  Processed 200,000 Wiktionary pages...
+  Processed 300,000 Wiktionary pages...
+[00:18:57] Progress:
+  Pages processed: 305,311
+  Greek pages found: 1,000
+  Rate: 8307 pages/second
+  Latest: μου
+  Processed 400,000 Wiktionary pages...
+[00:19:08] Progress:
+  Pages processed: 446,437
+  Greek pages found: 2,000
+  Rate: 9356 pages/second
+  Latest: Ἀτραμύττιον
+  Processed 500,000 Wiktionary pages...
+[00:19:11] Progress:
+  Pages processed: 509,175
+  Greek pages found: 3,000
+  Rate: 9898 pages/second
+  Latest: βασιλέας
+[00:19:15] Progress:
+  Pages processed: 570,193
+  Greek pages found: 4,000
+  Rate: 10321 pages/second
+  Latest: Ῥίον
+  Processed 600,000 Wiktionary pages...
+[00:19:22] Progress:
+  Pages processed: 664,431
+  Greek pages found: 5,000
+  Rate: 10771 pages/second
+  Latest: κύκλῳ
+  Processed 700,000 Wiktionary pages...
+  Processed 800,000 Wiktionary pages...
+[00:19:31] Progress:
+  Pages processed: 811,920
+  Greek pages found: 6,000
+  Rate: 11396 pages/second
+  Latest: πραματευτή
+  Processed 900,000 Wiktionary pages...
+[00:19:38] Progress:
+  Pages processed: 913,450
+  Greek pages found: 7,000
+  Rate: 11750 pages/second
+  Latest: πλάτος
+  Processed 1,000,000 Wiktionary pages...
+  Processed 1,100,000 Wiktionary pages...
+[00:19:54] Progress:
+  Pages processed: 1,183,556
+  Greek pages found: 8,000
+  Rate: 12560 pages/second
+  Latest: υἱύς
+  Processed 1,200,000 Wiktionary pages...
+  Processed 1,300,000 Wiktionary pages...
+[00:20:05] Progress:
+  Pages processed: 1,360,922
+  Greek pages found: 9,000
+  Rate: 12911 pages/second
+  Latest: κεράσι
+  Processed 1,400,000 Wiktionary pages...
+[00:20:13] Progress:
+  Pages processed: 1,485,869
+  Greek pages found: 10,000
+  Rate: 13136 pages/second
+  Latest: επιχειρηματίας
+  Processed 1,500,000 Wiktionary pages...
+  Processed 1,600,000 Wiktionary pages...
+[00:20:25] Progress:
+  Pages processed: 1,684,863
+  Greek pages found: 11,000
+  Rate: 13480 pages/second
+  Latest: Μεσόγειος
+  Processed 1,700,000 Wiktionary pages...
+[00:20:30] Progress:
+  Pages processed: 1,767,435
+  Greek pages found: 12,000
+  Rate: 13620 pages/second
+  Latest: διαταγές
+[00:20:32] Progress:
+  Pages processed: 1,798,735
+  Greek pages found: 13,000
+  Rate: 13665 pages/second
+  Latest: γερουσιαστής
+  Processed 1,800,000 Wiktionary pages...
+[00:20:35] Progress:
+  Pages processed: 1,858,304
+  Greek pages found: 14,000
+  Rate: 13720 pages/second
+  Latest: καθηγητών
+  Processed 1,900,000 Wiktionary pages...
+  Processed 2,000,000 Wiktionary pages...
+[00:20:45] Progress:
+  Pages processed: 2,045,996
+  Greek pages found: 15,000
+  Rate: 14081 pages/second
+  Latest: ἀείρω
+  Processed 2,100,000 Wiktionary pages...
+[00:20:51] Progress:
+  Pages processed: 2,155,411
+  Greek pages found: 16,000
+  Rate: 14251 pages/second
+  Latest: σάχηδων
+  Processed 2,200,000 Wiktionary pages...
+  Processed 2,300,000 Wiktionary pages...
+[00:21:00] Progress:
+  Pages processed: 2,306,170
+  Greek pages found: 17,000
+  Rate: 14432 pages/second
+  Latest: μεγαλύτερες
+  Processed 2,400,000 Wiktionary pages...
+[00:21:07] Progress:
+  Pages processed: 2,443,712
+  Greek pages found: 18,000
+  Rate: 14609 pages/second
+  Latest: χίππης
+[00:21:08] Progress:
+  Pages processed: 2,458,481
+  Greek pages found: 19,000
+  Rate: 14632 pages/second
+  Latest: αξιόπιστες
+[00:21:08] Progress:
+  Pages processed: 2,460,175
+  Greek pages found: 20,000
+  Rate: 14634 pages/second
+  Latest: απατηλού
+[00:21:08] Progress:
+  Pages processed: 2,461,362
+  Greek pages found: 21,000
+  Rate: 14636 pages/second
+  Latest: τηλεοπτικό
+[00:21:08] Progress:
+  Pages processed: 2,462,894
+  Greek pages found: 22,000
+  Rate: 14638 pages/second
+  Latest: καρβοξυλικές
+[00:21:08] Progress:
+  Pages processed: 2,463,897
+  Greek pages found: 23,000
+  Rate: 14640 pages/second
+  Latest: ολιγαρκείς
+[00:21:11] Progress:
+  Pages processed: 2,499,609
+  Greek pages found: 24,000
+  Rate: 14657 pages/second
+  Latest: υπέθεσα
+  Processed 2,500,000 Wiktionary pages...
+  Processed 2,600,000 Wiktionary pages...
+[00:21:16] Progress:
+  Pages processed: 2,600,403
+  Greek pages found: 25,000
+  Rate: 14783 pages/second
+  Latest: αναγλύφων
+  Processed 2,700,000 Wiktionary pages...
+  Processed 2,800,000 Wiktionary pages...
+  Processed 2,900,000 Wiktionary pages...
+[00:21:36] Progress:
+  Pages processed: 2,932,169
+  Greek pages found: 26,000
+  Rate: 14976 pages/second
+  Latest: αγοράσω
+  Processed 3,000,000 Wiktionary pages...
+[00:21:42] Progress:
+  Pages processed: 3,032,538
+  Greek pages found: 27,000
+  Rate: 15034 pages/second
+  Latest: κοντούρα
+  Processed 3,100,000 Wiktionary pages...
+[00:21:47] Progress:
+  Pages processed: 3,112,981
+  Greek pages found: 28,000
+  Rate: 15029 pages/second
+  Latest: στριμμένε
+[00:21:50] Progress:
+  Pages processed: 3,158,740
+  Greek pages found: 29,000
+  Rate: 15058 pages/second
+  Latest: ψήφισαν
+  Processed 3,200,000 Wiktionary pages...
+  Processed 3,300,000 Wiktionary pages...
+[00:22:02] Progress:
+  Pages processed: 3,359,873
+  Greek pages found: 30,000
+  Rate: 15141 pages/second
+  Latest: καραμέλα
+  Processed 3,400,000 Wiktionary pages...
+  Processed 3,500,000 Wiktionary pages...
+[00:22:14] Progress:
+  Pages processed: 3,573,534
+  Greek pages found: 31,000
+  Rate: 15244 pages/second
+  Latest: ανταπέδωσα
+  Processed 3,600,000 Wiktionary pages...
+[00:22:17] Progress:
+  Pages processed: 3,618,225
+  Greek pages found: 32,000
+  Rate: 15271 pages/second
+  Latest: τρομοκρατών
+[00:22:19] Progress:
+  Pages processed: 3,652,265
+  Greek pages found: 33,000
+  Rate: 15283 pages/second
+  Latest: ηλιακό ρολόι
+  Processed 3,700,000 Wiktionary pages...
+[00:22:22] Progress:
+  Pages processed: 3,705,226
+  Greek pages found: 34,000
+  Rate: 15298 pages/second
+  Latest: γραψίματα
+  Processed 3,800,000 Wiktionary pages...
+[00:22:30] Progress:
+  Pages processed: 3,828,637
+  Greek pages found: 35,000
+  Rate: 15341 pages/second
+  Latest: ἀγνόημα
+  Processed 3,900,000 Wiktionary pages...
+[00:22:37] Progress:
+  Pages processed: 3,942,490
+  Greek pages found: 36,000
+  Rate: 15363 pages/second
+  Latest: σπονδυλωτών
+  Processed 4,000,000 Wiktionary pages...
+[00:22:40] Progress:
+  Pages processed: 4,002,826
+  Greek pages found: 37,000
+  Rate: 15378 pages/second
+  Latest: άβλαπτος
+  Processed 4,100,000 Wiktionary pages...
+[00:22:47] Progress:
+  Pages processed: 4,109,540
+  Greek pages found: 38,000
+  Rate: 15382 pages/second
+  Latest: ὀξύτης
+  Processed 4,200,000 Wiktionary pages...
+[00:22:54] Progress:
+  Pages processed: 4,247,854
+  Greek pages found: 39,000
+  Rate: 15487 pages/second
+  Latest: ολόκαινες
+  Processed 4,300,000 Wiktionary pages...
+[00:23:01] Progress:
+  Pages processed: 4,355,646
+  Greek pages found: 40,000
+  Rate: 15518 pages/second
+  Latest: αιτώνες
+  Processed 4,400,000 Wiktionary pages...
+[00:23:06] Progress:
+  Pages processed: 4,458,544
+  Greek pages found: 41,000
+  Rate: 15608 pages/second
+  Latest: Παραγουανές
+  Processed 4,500,000 Wiktionary pages...
+  Processed 4,600,000 Wiktionary pages...
+  Processed 4,800,000 Wiktionary pages...
+[00:23:24] Progress:
+  Pages processed: 4,817,993
+  Greek pages found: 42,000
+  Rate: 15835 pages/second
+  Latest: ζεύγνυμι
+[00:23:28] Progress:
+  Pages processed: 4,897,344
+  Greek pages found: 43,000
+  Rate: 15889 pages/second
+  Latest: μελισσοκομείου
+  Processed 4,900,000 Wiktionary pages...
+[00:23:33] Progress:
+  Pages processed: 4,968,085
+  Greek pages found: 44,000
+  Rate: 15885 pages/second
+  Latest: αντιγραφών
+[00:23:37] Progress:
+  Pages processed: 5,024,456
+  Greek pages found: 45,000
+  Rate: 15867 pages/second
+  Latest: κοφτά
+  Processed 5,100,000 Wiktionary pages...
+[00:23:44] Progress:
+  Pages processed: 5,149,710
+  Greek pages found: 46,000
+  Rate: 15919 pages/second
+  Latest: κατσαρές
+[00:23:45] Progress:
+  Pages processed: 5,168,495
+  Greek pages found: 47,000
+  Rate: 15910 pages/second
+  Latest: μπάνια
+  Processed 5,200,000 Wiktionary pages...
+[00:23:48] Progress:
+  Pages processed: 5,231,555
+  Greek pages found: 48,000
+  Rate: 15962 pages/second
+  Latest: Λίβυας
+[00:23:49] Progress:
+  Pages processed: 5,262,838
+  Greek pages found: 49,000
+  Rate: 15977 pages/second
+  Latest: βιδρών
+  Processed 5,300,000 Wiktionary pages...
+[00:23:51] Progress:
+  Pages processed: 5,302,032
+  Greek pages found: 50,000
+  Rate: 16000 pages/second
+  Latest: χοντροκώλα
+[00:23:53] Progress:
+  Pages processed: 5,319,378
+  Greek pages found: 51,000
+  Rate: 15993 pages/second
+  Latest: λιογερμάτων
+[00:23:53] Progress:
+  Pages processed: 5,334,839
+  Greek pages found: 52,000
+  Rate: 16000 pages/second
+  Latest: αθύμωτος
+[00:23:55] Progress:
+  Pages processed: 5,353,943
+  Greek pages found: 53,000
+  Rate: 16005 pages/second
+  Latest: γονυκλισίες
+[00:23:55] Progress:
+  Pages processed: 5,366,928
+  Greek pages found: 54,000
+  Rate: 16008 pages/second
+  Latest: γυροσκόπια
+  Processed 5,400,000 Wiktionary pages...
+[00:23:59] Progress:
+  Pages processed: 5,426,831
+  Greek pages found: 55,000
+  Rate: 16020 pages/second
+  Latest: δασμών
+  Processed 5,500,000 Wiktionary pages...
+[00:24:05] Progress:
+  Pages processed: 5,529,836
+  Greek pages found: 56,000
+  Rate: 16049 pages/second
+  Latest: άληκτος
+[00:24:06] Progress:
+  Pages processed: 5,566,724
+  Greek pages found: 57,000
+  Rate: 16068 pages/second
+  Latest: διαμεσολαβητών
+  Processed 5,600,000 Wiktionary pages...
+[00:24:09] Progress:
+  Pages processed: 5,612,153
+  Greek pages found: 58,000
+  Rate: 16089 pages/second
+  Latest: βδομάδας
+[00:24:11] Progress:
+  Pages processed: 5,654,429
+  Greek pages found: 59,000
+  Rate: 16105 pages/second
+  Latest: αμυγδαλελαίων
+[00:24:13] Progress:
+  Pages processed: 5,681,232
+  Greek pages found: 60,000
+  Rate: 16115 pages/second
+  Latest: αναδίφησης
+[00:24:15] Progress:
+  Pages processed: 5,717,681
+  Greek pages found: 61,000
+  Rate: 16130 pages/second
+  Latest: ανακτορικός
+  Processed 5,800,000 Wiktionary pages...
+[00:24:20] Progress:
+  Pages processed: 5,809,115
+  Greek pages found: 62,000
+  Rate: 16146 pages/second
+  Latest: μουσκεμένες
+[00:24:25] Progress:
+  Pages processed: 5,888,884
+  Greek pages found: 63,000
+  Rate: 16133 pages/second
+  Latest: έσεισα
+  Processed 5,900,000 Wiktionary pages...
+  Processed 6,000,000 Wiktionary pages...
+[00:24:34] Progress:
+  Pages processed: 6,058,080
+  Greek pages found: 64,000
+  Rate: 16214 pages/second
+  Latest: λυμένου
+[00:24:35] Progress:
+  Pages processed: 6,086,608
+  Greek pages found: 65,000
+  Rate: 16227 pages/second
+  Latest: ἀγαλλιάετε
+  Processed 6,100,000 Wiktionary pages...
+[00:24:36] Progress:
+  Pages processed: 6,107,018
+  Greek pages found: 66,000
+  Rate: 16240 pages/second
+  Latest: ἀγγαρεύσητον
+[00:24:36] Progress:
+  Pages processed: 6,114,369
+  Greek pages found: 67,000
+  Rate: 16242 pages/second
+  Latest: σπιτώνω
+[00:24:39] Progress:
+  Pages processed: 6,168,074
+  Greek pages found: 68,000
+  Rate: 16269 pages/second
+  Latest: αναμισθώσεις
+[00:24:43] Progress:
+  Pages processed: 6,226,772
+  Greek pages found: 69,000
+  Rate: 16259 pages/second
+  Latest: σίσαρον
+[00:24:45] Progress:
+  Pages processed: 6,268,336
+  Greek pages found: 70,000
+  Rate: 16269 pages/second
+  Latest: ανελκύσθηκα
+  Processed 6,300,000 Wiktionary pages...
+[00:24:48] Progress:
+  Pages processed: 6,320,241
+  Greek pages found: 71,000
+  Rate: 16291 pages/second
+  Latest: σφάκελος
+[00:24:49] Progress:
+  Pages processed: 6,340,112
+  Greek pages found: 72,000
+  Rate: 16300 pages/second
+  Latest: τύχας
+[00:24:50] Progress:
+  Pages processed: 6,353,369
+  Greek pages found: 73,000
+  Rate: 16306 pages/second
+  Latest: τοιοῦδε
+[00:24:51] Progress:
+  Pages processed: 6,387,142
+  Greek pages found: 74,000
+  Rate: 16318 pages/second
+  Latest: μπάρκαρα
+  Processed 6,400,000 Wiktionary pages...
+[00:24:53] Progress:
+  Pages processed: 6,422,318
+  Greek pages found: 75,000
+  Rate: 16330 pages/second
+  Latest: αναριθμητισμού
+[00:24:54] Progress:
+  Pages processed: 6,444,202
+  Greek pages found: 76,000
+  Rate: 16340 pages/second
+  Latest: επιτρέπεται
+[00:24:56] Progress:
+  Pages processed: 6,467,315
+  Greek pages found: 77,000
+  Rate: 16349 pages/second
+  Latest: υποκλέπτομε
+  Processed 6,500,000 Wiktionary pages...
+[00:24:57] Progress:
+  Pages processed: 6,502,009
+  Greek pages found: 78,000
+  Rate: 16361 pages/second
+  Latest: ταλασίφρονος
+[00:25:00] Progress:
+  Pages processed: 6,552,130
+  Greek pages found: 79,000
+  Rate: 16381 pages/second
+  Latest: Λίσαι
+[00:25:02] Progress:
+  Pages processed: 6,587,682
+  Greek pages found: 80,000
+  Rate: 16390 pages/second
+  Latest: ανθρωπινός
+  Processed 6,600,000 Wiktionary pages...
+[00:25:03] Progress:
+  Pages processed: 6,612,841
+  Greek pages found: 81,000
+  Rate: 16397 pages/second
+  Latest: αγιόρταστος
+[00:25:05] Progress:
+  Pages processed: 6,641,581
+  Greek pages found: 82,000
+  Rate: 16392 pages/second
+  Latest: Πηλεΐωνι
+[00:25:08] Progress:
+  Pages processed: 6,687,168
+  Greek pages found: 83,000
+  Rate: 16409 pages/second
+  Latest: Τυνδάρεω
+[00:25:12] Progress:
+  Pages processed: 6,744,404
+  Greek pages found: 84,000
+  Rate: 16388 pages/second
+  Latest: διπλασίαν
+  Processed 6,800,000 Wiktionary pages...
+[00:25:15] Progress:
+  Pages processed: 6,800,580
+  Greek pages found: 85,000
+  Rate: 16400 pages/second
+  Latest: μουχτάρης
+[00:25:18] Progress:
+  Pages processed: 6,858,547
+  Greek pages found: 86,000
+  Rate: 16408 pages/second
+  Latest: αντιβασιλικός
+  Processed 6,900,000 Wiktionary pages...
+[00:25:21] Progress:
+  Pages processed: 6,913,943
+  Greek pages found: 87,000
+  Rate: 16410 pages/second
+  Latest: Ἀχαιιάδων
+[00:25:24] Progress:
+  Pages processed: 6,966,137
+  Greek pages found: 88,000
+  Rate: 16420 pages/second
+  Latest: παραλληλισμός
+[00:25:26] Progress:
+  Pages processed: 6,999,148
+  Greek pages found: 89,000
+  Rate: 16423 pages/second
+  Latest: πρυτανείας
+  Processed 7,000,000 Wiktionary pages...
+[00:25:29] Progress:
+  Pages processed: 7,045,900
+  Greek pages found: 90,000
+  Rate: 16419 pages/second
+  Latest: αντρειωμένος
+  Processed 7,100,000 Wiktionary pages...
+[00:25:35] Progress:
+  Pages processed: 7,147,443
+  Greek pages found: 91,000
+  Rate: 16437 pages/second
+  Latest: ἐγκυκλιωτέραν
+[00:25:37] Progress:
+  Pages processed: 7,195,243
+  Greek pages found: 92,000
+  Rate: 16453 pages/second
+  Latest: λέξι
+  Processed 7,200,000 Wiktionary pages...
+[00:25:41] Progress:
+  Pages processed: 7,267,802
+  Greek pages found: 93,000
+  Rate: 16464 pages/second
+  Latest: Ὕπνον
+  Processed 7,300,000 Wiktionary pages...
+[00:25:47] Progress:
+  Pages processed: 7,347,399
+  Greek pages found: 94,000
+  Rate: 16428 pages/second
+  Latest: σχήσοι
+  Processed 7,500,000 Wiktionary pages...
+[00:25:56] Progress:
+  Pages processed: 7,548,688
+  Greek pages found: 95,000
+  Rate: 16548 pages/second
+  Latest: απομνημονεύματος
+[00:26:01] Progress:
+  Pages processed: 7,642,025
+  Greek pages found: 96,000
+  Rate: 16589 pages/second
+  Latest: αποσκληραίνομαι
+[00:26:10] Progress:
+  Pages processed: 7,794,159
+  Greek pages found: 97,000
+  Rate: 16597 pages/second
+  Latest: στῶμεν
+  Processed 7,800,000 Wiktionary pages...
+[00:26:16] Progress:
+  Pages processed: 7,906,318
+  Greek pages found: 98,000
+  Rate: 16620 pages/second
+  Latest: Βαλδίμερ
+[00:26:20] Progress:
+  Pages processed: 7,986,873
+  Greek pages found: 99,000
+  Rate: 16638 pages/second
+  Latest: ερευνιέμαι
+[00:26:27] Progress:
+  Pages processed: 8,099,301
+  Greek pages found: 100,000
+  Rate: 16626 pages/second
+  Latest: παραμεμένηκας
+  Processed 8,100,000 Wiktionary pages...
+[00:26:28] Progress:
+  Pages processed: 8,123,230
+  Greek pages found: 101,000
+  Rate: 16631 pages/second
+  Latest: τειχίζου
+[00:26:33] Progress:
+  Pages processed: 8,207,830
+  Greek pages found: 102,000
+  Rate: 16661 pages/second
+  Latest: γεγονοίης
+[00:26:33] Progress:
+  Pages processed: 8,221,544
+  Greek pages found: 103,000
+  Rate: 16662 pages/second
+  Latest: ἀναλυτέε
+[00:26:34] Progress:
+  Pages processed: 8,230,228
+  Greek pages found: 104,000
+  Rate: 16663 pages/second
+  Latest: αριστεύσεων
+  Processed 8,300,000 Wiktionary pages...
+[00:26:38] Progress:
+  Pages processed: 8,305,247
+  Greek pages found: 105,000
+  Rate: 16678 pages/second
+  Latest: θερμολύσεων
+[00:26:48] Progress:
+  Pages processed: 8,391,885
+  Greek pages found: 106,000
+  Rate: 16515 pages/second
+  Latest: οὔρεσιν
+[00:27:07] Progress:
+  Pages processed: 8,531,529
+  Greek pages found: 107,000
+  Rate: 16197 pages/second
+  Latest: κρέ'
+  Processed 8,600,000 Wiktionary pages...
+[00:27:13] Progress:
+  Pages processed: 8,655,129
+  Greek pages found: 108,000
+  Rate: 16240 pages/second
+  Latest: πύθομαι
+[00:27:17] Progress:
+  Pages processed: 8,734,433
+  Greek pages found: 109,000
+  Rate: 16274 pages/second
+  Latest: πέμψετε
+  Processed 8,800,000 Wiktionary pages...
+  Processed 8,900,000 Wiktionary pages...
+  Processed 9,000,000 Wiktionary pages...
+[00:27:33] Progress:
+  Pages processed: 9,075,707
+  Greek pages found: 110,000
+  Rate: 16423 pages/second
+  Latest: δωδεκαθεϊσμός
+[00:27:38] Progress:
+  Pages processed: 9,164,194
+  Greek pages found: 111,000
+  Rate: 16425 pages/second
+  Latest: ἀνομίᾳ
+[00:27:41] Progress:
+  Pages processed: 9,231,607
+  Greek pages found: 112,000
+  Rate: 16442 pages/second
+  Latest: ἀραρυῖα
+  Processed 9,300,000 Wiktionary pages...
+[00:27:50] Progress:
+  Pages processed: 9,417,082
+  Greek pages found: 113,000
+  Rate: 16535 pages/second
+  Latest: ἀποτειχισθείσης
+[00:27:53] Progress:
+  Pages processed: 9,492,069
+  Greek pages found: 114,000
+  Rate: 16554 pages/second
+  Latest: δικαιολογημένος
+  Processed 9,500,000 Wiktionary pages...
+[00:27:59] Progress:
+  Pages processed: 9,569,859
+  Greek pages found: 115,000
+  Rate: 16531 pages/second
+  Latest: ενδεχόμενος
+  Processed 9,600,000 Wiktionary pages...
+[00:28:03] Progress:
+  Pages processed: 9,651,691
+  Greek pages found: 116,000
+  Rate: 16552 pages/second
+  Latest: αἰσχροτέρους
+[00:28:04] Progress:
+  Pages processed: 9,672,714
+  Greek pages found: 117,000
+  Rate: 16559 pages/second
+  Latest: καλλιόνων
+[00:28:05] Progress:
+  Pages processed: 9,681,142
+  Greek pages found: 118,000
+  Rate: 16561 pages/second
+  Latest: χρηστάς
+  Processed 9,700,000 Wiktionary pages...
+[00:28:09] Progress:
+  Pages processed: 9,758,163
+  Greek pages found: 119,000
+  Rate: 16580 pages/second
+  Latest: γελοῖοι
+  Processed 9,800,000 Wiktionary pages...
+[00:28:16] Progress:
+  Pages processed: 9,917,216
+  Greek pages found: 120,000
+  Rate: 16644 pages/second
+  Latest: ἐκφαίνω
+[00:28:18] Progress:
+  Pages processed: 9,954,389
+  Greek pages found: 121,000
+  Rate: 16656 pages/second
+  Latest: δίκα
+[00:28:19] Progress:
+  Pages processed: 9,974,253
+  Greek pages found: 122,000
+  Rate: 16663 pages/second
+  Latest: ἀναγκαιοτέρους
+[00:28:19] Progress:
+  Pages processed: 9,981,257
+  Greek pages found: 123,000
+  Rate: 16666 pages/second
+  Latest: ἀποκαλύψεσιν
+[00:28:22] Progress:
+  Pages processed: 10,039,765
+  Greek pages found: 124,000
+  Rate: 16681 pages/second
+  Latest: δασεῖς
+
+Saving 124,116 Greek pages to all_greek_wiktionary_pages.json...
+
+============================================================
+EXTRACTION COMPLETE
+============================================================
+Total time: 10.0 minutes
+Pages processed: 10,052,198
+Greek pages extracted: 124,116
+Processing rate: 16672 pages/second
+Output file: all_greek_wiktionary_pages.json (46.1 MB)

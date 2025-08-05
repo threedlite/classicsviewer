@@ -1,0 +1,840 @@
+{
+  "total_unique_words": 179325,
+  "total_tokens": 2639851,
+  "unique_coverage_percentage": 98.30419629164923,
+  "token_coverage_percentage": 90.37097926140358,
+  "top_missing_words": [
+    {
+      "word": "μαλιστα",
+      "frequency": 2604
+    },
+    {
+      "word": "πρωτον",
+      "frequency": 2566
+    },
+    {
+      "word": "ουχ",
+      "frequency": 2343
+    },
+    {
+      "word": "ημιν",
+      "frequency": 2181
+    },
+    {
+      "word": "υπ",
+      "frequency": 1741
+    },
+    {
+      "word": "ημασ",
+      "frequency": 1311
+    },
+    {
+      "word": "μεντοι",
+      "frequency": 1276
+    },
+    {
+      "word": "εφ",
+      "frequency": 1123
+    },
+    {
+      "word": "απ",
+      "frequency": 996
+    },
+    {
+      "word": "κακωσ",
+      "frequency": 948
+    },
+    {
+      "word": "θ",
+      "frequency": 864
+    },
+    {
+      "word": "ορθωσ",
+      "frequency": 851
+    },
+    {
+      "word": "τουτ",
+      "frequency": 844
+    },
+    {
+      "word": "ρωμαιων",
+      "frequency": 833
+    },
+    {
+      "word": "αυταρ",
+      "frequency": 824
+    },
+    {
+      "word": "υμιν",
+      "frequency": 795
+    },
+    {
+      "word": "ημεισ",
+      "frequency": 795
+    },
+    {
+      "word": "καθαπερ",
+      "frequency": 785
+    },
+    {
+      "word": "καισαροσ",
+      "frequency": 687
+    },
+    {
+      "word": "ηττον",
+      "frequency": 661
+    },
+    {
+      "word": "νη",
+      "frequency": 644
+    },
+    {
+      "word": "εχοντα",
+      "frequency": 641
+    },
+    {
+      "word": "πρωτοσ",
+      "frequency": 634
+    },
+    {
+      "word": "γενομενησ",
+      "frequency": 601
+    },
+    {
+      "word": "υμασ",
+      "frequency": 595
+    },
+    {
+      "word": "ταλλα",
+      "frequency": 580
+    },
+    {
+      "word": "μεγιστον",
+      "frequency": 570
+    },
+    {
+      "word": "επειδη",
+      "frequency": 558
+    },
+    {
+      "word": "εγωγε",
+      "frequency": 544
+    },
+    {
+      "word": "ομοιωσ",
+      "frequency": 526
+    },
+    {
+      "word": "εχοντεσ",
+      "frequency": 521
+    },
+    {
+      "word": "νουν",
+      "frequency": 515
+    },
+    {
+      "word": "πανταπασιν",
+      "frequency": 512
+    },
+    {
+      "word": "κε",
+      "frequency": 512
+    },
+    {
+      "word": "υμων",
+      "frequency": 510
+    },
+    {
+      "word": "καισαρ",
+      "frequency": 494
+    },
+    {
+      "word": "πομπηιον",
+      "frequency": 476
+    },
+    {
+      "word": "ζην",
+      "frequency": 472
+    },
+    {
+      "word": "οψιν",
+      "frequency": 462
+    },
+    {
+      "word": "ωστ",
+      "frequency": 440
+    },
+    {
+      "word": "υμεισ",
+      "frequency": 434
+    },
+    {
+      "word": "ουχι",
+      "frequency": 433
+    },
+    {
+      "word": "μητ",
+      "frequency": 430
+    },
+    {
+      "word": "τοδ",
+      "frequency": 428
+    },
+    {
+      "word": "πομπηιοσ",
+      "frequency": 423
+    },
+    {
+      "word": "πραττειν",
+      "frequency": 420
+    },
+    {
+      "word": "πομπηιου",
+      "frequency": 419
+    },
+    {
+      "word": "τρεισ",
+      "frequency": 408
+    },
+    {
+      "word": "ολωσ",
+      "frequency": 406
+    },
+    {
+      "word": "ταδ",
+      "frequency": 393
+    },
+    {
+      "word": "λεγοντοσ",
+      "frequency": 384
+    },
+    {
+      "word": "ρωμαιοισ",
+      "frequency": 379
+    },
+    {
+      "word": "μειζον",
+      "frequency": 377
+    },
+    {
+      "word": "ραδιωσ",
+      "frequency": 361
+    },
+    {
+      "word": "οδυσσευσ",
+      "frequency": 361
+    },
+    {
+      "word": "κατωνοσ",
+      "frequency": 359
+    },
+    {
+      "word": "ρωμαιοι",
+      "frequency": 352
+    },
+    {
+      "word": "ρ",
+      "frequency": 345
+    },
+    {
+      "word": "καισαρα",
+      "frequency": 339
+    },
+    {
+      "word": "θαλατταν",
+      "frequency": 327
+    },
+    {
+      "word": "δικαιωσ",
+      "frequency": 326
+    },
+    {
+      "word": "εστ",
+      "frequency": 319
+    },
+    {
+      "word": "χαιρειν",
+      "frequency": 318
+    },
+    {
+      "word": "ρωμαιουσ",
+      "frequency": 314
+    },
+    {
+      "word": "λακεδαιμονιων",
+      "frequency": 314
+    },
+    {
+      "word": "τουνομα",
+      "frequency": 311
+    },
+    {
+      "word": "γενομενων",
+      "frequency": 308
+    },
+    {
+      "word": "τουναντιον",
+      "frequency": 307
+    },
+    {
+      "word": "τοτ",
+      "frequency": 304
+    },
+    {
+      "word": "παροντων",
+      "frequency": 303
+    },
+    {
+      "word": "εχοντοσ",
+      "frequency": 303
+    },
+    {
+      "word": "εχοντασ",
+      "frequency": 303
+    },
+    {
+      "word": "κ",
+      "frequency": 302
+    },
+    {
+      "word": "εχοντων",
+      "frequency": 300
+    },
+    {
+      "word": "γενομενον",
+      "frequency": 299
+    },
+    {
+      "word": "οτ",
+      "frequency": 298
+    },
+    {
+      "word": "οραν",
+      "frequency": 297
+    },
+    {
+      "word": "συλλασ",
+      "frequency": 282
+    },
+    {
+      "word": "προθυμωσ",
+      "frequency": 280
+    },
+    {
+      "word": "ουθ",
+      "frequency": 279
+    },
+    {
+      "word": "εχουσαν",
+      "frequency": 278
+    },
+    {
+      "word": "θαλαττησ",
+      "frequency": 277
+    },
+    {
+      "word": "συλλα",
+      "frequency": 273
+    },
+    {
+      "word": "ηδεωσ",
+      "frequency": 273
+    },
+    {
+      "word": "ταχιστα",
+      "frequency": 266
+    },
+    {
+      "word": "εχουσα",
+      "frequency": 264
+    },
+    {
+      "word": "αντωνιοσ",
+      "frequency": 263
+    },
+    {
+      "word": "ικανωσ",
+      "frequency": 260
+    },
+    {
+      "word": "καγω",
+      "frequency": 259
+    },
+    {
+      "word": "διδοναι",
+      "frequency": 257
+    },
+    {
+      "word": "φρονειν",
+      "frequency": 256
+    },
+    {
+      "word": "σαφωσ",
+      "frequency": 253
+    },
+    {
+      "word": "γενομενου",
+      "frequency": 253
+    },
+    {
+      "word": "καισαρι",
+      "frequency": 249
+    },
+    {
+      "word": "αντωνιον",
+      "frequency": 249
+    },
+    {
+      "word": "ειθ",
+      "frequency": 247
+    },
+    {
+      "word": "τρωων",
+      "frequency": 239
+    },
+    {
+      "word": "ταυτο",
+      "frequency": 236
+    },
+    {
+      "word": "λεγοντεσ",
+      "frequency": 234
+    },
+    {
+      "word": "παροντοσ",
+      "frequency": 233
+    },
+    {
+      "word": "κικερων",
+      "frequency": 230
+    },
+    {
+      "word": "ελαβε",
+      "frequency": 230
+    },
+    {
+      "word": "προσηκει",
+      "frequency": 229
+    },
+    {
+      "word": "εκτωρ",
+      "frequency": 227
+    },
+    {
+      "word": "χαλεπωσ",
+      "frequency": 225
+    },
+    {
+      "word": "γιγνομενον",
+      "frequency": 225
+    },
+    {
+      "word": "δημοσθενησ",
+      "frequency": 223
+    },
+    {
+      "word": "βρουτοσ",
+      "frequency": 223
+    },
+    {
+      "word": "δημητριοσ",
+      "frequency": 219
+    },
+    {
+      "word": "λακεδαιμονιουσ",
+      "frequency": 217
+    },
+    {
+      "word": "προσεφη",
+      "frequency": 216
+    },
+    {
+      "word": "τωνδ",
+      "frequency": 210
+    },
+    {
+      "word": "μετριωσ",
+      "frequency": 208
+    },
+    {
+      "word": "τονδ",
+      "frequency": 207
+    },
+    {
+      "word": "γενομενην",
+      "frequency": 207
+    },
+    {
+      "word": "νηασ",
+      "frequency": 206
+    },
+    {
+      "word": "δευρ",
+      "frequency": 204
+    },
+    {
+      "word": "τηνδ",
+      "frequency": 203
+    },
+    {
+      "word": "κατωνα",
+      "frequency": 201
+    },
+    {
+      "word": "διαλεγεσθαι",
+      "frequency": 201
+    },
+    {
+      "word": "παρεχειν",
+      "frequency": 197
+    },
+    {
+      "word": "μεγιστα",
+      "frequency": 197
+    },
+    {
+      "word": "βρουτον",
+      "frequency": 197
+    },
+    {
+      "word": "αντωνιου",
+      "frequency": 194
+    },
+    {
+      "word": "τουτι",
+      "frequency": 193
+    },
+    {
+      "word": "τουδ",
+      "frequency": 193
+    },
+    {
+      "word": "παρεσχεν",
+      "frequency": 193
+    },
+    {
+      "word": "ζητειν",
+      "frequency": 192
+    },
+    {
+      "word": "διωνοσ",
+      "frequency": 192
+    },
+    {
+      "word": "βουλομενον",
+      "frequency": 191
+    },
+    {
+      "word": "ορωντεσ",
+      "frequency": 189
+    },
+    {
+      "word": "τυραννιδοσ",
+      "frequency": 188
+    },
+    {
+      "word": "λακεδαιμονιοι",
+      "frequency": 188
+    },
+    {
+      "word": "θαυμαζειν",
+      "frequency": 188
+    },
+    {
+      "word": "εφατ",
+      "frequency": 188
+    },
+    {
+      "word": "αναλαβων",
+      "frequency": 188
+    },
+    {
+      "word": "ουκετ",
+      "frequency": 185
+    },
+    {
+      "word": "μαριον",
+      "frequency": 184
+    },
+    {
+      "word": "πομπηιω",
+      "frequency": 180
+    },
+    {
+      "word": "ταυθ",
+      "frequency": 179
+    },
+    {
+      "word": "δημοσθενουσ",
+      "frequency": 179
+    },
+    {
+      "word": "συνεβη",
+      "frequency": 178
+    },
+    {
+      "word": "περικλεουσ",
+      "frequency": 178
+    },
+    {
+      "word": "σμικρον",
+      "frequency": 176
+    },
+    {
+      "word": "εχοντι",
+      "frequency": 176
+    },
+    {
+      "word": "εχρητο",
+      "frequency": 175
+    },
+    {
+      "word": "γεγονοτων",
+      "frequency": 175
+    },
+    {
+      "word": "λαβοντεσ",
+      "frequency": 173
+    },
+    {
+      "word": "κικερωνοσ",
+      "frequency": 173
+    },
+    {
+      "word": "θαρρειν",
+      "frequency": 171
+    },
+    {
+      "word": "ενθαδ",
+      "frequency": 170
+    },
+    {
+      "word": "πολλ",
+      "frequency": 169
+    },
+    {
+      "word": "παρασχειν",
+      "frequency": 169
+    },
+    {
+      "word": "προσηυδα",
+      "frequency": 168
+    },
+    {
+      "word": "πρωτην",
+      "frequency": 167
+    },
+    {
+      "word": "αμφ",
+      "frequency": 166
+    },
+    {
+      "word": "περικλησ",
+      "frequency": 165
+    },
+    {
+      "word": "μαριοσ",
+      "frequency": 165
+    },
+    {
+      "word": "κρασσοσ",
+      "frequency": 164
+    },
+    {
+      "word": "γενομενοι",
+      "frequency": 164
+    },
+    {
+      "word": "συναγαγων",
+      "frequency": 163
+    },
+    {
+      "word": "βαδιζειν",
+      "frequency": 163
+    },
+    {
+      "word": "αλκιβιαδησ",
+      "frequency": 162
+    },
+    {
+      "word": "μεγιστων",
+      "frequency": 161
+    },
+    {
+      "word": "λεγομενων",
+      "frequency": 161
+    },
+    {
+      "word": "παρεσχε",
+      "frequency": 160
+    },
+    {
+      "word": "μελλοντοσ",
+      "frequency": 160
+    },
+    {
+      "word": "μελλοντα",
+      "frequency": 160
+    },
+    {
+      "word": "λυσανδροσ",
+      "frequency": 159
+    },
+    {
+      "word": "εγων",
+      "frequency": 159
+    },
+    {
+      "word": "διαφερει",
+      "frequency": 159
+    },
+    {
+      "word": "αυτισ",
+      "frequency": 159
+    },
+    {
+      "word": "μανθανειν",
+      "frequency": 158
+    },
+    {
+      "word": "διωνα",
+      "frequency": 158
+    },
+    {
+      "word": "πρωτουσ",
+      "frequency": 157
+    },
+    {
+      "word": "ανελειν",
+      "frequency": 157
+    },
+    {
+      "word": "τουθ",
+      "frequency": 156
+    },
+    {
+      "word": "λουκουλλοσ",
+      "frequency": 156
+    },
+    {
+      "word": "πεφυκεν",
+      "frequency": 155
+    },
+    {
+      "word": "λυκουργοσ",
+      "frequency": 155
+    },
+    {
+      "word": "εχουσησ",
+      "frequency": 155
+    },
+    {
+      "word": "αλκιβιαδου",
+      "frequency": 155
+    },
+    {
+      "word": "αερα",
+      "frequency": 155
+    },
+    {
+      "word": "θεμιστοκλησ",
+      "frequency": 154
+    },
+    {
+      "word": "ηδιον",
+      "frequency": 154
+    },
+    {
+      "word": "ελαβεν",
+      "frequency": 153
+    },
+    {
+      "word": "απεκρινατο",
+      "frequency": 153
+    },
+    {
+      "word": "τησδ",
+      "frequency": 150
+    },
+    {
+      "word": "οκτω",
+      "frequency": 150
+    },
+    {
+      "word": "καλειται",
+      "frequency": 150
+    },
+    {
+      "word": "διαφερειν",
+      "frequency": 150
+    },
+    {
+      "word": "επιστασθαι",
+      "frequency": 149
+    },
+    {
+      "word": "δεομενον",
+      "frequency": 149
+    },
+    {
+      "word": "αμφοιν",
+      "frequency": 149
+    },
+    {
+      "word": "γεγραπται",
+      "frequency": 148
+    },
+    {
+      "word": "φησαντοσ",
+      "frequency": 147
+    },
+    {
+      "word": "πρωτων",
+      "frequency": 147
+    },
+    {
+      "word": "θατερον",
+      "frequency": 147
+    },
+    {
+      "word": "εγραψε",
+      "frequency": 147
+    },
+    {
+      "word": "τριηρεισ",
+      "frequency": 146
+    }
+  ],
+  "ending_distribution": {
+    "ιν": 101,
+    "οσ": 84,
+    "ειν": 84,
+    "ων": 73,
+    "ον": 67,
+    "αι": 63,
+    "ωσ": 51,
+    "ασ": 47,
+    "εν": 37,
+    "ου": 36,
+    "θαι": 32,
+    "εσ": 30,
+    "ισ": 28,
+    "τεσ": 27,
+    "τα": 25,
+    "τοσ": 25,
+    "υσ": 24,
+    "αν": 23,
+    "ουσ": 22,
+    "νοσ": 21,
+    "ην": 19,
+    "ησ": 17,
+    "οι": 16,
+    "εισ": 16,
+    "νων": 16,
+    "ει": 16,
+    "ντα": 15,
+    "να": 15,
+    "τασ": 14,
+    "νον": 14
+  }
+}

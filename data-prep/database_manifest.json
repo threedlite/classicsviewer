@@ -1,0 +1,5045 @@
+{
+  "generated_at": "2025-08-05T09:51:32.902020",
+  "database_version": "2.0",
+  "statistics": {
+    "total_authors": 16,
+    "total_works": 271,
+    "total_books": 431,
+    "total_lines": 310718,
+    "total_word_forms": 2767662,
+    "total_translation_segments": 96180,
+    "total_dictionary_entries": 28647,
+    "total_lemma_mappings": 69435,
+    "dictionary_by_language": {
+      "greek": 28647
+    },
+    "works_with_translations": 255,
+    "translation_coverage_percent": 94.1
+  },
+  "authors": [
+    {
+      "id": "tlg0026",
+      "name": "Aeschines",
+      "language": "greek",
+      "work_count": 3,
+      "total_books": 3,
+      "total_lines": 2761,
+      "works": [
+        {
+          "id": "tlg0026.tlg001",
+          "title": "Against Timarchus",
+          "title_english": "Against Timarchus",
+          "book_count": 1,
+          "total_lines": 169736,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 866
+            }
+          ]
+        },
+        {
+          "id": "tlg0026.tlg002",
+          "title": "On the Embassy",
+          "title_english": "On the Embassy",
+          "book_count": 1,
+          "total_lines": 142416,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 774
+            }
+          ]
+        },
+        {
+          "id": "tlg0026.tlg003",
+          "title": "Against Ctesiphon",
+          "title_english": "Against Ctesiphon",
+          "book_count": 1,
+          "total_lines": 291460,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1121
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0085",
+      "name": "Aeschylus",
+      "language": "greek",
+      "work_count": 7,
+      "total_books": 7,
+      "total_lines": 7999,
+      "works": [
+        {
+          "id": "tlg0085.tlg001",
+          "title": "Supplices",
+          "title_english": "Suppliant Maidens",
+          "book_count": 1,
+          "total_lines": 420675,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1065
+            }
+          ]
+        },
+        {
+          "id": "tlg0085.tlg002",
+          "title": "Persians",
+          "title_english": "Persians",
+          "book_count": 1,
+          "total_lines": 403560,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1062
+            }
+          ]
+        },
+        {
+          "id": "tlg0085.tlg003",
+          "title": "Prometheus Bound",
+          "title_english": "Prometheus Bound",
+          "book_count": 1,
+          "total_lines": 425226,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1082
+            }
+          ]
+        },
+        {
+          "id": "tlg0085.tlg004",
+          "title": "Seven Against Thebes",
+          "title_english": "Seven Against Thebes",
+          "book_count": 1,
+          "total_lines": 392200,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1060
+            }
+          ]
+        },
+        {
+          "id": "tlg0085.tlg005",
+          "title": "Agamemnon",
+          "title_english": "Agamemnon",
+          "book_count": 1,
+          "total_lines": 3517800,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1640
+            }
+          ]
+        },
+        {
+          "id": "tlg0085.tlg006",
+          "title": "Libation Bearers",
+          "title_english": "Libation Bearers",
+          "book_count": 1,
+          "total_lines": 414460,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1060
+            }
+          ]
+        },
+        {
+          "id": "tlg0085.tlg007",
+          "title": "Eumenides",
+          "title_english": "Eumenides",
+          "book_count": 1,
+          "total_lines": 369770,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1030
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0019",
+      "name": "Aristophanes",
+      "language": "greek",
+      "work_count": 11,
+      "total_books": 11,
+      "total_lines": 14990,
+      "works": [
+        {
+          "id": "tlg0019.tlg001",
+          "title": "Acharnians",
+          "title_english": "Acharnians",
+          "book_count": 1,
+          "total_lines": 1182,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1182
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg002",
+          "title": "Knights",
+          "title_english": "Knights",
+          "book_count": 1,
+          "total_lines": 1386,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1386
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg003",
+          "title": "Clouds",
+          "title_english": "Clouds",
+          "book_count": 1,
+          "total_lines": 899750,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1475
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg004",
+          "title": "Wasps",
+          "title_english": "Wasps",
+          "book_count": 1,
+          "total_lines": 1526,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1526
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg005",
+          "title": "Peace",
+          "title_english": "Peace",
+          "book_count": 1,
+          "total_lines": 1319,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1319
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg006",
+          "title": "Birds",
+          "title_english": "Birds",
+          "book_count": 1,
+          "total_lines": 1286250,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1715
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg007",
+          "title": "Lysistrata",
+          "title_english": "Lysistrata",
+          "book_count": 1,
+          "total_lines": 1282,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1282
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg008",
+          "title": "Thesmophoriazusae",
+          "title_english": "Thesmophoriazusae",
+          "book_count": 1,
+          "total_lines": 1207,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1207
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg009",
+          "title": "Frogs",
+          "title_english": "Frogs",
+          "book_count": 1,
+          "total_lines": 1510,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1510
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg010",
+          "title": "Ecclesiazusae",
+          "title_english": "Ecclesiazusae",
+          "book_count": 1,
+          "total_lines": 1180,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1180
+            }
+          ]
+        },
+        {
+          "id": "tlg0019.tlg011",
+          "title": "Wealth",
+          "title_english": "Wealth",
+          "book_count": 1,
+          "total_lines": 1208,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1208
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0086",
+      "name": "Aristotle",
+      "language": "greek",
+      "work_count": 9,
+      "total_books": 37,
+      "total_lines": 17122,
+      "works": [
+        {
+          "id": "tlg0086.tlg003",
+          "title": "Constitution of the Athenians",
+          "title_english": "Constitution of the Athenians",
+          "book_count": 1,
+          "total_lines": 844,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 844
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg009",
+          "title": "Eudemian Ethics",
+          "title_english": "Eudemian Ethics",
+          "book_count": 5,
+          "total_lines": 57385,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 164
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 430
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 274
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 598
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 169
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg010",
+          "title": "Nicomachean Ethics",
+          "title_english": "Nicomachean Ethics",
+          "book_count": 10,
+          "total_lines": 139830,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 371
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 247
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 457
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 451
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 420
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 285
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 392
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 464
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 367
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 420
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg025",
+          "title": "Metaphysics",
+          "title_english": "Metaphysics",
+          "book_count": 14,
+          "total_lines": 157983,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 338
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 70
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 245
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 356
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 437
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 87
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 511
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 160
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 250
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 281
+            },
+            {
+              "number": 11,
+              "label": "Book 11",
+              "line_count": 395
+            },
+            {
+              "number": 12,
+              "label": "Book 12",
+              "line_count": 324
+            },
+            {
+              "number": 13,
+              "label": "Book 13",
+              "line_count": 409
+            },
+            {
+              "number": 14,
+              "label": "Book 14",
+              "line_count": 215
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg029",
+          "title": "Economics",
+          "title_english": "Economics",
+          "book_count": 2,
+          "total_lines": 9767,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 109
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 252
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg034",
+          "title": "Poetics",
+          "title_english": "Poetics",
+          "book_count": 1,
+          "total_lines": 38006,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 613
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg035",
+          "title": "Politics",
+          "title_english": "Politics",
+          "book_count": 0,
+          "total_lines": 0,
+          "translator_count": 0,
+          "books": []
+        },
+        {
+          "id": "tlg0086.tlg038",
+          "title": "The \"Art\" of Rhetoric",
+          "title_english": "The \"Art\" of Rhetoric",
+          "book_count": 3,
+          "total_lines": 500728,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 2002
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 2110
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 1528
+            }
+          ]
+        },
+        {
+          "id": "tlg0086.tlg045",
+          "title": "On Virtues and Vices",
+          "title_english": "On Virtues and Vices",
+          "book_count": 1,
+          "total_lines": 77,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 77
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0006",
+      "name": "Euripides",
+      "language": "greek",
+      "work_count": 19,
+      "total_books": 19,
+      "total_lines": 25693,
+      "works": [
+        {
+          "id": "tlg0006.tlg001",
+          "title": "The Cyclops",
+          "title_english": "The Cyclops",
+          "book_count": 1,
+          "total_lines": 235136,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 704
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg002",
+          "title": "Alcestis",
+          "title_english": "Alcestis",
+          "book_count": 1,
+          "total_lines": 560070,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1143
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg003",
+          "title": "Medea",
+          "title_english": "Medea",
+          "book_count": 1,
+          "total_lines": 697392,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1392
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg004",
+          "title": "Heracleidae",
+          "title_english": "Heracleidae",
+          "book_count": 1,
+          "total_lines": 404352,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1053
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg005",
+          "title": "Hippolytus",
+          "title_english": "Hippolytus",
+          "book_count": 1,
+          "total_lines": 807594,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1437
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg006",
+          "title": "Andromache",
+          "title_english": "Andromache",
+          "book_count": 1,
+          "total_lines": 548576,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1264
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg007",
+          "title": "Hecuba",
+          "title_english": "Hecuba",
+          "book_count": 1,
+          "total_lines": 621888,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1264
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg008",
+          "title": "Supplices",
+          "title_english": "The Suppliants",
+          "book_count": 1,
+          "total_lines": 575463,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1227
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg009",
+          "title": "Hercules",
+          "title_english": "Heracles Mad",
+          "book_count": 1,
+          "total_lines": 737978,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1403
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg010",
+          "title": "Ion",
+          "title_english": "Ion",
+          "book_count": 1,
+          "total_lines": 1201923,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1609
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg011",
+          "title": "Troades",
+          "title_english": "The Trojan Women",
+          "book_count": 1,
+          "total_lines": 576368,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1304
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg012",
+          "title": "Electra",
+          "title_english": "Electra",
+          "book_count": 1,
+          "total_lines": 765664,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1348
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg013",
+          "title": "Iphigenia Taurica",
+          "title_english": "Iphigenia Among the Tauri",
+          "book_count": 1,
+          "total_lines": 940240,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1460
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg014",
+          "title": "Helena",
+          "title_english": "Helen",
+          "book_count": 1,
+          "total_lines": 1255325,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1685
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg015",
+          "title": "Phoenissae",
+          "title_english": "The Phoenician Maidens",
+          "book_count": 1,
+          "total_lines": 1233062,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1754
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg016",
+          "title": "Orestes",
+          "title_english": "Orestes",
+          "book_count": 1,
+          "total_lines": 1295025,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1671
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg017",
+          "title": "The Bacchae",
+          "title_english": "The Bacchae",
+          "book_count": 1,
+          "total_lines": 725679,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1377
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg018",
+          "title": "Iphigenia Aulidensis",
+          "title_english": "Iphigenia at Aulis",
+          "book_count": 1,
+          "total_lines": 1077759,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1611
+            }
+          ]
+        },
+        {
+          "id": "tlg0006.tlg019",
+          "title": "Rhesus",
+          "title_english": "Rhesus",
+          "book_count": 1,
+          "total_lines": 1339359,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 987
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0016",
+      "name": "Herodotus",
+      "language": "greek",
+      "work_count": 1,
+      "total_books": 9,
+      "total_lines": 20456,
+      "works": [
+        {
+          "id": "tlg0016.tlg001",
+          "title": "Histories",
+          "title_english": "Histories",
+          "book_count": 9,
+          "total_lines": 14234450,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 3152
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 2650
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 2504
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 2584
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 1632
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 1696
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 2890
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 1734
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 1614
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0020",
+      "name": "Hesiod",
+      "language": "greek",
+      "work_count": 3,
+      "total_books": 3,
+      "total_lines": 2384,
+      "works": [
+        {
+          "id": "tlg0020.tlg001",
+          "title": "Theogony",
+          "title_english": "Theogony",
+          "book_count": 1,
+          "total_lines": 222394,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1054
+            }
+          ]
+        },
+        {
+          "id": "tlg0020.tlg002",
+          "title": "Works and Days",
+          "title_english": "Works and Days",
+          "book_count": 1,
+          "total_lines": 147030,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 845
+            }
+          ]
+        },
+        {
+          "id": "tlg0020.tlg003",
+          "title": "Shield of Heracles",
+          "title_english": "Shield of Heracles",
+          "book_count": 1,
+          "total_lines": 48015,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 485
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0012",
+      "name": "Homer",
+      "language": "greek",
+      "work_count": 3,
+      "total_books": 49,
+      "total_lines": 27908,
+      "works": [
+        {
+          "id": "tlg0012.tlg001",
+          "title": "Iliad",
+          "title_english": "Iliad",
+          "book_count": 24,
+          "total_lines": 1293661,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 611
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 877
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 461
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 544
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 909
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 529
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 482
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 569
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 709
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 579
+            },
+            {
+              "number": 11,
+              "label": "Book 11",
+              "line_count": 847
+            },
+            {
+              "number": 12,
+              "label": "Book 12",
+              "line_count": 471
+            },
+            {
+              "number": 13,
+              "label": "Book 13",
+              "line_count": 837
+            },
+            {
+              "number": 14,
+              "label": "Book 14",
+              "line_count": 521
+            },
+            {
+              "number": 15,
+              "label": "Book 15",
+              "line_count": 746
+            },
+            {
+              "number": 16,
+              "label": "Book 16",
+              "line_count": 867
+            },
+            {
+              "number": 17,
+              "label": "Book 17",
+              "line_count": 761
+            },
+            {
+              "number": 18,
+              "label": "Book 18",
+              "line_count": 617
+            },
+            {
+              "number": 19,
+              "label": "Book 19",
+              "line_count": 424
+            },
+            {
+              "number": 20,
+              "label": "Book 20",
+              "line_count": 503
+            },
+            {
+              "number": 21,
+              "label": "Book 21",
+              "line_count": 611
+            },
+            {
+              "number": 22,
+              "label": "Book 22",
+              "line_count": 515
+            },
+            {
+              "number": 23,
+              "label": "Book 23",
+              "line_count": 897
+            },
+            {
+              "number": 24,
+              "label": "Book 24",
+              "line_count": 804
+            }
+          ]
+        },
+        {
+          "id": "tlg0012.tlg002",
+          "title": "Odyssey",
+          "title_english": "Odyssey",
+          "book_count": 24,
+          "total_lines": 697060,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 444
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 434
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 497
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 847
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 493
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 331
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 347
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 586
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 566
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 573
+            },
+            {
+              "number": 11,
+              "label": "Book 11",
+              "line_count": 640
+            },
+            {
+              "number": 12,
+              "label": "Book 12",
+              "line_count": 453
+            },
+            {
+              "number": 13,
+              "label": "Book 13",
+              "line_count": 440
+            },
+            {
+              "number": 14,
+              "label": "Book 14",
+              "line_count": 533
+            },
+            {
+              "number": 15,
+              "label": "Book 15",
+              "line_count": 557
+            },
+            {
+              "number": 16,
+              "label": "Book 16",
+              "line_count": 480
+            },
+            {
+              "number": 17,
+              "label": "Book 17",
+              "line_count": 606
+            },
+            {
+              "number": 18,
+              "label": "Book 18",
+              "line_count": 428
+            },
+            {
+              "number": 19,
+              "label": "Book 19",
+              "line_count": 604
+            },
+            {
+              "number": 20,
+              "label": "Book 20",
+              "line_count": 394
+            },
+            {
+              "number": 21,
+              "label": "Book 21",
+              "line_count": 434
+            },
+            {
+              "number": 22,
+              "label": "Book 22",
+              "line_count": 501
+            },
+            {
+              "number": 23,
+              "label": "Book 23",
+              "line_count": 371
+            },
+            {
+              "number": 24,
+              "label": "Book 24",
+              "line_count": 548
+            }
+          ]
+        },
+        {
+          "id": "tlg0012.tlg003",
+          "title": "Epigrams",
+          "title_english": "Epigrams",
+          "book_count": 1,
+          "total_lines": 12210,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 110
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0033",
+      "name": "Pindar",
+      "language": "greek",
+      "work_count": 4,
+      "total_books": 4,
+      "total_lines": 3414,
+      "works": [
+        {
+          "id": "tlg0033.tlg001",
+          "title": "Olympian Odes",
+          "title_english": "Olympian Odes",
+          "book_count": 1,
+          "total_lines": 305082,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 997
+            }
+          ]
+        },
+        {
+          "id": "tlg0033.tlg002",
+          "title": "Pythian Odes",
+          "title_english": "Pythian Odes",
+          "book_count": 1,
+          "total_lines": 446772,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1201
+            }
+          ]
+        },
+        {
+          "id": "tlg0033.tlg003",
+          "title": "Nemean Odes",
+          "title_english": "Nemean Odes",
+          "book_count": 1,
+          "total_lines": 185003,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 749
+            }
+          ]
+        },
+        {
+          "id": "tlg0033.tlg004",
+          "title": "Isthmean Odes",
+          "title_english": "Isthmean Odes",
+          "book_count": 1,
+          "total_lines": 69583,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 467
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0059",
+      "name": "Plato",
+      "language": "greek",
+      "work_count": 36,
+      "total_books": 56,
+      "total_lines": 32310,
+      "works": [
+        {
+          "id": "tlg0059.tlg001",
+          "title": "Euthyphro",
+          "title_english": "Euthyphro",
+          "book_count": 1,
+          "total_lines": 22326,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 366
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg002",
+          "title": "Apology",
+          "title_english": "Apology",
+          "book_count": 1,
+          "total_lines": 11076,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 426
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg003",
+          "title": "Crito",
+          "title_english": "Crito",
+          "book_count": 1,
+          "total_lines": 8296,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 244
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg004",
+          "title": "Phaedo",
+          "title_english": "Phaedo",
+          "book_count": 1,
+          "total_lines": 79794,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1209
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg005",
+          "title": "Cratylus",
+          "title_english": "Cratylus",
+          "book_count": 1,
+          "total_lines": 253924,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1276
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg006",
+          "title": "Theaetetus",
+          "title_english": "Theaetetus",
+          "book_count": 1,
+          "total_lines": 304584,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1554
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg007",
+          "title": "Sophist",
+          "title_english": "Sophist",
+          "book_count": 1,
+          "total_lines": 169920,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1180
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg008",
+          "title": "Statesman",
+          "title_english": "Statesman",
+          "book_count": 1,
+          "total_lines": 164304,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1008
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg009",
+          "title": "Parmenides",
+          "title_english": "Parmenides",
+          "book_count": 1,
+          "total_lines": 39278,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 958
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg010",
+          "title": "Philebus",
+          "title_english": "Philebus",
+          "book_count": 1,
+          "total_lines": 190760,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1255
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg011",
+          "title": "Symposium",
+          "title_english": "Symposium",
+          "book_count": 1,
+          "total_lines": 52417,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 989
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg012",
+          "title": "Phaedrus",
+          "title_english": "Phaedrus",
+          "book_count": 1,
+          "total_lines": 101261,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 929
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg013",
+          "title": "Alcibiades 1",
+          "title_english": "Alcibiades 1",
+          "book_count": 1,
+          "total_lines": 51756,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 908
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg014",
+          "title": "Alcibiades 2",
+          "title_english": "Alcibiades 2",
+          "book_count": 1,
+          "total_lines": 9835,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 281
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg015",
+          "title": "Hipparchus",
+          "title_english": "Hipparchus",
+          "book_count": 1,
+          "total_lines": 2565,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 171
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg016",
+          "title": "Lovers",
+          "title_english": "Lovers",
+          "book_count": 1,
+          "total_lines": 5370,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 179
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg017",
+          "title": "Theages",
+          "title_english": "Theages",
+          "book_count": 1,
+          "total_lines": 5300,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 265
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg018",
+          "title": "Charmides",
+          "title_english": "Charmides",
+          "book_count": 1,
+          "total_lines": 13080,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 545
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg019",
+          "title": "Laches",
+          "title_english": "Laches",
+          "book_count": 1,
+          "total_lines": 39737,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 503
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg020",
+          "title": "Lysis",
+          "title_english": "Lysis",
+          "book_count": 1,
+          "total_lines": 7455,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 355
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg021",
+          "title": "Euthydemus",
+          "title_english": "Euthydemus",
+          "book_count": 1,
+          "total_lines": 41796,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 774
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg022",
+          "title": "Protagoras",
+          "title_english": "Protagoras",
+          "book_count": 1,
+          "total_lines": 45792,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 864
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg023",
+          "title": "Gorgias",
+          "title_english": "Gorgias",
+          "book_count": 1,
+          "total_lines": 286605,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1737
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg024",
+          "title": "Meno",
+          "title_english": "Meno",
+          "book_count": 1,
+          "total_lines": 65859,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 757
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg025",
+          "title": "Greater Hippias",
+          "title_english": "Greater Hippias",
+          "book_count": 1,
+          "total_lines": 43180,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 635
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg026",
+          "title": "Lesser Hippias",
+          "title_english": "Lesser Hippias",
+          "book_count": 1,
+          "total_lines": 9610,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 310
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg027",
+          "title": "Ion",
+          "title_english": "Ion",
+          "book_count": 1,
+          "total_lines": 7224,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 258
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg028",
+          "title": "Menexenus",
+          "title_english": "Menexenus",
+          "book_count": 1,
+          "total_lines": 5129,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 223
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg029",
+          "title": "Cleitophon",
+          "title_english": "Cleitophon",
+          "book_count": 1,
+          "total_lines": 350,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 70
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg030",
+          "title": "Republic",
+          "title_english": "Republic",
+          "book_count": 10,
+          "total_lines": 149090,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 718
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 507
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 576
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 523
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 658
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 491
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 482
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 471
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 412
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 469
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg031",
+          "title": "Timaeus",
+          "title_english": "Timaeus",
+          "book_count": 1,
+          "total_lines": 74844,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 891
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg032",
+          "title": "Critias",
+          "title_english": "Critias",
+          "book_count": 1,
+          "total_lines": 3420,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 171
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg033",
+          "title": "Minos",
+          "title_english": "Minos",
+          "book_count": 1,
+          "total_lines": 4029,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 237
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg034",
+          "title": "Laws",
+          "title_english": "Laws",
+          "book_count": 12,
+          "total_lines": 329284,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 440
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 356
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 431
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 330
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 255
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 427
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 535
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 286
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 383
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 432
+            },
+            {
+              "number": 11,
+              "label": "Book 11",
+              "line_count": 298
+            },
+            {
+              "number": 12,
+              "label": "Book 12",
+              "line_count": 350
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg035",
+          "title": "Epinomis",
+          "title_english": "Epinomis",
+          "book_count": 1,
+          "total_lines": 7395,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 255
+            }
+          ]
+        },
+        {
+          "id": "tlg0059.tlg036",
+          "title": "Letters",
+          "title_english": "Letters",
+          "book_count": 1,
+          "total_lines": 45305,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 697
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0007",
+      "name": "Plutarch",
+      "language": "greek",
+      "work_count": 143,
+      "total_books": 153,
+      "total_lines": 74684,
+      "works": [
+        {
+          "id": "tlg0007.tlg001",
+          "title": "Theseus",
+          "title_english": "Theseus",
+          "book_count": 1,
+          "total_lines": 132384,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 788
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg002",
+          "title": "Romulus",
+          "title_english": "Romulus",
+          "book_count": 1,
+          "total_lines": 175940,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 926
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg003",
+          "title": "Comparison of Theseus and Romulus",
+          "title_english": "Comparison of Theseus and Romulus",
+          "book_count": 1,
+          "total_lines": 1920,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 80
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg004",
+          "title": "Lycurgus",
+          "title_english": "Lycurgus",
+          "book_count": 1,
+          "total_lines": 146464,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 796
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg005",
+          "title": "Numa",
+          "title_english": "Numa",
+          "book_count": 1,
+          "total_lines": 85424,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 562
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg006",
+          "title": "Comparison of Lycurgus and Numa",
+          "title_english": "Comparison of Lycurgus and Numa",
+          "book_count": 1,
+          "total_lines": 3060,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 102
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg007",
+          "title": "Solon",
+          "title_english": "Solon",
+          "book_count": 1,
+          "total_lines": 157208,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 914
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg008",
+          "title": "Publicola",
+          "title_english": "Publicola",
+          "book_count": 1,
+          "total_lines": 60984,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 484
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg009",
+          "title": "Comparison of Solon and Publicola",
+          "title_english": "Comparison of Solon and Publicola",
+          "book_count": 1,
+          "total_lines": 1440,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 72
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg010",
+          "title": "Themistocles",
+          "title_english": "Themistocles",
+          "book_count": 1,
+          "total_lines": 127344,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 758
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg011",
+          "title": "Camillus",
+          "title_english": "Camillus",
+          "book_count": 1,
+          "total_lines": 188940,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 804
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg012",
+          "title": "Pericles",
+          "title_english": "Pericles",
+          "book_count": 1,
+          "total_lines": 198440,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 902
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg013",
+          "title": "Fabius Maximus",
+          "title_english": "Fabius Maximus",
+          "book_count": 1,
+          "total_lines": 89040,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 560
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg014",
+          "title": "Comparison of Pericles and Fabius Maximus",
+          "title_english": "Comparison of Pericles and Fabius Maximus",
+          "book_count": 1,
+          "total_lines": 992,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 62
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg015",
+          "title": "Alcibiades",
+          "title_english": "Alcibiades",
+          "book_count": 1,
+          "total_lines": 210632,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 932
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg016",
+          "title": "Caius Marcius Coriolanus",
+          "title_english": "Caius Marcius Coriolanus",
+          "book_count": 1,
+          "total_lines": 137496,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 674
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg017",
+          "title": "Comparison of Alcibiades and Coriolanus",
+          "title_english": "Comparison of Alcibiades and Coriolanus",
+          "book_count": 1,
+          "total_lines": 2538,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 94
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg018",
+          "title": "Timoleon",
+          "title_english": "Timoleon",
+          "book_count": 1,
+          "total_lines": 670,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 670
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg019",
+          "title": "Aemilius Paulus",
+          "title_english": "Aemilius Paulus",
+          "book_count": 1,
+          "total_lines": 272748,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 764
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg020",
+          "title": "Comparison of Timoleon and Aemilius",
+          "title_english": "Comparison of Timoleon and Aemilius",
+          "book_count": 1,
+          "total_lines": 760,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 40
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg021",
+          "title": "Pelopidas",
+          "title_english": "Pelopidas",
+          "book_count": 1,
+          "total_lines": 130380,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 636
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg022",
+          "title": "Marcellus",
+          "title_english": "Marcellus",
+          "book_count": 1,
+          "total_lines": 111996,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 612
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg023",
+          "title": "Comparison of Pelopidas and Marcellus",
+          "title_english": "Comparison of Pelopidas and Marcellus",
+          "book_count": 1,
+          "total_lines": 1152,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 64
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg024",
+          "title": "Aristides",
+          "title_english": "Aristides",
+          "book_count": 1,
+          "total_lines": 128366,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 742
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg025",
+          "title": "Marcus Cato",
+          "title_english": "Marcus Cato",
+          "book_count": 1,
+          "total_lines": 105876,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 612
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg026",
+          "title": "Comparison of Aristides and Marcus Cato",
+          "title_english": "Comparison of Aristides and Marcus Cato",
+          "book_count": 1,
+          "total_lines": 3328,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 104
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg027",
+          "title": "Philopoemen",
+          "title_english": "Philopoemen",
+          "book_count": 1,
+          "total_lines": 46550,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 350
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg028",
+          "title": "Titus Flamininus",
+          "title_english": "Titus Flamininus",
+          "book_count": 1,
+          "total_lines": 50052,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 388
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg029",
+          "title": "Comparison of Philopoemen and Titus",
+          "title_english": "Comparison of Philopoemen and Titus",
+          "book_count": 1,
+          "total_lines": 504,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 42
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg030",
+          "title": "Pyrrhus",
+          "title_english": "Pyrrhus",
+          "book_count": 1,
+          "total_lines": 190608,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 836
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg031",
+          "title": "Caius Marius",
+          "title_english": "Caius Marius",
+          "book_count": 1,
+          "total_lines": 276640,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 988
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg032",
+          "title": "Lysander",
+          "title_english": "Lysander",
+          "book_count": 1,
+          "total_lines": 132090,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 714
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg033",
+          "title": "Sulla",
+          "title_english": "Sulla",
+          "book_count": 1,
+          "total_lines": 206668,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 854
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg034",
+          "title": "Comparison of Lysander and Sulla",
+          "title_english": "Comparison of Lysander and Sulla",
+          "book_count": 1,
+          "total_lines": 2408,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 86
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg035",
+          "title": "Cimon",
+          "title_english": "Cimon",
+          "book_count": 1,
+          "total_lines": 62976,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 492
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg036",
+          "title": "Lucullus",
+          "title_english": "Lucullus",
+          "book_count": 1,
+          "total_lines": 291264,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 984
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg037",
+          "title": "Comparison of Lucullus and Cimon",
+          "title_english": "Comparison of Lucullus and Cimon",
+          "book_count": 1,
+          "total_lines": 1470,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 70
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg038",
+          "title": "Nicias",
+          "title_english": "Nicias",
+          "book_count": 1,
+          "total_lines": 157056,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 818
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg039",
+          "title": "Crassus",
+          "title_english": "Crassus",
+          "book_count": 1,
+          "total_lines": 188936,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 836
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg040",
+          "title": "Comparison of Nicias and Crassus",
+          "title_english": "Comparison of Nicias and Crassus",
+          "book_count": 1,
+          "total_lines": 2688,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 96
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg041",
+          "title": "Eumenes",
+          "title_english": "Eumenes",
+          "book_count": 1,
+          "total_lines": 43290,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 370
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg042",
+          "title": "Sertorius",
+          "title_english": "Sertorius",
+          "book_count": 1,
+          "total_lines": 71920,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 464
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg043",
+          "title": "Comparison of Sertorius and Eumenes",
+          "title_english": "Comparison of Sertorius and Eumenes",
+          "book_count": 1,
+          "total_lines": 288,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 32
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg044",
+          "title": "Agesilaus",
+          "title_english": "Agesilaus",
+          "book_count": 1,
+          "total_lines": 217382,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 902
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg045",
+          "title": "Pompey",
+          "title_english": "Pompey",
+          "book_count": 1,
+          "total_lines": 1598,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1598
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg046",
+          "title": "Comparison of Agesilaus and Pompey",
+          "title_english": "Comparison of Agesilaus and Pompey",
+          "book_count": 1,
+          "total_lines": 1850,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 74
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg047",
+          "title": "Alexander",
+          "title_english": "Alexander",
+          "book_count": 1,
+          "total_lines": 692804,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1526
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg048",
+          "title": "Caesar",
+          "title_english": "Caesar",
+          "book_count": 1,
+          "total_lines": 374850,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1050
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg049",
+          "title": "Phocion",
+          "title_english": "Phocion",
+          "book_count": 1,
+          "total_lines": 124248,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 668
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg050",
+          "title": "Cato the Younger",
+          "title_english": "Cato the Younger",
+          "book_count": 1,
+          "total_lines": 491878,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1258
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg051",
+          "title": "Agis and Cleomenes",
+          "title_english": "Agis and Cleomenes",
+          "book_count": 2,
+          "total_lines": 155134,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 302
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 614
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg052",
+          "title": "Tiberius and Caius Gracchus",
+          "title_english": "Tiberius and Caius Gracchus",
+          "book_count": 2,
+          "total_lines": 75020,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 370
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 320
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg053",
+          "title": "Comparison of Agis and Cleomenes and the Gracchi",
+          "title_english": "Comparison of Agis and Cleomenes and the Gracchi",
+          "book_count": 1,
+          "total_lines": 1632,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 68
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg054",
+          "title": "Demosthenes",
+          "title_english": "Demosthenes",
+          "book_count": 1,
+          "total_lines": 88872,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 552
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg055",
+          "title": "Cicero",
+          "title_english": "Cicero",
+          "book_count": 1,
+          "total_lines": 275448,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 998
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg056",
+          "title": "Comparison of Demosthenes and Cicero",
+          "title_english": "Comparison of Demosthenes and Cicero",
+          "book_count": 1,
+          "total_lines": 1632,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 68
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg057",
+          "title": "Demetrius",
+          "title_english": "Demetrius",
+          "book_count": 1,
+          "total_lines": 339880,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1160
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg058",
+          "title": "Antony",
+          "title_english": "Antony",
+          "book_count": 1,
+          "total_lines": 834912,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1872
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg059",
+          "title": "Comparison of Demetrius and Antony",
+          "title_english": "Comparison of Demetrius and Antony",
+          "book_count": 1,
+          "total_lines": 1840,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 80
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg060",
+          "title": "Dion",
+          "title_english": "Dion",
+          "book_count": 1,
+          "total_lines": 950,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 950
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg061",
+          "title": "Brutus",
+          "title_english": "Brutus",
+          "book_count": 1,
+          "total_lines": 1140,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1140
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg062",
+          "title": "Comparison of Dion and Brutus",
+          "title_english": "Comparison of Dion and Brutus",
+          "book_count": 1,
+          "total_lines": 3116,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 82
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg063",
+          "title": "Aratus",
+          "title_english": "Aratus",
+          "book_count": 1,
+          "total_lines": 246532,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 862
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg064",
+          "title": "Artaxerxes",
+          "title_english": "Artaxerxes",
+          "book_count": 1,
+          "total_lines": 101660,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 598
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg065",
+          "title": "Galba",
+          "title_english": "Galba",
+          "book_count": 1,
+          "total_lines": 72782,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 482
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg066",
+          "title": "Otho",
+          "title_english": "Otho",
+          "book_count": 1,
+          "total_lines": 33456,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 328
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg067",
+          "title": "De liberis educandis",
+          "title_english": "A Discourse Touching the Training of Children",
+          "book_count": 1,
+          "total_lines": 14400,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 360
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg068",
+          "title": "Quomodo adolescens poetas audire debeat",
+          "title_english": "How a Young Man Ought to Hear Poems",
+          "book_count": 1,
+          "total_lines": 12488,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 446
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg069",
+          "title": "De recta ratione audiendi",
+          "title_english": "Of Hearing",
+          "book_count": 1,
+          "total_lines": 6228,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 173
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg070",
+          "title": "Quomodo adulator ab amico internoscatur",
+          "title_english": "How to Know a Flatterer from a Friend",
+          "book_count": 1,
+          "total_lines": 36112,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 488
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg071",
+          "title": "Quomodo quis suos in virtute sentiat profectus",
+          "title_english": "How a Man May Be Sensible of His Progress in Virtue.",
+          "book_count": 1,
+          "total_lines": 5474,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 161
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg072",
+          "title": "De capienda ex inimicis utilitate",
+          "title_english": "How a man may receive advantage and profit from his\n            enemies.",
+          "book_count": 1,
+          "total_lines": 3190,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 145
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg073",
+          "title": "De amicorum multitudine",
+          "title_english": "Of Large Acquaintance: or, an Essay to Prove the Folly of Seeking Many Friends",
+          "book_count": 1,
+          "total_lines": 1440,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 80
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg074",
+          "title": "De fortuna",
+          "title_english": "Of Fortune",
+          "book_count": 1,
+          "total_lines": 696,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 58
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg075",
+          "title": "De virtute et vitio",
+          "title_english": "Of Virtue and Vice",
+          "book_count": 1,
+          "total_lines": 280,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 35
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg076",
+          "title": "Consolatio ad Apollonium",
+          "title_english": "Consolation to Apollonius",
+          "book_count": 1,
+          "total_lines": 35742,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 483
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg077",
+          "title": "De tuenda sanitate praecepta",
+          "title_english": "Plutarch's Rules for the Preservation of Health",
+          "book_count": 1,
+          "total_lines": 15120,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 280
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg078",
+          "title": "Conjugalia Praecepta",
+          "title_english": "Conjugal Precepts",
+          "book_count": 1,
+          "total_lines": 17346,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 177
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg079",
+          "title": "Septem sapientium convivium",
+          "title_english": "The Banquet of the Seven Wise Men",
+          "book_count": 1,
+          "total_lines": 18270,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 435
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg080",
+          "title": "De Superstitione",
+          "title_english": "Of Superstition, or Indiscreet Devotion",
+          "book_count": 1,
+          "total_lines": 4648,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 166
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg081",
+          "title": "Regum et imperatorum apophthegmata",
+          "title_english": "The apophthegms or remarkable sayings of kings and great\n            commanders.",
+          "book_count": 1,
+          "total_lines": 1385784,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 2026
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg082",
+          "title": "Apophthegmata Laconica",
+          "title_english": "Laconic Apophthegms; or Remarkable Sayings of the Spartans.",
+          "book_count": 1,
+          "total_lines": 1031190,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1858
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg082a",
+          "title": "Instituta Laconia",
+          "title_english": "The Ancient Customs of the Spartans",
+          "book_count": 1,
+          "total_lines": 4536,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 108
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg082b",
+          "title": "Lacaenarum Apophthegmata",
+          "title_english": "Sayings of Spartan Women",
+          "book_count": 1,
+          "total_lines": 8372,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 182
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg083",
+          "title": "Mulierum virtutes",
+          "title_english": "Concerning the Virtues of Women",
+          "book_count": 1,
+          "total_lines": 29920,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 544
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg084a",
+          "title": "Quaestiones Romanae",
+          "title_english": "Roman Questions",
+          "book_count": 1,
+          "total_lines": 212892,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 942
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg084b",
+          "title": "Quaestiones Graecae",
+          "title_english": "Greek Questions",
+          "book_count": 1,
+          "total_lines": 45076,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 382
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg085",
+          "title": "Parallela minora",
+          "title_english": "Parallels, or a comparison between the Greek and Roman  Histories.",
+          "book_count": 1,
+          "total_lines": 31584,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 376
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg086",
+          "title": "De fortuna Romanorum",
+          "title_english": "Concerning the fortune of the Romans",
+          "book_count": 1,
+          "total_lines": 6162,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 237
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg087",
+          "title": "De Alexandri magni fortuna aut virtute",
+          "title_english": "Concerning the fortune or virtue of Alexander the Great.",
+          "book_count": 1,
+          "total_lines": 46200,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 840
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg088",
+          "title": "De gloria Atheniensium",
+          "title_english": "Whether the Athenians Were More Renowned For Their Warlike Achievements or For Their Learning",
+          "book_count": 1,
+          "total_lines": 4096,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 256
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg089",
+          "title": "De Iside et Osiride",
+          "title_english": "Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt.",
+          "book_count": 1,
+          "total_lines": 74304,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 864
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg090",
+          "title": "De E apud Delphos",
+          "title_english": "De E apud Delphos",
+          "book_count": 1,
+          "total_lines": 10584,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 252
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg091",
+          "title": "De Pythiae oraculis",
+          "title_english": "Wherefore the Pythian Priestess now Ceases to Deliver her Oracles in Verse",
+          "book_count": 1,
+          "total_lines": 25320,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 422
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg092",
+          "title": "De Defectu Oraculorum",
+          "title_english": "Why the Oracles Cease to Give Answers",
+          "book_count": 1,
+          "total_lines": 71968,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 692
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg093",
+          "title": "An Virtus Doceri Possit",
+          "title_english": "That Virtue May Be Taught",
+          "book_count": 1,
+          "total_lines": 228,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 38
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg094",
+          "title": "De Virtute Morali",
+          "title_english": "Of Moral Virtue",
+          "book_count": 1,
+          "total_lines": 6552,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 273
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg095",
+          "title": "De cohibenda ira",
+          "title_english": "Concerning the cure of anger: a dialogue",
+          "book_count": 1,
+          "total_lines": 9760,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 305
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg096",
+          "title": "De Tranquillitate Animi",
+          "title_english": "Of the Tranquillity of the Mind.",
+          "book_count": 1,
+          "total_lines": 13480,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 337
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg097",
+          "title": "De fraterno amore",
+          "title_english": "Of Brotherly Love",
+          "book_count": 1,
+          "total_lines": 14280,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 340
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg098",
+          "title": "De Amore Prolis",
+          "title_english": "Of Natural Affection Towards One's Offspring",
+          "book_count": 1,
+          "total_lines": 1420,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 142
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg099",
+          "title": "An vitiositas ad infelicitatem sufficia",
+          "title_english": "Whether vice is sufficient to render a man unhappy",
+          "book_count": 1,
+          "total_lines": 530,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 53
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg100",
+          "title": "Animine an corporis affectiones sint peiores",
+          "title_english": "Whether the Passions of the Soul or Diseases of the Body Are Worse",
+          "book_count": 1,
+          "total_lines": 376,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 47
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg101",
+          "title": "De Garrulitate",
+          "title_english": "Of Garrulity, or Talkativeness",
+          "book_count": 1,
+          "total_lines": 17250,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 375
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg102",
+          "title": "De curiositate",
+          "title_english": "Of Curiosity, or an Over-Busy Inquisitiveness into Things Impertinent.",
+          "book_count": 1,
+          "total_lines": 7104,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 222
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg103",
+          "title": "De Cupiditate Divitiarum",
+          "title_english": "Of the Love of Wealth",
+          "book_count": 1,
+          "total_lines": 1400,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 140
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg104",
+          "title": "De Vitioso Pudore",
+          "title_english": "Of Bashfulness",
+          "book_count": 1,
+          "total_lines": 3705,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 195
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg105",
+          "title": "De Invidia et Odio",
+          "title_english": "Of Envy and Hatred",
+          "book_count": 1,
+          "total_lines": 592,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 74
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg106",
+          "title": "De Se Ipsum Citra Invidiam Laudando",
+          "title_english": "How a Man May Inoffensively Praise Himself Without Being Liable to Envy",
+          "book_count": 1,
+          "total_lines": 4730,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 215
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg107",
+          "title": "De Sera Numinis Vindicta",
+          "title_english": "Concerning Such Whom God is Slow to Punish",
+          "book_count": 1,
+          "total_lines": 14388,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 436
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg108",
+          "title": "De Fato",
+          "title_english": "Of Fate.",
+          "book_count": 1,
+          "total_lines": 2796,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 233
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg109",
+          "title": "De Genio Socratis",
+          "title_english": "A Discourse Concerning Socrates's Daemon",
+          "book_count": 1,
+          "total_lines": 22610,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 665
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg110",
+          "title": "De exilio",
+          "title_english": "Of Banishment, or Flying One's Country.",
+          "book_count": 1,
+          "total_lines": 4301,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 253
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg111",
+          "title": "Consolatio Ad Uxorem",
+          "title_english": "Plutarch's Consolatory Letter to His Wife",
+          "book_count": 1,
+          "total_lines": 1276,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 116
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg112",
+          "title": "Quaestiones Convivales",
+          "title_english": "Symposiacs",
+          "book_count": 9,
+          "total_lines": 333578,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 978
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 984
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 988
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 834
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 748
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 704
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 1018
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 1126
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 758
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg113",
+          "title": "Amatorius",
+          "title_english": "Of Love.",
+          "book_count": 1,
+          "total_lines": 20644,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 794
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg114",
+          "title": "Amatoriae Narrationes",
+          "title_english": "Five Tragical Histories of Love",
+          "book_count": 1,
+          "total_lines": 1110,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 111
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg115",
+          "title": "Maxime Cum Principibus Viris Philosopho Esse Disserendum",
+          "title_english": "That a Philosopher Ought Chiefly to Converse with Great Men",
+          "book_count": 1,
+          "total_lines": 904,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 113
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg116",
+          "title": "Ad principem ineruditum",
+          "title_english": "A discourse to an unlearned prince",
+          "book_count": 1,
+          "total_lines": 1358,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 97
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg117",
+          "title": "An seni respublica gerenda sit",
+          "title_english": "Whether an Aged Man Ought to Meddle in State Affairs.",
+          "book_count": 1,
+          "total_lines": 17976,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 321
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg118",
+          "title": "Praecepta gerendae reipublicae",
+          "title_english": "Political Precepts",
+          "book_count": 1,
+          "total_lines": 37952,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 593
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg119",
+          "title": "De unius in republica dominatione, populari statu, et paucorum imperio",
+          "title_english": "Of the Three Sorts of Government, Monarchy, Democracy, and Oligarchy.",
+          "book_count": 1,
+          "total_lines": 328,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 41
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg120",
+          "title": "De vitando aere alieno",
+          "title_english": "Against Running in Debt, or Taking up Money Upon Usury",
+          "book_count": 1,
+          "total_lines": 2640,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 165
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg121",
+          "title": "Vitae decem oratorum",
+          "title_english": "Lives of the Ten Orators",
+          "book_count": 1,
+          "total_lines": 25532,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 982
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg122",
+          "title": "Comparationis Aristophanis et Menandri compendium",
+          "title_english": "An Abstract of a Comparison Betwixt Aristophanes and Menander",
+          "book_count": 1,
+          "total_lines": 232,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 29
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg123",
+          "title": "De Heroditi malignate",
+          "title_english": "Of Herodotus's Malice.",
+          "book_count": 1,
+          "total_lines": 15050,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 350
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg125",
+          "title": "Quaestiones Naturales",
+          "title_english": "Plutarch's Natural Questions",
+          "book_count": 1,
+          "total_lines": 10257,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 263
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg126",
+          "title": "De Facie Quae in orbe Lunae Apparet",
+          "title_english": "Of the Face Appearing Within the Orb Of the Moon",
+          "book_count": 1,
+          "total_lines": 32760,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 546
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg127",
+          "title": "De primo frigido",
+          "title_english": "On the Principle of Cold ",
+          "book_count": 1,
+          "total_lines": 11086,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 241
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg128",
+          "title": "Aquane an ignis sit utilior",
+          "title_english": "Whether water or fire be most useful.",
+          "book_count": 1,
+          "total_lines": 2340,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 90
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg129",
+          "title": "De sollertia animalium",
+          "title_english": "Which are the most crafty, water-animals or those creatures that breed upon the land?",
+          "book_count": 1,
+          "total_lines": 38175,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 509
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg130",
+          "title": "Bruta animalia ratione uti",
+          "title_english": "That brute beasts make use of reason",
+          "book_count": 1,
+          "total_lines": 3120,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 156
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg131",
+          "title": "De esu carnium I",
+          "title_english": "Of eating of flesh: Tract I.",
+          "book_count": 1,
+          "total_lines": 994,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 71
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg132",
+          "title": "De esu carnium II",
+          "title_english": "Of eating of flesh: Tract II.",
+          "book_count": 1,
+          "total_lines": 826,
+          "translator_count": 2,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 59
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg133",
+          "title": "Platonicae quaestiones",
+          "title_english": "Plutarch's Platonic questions",
+          "book_count": 1,
+          "total_lines": 27918,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 594
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg134",
+          "title": "De animae procreatione in Timaeo",
+          "title_english": "Concerning the procreation of the soul as discoursed in Timaeus",
+          "book_count": 1,
+          "total_lines": 11748,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 356
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg135",
+          "title": "Epitome libri de animae procreatione in Timaeo",
+          "title_english": "Epitome libri de animae procreatione in Timaeo",
+          "book_count": 1,
+          "total_lines": 49,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 49
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg136",
+          "title": "De Stoicorum repugnantiis",
+          "title_english": "The contradictions of the Stoics",
+          "book_count": 1,
+          "total_lines": 23598,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 513
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg137",
+          "title": "Compendium argumenti Stoicos absurdiora poetis dicere",
+          "title_english": "A breviate of a discourse, showing that the Stoics speak greater improbabilities than the poets.",
+          "book_count": 1,
+          "total_lines": 138,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 23
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg138",
+          "title": "De communibus notitiis adversus Stoicos",
+          "title_english": "Of common conceptions, against the Stoics.",
+          "book_count": 1,
+          "total_lines": 30950,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 619
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg139",
+          "title": "Non Posse Suaviter Vivi Secundum Epicurum",
+          "title_english": "That it is Not Possible to Live Pleasurably According to the Doctrine of Epicurus",
+          "book_count": 1,
+          "total_lines": 12400,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 400
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg140",
+          "title": "Adversus Coloten",
+          "title_english": "Against Colotes, the Disciple and Favorite of Epicurus.",
+          "book_count": 1,
+          "total_lines": 12682,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 373
+            }
+          ]
+        },
+        {
+          "id": "tlg0007.tlg141",
+          "title": "An Recte Dictum Sit Latenter Esse Vivendum",
+          "title_english": "Whether 'Twere Rightly Said, Live Concealed.",
+          "book_count": 1,
+          "total_lines": 455,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0011",
+      "name": "Sophocles",
+      "language": "greek",
+      "work_count": 8,
+      "total_books": 8,
+      "total_lines": 10318,
+      "works": [
+        {
+          "id": "tlg0011.tlg001",
+          "title": "Trachiniae",
+          "title_english": "Trachiniae",
+          "book_count": 1,
+          "total_lines": 574275,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1235
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg002",
+          "title": "Antigone",
+          "title_english": "Antigone",
+          "book_count": 1,
+          "total_lines": 647284,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1252
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg003",
+          "title": "Ajax",
+          "title_english": "Ajax",
+          "book_count": 1,
+          "total_lines": 709280,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1364
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg004",
+          "title": "Oedipus Tyrannus",
+          "title_english": "Oedipus Tyrannus",
+          "book_count": 1,
+          "total_lines": 979540,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1462
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg005",
+          "title": "Electra",
+          "title_english": "Electra",
+          "book_count": 1,
+          "total_lines": 913096,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1468
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg006",
+          "title": "Philoctetes",
+          "title_english": "Philoctetes",
+          "book_count": 1,
+          "total_lines": 831534,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1419
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg007",
+          "title": "Oedipus at Colonus",
+          "title_english": "Oedipus at Colonus",
+          "book_count": 1,
+          "total_lines": 1260278,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1717
+            }
+          ]
+        },
+        {
+          "id": "tlg0011.tlg008",
+          "title": "Ichneutae",
+          "title_english": "Tracking Satyrs",
+          "book_count": 1,
+          "total_lines": 46516,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 401
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0003",
+      "name": "Thucydides",
+      "language": "greek",
+      "work_count": 1,
+      "total_books": 8,
+      "total_lines": 12356,
+      "works": [
+        {
+          "id": "tlg0003.tlg001",
+          "title": "History of the Peloponnesian War",
+          "title_english": "History of the Peloponnesian War",
+          "book_count": 8,
+          "total_lines": 28330708,
+          "translator_count": 4,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1926
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 1600
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 1592
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 1726
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 1470
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 1396
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 1262
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 1384
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tlg0032",
+      "name": "Xenophon",
+      "language": "greek",
+      "work_count": 14,
+      "total_books": 36,
+      "total_lines": 37520,
+      "works": [
+        {
+          "id": "tlg0032.tlg001",
+          "title": " Hellenica",
+          "title_english": " Hellenica",
+          "book_count": 7,
+          "total_lines": 1232858,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 766
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 832
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 926
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 1218
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 1214
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 1194
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 1126
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg002",
+          "title": "Memorabilia",
+          "title_english": "Memorabilia",
+          "book_count": 4,
+          "total_lines": 702586,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 834
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 1022
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 1192
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 1282
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg003",
+          "title": "Οἰκονομικός",
+          "title_english": "Economics",
+          "book_count": 1,
+          "total_lines": 812592,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1944
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg004",
+          "title": "Symposium",
+          "title_english": "Symposium",
+          "book_count": 1,
+          "total_lines": 281670,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1374
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg005",
+          "title": "Apology",
+          "title_english": "Apology",
+          "book_count": 1,
+          "total_lines": 3944,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 116
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg006",
+          "title": "Anabasis",
+          "title_english": "Anabasis",
+          "book_count": 7,
+          "total_lines": 1716156,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1226
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 910
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 860
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 1124
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 1092
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 976
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 1472
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg007",
+          "title": "Cyropaedia",
+          "title_english": "Cyropaedia",
+          "book_count": 8,
+          "total_lines": 1876218,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1356
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 966
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 1060
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 1146
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 1414
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 982
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 1210
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 1770
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg008",
+          "title": "Hiero",
+          "title_english": "Hiero",
+          "book_count": 1,
+          "total_lines": 106272,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 648
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg009",
+          "title": "Agesilaus",
+          "title_english": "Agesilaus",
+          "book_count": 1,
+          "total_lines": 106264,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 718
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg010",
+          "title": "Constitution of the Lacedaimonians",
+          "title_english": "Constitution of the Lacedaimonians",
+          "book_count": 1,
+          "total_lines": 75040,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 560
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg011",
+          "title": "Ways and Means",
+          "title_english": "Ways and Means",
+          "book_count": 1,
+          "total_lines": 41612,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 404
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg012",
+          "title": "On the Cavalry Commander",
+          "title_english": "On the Cavalry Commander",
+          "book_count": 1,
+          "total_lines": 87616,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 592
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg013",
+          "title": "On the Cavalry Commander",
+          "title_english": "On the Cavalry Commander",
+          "book_count": 1,
+          "total_lines": 130144,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 784
+            }
+          ]
+        },
+        {
+          "id": "tlg0032.tlg014",
+          "title": "On Hunting",
+          "title_english": "On Hunting",
+          "book_count": 1,
+          "total_lines": 275880,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Complete Text",
+              "line_count": 1210
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phi0893",
+      "name": "Horace",
+      "language": "latin",
+      "work_count": 6,
+      "total_books": 11,
+      "total_lines": 7820,
+      "works": [
+        {
+          "id": "phi0893.phi001",
+          "title": "Carmina",
+          "title_english": "Odes",
+          "book_count": 4,
+          "total_lines": 2384184,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 876
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 572
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 1004
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 582
+            }
+          ]
+        },
+        {
+          "id": "phi0893.phi002",
+          "title": "Carmen Saeculare",
+          "title_english": "Carmen Saeculare",
+          "book_count": 1,
+          "total_lines": 76,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 76
+            }
+          ]
+        },
+        {
+          "id": "phi0893.phi003",
+          "title": "Epodi",
+          "title_english": "Epodes",
+          "book_count": 1,
+          "total_lines": 625,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 625
+            }
+          ]
+        },
+        {
+          "id": "phi0893.phi004",
+          "title": "Sermones",
+          "title_english": "Satires",
+          "book_count": 2,
+          "total_lines": 216954,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1031
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 1084
+            }
+          ]
+        },
+        {
+          "id": "phi0893.phi005",
+          "title": "Epistulae",
+          "title_english": "Epistles",
+          "book_count": 2,
+          "total_lines": 1494,
+          "translator_count": 0,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 1008
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 486
+            }
+          ]
+        },
+        {
+          "id": "phi0893.phi006",
+          "title": "Ars Poetica",
+          "title_english": "The Art of Poetry: To the Pisos",
+          "book_count": 1,
+          "total_lines": 49028,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phi0690",
+      "name": "P. Vergilius Maro (Virgil)",
+      "language": "latin",
+      "work_count": 3,
+      "total_books": 17,
+      "total_lines": 12983,
+      "works": [
+        {
+          "id": "phi0690.phi001",
+          "title": "Eclogues",
+          "title_english": "Eclogues",
+          "book_count": 1,
+          "total_lines": 77376,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 832
+            }
+          ]
+        },
+        {
+          "id": "phi0690.phi002",
+          "title": "Georgics",
+          "title_english": "Georgics",
+          "book_count": 4,
+          "total_lines": 1493702,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 515
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 542
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 566
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 570
+            }
+          ]
+        },
+        {
+          "id": "phi0690.phi003",
+          "title": "Aeneid",
+          "title_english": "Aeneid",
+          "book_count": 12,
+          "total_lines": 11157431,
+          "translator_count": 1,
+          "books": [
+            {
+              "number": 1,
+              "label": "Book 1",
+              "line_count": 758
+            },
+            {
+              "number": 2,
+              "label": "Book 2",
+              "line_count": 828
+            },
+            {
+              "number": 3,
+              "label": "Book 3",
+              "line_count": 719
+            },
+            {
+              "number": 4,
+              "label": "Book 4",
+              "line_count": 708
+            },
+            {
+              "number": 5,
+              "label": "Book 5",
+              "line_count": 872
+            },
+            {
+              "number": 6,
+              "label": "Book 6",
+              "line_count": 906
+            },
+            {
+              "number": 7,
+              "label": "Book 7",
+              "line_count": 818
+            },
+            {
+              "number": 8,
+              "label": "Book 8",
+              "line_count": 739
+            },
+            {
+              "number": 9,
+              "label": "Book 9",
+              "line_count": 823
+            },
+            {
+              "number": 10,
+              "label": "Book 10",
+              "line_count": 914
+            },
+            {
+              "number": 11,
+              "label": "Book 11",
+              "line_count": 917
+            },
+            {
+              "number": 12,
+              "label": "Book 12",
+              "line_count": 956
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

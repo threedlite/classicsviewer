@@ -1,0 +1,106 @@
+--- create_perseus_database.py.original
++++ create_perseus_database.py
+@@ -687,6 +687,34 @@
+                     child_text = child.tail.strip()
+                     if child_text:
+                         text_parts.append(child_text)
++
++def get_section_line_mapping(cursor, book_id, max_section):
++    """Create a mapping from section numbers to line ranges"""
++    
++    # Get total lines for this book
++    cursor.execute("""
++        SELECT COUNT(*), MAX(CAST(line_number as INTEGER))
++        FROM text_lines 
++        WHERE book_id = ?
++    """, (book_id,))
++    
++    line_count, max_line = cursor.fetchone()
++    
++    if not line_count or not max_line or not max_section:
++        return {}
++    
++    # Check if we need section-to-line mapping
++    # If max_section is much smaller than max_line, we need mapping
++    if max_section < max_line / 2:
++        section_map = {}
++        lines_per_section = max_line / max_section
++        
++        for section_num in range(1, max_section + 1):
++            start_line = int((section_num - 1) * lines_per_section) + 1
++            end_line = int(section_num * lines_per_section)
++            if end_line > max_line:
++                end_line = max_line
++            section_map[section_num] = (start_line, end_line)
++        return section_map
++    
++    return {}
+     
+     return ''.join(text_parts)
+@@ -786,15 +814,31 @@
+                             })
+     
+     # Insert segments into database
+     inserted_count = 0
++    
++    # Check if we need section-to-line mapping
++    max_section = max((s['start_line'] for s in segments if isinstance(s['start_line'], int)), default=0)
++    section_map = get_section_line_mapping(cursor, book_id, max_section)
++    
+     for segment in segments:
++        start_line = segment['start_line']
++        end_line = segment['end_line']
++        
++        # Apply section-to-line mapping if needed
++        if section_map and start_line in section_map:
++            start_line, end_line = section_map[start_line]
++            
+         cursor.execute("""
+             INSERT OR IGNORE INTO translation_segments
+             (book_id, start_line, end_line, translation_text, translator)
+             VALUES (?, ?, ?, ?, ?)
+-        """, (book_id, segment['start_line'], segment['end_line'], 
++        """, (book_id, start_line, end_line, 
+               segment['text'], segment['translator']))
+         if cursor.rowcount > 0:
+             inserted_count += 1
++    
++    if section_map:
++        print(f"        → Applied section-to-line mapping: {max_section} sections to {cursor.execute('SELECT MAX(CAST(line_number as INTEGER)) FROM text_lines WHERE book_id = ?', (book_id,)).fetchone()[0]} lines")
+     
+     if inserted_count > 0:
+         print(f"        → {inserted_count} translation segments added for {book_id}")
+@@ -835,13 +879,32 @@
+                 })
+     
+     # Insert translation segments
++    max_section = max((s['number'] for s in sections), default=0)
++    section_map = get_section_line_mapping(cursor, book_id, max_section)
++    
+     for section in sections:
++        start_line = section['number']
++        end_line = section['number']
++        
++        # Apply section-to-line mapping if needed
++        if section_map and start_line in section_map:
++            start_line, end_line = section_map[start_line]
++            
+         cursor.execute("""
+             INSERT OR IGNORE INTO translation_segments
+             (book_id, start_line, end_line, translation_text, translator)
+             VALUES (?, ?, ?, ?, ?)
+-        """, (book_id, section['number'], section['number'], 
++        """, (book_id, start_line, end_line, 
+               section['text'], translator))
++    
++    if section_map:
++        cursor.execute("""
++            SELECT MAX(CAST(line_number as INTEGER)) 
++            FROM text_lines 
++            WHERE book_id = ?
++        """, (book_id,))
++        max_line = cursor.fetchone()[0]
++        print(f"        → Applied section-to-line mapping: {max_section} sections to {max_line} lines")
+ 
+ def extract_lines_from_translation(trans_elem):
+     """Extract lines from a translation element"""

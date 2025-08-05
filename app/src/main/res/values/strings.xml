@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Classics Viewer</string>
+    <string name="select_language">Select Language</string>
+    <string name="select_author">Select Author</string>
+    <string name="select_work">Select Work</string>
+    <string name="select_book">Select Book</string>
+    <string name="select_lines">Select Lines</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="occurrences">Occurrences</string>
+</resources>

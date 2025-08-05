@@ -1,0 +1,1042 @@
+Loading corpus words...
+Looking for 179,325 unique Greek words
+
+Loading pre-extracted Greek pages...
+Loaded 124,116 Greek pages
+
+Processing pages...
+
+[00:31:11] Progress:
+  Found: 100 mappings
+  Remaining: 179,225 words
+  Rate: 1792.8 mappings/second
+  Example: ὑμένος → ῠ̔μήν (gen, s)
+
+[00:31:11] Progress:
+  Found: 200 mappings
+  Remaining: 179,125 words
+  Rate: 2136.4 mappings/second
+  Example: παρόν → πᾰρών (n, nom//acc//voc, s)
+
+[00:31:11] Progress:
+  Found: 300 mappings
+  Remaining: 179,025 words
+  Rate: 2089.6 mappings/second
+  Example: νέων → νέω (pres, actv, part)
+
+[00:31:11] Progress:
+  Found: 400 mappings
+  Remaining: 178,925 words
+  Rate: 2347.7 mappings/second
+  Example: θεία → θεῖος (nom//acc, s, f)
+  Processed 10,000/124,116 Greek pages...
+
+[00:31:11] Progress:
+  Found: 500 mappings
+  Remaining: 178,825 words
+  Rate: 2413.2 mappings/second
+  Example: επιθέτου → επίθετο (gen, s)
+
+[00:31:11] Progress:
+  Found: 600 mappings
+  Remaining: 178,725 words
+  Rate: 2614.5 mappings/second
+  Example: σταδίων → στάδιος (m//f//n, gen, p)
+
+[00:31:11] Progress:
+  Found: 700 mappings
+  Remaining: 178,625 words
+  Rate: 2818.4 mappings/second
+  Example: πεινάς → πεινάω,πεινώ (2, s, pres)
+
+[00:31:11] Progress:
+  Found: 700 mappings
+  Remaining: 178,625 words
+  Rate: 2817.7 mappings/second
+  Example: πείνας → πεῖνᾰ (acc, p)
+
+[00:31:11] Progress:
+  Found: 800 mappings
+  Remaining: 178,525 words
+  Rate: 2940.6 mappings/second
+  Example: ποικίλης → ποικῐ́λος (gen, s, f)
+  Processed 20,000/124,116 Greek pages...
+
+[00:31:11] Progress:
+  Found: 900 mappings
+  Remaining: 178,425 words
+  Rate: 3038.6 mappings/second
+  Example: δημαγωγών → δημαγωγός (gen, p)
+
+[00:31:12] Progress:
+  Found: 1,000 mappings
+  Remaining: 178,325 words
+  Rate: 3179.4 mappings/second
+  Example: ξύλου → ξῠ́λον (gen, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_1000.json
+
+[00:31:12] Progress:
+  Found: 1,100 mappings
+  Remaining: 178,225 words
+  Rate: 3318.6 mappings/second
+  Example: σοφοί → σοφός (nom//voc, p, m)
+
+[00:31:12] Progress:
+  Found: 1,200 mappings
+  Remaining: 178,125 words
+  Rate: 3450.6 mappings/second
+  Example: ποτηριού → ποτήρι (gen, s)
+  Processed 30,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 1,300 mappings
+  Remaining: 178,025 words
+  Rate: 3265.9 mappings/second
+  Example: φαίνεται → φαίνω (3, s, pres)
+
+[00:31:12] Progress:
+  Found: 1,400 mappings
+  Remaining: 177,925 words
+  Rate: 3312.3 mappings/second
+  Example: ἔριδας → ἔρῐς (acc, p)
+  Processed 40,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 1,500 mappings
+  Remaining: 177,825 words
+  Rate: 3378.8 mappings/second
+  Example: σύμφωνον → σῠ́μφωνος (n, nom//voc, s)
+
+[00:31:12] Progress:
+  Found: 1,600 mappings
+  Remaining: 177,725 words
+  Rate: 3500.8 mappings/second
+  Example: μονοειδές → μονοειδής (nom, s, n)
+
+[00:31:12] Progress:
+  Found: 1,700 mappings
+  Remaining: 177,625 words
+  Rate: 3507.2 mappings/second
+  Example: ἐποίησεν → ποιέω (3, s, aor)
+
+[00:31:12] Progress:
+  Found: 1,800 mappings
+  Remaining: 177,525 words
+  Rate: 3634.6 mappings/second
+  Example: φωνήσας → φωνέω (aor, actv, part)
+  Processed 50,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 1,900 mappings
+  Remaining: 177,425 words
+  Rate: 3721.5 mappings/second
+  Example: δώσετε → δίδωμι (2, p, fut)
+
+[00:31:12] Progress:
+  Found: 2,000 mappings
+  Remaining: 177,325 words
+  Rate: 3808.7 mappings/second
+  Example: δώματα → δῶμα (nom//acc//voc, p)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_2000.json
+
+[00:31:12] Progress:
+  Found: 2,100 mappings
+  Remaining: 177,225 words
+  Rate: 3655.6 mappings/second
+  Example: νόον → νόος (acc, s)
+
+[00:31:12] Progress:
+  Found: 2,200 mappings
+  Remaining: 177,125 words
+  Rate: 3770.9 mappings/second
+  Example: Τυδέος → Τῡδεύς (gen, s)
+
+[00:31:12] Progress:
+  Found: 2,300 mappings
+  Remaining: 177,025 words
+  Rate: 3889.1 mappings/second
+  Example: γένοιο → γῐ́γνομαι (2, s, aor)
+
+[00:31:12] Progress:
+  Found: 2,400 mappings
+  Remaining: 176,925 words
+  Rate: 4016.7 mappings/second
+  Example: Πυκνός → Πνύξ (gen, s)
+
+[00:31:12] Progress:
+  Found: 2,500 mappings
+  Remaining: 176,825 words
+  Rate: 4079.3 mappings/second
+  Example: πώγωνος → πώγων (gen, s)
+  Processed 60,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 2,600 mappings
+  Remaining: 176,725 words
+  Rate: 4143.3 mappings/second
+  Example: ἀγορᾷ → ᾰ̓γορᾱ́ (s, dat)
+
+[00:31:12] Progress:
+  Found: 2,700 mappings
+  Remaining: 176,625 words
+  Rate: 4225.8 mappings/second
+  Example: Μυκόνου → Μῠ́κονος (gen, s)
+
+[00:31:12] Progress:
+  Found: 2,800 mappings
+  Remaining: 176,525 words
+  Rate: 4344.3 mappings/second
+  Example: πεπαίδευμαι → παιδεύω (1, s, perf)
+
+[00:31:12] Progress:
+  Found: 2,900 mappings
+  Remaining: 176,425 words
+  Rate: 4434.4 mappings/second
+  Example: κούρῃ → κούρη (dat, s)
+
+[00:31:12] Progress:
+  Found: 3,000 mappings
+  Remaining: 176,325 words
+  Rate: 4542.0 mappings/second
+  Example: σοφάς → σοφός (acc, p, f)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_3000.json
+
+[00:31:12] Progress:
+  Found: 3,100 mappings
+  Remaining: 176,225 words
+  Rate: 4471.8 mappings/second
+  Example: τοῖσδε → ὅδε (mn, dat, p)
+
+[00:31:12] Progress:
+  Found: 3,200 mappings
+  Remaining: 176,125 words
+  Rate: 4595.7 mappings/second
+  Example: ἀγαθοῖς → ᾰ̓γᾰθός (m//n, dat, p)
+  Processed 70,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 3,300 mappings
+  Remaining: 176,025 words
+  Rate: 4596.4 mappings/second
+  Example: κωλύομαι → κωλῡ́ω (1, s, ind)
+
+[00:31:12] Progress:
+  Found: 3,400 mappings
+  Remaining: 175,925 words
+  Rate: 4709.7 mappings/second
+  Example: θαλάμοιο → θάλαμος (gen, s)
+
+[00:31:12] Progress:
+  Found: 3,500 mappings
+  Remaining: 175,825 words
+  Rate: 4821.7 mappings/second
+  Example: ὁπλίτας → ὁπλῑ́της (acc, p)
+
+[00:31:12] Progress:
+  Found: 3,600 mappings
+  Remaining: 175,725 words
+  Rate: 4944.2 mappings/second
+  Example: ἔρχεται → ἔρχομαι (3, s, pres)
+
+[00:31:12] Progress:
+  Found: 3,700 mappings
+  Remaining: 175,625 words
+  Rate: 5058.7 mappings/second
+  Example: Σάμῳ → Σᾰ́μος (dat, s)
+
+[00:31:12] Progress:
+  Found: 3,800 mappings
+  Remaining: 175,525 words
+  Rate: 5173.9 mappings/second
+  Example: αἰσθόμενος → αἰσθάνομαι (aor, mid, part)
+
+[00:31:12] Progress:
+  Found: 3,900 mappings
+  Remaining: 175,425 words
+  Rate: 5290.2 mappings/second
+  Example: ἐποιεῖτο → ποιέω (3, s, impf)
+
+[00:31:12] Progress:
+  Found: 4,000 mappings
+  Remaining: 175,325 words
+  Rate: 5407.3 mappings/second
+  Example: ἡμετέραν → ἡμέτερος (f, acc, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_4000.json
+
+[00:31:12] Progress:
+  Found: 4,100 mappings
+  Remaining: 175,225 words
+  Rate: 5267.4 mappings/second
+  Example: τύχαις → τῠ́χη (dat, p)
+
+[00:31:12] Progress:
+  Found: 4,200 mappings
+  Remaining: 175,125 words
+  Rate: 5375.3 mappings/second
+  Example: Σικελαί → Σῐκελός (f, nom//voc, p)
+
+[00:31:12] Progress:
+  Found: 4,300 mappings
+  Remaining: 175,025 words
+  Rate: 5481.5 mappings/second
+  Example: ὅμηρον → ὅμηρος (acc, s)
+
+[00:31:12] Progress:
+  Found: 4,400 mappings
+  Remaining: 174,925 words
+  Rate: 5588.8 mappings/second
+  Example: Λέσβον → Λέσβος (acc, s)
+
+[00:31:12] Progress:
+  Found: 4,500 mappings
+  Remaining: 174,825 words
+  Rate: 5694.5 mappings/second
+  Example: ἀπιστίαι → ᾰ̓πῐστῐ́ᾱ (nom//voc, p)
+
+[00:31:12] Progress:
+  Found: 4,600 mappings
+  Remaining: 174,725 words
+  Rate: 5799.6 mappings/second
+  Example: φαίνεις → φαίνω (2, s, pres)
+
+[00:31:12] Progress:
+  Found: 4,700 mappings
+  Remaining: 174,625 words
+  Rate: 5903.4 mappings/second
+  Example: ἁπάσας → ᾰ̔́πᾱς (f, acc, p)
+
+[00:31:12] Progress:
+  Found: 4,800 mappings
+  Remaining: 174,525 words
+  Rate: 6002.1 mappings/second
+  Example: ἐκκλησίαι → ἐκκλησῐ́ᾱ (nom//voc, p)
+
+[00:31:12] Progress:
+  Found: 4,900 mappings
+  Remaining: 174,425 words
+  Rate: 6098.0 mappings/second
+  Example: εἴσῃ → οἶδᾰ (2, s, fut)
+
+[00:31:12] Progress:
+  Found: 5,000 mappings
+  Remaining: 174,325 words
+  Rate: 6179.7 mappings/second
+  Example: ὦρσεν → ὄρνῡμι (3, s, aor)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_5000.json
+
+[00:31:12] Progress:
+  Found: 5,100 mappings
+  Remaining: 174,225 words
+  Rate: 5919.5 mappings/second
+  Example: ἀποστῆναι → ᾰ̓φῐ́στημῐ (aor, act, inf)
+
+[00:31:12] Progress:
+  Found: 5,200 mappings
+  Remaining: 174,125 words
+  Rate: 5987.2 mappings/second
+  Example: μετέφη → μετάφημι (3, s, impf)
+
+[00:31:12] Progress:
+  Found: 5,300 mappings
+  Remaining: 174,025 words
+  Rate: 6056.4 mappings/second
+  Example: ὕδατι → ῠ̔́δωρ (dat, s)
+
+[00:31:12] Progress:
+  Found: 5,400 mappings
+  Remaining: 173,925 words
+  Rate: 6122.9 mappings/second
+  Example: χιτῶνας → χῐτών (acc, p)
+
+[00:31:12] Progress:
+  Found: 5,500 mappings
+  Remaining: 173,825 words
+  Rate: 6198.8 mappings/second
+  Example: ἰόντι → ῐ̓ών (m//n, dat, s)
+
+[00:31:12] Progress:
+  Found: 5,600 mappings
+  Remaining: 173,725 words
+  Rate: 6278.7 mappings/second
+  Example: μέλανος → μέλᾱς (m//n, gen, s)
+
+[00:31:12] Progress:
+  Found: 5,700 mappings
+  Remaining: 173,625 words
+  Rate: 6356.6 mappings/second
+  Example: ναιετάοντας → ναιετάων (m, acc, p)
+
+[00:31:12] Progress:
+  Found: 5,800 mappings
+  Remaining: 173,525 words
+  Rate: 6416.6 mappings/second
+  Example: πείρατα → πεῖρᾰρ (nom//acc//voc, p)
+
+[00:31:12] Progress:
+  Found: 5,800 mappings
+  Remaining: 173,525 words
+  Rate: 6416.1 mappings/second
+  Example: πειρατά → πειρατής (voc, s)
+
+[00:31:12] Progress:
+  Found: 5,800 mappings
+  Remaining: 173,525 words
+  Rate: 6415.9 mappings/second
+  Example: ἑῷ → ἑός (m//n, dat, s)
+
+[00:31:12] Progress:
+  Found: 5,900 mappings
+  Remaining: 173,425 words
+  Rate: 6481.1 mappings/second
+  Example: μναῖ → μνᾶ (nom//voc, p)
+  Processed 80,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 6,000 mappings
+  Remaining: 173,325 words
+  Rate: 6533.7 mappings/second
+  Example: Ἴδῃ → Ῑ̓́δη (dat, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_6000.json
+
+[00:31:12] Progress:
+  Found: 6,000 mappings
+  Remaining: 173,325 words
+  Rate: 6161.3 mappings/second
+  Example: ἴδῃ → ῑ̓́δη (dat, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_6000.json
+
+[00:31:12] Progress:
+  Found: 6,100 mappings
+  Remaining: 173,225 words
+  Rate: 5906.5 mappings/second
+  Example: παισίν → παῖς (dat, p)
+
+[00:31:12] Progress:
+  Found: 6,200 mappings
+  Remaining: 173,125 words
+  Rate: 5969.1 mappings/second
+  Example: ὕλης → ῡ̔́λη (gen, s)
+
+[00:31:12] Progress:
+  Found: 6,300 mappings
+  Remaining: 173,025 words
+  Rate: 6035.7 mappings/second
+  Example: ἴσχεο → ἴσχω (2, s, pres)
+
+[00:31:12] Progress:
+  Found: 6,400 mappings
+  Remaining: 172,925 words
+  Rate: 6108.8 mappings/second
+  Example: ἦρξε → ἄρχω (3, s, aor)
+
+[00:31:12] Progress:
+  Found: 6,500 mappings
+  Remaining: 172,825 words
+  Rate: 6174.7 mappings/second
+  Example: νοήσας → νοέω (aor, actv, part)
+
+[00:31:12] Progress:
+  Found: 6,600 mappings
+  Remaining: 172,725 words
+  Rate: 6239.1 mappings/second
+  Example: Νηληϊάδη → Νηληϊάδης (voc, s)
+
+[00:31:12] Progress:
+  Found: 6,700 mappings
+  Remaining: 172,625 words
+  Rate: 6305.5 mappings/second
+  Example: βεβαιότερον → βεβαιότερος (n, nom//acc//voc, s)
+
+[00:31:12] Progress:
+  Found: 6,800 mappings
+  Remaining: 172,525 words
+  Rate: 6371.2 mappings/second
+  Example: ποιήσατο → ποιέω (3, s, aor)
+
+[00:31:12] Progress:
+  Found: 6,900 mappings
+  Remaining: 172,425 words
+  Rate: 6432.0 mappings/second
+  Example: νευρήν → νευρή (acc, s)
+
+[00:31:12] Progress:
+  Found: 7,000 mappings
+  Remaining: 172,325 words
+  Rate: 6494.8 mappings/second
+  Example: Τρῳαί → Τρῳός (f, nom//voc, p)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_7000.json
+
+[00:31:12] Progress:
+  Found: 7,100 mappings
+  Remaining: 172,225 words
+  Rate: 6188.5 mappings/second
+  Example: διιπετέος → δῐῑπετής (m//f//n, gen, s)
+
+[00:31:12] Progress:
+  Found: 7,200 mappings
+  Remaining: 172,125 words
+  Rate: 6243.6 mappings/second
+  Example: βασιλεύων → βασιλεύω (pres, actv, part)
+
+[00:31:12] Progress:
+  Found: 7,300 mappings
+  Remaining: 172,025 words
+  Rate: 6298.6 mappings/second
+  Example: ἐπολέμουν → πολεμέω (1s//3p, impf, actv)
+
+[00:31:12] Progress:
+  Found: 7,400 mappings
+  Remaining: 171,925 words
+  Rate: 6335.6 mappings/second
+  Example: κλαίουσα → κλαίων (f, nom//voc, s)
+
+[00:31:12] Progress:
+  Found: 7,500 mappings
+  Remaining: 171,825 words
+  Rate: 6382.3 mappings/second
+  Example: ἐρύξει → ἐρῡ́κω (3, s, fut)
+
+[00:31:12] Progress:
+  Found: 7,600 mappings
+  Remaining: 171,725 words
+  Rate: 6407.2 mappings/second
+  Example: ἀνάληψιν → ἀνάληψις (acc, s)
+
+[00:31:12] Progress:
+  Found: 7,700 mappings
+  Remaining: 171,625 words
+  Rate: 6457.1 mappings/second
+  Example: αἴνυτο → αἴνυμαι (3, s, impf)
+  Processed 90,000/124,116 Greek pages...
+
+[00:31:12] Progress:
+  Found: 7,800 mappings
+  Remaining: 171,525 words
+  Rate: 6496.3 mappings/second
+  Example: λύσαντες → λῡ́σᾱς (m, nom//voc, p)
+
+[00:31:12] Progress:
+  Found: 7,800 mappings
+  Remaining: 171,525 words
+  Rate: 6495.9 mappings/second
+  Example: διαφορᾶς → διαφορᾱ́ (gen, s)
+
+[00:31:12] Progress:
+  Found: 7,900 mappings
+  Remaining: 171,425 words
+  Rate: 6536.2 mappings/second
+  Example: γλαυκώπιδι → γλαυκῶπῐς (dat, s)
+
+[00:31:12] Progress:
+  Found: 8,000 mappings
+  Remaining: 171,325 words
+  Rate: 6572.4 mappings/second
+  Example: ἄσμενοι → ἄσμενος (m, nom//voc, p)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_8000.json
+
+[00:31:12] Progress:
+  Found: 8,100 mappings
+  Remaining: 171,225 words
+  Rate: 6249.1 mappings/second
+  Example: καταθέντα → καταθείς (m, acc, s)
+
+[00:31:12] Progress:
+  Found: 8,200 mappings
+  Remaining: 171,125 words
+  Rate: 6307.5 mappings/second
+  Example: ἕξουσιν → ἕξων (dat, p, m//n)
+
+[00:31:12] Progress:
+  Found: 8,300 mappings
+  Remaining: 171,025 words
+  Rate: 6372.0 mappings/second
+  Example: πάθωσιν → πᾰ́σχω (3, p, aor)
+
+[00:31:12] Progress:
+  Found: 8,400 mappings
+  Remaining: 170,925 words
+  Rate: 6421.3 mappings/second
+  Example: δισχιλίοις → δισχῑ́λιοι (m//n, dat, p)
+
+[00:31:13] Progress:
+  Found: 8,500 mappings
+  Remaining: 170,825 words
+  Rate: 6462.9 mappings/second
+  Example: Κυλλήνην → Κυλλήνη (acc, s)
+
+[00:31:13] Progress:
+  Found: 8,600 mappings
+  Remaining: 170,725 words
+  Rate: 6516.1 mappings/second
+  Example: θαλλῶν → θαλλός (gen, p)
+
+[00:31:13] Progress:
+  Found: 8,700 mappings
+  Remaining: 170,625 words
+  Rate: 6573.3 mappings/second
+  Example: ἱρόν → ῑ̔ρός (n, nom//acc//voc, s)
+
+[00:31:13] Progress:
+  Found: 8,800 mappings
+  Remaining: 170,525 words
+  Rate: 6620.9 mappings/second
+  Example: ἠδίκουν → ἀδικέω (1:s//3:p, impf, actv)
+
+[00:31:13] Progress:
+  Found: 8,900 mappings
+  Remaining: 170,425 words
+  Rate: 6669.7 mappings/second
+  Example: ἐγείνατο → γείνομαι (3, s, aor)
+
+[00:31:13] Progress:
+  Found: 9,000 mappings
+  Remaining: 170,325 words
+  Rate: 6715.4 mappings/second
+  Example: τίθησι → τίθημι (3, s, pres)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_9000.json
+
+[00:31:13] Progress:
+  Found: 9,100 mappings
+  Remaining: 170,225 words
+  Rate: 6379.4 mappings/second
+  Example: κεφαλαίῳ → κεφάλαιος (m//n, dat, s)
+
+[00:31:13] Progress:
+  Found: 9,200 mappings
+  Remaining: 170,125 words
+  Rate: 6428.7 mappings/second
+  Example: ὄψεαι → ὁράω (2s, fut, mid)
+
+[00:31:13] Progress:
+  Found: 9,300 mappings
+  Remaining: 170,025 words
+  Rate: 6476.2 mappings/second
+  Example: ἀνεχώρησε → ᾰ̓νᾰχωρέω (3, s, aor)
+  Processed 100,000/124,116 Greek pages...
+
+[00:31:13] Progress:
+  Found: 9,400 mappings
+  Remaining: 169,925 words
+  Rate: 6527.2 mappings/second
+  Example: ἐγειρόντων → ἐγείρω (3, pl, pres)
+
+[00:31:13] Progress:
+  Found: 9,500 mappings
+  Remaining: 169,825 words
+  Rate: 6574.7 mappings/second
+  Example: ἐτείχισα → τειχῐ́ζω (1, s, aor)
+
+[00:31:13] Progress:
+  Found: 9,600 mappings
+  Remaining: 169,725 words
+  Rate: 6620.1 mappings/second
+  Example: χαμαιλέοντος → χᾰμαιλέων (gen, s)
+
+[00:31:13] Progress:
+  Found: 9,700 mappings
+  Remaining: 169,625 words
+  Rate: 6670.9 mappings/second
+  Example: γεγενημένου → γεγενημένος (m//n, gen, s)
+
+[00:31:13] Progress:
+  Found: 9,800 mappings
+  Remaining: 169,525 words
+  Rate: 6712.8 mappings/second
+  Example: τρώσει → τρῶσις (dat, s, ;)
+
+[00:31:13] Progress:
+  Found: 9,800 mappings
+  Remaining: 169,525 words
+  Rate: 6712.6 mappings/second
+  Example: τρῶσιν → τρῶσις (acc, s)
+
+[00:31:13] Progress:
+  Found: 9,800 mappings
+  Remaining: 169,525 words
+  Rate: 6712.5 mappings/second
+  Example: τρῶσι → τρῶσις (voc, s)
+
+[00:31:13] Progress:
+  Found: 9,900 mappings
+  Remaining: 169,425 words
+  Rate: 6757.6 mappings/second
+  Example: ἀναγκάζοιμεν → ἀναγκάζω (1, pl, pres)
+
+[00:31:13] Progress:
+  Found: 10,000 mappings
+  Remaining: 169,325 words
+  Rate: 6810.2 mappings/second
+  Example: εὐθέα → εὐθῠ́ς (n, nom//acc//voc, pl)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_10000.json
+
+[00:31:13] Progress:
+  Found: 10,100 mappings
+  Remaining: 169,225 words
+  Rate: 6462.2 mappings/second
+  Example: φανήῃ → φαίνω (3s, aor, pasv)
+
+[00:31:13] Progress:
+  Found: 10,200 mappings
+  Remaining: 169,125 words
+  Rate: 6489.6 mappings/second
+  Example: ἀπαιτεῖ → ἀπαιτέω (3, s, pres)
+
+[00:31:13] Progress:
+  Found: 10,300 mappings
+  Remaining: 169,025 words
+  Rate: 6525.8 mappings/second
+  Example: ἷζον → ἵζω (1s//3p, impf, actv)
+
+[00:31:13] Progress:
+  Found: 10,400 mappings
+  Remaining: 168,925 words
+  Rate: 6572.1 mappings/second
+  Example: βήσσῃς → βήσσω (2s, pres, actv)
+
+[00:31:13] Progress:
+  Found: 10,500 mappings
+  Remaining: 168,825 words
+  Rate: 6619.4 mappings/second
+  Example: κρατέουσιν → κρατέω (3p, pres, actv)
+
+[00:31:13] Progress:
+  Found: 10,600 mappings
+  Remaining: 168,725 words
+  Rate: 6664.1 mappings/second
+  Example: οἰχόμενοι → οἰχόμενος (m, nom//voc, p)
+
+[00:31:13] Progress:
+  Found: 10,700 mappings
+  Remaining: 168,625 words
+  Rate: 6708.5 mappings/second
+  Example: φύσεων → φῠ́σῐς (gen, p)
+
+[00:31:13] Progress:
+  Found: 10,800 mappings
+  Remaining: 168,525 words
+  Rate: 6754.7 mappings/second
+  Example: ἔζη → ζῶ (3, s, impf)
+
+[00:31:13] Progress:
+  Found: 10,900 mappings
+  Remaining: 168,425 words
+  Rate: 6800.5 mappings/second
+  Example: λίποιμεν → λείπω (1, pl, aor)
+
+[00:31:13] Progress:
+  Found: 11,000 mappings
+  Remaining: 168,325 words
+  Rate: 6841.2 mappings/second
+  Example: λύσαιτε → λῡ́ω (2:p, aor, act)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_11000.json
+
+[00:31:13] Progress:
+  Found: 11,100 mappings
+  Remaining: 168,225 words
+  Rate: 6496.8 mappings/second
+  Example: κνημούς → κνημός (acc, p)
+
+[00:31:13] Progress:
+  Found: 11,200 mappings
+  Remaining: 168,125 words
+  Rate: 6538.9 mappings/second
+  Example: ἡγήτορε → ἡγήτωρ (nom//acc//voc, d)
+  Processed 110,000/124,116 Greek pages...
+
+[00:31:13] Progress:
+  Found: 11,300 mappings
+  Remaining: 168,025 words
+  Rate: 6585.5 mappings/second
+  Example: ὀψόμενοι → ὀψόμενος (m, nom//voc, p)
+
+[00:31:13] Progress:
+  Found: 11,400 mappings
+  Remaining: 167,925 words
+  Rate: 6628.7 mappings/second
+  Example: ᾑρέθη → αἱρέω (3, s, aor)
+
+[00:31:13] Progress:
+  Found: 11,500 mappings
+  Remaining: 167,825 words
+  Rate: 6673.7 mappings/second
+  Example: ἔθετο → τῐ́θημῐ (3, s, aor)
+
+[00:31:13] Progress:
+  Found: 11,600 mappings
+  Remaining: 167,725 words
+  Rate: 6718.7 mappings/second
+  Example: ἡδομένοις → ἡδόμενος (m//n, dat, p)
+
+[00:31:13] Progress:
+  Found: 11,700 mappings
+  Remaining: 167,625 words
+  Rate: 6747.6 mappings/second
+  Example: ἐπαΐσσων → ἐπαΐσσω (pres, actv, part)
+
+[00:31:13] Progress:
+  Found: 11,800 mappings
+  Remaining: 167,525 words
+  Rate: 6783.3 mappings/second
+  Example: πέτετο → πέτομαι (3s, impf, mp)
+
+[00:31:13] Progress:
+  Found: 11,900 mappings
+  Remaining: 167,425 words
+  Rate: 6823.2 mappings/second
+  Example: πεφυζότες → πεφυζώς (m, nom//voc, p)
+
+[00:31:13] Progress:
+  Found: 12,000 mappings
+  Remaining: 167,325 words
+  Rate: 6853.6 mappings/second
+  Example: ἐποιχομένην → ἐποιχόμενος (f, acc, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_12000.json
+
+[00:31:13] Progress:
+  Found: 12,100 mappings
+  Remaining: 167,225 words
+  Rate: 6488.2 mappings/second
+  Example: Τηλέγονον → Τηλέγονος (acc, s)
+
+[00:31:13] Progress:
+  Found: 12,200 mappings
+  Remaining: 167,125 words
+  Rate: 6523.9 mappings/second
+  Example: ἁμαρτάνων → ἁμαρτάνω (pres, actv, part)
+
+[00:31:13] Progress:
+  Found: 12,300 mappings
+  Remaining: 167,025 words
+  Rate: 6560.0 mappings/second
+  Example: νοούμενος → νοέω (pres, mp, part)
+
+[00:31:13] Progress:
+  Found: 12,400 mappings
+  Remaining: 166,925 words
+  Rate: 6598.9 mappings/second
+  Example: ἀμείνονας → ᾰ̓μείνων (m//f, acc, p)
+
+[00:31:13] Progress:
+  Found: 12,500 mappings
+  Remaining: 166,825 words
+  Rate: 6642.5 mappings/second
+  Example: βαρέσι → βᾰρῠ́ς (m//n, dat, p)
+
+[00:31:13] Progress:
+  Found: 12,600 mappings
+  Remaining: 166,725 words
+  Rate: 6686.7 mappings/second
+  Example: γλωττῶν → γλῶττᾰ (gen, p)
+
+[00:31:13] Progress:
+  Found: 12,700 mappings
+  Remaining: 166,625 words
+  Rate: 6729.9 mappings/second
+  Example: ἐγκρατῆ → ἐγκρατής (m//f, acc, s)
+
+[00:31:13] Progress:
+  Found: 12,800 mappings
+  Remaining: 166,525 words
+  Rate: 6773.3 mappings/second
+  Example: ἔρωτι → ἔρως (dat, s)
+
+[00:31:13] Progress:
+  Found: 12,900 mappings
+  Remaining: 166,425 words
+  Rate: 6816.5 mappings/second
+  Example: θερμῶν → θερμός (m//f//n, gen, p)
+
+[00:31:13] Progress:
+  Found: 13,000 mappings
+  Remaining: 166,325 words
+  Rate: 6860.2 mappings/second
+  Example: καλλίστῳ → κάλλιστος (m//n, dat, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_13000.json
+
+[00:31:13] Progress:
+  Found: 13,100 mappings
+  Remaining: 166,225 words
+  Rate: 6511.4 mappings/second
+  Example: λαμπρά → λαμπρός (f, nom//voc, s)
+
+[00:31:13] Progress:
+  Found: 13,200 mappings
+  Remaining: 166,125 words
+  Rate: 6552.6 mappings/second
+  Example: μυρμήκων → μύρμηξ (gen, p)
+
+[00:31:13] Progress:
+  Found: 13,300 mappings
+  Remaining: 166,025 words
+  Rate: 6594.0 mappings/second
+  Example: ὀρθήν → ὀρθός (f, acc, s)
+
+[00:31:13] Progress:
+  Found: 13,400 mappings
+  Remaining: 165,925 words
+  Rate: 6634.3 mappings/second
+  Example: ποίους → ποῖος (m, acc, p)
+
+[00:31:13] Progress:
+  Found: 13,500 mappings
+  Remaining: 165,825 words
+  Rate: 6675.2 mappings/second
+  Example: σοφιστάς → σοφῐστής (acc, p)
+
+[00:31:13] Progress:
+  Found: 13,600 mappings
+  Remaining: 165,725 words
+  Rate: 6716.2 mappings/second
+  Example: τηλικούτων → τηλῐκοῦτος (m//f//n//m//f, gen, p)
+
+[00:31:13] Progress:
+  Found: 13,700 mappings
+  Remaining: 165,625 words
+  Rate: 6756.6 mappings/second
+  Example: φιλτάτους → φῐ́λτᾰτος (m, acc, p)
+
+[00:31:13] Progress:
+  Found: 13,800 mappings
+  Remaining: 165,525 words
+  Rate: 6791.2 mappings/second
+  Example: θύουσα → θῡ́ων (f, nom//voc, s)
+
+[00:31:13] Progress:
+  Found: 13,900 mappings
+  Remaining: 165,425 words
+  Rate: 6827.7 mappings/second
+  Example: ὠφελειῶν → ὠφέλειᾰ (gen, p)
+
+[00:31:13] Progress:
+  Found: 14,000 mappings
+  Remaining: 165,325 words
+  Rate: 6862.4 mappings/second
+  Example: οἴκους → οἶκος (acc, p)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_14000.json
+
+[00:31:13] Progress:
+  Found: 14,000 mappings
+  Remaining: 165,325 words
+  Rate: 6471.5 mappings/second
+  Example: καπνώ → κᾰπνός (nom//acc//voc, d)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_14000.json
+
+[00:31:13] Progress:
+  Found: 14,100 mappings
+  Remaining: 165,225 words
+  Rate: 6137.0 mappings/second
+  Example: ὑπάρχουσιν → ὑπάρχω (3, p, pres)
+  Processed 120,000/124,116 Greek pages...
+
+[00:31:13] Progress:
+  Found: 14,200 mappings
+  Remaining: 165,125 words
+  Rate: 6163.3 mappings/second
+  Example: σαώσομεν → σαόω (1p, fut, actv)
+
+[00:31:13] Progress:
+  Found: 14,200 mappings
+  Remaining: 165,125 words
+  Rate: 6163.1 mappings/second
+  Example: ἦρα → ἦρ (nom//acc//voc, p)
+
+[00:31:13] Progress:
+  Found: 14,300 mappings
+  Remaining: 165,025 words
+  Rate: 6197.4 mappings/second
+  Example: ὠφελῆσαι → ὠφελέω (aor, actv, inf)
+
+[00:31:14] Progress:
+  Found: 14,400 mappings
+  Remaining: 164,925 words
+  Rate: 6228.1 mappings/second
+  Example: ἀναγκαίας → ᾰ̓νᾰγκαῖος (f, gen, s)
+
+[00:31:14] Progress:
+  Found: 14,400 mappings
+  Remaining: 164,925 words
+  Rate: 6228.0 mappings/second
+  Example: ἀναγκαίᾳ → ᾰ̓νᾰγκαῖος (f, dat, s)
+
+[00:31:14] Progress:
+  Found: 14,400 mappings
+  Remaining: 164,925 words
+  Rate: 6227.9 mappings/second
+  Example: ἀναγκαίω → ᾰ̓νᾰγκαῖος (m//n, nom//acc//voc, d)
+
+[00:31:14] Progress:
+  Found: 14,500 mappings
+  Remaining: 164,825 words
+  Rate: 6263.1 mappings/second
+  Example: ἀστέρων → ᾰ̓στήρ (gen, p)
+
+[00:31:14] Progress:
+  Found: 14,600 mappings
+  Remaining: 164,725 words
+  Rate: 6297.0 mappings/second
+  Example: γαστέρων → γᾰστήρ (gen, p)
+
+[00:31:14] Progress:
+  Found: 14,700 mappings
+  Remaining: 164,625 words
+  Rate: 6331.4 mappings/second
+  Example: δουλείᾳ → δουλείᾱ (dat, s)
+
+[00:31:14] Progress:
+  Found: 14,800 mappings
+  Remaining: 164,525 words
+  Rate: 6365.6 mappings/second
+  Example: ἐρωτικοῖς → ἐρωτῐκός (m//n, dat, p)
+
+[00:31:14] Progress:
+  Found: 14,900 mappings
+  Remaining: 164,425 words
+  Rate: 6399.2 mappings/second
+  Example: θρασέων → θρᾰσῠ́ς (m//n, gen, p)
+
+[00:31:14] Progress:
+  Found: 15,000 mappings
+  Remaining: 164,325 words
+  Rate: 6433.8 mappings/second
+  Example: ἀγριώτατον → ᾰ̓γρῐώτᾰτος (n, nom//acc//voc, s)
+  Saved checkpoint: inflection_extraction_results/inflection_checkpoint_15000.json
+
+[00:31:14] Progress:
+  Found: 15,100 mappings
+  Remaining: 164,225 words
+  Rate: 6095.8 mappings/second
+  Example: δικαιότερον → δῐκαιότερος (n, nom//acc//voc, s)
+
+[00:31:14] Progress:
+  Found: 15,200 mappings
+  Remaining: 164,125 words
+  Rate: 6124.2 mappings/second
+  Example: ἰσαίτερον → ῐ̓σαίτερος (n, nom//acc//voc, s)
+
+[00:31:14] Progress:
+  Found: 15,300 mappings
+  Remaining: 164,025 words
+  Rate: 6155.0 mappings/second
+  Example: λέκτο → λέγω (3s, aor, mid)
+
+[00:31:14] Progress:
+  Found: 15,400 mappings
+  Remaining: 163,925 words
+  Rate: 6186.7 mappings/second
+  Example: λυπηρῶν → λῡπηρός (m//f//n, gen, p)
+
+[00:31:14] Progress:
+  Found: 15,500 mappings
+  Remaining: 163,825 words
+  Rate: 6216.9 mappings/second
+  Example: φεύξεσθαι → φεύγω (fut, mid, inf)
+
+============================================================
+EXTRACTION COMPLETE
+============================================================
+Total time: 0.0 minutes
+Pages processed: 124,116
+Mappings found: 15,592
+Success rate: 8.7%
+Final output: inflection_extraction_results/inflection_mappings_final.json
+Words without inflection info: 163,733

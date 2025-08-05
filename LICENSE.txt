@@ -1,0 +1,26 @@
+
+
+Tufts University holds the overall copyright to the Perseus Digital Library; the materials therein 
+(including all texts, translations, images, descriptions, drawings, etc.) are provided for the 
+personal use of students, scholars, and the public. 
+
+Materials within the Perseus DL have varying copyright status: please contact the project for more information 
+about a specific component or object.  Copyright is protected by the copyright laws of the United States and 
+the Universal Copyright Convention. 
+
+Unless otherwise indicated, all contents of this repository are licensed under a 
+Creative Commons Attribution-ShareAlike 4.0 International License. You must  offer Perseus
+any modifications you make. Perseus provides credit for all accepted changes.
+
+
+Note these texts may be freely distributed under a CC BY-SA 4.0 license, subject to the following restrictions: 
+
+- You credit Perseus, as follows, whenever you use the document:
+    Text provided under a CC BY-SA license by Perseus Digital Library, http://www.perseus.tufts.edu, with funding from [funder as indicated in header].
+    Data accessed from https://github.com/PerseusDL/canonical-pdlrefwk/ [date of access]. 2025-08-01
+    Data accessed from https://github.com/PerseusDL/canonical-latinLit/ [date of access]. 2025-08-01
+    Data accessed from https://github.com/PerseusDL/canonical-greekLit/ [date of access]. 2025-08-01
+- You leave this availability statement intact
+- You offer Perseus any modifications you make.
+
+

@@ -1,0 +1,5238 @@
+{
+  "metadata": {
+    "source": "English Wiktionary (Wikimedia Foundation)",
+    "source_file": "../../data-sources/enwiktionary-latest-pages-articles.xml.bz2",
+    "extraction_date": "2025-08-04",
+    "license": "Creative Commons Attribution-ShareAlike 3.0 Unported License (CC BY-SA 3.0)",
+    "total_pages_processed": 1000050,
+    "pages_with_inflection_templates": 965,
+    "total_mappings": 653,
+    "description": "Greek inflection relationships extracted from {{inflection of}} templates"
+  },
+  "mappings": [
+    {
+      "word_form": "μια",
+      "lemma": "εισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|s",
+      "debug_pattern": "{{inflection of|grc|εἷς||f|nom|s}}"
+    },
+    {
+      "word_form": "μουσικη",
+      "lemma": "μουσικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s",
+      "debug_pattern": "{{inflection of|grc|μουσικός||f|nom//voc|s}}"
+    },
+    {
+      "word_form": "η",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||f|nom|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||f|nom|s}}"
+    },
+    {
+      "word_form": "οι",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||m//f|nom|p",
+      "debug_pattern": "{{inflection of|el|ο|t=the||m//f|nom|p}}"
+    },
+    {
+      "word_form": "το",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||n|nom//acc|s|;|m|acc|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||n|nom//acc|s|;|m|acc|s}}"
+    },
+    {
+      "word_form": "τα",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||nom//acc|n|p",
+      "debug_pattern": "{{inflection of|el|ο|t=the||nom//acc|n|p}}"
+    },
+    {
+      "word_form": "ερωμενοσ",
+      "lemma": "εραω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|mp|part",
+      "debug_pattern": "{{inflection of|grc|ἐράω||pres|mp|part}}"
+    },
+    {
+      "word_form": "παιδικα",
+      "lemma": "παιδικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|d",
+      "debug_pattern": "{{inflection of|grc|παιδικός||nom|d}}"
+    },
+    {
+      "word_form": "εν",
+      "lemma": "ενασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc|n",
+      "debug_pattern": "{{inflection of|el|ένας||nom//acc|n}}"
+    },
+    {
+      "word_form": "λεπιδα",
+      "lemma": "λεπισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|λεπίς||acc|s}}"
+    },
+    {
+      "word_form": "υποκρισει",
+      "lemma": "υποκρισισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|dat|s",
+      "debug_pattern": "{{inflection of|grc|ῠ̔πόκρῐσῐς||dat|s}}"
+    },
+    {
+      "word_form": "γραμματικη",
+      "lemma": "γραμματικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|s|f",
+      "debug_pattern": "{{inflection of|grc|γρᾰμμᾰτῐκός||nom|s|f}}"
+    },
+    {
+      "word_form": "μουρμουρισει",
+      "lemma": "μουρμουριζω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|aor|inf",
+      "debug_pattern": "{{inflection of|el|μουρμουρίζω||aor|inf}}"
+    },
+    {
+      "word_form": "φιλια",
+      "lemma": "φιλιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s|;|f|nom//voc//acc|d",
+      "debug_pattern": "{{inflection of|grc|φίλιος||f|nom//voc|s|;|f|nom//voc//acc|d}}"
+    },
+    {
+      "word_form": "πατερασ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|πατήρ||acc|p}}"
+    },
+    {
+      "word_form": "μητερα",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|μήτηρ||acc|s}}"
+    },
+    {
+      "word_form": "παραδεικνυναι",
+      "lemma": "παραδεικνυμι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|act|inf",
+      "debug_pattern": "{{inflection of|grc|πᾰρᾰδείκνῡμῐ||pres|act|inf}}"
+    },
+    {
+      "word_form": "ιουδαια",
+      "lemma": "ιουδαιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s|;|f|nom//acc//voc|d",
+      "debug_pattern": "{{inflection of|grc|Ῐ̓ουδαῖος||f|nom//voc|s|;|f|nom//acc//voc|d}}"
+    },
+    {
+      "word_form": "ταχυ",
+      "lemma": "ταχυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|voc|s",
+      "debug_pattern": "{{inflection of|grc|ταχύς||m|voc|s}}"
+    },
+    {
+      "word_form": "ψευδομαι",
+      "lemma": "ψευδω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mp|indc",
+      "debug_pattern": "{{inflection of|grc|ψεύδω||1|s|pres|mp|indc}}"
+    },
+    {
+      "word_form": "πρωτον",
+      "lemma": "πρωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|n|s",
+      "debug_pattern": "{{inflection of|grc|πρῶτος||nom|n|s}}"
+    },
+    {
+      "word_form": "ευθεωσ",
+      "lemma": "ευθυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|gen|s|;|n|gen|s",
+      "debug_pattern": "{{inflection of|grc|εὐθύς||m|gen|s|;|n|gen|s}}"
+    },
+    {
+      "word_form": "αρχομαι",
+      "lemma": "αρχω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mp|indc",
+      "debug_pattern": "{{inflection of|grc|ἄρχω||1|s|pres|mp|indc}}"
+    },
+    {
+      "word_form": "μονον",
+      "lemma": "μονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|μόνος||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "ημισυ",
+      "lemma": "ημισυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s|m|;|nom//voc//acc|s|n",
+      "debug_pattern": "{{inflection of|grc|ἥμισυς||voc|s|m|;|nom//voc//acc|s|n}}"
+    },
+    {
+      "word_form": "αριστον",
+      "lemma": "αριστοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s|m|;|nom//acc//voc|s|n",
+      "debug_pattern": "{{inflection of|grc|ἄριστος||acc|s|m|;|nom//acc//voc|s|n}}"
+    },
+    {
+      "word_form": "πρωταθληματα",
+      "lemma": "πρωταθλημα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πρωτάθλημα||nom|p}}"
+    },
+    {
+      "word_form": "καλη",
+      "lemma": "καλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|s|;|f|voc|s",
+      "debug_pattern": "{{inflection of|grc|κᾰλός||f|nom|s|;|f|voc|s}}"
+    },
+    {
+      "word_form": "αι",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|p",
+      "debug_pattern": "{{inflection of|grc|ὁ||f|nom|p}}"
+    },
+    {
+      "word_form": "οι",
+      "lemma": "ου",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|dat",
+      "debug_pattern": "{{inflection of|grc|οὗ||dat}}"
+    },
+    {
+      "word_form": "ταισ",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|dat|p|;|{{lb|grc|Lesbian",
+      "debug_pattern": "{{inflection of|grc|ὁ||f|dat|p|;|{{lb|grc|Lesbian}}"
+    },
+    {
+      "word_form": "τασ",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|acc|p",
+      "debug_pattern": "{{inflection of|grc|ὁ||f|acc|p}}"
+    },
+    {
+      "word_form": "τοισ",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//n|dat|p|;|{{lb|grc|Lesbian",
+      "debug_pattern": "{{inflection of|grc|ὁ||m//n|dat|p|;|{{lb|grc|Lesbian}}"
+    },
+    {
+      "word_form": "τουσ",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|p",
+      "debug_pattern": "{{inflection of|grc|ὁ||m|acc|p}}"
+    },
+    {
+      "word_form": "των",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//f//n|gen|p",
+      "debug_pattern": "{{inflection of|grc|ὁ||m//f//n|gen|p}}"
+    },
+    {
+      "word_form": "αυτου",
+      "lemma": "αυτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//n|gen|s",
+      "debug_pattern": "{{inflection of|grc|αὐτός||m//n|gen|s}}"
+    },
+    {
+      "word_form": "οπλα",
+      "lemma": "οπλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|ὅπλον||nom|p}}"
+    },
+    {
+      "word_form": "ανδροσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀνήρ||gen|s}}"
+    },
+    {
+      "word_form": "λυεισ",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2|s|ind|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||2|s|ind|pres|act}}"
+    },
+    {
+      "word_form": "λυεισ",
+      "lemma": "λυαω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2|s|ind|pres|act|contracted|;|2|s|ind|imperf|act|contracted|unaugmented|Ionic",
+      "debug_pattern": "{{inflection of|grc|λῠάω||2|s|ind|pres|act|contracted|;|2|s|ind|imperf|act|contracted|unaugmented|Io"
+    },
+    {
+      "word_form": "λυει",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3:s|ind|pres|act|;|2:s|ind|pres|mp|''a common'' {{alternative form of|grc|λῡ́ῃ",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3:s|ind|pres|act|;|2:s|ind|pres|mp|''a common'' {{alternative form of|grc|"
+    },
+    {
+      "word_form": "λυομεν",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1:p|ind|pres|act|;|{{lb|grc|Epic",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||1:p|ind|pres|act|;|{{lb|grc|Epic}}"
+    },
+    {
+      "word_form": "λυετε",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2:p|ind//imp|pres|act|;|2|p|ind|imperf|act|unaugmented|Epic",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||2:p|ind//imp|pres|act|;|2|p|ind|imperf|act|unaugmented|Epic}}"
+    },
+    {
+      "word_form": "λυουσι",
+      "lemma": "λυων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|dat|p|m//n",
+      "debug_pattern": "{{inflection of|grc|λῡ́ων||dat|p|m//n}}"
+    },
+    {
+      "word_form": "λυουσι",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|p|ind|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3|p|ind|pres|act}}"
+    },
+    {
+      "word_form": "λυουσιν",
+      "lemma": "λυων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|dat|p|m//n",
+      "debug_pattern": "{{inflection of|grc|λῡ́ων||dat|p|m//n}}"
+    },
+    {
+      "word_form": "λυουσιν",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|p|ind|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3|p|ind|pres|act}}"
+    },
+    {
+      "word_form": "λυησ",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2|s|sub|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||2|s|sub|pres|act}}"
+    },
+    {
+      "word_form": "λυη",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|s|sub|pres|act|;|2|s|ind|pres|mp|(''common alternative'': {{l|grc|λῡ́ει|tr=-",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3|s|sub|pres|act|;|2|s|ind|pres|mp|(''common alternative'': {{l|grc|λῡ́ει|"
+    },
+    {
+      "word_form": "λυωμεν",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|p|sub|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||1|p|sub|pres|act}}"
+    },
+    {
+      "word_form": "λυητε",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2|p|sub|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||2|p|sub|pres|act}}"
+    },
+    {
+      "word_form": "λυωσι",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|p|sub|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3|p|sub|pres|act}}"
+    },
+    {
+      "word_form": "λυωσιν",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|p|sub|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3|p|sub|pres|act}}"
+    },
+    {
+      "word_form": "λυε",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2|s|imp|pres|act|;|{{lb|grc|Epic",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||2|s|imp|pres|act|;|{{lb|grc|Epic}}"
+    },
+    {
+      "word_form": "λυετω",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|s|imp|pres|act",
+      "debug_pattern": "{{inflection of|grc|λῡω||3|s|imp|pres|act}}"
+    },
+    {
+      "word_form": "λυετωσαν",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|p|pres|act|imp",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||3|p|pres|act|imp}}"
+    },
+    {
+      "word_form": "λυειν",
+      "lemma": "λυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|act|inf",
+      "debug_pattern": "{{inflection of|grc|λῡ́ω||pres|act|inf}}"
+    },
+    {
+      "word_form": "προυμνου",
+      "lemma": "προυμνον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|προῦμνον||gen|s}}"
+    },
+    {
+      "word_form": "μου",
+      "lemma": "εγω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|enclitic|gen",
+      "debug_pattern": "{{inflection of|grc|ἐγώ||enclitic|gen}}"
+    },
+    {
+      "word_form": "κερασου",
+      "lemma": "κερασοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|κερᾰσός||gen|s}}"
+    },
+    {
+      "word_form": "οδου",
+      "lemma": "οδοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ὁδός||gen|s}}"
+    },
+    {
+      "word_form": "θεα",
+      "lemma": "θεη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|d",
+      "debug_pattern": "{{inflection of|grc|θεή||nom//acc//voc|d}}"
+    },
+    {
+      "word_form": "νοσου",
+      "lemma": "νοσοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νόσος||gen|s}}"
+    },
+    {
+      "word_form": "οστου",
+      "lemma": "οστουν",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ὀστοῦν||gen|s}}"
+    },
+    {
+      "word_form": "χωρασ",
+      "lemma": "χωρα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|χώρᾱ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "γνωμησ",
+      "lemma": "γνωμη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γνώμη||gen|s}}"
+    },
+    {
+      "word_form": "νεανιου",
+      "lemma": "νεανιασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νεᾱνίᾱς||gen|s}}"
+    },
+    {
+      "word_form": "νεφελησ",
+      "lemma": "νεφελη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νεφέλη||gen|s}}"
+    },
+    {
+      "word_form": "ξενου",
+      "lemma": "ξενοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ξένος||gen|s}}"
+    },
+    {
+      "word_form": "λογου",
+      "lemma": "λογοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|λόγος||gen|s}}"
+    },
+    {
+      "word_form": "φυγησ",
+      "lemma": "φυγη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|φῠγή||gen|s}}"
+    },
+    {
+      "word_form": "ανθρωπου",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓́νθρωπος||gen|s}}"
+    },
+    {
+      "word_form": "θεου",
+      "lemma": "θεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|θεός||gen|s}}"
+    },
+    {
+      "word_form": "πολιτου",
+      "lemma": "πολιτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|πολῑ́της||gen|s}}"
+    },
+    {
+      "word_form": "τεχνησ",
+      "lemma": "τεχνη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|τέχνη||gen|s}}"
+    },
+    {
+      "word_form": "θαλαττησ",
+      "lemma": "θαλαττα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|θᾰ́λᾰττᾰ||gen|s}}"
+    },
+    {
+      "word_form": "πολλοι",
+      "lemma": "πολυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|m|p",
+      "debug_pattern": "{{inflection of|grc|πολύς||nom//voc|m|p}}"
+    },
+    {
+      "word_form": "ψυχησ",
+      "lemma": "ψυχη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ψῡχή||gen|s}}"
+    },
+    {
+      "word_form": "λιθου",
+      "lemma": "λιθοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|λῐ́θος||gen|s}}"
+    },
+    {
+      "word_form": "μοιρασ",
+      "lemma": "μοιρα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|μοῖρᾰ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "κριτου",
+      "lemma": "κριτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|κρῐτής||gen|s}}"
+    },
+    {
+      "word_form": "δοξοσοφιασ",
+      "lemma": "δοξοσοφια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|δοξοσοφῐ́ᾱ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "δοξολογιασ",
+      "lemma": "δοξολογια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|δοξολογῐ́ᾱ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "απροσδοκητον",
+      "lemma": "απροσδοκητοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s",
+      "debug_pattern": "{{inflection of|grc|ἀπροσδόκητος||m|acc|s}}"
+    },
+    {
+      "word_form": "αδικον",
+      "lemma": "αδικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s",
+      "debug_pattern": "{{inflection of|grc|ἄδικος||m|acc|s}}"
+    },
+    {
+      "word_form": "νεωσ",
+      "lemma": "ναυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ναῦς||gen|s}}"
+    },
+    {
+      "word_form": "νεω",
+      "lemma": "νεωσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νεώς||gen|s}}"
+    },
+    {
+      "word_form": "νηου",
+      "lemma": "νηοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νηός||gen|s}}"
+    },
+    {
+      "word_form": "ναου",
+      "lemma": "ναοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ναός||gen|s}}"
+    },
+    {
+      "word_form": "διφθογγου",
+      "lemma": "διφθογγοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|gen|s",
+      "debug_pattern": "{{inflection of|grc|δίφθογγος||m|gen|s}}"
+    },
+    {
+      "word_form": "διφθογγον",
+      "lemma": "διφθογγοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom|s",
+      "debug_pattern": "{{inflection of|grc|δίφθογγος||n|nom|s}}"
+    },
+    {
+      "word_form": "στοχου",
+      "lemma": "στοχοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|στόχος||gen|s}}"
+    },
+    {
+      "word_form": "ιπποτοξοτου",
+      "lemma": "ιπποτοξοτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ῐ̔πποτοξότης||gen|s}}"
+    },
+    {
+      "word_form": "ατελειωτον",
+      "lemma": "ατελειωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|ἀτελείωτος||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "αληθειασ",
+      "lemma": "αληθεια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓λήθειᾰ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "αποθανειν",
+      "lemma": "αποθνησκω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|aor|act|inf",
+      "debug_pattern": "{{inflection of|grc|ἀποθνῄσκω||aor|act|inf}}"
+    },
+    {
+      "word_form": "απεθανον",
+      "lemma": "αποθνησκω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|aor|ind|act",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓ποθνῄσκω||1|s|aor|ind|act}}"
+    },
+    {
+      "word_form": "στροφησ",
+      "lemma": "στροφη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|στροφή||gen|s}}"
+    },
+    {
+      "word_form": "μελισσησ",
+      "lemma": "μελισσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|μέλῐσσᾰ||gen|s}}"
+    },
+    {
+      "word_form": "μελιττησ",
+      "lemma": "μελιττα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|μέλῐττᾰ||gen|s}}"
+    },
+    {
+      "word_form": "πυροσ",
+      "lemma": "πυρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πυρ||gen|s}}"
+    },
+    {
+      "word_form": "δημου",
+      "lemma": "δημοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|δῆμος||gen|s}}"
+    },
+    {
+      "word_form": "αγγελου",
+      "lemma": "αγγελοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἄγγελος||gen|s}}"
+    },
+    {
+      "word_form": "γεννασεωσ",
+      "lemma": "γεννασισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γέννασῐς||gen|s}}"
+    },
+    {
+      "word_form": "γεννησεωσ",
+      "lemma": "γεννησισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γέννησῐς||gen|s}}"
+    },
+    {
+      "word_form": "γενεσεωσ",
+      "lemma": "γενεσισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γένεσῐς||gen|s}}"
+    },
+    {
+      "word_form": "αποθανεομαι",
+      "lemma": "αποθνησκω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|fut|ind|mid",
+      "debug_pattern": "{{inflection of|grc|ἀποθνῄσκω||1|s|fut|ind|mid}}"
+    },
+    {
+      "word_form": "τεθνηκα",
+      "lemma": "θνησκω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|perf|act|ind",
+      "debug_pattern": "{{inflection of|grc|θνῄσκω||1|s|perf|act|ind}}"
+    },
+    {
+      "word_form": "υμενοσ",
+      "lemma": "υμην",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ῠ̔μήν||gen|s}}"
+    },
+    {
+      "word_form": "μεγαλοσ",
+      "lemma": "μεγασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|s|nom",
+      "debug_pattern": "{{inflection of|grc|μέγας||m|s|nom}}"
+    },
+    {
+      "word_form": "νηματοσ",
+      "lemma": "νημα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νῆμα||gen|s}}"
+    },
+    {
+      "word_form": "γλωττησ",
+      "lemma": "γλωττα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γλῶττᾰ||gen|s}}"
+    },
+    {
+      "word_form": "μικρα",
+      "lemma": "μικροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|s",
+      "debug_pattern": "{{inflection of|grc|μικρός||nom|s}}"
+    },
+    {
+      "word_form": "ποδοσ",
+      "lemma": "πουσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|πούς||gen|s}}"
+    },
+    {
+      "word_form": "σατυριασεωσ",
+      "lemma": "σατυριασισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|σᾰτῠρῐ́ᾱσῐς||gen|s}}"
+    },
+    {
+      "word_form": "σατυριησεωσ",
+      "lemma": "σατυριησισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|σᾰτῠρῐ́ησῐς||gen|s}}"
+    },
+    {
+      "word_form": "σατυρου",
+      "lemma": "σατυροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|σᾰ́τῠρος||gen|s}}"
+    },
+    {
+      "word_form": "τιτυρου",
+      "lemma": "τιτυροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|τῑ́τῠρος||gen|s}}"
+    },
+    {
+      "word_form": "κοινη",
+      "lemma": "κοινοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s",
+      "debug_pattern": "{{inflection of|grc|κοινός||f|nom//voc|s}}"
+    },
+    {
+      "word_form": "κοινον",
+      "lemma": "κοινοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|κοινός||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "στοχαστικη",
+      "lemma": "στοχαστικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s",
+      "debug_pattern": "{{inflection of|grc|στοχαστικός||f|nom//voc|s}}"
+    },
+    {
+      "word_form": "στοχαστικον",
+      "lemma": "στοχαστικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|στοχαστικός||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "δοξεωσ",
+      "lemma": "δοξισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|δόξῐς||gen|s}}"
+    },
+    {
+      "word_form": "χαλικοσ",
+      "lemma": "χαλιξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|χᾰ́λῐξ||gen|s}}"
+    },
+    {
+      "word_form": "χιμαραρχου",
+      "lemma": "χιμαραρχοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|χῐμᾰ́ρᾰρχος||gen|s}}"
+    },
+    {
+      "word_form": "αιγαγρου",
+      "lemma": "αιγαγροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|αἴγαγρος||gen|s}}"
+    },
+    {
+      "word_form": "τραγου",
+      "lemma": "τραγοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|τράγος||gen|s}}"
+    },
+    {
+      "word_form": "αιγοσ",
+      "lemma": "αιξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|αἴξ||gen|s}}"
+    },
+    {
+      "word_form": "καπρου",
+      "lemma": "καπροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|κᾰ́προς||gen|s}}"
+    },
+    {
+      "word_form": "σοφιασ",
+      "lemma": "σοφια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|σοφῐ́ᾱ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "τισ",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||f|acc|p",
+      "debug_pattern": "{{inflection of|el|ο|t=the||f|acc|p}}"
+    },
+    {
+      "word_form": "τον",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||m|acc|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||m|acc|s}}"
+    },
+    {
+      "word_form": "τη",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||f|acc|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||f|acc|s}}"
+    },
+    {
+      "word_form": "την",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||f|acc|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||f|acc|s}}"
+    },
+    {
+      "word_form": "του",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||m//n|gen|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||m//n|gen|s}}"
+    },
+    {
+      "word_form": "τησ",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=the||f|gen|s",
+      "debug_pattern": "{{inflection of|el|ο|t=the||f|gen|s}}"
+    },
+    {
+      "word_form": "ενοσ",
+      "lemma": "ενασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|m",
+      "debug_pattern": "{{inflection of|el|ένας||gen|m}}"
+    },
+    {
+      "word_form": "ενοσ",
+      "lemma": "ενα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|n",
+      "debug_pattern": "{{inflection of|el|ένα||gen|n}}"
+    },
+    {
+      "word_form": "μιασ",
+      "lemma": "ενασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|f",
+      "debug_pattern": "{{inflection of|el|ένας||gen|f}}"
+    },
+    {
+      "word_form": "μακρον",
+      "lemma": "μακροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|μακρός||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "εναν",
+      "lemma": "ενασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|m",
+      "debug_pattern": "{{inflection of|el|ένας||acc|m}}"
+    },
+    {
+      "word_form": "μιαν",
+      "lemma": "ενασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|f",
+      "debug_pattern": "{{inflection of|el|ένας||acc|f}}"
+    },
+    {
+      "word_form": "μιαν",
+      "lemma": "εισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s|f",
+      "debug_pattern": "{{inflection of|grc|εἷς||acc|s|f}}"
+    },
+    {
+      "word_form": "τω",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//f//n|nom//acc|d",
+      "debug_pattern": "{{inflection of|grc|ὁ||m//f//n|nom//acc|d}}"
+    },
+    {
+      "word_form": "τοιν",
+      "lemma": "ο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//f//n|gen//dat|dual",
+      "debug_pattern": "{{inflection of|grc|ὁ||m//f//n|gen//dat|dual}}"
+    },
+    {
+      "word_form": "βασιλεια",
+      "lemma": "βασιλειοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f|;|nom//acc//voc|d|f",
+      "debug_pattern": "{{inflection of|grc|βᾰσῐ́λειος||nom//voc|s|f|;|nom//acc//voc|d|f}}"
+    },
+    {
+      "word_form": "προβληματα",
+      "lemma": "προβλημα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πρόβλημα||nom|p}}"
+    },
+    {
+      "word_form": "τετελεσται",
+      "lemma": "τελεω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|perf|mp|3|s",
+      "debug_pattern": "{{inflection of|grc|τελέω||perf|mp|3|s}}"
+    },
+    {
+      "word_form": "βαθυτατα",
+      "lemma": "βαθια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|asupd|t=most deeply",
+      "debug_pattern": "{{inflection of|el|βαθιά||asupd|t=most deeply}}"
+    },
+    {
+      "word_form": "σου",
+      "lemma": "συ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|unstressed|gen|s",
+      "debug_pattern": "{{inflection of|grc|σύ||unstressed|gen|s}}"
+    },
+    {
+      "word_form": "ελληνεσ",
+      "lemma": "ελλην",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Ἕλλην||nom//voc|p}}"
+    },
+    {
+      "word_form": "με",
+      "lemma": "εγω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|enclitic|acc",
+      "debug_pattern": "{{inflection of|grc|ἐγώ||enclitic|acc}}"
+    },
+    {
+      "word_form": "αθηνασ",
+      "lemma": "αθηναι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc",
+      "debug_pattern": "{{inflection of|grc|Ἀθῆναι||acc}}"
+    },
+    {
+      "word_form": "γλαυκεσ",
+      "lemma": "γλαυξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|γλαῦξ||nom|p}}"
+    },
+    {
+      "word_form": "κλειδι",
+      "lemma": "κλεισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|dat|s",
+      "debug_pattern": "{{inflection of|grc|κλείς||dat|s}}"
+    },
+    {
+      "word_form": "εγγλεζοι",
+      "lemma": "εγγλεζοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|el|Εγγλέζος||nom//voc|p}}"
+    },
+    {
+      "word_form": "δρακειν",
+      "lemma": "δερκομαι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|aor|act|inf",
+      "debug_pattern": "{{inflection of|grc|δέρκομαι||aor|act|inf}}"
+    },
+    {
+      "word_form": "αμφιβια",
+      "lemma": "αμφιβιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p|n",
+      "debug_pattern": "{{inflection of|grc|ἀμφίβιος||nom//acc//voc|p|n}}"
+    },
+    {
+      "word_form": "αδυτον",
+      "lemma": "αδυτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s|m|;|nom//acc//voc|s|n",
+      "debug_pattern": "{{inflection of|grc|ἄδυτος||acc|s|m|;|nom//acc//voc|s|n}}"
+    },
+    {
+      "word_form": "μονασ",
+      "lemma": "μονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|special|f|form",
+      "debug_pattern": "{{inflection of|grc|μόνος||special|f|form}}"
+    },
+    {
+      "word_form": "ιππου",
+      "lemma": "ιπποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ῐ̔́ππος||gen|s}}"
+    },
+    {
+      "word_form": "οδοντοσ",
+      "lemma": "οδουσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ὀδούς||gen|s}}"
+    },
+    {
+      "word_form": "ωκεανου",
+      "lemma": "ωκεανοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|Ὠκεᾰνός||gen|s}}"
+    },
+    {
+      "word_form": "ιδια",
+      "lemma": "ιδιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s",
+      "debug_pattern": "{{inflection of|grc|ῐ̓́δῐος||f|nom//voc|s}}"
+    },
+    {
+      "word_form": "ιδιον",
+      "lemma": "ιδιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|ῐ̓́δῐος||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "σε",
+      "lemma": "συ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|σύ||acc|s}}"
+    },
+    {
+      "word_form": "ακρα",
+      "lemma": "ακροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//acc|s|;|f|nom//acc//voc|d",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓́κρος||f|nom//acc|s|;|f|nom//acc//voc|d}}"
+    },
+    {
+      "word_form": "φυλακασ",
+      "lemma": "φυλαξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|φῠ́λᾰξ||acc|p}}"
+    },
+    {
+      "word_form": "σοφη",
+      "lemma": "σοφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f",
+      "debug_pattern": "{{inflection of|grc|σοφός||nom//voc|s|f}}"
+    },
+    {
+      "word_form": "σοφον",
+      "lemma": "σοφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|σοφός||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "παπαγαλοι",
+      "lemma": "παπαγαλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|el|παπαγάλος||nom//voc|p}}"
+    },
+    {
+      "word_form": "παπαγαλο",
+      "lemma": "παπαγαλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|παπαγάλος||acc|s}}"
+    },
+    {
+      "word_form": "παπαγαλουσ",
+      "lemma": "παπαγαλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|παπαγάλος||acc|p}}"
+    },
+    {
+      "word_form": "παπαγαλου",
+      "lemma": "παπαγαλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|παπαγάλος||gen|s}}"
+    },
+    {
+      "word_form": "παπαγαλων",
+      "lemma": "παπαγαλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|παπαγάλος||gen|p}}"
+    },
+    {
+      "word_form": "παπαγαλε",
+      "lemma": "παπαγαλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|παπαγάλος||voc|s}}"
+    },
+    {
+      "word_form": "θερεοσ",
+      "lemma": "θεροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|θέρος||gen|s}}"
+    },
+    {
+      "word_form": "θερουσ",
+      "lemma": "θεροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|θέρος||gen|s}}"
+    },
+    {
+      "word_form": "νυμφησ",
+      "lemma": "νυμφη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νῠ́μφη||gen|s}}"
+    },
+    {
+      "word_form": "εγεννησε",
+      "lemma": "γενναω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|s|aor|act|ind",
+      "debug_pattern": "{{inflection of|grc|γεννᾰ́ω||3|s|aor|act|ind}}"
+    },
+    {
+      "word_form": "αθεοι",
+      "lemma": "αθεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//f|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|ἄθεος||m//f|nom//voc|p}}"
+    },
+    {
+      "word_form": "αρκτου",
+      "lemma": "αρκτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓́ρκτος||gen|s}}"
+    },
+    {
+      "word_form": "αψινθιου",
+      "lemma": "αψινθιον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀψίνθιον||gen|s}}"
+    },
+    {
+      "word_form": "βαθεοσ",
+      "lemma": "βαθοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|βᾰ́θος||gen|s}}"
+    },
+    {
+      "word_form": "βαθουσ",
+      "lemma": "βαθοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|βᾰ́θος||gen|s}}"
+    },
+    {
+      "word_form": "βαρεοσ",
+      "lemma": "βαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|βᾰ́ρος||gen|s}}"
+    },
+    {
+      "word_form": "βαρουσ",
+      "lemma": "βαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|βᾰ́ρος||gen|s}}"
+    },
+    {
+      "word_form": "γαλακοσ",
+      "lemma": "γαλα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γᾰ́λᾰ||gen|s}}"
+    },
+    {
+      "word_form": "γαλακτοσ",
+      "lemma": "γαλα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γᾰ́λᾰ||gen|s}}"
+    },
+    {
+      "word_form": "γλυφη",
+      "lemma": "γλυφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|f|s",
+      "debug_pattern": "{{inflection of|el|γλυφός||nom//acc//voc|f|s}}"
+    },
+    {
+      "word_form": "γλυφησ",
+      "lemma": "γλυφη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|γλῠφή||gen|s}}"
+    },
+    {
+      "word_form": "αβακισκου",
+      "lemma": "αβακισκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓βᾰκῐ́σκος||gen|s}}"
+    },
+    {
+      "word_form": "αβακοσ",
+      "lemma": "αβαξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἄβαξ||gen|s}}"
+    },
+    {
+      "word_form": "αγαπησ",
+      "lemma": "αγαπη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀγάπη||gen|s}}"
+    },
+    {
+      "word_form": "αγνοιασ",
+      "lemma": "αγνοια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἄγνοια||gen|s}}"
+    },
+    {
+      "word_form": "αγρου",
+      "lemma": "αγροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀγρός||gen|s}}"
+    },
+    {
+      "word_form": "αδελφησ",
+      "lemma": "αδελφη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀδελφή||gen|s}}"
+    },
+    {
+      "word_form": "αδου",
+      "lemma": "αδησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾍδης||gen|s}}"
+    },
+    {
+      "word_form": "αδυτου",
+      "lemma": "αδυτον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἄδυτον||gen|s}}"
+    },
+    {
+      "word_form": "αεροσ",
+      "lemma": "αηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀήρ||gen|s}}"
+    },
+    {
+      "word_form": "αθεοτητοσ",
+      "lemma": "αθεοτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀθεότης||gen|s}}"
+    },
+    {
+      "word_form": "αιθιοποσ",
+      "lemma": "αιθιοψ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|Αἰθῐ́οψ||gen|s}}"
+    },
+    {
+      "word_form": "αιματοσ",
+      "lemma": "αιμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|αἷμᾰ||gen|s}}"
+    },
+    {
+      "word_form": "αινιγματοσ",
+      "lemma": "αινιγμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|αἴνιγμα||gen|s}}"
+    },
+    {
+      "word_form": "αισθησεωσ",
+      "lemma": "αισθησισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|αἴσθησις||gen|s}}"
+    },
+    {
+      "word_form": "αιωνοσ",
+      "lemma": "αιων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|αἰών||gen|s}}"
+    },
+    {
+      "word_form": "ακακιασ",
+      "lemma": "ακακια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀκακία||gen|s}}"
+    },
+    {
+      "word_form": "ακαληφησ",
+      "lemma": "ακαληφη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀκαλήφη||gen|s}}"
+    },
+    {
+      "word_form": "ακανθου",
+      "lemma": "ακανθοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἄκανθος||gen|s}}"
+    },
+    {
+      "word_form": "ακησ",
+      "lemma": "ακη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓κή||gen|s}}"
+    },
+    {
+      "word_form": "αλεκτοροσ",
+      "lemma": "αλεκτωρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓λέκτωρ||gen|s}}"
+    },
+    {
+      "word_form": "αλιαιετου",
+      "lemma": "αλιαιετοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̔λῐαίετος||gen|s}}"
+    },
+    {
+      "word_form": "αλκυονοσ",
+      "lemma": "αλκυων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀλκῠών||gen|s}}"
+    },
+    {
+      "word_form": "αλοσ",
+      "lemma": "αλσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̔́λς||gen|s}}"
+    },
+    {
+      "word_form": "αμφισβαινησ",
+      "lemma": "αμφισβαινα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓μφῐ́σβαινᾰ||gen|s}}"
+    },
+    {
+      "word_form": "αναρχιασ",
+      "lemma": "αναρχια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓νᾰρχῐ́ᾱ||gen|s}}"
+    },
+    {
+      "word_form": "τανδροσ",
+      "lemma": "ανηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾱ̔νήρ||gen|s}}"
+    },
+    {
+      "word_form": "ανθουσ",
+      "lemma": "ανθοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓́νθος||gen|s}}"
+    },
+    {
+      "word_form": "ανθρακιασ",
+      "lemma": "ανθρακια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓νθρᾰκῐᾱ́||gen|s}}"
+    },
+    {
+      "word_form": "αντλιασ",
+      "lemma": "αντλια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|ἀντλῐ́ᾱ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "αποκαλυψεωσ",
+      "lemma": "αποκαλυψισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓ποκᾰ́λῠψῐς||gen|s}}"
+    },
+    {
+      "word_form": "λυκια",
+      "lemma": "λυκιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f|;|nom//voc//acc|d|f",
+      "debug_pattern": "{{inflection of|grc|Λύκιος||nom//voc|s|f|;|nom//voc//acc|d|f}}"
+    },
+    {
+      "word_form": "αρμενια",
+      "lemma": "αρμενιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f|;|nom//voc//acc|d|f",
+      "debug_pattern": "{{inflection of|grc|Ἀρμένιος||nom//voc|s|f|;|nom//voc//acc|d|f}}"
+    },
+    {
+      "word_form": "ερυθραια",
+      "lemma": "ερυθραιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f|;|nom//acc//voc|d|f",
+      "debug_pattern": "{{inflection of|grc|Ἐρυθραῖος||nom//voc|s|f|;|nom//acc//voc|d|f}}"
+    },
+    {
+      "word_form": "αθηναια",
+      "lemma": "αθηναιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f|;|nom//acc//voc|d|f",
+      "debug_pattern": "{{inflection of|grc|Ἀθηναῖος||nom//voc|s|f|;|nom//acc//voc|d|f}}"
+    },
+    {
+      "word_form": "βελγαι",
+      "lemma": "βελγησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Βέλγης||nom//voc|p}}"
+    },
+    {
+      "word_form": "ξωτικα",
+      "lemma": "ξωτικο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ξωτικό||nom|p}}"
+    },
+    {
+      "word_form": "καλα",
+      "lemma": "καλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p|n",
+      "debug_pattern": "{{inflection of|grc|καλός||nom//acc//voc|p|n}}"
+    },
+    {
+      "word_form": "κοντα",
+      "lemma": "κοντοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//acc//voc|d",
+      "debug_pattern": "{{inflection of|grc|κοντός||f|nom//acc//voc|d}}"
+    },
+    {
+      "word_form": "αγνη",
+      "lemma": "αγνοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s",
+      "debug_pattern": "{{inflection of|grc|ἁγνός||f|nom//voc|s}}"
+    },
+    {
+      "word_form": "αγνον",
+      "lemma": "αγνοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom|s",
+      "debug_pattern": "{{inflection of|grc|ἁγνός||n|nom|s}}"
+    },
+    {
+      "word_form": "αγια",
+      "lemma": "αγιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f|;|nom//acc//voc|d|f",
+      "debug_pattern": "{{inflection of|grc|ἅγιος||nom//voc|s|f|;|nom//acc//voc|d|f}}"
+    },
+    {
+      "word_form": "φωτοσ",
+      "lemma": "φωσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|φῶς||gen|s}}"
+    },
+    {
+      "word_form": "γραφειν",
+      "lemma": "γραφω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|act|inf",
+      "debug_pattern": "{{inflection of|grc|γρᾰ́φω||pres|act|inf}}"
+    },
+    {
+      "word_form": "παιδικον",
+      "lemma": "παιδικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|n|s|;|acc|m|s",
+      "debug_pattern": "{{inflection of|grc|παιδικός||nom//acc//voc|n|s|;|acc|m|s}}"
+    },
+    {
+      "word_form": "θανατου",
+      "lemma": "θανατοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|θᾰ́νᾰτος||gen|s}}"
+    },
+    {
+      "word_form": "διοσκοροι",
+      "lemma": "διοσκοροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Δῐόσκορος||nom//voc|p}}"
+    },
+    {
+      "word_form": "επιγονοι",
+      "lemma": "επιγονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|Ἐπῐ́γονος||nom|p}}"
+    },
+    {
+      "word_form": "βασιλεασ",
+      "lemma": "βασιλευσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|βασιλεύς||acc|p}}"
+    },
+    {
+      "word_form": "κηρεσ",
+      "lemma": "κηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Κήρ||nom//voc|p}}"
+    },
+    {
+      "word_form": "μελλων",
+      "lemma": "μελλω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|actv|part",
+      "debug_pattern": "{{inflection of|grc|μέλλω||pres|actv|part}}"
+    },
+    {
+      "word_form": "μελλον",
+      "lemma": "μελλων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|μέλλων||n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "μελλον",
+      "lemma": "μελλω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1:s//3:p|impf|actv|indc|unaugmented",
+      "debug_pattern": "{{inflection of|grc|μέλλω||1:s//3:p|impf|actv|indc|unaugmented}}"
+    },
+    {
+      "word_form": "μελλοντασ",
+      "lemma": "μελλων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|p",
+      "debug_pattern": "{{inflection of|grc|μέλλων||m|acc|p}}"
+    },
+    {
+      "word_form": "παρον",
+      "lemma": "παρων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|πᾰρών||n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "χαριτεσ",
+      "lemma": "χαρισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Χᾰ́ρῐς||nom//voc|p}}"
+    },
+    {
+      "word_form": "πυρετου",
+      "lemma": "πυρετοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πυρετός||gen|s}}"
+    },
+    {
+      "word_form": "λακωνικη",
+      "lemma": "λακωνικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f",
+      "debug_pattern": "{{inflection of|grc|Λᾰκωνῐκός||nom//voc|s|f}}"
+    },
+    {
+      "word_form": "λεοντινοι",
+      "lemma": "λεοντινοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Λεοντῖνος||nom//voc|p}}"
+    },
+    {
+      "word_form": "νικησ",
+      "lemma": "νικη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|νίκη||gen|s}}"
+    },
+    {
+      "word_form": "διοσκουροι",
+      "lemma": "διοσκουροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|Δῐόσκουρος||nom//voc|p}}"
+    },
+    {
+      "word_form": "λινδον",
+      "lemma": "λινδοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|Λίνδος||acc|s}}"
+    },
+    {
+      "word_form": "μαιονεσ",
+      "lemma": "μαιων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|Μαίων||nom|p}}"
+    },
+    {
+      "word_form": "μαγνητεσ",
+      "lemma": "μαγνησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|Μάγνης||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "πελασγοι",
+      "lemma": "πελασγοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|Πελασγός||nom|p}}"
+    },
+    {
+      "word_form": "λεβητασ",
+      "lemma": "λεβησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|λέβης||acc|p}}"
+    },
+    {
+      "word_form": "κυκλαδεσ",
+      "lemma": "κυκλασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|Κῠκλᾰ́ς||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "καθεστωσ",
+      "lemma": "καθιστημι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|perf|act|part",
+      "debug_pattern": "{{inflection of|grc|κᾰθῐ́στημῐ||perf|act|part}}"
+    },
+    {
+      "word_form": "διαλεγομαι",
+      "lemma": "διαλεγω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mp|indc",
+      "debug_pattern": "{{inflection of|grc|δῐᾰλέγω||1|s|pres|mp|indc}}"
+    },
+    {
+      "word_form": "θουριοι",
+      "lemma": "θουριοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|Θούρῐος||nom|p}}"
+    },
+    {
+      "word_form": "γενικη",
+      "lemma": "γενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s",
+      "debug_pattern": "{{inflection of|grc|γενῐκός||f|nom//voc|s}}"
+    },
+    {
+      "word_form": "πατριδα",
+      "lemma": "πατρισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|πᾰτρῐ́ς||acc|s}}"
+    },
+    {
+      "word_form": "δωρεαν",
+      "lemma": "δωρεα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|δωρεᾱ́||acc|s}}"
+    },
+    {
+      "word_form": "κορακασ",
+      "lemma": "κοραξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|κόραξ||acc|p}}"
+    },
+    {
+      "word_form": "αγγελοι",
+      "lemma": "αγγελοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|άγγελος||nom|p}}"
+    },
+    {
+      "word_form": "ουρανου",
+      "lemma": "ουρανοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|οὐρανός||gen|s}}"
+    },
+    {
+      "word_form": "θηβων",
+      "lemma": "θηβαι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|grc|Θῆβαι||gen|p}}"
+    },
+    {
+      "word_form": "παρων",
+      "lemma": "παρειμι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|act|part|id=be by",
+      "debug_pattern": "{{inflection of|grc|πᾰ́ρειμῐ||pres|act|part|id=be by}}"
+    },
+    {
+      "word_form": "ποιοτητα",
+      "lemma": "ποιοτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|ποιότης||acc|s}}"
+    },
+    {
+      "word_form": "φαβοριτεσ",
+      "lemma": "φαβοριτα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|φαβορίτα||nom|p}}"
+    },
+    {
+      "word_form": "κυκλω",
+      "lemma": "κυκλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|dat|s",
+      "debug_pattern": "{{inflection of|grc|κῠ́κλος||dat|s}}"
+    },
+    {
+      "word_form": "νενικηκαμεν",
+      "lemma": "νικαω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|perf|act|ind|1|p",
+      "debug_pattern": "{{inflection of|grc|νῑκάω||perf|act|ind|1|p}}"
+    },
+    {
+      "word_form": "ταπητασ",
+      "lemma": "ταπησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|τάπης||acc|p}}"
+    },
+    {
+      "word_form": "περιπατητικοι",
+      "lemma": "περιπατητικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|περῐπᾰτητῐκός||nom|p}}"
+    },
+    {
+      "word_form": "περιπατου",
+      "lemma": "περιπατοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|περῐ́πᾰτος||gen|s}}"
+    },
+    {
+      "word_form": "κειρειν",
+      "lemma": "κειρω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|act|inf",
+      "debug_pattern": "{{inflection of|grc|κείρω||pres|act|inf}}"
+    },
+    {
+      "word_form": "αοιδη",
+      "lemma": "αοιδοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|s|f",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓οιδός||nom//voc|s|f}}"
+    },
+    {
+      "word_form": "πεπυσμαι",
+      "lemma": "πυνθανομαι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|perf|mp|ind|1|s",
+      "debug_pattern": "{{inflection of|grc|πῠνθᾰ́νομαι||perf|mp|ind|1|s}}"
+    },
+    {
+      "word_form": "πινακασ",
+      "lemma": "πιναξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|πῐ́ναξ||acc|p}}"
+    },
+    {
+      "word_form": "αττα",
+      "lemma": "τι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|τί||nom|p}}"
+    },
+    {
+      "word_form": "γεγονοσ",
+      "lemma": "γεγονωσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|γεγονώς||n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "πολυσπαστον",
+      "lemma": "πολυσπαστοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|m|s|;|nom//acc//voc|n|s",
+      "debug_pattern": "{{inflection of|grc|πολυσπαστός||acc|m|s|;|nom//acc//voc|n|s}}"
+    },
+    {
+      "word_form": "συνωνυμον",
+      "lemma": "συνωνυμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|s|acc",
+      "debug_pattern": "{{inflection of|grc|συνώνυμος||m|s|acc}}"
+    },
+    {
+      "word_form": "κεφαλαιον",
+      "lemma": "κεφαλαιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|κεφᾰ́λαιος||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "ερειπια",
+      "lemma": "ερειπιον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|ἐρείπῐον||n|nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "εινατερεσ",
+      "lemma": "ενατηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|ἐνάτηρ||nom//voc|p}}"
+    },
+    {
+      "word_form": "πιθηκοι",
+      "lemma": "πιθηκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|πίθηκος||nom//voc|p}}"
+    },
+    {
+      "word_form": "ελεφαντεσ",
+      "lemma": "ελεφαντασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ελέφαντας||nom|p}}"
+    },
+    {
+      "word_form": "δελφινια",
+      "lemma": "δελφινι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|δελφίνι||nom|p}}"
+    },
+    {
+      "word_form": "αυγα",
+      "lemma": "αυγο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αυγό||nom|p}}"
+    },
+    {
+      "word_form": "δεντρα",
+      "lemma": "δεντρο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|δέντρο||nom|p}}"
+    },
+    {
+      "word_form": "κιθαρεσ",
+      "lemma": "κιθαρα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κιθάρα||nom|p}}"
+    },
+    {
+      "word_form": "κουνελια",
+      "lemma": "κουνελι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κουνέλι||nom|p}}"
+    },
+    {
+      "word_form": "μεθυσα",
+      "lemma": "μεθω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|sim|past",
+      "debug_pattern": "{{inflection of|el|μεθώ||1|s|sim|past}}"
+    },
+    {
+      "word_form": "μεθυσοι",
+      "lemma": "μεθυσοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|μέθυσος||nom|p}}"
+    },
+    {
+      "word_form": "κατακεχυμενοσ",
+      "lemma": "καταχεω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|perf|mp|part",
+      "debug_pattern": "{{inflection of|grc|καταχέω||perf|mp|part}}"
+    },
+    {
+      "word_form": "αληθινοι",
+      "lemma": "αληθινοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|m|p",
+      "debug_pattern": "{{inflection of|el|αληθινός||nom|m|p}}"
+    },
+    {
+      "word_form": "εδμεναι",
+      "lemma": "εδω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|actv|inf",
+      "debug_pattern": "{{inflection of|grc|ἔδω||pres|actv|inf}}"
+    },
+    {
+      "word_form": "γιαγιαδεσ",
+      "lemma": "γιαγια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|γιαγιά||nom|p}}"
+    },
+    {
+      "word_form": "λεξικα",
+      "lemma": "λεξικο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|el|λεξικό||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "λεξικα",
+      "lemma": "λεξικον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|λεξικόν||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "λυκων",
+      "lemma": "λυκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|λύκος||gen|p}}"
+    },
+    {
+      "word_form": "λυκουσ",
+      "lemma": "λυκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|λύκος||acc|p}}"
+    },
+    {
+      "word_form": "λυκου",
+      "lemma": "λυκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|λύκος||gen|s}}"
+    },
+    {
+      "word_form": "λυκο",
+      "lemma": "λυκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|λύκος||acc|s}}"
+    },
+    {
+      "word_form": "λυκε",
+      "lemma": "λυκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|λύκος||voc|s}}"
+    },
+    {
+      "word_form": "ποδιου",
+      "lemma": "ποδι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πόδι||gen|s}}"
+    },
+    {
+      "word_form": "κιθαρασ",
+      "lemma": "κιθαρα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κιθάρα||gen|s}}"
+    },
+    {
+      "word_form": "κιθαρων",
+      "lemma": "κιθαρα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κιθάρα||gen|p}}"
+    },
+    {
+      "word_form": "γλωσσεσ",
+      "lemma": "γλωσσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|γλώσσα||nom|p}}"
+    },
+    {
+      "word_form": "γλωσσασ",
+      "lemma": "γλωσσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|γλώσσα||gen|s}}"
+    },
+    {
+      "word_form": "γλωσσων",
+      "lemma": "γλωσσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|γλώσσα||gen|p}}"
+    },
+    {
+      "word_form": "βιολια",
+      "lemma": "βιολι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βιολί||nom|p}}"
+    },
+    {
+      "word_form": "βιολιου",
+      "lemma": "βιολι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βιολί||gen|s}}"
+    },
+    {
+      "word_form": "βιολιων",
+      "lemma": "βιολι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βιολί||gen|p}}"
+    },
+    {
+      "word_form": "ιπποι",
+      "lemma": "ιπποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|el|ίππος||nom//voc|p}}"
+    },
+    {
+      "word_form": "ιππων",
+      "lemma": "ιπποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ίππος||gen|p}}"
+    },
+    {
+      "word_form": "ιππο",
+      "lemma": "ιπποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|ίππος||acc|s}}"
+    },
+    {
+      "word_form": "ιππουσ",
+      "lemma": "ιπποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|ίππος||acc|p}}"
+    },
+    {
+      "word_form": "ιππε",
+      "lemma": "ιπποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|ίππος||voc|s}}"
+    },
+    {
+      "word_form": "αλεπουδεσ",
+      "lemma": "αλεπου",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αλεπού||nom|p}}"
+    },
+    {
+      "word_form": "αλεπουσ",
+      "lemma": "αλεπου",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αλεπού||gen|s}}"
+    },
+    {
+      "word_form": "αλεπουδων",
+      "lemma": "αλεπου",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αλεπού||gen|p}}"
+    },
+    {
+      "word_form": "ονοι",
+      "lemma": "ονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|όνος||nom|p}}"
+    },
+    {
+      "word_form": "ονου",
+      "lemma": "ονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|όνος||gen|s}}"
+    },
+    {
+      "word_form": "ονων",
+      "lemma": "ονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|όνος||gen|p}}"
+    },
+    {
+      "word_form": "ονο",
+      "lemma": "ονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|όνος||acc|s}}"
+    },
+    {
+      "word_form": "ονουσ",
+      "lemma": "ονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|όνος||gen|p}}"
+    },
+    {
+      "word_form": "ονε",
+      "lemma": "ονοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|όνος||voc|s}}"
+    },
+    {
+      "word_form": "τεκνα",
+      "lemma": "τεκνο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|el|τέκνο||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "τεκνα",
+      "lemma": "τεκνον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|τέκνον||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "τεκνου",
+      "lemma": "τεκνο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|τέκνο||gen|s}}"
+    },
+    {
+      "word_form": "τεκνων",
+      "lemma": "τεκνο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|τέκνο||gen|p}}"
+    },
+    {
+      "word_form": "κρεατα",
+      "lemma": "κρεασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κρέας||nom|p}}"
+    },
+    {
+      "word_form": "κρεατοσ",
+      "lemma": "κρεασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κρέας||gen|s}}"
+    },
+    {
+      "word_form": "νικητη",
+      "lemma": "νικητησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|νικητής||gen|s}}"
+    },
+    {
+      "word_form": "νικητων",
+      "lemma": "νικητησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|νικητής||gen|p}}"
+    },
+    {
+      "word_form": "κλεφτεσ",
+      "lemma": "κλεφτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κλέφτης||nom|p}}"
+    },
+    {
+      "word_form": "κλεφτη",
+      "lemma": "κλεφτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κλέφτης||gen|s}}"
+    },
+    {
+      "word_form": "κλεφτων",
+      "lemma": "κλεφτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κλέφτης||gen|p}}"
+    },
+    {
+      "word_form": "φουρναρηδεσ",
+      "lemma": "φουρναρησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|φούρναρης||nom|p}}"
+    },
+    {
+      "word_form": "φουρναρηδων",
+      "lemma": "φουρναρησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|φούρναρης||gen|p}}"
+    },
+    {
+      "word_form": "φουρναρη",
+      "lemma": "φουρναρησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|φούρναρης||gen|s}}"
+    },
+    {
+      "word_form": "σκυλοι",
+      "lemma": "σκυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|σκύλος||nom|p}}"
+    },
+    {
+      "word_form": "σκυλου",
+      "lemma": "σκυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|σκύλος||gen|s}}"
+    },
+    {
+      "word_form": "σκυλων",
+      "lemma": "σκυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|σκύλος||gen|p}}"
+    },
+    {
+      "word_form": "σκυλο",
+      "lemma": "σκυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|σκύλος||acc|s}}"
+    },
+    {
+      "word_form": "σκυλουσ",
+      "lemma": "σκυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|σκύλος||acc|p}}"
+    },
+    {
+      "word_form": "σκυλε",
+      "lemma": "σκυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|σκύλος||voc|s}}"
+    },
+    {
+      "word_form": "πεταλωτηδεσ",
+      "lemma": "πεταλωτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πεταλωτής||nom|p}}"
+    },
+    {
+      "word_form": "πεταλωτη",
+      "lemma": "πεταλωτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πεταλωτής||gen|s}}"
+    },
+    {
+      "word_form": "πεταλωτηδων",
+      "lemma": "πεταλωτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|πεταλωτής||gen|p}}"
+    },
+    {
+      "word_form": "παππουδων",
+      "lemma": "παππουσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|παππούς||gen|p}}"
+    },
+    {
+      "word_form": "παππου",
+      "lemma": "παππουσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|παππούς||gen|s}}"
+    },
+    {
+      "word_form": "εστι",
+      "lemma": "ειμι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|s|pres|actv|indc",
+      "debug_pattern": "{{inflection of|grc|εἰμί||3|s|pres|actv|indc}}"
+    },
+    {
+      "word_form": "καθεστωτα",
+      "lemma": "καθεστωσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|καθεστώς||nom|p}}"
+    },
+    {
+      "word_form": "καθεστωτοσ",
+      "lemma": "καθεστωσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|καθεστώς||gen|s}}"
+    },
+    {
+      "word_form": "καθεστωτων",
+      "lemma": "καθεστωσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|καθεστώς||gen|p}}"
+    },
+    {
+      "word_form": "εδαφουσ",
+      "lemma": "εδαφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|έδαφος||gen|s}}"
+    },
+    {
+      "word_form": "εδαφων",
+      "lemma": "εδαφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|έδαφος||gen|p}}"
+    },
+    {
+      "word_form": "βραδια",
+      "lemma": "βραδυ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βράδυ||nom|p}}"
+    },
+    {
+      "word_form": "βραδιου",
+      "lemma": "βραδυ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βράδυ||gen|s}}"
+    },
+    {
+      "word_form": "τουρκου",
+      "lemma": "τουρκοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|Τούρκος||gen|s}}"
+    },
+    {
+      "word_form": "πλατεια",
+      "lemma": "πλατυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|d|f",
+      "debug_pattern": "{{inflection of|grc|πλᾰτύς||nom//acc//voc|d|f}}"
+    },
+    {
+      "word_form": "πολεων",
+      "lemma": "πολισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|grc|πόλῐς||gen|p}}"
+    },
+    {
+      "word_form": "πολησ",
+      "lemma": "πολη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πόλη||gen|s}}"
+    },
+    {
+      "word_form": "πολεωσ",
+      "lemma": "πολισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|πόλῐς||gen|s}}"
+    },
+    {
+      "word_form": "βασιλισσεσ",
+      "lemma": "βασιλισσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βασίλισσα||nom|p}}"
+    },
+    {
+      "word_form": "βασιλισσων",
+      "lemma": "βασιλισσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βασίλισσα||gen|p}}"
+    },
+    {
+      "word_form": "βασιλισσασ",
+      "lemma": "βασιλισσα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βασίλισσα||gen|s}}"
+    },
+    {
+      "word_form": "αγκωνεσ",
+      "lemma": "αγκωνασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αγκώνας||nom|p}}"
+    },
+    {
+      "word_form": "αγκωνων",
+      "lemma": "αγκωνασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αγκώνας||gen|p}}"
+    },
+    {
+      "word_form": "αγκωνα",
+      "lemma": "αγκωνασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αγκώνας||gen|s}}"
+    },
+    {
+      "word_form": "πραματευταδεσ",
+      "lemma": "πραματευτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πραματευτής||nom|p}}"
+    },
+    {
+      "word_form": "πραματευτεσ",
+      "lemma": "πραματευτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πραματευτής||nom|p}}"
+    },
+    {
+      "word_form": "πραματευταδων",
+      "lemma": "πραματευτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|πραματευτής||gen|p}}"
+    },
+    {
+      "word_form": "πραματευτων",
+      "lemma": "πραματευτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|πραματευτής||gen|p}}"
+    },
+    {
+      "word_form": "πραματευτη",
+      "lemma": "πραματευτησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πραματευτής||gen|s}}"
+    },
+    {
+      "word_form": "παροντα",
+      "lemma": "παρον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|παρόν||nom|p}}"
+    },
+    {
+      "word_form": "παροντα",
+      "lemma": "παρων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|πᾰρών||m|acc|s|;|n|nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "παροντων",
+      "lemma": "παρον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|παρόν||gen|p}}"
+    },
+    {
+      "word_form": "παροντων",
+      "lemma": "παρων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//n|gen|p",
+      "debug_pattern": "{{inflection of|grc|πᾰρών||m//n|gen|p}}"
+    },
+    {
+      "word_form": "παροντοσ",
+      "lemma": "παρον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|παρόν||gen|s}}"
+    },
+    {
+      "word_form": "παροντοσ",
+      "lemma": "παρων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//n|gen|s",
+      "debug_pattern": "{{inflection of|grc|πᾰρών||m//n|gen|s}}"
+    },
+    {
+      "word_form": "ανθρωποι",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|άνθρωπος||nom|p}}"
+    },
+    {
+      "word_form": "ανθρωπων",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|άνθρωπος||gen|p}}"
+    },
+    {
+      "word_form": "ανθρωπο",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|άνθρωπος||acc|s}}"
+    },
+    {
+      "word_form": "ανθρωπουσ",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|άνθρωπος||acc|p}}"
+    },
+    {
+      "word_form": "ανθρωπε",
+      "lemma": "ανθρωποσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|άνθρωπος||voc|s}}"
+    },
+    {
+      "word_form": "καθαροι",
+      "lemma": "καθαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|κᾰθᾰρός||m|nom//voc|p}}"
+    },
+    {
+      "word_form": "φυομαι",
+      "lemma": "φυω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|midl|indc|1|s",
+      "debug_pattern": "{{inflection of|grc|φῠ́ω||pres|midl|indc|1|s}}"
+    },
+    {
+      "word_form": "μηλα",
+      "lemma": "μηλο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|μήλο||nom|p}}"
+    },
+    {
+      "word_form": "μηλου",
+      "lemma": "μηλο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μήλο||gen|s}}"
+    },
+    {
+      "word_form": "μηλου",
+      "lemma": "μηλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|μῆλον||gen|s}}"
+    },
+    {
+      "word_form": "μηλων",
+      "lemma": "μηλο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|μήλο||gen|p}}"
+    },
+    {
+      "word_form": "μηλων",
+      "lemma": "μηλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|grc|μῆλον||gen|p}}"
+    },
+    {
+      "word_form": "βερικοκα",
+      "lemma": "βερικοκο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βερίκοκο||nom|p}}"
+    },
+    {
+      "word_form": "βερικοκου",
+      "lemma": "βερικοκο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βερίκοκο||gen|s}}"
+    },
+    {
+      "word_form": "βερικοκων",
+      "lemma": "βερικοκο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βερίκοκο||gen|p}}"
+    },
+    {
+      "word_form": "βηχεσ",
+      "lemma": "βηχασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βήχας||nom|p}}"
+    },
+    {
+      "word_form": "βηχα",
+      "lemma": "βηχασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βήχας||gen|s}}"
+    },
+    {
+      "word_form": "βηχων",
+      "lemma": "βηχασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βήχας||gen|p}}"
+    },
+    {
+      "word_form": "ελευθερια",
+      "lemma": "ελευθεριη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|d|;|acc|d|;|voc|d|",
+      "debug_pattern": "{{inflection of|grc|ἐλευθερῐ́η||nom|d|;|acc|d|;|voc|d|}}"
+    },
+    {
+      "word_form": "δεντρου",
+      "lemma": "δεντρο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|δέντρο||gen|s}}"
+    },
+    {
+      "word_form": "δεντρων",
+      "lemma": "δεντρο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|δέντρο||gen|p}}"
+    },
+    {
+      "word_form": "οζων",
+      "lemma": "οζω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|actv|part",
+      "debug_pattern": "{{inflection of|grc|ὄζω||pres|actv|part}}"
+    },
+    {
+      "word_form": "οζον",
+      "lemma": "οζων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom|s",
+      "debug_pattern": "{{inflection of|grc|ὄζων||n|nom|s}}"
+    },
+    {
+      "word_form": "οζον",
+      "lemma": "οζω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|actv|part",
+      "debug_pattern": "{{inflection of|grc|ὄζω||pres|actv|part}}"
+    },
+    {
+      "word_form": "οζον",
+      "lemma": "οζοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|ὄζος||acc|s}}"
+    },
+    {
+      "word_form": "γευομαι",
+      "lemma": "γευω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mp|indc",
+      "debug_pattern": "{{inflection of|grc|γεύω||1|s|pres|mp|indc}}"
+    },
+    {
+      "word_form": "θυγατερα",
+      "lemma": "θυγατηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|θυγάτηρ||acc|s}}"
+    },
+    {
+      "word_form": "κοινα",
+      "lemma": "κοινοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|d",
+      "debug_pattern": "{{inflection of|grc|κοινός||f|nom|d}}"
+    },
+    {
+      "word_form": "νεου",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|m//n",
+      "debug_pattern": "{{inflection of|grc|νέος||gen|s|m//n}}"
+    },
+    {
+      "word_form": "νεα",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p|n",
+      "debug_pattern": "{{inflection of|grc|νέος||nom//acc//voc|p|n}}"
+    },
+    {
+      "word_form": "νεα",
+      "lemma": "νηυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|grc|νηῦς||acc|s}}"
+    },
+    {
+      "word_form": "νεεσ",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|p",
+      "debug_pattern": "{{inflection of|el|νέος||f|nom|p}}"
+    },
+    {
+      "word_form": "νεεσ",
+      "lemma": "νηυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|νηῦς||nom//voc|p}}"
+    },
+    {
+      "word_form": "νεοι",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|nom|p",
+      "debug_pattern": "{{inflection of|el|νέος||m|nom|p}}"
+    },
+    {
+      "word_form": "νεοι",
+      "lemma": "νεω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|s|pres|actv|optative",
+      "debug_pattern": "{{inflection of|grc|νέω||3|s|pres|actv|optative}}"
+    },
+    {
+      "word_form": "νεων",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|gen|p",
+      "debug_pattern": "{{inflection of|el|νέος||m|gen|p}}"
+    },
+    {
+      "word_form": "νεων",
+      "lemma": "νεω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|actv|part",
+      "debug_pattern": "{{inflection of|grc|νέω||pres|actv|part}}"
+    },
+    {
+      "word_form": "νεουσ",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|p",
+      "debug_pattern": "{{inflection of|el|νέος||m|acc|p}}"
+    },
+    {
+      "word_form": "νεασ",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|gen|s",
+      "debug_pattern": "{{inflection of|el|νέος||f|gen|s}}"
+    },
+    {
+      "word_form": "νεασ",
+      "lemma": "νηυσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|νηῦς||acc|p}}"
+    },
+    {
+      "word_form": "νεε",
+      "lemma": "νεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|voc|s",
+      "debug_pattern": "{{inflection of|el|νέος||m|voc|s}}"
+    },
+    {
+      "word_form": "αγοριου",
+      "lemma": "αγορι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αγόρι||gen|s}}"
+    },
+    {
+      "word_form": "αγορια",
+      "lemma": "αγορι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αγόρι||nom|p}}"
+    },
+    {
+      "word_form": "αγοριων",
+      "lemma": "αγορι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αγόρι||gen|p}}"
+    },
+    {
+      "word_form": "δυναμεισ",
+      "lemma": "δυναμισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|δύνᾰμῐς||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "δυναμεων",
+      "lemma": "δυναμισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|grc|δῠ́νᾰμῐς||gen|p}}"
+    },
+    {
+      "word_form": "δυναμεωσ",
+      "lemma": "δυναμισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|δῠ́νᾰμῐς||gen|s}}"
+    },
+    {
+      "word_form": "κορτακηδεσ",
+      "lemma": "κορτακιασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κορτάκιας||nom|p}}"
+    },
+    {
+      "word_form": "κορτακηδων",
+      "lemma": "κορτακιασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κορτάκιας||gen|p}}"
+    },
+    {
+      "word_form": "κορτακια",
+      "lemma": "κορτακιασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κορτάκιας||gen|s}}"
+    },
+    {
+      "word_form": "αχιλλεα",
+      "lemma": "αχιλλεασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|Αχιλλέας||gen|s}}"
+    },
+    {
+      "word_form": "γραμμησ",
+      "lemma": "γραμμη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|γραμμή||gen|s}}"
+    },
+    {
+      "word_form": "γραμμεσ",
+      "lemma": "γραμμη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|γραμμή||nom|p}}"
+    },
+    {
+      "word_form": "γραμμων",
+      "lemma": "γραμμη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|γραμμή||gen|p}}"
+    },
+    {
+      "word_form": "κουμπαρου",
+      "lemma": "κουμπαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κουμπάρος||gen|s}}"
+    },
+    {
+      "word_form": "κουμπαρο",
+      "lemma": "κουμπαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|κουμπάρος||acc|s}}"
+    },
+    {
+      "word_form": "κουμπαρε",
+      "lemma": "κουμπαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|κουμπάρος||voc|s}}"
+    },
+    {
+      "word_form": "κουμπαροι",
+      "lemma": "κουμπαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κουμπάρος||nom|p}}"
+    },
+    {
+      "word_form": "κουμπαρων",
+      "lemma": "κουμπαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κουμπάρος||gen|p}}"
+    },
+    {
+      "word_form": "κουμπαρουσ",
+      "lemma": "κουμπαροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|κουμπάρος||acc|p}}"
+    },
+    {
+      "word_form": "ανεμου",
+      "lemma": "ανεμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|άνεμος||gen|s}}"
+    },
+    {
+      "word_form": "ανεμο",
+      "lemma": "ανεμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|άνεμος||acc|s}}"
+    },
+    {
+      "word_form": "ανεμε",
+      "lemma": "ανεμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|άνεμος||voc|s}}"
+    },
+    {
+      "word_form": "ανεμοι",
+      "lemma": "ανεμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|άνεμος||nom|p}}"
+    },
+    {
+      "word_form": "ανεμων",
+      "lemma": "ανεμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|άνεμος||gen|p}}"
+    },
+    {
+      "word_form": "ανεμουσ",
+      "lemma": "ανεμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|άνεμος||acc|p}}"
+    },
+    {
+      "word_form": "δαση",
+      "lemma": "δασοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|δάσος||nom|p}}"
+    },
+    {
+      "word_form": "δασων",
+      "lemma": "δασοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|δάσος||gen|p}}"
+    },
+    {
+      "word_form": "δασουσ",
+      "lemma": "δασοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|δάσος||gen|s}}"
+    },
+    {
+      "word_form": "ιδιωματων",
+      "lemma": "ιδιωμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ιδίωμα||gen|p}}"
+    },
+    {
+      "word_form": "ιδιωματοσ",
+      "lemma": "ιδιωμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ιδίωμα||gen|s}}"
+    },
+    {
+      "word_form": "ιδιωματα",
+      "lemma": "ιδιωμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ιδίωμα||nom|p}}"
+    },
+    {
+      "word_form": "κιλου",
+      "lemma": "κιλο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κιλό||gen|s}}"
+    },
+    {
+      "word_form": "κιλων",
+      "lemma": "κιλο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κιλό||gen|p}}"
+    },
+    {
+      "word_form": "κιλα",
+      "lemma": "κιλο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κιλό||nom|p}}"
+    },
+    {
+      "word_form": "πελομαι",
+      "lemma": "πελω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mid|indc",
+      "debug_pattern": "{{inflection of|grc|πέλω||1|s|pres|mid|indc}}"
+    },
+    {
+      "word_form": "πεταλον",
+      "lemma": "πεταλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|πέταλος||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "αρνοσ",
+      "lemma": "αρην",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|ἀρήν||gen|s}}"
+    },
+    {
+      "word_form": "λεια",
+      "lemma": "λειοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom//voc|s|;|f|nom//acc//voc|d",
+      "debug_pattern": "{{inflection of|grc|λεῖος||f|nom//voc|s|;|f|nom//acc//voc|d}}"
+    },
+    {
+      "word_form": "λιμενασ",
+      "lemma": "λιμην",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|grc|λῐμήν||acc|p}}"
+    },
+    {
+      "word_form": "ψυχρον",
+      "lemma": "ψυχροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|nom|s",
+      "debug_pattern": "{{inflection of|grc|ψῡχρός||m|nom|s}}"
+    },
+    {
+      "word_form": "μελλοντα",
+      "lemma": "μελλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|μέλλον||nom|p}}"
+    },
+    {
+      "word_form": "μελλοντα",
+      "lemma": "μελλων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|μέλλων||m|acc|s|;|n|nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "μελλοντοσ",
+      "lemma": "μελλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μέλλον||gen|s}}"
+    },
+    {
+      "word_form": "μελλοντοσ",
+      "lemma": "μελλων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//n|gen|s",
+      "debug_pattern": "{{inflection of|grc|μέλλων||m//n|gen|s}}"
+    },
+    {
+      "word_form": "μελλοντων",
+      "lemma": "μελλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|μέλλον||gen|p}}"
+    },
+    {
+      "word_form": "μελλοντων",
+      "lemma": "μελλω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|3|p|pres|actv|impr",
+      "debug_pattern": "{{inflection of|grc|μέλλω||3|p|pres|actv|impr}}"
+    },
+    {
+      "word_form": "μελλοντων",
+      "lemma": "μελλων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m//n|gen|p",
+      "debug_pattern": "{{inflection of|grc|μέλλων||m//n|gen|p}}"
+    },
+    {
+      "word_form": "ταυτοτητασ",
+      "lemma": "ταυτοτητα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ταυτότητα||gen|s}}"
+    },
+    {
+      "word_form": "ταυτοτητεσ",
+      "lemma": "ταυτοτητα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ταυτότητα||nom|p}}"
+    },
+    {
+      "word_form": "ταυτοτητων",
+      "lemma": "ταυτοτητα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ταυτότητα||gen|p}}"
+    },
+    {
+      "word_form": "ιστοριασ",
+      "lemma": "ιστορια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ιστορία||gen|s}}"
+    },
+    {
+      "word_form": "ιστοριεσ",
+      "lemma": "ιστορια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ιστορία||nom|p}}"
+    },
+    {
+      "word_form": "ιστοριων",
+      "lemma": "ιστορια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ιστορία||gen|p}}"
+    },
+    {
+      "word_form": "φυλλα",
+      "lemma": "φυλλον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|φύλλον||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "κρεατων",
+      "lemma": "κρεασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κρέας||gen|p}}"
+    },
+    {
+      "word_form": "μπακαλη",
+      "lemma": "μπακαλησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μπακάλης||gen|s}}"
+    },
+    {
+      "word_form": "μπακαληδεσ",
+      "lemma": "μπακαλησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|μπακάλης||nom|p}}"
+    },
+    {
+      "word_form": "μπακαληδων",
+      "lemma": "μπακαλησ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|μπακάλης||gen|p}}"
+    },
+    {
+      "word_form": "αυτοκρατορα",
+      "lemma": "αυτοκρατορασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αυτοκράτορας||gen|s}}"
+    },
+    {
+      "word_form": "αυτοκρατορεσ",
+      "lemma": "αυτοκρατορασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αυτοκράτορας||nom|p}}"
+    },
+    {
+      "word_form": "αυτοκρατορεσ",
+      "lemma": "αυτοκρατωρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αυτοκράτωρ||nom|p}}"
+    },
+    {
+      "word_form": "αυτοκρατορων",
+      "lemma": "αυτοκρατορασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αυτοκράτορας||gen|p}}"
+    },
+    {
+      "word_form": "αυτοκρατορων",
+      "lemma": "αυτοκρατωρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αυτοκράτωρ||gen|p}}"
+    },
+    {
+      "word_form": "αυτοκρατοροσ",
+      "lemma": "αυτοκρατωρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αυτοκράτωρ||gen|s}}"
+    },
+    {
+      "word_form": "κυματοσ",
+      "lemma": "κυμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κύμα||gen|s}}"
+    },
+    {
+      "word_form": "κυματα",
+      "lemma": "κυμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|κῦμᾰ||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "αγωνοσ",
+      "lemma": "αγων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αγών||gen|s}}"
+    },
+    {
+      "word_form": "αγωνων",
+      "lemma": "αγωνασ,αγων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αγώνας,αγών||gen|p}}"
+    },
+    {
+      "word_form": "κυματων",
+      "lemma": "κυμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κύμα||gen|p}}"
+    },
+    {
+      "word_form": "παρελθον",
+      "lemma": "παρελθων",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|s|n",
+      "debug_pattern": "{{inflection of|grc|πᾰρελθών||nom//acc//voc|s|n}}"
+    },
+    {
+      "word_form": "μητροσ",
+      "lemma": "μητηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|μήτηρ||gen|s}}"
+    },
+    {
+      "word_form": "πατροσ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|πᾰτήρ||gen|s}}"
+    },
+    {
+      "word_form": "λογοι",
+      "lemma": "λογοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|λόγος||nom//voc|p}}"
+    },
+    {
+      "word_form": "γραφομενοσ",
+      "lemma": "γραφω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|mp|part",
+      "debug_pattern": "{{inflection of|grc|γρᾰ́φω||pres|mp|part}}"
+    },
+    {
+      "word_form": "γραφομενα",
+      "lemma": "γραφομενοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|γρᾰφόμενος||n|nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "φαλαγγεσ",
+      "lemma": "φαλαγξ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|grc|φᾰ́λᾰγξ||nom|p}}"
+    },
+    {
+      "word_form": "σελιδεσ",
+      "lemma": "σελιδα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|σελίδα||nom|p}}"
+    },
+    {
+      "word_form": "σελιδασ",
+      "lemma": "σελιδα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|σελίδα||gen|s}}"
+    },
+    {
+      "word_form": "σελιδων",
+      "lemma": "σελιδα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|σελίδα||gen|p}}"
+    },
+    {
+      "word_form": "παραισθησησ",
+      "lemma": "παραισθηση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|παραίσθηση||gen|s}}"
+    },
+    {
+      "word_form": "παραισθησεωσ",
+      "lemma": "παραισθηση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|παραίσθηση||gen|s}}"
+    },
+    {
+      "word_form": "παραισθησεισ",
+      "lemma": "παραισθηση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|παραίσθηση||nom|p}}"
+    },
+    {
+      "word_form": "παραισθησεων",
+      "lemma": "παραισθηση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|παραίσθηση||gen|p}}"
+    },
+    {
+      "word_form": "βεβαια",
+      "lemma": "βεβαιοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|βέβαιος||n|nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "ομοφυλοφιλιασ",
+      "lemma": "ομοφυλοφιλια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|s|gen",
+      "debug_pattern": "{{inflection of|el|ομοφυλοφιλία||s|gen}}"
+    },
+    {
+      "word_form": "επιλαμβανομαι",
+      "lemma": "επιλαμβανω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mp|indc",
+      "debug_pattern": "{{inflection of|grc|ἐπιλαμβάνω||1|s|pres|mp|indc}}"
+    },
+    {
+      "word_form": "ελαφια",
+      "lemma": "ελαφι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ελάφι||nom|p}}"
+    },
+    {
+      "word_form": "ελαφιου",
+      "lemma": "ελαφι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ελάφι||gen|s}}"
+    },
+    {
+      "word_form": "ελαφιων",
+      "lemma": "ελαφι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ελάφι||gen|p}}"
+    },
+    {
+      "word_form": "κουνελιου",
+      "lemma": "κουνελι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κουνέλι||gen|s}}"
+    },
+    {
+      "word_form": "κουνελιων",
+      "lemma": "κουνελι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κουνέλι||gen|p}}"
+    },
+    {
+      "word_form": "δελφινιου",
+      "lemma": "δελφινι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|δελφίνι||gen|s}}"
+    },
+    {
+      "word_form": "δελφινιων",
+      "lemma": "δελφινι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|δελφίνι||gen|p}}"
+    },
+    {
+      "word_form": "μασχαλεσ",
+      "lemma": "μασχαλη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|μασχάλη||nom|p}}"
+    },
+    {
+      "word_form": "μασχαλησ",
+      "lemma": "μασχαλη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μασχάλη||gen|s}}"
+    },
+    {
+      "word_form": "μασχαλων",
+      "lemma": "μασχαλη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|μασχάλη||gen|p}}"
+    },
+    {
+      "word_form": "αμυνομαι",
+      "lemma": "αμυνω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|midl|indc|1|s",
+      "debug_pattern": "{{inflection of|grc|ᾰ̓μῡ́νω||pres|midl|indc|1|s}}"
+    },
+    {
+      "word_form": "αινιγματων",
+      "lemma": "αινιγμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αίνιγμα||gen|p}}"
+    },
+    {
+      "word_form": "αινιγματα",
+      "lemma": "αινιγμα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αίνιγμα||nom|p}}"
+    },
+    {
+      "word_form": "λογικησ",
+      "lemma": "λογικη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|λογική||gen|s}}"
+    },
+    {
+      "word_form": "ουδεν",
+      "lemma": "ουδεισ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom|s",
+      "debug_pattern": "{{inflection of|grc|οὐδείς||n|nom|s}}"
+    },
+    {
+      "word_form": "ανωμαλιασ",
+      "lemma": "ανωμαλια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ανωμαλία||gen|s}}"
+    },
+    {
+      "word_form": "ανωμαλιεσ",
+      "lemma": "ανωμαλια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ανωμαλία||nom|p}}"
+    },
+    {
+      "word_form": "ανωμαλιων",
+      "lemma": "ανωμαλια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ανωμαλία||gen|p}}"
+    },
+    {
+      "word_form": "στυσεισ",
+      "lemma": "στυση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|στύση||nom|p}}"
+    },
+    {
+      "word_form": "στυσεων",
+      "lemma": "στυση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|στύση||gen|p}}"
+    },
+    {
+      "word_form": "στυσησ",
+      "lemma": "στυση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|στύση||gen|s}}"
+    },
+    {
+      "word_form": "στυσεωσ",
+      "lemma": "στυση",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|στύση||gen|s}}"
+    },
+    {
+      "word_form": "αγαπεσ",
+      "lemma": "αγαπη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αγάπη||nom|p}}"
+    },
+    {
+      "word_form": "αγαπων",
+      "lemma": "αγαπη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αγάπη||gen|p}}"
+    },
+    {
+      "word_form": "σατανα",
+      "lemma": "σατανασ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|Σατανάς||gen|s}}"
+    },
+    {
+      "word_form": "ζαφειρια",
+      "lemma": "ζαφειρι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ζαφείρι||nom|p}}"
+    },
+    {
+      "word_form": "ζαφειριων",
+      "lemma": "ζαφειρι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ζαφείρι||gen|p}}"
+    },
+    {
+      "word_form": "ζαφειριου",
+      "lemma": "ζαφειρι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ζαφείρι||gen|s}}"
+    },
+    {
+      "word_form": "λεσβου",
+      "lemma": "λεσβοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|Λέσβος||gen|s}}"
+    },
+    {
+      "word_form": "πεη",
+      "lemma": "πεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πέος||nom|p}}"
+    },
+    {
+      "word_form": "πεων",
+      "lemma": "πεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|πέος||gen|p}}"
+    },
+    {
+      "word_form": "πεουσ",
+      "lemma": "πεοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πέος||gen|s}}"
+    },
+    {
+      "word_form": "μυστηριου",
+      "lemma": "μυστηριο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μυστήριο||gen|s}}"
+    },
+    {
+      "word_form": "διαμαντια",
+      "lemma": "διαμαντι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|διαμάντι||nom|p}}"
+    },
+    {
+      "word_form": "διαμαντιου",
+      "lemma": "διαμαντι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|διαμάντι||gen|s}}"
+    },
+    {
+      "word_form": "διαμαντιων",
+      "lemma": "διαμαντι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|διαμάντι||gen|p}}"
+    },
+    {
+      "word_form": "μουνια",
+      "lemma": "μουνι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|μουνί||nom|p}}"
+    },
+    {
+      "word_form": "μουνιου",
+      "lemma": "μουνι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μουνί||gen|s}}"
+    },
+    {
+      "word_form": "μουνιων",
+      "lemma": "μουνι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|μουνί||gen|p}}"
+    },
+    {
+      "word_form": "ορχιδεεσ",
+      "lemma": "ορχιδεα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|ορχιδέα||nom|p}}"
+    },
+    {
+      "word_form": "ορχιδεασ",
+      "lemma": "ορχιδεα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|ορχιδέα||gen|s}}"
+    },
+    {
+      "word_form": "ορχιδεων",
+      "lemma": "ορχιδεα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|ορχιδέα||gen|p}}"
+    },
+    {
+      "word_form": "πορνογραφοι",
+      "lemma": "πορνογραφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|πορνογράφος||nom|p}}"
+    },
+    {
+      "word_form": "πορνογραφων",
+      "lemma": "πορνογραφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|πορνογράφος||gen|p}}"
+    },
+    {
+      "word_form": "πορνογραφουσ",
+      "lemma": "πορνογραφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|πορνογράφος||acc|p}}"
+    },
+    {
+      "word_form": "πορνογραφου",
+      "lemma": "πορνογραφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πορνογράφος||gen|s}}"
+    },
+    {
+      "word_form": "πορνογραφο",
+      "lemma": "πορνογραφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|πορνογράφος||acc|s}}"
+    },
+    {
+      "word_form": "πορνογραφε",
+      "lemma": "πορνογραφοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|πορνογράφος||voc|s}}"
+    },
+    {
+      "word_form": "νεκροτομεια",
+      "lemma": "νεκροτομειο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|νεκροτομείο||nom|p}}"
+    },
+    {
+      "word_form": "νεκροτομειου",
+      "lemma": "νεκροτομειο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|νεκροτομείο||gen|s}}"
+    },
+    {
+      "word_form": "νεκροτομειων",
+      "lemma": "νεκροτομειο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|νεκροτομείο||gen|p}}"
+    },
+    {
+      "word_form": "θηλεσ",
+      "lemma": "θηλη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|θηλή||nom|p}}"
+    },
+    {
+      "word_form": "θηλησ",
+      "lemma": "θηλη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|θηλή||gen|s}}"
+    },
+    {
+      "word_form": "θηλων",
+      "lemma": "θηλη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|θηλή||gen|p}}"
+    },
+    {
+      "word_form": "μορφινησ",
+      "lemma": "μορφινη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μορφίνη||gen|s}}"
+    },
+    {
+      "word_form": "ευγενικη",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|s",
+      "debug_pattern": "{{inflection of|el|ευγενικός||f|nom|s}}"
+    },
+    {
+      "word_form": "ευγενικου",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|gen|s",
+      "debug_pattern": "{{inflection of|el|ευγενικός||m|gen|s}}"
+    },
+    {
+      "word_form": "ευγενικησ",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|gen|s",
+      "debug_pattern": "{{inflection of|el|ευγενικός||f|gen|s}}"
+    },
+    {
+      "word_form": "ευγενικο",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s",
+      "debug_pattern": "{{inflection of|el|ευγενικός||m|acc|s}}"
+    },
+    {
+      "word_form": "ευγενικε",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|voc|s",
+      "debug_pattern": "{{inflection of|el|ευγενικός||m|voc|s}}"
+    },
+    {
+      "word_form": "ευγενικοι",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|nom|p",
+      "debug_pattern": "{{inflection of|el|ευγενικός||m|nom|p}}"
+    },
+    {
+      "word_form": "ευγενικεσ",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|p",
+      "debug_pattern": "{{inflection of|el|ευγενικός||f|nom|p}}"
+    },
+    {
+      "word_form": "ευγενικουσ",
+      "lemma": "ευγενικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|p",
+      "debug_pattern": "{{inflection of|el|ευγενικός||m|acc|p}}"
+    },
+    {
+      "word_form": "γεματων",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|gen|p",
+      "debug_pattern": "{{inflection of|el|γεμάτος||m|gen|p}}"
+    },
+    {
+      "word_form": "γεματου",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|gen|s",
+      "debug_pattern": "{{inflection of|el|γεμάτος||m|gen|s}}"
+    },
+    {
+      "word_form": "γεματο",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s",
+      "debug_pattern": "{{inflection of|el|γεμάτος||m|acc|s}}"
+    },
+    {
+      "word_form": "γεματε",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|voc|s",
+      "debug_pattern": "{{inflection of|el|γεμάτος||m|voc|s}}"
+    },
+    {
+      "word_form": "γεματησ",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|gen|s",
+      "debug_pattern": "{{inflection of|el|γεμάτος||f|gen|s}}"
+    },
+    {
+      "word_form": "γεματη",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|s",
+      "debug_pattern": "{{inflection of|el|γεμάτος||f|nom|s}}"
+    },
+    {
+      "word_form": "γεματοι",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|nom|p",
+      "debug_pattern": "{{inflection of|el|γεμάτος||m|nom|p}}"
+    },
+    {
+      "word_form": "γεματουσ",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|p",
+      "debug_pattern": "{{inflection of|el|γεμάτος||m|acc|p}}"
+    },
+    {
+      "word_form": "γεματεσ",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|p",
+      "debug_pattern": "{{inflection of|el|γεμάτος||f|nom|p}}"
+    },
+    {
+      "word_form": "γεματα",
+      "lemma": "γεματοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|n|nom|p",
+      "debug_pattern": "{{inflection of|el|γεμάτος||n|nom|p}}"
+    },
+    {
+      "word_form": "ει",
+      "lemma": "ειμι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "t=to be||2|s|pres|act|ind",
+      "debug_pattern": "{{inflection of|grc|εἰμῐ́|t=to be||2|s|pres|act|ind}}"
+    },
+    {
+      "word_form": "στρογγυλη",
+      "lemma": "στρογγυλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|s",
+      "debug_pattern": "{{inflection of|grc|στρογγῠ́λος||f|nom|s}}"
+    },
+    {
+      "word_form": "ταμιασ",
+      "lemma": "ταμια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s|;|acc|p",
+      "debug_pattern": "{{inflection of|grc|τᾰμίᾱ||gen|s|;|acc|p}}"
+    },
+    {
+      "word_form": "λεξικον",
+      "lemma": "λεξικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s|;|n|nom//acc//voc|s",
+      "debug_pattern": "{{inflection of|grc|λεξῐκός||m|acc|s|;|n|nom//acc//voc|s}}"
+    },
+    {
+      "word_form": "ετυμον",
+      "lemma": "ετυμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s",
+      "debug_pattern": "{{inflection of|grc|ἔτῠμος||m|acc|s}}"
+    },
+    {
+      "word_form": "πεισαι",
+      "lemma": "πεισα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//voc|p",
+      "debug_pattern": "{{inflection of|grc|πεῖσα||nom//voc|p}}"
+    },
+    {
+      "word_form": "πεισαι",
+      "lemma": "πειθω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|2|s|aor|actv|impr|;|aor|actv|inf",
+      "debug_pattern": "{{inflection of|grc|πείθω||2|s|aor|actv|impr|;|aor|actv|inf}}"
+    },
+    {
+      "word_form": "μαριχουανασ",
+      "lemma": "μαριχουανα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|μαριχουάνα||gen|s}}"
+    },
+    {
+      "word_form": "βουνα",
+      "lemma": "βουνο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βουνό||nom|p}}"
+    },
+    {
+      "word_form": "βουνων",
+      "lemma": "βουνο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βουνό||gen|p}}"
+    },
+    {
+      "word_form": "αναστεναγμοι",
+      "lemma": "αναστεναγμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|αναστεναγμός||nom|p}}"
+    },
+    {
+      "word_form": "αναστεναγμου",
+      "lemma": "αναστεναγμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αναστεναγμός||gen|s}}"
+    },
+    {
+      "word_form": "αναστεναγμο",
+      "lemma": "αναστεναγμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|αναστεναγμός||acc|s}}"
+    },
+    {
+      "word_form": "αναστεναγμε",
+      "lemma": "αναστεναγμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|αναστεναγμός||voc|s}}"
+    },
+    {
+      "word_form": "αναστεναγμων",
+      "lemma": "αναστεναγμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|αναστεναγμός||gen|p}}"
+    },
+    {
+      "word_form": "αναστεναγμουσ",
+      "lemma": "αναστεναγμοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|αναστεναγμός||acc|p}}"
+    },
+    {
+      "word_form": "αγγελο",
+      "lemma": "αγγελοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|άγγελος||acc|s}}"
+    },
+    {
+      "word_form": "αγγελε",
+      "lemma": "αγγελοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|άγγελος||voc|s}}"
+    },
+    {
+      "word_form": "αγγελων",
+      "lemma": "αγγελοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|άγγελος||gen|p}}"
+    },
+    {
+      "word_form": "αγγελουσ",
+      "lemma": "αγγελοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|άγγελος||acc|p}}"
+    },
+    {
+      "word_form": "αυγου",
+      "lemma": "αυγο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|αυγό||gen|s}}"
+    },
+    {
+      "word_form": "προβληματοσ",
+      "lemma": "προβλημα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|πρόβλημα||gen|s}}"
+    },
+    {
+      "word_form": "προβληματων",
+      "lemma": "προβλημα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|πρόβλημα||gen|p}}"
+    },
+    {
+      "word_form": "νεκρα",
+      "lemma": "νεκροσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|f|nom|s",
+      "debug_pattern": "{{inflection of|grc|νεκρός||f|nom|s}}"
+    },
+    {
+      "word_form": "πατεροσ",
+      "lemma": "πατηρ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|grc|πᾰτήρ||gen|s}}"
+    },
+    {
+      "word_form": "ριζικον",
+      "lemma": "ριζικοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|m|acc|s",
+      "debug_pattern": "{{inflection of|grc|ῥιζικός||m|acc|s}}"
+    },
+    {
+      "word_form": "νυχτεριδεσ",
+      "lemma": "νυχτεριδα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|νυχτερίδα||nom|p}}"
+    },
+    {
+      "word_form": "νυχτεριδασ",
+      "lemma": "νυχτεριδα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|νυχτερίδα||gen|s}}"
+    },
+    {
+      "word_form": "νυχτεριδων",
+      "lemma": "νυχτεριδα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|νυχτερίδα||gen|p}}"
+    },
+    {
+      "word_form": "καλουσ",
+      "lemma": "καλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|m|p",
+      "debug_pattern": "{{inflection of|el|καλός||acc|m|p}}"
+    },
+    {
+      "word_form": "καλε",
+      "lemma": "καλοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|m|s",
+      "debug_pattern": "{{inflection of|el|καλός||voc|m|s}}"
+    },
+    {
+      "word_form": "βιβλια",
+      "lemma": "βιβλιο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|el|βιβλίο||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "βιβλια",
+      "lemma": "βιβλιον",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom//acc//voc|p",
+      "debug_pattern": "{{inflection of|grc|βιβλίον||nom//acc//voc|p}}"
+    },
+    {
+      "word_form": "βιβλιου",
+      "lemma": "βιβλιο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βιβλίο||gen|s}}"
+    },
+    {
+      "word_form": "βιβλιων",
+      "lemma": "βιβλιο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βιβλίο||gen|p}}"
+    },
+    {
+      "word_form": "βιβλιοθηκεσ",
+      "lemma": "βιβλιοθηκη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|βιβλιοθήκη||nom|p}}"
+    },
+    {
+      "word_form": "βιβλιοθηκησ",
+      "lemma": "βιβλιοθηκη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|βιβλιοθήκη||gen|s}}"
+    },
+    {
+      "word_form": "βιβλιοθηκων",
+      "lemma": "βιβλιοθηκη",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|βιβλιοθήκη||gen|p}}"
+    },
+    {
+      "word_form": "κουβερτεσ",
+      "lemma": "κουβερτα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κουβέρτα||nom|p}}"
+    },
+    {
+      "word_form": "κουβερτασ",
+      "lemma": "κουβερτα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κουβέρτα||gen|s}}"
+    },
+    {
+      "word_form": "κουβερτων",
+      "lemma": "κουβερτα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κουβέρτα||gen|p}}"
+    },
+    {
+      "word_form": "κρεβατια",
+      "lemma": "κρεβατι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|κρεβάτι||nom|p}}"
+    },
+    {
+      "word_form": "κρεβατιου",
+      "lemma": "κρεβατι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|κρεβάτι||gen|s}}"
+    },
+    {
+      "word_form": "κρεβατιων",
+      "lemma": "κρεβατι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|κρεβάτι||gen|p}}"
+    },
+    {
+      "word_form": "παραθυρα",
+      "lemma": "παραθυρο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|παράθυρο||nom|p}}"
+    },
+    {
+      "word_form": "παραθυρου",
+      "lemma": "παραθυρο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|παράθυρο||gen|s}}"
+    },
+    {
+      "word_form": "παραθυρων",
+      "lemma": "παραθυρο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|παράθυρο||gen|p}}"
+    },
+    {
+      "word_form": "θρησκειεσ",
+      "lemma": "θρησκεια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|θρησκεία||nom|p}}"
+    },
+    {
+      "word_form": "θρησκειασ",
+      "lemma": "θρησκεια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|θρησκεία||gen|s}}"
+    },
+    {
+      "word_form": "θρησκειων",
+      "lemma": "θρησκεια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|θρησκεία||gen|p}}"
+    },
+    {
+      "word_form": "λωτοι",
+      "lemma": "λωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|p",
+      "debug_pattern": "{{inflection of|el|λωτός||voc|p}}"
+    },
+    {
+      "word_form": "λωτου",
+      "lemma": "λωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|λωτός||gen|s}}"
+    },
+    {
+      "word_form": "λωτων",
+      "lemma": "λωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|λωτός||gen|p}}"
+    },
+    {
+      "word_form": "λωτο",
+      "lemma": "λωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|s",
+      "debug_pattern": "{{inflection of|el|λωτός||acc|s}}"
+    },
+    {
+      "word_form": "λωτουσ",
+      "lemma": "λωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|acc|p",
+      "debug_pattern": "{{inflection of|el|λωτός||acc|p}}"
+    },
+    {
+      "word_form": "λωτε",
+      "lemma": "λωτοσ",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|voc|s",
+      "debug_pattern": "{{inflection of|el|λωτός||voc|s}}"
+    },
+    {
+      "word_form": "φαινομαι",
+      "lemma": "φαινω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|1|s|pres|mp|indc",
+      "debug_pattern": "{{inflection of|grc|φαίνω||1|s|pres|mp|indc}}"
+    },
+    {
+      "word_form": "νερα",
+      "lemma": "νερο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|νερό||nom|p}}"
+    },
+    {
+      "word_form": "νερου",
+      "lemma": "νερο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|νερό||gen|s}}"
+    },
+    {
+      "word_form": "νερων",
+      "lemma": "νερο",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|νερό||gen|p}}"
+    },
+    {
+      "word_form": "ευαγγελιζομαι",
+      "lemma": "ευαγγελιζω",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|pres|midl|indc|1|s",
+      "debug_pattern": "{{inflection of|grc|εὐᾰγγελῐ́ζω||pres|midl|indc|1|s}}"
+    },
+    {
+      "word_form": "τραπεζιου",
+      "lemma": "τραπεζι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|τραπέζι||gen|s}}"
+    },
+    {
+      "word_form": "τραπεζιων",
+      "lemma": "τραπεζι",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|τραπέζι||gen|p}}"
+    },
+    {
+      "word_form": "τραπεζεσ",
+      "lemma": "τραπεζα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|τράπεζα||nom|p}}"
+    },
+    {
+      "word_form": "τραπεζασ",
+      "lemma": "τραπεζα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|τράπεζα||gen|s}}"
+    },
+    {
+      "word_form": "τραπεζων",
+      "lemma": "τραπεζα",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|τράπεζα||gen|p}}"
+    },
+    {
+      "word_form": "τραπεζαριεσ",
+      "lemma": "τραπεζαρια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|nom|p",
+      "debug_pattern": "{{inflection of|el|τραπεζαρία||nom|p}}"
+    },
+    {
+      "word_form": "τραπεζαριασ",
+      "lemma": "τραπεζαρια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|s",
+      "debug_pattern": "{{inflection of|el|τραπεζαρία||gen|s}}"
+    },
+    {
+      "word_form": "τραπεζαριων",
+      "lemma": "τραπεζαρια",
+      "confidence": 1.0,
+      "source": "wiktionary:inflection_of",
+      "tags": "|gen|p",
+      "debug_pattern": "{{inflection of|el|τραπεζαρία||gen|p}}"
+    }
+  ]
+}
