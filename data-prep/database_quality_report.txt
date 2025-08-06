@@ -1,10 +1,10 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-06T14:03:51.424360
+Generated: 2025-08-06T14:34:49.911422
 
-Total Authors: 103
-Total Works: 845
-Total Books: 1424
-Total Lines: 914,504
+Total Authors: 91
+Total Works: 788
+Total Books: 1340
+Total Lines: 864,300
 Dictionary Entries: 28,647
 Lemma Mappings: 1,016,668
 
@@ -82,9 +82,6 @@ Aeschylus / Seven Against Thebes - 1,060 lines
 Aeschylus / Seven Against Thebes translations: Herbert Weir Smyth 188 segments
 Aeschylus / Suppliant Maidens - 1,065 lines
 Aeschylus / Suppliant Maidens translations: Herbert Weir Smyth 195 segments
-
-[Agathemerus]
-Agathemerus / tlg001 - 146 lines
 
 [Andocides]
 Andocides / Against Alcibiades - 228 lines
@@ -414,12 +411,6 @@ Claudius Ptolemaeus / Tetrabiblos / Book 2 - 322 lines
 Claudius Ptolemaeus / Tetrabiblos / Book 3 - 386 lines
 Claudius Ptolemaeus / Tetrabiblos / Book 4 - 299 lines
 
-[Clemens Romanus (Clement of Rome)]
-Clemens Romanus (Clement of Rome) / The First Epistle of Clement to the Corinthians - 1,278 lines
-Clemens Romanus (Clement of Rome) / The First Epistle of Clement to the Corinthians translations: Kirsopp Lake 464 segments
-Clemens Romanus (Clement of Rome) / The Second Epistle of Clement to the Corinthians - 384 lines
-Clemens Romanus (Clement of Rome) / The Second Epistle of Clement to the Corinthians translations: Kirsopp Lake 138 segments
-
 [Clement of Alexandria]
 Clement of Alexandria / Exhortation to Endurance or To the Newly Baptized (Fragment 44) - 3 lines
 Clement of Alexandria / Protrepticus - 1,814 lines
@@ -576,10 +567,6 @@ Demosthenes / Unknown Pleader Against Evergus and Mnesibulus, About False Testim
 Demosthenes / Unknown Pleader Against Evergus and Mnesibulus, About False Testimony translations: Augustus Taber Murray 1 segments
 Demosthenes / Unknown Pleader Against Phaenippus, On an Exchange of Properties - 105 lines
 Demosthenes / Unknown Pleader Against Phaenippus, On an Exchange of Properties translations: Augustus Taber Murray 32 segments
-
-[Didache]
-Didache / The Didache, or Teaching of the Twelve Apostles - 326 lines
-Didache / The Didache, or Teaching of the Twelve Apostles translations: Kirsopp Lake 116 segments
 
 [Dinarchus]
 Dinarchus / Against Aristogiton - 133 lines
@@ -804,63 +791,6 @@ Galen / On the Natural Faculties translations: Arthur John Brock 15 segments
 [Greek Anthology]
 Greek Anthology / Greek Anthology - 4,406 lines
 
-[Hermas, 2nd cent.]
-Hermas, 2nd cent. / Hermas - 3,658 lines total
-Hermas, 2nd cent. / Hermas / Book 1 - 132 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 24 segments
-Hermas, 2nd cent. / Hermas / Book 2 - 130 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 23 segments
-Hermas, 2nd cent. / Hermas / Book 3 - 436 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 99 segments
-Hermas, 2nd cent. / Hermas / Book 4 - 100 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 26 segments
-Hermas, 2nd cent. / Hermas / Book 5 - 34 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 8 segments
-Hermas, 2nd cent. / Hermas / Book 6 - 6 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 3 segments
-Hermas, 2nd cent. / Hermas / Book 7 - 34 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 8 segments
-Hermas, 2nd cent. / Hermas / Book 8 - 38 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 6 segments
-Hermas, 2nd cent. / Hermas / Book 9 - 116 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 30 segments
-Hermas, 2nd cent. / Hermas / Book 10 - 70 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 17 segments
-Hermas, 2nd cent. / Hermas / Book 11 - 76 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 17 segments
-Hermas, 2nd cent. / Hermas / Book 12 - 40 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 6 segments
-Hermas, 2nd cent. / Hermas / Book 13 - 74 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 13 segments
-Hermas, 2nd cent. / Hermas / Book 14 - 44 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 13 segments
-Hermas, 2nd cent. / Hermas / Book 15 - 64 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 19 segments
-Hermas, 2nd cent. / Hermas / Book 16 - 98 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 22 segments
-Hermas, 2nd cent. / Hermas / Book 17 - 118 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 36 segments
-Hermas, 2nd cent. / Hermas / Book 18 - 42 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 12 segments
-Hermas, 2nd cent. / Hermas / Book 19 - 80 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 11 segments
-Hermas, 2nd cent. / Hermas / Book 20 - 16 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 4 segments
-Hermas, 2nd cent. / Hermas / Book 21 - 36 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 9 segments
-Hermas, 2nd cent. / Hermas / Book 22 - 222 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 54 segments
-Hermas, 2nd cent. / Hermas / Book 23 - 152 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 35 segments
-Hermas, 2nd cent. / Hermas / Book 24 - 58 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 8 segments
-Hermas, 2nd cent. / Hermas / Book 25 - 384 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 88 segments
-Hermas, 2nd cent. / Hermas / Book 26 - 962 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 229 segments
-Hermas, 2nd cent. / Hermas / Book 27 - 96 lines
-Hermas, 2nd cent. / Hermas translations: Kirsopp Lake 21 segments
-
 [Herodotus]
 Herodotus / Histories - 20,456 lines total
 Herodotus / Histories / Book 1 - 3,152 lines
@@ -928,8 +858,6 @@ Hippocrates / The Epidemics / Book 1 - 534 lines
 Hippocrates / The Epidemics translations: Francis Adams 4 segments, William Henry Samuel Jones 4 segments
 Hippocrates / The Epidemics / Book 3 - 585 lines
 Hippocrates / The Epidemics translations: Francis Adams 3 segments, William Henry Samuel Jones 3 segments
-Hippocrates / The Law - 29 lines
-Hippocrates / The Law translations: Francis Adams 5 segments
 
 [Homer]
 Homer / Epigrams - 110 lines
@@ -1136,10 +1064,6 @@ Hyperides / In Defence of Euxenippus - 170 lines
 Hyperides / In Defence of Euxenippus translations: J. O. Burtt 41 segments
 Hyperides / In Defence of Lycophron - 151 lines
 Hyperides / In Defence of Lycophron translations: J. O. Burtt 20 segments
-
-[Ignatius of Antioch]
-Ignatius of Antioch / The Epistles of Saint Ignatius - 1,090 lines
-Ignatius of Antioch / The Epistles of Saint Ignatius translations: Kirsopp Lake 291 segments
 
 [Isaeus]
 Isaeus / On Behalf of Euphiletus - 70 lines
@@ -1645,10 +1569,6 @@ Marcus Aurelius / Ad Se Ipsum / Book 10 - 384 lines
 Marcus Aurelius / Ad Se Ipsum / Book 11 - 330 lines
 Marcus Aurelius / Ad Se Ipsum / Book 12 - 318 lines
 
-[Martyrium Polycarpi]
-Martyrium Polycarpi / The Martydom of St. Polycarp, Bishop of Smyrna - 296 lines
-Martyrium Polycarpi / The Martydom of St. Polycarp, Bishop of Smyrna translations: Kirsopp Lake 80 segments
-
 [Moschus]
 Moschus / Epitaphius Bios - 128 lines
 Moschus / Eros Drapeta - 31 lines
@@ -1762,84 +1682,6 @@ Nonnus of Panopolis / Dionysiaca / Book 45 - 359 lines
 Nonnus of Panopolis / Dionysiaca / Book 46 - 370 lines
 Nonnus of Panopolis / Dionysiaca / Book 47 - 742 lines
 Nonnus of Panopolis / Dionysiaca / Book 48 - 978 lines
-
-[Old Testament]
-Old Testament / Amos - 264 lines
-Old Testament / Amos translations: Rainbow Missions, Inc. 9 segments
-Old Testament / Canticle - 243 lines
-Old Testament / Canticle translations: Rainbow Missions, Inc. 8 segments
-Old Testament / Daniel - 597 lines
-Old Testament / Daniel translations: Rainbow Missions, Inc. 12 segments
-Old Testament / Deuteronomy - 1,356 lines
-Old Testament / Deuteronomy translations: Rainbow Missions, Inc. 34 segments
-Old Testament / Ecclesiastes - 401 lines
-Old Testament / Ecclesiastes translations: Rainbow Missions, Inc. 12 segments
-Old Testament / Esther - 252 lines
-Old Testament / Esther translations: Rainbow Missions, Inc. 10 segments
-Old Testament / Exodus - 1,800 lines
-Old Testament / Exodus translations: Rainbow Missions, Inc. 40 segments
-Old Testament / Ezekiel - 2,105 lines
-Old Testament / Ezekiel translations: Rainbow Missions, Inc. 48 segments
-Old Testament / Genesis - 2,494 lines
-Old Testament / Genesis translations: Rainbow Missions, Inc. 50 segments
-Old Testament / Habakkuk - 116 lines
-Old Testament / Habakkuk translations: Rainbow Missions, Inc. 3 segments
-Old Testament / Haggai - 64 lines
-Old Testament / Haggai translations: Rainbow Missions, Inc. 2 segments
-Old Testament / Hosea - 451 lines
-Old Testament / Hosea translations: Rainbow Missions, Inc. 14 segments
-Old Testament / I Chronicles - 1,301 lines
-Old Testament / I Chronicles translations: Rainbow Missions, Inc. 29 segments
-Old Testament / I Kings - 1,259 lines
-Old Testament / I Kings translations: Rainbow Missions, Inc. 22 segments
-Old Testament / I Samuel - 1,429 lines
-Old Testament / I Samuel translations: Rainbow Missions, Inc. 31 segments
-Old Testament / II Chronicles - 1,225 lines
-Old Testament / II Chronicles translations: Rainbow Missions, Inc. 36 segments
-Old Testament / II Kings - 1,200 lines
-Old Testament / II Kings translations: Rainbow Missions, Inc. 25 segments
-Old Testament / II Samuel - 1,208 lines
-Old Testament / II Samuel translations: Rainbow Missions, Inc. 24 segments
-Old Testament / Isaiah - 2,412 lines
-Old Testament / Isaiah translations: Rainbow Missions, Inc. 66 segments
-Old Testament / Jeremiah - 2,331 lines
-Old Testament / Jeremiah translations: Rainbow Missions, Inc. 52 segments
-Old Testament / Job - 1,624 lines
-Old Testament / Job translations: Rainbow Missions, Inc. 42 segments
-Old Testament / Joel - 151 lines
-Old Testament / Joel translations: Rainbow Missions, Inc. 3 segments
-Old Testament / Jonah - 91 lines
-Old Testament / Jonah translations: Rainbow Missions, Inc. 4 segments
-Old Testament / Joshua - 977 lines
-Old Testament / Joshua translations: Rainbow Missions, Inc. 24 segments
-Old Testament / Judges - 1,020 lines
-Old Testament / Judges translations: Rainbow Missions, Inc. 21 segments
-Old Testament / Lamentations - 268 lines
-Old Testament / Lamentations translations: Rainbow Missions, Inc. 5 segments
-Old Testament / Leviticus - 1,262 lines
-Old Testament / Leviticus translations: Rainbow Missions, Inc. 27 segments
-Old Testament / Malachi - 123 lines
-Old Testament / Malachi translations: Rainbow Missions, Inc. 4 segments
-Old Testament / Micah - 220 lines
-Old Testament / Micah translations: Rainbow Missions, Inc. 7 segments
-Old Testament / Nahum - 107 lines
-Old Testament / Nahum translations: Rainbow Missions, Inc. 3 segments
-Old Testament / Nehemiah - 366 lines
-Old Testament / Nehemiah translations: Rainbow Missions, Inc. 23 segments
-Old Testament / Numbers - 1,738 lines
-Old Testament / Numbers translations: Rainbow Missions, Inc. 36 segments
-Old Testament / Obadiah - 42 lines
-Old Testament / Obadiah translations: Rainbow Missions, Inc. 1 segments
-Old Testament / Proverbs - 1,306 lines
-Old Testament / Proverbs translations: Rainbow Missions, Inc. 31 segments
-Old Testament / Psalms - 4,162 lines
-Old Testament / Psalms translations: Rainbow Missions, Inc. 150 segments
-Old Testament / Ruth - 147 lines
-Old Testament / Ruth translations: Rainbow Missions, Inc. 4 segments
-Old Testament / Zechariah - 392 lines
-Old Testament / Zechariah translations: Rainbow Missions, Inc. 14 segments
-Old Testament / Zephaniah - 107 lines
-Old Testament / Zephaniah translations: Rainbow Missions, Inc. 3 segments
 
 [Onasander]
 Onasander / Strategicus - 976 lines
@@ -2582,10 +2424,6 @@ Polybius / The Histories translations: Evelyn S. Shuckburgh 11 segments
 Polybius / The Histories / Book 39 - 140 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 18 segments
 
-[Polycarp]
-Polycarp / The Epistle to the Philippians of Saint Polycarp - 156 lines
-Polycarp / The Epistle to the Philippians of Saint Polycarp translations: Kirsopp Lake 51 segments
-
 [Procopius]
 Procopius / De Bellis - 21,058 lines total
 Procopius / De Bellis / Book 1 - 2,446 lines
@@ -2597,20 +2435,6 @@ Procopius / De Bellis / Book 6 - 2,642 lines
 Procopius / De Bellis / Book 7 - 3,250 lines
 Procopius / De Bellis / Book 8 - 3,122 lines
 Procopius / Historia Arcana - 2,810 lines
-
-[Pseudo-Justinus Martyr]
-Pseudo-Justinus Martyr / The Epistle to Diogentus - 294 lines
-Pseudo-Justinus Martyr / The Epistle to Diogentus translations: Kirsopp Lake 112 segments
-
-[Pseudo-Lucian]
-Pseudo-Lucian / Demosthenes: an Encomium - 388 lines
-Pseudo-Lucian / Demosthenes: an Encomium translations: Henry Watson Fowler 50 segments
-Pseudo-Lucian / Loukios, or the Ass - 448 lines
-Pseudo-Lucian / Loukios, or the Ass translations: Emily James Smith 48 segments
-Pseudo-Lucian / The Cynic - 204 lines
-Pseudo-Lucian / The Cynic translations: Henry Watson Fowler 20 segments
-Pseudo-Lucian / The Halcyon - 60 lines
-Pseudo-Lucian / The Halcyon translations: Emily James Smith 8 segments
 
 [Pseudo-Plutarch]
 Pseudo-Plutarch / Concerning music - 441 lines
@@ -2626,8 +2450,6 @@ Pseudo-Plutarch / Of Those Sentiments Concerning Nature with which Philosophers 
 Pseudo-Plutarch / Of Those Sentiments Concerning Nature with which Philosophers were Delighted translations: John Dowell 24 segments
 Pseudo-Plutarch / Of Those Sentiments Concerning Nature with which Philosophers were Delighted / Book 5 - 193 lines
 Pseudo-Plutarch / Of Those Sentiments Concerning Nature with which Philosophers were Delighted translations: John Dowell 30 segments
-Pseudo-Plutarch / Of the Names of Rivers and Mountains, and of Such Things as are to be Found Therein - 432 lines
-Pseudo-Plutarch / Of the Names of Rivers and Mountains, and of Such Things as are to be Found Therein translations: R. White 25 segments
 
 [Quintus Smyrnaeus]
 Quintus Smyrnaeus / Fall of Troy - 8,804 lines total
@@ -2815,11 +2637,3 @@ Xenophon of Ephesus / Ephesiaca / Book 2 - 418 lines
 Xenophon of Ephesus / Ephesiaca / Book 3 - 414 lines
 Xenophon of Ephesus / Ephesiaca / Book 4 - 166 lines
 Xenophon of Ephesus / Ephesiaca / Book 5 - 566 lines
-
-[Zonaras]
-Zonaras / Epitome historiarum (Vol. 1) - 4,404 lines total
-Zonaras / Epitome historiarum (Vol. 1) / Book 1 - 1,089 lines
-Zonaras / Epitome historiarum (Vol. 1) / Book 2 - 912 lines
-Zonaras / Epitome historiarum (Vol. 1) / Book 3 - 849 lines
-Zonaras / Epitome historiarum (Vol. 1) / Book 4 - 761 lines
-Zonaras / Epitome historiarum (Vol. 1) / Book 5 - 793 lines

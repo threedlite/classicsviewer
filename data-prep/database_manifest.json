@@ -1,19 +1,19 @@
 {
-  "generated_at": "2025-08-06T14:03:51.161284",
+  "generated_at": "2025-08-06T14:34:49.653356",
   "database_version": "2.0",
   "statistics": {
-    "total_authors": 103,
-    "total_works": 845,
-    "total_books": 1424,
-    "total_lines": 914504,
-    "total_translation_segments": 165758,
+    "total_authors": 91,
+    "total_works": 788,
+    "total_books": 1340,
+    "total_lines": 864300,
+    "total_translation_segments": 162374,
     "total_dictionary_entries": 28647,
     "total_lemma_mappings": 1016668,
     "dictionary_by_language": {
       "greek": 28647
     },
-    "works_with_translations": 644,
-    "translation_coverage_percent": 76.2
+    "works_with_translations": 592,
+    "translation_coverage_percent": 75.1
   },
   "authors": [
     {
@@ -466,31 +466,6 @@
       ]
     },
     {
-      "id": "tlg0090",
-      "name": "Agathemerus",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 1,
-      "total_lines": 146,
-      "works": [
-        {
-          "id": "tlg0090.tlg001",
-          "title": "Geographiae informatio",
-          "title_english": "tlg001",
-          "book_count": 1,
-          "total_lines": 146,
-          "translator_count": 0,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 146
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "tlg0027",
       "name": "Andocides",
       "language": "greek",
@@ -754,19 +729,10 @@
       "id": "tlg0551",
       "name": "Appianus of Alexandria",
       "language": "greek",
-      "work_count": 15,
+      "work_count": 14,
       "total_books": 18,
       "total_lines": 19652,
       "works": [
-        {
-          "id": "tlg0551.tlg001",
-          "title": "Proemium",
-          "title_english": "Preface",
-          "book_count": 0,
-          "total_lines": 0,
-          "translator_count": 0,
-          "books": []
-        },
         {
           "id": "tlg0551.tlg002",
           "title": "Kings",
@@ -2884,46 +2850,6 @@
       ]
     },
     {
-      "id": "tlg1271",
-      "name": "Clemens Romanus (Clement of Rome)",
-      "language": "greek",
-      "work_count": 2,
-      "total_books": 2,
-      "total_lines": 1662,
-      "works": [
-        {
-          "id": "tlg1271.tlg001",
-          "title": "The First Epistle of Clement to the Corinthians",
-          "title_english": "The First Epistle of Clement to the Corinthians",
-          "book_count": 1,
-          "total_lines": 592992,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1278
-            }
-          ]
-        },
-        {
-          "id": "tlg1271.tlg002",
-          "title": "The Second Epistle of Clement to the Corinthians",
-          "title_english": "The Second Epistle of Clement to the Corinthians",
-          "book_count": 1,
-          "total_lines": 52992,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 384
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "tlg0555",
       "name": "Clement of Alexandria",
       "language": "greek",
@@ -4079,31 +4005,6 @@
       ]
     },
     {
-      "id": "tlg1311",
-      "name": "Didache",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 1,
-      "total_lines": 326,
-      "works": [
-        {
-          "id": "tlg1311.tlg001",
-          "title": "The Didache, or Teaching of the Twelve Apostles",
-          "title_english": "The Didache, or Teaching of the Twelve Apostles",
-          "book_count": 1,
-          "total_lines": 37816,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 326
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "tlg0029",
       "name": "Dinarchus",
       "language": "greek",
@@ -4607,7 +4508,7 @@
       "id": "tlg0557",
       "name": "Epictetus",
       "language": "greek",
-      "work_count": 6,
+      "work_count": 5,
       "total_books": 6,
       "total_lines": 14408,
       "works": [
@@ -4663,15 +4564,6 @@
         },
         {
           "id": "tlg0557.tlg003",
-          "title": "Fragments",
-          "title_english": "Fragments",
-          "book_count": 0,
-          "total_lines": 0,
-          "translator_count": 0,
-          "books": []
-        },
-        {
-          "id": "tlg0557.tlg003a",
           "title": "Fragments",
           "title_english": "Fragments",
           "book_count": 0,
@@ -5363,161 +5255,6 @@
       ]
     },
     {
-      "id": "tlg1419",
-      "name": "Hermas, 2nd cent.",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 27,
-      "total_lines": 3658,
-      "works": [
-        {
-          "id": "tlg1419.tlg001",
-          "title": "Hermas",
-          "title_english": "Hermas",
-          "book_count": 27,
-          "total_lines": 343718,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Book 1",
-              "line_count": 132
-            },
-            {
-              "number": 2,
-              "label": "Book 2",
-              "line_count": 130
-            },
-            {
-              "number": 3,
-              "label": "Book 3",
-              "line_count": 436
-            },
-            {
-              "number": 4,
-              "label": "Book 4",
-              "line_count": 100
-            },
-            {
-              "number": 5,
-              "label": "Book 5",
-              "line_count": 34
-            },
-            {
-              "number": 6,
-              "label": "Book 6",
-              "line_count": 6
-            },
-            {
-              "number": 7,
-              "label": "Book 7",
-              "line_count": 34
-            },
-            {
-              "number": 8,
-              "label": "Book 8",
-              "line_count": 38
-            },
-            {
-              "number": 9,
-              "label": "Book 9",
-              "line_count": 116
-            },
-            {
-              "number": 10,
-              "label": "Book 10",
-              "line_count": 70
-            },
-            {
-              "number": 11,
-              "label": "Book 11",
-              "line_count": 76
-            },
-            {
-              "number": 12,
-              "label": "Book 12",
-              "line_count": 40
-            },
-            {
-              "number": 13,
-              "label": "Book 13",
-              "line_count": 74
-            },
-            {
-              "number": 14,
-              "label": "Book 14",
-              "line_count": 44
-            },
-            {
-              "number": 15,
-              "label": "Book 15",
-              "line_count": 64
-            },
-            {
-              "number": 16,
-              "label": "Book 16",
-              "line_count": 98
-            },
-            {
-              "number": 17,
-              "label": "Book 17",
-              "line_count": 118
-            },
-            {
-              "number": 18,
-              "label": "Book 18",
-              "line_count": 42
-            },
-            {
-              "number": 19,
-              "label": "Book 19",
-              "line_count": 80
-            },
-            {
-              "number": 20,
-              "label": "Book 20",
-              "line_count": 16
-            },
-            {
-              "number": 21,
-              "label": "Book 21",
-              "line_count": 36
-            },
-            {
-              "number": 22,
-              "label": "Book 22",
-              "line_count": 222
-            },
-            {
-              "number": 23,
-              "label": "Book 23",
-              "line_count": 152
-            },
-            {
-              "number": 24,
-              "label": "Book 24",
-              "line_count": 58
-            },
-            {
-              "number": 25,
-              "label": "Book 25",
-              "line_count": 384
-            },
-            {
-              "number": 26,
-              "label": "Book 26",
-              "line_count": 962
-            },
-            {
-              "number": 27,
-              "label": "Book 27",
-              "line_count": 96
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "tlg0016",
       "name": "Herodotus",
       "language": "greek",
@@ -5641,9 +5378,9 @@
       "id": "tlg0627",
       "name": "Hippocrates",
       "language": "greek",
-      "work_count": 20,
-      "total_books": 21,
-      "total_lines": 7057,
+      "work_count": 19,
+      "total_books": 20,
+      "total_lines": 7028,
       "works": [
         {
           "id": "tlg0627.tlg001",
@@ -5842,21 +5579,6 @@
               "number": 1,
               "label": "Book 1",
               "line_count": 1
-            }
-          ]
-        },
-        {
-          "id": "tlg0627.tlg014",
-          "title": "Lex",
-          "title_english": "The Law",
-          "book_count": 1,
-          "total_lines": 145,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 29
             }
           ]
         },
@@ -6837,31 +6559,6 @@
               "number": 1,
               "label": "Complete Text",
               "line_count": 190
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg1443",
-      "name": "Ignatius of Antioch",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 1,
-      "total_lines": 1090,
-      "works": [
-        {
-          "id": "tlg1443.tlg001",
-          "title": "The Epistles of Saint Ignatius",
-          "title_english": "The Epistles of Saint Ignatius",
-          "book_count": 1,
-          "total_lines": 317190,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1090
             }
           ]
         }
@@ -9902,31 +9599,6 @@
       ]
     },
     {
-      "id": "tlg1484",
-      "name": "Martyrium Polycarpi",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 1,
-      "total_lines": 296,
-      "works": [
-        {
-          "id": "tlg1484.tlg001",
-          "title": "Martyrium Polycarpi",
-          "title_english": "The Martydom of St. Polycarp, Bishop of Smyrna",
-          "book_count": 1,
-          "total_lines": 23680,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 296
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "tlg0035",
       "name": "Moschus",
       "language": "greek",
@@ -10681,586 +10353,6 @@
               "number": 48,
               "label": "Book 48",
               "line_count": 978
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg0527",
-      "name": "Old Testament",
-      "language": "greek",
-      "work_count": 38,
-      "total_books": 38,
-      "total_lines": 36611,
-      "works": [
-        {
-          "id": "tlg0527.tlg001",
-          "title": "Genesis",
-          "title_english": "Genesis",
-          "book_count": 1,
-          "total_lines": 124700,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 2494
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg002",
-          "title": "Exodus",
-          "title_english": "Exodus",
-          "book_count": 1,
-          "total_lines": 72000,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1800
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg003",
-          "title": "Leviticus",
-          "title_english": "Leviticus",
-          "book_count": 1,
-          "total_lines": 34074,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1262
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg004",
-          "title": "Numbers",
-          "title_english": "Numbers",
-          "book_count": 1,
-          "total_lines": 62568,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1738
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg005",
-          "title": "Deuteronomy",
-          "title_english": "Deuteronomy",
-          "book_count": 1,
-          "total_lines": 46104,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1356
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg006",
-          "title": "Joshua",
-          "title_english": "Joshua",
-          "book_count": 1,
-          "total_lines": 23448,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 977
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg008",
-          "title": "Judges",
-          "title_english": "Judges",
-          "book_count": 1,
-          "total_lines": 21420,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1020
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg010",
-          "title": "Ruth",
-          "title_english": "Ruth",
-          "book_count": 1,
-          "total_lines": 588,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 147
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg011",
-          "title": "I Samuel",
-          "title_english": "I Samuel",
-          "book_count": 1,
-          "total_lines": 44299,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1429
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg012",
-          "title": "II Samuel",
-          "title_english": "II Samuel",
-          "book_count": 1,
-          "total_lines": 28992,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1208
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg013",
-          "title": "I Kings",
-          "title_english": "I Kings",
-          "book_count": 1,
-          "total_lines": 27698,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1259
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg014",
-          "title": "II Kings",
-          "title_english": "II Kings",
-          "book_count": 1,
-          "total_lines": 30000,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1200
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg015",
-          "title": "I Chronicles",
-          "title_english": "I Chronicles",
-          "book_count": 1,
-          "total_lines": 37729,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1301
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg016",
-          "title": "II Chronicles",
-          "title_english": "II Chronicles",
-          "book_count": 1,
-          "total_lines": 44100,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1225
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg018",
-          "title": "Nehemiah",
-          "title_english": "Nehemiah",
-          "book_count": 1,
-          "total_lines": 8418,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 366
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg019",
-          "title": "Esther",
-          "title_english": "Esther",
-          "book_count": 1,
-          "total_lines": 2520,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 252
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg027",
-          "title": "Psalms",
-          "title_english": "Psalms",
-          "book_count": 1,
-          "total_lines": 624300,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 4162
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg029",
-          "title": "Proverbs",
-          "title_english": "Proverbs",
-          "book_count": 1,
-          "total_lines": 40486,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1306
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg030",
-          "title": "Ecclesiastes",
-          "title_english": "Ecclesiastes",
-          "book_count": 1,
-          "total_lines": 4812,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 401
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg031",
-          "title": "Canticle",
-          "title_english": "Canticle",
-          "book_count": 1,
-          "total_lines": 1944,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 243
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg032",
-          "title": "Job",
-          "title_english": "Job",
-          "book_count": 1,
-          "total_lines": 68208,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 1624
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg036",
-          "title": "Hosea",
-          "title_english": "Hosea",
-          "book_count": 1,
-          "total_lines": 6314,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 451
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg037",
-          "title": "Amos",
-          "title_english": "Amos",
-          "book_count": 1,
-          "total_lines": 2376,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 264
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg038",
-          "title": "Micah",
-          "title_english": "Micah",
-          "book_count": 1,
-          "total_lines": 1540,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 220
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg039",
-          "title": "Joel",
-          "title_english": "Joel",
-          "book_count": 1,
-          "total_lines": 453,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 151
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg040",
-          "title": "Obadiah",
-          "title_english": "Obadiah",
-          "book_count": 1,
-          "total_lines": 42,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 42
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg041",
-          "title": "Jonah",
-          "title_english": "Jonah",
-          "book_count": 1,
-          "total_lines": 364,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 91
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg042",
-          "title": "Nahum",
-          "title_english": "Nahum",
-          "book_count": 1,
-          "total_lines": 321,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 107
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg043",
-          "title": "Habakkuk",
-          "title_english": "Habakkuk",
-          "book_count": 1,
-          "total_lines": 348,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 116
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg044",
-          "title": "Zephaniah",
-          "title_english": "Zephaniah",
-          "book_count": 1,
-          "total_lines": 321,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 107
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg045",
-          "title": "Haggai",
-          "title_english": "Haggai",
-          "book_count": 1,
-          "total_lines": 128,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 64
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg046",
-          "title": "Zechariah",
-          "title_english": "Zechariah",
-          "book_count": 1,
-          "total_lines": 5488,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 392
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg047",
-          "title": "Malachi",
-          "title_english": "Malachi",
-          "book_count": 1,
-          "total_lines": 492,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 123
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg048",
-          "title": "Isaiah",
-          "title_english": "Isaiah",
-          "book_count": 1,
-          "total_lines": 159192,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 2412
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg049",
-          "title": "Jeremiah",
-          "title_english": "Jeremiah",
-          "book_count": 1,
-          "total_lines": 121212,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 2331
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg051",
-          "title": "Lamentations",
-          "title_english": "Lamentations",
-          "book_count": 1,
-          "total_lines": 1340,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 268
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg053",
-          "title": "Ezekiel",
-          "title_english": "Ezekiel",
-          "book_count": 1,
-          "total_lines": 101040,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 2105
-            }
-          ]
-        },
-        {
-          "id": "tlg0527.tlg056",
-          "title": "Daniel",
-          "title_english": "Daniel",
-          "book_count": 1,
-          "total_lines": 7164,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 597
             }
           ]
         }
@@ -14795,50 +13887,6 @@
       ]
     },
     {
-      "id": "tlg1622",
-      "name": "Polycarp",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 1,
-      "total_lines": 156,
-      "works": [
-        {
-          "id": "tlg1622.tlg001",
-          "title": "Epistula ad Philippenses ",
-          "title_english": "The Epistle to the Philippians of Saint Polycarp",
-          "book_count": 1,
-          "total_lines": 7956,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 156
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg4036",
-      "name": "Proclus",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 0,
-      "total_lines": 0,
-      "works": [
-        {
-          "id": "tlg4036.tlg023",
-          "title": "Chrestomathy",
-          "title_english": "Chrestomathy",
-          "book_count": 0,
-          "total_lines": 0,
-          "translator_count": 0,
-          "books": []
-        }
-      ]
-    },
-    {
       "id": "tlg4029",
       "name": "Procopius",
       "language": "greek",
@@ -14914,123 +13962,13 @@
       ]
     },
     {
-      "id": "tlg0646",
-      "name": "Pseudo-Justinus Martyr",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 1,
-      "total_lines": 294,
-      "works": [
-        {
-          "id": "tlg0646.tlg004",
-          "title": "Epistula ad Diognetum",
-          "title_english": "The Epistle to Diogentus",
-          "book_count": 1,
-          "total_lines": 32928,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 294
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg0061",
-      "name": "Pseudo-Lucian",
-      "language": "greek",
-      "work_count": 4,
-      "total_books": 4,
-      "total_lines": 1100,
-      "works": [
-        {
-          "id": "tlg0061.tlg001",
-          "title": "Asinus",
-          "title_english": "Loukios, or the Ass",
-          "book_count": 1,
-          "total_lines": 21504,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 448
-            }
-          ]
-        },
-        {
-          "id": "tlg0061.tlg003",
-          "title": "Demosthenis encomium",
-          "title_english": "Demosthenes: an Encomium",
-          "book_count": 1,
-          "total_lines": 19400,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 388
-            }
-          ]
-        },
-        {
-          "id": "tlg0061.tlg004",
-          "title": "Halcyon",
-          "title_english": "The Halcyon",
-          "book_count": 1,
-          "total_lines": 480,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 60
-            }
-          ]
-        },
-        {
-          "id": "tlg0061.tlg006",
-          "title": "Cynicus",
-          "title_english": "The Cynic",
-          "book_count": 1,
-          "total_lines": 4080,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 204
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "tlg0094",
       "name": "Pseudo-Plutarch",
       "language": "greek",
-      "work_count": 3,
-      "total_books": 7,
-      "total_lines": 1884,
+      "work_count": 2,
+      "total_books": 6,
+      "total_lines": 1452,
       "works": [
-        {
-          "id": "tlg0094.tlg001",
-          "title": "De Fluviis",
-          "title_english": "Of the Names of Rivers and Mountains, and of Such Things as are to be Found Therein",
-          "book_count": 1,
-          "total_lines": 10800,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Complete Text",
-              "line_count": 432
-            }
-          ]
-        },
         {
           "id": "tlg0094.tlg002",
           "title": "De musica",
@@ -15928,51 +14866,6 @@
               "number": 5,
               "label": "Book 5",
               "line_count": 566
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg3135",
-      "name": "Zonaras",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 5,
-      "total_lines": 4404,
-      "works": [
-        {
-          "id": "tlg3135.tlg001",
-          "title": "Epitome historiarum (Vol. 1)",
-          "title_english": "Epitome historiarum (Vol. 1)",
-          "book_count": 5,
-          "total_lines": 4404,
-          "translator_count": 0,
-          "books": [
-            {
-              "number": 1,
-              "label": "Book 1",
-              "line_count": 1089
-            },
-            {
-              "number": 2,
-              "label": "Book 2",
-              "line_count": 912
-            },
-            {
-              "number": 3,
-              "label": "Book 3",
-              "line_count": 849
-            },
-            {
-              "number": 4,
-              "label": "Book 4",
-              "line_count": 761
-            },
-            {
-              "number": 5,
-              "label": "Book 5",
-              "line_count": 793
             }
           ]
         }

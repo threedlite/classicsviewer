@@ -664,7 +664,7 @@ def get_text_content(elem):
     text_parts = []
     
     # Skip editorial elements entirely
-    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'add', 'del', 'corr', 'sic', 'supplied', 'gap'}
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl' }
     tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
     
     if tag_name in excluded_tags:
@@ -1707,11 +1707,14 @@ def process_perseus_author(author_dir, language, cursor):
         except:
             pass
     
+    
     print(f"\nProcessing author: {author_name} ({author_id})")
     
     # Insert author
     cursor.execute("INSERT OR IGNORE INTO authors VALUES (?, ?, ?, ?, ?)",
                    (author_id, author_name, None, language, 0))
+    
+    works_processed = 0
     
     # Process each work
     for work_dir in author_dir.iterdir():
@@ -1756,9 +1759,31 @@ def process_perseus_author(author_dir, language, cursor):
         if not work_info.get('title_english') and title_english in latin_to_english:
             title_english = latin_to_english[title_english]
         
+        # Find text files first - before processing anything
+        text_files = list(work_dir.glob("*.xml"))
+        text_files = [f for f in text_files if not f.name.startswith('__')]
+        
+        if not text_files:
+            print(f"  Skipping work: {title_english} ({work_id}) - no text files found")
+            continue
+        
+        # Check if we have a suitable text file for this language
+        text_file = None
+        for f in text_files:
+            if 'perseus' in f.name and (
+                ('grc' in f.name and language == 'greek') or 
+                ('lat' in f.name and language == 'latin')
+            ):
+                text_file = f
+                break
+        
+        if not text_file:
+            print(f"  Skipping work: {title_english} ({work_id}) - no suitable {language} text file found")
+            continue
+        
         print(f"  Processing work: {title_english} ({work_id})")
         
-        # Insert work
+        # Insert work (only if we have suitable text files)
         cursor.execute("""
             INSERT OR IGNORE INTO works 
             (id, author_id, title, title_alt, title_english, type, urn, description)
@@ -1774,27 +1799,7 @@ def process_perseus_author(author_dir, language, cursor):
             f"{title_english} by {author_name}"
         ))
         
-        # Find text files
-        text_files = list(work_dir.glob("*.xml"))
-        text_files = [f for f in text_files if not f.name.startswith('__')]
-        
-        if not text_files:
-            print(f"    Warning: No text files found")
-            continue
-        
-        # Use the first suitable text file (prefer perseus editions)
-        text_file = None
-        for f in text_files:
-            if 'perseus' in f.name and (
-                ('grc' in f.name and language == 'greek') or 
-                ('lat' in f.name and language == 'latin')
-            ):
-                text_file = f
-                break
-        
-        if not text_file:
-            text_file = text_files[0]
-        
+        works_processed += 1
         print(f"    Reading {text_file.name}...")
         
         # Parse the text
@@ -1802,6 +1807,11 @@ def process_perseus_author(author_dir, language, cursor):
         
         # Process translations for this work
         process_translations(work_dir, work_id, cursor)
+    
+    # If no works were processed, remove the author
+    if works_processed == 0:
+        print(f"    No suitable works found, removing author: {author_name} ({author_id})")
+        cursor.execute("DELETE FROM authors WHERE id = ?", (author_id,))
 
 def generate_manifest(cursor):
     """Generate a manifest file with database contents"""
