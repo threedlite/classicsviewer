@@ -1,0 +1,502 @@
+{
+  "tlg0001": {
+    "name": "Apollonius Rhodius",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0003": {
+    "name": "Thucydides",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0004": {
+    "name": "Diogenes Laertius",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0005": {
+    "name": "Theocritus",
+    "works": 2,
+    "has_translations": false
+  },
+  "tlg0006": {
+    "name": "Euripides",
+    "works": 19,
+    "has_translations": true
+  },
+  "tlg0007": {
+    "name": "Plutarch",
+    "works": 143,
+    "has_translations": true
+  },
+  "tlg0008": {
+    "name": "Athenaeus of Naucratis",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0010": {
+    "name": "Isocrates",
+    "works": 30,
+    "has_translations": true
+  },
+  "tlg0011": {
+    "name": "Sophocles",
+    "works": 8,
+    "has_translations": true
+  },
+  "tlg0012": {
+    "name": "Homer",
+    "works": 3,
+    "has_translations": true
+  },
+  "tlg0013": {
+    "name": "Homeric Hymns",
+    "works": 33,
+    "has_translations": true
+  },
+  "tlg0014": {
+    "name": "Demosthenes",
+    "works": 63,
+    "has_translations": true
+  },
+  "tlg0016": {
+    "name": "Herodotus",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0017": {
+    "name": "Isaeus",
+    "works": 12,
+    "has_translations": true
+  },
+  "tlg0019": {
+    "name": "Aristophanes",
+    "works": 11,
+    "has_translations": true
+  },
+  "tlg0020": {
+    "name": "Hesiod",
+    "works": 3,
+    "has_translations": true
+  },
+  "tlg0023": {
+    "name": "Oppian",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0024": {
+    "name": "Oppian of Apamea",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0026": {
+    "name": "Aeschines",
+    "works": 3,
+    "has_translations": true
+  },
+  "tlg0027": {
+    "name": "Andocides",
+    "works": 4,
+    "has_translations": true
+  },
+  "tlg0028": {
+    "name": "Antiphon",
+    "works": 6,
+    "has_translations": true
+  },
+  "tlg0029": {
+    "name": "Dinarchus",
+    "works": 3,
+    "has_translations": true
+  },
+  "tlg0030": {
+    "name": "Hyperides",
+    "works": 6,
+    "has_translations": true
+  },
+  "tlg0031": {
+    "name": "New Testament",
+    "works": 27,
+    "has_translations": true
+  },
+  "tlg0032": {
+    "name": "Xenophon",
+    "works": 15,
+    "has_translations": true
+  },
+  "tlg0033": {
+    "name": "Pindar",
+    "works": 4,
+    "has_translations": true
+  },
+  "tlg0034": {
+    "name": "Lycurgus",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0035": {
+    "name": "Moschus",
+    "works": 5,
+    "has_translations": false
+  },
+  "tlg0036": {
+    "name": "Bion of Phlossa",
+    "works": 3,
+    "has_translations": false
+  },
+  "tlg0057": {
+    "name": "Galen",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0058": {
+    "name": "Aeneas Tacticus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0059": {
+    "name": "Plato",
+    "works": 36,
+    "has_translations": true
+  },
+  "tlg0060": {
+    "name": "Diodorus Siculus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0061": {
+    "name": "Pseudo-Lucian",
+    "works": 4,
+    "has_translations": true
+  },
+  "tlg0062": {
+    "name": "Lucian of Samosata",
+    "works": 71,
+    "has_translations": true
+  },
+  "tlg0074": {
+    "name": "Arrian",
+    "works": 6,
+    "has_translations": false
+  },
+  "tlg0081": {
+    "name": "Dionysius of Halicarnassus",
+    "works": 13,
+    "has_translations": false
+  },
+  "tlg0085": {
+    "name": "Aeschylus",
+    "works": 7,
+    "has_translations": true
+  },
+  "tlg0086": {
+    "name": "Aristotle",
+    "works": 9,
+    "has_translations": true
+  },
+  "tlg0090": {
+    "name": "Agathemerus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0093": {
+    "name": "Theophrastus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0094": {
+    "name": "Pseudo-Plutarch",
+    "works": 3,
+    "has_translations": true
+  },
+  "tlg0099": {
+    "name": "Strabo",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0199": {
+    "name": "Bacchylides",
+    "works": 2,
+    "has_translations": true
+  },
+  "tlg0284": {
+    "name": "Aristides, Aelius",
+    "works": 56,
+    "has_translations": false
+  },
+  "tlg0341": {
+    "name": "Lycophron",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0363": {
+    "name": "Claudius Ptolemaeus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0385": {
+    "name": "Cassius Dio Cocceianus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0525": {
+    "name": "Pausanias",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0526": {
+    "name": "Flavius Josephus",
+    "works": 4,
+    "has_translations": true
+  },
+  "tlg0527": {
+    "name": "Old Testament",
+    "works": 38,
+    "has_translations": true
+  },
+  "tlg0532": {
+    "name": "Achilles Tatius",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0533": {
+    "name": "Callimachus",
+    "works": 8,
+    "has_translations": false
+  },
+  "tlg0535": {
+    "name": "Demades",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0540": {
+    "name": "Lysias",
+    "works": 34,
+    "has_translations": true
+  },
+  "tlg0543": {
+    "name": "Polybius",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0545": {
+    "name": "Aelian",
+    "works": 3,
+    "has_translations": false
+  },
+  "tlg0548": {
+    "name": "Apollodorus",
+    "works": 2,
+    "has_translations": true
+  },
+  "tlg0551": {
+    "name": "Appianus of Alexandria",
+    "works": 15,
+    "has_translations": true
+  },
+  "tlg0554": {
+    "name": "Chariton of Aphrodisias",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0555": {
+    "name": "Clement of Alexandria",
+    "works": 4,
+    "has_translations": false
+  },
+  "tlg0556": {
+    "name": "Asclepiodotus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0557": {
+    "name": "Epictetus",
+    "works": 6,
+    "has_translations": true
+  },
+  "tlg0560": {
+    "name": "Longinus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0561": {
+    "name": "Longus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0562": {
+    "name": "Marcus Aurelius",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0612": {
+    "name": "Dio Chrysostom",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0613": {
+    "name": "Demetrius of Phaleron",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0627": {
+    "name": "Hippocrates",
+    "works": 20,
+    "has_translations": true
+  },
+  "tlg0638": {
+    "name": "Philostratus the Athenian",
+    "works": 6,
+    "has_translations": false
+  },
+  "tlg0641": {
+    "name": "Xenophon of Ephesus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0646": {
+    "name": "Pseudo-Justinus Martyr",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg0647": {
+    "name": "Tryphiodorus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0648": {
+    "name": "Onasander",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0652": {
+    "name": "Philostratus Minor",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0653": {
+    "name": "Aratus Solensis",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0655": {
+    "name": "Parthenius of Nicaea",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg0719": {
+    "name": "Aretaeus of Cappadocia",
+    "works": 4,
+    "has_translations": true
+  },
+  "tlg1216": {
+    "name": "Barnabae Epistula",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg1271": {
+    "name": "Clemens Romanus (Clement of Rome)",
+    "works": 2,
+    "has_translations": true
+  },
+  "tlg1311": {
+    "name": "Didache",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg1389": {
+    "name": "Harpocration",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg1419": {
+    "name": "Hermas, 2nd cent.",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg1443": {
+    "name": "Ignatius of Antioch",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg1484": {
+    "name": "Martyrium Polycarpi",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg1600": {
+    "name": "Philostratus Sophista",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg1622": {
+    "name": "Polycarp",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg1799": {
+    "name": "Euclid",
+    "works": 1,
+    "has_translations": true
+  },
+  "tlg2003": {
+    "name": "Julian, Emperor of Rome",
+    "works": 14,
+    "has_translations": false
+  },
+  "tlg2018": {
+    "name": "Eusebius of Caesarea",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg2040": {
+    "name": "Basil, Saint, Bishop of Caesarea",
+    "works": 2,
+    "has_translations": false
+  },
+  "tlg2045": {
+    "name": "Nonnus of Panopolis",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg2046": {
+    "name": "Quintus Smyrnaeus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg2934": {
+    "name": "John of Damascus, Saint",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg3135": {
+    "name": "Zonaras",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg4029": {
+    "name": "Procopius",
+    "works": 2,
+    "has_translations": false
+  },
+  "tlg4036": {
+    "name": "Proclus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg4081": {
+    "name": "Colluthus of Lycopolis",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg4091": {
+    "name": "Callistratus",
+    "works": 1,
+    "has_translations": false
+  },
+  "tlg7000": {
+    "name": "Greek Anthology",
+    "works": 1,
+    "has_translations": false
+  }
+}

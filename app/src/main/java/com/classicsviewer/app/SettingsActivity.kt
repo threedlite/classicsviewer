@@ -64,6 +64,14 @@ class SettingsActivity : BaseActivity() {
         
         // Apply initial preview colors
         updatePreviewColors(isInverted)
+        
+        // Setup word underlines switch
+        val showUnderlines = PreferencesManager.getShowWordUnderlines(this)
+        binding.showWordUnderlinesSwitch.isChecked = showUnderlines
+        
+        binding.showWordUnderlinesSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferencesManager.setShowWordUnderlines(this, isChecked)
+        }
     }
     
     private fun updatePreviewColors(inverted: Boolean) {

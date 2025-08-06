@@ -20,17 +20,24 @@ class TextLineWithSpeakerAdapter(
     
     class ViewHolder(val binding: ItemTextLineWithSpeakerBinding) : RecyclerView.ViewHolder(binding.root)
     
-    // Custom ClickableSpan that doesn't show underline or color
-    private inner class NoUnderlineClickableSpan(
-        private val clickAction: () -> Unit
+    // Custom ClickableSpan that can optionally show underline
+    private inner class CustomClickableSpan(
+        private val clickAction: () -> Unit,
+        private val showUnderline: Boolean
     ) : ClickableSpan() {
         override fun onClick(widget: View) {
             clickAction()
         }
         
         override fun updateDrawState(ds: TextPaint) {
-            // Don't call super to avoid default underline and color
-            // Keep the original text appearance
+            if (showUnderline) {
+                super.updateDrawState(ds)
+                // Keep underline but remove color change
+                ds.color = ds.linkColor
+            } else {
+                // Don't call super to avoid default underline and color
+                // Keep the original text appearance
+            }
         }
     }
     
@@ -69,14 +76,18 @@ class TextLineWithSpeakerAdapter(
         
         if (showSpeaker && !line.speaker.isNullOrBlank()) {
             holder.binding.speakerName.visibility = View.VISIBLE
+            val showUnderlines = PreferencesManager.getShowWordUnderlines(holder.itemView.context)
             
             // Make speaker name clickable
             val speakerSpannable = SpannableString(line.speaker)
             speakerSpannable.setSpan(
-                NoUnderlineClickableSpan {
-                    // For speaker names
-                    onWordClick(line.speaker)
-                },
+                CustomClickableSpan(
+                    clickAction = {
+                        // For speaker names
+                        onWordClick(line.speaker)
+                    },
+                    showUnderline = showUnderlines
+                ),
                 0,
                 line.speaker.length,
                 SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -91,48 +102,63 @@ class TextLineWithSpeakerAdapter(
         
         // Make text clickable by word
         val spannableString = SpannableString(line.text)
+        val showUnderlines = PreferencesManager.getShowWordUnderlines(holder.itemView.context)
         
-        // Use the word information from the database if available
-        if (line.words.isNotEmpty()) {
-            for (word in line.words) {
-                if (word.startOffset < line.text.length && word.endOffset <= line.text.length) {
-                    spannableString.setSpan(
-                        NoUnderlineClickableSpan {
-                            // Pass the original word
-                            onWordClick(word.text)
-                        },
-                        word.startOffset,
-                        word.endOffset,
-                        SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
-                    )
-                }
-            }
-        } else {
-            // Fallback to simple word splitting if no word data
-            val words = line.text.split(Regex("\\s+"))
-            var currentPos = 0
+        // Always use character-by-character parsing for reliability
+        // Process character by character to find word boundaries
+            var wordStart = -1
+            var i = 0
             
-            for (word in words) {
-                if (word.isNotEmpty()) {
-                    val wordStart = line.text.indexOf(word, currentPos)
-                    if (wordStart >= 0) {
-                        val wordEnd = wordStart + word.length
-                        
+            while (i < line.text.length) {
+                val char = line.text[i]
+                val isWordChar = char.isLetter() || (char == '\'' && i > 0 && i < line.text.length - 1 && 
+                                                      line.text[i-1].isLetter() && line.text[i+1].isLetter())
+                
+                if (isWordChar && wordStart == -1) {
+                    // Start of a new word
+                    wordStart = i
+                } else if (!isWordChar && wordStart != -1) {
+                    // End of current word
+                    val wordEnd = i
+                    val word = line.text.substring(wordStart, wordEnd)
+                    
+                    if (word.isNotEmpty()) {
                         spannableString.setSpan(
-                            NoUnderlineClickableSpan {
-                                val cleanWord = word.replace(Regex("[.,;:!?·]"), "")
-                                onWordClick(cleanWord)
-                            },
+                            CustomClickableSpan(
+                                clickAction = {
+                                    val cleanWord = word.replace(Regex("[.,;:!?·]"), "")
+                                    onWordClick(cleanWord)
+                                },
+                                showUnderline = showUnderlines
+                            ),
                             wordStart,
                             wordEnd,
                             SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
-                        
-                        currentPos = wordEnd
                     }
+                    wordStart = -1
+                }
+                i++
+            }
+            
+            // Handle last word if line ends with a word character
+            if (wordStart != -1) {
+                val word = line.text.substring(wordStart)
+                if (word.isNotEmpty()) {
+                    spannableString.setSpan(
+                        CustomClickableSpan(
+                            clickAction = {
+                                val cleanWord = word.replace(Regex("[.,;:!?·]"), "")
+                                onWordClick(cleanWord)
+                            },
+                            showUnderline = showUnderlines
+                        ),
+                        wordStart,
+                        line.text.length,
+                        SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
                 }
             }
-        }
         
         holder.binding.lineText.text = spannableString
         holder.binding.lineText.movementMethod = LinkMovementMethod.getInstance()

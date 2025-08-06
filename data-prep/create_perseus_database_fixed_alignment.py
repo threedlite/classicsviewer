@@ -35,41 +35,6 @@ def normalize_greek(text):
     
     return text
 
-def normalize_line_for_search(text, language='greek'):
-    """Normalize a line of text for searching, preserving word boundaries"""
-    if not text:
-        return ""
-    
-    if language == 'greek':
-        # First normalize to NFD (decomposed form)
-        text = unicodedata.normalize('NFD', text)
-        
-        # Remove diacritical marks
-        text = ''.join(c for c in text if not unicodedata.combining(c))
-        
-        # Convert to lowercase
-        text = text.lower()
-        
-        # Replace final sigma
-        text = text.replace('ς', 'σ')
-        
-        # Replace all non-letter characters with spaces to preserve word boundaries
-        normalized = []
-        for c in text:
-            if c.isalpha():
-                normalized.append(c)
-            else:
-                normalized.append(' ')
-        
-        # Join and clean up multiple spaces
-        result = ''.join(normalized)
-        result = ' '.join(result.split())  # Normalize whitespace
-        
-        return result
-    else:
-        # For non-Greek text, just lowercase and normalize spaces
-        return ' '.join(text.lower().split())
-
 class LSJParser:
     """Parser for LSJ XML dictionary entries"""
     
@@ -684,8 +649,8 @@ def get_text_content(elem):
     return ''.join(text_parts)
 
 
-def get_section_line_mapping(cursor, book_id, max_section):
-    """Create a mapping from section numbers to line ranges"""
+def get_section_line_mapping(cursor, book_id, max_section, segment_count=None):
+    """Create a mapping from section numbers to line ranges with improved distribution"""
     
     # Get total lines for this book
     cursor.execute("""
@@ -699,9 +664,24 @@ def get_section_line_mapping(cursor, book_id, max_section):
     if not line_count or not max_line or not max_section:
         return {}
     
-    # Check if we need section-to-line mapping
-    # If max_section is much smaller than max_line, we need mapping
-    if max_section < max_line / 2:
+    # Improved detection: if max_section equals segment count, it's likely section numbering
+    # This catches cases like Aristotle's Poetics with 62 sections mapped to 613 lines
+    if segment_count and abs(max_section - segment_count) <= 5:
+        print(f"          Detected section-based numbering: {max_section} sections for {segment_count} segments across {max_line} lines")
+        section_map = {}
+        lines_per_section = max_line / max_section
+        
+        for section_num in range(1, max_section + 1):
+            start_line = int((section_num - 1) * lines_per_section) + 1
+            end_line = int(section_num * lines_per_section)
+            if end_line > max_line:
+                end_line = max_line
+            section_map[section_num] = (start_line, end_line)
+        return section_map
+    
+    # Original logic but with better threshold
+    # Only map if sections are numbered significantly lower than lines
+    if max_section < max_line / 3 and max_section < 200:  # Avoid mapping large section numbers
         section_map = {}
         lines_per_section = max_line / max_section
         
@@ -716,12 +696,44 @@ def get_section_line_mapping(cursor, book_id, max_section):
     return {}
 
 def extract_translation_segments(book_elem, book_id, cursor, translator):
-    """Extract translation segments based on milestone markers"""
+    """Extract translation segments based on milestone markers or structure"""
     segments = []
     
     # Debug: print what we're processing
     elem_tag = book_elem.tag.split('}')[-1] if '}' in book_elem.tag else book_elem.tag
     print(f"        → Extracting from {elem_tag} for {book_id} (translator: {translator})")
+    
+    # First check for chapter.subchapter structure (common in Aristotle, other philosophical texts)
+    chapter_segments = []
+    for chapter in book_elem.findall('.//div[@type="textpart"][@subtype="chapter"]'):
+        chapter_n = chapter.get('n', '')
+        
+        # Look for subchapters
+        subchapters = chapter.findall('.//div[@type="textpart"][@subtype="subchapter"]')
+        if subchapters:
+            for i, subchapter in enumerate(subchapters):
+                subchapter_n = subchapter.get('n', '')
+                text = get_text_content(subchapter).strip()
+                if text and len(text) > 20:
+                    # Use sequential numbering for segments
+                    chapter_segments.append({
+                        'seq_num': len(chapter_segments) + 1,
+                        'text': text,
+                        'translator': translator,
+                        'ref': f"{chapter_n}.{subchapter_n}"
+                    })
+    
+    if chapter_segments:
+        print(f"          Found chapter.subchapter structure: {len(chapter_segments)} segments")
+        # Convert to standard segment format using sequential numbering
+        for seg in chapter_segments:
+            segments.append({
+                'start_line': seg['seq_num'],
+                'end_line': seg['seq_num'],
+                'text': seg['text'],
+                'translator': seg['translator']
+            })
+        return segments
     
     # Check if there are any milestones at all
     milestones_found = False
@@ -857,7 +869,8 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     
     # Check if we need section-to-line mapping
     max_section = max((s['start_line'] for s in segments if isinstance(s['start_line'], int)), default=0)
-    section_map = get_section_line_mapping(cursor, book_id, max_section)
+    # Pass segment count to improve section detection
+    section_map = get_section_line_mapping(cursor, book_id, max_section, len(segments))
     
     for segment in segments:
         start_line = segment['start_line']
@@ -1364,20 +1377,28 @@ def process_prose_text(root, work_id, cursor, language):
                 VALUES (?, ?, ?, ?, ?)
             """, (book_id, line['number'], line['text'], line['xml'], None))
             
-            # Insert words into words table
+            # Insert word forms
             words = line['text'].split()
+            char_pos = 0
+            
             for word_pos, word in enumerate(words, 1):
+                word_start = char_pos
+                word_end = char_pos + len(word)
+                
                 if language == 'greek':
                     word_normalized = normalize_greek(word)
                 else:
                     word_normalized = word.lower()
                 
-                if word_normalized:  # Only insert if normalized form is not empty
-                    cursor.execute("""
-                        INSERT INTO words 
-                        (word, word_normalized, book_id, line_number, word_position)
-                        VALUES (?, ?, ?, ?, ?)
-                    """, (word, word_normalized, book_id, line['number'], word_pos))
+                cursor.execute("""
+                    INSERT OR IGNORE INTO word_forms 
+                    (word, word_normalized, book_id, line_number, 
+                     word_position, char_start, char_end)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (word, word_normalized, book_id, line['number'], 
+                      word_pos, word_start, word_end))
+                
+                char_pos = word_end + 1
         
         print(f"      Complete Text: {len(all_lines)} lines")
 
@@ -1465,20 +1486,28 @@ def process_text_file(xml_path, work_id, cursor, language):
                         VALUES (?, ?, ?, ?, ?)
                     """, (book_id, line['number'], line['text'], line['xml'], line.get('speaker')))
                     
-                    # Insert words into words table
+                    # Insert word forms
                     words = line['text'].split()
+                    char_pos = 0
+                    
                     for word_pos, word in enumerate(words, 1):
+                        word_start = char_pos
+                        word_end = char_pos + len(word)
+                        
                         if language == 'greek':
                             word_normalized = normalize_greek(word)
                         else:
                             word_normalized = word.lower()
                         
-                        if word_normalized:  # Only insert if normalized form is not empty
-                            cursor.execute("""
-                                INSERT INTO words 
-                                (word, word_normalized, book_id, line_number, word_position)
-                                VALUES (?, ?, ?, ?, ?)
-                            """, (word, word_normalized, book_id, line['number'], word_pos))
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO word_forms 
+                            (word, word_normalized, book_id, line_number, 
+                             word_position, char_start, char_end)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """, (word, word_normalized, book_id, line['number'], 
+                              word_pos, word_start, word_end))
+                        
+                        char_pos = word_end + 1
                 
                 print(f"      Complete Text: {len(lines)} lines")
             return
@@ -1533,20 +1562,28 @@ def process_text_file(xml_path, work_id, cursor, language):
                             VALUES (?, ?, ?, ?, ?)
                         """, (book_id, line['number'], line['text'], line['xml'], None))
                         
-                        # Insert words into words table
+                        # Insert word forms
                         words = line['text'].split()
+                        char_pos = 0
+                        
                         for word_pos, word in enumerate(words, 1):
+                            word_start = char_pos
+                            word_end = char_pos + len(word)
+                            
                             if language == 'greek':
                                 word_normalized = normalize_greek(word)
                             else:
                                 word_normalized = word.lower()
                             
-                            if word_normalized:  # Only insert if normalized form is not empty
-                                cursor.execute("""
-                                    INSERT INTO words 
-                                    (word, word_normalized, book_id, line_number, word_position)
-                                    VALUES (?, ?, ?, ?, ?)
-                                """, (word, word_normalized, book_id, line['number'], word_pos))
+                            cursor.execute("""
+                                INSERT OR IGNORE INTO word_forms 
+                                (word, word_normalized, book_id, line_number, 
+                                 word_position, char_start, char_end)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)
+                            """, (word, word_normalized, book_id, line['number'], 
+                                  word_pos, word_start, word_end))
+                            
+                            char_pos = word_end + 1
                     
                     books_processed += 1
                     print(f"      Book {book_num}: {len(lines)} lines")
@@ -1583,20 +1620,28 @@ def process_text_file(xml_path, work_id, cursor, language):
                         VALUES (?, ?, ?, ?, ?)
                     """, (book_id, line['number'], line['text'], line['xml'], None))
                     
-                    # Insert words into words table
+                    # Insert word forms
                     words = line['text'].split()
+                    char_pos = 0
+                    
                     for word_pos, word in enumerate(words, 1):
+                        word_start = char_pos
+                        word_end = char_pos + len(word)
+                        
                         if language == 'greek':
                             word_normalized = normalize_greek(word)
                         else:
                             word_normalized = word.lower()
                         
-                        if word_normalized:  # Only insert if normalized form is not empty
-                            cursor.execute("""
-                                INSERT INTO words 
-                                (word, word_normalized, book_id, line_number, word_position)
-                                VALUES (?, ?, ?, ?, ?)
-                            """, (word, word_normalized, book_id, line['number'], word_pos))
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO word_forms 
+                            (word, word_normalized, book_id, line_number, 
+                             word_position, char_start, char_end)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """, (word, word_normalized, book_id, line['number'], 
+                              word_pos, word_start, word_end))
+                        
+                        char_pos = word_end + 1
                 
                 print(f"      Single book: {len(lines)} lines")
                 
@@ -1629,8 +1674,8 @@ def process_perseus_author(author_dir, language, cursor):
     print(f"\nProcessing author: {author_name} ({author_id})")
     
     # Insert author
-    cursor.execute("INSERT OR IGNORE INTO authors VALUES (?, ?, ?, ?, ?)",
-                   (author_id, author_name, None, language, 0))
+    cursor.execute("INSERT OR IGNORE INTO authors VALUES (?, ?, ?, ?)",
+                   (author_id, author_name, None, language))
     
     # Process each work
     for work_dir in author_dir.iterdir():
@@ -1744,7 +1789,8 @@ def generate_manifest(cursor):
     cursor.execute("SELECT COUNT(*) FROM text_lines")
     manifest["statistics"]["total_lines"] = cursor.fetchone()[0]
     
-    # word_forms statistics removed - not needed
+    cursor.execute("SELECT COUNT(*) FROM word_forms")
+    manifest["statistics"]["total_word_forms"] = cursor.fetchone()[0]
     
     cursor.execute("SELECT COUNT(*) FROM translation_segments")
     manifest["statistics"]["total_translation_segments"] = cursor.fetchone()[0]
@@ -2139,19 +2185,14 @@ def load_wiktionary_mappings(cursor):
 def generate_comprehensive_lemmatization(cursor):
     """Generate lemma mappings for ALL unique words in texts using algorithmic approach"""
     
-    # Since we don't have word_forms, we'll work with dictionary headwords instead
-    # This will generate reverse mappings from inflected forms to lemmas
-    print("Generating lemmatization mappings based on dictionary entries...")
-    
-    # Get all dictionary headwords
+    # Get ALL unique words from texts
     cursor.execute("""
-        SELECT DISTINCT headword_normalized 
-        FROM dictionary_entries 
-        WHERE language = 'greek'
-        ORDER BY headword_normalized
+        SELECT DISTINCT word_normalized 
+        FROM word_forms
+        ORDER BY word_normalized
     """)
     all_words = [row[0] for row in cursor.fetchall()]
-    print(f"Total dictionary headwords: {len(all_words):,}")
+    print(f"Total unique words in texts: {len(all_words):,}")
     
     # Get all dictionary headwords for validation
     cursor.execute("""
@@ -2339,43 +2380,86 @@ def generate_comprehensive_lemmatization(cursor):
     
     print(f"\n✓ Generated {generated:,} algorithmic mappings")
     
-    # Check final lemma map size
-    cursor.execute("SELECT COUNT(*) FROM lemma_map")
-    final_count = cursor.fetchone()[0]
-    print(f"Total lemma mappings generated: {final_count:,}")
-
-def optimize_lemma_map(cursor):
-    """Optimize lemma_map by removing invalid entries"""
-    print("\n=== OPTIMIZING LEMMA MAP ===")
-    
-    # Since we don't have word_forms, we'll just clean up invalid entries
-    # Remove any lemma_map entries where the lemma doesn't exist in dictionary
-    print("Removing invalid lemma mappings...")
+    # Check final coverage
     cursor.execute("""
-        DELETE FROM lemma_map
-        WHERE NOT EXISTS (
-            SELECT 1 FROM dictionary_entries de
-            WHERE de.headword_normalized = lemma_map.lemma
-            AND de.language = 'greek'
+        SELECT COUNT(DISTINCT wf.word_normalized)
+        FROM word_forms wf
+        WHERE EXISTS (
+            SELECT 1 FROM lemma_map lm 
+            WHERE lm.word_form = wf.word_normalized
         )
     """)
-    deleted_count = cursor.rowcount
-    print(f"Removed {deleted_count:,} invalid mappings")
+    final_coverage = cursor.fetchone()[0]
+    print(f"Final coverage: {final_coverage:,}/{len(all_words):,} words ({final_coverage/len(all_words)*100:.1f}%)")
+
+def optimize_lemma_map(cursor):
+    """Optimize lemma_map by keeping only words that appear in texts"""
+    print("\n=== OPTIMIZING LEMMA MAP ===")
     
-    # Get final count
+    # Get unique words from texts
+    print("Creating unique words table...")
+    cursor.execute("""
+        CREATE TEMP TABLE unique_text_words AS
+        SELECT DISTINCT word_normalized
+        FROM word_forms
+    """)
+    cursor.execute("CREATE INDEX idx_temp_words ON unique_text_words(word_normalized)")
+    
+    cursor.execute("SELECT COUNT(*) FROM unique_text_words")
+    unique_words = cursor.fetchone()[0]
+    print(f"Unique words in texts: {unique_words:,}")
+    
+    # Get original count
     cursor.execute("SELECT COUNT(*) FROM lemma_map")
-    final_count = cursor.fetchone()[0]
+    original_count = cursor.fetchone()[0]
     
-    cursor.execute("SELECT COUNT(*) FROM lemma_map WHERE morph_info IS NOT NULL")
+    # Create optimized table
+    print("\nCreating optimized lemma table...")
+    cursor.execute("DROP TABLE IF EXISTS lemma_map_optimized")
+    
+    # Create with proper schema including primary key
+    cursor.execute("""
+        CREATE TABLE lemma_map_optimized (
+            word_form TEXT NOT NULL,
+            word_normalized TEXT NOT NULL,
+            lemma TEXT NOT NULL,
+            confidence REAL DEFAULT 1.0,
+            source TEXT,
+            morph_info TEXT,
+            PRIMARY KEY (word_form, lemma)
+        )
+    """)
+    
+    # Insert optimized data
+    cursor.execute("""
+        INSERT INTO lemma_map_optimized
+        SELECT DISTINCT lm.*
+        FROM lemma_map lm
+        INNER JOIN unique_text_words utw ON lm.word_form = utw.word_normalized
+    """)
+    
+    # Stats
+    cursor.execute("SELECT COUNT(*) FROM lemma_map_optimized")
+    optimized_count = cursor.fetchone()[0]
+    
+    cursor.execute("SELECT COUNT(*) FROM lemma_map_optimized WHERE morph_info IS NOT NULL")
     with_morph = cursor.fetchone()[0]
     
-    print(f"\nTotal mappings: {final_count:,}")
-    print(f"With morphology: {with_morph:,} ({with_morph/final_count*100:.1f}%)") if final_count > 0 else None
+    print(f"\nOriginal mappings: {original_count:,}")
+    print(f"Optimized mappings: {optimized_count:,}")
+    print(f"Reduction: {original_count - optimized_count:,} ({(original_count - optimized_count)/original_count*100:.1f}%)")
+    print(f"With morphology: {with_morph:,} ({with_morph/optimized_count*100:.1f}%)") if optimized_count > 0 else None
     
-    # Ensure indexes exist
+    # Replace lemma_map with optimized version
+    print("\nReplacing lemma_map with optimized version...")
+    cursor.execute("DROP TABLE IF EXISTS lemma_map_full")
+    cursor.execute("ALTER TABLE lemma_map RENAME TO lemma_map_full")
+    cursor.execute("ALTER TABLE lemma_map_optimized RENAME TO lemma_map")
+    
+    # Create indexes
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_lemma_map_word ON lemma_map(word_form)")
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_lemma_map_normalized ON lemma_map(word_normalized)")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_lemma_map_lemma ON lemma_map(lemma)")
-    # idx_lemma_map_normalized removed - Room doesn't expect it
     
     print("✓ Optimization complete!")
 
@@ -2418,8 +2502,7 @@ def create_database():
             id TEXT PRIMARY KEY NOT NULL,
             name TEXT NOT NULL,
             name_alt TEXT,
-            language TEXT NOT NULL,
-            has_translations INTEGER DEFAULT 0
+            language TEXT NOT NULL
         )
     """)
     
@@ -2495,28 +2578,6 @@ def create_database():
     """)
     
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS words (
-            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            word TEXT NOT NULL,
-            word_normalized TEXT NOT NULL,
-            book_id TEXT NOT NULL,
-            line_number INTEGER NOT NULL,
-            word_position INTEGER NOT NULL,
-            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
-        )
-    """)
-    
-    cursor.execute("""
-        CREATE INDEX IF NOT EXISTS idx_words_normalized 
-        ON words(word_normalized)
-    """)
-    
-    cursor.execute("""
-        CREATE INDEX IF NOT EXISTS idx_words_book_line 
-        ON words(book_id, line_number)
-    """)
-    
-    cursor.execute("""
         CREATE INDEX IF NOT EXISTS idx_translation_segments_book 
         ON translation_segments(book_id)
     """)
@@ -2526,9 +2587,29 @@ def create_database():
         ON translation_segments(book_id, start_line)
     """)
     
-    # word_forms table removed - not needed for app functionality
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS word_forms (
+            word TEXT NOT NULL,
+            word_normalized TEXT NOT NULL,
+            book_id TEXT NOT NULL,
+            line_number INTEGER NOT NULL,
+            word_position INTEGER NOT NULL,
+            char_start INTEGER NOT NULL,
+            char_end INTEGER NOT NULL,
+            PRIMARY KEY (book_id, line_number, word_position),
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+        )
+    """)
     
-    # word_forms indexes removed - not needed
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_word_forms_book_line 
+        ON word_forms(book_id, line_number)
+    """)
+    
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_word_forms_normalized 
+        ON word_forms(word_normalized)
+    """)
     
     # Process specific authors we want
     print("\n=== PROCESSING GREEK AUTHORS ===")
@@ -2669,7 +2750,10 @@ def create_database():
             )
         """)
         
-        # idx_lemma_map_normalized removed - Room doesn't expect it
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_lemma_map_normalized 
+            ON lemma_map(word_normalized)
+        """)
         
         # Parse and import LSJ
         parser = LSJParser()
@@ -2755,7 +2839,8 @@ def create_database():
     cursor.execute("SELECT COUNT(*) FROM text_lines")
     print(f"Text lines: {cursor.fetchone()[0]}")
     
-    # word_forms statistics removed - not needed
+    cursor.execute("SELECT COUNT(*) FROM word_forms")
+    print(f"Word forms: {cursor.fetchone()[0]}")
     
     cursor.execute("SELECT COUNT(*) FROM translation_segments")
     print(f"Translation segments: {cursor.fetchone()[0]}")
@@ -2828,31 +2913,6 @@ def create_database():
     coverage = (works_with_trans / total_works * 100) if total_works > 0 else 0
     print(f"\n=== TRANSLATION COVERAGE ===")
     print(f"Works with translations: {works_with_trans}/{total_works} ({coverage:.1f}%)")
-    
-    # Update has_translations flag for authors
-    print("\nUpdating has_translations flag for authors...")
-    cursor.execute("""
-        UPDATE authors
-        SET has_translations = 1
-        WHERE id IN (
-            SELECT DISTINCT a.id
-            FROM authors a
-            JOIN works w ON a.id = w.author_id
-            JOIN books b ON w.id = b.work_id
-            JOIN translation_segments ts ON b.id = ts.book_id
-        )
-    """)
-    conn.commit()
-    
-    # Print authors with translations
-    cursor.execute("""
-        SELECT COUNT(*) as total_authors,
-               SUM(has_translations) as authors_with_trans
-        FROM authors
-        WHERE language = 'greek'
-    """)
-    total_authors, authors_with_trans = cursor.fetchone()
-    print(f"Greek authors with translations: {authors_with_trans}/{total_authors}")
     
     conn.close()
     print("\n✓ Database created successfully!")

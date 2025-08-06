@@ -29,7 +29,8 @@ object DictionaryTextFormatter {
         text: String,
         textView: TextView,
         currentLanguage: String,
-        invertColors: Boolean = false
+        invertColors: Boolean = false,
+        showUnderlines: Boolean = false
     ) {
         val spannableBuilder = SpannableStringBuilder()
         
@@ -63,8 +64,8 @@ object DictionaryTextFormatter {
                     
                     override fun updateDrawState(ds: TextPaint) {
                         // Don't call super to avoid default underline and color
-                        // Keep the original text color and no underline
-                        ds.isUnderlineText = false
+                        // Keep the original text color
+                        ds.isUnderlineText = showUnderlines
                     }
                 }
                 
@@ -113,7 +114,8 @@ object DictionaryTextFormatter {
         htmlText: String,
         textView: TextView,
         currentLanguage: String,
-        invertColors: Boolean = false
+        invertColors: Boolean = false,
+        showUnderlines: Boolean = false
     ) {
         // First remove HTML tags but preserve the text
         val plainText = htmlText
@@ -131,6 +133,6 @@ object DictionaryTextFormatter {
             .replace("&#39;", "'")
             .replace("&nbsp;", " ")
         
-        formatDictionaryText(context, plainText, textView, currentLanguage, invertColors)
+        formatDictionaryText(context, plainText, textView, currentLanguage, invertColors, showUnderlines)
     }
 }

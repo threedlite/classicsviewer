@@ -126,7 +126,8 @@ class DictionaryActivity : BaseActivity() {
                     displayText,
                     binding.definitionText,
                     language,
-                    PreferencesManager.getInvertColors(this@DictionaryActivity)
+                    PreferencesManager.getInvertColors(this@DictionaryActivity),
+                    PreferencesManager.getShowWordUnderlines(this@DictionaryActivity)
                 )
                 
                 // Update occurrences button to use the first lemma (or the provided lemma)

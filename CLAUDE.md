@@ -57,7 +57,7 @@ When you see `java.lang.IllegalStateException: Pre-packaged database has an inva
 
 ### Goal: Fast-Follow Delivery
 - **Production Goal**: Use fast-follow delivery type (downloads after app install)
-- **Database Size**: 774MB uncompressed, 171MB compressed
+- **Database Size**: 1.2GB uncompressed, 275MB compressed
 - **Current Status**: Using install-time delivery for easier local testing
 
 ### Key Components:
@@ -128,11 +128,11 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 ### Multiple Database Files:
 1. **`data-prep/perseus_texts.db`** - Source database
    - Created by `create_perseus_database.py`
-   - Original uncompressed SQLite (774MB)
+   - Original uncompressed SQLite (1.2GB)
    - Never shipped with app
 
 2. **`perseus_database/src/main/assets/perseus_texts.db.zip`** - Production asset pack
-   - Compressed version (171MB)
+   - Compressed version (275MB)
    - For Play Asset Delivery via Google Play
    - Used in production releases
 
@@ -143,13 +143,13 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 
 4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
    - On-device location after extraction
-   - Full 774MB uncompressed database
+   - Full 1.2GB uncompressed database
    - Created on first app launch
 
 ### Why This Structure?
 - **Modular**: Asset pack is a separate module for Play Store delivery
 - **Dual approach**: Production uses Play Asset Delivery, debug uses APK assets
-- **Compression**: Reduces download from 774MB to 171MB
+- **Compression**: Reduces download from 1.2GB to 275MB
 - **Local testing**: Debug fallback avoids bundletool limitations
 
 ## Translation Alignment System
@@ -174,6 +174,49 @@ Some Perseus texts (especially prose works) have translations that use section n
    - Mapping: Section 1 → Lines 1-4, Section 2 → Lines 5-8, etc.
    - Result: Full translation coverage across all 866 lines
 
+### Bekker Numbering
+**Bekker numbering** is a citation system used for Aristotle's works (and sometimes Plato's), based on the 1831 Berlin Academy edition by Immanuel Bekker. References use the format `[page][column][line]`, for example:
+- `1447a8` = page 1447, column a, line 8
+- `1450b12` = page 1450, column b, line 12
+
+In Perseus texts, Bekker references appear as milestones in the XML and require special handling:
+- The database creation process detects Bekker milestones and creates appropriate line mappings
+- Translation segments using Bekker references are aligned to the corresponding line ranges
+- This ensures proper synchronization between Greek text and translations in works like Aristotle's Poetics
+
+## Occurrence Highlighting System
+
+### Word Position-Based Highlighting
+The app now highlights matching words in occurrence lists using precomputed word number positions:
+
+### How It Works
+1. **Database Storage**: The `words` table stores each word with its position number (1, 2, 3, etc.) within each line
+   ```sql
+   CREATE TABLE words (
+       word TEXT NOT NULL,
+       word_normalized TEXT NOT NULL,
+       book_id TEXT NOT NULL,
+       line_number INTEGER NOT NULL,
+       word_position INTEGER NOT NULL  -- 1-based word number in line
+   )
+   ```
+
+2. **Position Calculation**: During database creation, word positions are computed using:
+   ```python
+   for word_pos, word in enumerate(words, 1):  # 1-based indexing
+   ```
+
+3. **Highlighting Display**: When showing occurrences:
+   - Retrieves matching words with their positions from database
+   - Applies background color and bold styling to words at those positions
+   - Uses yellow highlight for inverted mode, dark yellow for normal mode
+   - Respects color inversion user setting
+
+### Benefits
+- **Accurate positioning**: Uses word numbers (1st, 2nd, 3rd word) not character positions
+- **Fast rendering**: No runtime text analysis needed, uses precomputed data
+- **Lemma-aware**: Highlights all forms of a lemma, not just exact matches
+- **Visually clear**: Makes it easy to spot the searched term in context
 
 ## Database Creation Process
 
@@ -192,31 +235,44 @@ The database build uses pre-extracted Wiktionary data for morphological analysis
    - `ancient_greek_declension_mappings.json` - 37,119 declension patterns
    - `ancient_greek_all_morphology_correct.json` - Complete morphological data
 
-## Quick Deployment Instructions
+## Automated Deployment Instructions
 
-To rebuild and deploy the app from scratch:
+To rebuild and deploy the app from scratch (fully automated):
 
 ```bash
-# 1. Build the database (takes ~5 minutes)
-cd data-prep
-python3 create_perseus_database.py
-# This creates perseus_texts.db and automatically:
-# - Compresses it to perseus_texts.db.zip (774MB → 171MB)
-# - Copies to perseus_database/src/main/assets/
-cd ..
+# Option 1: Full rebuild and deploy (recommended)
+# - Rebuilds database from scratch
+# - Creates compressed asset pack
+# - Builds and deploys debug APK
+# - Clears app data for fresh start
+./deploy_complete.sh
 
-# 2. For debug builds (recommended for local testing):
+# Option 2: Deploy with existing database (faster)
+# - Uses existing database in perseus_database/src/main/assets/
+# - Builds and deploys debug APK
+# - Clears app data
+./deploy_simple.sh
+
+# Option 3: Production-like testing with bundletool
+# - Creates AAB with asset pack
+# - Uses bundletool for deployment simulation
+./deploy_with_bundletool.sh
+```
+
+### Manual Steps (Only if scripts fail):
+
+```bash
+# If you need to rebuild database only:
+cd data-prep && python3 create_perseus_database.py && cd ..
+
+# If you need manual debug deployment:
 cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 ./gradlew installDebug
 adb shell pm clear com.classicsviewer.app.debug
-
-# 3. For production-like testing with bundletool:
-./deploy_with_bundletool.sh
-# This builds AAB and uses bundletool for deployment
 ```
 
 ### Important Notes:
-- The database build creates a ~774MB SQLite file that gets compressed to ~171MB
+- The database build creates a ~1.2GB SQLite file that gets compressed to ~275MB
 - Debug builds include database in APK for easy local testing
 - The `pm clear` command ensures the app starts fresh
 - First launch extracts the database (takes ~6-7 seconds with progress dialog)

@@ -39,11 +39,13 @@ class LemmaOccurrencesActivity : BaseActivity() {
             binding.root.setBackgroundColor(0xFFFFFFFF.toInt())
             binding.totalCount.setTextColor(0xFF000000.toInt())
             binding.recyclerView.setBackgroundColor(0xFFFFFFFF.toInt())
+            binding.progressBar.indeterminateTintList = android.content.res.ColorStateList.valueOf(0xFF000000.toInt())
         } else {
             // White on black (default)
             binding.root.setBackgroundColor(0xFF000000.toInt())
             binding.totalCount.setTextColor(0xFFFFFFFF.toInt())
             binding.recyclerView.setBackgroundColor(0xFF000000.toInt())
+            binding.progressBar.indeterminateTintList = android.content.res.ColorStateList.valueOf(0xFFFFFFFF.toInt())
         }
         
         loadOccurrences(lemma, language)
@@ -51,20 +53,32 @@ class LemmaOccurrencesActivity : BaseActivity() {
     
     private fun loadOccurrences(lemma: String, language: String) {
         lifecycleScope.launch {
-            // Get occurrences (limited to 500) and total count
-            val occurrences = repository.getLemmaOccurrences(lemma, language)
-            val totalCount = repository.countLemmaOccurrences(lemma, language)
+            // Show progress bar and hide content
+            binding.progressBar.visibility = android.view.View.VISIBLE
+            binding.recyclerView.visibility = android.view.View.GONE
+            binding.totalCount.visibility = android.view.View.GONE
             
-            val adapter = OccurrenceAdapter(occurrences, PreferencesManager.getInvertColors(this@LemmaOccurrencesActivity)) { occurrence ->
-                navigateToOccurrence(occurrence)
-            }
-            binding.recyclerView.adapter = adapter
-            
-            // Show appropriate message based on count
-            binding.totalCount.text = when {
-                totalCount > 500 -> "Showing first 500 of $totalCount occurrences"
-                totalCount == 0 -> "No occurrences found"
-                else -> "Found $totalCount occurrences"
+            try {
+                // Get occurrences (limited to 500) and total count
+                val occurrences = repository.getLemmaOccurrences(lemma, language)
+                val totalCount = repository.countLemmaOccurrences(lemma, language)
+                
+                val adapter = OccurrenceAdapter(occurrences, PreferencesManager.getInvertColors(this@LemmaOccurrencesActivity)) { occurrence ->
+                    navigateToOccurrence(occurrence)
+                }
+                binding.recyclerView.adapter = adapter
+                
+                // Show appropriate message based on count
+                binding.totalCount.text = when {
+                    totalCount > 500 -> "Showing first 500 of $totalCount occurrences"
+                    totalCount == 0 -> "No occurrences found"
+                    else -> "Found $totalCount occurrences"
+                }
+            } finally {
+                // Hide progress bar and show content
+                binding.progressBar.visibility = android.view.View.GONE
+                binding.recyclerView.visibility = android.view.View.VISIBLE
+                binding.totalCount.visibility = android.view.View.VISIBLE
             }
         }
     }

@@ -9,6 +9,7 @@ object PreferencesManager {
     private const val KEY_LAST_ACTIVITY = "last_activity"
     private const val KEY_LAST_EXTRAS = "last_extras_"
     private const val KEY_INVERT_COLORS = "invert_colors"
+    private const val KEY_SHOW_WORD_UNDERLINES = "show_word_underlines"
     
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -30,6 +31,15 @@ object PreferencesManager {
     
     fun setInvertColors(context: Context, invert: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_INVERT_COLORS, invert).apply()
+    }
+    
+    // Word underline preference
+    fun getShowWordUnderlines(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_SHOW_WORD_UNDERLINES, false)
+    }
+    
+    fun setShowWordUnderlines(context: Context, show: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_SHOW_WORD_UNDERLINES, show).apply()
     }
     
     // Navigation state persistence

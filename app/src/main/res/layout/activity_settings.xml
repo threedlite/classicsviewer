@@ -102,6 +102,27 @@
             android:paddingEnd="16dp"
             android:paddingBottom="16dp" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/showWordUnderlinesSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show underlines on clickable words"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Makes clickable words more visible"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp" />
+
         <!-- Database Section -->
         <TextView
             android:layout_width="match_parent"

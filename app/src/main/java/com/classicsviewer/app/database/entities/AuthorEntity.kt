@@ -15,5 +15,7 @@ data class AuthorEntity(
     val name: String,
     @ColumnInfo(name = "name_alt")
     val nameAlt: String?,
-    val language: String
+    val language: String,
+    @ColumnInfo(name = "has_translations", defaultValue = "0")
+    val hasTranslations: Boolean?
 )

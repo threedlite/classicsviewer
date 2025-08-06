@@ -15,12 +15,12 @@ import java.io.File
         WorkEntity::class,
         BookEntity::class,
         TextLineEntity::class,
-        WordFormEntity::class,
+        WordEntity::class,
         LemmaMapEntity::class,
         DictionaryEntity::class,
         TranslationSegmentEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class PerseusDatabase : RoomDatabase() {
@@ -28,7 +28,7 @@ abstract class PerseusDatabase : RoomDatabase() {
     abstract fun workDao(): WorkDao
     abstract fun bookDao(): BookDao
     abstract fun textLineDao(): TextLineDao
-    abstract fun wordFormDao(): WordFormDao
+    abstract fun wordDao(): WordDao
     abstract fun lemmaDao(): LemmaDao
     abstract fun lemmaMapDao(): LemmaMapDao
     abstract fun dictionaryDao(): DictionaryDao

@@ -21,3 +21,16 @@ interface TextLineDao {
     @Query("SELECT MAX(line_number) FROM text_lines WHERE book_id = :bookId")
     suspend fun getLastLineNumber(bookId: String): Int?
 }
+
+data class OccurrenceResult(
+    val bookId: String,
+    val lineNumber: Int,
+    val lineText: String
+)
+
+data class OccurrenceResultWithWords(
+    val bookId: String,
+    val lineNumber: Int,
+    val lineText: String,
+    val matchingWords: List<com.classicsviewer.app.models.WordMatch>
+)

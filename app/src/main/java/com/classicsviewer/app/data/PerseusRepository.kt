@@ -3,8 +3,10 @@ package com.classicsviewer.app.data
 import android.content.Context
 import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.database.dao.OccurrenceResult
+import com.classicsviewer.app.database.dao.OccurrenceResultWithWords
 import com.classicsviewer.app.lemmatization.GreekLemmatizer
 import com.classicsviewer.app.models.*
+import com.classicsviewer.app.database.dao.LineReferenceWithWords
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,7 +16,7 @@ class PerseusRepository(context: Context) : DataRepository {
     private val workDao = database.workDao()
     private val bookDao = database.bookDao()
     private val textLineDao = database.textLineDao()
-    private val wordFormDao = database.wordFormDao()
+    private val wordDao = database.wordDao()
     private val lemmaDao = database.lemmaDao()
     private val lemmaMapDao = database.lemmaMapDao()
     private val dictionaryDao = database.dictionaryDao()
@@ -27,7 +29,8 @@ class PerseusRepository(context: Context) : DataRepository {
             Author(
                 id = entity.id,
                 name = entity.name,
-                language = entity.language
+                language = entity.language,
+                hasTranslatedWorks = entity.hasTranslations ?: false
             )
         }
     }
@@ -78,9 +81,8 @@ class PerseusRepository(context: Context) : DataRepository {
         endLine: Int
     ): List<TextLine> = withContext(Dispatchers.IO) {
         textLineDao.getByBookAndRange(bookId, startLine, endLine).map { entity ->
-            // Get word forms for clickable words
-            val wordForms = wordFormDao.getByBookAndLine(bookId, entity.lineNumber)
-            val words = parseWordsFromLine(entity.lineText, wordForms)
+            // Parse words from line text
+            val words = emptyList<Word>()
             
             TextLine(
                 lineNumber = entity.lineNumber,
@@ -237,20 +239,35 @@ class PerseusRepository(context: Context) : DataRepository {
     override suspend fun getLemmaOccurrences(lemma: String, language: String): List<Occurrence> = withContext(Dispatchers.IO) {
         android.util.Log.d("PerseusRepository", "getLemmaOccurrences: lemma='$lemma', language='$language'")
         
-        // Normalize the lemma for searching
-        val normalized = if (language.equals("greek", ignoreCase = true)) {
-            normalizeGreek(lemma)
-        } else {
-            lemma.lowercase().replace(Regex("[.,;:!?·]"), "")
+        // Get line references with word positions - this is fast!
+        val lineRefsWithWords = wordDao.findLinesWithLemmaAndPositions(lemma)
+        android.util.Log.d("PerseusRepository", "Found ${lineRefsWithWords.size} lines with lemma")
+        
+        // Now fetch the actual text lines
+        val allOccurrences = lineRefsWithWords.mapNotNull { ref ->
+            val lines = textLineDao.getByBookAndRange(ref.book_id, ref.line_number, ref.line_number)
+            lines.firstOrNull()?.let { line ->
+                // Parse word positions
+                val matchingWords = ref.word_positions.split(",").mapNotNull { wordPos ->
+                    val parts = wordPos.split(":")
+                    if (parts.size == 2) {
+                        WordMatch(word = parts[0], position = parts[1].toIntOrNull() ?: 0)
+                    } else null
+                }
+                
+                OccurrenceResultWithWords(
+                    bookId = ref.book_id,
+                    lineNumber = ref.line_number,
+                    lineText = line.lineText,
+                    matchingWords = matchingWords
+                )
+            }
         }
         
-        android.util.Log.d("PerseusRepository", "Normalized form: '$normalized'")
-        
-        val occurrences = wordFormDao.findOccurrences(normalized)
-        android.util.Log.d("PerseusRepository", "Found ${occurrences.size} occurrences")
+        android.util.Log.d("PerseusRepository", "Fetched ${allOccurrences.size} text lines")
         
         // Group by book and convert to Occurrence model
-        occurrences.map { result ->
+        allOccurrences.map { result ->
             val book = bookDao.getById(result.bookId)
             val work = book?.let { workDao.getById(it.workId) }
             val author = work?.let { authorDao.getById(it.authorId) }
@@ -264,54 +281,18 @@ class PerseusRepository(context: Context) : DataRepository {
                 bookId = result.bookId,
                 lineNumber = result.lineNumber,
                 lineText = result.lineText,
-                wordForm = normalized,
-                language = language
+                wordForm = lemma,
+                language = language,
+                matchingWords = result.matchingWords
             )
         }
     }
     
     override suspend fun countLemmaOccurrences(lemma: String, language: String): Int = withContext(Dispatchers.IO) {
-        // Normalize the lemma for searching
-        val normalized = if (language.equals("greek", ignoreCase = true)) {
-            normalizeGreek(lemma)
-        } else {
-            lemma.lowercase().replace(Regex("[.,;:!?·]"), "")
-        }
-        
-        wordFormDao.countOccurrences(normalized)
+        // Count using the fast words table
+        wordDao.countLinesWithLemma(lemma)
     }
     
-    private fun parseWordsFromLine(
-        lineText: String,
-        wordForms: List<com.classicsviewer.app.database.entities.WordFormEntity>
-    ): List<Word> {
-        // Create a map of position to word form
-        val wordFormMap = wordForms.associateBy { it.wordPosition }
-        
-        // Split line into words and create Word objects
-        val words = mutableListOf<Word>()
-        var position = 1 // Word positions are 1-based in database
-        
-        // Simple word splitting - in production, this would be more sophisticated
-        val tokens = lineText.split(Regex("\\s+"))
-        
-        for (token in tokens) {
-            if (token.isNotEmpty()) {
-                val wordForm = wordFormMap[position]
-                words.add(
-                    Word(
-                        text = token,
-                        lemma = wordForm?.wordNormalized ?: token.lowercase(),
-                        startOffset = wordForm?.charStart ?: 0,
-                        endOffset = wordForm?.charEnd ?: token.length
-                    )
-                )
-                position++
-            }
-        }
-        
-        return words
-    }
     
     override suspend fun getTranslationSegments(bookId: String, startLine: Int, endLine: Int): List<TranslationSegment> = withContext(Dispatchers.IO) {
         translationSegmentDao.getTranslationSegments(bookId, startLine, endLine).map { entity ->

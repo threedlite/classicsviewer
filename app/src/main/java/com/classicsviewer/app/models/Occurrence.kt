@@ -10,5 +10,11 @@ data class Occurrence(
     val lineNumber: Int,
     val lineText: String,
     val wordForm: String,
-    val language: String
+    val language: String,
+    val matchingWords: List<WordMatch> = emptyList()
+)
+
+data class WordMatch(
+    val word: String,
+    val position: Int
 )
