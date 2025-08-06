@@ -1,12 +1,12 @@
 {
-  "generated_at": "2025-08-06T14:34:49.653356",
+  "generated_at": "2025-08-06T15:11:02.017968",
   "database_version": "2.0",
   "statistics": {
     "total_authors": 91,
     "total_works": 788,
     "total_books": 1340,
     "total_lines": 864300,
-    "total_translation_segments": 162374,
+    "total_translation_segments": 162378,
     "total_dictionary_entries": 28647,
     "total_lemma_mappings": 1016668,
     "dictionary_by_language": {
@@ -393,7 +393,7 @@
           "title": "Prometheus Bound",
           "title_english": "Prometheus Bound",
           "book_count": 1,
-          "total_lines": 228302,
+          "total_lines": 229384,
           "translator_count": 1,
           "books": [
             {
@@ -4788,7 +4788,7 @@
           "title": "Electra",
           "title_english": "Electra",
           "book_count": 1,
-          "total_lines": 496064,
+          "total_lines": 497412,
           "translator_count": 1,
           "books": [
             {
@@ -4848,7 +4848,7 @@
           "title": "Orestes",
           "title_english": "Orestes",
           "book_count": 1,
-          "total_lines": 798738,
+          "total_lines": 800409,
           "translator_count": 1,
           "books": [
             {
@@ -14674,7 +14674,7 @@
           "title": "Cyropaedia",
           "title_english": "Cyropaedia",
           "book_count": 8,
-          "total_lines": 1874448,
+          "total_lines": 1876218,
           "translator_count": 1,
           "books": [
             {

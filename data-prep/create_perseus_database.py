@@ -819,6 +819,29 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     elif milestones_found:
         # Handle milestones inside paragraphs (common in Perseus translations)
         para_count = 0
+        
+        # First, check if this uses Bekker numbering (numbers > 1000 indicate Bekker pages)
+        is_bekker = False
+        first_milestone_num = None
+        
+        for child in book_elem.iter():
+            if child.tag.endswith('milestone') and child.get('unit') in ['line', 'card', 'section', 'chapter']:
+                n = child.get('n', '')
+                if n:
+                    num_match = re.match(r'(\d+)', n)
+                    if num_match:
+                        num = int(num_match.group(1))
+                        if num > 1000:  # Likely Bekker page number
+                            is_bekker = True
+                            if first_milestone_num is None:
+                                first_milestone_num = num
+                        break
+        
+        if is_bekker:
+            print(f"          Detected Bekker numbering (first reference: {first_milestone_num})")
+        
+        current_line = 1  # Track actual line numbers for Bekker texts
+        
         for para in book_elem.iter():
             if para.tag.endswith('p'):
                 para_count += 1
@@ -847,13 +870,23 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                 para_text = get_text_content(para).strip()
                 
                 if milestones_in_para and para_text:
-                    # Associate paragraph with first milestone
-                    segments.append({
-                        'start_line': milestones_in_para[0],
-                        'end_line': milestones_in_para[-1] if len(milestones_in_para) > 1 else milestones_in_para[0],
-                        'text': para_text,
-                        'translator': translator
-                    })
+                    if is_bekker:
+                        # For Bekker numbering, use sequential line numbers
+                        segments.append({
+                            'start_line': current_line,
+                            'end_line': current_line,
+                            'text': para_text,
+                            'translator': translator
+                        })
+                        current_line += 1
+                    else:
+                        # Associate paragraph with first milestone
+                        segments.append({
+                            'start_line': milestones_in_para[0],
+                            'end_line': milestones_in_para[-1] if len(milestones_in_para) > 1 else milestones_in_para[0],
+                            'text': para_text,
+                            'translator': translator
+                        })
         
         print(f"          Processed {para_count} paragraphs, extracted {len(segments)} segments")
     else:
