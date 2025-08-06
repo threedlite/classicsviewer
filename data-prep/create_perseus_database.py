@@ -820,9 +820,14 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # Handle milestones inside paragraphs (common in Perseus translations)
         para_count = 0
         
-        # First, check if this uses Bekker numbering (numbers > 1000 indicate Bekker pages)
+        # First, check if this uses Bekker or Stephanus numbering
         is_bekker = False
+        is_stephanus = False
         first_milestone_num = None
+        
+        # Check if this is a Plato work (uses Stephanus) or Aristotle work (uses Bekker)
+        author_id = book_id.split('.')[0]
+        is_plato = author_id == 'tlg0059'
         
         for child in book_elem.iter():
             if child.tag.endswith('milestone') and child.get('unit') in ['line', 'card', 'section', 'chapter']:
@@ -831,14 +836,21 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                     num_match = re.match(r'(\d+)', n)
                     if num_match:
                         num = int(num_match.group(1))
-                        if num > 1000:  # Likely Bekker page number
+                        if first_milestone_num is None:
+                            first_milestone_num = num
+                        
+                        # Stephanus: 3-digit numbers (100-999), common in Plato
+                        if is_plato and 100 <= num <= 999:
+                            is_stephanus = True
+                        # Bekker: 4-digit numbers (> 1000), common in Aristotle
+                        elif num > 1000:
                             is_bekker = True
-                            if first_milestone_num is None:
-                                first_milestone_num = num
                         break
         
         if is_bekker:
             print(f"          Detected Bekker numbering (first reference: {first_milestone_num})")
+        elif is_stephanus:
+            print(f"          Detected Stephanus pagination (first reference: {first_milestone_num})")
         
         current_line = 1  # Track actual line numbers for Bekker texts
         
@@ -870,8 +882,8 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                 para_text = get_text_content(para).strip()
                 
                 if milestones_in_para and para_text:
-                    if is_bekker:
-                        # For Bekker numbering, use sequential line numbers
+                    if is_bekker or is_stephanus:
+                        # For Bekker/Stephanus numbering, use sequential line numbers
                         segments.append({
                             'start_line': current_line,
                             'end_line': current_line,

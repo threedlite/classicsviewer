@@ -1,0 +1,3 @@
+ARISTOTLE TRANSLATION ALIGNMENT REPORT
+========================================
+Author               Work                                      Lines Segmts   MinL   MaxL  Cover%          Status
