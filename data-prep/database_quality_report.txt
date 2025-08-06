@@ -1,12 +1,12 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-06T15:28:43.115562
+Generated: 2025-08-06T17:29:40.734645
 
 Total Authors: 91
 Total Works: 788
 Total Books: 1340
 Total Lines: 864,300
 Dictionary Entries: 28,647
-Lemma Mappings: 1,016,668
+Lemma Mappings: 1,049,172
 
 === DETAILED BREAKDOWN ===
 

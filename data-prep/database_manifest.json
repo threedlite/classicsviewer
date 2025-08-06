@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-08-06T15:28:42.821649",
+  "generated_at": "2025-08-06T17:29:40.467928",
   "database_version": "2.0",
   "statistics": {
     "total_authors": 91,
@@ -8,7 +8,7 @@
     "total_lines": 864300,
     "total_translation_segments": 162378,
     "total_dictionary_entries": 28647,
-    "total_lemma_mappings": 1016668,
+    "total_lemma_mappings": 1049172,
     "dictionary_by_language": {
       "greek": 28647
     },

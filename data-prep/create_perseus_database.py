@@ -2275,19 +2275,17 @@ def load_wiktionary_mappings(cursor):
 def generate_comprehensive_lemmatization(cursor):
     """Generate lemma mappings for ALL unique words in texts using algorithmic approach"""
     
-    # Since we don't have word_forms, we'll work with dictionary headwords instead
-    # This will generate reverse mappings from inflected forms to lemmas
-    print("Generating lemmatization mappings based on dictionary entries...")
+    # Get ALL unique words from the actual texts
+    print("Getting all unique words from texts...")
     
-    # Get all dictionary headwords
+    # Get unique normalized words from the corpus
     cursor.execute("""
-        SELECT DISTINCT headword_normalized 
-        FROM dictionary_entries 
-        WHERE language = 'greek'
-        ORDER BY headword_normalized
+        SELECT DISTINCT word_normalized 
+        FROM words
+        ORDER BY word_normalized
     """)
     all_words = [row[0] for row in cursor.fetchall()]
-    print(f"Total dictionary headwords: {len(all_words):,}")
+    print(f"Total unique words in texts: {len(all_words):,}")
     
     # Get all dictionary headwords for validation
     cursor.execute("""
