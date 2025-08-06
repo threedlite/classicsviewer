@@ -193,7 +193,8 @@ object MockDataProvider {
                     startLine = currentLine,
                     endLine = segmentEnd,
                     translationText = mockTranslation,
-                    translator = "Mock Translator"
+                    translator = "Mock Translator",
+                    speaker = null
                 )
             )
             

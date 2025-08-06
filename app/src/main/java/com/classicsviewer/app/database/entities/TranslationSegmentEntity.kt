@@ -32,5 +32,6 @@ data class TranslationSegmentEntity(
     val endLine: Int?,
     @ColumnInfo(name = "translation_text")
     val translationText: String,
-    val translator: String?
+    val translator: String?,
+    val speaker: String?
 )

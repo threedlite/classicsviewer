@@ -22,8 +22,8 @@ import androidx.room.Index
         )
     ],
     indices = [
-        Index(value = ["book_id", "line_number"]),
-        Index(value = ["segment_id"])
+        Index(value = ["book_id", "line_number"], name = "index_translation_lookup_book_id_line_number"),
+        Index(value = ["segment_id"], name = "index_translation_lookup_segment_id")
     ]
 )
 data class TranslationLookupEntity(

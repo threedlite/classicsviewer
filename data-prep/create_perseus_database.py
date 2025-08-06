@@ -737,6 +737,65 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     elem_tag = book_elem.tag.split('}')[-1] if '}' in book_elem.tag else book_elem.tag
     print(f"        → Extracting from {elem_tag} for {book_id} (translator: {translator})")
     
+    # First check if this is a dramatic text with speaker tags
+    has_speakers = False
+    for elem in book_elem.iter():
+        if elem.tag.endswith('speaker'):
+            has_speakers = True
+            break
+    
+    if has_speakers:
+        # Process dramatic text with speakers
+        print(f"          Processing dramatic text with speakers")
+        current_speaker = None
+        current_lines = []
+        
+        for elem in book_elem.iter():
+            # Track current speaker
+            if elem.tag.endswith('speaker'):
+                # Save previous speaker's lines if any
+                if current_speaker and current_lines:
+                    # Consolidate lines for this speaker
+                    start_line = current_lines[0]['line']
+                    end_line = current_lines[-1]['line']
+                    text = ' '.join(line['text'] for line in current_lines)
+                    segments.append({
+                        'start_line': start_line,
+                        'end_line': end_line,
+                        'text': text,
+                        'translator': translator,
+                        'speaker': current_speaker
+                    })
+                    current_lines = []
+                
+                current_speaker = elem.text.strip() if elem.text else None
+            
+            # Collect lines for current speaker
+            elif elem.tag.endswith('l') and current_speaker:
+                line_n = elem.get('n', '')
+                if line_n and line_n.isdigit():
+                    line_text = get_text_content(elem).strip()
+                    if line_text:
+                        current_lines.append({
+                            'line': int(line_n),
+                            'text': line_text
+                        })
+        
+        # Don't forget the last speaker's lines
+        if current_speaker and current_lines:
+            start_line = current_lines[0]['line']
+            end_line = current_lines[-1]['line']
+            text = ' '.join(line['text'] for line in current_lines)
+            segments.append({
+                'start_line': start_line,
+                'end_line': end_line,
+                'text': text,
+                'translator': translator,
+                'speaker': current_speaker
+            })
+        
+        print(f"          Extracted {len(segments)} segments with speakers")
+        
     # Check if there are any milestones at all
     milestones_found = False
     milestone_count = 0
@@ -750,7 +809,10 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     
     print(f"          Milestones found: {milestones_found} (total: {milestone_count})")
     
-    if milestones_found:
+    # If we already have segments from speaker processing, skip other methods
+    if segments:
+        pass  # Already have segments from speaker processing
+    elif milestones_found:
         # Handle milestones inside paragraphs (common in Perseus translations)
         para_count = 0
         for para in book_elem.iter():
@@ -884,10 +946,10 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             
         cursor.execute("""
             INSERT OR IGNORE INTO translation_segments
-            (book_id, start_line, end_line, translation_text, translator)
-            VALUES (?, ?, ?, ?, ?)
+            (book_id, start_line, end_line, translation_text, translator, speaker)
+            VALUES (?, ?, ?, ?, ?, ?)
         """, (book_id, start_line, end_line, 
-              segment['text'], segment['translator']))
+              segment['text'], segment['translator'], segment.get('speaker')))
         if cursor.rowcount > 0:
             inserted_count += 1
     
@@ -935,10 +997,10 @@ def process_prose_translation(root, book_id, cursor, translator):
     for section in sections:
         cursor.execute("""
             INSERT OR IGNORE INTO translation_segments
-            (book_id, start_line, end_line, translation_text, translator)
-            VALUES (?, ?, ?, ?, ?)
+            (book_id, start_line, end_line, translation_text, translator, speaker)
+            VALUES (?, ?, ?, ?, ?, ?)
         """, (book_id, section['number'], section['number'], 
-              section['text'], translator))
+              section['text'], translator, None))
 
 def process_translations(work_dir, work_id, cursor):
     """Process English translations for a work"""
@@ -2500,6 +2562,7 @@ def create_database():
             end_line INTEGER,
             translation_text TEXT NOT NULL,
             translator TEXT,
+            speaker TEXT,
             FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
         )
     """)

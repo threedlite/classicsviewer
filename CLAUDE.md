@@ -15,7 +15,7 @@ Takes inspiration from the Perseus Hopper and Scaife viewer web apps.
 1. **ALWAYS** fully analyze and validate that the database schema matches Room entities
 2. **NEVER** make schema changes without checking ALL Room entity files in the Android app
 3. **ALWAYS** verify column names, types, and constraints match exactly between:
-   - The SQL schema used in data prep
+   - The SQL schema used in data prep, including indexes and not null constraints.  primary keys should never be nullable.
    - The Room entity annotations in the Android app
    - The DAO query expectations
 4. **The app WILL CRASH** on startup after language selection if there's ANY mismatch
@@ -59,6 +59,26 @@ When you see `java.lang.IllegalStateException: Pre-packaged database has an inva
 - **Production Goal**: Use fast-follow delivery type (downloads after app install)
 - **Database Size**: 1.4GB uncompressed, 300MB compressed
 - **Current Status**: Using install-time delivery for easier local testing
+
+### CRITICAL: Database Size Limits and Multi-Part Strategy
+
+**Play Asset Delivery has a 512MB limit per asset pack**. When the compressed database exceeds ~450MB, it MUST be split into multiple parts:
+
+1. **Current Setup**: Single 300MB ZIP file works for debug/testing
+2. **Future Scaling**: As database grows, use `build_multipart_database.sh`
+3. **Multi-part Process**:
+   - Creates `perseus_database_part1`, `perseus_database_part2`, etc. modules
+   - Each part stays under 450MB (safe margin)
+   - App code uses `MultiPartAssetPackDatabaseHelper` to reassemble
+   - Parts are downloaded as separate fast-follow asset packs
+
+### When to Switch to Multi-Part:
+- If `perseus_database/src/main/assets/perseus_texts.db.zip` exceeds 450MB
+- Run `./build_multipart_database.sh` instead of single-file approach
+- Update `settings.gradle` to include all part modules
+- Switch app code from `AssetPackDatabaseHelper` to `MultiPartAssetPackDatabaseHelper`
+
+**WARNING**: Always verify ZIP integrity with `unzip -t` before deployment. Corrupted ZIP files cause `Unexpected end of ZLIB input stream` errors during extraction.
 
 ### Key Components:
 1. **Asset Pack Module**: `perseus_database`
@@ -281,51 +301,95 @@ The database build uses pre-extracted Wiktionary data for morphological analysis
 
 ## Automated Deployment Instructions
 
-To rebuild and deploy the app from scratch (fully automated):
+**CRITICAL**: Database deployment is error-prone if done manually. Always use automated scripts.
+
+### Deployment Scripts (Fully Automated)
 
 ```bash
-# Option 1: Deploy with existing database (recommended)
+# Option 1: Complete rebuild and deploy (RECOMMENDED for schema changes)
+# - Rebuilds database from scratch (~4 minutes)
+# - Creates fresh compressed database
+# - Deploys and clears app data
+./deploy_complete.sh
+
+# Option 2: Deploy with existing database (faster, but dangerous if schema changed)
 # - Uses existing database in perseus_database/src/main/assets/
-# - Builds and deploys debug APK
-# - Clears app data
+# - Only use if you're certain database is current
 ./deploy_simple.sh
 
-# Option 2: Production-like testing with bundletool
+# Option 3: Production-like testing with bundletool
 # - Creates AAB with asset pack
 # - Uses bundletool for deployment simulation
 ./deploy_with_bundletool.sh
 ```
 
-### Database Build Time
+### **CRITICAL DEPLOYMENT RULES**:
+
+1. **After ANY schema changes**: ALWAYS use `./deploy_complete.sh`
+2. **Never manually copy database files** - the timestamps and versions get out of sync
+3. **Always clear app data** after schema changes - Room caches schema validation
+4. **Test immediately after deployment** - schema mismatches crash on startup
+5. **TIMEOUT = CORRUPTION**: If any script times out during compression, the ZIP file is corrupted
+6. **Always verify ZIP integrity**: Use `unzip -t` before deployment
+7. **Database size check**: Extracted database should be ~1.4GB, not 4KB
+
+### Database Build Process
 - **Full database creation**: ~4 minutes
 - Processes 100 Greek authors and 95 Latin authors
 - Creates comprehensive translation lookup table for all texts
+- **Schema validation**: Room expects exact match between SQLite and entity definitions
 
-### Manual Steps (Only if scripts fail):
+### Common Deployment Errors:
 
-```bash
-# If you need to rebuild database only (takes ~4 minutes):
-cd data-prep && python3 create_perseus_database.py && cd ..
+**Error: `Pre-packaged database has an invalid schema`**
+- **Cause**: Database schema doesn't match Room entities
+- **Solution**: Use `./deploy_complete.sh` to rebuild everything from scratch
+- **Never**: Try to manually fix by copying files
 
-# If you need manual debug deployment:
-cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
-./gradlew installDebug
-adb shell pm clear com.classicsviewer.app.debug
-```
+**Error: `Unexpected end of ZLIB input stream`**  
+- **Cause**: Corrupted ZIP file from incomplete compression
+- **Solution**: Use `./deploy_complete.sh` to recreate compression
+- **Verify**: Always test ZIP integrity with `unzip -t`
 
-### Important Notes:
-- The database build creates a ~1.4GB SQLite file that gets compressed to ~300MB
-- Debug builds include database in APK for easy local testing
-- The `pm clear` command ensures the app starts fresh
-- First launch extracts the database (takes ~6-7 seconds with progress dialog)
-- Database location shown in Settings screen
+**Script Timeout Issue**:
+- **Problem**: `./deploy_complete.sh` times out during 4-minute database rebuild
+- **Solution**: Run in background: `./deploy_complete.sh > deploy.log 2>&1 &`
+- **Monitor**: Watch progress with `tail -f deploy.log`
+- **Check completion**: Look for "DEPLOYMENT COMPLETE!" message
+- **CRITICAL**: If script times out during `zip` command, the ZIP file is corrupted and unusable
 
-### Troubleshooting:
+**Database Corruption Detection**:
+- **Symptom**: `java.io.EOFException: Unexpected end of ZLIB input stream`
+- **Symptom**: Database shows only 4096 bytes instead of ~1.4GB
+- **Symptom**: Authors list is empty after successful app launch
+- **Fix**: Delete corrupted ZIP, recreate with proper `cd data-prep && zip -9 ../perseus_database/src/main/assets/perseus_texts.db.zip perseus_texts.db`
+- **Verify**: Always run `unzip -t` to check integrity before deployment
+
+### Deployment Verification Checklist:
+
+**Before launching the app, verify:**
+1. `unzip -t perseus_database/src/main/assets/perseus_texts.db.zip` returns "OK"
+2. ZIP file size is ~300MB (not tiny or huge)
+3. Source database `data-prep/perseus_texts.db` exists and is ~1.4GB
+4. App launches without crash
+5. Database extraction completes (watch for progress dialog)
+6. Authors list shows 100+ Greek and Latin authors
+
+**If any step fails, STOP and fix before proceeding**
+
+### Common Troubleshooting:
 - **"./gradlew: No such file or directory"**: Run `chmod +x gradlew` first
-- **"adb: command not found"**: Ensure Android SDK platform-tools are in your PATH
-- **App shows "Error"**: Check logs with `adb logcat | grep AssetPackDatabaseHelper`
-- **No authors shown**: Force clear with `adb shell pm clear com.classicsviewer.app.debug`
-- **Asset pack not found**: For local testing, use debug build method above
+- **"adb: command not found"**: Ensure Android SDK platform-tools are in your PATH  
+- **Schema crash on startup**: Use `adb logcat | grep "Pre-packaged database"` - schema mismatch
+- **ZIP extraction fails**: Check `adb logcat | grep "EOFException"` - corrupted ZIP file
+- **Empty authors list**: Database is 4KB stub - ZIP corruption during build
+- **App stuck on splash**: Clear data with `adb shell pm clear com.classicsviewer.app.debug`
+
+### Directory Structure Reference:
+- **Source database**: `data-prep/perseus_texts.db` (1.4GB uncompressed)
+- **Asset pack ZIP**: `perseus_database/src/main/assets/perseus_texts.db.zip` (300MB compressed)  
+- **Debug fallback**: `app/src/debug/assets/perseus_texts.db.zip` (copy of asset pack for local testing)
+- **Device database**: `/data/data/.../databases/perseus_texts.db` (1.4GB extracted)
 
 
 

@@ -39,6 +39,7 @@ class TextViewerPagerActivity : BaseActivity() {
     private var translationSegments: List<TranslationSegment> = emptyList()
     private var availableTranslators: List<String> = emptyList()
     private var translationsByTranslator: Map<String, List<TranslationSegment>> = emptyMap()
+    private var currentPageIndex: Int = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,6 +142,7 @@ class TextViewerPagerActivity : BaseActivity() {
             // Register page change listener AFTER data is loaded
             binding.textViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
+                    currentPageIndex = position
                     binding.pageIndicator.text = when {
                         position == 0 -> if (language == "greek") "Greek" else "Latin"
                         position - 1 < availableTranslators.size -> {
@@ -150,6 +152,12 @@ class TextViewerPagerActivity : BaseActivity() {
                     }
                 }
             })
+            
+            // Restore page position if provided
+            val initialPage = intent.getIntExtra("initial_page", 0)
+            if (initialPage > 0 && initialPage < pagerAdapter.itemCount) {
+                binding.textViewPager.setCurrentItem(initialPage, false)
+            }
             
             // Update page indicator for initial page
             binding.pageIndicator.text = if (language == "greek") "Greek" else "Latin"
@@ -164,7 +172,44 @@ class TextViewerPagerActivity : BaseActivity() {
     }
     
     private fun navigateToPreviousPage() {
-        if (currentStartLine > 1) {
+        if (currentPageIndex > 0) {
+            // On translation page - navigate based on translation segments
+            val translatorIndex = currentPageIndex - 1
+            if (translatorIndex < availableTranslators.size) {
+                val translator = availableTranslators[translatorIndex]
+                
+                // Check if there are more translations before current range
+                lifecycleScope.launch {
+                    val prevSegments = repository.getTranslationSegmentsByTranslator(
+                        bookId, translator, maxOf(1, currentStartLine - 100), currentStartLine - 1
+                    )
+                    
+                    if (prevSegments.isNotEmpty() || currentStartLine > 1) {
+                        // Navigate to previous translation page
+                        val newStart = maxOf(1, currentStartLine - 100)
+                        val newEnd = currentStartLine - 1
+                        
+                        val intent = Intent(this@TextViewerPagerActivity, TextViewerPagerActivity::class.java).apply {
+                            putExtra("work_id", workId)
+                            putExtra("book_id", bookId)
+                            putExtra("book_number", bookNumber)
+                            putExtra("start_line", newStart)
+                            putExtra("end_line", newEnd)
+                            putExtra("total_lines", totalLines)
+                            putExtra("language", language)
+                            putExtra("author_name", this@TextViewerPagerActivity.intent.getStringExtra("author_name"))
+                            putExtra("work_title", this@TextViewerPagerActivity.intent.getStringExtra("work_title"))
+                            putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
+                            putExtra("language_name", this@TextViewerPagerActivity.intent.getStringExtra("language_name"))
+                            putExtra("initial_page", currentPageIndex) // Preserve page position
+                        }
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
+        } else if (currentStartLine > 1) {
+            // On Greek/Latin page - navigate normally
             val newStart = maxOf(1, currentStartLine - 100)
             val newEnd = currentStartLine - 1
             
@@ -187,7 +232,45 @@ class TextViewerPagerActivity : BaseActivity() {
     }
     
     private fun navigateToNextPage() {
-        if (currentEndLine < totalLines) {
+        if (currentPageIndex > 0) {
+            // On translation page - navigate based on translation segments
+            val translatorIndex = currentPageIndex - 1
+            if (translatorIndex < availableTranslators.size) {
+                val translator = availableTranslators[translatorIndex]
+                val segments = translationsByTranslator[translator] ?: emptyList()
+                
+                // Check if there are more translations beyond current range
+                lifecycleScope.launch {
+                    val nextSegments = repository.getTranslationSegmentsByTranslator(
+                        bookId, translator, currentEndLine + 1, minOf(totalLines, currentEndLine + 100)
+                    )
+                    
+                    if (nextSegments.isNotEmpty() || currentEndLine < totalLines) {
+                        // Navigate to next translation page
+                        val newStart = currentEndLine + 1
+                        val newEnd = minOf(totalLines, currentEndLine + 100)
+                        
+                        val intent = Intent(this@TextViewerPagerActivity, TextViewerPagerActivity::class.java).apply {
+                            putExtra("work_id", workId)
+                            putExtra("book_id", bookId)
+                            putExtra("book_number", bookNumber)
+                            putExtra("start_line", newStart)
+                            putExtra("end_line", newEnd)
+                            putExtra("total_lines", totalLines)
+                            putExtra("language", language)
+                            putExtra("author_name", this@TextViewerPagerActivity.intent.getStringExtra("author_name"))
+                            putExtra("work_title", this@TextViewerPagerActivity.intent.getStringExtra("work_title"))
+                            putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
+                            putExtra("language_name", this@TextViewerPagerActivity.intent.getStringExtra("language_name"))
+                            putExtra("initial_page", currentPageIndex) // Preserve page position
+                        }
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
+        } else if (currentEndLine < totalLines) {
+            // On Greek/Latin page - navigate normally
             val newStart = currentEndLine + 1
             val newEnd = minOf(totalLines, currentEndLine + 100)
             

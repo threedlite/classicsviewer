@@ -130,7 +130,8 @@ class TextPageFragment : Fragment() {
                         startLine = segment.startLine,
                         endLine = segment.endLine ?: segment.startLine,
                         text = segment.translationText,
-                        translator = segment.translator
+                        translator = segment.translator,
+                        speaker = segment.speaker
                     )
                 )
             }
@@ -143,7 +144,8 @@ class TextPageFragment : Fragment() {
                     startLine = lines?.firstOrNull()?.lineNumber ?: 1,
                     endLine = lines?.lastOrNull()?.lineNumber ?: 1,
                     text = "No translation available for this section.",
-                    translator = null
+                    translator = null,
+                    speaker = null
                 )
             )
         }
@@ -164,5 +166,6 @@ data class TranslationDisplayItem(
     val startLine: Int,
     val endLine: Int,
     val text: String,
-    val translator: String?
+    val translator: String?,
+    val speaker: String?
 )

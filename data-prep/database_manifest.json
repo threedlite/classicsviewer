@@ -1,12 +1,12 @@
 {
-  "generated_at": "2025-08-06T10:59:26.413425",
+  "generated_at": "2025-08-06T12:41:20.157619",
   "database_version": "2.0",
   "statistics": {
     "total_authors": 103,
     "total_works": 845,
     "total_books": 1424,
     "total_lines": 914504,
-    "total_translation_segments": 175610,
+    "total_translation_segments": 165787,
     "total_dictionary_entries": 28647,
     "total_lemma_mappings": 1016668,
     "dictionary_by_language": {
@@ -363,7 +363,7 @@
           "title": "Supplices",
           "title_english": "Suppliant Maidens",
           "book_count": 1,
-          "total_lines": 420675,
+          "total_lines": 207675,
           "translator_count": 1,
           "books": [
             {
@@ -378,7 +378,7 @@
           "title": "Persians",
           "title_english": "Persians",
           "book_count": 1,
-          "total_lines": 403560,
+          "total_lines": 220896,
           "translator_count": 1,
           "books": [
             {
@@ -393,7 +393,7 @@
           "title": "Prometheus Bound",
           "title_english": "Prometheus Bound",
           "book_count": 1,
-          "total_lines": 425226,
+          "total_lines": 229384,
           "translator_count": 1,
           "books": [
             {
@@ -408,7 +408,7 @@
           "title": "Seven Against Thebes",
           "title_english": "Seven Against Thebes",
           "book_count": 1,
-          "total_lines": 392200,
+          "total_lines": 199280,
           "translator_count": 1,
           "books": [
             {
@@ -423,7 +423,7 @@
           "title": "Agamemnon",
           "title_english": "Agamemnon",
           "book_count": 1,
-          "total_lines": 3517800,
+          "total_lines": 726520,
           "translator_count": 2,
           "books": [
             {
@@ -438,7 +438,7 @@
           "title": "Libation Bearers",
           "title_english": "Libation Bearers",
           "book_count": 1,
-          "total_lines": 414460,
+          "total_lines": 234260,
           "translator_count": 1,
           "books": [
             {
@@ -453,7 +453,7 @@
           "title": "Eumenides",
           "title_english": "Eumenides",
           "book_count": 1,
-          "total_lines": 369770,
+          "total_lines": 189520,
           "translator_count": 1,
           "books": [
             {
@@ -1688,7 +1688,7 @@
           "title": "Clouds",
           "title_english": "Clouds",
           "book_count": 1,
-          "total_lines": 899750,
+          "total_lines": 731600,
           "translator_count": 1,
           "books": [
             {
@@ -1733,7 +1733,7 @@
           "title": "Birds",
           "title_english": "Birds",
           "book_count": 1,
-          "total_lines": 1286250,
+          "total_lines": 938105,
           "translator_count": 1,
           "books": [
             {
@@ -2382,7 +2382,7 @@
           "title": "Dithyrambs",
           "title_english": "Dithyrambs",
           "book_count": 1,
-          "total_lines": 28724,
+          "total_lines": 30060,
           "translator_count": 1,
           "books": [
             {
@@ -4731,7 +4731,7 @@
           "title": "The Cyclops",
           "title_english": "The Cyclops",
           "book_count": 1,
-          "total_lines": 235136,
+          "total_lines": 166144,
           "translator_count": 1,
           "books": [
             {
@@ -4746,7 +4746,7 @@
           "title": "Alcestis",
           "title_english": "Alcestis",
           "book_count": 1,
-          "total_lines": 560070,
+          "total_lines": 364617,
           "translator_count": 1,
           "books": [
             {
@@ -4761,7 +4761,7 @@
           "title": "Medea",
           "title_english": "Medea",
           "book_count": 1,
-          "total_lines": 697392,
+          "total_lines": 345216,
           "translator_count": 1,
           "books": [
             {
@@ -4776,7 +4776,7 @@
           "title": "Heracleidae",
           "title_english": "Heracleidae",
           "book_count": 1,
-          "total_lines": 404352,
+          "total_lines": 223236,
           "translator_count": 1,
           "books": [
             {
@@ -4791,7 +4791,7 @@
           "title": "Hippolytus",
           "title_english": "Hippolytus",
           "book_count": 1,
-          "total_lines": 807594,
+          "total_lines": 428226,
           "translator_count": 1,
           "books": [
             {
@@ -4806,7 +4806,7 @@
           "title": "Andromache",
           "title_english": "Andromache",
           "book_count": 1,
-          "total_lines": 548576,
+          "total_lines": 265440,
           "translator_count": 1,
           "books": [
             {
@@ -4821,7 +4821,7 @@
           "title": "Hecuba",
           "title_english": "Hecuba",
           "book_count": 1,
-          "total_lines": 621888,
+          "total_lines": 328640,
           "translator_count": 1,
           "books": [
             {
@@ -4836,7 +4836,7 @@
           "title": "Supplices",
           "title_english": "The Suppliants",
           "book_count": 1,
-          "total_lines": 575463,
+          "total_lines": 319020,
           "translator_count": 1,
           "books": [
             {
@@ -4851,7 +4851,7 @@
           "title": "Hercules",
           "title_english": "Heracles Mad",
           "book_count": 1,
-          "total_lines": 737978,
+          "total_lines": 394243,
           "translator_count": 1,
           "books": [
             {
@@ -4866,7 +4866,7 @@
           "title": "Ion",
           "title_english": "Ion",
           "book_count": 1,
-          "total_lines": 1201923,
+          "total_lines": 827026,
           "translator_count": 1,
           "books": [
             {
@@ -4881,7 +4881,7 @@
           "title": "Troades",
           "title_english": "The Trojan Women",
           "book_count": 1,
-          "total_lines": 576368,
+          "total_lines": 272536,
           "translator_count": 1,
           "books": [
             {
@@ -4896,7 +4896,7 @@
           "title": "Electra",
           "title_english": "Electra",
           "book_count": 1,
-          "total_lines": 765664,
+          "total_lines": 497412,
           "translator_count": 1,
           "books": [
             {
@@ -4911,7 +4911,7 @@
           "title": "Iphigenia Taurica",
           "title_english": "Iphigenia Among the Tauri",
           "book_count": 1,
-          "total_lines": 940240,
+          "total_lines": 563560,
           "translator_count": 1,
           "books": [
             {
@@ -4926,7 +4926,7 @@
           "title": "Helena",
           "title_english": "Helen",
           "book_count": 1,
-          "total_lines": 1255325,
+          "total_lines": 807115,
           "translator_count": 1,
           "books": [
             {
@@ -4941,7 +4941,7 @@
           "title": "Phoenissae",
           "title_english": "The Phoenician Maidens",
           "book_count": 1,
-          "total_lines": 1233062,
+          "total_lines": 666520,
           "translator_count": 1,
           "books": [
             {
@@ -4956,7 +4956,7 @@
           "title": "Orestes",
           "title_english": "Orestes",
           "book_count": 1,
-          "total_lines": 1295025,
+          "total_lines": 800409,
           "translator_count": 1,
           "books": [
             {
@@ -4971,7 +4971,7 @@
           "title": "The Bacchae",
           "title_english": "The Bacchae",
           "book_count": 1,
-          "total_lines": 725679,
+          "total_lines": 422739,
           "translator_count": 1,
           "books": [
             {
@@ -4986,7 +4986,7 @@
           "title": "Iphigenia Aulidensis",
           "title_english": "Iphigenia at Aulis",
           "book_count": 1,
-          "total_lines": 1077759,
+          "total_lines": 626679,
           "translator_count": 1,
           "books": [
             {
@@ -5001,7 +5001,7 @@
           "title": "Rhesus",
           "title_english": "Rhesus",
           "book_count": 1,
-          "total_lines": 1339359,
+          "total_lines": 410592,
           "translator_count": 2,
           "books": [
             {
@@ -15186,7 +15186,7 @@
           "title": "Trachiniae",
           "title_english": "Trachiniae",
           "book_count": 1,
-          "total_lines": 574275,
+          "total_lines": 311220,
           "translator_count": 1,
           "books": [
             {
@@ -15201,7 +15201,7 @@
           "title": "Antigone",
           "title_english": "Antigone",
           "book_count": 1,
-          "total_lines": 647284,
+          "total_lines": 371844,
           "translator_count": 1,
           "books": [
             {
@@ -15216,7 +15216,7 @@
           "title": "Ajax",
           "title_english": "Ajax",
           "book_count": 1,
-          "total_lines": 709280,
+          "total_lines": 411928,
           "translator_count": 1,
           "books": [
             {
@@ -15231,7 +15231,7 @@
           "title": "Oedipus Tyrannus",
           "title_english": "Oedipus Tyrannus",
           "book_count": 1,
-          "total_lines": 979540,
+          "total_lines": 643280,
           "translator_count": 1,
           "books": [
             {
@@ -15246,7 +15246,7 @@
           "title": "Electra",
           "title_english": "Electra",
           "book_count": 1,
-          "total_lines": 913096,
+          "total_lines": 587200,
           "translator_count": 1,
           "books": [
             {
@@ -15261,7 +15261,7 @@
           "title": "Philoctetes",
           "title_english": "Philoctetes",
           "book_count": 1,
-          "total_lines": 831534,
+          "total_lines": 530706,
           "translator_count": 1,
           "books": [
             {
@@ -15276,7 +15276,7 @@
           "title": "Oedipus at Colonus",
           "title_english": "Oedipus at Colonus",
           "book_count": 1,
-          "total_lines": 1260278,
+          "total_lines": 798405,
           "translator_count": 1,
           "books": [
             {
@@ -15291,7 +15291,7 @@
           "title": "Ichneutae",
           "title_english": "Tracking Satyrs",
           "book_count": 1,
-          "total_lines": 46516,
+          "total_lines": 35689,
           "translator_count": 1,
           "books": [
             {

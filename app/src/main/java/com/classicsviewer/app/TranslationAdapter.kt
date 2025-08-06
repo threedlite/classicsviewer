@@ -28,6 +28,7 @@ class TranslationAdapter(
         // Apply saved font size
         val fontSize = PreferencesManager.getFontSize(holder.itemView.context)
         holder.binding.translationText.textSize = fontSize
+        holder.binding.speakerName.textSize = fontSize * 1.5f
         
         // Apply color inversion
         if (invertColors) {
@@ -35,11 +36,13 @@ class TranslationAdapter(
             holder.binding.translationText.setTextColor(0xFF000000.toInt())
             holder.binding.lineRange.setTextColor(0xFF666666.toInt())
             holder.binding.translatorName.setTextColor(0xFF666666.toInt())
+            holder.binding.speakerName.setTextColor(0xFF0066CC.toInt()) // Blue for speakers
         } else {
             // White on black (default)
             holder.binding.translationText.setTextColor(0xFFFFFFFF.toInt())
             holder.binding.lineRange.setTextColor(0xFF999999.toInt())
             holder.binding.translatorName.setTextColor(0xFF999999.toInt())
+            holder.binding.speakerName.setTextColor(0xFF66B2FF.toInt()) // Light blue for speakers
         }
         
         // Show line range
@@ -49,6 +52,14 @@ class TranslationAdapter(
             "Lines ${segment.startLine}-${segment.endLine}"
         }
         holder.binding.lineRange.text = rangeText
+        
+        // Show speaker if available
+        if (!segment.speaker.isNullOrBlank()) {
+            holder.binding.speakerName.visibility = View.VISIBLE
+            holder.binding.speakerName.text = segment.speaker
+        } else {
+            holder.binding.speakerName.visibility = View.GONE
+        }
         
         // Show translation text
         holder.binding.translationText.text = segment.text

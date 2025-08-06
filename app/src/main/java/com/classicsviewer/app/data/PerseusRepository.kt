@@ -302,7 +302,8 @@ class PerseusRepository(context: Context) : DataRepository {
                 startLine = entity.startLine,
                 endLine = entity.endLine,
                 translationText = entity.translationText,
-                translator = entity.translator
+                translator = entity.translator,
+                speaker = entity.speaker
             )
         }
     }
@@ -319,7 +320,8 @@ class PerseusRepository(context: Context) : DataRepository {
                 startLine = entity.startLine,
                 endLine = entity.endLine,
                 translationText = entity.translationText,
-                translator = entity.translator
+                translator = entity.translator,
+                speaker = entity.speaker
             )
         }
     }

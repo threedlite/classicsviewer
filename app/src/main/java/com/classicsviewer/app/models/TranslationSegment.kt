@@ -6,5 +6,6 @@ data class TranslationSegment(
     val startLine: Int,
     val endLine: Int?,
     val translationText: String,
-    val translator: String?
+    val translator: String?,
+    val speaker: String?
 )

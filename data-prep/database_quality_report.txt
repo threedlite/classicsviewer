@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-06T10:59:26.690285
+Generated: 2025-08-06T12:41:20.424313
 
 Total Authors: 103
 Total Works: 845
@@ -69,19 +69,19 @@ Aeschines / On the Embassy translations: Charles Darwin Adams 184 segments
 
 [Aeschylus]
 Aeschylus / Agamemnon - 1,640 lines
-Aeschylus / Agamemnon translations: Herbert Weir Smyth 520 segments, Robert Browning 1625 segments
+Aeschylus / Agamemnon translations: Herbert Weir Smyth 231 segments, Robert Browning 212 segments
 Aeschylus / Eumenides - 1,030 lines
-Aeschylus / Eumenides translations: Herbert Weir Smyth 359 segments
+Aeschylus / Eumenides translations: Herbert Weir Smyth 184 segments
 Aeschylus / Libation Bearers - 1,060 lines
-Aeschylus / Libation Bearers translations: Herbert Weir Smyth 391 segments
+Aeschylus / Libation Bearers translations: Herbert Weir Smyth 221 segments
 Aeschylus / Persians - 1,062 lines
-Aeschylus / Persians translations: Herbert Weir Smyth 380 segments
+Aeschylus / Persians translations: Herbert Weir Smyth 208 segments
 Aeschylus / Prometheus Bound - 1,082 lines
-Aeschylus / Prometheus Bound translations: Herbert Weir Smyth 393 segments
+Aeschylus / Prometheus Bound translations: Herbert Weir Smyth 212 segments
 Aeschylus / Seven Against Thebes - 1,060 lines
-Aeschylus / Seven Against Thebes translations: Herbert Weir Smyth 370 segments
+Aeschylus / Seven Against Thebes translations: Herbert Weir Smyth 188 segments
 Aeschylus / Suppliant Maidens - 1,065 lines
-Aeschylus / Suppliant Maidens translations: Herbert Weir Smyth 395 segments
+Aeschylus / Suppliant Maidens translations: Herbert Weir Smyth 195 segments
 
 [Agathemerus]
 Agathemerus / tlg001 - 146 lines
@@ -200,9 +200,9 @@ Aristides, Aelius / Orationes 55 - 20 lines
 [Aristophanes]
 Aristophanes / Acharnians - 1,182 lines
 Aristophanes / Birds - 1,715 lines
-Aristophanes / Birds translations: Anonymous 750 segments
+Aristophanes / Birds translations: Anonymous 547 segments
 Aristophanes / Clouds - 1,475 lines
-Aristophanes / Clouds translations: William James Hickie 610 segments
+Aristophanes / Clouds translations: William James Hickie 496 segments
 Aristophanes / Ecclesiazusae - 1,180 lines
 Aristophanes / Frogs - 1,510 lines
 Aristophanes / Knights - 1,386 lines
@@ -344,7 +344,7 @@ Athenaeus of Naucratis / The Deipnosophists translations: Charles Duke Yonge 65 
 
 [Bacchylides]
 Bacchylides / Dithyrambs - 334 lines
-Bacchylides / Dithyrambs translations: Diane Arnson Svarlien 86 segments
+Bacchylides / Dithyrambs translations: Diane Arnson Svarlien 90 segments
 Bacchylides / Epinicians - 995 lines
 Bacchylides / Epinicians translations: Diane Arnson Svarlien 283 segments
 
@@ -676,43 +676,43 @@ Epictetus / The Enchiridion translations: George Long 53 segments, Thomas Wentwo
 
 [Euripides]
 Euripides / Alcestis - 1,143 lines
-Euripides / Alcestis translations: Edward P. Coleridge 490 segments
+Euripides / Alcestis translations: Edward P. Coleridge 319 segments
 Euripides / Andromache - 1,264 lines
-Euripides / Andromache translations: Edward P. Coleridge 434 segments
+Euripides / Andromache translations: Edward P. Coleridge 210 segments
 Euripides / Electra - 1,348 lines
-Euripides / Electra translations: Edward P. Coleridge 568 segments
+Euripides / Electra translations: Edward P. Coleridge 369 segments
 Euripides / Hecuba - 1,264 lines
-Euripides / Hecuba translations: Edward P. Coleridge 492 segments
+Euripides / Hecuba translations: Edward P. Coleridge 260 segments
 Euripides / Helen - 1,685 lines
-Euripides / Helen translations: Edward P. Coleridge 745 segments
+Euripides / Helen translations: Edward P. Coleridge 479 segments
 Euripides / Heracleidae - 1,053 lines
-Euripides / Heracleidae translations: Edward P. Coleridge 384 segments
+Euripides / Heracleidae translations: Edward P. Coleridge 212 segments
 Euripides / Heracles Mad - 1,403 lines
-Euripides / Heracles Mad translations: Edward P. Coleridge 526 segments
+Euripides / Heracles Mad translations: Edward P. Coleridge 281 segments
 Euripides / Hippolytus - 1,437 lines
-Euripides / Hippolytus translations: Edward P. Coleridge 562 segments
+Euripides / Hippolytus translations: Edward P. Coleridge 298 segments
 Euripides / Ion - 1,609 lines
-Euripides / Ion translations: Edward P. Coleridge 747 segments
+Euripides / Ion translations: Edward P. Coleridge 514 segments
 Euripides / Iphigenia Among the Tauri - 1,460 lines
-Euripides / Iphigenia Among the Tauri translations: Edward P. Coleridge 644 segments
+Euripides / Iphigenia Among the Tauri translations: Edward P. Coleridge 386 segments
 Euripides / Iphigenia at Aulis - 1,611 lines
-Euripides / Iphigenia at Aulis translations: Edward P. Coleridge 669 segments
+Euripides / Iphigenia at Aulis translations: Edward P. Coleridge 389 segments
 Euripides / Medea - 1,392 lines
-Euripides / Medea translations: Edward P. Coleridge 501 segments
+Euripides / Medea translations: Edward P. Coleridge 248 segments
 Euripides / Orestes - 1,671 lines
-Euripides / Orestes translations: Edward P. Coleridge 775 segments
+Euripides / Orestes translations: Edward P. Coleridge 479 segments
 Euripides / Rhesus - 987 lines
-Euripides / Rhesus translations: Edward P. Coleridge 377 segments, Gilbert Murray 980 segments
+Euripides / Rhesus translations: Edward P. Coleridge 198 segments, Gilbert Murray 218 segments
 Euripides / The Bacchae - 1,377 lines
-Euripides / The Bacchae translations: T. A. Buckley 527 segments
+Euripides / The Bacchae translations: T. A. Buckley 307 segments
 Euripides / The Cyclops - 704 lines
-Euripides / The Cyclops translations: Edward P. Coleridge 334 segments
+Euripides / The Cyclops translations: Edward P. Coleridge 236 segments
 Euripides / The Phoenician Maidens - 1,754 lines
-Euripides / The Phoenician Maidens translations: Edward P. Coleridge 703 segments
+Euripides / The Phoenician Maidens translations: Edward P. Coleridge 380 segments
 Euripides / The Suppliants - 1,227 lines
-Euripides / The Suppliants translations: E. P. Coleridge 469 segments
+Euripides / The Suppliants translations: E. P. Coleridge 260 segments
 Euripides / The Trojan Women - 1,304 lines
-Euripides / The Trojan Women translations: Edward P. Coleridge 442 segments
+Euripides / The Trojan Women translations: Edward P. Coleridge 209 segments
 
 [Eusebius of Caesarea]
 Eusebius of Caesarea / Ecclesiastical History - 8,529 lines total
@@ -2648,21 +2648,21 @@ Quintus Smyrnaeus / Fall of Troy / Book 14 - 659 lines
 
 [Sophocles]
 Sophocles / Ajax - 1,364 lines
-Sophocles / Ajax translations: Richard Jebb 520 segments
+Sophocles / Ajax translations: Richard Jebb 302 segments
 Sophocles / Antigone - 1,252 lines
-Sophocles / Antigone translations: Richard Jebb 517 segments
+Sophocles / Antigone translations: Richard Jebb 297 segments
 Sophocles / Electra - 1,468 lines
-Sophocles / Electra translations: Richard Jebb 622 segments
+Sophocles / Electra translations: Richard Jebb 400 segments
 Sophocles / Oedipus Tyrannus - 1,462 lines
-Sophocles / Oedipus Tyrannus translations: Richard Jebb 670 segments
+Sophocles / Oedipus Tyrannus translations: Richard Jebb 440 segments
 Sophocles / Oedipus at Colonus - 1,717 lines
-Sophocles / Oedipus at Colonus translations: Richard Jebb 734 segments
+Sophocles / Oedipus at Colonus translations: Richard Jebb 465 segments
 Sophocles / Philoctetes - 1,419 lines
-Sophocles / Philoctetes translations: Richard Jebb 586 segments
+Sophocles / Philoctetes translations: Richard Jebb 374 segments
 Sophocles / Trachiniae - 1,235 lines
-Sophocles / Trachiniae translations: Richard Jebb 465 segments
+Sophocles / Trachiniae translations: Richard Jebb 252 segments
 Sophocles / Tracking Satyrs - 401 lines
-Sophocles / Tracking Satyrs translations: Anne Mahoney 116 segments
+Sophocles / Tracking Satyrs translations: Anne Mahoney 89 segments
 
 [Strabo]
 Strabo / Geography - 30,158 lines total
