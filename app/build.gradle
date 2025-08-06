@@ -8,6 +8,8 @@ android {
     namespace 'com.classicsviewer.app'
     compileSdk 34
     
+    assetPacks = [":perseus_database"]
+    
     // Load keystore properties if available
     def keystorePropertiesFile = rootProject.file("keystore.properties")
     def keystoreProperties = new Properties()
@@ -37,6 +39,9 @@ android {
         
         // Add build timestamp
         buildConfigField "String", "BUILD_TIME", "\"${new Date().format('yyyy-MM-dd HH:mm:ss')}\""
+        
+        // Only include English and Greek languages
+        resourceConfigurations += ["en", "el"]
     }
 
     buildTypes {
@@ -99,6 +104,10 @@ dependencies {
     
     // XML parsing
     implementation 'com.fasterxml.woodstox:woodstox-core:6.5.1'
+    
+    // Play Asset Delivery
+    implementation 'com.google.android.play:asset-delivery:2.2.2'
+    implementation 'com.google.android.play:asset-delivery-ktx:2.2.2'
     
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

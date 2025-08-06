@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.classicsviewer.app.data.ObbDatabaseHelper
+import com.classicsviewer.app.data.AssetPackDatabaseHelper
 import com.classicsviewer.app.databinding.ActivityMainBinding
 import com.classicsviewer.app.utils.NavigationHelper
 import com.classicsviewer.app.utils.PreferencesManager
@@ -33,11 +33,16 @@ class MainActivity : AppCompatActivity() {
             binding.root.setBackgroundColor(0xFF000000.toInt())
         }
         
-        // Check OBB status
-        checkDatabaseSource()
-        
-        // Always start fresh - no navigation state restoration
-        setupLanguageSelection()
+        // Check if database extraction is needed
+        if (needsDatabaseExtraction()) {
+            val intent = Intent(this, DatabaseExtractionActivity::class.java)
+            startActivity(intent)
+            finish() // Close MainActivity so user can't go back
+        } else {
+            // Database ready, show language selection
+            checkDatabaseSource()
+            setupLanguageSelection()
+        }
     }
     
     private fun setupLanguageSelection() {
@@ -60,21 +65,21 @@ class MainActivity : AppCompatActivity() {
     
     
     private fun checkDatabaseSource() {
-        val obbHelper = ObbDatabaseHelper(this)
+        val assetPackHelper = AssetPackDatabaseHelper(this)
         val dbFile = getDatabasePath("perseus_texts.db")
         
         when {
-            obbHelper.isObbAvailable() && !dbFile.exists() -> {
-                Toast.makeText(this, "Database will be loaded from OBB file", Toast.LENGTH_LONG).show()
+            assetPackHelper.isAssetPackReady() && !dbFile.exists() -> {
+                Toast.makeText(this, "Database will be loaded from asset pack", Toast.LENGTH_LONG).show()
             }
-            obbHelper.isObbAvailable() && dbFile.exists() -> {
-                Toast.makeText(this, "Using database from OBB (already extracted)", Toast.LENGTH_SHORT).show()
+            assetPackHelper.isAssetPackReady() && dbFile.exists() -> {
+                Toast.makeText(this, "Using database from asset pack (already extracted)", Toast.LENGTH_SHORT).show()
             }
-            !obbHelper.isObbAvailable() && dbFile.exists() -> {
+            !assetPackHelper.isAssetPackReady() && dbFile.exists() -> {
                 Toast.makeText(this, "Using database from internal storage", Toast.LENGTH_SHORT).show()
             }
             else -> {
-                Toast.makeText(this, "Using database from APK assets", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Asset pack not found - please reinstall", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -92,6 +97,12 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    
+    private fun needsDatabaseExtraction(): Boolean {
+        val dbFile = getDatabasePath("perseus_texts.db")
+        // Need extraction if database doesn't exist
+        return !dbFile.exists()
     }
     
     override fun onResume() {

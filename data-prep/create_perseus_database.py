@@ -2818,3 +2818,30 @@ def create_database():
 
 if __name__ == "__main__":
     create_database()
+    
+    # Copy and compress database to asset pack location for Play Asset Delivery
+    import shutil
+    import os
+    import zipfile
+    asset_pack_dir = "../perseus_database/src/main/assets"
+    os.makedirs(asset_pack_dir, exist_ok=True)
+    if os.path.exists("perseus_texts.db"):
+        # Remove old uncompressed file if exists
+        uncompressed_path = os.path.join(asset_pack_dir, "perseus_texts.db")
+        if os.path.exists(uncompressed_path):
+            os.remove(uncompressed_path)
+        
+        # Create compressed version
+        zip_path = os.path.join(asset_pack_dir, "perseus_texts.db.zip")
+        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+            zf.write("perseus_texts.db", "perseus_texts.db")
+        
+        # Get file sizes
+        original_size = os.path.getsize("perseus_texts.db") / (1024 * 1024)
+        compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
+        
+        print(f"\nDatabase compressed to asset pack location: {asset_pack_dir}")
+        print(f"Original size: {original_size:.1f}MB")
+        print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
+    else:
+        print("\nWarning: Database file not found for asset pack copy")

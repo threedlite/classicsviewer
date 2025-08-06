@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.classicsviewer.app.data.DataRepository
 import com.classicsviewer.app.data.RepositoryFactory
 import com.classicsviewer.app.data.PerseusXmlParser
-import com.classicsviewer.app.data.ObbDatabaseHelper
 import com.classicsviewer.app.databinding.ActivityListBinding
 import com.classicsviewer.app.models.Author
 import com.classicsviewer.app.utils.NavigationHelper
@@ -32,14 +31,7 @@ class AuthorListActivity : BaseActivity() {
         
         supportActionBar?.title = "$languageName Authors"
         
-        // Check if database extraction is needed
-        if (needsDatabaseExtraction()) {
-            val intent = Intent(this, DatabaseExtractionActivity::class.java)
-            startActivity(intent)
-            // Don't finish - we'll continue when they return
-            return
-        }
-        
+        // Database should already be ready at this point
         setupAfterDatabaseReady()
     }
     
@@ -64,18 +56,10 @@ class AuthorListActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         
-        // Check again in case we're returning from extraction
-        if (!needsDatabaseExtraction() && !::repository.isInitialized) {
-            // Continue setup after extraction
+        // Database should already exist if we got here
+        if (!::repository.isInitialized) {
             setupAfterDatabaseReady()
         }
-    }
-    
-    private fun needsDatabaseExtraction(): Boolean {
-        val dbFile = getDatabasePath("perseus_texts.db")
-        val obbHelper = ObbDatabaseHelper(this)
-        
-        return obbHelper.isObbAvailable() && !dbFile.exists()
     }
     
     private fun setupAfterDatabaseReady() {

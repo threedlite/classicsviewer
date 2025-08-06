@@ -1,0 +1,8 @@
+apply plugin: 'com.android.asset-pack'
+
+assetPack {
+    packName = "perseus_database"
+    dynamicDelivery {
+        deliveryType = "install-time"
+    }
+}

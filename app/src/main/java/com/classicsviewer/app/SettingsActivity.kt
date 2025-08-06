@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.classicsviewer.app.data.ObbDatabaseHelper
+import com.classicsviewer.app.data.AssetPackDatabaseHelper
 import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.databinding.ActivitySettingsBinding
 import com.classicsviewer.app.utils.PreferencesManager
@@ -29,7 +29,7 @@ class SettingsActivity : BaseActivity() {
         setupColorInversionControl()
         setupButtons()
         setupBuildInfo()
-        setupObbInfo()
+        setupAssetPackInfo()
     }
     
     private fun setupFontSizeControl() {
@@ -84,7 +84,7 @@ class SettingsActivity : BaseActivity() {
         }
         
         binding.refreshDatabaseButton.setOnClickListener {
-            refreshDatabaseFromObb()
+            refreshDatabaseFromAssetPack()
         }
     }
     
@@ -98,39 +98,41 @@ class SettingsActivity : BaseActivity() {
         binding.buildTime.text = "Built: ${BuildConfig.BUILD_TIME}"
     }
     
-    private fun setupObbInfo() {
-        val obbHelper = ObbDatabaseHelper(this)
-        val obbPath = obbHelper.getObbDatabasePath()
+    private fun setupAssetPackInfo() {
+        val assetPackHelper = AssetPackDatabaseHelper(this)
+        val dbFile = getDatabasePath("perseus_texts.db")
         
-        if (obbPath != null && obbPath.exists()) {
-            binding.obbPathValue.text = obbPath.absolutePath
-            // Also show file size
-            val sizeInMB = obbPath.length() / (1024 * 1024)
-            binding.obbPathValue.text = "${obbPath.absolutePath}\n(${sizeInMB}MB)"
+        // Show database file info
+        if (dbFile.exists()) {
+            val sizeInMB = dbFile.length() / (1024 * 1024)
+            val path = dbFile.absolutePath
+            binding.obbPathValue.text = "Database location:\n$path\n\nSize: ${sizeInMB}MB"
         } else {
-            val expectedPath = "/storage/emulated/0/Android/obb/${packageName}/main.1.${packageName}.obb"
-            binding.obbPathValue.text = "Not found\nExpected at: $expectedPath"
+            binding.obbPathValue.text = "Database not yet extracted"
+        }
+        
+        // Also show asset pack status
+        val assetPath = assetPackHelper.getAssetPackDatabasePath()
+        if (assetPath != null && assetPath.parent != "assets") {
+            // Real asset pack (not debug fallback)
+            binding.obbPathValue.text = "${binding.obbPathValue.text}\n\nAsset Pack: perseus_database (Ready)"
+        } else if (assetPackHelper.isAssetPackReady()) {
+            // Debug build with assets
+            binding.obbPathValue.text = "${binding.obbPathValue.text}\n\nUsing debug assets"
         }
     }
     
-    private fun refreshDatabaseFromObb() {
-        val obbHelper = ObbDatabaseHelper(this)
+    private fun refreshDatabaseFromAssetPack() {
+        val assetPackHelper = AssetPackDatabaseHelper(this)
         
-        // Debug logging
-        val obbPath = obbHelper.getObbDatabasePath()
-        android.util.Log.d("SettingsActivity", "Looking for OBB at: ${obbPath?.absolutePath ?: "null"}")
-        android.util.Log.d("SettingsActivity", "OBB exists: ${obbPath?.exists() ?: false}")
-        android.util.Log.d("SettingsActivity", "OBB readable: ${obbPath?.canRead() ?: false}")
-        
-        if (!obbHelper.isObbAvailable()) {
-            val expectedPath = "/sdcard/Android/obb/${packageName}/main.1.${packageName}.obb"
-            Toast.makeText(this, "No OBB file found at:\n$expectedPath", Toast.LENGTH_LONG).show()
+        if (!assetPackHelper.isAssetPackReady()) {
+            Toast.makeText(this, "Asset pack not installed. Please reinstall the app.", Toast.LENGTH_LONG).show()
             return
         }
         
         AlertDialog.Builder(this)
             .setTitle("Refresh Database")
-            .setMessage("This will replace the current database with the one from the OBB file. Continue?")
+            .setMessage("This will replace the current database with the one from the asset pack. Continue?")
             .setPositiveButton("Yes") { _, _ ->
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
@@ -143,8 +145,8 @@ class SettingsActivity : BaseActivity() {
                         // Force close any existing database instance
                         PerseusDatabase.destroyInstance()
                         
-                        // Extract from OBB
-                        val success = obbHelper.extractDatabaseFromObb()
+                        // Copy from asset pack
+                        val success = assetPackHelper.copyDatabaseFromAssetPack()
                         
                         withContext(Dispatchers.Main) {
                             if (success) {
@@ -156,7 +158,7 @@ class SettingsActivity : BaseActivity() {
                                 finishAffinity()
                             } else {
                                 Toast.makeText(this@SettingsActivity, 
-                                    "Failed to extract database from OBB", 
+                                    "Failed to copy database from asset pack", 
                                     Toast.LENGTH_SHORT).show()
                             }
                         }

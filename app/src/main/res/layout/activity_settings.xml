@@ -116,7 +116,7 @@
             android:id="@+id/obbPathLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OBB File Location:"
+            android:text="Asset Pack Status:"
             android:textSize="14sp"
             android:textColor="?android:attr/textColorSecondary"
             android:paddingStart="16dp"
@@ -138,7 +138,7 @@
             android:id="@+id/refreshDatabaseButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Refresh Database from OBB"
+            android:text="Refresh Database from Asset Pack"
             android:textAlignment="textStart"
             android:padding="16dp"
             style="?android:attr/borderlessButtonStyle" />

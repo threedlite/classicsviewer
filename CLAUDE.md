@@ -51,69 +51,106 @@ When you see `java.lang.IllegalStateException: Pre-packaged database has an inva
 - **Room validates EXACT schema match** - Even minor differences like nullable vs non-null will crash the app
 - **Always test with pm clear** - Old databases can mask schema issues
 
-## CRITICAL: Debug vs Release OBB Deployment
+## Play Asset Delivery Migration (Replaces OBB)
 
-**EXTREMELY IMPORTANT**: Debug builds look for OBB files with `.debug` suffix!
+**IMPORTANT**: This app now uses Google Play Asset Delivery instead of OBB files.
 
-### When deploying debug builds:
-1. The app package name is `com.classicsviewer.app.debug` (note the `.debug` suffix)
-2. The OBB must be at: `/storage/emulated/0/Android/obb/com.classicsviewer.app.debug/main.1.com.classicsviewer.app.debug.obb`
-3. If you only have the release OBB, copy it to the debug location:
-   ```bash
-   adb shell mkdir -p /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
-   adb shell cp /storage/emulated/0/Android/obb/com.classicsviewer.app/main.1.com.classicsviewer.app.obb \
-                /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/main.1.com.classicsviewer.app.debug.obb
-   ```
+### Goal: Fast-Follow Delivery
+- **Production Goal**: Use fast-follow delivery type (downloads after app install)
+- **Database Size**: 774MB uncompressed, 171MB compressed
+- **Current Status**: Using install-time delivery for easier local testing
 
-### To avoid this issue:
-- Always check the logs for which OBB path the app is looking for
-- Debug builds ALWAYS add `.debug` suffix to package names and OBB paths
-- After copying OBB, force stop and restart the app for clean database extraction
+### Key Components:
+1. **Asset Pack Module**: `perseus_database`
+   - Contains compressed database: `perseus_texts.db.zip`
+   - Manifest location: `perseus_database/src/main/AndroidManifest.xml`
+   - Change delivery type to `<dist:fast-follow />` for production
 
-### IMPORTANT: APK and OBB Deployment
-**When reinstalling the APK, you MUST also reinstall the OBB file!**
-- Android cleans up the OBB directory when uninstalling an app
-- The OBB file is the uncompressed SQLite database (not a ZIP)
-- After `adb install`, always push the OBB:
-  ```bash
-  adb shell mkdir -p /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
-  adb push data-prep/output/main.1.com.classicsviewer.app.debug.obb /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
-  ```
-- **CRITICAL**: Even if you only update the APK code (not the database), you still need to redeploy the OBB because `adb uninstall` removes it!
+2. **Database Extraction Flow**:
+   - App launches → MainActivity checks if DB exists
+   - If not → Immediately launches DatabaseExtractionActivity
+   - Extracts and decompresses database (~6-7 seconds)
+   - Returns to MainActivity for language selection
 
-### How the OBB Database System Works
-1. **OBB File Format**: The OBB file is a compressed ZIP containing the SQLite database
-   - Created by zipping the database: `zip -9 main.1.com.classicsviewer.app.debug.obb perseus_texts.db`
-   - Compressed size: ~173MB (78% reduction from 786MB)
-   - The ZIP must contain `perseus_texts.db` as the root entry
-   
-2. **Database Extraction Process**:
-   - On first launch after language selection, the app extracts the database from the compressed OBB
-   - From: `/storage/emulated/0/Android/obb/com.classicsviewer.app.debug/main.1.com.classicsviewer.app.debug.obb`
-   - To: `/data/data/com.classicsviewer.app.debug/databases/perseus_texts.db`
-   - Shows a progress dialog during extraction (takes ~2 seconds)
-   - The app automatically detects if the OBB is compressed (ZIP) or uncompressed (raw SQLite)
-   
-3. **Creating OBB Files**:
-   ```bash
-   cd data-prep/output
-   # For compressed OBB (recommended):
-   zip -9 main.1.com.classicsviewer.app.debug.obb perseus_texts.db
-   
-   # For release:
-   zip -9 main.1.com.classicsviewer.app.obb perseus_texts.db
-   ```
-   
-4. **Common Issues**:
-   - If extraction fails, check:
-     - OBB is a valid ZIP file: `file main.1.com.classicsviewer.app.debug.obb` should show "Zip archive data"
-     - ZIP contains perseus_texts.db: `unzip -l main.1.com.classicsviewer.app.debug.obb`
-     - NOT a ZIP of a ZIP (common mistake)
-   - If no authors show after deployment, check:
-     - Language selection in preferences (`adb shell pm clear` forces re-selection)
-     - Database extracted successfully to internal storage
-     - OBB file exists and is readable
-   - The Settings screen shows the OBB path and size for debugging
+### Local Testing Challenge & Solution:
+
+**Problem**: Bundletool with `--local-testing` doesn't properly support asset packs
+- Asset packs aren't accessible via AssetPackManager API
+- Fast-follow packs behave as on-demand in local testing
+
+**Solution**: Debug builds include database in APK assets
+```bash
+# Database is copied to debug assets:
+cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
+```
+
+**How it works**:
+- AssetPackDatabaseHelper detects debug builds
+- Falls back to extracting from APK assets instead of asset pack
+- Allows seamless local testing without asset pack infrastructure
+
+### Deployment Commands:
+
+**For local testing (debug build)**:
+```bash
+./gradlew installDebug
+# Database is included in APK, no separate asset pack needed
+```
+
+**For bundletool testing**:
+```bash
+./deploy_with_bundletool.sh
+# Uses bundletool to simulate Play Store deployment
+```
+
+### Code Structure:
+- **AssetPackDatabaseHelper**: Handles both asset pack and debug fallback
+- **DatabaseExtractionActivity**: Shows progress during extraction
+- **MainActivity**: Checks DB on launch, triggers extraction if needed
+
+### Production Deployment:
+1. Change to fast-follow in `perseus_database/src/main/AndroidManifest.xml`
+2. Build AAB: `./gradlew bundleRelease`
+3. Upload to Play Console - asset pack will be handled automatically
+
+## File Structure Explanation
+
+### Multiple AndroidManifest.xml Files:
+1. **`app/src/main/AndroidManifest.xml`** - Main app manifest
+   - Declares activities, permissions, app metadata
+   - Standard Android app configuration
+
+2. **`perseus_database/src/main/AndroidManifest.xml`** - Asset pack manifest
+   - Separate module for Play Asset Delivery
+   - Declares delivery type (install-time/fast-follow/on-demand)
+   - Contains: `<dist:delivery><dist:install-time /></dist:delivery>`
+
+### Multiple Database Files:
+1. **`data-prep/perseus_texts.db`** - Source database
+   - Created by `create_perseus_database.py`
+   - Original uncompressed SQLite (774MB)
+   - Never shipped with app
+
+2. **`perseus_database/src/main/assets/perseus_texts.db.zip`** - Production asset pack
+   - Compressed version (171MB)
+   - For Play Asset Delivery via Google Play
+   - Used in production releases
+
+3. **`app/src/debug/assets/perseus_texts.db.zip`** - Debug fallback
+   - Copy for local testing only
+   - Included in debug APKs because bundletool doesn't work well locally
+   - NOT included in release builds
+
+4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
+   - On-device location after extraction
+   - Full 774MB uncompressed database
+   - Created on first app launch
+
+### Why This Structure?
+- **Modular**: Asset pack is a separate module for Play Store delivery
+- **Dual approach**: Production uses Play Asset Delivery, debug uses APK assets
+- **Compression**: Reduces download from 774MB to 171MB
+- **Local testing**: Debug fallback avoids bundletool limitations
 
 ## Translation Alignment System
 
@@ -163,48 +200,34 @@ To rebuild and deploy the app from scratch:
 # 1. Build the database (takes ~5 minutes)
 cd data-prep
 python3 create_perseus_database.py
-# Or for full build with all enhancements:
-# python3 build_database.py
+# This creates perseus_texts.db and automatically:
+# - Compresses it to perseus_texts.db.zip (774MB → 171MB)
+# - Copies to perseus_database/src/main/assets/
+cd ..
 
-# 2. Create compressed OBB file
-mv perseus_texts.db output/
-cd output
-zip -9 main.1.com.classicsviewer.app.debug.obb perseus_texts.db
-cd ../..
-
-# 3. Build debug APK
-chmod +x gradlew  # Only needed once
-./gradlew assembleDebug
-
-# 4. Deploy to phone
-adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell mkdir -p /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
-adb push data-prep/output/main.1.com.classicsviewer.app.debug.obb /storage/emulated/0/Android/obb/com.classicsviewer.app.debug/
+# 2. For debug builds (recommended for local testing):
+cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
+./gradlew installDebug
 adb shell pm clear com.classicsviewer.app.debug
+
+# 3. For production-like testing with bundletool:
+./deploy_with_bundletool.sh
+# This builds AAB and uses bundletool for deployment
 ```
 
 ### Important Notes:
-- The database build creates a ~786MB SQLite file that gets compressed to ~171MB
-- **ALWAYS** redeploy the OBB when reinstalling the APK (Android removes OBB on uninstall)
-- The `pm clear` command ensures the app starts fresh with language selection
-- First launch after deployment extracts the database (takes ~2 seconds with progress dialog)
-- The APK build shows Kotlin warnings but these can be ignored
-
-### One-Line Deployment (if scripts exist):
-```bash
-# For complete rebuild and deployment:
-./build_and_deploy.sh
-
-# For database-only updates:
-./deploy_database_only.sh
-```
+- The database build creates a ~774MB SQLite file that gets compressed to ~171MB
+- Debug builds include database in APK for easy local testing
+- The `pm clear` command ensures the app starts fresh
+- First launch extracts the database (takes ~6-7 seconds with progress dialog)
+- Database location shown in Settings screen
 
 ### Troubleshooting:
 - **"./gradlew: No such file or directory"**: Run `chmod +x gradlew` first
 - **"adb: command not found"**: Ensure Android SDK platform-tools are in your PATH
-- **App crashes on startup**: Check logs with `adb logcat | grep "Pre-packaged database"` for schema mismatches
-- **No authors shown**: Force language reselection with `adb shell pm clear com.classicsviewer.app.debug`
-- **Wrong directory errors**: Always run commands from project root unless `cd` is specified
+- **App shows "Error"**: Check logs with `adb logcat | grep AssetPackDatabaseHelper`
+- **No authors shown**: Force clear with `adb shell pm clear com.classicsviewer.app.debug`
+- **Asset pack not found**: For local testing, use debug build method above
 
 
 

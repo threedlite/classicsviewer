@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.classicsviewer.app"
+    split="perseus_database">
+    
+    <dist:module
+        xmlns:dist="http://schemas.android.com/apk/distribution"
+        dist:type="asset-pack">
+        <dist:fusing dist:include="true" />
+        <dist:delivery>
+            <dist:install-time />
+        </dist:delivery>
+    </dist:module>
+    
+</manifest>
