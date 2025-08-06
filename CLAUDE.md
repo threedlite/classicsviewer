@@ -51,13 +51,13 @@ When you see `java.lang.IllegalStateException: Pre-packaged database has an inva
 - **Room validates EXACT schema match** - Even minor differences like nullable vs non-null will crash the app
 - **Always test with pm clear** - Old databases can mask schema issues
 
-## Play Asset Delivery Migration (Replaces OBB)
+## Play Asset Delivery
 
-**IMPORTANT**: This app now uses Google Play Asset Delivery instead of OBB files.
+**IMPORTANT**: This app uses Google Play Asset Delivery for efficient database distribution.
 
 ### Goal: Fast-Follow Delivery
 - **Production Goal**: Use fast-follow delivery type (downloads after app install)
-- **Database Size**: 1.2GB uncompressed, 275MB compressed
+- **Database Size**: 1.4GB uncompressed, 300MB compressed
 - **Current Status**: Using install-time delivery for easier local testing
 
 ### Key Components:
@@ -128,11 +128,11 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 ### Multiple Database Files:
 1. **`data-prep/perseus_texts.db`** - Source database
    - Created by `create_perseus_database.py`
-   - Original uncompressed SQLite (1.2GB)
+   - Original uncompressed SQLite (1.4GB)
    - Never shipped with app
 
 2. **`perseus_database/src/main/assets/perseus_texts.db.zip`** - Production asset pack
-   - Compressed version (275MB)
+   - Compressed version (300MB)
    - For Play Asset Delivery via Google Play
    - Used in production releases
 
@@ -143,13 +143,13 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 
 4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
    - On-device location after extraction
-   - Full 1.2GB uncompressed database
+   - Full 1.4GB uncompressed database
    - Created on first app launch
 
 ### Why This Structure?
 - **Modular**: Asset pack is a separate module for Play Store delivery
 - **Dual approach**: Production uses Play Asset Delivery, debug uses APK assets
-- **Compression**: Reduces download from 1.2GB to 275MB
+- **Compression**: Reduces download from 1.4GB to 300MB
 - **Local testing**: Debug fallback avoids bundletool limitations
 
 ## Translation Alignment System
@@ -183,6 +183,50 @@ In Perseus texts, Bekker references appear as milestones in the XML and require 
 - The database creation process detects Bekker milestones and creates appropriate line mappings
 - Translation segments using Bekker references are aligned to the corresponding line ranges
 - This ensures proper synchronization between Greek text and translations in works like Aristotle's Poetics
+
+## Translation Alignment Solution
+
+### Universal Translation Lookup
+The app now uses a `translation_lookup` table to handle all translation alignment patterns:
+
+### How It Works
+1. **During Database Creation**: A lookup table is built mapping every Greek line to its translation segments
+2. **Pattern Detection**: Automatically detects and handles:
+   - **Direct mapping**: Translation line numbers match Greek lines
+   - **Offset translations**: Consistent offset between Greek and translation numbers
+   - **Section-based**: Translation uses section numbers instead of line numbers
+   - **Partial coverage**: Translation only covers part of the text
+   - **Complex patterns**: Bekker numbering, Stephanus pagination, etc.
+
+3. **Proximity Mapping**: For lines without direct translation, finds nearest segment within 100 lines
+4. **Universal Query**: The app's DAO queries check both direct range overlap AND lookup table
+
+### Benefits
+- **Always finds translations**: Even with misaligned numbering systems
+- **Handles all edge cases**: Bekker, sections, offsets, partial translations
+- **No manual fixes needed**: Works generically for all texts
+- **Fast lookups**: Indexed for performance
+
+### Implementation
+```sql
+-- Enhanced translation query
+SELECT DISTINCT ts.* FROM translation_segments ts
+WHERE ts.book_id = :bookId 
+AND (
+    -- Original range-based lookup
+    (ts.start_line <= :endLine AND (ts.end_line IS NULL OR ts.end_line >= :startLine))
+    OR
+    -- Lookup table based mapping
+    EXISTS (
+        SELECT 1 FROM translation_lookup tl 
+        WHERE tl.book_id = :bookId 
+        AND tl.segment_id = ts.id
+        AND tl.line_number BETWEEN :startLine AND :endLine
+    )
+)
+```
+
+This ensures that when viewing any Greek text and swiping to translation view, the appropriate translation will be found regardless of the numbering scheme used.
 
 ## Occurrence Highlighting System
 
@@ -240,29 +284,27 @@ The database build uses pre-extracted Wiktionary data for morphological analysis
 To rebuild and deploy the app from scratch (fully automated):
 
 ```bash
-# Option 1: Full rebuild and deploy (recommended)
-# - Rebuilds database from scratch
-# - Creates compressed asset pack
-# - Builds and deploys debug APK
-# - Clears app data for fresh start
-./deploy_complete.sh
-
-# Option 2: Deploy with existing database (faster)
+# Option 1: Deploy with existing database (recommended)
 # - Uses existing database in perseus_database/src/main/assets/
 # - Builds and deploys debug APK
 # - Clears app data
 ./deploy_simple.sh
 
-# Option 3: Production-like testing with bundletool
+# Option 2: Production-like testing with bundletool
 # - Creates AAB with asset pack
 # - Uses bundletool for deployment simulation
 ./deploy_with_bundletool.sh
 ```
 
+### Database Build Time
+- **Full database creation**: ~4 minutes
+- Processes 100 Greek authors and 95 Latin authors
+- Creates comprehensive translation lookup table for all texts
+
 ### Manual Steps (Only if scripts fail):
 
 ```bash
-# If you need to rebuild database only:
+# If you need to rebuild database only (takes ~4 minutes):
 cd data-prep && python3 create_perseus_database.py && cd ..
 
 # If you need manual debug deployment:
@@ -272,7 +314,7 @@ adb shell pm clear com.classicsviewer.app.debug
 ```
 
 ### Important Notes:
-- The database build creates a ~1.2GB SQLite file that gets compressed to ~275MB
+- The database build creates a ~1.4GB SQLite file that gets compressed to ~300MB
 - Debug builds include database in APK for easy local testing
 - The `pm clear` command ensures the app starts fresh
 - First launch extracts the database (takes ~6-7 seconds with progress dialog)

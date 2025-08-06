@@ -8,11 +8,21 @@ import com.classicsviewer.app.database.entities.TranslationSegmentEntity
 interface TranslationSegmentDao {
     
     @Query("""
-        SELECT * FROM translation_segments 
-        WHERE book_id = :bookId 
-        AND start_line <= :endLine 
-        AND (end_line IS NULL OR end_line >= :startLine)
-        ORDER BY start_line
+        SELECT DISTINCT ts.* FROM translation_segments ts
+        WHERE ts.book_id = :bookId 
+        AND (
+            -- Original range-based lookup
+            (ts.start_line <= :endLine AND (ts.end_line IS NULL OR ts.end_line >= :startLine))
+            OR
+            -- Lookup table based mapping
+            EXISTS (
+                SELECT 1 FROM translation_lookup tl 
+                WHERE tl.book_id = :bookId 
+                AND tl.segment_id = ts.id
+                AND tl.line_number BETWEEN :startLine AND :endLine
+            )
+        )
+        ORDER BY ts.start_line
     """)
     suspend fun getTranslationSegments(
         bookId: String, 
@@ -30,12 +40,22 @@ interface TranslationSegmentDao {
     suspend fun getAvailableTranslators(bookId: String): List<String>
     
     @Query("""
-        SELECT * FROM translation_segments 
-        WHERE book_id = :bookId 
-        AND translator = :translator
-        AND start_line <= :endLine 
-        AND (end_line IS NULL OR end_line >= :startLine)
-        ORDER BY start_line
+        SELECT DISTINCT ts.* FROM translation_segments ts
+        WHERE ts.book_id = :bookId 
+        AND ts.translator = :translator
+        AND (
+            -- Original range-based lookup
+            (ts.start_line <= :endLine AND (ts.end_line IS NULL OR ts.end_line >= :startLine))
+            OR
+            -- Lookup table based mapping
+            EXISTS (
+                SELECT 1 FROM translation_lookup tl 
+                WHERE tl.book_id = :bookId 
+                AND tl.segment_id = ts.id
+                AND tl.line_number BETWEEN :startLine AND :endLine
+            )
+        )
+        ORDER BY ts.start_line
     """)
     suspend fun getTranslationSegmentsByTranslator(
         bookId: String,

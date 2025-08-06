@@ -209,6 +209,17 @@
                 android:textColor="?android:attr/textColorSecondary"
                 android:paddingTop="4dp" />
 
+            <TextView
+                android:id="@+id/githubLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="https://github.com/threedlite/classicsviewer"
+                android:textSize="12sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:paddingTop="8dp"
+                android:autoLink="web"
+                android:linksClickable="true" />
+
         </LinearLayout>
 
     </LinearLayout>

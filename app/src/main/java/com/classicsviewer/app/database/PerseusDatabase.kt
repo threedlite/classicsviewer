@@ -18,7 +18,8 @@ import java.io.File
         WordEntity::class,
         LemmaMapEntity::class,
         DictionaryEntity::class,
-        TranslationSegmentEntity::class
+        TranslationSegmentEntity::class,
+        TranslationLookupEntity::class
     ],
     version = 3,
     exportSchema = false

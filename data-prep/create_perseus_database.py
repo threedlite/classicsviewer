@@ -684,8 +684,8 @@ def get_text_content(elem):
     return ''.join(text_parts)
 
 
-def get_section_line_mapping(cursor, book_id, max_section):
-    """Create a mapping from section numbers to line ranges"""
+def get_section_line_mapping(cursor, book_id, max_section, segment_count=None):
+    """Create a mapping from section numbers to line ranges with improved detection"""
     
     # Get total lines for this book
     cursor.execute("""
@@ -699,9 +699,23 @@ def get_section_line_mapping(cursor, book_id, max_section):
     if not line_count or not max_line or not max_section:
         return {}
     
-    # Check if we need section-to-line mapping
-    # If max_section is much smaller than max_line, we need mapping
-    if max_section < max_line / 2:
+    # Improved detection: if max_section equals segment count, it's likely section numbering
+    # This handles cases like Aeschines where 196 sections map to 866 lines
+    if segment_count and max_section == segment_count and max_section < max_line / 2:
+        section_map = {}
+        lines_per_section = max_line / max_section
+        
+        for section_num in range(1, max_section + 1):
+            start_line = int((section_num - 1) * lines_per_section) + 1
+            end_line = int(section_num * lines_per_section)
+            if end_line > max_line:
+                end_line = max_line
+            section_map[section_num] = (start_line, end_line)
+        return section_map
+    
+    # Enhanced threshold detection - avoid mapping large section numbers
+    # Only map if sections are numbered significantly lower than lines
+    if max_section < max_line / 3 and max_section < 200:
         section_map = {}
         lines_per_section = max_line / max_section
         
@@ -857,7 +871,8 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     
     # Check if we need section-to-line mapping
     max_section = max((s['start_line'] for s in segments if isinstance(s['start_line'], int)), default=0)
-    section_map = get_section_line_mapping(cursor, book_id, max_section)
+    # Pass segment count to improve section detection
+    section_map = get_section_line_mapping(cursor, book_id, max_section, len(segments))
     
     for segment in segments:
         start_line = segment['start_line']
@@ -2854,21 +2869,152 @@ def create_database():
     total_authors, authors_with_trans = cursor.fetchone()
     print(f"Greek authors with translations: {authors_with_trans}/{total_authors}")
     
+    # Create translation lookup table for better alignment
+    print("\n=== CREATING TRANSLATION LOOKUP TABLE ===")
+    try:
+        create_translation_lookup_table(conn)
+    except Exception as e:
+        print(f"Warning during translation lookup table creation: {e}")
+        print("Continuing...")
+    
     conn.close()
     print("\n✓ Database created successfully!")
 
-if __name__ == "__main__":
-    import time
-    start_time = time.time()
-    create_database()
-    print(f"\nTotal build time: {(time.time() - start_time)/60:.1f} minutes")
+
+def create_translation_lookup_table(conn):
+    """Create a normalized lookup table for translation alignment"""
+    cursor = conn.cursor()
     
-    # Copy and compress database to asset pack location for Play Asset Delivery
+    # Drop and recreate the lookup table
+    cursor.execute("DROP TABLE IF EXISTS translation_lookup")
+    cursor.execute("""
+        CREATE TABLE translation_lookup (
+            book_id TEXT NOT NULL,
+            line_number INTEGER NOT NULL,
+            segment_id INTEGER NOT NULL,
+            PRIMARY KEY (book_id, line_number, segment_id),
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+            FOREIGN KEY (segment_id) REFERENCES translation_segments(id) ON DELETE CASCADE
+        )
+    """)
+    
+    # Create indexes to match Room entity definition exactly
+    cursor.execute("CREATE INDEX index_translation_lookup_book_id_line_number ON translation_lookup(book_id, line_number)")
+    cursor.execute("CREATE INDEX index_translation_lookup_segment_id ON translation_lookup(segment_id)")
+    
+    # Get all books with translations
+    cursor.execute("""
+        SELECT DISTINCT b.id, COUNT(DISTINCT tl.line_number), 
+               MIN(tl.line_number), MAX(tl.line_number)
+        FROM books b
+        JOIN text_lines tl ON b.id = tl.book_id
+        WHERE EXISTS (SELECT 1 FROM translation_segments ts WHERE ts.book_id = b.id)
+        GROUP BY b.id
+    """)
+    
+    books = cursor.fetchall()
+    total_mappings = 0
+    
+    for book_id, line_count, min_line, max_line in books:
+        # Get translation segments
+        cursor.execute("""
+            SELECT id, start_line, end_line
+            FROM translation_segments
+            WHERE book_id = ?
+            ORDER BY start_line
+        """, (book_id,))
+        
+        segments = cursor.fetchall()
+        if not segments:
+            continue
+            
+        # Get actual line numbers from text_lines
+        cursor.execute("""
+            SELECT DISTINCT line_number 
+            FROM text_lines 
+            WHERE book_id = ?
+        """, (book_id,))
+        valid_lines = set(row[0] for row in cursor.fetchall())
+        
+        # Detect if translation uses different numbering
+        max_trans_line = max(seg[2] for seg in segments) if segments else 0
+        needs_mapping = max_trans_line < max_line / 2 or max_trans_line > max_line * 2
+        
+        book_mappings = 0
+        
+        for seg_id, start, end in segments:
+            if needs_mapping and max_trans_line < 500 and max_trans_line > 0:
+                # Section-based translation - distribute across actual lines
+                proportion_start = (start - 1) / max_trans_line
+                proportion_end = end / max_trans_line
+                
+                mapped_start = int(min_line + proportion_start * (max_line - min_line))
+                mapped_end = int(min_line + proportion_end * (max_line - min_line))
+                
+                for line_num in range(mapped_start, mapped_end + 1):
+                    if line_num in valid_lines:
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO translation_lookup 
+                            VALUES (?, ?, ?)
+                        """, (book_id, line_num, seg_id))
+                        book_mappings += 1
+            else:
+                # Direct line mapping or close enough
+                for line_num in range(start, end + 1):
+                    if line_num in valid_lines:
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO translation_lookup 
+                            VALUES (?, ?, ?)
+                        """, (book_id, line_num, seg_id))
+                        book_mappings += 1
+        
+        # For lines without direct mappings, find nearest segment
+        unmapped_lines = valid_lines - set(
+            row[0] for row in cursor.execute(
+                "SELECT DISTINCT line_number FROM translation_lookup WHERE book_id = ?", 
+                (book_id,)
+            )
+        )
+        
+        if unmapped_lines and segments:
+            for line_num in unmapped_lines:
+                # Find nearest segment
+                best_seg = None
+                min_dist = float('inf')
+                
+                for seg_id, start, end in segments:
+                    dist = min(abs(line_num - start), abs(line_num - end))
+                    if dist < min_dist and dist < 100:  # Within 100 lines
+                        min_dist = dist
+                        best_seg = seg_id
+                
+                if best_seg:
+                    cursor.execute("""
+                        INSERT OR IGNORE INTO translation_lookup 
+                        VALUES (?, ?, ?)
+                    """, (book_id, line_num, best_seg))
+                    book_mappings += 1
+        
+        total_mappings += book_mappings
+        if book_mappings > 0:
+            coverage = len(set(row[0] for row in cursor.execute(
+                "SELECT line_number FROM translation_lookup WHERE book_id = ?", (book_id,)
+            ))) / line_count * 100
+            print(f"  {book_id}: {book_mappings} mappings ({coverage:.1f}% coverage)")
+    
+    conn.commit()
+    print(f"\nTotal translation mappings: {total_mappings}")
+
+
+def compress_and_copy_database():
+    """Compress database and copy to asset pack location"""
     import shutil
     import os
     import zipfile
+    
     asset_pack_dir = "../perseus_database/src/main/assets"
     os.makedirs(asset_pack_dir, exist_ok=True)
+    
     if os.path.exists("perseus_texts.db"):
         # Remove old uncompressed file if exists
         uncompressed_path = os.path.join(asset_pack_dir, "perseus_texts.db")
@@ -2877,6 +3023,7 @@ if __name__ == "__main__":
         
         # Create compressed version
         zip_path = os.path.join(asset_pack_dir, "perseus_texts.db.zip")
+        print(f"\nCompressing database to {zip_path}...")
         with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
             zf.write("perseus_texts.db", "perseus_texts.db")
         
@@ -2884,8 +3031,22 @@ if __name__ == "__main__":
         original_size = os.path.getsize("perseus_texts.db") / (1024 * 1024)
         compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
         
-        print(f"\nDatabase compressed to asset pack location: {asset_pack_dir}")
+        print(f"Database compressed to asset pack location: {asset_pack_dir}")
         print(f"Original size: {original_size:.1f}MB")
         print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
+        return True
     else:
         print("\nWarning: Database file not found for asset pack copy")
+        return False
+
+
+if __name__ == "__main__":
+    import time
+    start_time = time.time()
+    
+    # Create database
+    create_database()
+    print(f"\nTotal build time: {(time.time() - start_time)/60:.1f} minutes")
+    
+    # Compress and copy database
+    compress_and_copy_database()
