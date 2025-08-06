@@ -28,8 +28,10 @@
         <activity android:name=".AuthorListActivity" />
         <activity android:name=".WorkListActivity" />
         <activity android:name=".BookListActivity" />
-        <activity android:name=".TextViewerActivity" />
-        <activity android:name=".TextViewerPagerActivity" />
+        <activity android:name=".TextViewerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".TextViewerPagerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name=".DictionaryActivity" />
         <activity android:name=".LemmaOccurrencesActivity" />
         <activity android:name=".SettingsActivity" />

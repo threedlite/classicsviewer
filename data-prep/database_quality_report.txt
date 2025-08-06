@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-06T12:41:20.424313
+Generated: 2025-08-06T14:03:51.424360
 
 Total Authors: 103
 Total Works: 845
@@ -77,7 +77,7 @@ Aeschylus / Libation Bearers translations: Herbert Weir Smyth 221 segments
 Aeschylus / Persians - 1,062 lines
 Aeschylus / Persians translations: Herbert Weir Smyth 208 segments
 Aeschylus / Prometheus Bound - 1,082 lines
-Aeschylus / Prometheus Bound translations: Herbert Weir Smyth 212 segments
+Aeschylus / Prometheus Bound translations: Herbert Weir Smyth 211 segments
 Aeschylus / Seven Against Thebes - 1,060 lines
 Aeschylus / Seven Against Thebes translations: Herbert Weir Smyth 188 segments
 Aeschylus / Suppliant Maidens - 1,065 lines
@@ -680,7 +680,7 @@ Euripides / Alcestis translations: Edward P. Coleridge 319 segments
 Euripides / Andromache - 1,264 lines
 Euripides / Andromache translations: Edward P. Coleridge 210 segments
 Euripides / Electra - 1,348 lines
-Euripides / Electra translations: Edward P. Coleridge 369 segments
+Euripides / Electra translations: Edward P. Coleridge 368 segments
 Euripides / Hecuba - 1,264 lines
 Euripides / Hecuba translations: Edward P. Coleridge 260 segments
 Euripides / Helen - 1,685 lines
@@ -700,7 +700,7 @@ Euripides / Iphigenia at Aulis translations: Edward P. Coleridge 389 segments
 Euripides / Medea - 1,392 lines
 Euripides / Medea translations: Edward P. Coleridge 248 segments
 Euripides / Orestes - 1,671 lines
-Euripides / Orestes translations: Edward P. Coleridge 479 segments
+Euripides / Orestes translations: Edward P. Coleridge 478 segments
 Euripides / Rhesus - 987 lines
 Euripides / Rhesus translations: Edward P. Coleridge 198 segments, Gilbert Murray 218 segments
 Euripides / The Bacchae - 1,377 lines
@@ -1118,11 +1118,11 @@ Horace / Odes / Book 4 - 582 lines
 Horace / Odes translations: John Conington 574 segments
 Horace / Satires - 2,115 lines total
 Horace / Satires / Book 1 - 1,031 lines
-Horace / Satires translations: Christopher Smart 38 segments
+Horace / Satires translations: Christopher Smart 22 segments
 Horace / Satires / Book 2 - 1,084 lines
 Horace / Satires translations: Christopher Smart 164 segments
 Horace / The Art of Poetry: To the Pisos - 476 lines
-Horace / The Art of Poetry: To the Pisos translations: Christopher Smart 103 segments
+Horace / The Art of Poetry: To the Pisos translations: Christopher Smart 102 segments
 
 [Hyperides]
 Hyperides / Against Athenogenes - 240 lines
@@ -1179,7 +1179,7 @@ Isocrates / Against Lochites translations: Larue Van Hook 22 segments
 Isocrates / Against the Sophists - 47 lines
 Isocrates / Against the Sophists translations: George Norlin 22 segments
 Isocrates / Antidosis - 695 lines
-Isocrates / Antidosis translations: George Norlin 323 segments
+Isocrates / Antidosis translations: George Norlin 321 segments
 Isocrates / Areopagiticus - 199 lines
 Isocrates / Areopagiticus translations: George Norlin 84 segments
 Isocrates / Busiris - 110 lines
@@ -2783,7 +2783,7 @@ Xenophon / Cyropaedia translations: H. G. Dakyns 157 segments
 Xenophon / Cyropaedia / Book 7 - 1,210 lines
 Xenophon / Cyropaedia translations: H. G. Dakyns 201 segments
 Xenophon / Cyropaedia / Book 8 - 1,770 lines
-Xenophon / Cyropaedia translations: H. G. Dakyns 276 segments
+Xenophon / Cyropaedia translations: H. G. Dakyns 275 segments
 Xenophon / Economics - 1,944 lines
 Xenophon / Economics translations: Unknown 418 segments
 Xenophon / Hiero - 648 lines

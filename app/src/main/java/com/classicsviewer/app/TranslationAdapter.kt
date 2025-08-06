@@ -53,8 +53,11 @@ class TranslationAdapter(
         }
         holder.binding.lineRange.text = rangeText
         
-        // Show speaker if available
-        if (!segment.speaker.isNullOrBlank()) {
+        // Show speaker if available and different from previous speaker
+        val shouldShowSpeaker = !segment.speaker.isNullOrBlank() && 
+                                (position == 0 || segments[position - 1].speaker != segment.speaker)
+        
+        if (shouldShowSpeaker) {
             holder.binding.speakerName.visibility = View.VISIBLE
             holder.binding.speakerName.text = segment.speaker
         } else {

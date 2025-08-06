@@ -1,12 +1,12 @@
 {
-  "generated_at": "2025-08-06T12:41:20.157619",
+  "generated_at": "2025-08-06T14:03:51.161284",
   "database_version": "2.0",
   "statistics": {
     "total_authors": 103,
     "total_works": 845,
     "total_books": 1424,
     "total_lines": 914504,
-    "total_translation_segments": 165787,
+    "total_translation_segments": 165758,
     "total_dictionary_entries": 28647,
     "total_lemma_mappings": 1016668,
     "dictionary_by_language": {
@@ -393,7 +393,7 @@
           "title": "Prometheus Bound",
           "title_english": "Prometheus Bound",
           "book_count": 1,
-          "total_lines": 229384,
+          "total_lines": 228302,
           "translator_count": 1,
           "books": [
             {
@@ -4896,7 +4896,7 @@
           "title": "Electra",
           "title_english": "Electra",
           "book_count": 1,
-          "total_lines": 497412,
+          "total_lines": 496064,
           "translator_count": 1,
           "books": [
             {
@@ -4956,7 +4956,7 @@
           "title": "Orestes",
           "title_english": "Orestes",
           "book_count": 1,
-          "total_lines": 800409,
+          "total_lines": 798738,
           "translator_count": 1,
           "books": [
             {
@@ -7340,7 +7340,7 @@
           "title": "Antidosis",
           "title_english": "Antidosis",
           "book_count": 1,
-          "total_lines": 224485,
+          "total_lines": 223095,
           "translator_count": 1,
           "books": [
             {
@@ -15736,7 +15736,7 @@
           "title": "Cyropaedia",
           "title_english": "Cyropaedia",
           "book_count": 8,
-          "total_lines": 1876218,
+          "total_lines": 1874448,
           "translator_count": 1,
           "books": [
             {
@@ -16051,7 +16051,7 @@
           "title": "Sermones",
           "title_english": "Satires",
           "book_count": 2,
-          "total_lines": 216954,
+          "total_lines": 200458,
           "translator_count": 1,
           "books": [
             {
@@ -16091,7 +16091,7 @@
           "title": "Ars Poetica",
           "title_english": "The Art of Poetry: To the Pisos",
           "book_count": 1,
-          "total_lines": 49028,
+          "total_lines": 48552,
           "translator_count": 1,
           "books": [
             {

@@ -39,9 +39,9 @@ class AuthorAdapter(
         
         // Make authors with translations bold
         if (author.hasTranslatedWorks) {
-            holder.binding.itemText.setTypeface(holder.binding.itemText.typeface, android.graphics.Typeface.BOLD)
+            holder.binding.itemText.setTypeface(null, android.graphics.Typeface.BOLD)
         } else {
-            holder.binding.itemText.setTypeface(holder.binding.itemText.typeface, android.graphics.Typeface.NORMAL)
+            holder.binding.itemText.setTypeface(null, android.graphics.Typeface.NORMAL)
         }
         
         holder.binding.root.setOnClickListener { onAuthorClick(author) }

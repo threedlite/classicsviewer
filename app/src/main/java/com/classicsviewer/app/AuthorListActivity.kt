@@ -20,6 +20,7 @@ class AuthorListActivity : BaseActivity() {
     
     private lateinit var binding: ActivityListBinding
     private lateinit var repository: DataRepository
+    private lateinit var layoutManager: LinearLayoutManager
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,11 @@ class AuthorListActivity : BaseActivity() {
         lifecycleScope.launch {
             val authors = repository.getAuthors(language)
             
+            // Debug logging for Diodorus Siculus
+            authors.find { it.id == "tlg0060" }?.let { diodorus ->
+                android.util.Log.d("AuthorDebug", "Diodorus Siculus: hasTranslatedWorks = ${diodorus.hasTranslatedWorks}")
+            }
+            
             val adapter = AuthorAdapter(authors, PreferencesManager.getInvertColors(this@AuthorListActivity)) { author ->
                 val intent = Intent(this@AuthorListActivity, WorkListActivity::class.java)
                 intent.putExtra("author_id", author.id)
@@ -50,6 +56,9 @@ class AuthorListActivity : BaseActivity() {
             }
             
             binding.recyclerView.adapter = adapter
+            
+            // Restore scroll position
+            restoreScrollPosition()
         }
     }
     
@@ -78,8 +87,55 @@ class AuthorListActivity : BaseActivity() {
         // Get repository from factory
         repository = RepositoryFactory.getRepository(this)
         
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = layoutManager
         
         loadAuthors(language)
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        saveScrollPosition()
+    }
+    
+    private fun saveScrollPosition() {
+        if (::layoutManager.isInitialized) {
+            val language = intent.getStringExtra("language") ?: return
+            val scrollPosition = layoutManager.findFirstVisibleItemPosition()
+            val scrollOffset = layoutManager.findViewByPosition(scrollPosition)?.top ?: 0
+            
+            val prefs = getSharedPreferences("scroll_positions", MODE_PRIVATE)
+            prefs.edit()
+                .putInt("authors_${language}_position", scrollPosition)
+                .putInt("authors_${language}_offset", scrollOffset)
+                .apply()
+        }
+    }
+    
+    private fun restoreScrollPosition() {
+        if (::layoutManager.isInitialized) {
+            val language = intent.getStringExtra("language") ?: return
+            val prefs = getSharedPreferences("scroll_positions", MODE_PRIVATE)
+            val scrollPosition = prefs.getInt("authors_${language}_position", 0)
+            val scrollOffset = prefs.getInt("authors_${language}_offset", 0)
+            
+            // Post to ensure adapter is fully set up
+            binding.recyclerView.post {
+                try {
+                    if (scrollPosition > 0 && binding.recyclerView.adapter != null) {
+                        val itemCount = binding.recyclerView.adapter?.itemCount ?: 0
+                        if (scrollPosition < itemCount) {
+                            layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset)
+                        } else {
+                            // Invalid position, scroll to top
+                            layoutManager.scrollToPosition(0)
+                        }
+                    }
+                } catch (e: Exception) {
+                    // If anything fails, just scroll to top
+                    layoutManager.scrollToPosition(0)
+                }
+            }
+        }
     }
 }

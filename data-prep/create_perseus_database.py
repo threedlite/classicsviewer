@@ -660,11 +660,14 @@ def parse_cts_metadata(cts_path):
         return None
 
 def get_text_content(elem):
-    """Get all text content from element and its children, excluding notes"""
+    """Get all text content from element and its children, excluding editorial elements"""
     text_parts = []
     
-    # Skip note elements entirely
-    if elem.tag.endswith('note'):
+    # Skip editorial elements entirely
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'add', 'del', 'corr', 'sic', 'supplied', 'gap'}
+    tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
+    
+    if tag_name in excluded_tags:
         return ''
     
     # Add element's text
@@ -673,15 +676,16 @@ def get_text_content(elem):
     
     # Process children
     for child in elem:
-        # Skip notes
-        if not child.tag.endswith('note'):
+        # Skip editorial elements
+        child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
+        if child_tag not in excluded_tags:
             text_parts.append(get_text_content(child))
         
-        # Add tail text after child
+        # Always add tail text after child (this is text that comes after the child element)
         if child.tail:
             text_parts.append(child.tail)
     
-    return ''.join(text_parts)
+    return ''.join(text_parts).strip()
 
 
 def get_section_line_mapping(cursor, book_id, max_section, segment_count=None):
@@ -2918,6 +2922,8 @@ def create_database():
             JOIN works w ON a.id = w.author_id
             JOIN books b ON w.id = b.work_id
             JOIN translation_segments ts ON b.id = ts.book_id
+            WHERE ts.translation_text IS NOT NULL 
+            AND LENGTH(TRIM(ts.translation_text)) > 10
         )
     """)
     conn.commit()

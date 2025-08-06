@@ -69,6 +69,8 @@ interface TranslationSegmentDao {
             SELECT 1 FROM translation_segments ts 
             JOIN books b ON ts.book_id = b.id 
             WHERE b.work_id = :workId
+            AND ts.translation_text IS NOT NULL 
+            AND LENGTH(TRIM(ts.translation_text)) > 10
         )
     """)
     suspend fun hasTranslationsForWork(workId: String): Boolean

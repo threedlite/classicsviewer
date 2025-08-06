@@ -5,6 +5,17 @@ Important:
   The data-sources folder contains the cloned git repos for the following PerseusDL projects:
   canonical-greekLit  canonical-latinLit  canonical-pdlrefwk  perseus_catalog 
 
+**CRITICAL SCRIPT TIMEOUT HANDLING**:
+- **NEVER** assume a script was successful just because it timed out
+- If a long-running script times out (like database creation), run it in background:
+  ```bash
+  ./deploy_complete.sh > deploy.log 2>&1 &
+  # Monitor with: tail -f deploy.log
+  ```
+- Always verify completion by checking output files, timestamps, and success messages
+- Database creation takes ~4 minutes and will timeout at 5 minutes - this is normal
+- Only continue deployment if you can verify the script actually completed successfully
+
 App has 100% local operation on phone; no internet access or other android permissions are required.
 
 Takes inspiration from the Perseus Hopper and Scaife viewer web apps.
