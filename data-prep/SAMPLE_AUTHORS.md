@@ -10,6 +10,6 @@ Plato
 Aristotle
 Plutarch
 New Testament
-Vergil
+Virgil
 Horace
 

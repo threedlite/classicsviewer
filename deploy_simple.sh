@@ -3,10 +3,13 @@
 # Simple deployment for testing with Play Asset Delivery
 echo "=== Automated Deployment for Classics Viewer ==="
 
-# 1. Copy compressed database to debug assets for local testing
-echo "Copying compressed database to debug assets..."
-mkdir -p app/src/debug/assets
-cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
+# 1. Verify database exists in debug assets
+echo "Verifying database in debug assets..."
+if [ ! -f "app/src/debug/assets/perseus_texts.db.zip" ]; then
+    echo "Error: Database not found in app/src/debug/assets/"
+    echo "Run deploy_complete.sh to build the database first"
+    exit 1
+fi
 
 # 2. Build and install debug APK
 echo "Building and installing debug APK..."

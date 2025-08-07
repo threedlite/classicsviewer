@@ -23,6 +23,11 @@ class TextPageFragment : Fragment() {
         fun onLineLongClick(line: TextLine)
     }
     
+    interface FragmentCallbacks {
+        fun onWordClick(word: String)
+        fun onLineLongClick(line: TextLine)
+    }
+    
     private var _binding: FragmentTextPageBinding? = null
     private val binding get() = _binding!!
     
@@ -106,12 +111,19 @@ class TextPageFragment : Fragment() {
         
         if (isGreek) {
             // Display Greek text with speakers
-            val callback: (String) -> Unit = onWordClick ?: { word -> 
-                android.util.Log.w("TextPageFragment", "onWordClick is null, cannot open dictionary for: $word")
+            // Try to get callback from parent activity if fragment callback is null
+            val callback: (String) -> Unit = onWordClick ?: { word ->
+                // Try to get callback from parent activity
+                val parentActivity = activity
+                if (parentActivity is FragmentCallbacks) {
+                    parentActivity.onWordClick(word)
+                } else {
+                    android.util.Log.w("TextPageFragment", "onWordClick is null and activity doesn't implement FragmentCallbacks, cannot open dictionary for: $word")
+                }
             }
             
             // Log callback status
-            android.util.Log.d("TextPageFragment", "onWordClick is ${if (onWordClick != null) "set" else "null"}")
+            android.util.Log.d("TextPageFragment", "onWordClick is ${if (onWordClick != null) "set" else "retrieved from activity"}")
             
             // Log speaker info for debugging
             lines?.forEach { line ->
@@ -120,11 +132,18 @@ class TextPageFragment : Fragment() {
                 }
             }
             
+            val lineLongClickCallback: ((TextLine) -> Unit)? = onLineLongClick ?: { line ->
+                val parentActivity = activity
+                if (parentActivity is FragmentCallbacks) {
+                    parentActivity.onLineLongClick(line)
+                }
+            }
+            
             val adapter = TextLineWithSpeakerAdapter(
                 lines!!, 
                 callback, 
                 inverted, 
-                onLineLongClick, 
+                lineLongClickCallback, 
                 bookmarkedLines ?: emptySet()
             )
             binding.textRecyclerView.adapter = adapter

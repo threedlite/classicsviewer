@@ -119,14 +119,9 @@ class SettingsActivity : BaseActivity() {
             binding.obbPathValue.text = "Database not yet extracted"
         }
         
-        // Also show asset pack status
-        val assetPath = assetPackHelper.getAssetPackDatabasePath()
-        if (assetPath != null && assetPath.parent != "assets") {
-            // Real asset pack (not debug fallback)
-            binding.obbPathValue.text = "${binding.obbPathValue.text}\n\nAsset Pack: perseus_database (Ready)"
-        } else if (assetPackHelper.isAssetPackReady()) {
-            // Debug build with assets
-            binding.obbPathValue.text = "${binding.obbPathValue.text}\n\nUsing debug assets"
+        // Show if database is in APK assets
+        if (assetPackHelper.isAssetPackReady()) {
+            binding.obbPathValue.text = "${binding.obbPathValue.text}\n\nDatabase included in APK"
         }
     }
     

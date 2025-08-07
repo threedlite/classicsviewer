@@ -26,6 +26,8 @@ class LemmaOccurrencesActivity : BaseActivity() {
         val lemma = intent.getStringExtra("lemma") ?: return
         val language = intent.getStringExtra("language") ?: ""
         
+        android.util.Log.d("LemmaOccurrences", "Loading occurrences for lemma: '$lemma', language: '$language'")
+        
         supportActionBar?.title = "Occurrences: $lemma"
         
         repository = RepositoryFactory.getRepository(this)

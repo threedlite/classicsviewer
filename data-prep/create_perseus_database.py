@@ -2791,12 +2791,48 @@ def create_database(mode='full'):
     
     print("\n=== PROCESSING LATIN AUTHORS ===")
     
-    # Define Latin authors
-    latin_authors = {
-        "phi0959": "Ovid",
-        "phi0690": "Virgil",
-        "phi0893": "Horace"
-    }
+    # Discover all Latin authors dynamically
+    latin_authors = {}
+    print("Discovering Latin authors...")
+    
+    for author_dir in sorted(latin_dir.iterdir()):
+        if author_dir.is_dir() and author_dir.name.startswith("phi"):
+            cts_file = author_dir / "__cts__.xml"
+            author_name = f"Author {author_dir.name}"
+            
+            if cts_file.exists():
+                try:
+                    tree = ET.parse(cts_file)
+                    root = tree.getroot()
+                    
+                    # Find groupname element
+                    ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
+                    groupname_elem = root.find('.//ti:groupname', ns)
+                    
+                    if groupname_elem is not None and groupname_elem.text:
+                        author_name = groupname_elem.text.strip()
+                except Exception as e:
+                    print(f"  Warning: Failed to parse {cts_file}: {e}")
+            
+            latin_authors[author_dir.name] = author_name
+    
+    print(f"\nDiscovered {len(latin_authors)} Latin authors")
+    
+    # Filter authors based on mode
+    if mode == 'sample' and sample_authors:
+        # Filter to only include authors in the sample list
+        filtered_authors = {}
+        for author_id, author_name in latin_authors.items():
+            # Check if author name matches any in sample list (case-insensitive)
+            author_lower = author_name.lower()
+            
+            # Check if author name matches any in sample list
+            if any(sample in author_lower for sample in sample_authors):
+                filtered_authors[author_id] = author_name
+                print(f"  Including sample author: {author_name} ({author_id})")
+        
+        latin_authors = filtered_authors
+        print(f"\nFiltered to {len(latin_authors)} Latin authors for sample database")
     
     # Process each Latin author
     for author_id, author_name in latin_authors.items():
@@ -3181,7 +3217,7 @@ def compress_and_copy_database(db_filename, is_sample=False):
     import os
     import zipfile
     
-    asset_pack_dir = "../perseus_database/src/main/assets"
+    asset_pack_dir = "../app/src/debug/assets"
     os.makedirs(asset_pack_dir, exist_ok=True)
     
     if os.path.exists(db_filename):

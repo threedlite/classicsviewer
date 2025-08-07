@@ -11,6 +11,11 @@ import com.classicsviewer.app.data.AssetPackDatabaseHelper
 import com.classicsviewer.app.databinding.ActivityMainBinding
 import com.classicsviewer.app.utils.NavigationHelper
 import com.classicsviewer.app.utils.PreferencesManager
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StyleSpan
+import android.text.style.RelativeSizeSpan
 
 class MainActivity : AppCompatActivity() {
     
@@ -21,7 +26,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        supportActionBar?.title = "Classics Viewer"
+        // Create custom title with styled alpha
+        val title = SpannableString("α  Classics Viewer")
+        // Make alpha larger and bold
+        title.setSpan(RelativeSizeSpan(1.5f), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        title.setSpan(StyleSpan(Typeface.BOLD), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        supportActionBar?.title = title
+        
         
         // Apply color inversion setting
         val inverted = PreferencesManager.getInvertColors(this)

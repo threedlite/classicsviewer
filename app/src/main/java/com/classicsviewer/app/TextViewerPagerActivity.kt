@@ -30,7 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import com.classicsviewer.app.database.entities.BookmarkEntity
 
-class TextViewerPagerActivity : BaseActivity() {
+class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbacks {
     
     private lateinit var binding: ActivityTextViewerPagerBinding
     private lateinit var repository: DataRepository
@@ -56,21 +56,46 @@ class TextViewerPagerActivity : BaseActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Disable enter animation if navigating between pages
+        if (intent.hasExtra("initial_page")) {
+            overridePendingTransition(0, 0)
+        }
+        
         binding = ActivityTextViewerPagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        // Get parameters from intent
-        workId = intent.getStringExtra("work_id") ?: ""
-        bookId = intent.getStringExtra("book_id") ?: ""
-        bookNumber = intent.getStringExtra("book_number") ?: ""
-        currentStartLine = intent.getIntExtra("start_line", 1)
-        currentEndLine = intent.getIntExtra("end_line", 100)
-        totalLines = intent.getIntExtra("total_lines", 100)
-        language = intent.getStringExtra("language") ?: ""
-        
-        authorName = intent.getStringExtra("author_name") ?: ""
-        workTitle = intent.getStringExtra("work_title") ?: ""
-        bookLabel = intent.getStringExtra("book_label")
+        // Restore saved state if available
+        if (savedInstanceState != null) {
+            workId = savedInstanceState.getString("work_id", "")
+            bookId = savedInstanceState.getString("book_id", "")
+            bookNumber = savedInstanceState.getString("book_number", "")
+            currentStartLine = savedInstanceState.getInt("start_line", 1)
+            currentEndLine = savedInstanceState.getInt("end_line", 100)
+            totalLines = savedInstanceState.getInt("total_lines", 100)
+            language = savedInstanceState.getString("language", "")
+            authorName = savedInstanceState.getString("author_name", "")
+            workTitle = savedInstanceState.getString("work_title", "")
+            bookLabel = savedInstanceState.getString("book_label")
+            currentPageIndex = savedInstanceState.getInt("current_page_index", 0)
+            
+            android.util.Log.d("TextViewerPager", "Restored from savedInstanceState - language: '$language'")
+        } else {
+            // Get parameters from intent
+            workId = intent.getStringExtra("work_id") ?: ""
+            bookId = intent.getStringExtra("book_id") ?: ""
+            bookNumber = intent.getStringExtra("book_number") ?: ""
+            currentStartLine = intent.getIntExtra("start_line", 1)
+            currentEndLine = intent.getIntExtra("end_line", 100)
+            totalLines = intent.getIntExtra("total_lines", 100)
+            language = intent.getStringExtra("language") ?: ""
+            
+            authorName = intent.getStringExtra("author_name") ?: ""
+            workTitle = intent.getStringExtra("work_title") ?: ""
+            bookLabel = intent.getStringExtra("book_label")
+            
+            android.util.Log.d("TextViewerPager", "Loaded from intent - language: '$language'")
+        }
         
         supportActionBar?.title = "$authorName - $workTitle"
         supportActionBar?.subtitle = "Book $bookNumber: Lines $currentStartLine-$currentEndLine"
@@ -124,6 +149,9 @@ class TextViewerPagerActivity : BaseActivity() {
     
     private fun loadTexts() {
         lifecycleScope.launch {
+            // Save current page position before reloading
+            val savedPageIndex = currentPageIndex
+            
             // Show loading spinner
             binding.progressBar.visibility = View.VISIBLE
             binding.textViewPager.visibility = View.INVISIBLE
@@ -152,28 +180,48 @@ class TextViewerPagerActivity : BaseActivity() {
             }
             translationsByTranslator = translationMap
             
-            // Set up ViewPager
+            // Always create a new adapter to force fragment recreation
             val pagerAdapter = TextPagerAdapter(this@TextViewerPagerActivity)
             binding.textViewPager.adapter = pagerAdapter
             
-            // Register page change listener AFTER data is loaded
-            binding.textViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    currentPageIndex = position
-                    binding.pageIndicator.text = when {
-                        position == 0 -> if (language == "greek") "Greek" else "Latin"
-                        position - 1 < availableTranslators.size -> {
-                            "English (${availableTranslators[position - 1]})"
+            // Disable ViewPager user input to prevent swipe animations during setup
+            binding.textViewPager.isUserInputEnabled = false
+            
+            // Check if we need to register page change listener (first load)
+            if (savedPageIndex == 0 && intent.getIntExtra("initial_page", 0) == 0) {
+                // Register page change listener AFTER data is loaded
+                binding.textViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        currentPageIndex = position
+                        binding.pageIndicator.text = when {
+                            position == 0 -> if (language == "greek") "Greek" else "Latin"
+                            position - 1 < availableTranslators.size -> {
+                                "English (${availableTranslators[position - 1]})"
+                            }
+                            else -> "English"
                         }
-                        else -> "English"
+                    }
+                })
+                
+                // Restore page position if provided
+                val initialPage = intent.getIntExtra("initial_page", 0)
+                if (initialPage > 0 && initialPage < pagerAdapter.itemCount) {
+                    binding.textViewPager.post {
+                        binding.textViewPager.setCurrentItem(initialPage, false)
                     }
                 }
-            })
+            } else {
+                // Restore page position
+                binding.textViewPager.post {
+                    if (savedPageIndex < pagerAdapter.itemCount) {
+                        binding.textViewPager.setCurrentItem(savedPageIndex, false)
+                    }
+                }
+            }
             
-            // Restore page position if provided
-            val initialPage = intent.getIntExtra("initial_page", 0)
-            if (initialPage > 0 && initialPage < pagerAdapter.itemCount) {
-                binding.textViewPager.setCurrentItem(initialPage, false)
+            // Re-enable user input after setup
+            binding.textViewPager.post {
+                binding.textViewPager.isUserInputEnabled = true
             }
             
             // Update page indicator for initial page
@@ -203,48 +251,13 @@ class TextViewerPagerActivity : BaseActivity() {
                     
                     if (prevSegments.isNotEmpty() || currentStartLine > 1) {
                         // Navigate to previous translation page
-                        val newStart = maxOf(1, currentStartLine - 100)
-                        val newEnd = currentStartLine - 1
-                        
-                        val intent = Intent(this@TextViewerPagerActivity, TextViewerPagerActivity::class.java).apply {
-                            putExtra("work_id", workId)
-                            putExtra("book_id", bookId)
-                            putExtra("book_number", bookNumber)
-                            putExtra("start_line", newStart)
-                            putExtra("end_line", newEnd)
-                            putExtra("total_lines", totalLines)
-                            putExtra("language", language)
-                            putExtra("author_name", this@TextViewerPagerActivity.intent.getStringExtra("author_name"))
-                            putExtra("work_title", this@TextViewerPagerActivity.intent.getStringExtra("work_title"))
-                            putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
-                            putExtra("language_name", this@TextViewerPagerActivity.intent.getStringExtra("language_name"))
-                            putExtra("initial_page", currentPageIndex) // Preserve page position
-                        }
-                        startActivity(intent)
-                        finish()
+                        navigateToNewRange(maxOf(1, currentStartLine - 100), currentStartLine - 1)
                     }
                 }
             }
         } else if (currentStartLine > 1) {
             // On Greek/Latin page - navigate normally
-            val newStart = maxOf(1, currentStartLine - 100)
-            val newEnd = currentStartLine - 1
-            
-            val intent = Intent(this, TextViewerPagerActivity::class.java).apply {
-                putExtra("work_id", workId)
-                putExtra("book_id", bookId)
-                putExtra("book_number", bookNumber)
-                putExtra("start_line", newStart)
-                putExtra("end_line", newEnd)
-                putExtra("total_lines", totalLines)
-                putExtra("language", language)
-                putExtra("author_name", this@TextViewerPagerActivity.intent.getStringExtra("author_name"))
-                putExtra("work_title", this@TextViewerPagerActivity.intent.getStringExtra("work_title"))
-                putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
-                putExtra("language_name", this@TextViewerPagerActivity.intent.getStringExtra("language_name"))
-            }
-            startActivity(intent)
-            finish()
+            navigateToNewRange(maxOf(1, currentStartLine - 100), currentStartLine - 1)
         }
     }
     
@@ -254,7 +267,6 @@ class TextViewerPagerActivity : BaseActivity() {
             val translatorIndex = currentPageIndex - 1
             if (translatorIndex < availableTranslators.size) {
                 val translator = availableTranslators[translatorIndex]
-                val segments = translationsByTranslator[translator] ?: emptyList()
                 
                 // Check if there are more translations beyond current range
                 lifecycleScope.launch {
@@ -264,49 +276,24 @@ class TextViewerPagerActivity : BaseActivity() {
                     
                     if (nextSegments.isNotEmpty() || currentEndLine < totalLines) {
                         // Navigate to next translation page
-                        val newStart = currentEndLine + 1
-                        val newEnd = minOf(totalLines, currentEndLine + 100)
-                        
-                        val intent = Intent(this@TextViewerPagerActivity, TextViewerPagerActivity::class.java).apply {
-                            putExtra("work_id", workId)
-                            putExtra("book_id", bookId)
-                            putExtra("book_number", bookNumber)
-                            putExtra("start_line", newStart)
-                            putExtra("end_line", newEnd)
-                            putExtra("total_lines", totalLines)
-                            putExtra("language", language)
-                            putExtra("author_name", this@TextViewerPagerActivity.intent.getStringExtra("author_name"))
-                            putExtra("work_title", this@TextViewerPagerActivity.intent.getStringExtra("work_title"))
-                            putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
-                            putExtra("language_name", this@TextViewerPagerActivity.intent.getStringExtra("language_name"))
-                            putExtra("initial_page", currentPageIndex) // Preserve page position
-                        }
-                        startActivity(intent)
-                        finish()
+                        navigateToNewRange(currentEndLine + 1, minOf(totalLines, currentEndLine + 100))
                     }
                 }
             }
         } else if (currentEndLine < totalLines) {
             // On Greek/Latin page - navigate normally
-            val newStart = currentEndLine + 1
-            val newEnd = minOf(totalLines, currentEndLine + 100)
-            
-            val intent = Intent(this, TextViewerPagerActivity::class.java).apply {
-                putExtra("work_id", workId)
-                putExtra("book_id", bookId)
-                putExtra("book_number", bookNumber)
-                putExtra("start_line", newStart)
-                putExtra("end_line", newEnd)
-                putExtra("total_lines", totalLines)
-                putExtra("language", language)
-                putExtra("author_name", this@TextViewerPagerActivity.intent.getStringExtra("author_name"))
-                putExtra("work_title", this@TextViewerPagerActivity.intent.getStringExtra("work_title"))
-                putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
-                putExtra("language_name", this@TextViewerPagerActivity.intent.getStringExtra("language_name"))
-            }
-            startActivity(intent)
-            finish()
+            navigateToNewRange(currentEndLine + 1, minOf(totalLines, currentEndLine + 100))
         }
+    }
+    
+    private fun navigateToNewRange(newStart: Int, newEnd: Int) {
+        // Update instance variables
+        currentStartLine = newStart
+        currentEndLine = newEnd
+        supportActionBar?.subtitle = "Book $bookNumber: Lines $currentStartLine-$currentEndLine"
+        
+        // Reload content with new range
+        loadTexts()
     }
     
     private fun updateNavigationButtons() {
@@ -314,26 +301,70 @@ class TextViewerPagerActivity : BaseActivity() {
         binding.nextButton.isEnabled = currentEndLine < totalLines
     }
     
+    // Implement FragmentCallbacks interface
+    override fun onWordClick(word: String) {
+        openDictionary(word)
+    }
+    
+    override fun onLineLongClick(line: TextLine) {
+        bookmarkLine(line)
+    }
+    
     private fun openDictionary(word: String) {
+        // Ensure language is properly set and normalized
+        var currentLanguage = language.ifEmpty { 
+            // Fallback: try to determine from intent if language is empty
+            intent.getStringExtra("language") ?: ""
+        }.lowercase().trim()
+        
+        // If still empty, try to infer from bookId
+        if (currentLanguage.isEmpty() && bookId.isNotEmpty()) {
+            currentLanguage = when {
+                bookId.startsWith("tlg") -> "greek"
+                bookId.startsWith("phi") -> "latin"
+                else -> ""
+            }
+            android.util.Log.w("TextViewerPager", "Language was empty, inferred '$currentLanguage' from bookId: '$bookId'")
+        }
+        
+        android.util.Log.d("TextViewerPager", "openDictionary called with word: '$word', language: '$currentLanguage' (original: '$language')")
+        
+        // Validate language is set
+        if (currentLanguage.isEmpty()) {
+            android.util.Log.e("TextViewerPager", "Language is empty! Cannot proceed with dictionary lookup")
+            Snackbar.make(binding.root, "Unable to determine text language", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+        
+        // Disable dictionary and occurrences for Latin until we have a proper Latin dictionary
+        if (currentLanguage == "latin") {
+            Snackbar.make(binding.root, "Dictionary lookup not yet available for Latin texts", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+        
+        // Only proceed for Greek
+        if (currentLanguage != "greek") {
+            android.util.Log.w("TextViewerPager", "Unexpected language: $currentLanguage")
+            Snackbar.make(binding.root, "Dictionary lookup only available for Greek texts", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+        
         lifecycleScope.launch {
-            // Look up the lemma for this word
-            val lemma = repository.getLemmaForWord(word, language) ?: word
-            
-            if (language == "latin") {
-                // For Latin words, skip dictionary and go directly to occurrences
-                val intent = Intent(this@TextViewerPagerActivity, LemmaOccurrencesActivity::class.java).apply {
-                    putExtra("lemma", lemma)
-                    putExtra("language", language)
-                }
-                startActivity(intent)
-            } else {
+            try {
+                // Look up the lemma for this word with proper error handling
+                val lemma = repository.getLemmaForWord(word, currentLanguage) ?: word
+                android.util.Log.d("TextViewerPager", "Lemma lookup result: '$lemma' for word: '$word'")
+                
                 // For Greek words, show dictionary
                 val intent = Intent(this@TextViewerPagerActivity, DictionaryActivity::class.java).apply {
                     putExtra("word", word)
                     putExtra("lemma", lemma)
-                    putExtra("language", language)
+                    putExtra("language", currentLanguage)
                 }
                 startActivity(intent)
+            } catch (e: Exception) {
+                android.util.Log.e("TextViewerPager", "Error during dictionary lookup", e)
+                Snackbar.make(binding.root, "Error looking up word", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
@@ -401,10 +432,22 @@ class TextViewerPagerActivity : BaseActivity() {
     }
     
     private fun showNewBookmarkDialog(line: com.classicsviewer.app.models.TextLine) {
+        // Get display metrics for orientation check
+        val displayMetrics = resources.displayMetrics
+        
+        // Create ScrollView for landscape mode
+        val scrollView = android.widget.ScrollView(this)
+        scrollView.layoutParams = android.view.ViewGroup.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        
         // Create main container with vertical layout
         val mainContainer = android.widget.LinearLayout(this)
         mainContainer.orientation = android.widget.LinearLayout.VERTICAL
-        mainContainer.setPadding(48, 16, 48, 16)
+        mainContainer.setPadding(24, 8, 24, 8)
+        
+        scrollView.addView(mainContainer)
         
         // Create container for Greek text and copy button
         val greekContainer = android.widget.LinearLayout(this)
@@ -441,9 +484,17 @@ class TextViewerPagerActivity : BaseActivity() {
         // Create the note input field
         val input = com.google.android.material.textfield.TextInputEditText(this)
         input.hint = "Add your notes here (English or Greek)..."
-        input.setLines(5)  // Make it 5 lines tall
-        input.minLines = 5
-        input.maxLines = 10  // Allow up to 10 lines
+        
+        // Adjust lines based on orientation
+        val isLandscape = displayMetrics.widthPixels > displayMetrics.heightPixels
+        if (isLandscape) {
+            input.setLines(4)  // 4 lines in landscape
+            input.minLines = 4
+        } else {
+            input.setLines(8)  // 8 lines in portrait
+            input.minLines = 8
+        }
+        input.maxLines = 15  // Allow up to 15 lines
         input.gravity = android.view.Gravity.TOP  // Start text at top
         input.inputType = android.text.InputType.TYPE_CLASS_TEXT or 
                          android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
@@ -476,7 +527,7 @@ class TextViewerPagerActivity : BaseActivity() {
         val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Add Note - $authorName, $workTitle")
             .setMessage("Book ${bookLabel ?: bookNumber}, Line ${line.lineNumber}")
-            .setView(mainContainer)
+            .setView(scrollView)
             .setPositiveButton("Save") { _, _ ->
                 // Only create bookmark when Save is clicked
                 lifecycleScope.launch {
@@ -515,10 +566,22 @@ class TextViewerPagerActivity : BaseActivity() {
     }
     
     private fun showEditNoteDialog(bookmark: BookmarkEntity) {
+        // Get display metrics for orientation check
+        val displayMetrics = resources.displayMetrics
+        
+        // Create ScrollView for landscape mode
+        val scrollView = android.widget.ScrollView(this)
+        scrollView.layoutParams = android.view.ViewGroup.LayoutParams(
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        
         // Create main container with vertical layout
         val mainContainer = android.widget.LinearLayout(this)
         mainContainer.orientation = android.widget.LinearLayout.VERTICAL
-        mainContainer.setPadding(48, 16, 48, 16)
+        mainContainer.setPadding(24, 8, 24, 8)
+        
+        scrollView.addView(mainContainer)
         
         // Create container for Greek text and copy button
         val greekContainer = android.widget.LinearLayout(this)
@@ -556,9 +619,17 @@ class TextViewerPagerActivity : BaseActivity() {
         val input = com.google.android.material.textfield.TextInputEditText(this)
         input.setText(bookmark.note ?: "")
         input.hint = "Add your notes here (English or Greek)..."
-        input.setLines(5)  // Make it 5 lines tall
-        input.minLines = 5
-        input.maxLines = 10  // Allow up to 10 lines
+        
+        // Adjust lines based on orientation
+        val isLandscape = displayMetrics.widthPixels > displayMetrics.heightPixels
+        if (isLandscape) {
+            input.setLines(4)  // 4 lines in landscape
+            input.minLines = 4
+        } else {
+            input.setLines(8)  // 8 lines in portrait
+            input.minLines = 8
+        }
+        input.maxLines = 15  // Allow up to 15 lines
         input.gravity = android.view.Gravity.TOP  // Start text at top
         input.inputType = android.text.InputType.TYPE_CLASS_TEXT or 
                          android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
@@ -591,7 +662,7 @@ class TextViewerPagerActivity : BaseActivity() {
         val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Edit Note - ${bookmark.authorName}, ${bookmark.workTitle}")
             .setMessage("Book ${bookmark.bookLabel ?: ""}, Line ${bookmark.lineNumber}")
-            .setView(mainContainer)
+            .setView(scrollView)
             .setPositiveButton("Save") { _, _ ->
                 val noteText = input.text?.toString()?.trim()
                 bookmarkViewModel.updateBookmarkNote(bookmark.id, if (noteText.isNullOrEmpty()) null else noteText)
@@ -651,5 +722,73 @@ class TextViewerPagerActivity : BaseActivity() {
                 }
             }
         }
+        
+        // Force recreation of fragments when data changes
+        override fun getItemId(position: Int): Long {
+            // Use a combination of position and line range to force recreation
+            return position.toLong() + (currentStartLine * 1000L) + (currentEndLine * 1000000L)
+        }
+        
+        override fun containsItem(itemId: Long): Boolean {
+            val position = (itemId % 1000).toInt()
+            return position >= 0 && position < itemCount
+        }
+    }
+    
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        
+        // Save all critical state
+        outState.putString("work_id", workId)
+        outState.putString("book_id", bookId)
+        outState.putString("book_number", bookNumber)
+        outState.putInt("start_line", currentStartLine)
+        outState.putInt("end_line", currentEndLine)
+        outState.putInt("total_lines", totalLines)
+        outState.putString("language", language)
+        outState.putString("author_name", authorName)
+        outState.putString("work_title", workTitle)
+        outState.putString("book_label", bookLabel)
+        outState.putInt("current_page_index", currentPageIndex)
+        
+        android.util.Log.d("TextViewerPager", "Saved state - language: '$language'")
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        
+        // Log current language state when resuming
+        android.util.Log.d("TextViewerPager", "onResume - current language: '$language'")
+        
+        // If language is empty, try to recover it from intent
+        if (language.isEmpty()) {
+            language = intent.getStringExtra("language") ?: ""
+            android.util.Log.w("TextViewerPager", "Language was empty in onResume, recovered from intent: '$language'")
+            
+            // If still empty, try to infer from the book's author
+            if (language.isEmpty() && bookId.isNotEmpty()) {
+                android.util.Log.w("TextViewerPager", "Language still empty, attempting to infer from bookId: '$bookId'")
+                // Greek authors typically have IDs starting with "tlg", Latin with "phi"
+                language = when {
+                    bookId.startsWith("tlg") -> "greek"
+                    bookId.startsWith("phi") -> "latin"
+                    else -> {
+                        // Last resort - check if we have Greek lines loaded
+                        if (greekLines.isNotEmpty() && greekLines.first().text.any { it in '\u0370'..'\u03ff' || it in '\u1f00'..'\u1fff' }) {
+                            "greek"
+                        } else {
+                            ""
+                        }
+                    }
+                }
+                android.util.Log.w("TextViewerPager", "Inferred language: '$language' from bookId pattern")
+            }
+        }
+        
+        // Also ensure other critical fields are set
+        if (workId.isEmpty()) workId = intent.getStringExtra("work_id") ?: ""
+        if (bookId.isEmpty()) bookId = intent.getStringExtra("book_id") ?: ""
+        if (authorName.isEmpty()) authorName = intent.getStringExtra("author_name") ?: ""
+        if (workTitle.isEmpty()) workTitle = intent.getStringExtra("work_title") ?: ""
     }
 }

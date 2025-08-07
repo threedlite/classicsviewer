@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.classicsviewer.app.data.AssetPackDatabaseHelper
 import com.classicsviewer.app.databinding.ActivityDatabaseExtractionBinding
 import com.classicsviewer.app.utils.PreferencesManager
-import com.google.android.play.core.assetpacks.model.AssetPackStatus
 import kotlinx.coroutines.launch
 
 class DatabaseExtractionActivity : AppCompatActivity() {
@@ -44,55 +43,26 @@ class DatabaseExtractionActivity : AppCompatActivity() {
     
     private fun startExtraction() {
         android.util.Log.d("DatabaseExtractionActivity", "startExtraction called")
+        
+        // Update UI with initial status
+        binding.extractionTitle.text = "Preparing Database"
+        binding.extractionMessage.text = "Checking database availability..."
+        binding.progressText.text = "Please wait..."
+        
         lifecycleScope.launch {
             val assetPackHelper = AssetPackDatabaseHelper(this@DatabaseExtractionActivity)
             
-            // Check if pack is ready (fast-follow packs may need to be downloaded in local testing)
+            // Database is now in APK assets, always ready
             val isReady = assetPackHelper.isAssetPackReady()
-            android.util.Log.d("DatabaseExtractionActivity", "Asset pack ready: $isReady")
+            android.util.Log.d("DatabaseExtractionActivity", "Database ready: $isReady")
             
-            if (!isReady) {
-                binding.extractionMessage.text = "Downloading database..."
-                
-                // Request pack download for fast-follow in local testing
-                val status = assetPackHelper.requestPackIfNeeded()
-                android.util.Log.d("DatabaseExtractionActivity", "Pack request status: $status")
-                
-                // Register listener for download progress
-                assetPackHelper.registerListener { packState ->
-                    runOnUiThread {
-                        when (packState.status()) {
-                            com.google.android.play.core.assetpacks.model.AssetPackStatus.DOWNLOADING -> {
-                                val downloadProgress = if (packState.totalBytesToDownload() > 0) {
-                                    (packState.bytesDownloaded() * 100 / packState.totalBytesToDownload()).toInt()
-                                } else {
-                                    0
-                                }
-                                binding.extractionProgress.progress = downloadProgress
-                                binding.progressText.text = "$downloadProgress%"
-                                binding.extractionMessage.text = "Downloading database..."
-                            }
-                            com.google.android.play.core.assetpacks.model.AssetPackStatus.COMPLETED -> {
-                                // Pack downloaded, now extract
-                                lifecycleScope.launch {
-                                    extractDatabase()
-                                }
-                            }
-                            com.google.android.play.core.assetpacks.model.AssetPackStatus.FAILED -> {
-                                binding.extractionMessage.text = "Failed to download database. Please check your connection."
-                                binding.progressText.text = "Error"
-                            }
-                        }
-                    }
-                }
-                
-                // If already completed, extract immediately
-                if (status == AssetPackStatus.COMPLETED) {
-                    extractDatabase()
-                }
-            } else {
-                // Pack already available, extract immediately
+            if (isReady) {
+                // Extract immediately
                 extractDatabase()
+            } else {
+                // Should not happen with APK assets
+                binding.extractionMessage.text = "Database not found in app. Please reinstall."
+                binding.progressText.text = "Error"
             }
         }
     }
@@ -101,14 +71,23 @@ class DatabaseExtractionActivity : AppCompatActivity() {
         val assetPackHelper = AssetPackDatabaseHelper(this@DatabaseExtractionActivity)
         
         binding.extractionMessage.text = "Extracting database..."
+        binding.progressText.text = "Locating asset pack..."
         
-        val success = assetPackHelper.copyDatabaseFromAssetPack { progress ->
-            runOnUiThread {
-                val percentage = (progress * 100).toInt()
-                binding.extractionProgress.progress = percentage
-                binding.progressText.text = "$percentage%"
+        android.util.Log.e("DatabaseExtractionActivity", "Starting database extraction...")
+        val success = try {
+            assetPackHelper.copyDatabaseFromAssetPack { progress ->
+                runOnUiThread {
+                    val percentage = (progress * 100).toInt()
+                    binding.extractionProgress.progress = percentage
+                    binding.progressText.text = "$percentage%"
+                }
             }
+        } catch (e: Exception) {
+            android.util.Log.e("DatabaseExtractionActivity", "Exception during extraction", e)
+            false
         }
+        
+        android.util.Log.e("DatabaseExtractionActivity", "Extraction result: $success")
         
         if (success) {
             // Start MainActivity after successful extraction
@@ -118,7 +97,35 @@ class DatabaseExtractionActivity : AppCompatActivity() {
             finish()
         } else {
             // Show error
-            binding.extractionMessage.text = "Failed to extract database from asset pack. Please reinstall the app."
+            // Collect diagnostic information
+            val diagnosticInfo = StringBuilder()
+            
+            // Package info
+            diagnosticInfo.append("Package: ${packageName}\n")
+            diagnosticInfo.append("Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
+            diagnosticInfo.append("Debug: ${BuildConfig.DEBUG}\n\n")
+            
+            // Check APK assets
+            try {
+                assets.open("perseus_texts.db.zip").use { stream ->
+                    diagnosticInfo.append("Database found in APK assets\n")
+                    diagnosticInfo.append("Available size: ${stream.available() / 1024 / 1024} MB\n")
+                }
+            } catch (e: Exception) {
+                diagnosticInfo.append("Database NOT found in APK assets!\n")
+                diagnosticInfo.append("Error: ${e.message}\n")
+            }
+            
+            binding.extractionMessage.text = """
+                Database extraction failed
+                
+                === Debug Info ===
+                $diagnosticInfo
+                
+                The database was not found in the app package.
+                
+                Please report this with a screenshot.
+            """.trimIndent()
             binding.progressText.text = "Error"
         }
     }

@@ -6,9 +6,9 @@ plugins {
 
 android {
     namespace 'com.classicsviewer.app'
-    compileSdk 34
+    compileSdk 36
     
-    assetPacks = [":perseus_database"]
+    // Asset packs removed - including database directly in APK
     
     // Load keystore properties if available
     def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -31,9 +31,9 @@ android {
     defaultConfig {
         applicationId "com.classicsviewer.app"
         minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "0.8"
+        targetSdk 36
+        versionCode 4
+        versionName "0.8.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -71,15 +71,14 @@ android {
         buildConfig true
     }
     
-    // Exclude database files from APK to reduce memory usage during build
+    // Include database files in APK
     packagingOptions {
-        exclude 'assets/*.db'
-        exclude 'assets/**/*.db'
+        // Database files are now included directly
     }
     
-    // Reduce memory usage for asset compression
+    // Don't compress database files
     aaptOptions {
-        noCompress 'db'
+        noCompress 'db', 'zip'
     }
 }
 

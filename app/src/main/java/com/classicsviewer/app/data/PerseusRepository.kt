@@ -94,18 +94,19 @@ class PerseusRepository(context: Context) : DataRepository {
     }
     
     override suspend fun getAllDictionaryEntries(word: String, language: String): DictionaryResultMultiple = withContext(Dispatchers.IO) {
-        // Clean punctuation first, then normalize for searching
-        val cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
-        val normalized = if (language.equals("greek", ignoreCase = true)) {
-            normalizeGreek(cleanedWord)
-        } else {
-            cleanedWord.lowercase()
-        }
-        
-        // Normalize language parameter to match database (database uses lowercase)
-        val normalizedLanguage = language.lowercase()
-        
-        android.util.Log.d("PerseusRepository", "getAllDictionaryEntries: word='$word', normalized='$normalized', language='$language'")
+        try {
+            // Clean punctuation first, then normalize for searching
+            val cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
+            val normalized = if (language.equals("greek", ignoreCase = true)) {
+                normalizeGreek(cleanedWord)
+            } else {
+                cleanedWord.lowercase()
+            }
+            
+            // Normalize language parameter to match database (database uses lowercase)
+            val normalizedLanguage = language.lowercase().trim()
+            
+            android.util.Log.d("PerseusRepository", "getAllDictionaryEntries: word='$word', cleaned='$cleanedWord', normalized='$normalized', language='$normalizedLanguage' (original: '$language')")
         
         val entries = mutableListOf<DictionaryEntry>()
         
@@ -161,6 +162,11 @@ class PerseusRepository(context: Context) : DataRepository {
         ))
         
         DictionaryResultMultiple(entries = sortedEntries)
+        } catch (e: Exception) {
+            android.util.Log.e("PerseusRepository", "Error in getAllDictionaryEntries", e)
+            // Return empty result on error rather than crashing
+            DictionaryResultMultiple(entries = emptyList())
+        }
     }
 
     override suspend fun getDictionaryEntryWithMorphology(word: String, language: String): DictionaryResult? = withContext(Dispatchers.IO) {
@@ -331,16 +337,25 @@ class PerseusRepository(context: Context) : DataRepository {
     }
     
     override suspend fun getLemmaForWord(word: String, language: String): String? = withContext(Dispatchers.IO) {
-        // Clean punctuation first, then normalize for lookup
-        val cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
-        val normalized = if (language.equals("greek", ignoreCase = true)) {
-            normalizeGreek(cleanedWord)
-        } else {
-            cleanedWord.lowercase()
+        try {
+            // Clean punctuation first, then normalize for lookup
+            val cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
+            val normalized = if (language.equals("greek", ignoreCase = true)) {
+                normalizeGreek(cleanedWord)
+            } else {
+                cleanedWord.lowercase()
+            }
+            
+            android.util.Log.d("PerseusRepository", "getLemmaForWord: word='$word', cleaned='$cleanedWord', normalized='$normalized', language='$language'")
+            
+            // Try to find lemma in lemma_map table
+            val lemma = lemmaMapDao.getLemmaForWord(normalized)
+            android.util.Log.d("PerseusRepository", "Lemma lookup result: '$lemma' for normalized word: '$normalized'")
+            lemma
+        } catch (e: Exception) {
+            android.util.Log.e("PerseusRepository", "Error in getLemmaForWord", e)
+            null
         }
-        
-        // Try to find lemma in lemma_map table
-        lemmaMapDao.getLemmaForWord(normalized)
     }
     
     private fun normalizeGreek(word: String): String {

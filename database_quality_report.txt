@@ -1,0 +1,939 @@
+=== PERSEUS TEXTS DATABASE QUALITY REPORT ===
+Generated: 2025-08-07T16:15:39.841126
+
+Total Authors: 14
+Total Works: 280
+Total Books: 440
+Total Lines: 299,620
+Dictionary Entries: 28,647
+Lemma Mappings: 1,030,073
+
+=== DETAILED BREAKDOWN ===
+
+[Aeschylus]
+Aeschylus / Agamemnon - 1,640 lines
+Aeschylus / Agamemnon translations: Herbert Weir Smyth 231 segments, Robert Browning 212 segments
+Aeschylus / Eumenides - 1,030 lines
+Aeschylus / Eumenides translations: Herbert Weir Smyth 184 segments
+Aeschylus / Libation Bearers - 1,060 lines
+Aeschylus / Libation Bearers translations: Herbert Weir Smyth 221 segments
+Aeschylus / Persians - 1,062 lines
+Aeschylus / Persians translations: Herbert Weir Smyth 208 segments
+Aeschylus / Prometheus Bound - 1,082 lines
+Aeschylus / Prometheus Bound translations: Herbert Weir Smyth 212 segments
+Aeschylus / Seven Against Thebes - 1,060 lines
+Aeschylus / Seven Against Thebes translations: Herbert Weir Smyth 188 segments
+Aeschylus / Suppliant Maidens - 1,065 lines
+Aeschylus / Suppliant Maidens translations: Herbert Weir Smyth 195 segments
+
+[Aristotle]
+Aristotle / Constitution of the Athenians - 844 lines
+Aristotle / Economics - 361 lines total
+Aristotle / Economics / Book 1 - 109 lines
+Aristotle / Economics translations: George Cyril Armstrong 11 segments
+Aristotle / Economics / Book 2 - 252 lines
+Aristotle / Economics translations: George Cyril Armstrong 34 segments
+Aristotle / Eudemian Ethics - 1,635 lines total
+Aristotle / Eudemian Ethics / Book 1 - 164 lines
+Aristotle / Eudemian Ethics translations: Harris Rackham 20 segments
+Aristotle / Eudemian Ethics / Book 2 - 430 lines
+Aristotle / Eudemian Ethics translations: Harris Rackham 38 segments
+Aristotle / Eudemian Ethics / Book 3 - 274 lines
+Aristotle / Eudemian Ethics translations: Harris Rackham 26 segments
+Aristotle / Eudemian Ethics / Book 7 - 598 lines
+Aristotle / Eudemian Ethics translations: Harris Rackham 47 segments
+Aristotle / Eudemian Ethics / Book 8 - 169 lines
+Aristotle / Eudemian Ethics translations: Harris Rackham 15 segments
+Aristotle / Metaphysics - 4,078 lines total
+Aristotle / Metaphysics / Book 1 - 338 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 52 segments
+Aristotle / Metaphysics / Book 2 - 70 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 8 segments
+Aristotle / Metaphysics / Book 3 - 245 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 32 segments
+Aristotle / Metaphysics / Book 4 - 356 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 39 segments
+Aristotle / Metaphysics / Book 5 - 437 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 50 segments
+Aristotle / Metaphysics / Book 6 - 87 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 11 segments
+Aristotle / Metaphysics / Book 7 - 511 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 56 segments
+Aristotle / Metaphysics / Book 8 - 160 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 16 segments
+Aristotle / Metaphysics / Book 9 - 250 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 26 segments
+Aristotle / Metaphysics / Book 10 - 281 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 29 segments
+Aristotle / Metaphysics / Book 11 - 395 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 40 segments
+Aristotle / Metaphysics / Book 12 - 324 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 28 segments
+Aristotle / Metaphysics / Book 13 - 409 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 46 segments
+Aristotle / Metaphysics / Book 14 - 215 lines
+Aristotle / Metaphysics translations: Hugh Tredennick 27 segments
+Aristotle / Nicomachean Ethics - 3,874 lines total
+Aristotle / Nicomachean Ethics / Book 1 - 371 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 37 segments
+Aristotle / Nicomachean Ethics / Book 2 - 247 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 28 segments
+Aristotle / Nicomachean Ethics / Book 3 - 457 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 40 segments
+Aristotle / Nicomachean Ethics / Book 4 - 451 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 37 segments
+Aristotle / Nicomachean Ethics / Book 5 - 420 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 39 segments
+Aristotle / Nicomachean Ethics / Book 6 - 285 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 26 segments
+Aristotle / Nicomachean Ethics / Book 7 - 392 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 39 segments
+Aristotle / Nicomachean Ethics / Book 8 - 464 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 36 segments
+Aristotle / Nicomachean Ethics / Book 9 - 367 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 34 segments
+Aristotle / Nicomachean Ethics / Book 10 - 420 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 38 segments
+Aristotle / On Virtues and Vices - 77 lines
+Aristotle / Poetics - 613 lines
+Aristotle / Poetics translations: William Hamilton Fyfe 62 segments
+Aristotle / The "Art" of Rhetoric - 5,640 lines total
+Aristotle / The "Art" of Rhetoric / Book 1 - 2,002 lines
+Aristotle / The "Art" of Rhetoric translations: John Henry Freese 95 segments
+Aristotle / The "Art" of Rhetoric / Book 2 - 2,110 lines
+Aristotle / The "Art" of Rhetoric translations: John Henry Freese 103 segments
+Aristotle / The "Art" of Rhetoric / Book 3 - 1,528 lines
+Aristotle / The "Art" of Rhetoric translations: John Henry Freese 61 segments
+
+[Euripides]
+Euripides / Alcestis - 1,143 lines
+Euripides / Alcestis translations: Edward P. Coleridge 319 segments
+Euripides / Andromache - 1,264 lines
+Euripides / Andromache translations: Edward P. Coleridge 210 segments
+Euripides / Electra - 1,348 lines
+Euripides / Electra translations: Edward P. Coleridge 369 segments
+Euripides / Hecuba - 1,264 lines
+Euripides / Hecuba translations: Edward P. Coleridge 260 segments
+Euripides / Helen - 1,685 lines
+Euripides / Helen translations: Edward P. Coleridge 479 segments
+Euripides / Heracleidae - 1,053 lines
+Euripides / Heracleidae translations: Edward P. Coleridge 212 segments
+Euripides / Heracles Mad - 1,403 lines
+Euripides / Heracles Mad translations: Edward P. Coleridge 281 segments
+Euripides / Hippolytus - 1,437 lines
+Euripides / Hippolytus translations: Edward P. Coleridge 298 segments
+Euripides / Ion - 1,609 lines
+Euripides / Ion translations: Edward P. Coleridge 514 segments
+Euripides / Iphigenia Among the Tauri - 1,460 lines
+Euripides / Iphigenia Among the Tauri translations: Edward P. Coleridge 386 segments
+Euripides / Iphigenia at Aulis - 1,611 lines
+Euripides / Iphigenia at Aulis translations: Edward P. Coleridge 389 segments
+Euripides / Medea - 1,392 lines
+Euripides / Medea translations: Edward P. Coleridge 248 segments
+Euripides / Orestes - 1,671 lines
+Euripides / Orestes translations: Edward P. Coleridge 479 segments
+Euripides / Rhesus - 987 lines
+Euripides / Rhesus translations: Edward P. Coleridge 198 segments, Gilbert Murray 218 segments
+Euripides / The Bacchae - 1,377 lines
+Euripides / The Bacchae translations: T. A. Buckley 307 segments
+Euripides / The Cyclops - 704 lines
+Euripides / The Cyclops translations: Edward P. Coleridge 236 segments
+Euripides / The Phoenician Maidens - 1,754 lines
+Euripides / The Phoenician Maidens translations: Edward P. Coleridge 380 segments
+Euripides / The Suppliants - 1,227 lines
+Euripides / The Suppliants translations: E. P. Coleridge 260 segments
+Euripides / The Trojan Women - 1,304 lines
+Euripides / The Trojan Women translations: Edward P. Coleridge 209 segments
+
+[Herodotus]
+Herodotus / Histories - 20,456 lines total
+Herodotus / Histories / Book 1 - 3,152 lines
+Herodotus / Histories translations: A. D. Godley 926 segments
+Herodotus / Histories / Book 2 - 2,650 lines
+Herodotus / Histories translations: A. D. Godley 797 segments
+Herodotus / Histories / Book 3 - 2,504 lines
+Herodotus / Histories translations: A. D. Godley 687 segments
+Herodotus / Histories / Book 4 - 2,584 lines
+Herodotus / Histories translations: A. D. Godley 768 segments
+Herodotus / Histories / Book 5 - 1,632 lines
+Herodotus / Histories translations: A. D. Godley 457 segments
+Herodotus / Histories / Book 6 - 1,696 lines
+Herodotus / Histories translations: A. D. Godley 489 segments
+Herodotus / Histories / Book 7 - 2,890 lines
+Herodotus / Histories translations: A. D. Godley 821 segments
+Herodotus / Histories / Book 8 - 1,734 lines
+Herodotus / Histories translations: A. D. Godley 484 segments
+Herodotus / Histories / Book 9 - 1,614 lines
+Herodotus / Histories translations: A. D. Godley 441 segments
+
+[Hesiod]
+Hesiod / Shield of Heracles - 485 lines
+Hesiod / Shield of Heracles translations: Hugh G. Evelyn-White 99 segments
+Hesiod / Theogony - 1,054 lines
+Hesiod / Theogony translations: Hugh G. Evelyn-White 211 segments
+Hesiod / Works and Days - 845 lines
+Hesiod / Works and Days translations: Hugh G. Evelyn-White 174 segments
+
+[Homer]
+Homer / Epigrams - 110 lines
+Homer / Epigrams translations: Hugh G. Evelyn-White 111 segments
+Homer / Iliad - 15,691 lines total
+Homer / Iliad / Book 1 - 611 lines
+Homer / Iliad translations: Augustus Taber Murray 17 segments, Samuel Butler 123 segments
+Homer / Iliad / Book 2 - 877 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments, Samuel Butler 176 segments
+Homer / Iliad / Book 3 - 461 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments, Samuel Butler 47 segments
+Homer / Iliad / Book 4 - 544 lines
+Homer / Iliad translations: Augustus Taber Murray 13 segments, Samuel Butler 47 segments
+Homer / Iliad / Book 5 - 909 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments, Samuel Butler 74 segments
+Homer / Iliad / Book 6 - 529 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments, Samuel Butler 42 segments
+Homer / Iliad / Book 7 - 482 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments, Samuel Butler 42 segments
+Homer / Iliad / Book 8 - 569 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments, Samuel Butler 50 segments
+Homer / Iliad / Book 9 - 709 lines
+Homer / Iliad translations: Augustus Taber Murray 17 segments, Samuel Butler 47 segments
+Homer / Iliad / Book 10 - 579 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments, Samuel Butler 52 segments
+Homer / Iliad / Book 11 - 847 lines
+Homer / Iliad translations: Augustus Taber Murray 21 segments, Samuel Butler 67 segments
+Homer / Iliad / Book 12 - 471 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments, Samuel Butler 27 segments
+Homer / Iliad / Book 13 - 837 lines
+Homer / Iliad translations: Augustus Taber Murray 25 segments, Samuel Butler 66 segments
+Homer / Iliad / Book 14 - 521 lines
+Homer / Iliad translations: Augustus Taber Murray 15 segments, Samuel Butler 44 segments
+Homer / Iliad / Book 15 - 746 lines
+Homer / Iliad translations: Augustus Taber Murray 20 segments, Samuel Butler 59 segments
+Homer / Iliad / Book 16 - 867 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments, Samuel Butler 62 segments
+Homer / Iliad / Book 17 - 761 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments, Samuel Butler 58 segments
+Homer / Iliad / Book 18 - 617 lines
+Homer / Iliad translations: Augustus Taber Murray 19 segments, Samuel Butler 52 segments
+Homer / Iliad / Book 19 - 424 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments, Samuel Butler 30 segments
+Homer / Iliad / Book 20 - 503 lines
+Homer / Iliad translations: Augustus Taber Murray 16 segments, Samuel Butler 36 segments
+Homer / Iliad / Book 21 - 611 lines
+Homer / Iliad translations: Augustus Taber Murray 18 segments, Samuel Butler 49 segments
+Homer / Iliad / Book 22 - 515 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments, Samuel Butler 38 segments
+Homer / Iliad / Book 23 - 897 lines
+Homer / Iliad translations: Augustus Taber Murray 25 segments, Samuel Butler 74 segments
+Homer / Iliad / Book 24 - 804 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments, Samuel Butler 66 segments
+Homer / Odyssey - 12,107 lines total
+Homer / Odyssey / Book 1 - 444 lines
+Homer / Odyssey translations: Augustus Taber Murray 10 segments, Samuel Butler 32 segments
+Homer / Odyssey / Book 2 - 434 lines
+Homer / Odyssey translations: Augustus Taber Murray 10 segments, Samuel Butler 35 segments
+Homer / Odyssey / Book 3 - 497 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments, Samuel Butler 38 segments
+Homer / Odyssey / Book 4 - 847 lines
+Homer / Odyssey translations: Augustus Taber Murray 20 segments, Samuel Butler 81 segments
+Homer / Odyssey / Book 5 - 493 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments, Samuel Butler 37 segments
+Homer / Odyssey / Book 6 - 331 lines
+Homer / Odyssey translations: Augustus Taber Murray 8 segments, Samuel Butler 26 segments
+Homer / Odyssey / Book 7 - 347 lines
+Homer / Odyssey translations: Augustus Taber Murray 9 segments, Samuel Butler 29 segments
+Homer / Odyssey / Book 8 - 586 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments, Samuel Butler 50 segments
+Homer / Odyssey / Book 9 - 566 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments, Samuel Butler 44 segments
+Homer / Odyssey / Book 10 - 573 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments, Samuel Butler 49 segments
+Homer / Odyssey / Book 11 - 640 lines
+Homer / Odyssey translations: Augustus Taber Murray 15 segments, Samuel Butler 54 segments
+Homer / Odyssey / Book 12 - 453 lines
+Homer / Odyssey translations: Augustus Taber Murray 12 segments, Samuel Butler 39 segments
+Homer / Odyssey / Book 13 - 440 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments, Samuel Butler 38 segments
+Homer / Odyssey / Book 14 - 533 lines
+Homer / Odyssey translations: Augustus Taber Murray 13 segments, Samuel Butler 35 segments
+Homer / Odyssey / Book 15 - 557 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments, Samuel Butler 48 segments
+Homer / Odyssey / Book 16 - 480 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments, Samuel Butler 45 segments
+Homer / Odyssey / Book 17 - 606 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments, Samuel Butler 63 segments
+Homer / Odyssey / Book 18 - 428 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments, Samuel Butler 41 segments
+Homer / Odyssey / Book 19 - 604 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments, Samuel Butler 39 segments
+Homer / Odyssey / Book 20 - 394 lines
+Homer / Odyssey translations: Augustus Taber Murray 9 segments, Samuel Butler 36 segments
+Homer / Odyssey / Book 21 - 434 lines
+Homer / Odyssey translations: Augustus Taber Murray 10 segments, Samuel Butler 42 segments
+Homer / Odyssey / Book 22 - 501 lines
+Homer / Odyssey translations: Augustus Taber Murray 12 segments, Samuel Butler 52 segments
+Homer / Odyssey / Book 23 - 371 lines
+Homer / Odyssey translations: Augustus Taber Murray 9 segments, Samuel Butler 29 segments
+Homer / Odyssey / Book 24 - 548 lines
+Homer / Odyssey translations: Augustus Taber Murray 12 segments, Samuel Butler 45 segments
+
+[Horace]
+Horace / Carmen Saeculare - 76 lines
+Horace / Epistles - 1,494 lines total
+Horace / Epistles / Book 1 - 1,008 lines
+Horace / Epistles / Book 2 - 486 lines
+Horace / Epodes - 625 lines
+Horace / Odes - 3,034 lines total
+Horace / Odes / Book 1 - 876 lines
+Horace / Odes translations: John Conington 857 segments
+Horace / Odes / Book 2 - 572 lines
+Horace / Odes translations: John Conington 548 segments
+Horace / Odes / Book 3 - 1,004 lines
+Horace / Odes translations: John Conington 982 segments
+Horace / Odes / Book 4 - 582 lines
+Horace / Odes translations: John Conington 574 segments
+Horace / Satires - 2,115 lines total
+Horace / Satires / Book 1 - 1,031 lines
+Horace / Satires translations: Christopher Smart 22 segments
+Horace / Satires / Book 2 - 1,084 lines
+Horace / Satires translations: Christopher Smart 164 segments
+Horace / The Art of Poetry: To the Pisos - 476 lines
+Horace / The Art of Poetry: To the Pisos translations: Christopher Smart 102 segments
+
+[New Testament]
+New Testament / 1 Corinthians - 601 lines
+New Testament / 1 Corinthians translations: Rainbow Missions, Inc. 16 segments
+New Testament / 1 John - 149 lines
+New Testament / 1 John translations: Rainbow Missions, Inc. 5 segments
+New Testament / 1 Peter - 125 lines
+New Testament / 1 Peter translations: Rainbow Missions, Inc. 5 segments
+New Testament / 1 Thessalonians - 100 lines
+New Testament / 1 Thessalonians translations: Rainbow Missions, Inc. 5 segments
+New Testament / 1 Timothy - 128 lines
+New Testament / 1 Timothy translations: Rainbow Missions, Inc. 6 segments
+New Testament / 2 Corinthians - 324 lines
+New Testament / 2 Corinthians translations: Rainbow Missions, Inc. 13 segments
+New Testament / 2 John - 17 lines
+New Testament / 2 John translations: Rainbow Missions, Inc. 1 segments
+New Testament / 2 Peter - 68 lines
+New Testament / 2 Peter translations: Rainbow Missions, Inc. 3 segments
+New Testament / 2 Thessalonians - 52 lines
+New Testament / 2 Thessalonians translations: Rainbow Missions, Inc. 3 segments
+New Testament / 2 Timothy - 99 lines
+New Testament / 2 Timothy translations: Rainbow Missions, Inc. 4 segments
+New Testament / 3 John - 20 lines
+New Testament / 3 John translations: Rainbow Missions, Inc. 1 segments
+New Testament / Acts - 1,183 lines
+New Testament / Acts translations: Rainbow Missions, Inc. 28 segments
+New Testament / Colossians - 107 lines
+New Testament / Colossians translations: Rainbow Missions, Inc. 4 segments
+New Testament / Ephesians - 160 lines
+New Testament / Ephesians translations: Rainbow Missions, Inc. 6 segments
+New Testament / Galatians - 182 lines
+New Testament / Galatians translations: Rainbow Missions, Inc. 6 segments
+New Testament / Hebrews - 340 lines
+New Testament / Hebrews translations: Rainbow Missions, Inc. 13 segments
+New Testament / James - 150 lines
+New Testament / James translations: Rainbow Missions, Inc. 5 segments
+New Testament / John - 1,222 lines
+New Testament / John translations: Rainbow Missions, Inc. 21 segments
+New Testament / Jude - 25 lines
+New Testament / Jude translations: Rainbow Missions, Inc. 1 segments
+New Testament / Luke - 1,456 lines
+New Testament / Luke translations: Rainbow Missions, Inc. 24 segments
+New Testament / Mark - 863 lines
+New Testament / Mark translations: Rainbow Missions, Inc. 16 segments
+New Testament / Matthew - 1,394 lines
+New Testament / Matthew translations: Rainbow Missions, Inc. 28 segments
+New Testament / Philemon - 27 lines
+New Testament / Philemon translations: Rainbow Missions, Inc. 1 segments
+New Testament / Philippians - 121 lines
+New Testament / Philippians translations: Rainbow Missions, Inc. 4 segments
+New Testament / Revelation - 545 lines
+New Testament / Revelation translations: Rainbow Missions, Inc. 22 segments
+New Testament / Romans - 556 lines
+New Testament / Romans translations: Rainbow Missions, Inc. 16 segments
+New Testament / Titus - 53 lines
+New Testament / Titus translations: Rainbow Missions, Inc. 3 segments
+
+[P. Vergilius Maro (Virgil)]
+P. Vergilius Maro (Virgil) / Aeneid - 9,958 lines total
+P. Vergilius Maro (Virgil) / Aeneid / Book 1 - 758 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1066 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 2 - 828 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1081 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 3 - 719 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 985 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 4 - 708 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 992 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 5 - 872 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1136 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 6 - 906 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1179 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 7 - 818 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1069 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 8 - 739 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 986 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 9 - 823 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1114 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 10 - 914 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1223 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 11 - 917 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1218 segments
+P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 956 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Theodore C. Williams 1287 segments
+P. Vergilius Maro (Virgil) / Eclogues - 832 lines
+P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 93 segments
+P. Vergilius Maro (Virgil) / Georgics - 2,193 lines total
+P. Vergilius Maro (Virgil) / Georgics / Book 1 - 515 lines
+P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 652 segments
+P. Vergilius Maro (Virgil) / Georgics / Book 2 - 542 lines
+P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 668 segments
+P. Vergilius Maro (Virgil) / Georgics / Book 3 - 566 lines
+P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 676 segments
+P. Vergilius Maro (Virgil) / Georgics / Book 4 - 570 lines
+P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 725 segments
+
+[Plato]
+Plato / Alcibiades 1 - 908 lines
+Plato / Alcibiades 1 translations: Walter Rangeley Maitland Lamb 57 segments
+Plato / Alcibiades 2 - 281 lines
+Plato / Alcibiades 2 translations: Walter Rangeley Maitland Lamb 35 segments
+Plato / Apology - 426 lines
+Plato / Apology translations: Harold North Fowler 26 segments
+Plato / Charmides - 545 lines
+Plato / Charmides translations: Walter Rangeley Maitland Lamb 24 segments
+Plato / Cleitophon - 70 lines
+Plato / Cleitophon translations: Robert Gregg Bury 5 segments
+Plato / Cratylus - 1,276 lines
+Plato / Cratylus translations: Harold North Fowler 199 segments
+Plato / Critias - 171 lines
+Plato / Critias translations: Robert Gregg Bury 20 segments
+Plato / Crito - 244 lines
+Plato / Crito translations: Harold North Fowler 34 segments
+Plato / Epinomis - 255 lines
+Plato / Epinomis translations: Walter Rangeley Maitland Lamb 29 segments
+Plato / Euthydemus - 774 lines
+Plato / Euthydemus translations: Walter Rangeley Maitland Lamb 54 segments
+Plato / Euthyphro - 366 lines
+Plato / Euthyphro translations: Harold North Fowler 61 segments
+Plato / Gorgias - 1,737 lines
+Plato / Gorgias translations: Walter Rangeley Maitland Lamb 165 segments
+Plato / Greater Hippias - 635 lines
+Plato / Greater Hippias translations: Harold North Fowler 68 segments
+Plato / Hipparchus - 171 lines
+Plato / Hipparchus translations: Walter Rangeley Maitland Lamb 15 segments
+Plato / Ion - 258 lines
+Plato / Ion translations: William Rangeley Maitland Lamb 28 segments
+Plato / Laches - 503 lines
+Plato / Laches translations: Walter Rangeley Maitland Lamb 79 segments
+Plato / Laws - 4,523 lines total
+Plato / Laws / Book 1 - 440 lines
+Plato / Laws translations: Robert Gregg Bury 98 segments
+Plato / Laws / Book 2 - 356 lines
+Plato / Laws translations: Robert Gregg Bury 85 segments
+Plato / Laws / Book 3 - 431 lines
+Plato / Laws translations: Robert Gregg Bury 99 segments
+Plato / Laws / Book 4 - 330 lines
+Plato / Laws translations: Robert Gregg Bury 68 segments
+Plato / Laws / Book 5 - 255 lines
+Plato / Laws translations: Robert Gregg Bury 22 segments
+Plato / Laws / Book 6 - 427 lines
+Plato / Laws translations: Robert Gregg Bury 65 segments
+Plato / Laws / Book 7 - 535 lines
+Plato / Laws translations: Robert Gregg Bury 103 segments
+Plato / Laws / Book 8 - 286 lines
+Plato / Laws translations: Robert Gregg Bury 48 segments
+Plato / Laws / Book 9 - 383 lines
+Plato / Laws translations: Robert Gregg Bury 55 segments
+Plato / Laws / Book 10 - 432 lines
+Plato / Laws translations: Robert Gregg Bury 89 segments
+Plato / Laws / Book 11 - 298 lines
+Plato / Laws translations: Robert Gregg Bury 33 segments
+Plato / Laws / Book 12 - 350 lines
+Plato / Laws translations: Robert Gregg Bury 55 segments
+Plato / Lesser Hippias - 310 lines
+Plato / Lesser Hippias translations: Harold North Fowler 31 segments
+Plato / Letters - 697 lines
+Plato / Letters translations: R. G. Bury 65 segments
+Plato / Lovers - 179 lines
+Plato / Lovers translations: Walter Rangeley Maitland Lamb 30 segments
+Plato / Lysis - 355 lines
+Plato / Lysis translations: Walter Rangeley Maitland Lamb 21 segments
+Plato / Menexenus - 223 lines
+Plato / Menexenus translations: Robert Gregg Bury 23 segments
+Plato / Meno - 757 lines
+Plato / Meno translations: Walter Rangeley Maitland Lamb 87 segments
+Plato / Minos - 237 lines
+Plato / Minos translations: Walter Rangeley Maitland Lamb 17 segments
+Plato / Parmenides - 958 lines
+Plato / Parmenides translations: Harold North Fowler 41 segments
+Plato / Phaedo - 1,209 lines
+Plato / Phaedo translations: Harold North Fowler 66 segments
+Plato / Phaedrus - 929 lines
+Plato / Phaedrus translations: Harold North Fowler 109 segments
+Plato / Philebus - 1,255 lines
+Plato / Philebus translations: Harold North Fowler 152 segments
+Plato / Protagoras - 864 lines
+Plato / Protagoras translations: Walter Rangeley Maitland Lamb 53 segments
+Plato / Republic - 5,307 lines total
+Plato / Republic / Book 1 - 718 lines
+Plato / Republic translations: Paul Shorey 28 segments
+Plato / Republic / Book 2 - 507 lines
+Plato / Republic translations: Paul Shorey 27 segments
+Plato / Republic / Book 3 - 576 lines
+Plato / Republic translations: Paul Shorey 32 segments
+Plato / Republic / Book 4 - 523 lines
+Plato / Republic translations: Paul Shorey 27 segments
+Plato / Republic / Book 5 - 658 lines
+Plato / Republic translations: Paul Shorey 32 segments
+Plato / Republic / Book 6 - 491 lines
+Plato / Republic translations: Paul Shorey 28 segments
+Plato / Republic / Book 7 - 482 lines
+Plato / Republic translations: Paul Shorey 28 segments
+Plato / Republic / Book 8 - 471 lines
+Plato / Republic translations: Paul Shorey 27 segments
+Plato / Republic / Book 9 - 412 lines
+Plato / Republic translations: Paul Shorey 22 segments
+Plato / Republic / Book 10 - 469 lines
+Plato / Republic translations: Paul Shorey 27 segments
+Plato / Sophist - 1,180 lines
+Plato / Sophist translations: Harold North Fowler 144 segments
+Plato / Statesman - 1,008 lines
+Plato / Statesman translations: Harold North Fowler 163 segments
+Plato / Symposium - 989 lines
+Plato / Symposium translations: Walter Rangeley Maitland Lamb 53 segments
+Plato / Theaetetus - 1,554 lines
+Plato / Theaetetus translations: Harold North Fowler 196 segments
+Plato / Theages - 265 lines
+Plato / Theages translations: Walter Rangeley Maitland Lamb 20 segments
+Plato / Timaeus - 891 lines
+Plato / Timaeus translations: Robert Gregg Bury 84 segments
+
+[Plutarch]
+Plutarch / A Discourse Concerning Socrates's Daemon - 665 lines
+Plutarch / A Discourse Concerning Socrates's Daemon translations: Thomas Creech 34 segments
+Plutarch / A Discourse Touching the Training of Children - 360 lines
+Plutarch / A Discourse Touching the Training of Children translations: Frank Cole Babbitt 20 segments, Simon Ford 20 segments
+Plutarch / A breviate of a discourse, showing that the Stoics speak greater improbabilities than the poets. - 23 lines
+Plutarch / A breviate of a discourse, showing that the Stoics speak greater improbabilities than the poets. translations: William Baxter 6 segments
+Plutarch / A discourse to an unlearned prince - 97 lines
+Plutarch / A discourse to an unlearned prince translations: John Kersey 7 segments, William Clark Helmbold 7 segments
+Plutarch / Aemilius Paulus - 764 lines
+Plutarch / Aemilius Paulus translations: Bernadotte Perrin 357 segments
+Plutarch / Against Colotes, the Disciple and Favorite of Epicurus. - 373 lines
+Plutarch / Against Colotes, the Disciple and Favorite of Epicurus. translations: A. G. 34 segments
+Plutarch / Against Running in Debt, or Taking up Money Upon Usury - 165 lines
+Plutarch / Against Running in Debt, or Taking up Money Upon Usury translations: Harold North Fowler 8 segments, R. Smith 8 segments
+Plutarch / Agesilaus - 902 lines
+Plutarch / Agesilaus translations: Bernadotte Perrin 241 segments
+Plutarch / Agis and Cleomenes - 916 lines total
+Plutarch / Agis and Cleomenes / Book 1 - 302 lines
+Plutarch / Agis and Cleomenes translations: Bernadotte Perrin 103 segments
+Plutarch / Agis and Cleomenes / Book 2 - 614 lines
+Plutarch / Agis and Cleomenes translations: Bernadotte Perrin 202 segments
+Plutarch / Alcibiades - 932 lines
+Plutarch / Alcibiades translations: Bernadotte Perrin 226 segments
+Plutarch / Alexander - 1,526 lines
+Plutarch / Alexander translations: Bernadotte Perrin 454 segments
+Plutarch / An Abstract of a Comparison Betwixt Aristophanes and Menander - 29 lines
+Plutarch / An Abstract of a Comparison Betwixt Aristophanes and Menander translations: Harold North Fowler 4 segments, William Baxter 4 segments
+Plutarch / Antony - 1,872 lines
+Plutarch / Antony translations: Bernadotte Perrin 446 segments
+Plutarch / Aratus - 862 lines
+Plutarch / Aratus translations: Bernadotte Perrin 286 segments
+Plutarch / Aristides - 742 lines
+Plutarch / Aristides translations: Bernadotte Perrin 173 segments
+Plutarch / Artaxerxes - 598 lines
+Plutarch / Artaxerxes translations: Bernadotte Perrin 170 segments
+Plutarch / Brutus - 1,140 lines
+Plutarch / Brutus translations: Bernadotte Perrin 1 segments
+Plutarch / Caesar - 1,050 lines
+Plutarch / Caesar translations: Bernadotte Perrin 357 segments
+Plutarch / Caius Marcius Coriolanus - 674 lines
+Plutarch / Caius Marcius Coriolanus translations: Bernadotte Perrin 204 segments
+Plutarch / Caius Marius - 988 lines
+Plutarch / Caius Marius translations: Bernadotte Perrin 280 segments
+Plutarch / Camillus - 804 lines
+Plutarch / Camillus translations: Bernadotte Perrin 235 segments
+Plutarch / Cato the Younger - 1,258 lines
+Plutarch / Cato the Younger translations: Bernadotte Perrin 391 segments
+Plutarch / Cicero - 998 lines
+Plutarch / Cicero translations: Bernadotte Perrin 276 segments
+Plutarch / Cimon - 492 lines
+Plutarch / Cimon translations: Bernadotte Perrin 128 segments
+Plutarch / Comparison of Agesilaus and Pompey - 74 lines
+Plutarch / Comparison of Agesilaus and Pompey translations: Bernadotte Perrin 25 segments
+Plutarch / Comparison of Agis and Cleomenes and the Gracchi - 68 lines
+Plutarch / Comparison of Agis and Cleomenes and the Gracchi translations: Bernadotte Perrin 24 segments
+Plutarch / Comparison of Alcibiades and Coriolanus - 94 lines
+Plutarch / Comparison of Alcibiades and Coriolanus translations: Bernadotte Perrin 27 segments
+Plutarch / Comparison of Aristides and Marcus Cato - 104 lines
+Plutarch / Comparison of Aristides and Marcus Cato translations: Bernadotte Perrin 32 segments
+Plutarch / Comparison of Demetrius and Antony - 80 lines
+Plutarch / Comparison of Demetrius and Antony translations: Bernadotte Perrin 23 segments
+Plutarch / Comparison of Demosthenes and Cicero - 68 lines
+Plutarch / Comparison of Demosthenes and Cicero translations: Bernadotte Perrin 24 segments
+Plutarch / Comparison of Dion and Brutus - 82 lines
+Plutarch / Comparison of Dion and Brutus translations: Bernadotte Perrin 38 segments
+Plutarch / Comparison of Lucullus and Cimon - 70 lines
+Plutarch / Comparison of Lucullus and Cimon translations: Bernadotte Perrin 21 segments
+Plutarch / Comparison of Lycurgus and Numa - 102 lines
+Plutarch / Comparison of Lycurgus and Numa translations: Bernadotte Perrin 30 segments
+Plutarch / Comparison of Lysander and Sulla - 86 lines
+Plutarch / Comparison of Lysander and Sulla translations: Bernadotte Perrin 28 segments
+Plutarch / Comparison of Nicias and Crassus - 96 lines
+Plutarch / Comparison of Nicias and Crassus translations: Bernadotte Perrin 28 segments
+Plutarch / Comparison of Pelopidas and Marcellus - 64 lines
+Plutarch / Comparison of Pelopidas and Marcellus translations: Bernadotte Perrin 18 segments
+Plutarch / Comparison of Pericles and Fabius Maximus - 62 lines
+Plutarch / Comparison of Pericles and Fabius Maximus translations: Bernadotte Perrin 16 segments
+Plutarch / Comparison of Philopoemen and Titus - 42 lines
+Plutarch / Comparison of Philopoemen and Titus translations: Bernadotte Perrin 12 segments
+Plutarch / Comparison of Sertorius and Eumenes - 32 lines
+Plutarch / Comparison of Sertorius and Eumenes translations: Bernadotte Perrin 9 segments
+Plutarch / Comparison of Solon and Publicola - 72 lines
+Plutarch / Comparison of Solon and Publicola translations: Bernadotte Perrin 20 segments
+Plutarch / Comparison of Theseus and Romulus - 80 lines
+Plutarch / Comparison of Theseus and Romulus translations: Bernadotte Perrin 24 segments
+Plutarch / Comparison of Timoleon and Aemilius - 40 lines
+Plutarch / Comparison of Timoleon and Aemilius translations: Bernadotte Perrin 19 segments
+Plutarch / Concerning Such Whom God is Slow to Punish - 436 lines
+Plutarch / Concerning Such Whom God is Slow to Punish translations: John Philips 33 segments
+Plutarch / Concerning the Virtues of Women - 544 lines
+Plutarch / Concerning the Virtues of Women translations: Frank Cole Babbitt 27 segments, Isaac Chauncy 28 segments
+Plutarch / Concerning the cure of anger: a dialogue - 305 lines
+Plutarch / Concerning the cure of anger: a dialogue translations: William Clark Helmbold 16 segments, William Dillgham 16 segments
+Plutarch / Concerning the fortune of the Romans - 237 lines
+Plutarch / Concerning the fortune of the Romans translations: Frank Cole Babbitt 13 segments, John Oswald 13 segments
+Plutarch / Concerning the fortune or virtue of Alexander the Great. - 840 lines
+Plutarch / Concerning the fortune or virtue of Alexander the Great. translations: Frank Cole Babbitt 28 segments, John Phillips 27 segments
+Plutarch / Concerning the procreation of the soul as discoursed in Timaeus - 356 lines
+Plutarch / Concerning the procreation of the soul as discoursed in Timaeus translations: John Philips 33 segments
+Plutarch / Conjugal Precepts - 177 lines
+Plutarch / Conjugal Precepts translations: Frank Cole Babbitt 49 segments, John Philips 49 segments
+Plutarch / Consolation to Apollonius - 483 lines
+Plutarch / Consolation to Apollonius translations: Frank Cole Babbitt 37 segments, Matthew Morgan 37 segments
+Plutarch / Crassus - 836 lines
+Plutarch / Crassus translations: Bernadotte Perrin 226 segments
+Plutarch / De E apud Delphos - 252 lines
+Plutarch / De E apud Delphos translations: Frank Cole Babbitt 21 segments, R. Kippax 21 segments
+Plutarch / Demetrius - 1,160 lines
+Plutarch / Demetrius translations: Bernadotte Perrin 293 segments
+Plutarch / Demosthenes - 552 lines
+Plutarch / Demosthenes translations: Bernadotte Perrin 161 segments
+Plutarch / Dion - 950 lines
+Plutarch / Dion translations: Bernadotte Perrin 1 segments
+Plutarch / Epitome libri de animae procreatione in Timaeo - 49 lines
+Plutarch / Eumenes - 370 lines
+Plutarch / Eumenes translations: Bernadotte Perrin 117 segments
+Plutarch / Fabius Maximus - 560 lines
+Plutarch / Fabius Maximus translations: Bernadotte Perrin 159 segments
+Plutarch / Five Tragical Histories of Love - 111 lines
+Plutarch / Five Tragical Histories of Love translations: A.I. 5 segments, Harold North Fowler 5 segments
+Plutarch / Galba - 482 lines
+Plutarch / Galba translations: Bernadotte Perrin 151 segments
+Plutarch / Greek Questions - 382 lines
+Plutarch / Greek Questions translations: Frank Cole Babbitt 59 segments, Isaac Chauncy 59 segments
+Plutarch / How a Man May Be Sensible of His Progress in Virtue. - 161 lines
+Plutarch / How a Man May Be Sensible of His Progress in Virtue. translations: Frank Cole Babbitt 17 segments, Hugh Tod(d) 17 segments
+Plutarch / How a Man May Inoffensively Praise Himself Without Being Liable to Envy - 215 lines
+Plutarch / How a Man May Inoffensively Praise Himself Without Being Liable to Envy translations: P. Lancaster 22 segments
+Plutarch / How a Young Man Ought to Hear Poems - 446 lines
+Plutarch / How a Young Man Ought to Hear Poems translations: Frank Cole Babbitt 14 segments, Simon Ford 14 segments
+Plutarch / How a man may receive advantage and profit from his
+            enemies. - 145 lines
+Plutarch / How a man may receive advantage and profit from his
+            enemies. translations: Frank Cole Babbitt 11 segments, John Hartcliffe 11 segments
+Plutarch / How to Know a Flatterer from a Friend - 488 lines
+Plutarch / How to Know a Flatterer from a Friend translations: Frank Cole Babbitt 37 segments, George Tullie 37 segments
+Plutarch / Laconic Apophthegms; or Remarkable Sayings of the Spartans. - 1,858 lines
+Plutarch / Laconic Apophthegms; or Remarkable Sayings of the Spartans. translations: Frank Cole Babbitt 486 segments, unknown 69 segments
+Plutarch / Lives of the Ten Orators - 982 lines
+Plutarch / Lives of the Ten Orators translations: Charles Barcroft 13 segments, William Clark Helmbold 13 segments
+Plutarch / Lucullus - 984 lines
+Plutarch / Lucullus translations: Bernadotte Perrin 296 segments
+Plutarch / Lycurgus - 796 lines
+Plutarch / Lycurgus translations: Bernadotte Perrin 184 segments
+Plutarch / Lysander - 714 lines
+Plutarch / Lysander translations: Bernadotte Perrin 185 segments
+Plutarch / Marcellus - 612 lines
+Plutarch / Marcellus translations: Bernadotte Perrin 183 segments
+Plutarch / Marcus Cato - 612 lines
+Plutarch / Marcus Cato translations: Bernadotte Perrin 173 segments
+Plutarch / Nicias - 818 lines
+Plutarch / Nicias translations: Bernadotte Perrin 192 segments
+Plutarch / Numa - 562 lines
+Plutarch / Numa translations: Bernadotte Perrin 152 segments
+Plutarch / Of Banishment, or Flying One's Country. - 253 lines
+Plutarch / Of Banishment, or Flying One's Country. translations: John Patrick 17 segments
+Plutarch / Of Bashfulness - 195 lines
+Plutarch / Of Bashfulness translations: Thomas Hoy 19 segments
+Plutarch / Of Brotherly Love - 340 lines
+Plutarch / Of Brotherly Love translations: John Thomson 21 segments, W. C. Helmbold 21 segments
+Plutarch / Of Curiosity, or an Over-Busy Inquisitiveness into Things Impertinent. - 222 lines
+Plutarch / Of Curiosity, or an Over-Busy Inquisitiveness into Things Impertinent. translations: Maurice Wheeler 16 segments, William Clark Helmbold 16 segments
+Plutarch / Of Envy and Hatred - 74 lines
+Plutarch / Of Envy and Hatred translations: P. Lancaster 8 segments
+Plutarch / Of Fate. - 233 lines
+Plutarch / Of Fate. translations: A. G. 12 segments
+Plutarch / Of Fortune - 58 lines
+Plutarch / Of Fortune translations: Frank Cole Babbitt 6 segments, William Baxter 6 segments
+Plutarch / Of Garrulity, or Talkativeness - 375 lines
+Plutarch / Of Garrulity, or Talkativeness translations: John Philips 23 segments, William Clark Helmbold 23 segments
+Plutarch / Of Hearing - 173 lines
+Plutarch / Of Hearing translations: Frank Cole Babbitt 18 segments, Thomas Hoy 18 segments
+Plutarch / Of Herodotus's Malice. - 350 lines
+Plutarch / Of Herodotus's Malice. translations: A. G. 43 segments
+Plutarch / Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt. - 864 lines
+Plutarch / Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt. translations: Frank Cole Babbitt 80 segments, William Baxter 6 segments
+Plutarch / Of Large Acquaintance: or, an Essay to Prove the Folly of Seeking Many Friends - 80 lines
+Plutarch / Of Large Acquaintance: or, an Essay to Prove the Folly of Seeking Many Friends translations: Frank Cole Babbitt 9 segments, William W. Goodwin 9 segments
+Plutarch / Of Love. - 794 lines
+Plutarch / Of Love. translations: John Philips 26 segments
+Plutarch / Of Moral Virtue - 273 lines
+Plutarch / Of Moral Virtue translations: Matthew Morgan 12 segments, William Clark Helmbold 12 segments
+Plutarch / Of Natural Affection Towards One's Offspring - 142 lines
+Plutarch / Of Natural Affection Towards One's Offspring translations: R. Brown 5 segments, William Clark Helmbold 5 segments
+Plutarch / Of Superstition, or Indiscreet Devotion - 166 lines
+Plutarch / Of Superstition, or Indiscreet Devotion translations: Frank Cole Babbitt 14 segments, William Baxter 14 segments
+Plutarch / Of Virtue and Vice - 35 lines
+Plutarch / Of Virtue and Vice translations: Frank Cole Babbitt 4 segments, William Baxter 4 segments
+Plutarch / Of common conceptions, against the Stoics. - 619 lines
+Plutarch / Of common conceptions, against the Stoics. translations: Samuel White 50 segments
+Plutarch / Of eating of flesh: Tract I. - 71 lines
+Plutarch / Of eating of flesh: Tract I. translations: Harold Cherniss 7 segments, William Baxter 7 segments
+Plutarch / Of eating of flesh: Tract II. - 59 lines
+Plutarch / Of eating of flesh: Tract II. translations: Harold Cherniss 7 segments, William Baxter 7 segments
+Plutarch / Of the Face Appearing Within the Orb Of the Moon - 546 lines
+Plutarch / Of the Face Appearing Within the Orb Of the Moon translations: A.G. 30 segments, Harold Cherniss 30 segments
+Plutarch / Of the Love of Wealth - 140 lines
+Plutarch / Of the Love of Wealth translations: John Patrick 10 segments
+Plutarch / Of the Three Sorts of Government, Monarchy, Democracy, and Oligarchy. - 41 lines
+Plutarch / Of the Three Sorts of Government, Monarchy, Democracy, and Oligarchy. translations: Harold North Fowler 4 segments, R. Smith 4 segments
+Plutarch / Of the Tranquillity of the Mind. - 337 lines
+Plutarch / Of the Tranquillity of the Mind. translations: Matthew Morgan 20 segments, William Clark Helmbold 20 segments
+Plutarch / On the Principle of Cold  - 241 lines
+Plutarch / On the Principle of Cold  translations: F. Fetherston 23 segments, Harold Cherniss and William C. Helmbold 23 segments
+Plutarch / Otho - 328 lines
+Plutarch / Otho translations: Bernadotte Perrin 102 segments
+Plutarch / Parallels, or a comparison between the Greek and Roman  Histories. - 376 lines
+Plutarch / Parallels, or a comparison between the Greek and Roman  Histories. translations: Frank Cole Babbitt 42 segments, John Oswald 42 segments
+Plutarch / Pelopidas - 636 lines
+Plutarch / Pelopidas translations: Bernadotte Perrin 205 segments
+Plutarch / Pericles - 902 lines
+Plutarch / Pericles translations: Bernadotte Perrin 220 segments
+Plutarch / Philopoemen - 350 lines
+Plutarch / Philopoemen translations: Bernadotte Perrin 133 segments
+Plutarch / Phocion - 668 lines
+Plutarch / Phocion translations: Bernadotte Perrin 186 segments
+Plutarch / Plutarch's Consolatory Letter to His Wife - 116 lines
+Plutarch / Plutarch's Consolatory Letter to His Wife translations: Thomas Creech 11 segments
+Plutarch / Plutarch's Natural Questions - 263 lines
+Plutarch / Plutarch's Natural Questions translations: R. Brown 39 segments
+Plutarch / Plutarch's Platonic questions - 594 lines
+Plutarch / Plutarch's Platonic questions translations: R. Brown 47 segments
+Plutarch / Plutarch's Rules for the Preservation of Health - 280 lines
+Plutarch / Plutarch's Rules for the Preservation of Health translations: Frank Cole Babbitt 27 segments, Matthew Poole 27 segments
+Plutarch / Political Precepts - 593 lines
+Plutarch / Political Precepts translations: Samuel White 32 segments, William Clark Helmbold 32 segments
+Plutarch / Pompey - 1,598 lines
+Plutarch / Pompey translations: Bernadotte Perrin 1 segments
+Plutarch / Publicola - 484 lines
+Plutarch / Publicola translations: Bernadotte Perrin 126 segments
+Plutarch / Pyrrhus - 836 lines
+Plutarch / Pyrrhus translations: Bernadotte Perrin 228 segments
+Plutarch / Roman Questions - 942 lines
+Plutarch / Roman Questions translations: Frank Cole Babbitt 113 segments, Isaac Chauncy 113 segments
+Plutarch / Romulus - 926 lines
+Plutarch / Romulus translations: Bernadotte Perrin 190 segments
+Plutarch / Sayings of Spartan Women - 182 lines
+Plutarch / Sayings of Spartan Women translations: Frank Cole Babbitt 46 segments
+Plutarch / Sertorius - 464 lines
+Plutarch / Sertorius translations: Bernadotte Perrin 155 segments
+Plutarch / Solon - 914 lines
+Plutarch / Solon translations: Bernadotte Perrin 172 segments
+Plutarch / Sulla - 854 lines
+Plutarch / Sulla translations: Bernadotte Perrin 242 segments
+Plutarch / Symposiacs - 8,138 lines total
+Plutarch / Symposiacs / Book 1 - 978 lines
+Plutarch / Symposiacs translations: Thomas Creech 45 segments
+Plutarch / Symposiacs / Book 2 - 984 lines
+Plutarch / Symposiacs translations: Thomas Creech 41 segments
+Plutarch / Symposiacs / Book 3 - 988 lines
+Plutarch / Symposiacs translations: Thomas Creech 37 segments
+Plutarch / Symposiacs / Book 4 - 834 lines
+Plutarch / Symposiacs translations: Thomas Creech 31 segments
+Plutarch / Symposiacs / Book 5 - 748 lines
+Plutarch / Symposiacs translations: Thomas Creech 37 segments
+Plutarch / Symposiacs / Book 6 - 704 lines
+Plutarch / Symposiacs translations: Thomas Creech 34 segments
+Plutarch / Symposiacs / Book 7 - 1,018 lines
+Plutarch / Symposiacs translations: Thomas Creech 44 segments
+Plutarch / Symposiacs / Book 8 - 1,126 lines
+Plutarch / Symposiacs translations: Thomas Creech 50 segments
+Plutarch / Symposiacs / Book 9 - 758 lines
+Plutarch / Symposiacs translations: Thomas Creech 45 segments
+Plutarch / That Virtue May Be Taught - 38 lines
+Plutarch / That Virtue May Be Taught translations: John Patrick 3 segments, William Clark Helmbold 3 segments
+Plutarch / That a Philosopher Ought Chiefly to Converse with Great Men - 113 lines
+Plutarch / That a Philosopher Ought Chiefly to Converse with Great Men translations: Harold North Fowler 4 segments, Knightly Chetwood 4 segments
+Plutarch / That brute beasts make use of reason - 156 lines
+Plutarch / That brute beasts make use of reason translations: Harold Cherniss 10 segments, Sir A. J. 10 segments
+Plutarch / That it is Not Possible to Live Pleasurably According to the Doctrine of Epicurus - 400 lines
+Plutarch / That it is Not Possible to Live Pleasurably According to the Doctrine of Epicurus translations: William Baxter 31 segments
+Plutarch / The Ancient Customs of the Spartans - 108 lines
+Plutarch / The Ancient Customs of the Spartans translations: Frank Cole Babbitt 42 segments
+Plutarch / The Banquet of the Seven Wise Men - 435 lines
+Plutarch / The Banquet of the Seven Wise Men translations: Frank Cole Babbitt 21 segments, Roger Davis 21 segments
+Plutarch / The apophthegms or remarkable sayings of kings and great
+            commanders. - 2,026 lines
+Plutarch / The apophthegms or remarkable sayings of kings and great
+            commanders. translations: Edward Hinton 92 segments, Frank Cole Babbitt 592 segments
+Plutarch / The contradictions of the Stoics - 513 lines
+Plutarch / The contradictions of the Stoics translations: E. Smith 46 segments
+Plutarch / Themistocles - 758 lines
+Plutarch / Themistocles translations: Bernadotte Perrin 168 segments
+Plutarch / Theseus - 788 lines
+Plutarch / Theseus translations: Bernadotte Perrin 168 segments
+Plutarch / Tiberius and Caius Gracchus - 690 lines total
+Plutarch / Tiberius and Caius Gracchus / Book 1 - 370 lines
+Plutarch / Tiberius and Caius Gracchus translations: Bernadotte Perrin 118 segments
+Plutarch / Tiberius and Caius Gracchus / Book 2 - 320 lines
+Plutarch / Tiberius and Caius Gracchus translations: Bernadotte Perrin 98 segments
+Plutarch / Timoleon - 670 lines
+Plutarch / Timoleon translations: Bernadotte Perrin 1 segments
+Plutarch / Titus Flamininus - 388 lines
+Plutarch / Titus Flamininus translations: Bernadotte Perrin 129 segments
+Plutarch / Wherefore the Pythian Priestess now Ceases to Deliver her Oracles in Verse - 422 lines
+Plutarch / Wherefore the Pythian Priestess now Ceases to Deliver her Oracles in Verse translations: Frank Cole Babbitt 30 segments, John Philips 30 segments
+Plutarch / Whether 'Twere Rightly Said, Live Concealed. - 65 lines
+Plutarch / Whether 'Twere Rightly Said, Live Concealed. translations: Charles Whitaker 7 segments
+Plutarch / Whether an Aged Man Ought to Meddle in State Affairs. - 321 lines
+Plutarch / Whether an Aged Man Ought to Meddle in State Affairs. translations: F. Fetherston 28 segments, Harold North Fowler 28 segments
+Plutarch / Whether the Athenians Were More Renowned For Their Warlike Achievements or For Their Learning - 256 lines
+Plutarch / Whether the Athenians Were More Renowned For Their Warlike Achievements or For Their Learning translations: Frank Cole Babbitt 8 segments, R. Smith 8 segments
+Plutarch / Whether the Passions of the Soul or Diseases of the Body Are Worse - 47 lines
+Plutarch / Whether the Passions of the Soul or Diseases of the Body Are Worse translations: Samuel White 4 segments, William Clark Helmbold 4 segments
+Plutarch / Whether vice is sufficient to render a man unhappy - 53 lines
+Plutarch / Whether vice is sufficient to render a man unhappy translations: Samuel White 5 segments, William Clark Helmbold 5 segments
+Plutarch / Whether water or fire be most useful. - 90 lines
+Plutarch / Whether water or fire be most useful. translations: F. Fetherston 13 segments, Harold Cherniss 13 segments
+Plutarch / Which are the most crafty, water-animals or those creatures that breed upon the land? - 509 lines
+Plutarch / Which are the most crafty, water-animals or those creatures that breed upon the land? translations: Harold Cherniss 38 segments, John Philips> 37 segments
+Plutarch / Why the Oracles Cease to Give Answers - 692 lines
+Plutarch / Why the Oracles Cease to Give Answers translations: Frank Cole Babbitt 52 segments, Robert Midgley 52 segments
+
+[Sophocles]
+Sophocles / Ajax - 1,364 lines
+Sophocles / Ajax translations: Richard Jebb 302 segments
+Sophocles / Antigone - 1,252 lines
+Sophocles / Antigone translations: Richard Jebb 297 segments
+Sophocles / Electra - 1,468 lines
+Sophocles / Electra translations: Richard Jebb 400 segments
+Sophocles / Oedipus Tyrannus - 1,462 lines
+Sophocles / Oedipus Tyrannus translations: Richard Jebb 440 segments
+Sophocles / Oedipus at Colonus - 1,717 lines
+Sophocles / Oedipus at Colonus translations: Richard Jebb 465 segments
+Sophocles / Philoctetes - 1,419 lines
+Sophocles / Philoctetes translations: Richard Jebb 374 segments
+Sophocles / Trachiniae - 1,235 lines
+Sophocles / Trachiniae translations: Richard Jebb 252 segments
+Sophocles / Tracking Satyrs - 401 lines
+Sophocles / Tracking Satyrs translations: Anne Mahoney 89 segments
+
+[Thucydides]
+Thucydides / History of the Peloponnesian War - 12,356 lines total
+Thucydides / History of the Peloponnesian War / Book 1 - 1,926 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 722 segments, Henry Dale 722 segments, Richard Crawley 726 segments, Thomas Hobbes 724 segments
+Thucydides / History of the Peloponnesian War / Book 2 - 1,600 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 566 segments, Henry Dale 566 segments, Richard Crawley 566 segments, Thomas Hobbes 565 segments
+Thucydides / History of the Peloponnesian War / Book 3 - 1,592 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 583 segments, Henry Dale 583 segments, Richard Crawley 586 segments, Thomas Hobbes 582 segments
+Thucydides / History of the Peloponnesian War / Book 4 - 1,726 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 665 segments, Henry Dale 665 segments, Richard Crawley 666 segments, Thomas Hobbes 664 segments
+Thucydides / History of the Peloponnesian War / Book 5 - 1,470 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 507 segments, Henry Dale 507 segments, Richard Crawley 507 segments, Thomas Hobbes 507 segments
+Thucydides / History of the Peloponnesian War / Book 6 - 1,396 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 496 segments, Henry Dale 496 segments, Richard Crawley 496 segments, Thomas Hobbes 496 segments
+Thucydides / History of the Peloponnesian War / Book 7 - 1,262 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 450 segments, Henry Dale 450 segments, Richard Crawley 450 segments, Thomas Hobbes 450 segments
+Thucydides / History of the Peloponnesian War / Book 8 - 1,384 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 507 segments, Henry Dale 507 segments, Richard Crawley 507 segments, Thomas Hobbes 507 segments
+
+[Xenophon]
+Xenophon /  Hellenica - 7,276 lines total
+Xenophon /  Hellenica / Book 1 - 766 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 202 segments
+Xenophon /  Hellenica / Book 2 - 832 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 159 segments
+Xenophon /  Hellenica / Book 3 - 926 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 129 segments
+Xenophon /  Hellenica / Book 4 - 1,218 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 193 segments
+Xenophon /  Hellenica / Book 5 - 1,214 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 176 segments
+Xenophon /  Hellenica / Book 6 - 1,194 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 172 segments
+Xenophon /  Hellenica / Book 7 - 1,126 lines
+Xenophon /  Hellenica translations: H. G. Dakyns 153 segments
+Xenophon / Agesilaus - 718 lines
+Xenophon / Agesilaus translations: Unknown 148 segments
+Xenophon / Anabasis - 7,660 lines total
+Xenophon / Anabasis / Book 1 - 1,226 lines
+Xenophon / Anabasis translations: H. G. Dakyns 215 segments
+Xenophon / Anabasis / Book 2 - 910 lines
+Xenophon / Anabasis translations: H. G. Dakyns 179 segments
+Xenophon / Anabasis / Book 3 - 860 lines
+Xenophon / Anabasis translations: H. G. Dakyns 178 segments
+Xenophon / Anabasis / Book 4 - 1,124 lines
+Xenophon / Anabasis translations: H. G. Dakyns 238 segments
+Xenophon / Anabasis / Book 5 - 1,092 lines
+Xenophon / Anabasis translations: H. G. Dakyns 227 segments
+Xenophon / Anabasis / Book 6 - 976 lines
+Xenophon / Anabasis translations: H. G. Dakyns 181 segments
+Xenophon / Anabasis / Book 7 - 1,472 lines
+Xenophon / Anabasis translations: H. G. Dakyns 302 segments
+Xenophon / Apology - 116 lines
+Xenophon / Apology translations: Unknown 34 segments
+Xenophon / Constitution of the Lacedaimonians - 560 lines
+Xenophon / Constitution of the Lacedaimonians translations: Unknown 134 segments
+Xenophon / Cyropaedia - 9,904 lines total
+Xenophon / Cyropaedia / Book 1 - 1,356 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 134 segments
+Xenophon / Cyropaedia / Book 2 - 966 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 122 segments
+Xenophon / Cyropaedia / Book 3 - 1,060 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 147 segments
+Xenophon / Cyropaedia / Book 4 - 1,146 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 183 segments
+Xenophon / Cyropaedia / Book 5 - 1,414 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 230 segments
+Xenophon / Cyropaedia / Book 6 - 982 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 157 segments
+Xenophon / Cyropaedia / Book 7 - 1,210 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 201 segments
+Xenophon / Cyropaedia / Book 8 - 1,770 lines
+Xenophon / Cyropaedia translations: H. G. Dakyns 276 segments
+Xenophon / Economics - 1,944 lines
+Xenophon / Economics translations: Unknown 418 segments
+Xenophon / Hiero - 648 lines
+Xenophon / Hiero translations: Unknown 164 segments
+Xenophon / Memorabilia - 4,330 lines total
+Xenophon / Memorabilia / Book 1 - 834 lines
+Xenophon / Memorabilia translations: H. G. Dakyns 151 segments
+Xenophon / Memorabilia / Book 2 - 1,022 lines
+Xenophon / Memorabilia translations: H. G. Dakyns 162 segments
+Xenophon / Memorabilia / Book 3 - 1,192 lines
+Xenophon / Memorabilia translations: H. G. Dakyns 190 segments
+Xenophon / Memorabilia / Book 4 - 1,282 lines
+Xenophon / Memorabilia translations: H. G. Dakyns 144 segments
+Xenophon / On Hunting - 1,210 lines
+Xenophon / On Hunting translations: Unknown 228 segments
+Xenophon / On the Cavalry Commander - 592 lines
+Xenophon / On the Cavalry Commander translations: Unknown 148 segments
+Xenophon / On the Cavalry Commander - 784 lines
+Xenophon / On the Cavalry Commander translations: Unknown 166 segments
+Xenophon / Symposium - 1,374 lines
+Xenophon / Symposium translations: Unknown 205 segments
+Xenophon / Ways and Means - 404 lines
+Xenophon / Ways and Means translations: Unknown 103 segments

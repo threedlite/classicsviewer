@@ -27,10 +27,21 @@ class DictionaryActivity : BaseActivity() {
         
         val word = intent.getStringExtra("word") ?: return
         val lemma = intent.getStringExtra("lemma") ?: word  // Fallback to word if no lemma
-        val language = intent.getStringExtra("language") ?: ""
+        val rawLanguage = intent.getStringExtra("language") ?: ""
+        
+        // Normalize and validate language
+        val language = rawLanguage.lowercase().trim()
         
         // Debug log
-        android.util.Log.d("DictionaryActivity", "Word: '$word', Lemma: '$lemma', Language: '$language'")
+        android.util.Log.d("DictionaryActivity", "Word: '$word', Lemma: '$lemma', Language: '$language' (raw: '$rawLanguage')")
+        
+        // Validate language
+        if (language.isEmpty() || language != "greek") {
+            android.util.Log.e("DictionaryActivity", "Invalid language: '$language' - dictionary only supports Greek")
+            binding.definitionText.text = "Dictionary lookup is only available for Greek texts"
+            binding.occurrencesButton.isEnabled = false
+            return
+        }
         
         // For display, remove punctuation from the word
         val displayWord = word.replace(Regex("[.,;:!?·]"), "")

@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ClassicsViewer"
 include ':app'
-include ':perseus_database'

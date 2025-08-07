@@ -19,34 +19,26 @@ cd ..
 
 # Step 2: Remove old compressed databases
 echo "🗑️  Step 2: Removing old compressed databases..."
-rm -f perseus_database/src/main/assets/perseus_texts.db.zip
 rm -f app/src/debug/assets/perseus_texts.db.zip
 echo "✅ Old compressed databases removed"
 
 # Step 3: Create fresh compressed database
 echo "📦 Step 3: Creating fresh compressed database..."
 cd data-prep
-# Note: The sample database is already compressed and copied by create_perseus_database.py
-# But verify it exists
-if [ ! -f "../perseus_database/src/main/assets/perseus_texts.db.zip" ]; then
-    echo "❌ Expected compressed database not found - aborting"
-    exit 1
-fi
+# The database creation script now creates the ZIP directly in app/src/debug/assets
 cd ..
 
 # Step 4: Verify ZIP integrity
 echo "🔍 Step 4: Verifying ZIP integrity..."
-if unzip -t perseus_database/src/main/assets/perseus_texts.db.zip > /dev/null 2>&1; then
+if unzip -t app/src/debug/assets/perseus_texts.db.zip > /dev/null 2>&1; then
     echo "✅ ZIP file is valid"
 else
     echo "❌ ZIP file is corrupted - aborting"
     exit 1
 fi
 
-# Step 5: Copy to debug assets for local testing
-echo "📋 Step 5: Copying to debug assets..."
-mkdir -p app/src/debug/assets
-cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
+# Step 5: Database already in correct location
+echo "✅ Step 5: Database is in app/src/debug/assets/"
 echo "✅ Database copied to debug assets"
 
 # Step 6: Build and install debug APK

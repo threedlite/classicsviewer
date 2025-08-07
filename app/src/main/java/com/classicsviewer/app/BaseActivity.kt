@@ -14,6 +14,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setupActionBar()
     }
     
+    
     override fun onResume() {
         super.onResume()
         // Navigation state persistence has been removed - app always starts fresh
@@ -104,12 +105,12 @@ abstract class BaseActivity : AppCompatActivity() {
         // Try to get language from current intent, otherwise go to main to select language
         val language = intent.getStringExtra("language")
         if (language != null) {
-            val intent = Intent(this, AuthorListActivity::class.java).apply {
+            val authorIntent = Intent(this, AuthorListActivity::class.java).apply {
                 putExtra("language", language)
-                putExtra("language_name", intent.getStringExtra("language_name"))
+                putExtra("language_name", this@BaseActivity.intent.getStringExtra("language_name"))
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
-            startActivity(intent)
+            startActivity(authorIntent)
             finish()
         } else {
             // No language context, go to main screen
@@ -122,12 +123,14 @@ abstract class BaseActivity : AppCompatActivity() {
         // If we don't have it, go to author list instead
         val authorId = intent.getStringExtra("author_id")
         if (authorId != null) {
-            val intent = Intent(this, WorkListActivity::class.java).apply {
+            val workIntent = Intent(this, WorkListActivity::class.java).apply {
                 putExtra("author_id", authorId)
-                putExtra("author_name", intent.getStringExtra("author_name"))
+                putExtra("author_name", this@BaseActivity.intent.getStringExtra("author_name"))
+                putExtra("language", this@BaseActivity.intent.getStringExtra("language"))
+                putExtra("language_name", this@BaseActivity.intent.getStringExtra("language_name"))
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
-            startActivity(intent)
+            startActivity(workIntent)
         } else {
             navigateToAuthorList()
         }
@@ -139,14 +142,16 @@ abstract class BaseActivity : AppCompatActivity() {
         // If we don't have it, go to work list (or author list if no author info)
         val workId = intent.getStringExtra("work_id")
         if (workId != null) {
-            val intent = Intent(this, BookListActivity::class.java).apply {
+            val bookIntent = Intent(this, BookListActivity::class.java).apply {
                 putExtra("work_id", workId)
-                putExtra("work_title", intent.getStringExtra("work_title"))
-                putExtra("author_id", intent.getStringExtra("author_id"))
-                putExtra("author_name", intent.getStringExtra("author_name"))
+                putExtra("work_title", this@BaseActivity.intent.getStringExtra("work_title"))
+                putExtra("author_id", this@BaseActivity.intent.getStringExtra("author_id"))
+                putExtra("author_name", this@BaseActivity.intent.getStringExtra("author_name"))
+                putExtra("language", this@BaseActivity.intent.getStringExtra("language"))
+                putExtra("language_name", this@BaseActivity.intent.getStringExtra("language_name"))
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
-            startActivity(intent)
+            startActivity(bookIntent)
         } else {
             navigateToWorkList()
         }
