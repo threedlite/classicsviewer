@@ -93,8 +93,7 @@ class TextLineAdapter(
                         spannableString.setSpan(
                             CustomClickableSpan(
                                 clickAction = {
-                                    val cleanWord = word.replace(Regex("[.,;:!?·]"), "")
-                                    onWordClick(cleanWord)
+                                    onWordClick(word)
                                 },
                                 showUnderline = showUnderlines
                             ),
@@ -115,8 +114,7 @@ class TextLineAdapter(
                     spannableString.setSpan(
                         CustomClickableSpan(
                             clickAction = {
-                                val cleanWord = word.replace(Regex("[.,;:!?·]"), "")
-                                onWordClick(cleanWord)
+                                onWordClick(word)
                             },
                             showUnderline = showUnderlines
                         ),

@@ -29,18 +29,18 @@ class DictionaryActivity : BaseActivity() {
         val lemma = intent.getStringExtra("lemma") ?: word  // Fallback to word if no lemma
         val language = intent.getStringExtra("language") ?: ""
         
-        // Clean punctuation from display word (matching lookup logic)
-        val cleanWord = word.replace(Regex("[.,;:!?·]"), "")
-        
         // Debug log
-        android.util.Log.d("DictionaryActivity", "Word: '$word', Clean: '$cleanWord', Lemma: '$lemma', Language: '$language'")
+        android.util.Log.d("DictionaryActivity", "Word: '$word', Lemma: '$lemma', Language: '$language'")
         
-        supportActionBar?.title = "Dictionary: $cleanWord"
+        // For display, remove punctuation from the word
+        val displayWord = word.replace(Regex("[.,;:!?·]"), "")
+        
+        supportActionBar?.title = "Dictionary: $displayWord"
         
         repository = RepositoryFactory.getRepository(this)
         
         // Display cleaned word as main title
-        binding.wordTitle.text = cleanWord
+        binding.wordTitle.text = displayWord
         binding.backButton.setOnClickListener { finish() }
         
         // Apply saved font size
@@ -73,7 +73,7 @@ class DictionaryActivity : BaseActivity() {
             startActivity(intent)
         }
         
-        loadDefinition(lemma, language, word, cleanWord)
+        loadDefinition(lemma, language, word, displayWord)
     }
     
     private fun loadDefinition(lemma: String, language: String, originalWord: String, displayWord: String) {

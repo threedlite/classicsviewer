@@ -94,11 +94,12 @@ class PerseusRepository(context: Context) : DataRepository {
     }
     
     override suspend fun getAllDictionaryEntries(word: String, language: String): DictionaryResultMultiple = withContext(Dispatchers.IO) {
-        // Normalize the word for searching
+        // Clean punctuation first, then normalize for searching
+        val cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
         val normalized = if (language.equals("greek", ignoreCase = true)) {
-            normalizeGreek(word)
+            normalizeGreek(cleanedWord)
         } else {
-            word.lowercase().replace(Regex("[.,;:!?]"), "")
+            cleanedWord.lowercase()
         }
         
         // Normalize language parameter to match database (database uses lowercase)
@@ -124,8 +125,11 @@ class PerseusRepository(context: Context) : DataRepository {
             android.util.Log.d("PerseusRepository", "Getting all lemmas for Greek word")
             
             // Get all lemma mappings with confidence scores
-            val lemmaMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(word, normalized)
-            android.util.Log.d("PerseusRepository", "Found ${lemmaMappings.size} lemma mappings")
+            // Note: In the current database, both word_form and word_normalized columns
+            // contain the same normalized values (no diacritics), so we need to normalize
+            // the input word before querying
+            val lemmaMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(normalized)
+            android.util.Log.d("PerseusRepository", "Found ${lemmaMappings.size} lemma mappings for normalized word: $normalized")
             
             // Group by lemma to get the highest confidence mapping for each lemma
             val lemmaToMapping = lemmaMappings.groupBy { it.lemma }
@@ -327,11 +331,12 @@ class PerseusRepository(context: Context) : DataRepository {
     }
     
     override suspend fun getLemmaForWord(word: String, language: String): String? = withContext(Dispatchers.IO) {
-        // Normalize the word for lookup
+        // Clean punctuation first, then normalize for lookup
+        val cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
         val normalized = if (language.equals("greek", ignoreCase = true)) {
-            normalizeGreek(word)
+            normalizeGreek(cleanedWord)
         } else {
-            word.lowercase().replace(Regex("[.,;:!?]"), "")
+            cleanedWord.lowercase()
         }
         
         // Try to find lemma in lemma_map table
