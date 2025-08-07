@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../data-prep/perseus_texts.db:/data/perseus_texts.db:ro
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DB_PATH=/data/perseus_texts.db
+    command: npm start

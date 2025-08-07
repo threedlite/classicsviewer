@@ -1,4 +1,11 @@
+All application code I have created (some using Claude) in this project is licensed by the MIT license.  https://opensource.org/license/mit
 
+
+Texts licenses:
+
+Wikitionary - https://creativecommons.org/licenses/by-sa/4.0/
+
+==================================================================================================
 
 Tufts University holds the overall copyright to the Perseus Digital Library; the materials therein 
 (including all texts, translations, images, descriptions, drawings, etc.) are provided for the 

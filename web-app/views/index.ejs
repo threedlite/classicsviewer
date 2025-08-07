@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classics Viewer</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <span style="font-family: 'Times New Roman', serif; font-size: 56px; line-height: 0.6; font-weight: bold; color: #f8f9fa; margin-right: 20px; position: relative; top: -5px;">α</span>
+                Classics Viewer
+            </a>
+            <div class="navbar-nav ms-auto">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-light" id="greekBtn" 
+                            onclick="setLanguage('greek')" 
+                            <%= language === 'greek' ? 'disabled' : '' %>>
+                        Greek
+                    </button>
+                    <button type="button" class="btn btn-outline-light" id="latinBtn" 
+                            onclick="setLanguage('latin')"
+                            <%= language === 'latin' ? 'disabled' : '' %>>
+                        Latin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <!-- Left sidebar for navigation -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Authors</h5>
+                    </div>
+                    <div class="card-body" style="height: 300px; overflow-y: auto;">
+                        <div id="authorList" class="list-group">
+                            <!-- Authors will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5>Works</h5>
+                    </div>
+                    <div class="card-body" style="height: 300px; overflow-y: auto;">
+                        <div id="bookList" class="list-group">
+                            <!-- Works will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 id="contentTitle">Select an author and work</h5>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-primary" id="textBtn" onclick="showText()">Text</button>
+                                <button type="button" class="btn btn-outline-primary" id="translationBtn" onclick="showTranslation()">Translation</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="height: 600px; overflow-y: auto;">
+                        <div id="contentArea">
+                            <p class="text-muted text-center mt-5">Select an author and work from the left sidebar to begin reading.</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-sm btn-secondary" onclick="loadPreviousPage()" id="prevBtn" disabled>
+                                Previous
+                            </button>
+                            <span id="pageInfo">Page: 0</span>
+                            <button class="btn btn-sm btn-secondary" onclick="loadNextPage()" id="nextBtn" disabled>
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- License link -->
+    <div style="position: fixed; bottom: 10px; right: 10px; font-size: 0.85rem;">
+        <a href="/license" target="_blank" class="text-muted">License</a>
+    </div>
+
+    <!-- Word Info Panel -->
+    <div id="wordInfoPanel">
+        <div class="panel-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 id="selectedWord" class="mb-0">Word</h5>
+                <button type="button" class="btn-close" onclick="closeWordPanel()"></button>
+            </div>
+        </div>
+        <div class="panel-content">
+            <!-- Tabs for Dictionary and Occurrences -->
+            <ul class="nav nav-tabs word-info-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="dictionary-tab" data-bs-toggle="tab" data-bs-target="#dictionary-content" type="button" role="tab">
+                        Dictionary
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="occurrences-tab" data-bs-toggle="tab" data-bs-target="#occurrences-content" type="button" role="tab">
+                        Occurrences
+                    </button>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="dictionary-content" role="tabpanel">
+                    <div id="dictionaryResults">
+                        <div class="loading">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="occurrences-content" role="tabpanel">
+                    <div id="occurrencesResults">
+                        <div class="loading">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

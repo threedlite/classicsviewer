@@ -1,0 +1,174 @@
+/* Custom styles for Classics Viewer */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.list-group-item {
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+#contentArea {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.text-line {
+    margin-bottom: 0.5rem;
+}
+
+.line-number {
+    display: inline-block;
+    width: 50px;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.translation-segment {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.translation-text {
+    margin-bottom: 0.25rem;
+}
+
+.translation-reference {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* Greek text styling */
+.greek-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+}
+
+/* Latin text styling */
+.latin-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.15rem;
+}
+
+/* Loading indicator */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+}
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* Clickable words */
+.clickable-word {
+    cursor: pointer;
+    position: relative;
+}
+
+.clickable-word:hover {
+    text-decoration: underline;
+    color: #0d6efd;
+}
+
+/* Dictionary and occurrences panel */
+#wordInfoPanel {
+    position: fixed;
+    right: -400px;
+    top: 56px; /* Below navbar */
+    width: 400px;
+    height: calc(100vh - 56px);
+    background: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 1040;
+    overflow-y: auto;
+}
+
+#wordInfoPanel.show {
+    right: 0;
+}
+
+.panel-header {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.panel-content {
+    padding: 1rem;
+}
+
+.dictionary-entry {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.dictionary-entry:last-child {
+    border-bottom: none;
+}
+
+.dictionary-headword {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 0.5rem;
+}
+
+.dictionary-text {
+    line-height: 1.6;
+}
+
+.occurrence-item {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.occurrence-item:hover {
+    background-color: #e9ecef;
+}
+
+.occurrence-line-ref {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.highlighted-word {
+    background-color: #fff3cd;
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+/* Tabs for dictionary/occurrences */
+.word-info-tabs {
+    margin-bottom: 1rem;
+}
+
+.tab-content {
+    min-height: 200px;
+}
