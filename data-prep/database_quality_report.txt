@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-06T17:29:40.734645
+Generated: 2025-08-07T10:44:23.416306
 
 Total Authors: 91
 Total Works: 788

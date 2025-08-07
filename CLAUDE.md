@@ -369,6 +369,13 @@ The database build uses pre-extracted Wiktionary data for morphological analysis
 - **Check completion**: Look for "DEPLOYMENT COMPLETE!" message
 - **CRITICAL**: If script times out during `zip` command, the ZIP file is corrupted and unusable
 
+**Monitoring Progress During Deployment**:
+- **Greek Authors**: Watch for `[XX/100] Processing` messages (takes ~2-3 minutes)
+- **Latin Authors**: Look for `=== PROCESSING LATIN AUTHORS ===` marker
+- **Critical ZIP Phase**: When you see `Compressing database to`, monitor closely with `ps aux | grep zip`
+- **ZIP Completion**: Verify with `ls -la perseus_database/src/main/assets/perseus_texts.db.zip`
+- **Final Verification**: Always run `unzip -t` before continuing
+
 **Database Corruption Detection**:
 - **Symptom**: `java.io.EOFException: Unexpected end of ZLIB input stream`
 - **Symptom**: Database shows only 4096 bytes instead of ~1.4GB
