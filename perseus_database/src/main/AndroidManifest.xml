@@ -8,7 +8,7 @@
         dist:type="asset-pack">
         <dist:fusing dist:include="true" />
         <dist:delivery>
-            <dist:install-time />
+            <dist:fast-follow />
         </dist:delivery>
     </dist:module>
     

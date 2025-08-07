@@ -1,6 +1,6 @@
 # Privacy Policy for Classics Viewer
 
-**Last updated: January 2025**
+**Last updated: August 2025**
 
 ## Introduction
 
@@ -32,7 +32,7 @@ All app data is stored locally on your device:
 ## Permissions
 
 Classics Viewer requires minimal permissions:
-- **Storage Access**: Only to read the pre-packaged database file (OBB) containing classical texts
+- **Storage Access**: Only to read the packaged database file containing classical texts, and if the import/export bookmarks to CSV file function is used.
 - No internet permission required
 - No camera, microphone, or location access
 - No access to contacts or other personal data
