@@ -115,4 +115,13 @@ class BookmarkViewModel(application: Application) : AndroidViewModel(application
     suspend fun getBookmark(bookId: String, lineNumber: Int): BookmarkEntity? {
         return repository.getBookmark(bookId, lineNumber)
     }
+    
+    suspend fun getAllBookmarksForExport(): List<BookmarkEntity> {
+        return repository.getAllBookmarksForExport()
+    }
+    
+    suspend fun importBookmarks(bookmarks: List<BookmarkEntity>): Int {
+        val results = repository.importBookmarks(bookmarks)
+        return results.count { it != -1L }
+    }
 }

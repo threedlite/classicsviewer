@@ -110,4 +110,10 @@ class BookmarkRepository(context: Context) {
     
     suspend fun getBookmark(bookId: String, lineNumber: Int): BookmarkEntity? = 
         bookmarkDao.getBookmark(bookId, lineNumber)
+    
+    suspend fun getAllBookmarksForExport(): List<BookmarkEntity> = 
+        bookmarkDao.getAllBookmarksForExport()
+    
+    suspend fun importBookmarks(bookmarks: List<BookmarkEntity>): List<Long> = 
+        bookmarkDao.insertBookmarks(bookmarks)
 }

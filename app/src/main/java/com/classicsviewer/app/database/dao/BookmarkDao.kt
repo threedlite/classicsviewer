@@ -59,4 +59,10 @@ interface BookmarkDao {
     
     @Query("SELECT * FROM bookmarks WHERE note IS NOT NULL AND note != '' ORDER BY created_at DESC")
     fun getBookmarksWithNotes(): Flow<List<BookmarkEntity>>
+    
+    @Query("SELECT * FROM bookmarks ORDER BY created_at DESC")
+    suspend fun getAllBookmarksForExport(): List<BookmarkEntity>
+    
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertBookmarks(bookmarks: List<BookmarkEntity>): List<Long>
 }

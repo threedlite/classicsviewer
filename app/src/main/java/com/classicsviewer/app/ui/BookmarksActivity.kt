@@ -1,9 +1,11 @@
 package com.classicsviewer.app.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.classicsviewer.app.BaseActivity
@@ -16,6 +18,15 @@ import com.classicsviewer.app.database.entities.BookmarkEntity
 import com.classicsviewer.app.viewmodels.BookmarkViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BookmarksActivity : BaseActivity() {
     private val viewModel: BookmarkViewModel by viewModels()
@@ -24,6 +35,18 @@ class BookmarksActivity : BaseActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var emptyStateText: TextView
     private var workIdFilter: String? = null
+    
+    private val exportFilePicker = registerForActivityResult(
+        ActivityResultContracts.CreateDocument("text/csv")
+    ) { uri ->
+        uri?.let { performExport(it) }
+    }
+    
+    private val importFilePicker = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        uri?.let { performImport(it) }
+    }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -300,20 +323,157 @@ class BookmarksActivity : BaseActivity() {
     }
     
     private fun exportBookmarksToCSV() {
-        // TODO: Implement CSV export
-        com.google.android.material.snackbar.Snackbar.make(
-            recyclerView,
-            "Export feature coming soon",
-            com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
-        ).show()
+        val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+        val filename = "bookmarks_${dateFormat.format(Date())}.csv"
+        exportFilePicker.launch(filename)
     }
     
     private fun importBookmarksFromCSV() {
-        // TODO: Implement CSV import
-        com.google.android.material.snackbar.Snackbar.make(
-            recyclerView,
-            "Import feature coming soon",
-            com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
-        ).show()
+        importFilePicker.launch(arrayOf("text/csv", "text/comma-separated-values", "text/plain", "*/*"))
+    }
+    
+    private fun performExport(uri: Uri) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val bookmarks = viewModel.getAllBookmarksForExport()
+                val csvContent = buildString {
+                    // CSV Header
+                    appendLine("work_id,book_id,line_number,author_name,work_title,book_label,line_text,note,created_at,last_accessed")
+                    
+                    // CSV Data
+                    bookmarks.forEach { bookmark ->
+                        append("\"${escapeCSV(bookmark.workId)}\",")
+                        append("\"${escapeCSV(bookmark.bookId)}\",")
+                        append("${bookmark.lineNumber},")
+                        append("\"${escapeCSV(bookmark.authorName)}\",")
+                        append("\"${escapeCSV(bookmark.workTitle)}\",")
+                        append("\"${escapeCSV(bookmark.bookLabel ?: "")}\",")
+                        append("\"${escapeCSV(bookmark.lineText)}\",")
+                        append("\"${escapeCSV(bookmark.note ?: "")}\",")
+                        append("${bookmark.createdAt},")
+                        appendLine("${bookmark.lastAccessed}")
+                    }
+                }
+                
+                contentResolver.openOutputStream(uri)?.use { outputStream ->
+                    OutputStreamWriter(outputStream).use { writer ->
+                        writer.write(csvContent)
+                    }
+                }
+                
+                withContext(Dispatchers.Main) {
+                    com.google.android.material.snackbar.Snackbar.make(
+                        recyclerView,
+                        "Exported ${bookmarks.size} bookmarks",
+                        com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    com.google.android.material.snackbar.Snackbar.make(
+                        recyclerView,
+                        "Export failed: ${e.message}",
+                        com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+    
+    private fun performImport(uri: Uri) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val bookmarks = mutableListOf<BookmarkEntity>()
+                
+                contentResolver.openInputStream(uri)?.use { inputStream ->
+                    BufferedReader(InputStreamReader(inputStream)).use { reader ->
+                        // Skip header line
+                        reader.readLine()
+                        
+                        reader.forEachLine { line ->
+                            val values = parseCSVLine(line)
+                            if (values.size >= 10) {
+                                try {
+                                    bookmarks.add(BookmarkEntity(
+                                        workId = values[0],
+                                        bookId = values[1],
+                                        lineNumber = values[2].toInt(),
+                                        authorName = values[3],
+                                        workTitle = values[4],
+                                        bookLabel = values[5].ifEmpty { null },
+                                        lineText = values[6],
+                                        note = values[7].ifEmpty { null },
+                                        createdAt = values[8].toLong(),
+                                        lastAccessed = values[9].toLong()
+                                    ))
+                                } catch (e: Exception) {
+                                    // Skip malformed lines
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                val importedCount = viewModel.importBookmarks(bookmarks)
+                
+                withContext(Dispatchers.Main) {
+                    com.google.android.material.snackbar.Snackbar.make(
+                        recyclerView,
+                        "Imported $importedCount of ${bookmarks.size} bookmarks",
+                        com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                    ).show()
+                    
+                    // Refresh current tab
+                    when (tabLayout.selectedTabPosition) {
+                        0 -> observeAllBookmarks()
+                        1 -> observeRecentBookmarks()
+                        2 -> observeBookmarksWithNotes()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    com.google.android.material.snackbar.Snackbar.make(
+                        recyclerView,
+                        "Import failed: ${e.message}",
+                        com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+    
+    private fun escapeCSV(value: String): String {
+        return value.replace("\"", "\"\"")
+    }
+    
+    private fun parseCSVLine(line: String): List<String> {
+        val result = mutableListOf<String>()
+        var current = StringBuilder()
+        var inQuotes = false
+        var i = 0
+        
+        while (i < line.length) {
+            when {
+                line[i] == '"' -> {
+                    if (inQuotes && i + 1 < line.length && line[i + 1] == '"') {
+                        current.append('"')
+                        i++
+                    } else {
+                        inQuotes = !inQuotes
+                    }
+                }
+                line[i] == ',' && !inQuotes -> {
+                    result.add(current.toString())
+                    current = StringBuilder()
+                }
+                else -> {
+                    current.append(line[i])
+                }
+            }
+            i++
+        }
+        result.add(current.toString())
+        
+        return result
     }
 }
