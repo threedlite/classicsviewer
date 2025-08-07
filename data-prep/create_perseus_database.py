@@ -3217,32 +3217,48 @@ def compress_and_copy_database(db_filename, is_sample=False):
     import os
     import zipfile
     
-    asset_pack_dir = "../app/src/debug/assets"
-    os.makedirs(asset_pack_dir, exist_ok=True)
+    # For debug builds
+    debug_asset_dir = "../app/src/debug/assets"
+    os.makedirs(debug_asset_dir, exist_ok=True)
+    
+    # For release builds
+    main_asset_dir = "../app/src/main/assets"
+    os.makedirs(main_asset_dir, exist_ok=True)
     
     if os.path.exists(db_filename):
         # For sample database, copy to the standard location expected by the app
         if is_sample:
             # Create compressed version with the standard name expected by app
-            zip_path = os.path.join(asset_pack_dir, "perseus_texts.db.zip")
-            print(f"\nCompressing sample database to {zip_path}...")
-            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
-                # Archive name inside zip must be perseus_texts.db for app compatibility
-                zf.write(db_filename, "perseus_texts.db")
+            # Copy to both debug and main assets
+            for asset_dir in [debug_asset_dir, main_asset_dir]:
+                zip_path = os.path.join(asset_dir, "perseus_texts.db.zip")
+                print(f"\nCompressing sample database to {zip_path}...")
+                with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+                    # Archive name inside zip must be perseus_texts.db for app compatibility
+                    zf.write(db_filename, "perseus_texts.db")
+                
+                # Get file sizes
+                original_size = os.path.getsize(db_filename) / (1024 * 1024)
+                compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
+                
+                print(f"Database compressed: {zip_path}")
+                print(f"Original size: {original_size:.1f}MB")
+                print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
         else:
             # For full database, keep it in data-prep with its full name
             zip_path = f"{db_filename}.zip"
             print(f"\nCompressing full database to {zip_path}...")
             with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
                 zf.write(db_filename, db_filename)
+            
+            # Get file sizes
+            original_size = os.path.getsize(db_filename) / (1024 * 1024)
+            compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
+            
+            print(f"Database compressed: {zip_path}")
+            print(f"Original size: {original_size:.1f}MB")
+            print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
         
-        # Get file sizes
-        original_size = os.path.getsize(db_filename) / (1024 * 1024)
-        compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
-        
-        print(f"Database compressed: {zip_path}")
-        print(f"Original size: {original_size:.1f}MB")
-        print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
         return True
     else:
         print(f"\nWarning: Database file {db_filename} not found")
