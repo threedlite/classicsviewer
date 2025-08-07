@@ -157,24 +157,32 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
    - Contains: `<dist:delivery><dist:install-time /></dist:delivery>`
 
 ### Multiple Database Files:
-1. **`data-prep/perseus_texts.db`** - Source database
-   - Created by `create_perseus_database.py`
-   - Original uncompressed SQLite (1.4GB)
-   - Never shipped with app
+1. **`data-prep/perseus_texts_sample.db`** - Sample database source
+   - Created by `create_perseus_database.py sample`
+   - Contains only authors from SAMPLE_AUTHORS.md
+   - Smaller size for initial Play Store release
+   - Never shipped directly with app
 
-2. **`perseus_database/src/main/assets/perseus_texts.db.zip`** - Production asset pack
-   - Compressed version (300MB)
+2. **`data-prep/perseus_texts_full.db`** - Full database source  
+   - Created by `create_perseus_database.py full`
+   - Contains all ~100 Greek and Latin authors
+   - Original uncompressed SQLite (1.4GB)
+   - For local debugging and future release
+
+3. **`perseus_database/src/main/assets/perseus_texts.db.zip`** - Production asset pack
+   - Compressed version of sample database
    - For Play Asset Delivery via Google Play
    - Used in production releases
+   - Note: Always named `perseus_texts.db.zip` for app compatibility
 
-3. **`app/src/debug/assets/perseus_texts.db.zip`** - Debug fallback
+4. **`app/src/debug/assets/perseus_texts.db.zip`** - Debug fallback
    - Copy for local testing only
    - Included in debug APKs because bundletool doesn't work well locally
    - NOT included in release builds
 
-4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
+5. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
    - On-device location after extraction
-   - Full 1.4GB uncompressed database
+   - Uncompressed database from whichever version was deployed
    - Created on first app launch
 
 ### Why This Structure?
@@ -314,21 +322,46 @@ The database build uses pre-extracted Wiktionary data for morphological analysis
 
 **CRITICAL**: Database deployment is error-prone if done manually. Always use automated scripts.
 
+### Database Build Modes
+
+The database creation now supports two modes:
+- **Sample Database** (`perseus_texts_sample.db`): Contains only authors from SAMPLE_AUTHORS.md - for Play Store release
+- **Full Database** (`perseus_texts_full.db`): Contains all ~100 Greek and Latin authors - for local debugging
+
+### Database Creation
+
+```bash
+# Build both databases (default)
+cd data-prep
+python3 create_perseus_database.py
+
+# Build only sample database
+python3 create_perseus_database.py sample
+
+# Build only full database  
+python3 create_perseus_database.py full
+```
+
 ### Deployment Scripts (Fully Automated)
 
 ```bash
-# Option 1: Complete rebuild and deploy (RECOMMENDED for schema changes)
-# - Rebuilds database from scratch (~4 minutes)
+# Option 1: Deploy sample database (for Play Store release)
+# - Rebuilds sample database from scratch
 # - Creates fresh compressed database
 # - Deploys and clears app data
 ./deploy_complete.sh
 
-# Option 2: Deploy with existing database (faster, but dangerous if schema changed)
+# Option 2: Deploy full database (for local debugging)
+# - Rebuilds full database from scratch
+# - Deploys with all authors for testing
+./deploy_full_database.sh
+
+# Option 3: Deploy with existing database (faster, but dangerous if schema changed)
 # - Uses existing database in perseus_database/src/main/assets/
 # - Only use if you're certain database is current
 ./deploy_simple.sh
 
-# Option 3: Production-like testing with bundletool
+# Option 4: Production-like testing with bundletool
 # - Creates AAB with asset pack
 # - Uses bundletool for deployment simulation
 ./deploy_with_bundletool.sh

@@ -2513,12 +2513,17 @@ def optimize_lemma_map(cursor):
     
     print("✓ Optimization complete!")
 
-def create_database():
-    """Create database from Perseus data"""
+def create_database(mode='full'):
+    """Create database from Perseus data
+    
+    Args:
+        mode: 'full' for all authors, 'sample' for limited set from SAMPLE_AUTHORS.md
+    """
     
     # Paths
     script_dir = Path(__file__).parent
-    db_path = script_dir / "perseus_texts.db"
+    db_filename = "perseus_texts_full.db" if mode == 'full' else "perseus_texts_sample.db"
+    db_path = script_dir / db_filename
     data_sources = script_dir.parent / "data-sources"
     
     # Check paths
@@ -2536,6 +2541,7 @@ def create_database():
     
     # Create new database
     print(f"\nCreating new database at {db_path}...")
+    print(f"Mode: {mode.upper()}")
     
     # Remove existing database
     if db_path.exists():
@@ -2543,6 +2549,21 @@ def create_database():
     
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
+    
+    # Load sample authors if in sample mode
+    sample_authors = set()
+    if mode == 'sample':
+        sample_authors_file = script_dir / "SAMPLE_AUTHORS.md"
+        if sample_authors_file.exists():
+            with open(sample_authors_file, 'r') as f:
+                for line in f:
+                    author = line.strip()
+                    if author:
+                        sample_authors.add(author.lower())
+            print(f"Loaded {len(sample_authors)} sample authors: {', '.join(sorted(sample_authors))}")
+        else:
+            print(f"Error: Sample authors file not found at {sample_authors_file}")
+            return
     
     # Create tables with Room-compatible schema
     print("Creating tables...")
@@ -2695,28 +2716,49 @@ def create_database():
     
     print(f"\nDiscovered {len(greek_authors)} Greek authors")
     
-    # Add phase control for testing
-    import sys
-    phase = sys.argv[1] if len(sys.argv) > 1 else "full"
-    phase_limits = {"test": 30, "medium": 60, "full": None}
+    # Filter authors based on mode
+    if mode == 'sample' and sample_authors:
+        # Filter to only include authors in the sample list
+        filtered_authors = {}
+        for author_id, author_name in greek_authors.items():
+            # Check if author name matches any in sample list (case-insensitive)
+            if author_name.lower() in sample_authors:
+                filtered_authors[author_id] = author_name
+                print(f"  Including sample author: {author_name} ({author_id})")
+        
+        # Special handling for New Testament which might not be discovered as a single author
+        if 'new testament' in sample_authors and not any('testament' in name.lower() for name in filtered_authors.values()):
+            # Look for New Testament works (might be under various IDs)
+            for author_id, author_name in greek_authors.items():
+                if 'testament' in author_name.lower() or 'bible' in author_name.lower():
+                    filtered_authors[author_id] = author_name
+                    print(f"  Including New Testament author: {author_name} ({author_id})")
+        
+        greek_authors = filtered_authors
+        print(f"\nFiltered to {len(greek_authors)} Greek authors for sample database")
     
-    if phase in phase_limits and phase_limits[phase]:
-        # Get priority authors for testing
-        priority_authors = ["tlg0012", "tlg0085", "tlg0011", "tlg0006", "tlg0019",
-                           "tlg0007", "tlg0016", "tlg0003", "tlg0032", "tlg0059",
-                           "tlg0086", "tlg0020", "tlg0033", "tlg0026"]
+    # Add phase control for testing (only if not in sample mode)
+    elif len(sys.argv) > 2:
+        phase = sys.argv[2]
+        phase_limits = {"test": 30, "medium": 60, "full": None}
         
-        selected = {}
-        for auth_id in priority_authors:
-            if auth_id in greek_authors and len(selected) < phase_limits[phase]:
-                selected[auth_id] = greek_authors[auth_id]
-        
-        for auth_id, name in sorted(greek_authors.items()):
-            if auth_id not in selected and len(selected) < phase_limits[phase]:
-                selected[auth_id] = name
-        
-        greek_authors = selected
-        print(f"\nPhase '{phase}': Limited to {len(greek_authors)} authors")
+        if phase in phase_limits and phase_limits[phase]:
+            # Get priority authors for testing
+            priority_authors = ["tlg0012", "tlg0085", "tlg0011", "tlg0006", "tlg0019",
+                               "tlg0007", "tlg0016", "tlg0003", "tlg0032", "tlg0059",
+                               "tlg0086", "tlg0020", "tlg0033", "tlg0026"]
+            
+            selected = {}
+            for auth_id in priority_authors:
+                if auth_id in greek_authors and len(selected) < phase_limits[phase]:
+                    selected[auth_id] = greek_authors[auth_id]
+            
+            for auth_id, name in sorted(greek_authors.items()):
+                if auth_id not in selected and len(selected) < phase_limits[phase]:
+                    selected[auth_id] = name
+            
+            greek_authors = selected
+            print(f"\nPhase '{phase}': Limited to {len(greek_authors)} authors")
     
     # Process each Greek author with progress tracking
     total_authors = len(greek_authors)
@@ -3128,8 +3170,13 @@ def create_translation_lookup_table(conn):
     print(f"\nTotal translation mappings: {total_mappings}")
 
 
-def compress_and_copy_database():
-    """Compress database and copy to asset pack location"""
+def compress_and_copy_database(db_filename, is_sample=False):
+    """Compress database and copy to asset pack location
+    
+    Args:
+        db_filename: Name of the database file to compress
+        is_sample: If True, this is the sample database that goes to asset pack
+    """
     import shutil
     import os
     import zipfile
@@ -3137,38 +3184,71 @@ def compress_and_copy_database():
     asset_pack_dir = "../perseus_database/src/main/assets"
     os.makedirs(asset_pack_dir, exist_ok=True)
     
-    if os.path.exists("perseus_texts.db"):
-        # Remove old uncompressed file if exists
-        uncompressed_path = os.path.join(asset_pack_dir, "perseus_texts.db")
-        if os.path.exists(uncompressed_path):
-            os.remove(uncompressed_path)
-        
-        # Create compressed version
-        zip_path = os.path.join(asset_pack_dir, "perseus_texts.db.zip")
-        print(f"\nCompressing database to {zip_path}...")
-        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
-            zf.write("perseus_texts.db", "perseus_texts.db")
+    if os.path.exists(db_filename):
+        # For sample database, copy to the standard location expected by the app
+        if is_sample:
+            # Create compressed version with the standard name expected by app
+            zip_path = os.path.join(asset_pack_dir, "perseus_texts.db.zip")
+            print(f"\nCompressing sample database to {zip_path}...")
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+                # Archive name inside zip must be perseus_texts.db for app compatibility
+                zf.write(db_filename, "perseus_texts.db")
+        else:
+            # For full database, keep it in data-prep with its full name
+            zip_path = f"{db_filename}.zip"
+            print(f"\nCompressing full database to {zip_path}...")
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+                zf.write(db_filename, db_filename)
         
         # Get file sizes
-        original_size = os.path.getsize("perseus_texts.db") / (1024 * 1024)
+        original_size = os.path.getsize(db_filename) / (1024 * 1024)
         compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
         
-        print(f"Database compressed to asset pack location: {asset_pack_dir}")
+        print(f"Database compressed: {zip_path}")
         print(f"Original size: {original_size:.1f}MB")
         print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
         return True
     else:
-        print("\nWarning: Database file not found for asset pack copy")
+        print(f"\nWarning: Database file {db_filename} not found")
         return False
 
 
 if __name__ == "__main__":
     import time
-    start_time = time.time()
+    import sys
     
-    # Create database
-    create_database()
-    print(f"\nTotal build time: {(time.time() - start_time)/60:.1f} minutes")
+    # Determine which databases to build
+    build_mode = sys.argv[1] if len(sys.argv) > 1 else "both"
     
-    # Compress and copy database
-    compress_and_copy_database()
+    if build_mode not in ["sample", "full", "both"]:
+        print(f"Invalid build mode: {build_mode}")
+        print("Usage: python create_perseus_database.py [sample|full|both]")
+        sys.exit(1)
+    
+    overall_start = time.time()
+    
+    # Build sample database
+    if build_mode in ["sample", "both"]:
+        print("\n" + "="*60)
+        print("BUILDING SAMPLE DATABASE")
+        print("="*60)
+        start_time = time.time()
+        create_database(mode='sample')
+        print(f"\nSample database build time: {(time.time() - start_time)/60:.1f} minutes")
+        
+        # Compress and copy sample database to asset pack
+        compress_and_copy_database("perseus_texts_sample.db", is_sample=True)
+    
+    # Build full database
+    if build_mode in ["full", "both"]:
+        print("\n" + "="*60)
+        print("BUILDING FULL DATABASE")
+        print("="*60)
+        start_time = time.time()
+        create_database(mode='full')
+        print(f"\nFull database build time: {(time.time() - start_time)/60:.1f} minutes")
+        
+        # Compress full database (keep in data-prep directory)
+        compress_and_copy_database("perseus_texts_full.db", is_sample=False)
+    
+    print(f"\nTotal build time: {(time.time() - overall_start)/60:.1f} minutes")

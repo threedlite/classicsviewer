@@ -89,7 +89,8 @@ lint/tmp/
 .idea/
 *.iws
 
-# Keystore files
+# Keystore files and properties
+keystore.properties
 *.jks
 *.keystore
 

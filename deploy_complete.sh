@@ -12,8 +12,9 @@ echo ""
 # Step 1: Rebuild database from scratch
 echo "🔨 Step 1: Rebuilding database from scratch..."
 cd data-prep
-python3 create_perseus_database.py
-echo "✅ Database rebuilt successfully"
+# Build sample database for deployment (this goes to Play Store)
+python3 create_perseus_database.py sample
+echo "✅ Sample database rebuilt successfully"
 cd ..
 
 # Step 2: Remove old compressed databases
@@ -25,7 +26,12 @@ echo "✅ Old compressed databases removed"
 # Step 3: Create fresh compressed database
 echo "📦 Step 3: Creating fresh compressed database..."
 cd data-prep
-zip -9 ../perseus_database/src/main/assets/perseus_texts.db.zip perseus_texts.db
+# Note: The sample database is already compressed and copied by create_perseus_database.py
+# But verify it exists
+if [ ! -f "../perseus_database/src/main/assets/perseus_texts.db.zip" ]; then
+    echo "❌ Expected compressed database not found - aborting"
+    exit 1
+fi
 cd ..
 
 # Step 4: Verify ZIP integrity

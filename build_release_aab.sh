@@ -61,11 +61,11 @@ if [ $? -eq 0 ]; then
         echo "2. Create a new app or select existing"
         echo "3. Go to Release > Production"
         echo "4. Create new release and upload the AAB"
-        echo "5. Upload the OBB file as an expansion file"
         echo ""
-        echo "OBB files location:"
-        echo "  Debug:   data-prep/output/main.1.com.classicsviewer.app.debug.obb"
-        echo "  Release: data-prep/output/main.1.com.classicsviewer.app.obb"
+        echo "NOTES:"
+        echo "- The AAB includes the asset pack with the database"
+        echo "- No separate OBB file needed (using Play Asset Delivery)"
+        echo "- Sample database is included for initial release"
         echo "========================================="
         
         # Copy AAB to a convenient location
