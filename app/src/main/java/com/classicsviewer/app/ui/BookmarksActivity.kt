@@ -177,6 +177,10 @@ class BookmarksActivity : BaseActivity() {
             putExtra("book_label", bookmark.bookLabel)
             putExtra("book_number", bookmark.bookLabel ?: "")
             putExtra("language", language)
+            // Pass author_id if we have it from our intent
+            this@BookmarksActivity.intent.getStringExtra("author_id")?.let {
+                putExtra("author_id", it)
+            }
         }
         startActivity(intent)
     }
@@ -306,10 +310,6 @@ class BookmarksActivity : BaseActivity() {
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
             R.id.action_export -> {
                 exportBookmarksToCSV()
                 true

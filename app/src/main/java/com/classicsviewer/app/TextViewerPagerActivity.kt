@@ -350,6 +350,7 @@ class TextViewerPagerActivity : BaseActivity() {
                     putExtra("work_id", workId)
                     putExtra("work_title", workTitle)
                     putExtra("author_name", authorName)
+                    putExtra("author_id", this@TextViewerPagerActivity.intent.getStringExtra("author_id"))
                 }
                 startActivity(intent)
                 true

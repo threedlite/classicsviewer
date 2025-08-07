@@ -121,6 +121,7 @@ class BookListActivity : BaseActivity() {
                     putExtra("work_id", workId)
                     putExtra("work_title", workTitle)
                     putExtra("author_name", authorName)
+                    putExtra("author_id", this@BookListActivity.intent.getStringExtra("author_id"))
                 }
                 startActivity(intent)
                 true
