@@ -15,7 +15,9 @@ import com.classicsviewer.app.utils.PreferencesManager
 class TextLineWithSpeakerAdapter(
     private val lines: List<TextLine>,
     private val onWordClick: (String) -> Unit,
-    private val invertColors: Boolean = false
+    private val invertColors: Boolean = false,
+    private val onLineLongClick: ((TextLine) -> Unit)? = null,
+    private var bookmarkedLines: Set<Int> = emptySet()
 ) : RecyclerView.Adapter<TextLineWithSpeakerAdapter.ViewHolder>() {
     
     class ViewHolder(val binding: ItemTextLineWithSpeakerBinding) : RecyclerView.ViewHolder(binding.root)
@@ -162,6 +164,21 @@ class TextLineWithSpeakerAdapter(
         
         holder.binding.lineText.text = spannableString
         holder.binding.lineText.movementMethod = LinkMovementMethod.getInstance()
+        
+        // Show bookmark indicator if this line is bookmarked
+        if (bookmarkedLines.contains(line.lineNumber)) {
+            holder.binding.bookmarkIndicator.visibility = View.VISIBLE
+        } else {
+            holder.binding.bookmarkIndicator.visibility = View.GONE
+        }
+        
+        // Add long-click handler for bookmarking
+        onLineLongClick?.let { callback ->
+            holder.itemView.setOnLongClickListener {
+                callback(line)
+                true
+            }
+        }
     }
     
     private fun shouldShowSpeaker(position: Int): Boolean {
@@ -179,4 +196,18 @@ class TextLineWithSpeakerAdapter(
     }
     
     override fun getItemCount() = lines.size
+    
+    fun updateBookmarkedLines(newBookmarkedLines: Set<Int>) {
+        val oldBookmarkedLines = bookmarkedLines
+        bookmarkedLines = newBookmarkedLines
+        
+        // Update only the items that changed
+        lines.forEachIndexed { index, line ->
+            val wasBookmarked = oldBookmarkedLines.contains(line.lineNumber)
+            val isBookmarked = newBookmarkedLines.contains(line.lineNumber)
+            if (wasBookmarked != isBookmarked) {
+                notifyItemChanged(index)
+            }
+        }
+    }
 }

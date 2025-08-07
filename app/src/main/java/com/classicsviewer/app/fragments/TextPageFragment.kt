@@ -19,6 +19,10 @@ class TextPageFragment : Fragment() {
         fun onWordClick(word: String)
     }
     
+    interface OnLineLongClickListener {
+        fun onLineLongClick(line: TextLine)
+    }
+    
     private var _binding: FragmentTextPageBinding? = null
     private val binding get() = _binding!!
     
@@ -26,8 +30,10 @@ class TextPageFragment : Fragment() {
     private var language: String = ""
     private var isGreek: Boolean = true
     private var onWordClick: ((String) -> Unit)? = null
+    private var onLineLongClick: ((TextLine) -> Unit)? = null
     private var translationSegments: List<TranslationSegment>? = null
     private var translator: String? = null
+    private var bookmarkedLines: Set<Int>? = null
     
     companion object {
         private const val ARG_LANGUAGE = "language"
@@ -40,7 +46,9 @@ class TextPageFragment : Fragment() {
             isGreek: Boolean,
             onWordClick: (String) -> Unit,
             translationSegments: List<TranslationSegment>? = null,
-            translator: String? = null
+            translator: String? = null,
+            onLineLongClick: ((TextLine) -> Unit)? = null,
+            bookmarkedLines: Set<Int>? = null
         ): TextPageFragment {
             return TextPageFragment().apply {
                 arguments = Bundle().apply {
@@ -51,8 +59,10 @@ class TextPageFragment : Fragment() {
                 // Store non-serializable data as properties (will be reset by container)
                 this.lines = lines
                 this.onWordClick = onWordClick
+                this.onLineLongClick = onLineLongClick
                 this.translationSegments = translationSegments
                 this.translator = translator
+                this.bookmarkedLines = bookmarkedLines
             }
         }
     }
@@ -96,7 +106,12 @@ class TextPageFragment : Fragment() {
         
         if (isGreek) {
             // Display Greek text with speakers
-            val callback = onWordClick ?: { _: String -> }
+            val callback: (String) -> Unit = onWordClick ?: { word -> 
+                android.util.Log.w("TextPageFragment", "onWordClick is null, cannot open dictionary for: $word")
+            }
+            
+            // Log callback status
+            android.util.Log.d("TextPageFragment", "onWordClick is ${if (onWordClick != null) "set" else "null"}")
             
             // Log speaker info for debugging
             lines?.forEach { line ->
@@ -105,7 +120,13 @@ class TextPageFragment : Fragment() {
                 }
             }
             
-            val adapter = TextLineWithSpeakerAdapter(lines!!, callback, inverted)
+            val adapter = TextLineWithSpeakerAdapter(
+                lines!!, 
+                callback, 
+                inverted, 
+                onLineLongClick, 
+                bookmarkedLines ?: emptySet()
+            )
             binding.textRecyclerView.adapter = adapter
         } else {
             // Display English translation aligned with Greek
@@ -158,6 +179,15 @@ class TextPageFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    
+    fun updateBookmarkedLines(newBookmarkedLines: Set<Int>) {
+        bookmarkedLines = newBookmarkedLines
+        // If we have a TextLineWithSpeakerAdapter, update it
+        val adapter = binding?.textRecyclerView?.adapter
+        if (adapter is TextLineWithSpeakerAdapter) {
+            adapter.updateBookmarkedLines(newBookmarkedLines)
+        }
     }
 }
 

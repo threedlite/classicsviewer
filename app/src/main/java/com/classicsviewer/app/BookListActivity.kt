@@ -2,6 +2,8 @@ package com.classicsviewer.app
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +11,7 @@ import com.classicsviewer.app.data.DataRepository
 import com.classicsviewer.app.data.RepositoryFactory
 import com.classicsviewer.app.databinding.ActivityListBinding
 import com.classicsviewer.app.models.Book
+import com.classicsviewer.app.ui.BookmarksActivity
 import com.classicsviewer.app.utils.NavigationHelper
 import com.classicsviewer.app.utils.PreferencesManager
 import kotlinx.coroutines.launch
@@ -17,16 +20,19 @@ class BookListActivity : BaseActivity() {
     
     private lateinit var binding: ActivityListBinding
     private lateinit var repository: DataRepository
+    private var workId: String = ""
+    private var workTitle: String = ""
+    private var authorName: String = ""
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        val workId = intent.getStringExtra("work_id") ?: return
-        val workTitle = intent.getStringExtra("work_title") ?: ""
+        workId = intent.getStringExtra("work_id") ?: return
+        workTitle = intent.getStringExtra("work_title") ?: ""
         val language = intent.getStringExtra("language") ?: ""
-        val authorName = intent.getStringExtra("author_name") ?: ""
+        authorName = intent.getStringExtra("author_name") ?: ""
         
         supportActionBar?.title = "$authorName - $workTitle"
         
@@ -44,19 +50,40 @@ class BookListActivity : BaseActivity() {
         
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         
-        loadBooks(workId, language)
+        if (savedInstanceState == null) {
+            // Only load books on first creation, not on recreation
+            loadBooks(workId, language)
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        
+        // Ensure books are loaded when returning from other activities
+        if (binding.recyclerView.adapter == null) {
+            val language = intent.getStringExtra("language") ?: ""
+            loadBooks(workId, language)
+        }
     }
     
     private fun loadBooks(workId: String, language: String) {
         lifecycleScope.launch {
-            val books = repository.getBooks(workId)
-            
-            val adapter = BookAdapter(books, PreferencesManager.getInvertColors(this@BookListActivity)) { book ->
-                // Show line range selection dialog
-                showLineRangeDialog(book, workId, language)
+            try {
+                val books = repository.getBooks(workId)
+                
+                // Check if activity is still active
+                if (!isFinishing && !isDestroyed) {
+                    val adapter = BookAdapter(books, PreferencesManager.getInvertColors(this@BookListActivity)) { book ->
+                        // Show line range selection dialog
+                        showLineRangeDialog(book, workId, language)
+                    }
+                    
+                    binding.recyclerView.adapter = adapter
+                }
+            } catch (e: Exception) {
+                // Log error but don't crash
+                android.util.Log.e("BookListActivity", "Error loading books", e)
             }
-            
-            binding.recyclerView.adapter = adapter
         }
     }
     
@@ -80,5 +107,25 @@ class BookListActivity : BaseActivity() {
             startActivity(intent)
         }
         dialog.show(supportFragmentManager, "line_range")
+    }
+    
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_book_list, menu)
+        return true
+    }
+    
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_view_bookmarks -> {
+                val intent = Intent(this, BookmarksActivity::class.java).apply {
+                    putExtra("work_id", workId)
+                    putExtra("work_title", workTitle)
+                    putExtra("author_name", authorName)
+                }
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

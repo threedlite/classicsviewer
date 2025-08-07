@@ -4,7 +4,10 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnLayout
@@ -19,13 +22,19 @@ import com.classicsviewer.app.databinding.ActivityTextViewerPagerBinding
 import com.classicsviewer.app.fragments.TextPageFragment
 import com.classicsviewer.app.models.TextLine
 import com.classicsviewer.app.models.TranslationSegment
+import com.classicsviewer.app.ui.BookmarksActivity
 import com.classicsviewer.app.utils.PreferencesManager
+import com.classicsviewer.app.viewmodels.BookmarkViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import com.classicsviewer.app.database.entities.BookmarkEntity
 
 class TextViewerPagerActivity : BaseActivity() {
     
     private lateinit var binding: ActivityTextViewerPagerBinding
     private lateinit var repository: DataRepository
+    private val bookmarkViewModel: BookmarkViewModel by viewModels()
     
     private var workId: String = ""
     private var bookId: String = ""
@@ -34,12 +43,16 @@ class TextViewerPagerActivity : BaseActivity() {
     private var currentEndLine: Int = 100
     private var totalLines: Int = 100
     private var language: String = ""
+    private var authorName: String = ""
+    private var workTitle: String = ""
+    private var bookLabel: String? = null
     
     private var greekLines: List<TextLine> = emptyList()
     private var translationSegments: List<TranslationSegment> = emptyList()
     private var availableTranslators: List<String> = emptyList()
     private var translationsByTranslator: Map<String, List<TranslationSegment>> = emptyMap()
     private var currentPageIndex: Int = 0
+    private var bookmarkedLines: Set<Int> = emptySet()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +68,9 @@ class TextViewerPagerActivity : BaseActivity() {
         totalLines = intent.getIntExtra("total_lines", 100)
         language = intent.getStringExtra("language") ?: ""
         
-        val authorName = intent.getStringExtra("author_name") ?: ""
-        val workTitle = intent.getStringExtra("work_title") ?: ""
+        authorName = intent.getStringExtra("author_name") ?: ""
+        workTitle = intent.getStringExtra("work_title") ?: ""
+        bookLabel = intent.getStringExtra("book_label")
         
         supportActionBar?.title = "$authorName - $workTitle"
         supportActionBar?.subtitle = "Book $bookNumber: Lines $currentStartLine-$currentEndLine"
@@ -88,6 +102,9 @@ class TextViewerPagerActivity : BaseActivity() {
         }
         
         updateNavigationButtons()
+        
+        // Observe all bookmarks for this book to show indicators
+        observeBookmarksForBook()
     }
     
     private fun setupEdgeToEdgeExclusions() {
@@ -321,6 +338,175 @@ class TextViewerPagerActivity : BaseActivity() {
         }
     }
     
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_text_viewer, menu)
+        return true
+    }
+    
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_view_bookmarks -> {
+                val intent = Intent(this, BookmarksActivity::class.java).apply {
+                    putExtra("work_id", workId)
+                    putExtra("work_title", workTitle)
+                    putExtra("author_name", authorName)
+                }
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    
+    
+    private fun observeBookmarksForBook() {
+        bookmarkViewModel.getBookmarksByBook(bookId).observe(this) { bookmarks ->
+            // Update the set of bookmarked line numbers
+            val newBookmarkedLines = bookmarks.map { it.lineNumber }.toSet()
+            
+            // Only update if there's a change
+            if (newBookmarkedLines != bookmarkedLines) {
+                bookmarkedLines = newBookmarkedLines
+                
+                // Update the current Greek/Latin fragment
+                val fragments = supportFragmentManager.fragments
+                fragments.forEach { fragment ->
+                    if (fragment is TextPageFragment) {
+                        fragment.updateBookmarkedLines(bookmarkedLines)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    private fun bookmarkLine(line: com.classicsviewer.app.models.TextLine) {
+        lifecycleScope.launch {
+            // Check if bookmark already exists
+            val existingBookmark = bookmarkViewModel.getBookmark(bookId, line.lineNumber)
+            
+            if (existingBookmark != null) {
+                // Bookmark exists, open edit dialog
+                runOnUiThread {
+                    showEditNoteDialog(existingBookmark)
+                }
+            } else {
+                // Create new bookmark and wait for it to complete
+                val bookmarkId = bookmarkViewModel.addBookmark(
+                    workId = workId,
+                    bookId = bookId,
+                    lineNumber = line.lineNumber,
+                    authorName = authorName,
+                    workTitle = workTitle,
+                    bookLabel = bookLabel ?: bookNumber,
+                    lineText = line.text
+                )
+                
+                // Get the newly created bookmark and open edit dialog
+                val newBookmark = bookmarkViewModel.getBookmark(bookId, line.lineNumber)
+                newBookmark?.let {
+                    runOnUiThread {
+                        showEditNoteDialog(it)
+                    }
+                }
+            }
+        }
+    }
+    
+    private fun showEditNoteDialog(bookmark: BookmarkEntity) {
+        // Create main container with vertical layout
+        val mainContainer = android.widget.LinearLayout(this)
+        mainContainer.orientation = android.widget.LinearLayout.VERTICAL
+        mainContainer.setPadding(48, 16, 48, 16)
+        
+        // Create container for Greek text and copy button
+        val greekContainer = android.widget.LinearLayout(this)
+        greekContainer.orientation = android.widget.LinearLayout.VERTICAL
+        greekContainer.setBackgroundColor(0xFFEEEEEE.toInt())
+        greekContainer.setPadding(24, 16, 24, 16)
+        val greekMargins = android.widget.LinearLayout.LayoutParams(
+            android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        greekMargins.bottomMargin = 24
+        greekContainer.layoutParams = greekMargins
+        
+        // Show the Greek text
+        val greekTextView = android.widget.TextView(this)
+        greekTextView.text = bookmark.lineText
+        greekTextView.textSize = 16f
+        greekTextView.setTextColor(android.graphics.Color.BLACK)
+        greekTextView.setTypeface(null, android.graphics.Typeface.NORMAL)
+        greekTextView.setPadding(0, 0, 0, 8)
+        greekContainer.addView(greekTextView)
+        
+        // Add copy button
+        val copyButton = com.google.android.material.button.MaterialButton(this)
+        copyButton.text = "Copy Greek text to note"
+        copyButton.layoutParams = android.widget.LinearLayout.LayoutParams(
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        greekContainer.addView(copyButton)
+        
+        mainContainer.addView(greekContainer)
+        
+        // Create the note input field
+        val input = com.google.android.material.textfield.TextInputEditText(this)
+        input.setText(bookmark.note ?: "")
+        input.hint = "Add your notes here (English or Greek)..."
+        input.setLines(5)  // Make it 5 lines tall
+        input.minLines = 5
+        input.maxLines = 10  // Allow up to 10 lines
+        input.gravity = android.view.Gravity.TOP  // Start text at top
+        input.inputType = android.text.InputType.TYPE_CLASS_TEXT or 
+                         android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
+                         android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        input.setHorizontallyScrolling(false)  // Enable word wrap
+        
+        // Set background and text color for better visibility
+        input.setBackgroundResource(android.R.drawable.edit_text)
+        input.setTextColor(android.graphics.Color.BLACK)
+        input.setHintTextColor(android.graphics.Color.GRAY)
+        input.setPadding(24, 24, 24, 24)
+        
+        mainContainer.addView(input)
+        
+        // Set up copy button action
+        copyButton.setOnClickListener {
+            val currentText = input.text?.toString() ?: ""
+            val greekText = bookmark.lineText
+            if (currentText.isNotEmpty()) {
+                // Append to existing text with newline
+                input.setText("$currentText\n$greekText")
+            } else {
+                // Replace empty text
+                input.setText(greekText)
+            }
+            // Move cursor to end
+            input.setSelection(input.text?.length ?: 0)
+        }
+        
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Edit Note - ${bookmark.authorName}, ${bookmark.workTitle}")
+            .setMessage("Book ${bookmark.bookLabel ?: ""}, Line ${bookmark.lineNumber}")
+            .setView(mainContainer)
+            .setPositiveButton("Save") { _, _ ->
+                val noteText = input.text?.toString()?.trim()
+                bookmarkViewModel.updateBookmarkNote(bookmark.id, if (noteText.isNullOrEmpty()) null else noteText)
+                Snackbar.make(binding.root, "Note saved", Snackbar.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+        
+        // Focus and show keyboard
+        input.requestFocus()
+        input.postDelayed({
+            val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+            imm.showSoftInput(input, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
+        }, 100)
+    }
+    
     // ViewPager adapter
     private inner class TextPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int {
@@ -335,7 +521,11 @@ class TextViewerPagerActivity : BaseActivity() {
                     greekLines, 
                     language,
                     true, // isGreek
-                    { word -> openDictionary(word) }
+                    { word -> openDictionary(word) },
+                    null, // translationSegments
+                    null, // translator
+                    { line -> bookmarkLine(line) }, // Long-click handler
+                    bookmarkedLines // Pass bookmarked lines
                 )
                 else -> {
                     // Each translation page shows a specific translator

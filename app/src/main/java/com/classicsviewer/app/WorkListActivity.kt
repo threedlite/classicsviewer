@@ -44,29 +44,51 @@ class WorkListActivity : BaseActivity() {
         layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         
-        loadWorks(authorId, language)
+        if (savedInstanceState == null) {
+            // Only load works on first creation, not on recreation
+            loadWorks(authorId, language)
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        
+        // Ensure works are loaded when returning from other activities
+        if (binding.recyclerView.adapter == null) {
+            val authorId = intent.getStringExtra("author_id") ?: return
+            val language = intent.getStringExtra("language") ?: ""
+            loadWorks(authorId, language)
+        }
     }
     
     private fun loadWorks(authorId: String, language: String) {
         lifecycleScope.launch {
-            val works = repository.getWorks(authorId, language)
-            
-            val adapter = WorkAdapter(works, PreferencesManager.getInvertColors(this@WorkListActivity)) { work ->
-                val intent = Intent(this@WorkListActivity, BookListActivity::class.java)
-                intent.putExtra("work_id", work.id)
-                intent.putExtra("work_title", work.title)
-                intent.putExtra("language", language)
-                intent.putExtra("language_name", this@WorkListActivity.intent.getStringExtra("language_name"))
-                intent.putExtra("author_id", authorId)
-                intent.putExtra("author_name", this@WorkListActivity.intent.getStringExtra("author_name"))
-                NavigationHelper.addNavigationPath(intent, this@WorkListActivity)
-                startActivity(intent)
+            try {
+                val works = repository.getWorks(authorId, language)
+                
+                // Check if activity is still active
+                if (!isFinishing && !isDestroyed) {
+                    val adapter = WorkAdapter(works, PreferencesManager.getInvertColors(this@WorkListActivity)) { work ->
+                        val intent = Intent(this@WorkListActivity, BookListActivity::class.java)
+                        intent.putExtra("work_id", work.id)
+                        intent.putExtra("work_title", work.title)
+                        intent.putExtra("language", language)
+                        intent.putExtra("language_name", this@WorkListActivity.intent.getStringExtra("language_name"))
+                        intent.putExtra("author_id", authorId)
+                        intent.putExtra("author_name", this@WorkListActivity.intent.getStringExtra("author_name"))
+                        NavigationHelper.addNavigationPath(intent, this@WorkListActivity)
+                        startActivity(intent)
+                    }
+                    
+                    binding.recyclerView.adapter = adapter
+                    
+                    // Restore scroll position
+                    restoreScrollPosition()
+                }
+            } catch (e: Exception) {
+                // Log error but don't crash
+                android.util.Log.e("WorkListActivity", "Error loading works", e)
             }
-            
-            binding.recyclerView.adapter = adapter
-            
-            // Restore scroll position
-            restoreScrollPosition()
         }
     }
     

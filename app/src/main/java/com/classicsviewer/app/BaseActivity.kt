@@ -48,61 +48,16 @@ abstract class BaseActivity : AppCompatActivity() {
                 navigateToMain()
             }
             is WorkListActivity -> {
-                // Go back to author list
-                val language = intent.getStringExtra("language") ?: ""
-                val languageName = intent.getStringExtra("language_name") ?: ""
-                val intent = Intent(this, AuthorListActivity::class.java).apply {
-                    putExtra("language", language)
-                    putExtra("language_name", languageName)
-                    // Reconstruct navigation path
-                    putExtra(NavigationHelper.EXTRA_NAVIGATION_PATH, "Home")
-                }
-                startActivity(intent)
+                // Just finish to go back to author list
                 finish()
             }
             is BookListActivity -> {
-                // Go back to work list
-                val language = intent.getStringExtra("language") ?: ""
-                val languageName = intent.getStringExtra("language_name") ?: ""
-                val authorId = intent.getStringExtra("author_id") ?: ""
-                val authorName = intent.getStringExtra("author_name") ?: ""
-                val intent = Intent(this, WorkListActivity::class.java).apply {
-                    putExtra("language", language)
-                    putExtra("language_name", languageName)
-                    putExtra("author_id", authorId)
-                    putExtra("author_name", authorName)
-                    // Reconstruct navigation path
-                    putExtra(NavigationHelper.EXTRA_NAVIGATION_PATH, "Home > $languageName")
-                }
-                startActivity(intent)
+                // Just finish to go back to work list
                 finish()
             }
             is TextViewerActivity, is TextViewerPagerActivity -> {
-                // Check if we came from occurrences
-                if (intent.getBooleanExtra("from_occurrences", false)) {
-                    // Just finish to go back to occurrences
-                    finish()
-                } else {
-                    // Go back to book list
-                    val language = intent.getStringExtra("language") ?: ""
-                    val languageName = intent.getStringExtra("language_name") ?: ""
-                    val authorId = intent.getStringExtra("author_id") ?: ""
-                    val authorName = intent.getStringExtra("author_name") ?: ""
-                    val workId = intent.getStringExtra("work_id") ?: ""
-                    val workTitle = intent.getStringExtra("work_title") ?: ""
-                    val intent = Intent(this, BookListActivity::class.java).apply {
-                        putExtra("language", language)
-                        putExtra("language_name", languageName)
-                        putExtra("author_id", authorId)
-                        putExtra("author_name", authorName)
-                        putExtra("work_id", workId)
-                        putExtra("work_title", workTitle)
-                        // Reconstruct navigation path
-                        putExtra(NavigationHelper.EXTRA_NAVIGATION_PATH, "Home > $languageName > $authorName")
-                    }
-                    startActivity(intent)
-                    finish()
-                }
+                // Just finish to go back
+                finish()
             }
             is DictionaryActivity, is LemmaOccurrencesActivity -> {
                 // For dictionary and occurrences, just finish to go back
