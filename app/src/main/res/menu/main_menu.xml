@@ -13,5 +13,15 @@
         android:title="Settings"
         android:icon="@drawable/ic_settings"
         app:showAsAction="ifRoom" />
+    
+    <item
+        android:id="@+id/action_select_database"
+        android:title="Select External Database"
+        app:showAsAction="never" />
+    
+    <item
+        android:id="@+id/action_reset_database"
+        android:title="Reset to Bundled Database"
+        app:showAsAction="never" />
         
 </menu>

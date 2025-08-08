@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.classicsviewer.app.data.AssetPackDatabaseHelper
 import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.databinding.ActivitySettingsBinding
 import com.classicsviewer.app.utils.PreferencesManager
@@ -13,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class SettingsActivity : BaseActivity() {
     
@@ -29,7 +29,7 @@ class SettingsActivity : BaseActivity() {
         setupColorInversionControl()
         setupButtons()
         setupBuildInfo()
-        setupAssetPackInfo()
+        setupDatabaseInfo()
     }
     
     private fun setupFontSizeControl() {
@@ -92,7 +92,7 @@ class SettingsActivity : BaseActivity() {
         }
         
         binding.refreshDatabaseButton.setOnClickListener {
-            refreshDatabaseFromAssetPack()
+            refreshDatabase()
         }
     }
     
@@ -106,8 +106,24 @@ class SettingsActivity : BaseActivity() {
         binding.buildTime.text = "Built: ${BuildConfig.BUILD_TIME}"
     }
     
-    private fun setupAssetPackInfo() {
-        val assetPackHelper = AssetPackDatabaseHelper(this)
+    private fun setupDatabaseInfo() {
+        // Check for external database first
+        val externalDbUri = PreferencesManager.getExternalDatabaseUri(this)
+        if (externalDbUri != null) {
+            val uri = android.net.Uri.parse(externalDbUri)
+            val fileName = uri.lastPathSegment ?: "Unknown"
+            
+            // Check if the external database copy exists
+            val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
+            if (externalDbFile.exists()) {
+                val sizeInMB = externalDbFile.length() / (1024 * 1024)
+                binding.obbPathValue.text = "Using EXTERNAL database:\n$fileName\n\nCached at:\n${externalDbFile.absolutePath}\n\nSize: ${sizeInMB}MB"
+            } else {
+                binding.obbPathValue.text = "External database configured but not yet loaded:\n$fileName"
+            }
+            return
+        }
+        
         val dbFile = getDatabasePath("perseus_texts.db")
         
         // Show database file info
@@ -118,52 +134,51 @@ class SettingsActivity : BaseActivity() {
         } else {
             binding.obbPathValue.text = "Database not yet extracted"
         }
-        
-        // Show if database is in APK assets
-        if (assetPackHelper.isAssetPackReady()) {
-            binding.obbPathValue.text = "${binding.obbPathValue.text}\n\nDatabase included in APK"
-        }
     }
     
-    private fun refreshDatabaseFromAssetPack() {
-        val assetPackHelper = AssetPackDatabaseHelper(this)
+    private fun refreshDatabase() {
+        // Check if using external database
+        val externalDbUri = PreferencesManager.getExternalDatabaseUri(this)
         
-        if (!assetPackHelper.isAssetPackReady()) {
-            Toast.makeText(this, "Asset pack not installed. Please reinstall the app.", Toast.LENGTH_LONG).show()
-            return
+        val message = if (externalDbUri != null) {
+            "This will reload the external database. Continue?"
+        } else {
+            "This will refresh the bundled database. Continue?"
         }
         
         AlertDialog.Builder(this)
             .setTitle("Refresh Database")
-            .setMessage("This will replace the current database with the one from the asset pack. Continue?")
+            .setMessage(message)
             .setPositiveButton("Yes") { _, _ ->
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
-                        // Delete existing database
-                        val dbFile = getDatabasePath("perseus_texts.db")
-                        if (dbFile.exists()) {
-                            dbFile.delete()
-                        }
-                        
                         // Force close any existing database instance
                         PerseusDatabase.destroyInstance()
                         
-                        // Copy from asset pack
-                        val success = assetPackHelper.copyDatabaseFromAssetPack()
+                        if (externalDbUri != null) {
+                            // Delete the cached external database
+                            val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
+                            if (externalDbFile.exists()) {
+                                externalDbFile.delete()
+                            }
+                        } else {
+                            // Delete the bundled database
+                            val dbFile = getDatabasePath("perseus_texts.db")
+                            if (dbFile.exists()) {
+                                dbFile.delete()
+                            }
+                        }
                         
                         withContext(Dispatchers.Main) {
-                            if (success) {
-                                Toast.makeText(this@SettingsActivity, 
-                                    "Database refreshed successfully. Please restart the app.", 
-                                    Toast.LENGTH_LONG).show()
-                                
-                                // Force app restart
-                                finishAffinity()
-                            } else {
-                                Toast.makeText(this@SettingsActivity, 
-                                    "Failed to copy database from asset pack", 
-                                    Toast.LENGTH_SHORT).show()
-                            }
+                            Toast.makeText(this@SettingsActivity, 
+                                "Database will be refreshed on next launch. Please restart the app.", 
+                                Toast.LENGTH_LONG).show()
+                            
+                            // Force app restart
+                            val intent = packageManager.getLaunchIntentForPackage(packageName)
+                            intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                            finishAffinity()
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {

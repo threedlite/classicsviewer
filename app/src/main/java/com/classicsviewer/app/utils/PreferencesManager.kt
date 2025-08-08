@@ -10,6 +10,8 @@ object PreferencesManager {
     private const val KEY_LAST_EXTRAS = "last_extras_"
     private const val KEY_INVERT_COLORS = "invert_colors"
     private const val KEY_SHOW_WORD_UNDERLINES = "show_word_underlines"
+    private const val KEY_EXTERNAL_DATABASE_URI = "external_database_uri"
+    private const val KEY_EXTERNAL_DATABASE_COPIED_TIME = "external_database_copied_time"
     
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -91,5 +93,26 @@ object PreferencesManager {
             .forEach { prefs.remove(it) }
         
         prefs.apply()
+    }
+    
+    // External database URI preferences
+    fun getExternalDatabaseUri(context: Context): String? {
+        return getPrefs(context).getString(KEY_EXTERNAL_DATABASE_URI, null)
+    }
+    
+    fun setExternalDatabaseUri(context: Context, uri: String) {
+        getPrefs(context).edit().putString(KEY_EXTERNAL_DATABASE_URI, uri).apply()
+    }
+    
+    fun clearExternalDatabaseUri(context: Context) {
+        getPrefs(context).edit().remove(KEY_EXTERNAL_DATABASE_URI).apply()
+    }
+    
+    fun setExternalDatabaseCopiedTime(context: Context, time: Long) {
+        getPrefs(context).edit().putLong(KEY_EXTERNAL_DATABASE_COPIED_TIME, time).apply()
+    }
+    
+    fun getExternalDatabaseCopiedTime(context: Context): Long {
+        return getPrefs(context).getLong(KEY_EXTERNAL_DATABASE_COPIED_TIME, 0L)
     }
 }

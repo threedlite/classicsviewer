@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 import com.classicsviewer.app.database.dao.*
 import com.classicsviewer.app.database.entities.*
 import com.classicsviewer.app.data.ObbDatabaseHelper
+import com.classicsviewer.app.utils.PreferencesManager
+import android.widget.Toast
 import java.io.File
 
 @Database(
@@ -41,19 +43,56 @@ abstract class PerseusDatabase : RoomDatabase() {
         
         fun getInstance(context: Context): PerseusDatabase {
             return INSTANCE ?: synchronized(this) {
-                // Check if database needs to be extracted from OBB
-                checkAndExtractFromObb(context)
+                // Check for external database first
+                val externalDbUri = PreferencesManager.getExternalDatabaseUri(context)
                 
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    PerseusDatabase::class.java,
-                    "perseus_texts.db"
-                )
-                .fallbackToDestructiveMigration()
-                .build()
+                val instance = if (externalDbUri != null) {
+                    // External database should already be copied during selection
+                    val externalDbFile = File(context.getDatabasePath("dummy").parent, "external_perseus_texts.db")
+                    
+                    if (externalDbFile.exists() && externalDbFile.length() > 1000000) {
+                        // Open the pre-copied external database
+                        android.util.Log.d("PerseusDatabase", "Using pre-copied external database: ${externalDbFile.absolutePath}, size: ${externalDbFile.length() / (1024 * 1024)}MB")
+                        
+                        Room.databaseBuilder(
+                            context.applicationContext,
+                            PerseusDatabase::class.java,
+                            externalDbFile.absolutePath
+                        )
+                        .fallbackToDestructiveMigration()
+                        .build()
+                    } else {
+                        // External database not found or too small - fall back
+                        android.util.Log.e("PerseusDatabase", "External database not found or invalid. File exists: ${externalDbFile.exists()}, size: ${externalDbFile.length()}")
+                        android.os.Handler(android.os.Looper.getMainLooper()).post {
+                            Toast.makeText(context, "External database not found. Using bundled database.", Toast.LENGTH_LONG).show()
+                        }
+                        // Clear the invalid URI
+                        PreferencesManager.clearExternalDatabaseUri(context)
+                        // Fall back to bundled database
+                        createBundledDatabase(context)
+                    }
+                } else {
+                    // Use bundled database
+                    createBundledDatabase(context)
+                }
+                
                 INSTANCE = instance
                 instance
             }
+        }
+        
+        private fun createBundledDatabase(context: Context): PerseusDatabase {
+            // Check if database needs to be extracted from OBB
+            checkAndExtractFromObb(context)
+            
+            return Room.databaseBuilder(
+                context.applicationContext,
+                PerseusDatabase::class.java,
+                "perseus_texts.db"
+            )
+            .fallbackToDestructiveMigration()
+            .build()
         }
         
         fun destroyInstance() {

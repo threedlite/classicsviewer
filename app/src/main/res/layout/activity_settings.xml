@@ -142,7 +142,7 @@
             android:id="@+id/obbPathLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Asset Pack Status:"
+            android:text="Database Status:"
             android:textSize="14sp"
             android:textColor="?android:attr/textColorSecondary"
             android:paddingStart="16dp"
@@ -164,7 +164,7 @@
             android:id="@+id/refreshDatabaseButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Refresh Database from Asset Pack"
+            android:text="Refresh Database"
             android:textAlignment="textStart"
             android:padding="16dp"
             style="?android:attr/borderlessButtonStyle" />
