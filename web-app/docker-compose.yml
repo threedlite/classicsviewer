@@ -6,10 +6,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ../data-prep/perseus_texts.db:/data/perseus_texts.db:ro
+      - ../data-prep/perseus_texts_full.db:/data/perseus_texts_full.db:ro
       - ./:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - DB_PATH=/data/perseus_texts.db
+      - DB_PATH=/data/perseus_texts_full.db
     command: npm start

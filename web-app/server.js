@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Database connection
-const dbPath = process.env.DB_PATH || path.join(__dirname, '..', 'data-prep', 'perseus_texts.db');
+const dbPath = process.env.DB_PATH || path.join(__dirname, '..', 'data-prep', 'perseus_texts_full.db');
 let db = null;
 
 // Initialize database connection

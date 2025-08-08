@@ -18,7 +18,7 @@ RUN mkdir -p /data
 EXPOSE 3000
 
 # Set environment variable for database path
-ENV DB_PATH=/data/perseus_texts.db
+ENV DB_PATH=/data/perseus_texts_full.db
 
 # Start the application
 CMD ["node", "server.js"]

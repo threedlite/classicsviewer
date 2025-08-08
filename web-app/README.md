@@ -6,7 +6,7 @@ A local web application for viewing classical Greek and Latin texts from the Per
 
 - Simple tech stack: Node.js, Express, Bootstrap, HTML/CSS/JavaScript (all assets served locally, no CDN)
 - Runs in Docker container for easy deployment
-- Read-only access to perseus_texts.db
+- Read-only access to perseus_texts_full.db
 - Cookie-based language preference storage
 - Similar UI to the Android app with:
   - Language selection (Greek/Latin)
@@ -21,13 +21,13 @@ A local web application for viewing classical Greek and Latin texts from the Per
 ## Prerequisites
 
 - Docker and Docker Compose installed
-- The perseus_texts.db database file in ../data-prep/
+- The perseus_texts_full.db database file in ../data-prep/
 
 ## Quick Start
 
 1. Ensure the database exists:
    ```bash
-   ls ../data-prep/perseus_texts.db
+   ls ../data-prep/perseus_texts_full.db
    ```
 
 2. Run the application:
@@ -61,6 +61,6 @@ docker-compose up
 - **Server**: Express.js with SQLite3 for database access
 - **Views**: EJS templates for server-side rendering
 - **Frontend**: Vanilla JavaScript with Bootstrap for UI
-- **Database**: Read-only access to perseus_texts.db
+- **Database**: Read-only access to perseus_texts_full.db
 - **State**: Cookies for language preference (1 year expiry)
 

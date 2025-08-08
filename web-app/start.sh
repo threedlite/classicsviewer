@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Check if database exists
-if [ ! -f "../data-prep/perseus_texts.db" ]; then
-    echo "Error: Database file not found at ../data-prep/perseus_texts.db"
+if [ ! -f "../data-prep/perseus_texts_full.db" ]; then
+    echo "Error: Database file not found at ../data-prep/perseus_texts_full.db"
     echo "Please ensure the database has been created before running the web app."
     exit 1
 fi
