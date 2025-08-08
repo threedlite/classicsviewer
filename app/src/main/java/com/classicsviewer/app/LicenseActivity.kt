@@ -92,7 +92,7 @@ which permits redistribution and modification with proper attribution.
 APPLICATION LICENSE
 ===================
 
-This Android application is open source software.
+This Android application is open source software (MIT license).  https://github.com/threedlite/classicsviewer
 
 It provides offline access to texts and dictionaries from the Perseus Digital Library, making classical texts accessible without an internet connection.
 
