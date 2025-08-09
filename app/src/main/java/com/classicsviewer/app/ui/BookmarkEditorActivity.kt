@@ -19,6 +19,7 @@ import com.classicsviewer.app.R
 import com.classicsviewer.app.database.entities.BookmarkEntity
 import com.classicsviewer.app.databinding.ActivityBookmarkEditorBinding
 import com.classicsviewer.app.models.TextLine
+import com.classicsviewer.app.utils.PreferencesManager
 import com.classicsviewer.app.viewmodels.BookmarkViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -110,11 +111,21 @@ class BookmarkEditorActivity : AppCompatActivity() {
     }
     
     private fun setupViews() {
-        // Set header info
-        binding.bookInfo.text = "Book $bookLabel, Line $lineNumber"
+        // Get user font size preference
+        val fontSize = PreferencesManager.getFontSize(this)
         
-        // Set Greek/Latin text
+        // Set header info with user font size
+        binding.bookInfo.text = "Book $bookLabel, Line $lineNumber"
+        binding.bookInfo.textSize = fontSize * 0.8f // Slightly smaller for header
+        
+        // Set Greek/Latin text with max 2 lines
         binding.originalText.text = lineText
+        binding.originalText.textSize = fontSize
+        binding.originalText.maxLines = 2
+        binding.originalText.ellipsize = android.text.TextUtils.TruncateAt.END
+        
+        // Apply font size to note input
+        binding.noteInput.textSize = fontSize
         
         // Setup copy button
         binding.copyButton.setOnClickListener {

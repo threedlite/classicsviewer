@@ -1,53 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
 >
 
-    <!-- ViewPager2 for swipeable Greek/English pages -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/textViewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pageIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Page indicator showing Greek/English -->
-    <TextView
-        android:id="@+id/pageIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Greek"
-        android:textSize="14sp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@id/navigationBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/navigationBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+    <!-- Navigation bar at bottom (defined first for RelativeLayout) -->
     <LinearLayout
         android:id="@+id/navigationBar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="56dp"
         android:orientation="horizontal"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:background="?android:attr/windowBackground"
+        android:elevation="4dp"
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/previousButton"
@@ -67,4 +37,31 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Page indicator -->
+    <TextView
+        android:id="@+id/pageIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Greek"
+        android:textSize="14sp"
+        android:padding="8dp"
+        android:layout_above="@id/navigationBar"
+        android:layout_centerHorizontal="true" />
+
+    <!-- ViewPager2 for swipeable Greek/English pages -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/textViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_above="@id/pageIndicator" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
+
+
+</RelativeLayout>
