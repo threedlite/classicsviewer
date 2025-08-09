@@ -432,254 +432,35 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     }
     
     private fun showNewBookmarkDialog(line: com.classicsviewer.app.models.TextLine) {
-        // Get display metrics for orientation check
-        val displayMetrics = resources.displayMetrics
-        
-        // Create ScrollView for landscape mode
-        val scrollView = android.widget.ScrollView(this)
-        scrollView.layoutParams = android.view.ViewGroup.LayoutParams(
-            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        val intent = com.classicsviewer.app.ui.BookmarkEditorActivity.newIntent(
+            context = this,
+            workId = workId,
+            bookId = bookId,
+            lineNumber = line.lineNumber,
+            authorName = authorName,
+            workTitle = workTitle,
+            bookLabel = bookLabel ?: bookNumber,
+            lineText = line.text,
+            isEditMode = false
         )
-        
-        // Create main container with vertical layout
-        val mainContainer = android.widget.LinearLayout(this)
-        mainContainer.orientation = android.widget.LinearLayout.VERTICAL
-        mainContainer.setPadding(24, 8, 24, 8)
-        
-        scrollView.addView(mainContainer)
-        
-        // Create container for Greek text and copy button
-        val greekContainer = android.widget.LinearLayout(this)
-        greekContainer.orientation = android.widget.LinearLayout.VERTICAL
-        greekContainer.setBackgroundColor(0xFFEEEEEE.toInt())
-        greekContainer.setPadding(24, 16, 24, 16)
-        val greekMargins = android.widget.LinearLayout.LayoutParams(
-            android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        greekMargins.bottomMargin = 24
-        greekContainer.layoutParams = greekMargins
-        
-        // Show the Greek text
-        val greekTextView = android.widget.TextView(this)
-        greekTextView.text = line.text
-        greekTextView.textSize = 16f
-        greekTextView.setTextColor(android.graphics.Color.BLACK)
-        greekTextView.setTypeface(null, android.graphics.Typeface.NORMAL)
-        greekTextView.setPadding(0, 0, 0, 8)
-        greekContainer.addView(greekTextView)
-        
-        // Add copy button
-        val copyButton = com.google.android.material.button.MaterialButton(this)
-        copyButton.text = "Copy Greek text to note"
-        copyButton.layoutParams = android.widget.LinearLayout.LayoutParams(
-            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
-            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        greekContainer.addView(copyButton)
-        
-        mainContainer.addView(greekContainer)
-        
-        // Create the note input field
-        val input = com.google.android.material.textfield.TextInputEditText(this)
-        input.hint = "Add your notes here (English or Greek)..."
-        
-        // Adjust lines based on orientation
-        val isLandscape = displayMetrics.widthPixels > displayMetrics.heightPixels
-        if (isLandscape) {
-            input.setLines(4)  // 4 lines in landscape
-            input.minLines = 4
-        } else {
-            input.setLines(8)  // 8 lines in portrait
-            input.minLines = 8
-        }
-        input.maxLines = 15  // Allow up to 15 lines
-        input.gravity = android.view.Gravity.TOP  // Start text at top
-        input.inputType = android.text.InputType.TYPE_CLASS_TEXT or 
-                         android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
-                         android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-        input.setHorizontallyScrolling(false)  // Enable word wrap
-        
-        // Set background and text color for better visibility
-        input.setBackgroundResource(android.R.drawable.edit_text)
-        input.setTextColor(android.graphics.Color.BLACK)
-        input.setHintTextColor(android.graphics.Color.GRAY)
-        input.setPadding(24, 24, 24, 24)
-        
-        mainContainer.addView(input)
-        
-        // Set up copy button action
-        copyButton.setOnClickListener {
-            val currentText = input.text?.toString() ?: ""
-            val greekText = line.text
-            if (currentText.isNotEmpty()) {
-                // Append to existing text with newline
-                input.setText("$currentText\n$greekText")
-            } else {
-                // Replace empty text
-                input.setText(greekText)
-            }
-            // Move cursor to end
-            input.setSelection(input.text?.length ?: 0)
-        }
-        
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Add Note - $authorName, $workTitle")
-            .setMessage("Book ${bookLabel ?: bookNumber}, Line ${line.lineNumber}")
-            .setView(scrollView)
-            .setPositiveButton("Save") { _, _ ->
-                // Only create bookmark when Save is clicked
-                lifecycleScope.launch {
-                    val bookmarkId = bookmarkViewModel.addBookmark(
-                        workId = workId,
-                        bookId = bookId,
-                        lineNumber = line.lineNumber,
-                        authorName = authorName,
-                        workTitle = workTitle,
-                        bookLabel = bookLabel ?: bookNumber,
-                        lineText = line.text
-                    )
-                    
-                    val noteText = input.text?.toString()?.trim()
-                    if (!noteText.isNullOrEmpty()) {
-                        bookmarkViewModel.updateBookmarkNote(bookmarkId, noteText)
-                    }
-                    
-                    runOnUiThread {
-                        Snackbar.make(binding.root, "Bookmark saved", Snackbar.LENGTH_SHORT).show()
-                    }
-                }
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                // Explicitly dismiss without saving
-                dialog.dismiss()
-            }
-            .show()
-        
-        // Focus and show keyboard
-        input.requestFocus()
-        input.postDelayed({
-            val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-            imm.showSoftInput(input, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
-        }, 100)
+        startActivity(intent)
     }
     
     private fun showEditNoteDialog(bookmark: BookmarkEntity) {
-        // Get display metrics for orientation check
-        val displayMetrics = resources.displayMetrics
-        
-        // Create ScrollView for landscape mode
-        val scrollView = android.widget.ScrollView(this)
-        scrollView.layoutParams = android.view.ViewGroup.LayoutParams(
-            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        val intent = com.classicsviewer.app.ui.BookmarkEditorActivity.newIntent(
+            context = this,
+            workId = bookmark.workId,
+            bookId = bookmark.bookId,
+            lineNumber = bookmark.lineNumber,
+            authorName = bookmark.authorName,
+            workTitle = bookmark.workTitle,
+            bookLabel = bookmark.bookLabel ?: "",
+            lineText = bookmark.lineText,
+            bookmarkId = bookmark.id,
+            existingNote = bookmark.note,
+            isEditMode = true
         )
-        
-        // Create main container with vertical layout
-        val mainContainer = android.widget.LinearLayout(this)
-        mainContainer.orientation = android.widget.LinearLayout.VERTICAL
-        mainContainer.setPadding(24, 8, 24, 8)
-        
-        scrollView.addView(mainContainer)
-        
-        // Create container for Greek text and copy button
-        val greekContainer = android.widget.LinearLayout(this)
-        greekContainer.orientation = android.widget.LinearLayout.VERTICAL
-        greekContainer.setBackgroundColor(0xFFEEEEEE.toInt())
-        greekContainer.setPadding(24, 16, 24, 16)
-        val greekMargins = android.widget.LinearLayout.LayoutParams(
-            android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        greekMargins.bottomMargin = 24
-        greekContainer.layoutParams = greekMargins
-        
-        // Show the Greek text
-        val greekTextView = android.widget.TextView(this)
-        greekTextView.text = bookmark.lineText
-        greekTextView.textSize = 16f
-        greekTextView.setTextColor(android.graphics.Color.BLACK)
-        greekTextView.setTypeface(null, android.graphics.Typeface.NORMAL)
-        greekTextView.setPadding(0, 0, 0, 8)
-        greekContainer.addView(greekTextView)
-        
-        // Add copy button
-        val copyButton = com.google.android.material.button.MaterialButton(this)
-        copyButton.text = "Copy Greek text to note"
-        copyButton.layoutParams = android.widget.LinearLayout.LayoutParams(
-            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
-            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        greekContainer.addView(copyButton)
-        
-        mainContainer.addView(greekContainer)
-        
-        // Create the note input field
-        val input = com.google.android.material.textfield.TextInputEditText(this)
-        input.setText(bookmark.note ?: "")
-        input.hint = "Add your notes here (English or Greek)..."
-        
-        // Adjust lines based on orientation
-        val isLandscape = displayMetrics.widthPixels > displayMetrics.heightPixels
-        if (isLandscape) {
-            input.setLines(4)  // 4 lines in landscape
-            input.minLines = 4
-        } else {
-            input.setLines(8)  // 8 lines in portrait
-            input.minLines = 8
-        }
-        input.maxLines = 15  // Allow up to 15 lines
-        input.gravity = android.view.Gravity.TOP  // Start text at top
-        input.inputType = android.text.InputType.TYPE_CLASS_TEXT or 
-                         android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
-                         android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-        input.setHorizontallyScrolling(false)  // Enable word wrap
-        
-        // Set background and text color for better visibility
-        input.setBackgroundResource(android.R.drawable.edit_text)
-        input.setTextColor(android.graphics.Color.BLACK)
-        input.setHintTextColor(android.graphics.Color.GRAY)
-        input.setPadding(24, 24, 24, 24)
-        
-        mainContainer.addView(input)
-        
-        // Set up copy button action
-        copyButton.setOnClickListener {
-            val currentText = input.text?.toString() ?: ""
-            val greekText = bookmark.lineText
-            if (currentText.isNotEmpty()) {
-                // Append to existing text with newline
-                input.setText("$currentText\n$greekText")
-            } else {
-                // Replace empty text
-                input.setText(greekText)
-            }
-            // Move cursor to end
-            input.setSelection(input.text?.length ?: 0)
-        }
-        
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Edit Note - ${bookmark.authorName}, ${bookmark.workTitle}")
-            .setMessage("Book ${bookmark.bookLabel ?: ""}, Line ${bookmark.lineNumber}")
-            .setView(scrollView)
-            .setPositiveButton("Save") { _, _ ->
-                val noteText = input.text?.toString()?.trim()
-                bookmarkViewModel.updateBookmarkNote(bookmark.id, if (noteText.isNullOrEmpty()) null else noteText)
-                Snackbar.make(binding.root, "Note saved", Snackbar.LENGTH_SHORT).show()
-            }
-            .setNegativeButton("Cancel") { dialog, _ ->
-                // Explicitly dismiss without saving
-                dialog.dismiss()
-            }
-            .show()
-        
-        // Focus and show keyboard
-        input.requestFocus()
-        input.postDelayed({
-            val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-            imm.showSoftInput(input, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
-        }, 100)
+        startActivity(intent)
     }
     
     // ViewPager adapter

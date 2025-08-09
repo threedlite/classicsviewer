@@ -38,6 +38,7 @@
         <activity android:name=".LicenseActivity" />
         <activity android:name=".DatabaseExtractionActivity" />
         <activity android:name=".ui.BookmarksActivity" />
+        <activity android:name=".ui.BookmarkEditorActivity" />
         
     </application>
 
