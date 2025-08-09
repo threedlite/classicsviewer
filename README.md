@@ -89,4 +89,6 @@ The app uses data from:
 # Wiktionary data from:
 https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2
 
+## Local web app
+- There is also a simple web viewer in /web-app that runs locally in Docker.
 
