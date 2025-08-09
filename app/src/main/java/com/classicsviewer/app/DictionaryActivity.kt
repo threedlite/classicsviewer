@@ -111,12 +111,18 @@ class DictionaryActivity : BaseActivity() {
                         
                         // Show lemma if different from display word or if multiple entries
                         if ((entry.lemma != displayWord && entry.lemma.lowercase() != displayWord.lowercase()) || result.entries.size > 1) {
-                            val confidenceText = if (entry.confidence != null && !entry.isDirectMatch && totalConfidence > 0) {
-                                val normalizedConfidence = (entry.confidence / totalConfidence) * 100
-                                " (confidence: ${String.format("%.1f%%", normalizedConfidence)})"
-                            } else if (entry.isDirectMatch && result.entries.size > 1) {
-                                " (direct match)"
+                            // Only show confidence scores when there are multiple entries
+                            val confidenceText = if (result.entries.size > 1) {
+                                if (entry.confidence != null && !entry.isDirectMatch && totalConfidence > 0) {
+                                    val normalizedConfidence = (entry.confidence / totalConfidence) * 100
+                                    " (confidence: ${String.format("%.1f%%", normalizedConfidence)})"
+                                } else if (entry.isDirectMatch) {
+                                    " (direct match)"
+                                } else {
+                                    ""
+                                }
                             } else {
+                                // Single entry - no confidence score needed
                                 ""
                             }
                             append("<p><b>Dictionary form:</b> ${entry.lemma}$confidenceText</p>")

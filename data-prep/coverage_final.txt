@@ -1,0 +1,209 @@
+Analyzing dictionary coverage in: perseus_texts_sample.db
+
+Detailed results saved to: author_dictionary_coverage.json
+================================================================================
+DICTIONARY COVERAGE BY AUTHOR
+================================================================================
+
+Author                    Unique Words Coverage % Token Coverage %
+-----------------------------------------------------------------
+Hesiod                           6,357      69.0%            85.4%
+Aeschylus                       14,183      61.5%            82.2%
+Sophocles                       15,620      57.9%            83.8%
+Aristotle                       22,155      54.0%            90.7%
+Euripides                       28,495      53.8%            83.5%
+Homer                           28,293      52.0%            88.7%
+New Testament                   17,446      48.9%            86.7%
+Thucydides                      21,302      47.9%            87.9%
+Xenophon                        37,238      43.3%            86.2%
+Herodotus                       27,562      42.7%            81.6%
+Plato                           48,255      42.6%            88.7%
+Plutarch                       104,976      36.0%            81.6%
+Horace                          20,247       0.0%             0.0%
+P. Vergilius Maro (Virgil)       27,465       0.0%             0.0%
+
+================================================================================
+DETAILED BREAKDOWN
+================================================================================
+
+Hesiod:
+  Total unique words: 6,357
+  Words with dictionary entry: 4,384 (69.0%)
+  Direct dictionary matches: 936 (14.7%)
+  Total word occurrences (tokens): 16,366
+  Token coverage: 13,975 (85.4%)
+  Top missing words:
+    - τιτηνεσ (8 occurrences)
+    - μιγεισα (8 occurrences)
+    - μεμνημενοσ (8 occurrences)
+    - ηρακληειη (7 occurrences)
+    - εοντων (7 occurrences)
+
+Aeschylus:
+  Total unique words: 14,183
+  Words with dictionary entry: 8,722 (61.5%)
+  Direct dictionary matches: 1,912 (13.5%)
+  Total word occurrences (tokens): 40,059
+  Token coverage: 32,927 (82.2%)
+  Top missing words:
+    - φρενων (27 occurrences)
+    - δαιμονων (21 occurrences)
+    - τησδ (20 occurrences)
+    - γενοιτ (20 occurrences)
+    - φρενι (17 occurrences)
+
+Sophocles:
+  Total unique words: 15,620
+  Words with dictionary entry: 9,036 (57.9%)
+  Direct dictionary matches: 1,885 (12.1%)
+  Total word occurrences (tokens): 60,981
+  Token coverage: 51,102 (83.8%)
+  Top missing words:
+    - ουχι (48 occurrences)
+    - τουμον (45 occurrences)
+    - τησδ (37 occurrences)
+    - κουκ (35 occurrences)
+    - αρτιωσ (34 occurrences)
+
+Aristotle:
+  Total unique words: 22,155
+  Words with dictionary entry: 11,959 (54.0%)
+  Direct dictionary matches: 2,203 (9.9%)
+  Total word occurrences (tokens): 282,334
+  Token coverage: 256,056 (90.7%)
+  Top missing words:
+    - ενδεχεται (267 occurrences)
+    - ουθεν (235 occurrences)
+    - πραττειν (166 occurrences)
+    - συμβαινει (158 occurrences)
+    - διαφερει (151 occurrences)
+
+Euripides:
+  Total unique words: 28,495
+  Words with dictionary entry: 15,321 (53.8%)
+  Direct dictionary matches: 2,632 (9.2%)
+  Total word occurrences (tokens): 145,332
+  Token coverage: 121,404 (83.5%)
+  Top missing words:
+    - τησδ (82 occurrences)
+    - καγω (76 occurrences)
+    - ταλαινα (71 occurrences)
+    - ταμα (65 occurrences)
+    - τουμον (63 occurrences)
+
+Homer:
+  Total unique words: 28,293
+  Words with dictionary entry: 14,710 (52.0%)
+  Direct dictionary matches: 2,652 (9.4%)
+  Total word occurrences (tokens): 199,847
+  Token coverage: 177,334 (88.7%)
+  Top missing words:
+    - οδυσσευσ (309 occurrences)
+    - εκτωρ (202 occurrences)
+    - οδυσευσ (94 occurrences)
+    - οδυσσηοσ (78 occurrences)
+    - εκτορι (67 occurrences)
+
+New Testament:
+  Total unique words: 17,446
+  Words with dictionary entry: 8,525 (48.9%)
+  Direct dictionary matches: 1,646 (9.4%)
+  Total word occurrences (tokens): 137,612
+  Token coverage: 119,350 (86.7%)
+  Top missing words:
+    - αποκριθεισ (94 occurrences)
+    - απεκριθη (82 occurrences)
+    - αβρααμ (73 occurrences)
+    - καγω (71 occurrences)
+    - ισραηλ (68 occurrences)
+
+Thucydides:
+  Total unique words: 21,302
+  Words with dictionary entry: 10,209 (47.9%)
+  Direct dictionary matches: 1,482 (7.0%)
+  Total word occurrences (tokens): 303,258
+  Token coverage: 266,688 (87.9%)
+  Top missing words:
+    - ταλλα (134 occurrences)
+    - βρασιδασ (114 occurrences)
+    - νικιασ (108 occurrences)
+    - δημοσθενησ (88 occurrences)
+    - αλκιβιαδησ (80 occurrences)
+
+Xenophon:
+  Total unique words: 37,238
+  Words with dictionary entry: 16,119 (43.3%)
+  Direct dictionary matches: 2,465 (6.6%)
+  Total word occurrences (tokens): 621,675
+  Token coverage: 535,774 (86.2%)
+  Top missing words:
+    - ξενοφων (358 occurrences)
+    - πραττειν (226 occurrences)
+    - επιμελεισθαι (202 occurrences)
+    - ηδεωσ (179 occurrences)
+    - ταλλα (171 occurrences)
+
+Herodotus:
+  Total unique words: 27,562
+  Words with dictionary entry: 11,760 (42.7%)
+  Direct dictionary matches: 1,874 (6.8%)
+  Total word occurrences (tokens): 369,832
+  Token coverage: 301,696 (81.6%)
+  Top missing words:
+    - ουνομα (446 occurrences)
+    - τουτοισι (320 occurrences)
+    - επεαν (308 occurrences)
+    - βασιλεοσ (268 occurrences)
+    - εοντεσ (254 occurrences)
+
+Plato:
+  Total unique words: 48,255
+  Words with dictionary entry: 20,565 (42.6%)
+  Direct dictionary matches: 3,276 (6.8%)
+  Total word occurrences (tokens): 550,802
+  Token coverage: 488,518 (88.7%)
+  Top missing words:
+    - ταλλα (255 occurrences)
+    - πραττειν (214 occurrences)
+    - τουναντιον (208 occurrences)
+    - εαντε (156 occurrences)
+    - φησομεν (143 occurrences)
+
+Plutarch:
+  Total unique words: 104,976
+  Words with dictionary entry: 37,830 (36.0%)
+  Direct dictionary matches: 5,813 (5.5%)
+  Total word occurrences (tokens): 1,629,781
+  Token coverage: 1,329,405 (81.6%)
+  Top missing words:
+    - ρωμαιων (867 occurrences)
+    - πομπηιον (478 occurrences)
+    - πανταπασιν (457 occurrences)
+    - πομπηιοσ (425 occurrences)
+    - πομπηιου (419 occurrences)
+
+Horace:
+  Total unique words: 20,247
+  Words with dictionary entry: 0 (0.0%)
+  Direct dictionary matches: 0 (0.0%)
+  Total word occurrences (tokens): 43,902
+  Token coverage: 0 (0.0%)
+  Top missing words:
+    - et (1370 occurrences)
+    - non (463 occurrences)
+    - in (415 occurrences)
+    - si (337 occurrences)
+    - ut (327 occurrences)
+
+P. Vergilius Maro (Virgil):
+  Total unique words: 27,465
+  Words with dictionary entry: 0 (0.0%)
+  Direct dictionary matches: 0 (0.0%)
+  Total word occurrences (tokens): 83,909
+  Token coverage: 0 (0.0%)
+  Top missing words:
+    - et (2859 occurrences)
+    - in (1023 occurrences)
+    - nec (503 occurrences)
+    - atque (418 occurrences)
+    - ad (416 occurrences)

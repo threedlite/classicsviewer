@@ -28,6 +28,8 @@ import kotlinx.coroutines.withContext
 import android.app.ProgressDialog
 import android.os.Handler
 import android.os.Looper
+import java.util.zip.ZipInputStream
+import java.io.BufferedInputStream
 
 class MainActivity : AppCompatActivity() {
     
@@ -175,12 +177,14 @@ class MainActivity : AppCompatActivity() {
     private fun selectExternalDatabase() {
         AlertDialog.Builder(this)
             .setTitle("Select External Database")
-            .setMessage("Select a SQLite database file (*.db) from your device. The database schema will be validated before use.")
+            .setMessage("Select a SQLite database file (*.db) or compressed database (*.zip) from your device. The database schema will be validated before use.")
             .setPositiveButton("Select") { _, _ ->
-                // Filter for database files
+                // Filter for database and zip files
                 databaseFilePicker.launch(arrayOf(
                     "application/x-sqlite3",
                     "application/vnd.sqlite3", 
+                    "application/zip",
+                    "application/x-zip-compressed",
                     "application/octet-stream",
                     "*/*"
                 ))
@@ -190,16 +194,19 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun handleDatabaseSelection(uri: Uri) {
-        // First check if it's a .db file
+        // First check if it's a .db or .zip file
         val fileName = getFileName(uri)
-        if (!fileName.endsWith(".db", ignoreCase = true)) {
-            Toast.makeText(this, "Please select a SQLite database file (*.db)", Toast.LENGTH_LONG).show()
+        val isZipFile = fileName.endsWith(".zip", ignoreCase = true)
+        val isDbFile = fileName.endsWith(".db", ignoreCase = true)
+        
+        if (!isZipFile && !isDbFile) {
+            Toast.makeText(this, "Please select a SQLite database file (*.db) or compressed database (*.zip)", Toast.LENGTH_LONG).show()
             return
         }
         
         // Show progress dialog during validation and copy
         val progressDialog = ProgressDialog(this).apply {
-            setMessage("Validating database schema...")
+            setMessage(if (isZipFile) "Extracting compressed database..." else "Validating database schema...")
             setCancelable(false)
             show()
         }
@@ -209,28 +216,67 @@ class MainActivity : AppCompatActivity() {
                 // Take persistent permissions first
                 contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 
-                // Validate the database
-                val validationResult = DatabaseValidator.validateDatabase(this@MainActivity, uri)
+                // Copy the database to app's database directory
+                val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
                 
-                if (validationResult.isValid) {
+                // Delete existing file to ensure fresh copy
+                if (externalDbFile.exists()) {
+                    externalDbFile.delete()
+                }
+                
+                if (isZipFile) {
+                    // Extract ZIP file
+                    withContext(Dispatchers.Main) {
+                        progressDialog.setMessage("Extracting database from ZIP... This may take a minute...")
+                    }
+                    
+                    contentResolver.openInputStream(uri)?.use { input ->
+                        ZipInputStream(BufferedInputStream(input)).use { zipStream ->
+                            var extractedDb = false
+                            
+                            while (true) {
+                                val entry = zipStream.nextEntry ?: break
+                                
+                                // Look for .db files in the ZIP
+                                if (entry.name.endsWith(".db", ignoreCase = true) && !entry.isDirectory) {
+                                    android.util.Log.d("MainActivity", "Extracting: ${entry.name}")
+                                    
+                                    externalDbFile.outputStream().use { output ->
+                                        zipStream.copyTo(output)
+                                    }
+                                    extractedDb = true
+                                    break // Only extract the first .db file found
+                                }
+                                
+                                zipStream.closeEntry()
+                            }
+                            
+                            if (!extractedDb) {
+                                throw Exception("No database file found in ZIP archive")
+                            }
+                        }
+                    }
+                } else {
+                    // Copy uncompressed database
                     withContext(Dispatchers.Main) {
                         progressDialog.setMessage("Copying database... This may take a minute...")
                     }
                     
-                    // Copy the database to app's database directory
-                    val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
-                    
-                    // Delete existing file to ensure fresh copy
-                    if (externalDbFile.exists()) {
-                        externalDbFile.delete()
-                    }
-                    
-                    // Copy the database
                     contentResolver.openInputStream(uri)?.use { input ->
                         externalDbFile.outputStream().use { output ->
                             input.copyTo(output)
                         }
                     }
+                }
+                
+                // Now validate the extracted/copied database
+                withContext(Dispatchers.Main) {
+                    progressDialog.setMessage("Validating database schema...")
+                }
+                
+                val validationResult = DatabaseValidator.validateDatabase(this@MainActivity, externalDbFile)
+                
+                if (validationResult.isValid) {
                     
                     val fileSizeMB = externalDbFile.length() / (1024 * 1024)
                     android.util.Log.d("MainActivity", "External database copied, size: ${fileSizeMB}MB")

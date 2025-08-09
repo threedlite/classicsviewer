@@ -112,3 +112,29 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+// Task to ensure database exists in debug assets before building
+task checkDatabaseExists {
+    doLast {
+        def dbFile = file("$projectDir/src/debug/assets/perseus_texts.db.zip")
+        if (!dbFile.exists()) {
+            throw new GradleException("""
+                ERROR: Database file not found at: ${dbFile.absolutePath}
+                
+                The database must be built before compiling the app.
+                Please run one of the deployment scripts first:
+                  - ./deploy_complete.sh (builds sample database)
+                  - ./deploy_full_database.sh (builds full database)
+                
+                Or manually create the database:
+                  1. cd data-prep
+                  2. python3 create_perseus_database.py sample
+                  3. zip -9 ../app/src/debug/assets/perseus_texts.db.zip perseus_texts_sample.db
+            """)
+        }
+        println "✓ Database found at: ${dbFile.absolutePath} (${dbFile.length() / 1024 / 1024}MB)"
+    }
+}
+
+// Make sure database check runs before building
+preBuild.dependsOn checkDatabaseExists

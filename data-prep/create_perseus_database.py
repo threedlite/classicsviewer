@@ -1340,8 +1340,9 @@ def process_prose_with_books(root, work_id, cursor, language):
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (book_id, work_id, book_num, f"Book {book_num}", 1, len(all_lines), len(all_lines)))
             
-            # Clear existing text lines for this book
+            # Clear existing text lines and words for this book
             cursor.execute("DELETE FROM text_lines WHERE book_id = ?", (book_id,))
+            cursor.execute("DELETE FROM words WHERE book_id = ?", (book_id,))
             
             # Insert all lines
             for line in all_lines:
@@ -1350,6 +1351,21 @@ def process_prose_with_books(root, work_id, cursor, language):
                     (book_id, line_number, line_text, line_xml, speaker)
                     VALUES (?, ?, ?, ?, ?)
                 """, (book_id, line['number'], line['text'], line['xml'], None))
+                
+                # Insert words into words table
+                words = line['text'].split()
+                for word_pos, word in enumerate(words, 1):
+                    if language == 'greek':
+                        word_normalized = normalize_greek(word)
+                    else:
+                        word_normalized = word.lower()
+                    
+                    if word_normalized:  # Only insert if normalized form is not empty
+                        cursor.execute("""
+                            INSERT INTO words 
+                            (word, word_normalized, book_id, line_number, word_position)
+                            VALUES (?, ?, ?, ?, ?)
+                        """, (word, word_normalized, book_id, line['number'], word_pos))
             
             print(f"      Book {book_num}: {len(all_lines)} lines")
     
@@ -2120,6 +2136,9 @@ def extract_wiktionary_mappings():
     
     # Check if intermediate files exist
     required_files = [
+        (wikt_dir / "ancient_greek_complete_morphology.json",
+         "wiktionary-processing/extract_all_ancient_greek_words_enhanced.py",
+         "Enhanced Wiktionary complete morphology"),
         (wikt_dir / "greek_inflection_of_mappings.json", 
          "wiktionary-processing/extract_inflection_of_template.py",
          "English Wiktionary inflections"),
@@ -2156,11 +2175,67 @@ def extract_wiktionary_mappings():
     
     print("\n✓ Wiktionary extraction files ready")
 
+def load_wiktionary_definitions(cursor):
+    """Load Wiktionary definitions as fallback for words not in LSJ"""
+    
+    wiktionary_defs_path = Path("wiktionary-processing/wiktionary_extraction_results/wiktionary_definitions_final.json")
+    
+    if not wiktionary_defs_path.exists():
+        print("Warning: Wiktionary definitions file not found, skipping...")
+        return
+    
+    print("\n=== LOADING WIKTIONARY DEFINITIONS ===")
+    
+    # First, get all existing LSJ headwords to avoid duplicates
+    cursor.execute("""
+        SELECT DISTINCT headword_normalized 
+        FROM dictionary_entries 
+        WHERE language = 'greek' AND source = 'LSJ'
+    """)
+    lsj_headwords = set(row[0] for row in cursor.fetchall())
+    print(f"Found {len(lsj_headwords):,} existing LSJ entries")
+    
+    # Load Wiktionary definitions
+    with open(wiktionary_defs_path, 'r', encoding='utf-8') as f:
+        wiktionary_data = json.load(f)
+    
+    print(f"Found {len(wiktionary_data):,} Wiktionary definitions")
+    
+    # Import only definitions not already in LSJ
+    imported = 0
+    skipped = 0
+    
+    for normalized, entry in wiktionary_data.items():
+        if normalized in lsj_headwords:
+            skipped += 1
+            continue
+        
+        cursor.execute("""
+            INSERT OR IGNORE INTO dictionary_entries 
+            (headword, headword_normalized, language, entry_xml, entry_html, entry_plain, source)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (
+            entry['headword'],
+            entry['headword_normalized'],
+            entry['language'],
+            entry.get('entry_xml'),
+            entry['entry_html'],
+            entry['entry_plain'],
+            'wiktionary'
+        ))
+        
+        if cursor.rowcount > 0:
+            imported += 1
+    
+    print(f"✓ Imported {imported:,} Wiktionary definitions (skipped {skipped:,} already in LSJ)")
+    print(f"  These will serve as fallback for words like πρῶτος that are missing from LSJ")
+
 def load_wiktionary_mappings(cursor):
     """Load Ancient Greek morphological mappings from Wiktionary intermediate files"""
     
     # Look for all Wiktionary mapping files
     mapping_files = [
+        ("wiktionary-processing/ancient_greek_complete_morphology.json", "Enhanced Wiktionary (All Words + Lemmas)"),
         ("wiktionary-processing/greek_inflection_of_mappings.json", "English Wiktionary (inflection_of)"),
         ("wiktionary-processing/ancient_greek_all_forms.json", "English Wiktionary (all non-lemma forms)"),
         ("wiktionary-processing/ancient_greek_all_morphology_correct.json", "Greek Wiktionary (All Forms)"),
@@ -2205,13 +2280,19 @@ def load_wiktionary_mappings(cursor):
             inserted = 0
             skipped_duplicate = 0
             skipped_no_lemma = 0
+            standalone_inserted = 0
             
             print("Inserting mappings...")
             for i, mapping in enumerate(mappings):
-                # Only insert if the lemma exists in our dictionary
+                # Track if this is a standalone lemma (for statistics)
+                is_standalone = 'lemma:' in mapping.get('morph_type', '') or mapping.get('word_form') == mapping.get('lemma')
+                
+                # Track statistics about what we're inserting
                 if mapping['lemma'] not in valid_lemmas:
-                    skipped_no_lemma += 1
-                    continue
+                    if is_standalone:
+                        standalone_inserted += 1
+                    else:
+                        skipped_no_lemma += 1  # Actually not skipping, just counting non-LSJ entries
                 
                 try:
                     cursor.execute("""
@@ -2234,15 +2315,17 @@ def load_wiktionary_mappings(cursor):
                     
                     # Progress indicator
                     if (i + 1) % 1000 == 0:
-                        print(f"  Progress: {inserted:,} inserted, {skipped_duplicate:,} duplicates, {skipped_no_lemma:,} no matching lemma")
+                        print(f"  Progress: {inserted:,} inserted, {skipped_duplicate:,} duplicates, {skipped_no_lemma:,} non-LSJ lemmas")
                 
                 except Exception as e:
                     print(f"  Warning: Failed to insert mapping: {e}")
             
             print(f"\n✓ {source_name} mappings loaded successfully!")
             print(f"  Mappings inserted: {inserted:,}")
+            if 'standalone_inserted' in locals() and standalone_inserted > 0:
+                print(f"    Including {standalone_inserted:,} standalone lemmas (adverbs, particles, etc.)")
             print(f"  Mappings skipped (duplicates): {skipped_duplicate:,}")
-            print(f"  Mappings skipped (no dictionary entry): {skipped_no_lemma:,}")
+            print(f"  Non-LSJ lemmas included: {skipped_no_lemma:,}")
             
             total_loaded += inserted
             
@@ -2253,14 +2336,14 @@ def load_wiktionary_mappings(cursor):
     
     # Test coverage for known problematic words after loading all sources
     if total_loaded > 0:
-        test_words = ['μηνιν', 'αειδε', 'πολλασ', 'ψυχασ', 'εθηκε', 'ουλομενην']
+        test_words = ['μηνιν', 'αειδε', 'πολλασ', 'ψυχασ', 'εθηκε', 'ουλομενην', 
+                      'μαλιστα', 'πρωτον', 'μεντοι', 'ορθωσ', 'ουχ', 'ημιν']
         print(f"\n  Testing coverage for known problematic words:")
         found_count = 0
         for word in test_words:
             cursor.execute("""
-                SELECT COUNT(*) FROM lemma_map lm
-                JOIN dictionary_entries de ON lm.lemma = de.headword_normalized
-                WHERE lm.word_form = ?
+                SELECT COUNT(*) FROM lemma_map
+                WHERE word_form = ?
             """, (word,))
             if cursor.fetchone()[0] > 0:
                 found_count += 1
@@ -2479,22 +2562,24 @@ def generate_comprehensive_lemmatization(cursor):
     print(f"Total lemma mappings generated: {final_count:,}")
 
 def optimize_lemma_map(cursor):
-    """Optimize lemma_map by removing invalid entries"""
+    """Optimize lemma_map - no longer removes non-LSJ entries"""
     print("\n=== OPTIMIZING LEMMA MAP ===")
     
-    # Since we don't have word_forms, we'll just clean up invalid entries
-    # Remove any lemma_map entries where the lemma doesn't exist in dictionary
-    print("Removing invalid lemma mappings...")
+    # We now keep ALL Wiktionary entries, even if not in LSJ
+    # The whole point of Wiktionary data is to supplement LSJ!
+    print("Keeping all lemma mappings (including non-LSJ entries from Wiktionary)...")
+    
+    # Just get statistics, don't delete anything
     cursor.execute("""
-        DELETE FROM lemma_map
+        SELECT COUNT(*) FROM lemma_map lm
         WHERE NOT EXISTS (
             SELECT 1 FROM dictionary_entries de
-            WHERE de.headword_normalized = lemma_map.lemma
+            WHERE de.headword_normalized = lm.lemma
             AND de.language = 'greek'
         )
     """)
-    deleted_count = cursor.rowcount
-    print(f"Removed {deleted_count:,} invalid mappings")
+    non_lsj_count = cursor.fetchone()[0]
+    print(f"Found {non_lsj_count:,} lemma mappings without LSJ entries (keeping all)")
     
     # Get final count
     cursor.execute("SELECT COUNT(*) FROM lemma_map")
@@ -2503,8 +2588,20 @@ def optimize_lemma_map(cursor):
     cursor.execute("SELECT COUNT(*) FROM lemma_map WHERE morph_info IS NOT NULL")
     with_morph = cursor.fetchone()[0]
     
+    # Count standalone lemmas that don't have LSJ entries
+    cursor.execute("""
+        SELECT COUNT(*) FROM lemma_map lm
+        WHERE NOT EXISTS (
+            SELECT 1 FROM dictionary_entries de
+            WHERE de.headword_normalized = lm.lemma
+            AND de.language = 'greek'
+        )
+    """)
+    standalone_without_lsj = cursor.fetchone()[0]
+    
     print(f"\nTotal mappings: {final_count:,}")
     print(f"With morphology: {with_morph:,} ({with_morph/final_count*100:.1f}%)") if final_count > 0 else None
+    print(f"Standalone lemmas without LSJ: {standalone_without_lsj:,} ({standalone_without_lsj/final_count*100:.1f}%)") if final_count > 0 else None
     
     # Ensure indexes exist
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_lemma_map_word ON lemma_map(word_form)")
@@ -2908,6 +3005,9 @@ def create_database(mode='full'):
                 ))
             
             print("✓ LSJ dictionary entries imported successfully")
+            
+            # Import Wiktionary definitions as fallback for missing LSJ entries
+            load_wiktionary_definitions(cursor)
             
             # Generate and import lemma mappings
             print("Generating lemma mappings...")

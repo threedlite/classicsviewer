@@ -1,0 +1,6622 @@
+[
+  {
+    "author": "Achilles Tatius",
+    "total_unique_words": 10041,
+    "words_with_dictionary": 5843,
+    "unique_coverage_percent": 58.19,
+    "total_tokens": 83320,
+    "tokens_with_dictionary": 71748,
+    "token_coverage_percent": 86.11,
+    "direct_dictionary_matches": 1249,
+    "direct_match_percent": 12.44,
+    "top_missing_words": [
+      {
+        "word": "θερσανδροσ",
+        "frequency": 88
+      },
+      {
+        "word": "μελιτη",
+        "frequency": 70
+      },
+      {
+        "word": "κλεινιασ",
+        "frequency": 70
+      },
+      {
+        "word": "καγω",
+        "frequency": 70
+      },
+      {
+        "word": "κλειτοφων",
+        "frequency": 46
+      },
+      {
+        "word": "σωσθενην",
+        "frequency": 44
+      },
+      {
+        "word": "θερσανδρον",
+        "frequency": 44
+      },
+      {
+        "word": "σωσθενησ",
+        "frequency": 40
+      },
+      {
+        "word": "ετυχεν",
+        "frequency": 32
+      },
+      {
+        "word": "θερσανδρου",
+        "frequency": 30
+      }
+    ]
+  },
+  {
+    "author": "Aelian",
+    "total_unique_words": 28484,
+    "words_with_dictionary": 14234,
+    "unique_coverage_percent": 49.97,
+    "total_tokens": 141818,
+    "tokens_with_dictionary": 119865,
+    "token_coverage_percent": 84.52,
+    "direct_dictionary_matches": 2414,
+    "direct_match_percent": 8.47,
+    "top_missing_words": [
+      {
+        "word": "αριστοτελησ",
+        "frequency": 65
+      },
+      {
+        "word": "χροαν",
+        "frequency": 52
+      },
+      {
+        "word": "γινονται",
+        "frequency": 51
+      },
+      {
+        "word": "κεκληται",
+        "frequency": 31
+      },
+      {
+        "word": "προειρημενων",
+        "frequency": 27
+      },
+      {
+        "word": "ασμενωσ",
+        "frequency": 27
+      },
+      {
+        "word": "καλειται",
+        "frequency": 24
+      },
+      {
+        "word": "εργαζεται",
+        "frequency": 24
+      },
+      {
+        "word": "πιειν",
+        "frequency": 23
+      },
+      {
+        "word": "πηχεων",
+        "frequency": 22
+      }
+    ]
+  },
+  {
+    "author": "Aeneas Tacticus",
+    "total_unique_words": 4347,
+    "words_with_dictionary": 2469,
+    "unique_coverage_percent": 56.8,
+    "total_tokens": 27970,
+    "tokens_with_dictionary": 23408,
+    "token_coverage_percent": 83.69,
+    "direct_dictionary_matches": 455,
+    "direct_match_percent": 10.47,
+    "top_missing_words": [
+      {
+        "word": "ενεκεν",
+        "frequency": 18
+      },
+      {
+        "word": "πορρω",
+        "frequency": 14
+      },
+      {
+        "word": "περιοδευειν",
+        "frequency": 14
+      },
+      {
+        "word": "προσυγκειμενον",
+        "frequency": 12
+      },
+      {
+        "word": "λαθραιωσ",
+        "frequency": 12
+      },
+      {
+        "word": "κρυφαιωσ",
+        "frequency": 12
+      },
+      {
+        "word": "γεγραπται",
+        "frequency": 12
+      },
+      {
+        "word": "γεγραμμενα",
+        "frequency": 12
+      },
+      {
+        "word": "συνεβη",
+        "frequency": 10
+      },
+      {
+        "word": "προνοειν",
+        "frequency": 10
+      }
+    ]
+  },
+  {
+    "author": "Aeschines",
+    "total_unique_words": 10091,
+    "words_with_dictionary": 5369,
+    "unique_coverage_percent": 53.21,
+    "total_tokens": 46183,
+    "tokens_with_dictionary": 39229,
+    "token_coverage_percent": 84.94,
+    "direct_dictionary_matches": 985,
+    "direct_match_percent": 9.76,
+    "top_missing_words": [
+      {
+        "word": "δημοσθενησ",
+        "frequency": 82
+      },
+      {
+        "word": "δημοσθενην",
+        "frequency": 42
+      },
+      {
+        "word": "τιμαρχου",
+        "frequency": 25
+      },
+      {
+        "word": "κτησιφων",
+        "frequency": 25
+      },
+      {
+        "word": "φιλοκρατουσ",
+        "frequency": 19
+      },
+      {
+        "word": "συμπρεσβεισ",
+        "frequency": 19
+      },
+      {
+        "word": "τιμαρχοσ",
+        "frequency": 18
+      },
+      {
+        "word": "μαρτυρασ",
+        "frequency": 18
+      },
+      {
+        "word": "τιμαρχον",
+        "frequency": 17
+      },
+      {
+        "word": "αναγνωθι",
+        "frequency": 17
+      }
+    ]
+  },
+  {
+    "author": "Aeschylus",
+    "total_unique_words": 14183,
+    "words_with_dictionary": 8722,
+    "unique_coverage_percent": 61.5,
+    "total_tokens": 40059,
+    "tokens_with_dictionary": 32927,
+    "token_coverage_percent": 82.2,
+    "direct_dictionary_matches": 1912,
+    "direct_match_percent": 13.48,
+    "top_missing_words": [
+      {
+        "word": "φρενων",
+        "frequency": 27
+      },
+      {
+        "word": "δαιμονων",
+        "frequency": 21
+      },
+      {
+        "word": "τησδ",
+        "frequency": 20
+      },
+      {
+        "word": "γενοιτ",
+        "frequency": 20
+      },
+      {
+        "word": "φρενι",
+        "frequency": 17
+      },
+      {
+        "word": "τασδ",
+        "frequency": 17
+      },
+      {
+        "word": "ταλαινα",
+        "frequency": 15
+      },
+      {
+        "word": "χοασ",
+        "frequency": 14
+      },
+      {
+        "word": "προμηθευ",
+        "frequency": 14
+      },
+      {
+        "word": "καγω",
+        "frequency": 14
+      }
+    ]
+  },
+  {
+    "author": "Andocides",
+    "total_unique_words": 4880,
+    "words_with_dictionary": 2730,
+    "unique_coverage_percent": 55.94,
+    "total_tokens": 17980,
+    "tokens_with_dictionary": 15237,
+    "token_coverage_percent": 84.74,
+    "direct_dictionary_matches": 496,
+    "direct_match_percent": 10.16,
+    "top_missing_words": [
+      {
+        "word": "αδικωσ",
+        "frequency": 11
+      },
+      {
+        "word": "ωχοντο",
+        "frequency": 9
+      },
+      {
+        "word": "αναγνωθι",
+        "frequency": 9
+      },
+      {
+        "word": "υμινυμιν",
+        "frequency": 8
+      },
+      {
+        "word": "τεθναναι",
+        "frequency": 8
+      },
+      {
+        "word": "τωντων",
+        "frequency": 7
+      },
+      {
+        "word": "συγγενεισ",
+        "frequency": 7
+      },
+      {
+        "word": "ηη",
+        "frequency": 7
+      },
+      {
+        "word": "υμωνυμων",
+        "frequency": 6
+      },
+      {
+        "word": "τευκρου",
+        "frequency": 6
+      }
+    ]
+  },
+  {
+    "author": "Antiphon",
+    "total_unique_words": 4575,
+    "words_with_dictionary": 2553,
+    "unique_coverage_percent": 55.8,
+    "total_tokens": 19020,
+    "tokens_with_dictionary": 16159,
+    "token_coverage_percent": 84.96,
+    "direct_dictionary_matches": 469,
+    "direct_match_percent": 10.25,
+    "top_missing_words": [
+      {
+        "word": "αδικωσ",
+        "frequency": 21
+      },
+      {
+        "word": "μαρτυρασ",
+        "frequency": 20
+      },
+      {
+        "word": "ταληθη",
+        "frequency": 13
+      },
+      {
+        "word": "απεθανεν",
+        "frequency": 13
+      },
+      {
+        "word": "ακουσιωσ",
+        "frequency": 10
+      },
+      {
+        "word": "εκουσιωσ",
+        "frequency": 8
+      },
+      {
+        "word": "αποκτεινειν",
+        "frequency": 8
+      },
+      {
+        "word": "αποκτειναντα",
+        "frequency": 8
+      },
+      {
+        "word": "αποθανων",
+        "frequency": 8
+      },
+      {
+        "word": "απογραφεσθαι",
+        "frequency": 8
+      }
+    ]
+  },
+  {
+    "author": "Apollodorus",
+    "total_unique_words": 9855,
+    "words_with_dictionary": 4974,
+    "unique_coverage_percent": 50.47,
+    "total_tokens": 70730,
+    "tokens_with_dictionary": 54920,
+    "token_coverage_percent": 77.65,
+    "direct_dictionary_matches": 910,
+    "direct_match_percent": 9.23,
+    "top_missing_words": [
+      {
+        "word": "ηρακλησ",
+        "frequency": 132
+      },
+      {
+        "word": "παραγενομενοσ",
+        "frequency": 96
+      },
+      {
+        "word": "απεκτεινε",
+        "frequency": 74
+      },
+      {
+        "word": "οδυσσευσ",
+        "frequency": 64
+      },
+      {
+        "word": "γημασ",
+        "frequency": 62
+      },
+      {
+        "word": "θυγατερασ",
+        "frequency": 56
+      },
+      {
+        "word": "θηβασ",
+        "frequency": 56
+      },
+      {
+        "word": "απεκτεινεν",
+        "frequency": 54
+      },
+      {
+        "word": "παραγινεται",
+        "frequency": 50
+      },
+      {
+        "word": "αιδου",
+        "frequency": 48
+      }
+    ]
+  },
+  {
+    "author": "Apollonius Rhodius",
+    "total_unique_words": 12452,
+    "words_with_dictionary": 6583,
+    "unique_coverage_percent": 52.87,
+    "total_tokens": 38840,
+    "tokens_with_dictionary": 30436,
+    "token_coverage_percent": 78.36,
+    "direct_dictionary_matches": 1292,
+    "direct_match_percent": 10.38,
+    "top_missing_words": [
+      {
+        "word": "αισονιδησ",
+        "frequency": 29
+      },
+      {
+        "word": "ογ",
+        "frequency": 28
+      },
+      {
+        "word": "ιησων",
+        "frequency": 28
+      },
+      {
+        "word": "τονγε",
+        "frequency": 16
+      },
+      {
+        "word": "αριστηων",
+        "frequency": 16
+      },
+      {
+        "word": "τουσγε",
+        "frequency": 15
+      },
+      {
+        "word": "ουνομα",
+        "frequency": 15
+      },
+      {
+        "word": "αισονιδη",
+        "frequency": 15
+      },
+      {
+        "word": "αισονιδαο",
+        "frequency": 15
+      },
+      {
+        "word": "φριξοιο",
+        "frequency": 14
+      }
+    ]
+  },
+  {
+    "author": "Appianus of Alexandria",
+    "total_unique_words": 31391,
+    "words_with_dictionary": 12416,
+    "unique_coverage_percent": 39.55,
+    "total_tokens": 445705,
+    "tokens_with_dictionary": 357445,
+    "token_coverage_percent": 80.2,
+    "direct_dictionary_matches": 1902,
+    "direct_match_percent": 6.06,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 898
+      },
+      {
+        "word": "ρωμαιοισ",
+        "frequency": 534
+      },
+      {
+        "word": "αντωνιου",
+        "frequency": 442
+      },
+      {
+        "word": "πομπηιοσ",
+        "frequency": 400
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 396
+      },
+      {
+        "word": "σκιπιων",
+        "frequency": 370
+      },
+      {
+        "word": "αντωνιοσ",
+        "frequency": 365
+      },
+      {
+        "word": "καισαρα",
+        "frequency": 357
+      },
+      {
+        "word": "πομπηιου",
+        "frequency": 338
+      },
+      {
+        "word": "αντωνιον",
+        "frequency": 310
+      }
+    ]
+  },
+  {
+    "author": "Apuleius",
+    "total_unique_words": 30444,
+    "words_with_dictionary": 9,
+    "unique_coverage_percent": 0.03,
+    "total_tokens": 84584,
+    "tokens_with_dictionary": 14,
+    "token_coverage_percent": 0.02,
+    "direct_dictionary_matches": 3,
+    "direct_match_percent": 0.01,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 2906
+      },
+      {
+        "word": "in",
+        "frequency": 963
+      },
+      {
+        "word": "ad",
+        "frequency": 674
+      },
+      {
+        "word": "sed",
+        "frequency": 586
+      },
+      {
+        "word": "ut",
+        "frequency": 560
+      },
+      {
+        "word": "non",
+        "frequency": 546
+      },
+      {
+        "word": "quod",
+        "frequency": 519
+      },
+      {
+        "word": "me",
+        "frequency": 501
+      },
+      {
+        "word": "nec",
+        "frequency": 497
+      },
+      {
+        "word": "cum",
+        "frequency": 434
+      }
+    ]
+  },
+  {
+    "author": "Aratus Solensis",
+    "total_unique_words": 3038,
+    "words_with_dictionary": 1957,
+    "unique_coverage_percent": 64.42,
+    "total_tokens": 7769,
+    "tokens_with_dictionary": 6360,
+    "token_coverage_percent": 81.86,
+    "direct_dictionary_matches": 480,
+    "direct_match_percent": 15.8,
+    "top_missing_words": [
+      {
+        "word": "βορεω",
+        "frequency": 10
+      },
+      {
+        "word": "κητεοσ",
+        "frequency": 9
+      },
+      {
+        "word": "υετοιο",
+        "frequency": 7
+      },
+      {
+        "word": "σκεπτεο",
+        "frequency": 7
+      },
+      {
+        "word": "ειλισσονται",
+        "frequency": 7
+      },
+      {
+        "word": "δυνει",
+        "frequency": 7
+      },
+      {
+        "word": "αντελλει",
+        "frequency": 7
+      },
+      {
+        "word": "νοτοιο",
+        "frequency": 6
+      },
+      {
+        "word": "κηφευσ",
+        "frequency": 6
+      },
+      {
+        "word": "εοικωσ",
+        "frequency": 6
+      }
+    ]
+  },
+  {
+    "author": "Aretaeus of Cappadocia",
+    "total_unique_words": 11171,
+    "words_with_dictionary": 5764,
+    "unique_coverage_percent": 51.6,
+    "total_tokens": 51737,
+    "tokens_with_dictionary": 41680,
+    "token_coverage_percent": 80.56,
+    "direct_dictionary_matches": 1188,
+    "direct_match_percent": 10.63,
+    "top_missing_words": [
+      {
+        "word": "κην",
+        "frequency": 117
+      },
+      {
+        "word": "οκοσα",
+        "frequency": 74
+      },
+      {
+        "word": "ταμνειν",
+        "frequency": 44
+      },
+      {
+        "word": "οκοσον",
+        "frequency": 43
+      },
+      {
+        "word": "διδοναι",
+        "frequency": 43
+      },
+      {
+        "word": "οκοιον",
+        "frequency": 40
+      },
+      {
+        "word": "χρεεσθαι",
+        "frequency": 38
+      },
+      {
+        "word": "παθεοσ",
+        "frequency": 35
+      },
+      {
+        "word": "τουτεοισι",
+        "frequency": 33
+      },
+      {
+        "word": "νουσου",
+        "frequency": 33
+      }
+    ]
+  },
+  {
+    "author": "Aristides, Aelius",
+    "total_unique_words": 5197,
+    "words_with_dictionary": 3189,
+    "unique_coverage_percent": 61.36,
+    "total_tokens": 45702,
+    "tokens_with_dictionary": 39796,
+    "token_coverage_percent": 87.08,
+    "direct_dictionary_matches": 654,
+    "direct_match_percent": 12.58,
+    "top_missing_words": [
+      {
+        "word": "αφελειασ",
+        "frequency": 64
+      },
+      {
+        "word": "αφελει",
+        "frequency": 50
+      },
+      {
+        "word": "σεμνοτητα",
+        "frequency": 40
+      },
+      {
+        "word": "δημοσθενησ",
+        "frequency": 36
+      },
+      {
+        "word": "σεμνοτητοσ",
+        "frequency": 34
+      },
+      {
+        "word": "αφελουσ",
+        "frequency": 34
+      },
+      {
+        "word": "συνισταται",
+        "frequency": 32
+      },
+      {
+        "word": "ξενοφων",
+        "frequency": 30
+      },
+      {
+        "word": "εργαζεται",
+        "frequency": 30
+      },
+      {
+        "word": "αφελειαν",
+        "frequency": 28
+      }
+    ]
+  },
+  {
+    "author": "Aristophanes",
+    "total_unique_words": 22178,
+    "words_with_dictionary": 11339,
+    "unique_coverage_percent": 51.13,
+    "total_tokens": 88092,
+    "tokens_with_dictionary": 72554,
+    "token_coverage_percent": 82.36,
+    "direct_dictionary_matches": 2245,
+    "direct_match_percent": 10.12,
+    "top_missing_words": [
+      {
+        "word": "τουτι",
+        "frequency": 120
+      },
+      {
+        "word": "ουχι",
+        "frequency": 69
+      },
+      {
+        "word": "τουτονι",
+        "frequency": 56
+      },
+      {
+        "word": "καγω",
+        "frequency": 43
+      },
+      {
+        "word": "τιο",
+        "frequency": 36
+      },
+      {
+        "word": "στιν",
+        "frequency": 36
+      },
+      {
+        "word": "γω",
+        "frequency": 36
+      },
+      {
+        "word": "κουκ",
+        "frequency": 35
+      },
+      {
+        "word": "τημερον",
+        "frequency": 33
+      },
+      {
+        "word": "τουθ",
+        "frequency": 29
+      }
+    ]
+  },
+  {
+    "author": "Aristotle",
+    "total_unique_words": 22155,
+    "words_with_dictionary": 11959,
+    "unique_coverage_percent": 53.98,
+    "total_tokens": 282334,
+    "tokens_with_dictionary": 256056,
+    "token_coverage_percent": 90.69,
+    "direct_dictionary_matches": 2203,
+    "direct_match_percent": 9.94,
+    "top_missing_words": [
+      {
+        "word": "ενδεχεται",
+        "frequency": 267
+      },
+      {
+        "word": "ουθεν",
+        "frequency": 235
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 166
+      },
+      {
+        "word": "συμβαινει",
+        "frequency": 158
+      },
+      {
+        "word": "διαφερει",
+        "frequency": 151
+      },
+      {
+        "word": "ενια",
+        "frequency": 87
+      },
+      {
+        "word": "ειρημενων",
+        "frequency": 85
+      },
+      {
+        "word": "τουναντιον",
+        "frequency": 79
+      },
+      {
+        "word": "ταλλα",
+        "frequency": 69
+      },
+      {
+        "word": "ζητειν",
+        "frequency": 67
+      }
+    ]
+  },
+  {
+    "author": "Arrian",
+    "total_unique_words": 18951,
+    "words_with_dictionary": 9001,
+    "unique_coverage_percent": 47.5,
+    "total_tokens": 224265,
+    "tokens_with_dictionary": 190233,
+    "token_coverage_percent": 84.83,
+    "direct_dictionary_matches": 1439,
+    "direct_match_percent": 7.59,
+    "top_missing_words": [
+      {
+        "word": "νεαρχοσ",
+        "frequency": 126
+      },
+      {
+        "word": "ιναπερ",
+        "frequency": 114
+      },
+      {
+        "word": "πτολεμαιοσ",
+        "frequency": 108
+      },
+      {
+        "word": "αναλαβων",
+        "frequency": 98
+      },
+      {
+        "word": "αγριανασ",
+        "frequency": 86
+      },
+      {
+        "word": "σατραπην",
+        "frequency": 82
+      },
+      {
+        "word": "ηει",
+        "frequency": 80
+      },
+      {
+        "word": "ελεφαντασ",
+        "frequency": 80
+      },
+      {
+        "word": "προυχωρει",
+        "frequency": 78
+      },
+      {
+        "word": "λαγου",
+        "frequency": 72
+      }
+    ]
+  },
+  {
+    "author": "Asclepiodotus",
+    "total_unique_words": 1756,
+    "words_with_dictionary": 1060,
+    "unique_coverage_percent": 60.36,
+    "total_tokens": 13146,
+    "tokens_with_dictionary": 11136,
+    "token_coverage_percent": 84.71,
+    "direct_dictionary_matches": 246,
+    "direct_match_percent": 14.01,
+    "top_missing_words": [
+      {
+        "word": "στοιχειν",
+        "frequency": 30
+      },
+      {
+        "word": "παραγγελουμεν",
+        "frequency": 24
+      },
+      {
+        "word": "ζυγειν",
+        "frequency": 24
+      },
+      {
+        "word": "προσαγειν",
+        "frequency": 16
+      },
+      {
+        "word": "καλειται",
+        "frequency": 16
+      },
+      {
+        "word": "ζηθικ",
+        "frequency": 16
+      },
+      {
+        "word": "αβγδε",
+        "frequency": 16
+      },
+      {
+        "word": "φαλαγγι",
+        "frequency": 14
+      },
+      {
+        "word": "παρασταται",
+        "frequency": 14
+      },
+      {
+        "word": "αποκαταστησαι",
+        "frequency": 14
+      }
+    ]
+  },
+  {
+    "author": "Athenaeus of Naucratis",
+    "total_unique_words": 50975,
+    "words_with_dictionary": 23646,
+    "unique_coverage_percent": 46.39,
+    "total_tokens": 263563,
+    "tokens_with_dictionary": 216536,
+    "token_coverage_percent": 82.16,
+    "direct_dictionary_matches": 4082,
+    "direct_match_percent": 8.01,
+    "top_missing_words": [
+      {
+        "word": "αλεξισ",
+        "frequency": 183
+      },
+      {
+        "word": "αριστοφανησ",
+        "frequency": 178
+      },
+      {
+        "word": "αντιφανησ",
+        "frequency": 155
+      },
+      {
+        "word": "αριστοτελησ",
+        "frequency": 142
+      },
+      {
+        "word": "θεοφραστοσ",
+        "frequency": 98
+      },
+      {
+        "word": "πινειν",
+        "frequency": 96
+      },
+      {
+        "word": "καλειται",
+        "frequency": 93
+      },
+      {
+        "word": "θεοπομποσ",
+        "frequency": 90
+      },
+      {
+        "word": "διφιλοσ",
+        "frequency": 89
+      },
+      {
+        "word": "κλεαρχοσ",
+        "frequency": 86
+      }
+    ]
+  },
+  {
+    "author": "Bacchylides",
+    "total_unique_words": 2937,
+    "words_with_dictionary": 1918,
+    "unique_coverage_percent": 65.3,
+    "total_tokens": 4902,
+    "tokens_with_dictionary": 3762,
+    "token_coverage_percent": 76.74,
+    "direct_dictionary_matches": 399,
+    "direct_match_percent": 13.59,
+    "top_missing_words": [
+      {
+        "word": "ϝοι",
+        "frequency": 8
+      },
+      {
+        "word": "κεαρ",
+        "frequency": 6
+      },
+      {
+        "word": "πελοποσ",
+        "frequency": 5
+      },
+      {
+        "word": "νασον",
+        "frequency": 4
+      },
+      {
+        "word": "λιποντεσ",
+        "frequency": 4
+      },
+      {
+        "word": "θνατων",
+        "frequency": 4
+      },
+      {
+        "word": "αρηοσ",
+        "frequency": 4
+      },
+      {
+        "word": "αεθλοισ",
+        "frequency": 4
+      },
+      {
+        "word": "χερασ",
+        "frequency": 3
+      },
+      {
+        "word": "παυσεν",
+        "frequency": 3
+      }
+    ]
+  },
+  {
+    "author": "Barnabae Epistula",
+    "total_unique_words": 0,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0,
+    "total_tokens": 0,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0,
+    "top_missing_words": []
+  },
+  {
+    "author": "Basil, Saint, Bishop of Caesarea",
+    "total_unique_words": 1971,
+    "words_with_dictionary": 1368,
+    "unique_coverage_percent": 69.41,
+    "total_tokens": 9562,
+    "tokens_with_dictionary": 8266,
+    "token_coverage_percent": 86.45,
+    "direct_dictionary_matches": 299,
+    "direct_match_percent": 15.17,
+    "top_missing_words": [
+      {
+        "word": "ουχι",
+        "frequency": 12
+      },
+      {
+        "word": "προσηκε",
+        "frequency": 6
+      },
+      {
+        "word": "παραπλησιωσ",
+        "frequency": 6
+      },
+      {
+        "word": "εφησεν",
+        "frequency": 6
+      },
+      {
+        "word": "φεροντασ",
+        "frequency": 4
+      },
+      {
+        "word": "τουτι",
+        "frequency": 4
+      },
+      {
+        "word": "τεκοντασ",
+        "frequency": 4
+      },
+      {
+        "word": "ταλλα",
+        "frequency": 4
+      },
+      {
+        "word": "συνοντων",
+        "frequency": 4
+      },
+      {
+        "word": "συμπαντα",
+        "frequency": 4
+      }
+    ]
+  },
+  {
+    "author": "Bion of Phlossa",
+    "total_unique_words": 1029,
+    "words_with_dictionary": 726,
+    "unique_coverage_percent": 70.55,
+    "total_tokens": 1803,
+    "tokens_with_dictionary": 1446,
+    "token_coverage_percent": 80.2,
+    "direct_dictionary_matches": 198,
+    "direct_match_percent": 19.24,
+    "top_missing_words": [
+      {
+        "word": "αδωνιν",
+        "frequency": 13
+      },
+      {
+        "word": "επαιαζουσιν",
+        "frequency": 6
+      },
+      {
+        "word": "απωλετο",
+        "frequency": 6
+      },
+      {
+        "word": "χω",
+        "frequency": 4
+      },
+      {
+        "word": "μυρσων",
+        "frequency": 4
+      },
+      {
+        "word": "αδωνιδι",
+        "frequency": 4
+      },
+      {
+        "word": "ωνεκα",
+        "frequency": 3
+      },
+      {
+        "word": "μοισαι",
+        "frequency": 3
+      },
+      {
+        "word": "αδυ",
+        "frequency": 3
+      },
+      {
+        "word": "χριεν",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "author": "Callimachus",
+    "total_unique_words": 5048,
+    "words_with_dictionary": 3058,
+    "unique_coverage_percent": 60.58,
+    "total_tokens": 11631,
+    "tokens_with_dictionary": 9062,
+    "token_coverage_percent": 77.91,
+    "direct_dictionary_matches": 734,
+    "direct_match_percent": 14.54,
+    "top_missing_words": [
+      {
+        "word": "ουνομα",
+        "frequency": 10
+      },
+      {
+        "word": "πουλυ",
+        "frequency": 8
+      },
+      {
+        "word": "αστεριη",
+        "frequency": 8
+      },
+      {
+        "word": "αθαναια",
+        "frequency": 8
+      },
+      {
+        "word": "ωι",
+        "frequency": 6
+      },
+      {
+        "word": "οκα",
+        "frequency": 6
+      },
+      {
+        "word": "χω",
+        "frequency": 5
+      },
+      {
+        "word": "ωρχησαντο",
+        "frequency": 4
+      },
+      {
+        "word": "φαεα",
+        "frequency": 4
+      },
+      {
+        "word": "υπνωσαισ",
+        "frequency": 4
+      }
+    ]
+  },
+  {
+    "author": "Callistratus",
+    "total_unique_words": 1669,
+    "words_with_dictionary": 1085,
+    "unique_coverage_percent": 65.01,
+    "total_tokens": 3901,
+    "tokens_with_dictionary": 3248,
+    "token_coverage_percent": 83.26,
+    "direct_dictionary_matches": 258,
+    "direct_match_percent": 15.46,
+    "top_missing_words": [
+      {
+        "word": "ειστηκει",
+        "frequency": 8
+      },
+      {
+        "word": "χροαν",
+        "frequency": 7
+      },
+      {
+        "word": "ορωμενον",
+        "frequency": 4
+      },
+      {
+        "word": "μεμνονοσ",
+        "frequency": 4
+      },
+      {
+        "word": "εμπνουν",
+        "frequency": 4
+      },
+      {
+        "word": "νεοτησιον",
+        "frequency": 3
+      },
+      {
+        "word": "μετεχειριζετο",
+        "frequency": 3
+      },
+      {
+        "word": "ιδρυτο",
+        "frequency": 3
+      },
+      {
+        "word": "δημιουργημα",
+        "frequency": 3
+      },
+      {
+        "word": "βουλοιτο",
+        "frequency": 3
+      }
+    ]
+  },
+  {
+    "author": "Cassius Dio Cocceianus",
+    "total_unique_words": 26120,
+    "words_with_dictionary": 10366,
+    "unique_coverage_percent": 39.69,
+    "total_tokens": 380074,
+    "tokens_with_dictionary": 318174,
+    "token_coverage_percent": 83.71,
+    "direct_dictionary_matches": 1623,
+    "direct_match_percent": 6.21,
+    "top_missing_words": [
+      {
+        "word": "καισαρα",
+        "frequency": 360
+      },
+      {
+        "word": "αντωνιοσ",
+        "frequency": 284
+      },
+      {
+        "word": "ρωμαιων",
+        "frequency": 256
+      },
+      {
+        "word": "πομπηιοσ",
+        "frequency": 256
+      },
+      {
+        "word": "αντωνιου",
+        "frequency": 242
+      },
+      {
+        "word": "αντωνιον",
+        "frequency": 228
+      },
+      {
+        "word": "πομπηιου",
+        "frequency": 172
+      },
+      {
+        "word": "πομπηιον",
+        "frequency": 168
+      },
+      {
+        "word": "ταλλα",
+        "frequency": 144
+      },
+      {
+        "word": "αυγουστοσ",
+        "frequency": 136
+      }
+    ]
+  },
+  {
+    "author": "Catullus",
+    "total_unique_words": 6681,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 12868,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 182
+      },
+      {
+        "word": "in",
+        "frequency": 157
+      },
+      {
+        "word": "non",
+        "frequency": 136
+      },
+      {
+        "word": "est",
+        "frequency": 118
+      },
+      {
+        "word": "ut",
+        "frequency": 100
+      },
+      {
+        "word": "nec",
+        "frequency": 90
+      },
+      {
+        "word": "quod",
+        "frequency": 84
+      },
+      {
+        "word": "cum",
+        "frequency": 83
+      },
+      {
+        "word": "te",
+        "frequency": 82
+      },
+      {
+        "word": "o",
+        "frequency": 78
+      }
+    ]
+  },
+  {
+    "author": "Celsus, Aulus Cornelius",
+    "total_unique_words": 21164,
+    "words_with_dictionary": 3,
+    "unique_coverage_percent": 0.01,
+    "total_tokens": 102703,
+    "tokens_with_dictionary": 3,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 1,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 2472
+      },
+      {
+        "word": "in",
+        "frequency": 2128
+      },
+      {
+        "word": "si",
+        "frequency": 1755
+      },
+      {
+        "word": "est,",
+        "frequency": 1755
+      },
+      {
+        "word": "ex",
+        "frequency": 1155
+      },
+      {
+        "word": "est",
+        "frequency": 1048
+      },
+      {
+        "word": "vel",
+        "frequency": 1031
+      },
+      {
+        "word": "non",
+        "frequency": 895
+      },
+      {
+        "word": "quae",
+        "frequency": 840
+      },
+      {
+        "word": "aut",
+        "frequency": 812
+      }
+    ]
+  },
+  {
+    "author": "Chariton of Aphrodisias",
+    "total_unique_words": 8737,
+    "words_with_dictionary": 4888,
+    "unique_coverage_percent": 55.95,
+    "total_tokens": 69576,
+    "tokens_with_dictionary": 57194,
+    "token_coverage_percent": 82.2,
+    "direct_dictionary_matches": 1035,
+    "direct_match_percent": 11.85,
+    "top_missing_words": [
+      {
+        "word": "χαιρεασ",
+        "frequency": 266
+      },
+      {
+        "word": "καλλιρροη",
+        "frequency": 266
+      },
+      {
+        "word": "καλλιρροην",
+        "frequency": 224
+      },
+      {
+        "word": "χαιρεαν",
+        "frequency": 136
+      },
+      {
+        "word": "καλλιρροησ",
+        "frequency": 128
+      },
+      {
+        "word": "χαιρεου",
+        "frequency": 102
+      },
+      {
+        "word": "μιθριδατησ",
+        "frequency": 86
+      },
+      {
+        "word": "χαιρεα",
+        "frequency": 60
+      },
+      {
+        "word": "δεσποτα",
+        "frequency": 60
+      },
+      {
+        "word": "πολυχαρμοσ",
+        "frequency": 54
+      }
+    ]
+  },
+  {
+    "author": "Cicero, Marcus Tullius",
+    "total_unique_words": 150496,
+    "words_with_dictionary": 29,
+    "unique_coverage_percent": 0.02,
+    "total_tokens": 1220530,
+    "tokens_with_dictionary": 408,
+    "token_coverage_percent": 0.03,
+    "direct_dictionary_matches": 10,
+    "direct_match_percent": 0.01,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 26870
+      },
+      {
+        "word": "in",
+        "frequency": 23410
+      },
+      {
+        "word": "non",
+        "frequency": 17872
+      },
+      {
+        "word": "ut",
+        "frequency": 13669
+      },
+      {
+        "word": "cum",
+        "frequency": 11907
+      },
+      {
+        "word": "est",
+        "frequency": 11013
+      },
+      {
+        "word": "quod",
+        "frequency": 10623
+      },
+      {
+        "word": "ad",
+        "frequency": 10148
+      },
+      {
+        "word": "si",
+        "frequency": 9381
+      },
+      {
+        "word": "qui",
+        "frequency": 9319
+      }
+    ]
+  },
+  {
+    "author": "Claudius Ptolemaeus",
+    "total_unique_words": 7474,
+    "words_with_dictionary": 3982,
+    "unique_coverage_percent": 53.28,
+    "total_tokens": 37997,
+    "tokens_with_dictionary": 32267,
+    "token_coverage_percent": 84.92,
+    "direct_dictionary_matches": 468,
+    "direct_match_percent": 6.26,
+    "top_missing_words": [
+      {
+        "word": "επειδηπερ",
+        "frequency": 33
+      },
+      {
+        "word": "οικοδεσποτιαν",
+        "frequency": 29
+      },
+      {
+        "word": "ιδιοτροπιασ",
+        "frequency": 28
+      },
+      {
+        "word": "δωδεκατημοριον",
+        "frequency": 27
+      },
+      {
+        "word": "επομενα",
+        "frequency": 25
+      },
+      {
+        "word": "δωδεκατημοριων",
+        "frequency": 24
+      },
+      {
+        "word": "πλανωμενων",
+        "frequency": 23
+      },
+      {
+        "word": "ζωδιακου",
+        "frequency": 23
+      },
+      {
+        "word": "τουτεστι",
+        "frequency": 21
+      },
+      {
+        "word": "περιεχοντοσ",
+        "frequency": 21
+      }
+    ]
+  },
+  {
+    "author": "Clement of Alexandria",
+    "total_unique_words": 33819,
+    "words_with_dictionary": 16228,
+    "unique_coverage_percent": 47.98,
+    "total_tokens": 356977,
+    "tokens_with_dictionary": 306549,
+    "token_coverage_percent": 85.87,
+    "direct_dictionary_matches": 3038,
+    "direct_match_percent": 8.98,
+    "top_missing_words": [
+      {
+        "word": "ουχι",
+        "frequency": 230
+      },
+      {
+        "word": "επιφερει",
+        "frequency": 140
+      },
+      {
+        "word": "μωυσεωσ",
+        "frequency": 109
+      },
+      {
+        "word": "δαβιδ",
+        "frequency": 98
+      },
+      {
+        "word": "τουτεστι",
+        "frequency": 91
+      },
+      {
+        "word": "σαρκι",
+        "frequency": 86
+      },
+      {
+        "word": "μωυσησ",
+        "frequency": 86
+      },
+      {
+        "word": "αβρααμ",
+        "frequency": 83
+      },
+      {
+        "word": "προφητων",
+        "frequency": 78
+      },
+      {
+        "word": "γεγραπται",
+        "frequency": 69
+      }
+    ]
+  },
+  {
+    "author": "Colluthus of Lycopolis",
+    "total_unique_words": 1412,
+    "words_with_dictionary": 902,
+    "unique_coverage_percent": 63.88,
+    "total_tokens": 2330,
+    "tokens_with_dictionary": 1755,
+    "token_coverage_percent": 75.32,
+    "direct_dictionary_matches": 239,
+    "direct_match_percent": 16.93,
+    "top_missing_words": [
+      {
+        "word": "ρεεθροισ",
+        "frequency": 4
+      },
+      {
+        "word": "ποσειδαων",
+        "frequency": 4
+      },
+      {
+        "word": "κληιδασ",
+        "frequency": 4
+      },
+      {
+        "word": "θαμβησασα",
+        "frequency": 4
+      },
+      {
+        "word": "εουσα",
+        "frequency": 4
+      },
+      {
+        "word": "ανενεικατο",
+        "frequency": 4
+      },
+      {
+        "word": "σακεων",
+        "frequency": 3
+      },
+      {
+        "word": "προσεννεπε",
+        "frequency": 3
+      },
+      {
+        "word": "παριν",
+        "frequency": 3
+      },
+      {
+        "word": "οιοπολοισιν",
+        "frequency": 3
+      }
+    ]
+  },
+  {
+    "author": "Columella, Lucius Junius Moderatus",
+    "total_unique_words": 29328,
+    "words_with_dictionary": 1,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 195890,
+    "tokens_with_dictionary": 2,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 5546
+      },
+      {
+        "word": "in",
+        "frequency": 2968
+      },
+      {
+        "word": "ut",
+        "frequency": 1818
+      },
+      {
+        "word": "cum",
+        "frequency": 1660
+      },
+      {
+        "word": "est",
+        "frequency": 1630
+      },
+      {
+        "word": "non",
+        "frequency": 1548
+      },
+      {
+        "word": "si",
+        "frequency": 1482
+      },
+      {
+        "word": "quae",
+        "frequency": 1342
+      },
+      {
+        "word": "vel",
+        "frequency": 1308
+      },
+      {
+        "word": "a",
+        "frequency": 1268
+      }
+    ]
+  },
+  {
+    "author": "Curtius Rufus, Quintus",
+    "total_unique_words": 22578,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 149100,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 3242
+      },
+      {
+        "word": "in",
+        "frequency": 2900
+      },
+      {
+        "word": "ad",
+        "frequency": 1446
+      },
+      {
+        "word": "cum",
+        "frequency": 1416
+      },
+      {
+        "word": "non",
+        "frequency": 1398
+      },
+      {
+        "word": "ut",
+        "frequency": 1064
+      },
+      {
+        "word": "quam",
+        "frequency": 1064
+      },
+      {
+        "word": "qui",
+        "frequency": 984
+      },
+      {
+        "word": "sed",
+        "frequency": 952
+      },
+      {
+        "word": "esse",
+        "frequency": 684
+      }
+    ]
+  },
+  {
+    "author": "Demades",
+    "total_unique_words": 1026,
+    "words_with_dictionary": 734,
+    "unique_coverage_percent": 71.54,
+    "total_tokens": 2069,
+    "tokens_with_dictionary": 1762,
+    "token_coverage_percent": 85.16,
+    "direct_dictionary_matches": 184,
+    "direct_match_percent": 17.93,
+    "top_missing_words": [
+      {
+        "word": "εγραψα",
+        "frequency": 4
+      },
+      {
+        "word": "δημοσθενησ",
+        "frequency": 4
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 2
+      },
+      {
+        "word": "πλαττομενοι",
+        "frequency": 2
+      },
+      {
+        "word": "κινδυνευοντων",
+        "frequency": 2
+      },
+      {
+        "word": "ηκμαζον",
+        "frequency": 2
+      },
+      {
+        "word": "ευλαβωσ",
+        "frequency": 2
+      },
+      {
+        "word": "εποιησα",
+        "frequency": 2
+      },
+      {
+        "word": "εγκαλουντων",
+        "frequency": 2
+      },
+      {
+        "word": "αφαιρηται",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "author": "Demetrius of Phaleron",
+    "total_unique_words": 4418,
+    "words_with_dictionary": 2801,
+    "unique_coverage_percent": 63.4,
+    "total_tokens": 15424,
+    "tokens_with_dictionary": 13353,
+    "token_coverage_percent": 86.57,
+    "direct_dictionary_matches": 642,
+    "direct_match_percent": 14.53,
+    "top_missing_words": [
+      {
+        "word": "δεινοτητα",
+        "frequency": 19
+      },
+      {
+        "word": "αριστοτελησ",
+        "frequency": 15
+      },
+      {
+        "word": "μεγαλοπρεπεσ",
+        "frequency": 10
+      },
+      {
+        "word": "ξενοφων",
+        "frequency": 9
+      },
+      {
+        "word": "δεινοτητοσ",
+        "frequency": 9
+      },
+      {
+        "word": "θουκυδιδησ",
+        "frequency": 8
+      },
+      {
+        "word": "καλειται",
+        "frequency": 7
+      },
+      {
+        "word": "εμφαινει",
+        "frequency": 7
+      },
+      {
+        "word": "συγκρουσεωσ",
+        "frequency": 6
+      },
+      {
+        "word": "σαφεστερον",
+        "frequency": 6
+      }
+    ]
+  },
+  {
+    "author": "Demosthenes",
+    "total_unique_words": 30784,
+    "words_with_dictionary": 12207,
+    "unique_coverage_percent": 39.65,
+    "total_tokens": 293349,
+    "tokens_with_dictionary": 249619,
+    "token_coverage_percent": 85.09,
+    "direct_dictionary_matches": 1906,
+    "direct_match_percent": 6.19,
+    "top_missing_words": [
+      {
+        "word": "μαρτυρασ",
+        "frequency": 170
+      },
+      {
+        "word": "τουθ",
+        "frequency": 166
+      },
+      {
+        "word": "ουχι",
+        "frequency": 165
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 152
+      },
+      {
+        "word": "τουτονι",
+        "frequency": 135
+      },
+      {
+        "word": "αγνιου",
+        "frequency": 122
+      },
+      {
+        "word": "πραγματ",
+        "frequency": 85
+      },
+      {
+        "word": "τουτουι",
+        "frequency": 83
+      },
+      {
+        "word": "ακριβωσ",
+        "frequency": 83
+      },
+      {
+        "word": "τουναντιον",
+        "frequency": 81
+      }
+    ]
+  },
+  {
+    "author": "Dinarchus",
+    "total_unique_words": 3358,
+    "words_with_dictionary": 1993,
+    "unique_coverage_percent": 59.35,
+    "total_tokens": 11539,
+    "tokens_with_dictionary": 9755,
+    "token_coverage_percent": 84.54,
+    "direct_dictionary_matches": 366,
+    "direct_match_percent": 10.9,
+    "top_missing_words": [
+      {
+        "word": "δημοσθενησ",
+        "frequency": 15
+      },
+      {
+        "word": "αρπαλου",
+        "frequency": 10
+      },
+      {
+        "word": "ζητειν",
+        "frequency": 9
+      },
+      {
+        "word": "τιμωρησασθαι",
+        "frequency": 7
+      },
+      {
+        "word": "ποιησετε",
+        "frequency": 7
+      },
+      {
+        "word": "ταληθεσ",
+        "frequency": 6
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 6
+      },
+      {
+        "word": "πεπραγμενων",
+        "frequency": 6
+      },
+      {
+        "word": "ειληφεναι",
+        "frequency": 6
+      },
+      {
+        "word": "εγραψεν",
+        "frequency": 6
+      }
+    ]
+  },
+  {
+    "author": "Dio Chrysostom",
+    "total_unique_words": 27741,
+    "words_with_dictionary": 13830,
+    "unique_coverage_percent": 49.85,
+    "total_tokens": 177205,
+    "tokens_with_dictionary": 154036,
+    "token_coverage_percent": 86.93,
+    "direct_dictionary_matches": 2179,
+    "direct_match_percent": 7.85,
+    "top_missing_words": [
+      {
+        "word": "τουναντιον",
+        "frequency": 86
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 73
+      },
+      {
+        "word": "ταλλα",
+        "frequency": 70
+      },
+      {
+        "word": "ενεκεν",
+        "frequency": 60
+      },
+      {
+        "word": "ουχι",
+        "frequency": 57
+      },
+      {
+        "word": "ουθεν",
+        "frequency": 49
+      },
+      {
+        "word": "τοιγαρουν",
+        "frequency": 48
+      },
+      {
+        "word": "καγω",
+        "frequency": 34
+      },
+      {
+        "word": "οραν",
+        "frequency": 33
+      },
+      {
+        "word": "προσεχειν",
+        "frequency": 30
+      }
+    ]
+  },
+  {
+    "author": "Diodorus Siculus",
+    "total_unique_words": 24519,
+    "words_with_dictionary": 10032,
+    "unique_coverage_percent": 40.92,
+    "total_tokens": 365778,
+    "tokens_with_dictionary": 298990,
+    "token_coverage_percent": 81.74,
+    "direct_dictionary_matches": 1425,
+    "direct_match_percent": 5.81,
+    "top_missing_words": [
+      {
+        "word": "διοπερ",
+        "frequency": 444
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 220
+      },
+      {
+        "word": "συνεβη",
+        "frequency": 212
+      },
+      {
+        "word": "καρχηδονιων",
+        "frequency": 198
+      },
+      {
+        "word": "καρχηδονιοι",
+        "frequency": 126
+      },
+      {
+        "word": "πραττομενοισ",
+        "frequency": 124
+      },
+      {
+        "word": "ελαττουσ",
+        "frequency": 98
+      },
+      {
+        "word": "πυθομενοσ",
+        "frequency": 96
+      },
+      {
+        "word": "παραλαβων",
+        "frequency": 94
+      },
+      {
+        "word": "παραδοξωσ",
+        "frequency": 94
+      }
+    ]
+  },
+  {
+    "author": "Diogenes Laertius",
+    "total_unique_words": 22314,
+    "words_with_dictionary": 11385,
+    "unique_coverage_percent": 51.02,
+    "total_tokens": 218856,
+    "tokens_with_dictionary": 184004,
+    "token_coverage_percent": 84.08,
+    "direct_dictionary_matches": 2173,
+    "direct_match_percent": 9.74,
+    "top_missing_words": [
+      {
+        "word": "ερωτηθεισ",
+        "frequency": 150
+      },
+      {
+        "word": "χρυσιπποσ",
+        "frequency": 128
+      },
+      {
+        "word": "απολλοδωροσ",
+        "frequency": 110
+      },
+      {
+        "word": "ζηνων",
+        "frequency": 98
+      },
+      {
+        "word": "φαβωρινοσ",
+        "frequency": 94
+      },
+      {
+        "word": "δημητριοσ",
+        "frequency": 90
+      },
+      {
+        "word": "αριστοτελησ",
+        "frequency": 86
+      },
+      {
+        "word": "γεγραφωσ",
+        "frequency": 84
+      },
+      {
+        "word": "ερμιπποσ",
+        "frequency": 74
+      },
+      {
+        "word": "τελευτησαι",
+        "frequency": 64
+      }
+    ]
+  },
+  {
+    "author": "Dionysius of Halicarnassus",
+    "total_unique_words": 44226,
+    "words_with_dictionary": 18749,
+    "unique_coverage_percent": 42.39,
+    "total_tokens": 667698,
+    "tokens_with_dictionary": 561540,
+    "token_coverage_percent": 84.1,
+    "direct_dictionary_matches": 2791,
+    "direct_match_percent": 6.31,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 1286
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 472
+      },
+      {
+        "word": "ρωμαιοισ",
+        "frequency": 423
+      },
+      {
+        "word": "λατινων",
+        "frequency": 338
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 326
+      },
+      {
+        "word": "πατρικιων",
+        "frequency": 268
+      },
+      {
+        "word": "ουθεν",
+        "frequency": 262
+      },
+      {
+        "word": "ταρκυνιοσ",
+        "frequency": 248
+      },
+      {
+        "word": "σαβινων",
+        "frequency": 212
+      },
+      {
+        "word": "τυρρηνων",
+        "frequency": 178
+      }
+    ]
+  },
+  {
+    "author": "Epictetus",
+    "total_unique_words": 14261,
+    "words_with_dictionary": 7339,
+    "unique_coverage_percent": 51.46,
+    "total_tokens": 157366,
+    "tokens_with_dictionary": 135380,
+    "token_coverage_percent": 86.03,
+    "direct_dictionary_matches": 1455,
+    "direct_match_percent": 10.2,
+    "top_missing_words": [
+      {
+        "word": "θελεισ",
+        "frequency": 336
+      },
+      {
+        "word": "ουχι",
+        "frequency": 158
+      },
+      {
+        "word": "θελει",
+        "frequency": 102
+      },
+      {
+        "word": "θελησ",
+        "frequency": 76
+      },
+      {
+        "word": "καγω",
+        "frequency": 56
+      },
+      {
+        "word": "δειξον",
+        "frequency": 56
+      },
+      {
+        "word": "εκκλισιν",
+        "frequency": 48
+      },
+      {
+        "word": "εξεστιν",
+        "frequency": 46
+      },
+      {
+        "word": "θελη",
+        "frequency": 40
+      },
+      {
+        "word": "διαφερει",
+        "frequency": 40
+      }
+    ]
+  },
+  {
+    "author": "Euclid",
+    "total_unique_words": 0,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0,
+    "total_tokens": 0,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0,
+    "top_missing_words": []
+  },
+  {
+    "author": "Euripides",
+    "total_unique_words": 28495,
+    "words_with_dictionary": 15321,
+    "unique_coverage_percent": 53.77,
+    "total_tokens": 145332,
+    "tokens_with_dictionary": 121404,
+    "token_coverage_percent": 83.54,
+    "direct_dictionary_matches": 2632,
+    "direct_match_percent": 9.24,
+    "top_missing_words": [
+      {
+        "word": "τησδ",
+        "frequency": 82
+      },
+      {
+        "word": "καγω",
+        "frequency": 76
+      },
+      {
+        "word": "ταλαινα",
+        "frequency": 71
+      },
+      {
+        "word": "ταμα",
+        "frequency": 65
+      },
+      {
+        "word": "τουμον",
+        "frequency": 63
+      },
+      {
+        "word": "χερι",
+        "frequency": 60
+      },
+      {
+        "word": "ουχι",
+        "frequency": 59
+      },
+      {
+        "word": "χερασ",
+        "frequency": 56
+      },
+      {
+        "word": "κου",
+        "frequency": 56
+      },
+      {
+        "word": "κουκ",
+        "frequency": 54
+      }
+    ]
+  },
+  {
+    "author": "Eusebius of Caesarea",
+    "total_unique_words": 20288,
+    "words_with_dictionary": 9482,
+    "unique_coverage_percent": 46.74,
+    "total_tokens": 198416,
+    "tokens_with_dictionary": 165741,
+    "token_coverage_percent": 83.53,
+    "direct_dictionary_matches": 1612,
+    "direct_match_percent": 7.95,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 221
+      },
+      {
+        "word": "διαδεχεται",
+        "frequency": 110
+      },
+      {
+        "word": "ιωαννου",
+        "frequency": 101
+      },
+      {
+        "word": "ουχι",
+        "frequency": 64
+      },
+      {
+        "word": "αθροωσ",
+        "frequency": 60
+      },
+      {
+        "word": "ενεκεν",
+        "frequency": 56
+      },
+      {
+        "word": "πεποιηται",
+        "frequency": 54
+      },
+      {
+        "word": "ιωαννην",
+        "frequency": 52
+      },
+      {
+        "word": "ιεροσολυμοισ",
+        "frequency": 51
+      },
+      {
+        "word": "επιφερει",
+        "frequency": 50
+      }
+    ]
+  },
+  {
+    "author": "Flavius Josephus",
+    "total_unique_words": 55543,
+    "words_with_dictionary": 19492,
+    "unique_coverage_percent": 35.09,
+    "total_tokens": 473101,
+    "tokens_with_dictionary": 385781,
+    "token_coverage_percent": 81.54,
+    "direct_dictionary_matches": 3002,
+    "direct_match_percent": 5.4,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 385
+      },
+      {
+        "word": "ιεροσολυμα",
+        "frequency": 248
+      },
+      {
+        "word": "ηρωδου",
+        "frequency": 237
+      },
+      {
+        "word": "ναον",
+        "frequency": 217
+      },
+      {
+        "word": "ρωμαιουσ",
+        "frequency": 199
+      },
+      {
+        "word": "ιεροσολυμων",
+        "frequency": 183
+      },
+      {
+        "word": "ρωμαιοισ",
+        "frequency": 181
+      },
+      {
+        "word": "ηρωδην",
+        "frequency": 178
+      },
+      {
+        "word": "ιεροσολυμοισ",
+        "frequency": 159
+      },
+      {
+        "word": "μωυσησ",
+        "frequency": 144
+      }
+    ]
+  },
+  {
+    "author": "Florus, Lucius Annaeus",
+    "total_unique_words": 11618,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 59106,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 1662
+      },
+      {
+        "word": "in",
+        "frequency": 1342
+      },
+      {
+        "word": "cum",
+        "frequency": 640
+      },
+      {
+        "word": "ut",
+        "frequency": 468
+      },
+      {
+        "word": "b",
+        "frequency": 458
+      },
+      {
+        "word": "sed",
+        "frequency": 452
+      },
+      {
+        "word": "ad",
+        "frequency": 382
+      },
+      {
+        "word": "non",
+        "frequency": 352
+      },
+      {
+        "word": "quam",
+        "frequency": 326
+      },
+      {
+        "word": "nec",
+        "frequency": 296
+      }
+    ]
+  },
+  {
+    "author": "Galen",
+    "total_unique_words": 6444,
+    "words_with_dictionary": 3487,
+    "unique_coverage_percent": 54.11,
+    "total_tokens": 31799,
+    "tokens_with_dictionary": 27055,
+    "token_coverage_percent": 85.08,
+    "direct_dictionary_matches": 675,
+    "direct_match_percent": 10.47,
+    "top_missing_words": [
+      {
+        "word": "ερασιστρατοσ",
+        "frequency": 44
+      },
+      {
+        "word": "εναργωσ",
+        "frequency": 36
+      },
+      {
+        "word": "φλεβων",
+        "frequency": 33
+      },
+      {
+        "word": "κενουμενον",
+        "frequency": 29
+      },
+      {
+        "word": "ιπποκρατησ",
+        "frequency": 25
+      },
+      {
+        "word": "ελκειν",
+        "frequency": 25
+      },
+      {
+        "word": "τελεωσ",
+        "frequency": 23
+      },
+      {
+        "word": "κυστιν",
+        "frequency": 23
+      },
+      {
+        "word": "ακριβωσ",
+        "frequency": 23
+      },
+      {
+        "word": "αγγειων",
+        "frequency": 21
+      }
+    ]
+  },
+  {
+    "author": "Gellius, Aulus",
+    "total_unique_words": 33578,
+    "words_with_dictionary": 28,
+    "unique_coverage_percent": 0.08,
+    "total_tokens": 237897,
+    "tokens_with_dictionary": 540,
+    "token_coverage_percent": 0.23,
+    "direct_dictionary_matches": 8,
+    "direct_match_percent": 0.02,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 6781
+      },
+      {
+        "word": "in",
+        "frequency": 5750
+      },
+      {
+        "word": "non",
+        "frequency": 2777
+      },
+      {
+        "word": "quod",
+        "frequency": 2178
+      },
+      {
+        "word": "atque",
+        "frequency": 1987
+      },
+      {
+        "word": "cum",
+        "frequency": 1888
+      },
+      {
+        "word": "est",
+        "frequency": 1786
+      },
+      {
+        "word": "sed",
+        "frequency": 1714
+      },
+      {
+        "word": "qui",
+        "frequency": 1589
+      },
+      {
+        "word": "esse",
+        "frequency": 1583
+      }
+    ]
+  },
+  {
+    "author": "Greek Anthology",
+    "total_unique_words": 12209,
+    "words_with_dictionary": 7712,
+    "unique_coverage_percent": 63.17,
+    "total_tokens": 26824,
+    "tokens_with_dictionary": 21569,
+    "token_coverage_percent": 80.41,
+    "direct_dictionary_matches": 1719,
+    "direct_match_percent": 14.08,
+    "top_missing_words": [
+      {
+        "word": "κην",
+        "frequency": 20
+      },
+      {
+        "word": "ουνομα",
+        "frequency": 14
+      },
+      {
+        "word": "κυπριν",
+        "frequency": 11
+      },
+      {
+        "word": "βυζαντιω",
+        "frequency": 11
+      },
+      {
+        "word": "λοετρον",
+        "frequency": 10
+      },
+      {
+        "word": "οδυσσευσ",
+        "frequency": 8
+      },
+      {
+        "word": "μουσεων",
+        "frequency": 8
+      },
+      {
+        "word": "παφιησ",
+        "frequency": 7
+      },
+      {
+        "word": "αρεοσ",
+        "frequency": 7
+      },
+      {
+        "word": "τανδε",
+        "frequency": 6
+      }
+    ]
+  },
+  {
+    "author": "Harpocration",
+    "total_unique_words": 0,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0,
+    "total_tokens": 0,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0,
+    "top_missing_words": []
+  },
+  {
+    "author": "Herodotus",
+    "total_unique_words": 27562,
+    "words_with_dictionary": 11760,
+    "unique_coverage_percent": 42.67,
+    "total_tokens": 369832,
+    "tokens_with_dictionary": 301696,
+    "token_coverage_percent": 81.58,
+    "direct_dictionary_matches": 1874,
+    "direct_match_percent": 6.8,
+    "top_missing_words": [
+      {
+        "word": "ουνομα",
+        "frequency": 446
+      },
+      {
+        "word": "τουτοισι",
+        "frequency": 320
+      },
+      {
+        "word": "επεαν",
+        "frequency": 308
+      },
+      {
+        "word": "βασιλεοσ",
+        "frequency": 268
+      },
+      {
+        "word": "εοντεσ",
+        "frequency": 254
+      },
+      {
+        "word": "ξερξησ",
+        "frequency": 244
+      },
+      {
+        "word": "εγινετο",
+        "frequency": 216
+      },
+      {
+        "word": "σφεων",
+        "frequency": 204
+      },
+      {
+        "word": "τωυτο",
+        "frequency": 172
+      },
+      {
+        "word": "απικετο",
+        "frequency": 172
+      }
+    ]
+  },
+  {
+    "author": "Hesiod",
+    "total_unique_words": 6357,
+    "words_with_dictionary": 4384,
+    "unique_coverage_percent": 68.96,
+    "total_tokens": 16366,
+    "tokens_with_dictionary": 13975,
+    "token_coverage_percent": 85.39,
+    "direct_dictionary_matches": 936,
+    "direct_match_percent": 14.72,
+    "top_missing_words": [
+      {
+        "word": "τιτηνεσ",
+        "frequency": 8
+      },
+      {
+        "word": "μιγεισα",
+        "frequency": 8
+      },
+      {
+        "word": "μεμνημενοσ",
+        "frequency": 8
+      },
+      {
+        "word": "ηρακληειη",
+        "frequency": 7
+      },
+      {
+        "word": "εοντων",
+        "frequency": 7
+      },
+      {
+        "word": "αδαμαντοσ",
+        "frequency": 6
+      },
+      {
+        "word": "νιφοεντοσ",
+        "frequency": 5
+      },
+      {
+        "word": "μιχθεισ",
+        "frequency": 5
+      },
+      {
+        "word": "ιεισαι",
+        "frequency": 5
+      },
+      {
+        "word": "δηριν",
+        "frequency": 5
+      }
+    ]
+  },
+  {
+    "author": "Hippocrates",
+    "total_unique_words": 17384,
+    "words_with_dictionary": 7422,
+    "unique_coverage_percent": 42.69,
+    "total_tokens": 105157,
+    "tokens_with_dictionary": 84569,
+    "token_coverage_percent": 80.42,
+    "direct_dictionary_matches": 1248,
+    "direct_match_percent": 7.18,
+    "top_missing_words": [
+      {
+        "word": "οκοταν",
+        "frequency": 111
+      },
+      {
+        "word": "γινονται",
+        "frequency": 110
+      },
+      {
+        "word": "οκοσα",
+        "frequency": 87
+      },
+      {
+        "word": "πουλυ",
+        "frequency": 70
+      },
+      {
+        "word": "τουτοισι",
+        "frequency": 64
+      },
+      {
+        "word": "οκοσοισι",
+        "frequency": 63
+      },
+      {
+        "word": "τουτεοισι",
+        "frequency": 62
+      },
+      {
+        "word": "ποιεεσθαι",
+        "frequency": 61
+      },
+      {
+        "word": "οκοσοι",
+        "frequency": 52
+      },
+      {
+        "word": "χρεεσθαι",
+        "frequency": 51
+      }
+    ]
+  },
+  {
+    "author": "Homer",
+    "total_unique_words": 28293,
+    "words_with_dictionary": 14710,
+    "unique_coverage_percent": 51.99,
+    "total_tokens": 199847,
+    "tokens_with_dictionary": 177334,
+    "token_coverage_percent": 88.73,
+    "direct_dictionary_matches": 2652,
+    "direct_match_percent": 9.37,
+    "top_missing_words": [
+      {
+        "word": "οδυσσευσ",
+        "frequency": 309
+      },
+      {
+        "word": "εκτωρ",
+        "frequency": 202
+      },
+      {
+        "word": "οδυσευσ",
+        "frequency": 94
+      },
+      {
+        "word": "οδυσσηοσ",
+        "frequency": 78
+      },
+      {
+        "word": "εκτορι",
+        "frequency": 67
+      },
+      {
+        "word": "οδυσηοσ",
+        "frequency": 64
+      },
+      {
+        "word": "νεστωρ",
+        "frequency": 59
+      },
+      {
+        "word": "ποσειδαων",
+        "frequency": 53
+      },
+      {
+        "word": "εκτοροσ",
+        "frequency": 52
+      },
+      {
+        "word": "εκτορ",
+        "frequency": 48
+      }
+    ]
+  },
+  {
+    "author": "Homeric Hymns",
+    "total_unique_words": 5992,
+    "words_with_dictionary": 4116,
+    "unique_coverage_percent": 68.69,
+    "total_tokens": 16007,
+    "tokens_with_dictionary": 13735,
+    "token_coverage_percent": 85.81,
+    "direct_dictionary_matches": 840,
+    "direct_match_percent": 14.02,
+    "top_missing_words": [
+      {
+        "word": "μαιαδοσ",
+        "frequency": 17
+      },
+      {
+        "word": "μνησομ",
+        "frequency": 12
+      },
+      {
+        "word": "ερικυδεοσ",
+        "frequency": 8
+      },
+      {
+        "word": "αρχομ",
+        "frequency": 8
+      },
+      {
+        "word": "αλσεα",
+        "frequency": 7
+      },
+      {
+        "word": "θυωδεοσ",
+        "frequency": 6
+      },
+      {
+        "word": "κυδιμοσ",
+        "frequency": 5
+      },
+      {
+        "word": "κυδιμον",
+        "frequency": 5
+      },
+      {
+        "word": "κελεοιο",
+        "frequency": 5
+      },
+      {
+        "word": "εουσα",
+        "frequency": 5
+      }
+    ]
+  },
+  {
+    "author": "Horace",
+    "total_unique_words": 20247,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 43902,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 1370
+      },
+      {
+        "word": "non",
+        "frequency": 463
+      },
+      {
+        "word": "in",
+        "frequency": 415
+      },
+      {
+        "word": "si",
+        "frequency": 337
+      },
+      {
+        "word": "ut",
+        "frequency": 327
+      },
+      {
+        "word": "cum",
+        "frequency": 264
+      },
+      {
+        "word": "nec",
+        "frequency": 261
+      },
+      {
+        "word": "te",
+        "frequency": 250
+      },
+      {
+        "word": "est",
+        "frequency": 247
+      },
+      {
+        "word": "qui",
+        "frequency": 240
+      }
+    ]
+  },
+  {
+    "author": "Hyperides",
+    "total_unique_words": 3776,
+    "words_with_dictionary": 2177,
+    "unique_coverage_percent": 57.65,
+    "total_tokens": 12076,
+    "tokens_with_dictionary": 10147,
+    "token_coverage_percent": 84.03,
+    "direct_dictionary_matches": 430,
+    "direct_match_percent": 11.39,
+    "top_missing_words": [
+      {
+        "word": "ευξενιππον",
+        "frequency": 8
+      },
+      {
+        "word": "ειληφεναι",
+        "frequency": 7
+      },
+      {
+        "word": "τουναντιον",
+        "frequency": 6
+      },
+      {
+        "word": "πεπραγμενων",
+        "frequency": 6
+      },
+      {
+        "word": "λεωσθενουσ",
+        "frequency": 6
+      },
+      {
+        "word": "ενεκεν",
+        "frequency": 6
+      },
+      {
+        "word": "δημοσθενησ",
+        "frequency": 6
+      },
+      {
+        "word": "αρπαλοσ",
+        "frequency": 6
+      },
+      {
+        "word": "τετταρακοντα",
+        "frequency": 5
+      },
+      {
+        "word": "μιδαν",
+        "frequency": 5
+      }
+    ]
+  },
+  {
+    "author": "Isaeus",
+    "total_unique_words": 6456,
+    "words_with_dictionary": 3236,
+    "unique_coverage_percent": 50.12,
+    "total_tokens": 33877,
+    "tokens_with_dictionary": 28272,
+    "token_coverage_percent": 83.45,
+    "direct_dictionary_matches": 581,
+    "direct_match_percent": 9.0,
+    "top_missing_words": [
+      {
+        "word": "υον",
+        "frequency": 65
+      },
+      {
+        "word": "μαρτυρασ",
+        "frequency": 60
+      },
+      {
+        "word": "δικαιογενησ",
+        "frequency": 34
+      },
+      {
+        "word": "τελευτησαντοσ",
+        "frequency": 30
+      },
+      {
+        "word": "ευκτημονοσ",
+        "frequency": 30
+      },
+      {
+        "word": "φρατορασ",
+        "frequency": 22
+      },
+      {
+        "word": "διεθετο",
+        "frequency": 22
+      },
+      {
+        "word": "αναγνωθι",
+        "frequency": 22
+      },
+      {
+        "word": "αστυφιλου",
+        "frequency": 21
+      },
+      {
+        "word": "κιρωνοσ",
+        "frequency": 20
+      }
+    ]
+  },
+  {
+    "author": "Isocrates",
+    "total_unique_words": 15566,
+    "words_with_dictionary": 6878,
+    "unique_coverage_percent": 44.19,
+    "total_tokens": 112146,
+    "tokens_with_dictionary": 95866,
+    "token_coverage_percent": 85.48,
+    "direct_dictionary_matches": 947,
+    "direct_match_percent": 6.08,
+    "top_missing_words": [
+      {
+        "word": "ωσθ",
+        "frequency": 66
+      },
+      {
+        "word": "ειρημενων",
+        "frequency": 51
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 45
+      },
+      {
+        "word": "πεπραγμενων",
+        "frequency": 43
+      },
+      {
+        "word": "διελθειν",
+        "frequency": 41
+      },
+      {
+        "word": "επαινειν",
+        "frequency": 39
+      },
+      {
+        "word": "λεγομενοισ",
+        "frequency": 33
+      },
+      {
+        "word": "βουλομενουσ",
+        "frequency": 33
+      },
+      {
+        "word": "ζητειν",
+        "frequency": 32
+      },
+      {
+        "word": "χρωμενουσ",
+        "frequency": 31
+      }
+    ]
+  },
+  {
+    "author": "John of Damascus, Saint",
+    "total_unique_words": 0,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0,
+    "total_tokens": 0,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0,
+    "top_missing_words": []
+  },
+  {
+    "author": "Julian, Emperor of Rome",
+    "total_unique_words": 17886,
+    "words_with_dictionary": 9771,
+    "unique_coverage_percent": 54.63,
+    "total_tokens": 85097,
+    "tokens_with_dictionary": 73574,
+    "token_coverage_percent": 86.46,
+    "direct_dictionary_matches": 1673,
+    "direct_match_percent": 9.35,
+    "top_missing_words": [
+      {
+        "word": "ουχι",
+        "frequency": 41
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 34
+      },
+      {
+        "word": "πανταπασιν",
+        "frequency": 26
+      },
+      {
+        "word": "επαινειν",
+        "frequency": 21
+      },
+      {
+        "word": "διογενουσ",
+        "frequency": 21
+      },
+      {
+        "word": "ωετο",
+        "frequency": 17
+      },
+      {
+        "word": "οραν",
+        "frequency": 17
+      },
+      {
+        "word": "προσηκειν",
+        "frequency": 16
+      },
+      {
+        "word": "αθροωσ",
+        "frequency": 15
+      },
+      {
+        "word": "ρωμαιων",
+        "frequency": 14
+      }
+    ]
+  },
+  {
+    "author": "Julius Caesar",
+    "total_unique_words": 13752,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 102502,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "in",
+        "frequency": 2488
+      },
+      {
+        "word": "et",
+        "frequency": 1908
+      },
+      {
+        "word": "ad",
+        "frequency": 1584
+      },
+      {
+        "word": "cum",
+        "frequency": 1282
+      },
+      {
+        "word": "ex",
+        "frequency": 990
+      },
+      {
+        "word": "atque",
+        "frequency": 938
+      },
+      {
+        "word": "se",
+        "frequency": 872
+      },
+      {
+        "word": "quod",
+        "frequency": 870
+      },
+      {
+        "word": "ut",
+        "frequency": 800
+      },
+      {
+        "word": "ab",
+        "frequency": 756
+      }
+    ]
+  },
+  {
+    "author": "Juvenal",
+    "total_unique_words": 13003,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 26923,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 978
+      },
+      {
+        "word": "in",
+        "frequency": 263
+      },
+      {
+        "word": "si",
+        "frequency": 214
+      },
+      {
+        "word": "non",
+        "frequency": 193
+      },
+      {
+        "word": "cum",
+        "frequency": 186
+      },
+      {
+        "word": "nec",
+        "frequency": 164
+      },
+      {
+        "word": "atque",
+        "frequency": 160
+      },
+      {
+        "word": "sed",
+        "frequency": 153
+      },
+      {
+        "word": "est",
+        "frequency": 142
+      },
+      {
+        "word": "qui",
+        "frequency": 138
+      }
+    ]
+  },
+  {
+    "author": "Longinus",
+    "total_unique_words": 559,
+    "words_with_dictionary": 430,
+    "unique_coverage_percent": 76.92,
+    "total_tokens": 721,
+    "tokens_with_dictionary": 591,
+    "token_coverage_percent": 81.97,
+    "direct_dictionary_matches": 121,
+    "direct_match_percent": 21.65,
+    "top_missing_words": [
+      {
+        "word": "ελα",
+        "frequency": 2
+      },
+      {
+        "word": "ωνηρ",
+        "frequency": 1
+      },
+      {
+        "word": "χωποσα",
+        "frequency": 1
+      },
+      {
+        "word": "χρω",
+        "frequency": 1
+      },
+      {
+        "word": "χλωροτερα",
+        "frequency": 1
+      },
+      {
+        "word": "χειμαρροον",
+        "frequency": 1
+      },
+      {
+        "word": "φωνευ",
+        "frequency": 1
+      },
+      {
+        "word": "φυτευσαντεσ",
+        "frequency": 1
+      },
+      {
+        "word": "φανειη",
+        "frequency": 1
+      },
+      {
+        "word": "υψηχεεσ",
+        "frequency": 1
+      }
+    ]
+  },
+  {
+    "author": "Longus",
+    "total_unique_words": 6040,
+    "words_with_dictionary": 3581,
+    "unique_coverage_percent": 59.29,
+    "total_tokens": 39490,
+    "tokens_with_dictionary": 32590,
+    "token_coverage_percent": 82.53,
+    "direct_dictionary_matches": 715,
+    "direct_match_percent": 11.84,
+    "top_missing_words": [
+      {
+        "word": "δαφνισ",
+        "frequency": 192
+      },
+      {
+        "word": "δαφνιν",
+        "frequency": 116
+      },
+      {
+        "word": "δαφνιδοσ",
+        "frequency": 62
+      },
+      {
+        "word": "συριγγα",
+        "frequency": 52
+      },
+      {
+        "word": "δαφνιδι",
+        "frequency": 30
+      },
+      {
+        "word": "συριγγοσ",
+        "frequency": 26
+      },
+      {
+        "word": "μυρταλη",
+        "frequency": 24
+      },
+      {
+        "word": "επιουσησ",
+        "frequency": 24
+      },
+      {
+        "word": "λαμωνα",
+        "frequency": 22
+      },
+      {
+        "word": "δρυαντα",
+        "frequency": 22
+      }
+    ]
+  },
+  {
+    "author": "Lucan",
+    "total_unique_words": 19744,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 51456,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 950
+      },
+      {
+        "word": "in",
+        "frequency": 800
+      },
+      {
+        "word": "non",
+        "frequency": 622
+      },
+      {
+        "word": "nec",
+        "frequency": 324
+      },
+      {
+        "word": "sed",
+        "frequency": 238
+      },
+      {
+        "word": "iam",
+        "frequency": 230
+      },
+      {
+        "word": "cum",
+        "frequency": 222
+      },
+      {
+        "word": "si",
+        "frequency": 215
+      },
+      {
+        "word": "per",
+        "frequency": 213
+      },
+      {
+        "word": "ut",
+        "frequency": 179
+      }
+    ]
+  },
+  {
+    "author": "Lucian of Samosata",
+    "total_unique_words": 46496,
+    "words_with_dictionary": 20752,
+    "unique_coverage_percent": 44.63,
+    "total_tokens": 452197,
+    "tokens_with_dictionary": 382257,
+    "token_coverage_percent": 84.53,
+    "direct_dictionary_matches": 3770,
+    "direct_match_percent": 8.11,
+    "top_missing_words": [
+      {
+        "word": "λυκινοσ",
+        "frequency": 483
+      },
+      {
+        "word": "μενιπποσ",
+        "frequency": 186
+      },
+      {
+        "word": "ακριβωσ",
+        "frequency": 167
+      },
+      {
+        "word": "ουχι",
+        "frequency": 159
+      },
+      {
+        "word": "ερμοτιμοσ",
+        "frequency": 152
+      },
+      {
+        "word": "τυχιαδησ",
+        "frequency": 123
+      },
+      {
+        "word": "τουνομα",
+        "frequency": 104
+      },
+      {
+        "word": "μενιππε",
+        "frequency": 102
+      },
+      {
+        "word": "καγω",
+        "frequency": 95
+      },
+      {
+        "word": "τοιγαρουν",
+        "frequency": 94
+      }
+    ]
+  },
+  {
+    "author": "Lucretius",
+    "total_unique_words": 13455,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 49324,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 1261
+      },
+      {
+        "word": "in",
+        "frequency": 920
+      },
+      {
+        "word": "ut",
+        "frequency": 450
+      },
+      {
+        "word": "quae",
+        "frequency": 437
+      },
+      {
+        "word": "quod",
+        "frequency": 428
+      },
+      {
+        "word": "cum",
+        "frequency": 409
+      },
+      {
+        "word": "atque",
+        "frequency": 391
+      },
+      {
+        "word": "nec",
+        "frequency": 389
+      },
+      {
+        "word": "per",
+        "frequency": 310
+      },
+      {
+        "word": "est",
+        "frequency": 285
+      }
+    ]
+  },
+  {
+    "author": "Lycophron",
+    "total_unique_words": 4551,
+    "words_with_dictionary": 2612,
+    "unique_coverage_percent": 57.39,
+    "total_tokens": 7467,
+    "tokens_with_dictionary": 5291,
+    "token_coverage_percent": 70.86,
+    "direct_dictionary_matches": 585,
+    "direct_match_percent": 12.85,
+    "top_missing_words": [
+      {
+        "word": "μολων",
+        "frequency": 9
+      },
+      {
+        "word": "ηξει",
+        "frequency": 8
+      },
+      {
+        "word": "δεξεται",
+        "frequency": 7
+      },
+      {
+        "word": "γυασ",
+        "frequency": 7
+      },
+      {
+        "word": "δαρον",
+        "frequency": 5
+      },
+      {
+        "word": "χοιραδων",
+        "frequency": 4
+      },
+      {
+        "word": "τριπλασ",
+        "frequency": 4
+      },
+      {
+        "word": "πλακασ",
+        "frequency": 4
+      },
+      {
+        "word": "λοιβαισι",
+        "frequency": 4
+      },
+      {
+        "word": "κτενει",
+        "frequency": 4
+      }
+    ]
+  },
+  {
+    "author": "Lycurgus",
+    "total_unique_words": 3634,
+    "words_with_dictionary": 2168,
+    "unique_coverage_percent": 59.66,
+    "total_tokens": 11630,
+    "tokens_with_dictionary": 9857,
+    "token_coverage_percent": 84.75,
+    "direct_dictionary_matches": 404,
+    "direct_match_percent": 11.12,
+    "top_missing_words": [
+      {
+        "word": "λεωκρατησ",
+        "frequency": 20
+      },
+      {
+        "word": "λεωκρατουσ",
+        "frequency": 11
+      },
+      {
+        "word": "λεωκρατην",
+        "frequency": 9
+      },
+      {
+        "word": "αποθνησκειν",
+        "frequency": 7
+      },
+      {
+        "word": "τοιγαρουν",
+        "frequency": 6
+      },
+      {
+        "word": "προυδωκε",
+        "frequency": 6
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 6
+      },
+      {
+        "word": "επιγιγνομενοισ",
+        "frequency": 6
+      },
+      {
+        "word": "εγκαταλιπων",
+        "frequency": 6
+      },
+      {
+        "word": "χαιρωνεια",
+        "frequency": 5
+      }
+    ]
+  },
+  {
+    "author": "Lysias",
+    "total_unique_words": 10369,
+    "words_with_dictionary": 5001,
+    "unique_coverage_percent": 48.23,
+    "total_tokens": 57290,
+    "tokens_with_dictionary": 48915,
+    "token_coverage_percent": 85.38,
+    "direct_dictionary_matches": 802,
+    "direct_match_percent": 7.73,
+    "top_missing_words": [
+      {
+        "word": "μαρτυρασ",
+        "frequency": 52
+      },
+      {
+        "word": "αδικωσ",
+        "frequency": 45
+      },
+      {
+        "word": "αδικουντασ",
+        "frequency": 25
+      },
+      {
+        "word": "επιστασθε",
+        "frequency": 24
+      },
+      {
+        "word": "πεπραγμενων",
+        "frequency": 23
+      },
+      {
+        "word": "τιμωρεισθαι",
+        "frequency": 19
+      },
+      {
+        "word": "αποδειξαι",
+        "frequency": 19
+      },
+      {
+        "word": "ενθυμεισθε",
+        "frequency": 17
+      },
+      {
+        "word": "ταληθη",
+        "frequency": 16
+      },
+      {
+        "word": "προσηκειν",
+        "frequency": 16
+      }
+    ]
+  },
+  {
+    "author": "Marcus Aurelius",
+    "total_unique_words": 7448,
+    "words_with_dictionary": 4148,
+    "unique_coverage_percent": 55.69,
+    "total_tokens": 58290,
+    "tokens_with_dictionary": 49576,
+    "token_coverage_percent": 85.05,
+    "direct_dictionary_matches": 869,
+    "direct_match_percent": 11.67,
+    "top_missing_words": [
+      {
+        "word": "ουχι",
+        "frequency": 58
+      },
+      {
+        "word": "θελει",
+        "frequency": 36
+      },
+      {
+        "word": "εση",
+        "frequency": 30
+      },
+      {
+        "word": "ενεκεν",
+        "frequency": 30
+      },
+      {
+        "word": "συμβαινον",
+        "frequency": 28
+      },
+      {
+        "word": "θελεισ",
+        "frequency": 28
+      },
+      {
+        "word": "επισησ",
+        "frequency": 28
+      },
+      {
+        "word": "μεμνησθαι",
+        "frequency": 26
+      },
+      {
+        "word": "εξεστιν",
+        "frequency": 26
+      },
+      {
+        "word": "διηνεκωσ",
+        "frequency": 24
+      }
+    ]
+  },
+  {
+    "author": "Martial",
+    "total_unique_words": 21030,
+    "words_with_dictionary": 1,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 56211,
+    "tokens_with_dictionary": 1,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 1376
+      },
+      {
+        "word": "non",
+        "frequency": 889
+      },
+      {
+        "word": "nec",
+        "frequency": 554
+      },
+      {
+        "word": "tibi",
+        "frequency": 486
+      },
+      {
+        "word": "si",
+        "frequency": 469
+      },
+      {
+        "word": "cum",
+        "frequency": 449
+      },
+      {
+        "word": "sed",
+        "frequency": 440
+      },
+      {
+        "word": "in",
+        "frequency": 414
+      },
+      {
+        "word": "quod",
+        "frequency": 401
+      },
+      {
+        "word": "est",
+        "frequency": 381
+      }
+    ]
+  },
+  {
+    "author": "Moschus",
+    "total_unique_words": 1975,
+    "words_with_dictionary": 1369,
+    "unique_coverage_percent": 69.32,
+    "total_tokens": 3418,
+    "tokens_with_dictionary": 2769,
+    "token_coverage_percent": 81.01,
+    "direct_dictionary_matches": 379,
+    "direct_match_percent": 19.19,
+    "top_missing_words": [
+      {
+        "word": "μοισαι",
+        "frequency": 13
+      },
+      {
+        "word": "αχω",
+        "frequency": 4
+      },
+      {
+        "word": "ογ",
+        "frequency": 3
+      },
+      {
+        "word": "ευρωπειησ",
+        "frequency": 3
+      },
+      {
+        "word": "ωρεα",
+        "frequency": 2
+      },
+      {
+        "word": "ωνεμοσ",
+        "frequency": 2
+      },
+      {
+        "word": "ωμοι",
+        "frequency": 2
+      },
+      {
+        "word": "υποδμηθεισ",
+        "frequency": 2
+      },
+      {
+        "word": "υιεα",
+        "frequency": 2
+      },
+      {
+        "word": "τεθνακε",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "author": "Nepos, Cornelius",
+    "total_unique_words": 9585,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 28123,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "in",
+        "frequency": 648
+      },
+      {
+        "word": "cum",
+        "frequency": 518
+      },
+      {
+        "word": "et",
+        "frequency": 395
+      },
+      {
+        "word": "ut",
+        "frequency": 361
+      },
+      {
+        "word": "non",
+        "frequency": 354
+      },
+      {
+        "word": "ad",
+        "frequency": 248
+      },
+      {
+        "word": "quod",
+        "frequency": 233
+      },
+      {
+        "word": "est",
+        "frequency": 229
+      },
+      {
+        "word": "quam",
+        "frequency": 226
+      },
+      {
+        "word": "se",
+        "frequency": 220
+      }
+    ]
+  },
+  {
+    "author": "New Testament",
+    "total_unique_words": 17446,
+    "words_with_dictionary": 8525,
+    "unique_coverage_percent": 48.87,
+    "total_tokens": 137612,
+    "tokens_with_dictionary": 119350,
+    "token_coverage_percent": 86.73,
+    "direct_dictionary_matches": 1646,
+    "direct_match_percent": 9.43,
+    "top_missing_words": [
+      {
+        "word": "αποκριθεισ",
+        "frequency": 94
+      },
+      {
+        "word": "απεκριθη",
+        "frequency": 82
+      },
+      {
+        "word": "αβρααμ",
+        "frequency": 73
+      },
+      {
+        "word": "καγω",
+        "frequency": 71
+      },
+      {
+        "word": "ισραηλ",
+        "frequency": 68
+      },
+      {
+        "word": "εξηλθεν",
+        "frequency": 68
+      },
+      {
+        "word": "γεγραπται",
+        "frequency": 66
+      },
+      {
+        "word": "δαυειδ",
+        "frequency": 59
+      },
+      {
+        "word": "ουχι",
+        "frequency": 54
+      },
+      {
+        "word": "ιωανησ",
+        "frequency": 51
+      }
+    ]
+  },
+  {
+    "author": "Nonnus of Panopolis",
+    "total_unique_words": 24071,
+    "words_with_dictionary": 11450,
+    "unique_coverage_percent": 47.57,
+    "total_tokens": 127720,
+    "tokens_with_dictionary": 94570,
+    "token_coverage_percent": 74.04,
+    "direct_dictionary_matches": 2232,
+    "direct_match_percent": 9.27,
+    "top_missing_words": [
+      {
+        "word": "παλμω",
+        "frequency": 100
+      },
+      {
+        "word": "χεων",
+        "frequency": 63
+      },
+      {
+        "word": "τεησ",
+        "frequency": 63
+      },
+      {
+        "word": "εασασ",
+        "frequency": 58
+      },
+      {
+        "word": "μορρευσ",
+        "frequency": 57
+      },
+      {
+        "word": "δηριαδηοσ",
+        "frequency": 57
+      },
+      {
+        "word": "βρομιοιο",
+        "frequency": 57
+      },
+      {
+        "word": "υιεα",
+        "frequency": 56
+      },
+      {
+        "word": "γειτονα",
+        "frequency": 52
+      },
+      {
+        "word": "αρεα",
+        "frequency": 52
+      }
+    ]
+  },
+  {
+    "author": "Onasander",
+    "total_unique_words": 4134,
+    "words_with_dictionary": 2484,
+    "unique_coverage_percent": 60.09,
+    "total_tokens": 24032,
+    "tokens_with_dictionary": 20210,
+    "token_coverage_percent": 84.1,
+    "direct_dictionary_matches": 447,
+    "direct_match_percent": 10.81,
+    "top_missing_words": [
+      {
+        "word": "δρασαι",
+        "frequency": 18
+      },
+      {
+        "word": "οψιν",
+        "frequency": 12
+      },
+      {
+        "word": "ουθεν",
+        "frequency": 12
+      },
+      {
+        "word": "κερωσ",
+        "frequency": 12
+      },
+      {
+        "word": "φυλαττειν",
+        "frequency": 10
+      },
+      {
+        "word": "φθανειν",
+        "frequency": 10
+      },
+      {
+        "word": "συμβαινει",
+        "frequency": 10
+      },
+      {
+        "word": "μηθ",
+        "frequency": 10
+      },
+      {
+        "word": "φυλαττεσθαι",
+        "frequency": 8
+      },
+      {
+        "word": "ταττετω",
+        "frequency": 8
+      }
+    ]
+  },
+  {
+    "author": "Oppian",
+    "total_unique_words": 8710,
+    "words_with_dictionary": 4912,
+    "unique_coverage_percent": 56.39,
+    "total_tokens": 22758,
+    "tokens_with_dictionary": 17650,
+    "token_coverage_percent": 77.56,
+    "direct_dictionary_matches": 976,
+    "direct_match_percent": 11.21,
+    "top_missing_words": [
+      {
+        "word": "γενυεσσι",
+        "frequency": 13
+      },
+      {
+        "word": "νεποδων",
+        "frequency": 12
+      },
+      {
+        "word": "ηυτ",
+        "frequency": 12
+      },
+      {
+        "word": "εισοκεν",
+        "frequency": 12
+      },
+      {
+        "word": "ειλειται",
+        "frequency": 12
+      },
+      {
+        "word": "γενυν",
+        "frequency": 11
+      },
+      {
+        "word": "ισταται",
+        "frequency": 10
+      },
+      {
+        "word": "δελφινων",
+        "frequency": 10
+      },
+      {
+        "word": "αγκιστροιο",
+        "frequency": 10
+      },
+      {
+        "word": "μελεεσσι",
+        "frequency": 9
+      }
+    ]
+  },
+  {
+    "author": "Oppian of Apamea",
+    "total_unique_words": 6442,
+    "words_with_dictionary": 3765,
+    "unique_coverage_percent": 58.44,
+    "total_tokens": 13583,
+    "tokens_with_dictionary": 10287,
+    "token_coverage_percent": 75.73,
+    "direct_dictionary_matches": 761,
+    "direct_match_percent": 11.81,
+    "top_missing_words": [
+      {
+        "word": "ειαρι",
+        "frequency": 11
+      },
+      {
+        "word": "θηρεσσι",
+        "frequency": 9
+      },
+      {
+        "word": "γενυεσσι",
+        "frequency": 9
+      },
+      {
+        "word": "στοματεσσιν",
+        "frequency": 7
+      },
+      {
+        "word": "μεροπεσσι",
+        "frequency": 7
+      },
+      {
+        "word": "κεραεσσι",
+        "frequency": 7
+      },
+      {
+        "word": "θηρεσσιν",
+        "frequency": 7
+      },
+      {
+        "word": "γενυεσσιν",
+        "frequency": 7
+      },
+      {
+        "word": "αγρευτηρεσ",
+        "frequency": 7
+      },
+      {
+        "word": "τουνεκεν",
+        "frequency": 6
+      }
+    ]
+  },
+  {
+    "author": "Ovid",
+    "total_unique_words": 50528,
+    "words_with_dictionary": 1,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 223088,
+    "tokens_with_dictionary": 75,
+    "token_coverage_percent": 0.03,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 4943
+      },
+      {
+        "word": "in",
+        "frequency": 2831
+      },
+      {
+        "word": "non",
+        "frequency": 2045
+      },
+      {
+        "word": "nec",
+        "frequency": 1773
+      },
+      {
+        "word": "est",
+        "frequency": 1695
+      },
+      {
+        "word": "cum",
+        "frequency": 1191
+      },
+      {
+        "word": "ut",
+        "frequency": 1184
+      },
+      {
+        "word": "si",
+        "frequency": 979
+      },
+      {
+        "word": "quod",
+        "frequency": 929
+      },
+      {
+        "word": "quae",
+        "frequency": 890
+      }
+    ]
+  },
+  {
+    "author": "P. Vergilius Maro (Virgil)",
+    "total_unique_words": 27465,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 83909,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 2859
+      },
+      {
+        "word": "in",
+        "frequency": 1023
+      },
+      {
+        "word": "nec",
+        "frequency": 503
+      },
+      {
+        "word": "atque",
+        "frequency": 418
+      },
+      {
+        "word": "ad",
+        "frequency": 416
+      },
+      {
+        "word": "per",
+        "frequency": 409
+      },
+      {
+        "word": "non",
+        "frequency": 407
+      },
+      {
+        "word": "aut",
+        "frequency": 352
+      },
+      {
+        "word": "cum",
+        "frequency": 345
+      },
+      {
+        "word": "quae",
+        "frequency": 315
+      }
+    ]
+  },
+  {
+    "author": "Parthenius of Nicaea",
+    "total_unique_words": 2720,
+    "words_with_dictionary": 1583,
+    "unique_coverage_percent": 58.2,
+    "total_tokens": 13092,
+    "tokens_with_dictionary": 10408,
+    "token_coverage_percent": 79.5,
+    "direct_dictionary_matches": 325,
+    "direct_match_percent": 11.95,
+    "top_missing_words": [
+      {
+        "word": "καυνον",
+        "frequency": 12
+      },
+      {
+        "word": "καπειδη",
+        "frequency": 12
+      },
+      {
+        "word": "ηρασθη",
+        "frequency": 12
+      },
+      {
+        "word": "φιλοφρονωσ",
+        "frequency": 8
+      },
+      {
+        "word": "υψικρεων",
+        "frequency": 8
+      },
+      {
+        "word": "παρεκελευσατο",
+        "frequency": 8
+      },
+      {
+        "word": "οδυσσευσ",
+        "frequency": 8
+      },
+      {
+        "word": "κατηει",
+        "frequency": 8
+      },
+      {
+        "word": "ετυγχανεν",
+        "frequency": 8
+      },
+      {
+        "word": "ερασθεισαν",
+        "frequency": 8
+      }
+    ]
+  },
+  {
+    "author": "Pausanias",
+    "total_unique_words": 29078,
+    "words_with_dictionary": 13327,
+    "unique_coverage_percent": 45.83,
+    "total_tokens": 435196,
+    "tokens_with_dictionary": 369564,
+    "token_coverage_percent": 84.92,
+    "direct_dictionary_matches": 2333,
+    "direct_match_percent": 8.02,
+    "top_missing_words": [
+      {
+        "word": "πεποιηται",
+        "frequency": 404
+      },
+      {
+        "word": "ρωμαιων",
+        "frequency": 202
+      },
+      {
+        "word": "πορρω",
+        "frequency": 184
+      },
+      {
+        "word": "ηρακλησ",
+        "frequency": 150
+      },
+      {
+        "word": "χαλκουν",
+        "frequency": 140
+      },
+      {
+        "word": "ναον",
+        "frequency": 134
+      },
+      {
+        "word": "παρεχεται",
+        "frequency": 124
+      },
+      {
+        "word": "αφικεσθαι",
+        "frequency": 114
+      },
+      {
+        "word": "φωκεων",
+        "frequency": 106
+      },
+      {
+        "word": "θηβασ",
+        "frequency": 106
+      }
+    ]
+  },
+  {
+    "author": "Persius",
+    "total_unique_words": 3036,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 4531,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 141
+      },
+      {
+        "word": "in",
+        "frequency": 58
+      },
+      {
+        "word": "non",
+        "frequency": 47
+      },
+      {
+        "word": "cum",
+        "frequency": 41
+      },
+      {
+        "word": "si",
+        "frequency": 32
+      },
+      {
+        "word": "quod",
+        "frequency": 32
+      },
+      {
+        "word": "est",
+        "frequency": 32
+      },
+      {
+        "word": "quid",
+        "frequency": 31
+      },
+      {
+        "word": "hoc",
+        "frequency": 31
+      },
+      {
+        "word": "nec",
+        "frequency": 27
+      }
+    ]
+  },
+  {
+    "author": "Petronius Arbiter",
+    "total_unique_words": 2802,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 3979,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 106
+      },
+      {
+        "word": "in",
+        "frequency": 50
+      },
+      {
+        "word": "non",
+        "frequency": 34
+      },
+      {
+        "word": "iam",
+        "frequency": 24
+      },
+      {
+        "word": "ad",
+        "frequency": 23
+      },
+      {
+        "word": "atque",
+        "frequency": 20
+      },
+      {
+        "word": "nec",
+        "frequency": 18
+      },
+      {
+        "word": "inter",
+        "frequency": 16
+      },
+      {
+        "word": "est",
+        "frequency": 16
+      },
+      {
+        "word": "cum",
+        "frequency": 16
+      }
+    ]
+  },
+  {
+    "author": "Phaedrus",
+    "total_unique_words": 6219,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 11011,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 226
+      },
+      {
+        "word": "in",
+        "frequency": 128
+      },
+      {
+        "word": "est",
+        "frequency": 117
+      },
+      {
+        "word": "cum",
+        "frequency": 111
+      },
+      {
+        "word": "non",
+        "frequency": 105
+      },
+      {
+        "word": "ut",
+        "frequency": 100
+      },
+      {
+        "word": "qui",
+        "frequency": 100
+      },
+      {
+        "word": "quod",
+        "frequency": 80
+      },
+      {
+        "word": "si",
+        "frequency": 70
+      },
+      {
+        "word": "ad",
+        "frequency": 64
+      }
+    ]
+  },
+  {
+    "author": "Philostratus Minor",
+    "total_unique_words": 2847,
+    "words_with_dictionary": 1927,
+    "unique_coverage_percent": 67.69,
+    "total_tokens": 7167,
+    "tokens_with_dictionary": 6130,
+    "token_coverage_percent": 85.53,
+    "direct_dictionary_matches": 486,
+    "direct_match_percent": 17.07,
+    "top_missing_words": [
+      {
+        "word": "γεγραπται",
+        "frequency": 8
+      },
+      {
+        "word": "τουτι",
+        "frequency": 7
+      },
+      {
+        "word": "ηρακλησ",
+        "frequency": 6
+      },
+      {
+        "word": "υφισταται",
+        "frequency": 4
+      },
+      {
+        "word": "ιενται",
+        "frequency": 4
+      },
+      {
+        "word": "θατερον",
+        "frequency": 4
+      },
+      {
+        "word": "θατερα",
+        "frequency": 4
+      },
+      {
+        "word": "επερεισασ",
+        "frequency": 4
+      },
+      {
+        "word": "φιλοκτητησ",
+        "frequency": 3
+      },
+      {
+        "word": "σφριγων",
+        "frequency": 3
+      }
+    ]
+  },
+  {
+    "author": "Philostratus Sophista",
+    "total_unique_words": 7005,
+    "words_with_dictionary": 4367,
+    "unique_coverage_percent": 62.34,
+    "total_tokens": 22946,
+    "tokens_with_dictionary": 19719,
+    "token_coverage_percent": 85.94,
+    "direct_dictionary_matches": 934,
+    "direct_match_percent": 13.33,
+    "top_missing_words": [
+      {
+        "word": "γεγραπται",
+        "frequency": 51
+      },
+      {
+        "word": "τουτι",
+        "frequency": 17
+      },
+      {
+        "word": "εργαζεται",
+        "frequency": 10
+      },
+      {
+        "word": "ηρακλησ",
+        "frequency": 8
+      },
+      {
+        "word": "καθευδει",
+        "frequency": 6
+      },
+      {
+        "word": "ηγωμεθα",
+        "frequency": 6
+      },
+      {
+        "word": "εντυχων",
+        "frequency": 6
+      },
+      {
+        "word": "αποχρη",
+        "frequency": 6
+      },
+      {
+        "word": "προσβαλλει",
+        "frequency": 5
+      },
+      {
+        "word": "περιβεβληται",
+        "frequency": 5
+      }
+    ]
+  },
+  {
+    "author": "Philostratus the Athenian",
+    "total_unique_words": 23963,
+    "words_with_dictionary": 11983,
+    "unique_coverage_percent": 50.01,
+    "total_tokens": 155964,
+    "tokens_with_dictionary": 131790,
+    "token_coverage_percent": 84.5,
+    "direct_dictionary_matches": 2036,
+    "direct_match_percent": 8.5,
+    "top_missing_words": [
+      {
+        "word": "τουτι",
+        "frequency": 123
+      },
+      {
+        "word": "ηρετο",
+        "frequency": 72
+      },
+      {
+        "word": "δαμισ",
+        "frequency": 72
+      },
+      {
+        "word": "ηρωδου",
+        "frequency": 65
+      },
+      {
+        "word": "ηρωδην",
+        "frequency": 52
+      },
+      {
+        "word": "δαμι",
+        "frequency": 52
+      },
+      {
+        "word": "ηρωδη",
+        "frequency": 48
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 39
+      },
+      {
+        "word": "ηγωμεθα",
+        "frequency": 39
+      },
+      {
+        "word": "πολεμωνοσ",
+        "frequency": 38
+      }
+    ]
+  },
+  {
+    "author": "Pindar",
+    "total_unique_words": 9047,
+    "words_with_dictionary": 5386,
+    "unique_coverage_percent": 59.53,
+    "total_tokens": 21141,
+    "tokens_with_dictionary": 16577,
+    "token_coverage_percent": 78.41,
+    "direct_dictionary_matches": 968,
+    "direct_match_percent": 10.7,
+    "top_missing_words": [
+      {
+        "word": "μοισαν",
+        "frequency": 16
+      },
+      {
+        "word": "νασον",
+        "frequency": 13
+      },
+      {
+        "word": "αεθλοισ",
+        "frequency": 12
+      },
+      {
+        "word": "ηρακλεοσ",
+        "frequency": 11
+      },
+      {
+        "word": "εσλον",
+        "frequency": 11
+      },
+      {
+        "word": "φρενων",
+        "frequency": 9
+      },
+      {
+        "word": "ματερ",
+        "frequency": 9
+      },
+      {
+        "word": "αλφεου",
+        "frequency": 9
+      },
+      {
+        "word": "αιακιδαν",
+        "frequency": 9
+      },
+      {
+        "word": "χερι",
+        "frequency": 8
+      }
+    ]
+  },
+  {
+    "author": "Plato",
+    "total_unique_words": 48255,
+    "words_with_dictionary": 20565,
+    "unique_coverage_percent": 42.62,
+    "total_tokens": 550802,
+    "tokens_with_dictionary": 488518,
+    "token_coverage_percent": 88.69,
+    "direct_dictionary_matches": 3276,
+    "direct_match_percent": 6.79,
+    "top_missing_words": [
+      {
+        "word": "ταλλα",
+        "frequency": 255
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 214
+      },
+      {
+        "word": "τουναντιον",
+        "frequency": 208
+      },
+      {
+        "word": "εαντε",
+        "frequency": 156
+      },
+      {
+        "word": "φησομεν",
+        "frequency": 143
+      },
+      {
+        "word": "πανταπασιν",
+        "frequency": 136
+      },
+      {
+        "word": "αληθεστατα",
+        "frequency": 122
+      },
+      {
+        "word": "χαιρειν",
+        "frequency": 119
+      },
+      {
+        "word": "μανθανειν",
+        "frequency": 113
+      },
+      {
+        "word": "ουχι",
+        "frequency": 108
+      }
+    ]
+  },
+  {
+    "author": "Plautus, Titus Maccius",
+    "total_unique_words": 39372,
+    "words_with_dictionary": 1,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 168148,
+    "tokens_with_dictionary": 1,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "quid",
+        "frequency": 2034
+      },
+      {
+        "word": "ego",
+        "frequency": 2011
+      },
+      {
+        "word": "me",
+        "frequency": 1988
+      },
+      {
+        "word": "ut",
+        "frequency": 1980
+      },
+      {
+        "word": "et",
+        "frequency": 1729
+      },
+      {
+        "word": "in",
+        "frequency": 1556
+      },
+      {
+        "word": "si",
+        "frequency": 1514
+      },
+      {
+        "word": "te",
+        "frequency": 1498
+      },
+      {
+        "word": "non",
+        "frequency": 1338
+      },
+      {
+        "word": "qui",
+        "frequency": 1300
+      }
+    ]
+  },
+  {
+    "author": "Pliny, the Elder",
+    "total_unique_words": 164291,
+    "words_with_dictionary": 15,
+    "unique_coverage_percent": 0.01,
+    "total_tokens": 612553,
+    "tokens_with_dictionary": 23,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 2,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 15112
+      },
+      {
+        "word": "in",
+        "frequency": 12848
+      },
+      {
+        "word": "v",
+        "frequency": 6592
+      },
+      {
+        "word": "cum",
+        "frequency": 4372
+      },
+      {
+        "word": "a",
+        "frequency": 4116
+      },
+      {
+        "word": "e",
+        "frequency": 4080
+      },
+      {
+        "word": "r",
+        "frequency": 3912
+      },
+      {
+        "word": "ex",
+        "frequency": 3411
+      },
+      {
+        "word": "ad",
+        "frequency": 3068
+      },
+      {
+        "word": "est",
+        "frequency": 3009
+      }
+    ]
+  },
+  {
+    "author": "Pliny, the Younger",
+    "total_unique_words": 20966,
+    "words_with_dictionary": 3,
+    "unique_coverage_percent": 0.01,
+    "total_tokens": 65242,
+    "tokens_with_dictionary": 4,
+    "token_coverage_percent": 0.01,
+    "direct_dictionary_matches": 1,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 1754
+      },
+      {
+        "word": "in",
+        "frequency": 1166
+      },
+      {
+        "word": "ut",
+        "frequency": 916
+      },
+      {
+        "word": "non",
+        "frequency": 896
+      },
+      {
+        "word": "quod",
+        "frequency": 703
+      },
+      {
+        "word": "cum",
+        "frequency": 508
+      },
+      {
+        "word": "est",
+        "frequency": 497
+      },
+      {
+        "word": "quam",
+        "frequency": 476
+      },
+      {
+        "word": "sed",
+        "frequency": 426
+      },
+      {
+        "word": "si",
+        "frequency": 412
+      }
+    ]
+  },
+  {
+    "author": "Plutarch",
+    "total_unique_words": 104976,
+    "words_with_dictionary": 37830,
+    "unique_coverage_percent": 36.04,
+    "total_tokens": 1629781,
+    "tokens_with_dictionary": 1329405,
+    "token_coverage_percent": 81.57,
+    "direct_dictionary_matches": 5813,
+    "direct_match_percent": 5.54,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 867
+      },
+      {
+        "word": "πομπηιον",
+        "frequency": 478
+      },
+      {
+        "word": "πανταπασιν",
+        "frequency": 457
+      },
+      {
+        "word": "πομπηιοσ",
+        "frequency": 425
+      },
+      {
+        "word": "πομπηιου",
+        "frequency": 419
+      },
+      {
+        "word": "οψιν",
+        "frequency": 413
+      },
+      {
+        "word": "ρωμαιοισ",
+        "frequency": 385
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 366
+      },
+      {
+        "word": "κατωνοσ",
+        "frequency": 359
+      },
+      {
+        "word": "καισαρα",
+        "frequency": 339
+      }
+    ]
+  },
+  {
+    "author": "Polybius",
+    "total_unique_words": 34902,
+    "words_with_dictionary": 13287,
+    "unique_coverage_percent": 38.07,
+    "total_tokens": 622794,
+    "tokens_with_dictionary": 513410,
+    "token_coverage_percent": 82.44,
+    "direct_dictionary_matches": 1935,
+    "direct_match_percent": 5.54,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 1110
+      },
+      {
+        "word": "ρωμαιουσ",
+        "frequency": 554
+      },
+      {
+        "word": "ρωμαιοισ",
+        "frequency": 504
+      },
+      {
+        "word": "καρχηδονιων",
+        "frequency": 502
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 494
+      },
+      {
+        "word": "διοπερ",
+        "frequency": 390
+      },
+      {
+        "word": "πρεσβευτασ",
+        "frequency": 340
+      },
+      {
+        "word": "συνεβαινε",
+        "frequency": 332
+      },
+      {
+        "word": "συνεβη",
+        "frequency": 328
+      },
+      {
+        "word": "αννιβασ",
+        "frequency": 304
+      }
+    ]
+  },
+  {
+    "author": "Procopius",
+    "total_unique_words": 25025,
+    "words_with_dictionary": 10978,
+    "unique_coverage_percent": 43.87,
+    "total_tokens": 513426,
+    "tokens_with_dictionary": 425736,
+    "token_coverage_percent": 82.92,
+    "direct_dictionary_matches": 1849,
+    "direct_match_percent": 7.39,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 1670
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 822
+      },
+      {
+        "word": "βελισαριοσ",
+        "frequency": 722
+      },
+      {
+        "word": "ρωμαιοισ",
+        "frequency": 540
+      },
+      {
+        "word": "ρωμαιουσ",
+        "frequency": 410
+      },
+      {
+        "word": "βελισαριον",
+        "frequency": 326
+      },
+      {
+        "word": "χοσροησ",
+        "frequency": 304
+      },
+      {
+        "word": "ιωαννησ",
+        "frequency": 302
+      },
+      {
+        "word": "βυζαντιον",
+        "frequency": 302
+      },
+      {
+        "word": "ιουστινιανοσ",
+        "frequency": 264
+      }
+    ]
+  },
+  {
+    "author": "Propertius, Sextus",
+    "total_unique_words": 11042,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 25453,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 726
+      },
+      {
+        "word": "in",
+        "frequency": 341
+      },
+      {
+        "word": "non",
+        "frequency": 318
+      },
+      {
+        "word": "nec",
+        "frequency": 209
+      },
+      {
+        "word": "si",
+        "frequency": 171
+      },
+      {
+        "word": "tibi",
+        "frequency": 159
+      },
+      {
+        "word": "me",
+        "frequency": 158
+      },
+      {
+        "word": "mihi",
+        "frequency": 144
+      },
+      {
+        "word": "cum",
+        "frequency": 130
+      },
+      {
+        "word": "te",
+        "frequency": 115
+      }
+    ]
+  },
+  {
+    "author": "Pseudo-Plutarch",
+    "total_unique_words": 6212,
+    "words_with_dictionary": 3772,
+    "unique_coverage_percent": 60.72,
+    "total_tokens": 23327,
+    "tokens_with_dictionary": 19873,
+    "token_coverage_percent": 85.19,
+    "direct_dictionary_matches": 729,
+    "direct_match_percent": 11.74,
+    "top_missing_words": [
+      {
+        "word": "εμπεδοκλησ",
+        "frequency": 47
+      },
+      {
+        "word": "αριστοτελησ",
+        "frequency": 44
+      },
+      {
+        "word": "δημοκριτοσ",
+        "frequency": 38
+      },
+      {
+        "word": "αερα",
+        "frequency": 33
+      },
+      {
+        "word": "αναξαγορασ",
+        "frequency": 24
+      },
+      {
+        "word": "μητροδωροσ",
+        "frequency": 16
+      },
+      {
+        "word": "αναξιμανδροσ",
+        "frequency": 15
+      },
+      {
+        "word": "κινεισθαι",
+        "frequency": 13
+      },
+      {
+        "word": "παρμενιδησ",
+        "frequency": 11
+      },
+      {
+        "word": "ξενοφανησ",
+        "frequency": 10
+      }
+    ]
+  },
+  {
+    "author": "Quintilian",
+    "total_unique_words": 37409,
+    "words_with_dictionary": 3,
+    "unique_coverage_percent": 0.01,
+    "total_tokens": 355224,
+    "tokens_with_dictionary": 8,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 1,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 10818
+      },
+      {
+        "word": "in",
+        "frequency": 7362
+      },
+      {
+        "word": "non",
+        "frequency": 5780
+      },
+      {
+        "word": "ut",
+        "frequency": 5086
+      },
+      {
+        "word": "est",
+        "frequency": 4342
+      },
+      {
+        "word": "quod",
+        "frequency": 3526
+      },
+      {
+        "word": "sed",
+        "frequency": 3234
+      },
+      {
+        "word": "quae",
+        "frequency": 3158
+      },
+      {
+        "word": "cum",
+        "frequency": 2698
+      },
+      {
+        "word": "si",
+        "frequency": 2572
+      }
+    ]
+  },
+  {
+    "author": "Quintus Smyrnaeus",
+    "total_unique_words": 13124,
+    "words_with_dictionary": 6824,
+    "unique_coverage_percent": 52.0,
+    "total_tokens": 60209,
+    "tokens_with_dictionary": 48973,
+    "token_coverage_percent": 81.34,
+    "direct_dictionary_matches": 1281,
+    "direct_match_percent": 9.76,
+    "top_missing_words": [
+      {
+        "word": "δηριν",
+        "frequency": 47
+      },
+      {
+        "word": "ακαματοιο",
+        "frequency": 27
+      },
+      {
+        "word": "ποληα",
+        "frequency": 26
+      },
+      {
+        "word": "αχιλλεοσ",
+        "frequency": 25
+      },
+      {
+        "word": "ευρυπυλοσ",
+        "frequency": 24
+      },
+      {
+        "word": "αχρισ",
+        "frequency": 22
+      },
+      {
+        "word": "αχιληι",
+        "frequency": 22
+      },
+      {
+        "word": "στερνοισι",
+        "frequency": 20
+      },
+      {
+        "word": "θοον",
+        "frequency": 20
+      },
+      {
+        "word": "πονεεσθαι",
+        "frequency": 19
+      }
+    ]
+  },
+  {
+    "author": "Quintus Tullius Cicero",
+    "total_unique_words": 19,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 20,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "ut",
+        "frequency": 2
+      },
+      {
+        "word": "veniunt",
+        "frequency": 1
+      },
+      {
+        "word": "this",
+        "frequency": 1
+      },
+      {
+        "word": "studiorum",
+        "frequency": 1
+      },
+      {
+        "word": "section",
+        "frequency": 1
+      },
+      {
+        "word": "qua",
+        "frequency": 1
+      },
+      {
+        "word": "pattern",
+        "frequency": 1
+      },
+      {
+        "word": "non",
+        "frequency": 1
+      },
+      {
+        "word": "intelligentia",
+        "frequency": 1
+      },
+      {
+        "word": "id",
+        "frequency": 1
+      }
+    ]
+  },
+  {
+    "author": "Sallust",
+    "total_unique_words": 9852,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 31852,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 637
+      },
+      {
+        "word": "in",
+        "frequency": 590
+      },
+      {
+        "word": "atque",
+        "frequency": 301
+      },
+      {
+        "word": "neque",
+        "frequency": 269
+      },
+      {
+        "word": "quam",
+        "frequency": 232
+      },
+      {
+        "word": "ex",
+        "frequency": 225
+      },
+      {
+        "word": "sed",
+        "frequency": 220
+      },
+      {
+        "word": "cum",
+        "frequency": 220
+      },
+      {
+        "word": "ad",
+        "frequency": 209
+      },
+      {
+        "word": "aut",
+        "frequency": 193
+      }
+    ]
+  },
+  {
+    "author": "Scriptores Historiae Augustae",
+    "total_unique_words": 29003,
+    "words_with_dictionary": 1,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 121630,
+    "tokens_with_dictionary": 1,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 4059
+      },
+      {
+        "word": "in",
+        "frequency": 2421
+      },
+      {
+        "word": "cum",
+        "frequency": 1407
+      },
+      {
+        "word": "ut",
+        "frequency": 1380
+      },
+      {
+        "word": "ad",
+        "frequency": 1089
+      },
+      {
+        "word": "est",
+        "frequency": 1060
+      },
+      {
+        "word": "non",
+        "frequency": 960
+      },
+      {
+        "word": "qui",
+        "frequency": 949
+      },
+      {
+        "word": "quod",
+        "frequency": 912
+      },
+      {
+        "word": "de",
+        "frequency": 736
+      }
+    ]
+  },
+  {
+    "author": "Seneca the Elder",
+    "total_unique_words": 23589,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 172292,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "non",
+        "frequency": 4214
+      },
+      {
+        "word": "et",
+        "frequency": 3469
+      },
+      {
+        "word": "in",
+        "frequency": 3085
+      },
+      {
+        "word": "est",
+        "frequency": 2048
+      },
+      {
+        "word": "si",
+        "frequency": 1607
+      },
+      {
+        "word": "quod",
+        "frequency": 1585
+      },
+      {
+        "word": "cum",
+        "frequency": 1490
+      },
+      {
+        "word": "ut",
+        "frequency": 1474
+      },
+      {
+        "word": "quam",
+        "frequency": 1312
+      },
+      {
+        "word": "hoc",
+        "frequency": 1239
+      }
+    ]
+  },
+  {
+    "author": "Seneca, Lucius Annaeus",
+    "total_unique_words": 54338,
+    "words_with_dictionary": 3,
+    "unique_coverage_percent": 0.01,
+    "total_tokens": 308143,
+    "tokens_with_dictionary": 3,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 2,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 8381
+      },
+      {
+        "word": "non",
+        "frequency": 5928
+      },
+      {
+        "word": "in",
+        "frequency": 4770
+      },
+      {
+        "word": "est",
+        "frequency": 3741
+      },
+      {
+        "word": "si",
+        "frequency": 2560
+      },
+      {
+        "word": "quod",
+        "frequency": 2550
+      },
+      {
+        "word": "ut",
+        "frequency": 2230
+      },
+      {
+        "word": "sed",
+        "frequency": 2185
+      },
+      {
+        "word": ";",
+        "frequency": 2150
+      },
+      {
+        "word": "quam",
+        "frequency": 1996
+      }
+    ]
+  },
+  {
+    "author": "Silius Italicus, Tiberius Catius",
+    "total_unique_words": 25456,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 76504,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 1991
+      },
+      {
+        "word": "in",
+        "frequency": 941
+      },
+      {
+        "word": "per",
+        "frequency": 461
+      },
+      {
+        "word": "atque",
+        "frequency": 461
+      },
+      {
+        "word": "ad",
+        "frequency": 451
+      },
+      {
+        "word": "non",
+        "frequency": 444
+      },
+      {
+        "word": "nec",
+        "frequency": 409
+      },
+      {
+        "word": "ac",
+        "frequency": 336
+      },
+      {
+        "word": "cum",
+        "frequency": 295
+      },
+      {
+        "word": "iam",
+        "frequency": 267
+      }
+    ]
+  },
+  {
+    "author": "Sophocles",
+    "total_unique_words": 15620,
+    "words_with_dictionary": 9036,
+    "unique_coverage_percent": 57.85,
+    "total_tokens": 60981,
+    "tokens_with_dictionary": 51102,
+    "token_coverage_percent": 83.8,
+    "direct_dictionary_matches": 1885,
+    "direct_match_percent": 12.07,
+    "top_missing_words": [
+      {
+        "word": "ουχι",
+        "frequency": 48
+      },
+      {
+        "word": "τουμον",
+        "frequency": 45
+      },
+      {
+        "word": "τησδ",
+        "frequency": 37
+      },
+      {
+        "word": "κουκ",
+        "frequency": 35
+      },
+      {
+        "word": "αρτιωσ",
+        "frequency": 34
+      },
+      {
+        "word": "καγω",
+        "frequency": 32
+      },
+      {
+        "word": "χω",
+        "frequency": 31
+      },
+      {
+        "word": "τουργον",
+        "frequency": 31
+      },
+      {
+        "word": "κλυειν",
+        "frequency": 29
+      },
+      {
+        "word": "ωμοι",
+        "frequency": 27
+      }
+    ]
+  },
+  {
+    "author": "Statius, P. Papinius (Publius Papinius)",
+    "total_unique_words": 30989,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 94234,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 2985
+      },
+      {
+        "word": "in",
+        "frequency": 986
+      },
+      {
+        "word": "nec",
+        "frequency": 717
+      },
+      {
+        "word": "non",
+        "frequency": 657
+      },
+      {
+        "word": "iam",
+        "frequency": 518
+      },
+      {
+        "word": "sed",
+        "frequency": 421
+      },
+      {
+        "word": "—",
+        "frequency": 391
+      },
+      {
+        "word": "per",
+        "frequency": 317
+      },
+      {
+        "word": "sic",
+        "frequency": 287
+      },
+      {
+        "word": "nunc",
+        "frequency": 282
+      }
+    ]
+  },
+  {
+    "author": "Strabo",
+    "total_unique_words": 40511,
+    "words_with_dictionary": 17851,
+    "unique_coverage_percent": 44.06,
+    "total_tokens": 574350,
+    "tokens_with_dictionary": 483160,
+    "token_coverage_percent": 84.12,
+    "direct_dictionary_matches": 2904,
+    "direct_match_percent": 7.17,
+    "top_missing_words": [
+      {
+        "word": "ρωμαιων",
+        "frequency": 312
+      },
+      {
+        "word": "καλειται",
+        "frequency": 294
+      },
+      {
+        "word": "υπερκειται",
+        "frequency": 208
+      },
+      {
+        "word": "τετταρακοντα",
+        "frequency": 208
+      },
+      {
+        "word": "ρωμαιοι",
+        "frequency": 200
+      },
+      {
+        "word": "τελεωσ",
+        "frequency": 178
+      },
+      {
+        "word": "ερατοσθενησ",
+        "frequency": 176
+      },
+      {
+        "word": "τουνομα",
+        "frequency": 156
+      },
+      {
+        "word": "συμβαινει",
+        "frequency": 148
+      },
+      {
+        "word": "διεχει",
+        "frequency": 140
+      }
+    ]
+  },
+  {
+    "author": "Suetonius",
+    "total_unique_words": 21319,
+    "words_with_dictionary": 1,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 71801,
+    "tokens_with_dictionary": 1,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 2539
+      },
+      {
+        "word": "in",
+        "frequency": 1469
+      },
+      {
+        "word": "ut",
+        "frequency": 764
+      },
+      {
+        "word": "ac",
+        "frequency": 739
+      },
+      {
+        "word": "ad",
+        "frequency": 648
+      },
+      {
+        "word": "cum",
+        "frequency": 566
+      },
+      {
+        "word": "non",
+        "frequency": 496
+      },
+      {
+        "word": "se",
+        "frequency": 449
+      },
+      {
+        "word": "etiam",
+        "frequency": 438
+      },
+      {
+        "word": "ex",
+        "frequency": 432
+      }
+    ]
+  },
+  {
+    "author": "Tacitus, Cornelius",
+    "total_unique_words": 21397,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 75900,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 2761
+      },
+      {
+        "word": "in",
+        "frequency": 1552
+      },
+      {
+        "word": "ac",
+        "frequency": 740
+      },
+      {
+        "word": "ut",
+        "frequency": 631
+      },
+      {
+        "word": "ad",
+        "frequency": 504
+      },
+      {
+        "word": "non",
+        "frequency": 493
+      },
+      {
+        "word": "sed",
+        "frequency": 430
+      },
+      {
+        "word": "nec",
+        "frequency": 380
+      },
+      {
+        "word": "aut",
+        "frequency": 354
+      },
+      {
+        "word": "per",
+        "frequency": 345
+      }
+    ]
+  },
+  {
+    "author": "Terence",
+    "total_unique_words": 13880,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 50110,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "quid",
+        "frequency": 801
+      },
+      {
+        "word": "ut",
+        "frequency": 673
+      },
+      {
+        "word": "est",
+        "frequency": 666
+      },
+      {
+        "word": "me",
+        "frequency": 608
+      },
+      {
+        "word": "et",
+        "frequency": 540
+      },
+      {
+        "word": "non",
+        "frequency": 522
+      },
+      {
+        "word": "in",
+        "frequency": 512
+      },
+      {
+        "word": "si",
+        "frequency": 461
+      },
+      {
+        "word": "te",
+        "frequency": 459
+      },
+      {
+        "word": "ego",
+        "frequency": 412
+      }
+    ]
+  },
+  {
+    "author": "Theocritus",
+    "total_unique_words": 8930,
+    "words_with_dictionary": 5351,
+    "unique_coverage_percent": 59.92,
+    "total_tokens": 21260,
+    "tokens_with_dictionary": 16759,
+    "token_coverage_percent": 78.83,
+    "direct_dictionary_matches": 1238,
+    "direct_match_percent": 13.86,
+    "top_missing_words": [
+      {
+        "word": "αδυ",
+        "frequency": 29
+      },
+      {
+        "word": "μοισαι",
+        "frequency": 27
+      },
+      {
+        "word": "χω",
+        "frequency": 23
+      },
+      {
+        "word": "δαφνισ",
+        "frequency": 22
+      },
+      {
+        "word": "σελανα",
+        "frequency": 16
+      },
+      {
+        "word": "πα",
+        "frequency": 15
+      },
+      {
+        "word": "αρχετ",
+        "frequency": 15
+      },
+      {
+        "word": "μεναλκασ",
+        "frequency": 14
+      },
+      {
+        "word": "κηγω",
+        "frequency": 13
+      },
+      {
+        "word": "ποτνα",
+        "frequency": 12
+      }
+    ]
+  },
+  {
+    "author": "Theophrastus",
+    "total_unique_words": 2616,
+    "words_with_dictionary": 1626,
+    "unique_coverage_percent": 62.16,
+    "total_tokens": 13284,
+    "tokens_with_dictionary": 10966,
+    "token_coverage_percent": 82.55,
+    "direct_dictionary_matches": 397,
+    "direct_match_percent": 15.18,
+    "top_missing_words": [
+      {
+        "word": "φησαι",
+        "frequency": 34
+      },
+      {
+        "word": "δοξειεν",
+        "frequency": 20
+      },
+      {
+        "word": "προσελθων",
+        "frequency": 18
+      },
+      {
+        "word": "κελευσαι",
+        "frequency": 18
+      },
+      {
+        "word": "διηγεισθαι",
+        "frequency": 16
+      },
+      {
+        "word": "ερωταν",
+        "frequency": 12
+      },
+      {
+        "word": "φασκειν",
+        "frequency": 10
+      },
+      {
+        "word": "ερωτησαι",
+        "frequency": 10
+      },
+      {
+        "word": "απαλλαττεσθαι",
+        "frequency": 10
+      },
+      {
+        "word": "αναστασ",
+        "frequency": 10
+      }
+    ]
+  },
+  {
+    "author": "Thucydides",
+    "total_unique_words": 21302,
+    "words_with_dictionary": 10209,
+    "unique_coverage_percent": 47.93,
+    "total_tokens": 303258,
+    "tokens_with_dictionary": 266688,
+    "token_coverage_percent": 87.94,
+    "direct_dictionary_matches": 1482,
+    "direct_match_percent": 6.96,
+    "top_missing_words": [
+      {
+        "word": "ταλλα",
+        "frequency": 134
+      },
+      {
+        "word": "βρασιδασ",
+        "frequency": 114
+      },
+      {
+        "word": "νικιασ",
+        "frequency": 108
+      },
+      {
+        "word": "δημοσθενησ",
+        "frequency": 88
+      },
+      {
+        "word": "αλκιβιαδησ",
+        "frequency": 80
+      },
+      {
+        "word": "γυλιπποσ",
+        "frequency": 68
+      },
+      {
+        "word": "τισσαφερνησ",
+        "frequency": 44
+      },
+      {
+        "word": "περδικκασ",
+        "frequency": 44
+      },
+      {
+        "word": "ιοντεσ",
+        "frequency": 30
+      },
+      {
+        "word": "θουκυδιδησ",
+        "frequency": 30
+      }
+    ]
+  },
+  {
+    "author": "Tibullus",
+    "total_unique_words": 6262,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 12623,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 306
+      },
+      {
+        "word": "non",
+        "frequency": 133
+      },
+      {
+        "word": "nec",
+        "frequency": 128
+      },
+      {
+        "word": "in",
+        "frequency": 98
+      },
+      {
+        "word": "mihi",
+        "frequency": 85
+      },
+      {
+        "word": "sed",
+        "frequency": 76
+      },
+      {
+        "word": "tibi",
+        "frequency": 73
+      },
+      {
+        "word": "cum",
+        "frequency": 72
+      },
+      {
+        "word": "te",
+        "frequency": 71
+      },
+      {
+        "word": "est",
+        "frequency": 71
+      }
+    ]
+  },
+  {
+    "author": "Titus Livius (Livy)",
+    "total_unique_words": 74310,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 1017088,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "in",
+        "frequency": 24286
+      },
+      {
+        "word": "et",
+        "frequency": 23928
+      },
+      {
+        "word": "ad",
+        "frequency": 13984
+      },
+      {
+        "word": "cum",
+        "frequency": 12408
+      },
+      {
+        "word": "ut",
+        "frequency": 8182
+      },
+      {
+        "word": "non",
+        "frequency": 6642
+      },
+      {
+        "word": "ab",
+        "frequency": 6624
+      },
+      {
+        "word": "quam",
+        "frequency": 5862
+      },
+      {
+        "word": "ex",
+        "frequency": 5646
+      },
+      {
+        "word": "se",
+        "frequency": 5352
+      }
+    ]
+  },
+  {
+    "author": "Tryphiodorus",
+    "total_unique_words": 2665,
+    "words_with_dictionary": 1711,
+    "unique_coverage_percent": 64.2,
+    "total_tokens": 4233,
+    "tokens_with_dictionary": 3230,
+    "token_coverage_percent": 76.31,
+    "direct_dictionary_matches": 418,
+    "direct_match_percent": 15.68,
+    "top_missing_words": [
+      {
+        "word": "θεησ",
+        "frequency": 4
+      },
+      {
+        "word": "ουνομα",
+        "frequency": 3
+      },
+      {
+        "word": "οδυσσευσ",
+        "frequency": 3
+      },
+      {
+        "word": "θοροντεσ",
+        "frequency": 3
+      },
+      {
+        "word": "ειστηκει",
+        "frequency": 3
+      },
+      {
+        "word": "δηιφοβοιο",
+        "frequency": 3
+      },
+      {
+        "word": "ωμοι",
+        "frequency": 2
+      },
+      {
+        "word": "ωδυροντο",
+        "frequency": 2
+      },
+      {
+        "word": "φυγοντεσ",
+        "frequency": 2
+      },
+      {
+        "word": "φαμενη",
+        "frequency": 2
+      }
+    ]
+  },
+  {
+    "author": "Valerius Flaccus, Gaius",
+    "total_unique_words": 18274,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 50246,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "v",
+        "frequency": 1496
+      },
+      {
+        "word": "et",
+        "frequency": 1183
+      },
+      {
+        "word": "in",
+        "frequency": 487
+      },
+      {
+        "word": "v,",
+        "frequency": 445
+      },
+      {
+        "word": "|",
+        "frequency": 396
+      },
+      {
+        "word": "m,",
+        "frequency": 374
+      },
+      {
+        "word": "c",
+        "frequency": 361
+      },
+      {
+        "word": "2,",
+        "frequency": 343
+      },
+      {
+        "word": "m",
+        "frequency": 305
+      },
+      {
+        "word": "nec",
+        "frequency": 300
+      }
+    ]
+  },
+  {
+    "author": "Valerius Maximus",
+    "total_unique_words": 24463,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 158550,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 3364
+      },
+      {
+        "word": "in",
+        "frequency": 2914
+      },
+      {
+        "word": "cum",
+        "frequency": 1554
+      },
+      {
+        "word": "non",
+        "frequency": 1304
+      },
+      {
+        "word": "ad",
+        "frequency": 1248
+      },
+      {
+        "word": "ut",
+        "frequency": 1184
+      },
+      {
+        "word": "quam",
+        "frequency": 1048
+      },
+      {
+        "word": "se",
+        "frequency": 944
+      },
+      {
+        "word": "a",
+        "frequency": 924
+      },
+      {
+        "word": "quod",
+        "frequency": 788
+      }
+    ]
+  },
+  {
+    "author": "Vitruvius Pollio",
+    "total_unique_words": 16509,
+    "words_with_dictionary": 0,
+    "unique_coverage_percent": 0.0,
+    "total_tokens": 116880,
+    "tokens_with_dictionary": 0,
+    "token_coverage_percent": 0.0,
+    "direct_dictionary_matches": 0,
+    "direct_match_percent": 0.0,
+    "top_missing_words": [
+      {
+        "word": "et",
+        "frequency": 4220
+      },
+      {
+        "word": "in",
+        "frequency": 3364
+      },
+      {
+        "word": "ad",
+        "frequency": 1732
+      },
+      {
+        "word": "autem",
+        "frequency": 1344
+      },
+      {
+        "word": "non",
+        "frequency": 1312
+      },
+      {
+        "word": "cum",
+        "frequency": 1310
+      },
+      {
+        "word": "est",
+        "frequency": 1094
+      },
+      {
+        "word": "ex",
+        "frequency": 1090
+      },
+      {
+        "word": "sunt",
+        "frequency": 1022
+      },
+      {
+        "word": "quae",
+        "frequency": 916
+      }
+    ]
+  },
+  {
+    "author": "Xenophon",
+    "total_unique_words": 37238,
+    "words_with_dictionary": 16119,
+    "unique_coverage_percent": 43.29,
+    "total_tokens": 621675,
+    "tokens_with_dictionary": 535774,
+    "token_coverage_percent": 86.18,
+    "direct_dictionary_matches": 2465,
+    "direct_match_percent": 6.62,
+    "top_missing_words": [
+      {
+        "word": "ξενοφων",
+        "frequency": 358
+      },
+      {
+        "word": "πραττειν",
+        "frequency": 226
+      },
+      {
+        "word": "επιμελεισθαι",
+        "frequency": 202
+      },
+      {
+        "word": "ηδεωσ",
+        "frequency": 179
+      },
+      {
+        "word": "ταλλα",
+        "frequency": 171
+      },
+      {
+        "word": "ηδιον",
+        "frequency": 154
+      },
+      {
+        "word": "βουλοιτο",
+        "frequency": 144
+      },
+      {
+        "word": "οραν",
+        "frequency": 130
+      },
+      {
+        "word": "ελεξεν",
+        "frequency": 128
+      },
+      {
+        "word": "απεκρινατο",
+        "frequency": 124
+      }
+    ]
+  },
+  {
+    "author": "Xenophon of Ephesus",
+    "total_unique_words": 4429,
+    "words_with_dictionary": 2591,
+    "unique_coverage_percent": 58.5,
+    "total_tokens": 32916,
+    "tokens_with_dictionary": 27344,
+    "token_coverage_percent": 83.07,
+    "direct_dictionary_matches": 549,
+    "direct_match_percent": 12.4,
+    "top_missing_words": [
+      {
+        "word": "αβροκομην",
+        "frequency": 144
+      },
+      {
+        "word": "αβροκομου",
+        "frequency": 82
+      },
+      {
+        "word": "αβροκομη",
+        "frequency": 72
+      },
+      {
+        "word": "ιπποθοοσ",
+        "frequency": 62
+      },
+      {
+        "word": "τουνομα",
+        "frequency": 38
+      },
+      {
+        "word": "ιπποθοον",
+        "frequency": 34
+      },
+      {
+        "word": "εφεσον",
+        "frequency": 32
+      },
+      {
+        "word": "μαντω",
+        "frequency": 30
+      },
+      {
+        "word": "κανταυθα",
+        "frequency": 28
+      },
+      {
+        "word": "περιλαοσ",
+        "frequency": 24
+      }
+    ]
+  }
+]

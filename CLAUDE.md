@@ -7,14 +7,31 @@ Important:
 
 **CRITICAL SCRIPT TIMEOUT HANDLING**:
 - **NEVER** assume a script was successful just because it timed out
-- If a long-running script times out (like database creation), run it in background:
+- **ALWAYS** run database creation scripts in the background to avoid Claude's timeout:
   ```bash
+  # Database creation MUST be run in background:
+  cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1 &
+  
+  # Deployment scripts also need background execution:
   ./deploy_complete.sh > deploy.log 2>&1 &
-  # Monitor with: tail -f deploy.log
+  
+  # Monitor with: tail -f build.log
   ```
 - Always verify completion by checking output files, timestamps, and success messages
-- Database creation takes ~4 minutes and will timeout at 5 minutes - this is normal
+- Database creation takes ~4 minutes and will timeout at 2 minutes in Claude - running in foreground WILL corrupt data
 - Only continue deployment if you can verify the script actually completed successfully
+
+**CRITICAL APK BUILD REQUIREMENT**:
+- **THE APK MUST NEVER BE BUILT WITHOUT THE SAMPLE DATABASE**
+- The Gradle build has a `checkDatabaseExists` task that ensures `app/src/debug/assets/perseus_texts.db.zip` exists
+- If database is missing, the build will fail with clear instructions
+- **ALWAYS** run deployment scripts that create the database before building:
+  - `./deploy_complete.sh` - Rebuilds sample database and deploys
+  - `./deploy_full_database.sh` - Rebuilds full database and deploys
+- **NEVER** manually delete `app/src/debug/assets/perseus_texts.db.zip` without immediately recreating it
+- The database creation script (`create_perseus_database.py`) automatically places the compressed database in both:
+  - `app/src/debug/assets/perseus_texts.db.zip` (for debug builds)
+  - `app/src/main/assets/perseus_texts.db.zip` (for release builds)
 
 App has 100% local operation on phone; no internet access or other android permissions are required.
 

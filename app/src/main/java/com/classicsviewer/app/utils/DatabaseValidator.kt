@@ -37,6 +37,21 @@ object DatabaseValidator {
                 }
             } ?: return ValidationResult(false, "Could not open database file")
             
+            return validateDatabase(context, tempFile)
+            
+        } catch (e: Exception) {
+            return ValidationResult(false, "Invalid SQLite database: ${e.message}")
+        } finally {
+            tempFile.delete()
+        }
+    }
+    
+    fun validateDatabase(context: Context, dbFile: File): ValidationResult {
+        try {
+            if (!dbFile.exists()) {
+                return ValidationResult(false, "Database file does not exist")
+            }
+            
             // Get the bundled database schema for comparison
             val bundledDbPath = context.getDatabasePath("perseus_texts.db").absolutePath
             if (!File(bundledDbPath).exists()) {
@@ -45,7 +60,7 @@ object DatabaseValidator {
             
             // Open both databases for comparison
             val externalDb = SQLiteDatabase.openDatabase(
-                tempFile.absolutePath,
+                dbFile.absolutePath,
                 null,
                 SQLiteDatabase.OPEN_READONLY
             )
@@ -64,8 +79,6 @@ object DatabaseValidator {
             
         } catch (e: Exception) {
             return ValidationResult(false, "Invalid SQLite database: ${e.message}")
-        } finally {
-            tempFile.delete()
         }
     }
     

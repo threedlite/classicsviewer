@@ -13,20 +13,13 @@ echo ""
 echo "🔨 Step 1: Rebuilding database from scratch..."
 cd data-prep
 # Build sample database for deployment (this goes to Play Store)
+# This also creates the ZIP files in app/src/debug/assets and app/src/main/assets
 python3 create_perseus_database.py sample
 echo "✅ Sample database rebuilt successfully"
 cd ..
 
-# Step 2: Remove old compressed databases
-echo "🗑️  Step 2: Removing old compressed databases..."
-rm -f app/src/debug/assets/perseus_texts.db.zip
-echo "✅ Old compressed databases removed"
-
-# Step 3: Create fresh compressed database
-echo "📦 Step 3: Creating fresh compressed database..."
-cd data-prep
-# The database creation script now creates the ZIP directly in app/src/debug/assets
-cd ..
+# Step 2 and 3 are no longer needed - database creation script handles everything
+echo "📦 Database ZIP files already created by database creation script"
 
 # Step 4: Verify ZIP integrity
 echo "🔍 Step 4: Verifying ZIP integrity..."
