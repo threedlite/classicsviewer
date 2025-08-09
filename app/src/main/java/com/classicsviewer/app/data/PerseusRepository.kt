@@ -153,6 +153,41 @@ class PerseusRepository(context: Context) : DataRepository {
                 }
             }
             
+            // After processing all mappings, if we have a self-referential mapping with no dictionary entry,
+            // we should still look for possible base lemmas by checking morphologically similar words
+            val hasSelfReferential = lemmaToMapping.containsKey(normalized) && 
+                                    database.dictionaryDao().getEntry(normalized, normalizedLanguage) == null
+            
+            if (hasSelfReferential) {
+                android.util.Log.d("PerseusRepository", "Found self-referential mapping for $normalized, checking for related lemmas")
+                
+                // Look for morphologically similar words that might share the same base lemma
+                // For example, if λαων (gen. pl.) is self-referential, check λαοι (nom. pl.) to find λαος
+                val relatedForms = findMorphologicallyRelatedForms(normalized, normalizedLanguage)
+                
+                for (relatedForm in relatedForms) {
+                    val relatedMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(relatedForm)
+                    for (relatedMapping in relatedMappings) {
+                        // Skip self-references and already processed lemmas
+                        if (relatedMapping.lemma == relatedForm || lemmaToMapping.containsKey(relatedMapping.lemma)) {
+                            continue
+                        }
+                        
+                        val relatedEntry = database.dictionaryDao().getEntry(relatedMapping.lemma, normalizedLanguage)
+                        if (relatedEntry != null) {
+                            android.util.Log.d("PerseusRepository", "Found related lemma ${relatedMapping.lemma} via form $relatedForm")
+                            entries.add(DictionaryEntry(
+                                lemma = relatedMapping.lemma,
+                                definition = relatedEntry.entryHtml ?: relatedEntry.entryPlain ?: "",
+                                morphInfo = "inferred from related form: $relatedForm",
+                                isDirectMatch = false,
+                                confidence = (relatedMapping.confidence ?: 0.0) * 0.8 // Lower confidence for inferred
+                            ))
+                        }
+                    }
+                }
+            }
+            
         }
         
         // Sort all entries by confidence (highest first), with direct matches always first
@@ -383,5 +418,33 @@ class PerseusRepository(context: Context) : DataRepository {
         return normalizedSigma.filter { char ->
             char.isLetter() && (char in '\u0370'..'\u03ff' || char in '\u1f00'..'\u1fff')
         }
+    }
+    
+    private suspend fun findMorphologicallyRelatedForms(word: String, language: String): List<String> = withContext(Dispatchers.IO) {
+        if (language != "greek") return@withContext emptyList()
+        
+        // For performance, only check the most common related forms
+        // For λαων (gen pl), we mainly want to find λαοι (nom pl)
+        val relatedForms = mutableListOf<String>()
+        
+        // Extract the stem by removing common endings
+        val stem = when {
+            word.endsWith("ων") -> word.dropLast(2)  // genitive plural - look for nominative plural
+            else -> return@withContext emptyList() // For now, only handle genitive plural cases
+        }
+        
+        // Don't search if stem is too short
+        if (stem.length < 2) return@withContext emptyList()
+        
+        // For genitive plural ending in -ων, the nominative plural usually ends in -οι
+        val candidate = stem + "οι"
+        
+        // Check if this form exists in our lemma_map (single query)
+        val exists = database.lemmaMapDao().getLemmaForWord(candidate) != null
+        if (exists) {
+            relatedForms.add(candidate)
+        }
+        
+        relatedForms
     }
 }

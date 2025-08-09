@@ -93,28 +93,53 @@ class DictionaryActivity : BaseActivity() {
             val result = repository.getAllDictionaryEntries(originalWord, language)
             
             if (result.entries.isNotEmpty()) {
-                // Calculate total confidence for normalization
-                val entriesWithConfidence = result.entries.filter { it.confidence != null && !it.isDirectMatch }
-                val totalConfidence = entriesWithConfidence.sumOf { it.confidence ?: 0.0 }
+                // Deduplicate entries by lemma, keeping the one with highest confidence
+                val deduplicatedEntries = result.entries
+                    .groupBy { it.lemma }
+                    .map { (_, entries) ->
+                        // For each lemma, keep the entry with highest confidence or the direct match
+                        entries.maxByOrNull { entry ->
+                            when {
+                                entry.isDirectMatch -> Double.MAX_VALUE
+                                else -> entry.confidence ?: 0.0
+                            }
+                        }!!
+                    }
+                    .sortedWith(compareBy(
+                        { !it.isDirectMatch }, // Direct matches first
+                        { -(it.confidence ?: 0.0) } // Then by confidence descending
+                    ))
+                
+                // Calculate total confidence for normalization AFTER deduplication
+                // Include ALL non-direct match entries, even those without explicit confidence
+                val entriesForNormalization = deduplicatedEntries.filter { !it.isDirectMatch }
+                val totalConfidence = entriesForNormalization.sumOf { it.confidence ?: 0.5 } // Default 0.5 for entries without confidence
                 
                 // Build the display text with all entries
                 val displayText = buildString {
                     // If we have multiple entries, show a note
-                    if (result.entries.size > 1) {
-                        append("<p><i>Found ${result.entries.size} possible dictionary entries:</i></p><br/>")
+                    if (deduplicatedEntries.size > 1) {
+                        append("<p><i>Found ${deduplicatedEntries.size} possible dictionary entries:</i></p><br/>")
                     }
                     
-                    result.entries.forEachIndexed { index, entry ->
+                    deduplicatedEntries.forEachIndexed { index, entry ->
                         if (index > 0) {
-                            append("<br/><hr/><br/>") // Separator between entries
+                            // Just use blank lines for separation
+                            append("<br/><br/><br/>") 
+                        }
+                        
+                        // Add entry number if multiple entries
+                        if (deduplicatedEntries.size > 1) {
+                            append("<b>[${index + 1}]</b> ")
                         }
                         
                         // Show lemma if different from display word or if multiple entries
-                        if ((entry.lemma != displayWord && entry.lemma.lowercase() != displayWord.lowercase()) || result.entries.size > 1) {
+                        if ((entry.lemma != displayWord && entry.lemma.lowercase() != displayWord.lowercase()) || deduplicatedEntries.size > 1) {
                             // Only show confidence scores when there are multiple entries
-                            val confidenceText = if (result.entries.size > 1) {
-                                if (entry.confidence != null && !entry.isDirectMatch && totalConfidence > 0) {
-                                    val normalizedConfidence = (entry.confidence / totalConfidence) * 100
+                            val confidenceText = if (deduplicatedEntries.size > 1) {
+                                if (!entry.isDirectMatch && totalConfidence > 0) {
+                                    val entryConfidence = entry.confidence ?: 0.5 // Use same default as in total calculation
+                                    val normalizedConfidence = (entryConfidence / totalConfidence) * 100
                                     " (confidence: ${String.format("%.1f%%", normalizedConfidence)})"
                                 } else if (entry.isDirectMatch) {
                                     " (direct match)"
@@ -148,8 +173,8 @@ class DictionaryActivity : BaseActivity() {
                 )
                 
                 // Update occurrences button to use the first lemma (or the provided lemma)
-                val primaryLemma = result.entries.firstOrNull { it.isDirectMatch }?.lemma 
-                    ?: result.entries.firstOrNull()?.lemma 
+                val primaryLemma = deduplicatedEntries.firstOrNull { it.isDirectMatch }?.lemma 
+                    ?: deduplicatedEntries.firstOrNull()?.lemma 
                     ?: lemma
                     
                 binding.occurrencesButton.setOnClickListener {
