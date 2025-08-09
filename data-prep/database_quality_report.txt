@@ -1,12 +1,12 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-08T22:58:43.972169
+Generated: 2025-08-09T07:53:26.163155
 
-Total Authors: 13
-Total Works: 279
-Total Books: 432
-Total Lines: 287,264
+Total Authors: 12
+Total Works: 278
+Total Books: 423
+Total Lines: 266,808
 Dictionary Entries: 30,474
-Lemma Mappings: 1,088,935
+Lemma Mappings: 1,086,992
 
 === DETAILED BREAKDOWN ===
 
@@ -144,27 +144,6 @@ Euripides / The Suppliants - 1,227 lines
 Euripides / The Suppliants translations: E. P. Coleridge 260 segments
 Euripides / The Trojan Women - 1,304 lines
 Euripides / The Trojan Women translations: Edward P. Coleridge 209 segments
-
-[Herodotus]
-Herodotus / Histories - 20,456 lines total
-Herodotus / Histories / Book 1 - 3,152 lines
-Herodotus / Histories translations: A. D. Godley 926 segments
-Herodotus / Histories / Book 2 - 2,650 lines
-Herodotus / Histories translations: A. D. Godley 797 segments
-Herodotus / Histories / Book 3 - 2,504 lines
-Herodotus / Histories translations: A. D. Godley 687 segments
-Herodotus / Histories / Book 4 - 2,584 lines
-Herodotus / Histories translations: A. D. Godley 768 segments
-Herodotus / Histories / Book 5 - 1,632 lines
-Herodotus / Histories translations: A. D. Godley 457 segments
-Herodotus / Histories / Book 6 - 1,696 lines
-Herodotus / Histories translations: A. D. Godley 489 segments
-Herodotus / Histories / Book 7 - 2,890 lines
-Herodotus / Histories translations: A. D. Godley 821 segments
-Herodotus / Histories / Book 8 - 1,734 lines
-Herodotus / Histories translations: A. D. Godley 484 segments
-Herodotus / Histories / Book 9 - 1,614 lines
-Herodotus / Histories translations: A. D. Godley 441 segments
 
 [Hesiod]
 Hesiod / Shield of Heracles - 485 lines

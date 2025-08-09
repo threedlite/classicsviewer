@@ -1,18 +1,18 @@
 {
-  "generated_at": "2025-08-08T22:58:43.860390",
+  "generated_at": "2025-08-09T07:53:26.064022",
   "database_version": "2.0",
   "statistics": {
-    "total_authors": 13,
-    "total_works": 279,
-    "total_books": 432,
-    "total_lines": 287264,
-    "total_translation_segments": 65848,
+    "total_authors": 12,
+    "total_works": 278,
+    "total_books": 423,
+    "total_lines": 266808,
+    "total_translation_segments": 59978,
     "total_dictionary_entries": 30474,
-    "total_lemma_mappings": 1088935,
+    "total_lemma_mappings": 1086992,
     "dictionary_by_language": {
       "greek": 30474
     },
-    "works_with_translations": 272,
+    "works_with_translations": 271,
     "translation_coverage_percent": 97.5
   },
   "authors": [
@@ -705,71 +705,6 @@
               "number": 1,
               "label": "Complete Text",
               "line_count": 987
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg0016",
-      "name": "Herodotus",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 9,
-      "total_lines": 20456,
-      "works": [
-        {
-          "id": "tlg0016.tlg001",
-          "title": "Histories",
-          "title_english": "Histories",
-          "book_count": 9,
-          "total_lines": 14234450,
-          "translator_count": 1,
-          "books": [
-            {
-              "number": 1,
-              "label": "Book 1",
-              "line_count": 3152
-            },
-            {
-              "number": 2,
-              "label": "Book 2",
-              "line_count": 2650
-            },
-            {
-              "number": 3,
-              "label": "Book 3",
-              "line_count": 2504
-            },
-            {
-              "number": 4,
-              "label": "Book 4",
-              "line_count": 2584
-            },
-            {
-              "number": 5,
-              "label": "Book 5",
-              "line_count": 1632
-            },
-            {
-              "number": 6,
-              "label": "Book 6",
-              "line_count": 1696
-            },
-            {
-              "number": 7,
-              "label": "Book 7",
-              "line_count": 2890
-            },
-            {
-              "number": 8,
-              "label": "Book 8",
-              "line_count": 1734
-            },
-            {
-              "number": 9,
-              "label": "Book 9",
-              "line_count": 1614
             }
           ]
         }

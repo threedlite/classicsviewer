@@ -5,21 +5,44 @@ Important:
   The data-sources folder contains the cloned git repos for the following PerseusDL projects:
   canonical-greekLit  canonical-latinLit  canonical-pdlrefwk  perseus_catalog 
 
-**CRITICAL SCRIPT TIMEOUT HANDLING**:
-- **NEVER** assume a script was successful just because it timed out
-- **ALWAYS** run database creation scripts in the background to avoid Claude's timeout:
-  ```bash
-  # Database creation MUST be run in background:
-  cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1 &
-  
-  # Deployment scripts also need background execution:
-  ./deploy_complete.sh > deploy.log 2>&1 &
-  
-  # Monitor with: tail -f build.log
-  ```
-- Always verify completion by checking output files, timestamps, and success messages
-- Database creation takes ~4 minutes and will timeout at 2 minutes in Claude - running in foreground WILL corrupt data
-- Only continue deployment if you can verify the script actually completed successfully
+**CRITICAL: RUNNING LONG BUILDS IN CLAUDE - USE BACKGROUND EXECUTION**:
+
+⚠️ **ATTENTION CLAUDE**: You have a 2-minute execution timeout. Commands that take longer must be run in the background!
+
+**WHAT HAPPENS WITH DIRECT EXECUTION (WILL FAIL)**:
+- ❌ `./gradlew bundleRelease` - takes 3-4 minutes, WILL timeout and create 0-byte AAB
+- ❌ `python3 create_perseus_database.py` - takes 4+ minutes, WILL create corrupted database
+- ❌ `./deploy_complete.sh` - rebuilds database, WILL timeout
+- ❌ `zip` commands on large files - WILL create corrupt ZIPs
+
+**CORRECT APPROACH - RUN IN BACKGROUND**:
+```bash
+# For gradle builds - Run in background:
+nohup ./gradlew bundleRelease > aab_build.log 2>&1 &
+# Monitor progress:
+tail -f aab_build.log
+# Check completion:
+ls -lah app/build/outputs/bundle/release/app-release.aab
+
+# For database creation - Run in background:
+cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1 &
+# Monitor with: tail -f build.log
+
+# For deployment scripts - Run in background:
+nohup ./deploy_complete.sh > deploy.log 2>&1 &
+# Monitor with: tail -f deploy.log
+
+# For any long-running command:
+nohup [COMMAND] > output.log 2>&1 &
+```
+
+**KEY POINTS**:
+- ✅ You CAN run any command using `nohup ... &` to run in background
+- ✅ Use `tail -f` to monitor progress (can timeout safely)
+- ✅ Check completion by looking for output files or success messages
+- ❌ NEVER run commands that take >90 seconds in foreground
+
+**REMEMBER**: Background execution (`nohup ... &`) bypasses the timeout limitation!
 
 **CRITICAL APK BUILD REQUIREMENT**:
 - **THE APK MUST NEVER BE BUILT WITHOUT THE SAMPLE DATABASE**

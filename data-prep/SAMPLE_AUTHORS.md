@@ -3,7 +3,6 @@ Hesiod
 Aeschylus
 Sophocles
 Euripides
-Herodotus
 Xenophon
 Plato
 Aristotle
