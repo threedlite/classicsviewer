@@ -24,10 +24,13 @@ Important:
 **CRITICAL APK BUILD REQUIREMENT**:
 - **THE APK MUST NEVER BE BUILT WITHOUT THE SAMPLE DATABASE**
 - The Gradle build has a `checkDatabaseExists` task that ensures `app/src/debug/assets/perseus_texts.db.zip` exists
+- **THE BUILD WILL SUCCEED EVEN WITH A CORRUPTED DATABASE** - Always verify ZIP integrity!
+- **COMMON ERROR**: "Database not found in APK" at runtime means the ZIP file is corrupted
 - If database is missing, the build will fail with clear instructions
 - **ALWAYS** run deployment scripts that create the database before building:
-  - `./deploy_complete.sh` - Rebuilds sample database and deploys
+  - `./deploy_complete.sh` - Rebuilds sample database and deploys (USE THIS AFTER ANY ISSUES)
   - `./deploy_full_database.sh` - Rebuilds full database and deploys
+  - `./deploy_simple.sh` - ONLY use if you're 100% certain the database ZIP is valid
 - **NEVER** manually delete `app/src/debug/assets/perseus_texts.db.zip` without immediately recreating it
 - The database creation script (`create_perseus_database.py`) automatically places the compressed database in both:
   - `app/src/debug/assets/perseus_texts.db.zip` (for debug builds)
@@ -361,21 +364,32 @@ python3 create_perseus_database.py full
 
 ### Deployment Scripts (Fully Automated)
 
+**WHICH SCRIPT TO USE:**
+- **First time deployment**: Use `./deploy_complete.sh`
+- **After any database/schema changes**: Use `./deploy_complete.sh`
+- **After app crashes with database errors**: Use `./deploy_complete.sh`
+- **Quick redeploy (NO changes)**: Use `./deploy_simple.sh` ONLY if last deployment worked
+- **If unsure**: ALWAYS use `./deploy_complete.sh`
+
 ```bash
-# Option 1: Deploy sample database (for Play Store release)
+# Option 1: Deploy sample database (RECOMMENDED - USE THIS FIRST)
 # - Rebuilds sample database from scratch
 # - Creates fresh compressed database
 # - Deploys and clears app data
+# - Takes ~4-5 minutes but guarantees working database
 ./deploy_complete.sh
 
 # Option 2: Deploy full database (for local debugging)
 # - Rebuilds full database from scratch
 # - Deploys with all authors for testing
+# - Takes longer due to larger database
 ./deploy_full_database.sh
 
-# Option 3: Deploy with existing database (faster, but dangerous if schema changed)
+# Option 3: Deploy with existing database (DANGEROUS - ONLY if certain)
 # - Uses existing database in perseus_database/src/main/assets/
-# - Only use if you're certain database is current
+# - Assumes app/src/debug/assets/perseus_texts.db.zip is valid
+# - Will fail at runtime if database is corrupted
+# - Only saves ~4 minutes, not worth the risk if unsure
 ./deploy_simple.sh
 
 # Option 4: Production-like testing with bundletool
