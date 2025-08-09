@@ -32,8 +32,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 21
         targetSdk 36
-        versionCode 5
-        versionName "0.8.5"
+        versionCode 7
+        versionName "0.8.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -138,3 +138,36 @@ task checkDatabaseExists {
 
 // Make sure database check runs before building
 preBuild.dependsOn checkDatabaseExists
+
+// Task to check AAB size after building
+task checkAabSize {
+    doLast {
+        def aabFile = file("$buildDir/outputs/bundle/release/app-release.aab")
+        if (aabFile.exists()) {
+            def sizeInMB = aabFile.length() / 1024 / 1024
+            println "AAB size: ${sizeInMB}MB"
+            
+            if (sizeInMB > 200) {
+                throw new GradleException("""
+                    ERROR: Release AAB exceeds Google Play's 200MB limit!
+                    
+                    Current AAB size: ${sizeInMB}MB
+                    Maximum allowed: 200MB
+                    
+                    The database is too large for the base module.
+                    Consider:
+                    1. Reducing the number of authors in SAMPLE_AUTHORS.md
+                    2. Using Play Asset Delivery (requires perseus_database module)
+                    3. Implementing dynamic feature modules
+                """)
+            } else {
+                println "✓ AAB size is within Google Play limits (${sizeInMB}MB < 200MB)"
+            }
+        }
+    }
+}
+
+// Run size check after bundle task
+afterEvaluate {
+    tasks.bundleRelease.finalizedBy checkAabSize
+}

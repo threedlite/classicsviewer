@@ -1,18 +1,18 @@
 {
-  "generated_at": "2025-08-08T22:04:47.384233",
+  "generated_at": "2025-08-08T22:58:43.860390",
   "database_version": "2.0",
   "statistics": {
-    "total_authors": 14,
-    "total_works": 280,
-    "total_books": 440,
-    "total_lines": 299620,
-    "total_translation_segments": 83839,
+    "total_authors": 13,
+    "total_works": 279,
+    "total_books": 432,
+    "total_lines": 287264,
+    "total_translation_segments": 65848,
     "total_dictionary_entries": 30474,
-    "total_lemma_mappings": 1089735,
+    "total_lemma_mappings": 1088935,
     "dictionary_by_language": {
       "greek": 30474
     },
-    "works_with_translations": 273,
+    "works_with_translations": 272,
     "translation_coverage_percent": 97.5
   },
   "authors": [
@@ -4510,66 +4510,6 @@
               "number": 1,
               "label": "Complete Text",
               "line_count": 401
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "tlg0003",
-      "name": "Thucydides",
-      "language": "greek",
-      "work_count": 1,
-      "total_books": 8,
-      "total_lines": 12356,
-      "works": [
-        {
-          "id": "tlg0003.tlg001",
-          "title": "History of the Peloponnesian War",
-          "title_english": "History of the Peloponnesian War",
-          "book_count": 8,
-          "total_lines": 28330708,
-          "translator_count": 4,
-          "books": [
-            {
-              "number": 1,
-              "label": "Book 1",
-              "line_count": 1926
-            },
-            {
-              "number": 2,
-              "label": "Book 2",
-              "line_count": 1600
-            },
-            {
-              "number": 3,
-              "label": "Book 3",
-              "line_count": 1592
-            },
-            {
-              "number": 4,
-              "label": "Book 4",
-              "line_count": 1726
-            },
-            {
-              "number": 5,
-              "label": "Book 5",
-              "line_count": 1470
-            },
-            {
-              "number": 6,
-              "label": "Book 6",
-              "line_count": 1396
-            },
-            {
-              "number": 7,
-              "label": "Book 7",
-              "line_count": 1262
-            },
-            {
-              "number": 8,
-              "label": "Book 8",
-              "line_count": 1384
             }
           ]
         }

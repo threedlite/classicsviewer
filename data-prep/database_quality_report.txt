@@ -1,12 +1,12 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-08-08T22:04:47.515149
+Generated: 2025-08-08T22:58:43.972169
 
-Total Authors: 14
-Total Works: 280
-Total Books: 440
-Total Lines: 299,620
+Total Authors: 13
+Total Works: 279
+Total Books: 432
+Total Lines: 287,264
 Dictionary Entries: 30,474
-Lemma Mappings: 1,089,735
+Lemma Mappings: 1,088,935
 
 === DETAILED BREAKDOWN ===
 
@@ -840,25 +840,6 @@ Sophocles / Trachiniae - 1,235 lines
 Sophocles / Trachiniae translations: Richard Jebb 252 segments
 Sophocles / Tracking Satyrs - 401 lines
 Sophocles / Tracking Satyrs translations: Anne Mahoney 89 segments
-
-[Thucydides]
-Thucydides / History of the Peloponnesian War - 12,356 lines total
-Thucydides / History of the Peloponnesian War / Book 1 - 1,926 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 722 segments, Henry Dale 722 segments, Richard Crawley 726 segments, Thomas Hobbes 724 segments
-Thucydides / History of the Peloponnesian War / Book 2 - 1,600 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 566 segments, Henry Dale 566 segments, Richard Crawley 566 segments, Thomas Hobbes 565 segments
-Thucydides / History of the Peloponnesian War / Book 3 - 1,592 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 583 segments, Henry Dale 583 segments, Richard Crawley 586 segments, Thomas Hobbes 582 segments
-Thucydides / History of the Peloponnesian War / Book 4 - 1,726 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 665 segments, Henry Dale 665 segments, Richard Crawley 666 segments, Thomas Hobbes 664 segments
-Thucydides / History of the Peloponnesian War / Book 5 - 1,470 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 507 segments, Henry Dale 507 segments, Richard Crawley 507 segments, Thomas Hobbes 507 segments
-Thucydides / History of the Peloponnesian War / Book 6 - 1,396 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 496 segments, Henry Dale 496 segments, Richard Crawley 496 segments, Thomas Hobbes 496 segments
-Thucydides / History of the Peloponnesian War / Book 7 - 1,262 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 450 segments, Henry Dale 450 segments, Richard Crawley 450 segments, Thomas Hobbes 450 segments
-Thucydides / History of the Peloponnesian War / Book 8 - 1,384 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 507 segments, Henry Dale 507 segments, Richard Crawley 507 segments, Thomas Hobbes 507 segments
 
 [Xenophon]
 Xenophon /  Hellenica - 7,276 lines total

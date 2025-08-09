@@ -4,7 +4,6 @@ Aeschylus
 Sophocles
 Euripides
 Herodotus
-Thucydides
 Xenophon
 Plato
 Aristotle
