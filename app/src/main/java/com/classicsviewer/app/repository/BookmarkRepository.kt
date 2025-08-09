@@ -2,11 +2,13 @@ package com.classicsviewer.app.repository
 
 import android.content.Context
 import com.classicsviewer.app.database.UserDatabase
+import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.database.entities.BookmarkEntity
 import kotlinx.coroutines.flow.Flow
 
 class BookmarkRepository(context: Context) {
     private val bookmarkDao = UserDatabase.getInstance(context).bookmarkDao()
+    private val textLineDao = PerseusDatabase.getInstance(context).textLineDao()
     
     fun getAllBookmarks(): Flow<List<BookmarkEntity>> = bookmarkDao.getAllBookmarks()
     
@@ -116,4 +118,7 @@ class BookmarkRepository(context: Context) {
     
     suspend fun importBookmarks(bookmarks: List<BookmarkEntity>): List<Long> = 
         bookmarkDao.insertBookmarks(bookmarks)
+    
+    suspend fun getBookLineCount(bookId: String): Int = 
+        textLineDao.getLineCountByBook(bookId)
 }

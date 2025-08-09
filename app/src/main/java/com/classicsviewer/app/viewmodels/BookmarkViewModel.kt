@@ -124,4 +124,8 @@ class BookmarkViewModel(application: Application) : AndroidViewModel(application
         val results = repository.importBookmarks(bookmarks)
         return results.count { it != -1L }
     }
+    
+    suspend fun getBookLineCount(bookId: String): Int {
+        return repository.getBookLineCount(bookId)
+    }
 }

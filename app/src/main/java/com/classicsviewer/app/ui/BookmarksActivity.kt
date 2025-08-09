@@ -167,22 +167,30 @@ class BookmarksActivity : BaseActivity() {
         val startLine = (chunkNumber * chunkSize) + 1
         val endLine = startLine + chunkSize - 1
         
-        val intent = Intent(this, TextViewerPagerActivity::class.java).apply {
-            putExtra("work_id", bookmark.workId)
-            putExtra("book_id", bookmark.bookId)
-            putExtra("start_line", startLine)
-            putExtra("end_line", endLine)
-            putExtra("author_name", bookmark.authorName)
-            putExtra("work_title", bookmark.workTitle)
-            putExtra("book_label", bookmark.bookLabel)
-            putExtra("book_number", bookmark.bookLabel ?: "")
-            putExtra("language", language)
-            // Pass author_id if we have it from our intent
-            this@BookmarksActivity.intent.getStringExtra("author_id")?.let {
-                putExtra("author_id", it)
+        // Query the total line count for this book to enable proper navigation
+        CoroutineScope(Dispatchers.IO).launch {
+            val totalLines = viewModel.getBookLineCount(bookmark.bookId)
+            
+            withContext(Dispatchers.Main) {
+                val intent = Intent(this@BookmarksActivity, TextViewerPagerActivity::class.java).apply {
+                    putExtra("work_id", bookmark.workId)
+                    putExtra("book_id", bookmark.bookId)
+                    putExtra("start_line", startLine)
+                    putExtra("end_line", endLine)
+                    putExtra("total_lines", totalLines) // Add total lines for navigation
+                    putExtra("author_name", bookmark.authorName)
+                    putExtra("work_title", bookmark.workTitle)
+                    putExtra("book_label", bookmark.bookLabel)
+                    putExtra("book_number", bookmark.bookLabel ?: "")
+                    putExtra("language", language)
+                    // Pass author_id if we have it from our intent
+                    this@BookmarksActivity.intent.getStringExtra("author_id")?.let {
+                        putExtra("author_id", it)
+                    }
+                }
+                startActivity(intent)
             }
         }
-        startActivity(intent)
     }
     
     private fun showBookmarkOptions(bookmark: BookmarkEntity) {
