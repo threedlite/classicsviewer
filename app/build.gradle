@@ -146,12 +146,70 @@ task checkDatabaseExists {
     }
 }
 
+// Task to copy font file to assets/fonts directory with correct name
+task copyFontToAssets {
+    doLast {
+        def fontSource = file("$rootDir/font/sinaiticus_enhanced.ttf")
+        def fontDestDebug = file("$projectDir/src/debug/assets/fonts/sinaiticus.ttf")
+        def fontDestMain = file("$projectDir/src/main/assets/fonts/sinaiticus.ttf")
+
+        if (fontSource.exists()) {
+            // Create fonts directories if they don't exist
+            fontDestDebug.parentFile.mkdirs()
+            fontDestMain.parentFile.mkdirs()
+
+            // Copy to both debug and main assets/fonts with renamed filename
+            copy {
+                from fontSource
+                into fontDestDebug.parentFile
+                rename { 'sinaiticus.ttf' }
+            }
+            copy {
+                from fontSource
+                into fontDestMain.parentFile
+                rename { 'sinaiticus.ttf' }
+            }
+            println "✓ Font copied to assets/fonts/sinaiticus.ttf"
+        } else {
+            throw new GradleException("ERROR: Font file not found at: ${fontSource.absolutePath}")
+        }
+    }
+}
+
+// Task to copy audio file to assets
+task copyAudioToAssets {
+    doLast {
+        def audioSource = file("$rootDir/audio/homer_iliad_chamberlain_audio_7.zip")
+        def audioDestDebug = file("$projectDir/src/debug/assets/homer_iliad_chamberlain_audio_7.zip")
+        def audioDestMain = file("$projectDir/src/main/assets/homer_iliad_chamberlain_audio_7.zip")
+
+        if (audioSource.exists()) {
+            // Create assets directories if they don't exist
+            audioDestDebug.parentFile.mkdirs()
+            audioDestMain.parentFile.mkdirs()
+
+            // Copy to both debug and main assets
+            copy {
+                from audioSource
+                into audioDestDebug.parentFile
+            }
+            copy {
+                from audioSource
+                into audioDestMain.parentFile
+            }
+            println "✓ Audio copied to assets: homer_iliad_chamberlain_audio_7.zip (${audioSource.length() / 1024 / 1024}MB)"
+        } else {
+            println "⚠️ Warning: Audio file not found at: ${audioSource.absolutePath}. Audio features will require manual import."
+        }
+    }
+}
+
 // Task to ensure audio exists in assets
 task checkAudioExists {
     doLast {
         def audioFileDebug = file("$projectDir/src/debug/assets/homer_iliad_chamberlain_audio_7.zip")
         def audioFileMain = file("$projectDir/src/main/assets/homer_iliad_chamberlain_audio_7.zip")
-        
+
         if (audioFileDebug.exists()) {
             println "✓ Audio found in debug assets: ${audioFileDebug.absolutePath} (${audioFileDebug.length() / 1024}KB)"
         }
@@ -165,7 +223,10 @@ task checkAudioExists {
 }
 
 // Make sure database and audio checks run before building
+// Also copy font and audio files before build
 preBuild.dependsOn checkDatabaseExists
+preBuild.dependsOn copyFontToAssets
+preBuild.dependsOn copyAudioToAssets
 preBuild.dependsOn checkAudioExists
 
 // Task to check AAB size after building
