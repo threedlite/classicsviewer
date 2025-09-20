@@ -1,0 +1,40 @@
+// swift-tools-version: 5.9
+import PackageDescription
+
+let package = Package(
+    name: "ClassicsViewer",
+    platforms: [
+        .iOS(.v15)
+    ],
+    products: [
+        .library(
+            name: "ClassicsViewer",
+            targets: ["ClassicsViewer"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.14.1")
+    ],
+    targets: [
+        .target(
+            name: "ClassicsViewer",
+            dependencies: [
+                .product(name: "SQLite", package: "SQLite.swift")
+            ],
+            path: ".",
+            exclude: ["Package.swift", "Resources"],
+            sources: [
+                "ClassicsViewerApp.swift",
+                "Database",
+                "Models",
+                "ViewModels",
+                "Views",
+                "Utilities"
+            ]
+        ),
+        .testTarget(
+            name: "ClassicsViewerTests",
+            dependencies: ["ClassicsViewer"],
+            path: "Tests"
+        ),
+    ]
+)

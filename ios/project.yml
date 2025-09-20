@@ -1,0 +1,50 @@
+name: ClassicsViewer
+options:
+  bundleIdPrefix: com.classicsviewer
+  deploymentTarget:
+    iOS: 16.1
+  createIntermediateGroups: true
+  
+packages:
+  SQLite:
+    url: https://github.com/stephencelis/SQLite.swift
+    from: 0.14.1
+  SwiftCSV:
+    url: https://github.com/swiftcsv/SwiftCSV.git
+    from: 0.8.0
+
+targets:
+  ClassicsViewer:
+    type: application
+    platform: iOS
+    deploymentTarget: 16.1
+    sources:
+      - path: ClassicsViewer
+        excludes:
+          - Package.swift
+          - Tests
+          - .build
+          - "**/.git"
+          - "**/.build"
+    resources:
+      - ClassicsViewer/Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.classicsviewer.app
+        DEVELOPMENT_TEAM: ""
+        INFOPLIST_FILE: ClassicsViewer/Info.plist
+        SWIFT_VERSION: 5.9
+        TARGETED_DEVICE_FAMILY: 1,2
+        ENABLE_BITCODE: NO
+    dependencies:
+      - package: SQLite
+        product: SQLite
+      - package: SwiftCSV
+        product: SwiftCSV
+    preBuildScripts:
+      - name: "Check Database"
+        script: |
+          # Check if database exists in bundle
+          if [ ! -f "${SRCROOT}/ClassicsViewer/Resources/perseus_texts.db.zip" ]; then
+            echo "warning: Database file not found in Resources. App will need to download or import database on first launch."
+          fi

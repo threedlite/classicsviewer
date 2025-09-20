@@ -1,0 +1,1180 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg005/tlg0018.tlg005.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg005/tlg0018.tlg005.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "2",
+      "english_ref": "2",
+      "greek_text": "ὁρῶμεν γὰρ τοὺς πλείστους τῶν ἀγώνων κατά τε πόλεμον καὶ κατ’ εἰρήνην ἐν πεδίοις συνισταμένους· ἐν εἰρήνῃ μὲν οὖν ὅσοι τοὺς γυμνικοὺς ἄθλους διαθλοῦσι, στάδια καὶ λεωφόρα πεδία μεταδιώκουσι, κατὰ δὲ τὸν πόλεμον τὰς πεζομαχίας καὶ ἱππομαχίας οὐκ ἐν γεωλόφοις ἔθος ἐστὶ ποιεῖσθαι· πλείους γὰρ ἐκ τῆς ἀνεπιτηδειότητος τῶν χώρων αἱ βλάβαι, ὧν ἀντεπιφέρουσιν",
+      "english_text": "For we see that most contests, both in peace and in war, take place in the open fields. In peace, therefore, all those who practise gymnastic contests, seek for level race-courses and plain fields: and, in a war, it is not usual to have battles, of either infantry or cavalry, on hills; for many more disasters arise from the unfavourable character of the ground, than from anything that the enemies do to one another.",
+      "confidence": 0.7369845766446332,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "3",
+      "english_ref": "3",
+      "greek_text": "ἀλλήλοις οἱ ἐχθροί, γένοιντ’ ἄν. πεδίῳ θεωρεῖται· „ἀποστείλας γὰρ Ἰακὼβ ἐκάλεσε Λείαν καὶ Ῥαχὴλ εἰς τὸ πεδίον, οὗ τὰ ποίμνια“ (Gen. 31, 4), παριστὰς ἐναργῶς ὅτι φιλονεικίας σημεῖον τὸ πεδίον διὰ τί ;",
+      "english_text": "And a very great proof of this is the conduct of the practiser of knowledge, Jacob, when warring against the opposite disposition, ignorance; when it is beheld in the field how he regulates the irrational faculties in the soul after a fashion, reproving and correcting them. \"For Jacob having sent, called Leah and Rachel into the plain where the flocks were;\"",
+      "confidence": 0.7709113750571037,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "5",
+      "english_ref": "5",
+      "greek_text": "καὶ ὅσοι δὲ ἐν μέρει λόγου τοῦ προκόπτοντος κατὰ τὸν πατέρα κοσμοῦνται, τὰς ψυχῆς ἀλόγους φορὰς μεταδιδάσκουσιν ἐκλεξάμενοι ἐπιτήδειον τόπον τὸ πεδίον. λέγεται γὰρ τῷ Ἰωσήφ· „οὐχ οἱ ἀδελφοί σου ποιμαίνουσιν ἐν Συχέμ; δεῦρο ἀποστείλω σε πρὸς αὐτούς. ὁ δὲ εἶπεν Ἰδοὺ ἐγώ. εἶπε δὲ αὐτῷ Πορευθεὶς ἴδε, εἰ ὑγιαίνουσιν οἱ ἀδελφοί σου καὶ τὰ πρόβατα, καὶ ἀνάγγειλόν μοι. καὶ ἀπέστειλεν αὐτὸν ἐκ τῆς κοιλάδος τῆς Χεβρών, καὶ ἦλθεν εἰς Συχέμ. καὶ εὗρεν αὐτὸν ἄνθρωπος πλανωμένων ἐν τῷ πεδίῳ· ἠρώτησε δὲ αὐτὸν ὁ ἄνθρωπος Τί ζητεῖς; ὁ δὲ εἶπε Τοὺς ἀδελφούς μου ζητῶ, ἀνάγγειλόν μοι ποῦ βόσκουσιν. εἶπε δὲ αὐτῷ ὁ ἄνθρωπος Ἀπήρκασιν ἐντεῦθεν· ἤκουσα γὰρ αὐτῶν λεγόντων Πορευθῶμεν εἰς Δωθαείμ“ (Gen. 37, 13—17).",
+      "english_text": "And all those who, through the improvement of their reason, are adorned in the similitude of the Father, in consequence of education, unlearn all subserviency to the irrational impulses of the soul, selecting the plain as a suitable place, for it is said to Joseph, \"Are not thy brethren keeping sheep in Sichem? Come, I will send thee to them. And he said, Behold, here am I. And Jacob said unto him, Go and see if thy brethren and the flocks are well, and come and tell me. And he sent him from the valley of Chebron, and he came to Sichem, and a man found him wandering in the plain: and the man asked him, What seekest thou? And he said, I am seeking my brethren, tell me where they are feeding their sheep. And the man said unto him they have departed from hence, for I heard them saying, Let us go to Dotham.\"",
+      "confidence": 0.8007933979987141,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "6",
+      "english_ref": "6",
+      "greek_text": "αὐτούς, ἐπεὶ τὴν τοῦ πατρὸς ἐπιστήμην αὐστηροτέραν οὖσαν ἀδυνατεῖ φέρειν, ἵνα μάθῃ παρὰ τιθασωτέροις ὑφηγηταῖς τὰ πρακτέα καὶ συνοίσοντα· κέχρηται γὰρ δόγματι ἐκ διαφερόντων συνυφασμένῳ, πάνυ ποικίλῳ καὶ πολυπλόκῳ, παρὸ καὶ χιτῶνα κατεσκευάσθαι ποικίλον φησὶν ὁ νομοθέτης αὐτῷ (Gen. 37, 3), δηλῶν ὅτι λαβυρινθώδους καὶ δυσεκλύτου δόξης ἐστὶν εἰσηγητής·",
+      "english_text": "Therefore, from what has here been said it is plain, that they make the halting-place of the irrational faculties, which are in them, in the plain. But Joseph is sent unto them because he is unable to bear the somewhat austere knowledge of his father; that he may learn, under gentler instructors, what is to be done and what will be advantageous; for he uses a doctrine woven together from divers foundations, very variegated and very artfully made, in reference to which the law-giver says, that he had \"a robe of many colours made for him;\"",
+      "confidence": 0.6301919063079777,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "7",
+      "english_ref": "7",
+      "greek_text": "πρὸς γὰρ πολιτείαν μᾶλλον ἢ πρὸς ἀλήθειαν φιλοσοφῶν τὰ τρία γένη τῶν ἀγαθῶν, τά τε ἐκτὸς καὶ περὶ σῶμα καὶ ψυχήν, ὅλαις φύσεσιν ἀλλήλων διηρτημένα εἰς τὸ αὐτὸ ἄγει καὶ συνείρει, χρεῖον ἕκαστον ἑκάστου καὶ πάντα πάντων ἀποφαίνειν ἀξιῶν καὶ τὸ ἐξ ἀθρόων συντεθὲν ἄρτιον καὶ πλῆρες ὄντως ἀγαθόν, τὰ δ’ ἐξ ὧν τοῦτο ἐπάγη μέρη μὲν ἢ στοιχεῖα ἀγαθῶν,",
+      "english_text": "for as he philosophises more with a regard to political wisdom than to truth, he brings into one place and connects together the three kinds of good things, namely, external things, the things concerning the body, and those concerning the soul, things utterly different from one another in their whole natures; wishing to show that each has need of each, and that everything has need of everything; and that that which is really the complete and perfect good, is composed of all these things together, and that the parts of which this perfect good is compounded are parts or elements of good, but are not themselves perfect goods.",
+      "confidence": 0.7484302325581396,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "8",
+      "greek_text": "καθάπερ γὰρ μήτε πῦρ μήτε γῆν μήτε τι τῶν τεττάρων, ἐξ ὧν ἐδημιουργήθη τὸ πᾶν, κόσμον εἶναι, τὴν δὲ τῶν στοιχείων εἰς ταὐτὸ σύνοδόν τε καὶ κρᾶσιν, τὸν αὐτὸν τρόπον καὶ τὸ εὔδαιμον μήτε ἐν τοῖς ἐκτὸς ἰδίᾳ μήτε ἐν τοῖς περὶ σῶμα μήτε ἐν τοῖς περὶ ψυχὴν καθ’ αὑτὰ ἐξετάζεσθαι — τῶν γὰρ εἰρημένων ἕκαστον μερῶν τινα καὶ στοιχείων",
+      "english_text": "In the same way, as neither fire, nor earth, nor any one of the four elements, out of which the universe was created, are the world, but the meeting and mixture of all the elements together; in the same way also happiness ought not peculiarly to be sought for either in the external things, or in the things of the body, or in the things of the soul, taken by themselves; for each of the aforementioned things has only the rank of parts and elements, but it must be looked for in the combination of them all together.",
+      "confidence": 0.7570384615384615,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "9",
+      "english_ref": "9",
+      "greek_text": "λόγον ἔχειν —, ἀλλὰ κατὰ τὸ ἐκ πάντων ἄθροισμα. τὴν δόξαν πέμπεται μεταδιδαχθησόμενος πρὸς ἄνδρας μόνον τὸ καλὸν ἀγαθὸν νομίζοντας, ὃ ψυχῆς ὡς ψυχῆς ἐστιν ἴδιον, τὰ δ’ ἐκτὸς καὶ περὶ σῶμα πλεονεκτήματα λεγόμενα μόνον, οὐ πρὸς ἀλήθειαν ὄντα, ἀγαθὰ πεπιστευκότας. „ἰδοὺ“ γάρ φησιν „οἱ ἀδελφοί σου ποιμαίνουσι“ καὶ ἄρχουσι παντὸς ἀλόγου μέρους τῶν ἐν αὐτοῖς „ἐν Συχέμ“ (Gen. 37, 13)· ὦμος δὲ ἑρμηνεύεται, τλητικοῦ σημεῖον πόνου· βαστάζουσι γὰρ ἄχθος μέγιστον οἱ φιλάρετοι, τὴν πρὸς σῶμα καὶ τὴν σώματος ἡδονὴν καὶ πάλιν αὖ τὴν πρὸς τὰ ἐκτὸς καὶ τὰς ἀπ’ αὐτῶν ἐγγινομένας τέρψεις ἀντίταξιν.",
+      "english_text": "He therefore is sent, to be untaught this doctrine, to men who think nothing honourable but what is good, which is the peculiar attribute of the soul as the soul; but all external goods, which are called the good things of the body, they believe to be only superfluities, and not true and real goods: \"For behold,\" says he, \"thy brethren are tending their sheep,\" that is to say, they are governing all the irrational part that is in them, \"in Sichem;\"",
+      "confidence": 0.6339920848159175,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "11",
+      "english_ref": "11",
+      "greek_text": "καὶ μὴν ὅ γε προτρεπτικὸς λόγος τοῦ πατρὸς ἀνάγκην ἐπιτίθησιν οὐδεμίαν, ἵνα ἐθελουργὸς καὶ αὐτοκέλευστος ἐπιτηδεύῃς τὰ βελτίω, φησὶ γάρ· „πορευθεὶς ἴδε,“ θέασαι καὶ κατανόησον καὶ πάνυ ἀκριβῶς περίσκεψαι τὸ πρᾶγμα· εἰδέναι γάρ σε δεῖ περὶ ὃ μέλλεις πονεῖσθαι πρότερον, εἶτ’ αὖθις ἐπὶ τὴν ἐπιμέλειαν αὐτοῦ χωρεῖν.",
+      "english_text": "And yet the adhortatory speech of your father’s imposes no irresistible necessity upon you, to turn of your own accord and at the instigation of your own mind to better things; for he says, \"Go and see,\" behold, consider, and meditate in the matter with entire accuracy. For you ought first to know the affair concerning which you are going to labour, and then after that to proceed to a care how to accomplish it.",
+      "confidence": 0.8299986361156573,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "12",
+      "english_ref": "12",
+      "greek_text": "ὅταν μέντοι διακύψῃς καὶ περιαγαγὼν ὄμμα ὅλον δι’ ὅλων καταθεάσῃ, προσεξέτασον καὶ τοὺς ἐπιθεμένους ἤδη καὶ ἀσκητὰς αὐτοῦ γεγονότας, εἰ τοῦτο δρῶντες „ὑγιαίνουσιν“ ἀλλὰ μὴ μεμήνασι, καθάπερ οἱ φιλήδονοι διασύροντες καὶ ἐπιχλευάζοντες νομίζουσι. μήτε δὲ τὴν θέαν τοῦ πράγματος μήτε τὴν περὶ τοῦ ὑγιαίνειν τοὺς ἀσκητὰς διάγνωσιν βεβαιώσῃ παρὰ σεαυτῷ, πρὶν „ἀναγγεῖλαι“ καὶ ἀνενεγκεῖν τῷ πατρί· γνῶμαι γὰρ αἱ μὲν τῶν ἄρτι μανθάνειν ἀρχομένων ἄστατοι καὶ ἀνίδρυτοι, πάγιοι δ’ αἱ τῶν προκεκοφότων,",
+      "english_text": "But after you have examined into it, and after you have inspected it carefully, casting your eyes over the whole of the business, then examine, besides, those who have already given their attention to the matter, and who have become practisers of it, whether now that they do this they are in a sound state, and not mad, as the lovers of pleasure think who calumniate them and cover them with ridicule. And do not form a positive judgment in your own mind either as to the appearance of the matter, or as to the soundness of condition enjoyed by those who practise these things, before you have reported the matter to and laid it before the father; for the opinions of those who have only lately begun to learn are unstable and without any firm foundation; but the sentiment of those who have made some advance are solid, and from their opinions they must of necessity derive firmness and steadiness.",
+      "confidence": 0.7658282520325204,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "14",
+      "english_ref": "14",
+      "greek_text": "ὁ πάππος αὐτοῦ χωρὶς τοῦ πλήθους τῶν αἰχμαλώτων, οὓς ἐννέα βασιλεῖς καθελὼν ἀπήγαγεν, ὑπὲρ τριακοσίους ἔσχεν οἰκότριβας· μεμείωται δὲ τῆς οἰκίας οὐδέν, ἀλλὰ χρόνου προϊόντος πάντα διὰ πάντων ἔλαβεν αὔξησιν. οὐκ ἂν οὖν ἀφθόνου θεραπείας ὑπαρχούσης υἱὸν ἠξίου πέμπειν, οὗ μάλιστα ἐκήδετο, ἐπὶ πρᾶξιν, ἣν καὶ τῶν εὐτελεστάτων ἄν τις ῥᾳδίως κατώρθωσεν.",
+      "english_text": "His grandfather, besides the multitude of captives whom he had carried off when he defeated the nine kings, had more than three hundred domestic servants, and all this household had suffered no diminution, but rather, as time advanced, all his wealth had received great increase in all its parts. Would he not then, when he had an abundance of servants of all kinds ready to his hand, have preferred sending one of them, to sending his son, whom he loved above all things, on a business which any one of the lowest of his servants could easily have brought to a successful issue?",
+      "confidence": 0.9346319628647215,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "15",
+      "english_ref": "15",
+      "greek_text": "τοῦ ῥητοῦ· „ἐκ γὰρ τῆς κοιλάδος τῆς Χεβρών“ (Gen. 37, 14)· συζυγὴ δὲ καὶ συνεταιρὶς Χεβρὼν καλεῖται συμβολικῶς ἡμῶν τὸ σῶμα, ὅτι συνέζευκται καὶ ὥσπερ ἑταιρίαν καὶ φιλίαν πρὸς ψυχὴν τέθειται· κοιλάδας δὲ ἔχει τὰ αἰσθητήρια, μεγάλας δεξαμενὰς ἁπάντων ὅσα ἐκτὸς αἰσθητά, ἃ τὰς παμπληθεῖς ποιότητας ἐπαντλοῦντα καὶ διὰ τῶν δεξαμενῶν ἐπεισχέοντα τῇ διανοίᾳ κατακλύζει καὶ βύθιον αὐτὴν ἀπεργάζεται.",
+      "english_text": "But you see that he here gives a superfluously minute description of the country from which he sends him forth, in a way which all but commands us to forsake the strict letter of what is written. \"For out of the valley of Chebron,\" now the name Chebron, when interpreted, means conjoined and associated, being a figurative way of intimating our body which is conjoined and which is associated in a sort of companionship and friendship with the soul. Moreover, the organs of the outward senses have valleys, great ducts to receive everything external which is an object of the outward senses, which collect together an infinite number of distinctive qualities, and by means of those ducts pour them in upon the mind, and wash it out, and bring it in the depths.",
+      "confidence": 0.9342400914305431,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "16",
+      "english_ref": "16",
+      "greek_text": "διὰ τοῦτο ἐν τῷ νόμῳ τῆς λέπρας, ὅταν ἐν οἰκίᾳ κοιλάδες χλωρίζουσαι ἢ πυρρίζουσαι φανῶσι, διείρηται τοὺς λίθους, ἐν οἷς γεγόνασιν, ἐξελόντας ἑτέρους ἀντιτιθέναι (Lev. 14,37 ss.), τουτέστιν, ὅταν διαφέρουσαι ποιότητες, ἃς ἐδημιούργησαν ἡδοναὶ καὶ ἐπιθυμίαι καὶ τὰ ἀδελφὰ τούτων πάθη, βαρύνασαι καὶ πιέσασαι τὴν ὅλην ψυχὴν κοιλοτέραν καὶ ταπεινοτέραν αὐτὴν ἑαυτῆς ἐργάσωνται, τοὺς τῆς ἀσθενείας αἰτίους λόγους ἀνελεῖν, ὑγιεινοὺς δὲ δι’ ἀγωγῆς νομίμου ἢ καὶ παιδεύσεως ὀρθῆς ἀντεισαγαγεῖν.",
+      "english_text": "On this account, in the law concerning leprosy, it is expressly ordered, \"when in any house hollows appear of a pale or fiery red colour, that the inhabitants shall take out the stones in which such hollows appear, and put in other stones in their places;\"",
+      "confidence": 0.7096707818930041,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "18",
+      "english_ref": "18",
+      "greek_text": "ὥσπερ γὰρ οὔτε μουσικὴν ἀμούσως οὔτε γραμματικὴν ἀγραμμάτως οὐδὲ συνόλως φράσαι τέχνην ἀτέχνως ἢ κακοτέχνως ἀλλὰ τεχνικῶς ἑκάστην ἐπιτηδεύειν προσῆκεν, οὕτως οὐδὲ φρόνησιν πανούργως οὐδὲ σωφροσύνην φειδωλῶς καὶ ἀνελευθέρως οὐδὲ θρασέως ἀνδρείαν οὐδὲ δεισιδαιμόνως εὐσέβειαν οὐδ’ ἄλλην τινὰ τῶν κατ’ ἀρετὴν ἐπιστήμην ἀνεπιστημόνως· ἀνοδία γὰρ ὁμολογουμένως ταῦτα πάντα. παρὸ καὶ νόμος κεῖται „δικαίως τὸ δίκαιον διώκειν“ (Deut. 16, 20), ἵνα δικαιοσύνην καὶ πᾶσαν ἀρετὴν τοῖς συγγενέσιν ἔργοις αὐτῆς ἀλλὰ μὴ τοῖς ἐναντίοις μετερχώμεθα.",
+      "english_text": "For as it is of no use to study music in an unmusical manner, nor grammar without any attention to its true principles, nor, in short, any art whatever in a manner either devoid of art or proceeding on false rules of art, but each art must be cultivated on a strict obedience to its rules; so also it is of no avail to apply one’s self to the study of wisdom in a crafty spirit, or to the study of temperance in a nigardly and illiberal frame of mind, nor to courage rashly, nor to piety superstitiously, nor, in fact, to any other science which is in accordance with virtue in an unscientific manner. For all these steps are confessedly erroneous. In reference to which, a law has been delivered to us \"to pursue what is just in a just manner,\"",
+      "confidence": 0.8739970186846231,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "19",
+      "english_ref": "19",
+      "greek_text": "ἐὰν οὖν τινα θεάσῃ σῖτα καὶ ποτὰ μὴ ἐν καιρῷ προσιέμενον ἢ λουτρὰ καὶ ἀλείμματα παραιτούμενον ἢ τῶν περὶ σῶμα σκεπασμάτων ἀμελοῦντα ἢ χαμευνίαις καὶ δυσαυλίαις χρώμενον, εἶτ’ ἐκ τούτων ἐπιμορφάζοντα ἐγκράτειαν, οἶκτον λαβὼν τῆς περὶ αὐτὸν πλάνης τὴν ἀληθῆ τῆς ἐγκρατείας ὁδὸν δεῖξον· ἃ γὰρ ἐπετήδευσεν, ἀνήνυτοι καὶ ἄτρυτοι πόνοι λιμῷ καὶ ταῖς ἄλλαις κακώσεσι ψυχὴν καὶ σῶμα ἐκτραχηλίζοντες.",
+      "english_text": "If, therefore, you see any one desiring meat or drink at an unseasonable time, or repudiating baths or ointments at the proper season, or neglecting the proper clothing for his body, or lying on the ground and sleeping in the open air, and by such conduct as this, pretending to a character for temperance and self-denial, you, pitying his self-deception, should show him the true path of temperance, for all the practises in which he has been indulging are useless and profitless labours, oppressing both his soul and body with hunger and all sorts of other hardships.",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "20",
+      "english_ref": "20",
+      "greek_text": "μηδ’ εἴ τις περιρραντηρίοις ἢ καθαρσίοις χρώμενος διάνοιαν μὲν ῥυπαίνει τὴν ἑαυτοῦ, τὸ δὲ σῶμα φαιδρύνει, μηδ’ εἰ πάλιν ὑπὸ περιουσίας νεὼν ἱδρύεται λαμπροτάταις χορηγίαις καὶ δαπάναις χρώμενος ἢ ἑκατόμβας ἀνάγει καὶ βουθυτῶν οὐ παύεται ἢ πολυτελέσιν ἀναθήμασι κοσμεῖ τὸ ἱερὸν ἀφθόνους μὲν ὕλας τέχνας δὲ παντὸς ἀργύρου καὶ χρυσοῦ τιμιωτέρας εἰσάγων, μετ’ εὐσεβῶν ἀναγεγράφθω·",
+      "english_text": "Nor if anyone, using washings and purifications, soils his mind, but makes his bodily appearance brilliant; nor if again out of his abundant wealth he builds a temple with brilliant a artments of all kinds, at a vast expense; nor if he offers up h catombs and never ceases sacrificing oxen; nor if he adorns temples with costly offerings, bringing timber in abundance, and skilful ornaments, more valuable than any of gold or silver,",
+      "confidence": 0.7334888781431335,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "21",
+      "english_ref": "21",
+      "greek_text": "πεπλάνηται γὰρ καὶ οὗτος τῆς πρὸς εὐσέβειαν ὁδοῦ, θρησκείαν ἀντὶ ὁσιότητος ἡγούμενος καὶ δῶρα τῷ ἀδεκάστῳ διδοὺς οὐδέποτε ληψομένῳ τὰ τοιαῦτα καὶ κολακεύων τὸν ἀκολάκευτον, ὃς γνησίους μὲν θεραπείας ἀσπάζεται — γνήσιοι δ’ εἰσὶν αἱ ψυχῆς ψιλὴν καὶ μόνην θυσίαν φερούσης ἀλήθειαν —, τὰς δὲ νόθους ἀποστρέφεται· νόθοι δ’ ὅσαι διὰ τῶν ἐκτὸς ἀφθονιῶν ἐπιδείξεις.",
+      "english_text": "still let him not be classed among pious men, for he also has wandered out of the way to piety, looking upon ceremonious worship as equivalent to sanctity, and giving gifts to the incorruptible being who will never receive such offerings, and flattering him who can never listen to flattery, who loves genuine worship (and genuine worship is that of the soul which offers the only sacrifice, plain truth), and rejects all spurious ministrations, and those are spurious which are only displays of external riches and extravagance.",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "22",
+      "english_ref": "22",
+      "greek_text": "πεδίῳ πλανώμενον αὐτὸν ἀνθρώπου (Gen. 37, 15) τὸ κύριον ὄνομα οὔ φασί τινες δεδηλῶσθαι, καὶ αὐτοὶ τρόπον τινὰ πεπλανημένοι διὰ τὸ μὴ δύνασθαι τὴν ὀρθὴν ὁδὸν τῶν πραγμάτων ἐναργῶς ὁρᾶν· εἰ γὰρ μὴ τὸ ψυχῆς ὄμμα ἐπεπήρωντο, ἔγνωσαν ἂν ὅτι τοῦ πρὸς ἀλήθειαν ἀνθρώπου τὸ ἰδιαίτατον καὶ εὐθυβολώτατον ὄνομά ἐστιν αὐτὸ τοῦτο ἄνθρωπος, ἠρθρωμένης καὶ λογικῆς διανοίας οἰκειοτάτη πρόσρησις.",
+      "english_text": "But some say that the proper name of the man who found him wandering in the plain is not mentioned, and they themselves are in some degree mistaken here, because they are unable clearly to discover the true way of this business, for if they had not been mutilated as to the eye of the soul, they would have known that of one who is truly a man, the most proper, and appropriate, and felicitous name is this very name of man, being the most appropriate appelation of a well regulated and rational mind.",
+      "confidence": 0.8295898394056676,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "23",
+      "english_ref": "23",
+      "greek_text": "οὗτος ὁ ἄνθρωπος ἐν ἑκάστου τῇ ψυχῇ τοῦ συνειδότος ἡνίαις τὸν αὐθάδη μετὰ ἀφηνιασμοῦ δρόμον γλώττης ἐπέσχεν.",
+      "english_text": "This man, dwelling in the soul of each individual, is found at one time to be a ruler and monarch, and at another time to be a judge and umpire of the contests which take place in life. At times also he takes the place of a witness and accuser, and without being seen he corrects us from within, not suffering us to open our mouths, but taking up, and restraining, and bridling, with the reins of conscience the self-satisfied and restive course of the tongue.",
+      "confidence": 0.624537037037037,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "24",
+      "english_ref": "24",
+      "greek_text": "οὗτος ὁ ἔλεγχος ἐπύθετο τῆς ψυχῆς, ἡνίκα τὴν πλάνην εἶδεν αὐτῆς· „τί ζητεῖς“ (Gen. 37, 15) ; ἆρά γε φρόνησιν; τί οὖν ἐπὶ πανουργίας βαίνεις; ἀλλὰ σωφροσύνην; ἀλλ’ ἐπὶ φειδωλίαν ἡ τρίβος ἄγει· ἀλλὰ ἀνδρείαν; θρασύτης προσέρχεται ταύτῃ· ἀλλ’ εὐσέβειαν μετέρχῃ;",
+      "english_text": "This convicting feeling it is which inquires of the soul when it sees it wandering about, What seekest thou? Is it wisdom? why then do you go after wickedness? Or is it temperance? but this path of yours leads to niggardliness. Or is courage? by this path you will only arrive at rashness. Or are you in pursuit of piety? this is the road to superstition.",
+      "confidence": 0.7633445200731077,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "25",
+      "english_ref": "25",
+      "greek_text": "δεισιδαιμονίας ἡ ὁδός. ἐὰν δὲ φάσκῃ ζητεῖν τοὺς ἐπιστήμης λόγους καὶ ποθεῖν ὡς τοὺς ἐγγυτάτω γένους ἀδελφούς, μὴ πάνυ πιστεύωμεν αὐτῇ· οὐ γὰρ ἂν ἐπυνθάνετο „ποῦ βόσκουσιν“ (ib. v. 16), ἀλλὰ „ποῦ ποιμαίνουσιν“· οἱ μὲν γὰρ βόσκοντες τροφὰς τὰ αἰσθητὰ πάντα παρέχουσι τῷ τῶν αἰσθήσεων ἀλόγῳ καὶ ἀπλήστῳ θρέμματι, δι’ ἃς ἀκράτορες ἑαυτῶν γινόμενοι καὶ κακοδαιμονοῦμεν, οἱ δὲ ποιμαίνοντες ἀρχόντων καὶ ἡγεμόνων ἔχοντες δύναμιν τὰ ἐξηγριωμένα ἡμεροῦσι στέλλοντες τὸ τῶν ἐπιθυμιῶν μέγεθος.",
+      "english_text": "But if it should say that it is seeking words of wisdom, and that it is longing for them, as for what is nearest akin to its own race, we must not give implicit belief to this, for the question was not, Where are they feeding their flocks? but Where are they tending them? for they who feed their flocks supply nourishment, and all the objects of the outward senses to the animal of the outward senses devoid of reason and insatiable; by means of which outward senses and their indulgence, we become unable to govern ourselves and fall into misfortune; but they who tend their flocks, having the power of rulers and governors, make those gentle which were fierce before, checking the mighty power of the appetites.",
+      "confidence": 0.8607330567081604,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "26",
+      "english_ref": "26",
+      "greek_text": "εἴπερ οὖν ἐζήτει τοὺς ἀρετῆς πρὸς ἀλήθειαν ἀσκητάς, ἐσκέπτετ’ ἂν αὐτοὺς ἐν βασιλεῦσιν, οὐκ ἐν οἰνοχόοις ἢ σιτοποιοῖς ἢ μαγείροις· οὗτοι μὲν γὰρ τὰ πρὸς ἡδονὰς εὐτρεπίζουσιν, ἐκεῖνοι δὲ ἡδονῶν ἄρχουσι.",
+      "english_text": "If, therefore, he was in all sincerity seeking the practises of virtue, he would have sought for them among kings, and not among cup-bearers, or cooks, or confectioners, for these last prepare things which have reference to pleasure, but the former are masters of pleasure.",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "27",
+      "english_ref": "27",
+      "greek_text": "ἐντεῦθεν“ (Gen. 37, 17). δείκνυσι δὲ τὸν σωματικὸν ὄγκον δηλῶν ὅτι πάντες, οἷς ὑπὲρ κτήσεως ἀρετῆς πόνος διαθλεῖται, τὸν περίγειον καταλελοιπότες χῶρον μετεωροπολεῖν ἐγνώκασιν οὐδεμίαν τῶν σωματικῶν ἐφελκόμενοι κηρῶν· καὶ γὰρ λεγόντων ἀκηκοέναι φησὶν αὐτῶν·",
+      "english_text": "And he shows here the mass of the body; clearly proving that all those by whom labour is practised for the sake of the acquisition of virtue, having left the regions of earth, have determined on contemplating only what is sublime, dragging with them no stain of the body. For he says, too, that he had heard them say,",
+      "confidence": 0.8852445803224014,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "28",
+      "english_ref": "28",
+      "greek_text": "„εἰς Δωθαεὶμ πορευθῶμεν“ (ibid.) — ἑρμηνεύεται δὲ ἔκλειψις ἱκανή —, παριστάντων ὅτι οὐ μέσως ἀλλ’ ἄκρως ἀπόλειψιν καὶ ἔκλειψιν τῶν ἃ μὴ πρὸς ἀρετὴν συνεργεῖ μεμελετήκασι, καθὰ καὶ „Σάρρᾳ ἔτι γίνεσθαι τὰ γυναικεῖα ἐξέλιπε“ (Gen. 18, 11)· θήλεα δὲ φύσει τὰ πάθη, ὧν ἔκλειψιν ἐπιτηδευτέον παρὰ τοὺς ἄρρενας τῶν εὐπαθειῶν χαρακτῆρας. οὐκοῦν „ἐν πεδίῳ“ τουτέστιν ἐν ἁμίλλῃ λόγων εὑρίσκεται καὶ ὁ ποικίλου δόγματος εἰσηγητὴς πρὸς πολιτείας μᾶλλον ἢ πρὸς ἀληθείας τύπον χρησίμου πλανώμενος Ἰωσήφ.",
+      "english_text": "\"Let us go to Dotham:\" and the name Dotham, being interpreted, means \"a sufficient leaving;\" showing that it was with no moderate resolution, but with extreme determination that they had decided on leaving and abandoning all those things which do not co-operate towards virtue, just as the customs of women had ceased any longer to affect Sarah. But the passions are female by nature, and we must study to quit them, showing our preference for the masculine characters of the good dispositions. Therefore the interpreter of divers opinions, the wandering Joseph, is found in the plain, that is to say, in a contention of words, having reference to political considerations rather than to useful truth;",
+      "confidence": 0.9051228375614879,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "29",
+      "english_ref": "29",
+      "greek_text": "εἰσὶ δέ τινες τῶν ἀγωνιστῶν οἳ διὰ σώματος εὐεξίαν, ἀπειπόντων τῶν ἀντιπάλων, ἐστεφανώθησαν ἀμαχὶ μηδ’ αὐτὸ μόνον κονισάμενοι ἀσυγκρίτου „ἐξέρχεται μὲν εἰς τὸ πεδίον“ (Gen. 24, 63), ἁμιλλησόμενος δ’ οὐδενί, πάντων κατεπτηχότων τῶν ἀνταγωνιστῶν τὸ μεγαλεῖον καὶ ὑπερβάλλον ἐν ἅπασι τῆς φύσεως αὐτοῦ, μόνον δὲ ἰδιάσαι βουλόμενος καὶ ἰδιολογήσασθαι τῷ συνοδοιπόρῳ καὶ ἡγεμόνι τῆς τε ὁδοῦ καὶ τῆς ψυχῆς θεῷ.",
+      "english_text": "but there are some adversaries who, by reason of their vigorous body, their antagonists having succumbed, have gained the prize of victory without a struggle, not having even had, to descend into the arena to contend for it, but obtaining the chief honours on account of their incomparable strength. Using such a power as this with reference to the most divine thing that is in us, namely, our mind, \"Isaac goes forth into the plain;\"",
+      "confidence": 0.7725961538461539,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "30",
+      "english_ref": "30",
+      "greek_text": "τεκμήριον δὲ ἐναργέστατον τοῦ μηδένα προσομιλοῦντα τῷ Ἰσαὰκ θνητὸν εἶναι· Ῥεβέκκα γὰρ ἡ ὑπομονὴ πεύσεται τοῦ παιδὸς ἕνα ὁρῶσα καὶ ἑνὸς μόνου λαμβάνουσα φαντασίαν· „τίς ὁ ἄνθρωπος οὗτος ὁ πορευόμενος εἰς συνάντησιν ἡμῖν“ (ib. v. 65) ; ἡ γὰρ ἐπιμένουσα τοῖς καλοῖς ψυχὴ ἱκανὴ μέν ἐστι τὴν αὐτομαθῆ σοφίαν καταλαμβάνειν, ἐπίκλησιν Ἰσαάκ, οὔπω δὲ δυνατὴ τὸν τῆς σοφίας ἡγεμόνα θεὸν ἰδεῖν.",
+      "english_text": "And the clearest possible proof of this is, that no one who conversed with Isaac was a mere mortal. Rebecca, that is perseverance, asks her servant, seeing but one person, and having no conception but of one only, \"Who is this man who is coming to meet us?\" For the soul which perseveres in what is good, is able to comprehend all self-taught wisdom, which is named Isaac, but is not yet able to see God, who is the guide of wisdom.",
+      "confidence": 0.7470696721311476,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "31",
+      "english_ref": "31",
+      "greek_text": "παρὸ καὶ ὁ παῖς ἐπισφραγιζόμενος τὸ μὴ δύνασθαι καταλαβεῖν τὸν ἀειδῆ καὶ προσομιλοῦντα ἀοράτως φησίν· „οὗτος ὁ κύριός μου“ (ibid.), τὴν δεῖξιν φέρων ἐπὶ τὸν Ἰσαὰκ μόνον· οὐ γὰρ εἰκὸς προφανέντων δυεῖν ἕνα δεικνύναι, ἀλλὰ τὸν ἄδεικτον οὐκ εἶδε πᾶσι τοῖς μέσοις ἀόρατον ὄντα.",
+      "english_text": "Therefore, also, the servant confirming the fact that he cannot be comprehended who is invisible, and who converses with man invisibly, says, \"He is my lord,\" pointing to Isaac alone. For it is not natural that, if two persons were in sight, he should point to one alone; but the person whom he did not point to, he did not see, inasmuch as he was invisible to all persons of intermediate character.",
+      "confidence": 0.8003496503496503,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "33",
+      "english_ref": "33",
+      "greek_text": "πάντα γάρ, τὸ τοῦ λόγου δὴ τοῦτο, κινοῦσι λίθον φάσκοντες· οὐκ οἰκία ψυχῆς τὸ σῶμα; διὰ τί οὖν οἰκίας, ὡς μὴ γένοιτο ἐρείπιος, οὐκ ἐπιμελησόμεθα; οὐκ ὀφθαλμοὶ καὶ ὦτα καὶ ὁ τῶν ἄλλων χορὸς αἰσθήσεων ψυχῆς ὥσπερ τινὲς δορυφόροι καὶ φίλοι; συμμάχους οὖν καὶ φίλους οὐκ ἐν ἴσῳ τιμητέον ἑαυτοῖς; ἡδονὰς δὲ καὶ ἀπολαύσεις καὶ τὰς παρὰ πάντα τὸν βίον τέρψεις τοῖς τεθνεῶσιν ἢ τοῖς ἀλλ’ οὐχὶ τοῖς ζῶσιν ἡ φύσις ἐδημιούργει; πλοῦτον δὲ καὶ δόξαν καὶ τιμὰς καὶ ἀρχὰς καὶ τὰ ἄλλα ὅσα τοιαῦτα τί παθόντες οὐ ποριούμεθα, ἐξ ὧν οὐ μόνον τὸ ἀσφαλῶς ἀλλὰ καὶ εὐδαιμόνως ζῆν περιγίνεται;",
+      "english_text": "for, as the proverb is, they leave no stone unturned, saying, Is not the body the house of the soul? Why, then, should we not take care of the house that it may not become ruinous? Are not the eyes and the ears, and all the company of the other outward senses, guards, as it were, and friends of the soul? Ought we not, then, to honour men’s friends and allies equally with themselves? And has nature made pleasures and enjoyments, and all the delights which are spread over the whole of life for the dead, or for those who have never even had any existence at all, and not rather for those who are alive? And what ought we not to do to procure for ourselves riches, and glory, and honours, and authority, and all other things of that sort, which are the only means of living not only safely, but happily?",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "34",
+      "english_ref": "34",
+      "greek_text": "μάρτυς δὲ ὁ βίος τούτων· οἱ μὲν γὰρ λεγόμενοι φιλάρετοι ἄδοξοι σχεδὸν ἅπαντες, εὐκαταφρόνητοι, ταπεινοί, τῶν ἀναγκαίων ἐνδεεῖς, ὑπηκόων μᾶλλον δὲ καὶ δούλων ἀτιμότεροι, ῥυπῶντες, ὠχροί, κατεσκελετευμένοι, λιμὸν ὑπ’ ἀσιτίας ἐμβλέποντες, νοσερώτατοι, μελετῶντες ἀποθνῄσκειν· οἱ δ’ αὑτῶν ἐπιμελούμενοι ἔνδοξοι, πλούσιοι, ἡγεμόνες, ἐπαινούμενοι, τιμώμενοι, [πάλιν] ὑγιεινοί, πίονες, ἐρρωμένοι, ἁβροδίαιτοι, θρυπτόμενοι, πόνον οὐκ εἰδότες, ἡδοναῖς συζῶντες διὰ πασῶν τῶν αἰσθήσεων ἐπὶ τὴν πανδεχῆ ψυχὴν",
+      "english_text": "And the life of these men is a proof of this. For they who are called lovers of virtue are nearly all of them men inglorious, easily to be despised, lowly, in need of necessary things, more dishonourable than subjects, or even than slaves, sordid, pale, cadaverous-looking, bearing want and hunger in their countenances, full of diseases, men who would be glad to die. But those who take care of themselves are men of reputation, rich, leaders, men in the enjoyment of praise and honour; moreover, they are healthy, stout, and vigorous; living delicately, nursed in luxury, strangers to labour, living in the constant company of pleasure, and using all their outward senses to bring delights to the soul, which is capable of receiving them all.",
+      "confidence": 0.7224297397286947,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "35",
+      "english_ref": "35",
+      "greek_text": "τὰ ἡδέα φερούσαις. πράξεων ἐπαινετῶν ἀσκηταὶ γενόμενοι, τερθρείας λόγων ἀλλ’ οὐδ’ ὄναρ ἐπῃσθημένοι, τοῖς δὲ ἀμφότερα ἐξεγένετο, τὴν μὲν διάνοιαν εὐβουλίᾳ καὶ ἀγαθοῖς ἔργοις, τοὺς δὲ λόγους ταῖς περὶ αὐτοὺς τέχναις μάλιστα ὀχυρώσασθαι·",
+      "english_text": "Arguing therefore in this prolix train of reasoning, they thought that they got the better of those who were not accustomed to deal in sophistry. But the cause of their victory was not the strength of those who got the better, but the weakness of their adversaries in these matters. For of those who practise virtue, some treasured up what is good in their soul alone, becoming practisers of praiseworthy actions, and having no knowledge whatever of sophistries of words. But they who were armed in both ways, having their minds furnished with wise counsel and with good deeds, and having also good store of reasons to bring forward according to the arts of the sophists,",
+      "confidence": 0.6524572649572649,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "36",
+      "english_ref": "36",
+      "greek_text": "τούτοις μὲν οὖν πρὸς τὰς ἐριστικὰς ἐνίων ἁμίλλας ἀπαντᾶν ἐμπρεπές, οἷς τοὺς ἐναντίους ἀμύνονται πεπορισμένοις ἐξ ἑτοίμου, τοῖς δὲ προτέροις οὐδεμία ἀσφάλεια· γυμνοὶ γὰρ πρὸς ὡπλισμένους τίνες ἂν ἰσοκρατῶς ἀπομάχεσθαι δυνηθεῖεν, ὁπότε καὶ παρεσκευασμένοις ἀγὼν ἄνισος;",
+      "english_text": "they had a good right to oppose the contentious behaviour of some others, having means at hand by which to repel their enemies. But the former sort had no safety whatever. For what men could fight naked against armed enemies on equal terms, when, even if they had been both equally armed, the contest would still have been unequal?",
+      "confidence": 0.8224016853932583,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "37",
+      "english_ref": "37",
+      "greek_text": "ὁ τοίνυν Ἄβελ τέχνας μὲν λόγων οὐκ ἔμαθε, διανοίᾳ δὲ μόνῃ τὸ καλὸν οἶδεν· οὗ χάριν τὴν εἰς τὸ πεδίον ἄφιξιν ἐχρῆν παραιτήσασθαι καὶ τῆς τοῦ δυσμενοῦς προκλήσεως ἀλογῆσαι· ἥττης γὰρ πᾶς ὄκνος ἀμείνων· τὸν δὲ ὄκνον τοῦτον οἱ μὲν ἐχθροὶ δειλίαν, ἀσφάλειαν δ’ οἱ φίλοι προσαγορεύουσι· φίλοις δὲ πρὸ δυσμενῶν ἅτε ἀψευδοῦσι πιστευτέον.",
+      "english_text": "Abel therefore had not learnt any of the arts of reasoning, but he knew what was good by his intellectual disposition alone; on account of which he ought to have refused to go down to the plain, and to have disregarded the invitation of his enemy. For any display of fear is better than being defeated; but such fear a man’s enemies call cowardice, but his friends entitle it safe prudence, and we must believe friends in preference to enemies, inasmuch as they tell us the truth.",
+      "confidence": 0.802114994934144,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "38",
+      "english_ref": "38",
+      "greek_text": "ἀπάταις ἤθη χρηστὰ τρόπον τινὰ φαρμακεύεται καὶ διαφθείρεται — ἐστιν (Exod. 6, 12) ; ἄλογος δέ, οὐχ ὥς φαμεν τὰ μὴ λογικὰ τῶν ζῴων, ἀλλ’ ὁ μὴ δικαιῶν τῷ διὰ τοῦ φωνητηρίου ὀργάνου γεγωνῷ λόγῳ χρῆσθαι, μόνῃ δὲ σημειούμενος καὶ ἐνσφραγιζόμενος διανοίᾳ τὰ τῆς ἀληθοῦς σοφίας, ἥτις ἀντίθετός ἐστι ψευδεῖ σοφιστείᾳ, θεωρήματα.",
+      "english_text": "And it is on this account, as you see, that Moses rejected the sophists in Egypt, that is to say, in the body whom he calls magicians (for it is owing to the tricks and deceits of their sophistical tricks that good dispositions and good habits are infected and corrupted), saying that he was \"not an eloquent man,\" in the sense in which we do when we call animals void of words, but speaking of himself as one who did not choose to employ words by means of his organs of speech, but who impresses and stamps the principles of true wisdom upon his mind alone, which is the most perfect opposite to false sophistry.",
+      "confidence": 0.671985082674335,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "39",
+      "english_ref": "39",
+      "greek_text": "καὶ οὐ βαδιεῖται πρότερον εἰς Αἴγυπτον οὐδ’ εἰς ἅμιλλαν ἀφίξεται τοῖς αὐτῆς σοφισταῖς, πρὶν ἢ τὸν προφορικὸν ἄκρως ἀσκηθῆναι λόγον, τὰς πρὸς ἑρμηνείαν ἁπάσας ἰδέας ἀναδείξαντος καὶ τελειώσαντος θεοῦ διὰ τῆς Ἀαρὼν χειροτονίας, ὃν ἀδελφὸν Μωυσέως ὄντα „στόμα“ καὶ ἑρμηνέα καὶ „προφήτην“ (Exod. 4, 16. 7, 1) εἴωθε καλεῖν· πάντα γὰρ ταῦτα τῷ λόγῳ συμβέβηκεν, ὃς",
+      "english_text": "And he will not go to Egypt, nor will he descend into the arena to strive against the sophists who contend in it, till he has thoroughly studied and practised the art of argumentative reasoning; God himself showing to him all the ideas which belong to such elocution, and making him perfect in them by the election of Aaron who was the brother of Moses, and whom he was accustomed to call his mouth-piece, and interpreter, and prophet.",
+      "confidence": 0.7653886554621849,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "40",
+      "english_ref": "40",
+      "greek_text": "ἀδελφός ἐστι διανοίας· πηγὴ γὰρ λόγων διάνοια καὶ στόμιον αὐτῆς λόγος, ὅτι τὰ ἐνθυμήματα πάντα διὰ τούτου καθάπερ νάματα ἀπὸ πηγῆς εἰς τοὐμφανὲς ἐπιρρέοντα ἀναχεῖται· καὶ ἑρμηνεύς ἐστιν ὧν ἐν τῷ ἑαυτῆς βουλευτηρίῳ βεβούλευκεν· ἔτι μέντοι καὶ προφήτης καὶ θεοπρόπος ὧν ἐξ ἀδύτων καὶ ἀοράτων χρησμῳδοῦσα οὐ παύεται.",
+      "english_text": "For all these attributes belong to speech, which is the brother of the intellect; for the intellect is the fountain of words, and speech is its mouth-piece, because all the conceptions which are entertained in the mind are poured forth by means of speech, like streams of water which flow out of the earth, and come into sight. And speech is an interpreter of the things which the mind has decided upon in its tribunal. Moreover, it is a prophet and a soothsayer of those things which the mind unceasingly pours forth as oracles from its inaccessible and invisible retreats.",
+      "confidence": 0.7770567092651757,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "41",
+      "english_ref": "41",
+      "greek_text": "δόγματα ἐριστικοῖς χρήσιμον· γεγυμνασμένοι γὰρ περὶ τὰς τῶν λόγων ἰδέας οὐκέτ’ ἀπειρίᾳ σοφιστικῶν παλαισμάτων ὀκλάσομεν, ἐξαναστάντες δὲ καὶ διερεισάμενοι τὰς ἐντέχνους αὐτῶν περιπλοκὰς εὐμαρῶς ἐκδυσόμεθα. οἱ δ’ ἅπαξ εὑρεθέντες σκιαμάχων ἀλλ’ οὐκ ἀγωνιστῶν ἐπιδείκνυσθαι δόξουσι δύναμιν· καὶ γὰρ ἐκεῖνοι καθ’ ἑαυτοὺς μὲν χειρονομοῦντες εὐδοκιμοῦσι, πρὸς δ’ ἅμιλλαν ἐλθόντες οὐ μετρίως ἀδοξοῦσιν.",
+      "english_text": "In this manner, then, it is useful to oppose those who are ostentatious about doctrines. For if we have been well exercised in various species of discourses, we shall no longer stumble through inexperience and want of acquaintance with the manoeuvres of sophists. But rising up and making a firm and resolute stand against them, we shall with ease escape from their artificial entanglements. But they, when their tricks have once been found out, will appear to be exhibiting the conduct of sparrers rather than of regular combatants. For they too, in their own opinion, get great credit by their style of beating the air; but when they come to a real contest they meet with no moderate disgrace.",
+      "confidence": 0.7786919831223629,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "42",
+      "english_ref": "42",
+      "greek_text": "εἰ δέ τις τὴν μὲν ψυχὴν ἀρεταῖς ἁπάσαις κεκόσμηται, τέχνας δὲ λόγων οὐκ ἐμελέτησεν, ἡσυχίᾳ χρώμενος ἀσφάλειαν γέρας ἀκίνδυνον εὑρήσεται, παρελθὼν δ’ ὡς Ἄβελ εἰς σοφιστικὸν ἀγῶνα πρὶν διερηρεῖσθαι πεσεῖται.",
+      "english_text": "And if any one is adorned as to his soul with all imaginable virtues, and yet has paid no attention to the art of speaking and arguing, if he only preserves silence he will obtain safety, a prize won without danger. But if he comes forth like Abel into a contest with sophists, he will be thrown down before he has obtained a firm footing.",
+      "confidence": 0.7451829268292682,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "43",
+      "english_ref": "43",
+      "greek_text": "καθάπερ γὰρ ἐν ἰατρικῇ τινες μὲν θεραπεύειν εἰδότες πάντα σχεδὸν πάθη καὶ νοσήματα καὶ ἀρρωστήματα λόγον οὐδενὸς αὐτῶν οὔτε ἀληθῆ οὔτ’ εἰκότα ἀποδοῦναι δύνανται, οἱ δ’ ἔμπαλιν τὰ μὲν περὶ λόγους εἰσὶ δεινοί, σημείων καὶ αἰτιῶν καὶ θεραπείας, ἐξ ὧν ἡ τέχνη συνέστηκεν, ἑρμηνεῖς ἄριστοι, τὰ δὲ πρὸς καμνόντων ἐπιμέλειαν σωμάτων φαυλότατοι, τῶν εἰς ἴασιν ἐθησαυρίσαντο.",
+      "english_text": "For, as in medical science, some practitioners who know how to cure almost every complaint, and disease, and infirmity, can nevertheless give no true or even probable account of any one of them; and on the other hand, others are very clever, as far as giving an account of the diseases goes, and in explaining their symptoms and causes, and the modes of cure, and are the most excellent interpreters possible of the principles of which their art is made up, but are utterly useless in the matter of attending the bodies of the sick, to the cure of which they are not able to contribute even the slightest assistance. In the same way, those who have devoted themselves to practical wisdom have often neglected to pay attention to their language; and those who have learnt their professions thoroughly as far as words go, have yet treasured up no good instruction in their soul.",
+      "confidence": 0.699077868852459,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "44",
+      "english_ref": "44",
+      "greek_text": "τούτους μὲν οὖν ἀχαλίνῳ κεχρημένους γλώττῃ μετ’ αὐθαδείας θρασύνεσθαι παράδοξον οὐδέν, ἀπόνοιαν γὰρ ἣν ἐξ ἀρχῆς ἐμελέτησαν ἐπιδείκνυνται· ἐκείνοις δ’ ὥσπερ ἰατροῖς τὸ ὑγιάζον τὰς ψυχῆς νόσους τε καὶ κῆρας ἀναδιδαχθεῖσι μέρος ἐπέχειν ἀναγκαῖον, μέχρις ἂν ὁ θεὸς καὶ τὸν ἄριστον ἑρμηνέα κατασκευάσῃ τὰς τοῦ λέγειν πηγὰς ἀνομβρήσας καὶ ἀναδείξας αὐτῷ.",
+      "english_text": "It is therefore nothing extraordinary, that these men being in the habit of indulging an unbridled tongue, should be full of self-sufficiency and boldness, displaying all the folly which they have from the first beginning cherished. But it is better to trust to those who, like skilful physicians, have a knowledge of the means of healing the diseases and evil affections of the soul, until God provides an excellent interpreter, and displays to and pours upon him the fountains of his eloquence.",
+      "confidence": 0.7756761325219743,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "46",
+      "english_ref": "46",
+      "greek_text": "καὶ γὰρ ἀφόρητόν τινα ἀπειλὴν ἐπανατείνεται φάσκων· „ἐγγισάτωσαν αἱ ἡμέραι τοῦ πένθους τοῦ πατρός μου, ἵνα ἀποκτείνω Ἰακὼβ τὸν ἀδελφόν μου“ (Gen. 27, 41)· εὔχεται γὰρ τὸ μόνον ἀπαθὲς εἶδος ἐν γενέσει τὸν Ἰσαάκ, ᾧ χρησμός ἐστι „μὴ καταβῆναι εἰς Αἴγυπτον“ (Gen. 26, 2), ἀλόγῳ πάθει χρῆσθαι, ἵνα, δοκῶ, ἡδονῆς ἢ λύπης ἤ τινος ἄλλου πάθους κέντροις τρωθῇ, δηλῶν ὡς ὁ ἀτελέστερος καὶ ἐπιπόνῳ προκοπῇ χρώμενος οὐ τραῦμα μόνον ἀλλὰ καὶ παντελῆ φθορὰν δέξεται· ὁ μέντοι χρηστὸς θεὸς οὔτε ἁλωτὸν πάθει τὸ ἀτρώτου γένους εἶδος ἐργάσεται οὔτε τὴν ἀρετῆς ἄσκησιν ἐπ’ ὀλέθρῳ φονῶντι καὶ δαιμονῶντι ἐκδώσει.",
+      "english_text": "for Esau had been holding out an intolerable threat over Jacob, saying, \"The days of mourning for my Father are at hand, that then I may slay my brother Jacob;\" and who makes laborious improvements, will receive not merely a wound, but utter destruction. However, the good God will neither allow that invulnerable species among created things to be subdued by passion, nor will he surrender the practise of virtue to bloody and raging destruction.",
+      "confidence": 0.6962834633220911,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "48",
+      "english_ref": "48",
+      "greek_text": "εἰκότως δὲ τοῦτο ἔπαθεν· ἡ γὰρ ἐξ αὑτῆς ἀνελοῦσα ψυχὴ τὸ φιλάρετον καὶ φιλόθεον δόγμα τὸν ἀρετῆς τέθνηκε βίον· ὥσθ’ ὁ Ἄβελ, τὸ παραδοξότατον, ἀνῄρηταί τε καὶ ζῇ· ἀνῄρηται μὲν ἐκ τῆς τοῦ ἄφρονος διανοίας, ζῇ δὲ τὴν ἐν θεῷ ζωὴν εὐδαίμονα. μαρτυρήσει δὲ τὸ χρησθὲν λόγιον, ἐν ᾧ „φωνῇ“ χρώμενος καὶ „βοῶν“ (Gen. 4, 10) ἃ πέπονθεν ὑπὸ κακοῦ συνδέτου τηλαυγῶς εὑρίσκεται· πῶς γὰρ ὁ μηκέτ’ ὢν διαλέγεσθαι δυνατός;",
+      "english_text": "And very reasonably may we attribute this to him. For the soul, which destroys out of itself the virtue-loving and God-loving principle, has died as to the life of virtue, so that Abel (which appears a most paradoxical assertion) both is dead and alive. He is dead, indeed, having been slain by the foolish mind, but he lives according to the happy life which is in God. And the holy oracle which has been given will bear witness, which expressly says, that he cried out loudly, and betrayed clearly by his cries",
+      "confidence": 0.7866256157635467,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "49",
+      "english_ref": "49",
+      "greek_text": "τὰ ποιοῦντα, ἕτερα δ’ εἶναι τὰ πάσχοντα δυνατὸν καὶ ῥᾴδιον· ὁπότε γὰρ πατὴρ υἱὸν τύπτει σωφρονίζων ἢ διδάσκαλος γνώριμον, ἕτερος ὁ τύπτων καὶ ἕτερος ὁ τυπτόμενός ἐστιν· ἐπὶ δὲ τῶν ἡνωμένων περὶ ὃ τὸ ποιεῖν καὶ τὸ πάσχειν εὑρίσκεται, καὶ οὔτε ἐν ἑτέρῳ χρόνῳ οὔτε ἕτερον, ἀλλὰ κατὰ τὸν αὐτὸν καὶ τὸ αὐτό· ἐπειδὰν γοῦν ἀθλητὴς ἑαυτὸν τοῦ γυμνάσασθαι χάριν ἀνατρίβῃ, πάντως τρίβεται, καὶ εἴ τις μέντοι παίει ἑαυτὸν ἢ τιτρώσκει, παίεταί τε καὶ τιτρώσκεται, καὶ γὰρ ὁ πηρῶν ἢ κτείνων ἑαυτὸν πηροῦται καὶ κτείνεται. πρὸς τί δὴ ταῦτ’ εἶπον;",
+      "english_text": "The wise man, therefore, who appears to have departed from this mortal life, lives according to the immortal life; but the wicked man who lives in wickedness has died according to the happy life. For in the various animals of different kinds, and in general in all bodies, it is both possible and easy to conceive, that the agents are of one kind, and the patients of another. For when a father beats his son, correcting him, or when a teacher beats his pupil, he who beats is one, and he who is beaten is another. But in the case of these beings, which are united and made one, only in the part as to which both acting and suffering are found to exist; these two things are there, neither at different times, nor do they affect different people, but they affect the same person in the same manner at the same time. At all events, when an athlete rubs himself for the sake of taking exercise, he is by all means rubbed also; and, if any one strikes himself, he himself is struck and wounded; and so also he who mutilates or kills himself as the agent, is mutilated or killed as the patient.",
+      "confidence": 0.7239452798663324,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "50",
+      "english_ref": "50",
+      "greek_text": "ὅτι τὴν ψυχὴν οὐχὶ τῶν διεστηκότων ἀλλὰ τῶν ἡνωμένων οὖσαν ἀνάγκη πάσχειν ὃ ποιεῖν δοκεῖ, καθάπερ ἀμέλει καὶ νῦν· δόξασα γὰρ ἀνελεῖν τὸ θεοφιλέστατον δόγμα ἑαυτὴν ἀνῄρηκε. μάρτυς δὲ Λάμεχ ὁ τῆς Κάιν ἀσεβείας ἔκγονος, ὅς φησι γυναιξὶ ταῖς ἑαυτοῦ, δυσὶ γνώμαις ἀγνώμοσιν· „ἄνδρα ἀπέκτεινα εἰς τραῦμα ἐμοί, καὶ νεανίσκον εἰς μώλωπα ἐμοί“ (Gen. 4, 23).",
+      "english_text": "Why, then, do I say this? Because it appears inevitable that the soul, inasmuch as it consists not of particles which are separated but of those which are united, should suffer what it appears to do, as in real truth it did in this instance; for, when it appeared to be destroying the God-loving doctrine, it destroyed itself. And Lamech is a witness to this, the descendant of the impiety of Cain, who says to his wives, who are the representatives of two inconsiderate opinions, \"I have slain a man to my hurt, and a young man to be a scar to me.\"",
+      "confidence": 0.8534328817733989,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "51",
+      "english_ref": "51",
+      "greek_text": "δῆλον γὰρ ὅτι, εἴ τις τὸν ἀνδρείας λόγον κτείνει, ἑαυτὸν ἐναντίᾳ νόσῳ τιτρώσκει δειλίας, καὶ εἴ τις τὴν ἀνηβῶσαν ἰσχὺν ἐν ἀσκήσει τῶν καλῶν ἀναιρεῖ, πληγὰς καὶ μεγάλας αἰκίας μετ’ οὐ μετρίας αἰσχύνης ἐπιφέρει ἑαυτῷ. λέγει μέντοι καὶ ἡ ὑπομονὴ ὅτι, ἐὰν ἄσκησις ἀναιρεθῇ καὶ προκοπή, οὐχ ἓν μόνον ἔκγονον ἀλλὰ καὶ τὰ ἄλλα",
+      "english_text": "For it is evident that if any one slays the principle of courage, he wounds himself with the opposite disease of cowardice; and if any one in the practise of honourable studies slays his vigorous strength, he is inflicting on himself wounds and great injuries with no moderate degree of disgrace. Therefore, indeed, perseverance says that if practise and improvement be destroyed she will lose not only one child but also her others also, and be an instance of complete childlessness.",
+      "confidence": 0.8466954022988504,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "52",
+      "greek_text": "ἀποβάλλει, ἀτεκνίαν ἐνδεξαμένη παντελῆ (Gen. 27, 45). δ’ ὁ βλάπτων τὸν ἀστεῖον ἐπιδέδεικται ζημιῶν ἑαυτόν, οὕτως καὶ ὁ προνομίας τοὺς ἀμείνους ἀξιῶν λόγῳ μὲν ἐκείνοις, ἔργῳ δὲ αὑτῷ περιποιεῖται ἀγαθόν. μαρτυρεῖ δέ μου τῷ λόγῳ ἡ φύσις καὶ τὰ ἀκολούθως αὐτῇ νομοθετηθέντα, διείρηται γὰρ ἄντικρυς καὶ σαφῶς οὕτως· „τίμα τὸν πατέρα καὶ τὴν μητέρα, ἵνα εὖ σοι γένηται“ (Exod. 20, 12)· οὐχὶ τοῖς τιμωμένοις, φησίν, ἀλλὰ „σοί“· ἐάν τε γὰρ τὸν νοῦν ὡς πατέρα τοῦ συγκρίματος ἐάν τε τὴν αἴσθησιν ὡς μητέρα διὰ τιμῆς ἔχωμεν, εὖ πρὸς ἐκείνων αὐτοὶ πεισόμεθα.",
+      "english_text": "But as he who injures a good man is proved to be doing injury to himself, so also does he who thinks his betters worthy of privileges, in word indeed claim advantage for them, but in fact he is procuring it for himself. And nature here bears testimony in support of my argument, and so do all the laws which have been established in consistency with her; for there is a positive and express and intelligible command laid down in these words: \"Honour thy father and thy mother, that it may be well with thee;\"",
+      "confidence": 0.693935100548446,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "53",
+      "english_ref": "53",
+      "greek_text": "τιμὴ δὲ τοῦ μὲν νοῦ τὸ διὰ τῶν συμφερόντων ἀλλὰ μὴ διὰ τῶν ἡδέων θεραπεύεσθαι—πάντα δὲ τὰ ἀπ’ ἀρετῆς συμφέροντα —, τῆς δὲ αἰσθήσεως τὸ μὴ ἀφεθῆναι ῥύμῃ μιᾷ φέρεσθαι πρὸς τὰ ἐκτὸς αἰσθητά, ἐγχαλινωθῆναι δὲ ὑπὸ νοῦ κυβερνᾶν καὶ ἡνιοχεῖν τὰς ἀλόγους ἐν ἡμῖν δυνάμεις ἐπισταμένου.",
+      "english_text": "But the proper honour to be paid to the mind is first to be honoured on account of what is useful, and not on account of what is pleasant; but all things proceeding from virtue are useful. And the honour proper to be paid to the outward sense is when we do not allow ourselves to be carried away by its impetuosity towards the external objects of the outward senses, but compel it to be curved by the mind, which knows how to govern and guide the irrational powers in us.",
+      "confidence": 0.8234466543324082,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "55",
+      "english_ref": "55",
+      "greek_text": "ἱππικὴ μὲν γὰρ καὶ σκυλακευτική, ἐπιστήμη θεραπείας ἡ μὲν ἵππων ἡ δὲ σκυλάκων οὖσα, πορίζει τοῖς ζῴοις τὰ ὠφέλιμα, ὧν ἐκεῖνα δεῖται· μὴ πορίζουσα δὲ ἀμελεῖν ἂν δοκοίη. τὴν δὲ εὐσέβειαν θεοῦ θεραπείαν ὑπάρχουσαν οὐ θέμις ποριστικὴν εἰπεῖν τῶν ὠφελησόντων τὸ θεῖον· ὠφελεῖται γὰρ ὑπ’ οὐδενός, ἅτε μήτε ἐνδεὲς ὂν μήτε τινὸς τὸ ἐν ἅπασιν αὐτοῦ κρεῖττον πεφυκότος ὀνῆσαι, τοὐναντίον δὲ τὰ σύμπαντα συνεχῶς καὶ ἀπαύστως ὠφελεῖ.",
+      "english_text": "For skill in horsemanship and in judging of dogs, being in reality a ministering to horses and dogs, supplies those animals with the useful things of which each species is in need; and if it were not so to supply them it would seem to neglect them. But it is not proper to call piety, which consists in ministering to God, a virtue which is conversant about supplying the things which will be of use to the Deity; for the Deity is not benefited by any one, inasmuch as he is not in need of anything, nor is it in the power of any one to benefit a being who is in every particular superior to himself. But, on the contrary, God himself is continually and unceasingly benefiting all things.",
+      "confidence": 0.7261878257170206,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "56",
+      "english_ref": "56",
+      "greek_text": "ὥστε ὅταν τὴν εὐσέβειαν λέγωμεν εἶναι θεοῦ θεραπείαν, ὑπηρεσίαν τινὰ τοιαύτην φαμέν, ὁποίαν δοῦλοι δεσπόταις τὸ κελευόμενον ἀόκνως ποιεῖν ἐγνωκότες ὑπηρετοῦσι. διοίσει δὲ πάλιν, ὅτι οἱ μὲν δεσπόται ὑπηρεσίας ἐνδεεῖς, ὁ δὲ θεὸς οὐ χρεῖος· ὥστε ἐκείνοις μὲν τὰ ὠφελήσοντα αὐτοὺς ὑπηρετοῦσι, τῷ δ’ οὐδὲν ἔξω φιλοδεσπότου γνώμης παρέξουσι· βελτιῶσαι μὲν γὰρ οὐδὲν εὑρήσουσι, τῶν δεσποτικῶν πάντων ἐξ ἀρχῆς ὄντων ἀρίστων, μεγάλα δ’ αὑτοὺς ὀνήσουσι γνωρισθῆναι θεῷ προμηθούμενοι.",
+      "english_text": "So, when we say that piety is a ministering to God, we say that it is in some such a service as slaves discharge to their masters, who are taught to do without hesitation that which is commanded them; but, again, there will be a difference, because the masters are in need of service, but God has no such want. So that, in the case of the masters, the servants do supply that which will be of use to them, but to God they supply nothing beyond a mind imbued with a spirit of willing obedience; for they will not find anything which they can improve, since all things belonging to masters are, from the very beginning, most excellent; but they will benefit themselves very greatly by determining to become friends to God.",
+      "confidence": 0.7194187601044646,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "57",
+      "english_ref": "57",
+      "greek_text": "σου“ (Gen. 4, 9) ; πρὸς ἣν ἀποκρίνεται· „οὐ γινώσκω, μὴ φύλαξ τοῦ ἀδελφοῦ μού εἰμι ἐγώ“ (ibid.) ; οὐκοῦν ἄξιον διαπορῆσαι, εἰ κυρίως ἐνδέχεται πυνθάνεσθαι θεόν· ὁ γὰρ ἐρωτῶν ἢ πυνθανόμενος περὶ ὧν ἀγνοεῖ ἐρωτᾷ τε καὶ πυνθάνεται ζητῶν ἀπόκρισιν, ἐξ ἧς ὃ μὴ οἶδεν εἴσεται· πάντα δὲ θεᾷ γνώριμα, οὐ τὰ παρόντα μόνον καὶ παρεληλυθότα ἀλλὰ καὶ τὰ μέλλοντα.",
+      "english_text": "I think, therefore, that enough has been now said with respect to those who appear to think that they do others good or harm. For it has been shown, that that which they think that they are doing to others, they in either case do to themselves. We will now examine the remainder of this event; the question is as follows:—\"Where is Abel, thy brother?\"",
+      "confidence": 0.7265846994535519,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "58",
+      "english_ref": "58",
+      "greek_text": "τί οὖν καὶ ἀποκρίσεως ὄφελος μὴ μελλούσης τινὰ περιποιεῖν τῷ πυνθανομένῳ κατάληψιν; ἀλλὰ ῥητέον, ὅτι τοιαῦτα οὐ πέφυκεν ἐπὶ τοῦ αἰτίου κυριολογεῖσθαι, ἀλλ’ ὥσπερ ψεῦδος λέγειν ἔστι μὴ ψευδόμενον, οὕτως καὶ ἐρώτημα καὶ πύσμα προφέρεσθαι μήτε ἐρωτῶντα μήτε πυνθανόμενον. τίνος οὖν ἕνεκα, φήσει τις ἴσως, λέγεται τοιαῦτα; ἵν’ ἡ μέλλουσα τὰς ἀποκρίσεις ποιεῖσθαι ψυχὴ δι’ ἑαυτῆς ἐλέγχηται περὶ ὧν εὖ ἢ κακῶς ἀποφαίνεται, μήτε κατηγόρῳ μήτε συναγωνιστῇ χρωμένη ἑτέρῳ.",
+      "english_text": "What need, then, has he of an answer which cannot give any additional knowledge to the questioner? But we must say that such things cannot properly be uttered by the Cause of all things, but that, as it is possible to say what is not true without lying, so it is possible for one to put a question or an interrogatory without either making inquiry or seeking for information. \"Why, then,\" some one will say, \"are such words spoken?\" In order that the soul which is about to give the answer may prove by itself what it answers correctly or incorrectly, having no one else either as an accuser or an adversary.",
+      "confidence": 0.8440617353660831,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "59",
+      "english_ref": "59",
+      "greek_text": "ἐπεὶ καὶ τὸν σοφὸν ὁπότε ἕνεκα τοῦ τὸν ἔπαινον τὸν ἐξ αὐτοῦ τοῦ λέγοντος παραστῆσαι· φησὶ γοῦν ὅτι εἶπεν· „ἰδοὺ ἐν τῇ σκηνῇ“ τουτέστι τῇ ψυχῇ. τί οὖν τὸ ἐκ τῆς ἀποκρίσεως ἐπαινετόν; ἰδοὺ τὴν ἀρετήν, φησίν, ἔχω παρ’ ἐμαυτῷ καθάπερ τι κειμήλιον, καὶ διὰ τοῦτ’ εὐθὺς εὐδαιμονῶ.",
+      "english_text": "Since, when he asks the wise man, Where is virtue?",
+      "confidence": 0.7080824209245742,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "60",
+      "english_ref": "60",
+      "greek_text": "χρῆσις γὰρ καὶ ἀπόλαυσις ἀρετῆς τὸ εὔδαιμον, οὐ ψιλὴ μόνον κτῆσις· χρῆσθαι δ’ οὐκ ἂν δυναίμην, εἰ μὴ σὺ καθεὶς ἐξ οὐρανοῦ τὰ σπέρματα ἀπεργάσαιο αὐτὴν ἐγκύμονα, ἡ δὲ εὐδαιμονίας γένος ἀποτέκοι τὸν Ἰσαάκ — εὐδαιμονίαν δὲ χρῆσιν ἀρετῆς τελείας ἐν βίῳ τελείῳ νενόηκα —. παρὸ καὶ τῆς προαιρέσεως ἀγάμενος αὐτὸν ὁμολογεῖ τελεσφορήσειν καιρίως ἃ",
+      "english_text": "For it is the use and enjoyment of virtue that is happiness, and not the bare possession of it. But I should not be able to use it unless you, by letting down the seeds from heaven, had yourself made virtue pregnant; and unless she had brought forth the germs of happiness, namely, Isaac. And I consider that happiness is the employment of perfect virtue in a perfect life. In reference to which he, approving of his own determination, promises that he will complete perfectly all that he asked.",
+      "confidence": 0.6716452131938858,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "61",
+      "english_ref": "61",
+      "greek_text": "ᾐτήσατο. εἶναι, τῷ δὲ Κάιν ἀκολούθως ψόγον φάσκοντι μὴ εἰδέναι, ποῦ ὁ δολοφονηθείς ἐστι παρ’ αὐτοῦ· δόξει γὰρ τὸν ἀκούοντα ἀπατήσειν ὡς οὐ πάντα διορῶντα καὶ τὴν ἀπάτην ᾗ μέλλει χρῆσθαι προκατειληφότα· ἔκθεσμος δὲ καὶ ἔκφυλος πᾶς ὁ τὸν τοῦ θεοῦ ὀφθαλμὸν οἰόμενός τι παρορᾶν.",
+      "english_text": "To him therefore the answer brought praise, as he confessed that virtue without the divine favour was not sufficient of itself to help any one; and, in consequence, it also brings blame to Cain, who says that he does not know where he is who has been treacherously slain by him. For he appears by this answer to be wishing to deceive his hearer, as one who does not see everything, and who has no previous suspicion of the deceit which he is about to use. But every one is wicked and worthy of proscription who thinks that the eye of God can ever fail to see anything.",
+      "confidence": 0.6830170316301702,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "62",
+      "english_ref": "62",
+      "greek_text": "ὁ δέ γε καὶ ἐπινεανιεύεται φάσκων· „μὴ φύλαξ τοῦ ἀδελφοῦ μού εἰμι ἐγώ“ (Gen. 4, 9) ; πάνυ γάρ, εἴποιμ’ ἂν, ἀθλίως ἔμελλε βιώσεσθαι, εἰ σὲ φρουρὸν καὶ φύλακα ἡ φύσις ἀγαθοῦ τοσούτου κατέστησεν. ἢ οὐχ ὁρᾷς ὅτι τὴν τῶν ἁγίων διατήρησίν τε καὶ φυλακὴν οὐ τοῖς ἐπιτυχοῦσιν ὁ νομοθέτης ἀλλὰ τοῖς τὰς γνώμας ἱερωτάτοις Λευίταις ἐπιτρέπει; ὧν ἀνάξιος κλῆρος γῆ καὶ ὕδωρ καὶ ἀὴρ ἔτι δὲ οὐρανὸς καὶ πᾶς ὁ κόσμος ἐνομίσθη, μόνος δ’ ἀξιόχρεως ὁ δημιουργός, ᾧ προσπεφεύγασιν ἱκέται γνήσιοι καὶ θεράποντες αὐτοῦ γινόμενοι, τὸ φιλοδέσποτον διὰ τῆς συνεχοῦς ὑπηρεσίας καὶ τῆς τῶν ἐπιτραπέντων ἀοκνοτάτης",
+      "english_text": "But Cain here speaks arrogantly, \"Am I my brother’s keeper?\" For we might altogether say he was sure hereafter to lead a miserable life, if nature made you the guardian and keeper of so good a man. Do you not see that the lawgiver entrusts the keeping and preservation of the holy things not to any chance person, but to the Levites, who were the most holy persons in their opinions? for whom the earth and the air and the water were considered an unworthy inheritance, but the heaven and the whole world were looked upon as their due. And the Creator alone is worthy of these things, to whom they have fled for refuge, becoming his sincere suppliants and servants, showing their love for their master in their continued service, and in the unhesitating observance of all the commands which are laid upon them, and in the preservation of the things entrusted to them.",
+      "confidence": 0.7490047243541333,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "63",
+      "english_ref": "63",
+      "greek_text": "ἐπιδεικνύμενοι φυλακῆς. ἱκέταις γενέσθαι φύλαξιν ἱερῶν, ἀλλ’ εἴ τινες ἀριθμὸν πεντηκοστὸν ἔλαχον ἄφεσιν καὶ ἐλευθερίαν παντελῆ καὶ ἐπάνοδον εἰς τὰς ἀρχαίας λήξεις προκηρύττοντα. „τοῦτο“ γάρ φησιν „ἐστὶ τὸ περὶ τῶν Λευιτῶν· ἀπὸ πέντε καὶ εἴκοσιν ἐτῶν εἰσελεύσεται μαρτυρίου, καὶ ἀπὸ πεντήκοντα ἐτῶν ἀποστήσεται τῆς λειτουργίας, καὶ οὐκ ἐργάσεται ἔτι, λειτουργήσει δὲ ὁ ἀδελφὸς αὐτοῦ· ὁ δὲ φυλάξει φυλακάς, ἔργα δὲ οὐκ ἐργάσεται“ (Num. 8, 24 — 26).",
+      "english_text": "And it has not fallen to the lot of all the suppliants to become guardians of the holy things, but to those only who have arrived at the number fifty, which proclaims remission of offences and perfect liberty and a return to their ancient possessions. \"For this,\" says the Scripture, \"is the law concerning the Levites: from twenty-five years old and upwards, they shall go in to wait upon the service of the tabernacle of the congregation: and from the age of fifty years they shall cease waiting upon the service thereof, and shall serve no more; but shall minister with their brethren in the tabernacle of the congregation, and they shall keep what is to be kept, and shall do no service.\"",
+      "confidence": 0.7298919081721438,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "64",
+      "english_ref": "64",
+      "greek_text": "οὐκοῦν τῷ μὲν ἡμίσει τὴν τελειότητα — τέλειος γὰρ ὁ πεντηκοστὸς λόγος, ὁ δὲ τῶν πέντε καὶ εἴκοσιν ἥμισυ μέρος — ἐνεργεῖν ἐπιτρέπει καὶ δρᾶν τὰ ἅγια τὴν δι’ ἔργων ἀρέσκειαν ἐπιδεικνυμένῳ — ἀρχὴ δέ, ὡς ἔφη τις τῶν πάλαι, τοῦ παντὸς ἥμισυ μέρος —, τῷ δὲ τελείῳ μηκέτι πονεῖν, τὰ δ’ ὅσα ἐκ μελέτης καὶ πόνου περιεποιήσατο φυλάττειν· μὴ γὰρ γενοίμην ἀσκητὴς ὧν μὴ φύλαξ αὖθις.",
+      "english_text": "Therefore, the Scripture charges him who has half perfection (for the number fifty is perfect, and the number twenty-five is the half of fifty), to work and to do what is holy, approving his ministration by his works. And the beginning, as an old writer has said, is half of the whole. But the perfect man it does not enjoin to labour any longer, but only to preserve what he has acquired by labour and diligence. For may I never become a practiser of what I ought not to be a preserver;",
+      "confidence": 0.6936184978074587,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "65",
+      "english_ref": "65",
+      "greek_text": "ἡ μὲν οὖν ἄσκησις μέσον, οὐ τέλειον, γίνεται γὰρ ἐν οὐ τελείαις μὲν ἀκρότητος δὲ ἐφιεμέναις ψυχαῖς· ἡ δὲ φυλακὴ παντελές, μνήμῃ τὰ ἀσκητὰ παραδοῦναι θεωρήματα τῶν ἁγίων, ἐπιστήμης καλὴν παρακαταθήκην φύλακι πιστῇ, ἣ μόνη τῶν λήθης πολυμηχάνων δικτύων ἀλογεῖ· ὥστε τὸν μνήμονα ὧν ἔμαθεν ὑγιῶς καὶ εὐθυβόλως καλεῖ φύλακα.",
+      "english_text": "subsequently practise therefore is mediocrity not perfection, for it takes place not in perfect souls, but in such as are seeking after perfection. But it is the perfect duty of guardianship to deliver to memory the well-practised contemplations of holy things, the excellent deposit of knowledge to a faithful guardian, who is the only one who disregards the ingenious and manifold nets of forgetfulness; so that the Scripture, with great propriety and felicity, calls him who is mindful of what he has learnt, the guardian of it.",
+      "confidence": 0.7360621734587252,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "66",
+      "english_ref": "66",
+      "greek_text": "οὗτος δὲ πρότερον ὅτε ἐγυμνάζετο μαθητὴς ἦν διδάσκοντος ἑτέρου· ὁπότε δὲ ἱκανὸς φυλάττειν ἐγένετο, διδασκάλου δύναμιν καὶ τάξιν ἔλαχε, τὸν ἀδελφὸν εἰς τὰς ὑπηρεσίας τῆς διδασκαλίας χειροτονήσας τὸν ἑαυτοῦ προφορικὸν λόγον· λέγεται γὰρ ὅτι „λειτουργήσει ὁ ἀδελφὸς αὐτοῦ“ (Num. 8, 26)· ὥστε ὁ μὲν τοῦ ἀστείου νοῦς φύλαξ καὶ ταμίας τῶν ἀρετῆς ἔσται δογμάτων, ὁ δ’ ἀδελφὸς αὐτοῦ λόγος λειτουργήσει τοῖς παιδείαν μετιοῦσι διεξιὼν τὰ σοφίας δόγματά τε καὶ θεωρήματα.",
+      "english_text": "And such an one before he practised was a pupil, having another to teach him; but when he became competent himself to guard what he had learnt, he then received the power and rank of a teacher, having appointed his brother, his own uttered discourse, to the ministration of teaching. For it is said that, \"His brother shall minister;\"",
+      "confidence": 0.6745186335403728,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "68",
+      "english_ref": "68",
+      "greek_text": "οὐκοῦν ὅτι καὶ λόγων καὶ διαθήκης θεοῦ φύλαξ ὁ ἀστεῖός ἐστιν, ἐναργῶς παρίστησι· καὶ μὴν ὅτι δικαιωμάτων καὶ νόμων ἑρμηνεὺς καὶ ὑφηγητὴς ἄριστος, πάλιν δεδήλωκε, τῆς μὲν ἑρμηνείας διὰ συγγενικοῦ ὀργάνου, τοῦ φωνητηρίου δήπου, συνισταμένης, τῆς δὲ φυλακῆς περὶ τὸν νοῦν ἐξεταζομένης, ὃς μέγα ταμεῖον ὑπὸ φύσεως δημιουργηθεὶς τὰς ἁπάντων καὶ σωμάτων καὶ πραγμάτων ἐννοίας εὐμαρῶς κεχώρηκεν. ἐλυσιτέλει δὴ καὶ τῷ φιλαύτῳ Κάιν φυλάξαι τὸν Ἄβελ· εἰ γὰρ διετήρησεν αὐτόν, κεκριμένου καὶ μέσου βίου μετεποιήσατ’ ἄν, ἀλλ’ οὐκ ἀμιγοῦς καὶ ἀκράτου κακίας ἐνεφορήθη.",
+      "english_text": "Therefore, he here clearly asserts that the good man is the guardian of the words and of the covenant of God. And, indeed, in another place he has shown that he is the best interpreter and declarer of his justifications and laws; the faculty of interpretation being displayed through its kindred organ—the voice, and guardianship being exerted through the mind, which having been made by nature as a great storehouse, easily contains the conceptions of all things, whether bodies or things. It would therefore have been worth the while of this self-loving Cain to have been the keeper of Abel; for if he had kept him he would have attained to a compounded and moderate kind of life, and would not have been filled with unmodified and absolute wickedness.",
+      "confidence": 0.7163616628676869,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "69",
+      "english_ref": "69",
+      "greek_text": "δολοφονῆσαι δοκοῦντι. ἡ μὲν οὖν ἀγανάκτησις ἐπὶ τῇ τοῦ δεδρακότος γνώμῃ γίνεται, ὅτι τὸ καλὸν ἀνελεῖν ἐβούλευσεν· ἡ δὲ χλεύη διὰ τὸ οἴεσθαι μὲν ἐπιβεβουλευκέναι τῷ κρείττονι, ἐπιβεβουλευκέναι δ’ οὐκ ἐκείνῳ μᾶλλον ἢ ἑαυτῷ· ζῇ",
+      "english_text": "And God said, \"What hast thou done? The voice of the blood of thy brother cries out to me from out of the ground.\"",
+      "confidence": 0.6768749999999999,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "70",
+      "english_ref": "70",
+      "greek_text": "μὲν γάρ, ὡς καὶ πρότερον ἔφην, ὁ τεθνάναι δοκῶν, εἴ γε καὶ ἱκέτης ὢν θεοῦ καὶ φωνῇ χρώμενος εὑρίσκεται, τέθνηκε δὲ ὁ περιεῖναι νομιζόμενος τὸν ψυχικὸν θάνατον, ἀρετῆς καθ’ ἣν ἄξιον μόνην ἐστὶ ζῆν ἀποσχοινισθείς· ὥστε καὶ τὸ „τί ἐποίησας“ ἴσον εἶναι τῷ „οὐδὲν ἐποίησας“, οὐδὲν ἤνυσας.",
+      "english_text": "For, as I have said before, he who appears to be dead is alive, inasmuch as he is found to be a suppliant of God and to utter a voice; and he who believes that he is still alive is dead, as to the death of the soul, inasmuch as he is excluded from virtue, according to which alone he is worthy to live. So that the expression, \"What hast thou done?\" is equivalent to, \"Thou hast done nothing; thou hast done no good for thyself.\"",
+      "confidence": 0.6585610104503421,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "71",
+      "english_ref": "71",
+      "greek_text": "οὐδὲ γὰρ ὁ σοφιστὴς Βαλαάμ, μάταιος ὢν ὄχλος ἐναντίων καὶ μαχομένων δοξῶν, βουληθεὶς ἀρὰς τίθεσθαι καὶ βλάπτειν τὸν ἀστεῖον ἴσχυσε, τοῦ θεοῦ τὰς κατάρας εἰς εὐλογίαν τρέποντος (Num. 23, 8), ἵνα καὶ τῆς πανουργίας ἀπελέγξῃ τὸν",
+      "english_text": "For neither was the sophist, Balaam, who was an empty multitude of contrary and contending doctrines, when he was desirous to imprecate curses upon and to injure the good man, able to do so; since God turned his curses into a blessing, in order to correct the unjust man of wickedness and to display his own love of virtue.",
+      "confidence": 0.9488611111111112,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "72",
+      "english_ref": "72",
+      "greek_text": "ἄδικον καὶ ἑαυτοῦ τὸ φιλάρετον παραστήσῃ. σωφροσύνην συμφέρον, τὴν ἐγκράτειαν ἀστεῖον, τὴν εὐσέβειαν ὠφελιμώτατον, τὴν ἄλλην ἀρετὴν ὑγιεινότατόν τε καὶ σωτήριον ἀποφαίνοντες, καὶ πάλιν τὴν ἀδικίαν ἄσπονδον, τὴν ἀκολασίαν νοσερόν, τὴν ἀσέβειαν ἔκθεσμον, τὴν ἄλλην κακίαν βλαβερώτατον διεξιόντες·",
+      "english_text": "But it is the nature of sophists to have for enemies the faculties which are in them, while their language is at variance with their thoughts and their thoughts with their language, and while neither is in the least degree consistent with the other. At all events, they wear out our ears, arguing that justice is a great bond of society, that temperance is a profitable thing, that continence is a virtuous thing, that piety is a most useful thing, and, of each other virtue, that it is a most wholesome and saving quality. And, on the other hand, that injustice is a quality with which we ought to have no truce, that intemperance is a diseased habit, that impiety is scandalous, and so going through every kind of wickedness, that each sort is most pernicious.",
+      "confidence": 0.6662414965986394,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "73",
+      "english_ref": "73",
+      "greek_text": "καὶ ὅμως τὰ ἐναντία τοῖς λεγομένοις φρονοῦντες οὐ παύονται, ἀλλ’ ὅταν φρόνησιν καὶ σωφροσύνην καὶ δικαιοσύνην καὶ εὐσέβειαν ὑμνῶσι, τότε δὴ μάλιστα ἀφραίνοντες ἀκολασταίνοντες ἀδικοῦντες ἀσεβοῦντες πάνθ’ ὡς ἔπος εἰπεῖν ἀνθρώπεια καὶ θεῖα συγχέοντές τε καὶ ἀνατρέποντες εὑρίσκονται.",
+      "english_text": "And, nevertheless, they never cease showing by their conduct that their real opinion is the reverse of their language. But, when they extol prudence and temperance and justice and piety, they then show that they are, above all measure, foolish, and intemperate, and unjust, and impious; in short, that they are throwing into confusion and overturning all divine and human regulations and principles.",
+      "confidence": 0.8299876693513142,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "74",
+      "english_ref": "74",
+      "greek_text": "πρὸς οὓς εἴποι τις ἂν ὀρθῶς, ὅπερ καὶ ὁ χρησμὸς ἔφη τῷ Κάιν· τί ἐποιήσατε; τί εἰργάσασθε αὑτοὺς ἀγαθόν; τί οἱ τοσοῦτοι περὶ ἀρετῆς λόγοι τὴν ὑμετέραν ψυχὴν ὠφέλησαν; τί τοῦ βίου μικρὸν ἢ μέγα μέρος ἐπηνωρθώσασθε; τί δ’; οὐχὶ τἀναντία διαβολὰς καθ’ αὑτῶν ἀληθεῖς ἠρανίσατε, ὅτι συνιέντες τὰ καλὰ καὶ τῷ λόγῳ φιλοσοφοῦντες ἑρμηνεῖς μὲν ἄριστοι γεγόνατε, τὰ δ’ αἴσχιστα καὶ φρονοῦντες καὶ ἐπιτηδεύοντες ἀεὶ ἁλίσκεσθε; οὐ μὴν ἔτι γε ἐν ταῖς ὑμετέραις ψυχαῖς τέθνηκε τὰ καλά, ζωπυρηθέντων κακῶν;",
+      "english_text": "And to them, therefore, one may very properly say what the divine oracle said to Cain, \"What is this that thou hast done?\" What good have ye done yourselves? What have all these discourses about virtue profited your souls? In what particular of life, whether small or great, have ye done well? What? Have you not, on the contrary, contributed to advancing true charges against yourselves? because, by expressing your approval of what is good, and philosophising as far as words go, you have been excellent interpreters, but are nevertheless discovered to be men who both think and practise shameful things. In fact, all good things are dead in your souls, these evils having been there kindled; and, on this account there is no one of you who is really alive.",
+      "confidence": 0.7949142573696144,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "75",
+      "english_ref": "75",
+      "greek_text": "διὰ τοῦτο ἕκαστος ὑμῶν οὐ περίεστιν. ὥσπερ γὰρ μουσικοῦ τινος ἢ γραμματικοῦ τελευτήσαντος ἡ μὲν ἐν ταῖς εἰσαεὶ μουσικοί τε καὶ γραμματικοὶ γενήσονται, οὕτως καὶ τὸ ἔν τινι φρόνιμον ἢ σῶφρον ἢ ἀνδρεῖον ἢ δίκαιον ἢ συνόλως σοφὸν ἂν ἀναιρεθῇ, οὐδὲν ἧττον ἐν τῇ τοῦ παντὸς ἀθανάτῳ φύσει φρόνησις ἀθάνατος καὶ ἀρετὴ σύμπασα ἄφθαρτος ἐστηλίτευται, καθ’ ἣν καὶ νῦν εἰσιν ἀστεῖοί τινες καὶ αὖθις γενήσονται·",
+      "english_text": "For as, when some musician or grammarian is dead, the music and grammar which existed in them dies with them, but their ideas survive, and in a manner live as long as the world itself endures; according to which the existing race of men, and those who are to exist hereafter in continual succession, will, to the end of time, become skilful in music and grammar. Thus, also, if the prudence, or the temperance, or the courage, or the justice, or, in short, if the wisdom of any kind existing in any individual be destroyed, nevertheless the prudence existing in the nature of the immortal universe will still be immortal; and every virtue is erected like a pillar in imperishable solidity, in accordance with which there are some good people now, and there will be some hereafter.",
+      "confidence": 0.7691787160208212,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "76",
+      "english_ref": "76",
+      "greek_text": "εἰ μὴ καὶ ἀνθρώπου τινὸς τῶν ἐν μέρει θάνατον φθορὰν ἐργάσασθαι φήσομεν ἀνθρωπότητι, ἣν εἴτε γένος εἴτε ἰδέαν εἴτε ἐννόημα εἴθ’ ὅ τί ποτε χρὴ καλεῖν οἱ ζητητικοὶ τῶν κυρίων ὀνομάτων εἴσονται. μία σφραγὶς πολλάκις μυρίας ὅσας ἀπείρους οὐσίας τυπώσασα πάντων ἔστιν ὅτε τῶν τύπων ἐξιτήλων αὐταῖς οὐσίαις γενομένων ἐν τῇ ἑαυτῆς φύσει μηδὲν βλαβεῖσα κατὰ χώραν ἔμεινεν.",
+      "english_text": "Unless, indeed, we should say that the death of any individual man is the destruction of humanity and of the human race, which, whether we ought to call it a genus, or a species, or a conception, or whatever else you please, those who are anxious about the investigation of proper names may determine. One seal has often stamped thousands upon thousands of impressions in infinite number, and though at times all those impressions have been effaced with the substances on which they were stamped, still the seal itself has remained in its pristine condition without being at all injured in its nature.",
+      "confidence": 0.9493652898825311,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "77",
+      "english_ref": "77",
+      "greek_text": "εἶτ’ οὐκ οἰόμεθα τὰς ἀρετάς, κἂν πάντες οἱ χαρακτῆρες, οὓς ἐνεσημήναντο ταῖς τῶν προσεληλυθότων ψυχαῖς, ὑπὸ μοχθηρᾶς διαίτης ἤ τινος ἑτέρας ἐξ αἰτίας ἐξίτηλοι γένωνται, τὴν ἀκήρατον ἑαυτῶν καὶ ἄφθαρτον φύσιν εἰσαεὶ σχήσειν; οὐκ εἰδότες οὖν οἱ παιδείας ἀμύητοι διαφορὰς οὔθ’ ὅλων πρὸς μέρη οὔτε γενῶν πρὸς εἴδη οὔτε τὰς ἐν τούτοις ὁμωνυμίας πάντα διὰ πάντων συγχέουσι καὶ φύρουσι.",
+      "english_text": "Again, do we not think that the virtues, even if all the characters which they have impressed upon the souls of those who have sought them should become effaced by wicked living, or by any other cause, would nevertheless preserve their own unadulterated and imperishable nature? Therefore, they who have not been duly initiated in instruction, not knowing anything about the differences between wholes and parts, or between genera and species, or about the homonymies which are incidental to these things, mix up all things together in a confused mass.",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "78",
+      "english_ref": "78",
+      "greek_text": "διὸ πᾶς φίλαυτος, ἐπίκλησιν Κάιν, διδαχθήτω ὅτι τὸ ὁμώνυμον τοῦ Ἄβελ ἀνῄρηκε, τὸ εἶδος, τὸ μέρος, τὸν ἀπεικονισθέντα τύπον, οὐ τὸ ἀρχέτυπον, οὐ τὸ γένος, οὐ τὴν ἰδέαν, ἅπερ οἴεται μετὰ ζῴων ἄφθαρτα ὄντα συνεφθαρκέναι. λεγέτω δή τις κατακερτομῶν αὐτὸν κἀπιχλευάζων· τί πεποίηκας, ὦ κακόδαιμον; οὐχ ἣν μὲν δοκεῖς ἀνῃρηκέναι φιλόθεον δόξαν, ζῇ παρὰ θεῷ; σαυτοῦ δὲ γέγονας αὐθέντης, ᾧ μόνῳ βιοῦν ἀνυπαιτίως ἠδύνασο ἐξ ἐνέδρας ἀνελών.",
+      "english_text": "On which account every one who is a lover of self, by surname Cain, should learn that he has destroyed the namesake of Abel, that is to say species, individuality, the image made according to the model; not the archetypal pattern, nor the genus, nor the idea, which he thinks are destroyed together with animals, though, in fact, they are indestructible. Let any one then say to him, reproving and ridiculing him, What is this that thou hast done, O wretched man? Does not the God-loving opinion which you flatter yourself that you have destroyed, live in the presence of God? But it is of yourself that you have become the murderer, by destroying from out of its seat the only quality by which you could live in a blameless manner.",
+      "confidence": 0.7836728942699092,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "80",
+      "english_ref": "80",
+      "greek_text": "πολλαχοῦ μὲν γὰρ τῆς νομοθεσίας οὐσίαν τῆς ψυχῆς ἀποφαίνεται τὸ αἷμα λέγων ἄντικρυς· „ἡ γὰρ ψυχὴ πάσης σαρκὸς αἷμά ἐστιν“ (Lev. 17, 11 al.)· ὁπότε δὲ πρῶτον μετὰ τὴν οὐρανοῦ καὶ γῆς καὶ τῶν μεταξὺ γένεσιν ἐδημιούργει τὸν ἄνθρωπον ὁ ζῳοπλάστης, φησὶν ὅτι „ἐνεφύσησεν εἰς τὸ πρόσωπον αὐτοῦ πνεῦμα ζωῆς, καὶ ἐγένετο ὁ ἄνθρωπος εἰς ψυχὴν ζῶσαν“ (Gen. 2, 7), πάλιν διὰ τούτου παριστάς, ὅτι πνεῦμά ἐστιν ἡ ψυχῆς οὐσία.",
+      "english_text": "for in many places of the law as given by Moses, he pronounces the blood to be the essence of the soul or of life, saying distinctly, \"For the life of all flesh is the blood thereof.\" is the essence of the life.",
+      "confidence": 0.6266782246879334,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "81",
+      "english_ref": "81",
+      "greek_text": "καὶ μὴν τῶν ἐξ ἀρχῆς ὑποθέσεων ἄκρως εἴωθε διαμεμνῆσθαι, τὰ ἀκόλουθα καὶ ὁμολογούμενα τοῖς προτέροις δικαιῶν ἐφαρμόττειν· οὐκ ἂν οὖν πνεῦμα ψυχῆς οὐσίαν προειπὼν αἷμα διαφέρον σῶμά τι αὖθις ἔλεγεν, εἰ μὴ πρός τι τῶν ἀναγκαιοτάτων καὶ συνεκτικωτάτων τὴν ἀναφορὰν ἐποιεῖτο. τί οὖν λεκτέον;",
+      "english_text": "And, indeed, he is accustomed diligently to record all the suggestions and purposes of God from the beginning, thinking it right to adopt his subsequent statements to aid to make them consistent with his first accounts. Therefore, after he had previously stated the breath to be the essence of the life, he would not subsequently have spoken of the blood as occupying the most important place in the body, unless he had been making a reference to some very necessary and comprehensive principle.",
+      "confidence": 0.8447596610706367,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "82",
+      "english_ref": "82",
+      "greek_text": "ἕκαστον ἡμῶν κατὰ τὰς προσεχεῖς τομὰς ἀριθμῷ δύο εἶναι συμβέβηκε, ζῷόν τε καὶ ἄνθρωπον· ἑκατέρῳ δὲ τούτων συγγενὴς δύναμις τῶν κατὰ ψυχὴν ἀποκεκλήρωται, τῷ μὲν ἡ ζωτική, καθ’ ἣν ζῶμεν, τῷ δ’ ἡ λογική, καθ’ ἣν λογικοὶ γεγόναμεν· τῆς μὲν οὖν ζωτικῆς μετέχει καὶ τὰ ἄλογα, τῆς δὲ λογικῆς οὐ μετέχει μέν, ἄρχει δὲ ὁ θεός, ἡ τοῦ πρεσβυτάτου λόγου πηγή.",
+      "english_text": "What then are we to say? The truth is, that every one of us according to the nearest estimation of numbers, is two persons, the animal and the man. And each of these two has a cognate power in the faculties, the seat of which is the soul assigned to it. To the one portion is assigned the vivifying faculty according to which we live; and to the other, the reasoning faculty in accordance with which we are capable of reasoning. Therefore, even the irrational animals partake of the vivifying power; but of the rational faculty, God—I will not say partakes, but—is the ruler, and that is the fountain of the most ancient Word.",
+      "confidence": 0.6589200507528565,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "84",
+      "english_ref": "84",
+      "greek_text": "διὰ τοῦτο σαρκὸς μὲν ψυχήν φησι τὸ αἷμα, εἰδὼς ὅτι ἡ σαρκῶν φύσις νοῦ μὲν οὐ μεμοίραται, ζωῆς δὲ καθάπερ καὶ ὅλον ἡμῶν τὸ σῶμα μετέχει, ἀνθρώπου δὲ ψυχὴν πνεῦμα ὀνομάζει, ἄνθρωπον οὐ τὸ σύγκριμα καλῶν, ὡς ἔφην, ἀλλὰ τὸ θεοειδὲς ἐκεῖνο δημιούργημα, ᾧ λογιζόμεθα, οὗ τὰς ῥίζας εἰς οὐρανὸν ἔτεινε καὶ τῆς ὑστάτης τῶν λεγομένων ἀπλανῶν ἁψῖδος ἐξῆψε.",
+      "english_text": "On this account, Moses represents God as calling the blood the life of the flesh, though he is aware that the nature of the flesh has no participation in intellect, but that it does partake of life, as also does our whole body. And the soul of man he names the spirit, meaning by the term man, not the compound being, as I said before, but that Godlike creation by which we reason, the roots of which he stretched to heaven, and fastened it to the outermost rim of the circle of those bodies which we call the fixed stars.",
+      "confidence": 0.7735335298452468,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "86",
+      "english_ref": "86",
+      "greek_text": "ἀειδοῦς, οἱ Μωυσέως γνώριμοι· τὴν γὰρ αἰτίαν χρησμῷ μαθὼν αὐτὸς ἡμῖν ὑφηγήσατο. ἔλεγε δὲ ὧδε· ψυχὴν οὐδεμίαν τῷ σώματι ὁ ποιῶν εἰργάζετο ἱκανὴν ἐξ ἑαυτῆς τὸν ποιητὴν ἰδεῖν, λογισάμενος δὲ μεγάλα ὀνήσειν τὸ δημιούργημα, εἰ λάβοι τοῦ δημιουργήσαντος ἔννοιαν — εὐδαιμονίας γὰρ καὶ μακαριότητος ὅρος οὗτος —, ἄνωθεν ἐνέπνει τῆς ἰδίου θειότητος· ἡ δ’ ἀόρατος ἀοράτῳ ψυχῇ τοὺς ἑαυτῆς τύπους ἐνεσφαγίζετο, ἵνα μηδ’ ὁ περίγειος χῶρος εἰκόνος ἀμοιρήσῃ θεοῦ.",
+      "english_text": "Let us then no longer doubt, we who are the disciples of Moses, how man conceived an idea of God who is destitute of all figure, for he was taught the reason of this by the divine oracle, and afterwards he explained it to us. And he spoke as follows:—\"He said that the Creator made no soul in any body capable of seeing its Creator by its own intrinsic powers. But having considered that the knowledge of the Creator and the proper understanding of the work of Creation, would be of great advantage to the creature (for such knowledge is the boundary of happiness and blessedness), he breathed into him from above something of his own divine nature. And his divine nature stamped her own impression in an invisible manner on the invisible soul, in order that even the earth might not be destitute of the image of God.",
+      "confidence": 0.7135271092132505,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "87",
+      "english_ref": "87",
+      "greek_text": "τὸ δ’ ἀρχέτυπον οὕτως ἦν ἄρα ἀειδές, ὥστε καὶ ἡ εἰκὼν οὐχ ὁρατή, τυπωθεῖσα μέντοι κατὰ τὸ παράδειγμα οὐκέτι θνητὰς ἀλλ’ ἀθανάτους ἐννοίας ἐδέχετο· πῶς γὰρ ἂν θνητὴ φύσις μένειν ἅμα καὶ ἀποδημεῖν ἠδύνατο ἢ τὰ ἐνταῦθα καὶ τὰ ἑτέρωθι καθορᾶν ἢ θάλατταν μὲν περιπλεῖν ἅπασαν, γῆν δὲ ἄχρι περάτων ἐπέρχεσθαι, ἢ νόμων καὶ ἐθῶν ἢ συνόλως πραγμάτων καὶ σωμάτων ἐφάπτεσθαι; ἢ δίχα τῶν ἐπιγείων καὶ τὰ μετάρσια καταλαμβάνειν, ἀέρα καὶ τροπὰς αὐτοῦ καὶ καιρῶν ἰδιότητας καὶ ὅσα ταῖς ἐτησίοις ὥραις καινουργούμενά τε κἀξ ἔθους ἀποτελεῖται;",
+      "english_text": "But the archetypal pattern was so devoid of all figure, that its very image was not visible, being indeed fabricated in accordance with the model, and accordingly it received not mortal but immortal conceptions. For how could a mortal nature at the same time remain where it was and also emigrate? or how could it see what was here and what was on the other side? or how could it sail round the white sea, and at the same time traverse the whole earth to its furthest boundaries, and inspect the customs and laws of the nations on all the affairs and bodies which are in existence? On separating them from the things of the earth, how could it arrive at a contemplation of the sublimer things of the air and its revolutions, and the peculiar character of its seasons, and all the things which at the periodical changes of the year are made anew, and, according to their usual habit, brought to perfection?",
+      "confidence": 0.8328401217951547,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "88",
+      "english_ref": "88",
+      "greek_text": "ἢ πάλιν δι’ ἀέρος εἰς οὐρανὸν ἀπὸ γῆς ἀνίπτασθαι καὶ τὰς ἐν οὐρανῷ φύσεις ἐξετάζειν, ὡς ἔχουσιν, ὡς κινοῦνται, τίνες ὅροι τῆς κινήσεως ἀρχῆς καὶ τέλους αὐταῖς, πῶς ἀλλήλαις τε καὶ τῷ παντὶ κατά τι συγγενείας δίκαιον ἁρμόζονται; τέχνας τε καὶ ἐπιστήμας ἐπινοῆσαι, ὅσαι τά τε ἐκτὸς δημιουργοῦσι καὶ τὰ περὶ σῶμα καὶ ψυχήν, ὡς ἑκάτερον βελτιωθήσεται, πραγματεύονται, καὶ μυρία ἄλλα, ὧν οὔτε ἀριθμὸν οὔτε φύσιν λόγῳ περιλαβεῖν εὔπορον;",
+      "english_text": "Or again, how could it fly through the air from earth to heaven, and investigate the natures which exist in heaven, and see of what nature they are, how they are moved, what are the limits of their movements, of their beginning and of their end; how they are adapted to one another and to the universe according to the just principles of kindred? Is it easy to have an accurate comprehension of the different arts and of the different branches of knowledge which bring external things into shape, and which are concerned with the affairs of the body and of the soul, with a view to the improvement of the two, and to understand ten thousand other things, of which it is not easy to describe either the number or the nature in language?",
+      "confidence": 0.888527690910925,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "89",
+      "english_ref": "89",
+      "greek_text": "μόνον γὰρ αὐτὸ τῶν παρ’ ἡμῖν ὁ νοῦς ἅτε πάντων ὠκυδρομώτατος καὶ τὸν χρόνον, ἐν ᾧ γίνεσθαι δοκεῖ, φθάνει καὶ παραμείβεται, κατὰ ἀοράτους δυνάμεις ἀχρόνως τοῦ τε παντὸς καὶ μερῶν καὶ τῶν τούτων αἰτίων ἐπιψαύων. ἤδη δὲ οὐ μόνον ἄχρι τῶν γῆς καὶ θαλάττης ἀλλὰ καὶ ἀέρος καὶ οὐρανοῦ περάτων ἐλθὼν οὐδ’ ἐνταῦθα ἔστη, βραχὺν ὅρον τοῦ συνεχοῦς καὶ ἀπαύστου δρόμου νομίσας τὸν κόσμον εἶναι, προσωτέρω δὲ χωρῆσαι γλιχόμενος καὶ τὴν ἀκατάληπτον θεοῦ φύσιν, ὅτι μὴ πρὸς τὸ εἶναι μόνον, καταλαβεῖν, ἢν δύνηται.",
+      "english_text": "For of all the faculties which exist in us, the mind alone, as being the most rapid in its motions of all, appears to be able to outrun and to pass by the time in which it originates, according to the invisible powers of the universe and of its parts existing without any reference to time, and touching the universe and its parts, and the causes of them. And now, having gone not only to the very boundaries of earth and sea, but also to those of air and heaven, it has not stopped even there, thinking that the world itself is but a brief limit for its continued and unremitting course. And it is eager to advance further; and, if it can possibly do so, to comprehend the incomprehensible nature of God, even if only as to its existence.",
+      "confidence": 0.7643574297188755,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "90",
+      "english_ref": "90",
+      "greek_text": "πῶς οὖν εἰκὸς βραχὺν οὕτως ὄντα τὸν ἀνθρώπινον νοῦν μήνιγγι ἢ καρδίᾳ, βραχέσιν ὄγκοις, ἐγκατειλημμένον μέγεθος οὐρανοῦ καὶ κόσμου τῷ παντὶ τελειότητος, ὅταν ἐννοῇ κόσμον, τοῖς πέρασι τοῦ παντὸς συνευρύνεται ῥῆξιν οὐ λαμβάνων· ὁλκὸς γὰρ ἡ δύναμις αὐτοῦ.",
+      "english_text": "How, then, is it natural that the human intellect, being as scanty as it is, and enclosed in no very ample space, in some membrane, or in the heart (truly very narrow bounds), should be able to embrace the vastness of the heaven and of the world, great as it is, if there were not in it some portion of a divine and happy soul, which cannot be separated from it? For nothing which belongs to the divinity can be cut off from it so as to be separated from it, but it is only extended. On which account the being which has had imparted to it a share of the perfection which is in the universe, when it arrives at a proper comprehension of the world, is extended in width simultaneously with the boundaries of the universe, and is incapable of being broken or divided; for its power is ductile and capable of extension.",
+      "confidence": 0.6005952380952382,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "91",
+      "english_ref": "91",
+      "greek_text": "ἀποδώσομεν. τῆς ἡμετέρας ψυχῆς τὸ μὲν ἄφωνόν ἐστι, τὸ δὲ φωνῆεν· τὸ μὲν ἄλογον ἄφωνον, φωνῆεν δ’ ὅσον λογικόν, ὃ δὴ μόνον ἔννοιαν εἴληφε θεοῦ· τοῖς γὰρ ἄλλοις μέρεσιν οὔτε θεὸν οὔτε τι νοητὸν καταλαβεῖν δυνάμεθα.",
+      "english_text": "Let this then be enough to say concisely about the essence of the soul. And now proceeding in regular order, we will explain the expression, that \"the voice of his blood cries out,\" in this manner, —of our soul, one part is dumb, and one part is endowed with utterance. All that part which is devoid of reason is likewise destitute of voice, but all that part which is rational is capable of speech, and that part alone has formed any conception of God; for, by the other parts of us, we are not able to comprehend God, or any other object of the intellect.",
+      "confidence": 0.6415487421383648,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "92",
+      "english_ref": "92",
+      "greek_text": "τῆς οὖν ζωτικῆς δυνάμεως, ἧς τὸ οὐσιῶδες αἷμα, μοῖρά τις ἐξαίρετον ἔσχε γέρας φωνὴν καὶ λόγον, οὐ τὸ διὰ στόματος καὶ γλώττης ῥέον νᾶμα, ἀλλὰ τὴν πηγήν, ἀφ’ ἧς αἱ τοῦ προφορικοῦ δεξαμεναὶ πληροῦσθαι πεφύκασιν· ἡ δὲ πηγὴ νοῦς ἐστι, δι’ οὗ τὰς πρὸς τὸν ὄντα ἐντεύξεις καὶ ἐκβοήσεις τῇ μὲν ἑκόντες τῇ δὲ καὶ ἄκοντες ἀναφθεγγόμεθα.",
+      "english_text": "Of our vivifying power, therefore, of which the blood is, as it were, the essence, one portion has particular honour, namely, that of speech and reason; I do not mean the stream which flows through the mouth and tongue, but I speak of the fountain itself, from which the channels of utterance are, in the course of nature, filled. And this fountain is the mind; by means of which, all our conversations with and cries to the living God take place, at one time being voluntary, and at another involuntary.",
+      "confidence": 0.7086431675519074,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "93",
+      "english_ref": "93",
+      "greek_text": "ὁ δὲ ἅτε ἀγαθὸς ὢν καὶ ἵλεως τοὺς ἱκέτας οὐκ ἀποστρέφεται, καὶ μάλισθ’ ὅταν ἐπὶ τοῖς Αἰγυπτίοις ἔργοις καὶ πάθεσι στενάζοντες ἀψευδῶς καὶ ἀπλάστως ἐκβοῶσι· τότε γὰρ ἀναβαίνειν φησὶ Μωυσῆς τοὺς λόγους αὐτῶν πρὸς τὸν θεόν (Exod. 2, 23), τὸν δὲ ἐπακούσαντα ῥύεσθαι τῶν παρεστώτων κακῶν·",
+      "english_text": "But he, as a good and merciful God, does not reject his suppliants, and most especially he does not, when they, groaning at the Egyptian deeds and passions, cry to him in sincerity and truth. For at such a time Moses says that, \"their words go up to God,\"",
+      "confidence": 0.7249443078813951,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "94",
+      "english_ref": "94",
+      "greek_text": "ταῦτα δὲ πάντα γίνεσθαι, ὅταν ὁ βασιλεὺς Αἰγύπτου τελευτήσῃ· τὸ παραδοξότατον· εἰκὸς γὰρ ἦν ἀποθανόντος τυράννου χαίρειν καὶ γεγηθέναι τοὺς τυραννουμένους· ἀλλὰ τότε λέγονται στενάζειν· „μετὰ γὰρ τὰς ἡμέρας τὰς πολλὰς ἐκείνας ἐτελεύτησεν ὁ βασιλεὺς Αἰγύπτου, καὶ κατεστέναξαν οἱ υἱοὶ Ἰσραήλ“ (ibid.).",
+      "english_text": "But that all these things should happen when the king of Egypt dies, should be a most strange thing; for it would be natural that when the tyrant died, all those who have been tyrannised over by him should rejoice and exult; but at that time they are said to groan. \"For after many days the king of Egypt died, and the children of Israel groaned.\"",
+      "confidence": 0.731642857142857,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "95",
+      "english_ref": "95",
+      "greek_text": "πρὸς μὲν οὖν τὸ ῥητὸν ἡ λέξις τὸ εὔλογον οὐ περιέχει, πρὸς δὲ τὰς ἐν ψυχῇ δυνάμεις τὸ κατ’ αὐτὴν ἀκόλουθον εὑρίσκεται. ὁ γὰρ ἀνασκιδνὰς καὶ ἀπορρίπτων τὰς περὶ τῶν καλῶν δόξας ὅταν ἐν ἡμῖν ζωπυρῆται Φαραὼ καὶ ὑγιαίνειν δοκῇ, εἰ δή τινα τῶν φαύλων ὑγιαίνειν λεκτέον, τὴν ἡδονὴν ἀποδεχόμεθα ἐγκράτειαν πέραν ὅρων ἐλαύνοντες· ὅταν δὲ ἀπόκρατος γένηται καὶ τρόπον τινὰ τελευτήσῃ ὁ τοῦ βδελυρῶς καὶ ἀσελγῶς ζῆν αἴτιος, τὸν σώφρονα ἐναυγασθέντες βίον μετακλαίομεν καὶ μεταστένομεν τῆς παλαιᾶς διαίτης ἑαυτούς, ὅτι ἡδονὴν ἀρετῆς προτιμήσαντες θνητὸν βίον ἀθανάτῳ ἐπεζεύξαμεν· λαβὼν δ’ οἶκτον τῆς συνεχοῦς ἡμῶν ὀλοφύρσεως ὁ μόνος",
+      "english_text": "Now here, if we look merely at the words, the expression does not appear to be reasonable; but if we have regard to the faculties in the soul, then its consistency is discovered. For as long as he who scatters abroad and dissipates the opinions about good things, namely, Pharaoh, is vigorous in us, and appears in a sound and healthy state, if indeed we can say that any wicked man is in such a condition, we receive pleasure, driving temperance away from our borders. But when he loses his strength, and in a manner dies, he who has been the cause of men’s living in a filthy and lascivious manner, then we, fixing our eyes on modesty of life, bewail and groan over ourselves on account of our former way of living; because then, honouring pleasure before virtue, we joined a mortal life to an immortal one; and the law taking pity on our continued lamentation, gently receives our suppliant souls, and easily drives away the Egyptian calamities which are brought upon them by the passions.",
+      "confidence": 0.8846821720869233,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "96",
+      "english_ref": "96",
+      "greek_text": "ἀδελφοκτονίας οἰκειοτάτας ἀρὰς τίθεται· πρῶτον μὲν γάρ φησιν αὐτῷ· „καὶ νῦν ἐπικατάρατος σὺ ἀπὸ τῆς γῆς“ (Gen. 4,11), δηλῶν πρῶτον ὅτι οὐχὶ νῦν ὅτε ἐδολοφόνησεν ἐναγὴς καὶ ἐπάρατός ἐστιν, ἀλλὰ καὶ πρότερον ὅτε ἐβούλευσε τὸν φόνον, τῆς γνώμης ἴσον τῷ τελείῳ δυναμένης.",
+      "english_text": "But on him who is incapable of receiving repentance on account of the enormity of the pollution which he has incurred by the murder of his brother, namely, on Cain, he lays well-deserved and fitting curses; for in the first place he says to him, \"And now, cursed art thou upon the earth:\"",
+      "confidence": 0.7069087747458533,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "97",
+      "english_ref": "97",
+      "greek_text": "ἕως μὲν γὰρ τὰ αἰσχρὰ μόνον ἐννοοῦμεν κατὰ ψιλὴν τοῦ νοῦ φαντασίαν, τότε τῆς διανοίας οὔκ ἐσμεν ὕποχοι, δύναται γὰρ καὶ ἀκουσίως ἡ ψυχὴ τρέπεσθαι· ὅταν δὲ προσγένηται τοῖς βουλευθεῖσιν ἡ πρᾶξις, ὑπαίτιον γίνεται καὶ τὸ βουλεύσασθαι, τὸ γὰρ ἑκουσίως διαμαρτάνειν ταύτῃ μάλιστα διαγνωρίζεται.",
+      "english_text": "for as long as we only conceive wicked things in the bad imagination of our minds, still, during that time, we are guilty of thoughts only, for the mind is capable of being changed even against its will; but when performance is added to the intention that has been conceived, then our deliberate purpose becomes also guilty; for this is the chief distinction between voluntary and involuntary sin.",
+      "confidence": 0.8358725182863114,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "98",
+      "english_ref": "98",
+      "greek_text": "κατάρατον δέ φησι τὸν νοῦν οὐκ ἀπ’ ἄλλου τινὸς ἢ ἀπὸ τῆς γῆς ἔσεσθαι· τῶν γὰρ χαλεπωτάτων αὐτοῦ συμφορῶν τὸ περὶ ἕκαστον ἡμῶν γεῶδες αἴτιον εὑρίσκεται· τὸ γοῦν σῶμα ἢ νόσῳ χρησάμενον τὰς ἀφ’ ἑαυτοῦ προσβαλὸν κῆρας ἄσης καὶ ἀδημονίας αὐτὸν ἐνέπλησεν ἢ πιανθὲν ἀμέτρως ἀπολαύσει ἡδονῶν ἀμβλυτέρας τὰς εἰς τὸ καταλαμβάνειν ἀκμὰς ἀπειργάσατο.",
+      "english_text": "But the scripture here pronounces that the mind shall be accursed, not from anything else, but from the earth; for of all the most grievous calamities which can happen to it, the earthly portion which exists in each of us is found to be the cause. At all events, when the body is afflicted with disease, it adds the miseries which are derived from itself, and so fills the mind with grief and despondency; or, on the other hand, if it has grown fat immoderately through enjoyment of pleasures, it makes all the faculties of the mind duller for the comprehension of nobler objects.",
+      "confidence": 0.7913543721236029,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "99",
+      "english_ref": "99",
+      "greek_text": "καὶ μὲν δὴ ἑκάστη τῶν αἰσθήσεων δεκτικὴ βλάβης ἐστίν· ἢ γὰρ κάλλος ἰδὼν ἔρωτος ἐτρώθη δεινοῦ πάθους βέλεσιν ἢ θάνατον ἀκούσας γένει προσήκοντός τινος ὑπὸ λύπης ἐκάμφθη· πολλάκις δὲ καὶ γεῦσις αὐτὸν κατέβαλεν ἀηδέσι χυλοῖς αἰκισαμένη ἢ πλήθει ἡδέων βαρύνασα· τῶν μὲν γὰρ πρὸς συνουσίαν οἴστρων τί δεῖ μεμνῆσθαι; πόλεις ὅλας καὶ χώρας καὶ κλίματα μεγάλα γῆς οὗτοι διέφθειραν, ὧν μάρτυς ἡ ποιητῶν καὶ συγγραφέων",
+      "english_text": "For, indeed, each of the outward senses is capable of receiving injury; for either a man beholding beauty is wounded by the darts of love, which is a terrible passion; or else, perhaps, if he hears of the death of any one related to him by birth, he is bowed down by sorrow: very often, too, taste gets the mastery of a man, when it is either tortured by disagreeable flavours, or weighed down by the multitude of delicacies. And why need I speak of the impetuous passions, which tend to the connexion of the two sexes? These have destroyed whole cities, and countries, and mighty nations of the earth; to which fact nearly the whole multitude, both of poets and of historians, bears abundant testimony.",
+      "confidence": 0.757434012066365,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "100",
+      "english_ref": "100",
+      "greek_text": "πληθὺς σχεδὸν ἅπασα. χαλεπὸν γὰρ διοιχθῆναί τε καὶ ἀνευρυνθῆναι τὰ τῶν αἰσθήσεων στόμια, ὡς ἀχανέσιν αὐτοῖς τὴν τῶν αἰσθητῶν φορὰν ποταμοῦ πλημμυροῦντος δίκην ἐπιχεῖσθαι, μηδενὸς τὴν βίαιον ὁρμὴν ἀνωθοῦντος· τότε γὰρ ἐγκαταποθεὶς ὁ νοῦς τοσούτῳ κλύδωνι βύθιος εὑρίσκεται, μηδ’ ὅσον ἀνανήξασθαι καὶ ὑπερκῦψαι δυνάμενος.",
+      "english_text": "And as to the manner in which the mind becomes accursed upon the earth, he adds further information immediately afterwards, saying: \"The earth which opened her mouth to receive the blood of thy brother.\" For it is very difficult for the mouths of the outward senses to be opened and widened, as even when they are not open the flood of the objects appreciable only by them rushes in like an overflowing river, nothing being capable of resisting their evident impetuosity; for then the mind is found to be overwhelmed, being wholly absorbed by so vast a wave, and being utterly unable to swim against it, or even to raise its head above it;",
+      "confidence": 0.8302101200686107,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "101",
+      "english_ref": "101",
+      "greek_text": "ἀλλὰ χρὴ τούτων ἑκάστῳ καταχρῆσθαι μὴ πρὸς ἃ δύναται μᾶλλον ἢ πρὸς τὰ βέλτιστα· δύναται μὲν γὰρ πάνθ’ ὁρᾶν χρώματα καὶ σχήματα ἡ ὄψις, ἀλλ’ ὁράτω τὰ φωτός, μὴ σκότους, ἄξια· δύναται δὲ καὶ τὸ οὖς πασῶν ἀντιλαμβάνεσθαι φωνῶν, ἀλλ’ ἐνίων παρακουέτω, μυρία γὰρ τῶν λεγομένων αἰσχρά· μηδ’ ὅτι γεύσεώς αἰθυίης πάντων ἀπλήστως ἐμφοροῦ· πολλὰ γὰρ τῶν οὐ τροφίμων μόνον ἀλλὰ καὶ περιττῶν νόσους μετὰ χαλεπῆς ὠδῖνος ἔτεκε·",
+      "english_text": "but it is necessary to employ all these things not so much for whatever objects can possibly be effected, but for those that are best; for the sight can perceive all colours and all shapes; but still it ought to behold only things worthy of light, and not of darkness. Again, the ear can receive all kinds of sounds; but some it ought to disregard; for myriads of the things that are said are disgraceful. Nor, O foolish and arrogant man, because nature has given you the faculty of taste, ought you to fill yourself insatiably with everything, like a cormorant; for there are many things not merely among such as are nutritious, but of those which are exceedingly so, which have, nevertheless, produced diseases accompanied with great suffering.",
+      "confidence": 0.7424058182595072,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "102",
+      "english_ref": "102",
+      "greek_text": "μηδ’ ὅτι μερῶν τῶν πρὸς γονὰς ἠξιώθης ἕνεκα τῆς διαμονῆς τοῦ παντός, φθορὰς καὶ μοιχείας καὶ τὰς ἄλλας οὐκ εὐαγεῖς μίξεις μετέρχου, ἀλλ’ ὅσαι μετὰ νόμου τὸ ἀνθρώπων σπείρουσί τε καὶ φυτεύουσι γένος· μηδ’ ὅτι γλώττης καὶ στόματος καὶ φωνητηρίων ὀργάνων μεμοίρασαι, πάντ’ ἐκλάλει, καὶ τὰ ἄρρητα· τὸ γὰρ ἐχεμυθεῖν ἔστιν ὅπου χρήσιμον, καί μοι δοκοῦσιν οἱ μαθόντες λέγειν μεμαθηκέναι καὶ ἡσυχάζειν, τῆς αὐτῆς δυνάμεως περιποιούσης ἑκάτερον, οἱ δ’ ὅσα μὴ προσῆκε διεξιόντες οὐ δύναμιν λόγων ἀλλ’ ἡσυχίας ἀσθένειαν ἐπιδείκνυσθαι.",
+      "english_text": "Nor does it follow that, because for the sake of the perpetuation of your race you have been endowed with the powers of generation, you ought to pursue pollutions and adulteries and other impure connections; but only such as, in a legitimate manner, engender and propagate the race of mankind. Nor, because you have been made endowed with a mouth and a tongue and the organs of speech, ought you to say everything and to reveal what ought not to be spoken, for there are times when to hold one’s peace is useful. And, in my opinion, those who have learnt to speak have also learnt to be silent, the same capacity teaching a man both lines of conduct. But those men who relate what they ought not, do not display the faculty of eloquence, but the weakness of their faculty of silence.",
+      "confidence": 0.7607940965583173,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "104",
+      "english_ref": "104",
+      "greek_text": "ὑπηρεσίαν· οὗτοι μὲν οὖν ἐν οἷς δρῶσι πολλὰ βλάπτουσιν ἐπιστάτου μὴ τυχόντες· ἃ δ’ ἂν καὶ εὖ ἐργάσωνται, κατὰ τύχην, οὐ σὺν λόγῳ, κατορθοῦσι· τὰ δὲ τῶν γεωργῶν τὰ μετ’ ἐπιστήμης ἐνεργούμενα πάντ’ ἐστὶν ἐξ ἀνάγκης ὠφέλιμα.",
+      "english_text": "\"On this account shall he cultivate the earth;\"",
+      "confidence": 0.8018497003791121,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "105",
+      "english_ref": "105",
+      "greek_text": "τούτου χάριν ὁ νομοθέτης τῷ δικαίῳ Νῶε τὴν γεωργικὴν ἀνῆψε τέχνην (Gen. 9, 20), ἐκδιδάσκων ὅτι καθάπερ γεωργὸς ἀγαθὸς ὁ σπουδαῖος τῆς τε ἀγρίας ὕλης τὰ μὲν ὅσα βλαβερὰ ἔρνη πρὸς παθῶν ἢ κακιῶν φυτευθέντα ἐκκόπτει, τὰ δ’ ὅσα μὴ καρποτόκα μὲν δύναται δὲ ἀντὶ τείχους φραγμὸς εἶναι ψυχῆς ὀχυρώτατος ἐᾷ, καὶ πάλιν αὖ τῆς ἡμέρου πάσης κατὰ διαφέροντας καὶ οὐχὶ τοὺς αὐτοὺς τρόπους ἐπιμελεῖται, τῶν μὲν ἀφαιρῶν, τοῖς δὲ προστιθείς, καὶ τὰ μὲν εἰς μέγεθος αὔξων, τὰ δὲ εἰς βραχύτητα συντέμνων·",
+      "english_text": "On this account it is that the law-giver has attributed to the just Noah the employment of a farmer;",
+      "confidence": 0.6276661146241092,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "106",
+      "english_ref": "106",
+      "greek_text": "ἤδη δὲ καὶ ἄμπελον ἰδὼν εὐθηνοῦσαν τὰς κληματίδας ἔτεινε κατὰ γῆς, τάφρους ὀρυξάμενος καὶ τὸν χοῦν αὖθις ἐπενεγκών· αἱ δ’ ἀντὶ τὴν τροφὴν πολλοῖς ἐκγόνοις ἅτε ἱκανοῖς γεγονόσιν ἐξ ἑαυτῶν τρέφεσθαι, παρ’ ἣν αἰτίαν λιμώττουσα ἠσθένει, μόλις διακορὴς ἐγένετο, ὡς πιανθεῖσαν πάλιν ἀνηβῆσαι.",
+      "english_text": "Again, when he sees a vine flourishing and luxuriant he bends down its young shoots to the ground, digging trenches to receive them, and again heaping up the ground on the top of them; and they at no distant period, instead of parts, become whole trees, and instead of daughters they become mothers, having moreover put off the old age which is the usual companion of maternity. For, having desisted from distributing and apportioning its nourishment amongst numerous offspring, inasmuch as they are able to support themselves, that which was previously weak from being drained by this cause becomes so fully satiated as to grow fat and young again.",
+      "confidence": 0.7547555158020274,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "107",
+      "english_ref": "107",
+      "greek_text": "ἕτερον δὲ ἐθεασάμην, ὃς τῶν ἡμέρων δένδρων οὐκ εὐγενὲς ὃ μὲν ὑπερεῖχε τῆς γῆς ἔρνος ἔτεμε, μικρὸν δ’ ὅσον πρὸς αὐταῖς ῥίζαις ἀνέχον εἴασε, λαβὼν δ’ ἀπ’ εὐγενοῦς ἑτέρου κλάδον εὐφυᾶ τὸν μὲν ἄχρι τῆς ἐντεριώνης καθ’ ἓν μέρος ἀπέξεσε, τὸ δὲ πρὸς ταῖς ῥίζαις οὐ κατὰ πολλοῦ βάθους ἐντεμών, ἀλλ’ ὥστε διαστῆσαι μόνον τὴν ἕνωσιν, τὸ ἀπεξεσμένον ὑπενεγκὼν ἐνηρμόσατο τῷ διαστήματι·",
+      "english_text": "And I have seen another man who cut away the less desirable shoots of trees which admitted of cultivation, as soon as they appeared above the ground, and left only a small piece adhering to the root itself. And then taking a branch in good condition from another tree of a good sort, he scraped away the one shoot down till he came to the pith, and the shoot which was attached to the root he cut at no great depth, but opening it just sufficiently to make the union perfect, and then putting into the cleft the shoot which he had pared away he fitted it in;",
+      "confidence": 0.7439537691909608,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "108",
+      "english_ref": "108",
+      "greek_text": "ἐξ ὧν ἀμφοτέρων μία δένδρου φύσις ἡνωμένη γίνεται, ἑκατέρου μέρους ἀντίδοσιν τῆς ὠφελείας θατέρῳ ποιουμένου· αἱ μὲν γὰρ ῥίζαι τὸν ἐφαρμοσθέντα τρέφουσι καὶ κωλύουσιν ἀφαυαίνεσθαι κλάδον, ὁ δ’ εὐκαρπίαν ἀμοιβὴν τροφῆς ἀντιχαρίζεται ταύταις. ἔστι δὲ καὶ ἄλλα μυρία τῶν κατὰ γεωργίαν τεχνικὰ ἔργα, ὧν περιττὸν ἐν τῷ παρόντι μεμνῆσθαι· τοῦ γὰρ διαφορὰν ἐνδείξασθαι μόνον ἐργάτου γῆς καὶ γεωργοῦ χάριν ταῦτ’ ἐμηκύναμεν.",
+      "english_text": "and from these two shoots one single tree of one united nature sprang up, each portion giving to the other that which was useful to it; for the roots support the shoot which has been fitted into them, and prevent it from drying up and withering, and the shoot which has been inserted as a reward for its nourishment supplies the root with good fruit in requital. There are also an innumerable host of other operations in farming which proceed on rules of art, which it would be superfluous to enumerate on the present occasion, for we have only dwelt on this point at such length for the purpose of showing the difference between the man who is only a cultivator of the earth, and one who is a farmer.",
+      "confidence": 0.8748257701750217,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "110",
+      "english_ref": "110",
+      "greek_text": "ὅταν μέν γε αἱ αἰσθήσεις ἐξυβρίζωσι πρὸς τὰ ἐκτὸς αἰσθητὰ μετὰ ἀκατασχέτου ῥύμης ἐκφερόμεναι, μηχανῇ τινι ὧν ἡ τέχνη κατεσκευάσατο ῥᾳδίως στέλλονται· ὅταν δὲ παλμῶδες ἐν ψυχῇ πάθος ὠμὸν γένηται κνησμοὺς καὶ γαργαλισμοὺς ἐξ ἡδονῆς καὶ ἐπιθυμίας ἢ πάλιν δηγμούς τε καὶ πτοίας ἐκ φόβου καὶ λύπης ἐμποιοῦν, προευτρεπισθέντι σωτηρίῳ πεπαίνεται φαρμάκῳ· καὶ μὴν εἴ τις ἐπινεμομένη κακία μηκύνεται, τῆς ἐν σώματι ἑρπηνώδους ἀδελφὴ νόσου, λόγῳ τομεῖ τῷ κατ’ ἐπιστήμην τέμνεται.",
+      "english_text": "but when an impetuous passion in the soul becomes violent, bringing forth voluptuous itchings and ticklings arising from pleasure or from appetite, or on the other hand, stings and agitation, caused by fear or grief, it is softened by the previously prepared saving medicine; and if any evil devouring as it goes, proceeds further, like a sister of the cancrous disease, which creeps over the body, it is cut out by reason which proceeds in its operations in accordance with knowledge.",
+      "confidence": 0.8372691372113277,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "111",
+      "english_ref": "111",
+      "greek_text": "τὸν μὲν δὴ τρόπον τοῦτον τὰ τῆς ἀγρίας ὕλης τιθασεύεται, τῶν δ’ ἡμέρων καὶ καρποτόκων ἀρετῶν τὰ φυτὰ πάντα βλαστὰ μὲν ἔχει τὰ ἐπιτηδεύματα, καρπὸν δὲ τὰς καλὰς πράξεις· ὧν ἕκαστον ἡ γεωργικὴ ψυχῆς τέχνη συναύξει καὶ τό γε ἐφ’ ἑαυτὴν ἧκον μέρος ἀπαθανατίζει ταῖς ἐπιμελείαις.",
+      "english_text": "In this manner then the trees of the wild wood are brought into a state of tameness, but all the plants of the cultivated and fruit-bearing virtues have for their shoots studies, and for their fruits virtuous actions, of each of which the farming skill of the soul promotes the growth, and as far as depends upon it, it makes them immortal by its industry.",
+      "confidence": 0.9459417645192003,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "113",
+      "english_ref": "113",
+      "greek_text": "ἐμπιπλάμενος δὲ μηδέποτε, ἢ ταῖς μετὰ γαστέρα χρώμενος ἡδοναῖς ἐπαλλήλοις καὶ ἔτι ταῖς πρὸς συνουσίαν ὀρέξεσιν ἀκμάζων· ἡ μὲν γὰρ ἔνδεια ἀσθένειαν, ἰσχὺν δ’ ἡ πλήρωσις ἀπεργάζεται· τὸ δ’ ἀκόρεστον ὁ μετ’ ἀφθονίας τῶν ἐπιτηδείων σὺν ἀκρασίᾳ δεινῇ λιμός ἐστιν· ἄθλιοι δ’ ὧν μεστοὶ μὲν οἱ ὄγκοι, κεναὶ δ’ αἱ ἐπιθυμίαι καὶ ἔτι διψῶσαι.",
+      "english_text": "and such would be the character of a man who was always eating or drinking and never satisfied, or who was incessantly indulging in the pleasures of the belly, and devoting his energies to the gratifying of his carnal appetites, for deficiency produces weakness, but fulness produces strength; but when, amid abundance of things an insatiability is united with excessive intemperance, that is hunger; and they are truly wretched whose bodies are filled, while their passions are empty and still thirsting;",
+      "confidence": 0.8471173212487411,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "114",
+      "english_ref": "114",
+      "greek_text": "ἀλλὰ τοὺς ἐραστὰς ἐπιστήμης ἐν ᾠδῇ μεγάλῃ φησὶν ὅτι „ἀνεβίβασεν ἐπὶ τὴν ἰσχὺν τῆς γῆς, καὶ ἐψώμισε γεννήματα ἀγρῶν„ (Deut. 32, 13), δηλῶν ὅτι ὁ μὲν ἄθεος ἀτυχεῖ τοῦ τέλους, ἵνα μᾶλλον ὀδυνᾶται, μὴ προστιθεμένης ἰσχύος οἷς ἐνεργεῖ, τοὐναντίον δ’ ὑφαιρουμένης, οἱ δὲ μετιόντες ἀρετὴν ὑπεράνω τῶν ὅσα γεώδη καὶ θνητὰ ἱστάμενοι τοῦ κράτους αὐτῶν κατὰ πολλὴν περιουσίαν ἀλογοῦσιν, ἅτε ἡγεμόνι χρησάμενοι τῆς ἀνόδου θεῷ, ὃς καὶ τὰ γεννήματα τῶν ἀγρῶν εἰς ἀπόλαυσιν καὶ χρῆσιν ὠφελιμωτάτην αὐτοῖς ὀρέγει, τὰς μὲν ἀρετὰς ἀγροῖς, ἃ δ’ ἀποκύουσι γεννήμασι παρὰ τὴν γένεσιν ἀπεικάζων· γίνεται μὲν γὰρ ἐκ φρονήσεως τὸ φρονεῖν, ἐκ δὲ σωφροσύνης τὸ σωφρονεῖν, ἐκ δὲ εὐσεβείας τὸ εὐσεβεῖν, καὶ ἀφ’",
+      "english_text": "but of the lovers of knowledge the prophet speaks in a great song, and says, \"That she has made them to ascend upon the strength of the earth, and has fed them upon the produce of the fields,\" disregard their strength in their exceeding abundance, using God as the guide to conduct them in their ascent, who proffers to them the produce of the earth for their enjoyment and most profitable use, likening the virtues to fields, and the fruits of the virtues to the produce of the fields, according to the principles of their generation; for from prudence is derived prudent action, and from temperance temperate action, and from piety pious conduct, and from each of the other virtues is derived the energy in accordance with it.",
+      "confidence": 0.6914458285130082,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "115",
+      "english_ref": "115",
+      "greek_text": "ἑκάστης τῶν ἄλλων τὸ κατ’ αὐτὴν ἐνέργημα. κουροτρόφον τῶν ἀφθάρτου διαίτης ἐφιεμένων.",
+      "english_text": "Now these energies are especially the food of the soul, which is competent to give suck, as the lawgiver says, \"Honey out of the rock, and oil out of the solid rock,\"",
+      "confidence": 0.6440196078431373,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "116",
+      "english_ref": "116",
+      "greek_text": "αὕτη γὰρ οἷα μήτηρ τῶν ἐν κόσμῳ γενομένη τὰς τροφὰς ἐξ ἑαυτῆς εὐθὺς ἤνεγκε τοῖς ἀποκυηθεῖσιν· ἀλλ’ οὐχ ἅπαντα τροφῆς θείας ἠξιώθη, τὰ δ’ ὅσα τῶν ἐκγόνων ἐπάξια τῶν γεννησάντων εὑρίσκετο· πολλὰ γὰρ ἔσθ’ ἃ λιμὸς ἀρετῆς, ὁ τοῦ περὶ τὰ σιτία καὶ ποτὰ σχετλιώτερος, διέφθειρε.",
+      "english_text": "for it, as the mother of those things which exist in the world, immediately supplies food to those beings which are brought forth by her; but they are not all thought worthy of divine food, but only such are honoured with that as do not show any degeneracy from their parent; for there are many which a scarcity of virtue, which is more terrible than a scarcity of meat and drink, has destroyed;",
+      "confidence": 0.8371898229851864,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "117",
+      "english_ref": "117",
+      "greek_text": "φέρεται δ’ ἡ τῆς θείας σοφίας πηγὴ τοτὲ μὲν ἠρεμαιοτέρῳ καὶ πρᾳοτέρῳ ῥεύματι, τοτὲ δὲ αὖ μετ’ ὀξυτέρου τοῦ τάχους καὶ πλείονος φορᾶς τε καὶ ῥύμης· ὅταν μὲν οὖν ἠρέμα κατέρχηται, μέλιτος γλυκαίνει τὸν τρόπον, ὅταν δὲ μετ’ ὠκύτητος, ἀθρόα ὕλη καθάπερ ἔλαιον ψυχικοῦ γίνεται φωτός.",
+      "english_text": "but the fountain of divine wisdom is borne along, at one time in a more gentle and moderate stream, and at another with greater rapidity and a more exceeding violence and impetuosity. When, therefore, it descends gently it sweetens after the manner of honey, but when it comes on swiftly the whole material enters like oil into the light of the soul.",
+      "confidence": 0.864036596809509,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "118",
+      "english_ref": "118",
+      "greek_text": "τὴν πέτραν ταύτην ἑτέρωθι συνωνυμίᾳ χρώμενος καλεῖ μάννα, τὸν πρεσβύτατον γίνονται, τουτέστιν ἀγωγαὶ δύο σφόδρα ἀδιάκριτοι καὶ σπουδῆς ἄξιαι, κατ’ ἀρχὰς μὲν γλυκύτητα ἐμποιοῦσαι τῶν ἐπιστήμης θεωρημάτων, αὖθις δὲ καὶ φῶς τηλαυγέστατον ἀπαστράπτουσαι τοῖς μὴ ἁψικόρως κραταιῶς δὲ καὶ παγίως ἐξ ἀδιαστάτου καὶ συνεχοῦς ἐπιμονῆς ἐλλαμβανομένοις ὧν ἐρῶσιν. οὗτοι μὲν οὖν, ὡς ἔφην, „ἐπὶ τὴν ἰσχὺν τῆς γῆς ἀναβιβάζονται“ (Deut. 32, 13).",
+      "english_text": "This rock, Moses, in another place, using a synonymous expression, calls manna the most ancient word of God, by which appellation is understood, something of the most general possible nature, from which two cakes are made, one of honey and the other of oil, that is to say, two different systems of life, exceedingly difficult to distinguish from one another, both worthy of attention, at the very beginning instilling the sweetness of these contemplations which exist in the sciences, and again emitting the most brilliant light to those who take hold of the things which are the objects of their desire, not fastidiously, but firmly, and scarcely by means of unremitting and incessant perseverance. These then, as I have said before, are they who ascend up upon the strength of the earth.",
+      "confidence": 0.7276287821955489,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "119",
+      "english_ref": "119",
+      "greek_text": "βίος, τῶν τεττάρων παθῶν τὰ ὀδυνηρότερα ἀποκεκληρωμένος φόβον τε καὶ λύπην, τὴν μὲν τοῦ στένειν, τὸν δὲ τοῦ τρέμειν συνώνυμον· ἀνάγκη γὰρ ἢ παρεῖναί τι κακὸν ἢ μέλλειν γε τῷ τοιούτῳ· τοῦ μὲν οὖν μέλλοντος ἡ προσδοκία φόβον, τοῦ δὲ παρόντος ἡ χρῆσις λύπην ἐγέννησεν.",
+      "english_text": "But to the impious Cain, neither does the earth contribute anything to give him vigour, even though he never concerns himself about anything which is exterior to it; on which account, in the next sentence, he is found \"groaning and trembling upon the earth,\"",
+      "confidence": 0.7970125786163522,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "120",
+      "english_ref": "120",
+      "greek_text": "ἀλλ’ ὅ γε μετιὼν ἀρετὴν ἐν εὐπαθείαις ἀναλογούσαις ἐξετάζεται· ἢ γὰρ περιπεποίηται τἀγαθὸν ἢ περιποιήσεται· τὸ μὲν οὖν ἔχειν ἀποτελεῖ χαράν, κτημάτων τὸ κάλλιστον, τὸ δὲ σχήσειν προσδοκᾶν τὴν τροφὴν φιλαρέτων ψυχῶν ἐλπίδα, δι’ ἣν ὄκνον μεθιέμενοι σὺν αὐτοκελεύστῳ ἑτοιμότητι πρὸς τὰ καλὰ τῶν ἔργων ἀπαντῶμεν.",
+      "english_text": "On the other hand, he who pursues virtue is found to be in the enjoyment of corresponding blessings; for either he has acquired what is good or he will attain to it. Now the present possession perfects joy, which is the best of all possessions; but the expectation of possessing it brings hope, the food of those souls which love virtue; on account of which, putting away sluggishness, we, with spontaneous readiness, hasten onwards to good actions.",
+      "confidence": 0.7673461321287408,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "121",
+      "english_ref": "121",
+      "greek_text": "ᾗ μὲν οὖν ἀποκεκύηκε δικαιοσύνη ψυχῇ γενεὰν ἄρρενα, τὸν δίκαιον λογισμόν, ταύτης τὰ λυπηρὰ πάντα ἐξῴκισται. μαρτυρήσει δ’ ἡ Νῶε γένεσις — ὃ ἑρμηνεύεται δίκαιος —, ἐφ’ οὗ λέγεται· „οὗτος διαναπαύσει ἡμᾶς ἀπὸ τῶν ἔργων ἡμῶν καὶ ἀπὸ τῶν λυπῶν τῶν χειρῶν ἡμῶν καὶ ἀπὸ τῆς γῆς ἧς κατηράσατο κύριος ὁ θεός“ (Gen. 5, 29).",
+      "english_text": "From that soul therefore, in which justice has brought forth a male offspring, that is to say just thoughts, it has also at the same time removed all painful things, and the birth of Noah will bear testimony in confirmation of this, and the interpretation of the name of Noah is just; and of him it is said, \"he will make us to rest from our works, and from the labours of our hands, and from the earth, which the Lord God has cursed;\"",
+      "confidence": 0.733888728044779,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "122",
+      "english_ref": "122",
+      "greek_text": "πέφυκε γὰρ ἡ δικαιοσύνη πρῶτον μὲν ἀνάπαυλαν ποιεῖν ἀντὶ καμάτου τὰ μεθόρια κακίας καὶ ἀρετῆς ἐξαδιαφοροῦσα, πλοῦτον καὶ δόξαν καὶ ἀρχὰς καὶ τιμὰς καὶ ὅσα τούτων ἀδελφά, περὶ ἃ πραγματεύεται τὸ πλεῖστον ἀνθρώπων γένος, ἔπειτα λύπας ἀναιρεῖν, αἳ συνίστανται κατὰ τὰς ἐξ ἡμῶν αὐτῶν ἐνεργείας — οὐ γάρ, ὡς ἔνιοι τῶν ἀσεβῶν, τὸν θεὸν αἴτιον κακῶν φησι Μωυσῆς, ἀλλὰ τὰς ἡμετέρας χεῖρας, συμβολικῶς τὰ ἡμέτερα παριστὰς ἐγχειρήματα καὶ τὰς ἑκουσίους τῆς διανοίας πρὸς τὸ χεῖρον τροπάς —,",
+      "english_text": "for it is the nature of justice in the first place to cause rest instead of labour, being utterly indifferent to the things that are in the confines between wickedness and virtue, riches and glory, and power and honour, and all other things which are akin to these, which are the chief objects of the energies of the human race. And, in the second place, to destroy those pains which exist in accordance with our own energies; for Moses does not (as some wicked men do) say, that God is the cause of evils, but our own hands; indicating, by a figurative expression, the works of our hands, and the voluntary inclinations of our mind to the worser part.",
+      "confidence": 0.6270075757575757,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "124",
+      "english_ref": "124",
+      "greek_text": "δημιουργὸς γὰρ ὁ θεὸς σπουδαίου γέλωτος καὶ χαρᾶς ἐστιν, ὥστε οὐ γενέσεως πλάσμα τὸν Ἰσαάκ, ἔργον δὲ τοῦ ἀγενήτου νομιστέον· εἰ γὰρ γέλως μὲν Ἰσαὰκ ἑρμηνεύεται, γέλωτος δὲ ποιητὴς ὁ θεὸς κατὰ τὴν Σάρρας ἀψευδῆ μαρτυρίαν, καὶ τοῦ Ἰσαὰκ ὀρθότατα λέγοιτ’ ἂν εἶναι πατήρ. μεταδίδωσι δὲ καὶ τῷ σοφῷ τῆς ἰδίου κλήσεως Ἀβραάμ, ᾧ καὶ τὸ χαίρειν, ἐπιγέννημα σοφίας, ἐκτεμὼν λύπην δεδώρηται. εἴ τις οὖν ἱκανός ἐστιν ἀκοῦσαι τῆς θεοῦ ποιητικῆς, γέγηθε μὲν ἐξ ἀνάγκης αὐτός, συγχαίρει δὲ καὶ τοῖς ἀκροατικῶς πρότερον ἐσχηκόσιν.",
+      "english_text": "For God is the author of virtuous laughter and joy; so that we must look upon Isaac not as the offspring of creation, but as the work of the uncreate God. For if Isaac, being interpreted, means laughter, and if it be God who is the cause of laughter according to the true testimony of Sarah, then he may be most properly said to be the father of Isaac. And he also gives a share to Abraham of his own proper appellation, to whom, when he eradicated pain from wisdom, he gave rejoicing as an offspring.",
+      "confidence": 0.7478877646508364,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "125",
+      "english_ref": "125",
+      "greek_text": "ἐν δὲ τῇ τοῦ θεοῦ ποιητικῇ μύθου μὲν πλάσμα οὐδὲν εὑρήσεις, τοὺς δὲ ἀληθείας ἀσινεῖς κανόνας ἅπαντας ἐστηλιτευμένους, οὐδ’ αὖ τὰ φωνῆς μέτρα καὶ ῥυθμοὺς καὶ μέλη ἀκοὰς διὰ μουσικῆς ψυχαγωγοῦντα, τὰ δὲ φύσεως αὐτῆς τελειότατα ἔργα τὴν ἴδιον εὐαρμοστίαν κεκληρωμένα. καθάπερ δὲ ὁ νοῦς ἀκροατικῶς ἔχων τῶν θεοῦ ποιημάτων χαίρει, οὕτως καὶ ὁ λόγος συνῳδὸς ὢν τοῖς διανοίας ἐνθυμήμασι καὶ τρόπον τινὰ προσέχων",
+      "english_text": "If, therefore, any one is worthy to listen to the account of the creative power of God he is of necessity joyful, and rejoices in company with those who have had a longing to hear the same. And in the account of the creative power of God you will find no cunningly devised fable, but only unalloyed laws of truth firmly established. Moreover, you will find no vocal measures or rhythm, no melodies alluring the hearing with musical art; but only most perfect works of virtue, which have all of them a peculiar harmony and fitness. And as the mind rejoices which is eager to hear of the works of God, so also does language, which is in harmony with the conceptions of the mind, and which in a manner is compelled to attend to them, feel exultation.",
+      "confidence": 0.640830754950495,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "127",
+      "english_ref": "127",
+      "greek_text": "οὗτος ὁ λόγος ἐμοί τε καὶ σοὶ καὶ πᾶσιν ἀνθρώποις φωνεῖ καὶ λαλεῖ καὶ ἑρμηνεύει τὰ ἐνθυμήματα καὶ προσεξέρχεταί γε ὑπαντησόμενος οἷς ἡ διάνοια λελόγισται. ἐπειδὰν γὰρ ὁ νοῦς ἐξαναστὰς πρός τι τῶν οἰκείων ὁρμὴν λάβῃ ἢ κινηθεὶς ἔνδοθεν ἐξ ἑαυτοῦ ἢ δεξάμενος ἀπὸ τῶν ἐκτὸς τύπους διαφέροντας, κυοφορεῖ τε καὶ ὠδίνει τὰ νοήματα· καὶ βουλόμενος ἀποτεκεῖν ἀδυνατεῖ, μέχρις ἂν ἡ διὰ γλώττης καὶ τῶν ἄλλων φωνητηρίων ὀργάνων ἠχὴ δεξαμένη μαίας τρόπον εἰς φῶς προαγάγῃ τὰ νοήματα.",
+      "english_text": "This speech speaks, and discourses, and interprets both in your case and mine, and in that of all mankind, the things conceived in the mind, and it moreover comes forward to meet the things - which the mind conceives; for when the mind being excited towards any object connected with it receives an impetus, either because it has been moved internally by itself, or because it has received some remarkable impressions from external circumstances, it then becomes pregnant and labours to bring forth its conceptions. And, though it tries to deliver itself of them, it is unable to do so till sound, like a midwife, acting either through the medium of the tongue or of some other of the organs of speech, receives those conceptions and brings them to light.",
+      "confidence": 0.9035252433341605,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "128",
+      "english_ref": "128",
+      "greek_text": "φωνὴ ἕως ἂν ἐπιλάμψαν φῶς αὐτὰ δείξῃ, τὸν αὐτὸν τρόπον τὰ ἐνθυμήματα ἐν ἀοράτῳ χωρίῳ, διανοίᾳ, ταμιεύεται, μέχρις ἂν οἷα φῶς ἐναυγάσασα ἡ φωνὴ πάντ’ ἐκκαλύψῃ.",
+      "english_text": "And this voice is itself the most manifest of all the conceptions. For, as what is laid up is hidden in darkness until light shines upon it and exhibits it, in the same manner the conceptions are stored away in an invisible place, namely, the mind, until the voice, like light, sheds its beams upon them and reveals everything.",
+      "confidence": 0.8263266796494644,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "129",
+      "english_ref": "129",
+      "greek_text": "ποθεινότατον· ἴδιον δὲ λόγου τὸ λέγειν, πρὸς ὃ οἰκειώσει φυσικῇ τινι σπεύδει. γέγηθε δὲ καὶ χαίρει, ὅταν ὥσπερ ἐναυγασθεὶς ἴδῃ καὶ καταλάβῃ τὸν νοῦν τοῦ δηλουμένου πράγματος ἄκρως· τότε γὰρ περιδραξάμενος ἄριστος ἑρμηνεὺς γίνεται.",
+      "english_text": "Very beautifully, therefore, was it said that speech goes forth to meet the conceptions, and that it runs on endeavouring to overtake them, from its desire of giving information respecting them, for everything has the greatest affection for its own proper employment; and the proper employment of speech is to speak, to which employment therefore it hastens by a kind of natural kindred and propriety. And it rejoices and exults when, shedding its rays upon it as it were, it accurately sees and overtakes the sense of the matter exhibited; for then, seizing it in its embrace, it becomes its most excellent interpreter.",
+      "confidence": 0.7296781756180732,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "130",
+      "english_ref": "130",
+      "greek_text": "τοὺς γοῦν μὴ πάνυ τῶν νοημάτων ἐν ταῖς τοῦ λέγειν διεξόδοις περικρατοῦντας ἀδολέσχους καὶ ἀπεραντολόγους ὄντας παραιτούμεθα, κενὰς καὶ μακρὰς ἔτι δὲ ἀψύχους κυρίως εἰπεῖν ῥήσεις συνείροντας. ἀσχημονῶν οὖν ὁ τῶν τοιούτων λόγος δικαίως ἂν στένοι, ὥστε ἔμπαλιν χαίρειν ἀναγκαῖον τὸν ἐκ περισκέψεως τῶν ἐνθυμημάτων ἱκανῶς ἐπὶ τὴν ὧν εἶδε καὶ ὧν δυνατῶς κατέλαβε μήνυσιν ἐλθόντα.",
+      "english_text": "At all events, we repudiate those chatterers and interminable talkers, who, in the long passages of their conversations, do not properly keep to their conceptions, but merely connect long and empty and, to say the truth, lifeless sentences. Therefore the conversation of such men as these is indecorous, and is justly condemned to groan; as, on the other hand, it is inevitable that that conversation which proceeds from a proper consideration of the objects of its consideration must rejoice, since it comes in an adequate manner to the interpretation of the things which it saw and comprehended vigorously;",
+      "confidence": 0.9000334224598932,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "131",
+      "english_ref": "131",
+      "greek_text": "γνωρίζεται δὲ τοῦτο σχεδὸν ἅπασιν ἐκ τῆς καθ’ ἑκάστην ἡμέραν πείρας· ὅταν μὲν γὰρ ἄκρως εἰδῶμεν ὃ λέγομεν, χαίρων καὶ γεγηθὼς ὁ λόγος ἐμφαντικωτάτων καὶ κυρίων ὀνομάτων πλουτεῖ, οἷς κατὰ πολλὴν περιουσίαν εὐτρόχως καὶ ἀπταίστως ἔτι δὲ ἐναργῶς καὶ ἀνυσίμως τὸ δηλούμενον παρίστησιν· ὅταν δὲ τοῦ νοήματος ἐπαμφοτερίζῃ κατάληψις, ὑπὸ δεινῆς ἀπορίας προσεχῶν καὶ εὐθυβόλων ὀνομάτων παραπαίων ἀκυρολογεῖ· διόπερ αὐτός τε ἐν ἀηδίᾳ καὶ ἄσῃ περιρρέων καὶ πλανώμενος γίνεται τούς τε ἀκούοντας ἀντὶ τοῦ πείθειν τὰ ὦτα",
+      "english_text": "and this is a matter within the knowledge of almost every one from his daily experience. For, when we thoroughly understand what we are saying, then our speech rejoices and exults, and is rich in most emphatic and appropriate expressions, with which, using great copiousness and fluency of unhesitating diction, it sets before the hearer what it desires to exhibit to him in a most evident and efficient manner. But when the comprehension of the conceptions is doubtful, then the speech stumbles and exhibits a great deficiency of suitable and felicitous expressions, and speaks very inappropriately; on which account it is tedious and wearisome and wanders about, and instead of persuading its hearers it pains their ears.",
+      "confidence": 0.75734073618689,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "133",
+      "english_ref": "133",
+      "greek_text": "μὴ γάρ ποτε φαύλου λόγος ἑρμηνεὺς γένοιτο δογμάτων θείων — τὸ γὰρ κάλλος αὐτῶν οἰκείοις μιάσμασιν αἰσχύνει —, μηδ’ ἔμπαλιν σπουδαίου προφορᾷ τὰ ἀκόλαστα καὶ αἰσχρὰ μηνύοιτο, ἀλλ’ ἀεὶ τὴν τῶν ἁγίων διήγησιν ἱεροὶ καὶ ἅγιοι ποιείσθωσαν λόγοι.",
+      "english_text": "For never may the speech of a wicked man be interpreter of divine doctrines, for such an one would deform their beauty by his own pollutions; and, on the other hand, may what is intemperate and disgraceful never be related by the utterance of a virtuous man, but may sacred and holy conversations always deliver the relation of holy things.",
+      "confidence": 0.8774122807017544,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "134",
+      "english_ref": "134",
+      "greek_text": "ἔν τινι τῶν εὐνομωτάτων πόλεων ἔθος εἶναί εἶτ’ ἐκεῖνος ἀναστὰς ἃ ἤκουσε διηγεῖται, ἀπερραμμένου τὸ στόμα τοῦ διδάξαντος ὁ ἐξ ὑπογυίου μαθητὴς ἀναφανείς, καὶ ἀλλοτρίας εὑρέσεις ἐπιδείκνυται, οὐδ’ ἀκροατοῦ τάξιν ἢ θεατοῦ τὸν ἐπινενοηκότα λαχεῖν ἀξιώσας. οὕτως οὐδὲ ὠφεληθῆναί τινες πρὸς ἀδίκων ἀξιοῦσιν, ἀλλὰ τῆς γενησομένης ὠφελείας μεῖζον τὸ ἐκ τῆς παρακολουθούσης βλαβερὸν",
+      "english_text": "In some of the best governed cities of the world they say that such a custom as this prevails. When any man who has not lived well attempts to deliver his opinion, either in the council or in the assembly of the people, he is not permitted to do so by his own mouth, but is compelled by the magistrates to deliver his opinion to some virtuous and honourable man to explain in his behalf; and then he, when he has heard what he wishes said, rises up and unfolds the meaning of the sewn up mouth of his instructor, becoming his extempore pupil; and he displays the imaginations of another, scarcely considering the original concern for them even in the rank of a hearer or spectator. So some people do not choose to receive even benefits from unworthy persons, but look upon the injury accruing from the shame of taking their advice as greater than the advantage which can be derived from it.",
+      "confidence": 0.6436215792402246,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "136",
+      "english_ref": "136",
+      "greek_text": "κυρίως γὰρ οὔτε ἐπὶ χρημάτων ἢ κτημάτων περιουσίᾳ οὔτε ἐπὶ δόξης λαμπρότητι οὐδὲ συνόλως ἐπί τινι τῶν ἐκτὸς ἀψύχων τε ὄντων καὶ ἀβεβαίων καὶ ἐξ ἑαυτῶν τὰς φθορὰς δεχομένων χαίρειν ἔνεστι, καὶ μὴν οὐδὲ ἐπὶ ῥώμῃ καὶ εὐτονίᾳ καὶ τοῖς ἄλλοις σώματος πλεονεκτήμασιν, ἃ καὶ τῶν φαυλοτάτων ἐστὶ κοινὰ καὶ τοῖς ἔχουσι πολλάκις ὄλεθρον ἀπαραίτητον ἤνεγκεν.",
+      "english_text": "for to speak strictly, the feeling of joy does not belong to abundance of money, or of possessions, or to brilliancy of renown, nor, in short, to any one of those external circumstances which are lifeless and unstable, and which contain the seeds of their decay in themselves: nor yet does it belong to personal strength and vigour, and to the other advantages of the body, which are common to even the most worthless men, and which have often brought inevitable destruction on those who possessed them.",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "137",
+      "english_ref": "137",
+      "greek_text": "ἐπεὶ οὖν ἐν τοῖς τῆς ψυχῆς μόνοις ἀγαθοῖς ἡ ἀνόθευτος χαρὰ καὶ ἀκιβδήλευτος εὑρίσκεται, ἐν ἑαυτῷ δὴ πᾶς σοφὸς χαίρει, οὐκ ἐν τοῖς περὶ αὐτόν· τὰ μὲν γὰρ ἐν ἑαυτῷ διανοίας εἰσὶν ἀρεταί, ἐφ’ αἷς ἄξιον σεμνύνεσθαι, τὰ δὲ περὶ αὐτὸν ἢ ἡ εὐπάθεια σώματος ἢ ἡ τῶν ἐκτὸς ἀφθονία, ἐφ’ οἷς οὐ μεγαλαυχητέον.",
+      "english_text": "Since then it is only in the virtues of the soul that genuine and unadulterated joy is found, and since every wise man rejoices, he rejoices in himself, and not in his surrounding circumstances; for the things that are in himself are the virtues of the mind on which it is worthy for a man to provide himself; but the circumstances which surround him are either a good condition of body or an abundance of external wealth, which are not proper objects for a man to pride himself on.",
+      "confidence": 0.8405947054436986,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "140",
+      "english_ref": "140",
+      "greek_text": "ἀστεῖοι μὲν οὖν χαρὰν καὶ ἐλπίδα κλῆρον λαχόντες εὐδαίμονα ἢ ἐχέτωσαν ἢ προσδοκάτωσαν πάντως ἀγαθά· φαῦλοι δ’, ὧν Κάιν ἐστὶ θιασώτης, ἐν λύπαις καὶ φόβοις ὄντες ἢ μετουσίαν ἢ προσδοκίαν κακῶν ἀργαλεωτάτην μερίδα καρπούσθωσαν, ἐπὶ μὲν τοῖς ἐν χερσὶν ὀδυνηροῖς στένοντες, ἐπὶ δὲ τοῖς προσδοκωμένοις φοβεροῖς τρέμοντές τε καὶ φρίττοντες (cf. Gen. 4, 12).",
+      "english_text": "Let good men, then, by all means having received joy and hope for their blessed inheritance, either possess or expect good things: but let bad men, of whom Cain is a companion, living in fear and pain, reap a harvest of a most bitter portion, namely, either the presence or the expectation of evils, groaning over the miseries which are actually oppressing them, and trembling and shuddering at the expected fearful dangers.",
+      "confidence": 0.6687321937321937,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "141",
+      "english_ref": "141",
+      "greek_text": "πλοῦν τῇ νηὶ διαμαρτάνεσθαι; τί δ’, εἰ τέθριππον ἡνίοχος ἐν ἱπποδρομίας ἀγῶνι, οὐκ ἀναγκαῖον ἄτακτον καὶ πλημμελῆ τὸν δρόμον γίνεσθαι τῷ τεθρίππῳ; τί δ’, ὅταν ἀπολειφθῇ πόλις πρὸς ἀρχόντων ἢ νόμων — ἐν ἄρχουσι δὲ γράφονται δήπου καὶ νόμοι —, οὐκ ἀναρχίᾳ καὶ ἀνομίᾳ, κακοῖς μεγίστοις, ἡ πόλις ἐκείνη διαφθείρεται; καὶ μὴν σῶμα μὲν ἀπουσίᾳ ψυχῆς, ψυχὴ δὲ ἀπουσίᾳ λογισμοῦ, λογισμὸς δὲ ἐνδείᾳ ἀρετῆς πέφυκε παραπόλλυσθαι.",
+      "english_text": "However, we have now said enough on this subject, and let us proceed to investigate what comes afterwards. He continues thus: \"And Cain said unto the Lord, My crime is too great to be forgiven.\"",
+      "confidence": 0.6679784688995215,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "143",
+      "english_ref": "143",
+      "greek_text": "πότε γὰρ εἴποις ἂν τὸν ἄτεχνον μάλιστα βλάπτεσθαι; ἆρ’ οὐχ ὅταν πρὸς ἐπιστήμης κατὰ τὸ παντελὲς ἐαθῇ; πότε δὲ τὸν ἀμαθῆ καὶ λίαν ἀπαίδευτον; οὐχ ὅταν ἀπόλειψιν τὴν ἐπ’ αὐτῷ χρηματίσῃ διδασκαλία ψηφίσωνται; πότε δὲ τοὺς ἀσεβεῖς; οὐχ ὅταν εὐσέβεια τῶν ἰδίων ὀργίων ἀποσχοινίσῃ;",
+      "english_text": "And when would you say that the ignorant and wholly uninstructed man is most injured? Must it not be when instruction and education complete their desertion of him? When again do we most deplore the condition of the foolish? Is it not when prudence has utterly rejected them? And when do we pronounce intemperate or unjust men, miserable? Is it not when temperance and justice have condemned them to an eternal banishment from their dominion? When do we pronounce the impious, wretched? Is it not when piety has cut them off from her peculiar rites?",
+      "confidence": 0.7739642857142857,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "144",
+      "english_ref": "144",
+      "greek_text": "διό μοι δοκοῦσιν οἱ μὴ τελείως δυσκάθαρτοι εὔξασθαι ἂν κολασθῆναι μᾶλλον ἢ ἀφεθῆναι· ἡ μὲν γὰρ ἄφεσις αὐτοὺς ὥσπερ ἀνερμάτιστα καὶ ἀκυβέρνητα πλοῖα ῥᾷστα ἀνατρέψει, ἡ δὲ κόλασις ἐπανορθώσεται.",
+      "english_text": "So that it seems to me that those who are not utterly impure should pray to be chastised and rejected rather than deserted; for desertion will most easily ruin them, as vessels without ballast and without a pilot; but correction will set them right again.",
+      "confidence": 0.8333602729885057,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "145",
+      "english_ref": "145",
+      "greek_text": "ἢ οὐκ ἀμείνους μὲν τῶν ἀπαιδαγωγήτων οἱ ὑπὸ παιδαγωγῶν ἐν οἷς ἁμαρτάνουσιν ἐπιπληττόμενοι, ἀμείνους δὲ τῶν ἀνεπιτιμήτων οἱ ὑπὸ διδασκάλων ἐν οἷς περὶ τὰς τέχνας οὐ κατορθοῦσιν ὀνειδιζόμενοι, εὐτυχέστεροι δὲ καὶ κρείττους τῶν ἀνεπιτροπεύτων νέων οἱ μάλιστα μὲν ἐπιστασίας καὶ ἀρχῆς ἀξιωθέντες φυσικῆς, ἣν οἱ γεννήσαντες ἐπὶ τέκνοις κεκλήρωνται, εἰ δὲ μή, δευτέρων γοῦν ἡγεμόνων ἐπιλαχόντες, οὓς ὀρφανίας ἔλεος ἐπιτρόπους εἴωθε χειροτονεῖν τὴν γονέων ἐν ἅπασι τοῖς συμφέρουσι τάξιν ἐκπλήσοντας;",
+      "english_text": "Are not those boys who are beaten by their preceptors, for whatever errors they commit, better than those who have no schoolmaster? And are not those who are reproved by their teachers, for all the errors they commit in the arts which they are studying, better than those who receive no such reproof? And are not those young men who have been accounted especially worthy of that natural superintendence and government, which those who are parents exercise over their children, more fortunate and better than those who have had no such protectors? And if they have not such natural protectors, do they not receive guardians as governors in a secondary rank, who are accustomed to be appointed over them out of pity for their orphan state; to fill the place of parents to them in all things that are expedient?",
+      "confidence": 0.7521138211382113,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "147",
+      "english_ref": "147",
+      "greek_text": "διὰ τοῦτο „πάνθ’ ὅσα ἂν εὔξηται χήρα καὶ ἐκβεβλημένη κατὰ τῆς ψυχῆς αὐτῆς“ φησὶν ὁ νομοθέτης μενεῖν αὐτῇ (Num. 30, 10)· τὸν μὲν γὰρ θεὸν ἄνδρα καὶ πατέρα τῶν ὅλων σπορὰν καὶ γένεσιν ἁπάντων παρεχόμενον ἐνδίκως φήσομεν, διάνοιαν δὲ ἐκβεβλῆσθαι καὶ χήραν θεοῦ, ἥτις ἢ γονὰς θείας οὐ παρεδέξατο ἢ παραδεξαμένη ἑκουσίως αὖθις ἐξήμβλωσε.",
+      "english_text": "On this account the law-giver says, \"Every word which a widow or a woman who is divorced vows against her own soul shall remain against it.\"",
+      "confidence": 0.615528781793842,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "148",
+      "english_ref": "148",
+      "greek_text": "τοιγαροῦν ὅσα ἂν ὁρίσηται, καθ’ ἑαυτῆς ὁριεῖται, καὶ ταῦτα μενεῖ πάντως ἀνίατα· πῶς γὰρ οὐ κακὸν ἀπευκτόν, ὁρίζεσθαί τι καὶ παγίως ἀποφαίνεσθαι περὶ αὑτῆς γένεσιν τὴν ἄστατον πάντῃ καὶ φορητήν, ἐπιγράφουσαν αὑτῇ τὰς τοῦ ποιοῦντος ἀρετάς, ὧν μία ἐστί, καθ’ ἣν ἀνενδοιάστως καὶ ἀκλινῶς ἕκαστα ὁρίζεται.",
+      "english_text": "Therefore every thing which it decides it shall decide against itself: and these things shall remain utterly incurable. For how can it be anything but a most intolerable evil, for a creature which is inconstant and easily moved in every direction, to lay down any positive decision and determination about itself, attributing to itself the virtues of the Creator? One of which is that, according to which, it defines in an unhesitating and unalterable manner.",
+      "confidence": 0.7375507246376811,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "149",
+      "english_ref": "149",
+      "greek_text": "τοιγαροῦν οὐ χηρεύσει μόνον ἐπιστήμης, ἀλλὰ καὶ ἐκβεβλήσεται· τοῦτο δ’ ἐστὶ τοιοῦτον· ἡ χηρεύουσα μὲν μήπω δὲ ἐκβεβλημένη τοῦ καλοῦ ψυχὴ δύναταί πως ἐγκαρτερήσασα τὰς πρὸς τὸν ὀρθὸν λόγον τὸν νόμιμον ἄνδρα συμβάσεις καὶ καταλλαγὰς εὑρεῖν· ἡ δ’ ἅπαξ διαζευχθεῖσα καὶ",
+      "english_text": "Therefore, not only shall it be widowed of knowledge, but it shall likewise be divorced from it. And the meaning of this expression is as follows:—For the soul which is widowed of, but is not yet divorced from, what is good, is able, in a manner, after long perseverance, to come to a reconciliation and agreement with her lawful husband, right-reason. But the soul which has once been utterly separated from it, and which has been removed to a different abode, has been cast out for ever and ever, as utterly incapable of reconciliation or peace, and is entirely unable to return to its previous habitation.",
+      "confidence": 0.6663805798435343,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "150",
+      "english_ref": "150",
+      "greek_text": "φησί „σήμερον ἀπὸ προσώπου τῆς γῆς, καὶ ἀπὸ τοῦ προσώπου σου κρυβήσομαι“ (Gen. 4, 14). τί λέγεις, ὦ γενναῖε; ἐὰν ἐκβληθῇς ἐξ ἁπάσης τῆς γῆς, ἔτι κρυβήσῃ; τίνα τρόπον; ζῆν γὰρ δύναιο ἄν;",
+      "english_text": "This, then, may be enough to say about the expression, \"My crime is too great to be forgiven.\"",
+      "confidence": 0.6722668772668773,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "151",
+      "english_ref": "151",
+      "greek_text": "ἢ τοῦτ’ ἠγνόησας, ὅτι τοῖς ζῴοις ἡ φύσις διαφέροντας καὶ οὐχὶ τοὺς αὐτοὺς τόπους πρὸς διαμονὴν ἐδωρήσατο, θάλατταν μὲν ἰχθύσι καὶ παντὶ τῷ ἐνύδρῳ γένει, γῆν δὲ ἅπασι τοῖς χερσαίοις; χερσαῖον δὲ κατὰ γοῦν τὰς σώματος συγκρίσεις ζῷον καὶ ἄνθρωπός ἐστι· διὰ τοῦτο ἀμείψαντα τὰς οἰκείους χώρας ἕκαστα καὶ ὥσπερ εἰς ἀλλοδαπὴν ἐλθόντα ῥᾳδίως τελευτᾷ, τὰ μὲν χερσαῖα καθ’ ὕδατος δύντα, τὰ δ’ ἔνυδρα ἐπὶ χέρσον ἀναπλεύσαντα.",
+      "english_text": "For shall you be able to live? or are you ignorant of this, that nature has given animals different places to live in, and has not assigned the same place to them all? She has allotted the sea to the fishes, and to the whole race of aquatic animals, and the land to all the terrestrial animals. And man too, according, at least, to the composite nature of his body, is a terrestrial animal. And it is owing to this that all animals easily die when they have quitted the place which properly belongs to them, and have gone, as it were, into a foreign country; as, for instance, when terrestrial animals go under the water, or when aquatic animals have sailed out upon the land.",
+      "confidence": 0.8068718905472636,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "152",
+      "english_ref": "152",
+      "greek_text": "εἴπερ οὖν ἐκβληθείης ἀπὸ γῆς ἄνθρωπος ὤν, ποῖ τετράψῃ; νήξῃ καθ’ ὕδατος τὴν τῶν ἐνύδρων ἀπομιμούμενος φύσιν; ἀλλ’ ὑποβρύχιος αὐτίκα τεθνήξῃ. ἀλλὰ πτερώσας καὶ μετεωρίσας σαυτὸν ἀεροβατεῖν ἐθελήσεις τὸ χερσαῖον εἰς πτηνοῦ γένος μεταβαλών; ἀλλ’ εἰ δύνασαι, μετάπλαττε καὶ μεταχάραττε τὸ θεῖον νόμισμα· ἀλλ’ οὐ δυνήσῃ· ὅσῳ γὰρ ἂν μετεωρότερον σεαυτὸν ἐξάρῃς, τοσούτῳ θᾶττον ἀφ’ ὑψηλοτέρου μετὰ πλείονος φορᾶς ἐπὶ γῆν τὸ οἰκεῖον χωρίον ἐνεχθήσῃ.",
+      "english_text": "If, therefore you, being a man, should be cast out from the land, whither will you turn? Will you dive under water, imitating the nature of aquatic animals? But you will die the moment that you are underneath the water. Or will you take wings and raise yourself aloft, and so attempt to traverse the regions of the air, changing your character of a terrestrial, for that of a flying animal? But, if it is in your power, change and re-fashion the divine impress that you bear. You cannot do so. For in proportion as you raise yourself to a greater height, so much the more rapidly will you descend from that higher region and with the greater impetuosity to the earth, which is your appropriate place.",
+      "confidence": 0.8875885225885225,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "154",
+      "english_ref": "154",
+      "greek_text": "εἰ τὸ ὄν, καθ’ ἣν τέχνην ἐποίει τὰ ἀμφίβια, κατὰ ταύτην καὶ ζῷον πανταχοῦ βιωσόμενον ἐβουλήθη καινουργῆσαι, τοῦτο τὸ ζῷον, εἰ μὲν τὰ βάρος ἔχοντα ἀπεδίδρασκε γῆν καὶ ὕδωρ, πρὸς τὰ τῇ φύσει κοῦφα ἀέρα καὶ πῦρ ἧκεν ἄν, ἔμπαλιν δ’ ἐνομιλῆσαν τοῖς μεταρσίοις, εἰ μετανάστασιν ἐζήτει τὴν ἀπ’ αὐτῶν, τὸν ἐναντίον ἤμειψεν ἂν χῶρον· ἔδει γὰρ αὐτὸ πάντως καθ’ ἓν τοῦ κόσμου μέρος προφαίνεσθαι, ἐπειδὴ τοῦ παντὸς ἔξω δραμεῖν ἦν ἀδύνατον, πρὸς τῷ μηδὲ ἐκτὸς ὑπολελεῖφθαί τι τὸν δημιουργὸν ὅλας δι’ ὅλων τὰς τέτταρας ἀρχὰς εἰς τὴν τοῦ κόσμου σύστασιν ἀναλώσαντα, ἵνα ἐκ μερῶν τελείων τελειότατον",
+      "english_text": "At all events, if the Creator, employing that act by which he created amphibious animals, had chosen also by the same act to create a new animal, one capable of living in any element, then, this animal, if it forsook the weighty elements of earth and water, would necessarily have gone to those which are naturally light, namely, air and fire. And, on the other hand, supposing that it had originally dwelt among those elements whose place is on high, if it had sought to effect a migration from them, it would have changed to the opposite region; for it was at all events necessary for it to appear steadily in one portion of the world, since it was not possible for it to run away out of every element: since, in order that nothing external might be omitted, the Creator scattered the whole of the four principles of everything over the universe, in order to create the existing condition of the world, in order to make a most perfect universe of perfect parts.",
+      "confidence": 0.6480539689837492,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "155",
+      "english_ref": "155",
+      "greek_text": "ὁπότ’ οὖν ὅλον ἐκφυγεῖν τὸ τοῦ θεοῦ ἔργον ἀμήχανον, πῶς οὐκ ἀδύνατον μᾶλλον ἀποδρᾶναι τὸν ποιητὴν καὶ ἡγεμόνα τούτου; μηδεὶς οὖν τὴν πρόχειρον ἐκδοχὴν τοῦ λόγου παραδεχόμενος ἀνεξετάστως τῷ νόμῳ τὴν ἰδίαν εὐήθειαν προσαρτάτω, περισκεψάμενος δ’ ὅπερ αἰνίττεται δι’ ὑπονοιῶν τὸ σαφὲς διαγνώτω.",
+      "english_text": "As therefore it is impossible for any one to escape from the whole of the creation of God, how can it be anything but still more impossible to escape from the Creator and Ruler himself? Let no one therefore too easily receiving these words in their obvious and literal acceptation without examination, affix his own simplicity and folly to the law; but let him rather consider what is here enigmatically intimated by figurative expressions, and so understand the truth.",
+      "confidence": 0.792793494765444,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "157",
+      "english_ref": "157",
+      "greek_text": "τὰ γὰρ παρ’ ἡμῖν ἀναγκαῖα καὶ τίμια καὶ γνήσια ὡς ἀληθῶς ἀγαθὰ ταῦτα· φαγεῖν, πιεῖν, [περιβαλέσθαι,] ποικιλίαις χρωμάτων δι’ ὄψεως ἡσθῆναι, μελῳδίαις παντοδαπῶν ἤχων δι’ ἀκοῆς τερφθῆναι, ἀτμῶν ἀποφοραῖς εὐώδεσι διὰ μυκτήρων γανωθῆναι, ταῖς γαστρὸς καὶ μετὰ γαστέρα ἡδοναῖς ἁπάσαις εἰς κόρον χρήσασθαι, τῆς ἀργύρου καὶ χρυσοῦ κτήσεως μὴ ἀμελῆσαι, τιμὰς καὶ ἀρχὰς καὶ ὅσα ἄλλα συντείνοντα πρὸς δόξαν περιβαλέσθαι· φρόνησιν δ’ ἢ καρτερίαν ἢ δικαιοσύνης αὐστηρὰς διαθέσεις ἐπίπονον παρασκευαζούσας βίον ἐῶμεν· εἰ δ’ ἄρα καὶ χρηστέον αὐταῖς, οὐχ ὡς ἀγαθοῖς τελείοις χρηστέον, ἀλλὰ ὡς ποιητικοῖς ἀγαθοῦ.",
+      "english_text": "Now the things which among us are accounted necessary and valuable and genuine real goods are these; to eat, to drink, to be clothed in various colours and fashions; by means of the faculty of sight, to be delighted with pleasant sights; by means of one’s faculty of hearing to be delighted with melodies of all sorts of sounds; to be gratified through our nostrils with fragrant exhalations of odours; to indulge in all the pleasures of the belly and of the parts adjacent to the belly to satiety; not to be indifferent to the acquisition of silver and gold; to be invested with honours and post of authority, and all other things which may tend to man’s reputation; but as for prudence, or fortitude, or justice, austere dispositions which only make life laborious, those we pass by, and if we are forced to admit them into one calculation we must do so, not as perfect goods in themselves, but only as efficients of good.",
+      "confidence": 0.746256666474133,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "158",
+      "english_ref": "158",
+      "greek_text": "σὺ μὲν οὖν, ὦ καταγέλαστε, φῂς ὅτι τῶν σωματικῶν καὶ τῶν ἐκτὸς ἀφαιρεθεὶς πλεονεκτημάτων εἰς ὄψιν οὐκ ἀφίξῃ θεοῦ; ἐγὼ δέ σοι λέγω ὅτι, ἐὰν ἀφαιρεθῇς, πάντως ἀφίξῃ· λυθεὶς γὰρ τῶν ἀρρήκτων σώματος καὶ περὶ",
+      "english_text": "Do you therefore, O ridiculous man, affirm that if you are deprived of a superfluity of bodily advantages and external good things, you will not come into the sight of God? But I tell you that even if you are so deprived of them, you will by all means come into his sight; for when you have been released from the unspeakable bonds of the body and around the body, you will attain to an imagination of the uncreated God.",
+      "confidence": 0.6839635854341737,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "161",
+      "english_ref": "161",
+      "greek_text": "τούτοις ἕπεται καὶ τὸ Μωυσῆν, ὁπότε χειροτονεῖται „θεὸς τοῦ Φαραώ“, μὴ πρὸς ἀλήθειαν γεγενῆσθαι, δόξῃ δὲ μόνον ὑπολαμβάνεσθαι· θεὸν γὰρ διδόντα μὲν οἶδα καὶ χαριζόμενον, διδόμενον δὲ οὐ δύναμαι νοῆσαι, λέγεται δὲ ἐν ἱεραῖς βίβλοις· „δίδωμί σε θεὸν Φαραώ“ (Exod. 7, 1), τοῦ διδομένου πάσχοντος, οὐ δρῶντος· δραστήριον δὲ τὸ ὄντως ὄν, οὐ πάσχον, ἀναγκαῖον εἶναι. τί οὖν διὰ τούτων συνάγεται;",
+      "english_text": "but I am not able to perceive that he is given, and it is said in the sacred scriptures, \"I give thee as a God to Pharaoh,\" and yet what is given is the patient, not the agent; but he that is truly living must be the agent, and beyond all question cannot be the patient.",
+      "confidence": 0.7827234958630087,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "162",
+      "english_ref": "162",
+      "greek_text": "ὅτι ὁ σοφὸς λέγεται μὲν θεὸς τοῦ ἄφρονος, πρὸς ἀλήθειαν δὲ οὐκ ἔστι θεός, ὥσπερ οὐδὲ τὸ ἀδόκιμον τετράδραχμόν ἐστι τετράδραχμον· ἀλλ’ ὅταν μὲν τῷ ὄντι παραβάλληται, ἄνθρωπος εὑρεθήσεται θεοῦ, ὅταν δὲ ἄφρονι ἀνθρώπῳ, θεὸς πρὸς φαντασίαν καὶ δόκησιν, οὐ πρὸς ἀλήθειαν καὶ τὸ εἶναι, νοούμενος.",
+      "english_text": "What then is inferred from these facts? Why, that the wise man is called the God of the foolish man, but he is not God in reality, just as a base coin of the apparent value of four drachmas is not a four drachma piece. But when he is compared with the living God, then he will be found to be a man of God; but when he is compared with a foolish man, he is accounted a God to the imagination and in appearance, but he is not so in truth and essence.",
+      "confidence": 0.6739805097451275,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "164",
+      "english_ref": "164",
+      "greek_text": "καὶ μὴν οὐδὲ πᾶς „ὁ εὑρίσκων σε ἀποκτενεῖ“, καθάπερ σοφιζόμενος διεξῄεις (Gen. 4, 14)· τὸ γὰρ εὑρισκόμενον ὑπὸ δυοῖν, ἢ ὁμοίου ἢ ἀνομοίου, πάντως εὑρίσκεται, ὑπὸ μὲν [οὖν] τοῦ ὁμοίου καὶ συγγενοῦς διὰ τὴν ἐν ἅπασιν οἰκειότητα καὶ κοινωνίαν, ὑπὸ δὲ τοῦ ἀνομοίου διὰ τὴν ἀντίπαλον ἀλλοτριότητα· τὸ μὲν οὖν ὅμοιόν ἐστι καὶ φυλακτικὸν τοῦ παραπλησίου, τὸ δ’ ἀνόμοιον καὶ φθαρτικὸν τοῦ διαλλάττοντος.",
+      "english_text": "And indeed it will not be the case, that every one who findeth thee will hide thee, as thou sayest, speaking sophistically. For that which is found, is found in every case by two people, by one who resembles itself, or by one who is dissimilar. By one who resembles itself according to the kindred and relationship which exists in all things, and by him who is not like, according to the contrary unlikeness. The one, therefore, that is like, endeavours to preserve that which resembles itself, and that which is dissimilar endeavours to destroy that which differs from it.",
+      "confidence": 0.820150693188668,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "165",
+      "english_ref": "165",
+      "greek_text": "ἴστωσαν δὴ καὶ ὁ Κάιν καὶ εἴ τις ἕτερος πανοῦργος, ὅτι οὐχ ὑπὸ παντὸς τοῦ ἐντυγχάνοντος ἀναιρεθήσεται, ἀλλὰ ῥᾳδιουργοὶ μὲν ἀδελφὰς καὶ συγγενεῖς κακίας ἐζηλωκότες φρουροὶ καὶ φύλακες αὐτοῦ γενήσονται, φρόνησιν δ’ ὅσοι καὶ ἄλλην ἀρετὴν ἐξεπόνησαν ὡς ἄσπονδον ἐχθρόν, ἢν δύνωνται, καθελοῦσι· πάντα γάρ, ὡς ἔπος εἰπεῖν, καὶ σώματα καὶ διαφθείρεται.",
+      "english_text": "And let them know that Cain, and all other wicked men will not be slain by any one who meets them, but that evil doers imitating their kindred and connected wickednesses, will become guardians and preservers of them; but all those who have cultivated prudence or any other virtue, will destroy them if they can, as irreconcileable enemies. For, in short, all bodies and all things are preserved by the things which are akin to and attached to them, but are destroyed by those that are alien and hostile to them.",
+      "confidence": 0.7011413043478261,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "168",
+      "english_ref": "168",
+      "greek_text": "μήποτ’ οὖν ὃ βούλεται παριστάνειν ἐστὶ τοιόνδε· τὸ ἄλογον τῆς ψυχῆς εἰς ἑπτὰ διανέμεται μοίρας, ὅρασιν ἀκοὴν ὄσφρησιν γεῦσιν ἁφὴν λόγον γόνιμον· εἰ δή τις τὸν ὄγδοον ἀνέλοι, νοῦν τὸν ἡγεμόνα τούτων Κάιν, παραλύσει καὶ τὰ ἑπτά· ῥώμῃ μὲν γὰρ τῆς διανοίας καρτερᾷ πάντα συρρώννυται, ἀσθενείᾳ δὲ συγκάμνει, φθορᾷ δὲ ἣν ἐπάγει κακία παντελεῖ πάρεσίν τε καὶ ἔκλυσιν λαμβάνει.",
+      "english_text": "The irrational part of the soul is divided into seven parts, the senses of seeing, of smelling, of hearing, of tasting, and of touch, the organs of speech, and the organs of generation. If, therefore, any one were to slay the eighth, that is to say, Cain, the ruler of them all, he would also paralyse all the seven. For they are all confirmed by the vigorous strength of the mind, and they all feel weak simultaneously with any weakness exhibited by the mind, and they all endure relaxation and complete dissolution in consequence of the destruction which complete wickedness brings upon them.",
+      "confidence": 0.7078889348215516,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "169",
+      "english_ref": "169",
+      "greek_text": "τὰ δὲ ἑπτὰ ταῦτα ἐν μὲν σοφοῦ ψυχῇ ἀμίαντα. καὶ καθαρά, ταύτῃ καὶ τιμῆς ἐπάξια εὑρίσκεται, ἐν δὲ ἄφρονος ἀκάθαρτα καὶ μεμιασμένα καὶ ὅπερ εἶπεν ἐκδικούμενα, ἴσον τῷ δίκης ἐπάξια καὶ τιμωρίας.",
+      "english_text": "Now these seven senses are unpolluted and pure in the soul of the wise man, and here also they are found worthy of honour. But in that of the foolish man they are impure and polluted, and as I said before, punished, that is, they are worthy of punishment and chastisement.",
+      "confidence": 0.95,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "170",
+      "english_ref": "170",
+      "greek_text": "ὁπότε γοῦν τὴν γῆν ὕδατι καθαίρειν ὁ δημιουργὸς διενοήθη καὶ τὴν ψυχὴν τῶν ἀμυθήτων ἀδικημάτων κάθαρσιν λαβεῖν ἐκνιψαμένην καὶ ἀπολουσαμένην τὰ μιάσματα τρόπον ἁγνείας ἱερᾶς, παραινεῖ τῷ φανέντι δικαίῳ, ὃς οὐ παρεσύρη τῇ τοῦ κατακλυσμοῦ φορᾷ, εἰσάγειν εἰς τὴν κιβωτόν, ὅπερ ἦν τὸ ψυχῆς ἀγγεῖον τὸ σῶμα, „ἀπὸ τῶν κτηνῶν τῶν καθαρῶν ἑπτά, ἄρρεν καὶ θῆλυ“ (Gen. 7, 2), δικαιώσας τὸν ἀστεῖον λογισμὸν χρῆσθαι μέρεσι τοῖς τοῦ ἀλόγου πᾶσι καθαροῖς.",
+      "english_text": "At all events, when the Creator determined to purify the earth by means of water, and that the soul should receive purification of all its unspeakable offences, having washed off and effaced its pollutions after the fashion of a holy purification, he recommended him who was found to be a just man, who was not borne away by the violence of the deluge, to enter into the ark, that is to say, into the vessel containing the soul, namely, the body, and to lead into it \"seven of all clean beasts, male and female,\"",
+      "confidence": 0.6502995044171515,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "172",
+      "english_ref": "172",
+      "greek_text": "ἕκαστον δὲ τῶν ἑπτὰ τῇ μὲν ἄρρεν γίνεται, τῇ δὲ καὶ θῆλυ· ἐπειδὴ γὰρ ἢ ἴσχεται ἢ κινεῖται, ἴσχεται μὲν κατὰ τοὺς ὕπνους ἠρεμοῦντα, κινεῖται δὲ ἐν ταῖς ἐγρηγόρσεσιν ἤδη ἐνεργοῦντα, τὸ μὲν καθ’ ἕξιν καὶ ἠρεμίαν ἅτε πρὸς τὸ παθεῖν ὑποβεβλημένον καλεῖται θῆλυ, τὸ δὲ ἐν τῷ δρᾶν ἐπινοούμενον ἄρρεν ὀνομάζεται.",
+      "english_text": "And every one of the seven outward senses is in one respect male, and in another, female. For when they are stationary, or when it is in motion, they are stationary while quiescent in sleep, and they are in motion while they are energising in their waking state; and the one in accordance with habit and tranquillity, as being subject to passion, is called the female; and the one which exists according to motion and energy, as one that is only conceived in action, is called the male.",
+      "confidence": 0.8030111336032388,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "173",
+      "english_ref": "173",
+      "greek_text": "οὕτως μὲν ἐν τῷ σοφῷ τὰ ἑπτὰ φαίνεται καθαρά, κατὰ δὲ τὰ ἐναντία ἐν τῷ φαύλῳ πάντα ἐκδικούμενα· πόσην γὰρ ὑπολαμβάνομεν πληθὺν καθ’ ἑκάστην ἡμέραν ὑπ’ ὀφθαλμῶν προδίδοσθαι πρὸς τὰ χρώματα καὶ σχήματα καὶ ἃ μὴ θέμις ὁρᾶν αὐτομολούντων; πόσην δὲ ὑπὸ ὤτων ἁπάσαις φωναῖς ἐπακολουθούντων; πόσην δὲ πρὸς τῶν ὀσφρήσεως καὶ γεύσεως ὀργάνων ὑπό τε ἀτμῶν καὶ τῶν ἄλλων ἀπλέτοις ποικιλίαις ἀγομένων;",
+      "english_text": "Thus, in the wise man, the seven senses appear to be pure; and on the contrary in the wicked man, they appear to be all liable to punishment. For how great a multitude of things do we imagine to be each day wrongly represented by our eyes, which go over to colours and shapes, and to things which it is not lawful to see? And how so great a multitude of things suffer similar treatment from the ears which follow all kinds of sounds? How many too are misrepresented by the organs of smelling and of taste, and by flavours and vapours, and other things led on according to innumerable variations?",
+      "confidence": 0.8793352919574,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "174",
+      "english_ref": "174",
+      "greek_text": "ἔτι τοίνυν σοι λέγω τὸ πλῆθος ὧν ἀχαλίνου γλώττης ῥεῦμα ἀνεπίσχετον διέφθειρεν ἢ ὁ περὶ τὰς μίξεις μετ’ ἐπιθυμίας ἀκρατοῦς ἀνίατος οἶστρος; μεσταὶ μὲν αἱ πόλεις, μεστὴ δὲ ἀπὸ περάτων ἐπὶ πέρατα πᾶσα ἡ γῆ τῶν κακῶν τούτων, ἐξ ὧν ὁ συνεχὴς καὶ ἄπαυστος καὶ μέγιστος πολέμων ὁ κατ’ εἰρήνην ἀνθρώπων γένει καὶ ἰδίᾳ καὶ κοινῇ φύεται.",
+      "english_text": "I say nothing of that multitude of persons whom the unrestrainable impetuosity of an unbridled tongue has destroyed, or the incurable violence which leads man on to carnal connections with intemperate appetite. Cities are full, and all the earth from one side to the other, is full of these evils, in consequence of which, continual and unceasing and terrible wars are set on foot among men, even in times of peace, both publicly and privately.",
+      "confidence": 0.841367137355584,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "175",
+      "english_ref": "175",
+      "greek_text": "καὶ κεκωφῶσθαι μᾶλλον ἢ βλαβερῶν ἀκούειν λόγων καὶ ἐκτετμῆσθαι γλῶτταν ὑπὲρ τοῦ μηδὲν τῶν ἀρρήτων ἐκλαλῆσαι.",
+      "english_text": "On which account it appears to me that all men who are not utterly uneducated would choose to be mutilated and to become blind, rather than to see what is not fitting to be seen, to become deaf rather than to hear pernicious discourses, and to have their tongues cut out if that were the only way to prevent their speaking things, which ought not to be spoken.",
+      "confidence": 0.7458333333333333,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "176",
+      "english_ref": "176",
+      "greek_text": "φασὶ γοῦν ἤδη τινὰς τῶν σοφῶν τροχιζομένους ὑπὲρ τοῦ τὰ ἄρρητα μηνῦσαι γλῶτταν ἀποτραγόντας τὴν ἑαυτῶν ἀργαλεωτέραν κατὰ τῶν βασανιστῶν ἀντιτεχνήσασθαι βάσανον οὐ δυνηθέντων ἃ ἐπόθουν ἐπιγνῶναι. ἐξευνουχισθῆναί γε μὴν ἄμεινον ἢ πρὸς συνουσίας ἐκνόμους λυττᾶν. ἅπαντα δὴ ταῦτα συμφοραῖς ἀνηκέστοις βαπτίζοντα τὴν ψυχὴν δίκης καὶ τιμωρίας εἰκότως ἂν τῆς ἀνωτάτω τυγχάνοι.",
+      "english_text": "At all events, they say that some wise men, when they have been tortured on the wheel to make them betray secrets which are not worthy to be divulged, have bitten out their tongues, and so have inflicted on their torturers a more grievous torture than they themselves were suffering, as they could not learn from them what they desired; and it is better to be made an eunuch than to be hurried into wickedness by the fury of the illicit passions: for all these things, as they overwhelm the soul in pernicious calamities, are deservedly followed by extreme punishments.",
+      "confidence": 0.8870361684386074,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "177",
+      "english_ref": "177",
+      "greek_text": "λέγει δ’ ἑξῆς ὅτι „ἔθετο κύριος ὁ θεὸς σημεῖον τῷ Κάιν, τοῦ μὴ ἀνελεῖν αὐτὸν πάντα τὸν εὑρίσκοντα“ (Gen. 4, 15)· καὶ τί τὸ σημεῖόν ἐστιν, οὐ δεδήλωκε, καίτοι γε εἰωθὼς τὴν ἑκάστου φύσιν διὰ σημείου δεικνύναι, ὥσπερ ἐπὶ τῶν ἐν Αἰγύπτῳ τὴν ῥάβδον μεταβαλὼν εἰς ὄφιν καὶ τὴν χεῖρα Μωυσέως εἰς χιόνος ἰδέαν καὶ τὸν ποταμὸν εἰς αἷμα.",
+      "english_text": "Moses says in the next passage that the Lord God set a mark upon Cain in order to prevent any one who found him from slaying him; but what this mark is, he has not shown, although he is in the habit of explaining the nature of everything by a sign, as he does in the affairs of Egypt, where God changed his rod into a serpent, and withered the hand of Moses till it became like snow, and turned the river into blood.",
+      "confidence": 0.7701942951632905,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "178",
+      "english_ref": "178",
+      "greek_text": "μήποτ’ οὖν αὐτὸ τοῦτο σημεῖόν ἐστι τῷ Κάιν τοῦ μὴ φονευθῆναι τὸ μηδέποτε ἀναιρεθῆναι· οὐ γὰρ θάνατον αὐτοῦ διὰ πάσης τῆς νομοθεσίας δεδήλωκεν αἰνιττόμενος ὅτι, ὥσπερ ἡ μεμυθευμένη Σκύλλα, κακὸν ἀθάνατόν ἐστιν ἀφροσύνη, εἴθε μέντοι συμβαίνοι τἀναντία, ὡς ἐκποδὼν τὰ φαῦλα ἀναιρεῖσθαι παντελῆ φθορὰν ὑπομένοντα· νῦν δ’ ἀεὶ ζωπυρούμενα τὴν ἀθάνατον ἐγκατασκήπτει νόσον τοῖς ἅπαξ πρὸς αὐτῶν ἁλοῦσιν.",
+      "english_text": "Or may we not suppose that this mark was set upon Cain to prevent his being slain, as a token that he would never be destroyed? For he has never once mentioned his death in the whole of the law, showing enigmatically that, like that fabulous monster Scylla, so also folly is an undying evil, which never entirely perishes, and yet which as to its capability of dying receives all time, and is never wholly free from death. And I would that the opposite event might happen, that all evils might be utterly eradicated, and might endure total destruction; but as it is they are constantly budding forth, and inflict an incurable disease on all who are once infected by them.",
+      "confidence": 0.6534711916193802,
+      "method": "section-ref"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 176,
+    "total_english_segments": 177,
+    "aligned_segments": 146,
+    "confidence_threshold": 0.6
+  }
+}

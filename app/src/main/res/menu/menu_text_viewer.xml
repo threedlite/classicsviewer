@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/action_view_bookmarks"
+        android:title="View Bookmarks"
+        android:icon="@drawable/ic_bookmarks"
+        app:showAsAction="always" />
+    
+    <item
+        android:id="@+id/action_check_definitions"
+        android:title="Check Definitions"
+        android:icon="@drawable/ic_wrench"
+        app:showAsAction="always" />
+    
+    <item
+        android:id="@+id/action_continuous_playback"
+        android:title="Continuous Audio"
+        android:checkable="true"
+        app:showAsAction="never" />
+        
+</menu>

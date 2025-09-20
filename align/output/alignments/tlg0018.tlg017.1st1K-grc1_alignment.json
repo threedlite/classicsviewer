@@ -1,0 +1,156 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg017/tlg0018.tlg017.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg017/tlg0018.tlg017.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "1",
+      "english_ref": "3",
+      "greek_text": "ὁ ἄγγελος κυρίου· ἀποστράφηθι πρὸς τὴν κυρίαν σου καὶ ταπεινώθητι ὑπὸ τὰς χεῖρας αὐτῆς. καὶ εἶπεν αὐτῇ ὁ ἄγγελος κυρίου· ἰδοὺ σὺ ἐν γαστρὶ ἔχεις, καὶ τέξῃ υἱόν, καὶ καλέσεις τὸ ὄνομα αὐτοῦ Ἰσμαήλ, ὅτι ἐπήκουσε κύριος τῇ ταπεινώσει σου. οὗτος ἔσται ἀγροῖκος ἄνθρωπος· αἱ χεῖρες αὐτοῦ ἐπὶ πάντας καὶ αἱ χεῖρες πάντων ἐπ’ αὐτόν (Gen. 16, 6—12, ομ. 10).”",
+      "english_text": "I think therefore that there are three causes for flight—hatred, fear, and shame. Now women leave their husbands out of hatred, and for the same reason men desert their wives. But children flee from their parents, and servants from their masters, out of fear. And lastly, friends avoid their companions out of shame, when they have done anything which is displeasing to them. And before now I have known instances of fathers who have led a life of effeminate luxury, reverencing the austere and philosophical lives of their sons, and out of shame preferring to live in the country rather than in the city.",
+      "confidence": 0.6064285714285714,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "8",
+      "greek_text": "τίς οὖν αἰτία τοῦ μίσους; ποθεῖς γὰρ ἴσως δὴ τοῦτο μαθεῖν. εἰσί τινες οἱ τὴν ἄποιον καὶ ἀνείδεον καὶ ἀσχημάτιστον οὐσίαν θεοπλαστοῦντες, τὸ κινοῦν αἴτιον οὔτε εἰδότες οὔτε παρὰ τῶν εἰδότων μαθεῖν σπουδάσαντες, ἀγνοίᾳ δὲ καὶ ἀμαθίᾳ κεχρημένοι τοῦ καλλίστου μαθήματος, οὗ πρώτου καὶ μόνου τὴν ἐπιστήμην ἐκπονεῖν ἦν ἀναγκαῖον.",
+      "english_text": "What then was the cause of his hatred? For perhaps you are desirous to hear this. There are some persons who make to themselves gods of substance destitute of all distinctive quality, and species, and shape, neither knowing the cause which puts things in motion, nor showing any anxiety to learn of those who do know, but being contented with their ignorance and want of understanding of the most important kind of learning, which was in fact the first and only thing of which it was absolutely necessary to labour for the understanding.",
+      "confidence": 0.6430080629316504,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "9",
+      "greek_text": "τίς οὖν αἰτία τοῦ μίσους; ποθεῖς γὰρ ἴσως δὴ τοῦτο μαθεῖν. εἰσί τινες οἱ τὴν ἄποιον καὶ ἀνείδεον καὶ ἀσχημάτιστον οὐσίαν θεοπλαστοῦντες, τὸ κινοῦν αἴτιον οὔτε εἰδότες οὔτε παρὰ τῶν εἰδότων μαθεῖν σπουδάσαντες, ἀγνοίᾳ δὲ καὶ ἀμαθίᾳ κεχρημένοι τοῦ καλλίστου μαθήματος, οὗ πρώτου καὶ μόνου τὴν ἐπιστήμην ἐκπονεῖν ἦν ἀναγκαῖον.",
+      "english_text": "Laban now is one of this kind of persons; for the sacred scriptures attribute to him a flock devoid of all distinctive marks. And matter, without any distinctive characteristics, is without any marks in the universe, and so is in men the soul, which is destitute of learning and which has no instructors.",
+      "confidence": 0.601269612556561,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "14",
+      "greek_text": "τίς οὖν αἰτία τοῦ μίσους; ποθεῖς γὰρ ἴσως δὴ τοῦτο μαθεῖν. εἰσί τινες οἱ τὴν ἄποιον καὶ ἀνείδεον καὶ ἀσχημάτιστον οὐσίαν θεοπλαστοῦντες, τὸ κινοῦν αἴτιον οὔτε εἰδότες οὔτε παρὰ τῶν εἰδότων μαθεῖν σπουδάσαντες, ἀγνοίᾳ δὲ καὶ ἀμαθίᾳ κεχρημένοι τοῦ καλλίστου μαθήματος, οὗ πρώτου καὶ μόνου τὴν ἐπιστήμην ἐκπονεῖν ἦν ἀναγκαῖον.",
+      "english_text": "But seeing that he is dumb with respect to learning and to all desirable and legitimate authority, he very naturally thinks of flight. For he is afraid that in addition to not being able to derive any advantage, he may even be injured. For all connections with the foolish injures us, and very often the soul against its will becomes stamped with the impression of their insanity of mind. And, in truth, instruction is naturally a thing inimical to ignorance, and so is industry to indifference.",
+      "confidence": 0.6089520689449869,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "16",
+      "greek_text": "τίς οὖν αἰτία τοῦ μίσους; ποθεῖς γὰρ ἴσως δὴ τοῦτο μαθεῖν. εἰσί τινες οἱ τὴν ἄποιον καὶ ἀνείδεον καὶ ἀσχημάτιστον οὐσίαν θεοπλαστοῦντες, τὸ κινοῦν αἴτιον οὔτε εἰδότες οὔτε παρὰ τῶν εἰδότων μαθεῖν σπουδάσαντες, ἀγνοίᾳ δὲ καὶ ἀμαθίᾳ κεχρημένοι τοῦ καλλίστου μαθήματος, οὗ πρώτου καὶ μόνου τὴν ἐπιστήμην ἐκπονεῖν ἦν ἀναγκαῖον.",
+      "english_text": "For those who are free both in name and also in their minds do not consider any foolish person as either rich or glorious, but look upon all such persons, so to say, as inglorious and poor, even if they exceed the fortune of wealthy kings. For they do not say that they will have the riches of their father, but the riches which have been taken away; nor do they say that they shall possess his glory, but the glory which has been taken away from him.",
+      "confidence": 0.6359743927125506,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "26",
+      "greek_text": "τίς οὖν αἰτία τοῦ μίσους; ποθεῖς γὰρ ἴσως δὴ τοῦτο μαθεῖν. εἰσί τινες οἱ τὴν ἄποιον καὶ ἀνείδεον καὶ ἀσχημάτιστον οὐσίαν θεοπλαστοῦντες, τὸ κινοῦν αἴτιον οὔτε εἰδότες οὔτε παρὰ τῶν εἰδότων μαθεῖν σπουδάσαντες, ἀγνοίᾳ δὲ καὶ ἀμαθίᾳ κεχρημένοι τοῦ καλλίστου μαθήματος, οὗ πρώτου καὶ μόνου τὴν ἐπιστήμην ἐκπονεῖν ἦν ἀναγκαῖον.",
+      "english_text": "Consider, therefore, now by what conduct you may avoid his attacks; apply yourself to the same things, I do not mean the same pursuits, but to the same things which are the efficient causes of those things which have been mentioned; to honours, to offices of authority, to silver, to gold, to possessions, to money, to colours, to forms, to exceeding nicety; and when you meet with such things, then, like a skilful workman, impress the most beautiful appearance on the material substances: and perfect a most excellent work.",
+      "confidence": 0.6055749702310075,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "13",
+      "english_ref": "32",
+      "greek_text": "τὸ γὰρ γενόμενον ζῷον ἀτελὲς μέν ἐστι τῷ ποσῷ — μάρτυρες δὲ αἱ καθ’ ἡλικίαν ἑκάστην παραυξήσεις —, τέλειον δὲ τῷ ποιῷ· μένει γὰρ ἡ αὐτὴ ποιότης ἅτε ἀπὸ μένοντος ἐκμαγεῖσα καὶ μηδαμῇ τρεπομένου θείου λόγου.",
+      "english_text": "But do you adopt a moderate course without being compelled thereto, and if ever you are constrained to indulge yourself in things beyond moderation, still make reason the governor of the necessity, and never go so far as to change pleasure into unpleasantness, but, if we may speak in such a manner, be drunk in a sober manner.",
+      "confidence": 0.6535373377892433,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "27",
+      "english_ref": "46",
+      "greek_text": "ἢ οὐκ οἶδας, ὅτι ναῦν ἰδιώτης μὲν παραλαβὼν σῴζεσθαι δυναμένην ἀνατρέπει, κυβερνητικὸς δὲ ἀνὴρ καὶ τὴν ἀπολλυμένην πολλάκις ἔσωσε, καὶ τῶν καμνόντων οἱ μὲν ἀπειρίᾳ τῶν θεραπευόντων χρησάμενοι σφαλερῶς τὰ σώματα ἔσχον, οἱ δὲ ἐμπειρίᾳ καὶ τὰς σφαλερὰς νόσους ἀπέφυγον; καὶ τί δεῖ μηκύνειν; ἀεὶ γὰρ τὰ μετὰ τέχνης ἔλεγχός ἐστι τῶν σὺν ἀτεχνίᾳ γινομένων, καὶ ὁ τούτων ἀληθὴς ἔπαινος ἀψευδὴς ἐκείνων ἐστὶ κατηγορία.",
+      "english_text": "\"Dwell, therefore,\" says she, \"O my child, with him,\" not all thy life, but \"certain days;\" that is to say, learn to be acquainted with the country of the external senses; know thyself and thy own parts, and what each is, and for what end it was made, and how it is by nature calculated to energise, and who it is who moves those marvellous things, and pulls the strings, being himself invisible, in an invisible manner, whether it is the mind that is in thee, or the mind of the universe.",
+      "confidence": 0.6371958804819419,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "66",
+      "english_ref": "70",
+      "greek_text": "δῐ ὑπηρετούντων ἑτέρων, οὐ δι’ ἑαυτοῦ. τὰς μὲν γὰρ χάριτας καὶ δωρεὰς καὶ εὐεργεσίας αὐτὸν ἁρμόττει προτείνειν ἅτε ἀγαθὸν καὶ φιλόδωρον ὄντα φύσει, τὰς δὲ τιμωρίας οὐκ ἄνευ μὲν ἐπικελεύσεως τῆς ἑαυτοῦ βασιλέως ἅτε ὑπάρχοντος, δι’ ἄλλων δέ, οἳ πρὸς τοιαύτας χρείας εὐτρεπεῖς εἰσι. μαρτυρεῖ δέ μου τῷ λόγῳ ὁ ἀσκητὴς ἐν οἷς φησιν·",
+      "english_text": "And he made us of the powers which were subordinate to him, not only for the reason which has been mentioned, but also because the soul of man alone was destined to receive notions of good and of evil, and to choose one of the two, since it could not adopt both. Therefore, he thought it necessary to assign the origin of evil to other workmen than himself, —but to retain the generation of good for himself alone.",
+      "confidence": 0.6460143201599624,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "72",
+      "english_ref": "86",
+      "greek_text": "οὗ χάριν ὁ μὲν κατ’ ἐξοχὴν ἄνθρωπος σὺν τῷ ἄρθρῳ μεμήνυται — λέγεται γάρ· „ἐποίησεν ὁ θεὸς τὸν ἄνθρωπον,“ τὸν ἀειδῆ καὶ ἄκρατον ἐκεῖνον λογισμόν —, ὁ δὲ ἄνευ τῆς τοῦδε προσθήκης· τὸ γὰρ· „ποιήσωμεν ἄνθρωπον“ ἐμφαίνει τὸν ἐξ ἀλόγου καὶ λογικῆς συνυφανθέντα φύσεως.",
+      "english_text": "But they who have been instructed in the difference between voluntary and involuntary offences, and who have received a tongue which speaketh good things instead of one which delighteth in accusation, when they do right are to be praised, and when they err contrary to their intention, they are not greatly to be blamed, for which reason cities have been set apart for them to flee unto for refuge.",
+      "confidence": 0.6542553103977772,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "76",
+      "english_ref": "92",
+      "greek_text": "θέμις οὖν τῷ δόξαντι τροπῇ χρήσασθαι ἀκουσίῳ φάναι κατὰ θεὸν συμβῆναι τὴν τροπήν, ὅπερ οὐ θέμις τῷ ἑκουσίως ἁμαρτόντι. „δώσειν“ δέ φησιν οὐ τῷ κτείναντι, ἀλλ’ ᾧ διαλέγεται, ὥσθ’ ἕτερον μὲν εἶναι τὸν οἰκήτορα, ἕτερον δὲ τὸν φεύγοντα. τῷ μὲν γὰρ ἑαυτοῦ λόγῳ ὁ θεὸς πατρίδα οἰκεῖν τὴν ἐπιστήμην ἑαυτοῦ, ὡς ἂν αὐτόχθονι, δεδώρηται, τῷ δ’ ἐν ἀκουσίοις γενομένῳ σφάλμασι καταφυγήν,",
+      "english_text": "Then, in regular order, the reason removes to a distance and separates the uttered speech which appeared to be the nearest to it of all things, in order that speech, according to the intention, might alone be left, free from the body, free from the entanglements of the outward senses, and free from all uttered speech; for when it is left in this manner existing in a solitary manner, it will embrace that which alone is to be embraced with purity, and in such a way that it cannot be drawn away.",
+      "confidence": 0.6487556977721731,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "76",
+      "english_ref": "98",
+      "greek_text": "θέμις οὖν τῷ δόξαντι τροπῇ χρήσασθαι ἀκουσίῳ φάναι κατὰ θεὸν συμβῆναι τὴν τροπήν, ὅπερ οὐ θέμις τῷ ἑκουσίως ἁμαρτόντι. „δώσειν“ δέ φησιν οὐ τῷ κτείναντι, ἀλλ’ ᾧ διαλέγεται, ὥσθ’ ἕτερον μὲν εἶναι τὸν οἰκήτορα, ἕτερον δὲ τὸν φεύγοντα. τῷ μὲν γὰρ ἑαυτοῦ λόγῳ ὁ θεὸς πατρίδα οἰκεῖν τὴν ἐπιστήμην ἑαυτοῦ, ὡς ἂν αὐτόχθονι, δεδώρηται, τῷ δ’ ἐν ἀκουσίοις γενομένῳ σφάλμασι καταφυγήν,",
+      "english_text": "Him, again, who is still less ready he bids flee to his kingly power; for that which is in subjection is corrected by the fear of him who rules it, and by necessity which keeps it in order, even if the child is not kept in the right way by love for his father. Again, in the case of him who is not able to reach the boundaries which have been already mentioned, in respect of their being a long way off, there are other goals appointed for them at a shorter distance, the cities namely of the necessary powers, the city of the power of the mercy, the city of the power which enjoins what is right, the city of the power which forbids what is not right:",
+      "confidence": 0.62228517234132,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "99",
+      "english_ref": "116",
+      "greek_text": "ὅ τε γὰρ προλαβών, πειθαρχῶν οἷς ἂν προστάττῃ πᾶσιν εὐδαιμονήσει· ὁ δ’ ὕστατος ὑστάτην εὑρήσεται καταφυγήν, ἀποτροπὴν κακῶν, εἰ καὶ μὴ μετουσίαν προηγουμένων ἀγαθῶν.",
+      "english_text": "But I am not saying this at random, but for the sake of proving that the period of the death of the high priest is a most natural termination of exile to be appointed by the law, so as to allow of the return of the fugitives.",
+      "confidence": 0.616826240166084,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "122",
+      "english_ref": "122",
+      "greek_text": "ὃς γὰρ ἂν ὀλιγωρήσας τοῦ διδάσκοντος ὑπὸ ῥᾳθυμίας ἐμφύτου τε ὁμοῦ καὶ συνήθους τὰ μὲν πρόσω καταλίπῃ, δι’ ὧν ὁρᾶν καὶ ἀκούειν καὶ ταῖς ἄλλαις δυνάμεσιν ἔστι χρῆσθαι πρὸς τὴν τῶν φύσεως πραγμάτων ἐπίκρισιν, ἐκτραχηλίσας δ’ αὑτὸν εἰς τοὐπίσω περιαγάγῃ, τὰ τυφλὰ τῶν ἐν τῷ βίῳ πραγμάτων μᾶλλον ἢ τῶν τοῦ σώματος μερῶν ἐζηλωκώς, ἀψύχου καὶ κωφῆς λίθου τρόπον στηλιτεύεται.",
+      "english_text": "For whoever despises his teacher, and under the influence of an innate and habitual indolence forsakes what is in front of him, by means of which it may be in his power to see, and to hear, and to exert his other powers, so as to form a judgment in things of nature, and turns his head round so as to keep his eyes on what is behind him, that man has an admiration for blindness in the affairs of life, as well as in the parts of the body, and becomes a pillar, like a lifeless and senseless stone.",
+      "confidence": 0.6426630434782609,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "134",
+      "english_ref": "152",
+      "greek_text": "οἷον ἰδοὺ ὁ νοῦς, ἔνθερμον καὶ πεπυρωμένον πνεῦμα· ἰδοὺ καὶ τὰ νοητά, ὡσανεὶ ὗλαι· ποῦ τὸ τρίτον, τὸ νοεῖν; πάλιν ἰδοὺ ἡ ὅρασις, ἰδοὺ τὸ χρῶμα, ποῦ τὸ ὁρᾶν; καὶ συνόλως ἰδοὺ ἡ αἴσθησις, τὸ κριτήριον, ἀλλὰ καὶ τὰ αἰσθητά, αἱ ὗλαι· τὸ οὖν αἰσθάνεσθαι ποῦ;",
+      "english_text": "And when will this be? when she willingly exchanges what is of importance for what is indifferent, preferring spurious to genuine good. Now the genuine good things are faith, the connection and union of words with deeds, and the rule of right instruction, as on the other hand the evils are, faithlessness, a want of such connection between words and deeds, and ignorance. And spurious goods are those which depend upon appetite devoid of reason;",
+      "confidence": 0.6216484873821831,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "135",
+      "english_ref": "155",
+      "greek_text": "ταῦτα πυνθανομένῳ δεόντως ἀποκρίνεται· „ὁ θεὸς ὄψεται ἑαυτῷ“· θεοῦ γὰρ ἔργον ἴδιον τὸ τρίτον. ἐπιφροσύνῃ γὰρ αὐτοῦ ὁ μὲν νοῦς καταλαμβάνει, ἡ δ’ ὅρασις ὁρᾷ καὶ πᾶσα αἴσθησις αἰσθάνεται. „κριὸς δ’ εὑρίσκεται κατεχόμενος“, τουτέστι λόγος ἡσυχάζων καὶ ἐπέχων.",
+      "english_text": "But let us not be laughed at as appearing to have given gifts which were not merited, while we think that we gave what is most suitable to the soul; for I, indeed, did what was proper for a man to do who wished to make experiment of and to test her disposition, throwing out a bait and sending a messenger; but he has showed me that her nature is not easily caught.",
+      "confidence": 0.6211792486399291,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "172",
+      "english_ref": "182",
+      "greek_text": "ἀρχὴ μὲν οὖν ὁ σπόρος, τελευτὴ δὲ ὁ ἄμητος. ἄμεινον δ’ ἐκεῖνο ἐκδέξασθαι· πᾶσα ἀρχὴ καὶ πᾶν τέλος αὐτόματόν ἐστιν, ἴσον τῷ φύσεως, οὐχ ἡμέτερον ἔργον· οἷον ἀρχὴ τίς τοῦ μανθάνειν; ἢ δῆλον ὅτι ἡ ἐν τῷ διδασκομένῳ φύσις εὐπαράδεκτος οὖσα πρὸς τὰ κατὰ μέρος θεωρήματα; τίς δὲ τοῦ τελειοῦσθαι; πάλιν, εἰ δεῖ μηδὲν ὑποστειλάμενον εἰπεῖν, ἡ φύσις. προκοπὰς μὲν γὰρ ἐμποιῆσαι καὶ ὁ διδάσκων ἱκανός, τὴν δ’ ἐπ’ ἄκρον τελειότητα ὁ θεὸς μόνος, ἡ ἀρίστη φύσις.",
+      "english_text": "The dominant part of us, like a fountain, pours forth many powers through the veins of the earth as it were, till they reach the organs of the external senses, that is to say, the eyes, and ears, and nostrils, and other organs; and these organs in every animal are situated about the head and face. Therefore, the face, which is the dominant portion of the body, is irrigated as from a fountain from the dominant portion of the soul; making the spirit, which is calculated for seeing, reach to the eyes, that which has the power of hearing reach the ears, the spirit of smelling reach the nostrils, that of taste the mouth, and causing that of touch to pervade the whole surface of the body.",
+      "confidence": 0.6027167535971824,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "172",
+      "english_ref": "191",
+      "greek_text": "ἀρχὴ μὲν οὖν ὁ σπόρος, τελευτὴ δὲ ὁ ἄμητος. ἄμεινον δ’ ἐκεῖνο ἐκδέξασθαι· πᾶσα ἀρχὴ καὶ πᾶν τέλος αὐτόματόν ἐστιν, ἴσον τῷ φύσεως, οὐχ ἡμέτερον ἔργον· οἷον ἀρχὴ τίς τοῦ μανθάνειν; ἢ δῆλον ὅτι ἡ ἐν τῷ διδασκομένῳ φύσις εὐπαράδεκτος οὖσα πρὸς τὰ κατὰ μέρος θεωρήματα; τίς δὲ τοῦ τελειοῦσθαι; πάλιν, εἰ δεῖ μηδὲν ὑποστειλάμενον εἰπεῖν, ἡ φύσις. προκοπὰς μὲν γὰρ ἐμποιῆσαι καὶ ὁ διδάσκων ἱκανός, τὴν δ’ ἐπ’ ἄκρον τελειότητα ὁ θεὸς μόνος, ἡ ἀρίστη φύσις.",
+      "english_text": "When, then, is it without a guardian? Is it not when the sight is without any covering, being poured forth upon the objects of sight; and when the hearing is without a covering, being occupied in drinking in all kinds of sounds; and when the sense of smell is uncovered, and the kindred powers are left to themselves, and so are most ready to suffer whatever the invading enemy may be disposed to inflict? And that speech is uncovered and uttered which speaks ten thousand things in an unseasonable manner, without any thing to restrain its impetuosity; therefore flowing on unrestrainedly, it overturns many noble purposes and plans of life which were previously sailing on erect as though in calm weather.",
+      "confidence": 0.6548365453449668,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 208,
+    "total_english_segments": 212,
+    "aligned_segments": 18,
+    "confidence_threshold": 0.6
+  }
+}

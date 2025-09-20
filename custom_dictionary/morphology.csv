@@ -1,0 +1,7 @@
+word_form,lemma,morph_info,language,confidence,source_name
+ἄειδε,ἀείδω,"2 s pres actv impr",greek,1.0,"Custom entry"
+λόγων,λόγος,"gen pl",greek,1.0,"Custom entry"
+λόγοις,λόγος,"dat pl",greek,0.95,"Custom entry"
+Ἀτρεΐδης,Ἀτρεΐδης,"nom sg",greek,1.0,"Custom Iliad entry"
+ἔπεισιν,ἔπειμι,"3 s fut actv ind",greek,1.0,"Custom Iliad entry"
+arma,arma,"nom pl neut",latin,1.0,"Custom Aeneid entry"

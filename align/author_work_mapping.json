@@ -1,0 +1,43 @@
+{
+  "authors": {
+    "tlg0018": "Philo Judaeus",
+    "tlg0094": "Dinarchus",
+    "tlg0317": "Aristaenetus",
+    "tlg0527": "Epictetus",
+    "tlg0544": "Aesopus",
+    "tlg1553": "Apollodorus",
+    "tlg2018": "Eusebius of Caesarea",
+    "tlg2038": "Theophilus of Antioch",
+    "tlg2948": "Methodius",
+    "tlg4037": "Maximus Confessor"
+  },
+  "works": {
+    "tlg0527": {
+      "tlg048": "Enchiridion"
+    },
+    "tlg0544": {
+      "tlg001": "Fables"
+    },
+    "tlg0094": {
+      "tlg001": "Against Demosthenes"
+    },
+    "tlg0317": {
+      "tlg001": "Love Letters"
+    },
+    "tlg1553": {
+      "tlg001": "Library"
+    },
+    "tlg2018": {
+      "tlg002": "Ecclesiastical History"
+    },
+    "tlg2038": {
+      "tlg001": "To Autolycus"
+    },
+    "tlg2948": {
+      "tlg001": "Symposium"
+    },
+    "tlg4037": {
+      "tlg001": "Ambigua"
+    }
+  }
+}

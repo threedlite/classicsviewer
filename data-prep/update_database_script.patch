@@ -1,0 +1,106 @@
+--- create_perseus_database.py.old
++++ create_perseus_database.py.new
+@@ -1,5 +1,6 @@
+ # At the top, add import:
+ from pathlib import Path
++from load_combined_dictionaries import load_combined_dictionaries
+ 
+ # Remove or comment out these functions:
+ # - class LSJParser
+@@ -3303,91 +3304,8 @@
+     
+     # Import LSJ dictionary
+     print("\n=== PROCESSING LSJ DICTIONARY ===")
+-    lsj_path = data_sources / "canonical-pdlrefwk" / "data" / "viaf66541464" / "001" / "viaf66541464.001.perseus-eng1.xml"
+-    
+-    if lsj_path.exists():
+-        
+-        # Create dictionary tables
+-        print("Creating dictionary tables...")
+-        cursor.execute("""
+-            CREATE TABLE IF NOT EXISTS dictionary_entries (
+-                id INTEGER PRIMARY KEY NOT NULL,
+-                headword TEXT NOT NULL,
+-                headword_normalized TEXT NOT NULL,
+-                language TEXT NOT NULL,
+-                entry_xml TEXT,
+-                entry_html TEXT,
+-                entry_plain TEXT,
+-                source TEXT,
+-                CHECK (language IN ('greek', 'latin'))
+-            )
+-        """)
+-        
+-        cursor.execute("""
+-            CREATE INDEX IF NOT EXISTS idx_dictionary_headword_normalized 
+-            ON dictionary_entries(headword_normalized, language)
+-        """)
+-        
+-        cursor.execute("""
+-            CREATE TABLE IF NOT EXISTS lemma_map (
+-                word_form TEXT NOT NULL,
+-                word_normalized TEXT NOT NULL,
+-                lemma TEXT NOT NULL,
+-                confidence REAL DEFAULT 1.0,
+-                source TEXT,
+-                morph_info TEXT,
+-                PRIMARY KEY (word_form, lemma)
+-            )
+-        """)
+-        
+-        # idx_lemma_map_normalized removed - Room doesn't expect it
+-        
+-        # Parse and import LSJ
+-        parser = LSJParser()
+-        lsj_entries = parser.parse_lsj_xml(str(lsj_path))
+-        
+-        if lsj_entries:
+-            print(f"Importing {len(lsj_entries)} LSJ entries...")
+-            
+-            # Import dictionary entries
+-            for entry in lsj_entries:
+-                cursor.execute("""
+-                    INSERT INTO dictionary_entries 
+-                    (headword, headword_normalized, language, entry_xml, entry_html, entry_plain, source)
+-                    VALUES (?, ?, ?, ?, ?, ?, ?)
+-                """, (
+-                    entry['headword'],
+-                    entry['headword_normalized'], 
+-                    entry['language'],
+-                    entry['entry_xml'],
+-                    entry['entry_html'],
+-                    entry['entry_plain'],
+-                    entry['source']
+-                ))
+-            
+-            print("✓ LSJ dictionary entries imported successfully")
+-            
+-            # Import Cunliffe Homeric Dictionary for specialized Homeric vocabulary
+-            load_cunliffe_dictionary(cursor)
+-            
+-            # Import Wiktionary definitions as fallback for missing LSJ entries
+-            load_wiktionary_definitions(cursor)
+-            
+-            # Generate and import lemma mappings
+-            print("Generating lemma mappings...")
+-            lemma_mappings = create_lemma_mappings(lsj_entries)
+-            
+-            if lemma_mappings:
+-                print(f"Importing {len(lemma_mappings)} lemma mappings...")
+-                
+-                for mapping in lemma_mappings:
+-                    cursor.execute("""
+-                        INSERT OR IGNORE INTO lemma_map
+-                        (word_form, word_normalized, lemma, confidence, source)
+-                        VALUES (?, ?, ?, ?, ?)
+-                    """, (
+-                        mapping['word_form'],
+-                        mapping['word_normalized'],
+-                        mapping['lemma'],
+-                        mapping['confidence'],
+-                        mapping['source']
++    # Load combined dictionary data (Cunliffe, LSJ, Wiktionary)
++    load_combined_dictionaries(cursor)
+     
+     # Also remove the individual import functions:
+     # - load_cunliffe_dictionary

@@ -1,0 +1,484 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg012/tlg0018.tlg012.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg012/tlg0018.tlg012.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "2",
+      "english_ref": "2",
+      "greek_text": "τὸ νήφειν οὐ μόνον ψυχαῖς ἀλλὰ καὶ σώμασιν ὠφελιμώτατον ἀνωμολόγηται· τάς τε γὰρ ἐξ ἀμέτρου πλησμονῆς γινομένας νόσους ἀπωθεῖται καὶ τὰς αἰσθήσεις πρὸς ἄκρας ὀξύτητας ἀκονᾷ καὶ ὅλα μέντοι τὰ σώματα οὐκ ἐᾷ βαρυνόμενα πίπτειν, ἀλλ’ ἐξαίρει καὶ ἐπικουφίζει καὶ πρὸς τὰς οἰκείους ἐνεργείας ἀνακαλεῖ πᾶσι τοῖς μέρεσιν ἑτοιμότητα ἐντίκτον· καὶ συνόλως ὅσων δημιουργὸς κακῶν ἡ μέθη, τοσούτων ἔμπαλιν ἀγαθῶν τὸ νηφάλιον.",
+      "english_text": "Sobriety is confessed to be a most advantageous thing, not only for souls but also for bodies, for it drives away the diseases which arise from immoderate repletion, and it sharpens the outward senses to an exceeding degree of acuteness, and it altogether prevents bodies from being weighed down so as to fall, but keeps them light, and raises them up, and incites them to the exercise of their appropriate energies, implanting in every part a promptness and vigour; and in short, sobriety is the cause of exactly as many good things, as drunkenness, on the contrary, is of evils.",
+      "confidence": 0.8744206075790792,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "3",
+      "english_ref": "3",
+      "greek_text": "ὁπότ’ οὖν καὶ σώμασιν, οἷς ἡ οἴνου πόσις οἰκεῖον, λυσιτελέστατον τὸ νήφειν, οὐ πολὺ μᾶλλον ψυχαῖς, ὧν φθαρτὴ τροφὴ πᾶσα ἀλλότριον; νηφούσης γὰρ διανοίας τί τῶν παρὰ ἀνθρώποις μεγαλειότερον; τίς δόξα; τίς πλοῦτος; τίς δυναστεία; τίς ἰσχύς; τί τῶν πάντων ὅσα θαυμάζεται; φέρε μόνον τὸ ψυχῆς ὄμμα ὅλον ἰσχῦσαι δι’ ὅλων διοιχθῆναι καὶ μηδὲν οἷα ὑπὸ ῥεύματος συγχυθῆναι μέρος ἢ καταμῦσαι· τότε γὰρ μάλιστα ὀξυωπῆσαν, σύνεσιν καὶ φρόνησιν αὐτὴν ἐμβλέπον, τοῖς νοητοῖς καὶ τί θαυμάζομεν,",
+      "english_text": "Since then sobriety is most advantageous to those bodies to which the drinking of wine is naturally suitable, is it not much more so to souls, with which all perishable food is inconsistent; for what thing in human nature can be more noble than a sober mind? what glory can be more glorious? what wealth can be more rich? what authority more powerful? what strength more vigorous? of all admirable things what can be more admirable? Let there only be the eye of the soul fit to act, which is able to penetrate every where and to open every thing, being in no part hindered or dimmed by the suffusion of its own moisture; for being then most exceedingly sharp-sighted as to its comprehension, and looking into wisdom itself, it will meet with images such as are intelligible only by the intellect, the contemplation of which attracts the soul and will not suffer it any longer to turn aside to the objects which belong to the outward senses.",
+      "confidence": 0.8743611111111111,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "4",
+      "english_ref": "4",
+      "greek_text": "εἰ τῷ νηφαλίῳ τῆς ψυχῆς καὶ βλέποντι ὀξυωπέστατα τῶν γένεσιν λαχόντων μηδέν ἐστιν ἰσότιμον; καὶ γὰρ οἱ τοῦ σώματος ὀφθαλμοὶ καὶ τὸ αἰσθητὸν φῶς περιττῶς πρὸς ἡμῶν πάντων τετίμηται· πολλοὶ γοῦν τῶν τὰς ὄψεις ἀποβαλόντων καὶ τὸ ζῆν ἑκουσίως προσαπέβαλον κουφότερον κακὸν πηρώσεως θάνατον εἶναι δικάσαντες ἑαυτοῖς.",
+      "english_text": "And why should we wonder if there is no created thing equal in honour to a man who is sober in his soul, and gifted with acute vision? for the eyes of the body and the light which is appreciable by the outward senses are honoured in an excessive degree by all of us. Accordingly, many who have lost their sight, have voluntarily also thrown away life, thinking as far as they were concerned, that death itself was a lighter evil than such deprivation.",
+      "confidence": 0.8884654853937197,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "5",
+      "english_ref": "5",
+      "greek_text": "ὅσῳ τοίνυν ψυχὴ σώματος κρείττων, τοσούτῳ καὶ νοῦς ὀφθαλμῶν ἀμείνων· ὃς εἴπερ ἀπήμων εἴη καὶ ἀζήμιος πρὸς μηδενὸς τῶν μέθην παράφορον ἐργαζομένων ἀδικημάτων ἢ παθῶν πιεσθείς, ὕπνῳ μὲν ἀποτάξεται λήθην καὶ ὄκνον ἐμποιοῦντι τῶν πρακτέων, ἐγρήγορσιν δὲ ἀσπασάμενος πρὸς τὰ θέας ἄξια πάντα ὀξυδορκήσει, μνήμαις μὲν ὑποβαλλούσαις ἐγειρόμενος, πράξεσι δὲ τοῖς γνωσθεῖσιν ἑπομέναις χρώμενος.",
+      "english_text": "In proportion then as the soul is superior to the body, in the same proportion also is the mind better than the eyes; and the mind while it is free from injury and imperfection, not being oppressed by any of the iniquities or passions which are produced by insane drunkenness, renounces sleep as a thing which causes forgetfulness and hesitation in what is to be done; but it embraces wakefulness, and uses acuteness of vision, with respect to every object worthy of being beheld, being kept awake by exceedingly perfect memory, and committing actions which are in accordance with the knowledge that it acquires.",
+      "confidence": 0.8185763888888888,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "8",
+      "english_ref": "8",
+      "greek_text": "τὸν γοῦν Ἰσμαὴλ εἰκοσαετίαν ἤδη που βεβιωκότα σχεδὸν κατὰ τὴν πρὸς τὸν ἐν ἀρεταῖς τέλειον Ἰσαὰκ σύγκρισιν ὀνομάζει παιδίον· „ἔλαβε„ γάρ φησιν „ἄρτους καὶ ἀσκὸν ὕδατος καὶ ἔδωκεν Ἄγαρ, καὶ ἐπέθηκεν ἐπὶ τὸν ὦμον καὶ τὸ παιδίον“, ἡνίκα αὐτοὺς οἴκοθεν Ἀβραὰμ ἐξέπεμψε, καὶ πάλιν „ἔρριψε τὸ παιδίον ὑποκάτω μιᾶς ἐλάτης„, καὶ „οὐ μὴ ἴδω τὸν θάνατον τοῦ παιδίου„ (Gen. 21, 14 — 16)· καίτοι πρὸ μὲν τῆς γενέσεως Ἰσαὰκ τρισκαίδεκα γεγονὼς ἐτῶν Ἰσμαὴλ περιτέτμηται (Gen. 17,25), περὶ δὲ τὴν ἑπταέτιν ἡλικίαν παυσαμένου τῆς ἐν γάλακτι τροφῆς ἐκείνου τῷ τὴν ἐν παιδιαῖς ἰσότητα φέρεσθαι νόθος γνησίῳ",
+      "english_text": "Accordingly he calls Ishmael when he has now lived a space of nearly twenty years a child, speaking by a comparison with Isaac who is perfect in virtue; for, says he, \"he took bread, and a skin of water, and gave it to Agar, and put it upon her shoulder, and the child also, when Abraham sent them forth from his house.\"",
+      "confidence": 0.701204608625482,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "9",
+      "english_ref": "9",
+      "greek_text": "ἀλλ’ ὅμως παιδίον νεανίας ὢν ἤδη καλεῖται ὁ σοφιστὴς ἀντεξεταζόμενος σοφῷ· σοφίαν μὲν γὰρ Ἰσαάκ, σοφιστείαν δὲ Ἰσμαὴλ κεκλήρωται, ὡς, ἐπειδὰν ἑκάτερον χαρακτηρίζωμεν, ἐν τοῖς ἰδίᾳ λόγοις ἐπιδείκνυμεν. ὃν γὰρ ἔχει λόγον κομιδῇ νήπιον παιδίον πρὸς ἄνδρα τέλειον, τοῦτον καὶ σοφιστὴς πρὸς σοφὸν καὶ τὰ ἐγκύκλια τῶν μαθημάτων πρὸς τὰς ἐν ἀρεταῖς ἐπιστήμας.",
+      "english_text": "But nevertheless, though in reality a young man, he is still called a child, being as it were a sophist put in comparison with a wise man; for Isaac received wisdom for his inheritance, and Ishmael sophistry, as when we define the characters of each we purpose to show in certain dialogues. For the same relation which a completely infant child bears to a full-grown man, the same does a sophist bear to a wise man, and the encyclical branches of education to real knowledge in virtue.",
+      "confidence": 0.7957788379073756,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "10",
+      "english_ref": "10",
+      "greek_text": "„καὶ ὅσιος ὁ κύριος· ἥμαρτον οὐκ αὐτῷ τέκνα μωμητά· γενεὰ σκολιὰ καὶ διεστραμμένη, ταῦτα κυρίῳ ἀνταποδίδοτε; οὕτως λαὸς μωρὸς καὶ οὐχὶ σοφός;„ (Deut. 32, 4 — 6).",
+      "english_text": "And again in his great song he calls the whole people, when it is smitten with a desire of innovation by the name suited to foolish and infant age, entitling them \"children.\" \"For,\" says he, \"the Lord is just and holy; have they not sinned against him, blameworthy children that they are? O crooked and perverse generation, is this the requital that ye offer to the Lord? is the people so foolish and not wise?\"",
+      "confidence": 0.6590269151138717,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "11",
+      "english_ref": "11",
+      "greek_text": "οὐκοῦν τέκνα ἐναργῶς ὠνόμακε τοὺς μώμους ἔχοντας ἄνδρας ἐν ψυχῇ καὶ μωρίᾳ καὶ ἀνοίᾳ τὰ πολλὰ σφαλλομένους ἐν ταῖς κατὰ τὸν ὀρθὸν βίον πράξεσιν, οὐκ εἰς τὰς ἐν παισὶ σώματος ἡλικίας ἀπιδών, ἀλλ’ εἰς τὸ τῆς διανοίας ἀλόγιστον καὶ πρὸς ἀλήθειαν βρεφῶδες.",
+      "english_text": "Therefore, he here distinctly calls those men children who deserve blame and have guilt in their souls, and who through folly and senselessness commit many errors in their actions which are not according to uprightness of life; not having regard to the bodily age of the children, but to the irrational and really childish condition of their minds.",
+      "confidence": 0.8728941377347752,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "12",
+      "english_ref": "12",
+      "greek_text": "οὕτως μέντοι καὶ Ῥαχήλ, ἡ σώματος εὐμορφία, νεωτέρα Λείας, τοῦ κατὰ ψυχὴν κάλλους, ἀναγράφεται· ἡ μὲν γὰρ θνητή, τὸ δ’ ἐστὶν ἀθάνατον, καὶ ὅσα μέντοι τίμια πρὸς αἴσθησιν, ἑνὸς μόνου τοῦ κατὰ ψυχὴν κάλλους ἀτελέστερα. οἷς ἀκολουθεῖ καὶ τὸν Ἰωσὴφ νέον τε καὶ νεώτατον αἰεὶ λέγεσθαι· καὶ γάρ, ὅταν ἐπιστατῇ τῆς ποίμνης μετὰ τῶν νόθων ἀδελφῶν, νέος προσαγορεύεται (Gen. 37, 2), καὶ ὅταν εὔχηται ὁ πατὴρ αὐτῷ, φησίν· „υἱὸς ηὐξημένος νεώτατος πρὸς μὲ ἀνάστρεψον“ (Gen. 49, 22).",
+      "english_text": "Thus indeed, Rachel also, that is beauty of body, is represented as younger than Leah, who is beauty of soul. For the beauty of the body is mortal, but that of the soul is immortal; and all the things which are accounted honourable when judged of with reference to the outward senses, are all taken together inferior to the one single thing, the beauty of the soul. And it is in accordance with this principle that Joseph is always spoken of as young and as \"the youngest.\"",
+      "confidence": 0.7349525739653129,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "13",
+      "english_ref": "13",
+      "greek_text": "οὗτος δέ ἐστιν ὁ τῆς περὶ τὸ σῶμα ἁπάσης ὑπέρμαχος δυνάμεως καὶ ὁ τῆς τῶν ἐκτὸς ἀφθονίας ἀκολάκευτος ἑταῖρος, ὁ τῆς πρεσβυτέρας ψυχῆς πρεσβύτερον καὶ τιμιώτερον ἀγαθὸν μήπω τέλειον εὑρημένος. εἰ γὰρ εὕρητο, κἂν ὅλην Αἴγυπτον ἀμεταστρεπτὶ φεύγων ᾤχετο· νυνὶ δὲ ἐπὶ τῷ τρέφειν αὐτὴν καὶ τιθηνοκομεῖν μάλιστα σεμνύνεται, ἧς τὸ μάχιμον καὶ ἡγεμονεῦον ὅταν ἴδῃ ὁ ὁρῶν καταπεποντωμένον καὶ διεφθαρμένον, ὕμνον εἰς τὸν θεὸν ᾄδει.",
+      "english_text": "This is the champion of all the power of the body and the unflattering companion of the abundant supply of external things, who has not yet found out any perfect good more valuable and honourable than that of the elder soul; for if he had found it, he would have departed and abandoned the whole of Egypt without ever turning back. But now he chiefly prides himself on his nourishing it and supporting it as a nurse; and when he who sees beholds the warlike and authoritative part of it overwhelmed in the sea and destroyed, he sings a hymn to God.",
+      "confidence": 0.7406864857101823,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "14",
+      "english_ref": "14",
+      "greek_text": "νέος μὲν οὖν τρόπος ὁ μήπω δυνάμενος μετὰ τῶν γνησίων ἀδελφῶν ποιμαίνειν, τὸ δ’ ἐστὶ τῆς κατὰ ψυχὴν ἀλόγου φύσεως ἄρχειν τε καὶ ἐπιτροπεύειν, ἀλλ’ ἔτι μετὰ τῶν νόθων, οἷς τὰ δοκήσει πρὸ τῶν γνησίων καὶ τῷ εἶναι παραριθμουμένων ἀγαθῶν",
+      "english_text": "It is therefore a juvenile disposition, which is not yet able to tend the sheep with the legitimate genuine virtues, that is to say, to govern and superintend the irrational nature existing in accordance with the soul, but which still with its illegitimate brethren, honours the things which appear good, in preference to joining his legitimate brothers and to those things which really are good.",
+      "confidence": 0.8131035407725322,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "17",
+      "english_ref": "17",
+      "greek_text": "τίς οὖν ἀγνοεῖ τῶν ἐντετυχηκότων ταῖς ἱερωτάταις βίβλοις, ὅτι σχεδὸν τῶν προγόνων ἑαυτοῦ πάντων ὁ σοφὸς Ἀβραὰμ ὀλιγοχρονιώτατος εἰσάγεται; κἀκείνων μέν, οἶμαι, οἳ μακροβιώτατοι γεγόνασιν, οὐδὲ εἷς, οὑτοσὶ δὲ ἀναγέγραπται πρεσβύτερος· φασὶ γοῦν οἱ χρησμοί, ὅτι „Ἀβραὰμ ἦν πρεσβύτερος προβεβηκὼς καὶ κύριος εὐλόγησε τὸν Ἀβραὰμ κατὰ πάντα„ (Gen. 24,1).",
+      "english_text": "Who then of those persons, who are acquainted with the sacred scriptures, is ignorant that the wise Abraham is represented as less long lived than almost any one of his ancestors? And yet of all those who lived to the most extreme old age there is not one, as I think, who is called an elder, but he alone has this title given to him. Therefore, the sacred scriptures say, that \"Abraham was now old and advanced in years,\" and, \"The Lord blessed Abraham in all things.\"",
+      "confidence": 0.7840287117712414,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "18",
+      "english_ref": "18",
+      "greek_text": "τοῦτό μοι δοκεῖ τὸ προκείμενον αἰτίας ἀπόδοσις εἶναι, δι’ ἣν πρεσβύτερος ἐλέχθη ὁ σοφός· ἐπιφροσύνῃ γὰρ θεοῦ τὸ λογικὸν τῆς ψυχῆς μέρος ὅταν εὖ διατεθῇ καὶ μὴ καθ’ ἓν εἶδος ἀλλὰ κατὰ πάσας τὰς ἐπιβολὰς εὐλογιστῇ, πρεσβυτέρᾳ χρώμενον γνώμῃ καὶ αὐτὸ δήπου πρεσβύτερόν ἐστιν.",
+      "english_text": "This appears to me to be added as a sort of explanatory cause for what has been said before, namely, why the wise man is called the elder. For when the rational part of the soul is made of a good disposition by the kind providence of God, and when it reasons not only about one species, but about everything which is presented to it, using older opinion, it then becomes blessed, and is itself the older part of the people.",
+      "confidence": 0.7646891711229946,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "19",
+      "english_ref": "19",
+      "greek_text": "οὕτως καὶ τοὺς συνέδρους τοῦ θεοφιλοῦς τὸν δέκα ἑβδομάδων ἀριθμὸν εἰληχότας πρεσβυτέρους ὀνομάζειν ἔθος· λέγεται γάρ· „συνάγαγέ μοι ἑβδομήκοντα ἄνδρας ἀπὸ τῶν πρεσβυτέρων Ἰσραήλ, οὓς αὐτὸς σὺ οἶδας ὅτι οὗτοί εἰσι πρεσβύτεροι„ (Num. 11, 16).",
+      "english_text": "Thus also he is accustomed to call the members of the assembly of the God-loving people which consists of the number of ten sevens, elders. For we read in the scripture the direction given to Moses, \"Assemble for me seventy men of the elders of Israel, whom you yourself know that they are elders.\"",
+      "confidence": 0.7963690476190477,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "20",
+      "english_ref": "20",
+      "greek_text": "οὐκοῦν οὐ τοὺς ὑπὸ τῶν τυχόντων γέροντας νομιζομένους ὡς ἱεροφάντας, ἀλλ’ οὓς ὁ σοφὸς οἶδε μόνος, τῆς τῶν πρεσβυτέρων ἠξίωσε προσρήσεως· οὓς μὲν γὰρ ἂν οὗτος ἀποδοκιμάσῃ καθάπερ ἀργυραμοιβὸς ἀγαθὸς ἐκ τοῦ τῆς ἀρετῆς νομίσματος, κεκιβδηλευμένοι νεωτεροποιοὶ τὰς ψυχὰς ἅπαντες· οὓς δ’ ἂν γνωρίμους ἐθελήσῃ ποιήσασθαι, δόκιμοί τε καὶ τὸ φρόνημα πρεσβύτεροι κατὰ τὸ ἀναγκαῖόν εἰσιν.",
+      "english_text": "Therefore, it is not only those persons who are looked upon by ordinary people as old men, inasmuch as they are hierophants, but those whom the wise man alone knows, whom he thinks worthy of the appellation of elders. For those whom he rejects, like a skilful money-changer, from the coinage of virtue, being alloyed, are all in their souls inclined to innovation; but those whom he wishes to make friends to himself, are of necessity well tested and approved, and elders as to their minds.",
+      "confidence": 0.8329695767195766,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "21",
+      "english_ref": "21",
+      "greek_text": "τοῖς ἀκούειν ἐπισταμένοις ἑκάτερον ὧν εἶπον ἐναργέστερον φανεῖται δεδηλωκώς· „ἐὰν γὰρ γένωνται„ φησίν „ἀνθρώπῳ δύο γυναῖκες, ἠγαπημένη καὶ μισουμένη, καὶ τέκωσιν αὐτῷ ἡ ἠγαπημένη καὶ ἡ μισουμένη, καὶ γένηται υἱὸς πρωτότοκος τῆς μισουμένης, ᾗ ἂν ἡμέρᾳ κληροδοτῇ τοῖς | υἱοῖς τὰ ὑπάρχοντα, οὐ δυνήσεται πρωτοτοκεῦσαι τῷ υἱῷ τῆς ἠγαπημένης ὑπεριδὼν τὸν υἱὸν τῆς μισουμένης τὸν πρωτότοκον· ἀλλὰ τὸν πρωτότοκον υἱὸν τῆς μισουμένης ἐπιγνώσεται, δοῦναι αὐτῷ διπλᾶ ἀπὸ πάντων ὧν ἐὰν εὑρεθῇ αὐτῷ, ὅτι οὗτός ἐστιν ἀρχὴ τέκνων αὐτοῦ καὶ τούτῳ καθήκει τὰ πρωτοτόκια“ (Deut. 21,15 — 17).",
+      "english_text": "Therefore, the scripture is seen to prove each particular of what I have said more plainly to those who have taught themselves to obey one injunction of the law. \"For if,\" says the scripture, \"a man has two wives, the one beloved and the other hated, and if she who is beloved bears him a child, and also she who is hated, and if the child of the wife who is hated be the first born, then, on the day on which he bestows on his sons the inheritance of his substance, he shall not be able to give the share of the first born to the son of her who is beloved, overlooking his real first born son, the child of her who is hated; but he must recognize the son of her who is hated as his first born, to give him a double share of all the possessions that belong to him, because he is the beginning of his children, and the rights of the first born belong to him.\"",
+      "confidence": 0.8256007449237055,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "22",
+      "english_ref": "22",
+      "greek_text": "ἀλλ’ ὅμως τὸ μὲν τῆς προτέρας γέννημα, κἂν πολυχρονιώτερον ᾖ, νεώτερον παρ’ ὀρθῷ λόγῳ δικάζοντι νενόμισται, τὸ δὲ τῆς ὑστέρας, κἂν ἐν τοῖς κατὰ τὴν γένεσιν χρόνοις ὑστερίζῃ, τῆς μείζονος καὶ πρεσβυτέρας μοίρας ἠξίωται. διὰ τί;",
+      "english_text": "You observe here now that he never calls the son of the wife that is beloved the first born or the elder, but he often gives this title to the son of her who is hated; and yet he has already pointed out that the son of her who is beloved was in point of time the first, and the son of her who is hated the last, at the very beginning of this injunction; for he says, \"If the beloved wife and she who is hated both bear children.\" But nevertheless the offspring of the first mentioned, even though it may be considerably earlier in point of time is looked upon as younger by right reason when it comes to decide between them. But the offspring of her who is spoken of in the second place, even though it may come after as to the time of its birth, is thought worthy of the more important and elder share.",
+      "confidence": 0.6248451327433628,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "23",
+      "english_ref": "23",
+      "greek_text": "ὅτι τῶν γυναικῶν τὴν μὲν στεργομένην ἡδονῆς, τὴν δὲ στυγουμένην φρονήσεως εἶναί φαμεν σύμβολον· τῆς μὲν γὰρ ὁ πολὺς ὅμιλος ἀνθρώπων τὴν συνουσίαν ὑπερφυῶς ἀγαπᾷ δελέατα καὶ φίλτρα ἐξ ἑαυτῆς ἐπαγωγότατα ἐνδιδούσης ἀπὸ γενέσεως ἀρχῆς ἄχρι πανυστάτου γήρως, τῆς δὲ ἐκτόπως τὸ αὐστηρὸν καὶ περίσεμνον διαμεμίσηκε καθάπερ οἱ ἄφρονες παῖδες τὰς τῶν γονέων καὶ τρεφόντων ὠφελιμωτάτας μὲν ἀτερπεστάτας δὲ ὑφηγήσεις.",
+      "english_text": "Why so? because we say that she who is beloved is the symbol of pleasure, and she who is hated is the emblem of prudence. For the chief multitude of men love the company of the one to excess, inasmuch as she, from her own treasures, proffers them most seductive charms and allurements, from the very first moment of their birth to the extremity of old age; but of the other they detest excessively the austere and very dignified look, just as silly children dislike the profitable but unpleasant reproofs of their parents and guardians.",
+      "confidence": 0.7970976658476658,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "24",
+      "english_ref": "24",
+      "greek_text": "τίκτουσι δ’ ἀμφότεραι, ἡ μὲν τὸν φιλήδονον, ἡ δ’ αὖ τὸν φιλάρετον ἐν ψυχῇ τρόπον. ἀλλ’ ὁ μὲν φιλήδονος ἀτελὴς καὶ ὄντως ἀεὶ παῖς ἐστι, κἂν εἰς πολυετίας αἰῶνα μήκιστον ἀφίκηται, ὁ δ’ αὖ φιλάρετος ἐν γερουσίᾳ τῆς φρονήσεως ἐξ ἔτι σπαργάνων, τὸ τοῦ λόγου δὴ τοῦτο, ἀγήρως ὢν τάττεται·",
+      "english_text": "And both the wives become mothers: the one bringing forth that disposition in the soul which loves pleasure, and the other that which loves virtue; but the lover of pleasure is imperfect, and in reality is always a child, even if he reaches a vast age of many years. But, on the other hand, the lover of virtue, though he is in old age as to his wisdom, while still in his swaddling clothes, as the proverb has it, will never grow old.",
+      "confidence": 0.8359609929078013,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "25",
+      "english_ref": "25",
+      "greek_text": "παρὸ καὶ λίαν ἐμφαντικῶς εἴρηκεν ἐπὶ τοῦ τῆς μισουμένης ὑπὸ τῶν πολλῶν ἀρετῆς γεγονότος, ὅτι „οὗτός ἐστιν ἀρχὴ τέκνων“, καὶ τάξει καὶ ἡγεμονίᾳ δήπου πρῶτος ὤν, “καὶ τούτῳ καθήκει τὰ πρωτοτόκια“ νόμῳ φύσεως, οὐκ",
+      "english_text": "In reference to which Moses says very emphatically with respect to the son of virtue, which is hated by the generality of men, that \"he is the beginning of his children,\" being, forsooth, the first both in order and precedency. And to him belong the rights of the first-born by the law of nature, and not by the lawless principle existing among men.",
+      "confidence": 0.644124649859944,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "26",
+      "english_ref": "26",
+      "greek_text": "ἀνομίᾳ τῇ παρ’ ἀνθρώποις. τὸν Ἰακὼβ γενέσει μὲν τοῦ Ἠσαῦ νεώτερον — ὅτι ἀφροσύνη μὲν ἐκ πρώτης ἡλικίας ἐστὶν ἡμῖν σύντροφος, ὀψίγονος δ’ ὁ τοῦ καλοῦ ζῆλος —, δυνάμει δὲ πρεσβύτερον· παρὸ καὶ τῶν πρωτοτοκίων ὁ μὲν Ἠσαῦ ἐξίσταται, μεταποιεῖται δ’ οὗτος εἰκότως.",
+      "english_text": "The prophet, then, in accordance with this law, and as it were shooting his arrows with happy aim at the appointed mark, in strict agreement with what has gone before, represents Jacob as younger in point of age than Esau (because from our very earliest birth folly is bred up with us, and the desire of what is honourable is engendered subsequently), but as older in point of power. In consequence of which Esau is deprived of his birthright as the elder son, but Jacob is very naturally invested with it;",
+      "confidence": 0.8185956720840442,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "27",
+      "english_ref": "27",
+      "greek_text": "τούτοις συνᾴδει καὶ τὰ ἐπὶ τῶν υἱῶν Ἰωσὴφ ἐκ πολλῆς περισκέψεως ἀνεζητημένα, ἡνίκα ἐνθουσιῶν ὁ σοφὸς ἀντικρὺς παρεστηκότων οὐκ ἐπιτίθησι ταῖς κεφαλαῖς ἐξ ἐναντίας καὶ κατ’ εὐθὺ τὰς χεῖρας ἐπενεγκών, ἀλλ’ ἐναλλάξας, ὅπως τῇ μὲν εὐωνύμῳ τοῦ πρεσβυτέρου δοκοῦντος εἶναι, τοῦ δὲ νεωτέρου τῇ δεξιᾷ ψαύσῃ (Gen. 48, 13. 14).",
+      "english_text": "and the arrangements made with respect to the sons of Joseph are consistent, if we examine them carefully and with much consideration; when the wise man, under the influence of immediate inspiration, having them both standing before him, does not put his hands on their heads, directing them as the youths are straight before him and immediately, but crossing his hands, so as to touch with his left the head of the one who appears to be the elder, and with his right that of him who seems the younger; and the elder one in point of age is called Manasseh, and the younger is called Ephraim.",
+      "confidence": 0.771282334384858,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "28",
+      "english_ref": "28",
+      "greek_text": "καλεῖται δ’ ὁ μὲν [ἐν] γενέσει πρεσβύτερος Μανασσῆς, ὁ δὲ νεώτερος Ἐφραΐμ· ταῦτα δ’ εἰ μεταληφθείη τὰ ὀνόματα εἰς Ἑλλάδα γλῶτταν, μνήμης καὶ ἀναμνήσεως εὑρεθήσεται σύμβολα· ἑρμηνεύεται γὰρ καρπὸς ὠφελιμώτατος καὶ τῷ ὄντι ἐδώδιμος ψυχαῖς τὸ ἄληστον ἐν",
+      "english_text": "And these names, if they are translated into the Greek language will be found to be symbols of memory and recollection; for the name Manasseh, being interpreted, means \"from forgetfulness,\" and which by another name is called \"recollection;\" for he who comes to a recollection of what he has forgotten is advancing out of forgetfulness. But Ephraim being interpreted means \"fruit-bearing,\" a most appropriate appellation for memory; because the fruit which is the most useful and truly eatable for souls is lasting memory, which never forgets.",
+      "confidence": 0.8216631578947369,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "29",
+      "english_ref": "29",
+      "greek_text": "μνήμαις ἀδιαστάτοις. μνῆμαι μὲν οὖν ἠνδρωμένοις ἤδη καὶ παγίοις συντυγχάνουσι, παρὸ καὶ νεώτεραι ἐνομίσθησαν ὀψὲ φυόμεναι· λήθη δὲ καὶ ἀνάμνησις ἐπαλλήλως σχεδὸν ἐκ πρώτης ἡλικίας ἑκάστῳ σύνεισιν, οὗ ἕνεκα τὰ χρόνου πρεσβεῖα εὕρηνται καὶ ἐπ’ εὐωνύμοις παρὰ σοφῷ ταξιαρχοῦντι τάττονται· τῶν δὲ ἀρετῆς αἱ μνῆμαι κοινωνήσουσι πρεσβείων, ἃς ὁ θεοφιλὴς δεξιωσάμενος τῆς ἀμείνονος παρ’ ἑαυτῷ μοίρας ἀξιώσει.",
+      "english_text": "Memory, therefore, exists best when meeting with manly and solid natures, in respect of which it is looked upon as younger, having been brought forth late; but forgetfulness and recollection, almost from the earliest birth of a man, dwell alternately with every one, on which account recollection has the precedence in point of time, and is placed on the left hand by the wise man when he is arranging the two in order; but memory will share the chief honours of virtue, which the lover of God, receiving eagerly, will think worthy of a better portion by himself.",
+      "confidence": 0.7912521328258302,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "30",
+      "english_ref": "30",
+      "greek_text": "Νήψας οὖν ὁ δίκαιος καὶ γνοὺς ὅσα „ἐποίησεν αὐτῷ ὁ νεώτερος αὐτοῦ υἱὸς„ ἀρὰς χαλεπωτάτας τίθεται· τῷ γὰρ ὄντι ὅταν ὁ νοῦς νήψῃ, κατὰ τὸ ἀκόλουθον εὐθὺς αἰσθάνεται ὅσα ἡ νεωτεροποιὸς ἐν αὐτῷ κακία πρότερον εἰργάζετο, ἃ μεθύων ἀδυνάτως καταλαβεῖν εἶχε.",
+      "english_text": "Therefore, the first man, being become sober, and knowing what his younger son had done to him, imprecates very terrible curses on him; for, in truth, when the mind recovers its sobriety, it does in consequence immediately perceive all that innovating wickedness has previously done to it, which, while it was intoxicated, it was unable to comprehend.",
+      "confidence": 0.7744682926829268,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "32",
+      "english_ref": "32",
+      "greek_text": "ὁ μὲν γὰρ ἐκ περιεργίας ἰδεῖν τὸν πατέρα γυμνὸν ἐθελήσας καὶ γελάσας ἃ εἶδε καὶ ἐκλαλήσας τὰ δεόντως ἡσυχασθέντα ὁ υἱὸς ἦν τοῦ Νῶε Χάμ, ὁ δὲ ἐφ’ οἷς ἕτερος ἠδίκησε τὰς αἰτίας ἔχων καὶ τὰς ἀρὰς καρπούμενος Χαναάν ἐστι· λέγεται γὰρ „ἐπικατάρατος Χαναάν· παῖς οἰκέτης [δοῦλος δούλων] ἔσται τοῖς ἀδελφοῖς αὐτοῦ“ (Gen. 9, 25). τί γὰρ ἡμάρτηκεν, ὡς ἔφην, οὗτος;",
+      "english_text": "for he who from superfluous curiosity wished to see his father naked, and who laughed at what he saw, and who divulged what ought properly to have been concealed in silence, was Ham, the son of Noah; but he who bears the blame for the offences committed by the other, and who reaped the fruit of them in curses is Canaan; for it is said, \"Cursed is Canaan the son, the servant, the servant of servants, shall he be to his brethren.\"",
+      "confidence": 0.7616647425536827,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "33",
+      "english_ref": "33",
+      "greek_text": "ἀλλ’ ἐσκέψαντο μὲν ἐφ’ ἑαυτῶν ἴσως οἷς ἔθος ἀκριβοῦν τὰς ῥητὰς καὶ προχείρους ἀποδόσεις ἐν τοῖς νόμοις· ἡμεῖς δὲ πειθόμενοι τῷ ὑποβάλλοντι ὀρθῷ λόγῳ τὴν ἐγκειμένην ἀπόδοσιν διερμηνεύσωμεν ἐκεῖνα ἀναγκαίως",
+      "english_text": "And yet, as I said before, what sin had he committed? But they, who are accustomed to explain the formal, and literal, and obvious interpretations of the laws have perhaps considered this by themselves; but we, being guided by right reason, as it suggests itself to us, will interpret it according to the explanation which is ready to hand, having just made this necessary preface.",
+      "confidence": 0.7191176470588235,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "34",
+      "english_ref": "34",
+      "greek_text": "προειπόντες· ἐστιν ἠρεμία, φορὰ δὲ ἡ κίνησις· ἧς εἴδη δύο, τὸ μὲν μεταβατικόν, τὸ δὲ περὶ τὸν αὐτὸν τόπον εἰλούμενον. σχέσει μὲν οὖν | ἀδελφὸν ἕξις,",
+      "english_text": "A stationary position and motion differ from one another; for the one is a state of tranquillity, but motion is impetuosity, of which last there are two species—the one that which changes its place, the other that which is constantly revolving about the same place. Now habit is closely akin to the stationary position, and energy to motion;",
+      "confidence": 0.7758229383229382,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "35",
+      "english_ref": "35",
+      "greek_text": "τὸ δὲ λεγόμενον παραδείγματι οἰκείῳ γνωριμώτερον γένοιτ’ ἄν· τέκτονα καὶ ζωγράφον καὶ γεωργὸν καὶ μουσικὸν καὶ τοὺς ἄλλους τεχνίτας, κἂν ἡσυχίαν ἄγωσι μηδὲν τῶν κατὰ τὰς τέχνας ἐνεργοῦντες, οὐδὲν ἧττον τοῖς εἰρημένοις ἔθος καλεῖν ὀνόμασιν, ἐπεὶ τὴν ἐν ἑκάστοις ἐμπειρίαν καὶ ἐπιστήμην ἀνειληφότες ἔχουσιν.",
+      "english_text": "and what we have here said may be more easily understood by an appropriate example. It is customary to call an architect, or a painter, or a farmer, or a musician (and so on with other artists), by the aforesaid name of their profession, even if they remain inactive, doing nothing in the way of working at their respective arts, with reference to the skill and knowledge which they have each of them acquired in their respective professions;",
+      "confidence": 0.8645044709388972,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "36",
+      "english_ref": "36",
+      "greek_text": "ἐπειδὰν δὲ ὁ τεκτονικὸς ξύλων ὕλην ἐργάζηται λαβών, ὁ δὲ ζωγράφος τὰ οἰκεῖα κερασάμενος χρώματα ἐπὶ τοῦ πίνακος διαγράφῃ τοὺς τύπους ὧν ἂν διανοῆται, ὁ δ’ αὖ γεωργὸς ἀνατέμνων γῆς αὔλακας καταβάλλῃ τὰ σπέρματα, κληματίδας δὲ καὶ μοσχεύματα δένδρων ἐμφυτεύῃ, ἅμα δὲ τροφὴν ἀναγκαιοτάτην ἄρδῃ καὶ ἐποχετεύῃ τοῖς φυτευθεῖσι καὶ τοῖς ἄλλοις ὅσα γεωργικὰ πᾶσιν ἐγχειρῇ, ὁ δ’ αὖ μουσικὸς αὐλοῖς καὶ κιθάραις καὶ τοῖς ἄλλοις ὀργάνοις μέτρα καὶ ῥυθμοὺς καὶ πάσας μέλους ἰδέας ἁρμόττῃ — δύναται δὲ καὶ δίχα τῶν χειροκμήτων τῷ τῆς φύσεως ὀργάνῳ χρῆσθαι διὰ φωνῆς ἡρμοσμένης πᾶσι τοῖς φθόγγοις — καὶ τῶν ἄλλων ἕκαστος τεχνιτῶν εἴπερ ἐγχειρεῖ, τοῖς κατὰ τὰς ἐπιστήμας ἕτερα ἐξ ἀνάγκης οἰκεῖα τοῖς προτέροις ὀνόματα προσγίνεται, τῷ μὲν τέκτονι τὸ τεκτονεῖν, τῷ δὲ ζωγράφῳ τὸ ζωγραφεῖν ἤδη, καὶ τὸ γεωργεῖν μέντοι τῷ γεωργῷ, καὶ τὸ αὐλεῖν ἢ κιθαρίζειν ἢ ᾄδειν ἤ τι τῶν παραπλησίων ποιεῖν τῷ μουσικῷ. τίσιν οὖν οἱ ψόγοι καὶ οἱ ἔπαινοι παρακολουθοῦσιν;",
+      "english_text": "but when the architect has taken a material of wood and is working it up, and when the painter having mixed his proper colours on his pallet, paints the figures which he has in his head; and when, again, the former cutting furrows in the earth, throws in the seed, and plants, cuttings, and shoots of trees; and when, also, by way of supplying what he has planted with nourishment, he waters them and draws up channels of water to their roots, and does every thing else which a farmer may be expected to do; and also, when the musician adapts metres, and rhythm, and all kinds of melody to his flutes, and harps, and other instruments, and is able even without any manufactured instruments to use the organ with which he is furnished by nature by means of his voice which is furnished with all the tones; and so on with all the other artists, if it were worth while to mention them separately. In all these cases, besides the aforesaid names derived from their profession, other names akin to the former ones are added with reference to their work; so that we predicate of the architect that he builds, of the painter that he portrays, of the farmer that he cultivates the land, of the musician that he plays the flute or the harp, or that he sings, or does something similar.",
+      "confidence": 0.797939962084699,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "37",
+      "english_ref": "37",
+      "greek_text": "ἆρ’ οὐχὶ τοῖς ἐνεργοῦσι καὶ δρῶσι; κατορθοῦντες μὲν γὰρ ἔπαινον, ψόγον δ’ ἔμπαλιν καρποῦνται διαμαρτάνοντες. οἱ δ’ ἄνευ τοῦ τι ποιεῖν ἐπιστήμονες αὐτὸ μόνον, ἀκίνδυνον γέρας εἰληφότες ἡσυχίαν ἠρεμοῦσιν.",
+      "english_text": "Now, what men are followed by praise and blame? Is it not those men who energise and do something? For when they succeed they meet with praise; and when, on the other hand, they fail they incur blame; but those who are scientific, without proceeding to action, remain in tranquillity, having attained this one honour unattended with danger, namely, peace.",
+      "confidence": 0.8669562990781836,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "38",
+      "english_ref": "38",
+      "greek_text": "ἀνδρεῖοι καὶ δίκαιοι τὰς ψυχὰς μυρίοι γεγόνασι φύσεως μὲν εὐμοιρίᾳ, νομίμοις δ’ ὑφηγήσεσι, πόνοις δ’ ἀηττήτοις καὶ ἀοκνοτάτοις χρησάμενοι, τὸ δὲ κάλλος τῶν ἐν ταῖς διανοίαις ἀγαλμάτων οὐκ ἴσχυσαν ἐπιδείξασθαι διὰ πενίαν ἢ ἀδοξίαν ἢ νόσον σώματος ἢ τὰς ἄλλας κῆρας ὅσαι τὸν ἀνθρώπινον περιπολοῦσι βίον.",
+      "english_text": "Therefore, the same assertion applies to those who live according to folly, and also to all those who live in accordance with virtue or vice. Those who are prudent, and temperate, and manly, and just men in their dispositions are infinite in number, having a happy portion in nature, and institutions in accordance with the law, and exerting themselves in invincible and unhesitating labours; but the beauty which exists in the ideas in their minds they are not able to display by reason of their poverty, or of their want of rank, or of some disease of the body, or of some one of the other disasters which surround human life;",
+      "confidence": 0.7730361355866917,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "39",
+      "english_ref": "39",
+      "greek_text": "οὐκοῦν οὗτοι μὲν ὥσπερ δεδεμένα καὶ καθειργμένα ἐκτήσαντο ἀγαθά, ἕτεροι δ’ εἰσὶν οἳ λελυμένοις καὶ ἀφέτοις καὶ ἐλευθέροις ἐχρήσαντο πᾶσι τὰς εἰς ἐπίδειξιν ὕλας ἀφθονωτάτας προσλαβόντες·",
+      "english_text": "therefore, they being good have got their good things as it were in bondage and prison. But there are others who have them in an unconfined, and emancipated, and wholly free condition, having unlimited materials and opportunities for their exhibition.",
+      "confidence": 0.7524532224532224,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "40",
+      "english_ref": "40",
+      "greek_text": "ὁ μὲν φρόνιμος ἰδίων τε καὶ κοινῶν προστασίαν πραγμάτων, οἷς σύνεσιν καὶ εὐβουλίαν ἐνεπιδείξεται· ὁ δὲ σώφρων τὸν εἰς ἀσωτίαν δεινὸν ἐπᾶραι καὶ παρακαλέσαι τυφλὸν πλοῦτον, ἵνα βλέποντα ἀποδείξῃ· ὁ δὲ δίκαιος ἀρχήν, δι’ ἧς τὸ κατ’ ἀξίαν ἀπονέμειν ἑκάστῳ τῶν ὄντων ἀκωλύτως δυνατὸς ἔσται· ὁ δ’ ἀσκητὴς εὐσεβείας ἱερωσύνην καὶ χωρίων",
+      "english_text": "The wise man having an abundance of private and public assisting circumstances by which he can display his acuteness and his wisdom; the temperate man will make riches which are usually blind and accustomed to excite and tempt men to luxury, farsighted for the future: the just man will exercise authority by which he will for the future be able to assign to each individual without any hindrance, such a share of existing things as agrees with his deserts. The practiser of virtue will display piety, holiness, and a proper care of the sacred places and of the sacred rites performed in them.",
+      "confidence": 0.7365938228438228,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "41",
+      "english_ref": "41",
+      "greek_text": "ἄνευ δὲ τούτων ἀρεταὶ μέν εἰσιν, ἀκίνητοι δὲ ἀρεταὶ καὶ ἡσυχίαν ἄγουσαι, καθάπερ ὁ τεθησαυρισμένος ἐν ἀφανέσι γῆς μυχοῖς ἄργυρός τε καὶ χρυσὸς οὐδὲν χρήσιμος.",
+      "english_text": "But without proper opportunities virtues indeed exist, but they are immoveable and like silver and gold, which is of no use in the world, because it is treasured up in the secret recesses of the earth.",
+      "confidence": 0.9466075949367088,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "42",
+      "english_ref": "42",
+      "greek_text": "πάλιν τοίνυν κατὰ τὰ ἐναντία μυρίους ἔστιν ἰδεῖν ἀνάνδρους, ἀκολάστους, ἄφρονας, ἀδίκους, ἀσεβεῖς ἐν ταῖς διανοίαις ὑπάρχοντας, τὸ δὲ κακίας ἑκάστης αἶσχος ἀδυνατοῦντας ἐπιδείκνυσθαι δι’ ἀκαιρίαν τῶν εἰς τὸ ἁμαρτάνειν καιρῶν, ἐπειδὰν δὲ τοῦ δύνασθαι πολλὴ καὶ μεγάλη κατασκήψῃ φορά, γῆν καὶ θάλατταν ἄχρι τερμάτων ἀμυθήτων ἀναπιμπλάντας κακῶν καὶ μηδέν, μὴ μικρὸν μὴ μέγα, ἀζήμιον ἐῶντας, ἀλλὰ ῥύμῃ μιᾷ ἀνατρέποντάς τε καὶ φθείροντας·",
+      "english_text": "On the other hand again, one can see innumerable persons, unmanly, intemperate, foolish, unjust, impious in their minds, but unable fully to display the disgraceful character of all their vices by reason of the want of opportunity to sin; but if any important or frequent opportunities present themselves, then filling earth and sea to its extremest boundaries with unspeakable wickedness, and leaving nothing whether great or small uninjured, they overturn and destroy everything at one blow.",
+      "confidence": 0.7222734254992319,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "43",
+      "english_ref": "43",
+      "greek_text": "ὥσπερ γὰρ τοῦ πυρὸς ἡ δύναμις ἀπουσίᾳ μὲν ὕλης ἡσυχάζει, παρουσίᾳ δὲ ἀνακαίεται, οὕτως καὶ ὅσαι πρὸς ἀρετὴν ἢ κακίαν ψυχῆς δυνάμεις ἀφορῶσι, σβέννυνται μὲν ἀκαιρίαις, καθάπερ",
+      "english_text": "For as the power of fire is quiet when it has no fuel, but when there are proper materials it blazes up; so also all the powers which have reference to the virtue or vice of the soul are extinguished by want of opportunity, as I have said before, but are kindled by a favourable occasion and a happy concurrence of circumstances.",
+      "confidence": 0.7082375478927203,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "44",
+      "english_ref": "44",
+      "greek_text": "ἔφην, καιρῶν, τυχηραῖς δ’ εὐπορίαις ἀναφλέγονται. γὰρ θέρμη μὲν Χάμ, σάλος δὲ Χαναάν.",
+      "english_text": "Why then have I said these things, except with the object of teaching that Ham, the son of Noah, is the name of wickedness in a state of inactivity, but his grandson, Canaan, is the name of wickedness in a state of motion? For Ham being interpreted, means \"warm,\" but Canaan means \"commotion;\"",
+      "confidence": 0.6151470588235295,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "45",
+      "english_ref": "45",
+      "greek_text": "θέρμη δὲ ἐν μὲν σώματι πυρετὸν ἐμφαίνει, κακίαν δὲ ἐν ψυχαῖς· ὡς γάρ, οἶμαι, καταβολὴ πυρετοῦ νόσος ἐστὶν οὐ μέρους ἀλλ’ ὅλου σώματος, οὕτως ὅλης τῆς ψυχῆς ἀρρώστημά ἐστι κακία. ἀλλ’ ὁτὲ μὲν ἠρεμεῖ, ὁτὲ δὲ κινεῖται· τὴν δὲ κίνησιν αὐτῆς ὀνομάζει σάλον,",
+      "english_text": "and warm in a body implies fever, but in the soul it implies wickedness. For as I suppose disease is the foundation of fever, not only of a part but of the whole body; so also wickedness is a disease of the whole soul. But at one time it is in a state of tranquillity, and at another in motion; now he calls its motion commotion ( σάλος ), which in the Hebrew language is called Canaan.",
+      "confidence": 0.6622849760059062,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "46",
+      "english_ref": "46",
+      "greek_text": "ὃς Ἑβραίων γλώττῃ Χαναὰν καλεῖται. νομοθετῶν δὲ οὐδεὶς ἐπιτίμιον ὁρίζει κατὰ ἀδίκων ἠρεμούντων, ἀλλὰ δὴ κινουμένων καὶ τοῖς κατὰ ἀδικίαν ἔργοις χρωμένων, καθάπερ οὐδὲ τῶν δακετῶν οὐδὲν ἀνὴρ μέτριος κτείνειν ἂν ἐθελήσαι μὴ μέλλον δάκνειν· λόγῳ γὰρ ὑπεξαιρετέον ψυχῆς ὠμότητα φύσει [καὶ] κατὰ πάντων φονῶσαν.",
+      "english_text": "But no lawgiver ever affixes a punishment to wicked men while in a state of inaction, but only when they are in a state of motion and practise actions in accordance with injustice, just as a moderate man would not care about killing a snake if it were not about to bite him. For we must leave out of the question, that natural cruelty of soul which in the case of some persons delights to deal destruction upon everything.",
+      "confidence": 0.8372875816993464,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "47",
+      "english_ref": "47",
+      "greek_text": "εἰκότως οὖν ὁ δίκαιος τὰς ἀρὰς τῷ υἱωνῷ Χαναὰν δόξει τίθεσθαι· δόξει δὲ εἶπον, ὅτι δυνάμει τῷ υἱῷ Χὰμ δι’ ἐκείνου καταρᾶται· κινηθεὶς γὰρ πρὸς τὸ ἁμαρτάνειν Χὰμ αὐτὸς γίνεται Χαναάν. ἓν γὰρ τὸ ὑποκείμενον κακία, ἧς τὸ μὲν ἐν σχέσει, τὸ δὲ ἐν κινήσει θεωρεῖται· πρεσβύτερον δὲ κινήσεως σχέσις, ὡς ἐγγόνου λόγον ἔχειν τὸ κινούμενον πρὸς τὸ ἰσχόμενον·",
+      "english_text": "Very appropriately, therefore, the just man will appear to have launched his curses against his grandson, Canaan. But I have used the expression \"will appear,\" because in effect he is cursing his son Ham through the medium of Canaan; for Ham being moved to commit sin does himself become Canaan. For there is one subject, namely wickedness, of which one kind is contemplated in a stationary condition, and the other in motion. But a stationary condition is antecedent to motion, so that that which is moved appears to have the relation of offspring to that which is stationary.",
+      "confidence": 0.6533260276641341,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "48",
+      "english_ref": "48",
+      "greek_text": "παρὸ καὶ τοῦ Χὰμ υἱὸς ὁ Χαναὰν φυσικῶς ἀναγράφεται, σάλος ἠρεμίας, ἵνα καὶ τιμωρίαι, κατ’ αὐτοὺς ἐκείνων, εἰ μηδεμία προσγένοιτο πρᾶξις ἐπίληπτος, ἀποδιδρασκόντων τὰ ἐγκλήματα.",
+      "english_text": "In reference to which fact Canaan is, according to the order of nature, described as the son of Ham; commotion as the offspring of tranquillity, in order that the statement made in another passage may be true, namely, \"visiting the iniquities of the fathers upon the sons to the third and fourth generations.\"",
+      "confidence": 0.728215909090909,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "49",
+      "english_ref": "49",
+      "greek_text": "διὰ τοῦτο μέντοι κἀν τῷ νόμῳ τῆς λέπρας ὁ μέγας πάντα Μωυσῆς τὴν μὲν κίνησιν καὶ ἐπὶ πλέον αὐτῆς φορὰν καὶ χύσιν ἀκάθαρτον, τὴν δ’ ἠρεμίαν καθαρὰν ἀναγράφει· λέγει γὰρ ὅτι „ἐὰν διαχέηται ἐν τῷ δέρματι, μιανεῖ ὁ ἱερεύς. ἐὰν δὲ κατὰ χώραν μείνῃ τὸ τηλαύγημα καὶ μὴ διαχέηται, καθαριεῖ“(Lev. 13,22.23)· ὥστε τὴν μὲν ἡσυχίαν καὶ μονὴν κακιῶν καὶ παθῶν τῶν κατὰ ψυχὴν — ταῦτα γὰρ αἰνίττεται διὰ τῆς λέπρας — οὐχ ὑπαίτιον εἶναι, τὴν δὲ κίνησιν καὶ φορὰν ὕποχον δέοντως.",
+      "english_text": "On this account, therefore, in the law concerning leprosy the great and wise Moses speaks of motion and its further progress and diffusion as unclean, but of tranquillity as pure. For he says, \"If it be diffused over the skin the priest shall pronounce him polluted. But if the bright colour remain in its place and be not diffused, he shall pronounce him clean.\"",
+      "confidence": 0.6634601231901448,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "50",
+      "english_ref": "50",
+      "greek_text": "τὸ παραπλήσιον καὶ ἐν τοῖς πρὸς τὸν Κάιν χρησθεῖσι λογίοις περιέχεται σημειωδέστερον· λέγεται γὰρ πρὸς αὐτόν· ὦ οὗτος, „ἥμαρτες, ἡσύχασον“ (Gen. 4,7), τοῦ μὲν ἁμαρτάνειν, ὅτι κινεῖσθαι καὶ ἐνεργεῖν κατὰ τὴν κακίαν ἦν, ὄντος ἐνόχου, τοῦ δ’ ἡσυχάζειν, ὅτι ἴσχεσθαι καὶ ἠρεμεῖν, ἀνυπαιτίου καὶ σωτηρίου.",
+      "english_text": "There is also something like this in the sacred scriptures, where the account of the creation of the universe is given and it is expressed more distinctly. For it is said to the wicked man, \"O thou man, thou hast sinned. Cease to sin:\"",
+      "confidence": 0.7375,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "52",
+      "greek_text": "ἔφαμεν πάλαι, ὅτι Σὴμ ἐπώνυμός ἐστιν ἀγαθοῦ, καλούμενος οὐκ ὀνόματος εἴδει, ἀλλ’ ὅλον τὸ γένος αὐτοῦ ὄνομα, παρόσον τὸ ἀγαθὸν ὀνομαστὸν μόνον καὶ εὐφημίας καὶ εὐκλείας ἄξιον, ὡς ἔμπαλιν ἀνώνυμον καὶ δυσώνυμον τὸ κακόν. τίνος οὖν τὸν τῆς φύσεως τἀγαθοῦ μεμοιραμένον εὐχῆς ἀξιοῖ;",
+      "english_text": "We said some time ago that Shem bears the same name as good, being called not by a special name, but the whole genus of good is his name; in reference to which, the good is the only thing to be named, the only thing worthy of a good report and of glory; as, on the other hand, evil is the thing with no good report and with an evil fame.",
+      "confidence": 0.7619931156074218,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "53",
+      "english_ref": "53",
+      "greek_text": "τίνος; καινοτάτης καὶ παρηλλαγμένης, ᾗ θνητὸς οὐδεὶς ὑπηρετῆσαι δυνατός, ἀφ’ ἧς σχεδὸν ὥσπερ ἀπ’ ὠκεανοῦ ῥέουσιν αἱ ἄφθονοι καὶ ἀέναοι πλημμυροῦσαι καὶ ἀναχεόμεναι τῶν καλῶν πηγαί. τὸν γὰρ κύριον καὶ θεὸν τοῦ τε κόσμου καὶ τῶν ἐν αὐτῷ πάντων ἰδίᾳ θεὸν κατ’ ἐξαίρετον χάριν τοῦ Σὴμ ἀνακαλεῖ.",
+      "english_text": "Of what prayer then does he think the man worthy who has received a share of the nature of good? Surely of some new and extraordinary benediction, which no mortal is able to act up to, and from which, almost as from the ocean itself, abundant and unceasing springs of good things do gush out ever rising high and overflowing; for he calls the Lord and God of the world and of all the things in it, by a particular grace, the private especial God of Shem.",
+      "confidence": 0.8144460748349229,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "54",
+      "english_ref": "54",
+      "greek_text": "καὶ ὅρα· τίνας ὑπερβολὰς τοῦτο οὐχ ὑπερβάλλει; σχεδὸν γὰρ ἰσότιμος ὁ τούτου λαχὼν γίνεται κόσμῳ· ὅτε γὰρ τὸ ἐπιστατοῦν καὶ κηδόμενον ἀμφοῖν ταὐτόν, καὶ τὰ ἐπιτροπευόμενα κατ’ ἀναγκαῖον εὐθύς ἐστιν ἰσότιμα.",
+      "english_text": "And see now how this exceeds all imaginable excess; for the man of whom such a thing is said, almost receives equal honour with the world; for when the same being cares for and superintends them both, it follows of necessity that the two things so superintended must be of equal honour and importance;",
+      "confidence": 0.8927694728560189,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "56",
+      "english_ref": "56",
+      "greek_text": "παρὸ καὶ σαφῶς ἐπὶ Ἀβραὰμ φάσκει· „μὴ ἐπικαλύψω ἐγὼ ἀπὸ Ἀβραὰμ τοῦ φίλου μου“ (Gen. 18, 17) ; ὁ δὲ ἔχων τὸν κλῆρον τοῦτον πέραν ὅρων ἀνθρωπίνης εὐδαιμονίας προελήλυθε· μόνος γὰρ εὐγενὴς ἅτε θεὸν ἐπιγεγραμμένος πατέρα καὶ γεγονὼς εἰσποιητὸς αὐτῷ μόνος υἱός· οὐ πλούσιος, ἀλλὰ πάμπλουτος, ἐν ἀφθόνοις καὶ γνησίοις, οὐ χρόνῳ παλαιουμένοις, καινουμένοις δὲ καὶ ἡβῶσιν ἀεὶ τρυφῶν ἀγαθοῖς μόνοις·",
+      "english_text": "But the man who has this inheritance has advanced beyond the bounds of human happiness; for he alone is nobly born, inasmuch as he has God attributed to him as his father, and being his adopted only son, he is not rich, but all-wealthy, dwelling luxuriously in abundance and among genuine good things, not worn out by age, but in a state of vigour and continual renewal, such that besides them there is no good;",
+      "confidence": 0.7699054224464061,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "57",
+      "english_ref": "57",
+      "greek_text": "οὐκ ἔνδοξος, ἀλλ’ εὐκλεής, τὸν μὴ κολακείᾳ νοθούμενον, ἀλλὰ βεβαιούμενον ἀληθείᾳ καρπούμενος ἔπαινον· μόνος βασιλεύς, παρὰ τοῦ πανηγεμόνος λαβὼν τῆς ἐφ’ ἅπασιν ἀρχῆς τὸ κράτος ἀνανταγώνιστον· μόνος ἐλεύθερος, ἀφειμένος ἀργαλεωτάτης δεσποίνης, κενῆς δόξης, ἣν ὑπέραυχον οὖσαν ἀπὸ τῆς ἀκροπόλεως ἄνωθεν ὁ ἐλευθεροποιὸς καθεῖλε θεός.",
+      "english_text": "being a man not of fair reputation, but of exceeding glory and receiving praise, not of that bastard sort which proceeds from flattery, but that which is founded on truth. He is the only king, having received from the Ruler of all things an irresistible power, without a rival, and authority over all things. He is the only free man, being emancipated from that most grievous mistress, vain opinion, whom God who makes free has torn down, since she was very proud, from her citadel on high, and has utterly destroyed.",
+      "confidence": 0.7065530303030303,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "58",
+      "english_ref": "58",
+      "greek_text": "τούτῳ δὴ τῷ τοσούτων καὶ οὕτως ὑπερβαλλόντων καὶ ἀθρόων ἀξιωθέντι ἀγαθῶν τί προσήκει ποιεῖν ἢ λόγοις καὶ ᾠδαῖς καὶ ὕμνοις τὸν εὐεργέτην ἀμείβεσθαι; τοῦτ’ ἔσθ’, ὡς ἔοικεν, ὃ αἰνίττεται διὰ τοῦ „εὐλογημένος κύριος ὁ θεὸς Σήμ“, ἐπειδὴ τῷ τὸν θεὸν ἔχοντι κλῆρον εὐλογεῖν καὶ ἐπαινεῖν αὐτὸν ἁρμόττει μόνον τοῦτ’ ἀντιπαρασχεῖν δυναμένῳ, τὰ δ’ ἄλλα ἀνὰ κράτος πάνθ’ ἁπλῶς ἀδυνατοῦντι.",
+      "english_text": "What then ought a man to do who has been thought worthy of such great and such exceeding blessings, all united in his case? What ought he to do, except requite his benefactor with words, and hymns, and songs of praise? This is as it seems what is obscurely intimated to him in the words, \"Blessed is the Lord God of Shem;\"",
+      "confidence": 0.721519129613811,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "59",
+      "english_ref": "59",
+      "greek_text": "„πλατύναι“ φησίν „ὁ θεὸς τῷ Ἰάφεθ, καὶ κατοικησάτω ἐν τοῖς οἴκοις τοῦ Σήμ, καὶ γενέσθω Χαναὰν δοῦλος αὐτοῖς„ (Gen. 9, 27).",
+      "english_text": "This, then, is the prayer which Noah offers for Shem; let us now see what kind of prayer it is that he puts forth for Japhet. He says, \"May God make Japhet broad, and let him dwell in the tents of Shem, and Canaan shall be their servant.\"",
+      "confidence": 0.6810304449648712,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "60",
+      "english_ref": "60",
+      "greek_text": "τοῦ ἀγαθὸν ἡγουμένου τὸ καλὸν μόνον ἔσταλται καὶ συνῆκται τὸ τέλος — ἑνὶ γὰρ μυρίων ὄντων τῶν περὶ ἡμᾶς τῷ ἡγεμόνι νῷ συνέζευκται —, τοῦ δὲ τρισὶν ἐφαρμόζοντος αὐτὸ γένεσιν, τῷ περὶ ψυχήν, τῷ περὶ σῶμα, τῷ περὶ τὰ ἐκτός, ἅτ’ εἰς πολλὰ καὶ ἀνόμοια κατακερματιζόμενον εὐρύνεται.",
+      "english_text": "The object of a man who thinks nothing beautiful but what is good is limited and contracted, for of all the innumerable guides which influence different men he is confined to one alone, namely, to the mind. But the object of a man who attributes good to three different kinds of things, dividing it as it has reference to the soul, and to the body, and to external things, is more extended, inasmuch as he cuts up the good into a number of small and dissimilar fragments;",
+      "confidence": 0.8714962997224791,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "61",
+      "english_ref": "61",
+      "greek_text": "διόπερ οἰκείως εὔχεται τούτῳ προσγενέσθαι πλάτος, ὅπως καὶ ταῖς περὶ ψυχὴν ἀρεταῖς, φρονήσει καὶ σωφροσύνῃ καὶ ἑκάστῃ τῶν ἄλλων, χρῆσθαι δύναιτο καὶ ταῖς σώματος, ὑγείᾳ κὶ εὐαισθησίᾳ δυνάμει τε καὶ ῥώμῃ καὶ ταῖς τούτων συrίενέσιν, ἔτι μέντοι καὶ τοῖς ἐκτὸς πλεονεκτήμασιν, ὅσα εἰς πλοῦτον καὶ δόξαν ἀπόλαυσίν τε καὶ χρῆσιν τῶν ἀναγκαίων ἡδονῶν ἄγεται.",
+      "english_text": "on which account Noah very appropriately prays that breadth may be added to him, in order that he may be able to exercise the virtues of the soul, prudence, and temperance, and all the others, and likewise the vigorous health and acute perceptions of the body, strength and vigour, and the other qualities akin to them; and also the external advantages which contribute to wealth and glory, and to the enjoyment and use of necessary pleasures.",
+      "confidence": 0.7686609686609687,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "63",
+      "english_ref": "63",
+      "greek_text": "κτοικεῖν δὲ ἐν οἴκῳ λέγεται ὁ θεὸς οὐχ ὡς ἐν τόπῳ — περιέχει γὰρ τὰ πάντα πρὸς μηδενὸς περιεχόμενος —, ἀλλ ὡς πρόνοιαν καὶ ἐπιμέλειαν ἐκείνου τοῦ χωρίου διαφερόντως ποιούμενος· παντὶ γὰρ τῷ δεσπόζοντι οἰκίας ἡ ταύτης κατὰ τὸ ἀναγκαῖον ἀνῆπιαι φρονιίς.",
+      "english_text": "But God is said to dwell in a house, not as in respect of place (for he contains everything and is contained by nothing), but as in a most especial degree exerting his providence and care in favour of that place; for it follows inevitably in the case of every one who is master of a house that he has a particular care for that house.",
+      "confidence": 0.7731507622811971,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "64",
+      "english_ref": "64",
+      "greek_text": "εὐχέσθω δὴ πᾶς θεῷ, ὅτῳ τὸ θεοφὲς ὤμβρησεν ἀγαθόν, οἰκήτορος λαχεῖν τοῦ πανηγεμόνος, ὃς τὸ βραχὺ τοῦτο οἰκοδόμημα, τὸν νοῦν, ἐξαίρων εἰς ὕψος ἀπὸ ἧς τοῖς οὐρανοῦ συνάψει πέρασι.",
+      "english_text": "But let every one, on whom the love of God has showered good things, pray to God that he may have as a dweller within him the Ruler of all things, who will raise this small house, the mind, to a great height above the earth, and will connect it with the bounds of heaven.",
+      "confidence": 0.8343122930060394,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "65",
+      "english_ref": "65",
+      "greek_text": "καὶ τὸ ῥητὸν μέντοι συνᾴδειν ἔοικεν· ὁ γὰρ Σὴμ ὡσανεὶ ῥίζα κλλοκἀγαθίας ὑποβέβληται, δένδρον δ’ ἡμροτοκοῦν ἐκ ταύτης ὁ σοφὸς Ἀβραὰμ ἀνέδραμεν, οὗ τὸ αὐτήκοον καὶ αὐτομαθὲς γένος, Ἰσαάκ, ὁ καρπὸς ἦν, ἀφ’ οὗ πάλιν αἱ διὰ πόνων ἀρεταὶ κατασπείρονται, ὧν ἀθλητῆής ἐστιν ὁ τὴν πρὸς πάθη πάλην γεγυμνασμένος Ἰακώβ, ἀγγέλοις ἀλείπταις, λόγοις, χρώμενος.",
+      "english_text": "And what is said in the scriptures appears to coincide with this, for Shem is planted as a root of excellence and virtue; and from this root there sprang up a tree bringing forth good fruit, namely, Abraham, of whom the self-instructed and self-teaching offspring, Isaac, was the fruit, by whom again the virtues which are displayed in labour are sown, the practiser of which is Jacob, the man trained and exercised in wrestling with the passions, having the admonitions of angels for his gymnastic trainers.",
+      "confidence": 0.753965960179833,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "67",
+      "english_ref": "67",
+      "greek_text": "ἴσως μέντοι τὰ τῆς εὐχῆς καὶ ἐπὶ τὸν ’1άφεθ ἀναφέρεται, ὅπως ἐν τοῖς οἴκοις τοῦ Σὴμ ποιῆται τὰς διατριβάς· τῷ γὰρ καὶ τὰ σώματος καὶ τὰ ἐκτὸς πλεονεκτήματα ἀγαθὰ ἡγουμένῳ καλὸν εὔξασθαι πρὸς μόνον τὸ ψυχῆς ἀναδραμεῖν καὶ μὴ μέχρι τοῦ παντὸς αἰῶνος ἀληθοῦς δόξης διαμαρτεῖν, ἃ κοινὰ καὶ τῶν ἐπαρατοτάτων καὶ κακίστων ἐστίν, ὑγίειαν ἢ πολυχρηματίαν ἢ ὅσα ὁμοιότροπα, νομίσαντα εἶναι ἀγαθά, τῆς ἀψευδοῦς τῶν ἀγαθῶν μερίδος οὐδενὶ φαύλῳ συνταττομένης· ἀκοινώνητον γὰρ φύσει κακῷ τὸ ἀγαθόν.",
+      "english_text": "Perhaps, indeed, the prayer has reference also to Japhet, that he also may make his abode in the dwellings of Shem, for it is well to pray for one who thinks the good things of the body and external advantages the only goods, that he may come over to the only true good, that of the soul, and may not wander from true opinions all his life, thinking advantages which are common to the most accursed and worst of men, such as health, and riches, and all such things as those, goods, when nature has not given any portion of what is really good to any wicked man; for, by its own nature, what is good can have no participation in what is bad.",
+      "confidence": 0.6952001606640781,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "68",
+      "english_ref": "68",
+      "greek_text": "διὰ τοῦτ’ ἐν ψυχὴ μόνῃ τεθησαύρισται, ἧς τοῦ κάλλους οὐδενὶ μέτεστι τῶν ἀφρόνων· τοῦτο ὅ γε προ φητικὸς λόγος τὸν σπουδαῖον ἔγραψεν εὐχεσθαί τινι τῶν ἑαυτοῦ γνωρίμων λέγοντα „πρὸς μὲ ἀνάστρεψον“ (Gen. 49, 22), ἵνα ἐπὶ τὴν αὐτοῦ γνώμην ἐπανελθών, τῶν ἑτέρων, οἷς καὶ τὰ σωματικὰ καὶ τὰ ἐκτὸς τετίμηται.",
+      "english_text": "On this account good is treasured up in the soul alone, in the beauty of which no foolish man has any share. Now, the original progenitor of a virtuous posterity has written that he prayed for this for some of his friends, saying, \"Return unto me,\"",
+      "confidence": 0.6685293466223698,
+      "method": "section-ref"
+    },
+    {
+      "greek_ref": "69",
+      "english_ref": "69",
+      "greek_text": "εἰκότως μέντοι καὶ δοῦλον τὸν ἄφρονα τῶν ἀρετῆς μεταποιουμένων ἀνέγραψεν, ἵν’ ἢ κρείττονος ἐπιστασίας ἀξιωθεὶς ἀμείνονι βίῳ χρήσητι ἢ ἐπιμένων τῷ ἀδικεῖν μετ’ εὐμαρείας αὐτοκράτορι ἡγεμόνων ἀρχῇ τῶν δεσποτῶν κολάζηται.",
+      "english_text": "And very appropriately has he assigned the fool to be a slave to those who cultivate virtue, that, either by passing under a better government he may live a better life, or if he continue in evil doing he may easily be punished by the independent authority of his masters.",
+      "confidence": 0.9373853211009173,
+      "method": "section-ref"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 69,
+    "total_english_segments": 68,
+    "aligned_segments": 59,
+    "confidence_threshold": 0.6
+  }
+}

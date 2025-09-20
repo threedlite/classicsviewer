@@ -1,0 +1,2 @@
+#!/bin/bash
+cd /Users/user1/git/classicsviewer/align && source venv/bin/activate && python3 run_alignment.py --perseus-dir ../data-sources/canonical-greekLit --first1k-dir ../data-sources/First1KGreek --output-dir output

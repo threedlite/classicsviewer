@@ -1,0 +1,12 @@
+{
+  "char_ratio": 0.28719972670160093,
+  "word_ratio": 0.196974082883051,
+  "proper_noun_overlap": 0.33491447360266674,
+  "number_overlap": 0.013573714289926658,
+  "punctuation_similarity": 0.06522482117129334,
+  "sentence_ratio": 0.09997523972474247,
+  "has_dialogue": 0.0,
+  "starts_similarly": 0.002137941626718904,
+  "position_difference": 0.0,
+  "is_sequential": 0.0
+}

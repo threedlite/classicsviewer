@@ -1,0 +1,414 @@
+/* Classics Viewer Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Navigation */
+.navigation {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.navigation-bottom {
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 0;
+    border-top: 1px solid #ddd;
+    border-bottom: none;
+}
+
+.navigation a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+/* Text display */
+.text-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.greek-text, .translation {
+    padding: 15px;
+}
+
+.greek-text {
+    font-size: 1.1em;
+    background: #fafafa;
+    border-radius: 4px;
+}
+
+.translation {
+    background: #f0f8ff;
+    border-radius: 4px;
+}
+
+.line {
+    margin: 8px 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.line-number {
+    display: inline-block;
+    min-width: 40px;
+    color: #666;
+    font-size: 0.9em;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.speaker {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Dictionary pages */
+.dictionary-page {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.dict-header {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.dict-header h1 {
+    margin: 0;
+    color: #333;
+    font-size: 2em;
+}
+
+.lemma-title {
+    margin-bottom: 5px;
+}
+
+.lemma-label {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0;
+    font-style: italic;
+}
+
+.entries-count {
+    color: #28a745;
+    font-size: 0.95em;
+    margin: 10px 0 0 0;
+    font-weight: 500;
+}
+
+.dict-morph {
+    background: #f0f8ff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border-left: 4px solid #28a745;
+}
+
+.dict-morph h3 {
+    margin-top: 0;
+    color: #28a745;
+    font-size: 1.1em;
+}
+
+.dict-morph ul {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+}
+
+.dict-morph li {
+    margin: 5px 0;
+    color: #555;
+}
+
+.back-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.back-button:hover {
+    background: #0056b3;
+}
+
+/* Android-style dictionary header */
+.dict-android-header {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.clicked-word-section {
+    margin-bottom: 15px;
+}
+
+.clicked-word {
+    font-size: 2.5em;
+    color: #007bff;
+    margin: 0 0 5px 0;
+}
+
+.morph-info {
+    color: #666;
+    font-style: italic;
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+}
+
+.lemma-section {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border-left: 4px solid #28a745;
+}
+
+.lemma-label {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lemma-word {
+    color: #28a745;
+    font-size: 1.8em;
+    margin: 5px 0 0 0;
+}
+
+.dict-section-title {
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.dict-other-forms {
+    background: #fff3cd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border-left: 4px solid #ffc107;
+}
+
+.dict-other-forms h4 {
+    margin-top: 0;
+    color: #856404;
+}
+
+.entry-num {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.no-entry {
+    color: #dc3545;
+    font-style: italic;
+    padding: 20px;
+    background: #f8d7da;
+    border-radius: 4px;
+}
+
+.dict-entry {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+}
+
+.dict-source {
+    color: #007bff;
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.dict-text {
+    white-space: pre-wrap;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Links */
+.greek-text a {
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px dotted #999;
+}
+
+.greek-text a:hover {
+    background: #ffeb3b;
+    border-bottom-color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .text-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .navigation {
+        text-align: center;
+    }
+}
+
+/* Index pages */
+.author-list, .work-list {
+    list-style: none;
+    padding: 0;
+}
+
+.author-list li, .work-list li {
+    margin: 10px 0;
+}
+
+.author-list a, .work-list a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.author-list a:hover, .work-list a:hover {
+    text-decoration: underline;
+}
+
+/* Android-style Language Selection Buttons */
+.language-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.language-button {
+    display: inline-block;
+    padding: 20px 40px;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.greek-button {
+    background: #4CAF50;  /* Material Design Green */
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.greek-button:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
+    transform: translateY(-2px);
+}
+
+.latin-button {
+    background: #f44336;  /* Material Design Red */
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+}
+
+.latin-button:hover {
+    background: linear-gradient(135deg, #da190b 0%, #c41e3a 100%);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Responsive buttons */
+@media (max-width: 768px) {
+    .language-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .language-button {
+        width: 200px;
+    }
+}
+
+/* Dictionary entries with source attribution */
+.dict-entry {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 4px;
+    border-left: 4px solid #007bff;
+    position: relative;
+}
+
+.dict-source {
+    color: #007bff;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Source label style for better attribution */
+.dict-source-label {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Different colors for different sources */
+.dict-source-label:contains("CUNLIFFE") {
+    background: #28a745;
+}
+
+.dict-source-label:contains("WIKTIONARY") {
+    background: #6c757d;
+}
+
+.dict-source-label:contains("TREEBANK") {
+    background: #ffc107;
+    color: #333;
+}
+
+.dict-text {
+    color: #333;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}

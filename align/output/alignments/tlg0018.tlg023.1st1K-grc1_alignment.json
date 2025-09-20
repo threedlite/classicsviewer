@@ -1,0 +1,188 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg023/tlg0018.tlg023.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg023/tlg0018.tlg023.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "5",
+      "english_ref": "6",
+      "greek_text": "πρὸ τοῦ σώματος δι’ ὑπερβολὴν ὕβρεως πιεζόμενοι. πολλῶν ἄλλων κακῶν δημιουργός ἐστιν, ἀλαζονείας, ὑπεροψίας, ἀνισότητος· αἱ δ’ εἰσὶν ἀρχαὶ ξενικῶν καὶ ἐμφυλίων πολέμων οὐδὲν μέρος, οὐ κοινόν, οὐκ ἴδιον, οὐ κατὰ γῆν, οὐ κατὰ θάλατταν, ἡσυχάζειν ἐῶσαι. τί δὲ δεῖ τῶν πρὸς ἀλλήλους ἁμαρτημάτων μεμνῆσθαι;",
+      "english_text": "And why need I mention the offences of such men against one another? For even divine things are neglected by pride, even though they are generally thought to be entitled to the highest honour. And what honour can there be where there is not truth also which has an honourable name and reality, since falsehood, on the other hand, is by nature devoid of honour;",
+      "confidence": 0.6431339977851606,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "5",
+      "english_ref": "12",
+      "greek_text": "πρὸ τοῦ σώματος δι’ ὑπερβολὴν ὕβρεως πιεζόμενοι. πολλῶν ἄλλων κακῶν δημιουργός ἐστιν, ἀλαζονείας, ὑπεροψίας, ἀνισότητος· αἱ δ’ εἰσὶν ἀρχαὶ ξενικῶν καὶ ἐμφυλίων πολέμων οὐδὲν μέρος, οὐ κοινόν, οὐκ ἴδιον, οὐ κατὰ γῆν, οὐ κατὰ θάλατταν, ἡσυχάζειν ἐῶσαι. τί δὲ δεῖ τῶν πρὸς ἀλλήλους ἁμαρτημάτων μεμνῆσθαι;",
+      "english_text": "in this manner those who are skilful in the art of medicine, save their patients; for they do not think it advisable to give food before they have removed the causes of their diseases; for while the diseases remain, food is useless, being the pernicious materials of their sufferings.",
+      "confidence": 0.6017484941012295,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "5",
+      "english_ref": "17",
+      "greek_text": "πρὸ τοῦ σώματος δι’ ὑπερβολὴν ὕβρεως πιεζόμενοι. πολλῶν ἄλλων κακῶν δημιουργός ἐστιν, ἀλαζονείας, ὑπεροψίας, ἀνισότητος· αἱ δ’ εἰσὶν ἀρχαὶ ξενικῶν καὶ ἐμφυλίων πολέμων οὐδὲν μέρος, οὐ κοινόν, οὐκ ἴδιον, οὐ κατὰ γῆν, οὐ κατὰ θάλατταν, ἡσυχάζειν ἐῶσαι. τί δὲ δεῖ τῶν πρὸς ἀλλήλους ἁμαρτημάτων μεμνῆσθαι;",
+      "english_text": "for they would see that he, who had given them a sufficiency of the means of life was now also giving them a means which should contribute to their living well; accordingly, to live at all required meat and drink which they found, though they had never prepared them; and towards living well, and in accordance with nature and decorum, they required laws and enactments, by which they were likely to be improved in their minds.",
+      "confidence": 0.6401670923511225,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "5",
+      "english_ref": "24",
+      "greek_text": "πρὸ τοῦ σώματος δι’ ὑπερβολὴν ὕβρεως πιεζόμενοι. πολλῶν ἄλλων κακῶν δημιουργός ἐστιν, ἀλαζονείας, ὑπεροψίας, ἀνισότητος· αἱ δ’ εἰσὶν ἀρχαὶ ξενικῶν καὶ ἐμφυλίων πολέμων οὐδὲν μέρος, οὐ κοινόν, οὐκ ἴδιον, οὐ κατὰ γῆν, οὐ κατὰ θάλατταν, ἡσυχάζειν ἐῶσαι. τί δὲ δεῖ τῶν πρὸς ἀλλήλους ἁμαρτημάτων μεμνῆσθαι;",
+      "english_text": "Moreover, at all events, in addition to what has been already said, any one may reasonably admire the decade for the following reason, that it contains within itself a nature which is at the same time devoid of intervals and capable of containing them. Now that nature which has no connection with intervals is beheld in a point alone; but that which is capable of containing intervals is beheld under three appearances, a line, and a superficies, and a solid.",
+      "confidence": 0.6363876353068448,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "17",
+      "english_ref": "34",
+      "greek_text": "ὁ γὰρ πρὸς τὸ ζῆν ἀφθονίαν δοὺς καὶ τὰς πρὸς τὸ εὖ ζῆν ἀφορμὰς ἐδωρεῖτο· πρὸς μὲν οὖν τὸ ζῆν σιτίων ἔδει καὶ ποτῶν, ἅπερ ἀνεύρισκον οὐχ ἑτοιμασάμενοι, πρὸς δὲ τὸ εὖ ζῆν νόμων καὶ διαταγμάτων, οἷς βελτιοῦσθαι τὰς ψυχὰς ἔμελλον.",
+      "english_text": "For the voices of men, when they are spread over a very long distance, do naturally become weaker and weaker, so that those who are at a distance from them cannot arrive at a clear comprehension of them, but their understanding is gradually dimmed by the extension of the sound over a larger space, since the organs also by which it is extended are perishable.",
+      "confidence": 0.6542507226993084,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "22",
+      "english_ref": "42",
+      "greek_text": "περιέχει δὲ ἡ δεκὰς καὶ τὰς τῶν τριγώνων καὶ τετραγώνων καὶ τῶν ἄλλων πολυγώνων ἐμφαινομένας ἰδιότητας καὶ τὰς τῶν συμφωνιῶν, τήν τε διὰ τεσσάρων ἐν ἐπιτρίτῳ λόγῳ, τῷ τέσσαρα τρία, καὶ τὴν διὰ πέντε ἐν ἡμιολίῳ, τῷ τρία πρὸς δύο, καὶ τὴν διὰ πασῶν ἐν διπλασίῳ, τῷ δύο πρὸς ἕν, καὶ τὴν δὶς διὰ πασῶν ἐν τετραπλασίῳ, τῷ ὀκτὼ πρὸς δύο.",
+      "english_text": "I will, therefore, behave myself in an affable, and courteous, and conciliatory manner to all men, even if I should obtain the dominion over the whole earth and the whole sea, and especially to those who are in the greatest difficulties and of the least reputation, and who are destitute of all assistance from kindred of their own, to those who are orphaned of either or of both their parents, to women who have experienced widowhood, and to old men who have either never had any children at all, or who have lost at an early age those who have been born to them;",
+      "confidence": 0.6501083181627023,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "25",
+      "english_ref": "46",
+      "greek_text": "τὸ μὲν γὰρ δυσὶ σημείοις περατούμενόν ἐστι γραμμή, τὸ δ’ ἐπὶ δύο διαστατὸν ἐπιφάνεια, ῥυείσης ἐπὶ πλάτος γραμμῆς, τὸ δ’ ἐπὶ τρία στερεόν, μήκους καὶ πλάτους βάθος προσλαβόντων, ἐφ’ ὧν ἵσταται ἡ φύσις· πλείους γὰρ τριῶν διαστάσεις οὐκ ἐγέννησεν.",
+      "english_text": "And a voice sounded forth from out of the midst of the fire which had flowed from heaven, a most marvellous and awful voice, the flame being endowed with articulate speech in a language familiar to the hearers, which expressed its words with such clearness and distinctness that the people seemed rather to be seeing than hearing it.",
+      "confidence": 0.6472064997922573,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "48",
+      "english_ref": "55",
+      "greek_text": "παγκάλως μέντοι καὶ θεοπρεπῶς εἴρηται ἐκ τοῦ πυρὸς ἡ φωνὴ προέρχεσθαι· ἠκρίβωται γὰρ καὶ βεβασάνισται τὰ τοῦ θεοῦ λόγια καθάπερ χρυσὸς πυρί. μηνύει δὲ καὶ διὰ συμβόλου τι τοιοῦτον·",
+      "english_text": "and to every one of the stars they have affixed names and given them to the inventors of fables, who have woven together cleverly-contrived imaginations to deceive the ear, and have appeared to have been themselves the ingenious inventors of these names thus given.",
+      "confidence": 0.6575296215090913,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "68",
+      "greek_text": "Ἐπισκεπτέον δὲ μετὰ πάσης ἀκριβείας τῶν λογίων ἕκαστον μηδὲν πάρεργον αὐτῶν ποιουμένους. ἀρχὴ δ’ ἀρίστη πάντων μὲν τῶν ὄντων θεός, ἀρετῶν δ’ εὐσέβεια· περὶ ὧν ἀναγκαιότατον πρῶτον διεξελθεῖν. πλάνος τις οὐ μικρὸς τὸ πλεῖστον τῶν ἀνθρώπων γένος κατέσχηκε περὶ πράγματος, ὅπερ ἢ μόνον ἢ μάλιστα ἦν εἰκὸς ἀπλανέστατον ταῖς ἑκάστων διανοίαις ἐνιδρῦσθαι.",
+      "english_text": "and such men appear to me to have a more miserable life than those who are deprived of their bodily sight; for these latter have either been injured without their own consent, or else have endured some terrible disease of the eyes, or else have been plotted against by their enemies; but those others by their own deliberate intention, have not only dimmed the eye of their soul, but have even chosen utterly to discard it;",
+      "confidence": 0.6396227358609556,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "59",
+      "english_ref": "71",
+      "greek_text": "τινος χρόνου γενόμενον καὶ μὴ διαιωνίζοντα λέγειν οὐ θεμιτόν. γὰρ ἔνιοι περὶ τὰς κρίσεις ἀπονοίᾳ τοσαύτῃ κέχρηνται, ὡς οὐ μόνον τὰ εἰρημένα θεοὺς νομίζειν, ἀλλὰ καὶ ἕκαστον αὐτῶν μέγιστον καὶ πρῶτον θεόν, τὸν ὄντα ὄντως ἢ οὐκ εἰδότες ἀδιδάκτῳ τῇ φύσει ἢ οὐ σπουδάζοντες μαθεῖν, ἕνεκα τοῦ μηδὲν ἔξω τῶν αἰσθητῶν ἀόρατον καὶ νοητὸν αἴτιον ὑπολαμβάνειν εἶναι, καίτοι σαφεστάτης ἐγγὺς παρακειμένης πίστεως.",
+      "english_text": "and these artists have often grown old in poverty and obscurity, dying, worn out by incessant misfortunes, while the things which they have fabricated, are made splendid with purple, and gold, and all sorts of costly splendour which wealth can furnish, and are worshipped not only by freemen but even by men of noble birth, and of the greatest personal strength and beauty. For the race of priests is scrutinised with the greatest rigour and minuteness, to see whether they are without blemish, and to see whether the whole combination of the parts of their bodies is entire and perfect;",
+      "confidence": 0.6478962751968296,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "77",
+      "english_ref": "92",
+      "greek_text": "καὶ ταῦτα μὲν ἴσως ἔχει τινὰ λόγον, ἡμερώτατα γὰρ καὶ ὠφελιμώτατα τῷ βίῳ· ἀροτὴρ ὁ βοὺς αὔλακας ἀνατέμνει καιρῷ σπορᾶς, ἀλοῆσαι πάλιν, ὅταν δέῃ τὸν καρπὸν καθαίρεσθαι, δυνατώτατος· ὁ κριὸς τὸ κάλλιστον τῶν σκεπασμάτων, ἐσθῆτα, παρέχει· γυμνὰ γὰρ ἂν τὰ σώματα διεφθείρετο ῥᾳδίως, ἢ διὰ θάλπος ἢ διὰ κρύος ἄμετρον, τοτὲ μὲν τῷ ἀφ’ ἡλίου φλογμῷ, τοτὲ δὲ τῇ ἀπ’ ἀέρος περιψύξει.",
+      "english_text": "But there are also some people who, without any idea of acquiring gain, do from a bad habit incessantly and inconsiderately swear upon every occasion, even when there is nothing at all about which any doubt is raised, as if they were desirous to fill up the deficiency of their argument with oaths, as if it would not be better to cut their conversation short, or I might rather say to utter nothing at all, but to preserve entire silence, for from a frequency of oaths arises a habit of perjury and impiety.",
+      "confidence": 0.6501105066303978,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "86",
+      "english_ref": "93",
+      "greek_text": "τὸ γὰρ πρᾶγμα οὐ μικρόν, εἰ καὶ τῷ ἔθει καταφρονεῖται. μαρτυρία γάρ ἐστι θεοῦ περὶ πραγμάτων ἀμφισβητουμένων ὅρκος· μάρτυρα δὲ καλεῖν ἐπὶ ψεύδει θεὸν ἀνοσιώτατον. ἴθι γάρ, εἰ βούλει, τῷ λόγῳ διάκυψον εἰς τὴν τοῦ μέλλοντος ὀμνύναι διάνοιαν ἐπὶ ψεύδει· θεάσῃ γὰρ αὐτὴν οὐκ ἠρεμοῦσαν, ἀλλὰ θορύβου καὶ ταραχῆς μεστήν, κατηγορουμένην καὶ πάσας ὕβρεις καὶ βλασφημίας ὑπομένουσαν.",
+      "english_text": "On which account the man who is going to take an oath ought to investigate everything with care and exceeding accuracy, considering whether the subject is of serious importance, and whether it has really taken place, and whether, if it has, he has comprehended it properly; and considering himself, also, whether he is pure in soul, and body, and tongue, having the first free from all violation of the law, the second from all defilement, and the last from all blasphemy. For it is an impiety for any disgraceful words to be uttered by that mouth by which the most sacred name is also mentioned.",
+      "confidence": 0.6389254989270647,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "102",
+      "english_ref": "116",
+      "greek_text": "ἐν ἑτέροις. παρθένος, ἡ ἀμήτωρ φύσις, ἡ μονάδος οἰκειοτάτη καὶ ἀρχῆς, ἡ ἰδέα τῶν πλανήτων, ἐπεὶ καὶ τῆς ἀπλανοῦς σφαίρας μονάς· ἐκ γὰρ μονάδος καὶ ἑβδομάδος οὐρανὸς ὁ ἀσώματος, τὸ παράδειγμα τοῦ ὁρατοῦ.",
+      "english_text": "In the case of storks the old birds remain in their nests because they are unable to fly; but their children, I had very nearly said, traverse the whole of earth and sea, and from all quarters provide their parents with what is necessary for them.",
+      "confidence": 0.6358696794534945,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "112",
+      "english_ref": "118",
+      "greek_text": "τίνα γὰρ ἕτερον εὖ ποιήσουσιν οἱ τῶν συγγενεστάτων καὶ τὰς μεγίστας παρασχομένων δωρεὰς ὀλιγωροῦντες, ὧν ἔνιαι δι’ ὑπερβολὴν οὐδ’ ἀμοιβὰς ἐνδέχονται; πῶς γὰρ ἂν ὁ γεννηθεὶς ἀντιγεννῆσαι δύναιτο τοὺς σπείραντας, κλῆρον ἐξαίρετον τῆς φύσεως χαρισαμένης πρὸς παῖδας γονεῦσιν εἰς ἀντίδοσιν ἐλθεῖν οὐ δυνάμενον; ὅθεν καὶ σφόδρα προσῆκεν ἀγανακτεῖν, εἰ μὴ πάντα ἔχοντες ἀντιχαρίζεσθαι μηδὲ τὰ κουφότατα ἐθελήσουσιν.",
+      "english_text": "Is it not right, then, after these examples, that men who neglect their parents should cover their faces from shame, and reproach themselves for disregarding those things which they ought to have cared for alone, or in preference to any thing else whatever? And this too, when they would not have been so much conferring benefits as requiting them? For the children have nothing of their own which does not belong to the parents, who have either bestowed it upon them from their own substance, or have enabled them to acquire it by supplying them with the means.",
+      "confidence": 0.6379077800001933,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "112",
+      "english_ref": "128",
+      "greek_text": "τίνα γὰρ ἕτερον εὖ ποιήσουσιν οἱ τῶν συγγενεστάτων καὶ τὰς μεγίστας παρασχομένων δωρεὰς ὀλιγωροῦντες, ὧν ἔνιαι δι’ ὑπερβολὴν οὐδ’ ἀμοιβὰς ἐνδέχονται; πῶς γὰρ ἂν ὁ γεννηθεὶς ἀντιγεννῆσαι δύναιτο τοὺς σπείραντας, κλῆρον ἐξαίρετον τῆς φύσεως χαρισαμένης πρὸς παῖδας γονεῦσιν εἰς ἀντίδοσιν ἐλθεῖν οὐ δυνάμενον; ὅθεν καὶ σφόδρα προσῆκεν ἀγανακτεῖν, εἰ μὴ πάντα ἔχοντες ἀντιχαρίζεσθαι μηδὲ τὰ κουφότατα ἐθελήσουσιν.",
+      "english_text": "Moreover, the doubt as to the legitimacy of the children is a most terrible evil. For if the wife be not chaste, it is quite a matter of doubt and uncertainty to what father the children belong. And then, if the matter remain undiscovered, the children of adultery enter unjustly into the classification of legitimate children, and make a race spurious to which they have no pretensions to belong, and receive an inheritance which in appearance indeed is their own patrimony, but which in reality has no connection with them.",
+      "confidence": 0.6401608023903902,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "112",
+      "english_ref": "132",
+      "greek_text": "τίνα γὰρ ἕτερον εὖ ποιήσουσιν οἱ τῶν συγγενεστάτων καὶ τὰς μεγίστας παρασχομένων δωρεὰς ὀλιγωροῦντες, ὧν ἔνιαι δι’ ὑπερβολὴν οὐδ’ ἀμοιβὰς ἐνδέχονται; πῶς γὰρ ἂν ὁ γεννηθεὶς ἀντιγεννῆσαι δύναιτο τοὺς σπείραντας, κλῆρον ἐξαίρετον τῆς φύσεως χαρισαμένης πρὸς παῖδας γονεῦσιν εἰς ἀντίδοσιν ἐλθεῖν οὐ δυνάμενον; ὅθεν καὶ σφόδρα προσῆκεν ἀγανακτεῖν, εἰ μὴ πάντα ἔχοντες ἀντιχαρίζεσθαι μηδὲ τὰ κουφότατα ἐθελήσουσιν.",
+      "english_text": "The second commandment of this second table is to do no murder. For nature, having produced man as a gregarious and sociable creature, and the most easily domesticated of all animals, has invited it to a fellowship of opinion and partnership, giving him reason, as a means to lead to a harmony and admixture of dispositions. And he who slays any man must not be ignorant that he is overturning the laws and ordinances of nature, which have been beautifully established for the common advantage of all men.",
+      "confidence": 0.6388522578759178,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "120",
+      "english_ref": "141",
+      "greek_text": "τῶν δ’ εὐτολμοτέρων ἀποσεμνύνοντες τὸ γονέων ὄνομά φασί τινες, ὡς ἄρα πατὴρ καὶ μήτηρ ἐμφανεῖς εἰσι θεοί, μιμούμενοι τὸν ἀγένητον ἐν τῷ ζῳοπλαστεῖν· ἀλλὰ τὸν μὲν εἶναι τοῦ κόσμου θεόν, τοὺς δὲ μόνων ὧν ἐγέννησαν. ἀμήχανον δ’ εὐσεβεῖσθαι τὸν ἀόρατον ὑπὸ τῶν εἰς τοὺς ἐμφανεῖς καὶ ἐγγὺς ὄντας ἀσεβούντων.",
+      "english_text": "Moreover, this kind of crafty wickedness outstrips all other offences in its impiety; for it is not customary for judges to decide without being sworn, but rather after having taken the most fearful oaths, which those men transgress who deceive others, more than they do who are deceived by them, since the error of the one is not intentional, but the others do deliberately plot against them, and do of malice aforethought sin, persuading those in whose power it is to give the decisive vote to err, not knowing what they do, so that things which deserve no chastisement meet with punishment and loss.",
+      "confidence": 0.6090243604236474,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "132",
+      "english_ref": "143",
+      "greek_text": "καὶ σύννομον ζῷον τὸ ἡμερώτατον ἄνθρωπον ἡ φύσις γεννήσασα πρὸς ὁμόνοιαν καὶ κοινωνίαν ἐκάλεσε. λόγον δοῦσα συναγωγὸν εἰς ἁρμονίαν καὶ κρᾶσιν ἠθῶν. ὁ δὴ κτείνων τινὰ μὴ ἀγνοείτω νόμους φύσεως καὶ θεσμοὺς ἀνατρέπων καλῶς καὶ συμφερόντως ἅπασι γραφέντας.",
+      "english_text": "But what is it that I am saying? The appearance and idea of a present good, or of one that is accounted such, rouses up and excites the soul which was previously in a state of tranquillity, and raises it to a high degree of elation, like a light suddenly flashing before the eyes; and this passion of the soul is called pleasure.",
+      "confidence": 0.6372308420376567,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "132",
+      "english_ref": "152",
+      "greek_text": "καὶ σύννομον ζῷον τὸ ἡμερώτατον ἄνθρωπον ἡ φύσις γεννήσασα πρὸς ὁμόνοιαν καὶ κοινωνίαν ἐκάλεσε. λόγον δοῦσα συναγωγὸν εἰς ἁρμονίαν καὶ κρᾶσιν ἠθῶν. ὁ δὴ κτείνων τινὰ μὴ ἀγνοείτω νόμους φύσεως καὶ θεσμοὺς ἀνατρέπων καλῶς καὶ συμφερόντως ἅπασι γραφέντας.",
+      "english_text": "Is it not owing to this passion that relationships are broken asunder, and change the good will which originates in nature into an irreconcilable enmity? And are not great countries and populous kingdoms made desolate by domestic seditions, through such causes? And are not earth and sea continually filled with novel and terrible calamities by naval battles and military expeditions for the same reason?",
+      "confidence": 0.6470399505507506,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "143",
+      "english_ref": "154",
+      "greek_text": "τί δ’ ἐστὶν ὃ λέγω; τοῦ παρόντος καὶ νομισθέντος ἀγαθοῦ φαντασία διεγείρει καὶ διανίστησι τὴν ψυχὴν ἠρεμοῦσαν καὶ σφόδρα μετέωρον ἐξαίρει καθάπερ ὀφθαλμοὺς φῶς ἀναστράψαν· καλεῖται δὲ τουτὶ τὸ πάθος αὐτῆς ἡδονή.",
+      "english_text": "However, enough of these matters. Still we must not be ignorant of this fact either, that the ten commandments are the heads of all the particular and special laws which are recorded throughout all the history of the giving of the law related in the sacred scriptures.",
+      "confidence": 0.6449138598197407,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "145",
+      "english_ref": "166",
+      "greek_text": "ὄνομα δὲ καὶ] τούτῳ τῷ πάθει λύπη. ὅταν δὲ τὸ κακὸν μήπω μὲν εἰσῳκισμένον θλίβῃ, μέλλῃ δ’ ἀφικνεῖσθαι καὶ παρευτρεπίζηται, πτοίαν καὶ ἀγωνίαν, ἀποφράδας ἀγγέλους, προεκπέμπει δειματοῦντας· φόβος δὲ προσαγορεύεται τὸ πάθος.",
+      "english_text": "for parents belong to the superior class of all these divisions just mentioned, the class, I mean, of elders, of rulers, of benefactors, and of masters; and children are in the inferior class, in which are ranked the younger people, the subjects, those who have received benefits, and slaves.",
+      "confidence": 0.6433969057569129,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "151",
+      "english_ref": "168",
+      "greek_text": "εὔηθες ἴσως μακρηγορεῖν ἐστι περὶ τῶν οὕτως ἐμφανῶν, ἃ τίς ἀνὴρ ἢ πόλις ἀγνοεῖ καθ’ ἑκάστην οὐχ ἡμέραν μόνον ἀλλὰ καὶ ὥραν ὡς ἔπος εἰπεῖν ἔλεγχον ἐναργῆ παριστάντα; χρημάτων ἔρως ἢ γυναικὸς ἢ δόξης ἤ τινος ἄλλου τῶν ἡδονὴν ἀπεργαζομένων ἀρά γε μικρῶν καὶ τῶν τυχόντων αἴτιος γίνεται κακῶν;",
+      "english_text": "The first table of five, then, is completed in these commandments, exhibiting a comprehensive character; but of the special and particular laws the number is very great. Of the second table, the first commandment is that against adulterers, under which many other commands are conveyed by implication, such as that against seducers, that against practisers of unnatural crimes, that against all who live in debauchery, that against all men who indulge in illicit and incontinent connections;",
+      "confidence": 0.6129002107473388,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 173,
+    "total_english_segments": 178,
+    "aligned_segments": 22,
+    "confidence_threshold": 0.6
+  }
+}

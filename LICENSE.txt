@@ -1,0 +1,60 @@
+All application code I have created (some using Claude) in this project is licensed by the MIT license.  https://opensource.org/license/mit
+
+
+Texts licenses:
+
+Wikitionary - https://creativecommons.org/licenses/by-sa/4.0/
+
+==================================================================================================
+
+Tufts University holds the overall copyright to the Perseus Digital Library; the materials therein 
+(including all texts, translations, images, descriptions, drawings, etc.) are provided for the 
+personal use of students, scholars, and the public. 
+
+Materials within the Perseus DL have varying copyright status: please contact the project for more information 
+about a specific component or object.  Copyright is protected by the copyright laws of the United States and 
+the Universal Copyright Convention. 
+
+Unless otherwise indicated, all contents of this repository are licensed under a 
+Creative Commons Attribution-ShareAlike 4.0 International License. You must  offer Perseus
+any modifications you make. Perseus provides credit for all accepted changes.
+
+
+Note these texts may be freely distributed under a CC BY-SA 4.0 license, subject to the following restrictions: 
+
+- You credit Perseus, as follows, whenever you use the document:
+    Text provided under a CC BY-SA license by Perseus Digital Library, http://www.perseus.tufts.edu, with funding from [funder as indicated in header].
+    Data accessed from https://github.com/PerseusDL/canonical-pdlrefwk/ [date of access]. 2025-08-01
+    Data accessed from https://github.com/PerseusDL/canonical-latinLit/ [date of access]. 2025-08-01
+    Data accessed from https://github.com/PerseusDL/canonical-greekLit/ [date of access]. 2025-08-01
+- You leave this availability statement intact
+- You offer Perseus any modifications you make.
+
+
+==================================================================================================
+
+Portions of code may be adapted from:
+
+SCAIFE VIEWER
+=============
+
+Source: Scaife Viewer - Perseus Digital Library
+------------------------------------------------
+Copyright (c) 2017-2020 Perseus Digital Library
+License: MIT License
+Repository: https://github.com/scaife-viewer/scaife-viewer
+
+Scaife Viewer is the new reading environment for version 5.0 of the Perseus
+Digital Library. It provides an open-source ecosystem for building rich online
+reading environments for classical texts.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions: The above copyright
+notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+

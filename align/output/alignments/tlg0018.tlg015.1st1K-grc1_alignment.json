@@ -1,0 +1,164 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg015/tlg0018.tlg015.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg015/tlg0018.tlg015.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "3",
+      "english_ref": "3",
+      "greek_text": "καίτοι τίς οὐκ ἂν τὸ τοῦ χρησμῳδοῦντος ἀξίωμα καὶ μέγεθος καταπλαγεὶς ἄφωνος καὶ ἀχανὴς ἐγένετο, καὶ εἰ μὴ διὰ δέος, ἀλλά τοι τῷ περιχαρεῖ; ἐπιστομίζουσι γὰρ ὡς αἱ σφοδραὶ λῦπαι, καὶ αἱ ὑπερβάλλουσαι χαραί.",
+      "english_text": "And yet who would not have been amazed at the dignity and greatness of him who delivered this oracle, so as to become silent and mute before him, if not out of fear, still at all events from excess of joy? For excessive griefs stop the mouth, and so also do excessive joys;",
+      "confidence": 0.6491353545372369,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "3",
+      "english_ref": "6",
+      "greek_text": "καίτοι τίς οὐκ ἂν τὸ τοῦ χρησμῳδοῦντος ἀξίωμα καὶ μέγεθος καταπλαγεὶς ἄφωνος καὶ ἀχανὴς ἐγένετο, καὶ εἰ μὴ διὰ δέος, ἀλλά τοι τῷ περιχαρεῖ; ἐπιστομίζουσι γὰρ ὡς αἱ σφοδραὶ λῦπαι, καὶ αἱ ὑπερβάλλουσαι χαραί.",
+      "english_text": "When then has a slave freedom of speech towards his master? Is it not when he is conscious that he has not wronged him, but that he has done and said everything with a view to the advantage of his owner?",
+      "confidence": 0.6143059264148018,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "3",
+      "english_ref": "16",
+      "greek_text": "καίτοι τίς οὐκ ἂν τὸ τοῦ χρησμῳδοῦντος ἀξίωμα καὶ μέγεθος καταπλαγεὶς ἄφωνος καὶ ἀχανὴς ἐγένετο, καὶ εἰ μὴ διὰ δέος, ἀλλά τοι τῷ περιχαρεῖ; ἐπιστομίζουσι γὰρ ὡς αἱ σφοδραὶ λῦπαι, καὶ αἱ ὑπερβάλλουσαι χαραί.",
+      "english_text": "But the man who appears to be endued with a thin voice, and with slowness of speech, and to be almost dumb, is nevertheless found to be talkative, so that in one place he is represented not merely as speaking, but even as crying out; and, in another, as exerting a ceaseless and uninterrupted flow of words;",
+      "confidence": 0.6462013381189935,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "5",
+      "english_ref": "37",
+      "greek_text": "θαυμάσιοι δὲ ἀρεταὶ ἥ τε εὐτολμία καὶ ἡ ἐν τῷ δέοντι παρρησία πρὸς τοὺς ἀμείνους, ὡς καὶ τὸ κωμικὸν ἀψευδῶς μᾶλλον ἢ κωμικῶς εἰρῆσθαι δοκεῖν ἂν πάνθ’ ὁ δοῦλος ἡσυχάζειν μανθάνῃ, πονηρὸς ἔσται· μεταδίδου παρρησίας.",
+      "english_text": "Therefore I am a suppliant to thee, and I implore thee, that those seeds and sparks being kindled and cherished, the saving light of virtue may burn up and give light, which being borne on like a torch, delivered from hand to hand in constant succession, may last as long as the world.",
+      "confidence": 0.6468399469665675,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "63",
+      "english_ref": "84",
+      "greek_text": "εἶχεν ἀσάφειαν ἡ πρότασις αἰνιγματώδη. τί δὲ ὁ φιλομαθὴς ζητεῖ, διερμηνευτέον ἀκριβέστερον· μήποτ’ οὖν ἐστι τοιοῦτον, εἰ δύναταί",
+      "english_text": "And again he says, \"The priest shall not be a man by himself, when he goeth into the holy of holies, until he cometh out;\"",
+      "confidence": 0.6224642142660044,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "101",
+      "english_ref": "105",
+      "greek_text": "ἴσως ἄν τις εἴποι μάχεσθαι τοῦτο τῷ πεπιστευκέναι· τὸ μὲν γὰρ ἀπορεῖν ἐνδοιάζοντος, τὸ δὲ μηκέτι ζητεῖν ἔργον εἶναι πεπιστευκότος. λεκτέον οὖν, ὅτι καὶ ἀπορεῖ καὶ πεπίστευκεν, οὐ μὴν περὶ τοῦ αὐτοῦ, πολλοῦ γε καὶ δεῖ. πεπίστευκε μὲν γὰρ ὅτι κληρονόμος ἔσται σοφίας, τὸν δὲ τρόπον αὐτὸ μόνον ζητεῖ καθ’ ὃν ἂν γένοιτο· τὸ δ’ ὅτι γενήσεται, πάντως κατὰ τὰς θείας ὑποσχέσεις βεβαίως κατείληφεν.",
+      "english_text": "For many men have become wicked in respect of such sacred deposits, having, through their immoderate covetousness improperly used the property of others as their own. But do thou, O good man! endeavour with all thy strength, not only to present what you have received without injury and without adulteration, but also to take even more care than that of such things, that he who has deposited them with you may have no grounds to blame the care which has been exercised by you.",
+      "confidence": 0.6335406982297505,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "105",
+      "english_ref": "135",
+      "greek_text": "ἀντεκτινούσῃ δικαίως καὶ προσηκόντως ἀμειψάμενος. τῆς πλεονεξίας καταχρησάμενοι. σὺ δέ, ὦ γενναῖε, παντὶ σθένει πειρῶ μὴ μόνον ἀσινῆ καὶ ἀκιβδήλευτα φυλάττειν ἃ ἔλαβες, ἀλλὰ καὶ πάσης ἐπιμελείας ἀξιοῦν, ἵν’ ὁ παρακαταθέμενος μηδὲν ἔχῃ τῆς παρὰ σοῦ φυλακῆς αἰτιάσασθαι.",
+      "english_text": "Again, he subdivided heavy and light according to other ideas, for he divided the light into cold and hot; and the cold he called air, and that which was hot by nature he called fire. The heavy, again, he divided into wet and dry; and the dry he called land, and the wet he called water—",
+      "confidence": 0.632722703578656,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "121",
+      "english_ref": "147",
+      "greek_text": "πῶς; φυτοῦ μὲν ἀρχὴ σπέρμα, τέλος δ’ ὁ καρπός, ἑκάτερον οὐ γεωργίας, ἀλλὰ φύσεως ἔργον. πάλιν ἐπιστήμης ἀρχὴ μὲν ἡ φύσις, οὐδενὶ τῶν ἐπιτηδευμάτων, ἀλλ’ ἀψευδῶς αἱ τελειότητες καὶ ἀκρότητες ἑνός εἰσι μόνου. φορούμεθ’ οὖν λοιπὸν ἡμεῖς ἐν τῷ τέλους καὶ ἀρχῆς μεθορίῳ, μανθάνοντες, διδάσκοντες, γεωπονοῦντες, ἐργαζόμενοι τῶν ἄλλων ἕκαστον ὡς ἂν ἱδρῶντες, ἵνα τι καὶ γένεσις πράττειν δοκῇ.",
+      "english_text": "Again, he has divided things so as to make his divisions equal in point of magnitude; such as the parallel cycles in heaven, and those which belong to the equinoxes both of spring and autumn, and those which belong to the winter and summer solstice. And on the earth he has divided the zones, two being equal to one another, which being placed close to the poles are frozen with cold, and on this account are uninhabitable. And two he has placed on the borders between these two and the torrid zone, and these two they say are the abode of a happy temperature of the air, one of them lying towards the south and the other towards the north.",
+      "confidence": 0.625145723061314,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "121",
+      "english_ref": "149",
+      "greek_text": "πῶς; φυτοῦ μὲν ἀρχὴ σπέρμα, τέλος δ’ ὁ καρπός, ἑκάτερον οὐ γεωργίας, ἀλλὰ φύσεως ἔργον. πάλιν ἐπιστήμης ἀρχὴ μὲν ἡ φύσις, οὐδενὶ τῶν ἐπιτηδευμάτων, ἀλλ’ ἀψευδῶς αἱ τελειότητες καὶ ἀκρότητες ἑνός εἰσι μόνου. φορούμεθ’ οὖν λοιπὸν ἡμεῖς ἐν τῷ τέλους καὶ ἀρχῆς μεθορίῳ, μανθάνοντες, διδάσκοντες, γεωπονοῦντες, ἐργαζόμενοι τῶν ἄλλων ἕκαστον ὡς ἂν ἱδρῶντες, ἵνα τι καὶ γένεσις πράττειν δοκῇ.",
+      "english_text": "From the spring equinox to the summer solstice, day receives an addition to its length, and night, on the other hand, submits to a diminution; until the longest day and the shortest night are both completed. And then after the summer solstice the sun, turning back again the same road, neither more quickly nor more slowly than he advanced, but always preserving the same difference in the same manner, having a constantly equal arrangement, proceeds on till the autumnal equinox; and then, having made day and night both equal, it begins to increase the length of the night, diminishing the day until the time of the winter solstice.",
+      "confidence": 0.6392825276642764,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "139",
+      "english_ref": "150",
+      "greek_text": "καὶ τοῦ θνητοῦ δύο μοίρας εἰργάζετο, ὧν τὴν μὲν ἀνδρῶν, τὴν δὲ γυναικῶν ἐπεφήμισε. καὶ κατ’ ἄλλον μέντοι τρόπον τὸ ζῷον εἰς ἄρρεν ἔτεμνε καὶ θῆλυ· ἐδέχετο δὲ καὶ ἄλλας ἀναγκαίας τομάς, αἳ διέστελλον πτηνὰ μὲν χερσαίων, χερσαῖα δὲ ἐνύδρων, ἔνυδρα δὲ ἀμφοῖν τῶν ἄκρων.",
+      "english_text": "And when it has made the night the longest night, and the day the shortest day, then returning back again and adopting the same distances as before, he again comes to the spring equinox. Thus the differences of time which appear to be unequal, do in reality possess a perfect equality in respect of magnitude, not indeed at the same seasons, but at different seasons of the year.",
+      "confidence": 0.6555109171936463,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "151",
+      "english_ref": "177",
+      "greek_text": "μέρεσι τῶν ζῴων καὶ μάλιστα ἀνθρώπων θεωρεῖται. ποὺς γὰρ ποδὶ καὶ χεὶρ χειρὶ καὶ τὰ ἄλλα σχεδὸν ἅπαντα ἴσα μεγέθει, τὰ ἐπὶ δεξιὰ τοῖς κατ’ εὐώνυμα. τὰ δ’ ἴσα δυνάμει πάμπολλά ἐστιν ἔν τε ξηροῖς καὶ ὑγροῖς, ὧν ἡ ἐπίκρισις ἐν μέτροις καὶ πλάστιγξι καὶ τοῖς παραπλησίοις θεωρεῖται.",
+      "english_text": "What more need I say? Has he not also, taking two mountains symbolically to mean two races, and having again divided them on principles of the equality of proportion, allotted one to those who bless, and the other to those who curse; appointing leaders of tribes over each in order to give admonitions to those who have need of them, and to show them that the curses are equal in number to the blessings, and nearly, if it may be lawful to say so, of equal value?",
+      "confidence": 0.6417627909261994,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "151",
+      "english_ref": "181",
+      "greek_text": "μέρεσι τῶν ζῴων καὶ μάλιστα ἀνθρώπων θεωρεῖται. ποὺς γὰρ ποδὶ καὶ χεὶρ χειρὶ καὶ τὰ ἄλλα σχεδὸν ἅπαντα ἴσα μεγέθει, τὰ ἐπὶ δεξιὰ τοῖς κατ’ εὐώνυμα. τὰ δ’ ἴσα δυνάμει πάμπολλά ἐστιν ἔν τε ξηροῖς καὶ ὑγροῖς, ὧν ἡ ἐπίκρισις ἐν μέτροις καὶ πλάστιγξι καὶ τοῖς παραπλησίοις θεωρεῖται.",
+      "english_text": "For the soul, being as some ancient writer has said, a waxen tablet, while it is hard and resisting, repels and refuses the impressions which are attempted to be stamped upon it; and remains of necessity undistinguished by any figure. But when it becomes tractable and yielding in a moderate degree, it then receives deep impressions, and having taken off the stamp given by the seal, it preserves accurately the appearances which are impressed upon it, so that they cannot be effaced.",
+      "confidence": 0.6525578130211062,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "160",
+      "english_ref": "185",
+      "greek_text": "ἐπῄνεσε δὲ ὁ θεὸς οὐ τὴν δημιουργηθεῖσαν ὕλην, τὴν ἄψυχον καὶ πλημμελῆ καὶ διαλυτήν, ἔτι δὲ φθαρτὴν ἐξ ἑαυτῆς ἀνώμαλόν τε καὶ ἄνισον, ἀλλὰ τὰ ἑαυτοῦ τεχνικὰ ἔργα κατὰ μίαν ἴσην καὶ ὁμαλὴν δύναμιν καὶ ἐπιστήμην ὁμοίαν καὶ τὴν αὐτὴν ἀποτελεσθέντα. παρὸ καὶ τοῖς τῆς ἀναλογίας κανόσιν ἴσα καὶ ὅμοια πάντα πᾶσιν ἐνομίσθη κατὰ τὸν τῆς τέχνης καὶ ἐπιστήμης λόγον.",
+      "english_text": "Now, the craters of the sense of seeing are the eyes, those of hearing are the ears, those of smelling are the nostrils, and so on with the appropriate receptacles for each of the senses. On these craters the sacred word pours a portion of blood, thinking it right that the irrational part of us should become endowed with soul and vitality, and should in some manner become rational; following the guidance of admonition, and purifying itself from the deceitful alluring powers of the objects of the outward sense which aim to overcome it.",
+      "confidence": 0.6030960612721911,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "182",
+      "english_ref": "186",
+      "greek_text": "ἀνεξάλειπτα εἴδη. μὲν θεῖον, τὸ δὲ ἀνθρώπινον·",
+      "english_text": "Was it not in the same manner that the holy double-drachm was divided?",
+      "confidence": 0.6357469355435811,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "183",
+      "english_ref": "202",
+      "greek_text": "καὶ τὸ μὲν θεῖον ἀμιγὲς καὶ ἄκρατον, οὗ ἕνεκα τῷ ἀμιγεῖ καὶ ἀκράτῳ καὶ κατὰ τὴν μόνωσιν μονάδι ὄντι σπένδεται θεῷ, τὸ δὲ ἀνθρώπινον μικτὸν καὶ κεκραμένον, ὃ τοῦ μικτοῦ καὶ συνθέτου καὶ κεκραμένου γένους κατασκεδάννυται ἡμῶν, ὁμόνοιαν καὶ κοινωνίαν καὶ τί γὰρ ἄλλο ἢ κρᾶσιν μερῶν τε καὶ ἠθῶν ἐργασόμενον.",
+      "english_text": "for, owing to the mere fact of being near those who are sick, it has often happened that those who were in perfect health have caught their disease, and have been at the point of death: and it was impossible for them any longer to be exposed to this affliction if they once separated by a strong boundary fixed in the middle between them, which will preserve the better part by keeping off the inroads and attacks of the worse.",
+      "confidence": 0.6487078732220709,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "188",
+      "english_ref": "208",
+      "greek_text": "χαῦνα γὰρ τά τε ἄλλα ἐξ ἑαυτῶν, εἰ δέ που καὶ πυκνωθείη, λόγῳ σφίγγεται θείῳ. κόλλα γὰρ καὶ δεσμὸς οὗτος πάντα τῆς οὐσίας ἐκπεπληρωκώς· ὁ δ’ εἴρας καὶ συνυφήνας ἕκαστα πλήρης αὐτὸς ἑαυτοῦ κυρίως ἐστίν, οὐ δεηθεὶς ἑτέρου τὸ παράπαν.",
+      "english_text": "Hot is opposite to cold, and dry to wet, and light to heavy, and darkness to light, and night to day; also in heaven that which is fixed is opposite to the wandering planetary motion, and in the air a clear sky is opposite to clouds, winter to summer, autumn to spring, for the one is blooming and the other fading.",
+      "confidence": 0.6494769717037929,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "265",
+      "english_ref": "293",
+      "greek_text": "τῷ δὲ προφητικῷ γένει φιλεῖ τοῦτο συμβαίνειν· ἐξοικίζεται μὲν γὰρ ἐν ἡμῖν ὁ νοῦς κατὰ τὴν τοῦ θείου πνεύματος ἄφιξιν, κατὰ δὲ τὴν μετανάστασιν αὐτοῦ πάλιν εἰσοικίζεται· θέμις γὰρ οὐκ ἔστι θνητὸν ἀθανάτῳ συνοικῆσαι. διὰ τοῦτο ἡ δύσις τοῦ λογισμοῦ καὶ τὸ περὶ αὐτὸν σκότος ἔκστασιν καὶ θεοφόρητον μανίαν ἐγέννησε.",
+      "english_text": "In the next verses it is said, \"And in the fourth generation they shall return hither,\" not merely in order that the time may be exactly marked out to him, in which his descendants shall become inhabitants of the holy land, but also in order to represent to him the perfect and complete re-establishment of virtue; and this takes place as it were in the fourth generation, but how it does so it is worth while to consider.",
+      "confidence": 0.645242352164562,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "268",
+      "english_ref": "294",
+      "greek_text": "ἓν μὲν δὴ παίδευμα τοῦτο· ἕτερον δέ, ὅτι τὰ δουλείαν καὶ κάκωσιν καὶ δεινήν, ὡς αὐτὸς ἔφη, ταπείνωσιν ἐπάγοντα τῇ ψυχῇ τὰ κατὰ γῆν ἐστιν οἰκίδια· νόθα γὰρ καὶ ξένα διανοίας τὰ σώματος ὡς ἀληθῶς πάθη, σαρκὸς ἐκπεφυκότα, ᾗ προσερρίζωται.",
+      "english_text": "The child, after it is brought forth, during its age of infancy, till it has completed its first period of seven years, has a pure unmixed nature, very like a smooth waxen tablet, which has not yet been stamped with the indelible impressions of good or evil; for all the things which appear to be engraved upon it are soon confused and effaced by reason of its moisture:",
+      "confidence": 0.6460481189234888,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "268",
+      "english_ref": "297",
+      "greek_text": "ἓν μὲν δὴ παίδευμα τοῦτο· ἕτερον δέ, ὅτι τὰ δουλείαν καὶ κάκωσιν καὶ δεινήν, ὡς αὐτὸς ἔφη, ταπείνωσιν ἐπάγοντα τῇ ψυχῇ τὰ κατὰ γῆν ἐστιν οἰκίδια· νόθα γὰρ καὶ ξένα διανοίας τὰ σώματος ὡς ἀληθῶς πάθη, σαρκὸς ἐκπεφυκότα, ᾗ προσερρίζωται.",
+      "english_text": "This diseased generation or age must be remedied by some third age, acting towards it the part of medical philosophy, so that it shall be charmed with salutary and saving words, by means of which it will receive an evacuation of the immoderate satiety of evil actions, and a fulness of a sort of hungry emptiness, and terrible desolation of good deeds.",
+      "confidence": 0.6527550813724109,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 302,
+    "total_english_segments": 315,
+    "aligned_segments": 19,
+    "confidence_threshold": 0.6
+  }
+}

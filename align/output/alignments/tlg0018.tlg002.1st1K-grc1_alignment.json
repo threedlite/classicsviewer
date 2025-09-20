@@ -1,0 +1,68 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg002/tlg0018.tlg002.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg002/tlg0018.tlg002.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "7",
+      "english_ref": "103",
+      "greek_text": "τὸ δ’ ὑπερτεθὲν ἴδωμεν, πῶς βοηθεῖ. ἡδεῖα ἡ τοῦ κιθαρῳδοῦ φωνὴ ἢ τοὐναντίον ἐκμελής, εἰ μὴ βοηθῷ χρησάμενος ἀκοῇ; πῶς δὲ ὅτι εὐώδεις ἢ δυσώδεις οἱ ἀτμοί, εἰ μὴ συμμάχῳ χρησάμενος ὀσφρήσει; πῶς δὲ δοκιμάζει τοὺς χυλούς, εἰ μὴ διὰ βοηθοῦ τῆς γεύσεως; πῶς δὲ αὖ τὰ μαλακὰ καὶ τραχέα, εἰ μὴ δι’ ἁφῆς;",
+      "english_text": "In the second place, for the due comprehension and adoption of virtue man requires one thing alone, namely reason. But the body not only does not co-operate in it at all, but rather impedes the progress of the reason towards it. For it may be almost called the peculiar task of wisdom to alienate itself from the body and from the corporeal appetites. But for the enjoyment of evil it is not only necessary for a man to have mind in some degree, but also senses, and reason, and a body.",
+      "confidence": 0.6254956174122841,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "73",
+      "english_ref": "117",
+      "greek_text": "καὶ νεκροῦ συνδέτου πλημμελῆται τὸ ἄριστον ἡ ψυχή. ἐστι τοῦ αἰτίου ὄνομα —, ἵνα εἰδῇς ὅτι καὶ τὰ ἄψυχα οὐκ ἐξουσίᾳ πεποίηκεν ἀλλ’ ἀγαθότητι, ᾗ καὶ τὰ ἔμψυχα· ἔδει γὰρ εἰς τὴν τῶν βελτιόνων δήλωσιν γένεσιν ὑποστῆναι καὶ τῶν χειρόνων ὑπὸ δυνάμεως τῆς αὐτῆς ἀγαθότητος τοῦ αἰτίου, ἥτις ἐστὶν ὁ θεός.",
+      "english_text": "Therefore, the mind is not hindered by any external force from abandoning the legitimate objects of its attention, which can only be perceived by the intellect, and surrendering itself to those which are worse; but still this never happens except when there is a war in the soul, for then indeed it follows of necessity that reason must fall under the power of the inferior part of man, inasmuch as it is not of a warlike character, but is fond of peace.",
+      "confidence": 0.6499324833883657,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "91",
+      "english_ref": "120",
+      "greek_text": "τί οὖν χρὴ λέγειν ἢ τοῦτο, ὅτι δύο φύσεις ἐδημιουργήθησαν ἐν ψυχῇ ὑπὸ θεοῦ σφόδρα ἀναγκαῖαι, μνήμη τε καὶ ἀνάμνησις; ἀμείνων μὲν ἡ μνήμη, χείρων δὲ ἡ ἀνάμνησις· ἡ μὲν γὰρ ἐναύλους ἔχει καὶ ἐναργεῖς τὰς καταλήψεις, ὡς μηδὲ ἀγνοίᾳ διαμαρτεῖν, ἀναμνήσεως δὲ λήθη πάντως προηγεῖται, πηρὸν καὶ τυφλὸν πρᾶγμα.",
+      "english_text": "and of this well approved kind of language he says that there are two supreme virtues, namely, distinctness and truth, and he says well. For it is language which has in the first place enabled one man to make affairs plain and evident to his neighbour, when without it we should not be able to give any intimation of the impression produced on our soul by outward circumstances, nor to show of what kind they are.",
+      "confidence": 0.6500983103438549,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "113",
+      "english_ref": "140",
+      "greek_text": "αἴσθησις τῇ πηρούσῃ αὐτὴν ἡδονῇ; εἶναι δοκεῖ; ὅτι σχεδὸν ὑποβέβληται πᾶσιν, ὥσπερ τις ἀρχὴ καὶ θεμέλιος· ἥ τε γὰρ ἐπιθυμία γέγονε δι’ ἔρωτος ἡδονῆς, ἥ τε λύπη συνίσταται κατὰ τὴν ταύτης ἀφαίρεσιν, φόβος τε αὖ γεννᾶται δι’ εὐλάβειαν ἀπουσίας αὐτῆς· ὥστε δῆλον εἶναι, ὅτι πάντα ἐφορμεῖ τὰ πάθη τῇ ἡδονῇ, καὶ οὐδ’ ἂν συνέστη τὸ παράπαν ἴσως ἐκεῖνα, εἰ μὴ προκατεβλήθη τὸ οἰστικὸν αὐτῶν ἡδονή.",
+      "english_text": "This much having been premised, behold again the difference between the perfect man and him who is still advancing towards perfection. As, therefore, the perfect man was, just now, found to be competent to eradicate the whole of the angry feelings from the contentious soul and to make it submissive and manageable, and peaceable and gentle to every one, both in word and deed; and as he who is still advancing towards perfection is not able wholly to eradicate passion, for he bears the breast about with him, though he does educate it by the aid of judicious language, which is invested with two virtues perspicuity and truth.",
+      "confidence": 0.6524593852305934,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "113",
+      "english_ref": "149",
+      "greek_text": "αἴσθησις τῇ πηρούσῃ αὐτὴν ἡδονῇ; εἶναι δοκεῖ; ὅτι σχεδὸν ὑποβέβληται πᾶσιν, ὥσπερ τις ἀρχὴ καὶ θεμέλιος· ἥ τε γὰρ ἐπιθυμία γέγονε δι’ ἔρωτος ἡδονῆς, ἥ τε λύπη συνίσταται κατὰ τὴν ταύτης ἀφαίρεσιν, φόβος τε αὖ γεννᾶται δι’ εὐλάβειαν ἀπουσίας αὐτῆς· ὥστε δῆλον εἶναι, ὅτι πάντα ἐφορμεῖ τὰ πάθη τῇ ἡδονῇ, καὶ οὐδ’ ἂν συνέστη τὸ παράπαν ἴσως ἐκεῖνα, εἰ μὴ προκατεβλήθη τὸ οἰστικὸν αὐτῶν ἡδονή.",
+      "english_text": "Now I know many people who have fallen into error in respect of the appetites of the belly, that while still devoting themselves to their gratifications, they have again rushed with eagerness to wine and other luxuries; for the appetites of the intemperate soul bear no analogy to the mass of the body. But some men, like vessels made to hold a certain measure, desire nothing extravagant, but discard everything that is superfluous; but appetite on the other hand is never satisfied, but remains always in want and thirsty.",
+      "confidence": 0.6030008908063462,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "113",
+      "english_ref": "152",
+      "greek_text": "αἴσθησις τῇ πηρούσῃ αὐτὴν ἡδονῇ; εἶναι δοκεῖ; ὅτι σχεδὸν ὑποβέβληται πᾶσιν, ὥσπερ τις ἀρχὴ καὶ θεμέλιος· ἥ τε γὰρ ἐπιθυμία γέγονε δι’ ἔρωτος ἡδονῆς, ἥ τε λύπη συνίσταται κατὰ τὴν ταύτης ἀφαίρεσιν, φόβος τε αὖ γεννᾶται δι’ εὐλάβειαν ἀπουσίας αὐτῆς· ὥστε δῆλον εἶναι, ὅτι πάντα ἐφορμεῖ τὰ πάθη τῇ ἡδονῇ, καὶ οὐδ’ ἂν συνέστη τὸ παράπαν ἴσως ἐκεῖνα, εἰ μὴ προκατεβλήθη τὸ οἰστικὸν αὐτῶν ἡδονή.",
+      "english_text": "After that he says, And you shall go out there. Why so? Because the soul, which is abiding in companionship with prudence and dwelling in the house of wisdom, cannot indulge in any of the delights of the body, for it is at that time nourished on a diviner food in the sciences, in consequence of which it neglects the flesh, for when it has gone forth beyond the sacred thresholds of virtue, then it turns to the material substances, which disarrange and oppress the soul. How then am I to deal with them?",
+      "confidence": 0.6059114959124104,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "205",
+      "english_ref": "250",
+      "greek_text": "λόγοι εἰσὶν ὅρκοι βεβαιούμενοι ἔργων ἀποτελέσμασι. δεῖ εἶναι τὸν ποιούμενον τὴν μαρτυρίαν καὶ τὸν ὑπὲρ οὗ γίνεται. τί οὖν λεκτέον; πρῶτον μὲν ὡς οὐκ ἔστιν ὑπαίτιον ἑαυτῷ μαρτυρεῖν τὸν θεόν· τίς γὰρ ἂν ἄλλος γένοιτο ἱκανὸς αὐτῷ μαρτυρῆσαι; ἔπειτα πάντ’ ἐστὶν αὐτὸς ἑαυτῷ τὰ τιμιώτατα, συγγενὴς οἰκεῖος φίλος ἀρετὴ εὐδαιμονία μακαριότης ἐπιστήμη σύνεσις ἀρχὴ τέλος ὅλον πᾶν δικαστὴς γνώμη βουλὴ νόμος πρᾶξις ἡγεμονία.",
+      "english_text": "and each of the passions he calls thistles ( τριβόλια ), because they are divisible into three parts: the passion itself, the efficient cause, and the effect which arises from the combined operation of the two. As for instance pleasure, what is pleasant, and the being pleased; appetite, the object of appetite, and the indulgence of appetite; pain, what is painful, and the suffering pain; fear, what is fearful, and the being in a state of fear.",
+      "confidence": 0.614688120001373,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 468,
+    "total_english_segments": 472,
+    "aligned_segments": 7,
+    "confidence_threshold": 0.6
+  }
+}

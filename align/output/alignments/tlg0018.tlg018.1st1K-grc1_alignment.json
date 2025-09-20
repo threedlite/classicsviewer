@@ -1,0 +1,140 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg018/tlg0018.tlg018.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg018/tlg0018.tlg018.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "6",
+      "english_ref": "5",
+      "greek_text": "ὅταν οὖν ἀκούσῃς ὀφθέντα θεὸν ἀνθρώπῳ, τοῦτο γίνεσθαι νόει χωρὶς φωτὸς αἰσθητοῦ· νοήσει γὰρ τὸ νοητὸν εἰκὸς μόνον καταλαμβάνεσθαι. πηγὴ δὲ τῆς καθαρωτάτης αὐγῆς θεός ἐστιν· ὥσθ’ ὅταν ἐπιφαίνηται ψυχῇ, τὰς ἀσκίους καὶ περιφανεστάτας ἀκτῖνας ἀνίσχει.",
+      "english_text": "and in the same way also we learn the sciences; for the mind, applying its never-closing and never-slumbering eye to their doctrines and speculations, sees them by no spurious light, but by that genuine light which shines forth from itself.",
+      "confidence": 0.6062607934180515,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "16",
+      "english_ref": "16",
+      "greek_text": "νοῦς δὲ ἡμῶν ἡνίκα ἐχαλδάιζε μετεωρολεσχῶν, τῷ κόσμῳ τὰς δραστηρίους ἦν περιέπων δυνάμεις ὡς αἰτίας· γενόμενος δὲ μετανάστης ἀπὸ τοῦ Χαλδαϊκοῦ δόγματος ἔγνω ἡνιοχούμενον καὶ κυβερνώμενον αὐτὸν ὑπὸ ἡγεμόνος, οὗ τῆς ἀρχῆς φαντασίαν ἔλαβε.",
+      "english_text": "But when our mind was occupied with the wisdom of the Chaldaeans, studying the sublime things which exist in the world, it made as it were the circuit of all the efficient powers as causes of what existed; but when it emigrated from the Chaldaean doctrines, it then knew that it was moving under the guidance and direction of a governor, of whose authority it perceived the appearance.",
+      "confidence": 0.6813096269902416,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "46",
+      "english_ref": "65",
+      "greek_text": "τίς γὰρ οὐκ οἶδεν, ὅτι καὶ πρὸ τῆς τοῦ κόσμου γενέσεως ἱκανὸς ἦν αὐτὸς ἑαυτῷ ὁ θεὸς καὶ μετὰ τὴν τοῦ κόσμου γένεσιν ὁ αὐτὸς ἔμενεν, οὐ μεταβαλών; διὰ τί οὖν ἐποίει τὰ μὴ ὄντα; ἢ ὅτι ἀγαθὸς καὶ φιλόδωρος ἦν; εἶτ’ οὐχ ἑψόμεθα οἱ δοῦλοι τῷ δεσπότῃ, θαυμάζοντες μὲν τὸν αἴτιον ὑπερφυῶς, τῆς δὲ καθ’ αὑτοὺς φύσεως μὴ ὑπερορῶντες;",
+      "english_text": "But such things as these are the characteristic marks of different powers; small marks of great powers, marks perceptible by the outward senses of powers appreciable only by the intellect, manifest marks of powers which are indistinct; and the powers themselves are discerned in most excellent doctrines, in true and pure conceptions, in the improvement of souls. And it is easy to see a proof of this if we make a beginning with the man who is here spoken of as having his name changed;",
+      "confidence": 0.6519288369809203,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "54",
+      "english_ref": "74",
+      "greek_text": "γένους οὐδένειαν καὶ πεσεῖν παρὰ τὸν ἑστῶτα εἰς ἔνδειξιν τῆς ὑπολήψεως, ἣν περὶ ἑαυτοῦ τε ἔσχε καὶ θεοῦ, ὅτι ὁ μὲν κατὰ τὰ αὐτὰ ἑστὼς κινεῖ τὴν σύμπασαν στάσιν, οὐ διὰ τῶν σκελῶν — οὐ γὰρ ἀνθρωπόμορφος —,",
+      "english_text": "On which account some of the ancients have compared the discussion and consideration of philosophy to a field, and have likened the physical portion of it to the plants, the logical part to the hedges and fences, the moral part to the fruit,",
+      "confidence": 0.6144825773211996,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "94",
+      "english_ref": "119",
+      "greek_text": "τοῦτο ὁ πρεσβύτερος λόγος καὶ πατὴρ ὄντως εὐθυβόλον καὶ κύριον ὄνομα αὐτῷ τίθεται, ἡ δὲ παθοῦσα ψυχὴ τὸ ᾧ πέπονθεν ἁρμόττον· ὀδύνης γὰρ υἱὸν καλεῖ. διὰ τί; ὅτι οἱ ἐν ταῖς κεναῖς φερόμενοι δόξαις ὑπολαμβάνονται μὲν εὐδαιμονεῖν, πρὸς ἀλήθειαν δὲ κακοδαιμονοῦσι.",
+      "english_text": "When he has heard this, he will again inquire, \"Where is the man?\" In what part of you is the reasonable species dwelling? Why have you left it so easily, and have not rather after having once met with it, preserved that which was the most beautiful of possessions, and the most advantageous for yourselves?",
+      "confidence": 0.6293450472566325,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "142",
+      "english_ref": "158",
+      "greek_text": "ἴσον γὰρ εἶναι τὸ ἐξ αὐτῆς τῷ παραχρῆμα, εὐθύς, ἀνυπερθέτως, ἄνευ μελλήσεως. τοῦτον δὲ τὸν τρόπον αἱ θεῖαι φιλοῦσι συμβαίνειν δωρεαὶ φθάνουσαι καὶ τὰ χρόνων διαστήματα. τρίτοι δέ εἰσιν οἱ τὴν ἀρετὴν μητέρα τοῦ γενητοῦ εἶναι λέγοντες ἀγαθοῦ, λαμβάνουσαν τὰς γονὰς παρὰ μηδενὸς θνητοῦ.",
+      "english_text": "What, then, are we to say? Nature foreshows many of the things which are hereafter to happen by certain symbols. Do you not see how the young bird, before it commits itself to the air, is fond of fluttering its wings and shaking its pinions, giving a previous happy indication of its hope that it will be able to fly?",
+      "confidence": 0.6292018563404685,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "142",
+      "english_ref": "161",
+      "greek_text": "ἴσον γὰρ εἶναι τὸ ἐξ αὐτῆς τῷ παραχρῆμα, εὐθύς, ἀνυπερθέτως, ἄνευ μελλήσεως. τοῦτον δὲ τὸν τρόπον αἱ θεῖαι φιλοῦσι συμβαίνειν δωρεαὶ φθάνουσαι καὶ τὰ χρόνων διαστήματα. τρίτοι δέ εἰσιν οἱ τὴν ἀρετὴν μητέρα τοῦ γενητοῦ εἶναι λέγοντες ἀγαθοῦ, λαμβάνουσαν τὰς γονὰς παρὰ μηδενὸς θνητοῦ.",
+      "english_text": "And the soul is subject to many things of much the same kind. For when something good is hoped for it rejoices beforehand, so that in a manner it rejoices before its joy, and is delighted before its delight. And one may also compare this to what happens with respect to plants; for they, too, when they are about to bear fruit, bud beforehand and flower previously, and are green previously.",
+      "confidence": 0.6059331012907747,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "142",
+      "english_ref": "167",
+      "greek_text": "ἴσον γὰρ εἶναι τὸ ἐξ αὐτῆς τῷ παραχρῆμα, εὐθύς, ἀνυπερθέτως, ἄνευ μελλήσεως. τοῦτον δὲ τὸν τρόπον αἱ θεῖαι φιλοῦσι συμβαίνειν δωρεαὶ φθάνουσαι καὶ τὰ χρόνων διαστήματα. τρίτοι δέ εἰσιν οἱ τὴν ἀρετὴν μητέρα τοῦ γενητοῦ εἶναι λέγοντες ἀγαθοῦ, λαμβάνουσαν τὰς γονὰς παρὰ μηδενὸς θνητοῦ.",
+      "english_text": "And at the same time it also teaches us that virtue is naturally a thing to be rejoiced at, and that he who possesses it is at all times rejoiced; and, on the contrary, that vice is a painful thing, and that he who possesses that is most miserable. And do we even now marvel at those philosophers who affirm that virtue consists in apathy?",
+      "confidence": 0.6395749640741659,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "165",
+      "english_ref": "185",
+      "greek_text": "κἀν ταῖς ὁδοιπορίαις μέντοι πεινήσας τις καὶ διψήσας, πηγὰς ἐξαίφνης ἰδὼν ἢ δένδρα παντοῖα ἡμέροις βρίθοντα καρποῖς, μήπω φαγὼν ἢ πιών, ἀλλὰ μηδ’ ἀρυσάμενος ἢ δρεψάμενος ἐλπίδι τῆς ἀπολαύσεως προπληροῦται. εἶτ’ οἰόμεθα ταῖς μὲν τοῦ σώματος τροφαῖς καὶ πρὸ τῆς χρήσεως ἑστιᾶσθαι δύνασθαι, τὰς δὲ τῆς διανοίας οὐχ ἱκανὰς εἶναι καὶ ὁπότε μέλλοιεν ἑστιᾶν προευφραίνειν;",
+      "english_text": "But he is happy to whom it has happened that for the greater portion of his life he has inclined towards the more excellent and more divine part; for that he should have done so all his life is impossible, since at times the mortal weight which is opposed to him has preponderated in the opposite scale, and impending over his mind, has kept watch for the opportunities of coming upon his reason at an unfavourable time, so as to drag it back again.",
+      "confidence": 0.6420601720819653,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "196",
+      "english_ref": "219",
+      "greek_text": "τὸ γὰρ ἐκτραγῳδεῖν καὶ ἐπικομπάζειν τὰ κακὰ διπλοῦν ἁμάρτημα. σχεδὸν δ’ οἱ πολλοὶ πεπόνθασι τοῦτο· λέγουσι μὲν γὰρ ἀεὶ τῇ παρθένῳ ἀρετῇ τὰ φίλα καὶ δίκαια, καιρὸν δ’ οὐδένα παριᾶσιν, ἐν ᾧ δυνηθέντες αὐτὴν οὐχ ὑβριοῦσι καὶ κακώσουσι. ποία γὰρ πόλις οὔκ ἐστι μεστὴ τῶν τὴν ἀειπάρθενον ὑμνούντων ἀρετήν;",
+      "english_text": "for we must be content, if, by means of labour and diligence, we obtain a share of those good things which are familiar and customary to us. But there is no hope that we can attain to those which come of their own accord, and from some ever ready and previously prepared source, without any art, or in short, any human contrivance whatever; for inasmuch as these things are divine, they must of necessity be found out by more divine and unadulterated natures, such as have no connection with any mortal body.",
+      "confidence": 0.6384849206349206,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "217",
+      "english_ref": "229",
+      "greek_text": "εἰ γὰρ παιδαγωγοῦ μὲν παρόντος οὐκ ἂν ἁμάρτοι ὁ ἀγόμενος, ὑφηγητὴς δὲ ἐγγὺς ὢν ὠφελεῖ τὸν μανθάνοντα, πρεσβυτέρου δὲ παρατυγχάνοντος αἰδοῖ καὶ σωφροσύνῃ κοσμεῖται νέος, πατὴρ δὲ ἢ μήτηρ υἱὸν μέλλοντα ἀδικεῖν ἐκώλυσαν ἐφ’ ἡσυχίας αὐτὸ μόνον ὀφθέντες, ἡλίκαις τισὶν ὑπερβολαῖς ἀγαθῶν χρήσεσθαι νομίζομεν τὸν ὑπολαμβάνοντ’ ἀεὶ ὑπὸ θεοῦ θεωρεῖσθαι; τὸ γὰρ τοῦ παρόντος καὶ περιβλέπεται ἀξίωμα δεδιὼς καὶ τρέμων ἀνὰ κράτος τὸ ἀδικεῖν ἀποδράσεται.",
+      "english_text": "But those who are instructed have many more opportunities of prayer than those who are destitute of teachers, and those who are well initiated in encyclical accomplishments have more opportunities than those who are unmusical and illiterate, inasmuch as they from their childhood almost have been imbued with all the lessons of virtue, and temperance, and all kinds of excellence. Wherefore, even if they have not entirely got rid of and effaced old marks of iniquity so as to wear a completely clean appearance, at least they have purified themselves in a reasonable and moderate degree.",
+      "confidence": 0.6497174145299145,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "225",
+      "english_ref": "231",
+      "greek_text": "εὐκτὸν μὲν ἀθρόῳ τῷ πλήθει τῶν ἀρετῶν ἐγχορεύειν· εἰ δὲ τοῦτο μεῖζον ἢ κατὰ ἀνθρωπίνην φύσιν, ἀγαπῶμεν, εἴ τῳ ἐξεγένετο μιᾷ τινι τῶν κατὰ μέρος ἢ δικαιοσύνῃ ἢ φιλανθρωπίᾳ. φερέτω γὰρ ἕν τι ἀγαθὸν ἡ ψυχὴ καὶ τικτέτω, μὴ πάντων ἄφορος καὶ στεῖρα γινέσθω.",
+      "english_text": "Since, therefore, there are many good things existing in nature, give me that which appears to be best adapted to my circumstances, even if it be the most trifling thing possible; looking at this one point alone, whether I shall be able to bear what is given me with equanimity, and not, like a wretched person, sink under and be overwhelmed by it.",
+      "confidence": 0.6502002062016267,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "225",
+      "english_ref": "241",
+      "greek_text": "εὐκτὸν μὲν ἀθρόῳ τῷ πλήθει τῶν ἀρετῶν ἐγχορεύειν· εἰ δὲ τοῦτο μεῖζον ἢ κατὰ ἀνθρωπίνην φύσιν, ἀγαπῶμεν, εἴ τῳ ἐξεγένετο μιᾷ τινι τῶν κατὰ μέρος ἢ δικαιοσύνῃ ἢ φιλανθρωπίᾳ. φερέτω γὰρ ἕν τι ἀγαθὸν ἡ ψυχὴ καὶ τικτέτω, μὴ πάντων ἄφορος καὶ στεῖρα γινέσθω.",
+      "english_text": "But why it is a more grievous offence to say what is wrong than only to think it, is very easy to see. For some times a person thinks without any deliberate previous intention of so thinking, but inconsiderately: for he is compelled to admit ideas in his mind which he does not wish to admit; and nothing which is involuntary is blameable:",
+      "confidence": 0.6459570850550964,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "225",
+      "english_ref": "249",
+      "greek_text": "εὐκτὸν μὲν ἀθρόῳ τῷ πλήθει τῶν ἀρετῶν ἐγχορεύειν· εἰ δὲ τοῦτο μεῖζον ἢ κατὰ ἀνθρωπίνην φύσιν, ἀγαπῶμεν, εἴ τῳ ἐξεγένετο μιᾷ τινι τῶν κατὰ μέρος ἢ δικαιοσύνῃ ἢ φιλανθρωπίᾳ. φερέτω γὰρ ἕν τι ἀγαθὸν ἡ ψυχὴ καὶ τικτέτω, μὴ πάντων ἄφορος καὶ στεῖρα γινέσθω.",
+      "english_text": "Again, as I have already said, fine flour is a symbol of the purification of activity, but it is sorted from the commoner sort by the hands of the bakers, who make the business their study. On which account the law says, \"And the priest having taken an entire handful, shall place it on the altar as a memorial of them,\" by the word handful, indicating both the endeavour and the action.",
+      "confidence": 0.6483602051357733,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "257",
+      "english_ref": "269",
+      "greek_text": "αἱ δ’ ὁρμαὶ καὶ φαντασίαι — πρῶται δ’ εἰσὶν αὗται κινήσεις καὶ σχέσεις ψυχῆς — διδασκαλίᾳ συνέστησαν; παρὰ δὲ σοφιστὴν φοιτήσας ὁ νοῦς ἡμῶν νοεῖν καὶ καταλαμβάνειν ἔμαθε; πάντα ταῦτ’ ἀφειμένα διδασκαλίας ἀπαυτοματιζούσῃ φύσει χρῆται πρὸς τὰς οἰκείας ἐνεργείας.",
+      "english_text": "And he sowed, displaying the virtue, the enemy of envy and wickedness; he is, however, here said to find, not to reap. For he who has made the ear of his good deeds more productive and full, was a different person, having laid up an abundance of greater hopes well prepared, and he also proposed more abundant advantages to all those who sought them, encouraging them to hope to find them.",
+      "confidence": 0.635368006993007,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "261",
+      "english_ref": "270",
+      "greek_text": "πάθος, ὅπερ ἂν ἐπ’ αὐτῷ πάθῃς, πείσῃ δὲ πάντως χαράν· ὥστε καὶ τὸ σύμβολον αὐτῆς ὄνομα θήσεις, γέλωτα.",
+      "english_text": "And the words, \"He finished speaking to him,\" voluntary study without any suggestions from other quarters, stamping on him a most durable species of indelible recollection.",
+      "confidence": 0.6653709893048128,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 264,
+    "total_english_segments": 269,
+    "aligned_segments": 16,
+    "confidence_threshold": 0.6
+  }
+}

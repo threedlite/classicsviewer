@@ -1,0 +1,228 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0018/tlg020/tlg0018.tlg020.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0018/tlg020/tlg0018.tlg020.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "10",
+      "english_ref": "20",
+      "greek_text": "καθάπερ γὰρ ποιητὴς Ὅμηρος, μυρίων ποιητῶν ὄντων, κατ’ ἐξοχὴν λέγεται, καὶ τὸ μέλαν ᾧ γράφομεν, καίτοι παντὸς ὃ μὴ λευκόν ἐστι μέλανος ὄντος, καὶ ἄρχων Ἀθήνῃσιν ὁ ἐπώνυμος καὶ τῶν ἐννέα ἀρχόντων ἄριστος, ἀφ’ οὗ οἱ χρόνοι καταριθμοῦνται, τὸν αὐτὸν τρόπον καὶ τὸν ἐλπίδι χρώμενον „ἄνθρωπον“ κατ’ ἐξοχὴν ὠνόμασε τὰ πλήθη τῶν ἄλλων ἀφησυχάσας ὡς οὐκ ἀξίων τῆς αὐτῆς προσρήσεως ἐπιλαχεῖν.",
+      "english_text": "And besides, the bad man runs about through the market-place, and theatres, and courts of justice, and council halls, and assemblies, and every meeting and collection of men whatever, like one who lives with and for curiosity, letting loose his tongue in immoderate, and interminable, and indiscriminate conversation, confusing and disturbing every thing, mixing up what is true with what is false, what is unspeakable with what is public, private with public things, things profane with things sacred, what is ridiculous with what is excellent, from never having been instructed in what is the most excellent thing in season, namely silence.",
+      "confidence": 0.6574329102997617,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "20",
+      "english_ref": "43",
+      "greek_text": "καὶ ἄλλως ὁ μὲν φαῦλος ἀγορὰν καὶ θέατρα καὶ δικαστήρια βουλευτήριά τε καὶ ἐκκλησίας καὶ πάντα σύλλογον καὶ θίασον ἀνθρώπων ἅτε φιλοπραγμοσύνῃ συζῶν μετατρέχει, τὴν μὲν γλῶτταν ἀνιεὶς πρὸς ἄμετρον καὶ ἀπέραντον καὶ ἄκριτον διήγησιν, συγχέων ἅπαντα καὶ φύρων, ἀληθέσι ψευδῆ καὶ ῥητοῖς ἄρρητα καὶ ἴδια κοινοῖς καὶ ἱεροῖς βέβηλα καὶ σπουδαίοις γελοῖα ἀναμιγνύς, διὰ τὸ μὴ πεπαιδεῦσθαι τὸ ἐν καιρῷ κάλλιστον, ἡσυχίαν, τὰ δὲ ὦτα ἐπουρίσας ἕνεκα πολυπράγμονος περιεργίας·",
+      "english_text": "Nor indeed was the air tranquil, for a deep and unbroken cloud overspread the whole heaven, and there were fearful storms of wind, and roarings of thunder, and flashes of lightning, and rapid hurlings of thunderbolts, ceaseless storms of rain being poured forth, so that one might have thought that all the parts of the universe were hastening to dissolve themselves into the one element of the nature of water, until, while the water from above kept pouring down, and that below kept bursting up, the streams were raised to a height above everything, so that they not only overwhelmed and hid from sight all the plains and all the level ground, but even the tops of the highest mountains,",
+      "confidence": 0.6402548443989304,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "24",
+      "english_ref": "49",
+      "greek_text": "διὰ τοῦτο εἶπεν ὅτι ὁ μετατεθεὶς „οὐχ εὑρίσκετο“ δυσεύρετος καὶ δυσθήρατος ὤν. μεθορμίζεται οὖν εἰς παιδείαν ἐξ ἀμαθίας καὶ ἐξ ἀφροσύνης εἰς φρόνησιν ἔκ τε δειλίας εἰς δυναστείας κτῆσις ὠφελιμωτέρα;",
+      "english_text": "The particulars then on which each individual differs from the other, though all are hastening to one and the same end, we will hereafter examine more minutely; but it is necessary not to pass over in silence what it seems desirable to premise concerning the whole three taken together.",
+      "confidence": 0.6441875514403292,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "56",
+      "greek_text": "μηνύματα δ’ ἐστὶ φύσεως ἀδηλοτέρας καὶ πολὺ βελτίονος τῆς ἐν αἰσθητοῖς. τρόπους γὰρ ψυχῆς ἔοικεν ὁ ἱερὸς διερευνᾶσθαι λόγος, ἀστείους ἅπαντας, τὸν μὲν ἐκ διδασκαλίας, τὸν δ’ ἐκ φύσεως, τὸν δ’ ἐξ ἀσκήσεως ἐφιέμενον τοῦ καλοῦ. ὁ μὲν γὰρ πρῶτος, ἐπίκλησιν Ἀβραάμ, σύμβολον διδασκαλικῆς ἀρετῆς ἐστιν, ὁ δὲ μέσος, Ἰσαάκ, φυσικῆς, ὁ δὲ τρίτος, Ἰακώβ, ἀσκητικῆς.",
+      "english_text": "We must, however, not remain in ignorance that the sacred historian has represented the first man, him who was formed out of the earth as the father of all those who existed before the deluge; and him who, with his whole family, was the only person left out of so universal a destruction, because of his justice and his other excellencies and virtues, as the founder of the new race of men which was to flourish hereafter. And that venerable, and estimable, and glorious triad is comprehended by the sacred scriptures under one class, and called, \"A royal priesthood, and a holy nation.\"",
+      "confidence": 0.6437744727625009,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "61",
+      "greek_text": "μηνύματα δ’ ἐστὶ φύσεως ἀδηλοτέρας καὶ πολὺ βελτίονος τῆς ἐν αἰσθητοῖς. τρόπους γὰρ ψυχῆς ἔοικεν ὁ ἱερὸς διερευνᾶσθαι λόγος, ἀστείους ἅπαντας, τὸν μὲν ἐκ διδασκαλίας, τὸν δ’ ἐκ φύσεως, τὸν δ’ ἐξ ἀσκήσεως ἐφιέμενον τοῦ καλοῦ. ὁ μὲν γὰρ πρῶτος, ἐπίκλησιν Ἀβραάμ, σύμβολον διδασκαλικῆς ἀρετῆς ἐστιν, ὁ δὲ μέσος, Ἰσαάκ, φυσικῆς, ὁ δὲ τρίτος, Ἰακώβ, ἀσκητικῆς.",
+      "english_text": "for if any one observes the arrangement which exists in nature, and the constitution according to which the world goes on, which is more excellent than any kind of reasoning, he learns, even though no one speaks to him, to study a course of life consistent with law and peace, looking to the example of good men. But the most manifest demonstrations of peace are those which the scriptures contain; and we must mention the first which also occurs the first in the order in which they are set down.",
+      "confidence": 0.6472994047619048,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "73",
+      "greek_text": "μηνύματα δ’ ἐστὶ φύσεως ἀδηλοτέρας καὶ πολὺ βελτίονος τῆς ἐν αἰσθητοῖς. τρόπους γὰρ ψυχῆς ἔοικεν ὁ ἱερὸς διερευνᾶσθαι λόγος, ἀστείους ἅπαντας, τὸν μὲν ἐκ διδασκαλίας, τὸν δ’ ἐκ φύσεως, τὸν δ’ ἐξ ἀσκήσεως ἐφιέμενον τοῦ καλοῦ. ὁ μὲν γὰρ πρῶτος, ἐπίκλησιν Ἀβραάμ, σύμβολον διδασκαλικῆς ἀρετῆς ἐστιν, ὁ δὲ μέσος, Ἰσαάκ, φυσικῆς, ὁ δὲ τρίτος, Ἰακώβ, ἀσκητικῆς.",
+      "english_text": "But, some one may say, what is the use of these holes, unless the invisible mind, like the exhibition of a puppet show, does from within prompt its own powers, which at one time losing and allowing to roam, and at another time holding back and restraining by force? He gives sometimes an harmonious motion, and sometimes perfect quiet to his puppets. And having this example at home, you will easily comprehend that being, the understanding of whom you are so anxious to arrive at;",
+      "confidence": 0.648821248323273,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "52",
+      "english_ref": "74",
+      "greek_text": "μηνύματα δ’ ἐστὶ φύσεως ἀδηλοτέρας καὶ πολὺ βελτίονος τῆς ἐν αἰσθητοῖς. τρόπους γὰρ ψυχῆς ἔοικεν ὁ ἱερὸς διερευνᾶσθαι λόγος, ἀστείους ἅπαντας, τὸν μὲν ἐκ διδασκαλίας, τὸν δ’ ἐκ φύσεως, τὸν δ’ ἐξ ἀσκήσεως ἐφιέμενον τοῦ καλοῦ. ὁ μὲν γὰρ πρῶτος, ἐπίκλησιν Ἀβραάμ, σύμβολον διδασκαλικῆς ἀρετῆς ἐστιν, ὁ δὲ μέσος, Ἰσαάκ, φυσικῆς, ὁ δὲ τρίτος, Ἰακώβ, ἀσκητικῆς.",
+      "english_text": "unless, indeed, you fancy that the world is situated in you as the dominant part of you, which the whole common powers of the body obey, and which each of the outward senses follows; but that the world, the most beautiful, and greatest, and most perfect of works, of which everything else is but a part, is destitute of any king to hold it together, and to regulate it, and govern it in accordance with justice. And if it be invisible, wonder not at that, for neither can the mind which is in thee be perceived by the sight.",
+      "confidence": 0.6359888283404129,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "59",
+      "english_ref": "86",
+      "greek_text": "αἱ μὲν γὰρ ἀνάντεις ὁδοὶ καματηραὶ καὶ βραδεῖαι, ἡ δὲ κατὰ πρανοῦς φορά, συρμὸν ἔχουσα τὸ πλέον ἢ κάθοδον, ταχεῖα καὶ ῥᾴστη. πολλὰ δὲ τὰ κάτω βιαζόμενα, ὧν οὐδὲν ὄφελος, ὅταν ἐκ τῶν αὑτοῦ δυνάμεων ἀνακρεμάσας τὴν ψυχὴν ὁ θεὸς ὁλκῇ δυνατωτέρᾳ πρὸς ἑαυτὸν ἐπισπάσηται.",
+      "english_text": "And yet, what other man would not have been grieved, not only at departing from his own country but also at being driven away from every city into an inaccessible and impassable district? And what other man would not have turned back and returned to his former home, paying but little attention to his former hopes, but desiring to escape from his present perplexity, thinking it folly for the sake of uncertain advantages to undergo admitted evils?",
+      "confidence": 0.6495045112781954,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "71",
+      "english_ref": "99",
+      "greek_text": "ὅπως οὖν βεβαιώσηται τὴν φανεῖσαν ὄψιν ἐν τῇ διανοίᾳ παγιώτερον, αὖθίς φησιν ὁ ἱερὸς λόγος αὐτῷ· „τὰ μεγάλα, ὦ οὗτος, ὑποτυπώσει βραχυτέρων πολλάκις γνωρίζεται, πρὸς ἅ τις ἀπιδὼν ηὔξησε τὴν φαντασίαν ἀπεριγράφοις μεγέθεσι. παραπεμψάμενος οὖν τούς τε κατ’ οὐρανὸν περιπολοῦντας καὶ τὴν Χαλδαϊκὴν ἐπιστήμην μετανάστηθι πρὸς ὀλίγον χρόνον ἀπὸ τῆς μεγίστης πόλεως, τοῦδε τοῦ κόσμου, πρὸς βραχυτέραν, δι’ ἧς δυνήσῃ μᾶλλον καταλαβεῖν τὸν ἔφορον τοῦ παντός.“",
+      "english_text": "I have heard men versed in natural philosophy interpreting this passage in an allegorical manner with no inconsiderable ingenuity and propriety; and their idea is, that the man here is a symbolical expression for the virtuous mind, conjecturing from the interpretation of his name that what is intended to be indicated is the virtuous disposition existing in the soul; and that by his wife is meant virtue, for the name of his wife is, in the Chaldaean language, Sarah, but in Greek \"princess,\" because there is nothing more royal or more worthy of pre-eminence than virtue.",
+      "confidence": 0.7155,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "74",
+      "english_ref": "102",
+      "greek_text": "οὐ γὰρ ἐν σοὶ μὲν νοῦς ἐστιν ἡγεμὼν ἐπιτεταγμένος, ᾧ καὶ τοῦ σώματος ἅπασα κοινωνία πειθαρχεῖ καὶ ἑκάστη τῶν αἰσθήσεων ἕπεται, ὁ δὲ κόσμος, τὸ κάλλιστον καὶ μέγιστον καὶ τελεώτατον ἔργον, οὗ πάντα τὰ ἄλλα συμβέβηκεν εἶναι μέρη, βασιλέως ἀμοιρεῖ τοῦ συνέχοντος καὶ ἐνδίκως ἐπιτροπεύοντος. εἰ δ’ ἀόρατος ὁ βασιλεύς, μὴ θαυμάσῃς· οὐδὲ γὰρ ὁ ἐν σοὶ νοῦς ὁρατός.",
+      "english_text": "But if any one, discarding the considerations of the names which tend to throw darkness over the subject, chooses to look at the plain facts without any disguise, he will know that virtue is masculine by nature, inasmuch as it puts things in motion, and arranges them, and suggests good conceptions of noble actions and speeches; but reason is feminine, inasmuch as it is put in motion by another, and is instructed and benefited, and, in short, is altogether the patient, as its passive state is its only safety.",
+      "confidence": 0.6521260148127047,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "104",
+      "english_ref": "129",
+      "greek_text": "ὅπερ κατιδὼν ὁ ἔφορος — μόνῳ γὰρ ἔξεστι θεῷ ψυχὴν ἰδεῖν — ἐμίσησε καὶ προὐβάλετο καὶ βασάνοις ἤλεγξεν ἀργαλεωτάταις ἦθος κατεψευσμένον. αἱ δὲ βάσανοι διὰ τίνων ὀργάνων; ἢ πάντως διὰ τῶν τῆς ἀρετῆς μερῶν, ἅπερ ἐπεισιόντα χαλεπῶς αἰκίζεται καὶ τιτρώσκει; βάσανος μὲν γάρ ἐστιν ἀπληστίας ὀλιγοδεΐα, βάσανος δὲ λαγνείας ἐγκράτεια· στρεβλοῦται δὲ καὶ ὁ φιλόδοξος ἀτυφίας εὐημερούσης καὶ ὁ ἄδικος δικαιοσύνης ἐπαινουμένης.",
+      "english_text": "But the rewards which shall be laid up for those who honour me for my own sake are rewards of affection; while those which are given to those who do so with a view to their own advantage are not given through affection, but because they are not looked upon as aliens. For I receive him who wishes to be a partaker of my beneficent power to a participation in my good things, and him who out of fear seeks to propitiate my governing and despotic power, I receive so far as to avert punishment from him. For I am not unaware that, in addition to these men not becoming worse, they will become better, by gradually arriving at a sincere and pure piety by their constant perseverance in serving me.",
+      "confidence": 0.6193906465398401,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "116",
+      "english_ref": "135",
+      "greek_text": "πῶς γὰρ ἂν τὴν ἀρχὴν εἰσελθεῖν ὑπέμειναν, εἰ μὴ καθάπερ νεὼς εὖ συντεταγμένον πλήρωμα τοὺς ἔνδον ἅπαντας ᾔδεσαν ἑνὶ πειθαρχοῦντας κελεύσματι τῷ τοῦ προεστηκότος ὡσανεὶ κυβερνήτου; πῶς δ’ ἂν ἑστιωμένων καὶ ξενιζομένων παρέσχον ὑπόληψιν, εἰ μὴ τὸν ἑστιάτορα συγγενῆ καὶ ὁμόδουλον ἡγοῦντο τῷ αὐτῶν προσπεφευγότα δεσπότῃ; νομιστέον μέντοι καὶ κατὰ τὴν εἴσοδον αὐτῶν ἔτι μᾶλλον ἐπιδοῦναι πάντα τὰ μέρη τῆς οἰκίας πρὸς τὸ βέλτιον αὔρᾳ τινὶ τελειοτάτης ἀρετῆς ἐπιπνευσθέντα.",
+      "english_text": "As men, being unable to bear discreetly a satiety of these things, get restive like cattle, and become stiff-necked, and discard the laws of nature, pursuing a great and intemperate indulgence of gluttony, and drinking, and unlawful connections; for not only did they go mad after women, and defile the marriage bed of others, but also those who were men lusted after one another, doing unseemly things, and not regarding or respecting their common nature, and though eager for children, they were convicted by having only an abortive offspring; but the conviction produced no advantage, since they were overcome by violent desire;",
+      "confidence": 0.649072262048847,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "116",
+      "english_ref": "140",
+      "greek_text": "πῶς γὰρ ἂν τὴν ἀρχὴν εἰσελθεῖν ὑπέμειναν, εἰ μὴ καθάπερ νεὼς εὖ συντεταγμένον πλήρωμα τοὺς ἔνδον ἅπαντας ᾔδεσαν ἑνὶ πειθαρχοῦντας κελεύσματι τῷ τοῦ προεστηκότος ὡσανεὶ κυβερνήτου; πῶς δ’ ἂν ἑστιωμένων καὶ ξενιζομένων παρέσχον ὑπόληψιν, εἰ μὴ τὸν ἑστιάτορα συγγενῆ καὶ ὁμόδουλον ἡγοῦντο τῷ αὐτῶν προσπεφευγότα δεσπότῃ; νομιστέον μέντοι καὶ κατὰ τὴν εἴσοδον αὐτῶν ἔτι μᾶλλον ἐπιδοῦναι πάντα τὰ μέρη τῆς οἰκίας πρὸς τὸ βέλτιον αὔρᾳ τινὶ τελειοτάτης ἀρετῆς ἐπιπνευσθέντα.",
+      "english_text": "And when the flames had consumed everything that was visible and that existed on the face of the earth, they proceeded to burn even the earth itself, penetrating into its lowest recesses, and destroying all the vivifying powers which existed within it so as to produce a complete and everlasting barrenness, so that it should never again be able to bear fruit, or to put forth any verdure; and to this very day it is scorched up. For the fire of the lightning is what is most difficult to extinguish, and creeps on pervading everything, and smouldering.",
+      "confidence": 0.6344305896064578,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "116",
+      "english_ref": "141",
+      "greek_text": "πῶς γὰρ ἂν τὴν ἀρχὴν εἰσελθεῖν ὑπέμειναν, εἰ μὴ καθάπερ νεὼς εὖ συντεταγμένον πλήρωμα τοὺς ἔνδον ἅπαντας ᾔδεσαν ἑνὶ πειθαρχοῦντας κελεύσματι τῷ τοῦ προεστηκότος ὡσανεὶ κυβερνήτου; πῶς δ’ ἂν ἑστιωμένων καὶ ξενιζομένων παρέσχον ὑπόληψιν, εἰ μὴ τὸν ἑστιάτορα συγγενῆ καὶ ὁμόδουλον ἡγοῦντο τῷ αὐτῶν προσπεφευγότα δεσπότῃ; νομιστέον μέντοι καὶ κατὰ τὴν εἴσοδον αὐτῶν ἔτι μᾶλλον ἐπιδοῦναι πάντα τὰ μέρη τῆς οἰκίας πρὸς τὸ βέλτιον αὔρᾳ τινὶ τελειοτάτης ἀρετῆς ἐπιπνευσθέντα.",
+      "english_text": "And a most evident proof of this is to be found in what is seen to this day: for the smoke which is still emitted, and the sulphur which men dig up there, are a proof of the calamity which befell that country; while a most conspicuous proof of the ancient fertility of the land is left in one city, and in the land around it. For the city is very populous, and the land is fertile in grass and in corn, and in every kind of fruit, as a constant evidence of the punishment which was inflicted by the divine will on the rest of the country.",
+      "confidence": 0.6347567644918916,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "147",
+      "english_ref": "155",
+      "greek_text": "ἐστίν· ἡ δ’ ἐν ἀποκρύφῳ καὶ πρὸς ὀλίγους, ὅσοι τρόπους ψυχῆς ἐρευνῶσιν ἀλλ’ οὐ σωμάτων μορφάς, αὐτίκα λεχθήσεται. συμβολικῶς ἡ πεντάπολις αἱ ἐν ἡμῖν πέντε αἰσθήσεις εἰσί, τὰ τῶν ἡδονῶν ὄργανα, δι’ ὧν ἅπασαι μικραί τε αὖ καὶ μεγάλαι τελεσιουργοῦνται.",
+      "english_text": "and the soul itself is everlastingly awake, and is in perpetual motion both night and day; but to the eyes, as being to a great degree partakers of the fleshly nature, a self sufficient gift was given, to be able to continue exercising their appropriate energies during one half of the entire period of life.",
+      "confidence": 0.638550228692548,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "147",
+      "english_ref": "173",
+      "greek_text": "ἐστίν· ἡ δ’ ἐν ἀποκρύφῳ καὶ πρὸς ὀλίγους, ὅσοι τρόπους ψυχῆς ἐρευνῶσιν ἀλλ’ οὐ σωμάτων μορφάς, αὐτίκα λεχθήσεται. συμβολικῶς ἡ πεντάπολις αἱ ἐν ἡμῖν πέντε αἰσθήσεις εἰσί, τὰ τῶν ἡδονῶν ὄργανα, δι’ ὧν ἅπασαι μικραί τε αὖ καὶ μεγάλαι τελεσιουργοῦνται.",
+      "english_text": "And the father collected stones wherewith to build the altar; and when his son saw everything else prepared for the celebration of the sacrifice, but no animal, he looked to his father and said, \"My father, behold the fire and the wood, but where is the victim for the burnt sacrifice?\"",
+      "confidence": 0.6224720102632754,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "160",
+      "english_ref": "186",
+      "greek_text": "ἐπαυχήσει διαβῆναί ποτε τοσοῦτον; φάτναις τὸ σύμφυτον ἡμῖν θρέμμα πιαινούσας, τὴν ἐπιθυμίαν, ἐξετάσωμεν τὴν λόγου μεταποιουμένην ἀκοήν· ἧς ὁ σύντονος καὶ τελειότατος δρόμος ἵσταται κατὰ ἀέρα τὸν περίγειον, ὅταν βία πνευμάτων καὶ κτύποι βροντῶν συρμὸν πολὺν καὶ χαλεπὸν πάταγον ἐξηχῶσιν.",
+      "english_text": "Again: surely, they who offer up their children out of fear deserve no praise; for praise is only given to voluntary good actions, but what is involuntary, is ascribed to other causes than the immediate actors—to the occasion, or to chance, or to compulsion from men.",
+      "confidence": 0.6027496730121731,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "177",
+      "english_ref": "205",
+      "greek_text": "τὴν σφαγὴν ἐργάσασθαι. ἀντιχαρισαμένου τοῦ θεοῦ καὶ τὸν φέροντα ἐν οἷς εὐσεβεῖτο ἀντιτιμήσαντος· τῷ δ’ ἤδη καὶ ἡ πρᾶξις, εἰ καὶ μὴ τὸ τέλος ἐπηκολούθησεν, ὁλόκληρος καὶ παντελὴς οὐ μόνον ἐν ταῖς ἱεραῖς βίβλοις ἀλλὰ καὶ ἐν ταῖς τῶν ἀναγινωσκόντων διανοίαις ἀνάγραπτος ἐστηλίτευται.",
+      "english_text": "And let no one fancy that that unmixed joy, which is without any alloy of sorrow, descends from heaven to the earth, but rather, that it is a combination of the two, that which is the better being predominant in the mixture; in the same manner as the light in heaven is unalloyed and free from any admixture of darkness, but in the sublunary atmosphere it is mingled with dark air.",
+      "confidence": 0.6382337040113203,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "189",
+      "english_ref": "210",
+      "greek_text": "καὶ μὴν οὐδὲ φόβος τις ἦν ἀπ’ ἀνθρώπων — οὐδὲ γὰρ τὸ χρησθὲν αὐτῷ μόνῳ λόγιον ᾔδει τις —, οὐδέ τις συμφορὰ κοινὴ κατείληφεν, ἧς ἔδει τὴν θεραπείαν ἀναιρέσει γενέσθαι τοῦ δοκιμωτάτου παιδός.",
+      "english_text": "and if, as is often the case, any contention or quarrel arose between his servants and retinue and those of others, he always endeavoured to terminate it quietly by his gentle disposition, discarding and driving to a distance from his soul all quarrelsome, and turbulent, and disorderly things.",
+      "confidence": 0.6574562289562289,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "199",
+      "english_ref": "221",
+      "greek_text": "τί δὴ τῶν εἰρημένων πρὸς ἑτέρους κοινόν; τί δ’ οὐκ ἐξαίρετον καὶ παντὸς λόγου κρεῖττον; ὡς τόν γε μὴ φύσει βάσκανον καὶ φιλοπόνηρον καταπλαγῆναι καὶ θαυμάσαι τῆς περιττῆς ἄγαν εὐσεβείας, οὐχ ἅπαντα ὅσα εἶπον ἀθρόα εἰς νοῦν βαλλόμενον, ἀλλὰ κἂν ἕν τι τῶν πάντων· ἱκανὴ γὰρ καὶ ἡ ἑνὸς φαντασία τύπῳ τινὶ βραχεῖ — βραχὺ δ’ οὐδὲν ἔργον σοφοῦ — μέγεθος ψυχῆς καὶ ὕψος ἐμφῆναι.",
+      "english_text": "Moreover, there are overseers and superintendents of each of these flocks, just as there are shepherds to flocks of sheep. Of the flock of external things, the superintendents are those who are fond of money, those who are fond of glory, those who are eager for war, and all those who love authority over multitudes. And the managers of the flock of things concerning the soul are all those who are lovers of virtue and of what is honourable, and who do not prefer spurious good things to genuine ones, but genuine to spurious good.",
+      "confidence": 0.6516949954308444,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "199",
+      "english_ref": "228",
+      "greek_text": "τί δὴ τῶν εἰρημένων πρὸς ἑτέρους κοινόν; τί δ’ οὐκ ἐξαίρετον καὶ παντὸς λόγου κρεῖττον; ὡς τόν γε μὴ φύσει βάσκανον καὶ φιλοπόνηρον καταπλαγῆναι καὶ θαυμάσαι τῆς περιττῆς ἄγαν εὐσεβείας, οὐχ ἅπαντα ὅσα εἶπον ἀθρόα εἰς νοῦν βαλλόμενον, ἀλλὰ κἂν ἕν τι τῶν πάντων· ἱκανὴ γὰρ καὶ ἡ ἑνὸς φαντασία τύπῳ τινὶ βραχεῖ — βραχὺ δ’ οὐδὲν ἔργον σοφοῦ — μέγεθος ψυχῆς καὶ ὕψος ἐμφῆναι.",
+      "english_text": "These, on all other occasions, had paid the appointed revenues to the collectors of the taxes, honouring and at the same time fearing those more powerful sovereigns of whom they were the viceroys. But when they were completely sated with good things, and when, as is ordinarily the case, satiety had begotten insolence, they, cherishing a pride beyond their power, began at first to lift up their heads and to become restive. Then, like wicked servants, they set upon their masters, trusting more to their factious spirit than to their strength.",
+      "confidence": 0.6471576519916141,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "207",
+      "english_ref": "233",
+      "greek_text": "μηδὲν εὐλαβηθῇς, ὄντως ἐγέλασας καὶ μέτεστί σοι χαρᾶς. οὐ γὰρ εἴασεν ὁ πατὴρ τῶν ἀνθρώπων τὸ γένος λύπαις καὶ ὀδύναις καὶ ἄχθεσιν ἀνιάτοις ἐμφέρεσθαι, παρέμιξε δὲ καὶ τῆς ἀμείνονος φύσεως, εὐδιάσαι καὶ γαληνιάσαι ποτὲ τὴν ψυχὴν δικαιώσας· τὴν δὲ τῶν σοφῶν καὶ τὸν πλείω χρόνον τοῦ βίου γήθειν καὶ εὐφραίνεσθαι τοῖς τοῦ κόσμου θεωρήμασιν ἐβουλήθη.",
+      "english_text": "Therefore putting forth all his exertions he hastened on, in nowise relaxing his speed, until, watching his opportunity, he fell upon the enemy by night, after they had supped, and when they were just on the point of betaking themselves to sleep. And some he slew in their beds, and those who were arrayed against him he utterly destroyed, and with great vigour he defeated them all, more by the courage of his soul than by the adequacy of his means.",
+      "confidence": 0.6451832116930383,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "208",
+      "english_ref": "236",
+      "greek_text": "ἄλλων ἐστὶν ἀφθονία, λελέχθω. διερευνητέον δὲ καὶ τὴν πρὸς ἀνθρώπους αὐτοῦ δεξιότητα· τῆς γὰρ αὐτῆς φύσεώς ἐστιν εὐσεβῆ τε εἶναι καὶ φιλάνθρωπον, καὶ περὶ τὸν αὐτὸν ἑκάτερον, ὁσιότης μὲν πρὸς θεόν, δικαιοσύνη δὲ πρὸς ἀνθρώπους, θεωρεῖται. πάντα μὲν οὖν τὰ πεπραγμένα μακρὸν ἂν εἴη διεξιέναι, δυεῖν δὲ ἢ τριῶν οὐκ ἄτοπον ἐπιμνησθῆναι.",
+      "english_text": "These things, then, are what are contained in the plain words of the scriptures. But as many as are able to contemplate the facts related in them in their incorporeal and naked state, living rather in the soul than in the body, will say that of the nine kings the four are the powers of the four passions which exist within us, the passion of pleasure, of desire, of fear, and of grief; and that the other five kings are the outward senses, being equal in number, the sense of sight, of hearing, of smell, of taste, and of touch.",
+      "confidence": 0.6295524498857833,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "216",
+      "english_ref": "241",
+      "greek_text": "καίτοι τίς ἂν ἕτερος ἀσθενεστέρῳ παραχωρήσειεν οὑτινοσοῦν ἰσχυρότερος ὤν; τίς δὲ νικᾶν δυνάμενος βούλοιτ’ ἂν ἡττᾶσθαι, μὴ συγχρώμενος τῷ δύνασθαι; μόνος δὲ οὗτος τὸ ἄριστον οὐκ ἐν ῥώμῃ καὶ πλεονεξίᾳ τιθέμενος ἀλλ’ ἐν ἀστασιάστῳ βίῳ καὶ τό γε ἐπ’ αὐτὸν ἧκον μέρος ἡσυχάζοντι πάντων ἔδοξεν εἶναι θαυμασιώτατος.",
+      "english_text": "and the statement that follows is in strict consistency with what might be naturally expected, namely, that of the five kings two fell into wells, and three took to flight. For touch and taste reach to the very deepest portions of the body, sending down into the entrails those things which are suitable for digestion; but the eyes and the ears, and the smell, roaming abroad for the most part, escape the slavery of the body.",
+      "confidence": 0.6428401875901876,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "216",
+      "english_ref": "246",
+      "greek_text": "καίτοι τίς ἂν ἕτερος ἀσθενεστέρῳ παραχωρήσειεν οὑτινοσοῦν ἰσχυρότερος ὤν; τίς δὲ νικᾶν δυνάμενος βούλοιτ’ ἂν ἡττᾶσθαι, μὴ συγχρώμενος τῷ δύνασθαι; μόνος δὲ οὗτος τὸ ἄριστον οὐκ ἐν ῥώμῃ καὶ πλεονεξίᾳ τιθέμενος ἀλλ’ ἐν ἀστασιάστῳ βίῳ καὶ τό γε ἐπ’ αὐτὸν ἧκον μέρος ἡσυχάζοντι πάντων ἔδοξεν εἶναι θαυμασιώτατος.",
+      "english_text": "For she was always with him at all times, and in all places, never being absent from any spot, or failing to share any of his fortune, being truly the partner of his life, and of all the circumstances of his life; judging it right equally to share all his good and evil fortune together with him. For she did not, as some persons do, shun any participation in his misfortunes, but lie in wait only for his prosperity, but with all cheerfulness took her share in both, as was fitting and becoming to a wedded wife.",
+      "confidence": 0.6224398416792034,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "260",
+      "english_ref": "260",
+      "greek_text": "ὡς δ’ ἧκον οἱ ἐν τέλει τῶν κατὰ τὴν χώραν συναλγήσοντες, ἰδόντες οὐδὲν τῶν ἐν ἔθει παρ’ αὐτοῖς γινομένων ἐπὶ τοῖς πενθοῦσιν, οὐκ ὀλόφυρσιν, οὐ θρῆνον, οὐ κοπετόν, οὐκ ἀνδρῶν, οὐ γυναικῶν, ἀλλὰ τῆς συμπάσης οἰκίας εὐσταθῆ καὶ νηφάλιον κατήφειαν, ἐθαύμαζον οὐ μετρίως καὶ τὸν ἄλλον βίον προκαταπεπληγμένοι τοῦ ἀνδρός.",
+      "english_text": "And when the magistrates of that country came to sympathise with him in his sorrow, seeing none of the customary signs of woe which were usually exhibited in their land by mourners, no loud wailing or howling, no beating of the breast, no loud cries of men or women, but a steady, sober depression of spirits on the part of the whole household, they marvelled exceedingly, even though they had been previously full of astonishment and admiration at all the rest of the man’s way of life.",
+      "confidence": 0.6465620311581423,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "276",
+      "english_ref": "274",
+      "greek_text": "τοιοῦτος ὁ βίος τοῦ πρώτου καὶ ἀρχηγέτου τοῦ ἔθνους ἐστίν, ὡς μὲν ἔνιοι φήσουσι, νόμιμος, ὡς δ’ ὁ παρ’ ἐμοῦ λόγος ἔδειξε, νόμος αὐτὸς ὢν καὶ θεσμὸς ἄγραφος.",
+      "english_text": "Let the virtuous man both be and be called the elder and the first, and let every fool be called the younger and the last, since he only pursues such objects as may produce revolution and as are placed in the lowest rank.",
+      "confidence": 0.6551690917107584,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 270,
+    "total_english_segments": 276,
+    "aligned_segments": 27,
+    "confidence_threshold": 0.6
+  }
+}

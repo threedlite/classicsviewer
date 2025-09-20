@@ -1,0 +1,26 @@
+# Requirements for Kiwix ZIM content generation
+
+# No external dependencies required - using only Python standard library
+# The script uses:
+# - sqlite3 (standard library)
+# - pathlib (standard library)
+# - json (standard library)
+# - html (standard library)
+# - re (standard library)
+# - argparse (standard library)
+# - unicodedata (standard library)
+# - datetime (standard library)
+
+# Optional dependencies for future enhancements:
+
+# For advanced templating (if needed in future):
+# jinja2>=3.0.0
+
+# For better progress bars during generation:
+# tqdm>=4.65.0
+
+# For parallel processing of large databases:
+# multiprocessing-logging>=0.3.4
+
+# For creating ZIM files directly from Python (required for create_zim_optimized.py):
+libzim>=3.4.0

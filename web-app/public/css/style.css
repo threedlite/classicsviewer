@@ -1,0 +1,264 @@
+/* Custom styles for Classics Viewer */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.list-group-item {
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+#contentArea {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.text-line {
+    margin-bottom: 0.5rem;
+}
+
+.line-number {
+    display: inline-block;
+    width: 50px;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.speaker-label {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.translation-segment {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.translation-text {
+    margin-bottom: 0.25rem;
+}
+
+.translation-reference {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* Greek text styling */
+.greek-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+}
+
+/* Latin text styling */
+.latin-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.15rem;
+}
+
+/* Loading indicator */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+}
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* Clickable words */
+.clickable-word {
+    cursor: pointer;
+    position: relative;
+}
+
+.clickable-word:hover {
+    text-decoration: underline;
+    color: #0d6efd;
+}
+
+/* Dictionary and occurrences panel */
+#wordInfoPanel {
+    position: fixed;
+    right: -400px;
+    top: 56px; /* Below navbar */
+    width: 400px;
+    height: calc(100vh - 56px);
+    background: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 1040;
+    overflow-y: auto;
+}
+
+#wordInfoPanel.show {
+    right: 0;
+}
+
+.panel-header {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.panel-content {
+    padding: 1rem;
+}
+
+.dictionary-entry {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.dictionary-entry:last-child {
+    border-bottom: none;
+}
+
+.dictionary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.dictionary-headword {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.dictionary-source {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.dictionary-text {
+    line-height: 1.6;
+}
+
+/* Enhanced dictionary formatting */
+.morph-info {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+    margin: 0.25rem 0;
+}
+
+.grammar-info {
+    color: #495057;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.citation {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.dictionary-text strong {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.dictionary-text em {
+    color: #495057;
+    font-style: italic;
+}
+
+.occurrence-item {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.occurrence-item:hover {
+    background-color: #e9ecef;
+}
+
+.occurrence-line-ref {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.highlighted-word {
+    background-color: #fff3cd;
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+/* Tabs for dictionary/occurrences */
+.word-info-tabs {
+    margin-bottom: 1rem;
+}
+
+.tab-content {
+    min-height: 200px;
+}
+
+/* Filter controls styling */
+.filter-controls {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 0.5rem;
+}
+
+.filter-controls input[type="text"] {
+    font-size: 0.875rem;
+}
+
+.filter-controls .form-check {
+    margin-top: 0.25rem;
+}
+
+.filter-controls .form-check-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.filter-count {
+    font-style: italic;
+    color: #6c757d;
+    padding: 0.25rem 0;
+}
+
+/* Bold text for translated items */
+.list-group-item strong {
+    font-weight: 600;
+}

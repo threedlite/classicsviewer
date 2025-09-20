@@ -1,0 +1,436 @@
+
+================================================================================
+Failed work: tlg0363.tlg007_OGL
+Author ID: tlg0363
+Work number: tlg007
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0363/tlg007/tlg0363.tlg007.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1445 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=374939 chars, count=2307
+  p_tags: max=1903 chars, count=745
+  div_sections: max=2187 chars, count=660
+  pb: max=1458 chars, count=214
+  semicolon_period: max=1779 chars, count=18871
+  punctuation_all: max=1445 chars, count=20162
+
+Sample of longest line (first 500 chars):
+  [1] 76, 9 Ματιαν „ „ 87, 26 βιαιοθανασίας „ „ 107, 9 τῆς „ „ 124, 6 Ἀνακτόρων „ „ 124, 9 Χαρίτων „ „ 142, 5 βλάβας „ „ 144, 24 νυναικοποεπωδέστεοον „ „ 153, 13 δωδεκατημοοίω „ „ 161, 8 νυκτιρέμβους „ „ 166, 3 τρυφητάς „ „ 173, 19 εὐποοσκοπώτεορ „ „ 183, 13 Καρκίνῳ „ „ 200, 15 ὑδοωπικῶν ΚΛΑΥΔΙΟΥ ΠΤΟΛΕΜΑΙΟΥ ΤΩΝ ΠΡΟΣ ΣΥΡΟΝ ΑΠΟΤΕΛΕΣΜΑΤΙΚΩΝ ΒΙΒΛΙΟΝ Α΄ Τάδε ἔνεστιν ἐν τῷ α΄ βιβλίῳ κεφάλαια Κλαυδίου Πτολεμαίου τῶν πρὸς Σύρον ἀποτελεσματικῶν
+
+================================================================================
+Failed work: tlg0527.tlg053_OGL
+Author ID: tlg0527
+Work number: tlg053
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0527/tlg053/tlg0527.tlg053.1st1K-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1425 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=290733 chars, count=2577
+  p_tags: max=2181 chars, count=1262
+  div_sections: max=1716 chars, count=1269
+  pb: max=1866 chars, count=113
+  semicolon_period: max=1425 chars, count=6324
+  punctuation_all: max=1425 chars, count=8034
+
+Sample of longest line (first 500 chars):
+  [1] καὶ τέσσαρα πρόσωπα τῷ ἑνί, καὶ τέσσαρες πτέρυγες τῷ ἑνί καὶ τὰ σκέλη αὐτῶν ὀρθά, καὶ πτερωτοὶ οἱ πόδες αὐτῶν, καὶ σπινθῆρες ὡς ἐξαστράπτων χαλκός· καὶ ἐλαφραὶ αἱ πτέρυγες αὐτῶν, καὶ χεὶρ ἀνθρώπου ὑποκάτωθεν τῶν πτερύγων αὐτῶν ἐπὶ τὰ τέσσαρα μέρη αὐτῶν· καὶ τὰ πρόσωπα αὐτῶυ τῶν τεσσάρων οὺκ ἐπεστρέφοντο ἐν τῷ βαδίζειν αὐτά, ἕκαστον ἀπέναντι τοῦ προσώπου αὐτῶν ἐπορεύοντο
+
+================================================================================
+Failed work: tlg0527.tlg017_OGL
+Author ID: tlg0527
+Work number: tlg017
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0527/tlg017/tlg0527.tlg017.1st1K-grc1.xml
+Best method attempted: div_sections
+Longest line length: 1142 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=79849 chars, count=874
+  p_tags: max=1506 chars, count=430
+  div_sections: max=1142 chars, count=432
+  pb: max=1973 chars, count=34
+  semicolon_period: max=1590 chars, count=1710
+  punctuation_all: max=1148 chars, count=2481
+
+Sample of longest line (first 500 chars):
+  Οὐκ ἔσται ὑμῖν ἄραι ἐπʼ ὤμῶν αὐτήν· καὶ νῦν λατρεύετε τῷ κυρίῳ θεῷ ὑμῶν, καὶ θεραπεύετε τὸ ἔθνος αὐτοῦ Ἰσραήλ, καὶ ἑτοιμάσατε κατὰ τὰς πατριὰς καὶ τὰς φυλὰς ὑμῶυ )(⁵)κατὰ τὴν γραφὴν Δαυεὶδ βασιλέως Ἰσραὴλ καὶ κατὰ τὴν μεγαλειότητα Σαλωμὼν τοῦ υἱοῦ αὐτοῦ·
+
+================================================================================
+Failed work: tlg0552.tlg003_OGL
+Author ID: tlg0552
+Work number: tlg003
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0552/tlg003/tlg0552.tlg003.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1017 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=123289 chars, count=591
+  p_tags: max=5297 chars, count=139
+  div_sections: max=1700 chars, count=32
+  pb: max=1627 chars, count=101
+  semicolon_period: max=1871 chars, count=1716
+  punctuation_all: max=1017 chars, count=2502
+
+Sample of longest line (first 500 chars):
+  [1] Ἀποστέλλω τοι γράψας ἐν τῷδε τῷ βιβλίῳ τῶν τε λοιπῶν θεωρημάτων τὰς ἀποδείξιας, ὧν οὐκ εἶχες ἐν τοῖς πρότερον ἀπεσταλμένοις, καὶ ἄλλων ὕστερον ποτεξευρημένων, ἃ πρότερον μὲν ἤδη πολλάκις ἐγχειρήσας ἐπισκέπτεσθαι δύσκολον ἔχειν τι φανείσας μοι τᾶς εὑρέσιος αὐτῶν ἀπόρησα
+
+================================================================================
+Failed work: tlg0658.tlg001_OGL
+Author ID: tlg0658
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0658/tlg001/tlg0658.tlg001.perseus-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1042 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=492414 chars, count=689
+  p_tags: max=4220 chars, count=405
+  div_sections: max=2855 chars, count=273
+  pb: max=2106 chars, count=310
+  quote_cit: max=374788 chars, count=3
+  semicolon_period: max=1042 chars, count=11250
+  punctuation_all: max=1042 chars, count=11250
+
+Sample of longest line (first 500 chars):
+  [1] Ἡμέρας ἄρτι διαγελώσης καὶ ἡλίου τὰς ἀκρωρείας καταυγάζοντος ἄνδρες ἐν ὅπλοις λῃστρικοῖς ὄρους ὑπερκύψαντες, ὃ δὴ κατ̓ ἐκβολὰς τοῦ Νείλου καὶ στόμα τὸ καλούμενον Ἡρακλεωτικὸν, ὑπερτείνει, μικρὸν ἐπιστάντες τὴν ὑποκειμένην θάλατταν ὀφθαλμοῖς ἐπήρχοντο, καὶ τῷ πελάγει τὰς ὄψεις τὸ πρῶτον ἐπαφέντες, ὡς οὐδὲν ἄγρας λῃστρικῆς ἐπηγγέλλετο μὴ πλεόμενον, ἐπὶ τὸν πλησίον αἰγιαλὸν τῇ θέᾳ κατήγοντο
+
+================================================================================
+Failed work: tlg0732.tlg007_OGL
+Author ID: tlg0732
+Work number: tlg007
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0732/tlg007/tlg0732.tlg007.1st1K-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1174 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=511696 chars, count=2037
+  p_tags: max=12274 chars, count=222
+  div_sections: max=29081 chars, count=2
+  pb: max=2055 chars, count=174
+  semicolon_period: max=1174 chars, count=19020
+  punctuation_all: max=1174 chars, count=21230
+
+Sample of longest line (first 500 chars):
+  [1] 5 εἰπὼν ἐν τοῖς Περὶ ψυχῆς περί τε ψυχῆς τῆς συμπάσης κοινῶς καὶ καθόλου καὶ ἰδίᾳ περὶ ἑκάστης τῶν δυνάμεων αὐτῆς, πόσαι τέ εἰσι καὶ τίνες καὶ ἐν τίσιν ἑκάστῃ αὐτῶν τὸ εἶναι, ἐν οἷς καὶ περὶ τῆς αἰσθητικῆς δυνάμεως ποιησάμενος τὸν λόγον, καὶ τίς τέ ἐστιν εἰπὼν καὶ εἰς πόσας αἰσθήσεις διαιρεῖται, καὶ ἰδίᾳ περὶ ἑκάστης τῶν αἰσθήσεων διεξελθὼν καὶ εἰπών, τίς μὲν ἡ δύναμις αὐτῶν ἑκάστης, ἀφ’ ἧς τὸ αἰσθά|νεσθαι, αἰσθά| νεσθαι, τίς δὲ 6 ἡ ἐνέργεια καὶ περὶ τί, ποιησάμενος δὲ καὶ περὶ τοῦ καθ’ ἑκάσ...
+
+================================================================================
+Failed work: tlg0732.tlg005_OGL
+Author ID: tlg0732
+Work number: tlg005
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg0732/tlg005/tlg0732.tlg005.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1096 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=1168996 chars, count=5585
+  p_tags: max=12751 chars, count=834
+  div_sections: max=1742 chars, count=315
+  pb: max=2772 chars, count=417
+  semicolon_period: max=2170 chars, count=31002
+  punctuation_all: max=1096 chars, count=40550
+
+Sample of longest line (first 500 chars):
+  [1] ALEXANDRI IN ARISTOTELIS ANALYTICORUM PRIORUM LIBRUM I COMMENTARIUM ΑΛΕΞΑΝΔΡΟΥ ΑΦΡΟΔΙΣΙΕΩΣ ΕΙΣ TO Α ΤΩΝ ΑΡΙΣΤΟΤΕΛΟΥΣ 2r ΑΝΑΛΥΤΙΚΩΝ ΠΡΟΤΕΡΩΝ ΥΠΟΜΝΗΜΑ Ἡ λογική τε καὶ συλλογιστικὴ πραγματεία ἡ νῦν ἡμῖν προκειμένη, ὑφ’ ἣν ἥ τε ἀποδεικτικὴ καὶ ἡ διαλεκτική τε καὶ πειραστικὴ ἔτι τε καὶ ἡ σοφιστικὴ μέθοδος, ἔστι μὲν ἔργον φιλοσοφίας, χρῶνται δὲ αὐτῇ καὶ ἄλλαι τινὲς ἐπιστῆμαι καὶ τέχναι, ἀλλὰ παρὰ φιλοσοφίας λαβοῦσαι
+
+================================================================================
+Failed work: tlg1205.tlg002_OGL
+Author ID: tlg1205
+Work number: tlg002
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg1205/tlg002/tlg1205.tlg002.perseus-grc2.xml
+Best method attempted: div_sections
+Longest line length: 1012 characters (limit: 1000)
+
+All methods tried:
+  p_tags: max=1370 chars, count=126
+  div_sections: max=1012 chars, count=126
+  pb: max=1749 chars, count=34
+  semicolon_period: max=1374 chars, count=178
+  punctuation_all: max=1374 chars, count=271
+
+Sample of longest line (first 500 chars):
+  Οὐδὲν γὰρ τῶν ἀληθῶν οἱ τοιοῦτοι κατέλιπον ἀσυκοφάντητον, οὐ τὴν οὐσίαν τοῦ θεοῦ, οὐ τὴν γνῶσιν, οὐ τὴν ἐνέργειαν, οὐ τὰ τούτοις ἐφεξῆς καθ᾿ εἱρμὸν ἑπόμενα καὶ τὸν τῆς εὐσεβείας ἡμῖν ὑπογράφοντα λόγον. Ἀλλ᾿ οἱ μὲν πάντη καὶ καθάπαξ ἀπογινώσκουσι τὴν περὶ τούτων ἀλήθειαν, οἱ δὲ πρὸς τὸ δοκοῦν αὐτοῖς διαστρέφουσιν, οἱ δὲ καὶ περὶ τῶν ἐμφανῶν ἀπορεῖν ἐπιτηδεύουσιν.
+
+================================================================================
+Failed work: tlg2000.tlg001_OGL
+Author ID: tlg2000
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2000/tlg001/tlg2000.tlg001.1st1K-grc1.xml
+Best method attempted: div_sections
+Longest line length: 1508 characters (limit: 1000)
+
+All methods tried:
+  p_tags: max=4797 chars, count=653
+  div_sections: max=1508 chars, count=705
+  pb: max=1564 chars, count=1427
+  semicolon_period: max=1519 chars, count=8162
+  punctuation_all: max=1519 chars, count=8162
+
+Sample of longest line (first 500 chars):
+  πρῶτον δὲ ψυχὴν ληπτέον, πότερον ἄλλο μὲν ψυχή, ἄλλο δὲ ψυχῇ εἶναι. εἰ γὰρ τοῦτο, σύνθετόν τι ἡ ψυχὴ καὶ οὐκ ἄτοπον ἤδη δέχεσθαι αὐτὴν καὶ αὐτῆς εἶναι τὰ πάθη τὰ τοιαῦτα, εἰ ἐπιτρέψει καὶ οὕτως ὁ λόγος, καὶ ὅλως ἕξεις καὶ διαθέσεις χείρους καὶ βελτίους. ἤ, εἰ ταὐτόν ἐστι ψυχὴ καὶ τὸ ψυχῇ εἶναι, εἰδός τι ἂν εἴη ψυχὴ ἄδεκτον τούτων ἁπασῶν τῶν ἐνεργειῶν, ὧν ἐποιστικὸν ἄλλῳ, ἑαυτῷ δὲ συμφυᾶ
+
+================================================================================
+Failed work: tlg2001.tlg042_OGL
+Author ID: tlg2001
+Work number: tlg042
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2001/tlg042/tlg2001.tlg042.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1026 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=500673 chars, count=1346
+  p_tags: max=11015 chars, count=176
+  div_sections: max=25219 chars, count=3
+  pb: max=2978 chars, count=165
+  semicolon_period: max=1496 chars, count=13284
+  punctuation_all: max=1026 chars, count=18085
+
+Sample of longest line (first 500 chars):
+  [1] Εἰπόντες καὶ παραδόντες τάς τε τοῦ ὑπάρχοντος τάς τε τοῦ ἀναγκαίου 64v προτάσεις καὶ δείξαντες, ποίους ποιοῦσι καθ’ ἕκαστον σχῆμα συλλογισμούς, ἑξῆς λέγομεν περὶ τῶν ἐκ μίξεως ἀναγκαίας τε καὶ ὑπαρχούσης προτάσεως γινομένων καθ’ ἕκαστον σχῆμα συλλογισμῶν, τίνες τέ εἰσι, καὶ ποῖόν τι ἐν ταῖς μίξεσιν αὐτῶν γίνεται τὸ συμπέρασμα, καὶ τίνες αἱ κατὰ τὰς μίξεις τῶν τρόπων τούτων ἐν τοῖς γινομένοις συλλογισμοῖς διαφοραί
+
+================================================================================
+Failed work: tlg2018.tlg009_OGL
+Author ID: tlg2018
+Work number: tlg009
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2018/tlg009/tlg2018.tlg009.1st1K-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1085 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=249389 chars, count=1300
+  p_tags: max=1886 chars, count=585
+  div_sections: max=1092 chars, count=532
+  pb: max=2263 chars, count=204
+  quote_cit: max=28647 chars, count=253
+  semicolon_period: max=1085 chars, count=8415
+  punctuation_all: max=1085 chars, count=10198
+
+Sample of longest line (first 500 chars):
+  [1] βʹ ὅτι τῇ ἐκκλησίᾳ τοῦ θεοῦ ἡ Χριστοῦ χάρις τὴν περὶ πατρὸς καὶ υἱοῦ γνῶσιν ἐξαίρετον ἐδωρήσατο
+
+================================================================================
+Failed work: tlg2018.tlg002_OGL
+Author ID: tlg2018
+Work number: tlg002
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2018/tlg002/tlg2018.tlg002.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1319 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=702663 chars, count=2463
+  p_tags: max=8012 chars, count=896
+  div_sections: max=4474 chars, count=248
+  pb: max=1708 chars, count=502
+  semicolon_period: max=2118 chars, count=17009
+  punctuation_all: max=1319 chars, count=22341
+
+Sample of longest line (first 500 chars):
+  [1] Γݲ Ὡς καὶ τὸ Ἰησοῦ ὄνομα καὶ αὐτὸ δὴ τὸ τοῦ Χριατοῦ ἔγνωστό τε ἀνέκαθεν καὶ τετίμητο παρὰ τοῖς θεσπεσίοις προφήταις
+
+================================================================================
+Failed work: tlg2023.tlg001_OGL
+Author ID: tlg2023
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2023/tlg001/tlg2023.tlg001.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1080 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=196175 chars, count=708
+  p_tags: max=1290 chars, count=362
+  div_sections: max=2471 chars, count=335
+  pb: max=1603 chars, count=194
+  quote_cit: max=65179 chars, count=31
+  semicolon_period: max=1414 chars, count=3887
+  punctuation_all: max=1080 chars, count=4877
+
+Sample of longest line (first 500 chars):
+  [1] Περὶ Πυθαγόρου καὶ τοῦ γένους αὐτοῦ καὶ τῆς πατρίδος καὶ τῆς ἀνατροφῆς καὶ παιδείας καὶ τῶν ἀποδημιῶν καὶ τῆς εἰς οἶκον ἐπανόδου καὶ τῆς ἐντεῦθεν εἰς Ἰταλίαν ἐξόδου καὶ ὅλως περὶ παντὸς τοῦ κατ’ αὐτὸν βίου
+
+================================================================================
+Failed work: tlg2023.tlg003_OGL
+Author ID: tlg2023
+Work number: tlg003
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2023/tlg003/tlg2023.tlg003.1st1K-grc1.xml
+Best method attempted: pb
+Longest line length: 1521 characters (limit: 1000)
+
+All methods tried:
+  p_tags: max=7563 chars, count=105
+  div_sections: max=4067 chars, count=36
+  pb: max=1521 chars, count=97
+  semicolon_period: max=1569 chars, count=588
+  punctuation_all: max=1569 chars, count=800
+
+Sample of longest line (first 500 chars):
+  ε′. Τίνα κοινῶς ὑπόκειται πᾶσι τοῖς μαθήμασι, περὶ ἃ ποιοῦνται τὴν πραγματείαν οἱ φιλομαθεῖς, καὶ πῶς ἔνεστι περὶ αὐτὰ καθόλου τὴν θεωρίαν ποιεῖσθαι. ϛ′. Τίς ἀρίστη χρῆσις τῆς περὶ τὰ μαθήματα σπουδῆς, καὶ πρὸς τί τέλος ἀναφέρειν δεῖ τὴν ἀρίστην περὶ αὐτὰ πραγματείαν. ζ′. Τί ἑκάστῃ μαθηματικῇ ἐπιστήμῃ ὑπόκειται οἰκεῖον ἐπιστητόν, καὶ πῶς ἔνεστιν ἐκ διαιρέσεως τὴν κοινὴν αὐτῶν διάκρισιν ποιήσασθαι, ὡς εἰδέναι τὸ ἐν τοῖς μαθήμασιν ἓν καὶ πλῆθος ποῖόν τί ἐστι καὶ πῶς αὐτὸ δεῖ ὁρίζειν. η′. Τί κοινὸν...
+
+================================================================================
+Failed work: tlg2042.tlg001_OGL
+Author ID: tlg2042
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2042/tlg001/tlg2042.tlg001.perseus-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1057 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=1040856 chars, count=1727
+  p_tags: max=2925 chars, count=962
+  div_sections: max=2812 chars, count=613
+  pb: max=2057 chars, count=1505
+  semicolon_period: max=1586 chars, count=23097
+  punctuation_all: max=1057 chars, count=33553
+
+Sample of longest line (first 500 chars):
+  [1] Ὁ μὲν σωτὴρ καὶ κύριος ἡμῶν Ἰησοῦς Χριστὸς ψευδομαρτυρούμενος μὲν „ἐσιώπα“ κατηγορούμενος δὲ „οὐδὲν ἀπεκρίνατο“, πειθόμενος πάντα τὸν βίον ἑαυτοῦ καὶ τὰς ἐν Ἰουδαίοις πράξεις κρείττους γεγονέναι φωνῆς ἐλεγχούσης τὴν ψευδομαρτυρίαν καὶ λέξεων ἀπολογουμένων πρὸς τὰς κατηγορίας
+
+================================================================================
+Failed work: tlg2200.tlg00458_OGL
+Author ID: tlg2200
+Work number: tlg00458
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2200/tlg00458/tlg2200.tlg00458.opp-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1034 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=31258 chars, count=148
+  p_tags: max=1424 chars, count=28
+  div_sections: max=1810 chars, count=22
+  pb: max=1093 chars, count=20
+  semicolon_period: max=1034 chars, count=830
+  punctuation_all: max=1034 chars, count=859
+
+Sample of longest line (first 500 chars):
+  [1] ὧνπερ αὖ πρότερον, καὶ νῦν ἔοικέ μοι δεῖν R III 252 φαρμάκων νόσου πάλιν καταλαβούσης τοὺς ὁμιλοῦντας ἡμῖν πολὺ χαλεπωτέρας ἧς πρόσθεν τινὲς ἐνόσησαν
+
+================================================================================
+Failed work: tlg2200.tlg00459_OGL
+Author ID: tlg2200
+Work number: tlg00459
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2200/tlg00459/tlg2200.tlg00459.opp-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1270 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=149408 chars, count=608
+  p_tags: max=1735 chars, count=105
+  div_sections: max=1363 chars, count=109
+  pb: max=1453 chars, count=89
+  semicolon_period: max=1270 chars, count=4298
+  punctuation_all: max=1270 chars, count=4450
+
+Sample of longest line (first 500 chars):
+  [1] R III 272 Ἐκεῖνο μάλιστα παρατηρεῖν ἄξιον, ὅτι δυοῖν ὑποκει- μἐνοιν προσώποιν ὁρμᾶται μὲν ἐκ μιᾶς ἀρχῆς ὁ λόγος καὶ C = codex Chisianus Μο = Monacensis gr
+
+================================================================================
+Failed work: tlg2733.tlg001_OGL
+Author ID: tlg2733
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg2733/tlg001/tlg2733.tlg001.1st1K-grc1.xml
+Best method attempted: div_sections
+Longest line length: 1597 characters (limit: 1000)
+
+All methods tried:
+  p_tags: max=30318 chars, count=407
+  div_sections: max=1597 chars, count=176
+  milestone: max=4253 chars, count=226
+  pb: max=1828 chars, count=241
+  semicolon_period: max=1671 chars, count=2620
+  punctuation_all: max=1671 chars, count=2620
+
+Sample of longest line (first 500 chars):
+  Ἄρτι τῆς Ἰουλιανοῦ δυσσεβείας τοῖς τῶν μαρτύρων αἵμασι κατακλυσθείσης καὶ τῆς Ἀρείου μανίας συνδεθείσης ταῖς ἐν Νικαίᾳ χαλκευθείσαις πέδαις, Εὐνομίου τε αὖ καὶ Μακεδονίου ὑπὸ τοῦ παναγίου πνεύματος κατὰ τὸν Βόσπορον ἐκβρασθέντων καὶ πρὸς τῇ Κωνσταντίνου ἱερᾷ θραυσθέντωνπόλει, ἤδη τε τῆς ἁγίας ἐκκλησίας τὸν πρόσφατον ἀποθεμένης ῥύπον καὶ πρὸς τὴν ἀρχαίαν ἐπαναγομένης εὐπρέπειαν, ἐν ἱματισμῷ διαχρύσῳ περιβεβλημένης καὶ πεποικιλμένης τῷ τε ἐραστῇ νυμφίῳ συναρμοζομένης, οὐκ ἐνεγκὼν ὁ μισόκαλος δαίμω...
+
+================================================================================
+Failed work: tlg3156.tlg001_OGL
+Author ID: tlg3156
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg3156/tlg001/tlg3156.tlg001.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1453 characters (limit: 1000)
+
+All methods tried:
+  p_tags: max=5442 chars, count=110
+  div_sections: max=1558 chars, count=109
+  pb: max=1661 chars, count=45
+  semicolon_period: max=1484 chars, count=1842
+  punctuation_all: max=1453 chars, count=1876
+
+Sample of longest line (first 500 chars):
+  [1] ἢ χορεύειν φησί, τουτέστι ἐγκεῖσθαι ταύτας περὶ τὸν ἐγκέφαλον, ὅτι εἰ μή τις ἀεὶ στρέφοιτο ἐπὶ τῆς τέχνης, ἣν ἐξηγήσατο, οὔποτʼ ἂν ἐν ἕξει ταύτῃ γενήσεται
+
+================================================================================
+Failed work: tlg4015.tlg008_OGL
+Author ID: tlg4015
+Work number: tlg008
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg4015/tlg008/tlg4015.tlg008.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1115 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=1622660 chars, count=7299
+  p_tags: max=25657 chars, count=1270
+  div_sections: max=56344 chars, count=3
+  pb: max=3228 chars, count=607
+  semicolon_period: max=1346 chars, count=45034
+  punctuation_all: max=1115 chars, count=58394
+
+Sample of longest line (first 500 chars):
+  [1] a 1r ΠΡΟΟΙΜΙΟΝ Μέλλοντας ἡμᾶς τῶν περὶ ψυχῆς ἀκροᾶσθαι λόγων ἀναγκαῖον εἰπεῖν πρότερον περὶ τῶν δυνάμεων τῆς ψυχῆς, ποσαχῶς τε διαιροῦνται καὶ ποίας ἑκάστη τῆς ὀνομασίας τετύχηκεν, εἶτα πόσαι τῶν ἀρχαιοτέρων περὶ αὐτῶν δόξαι γεγόνασιν, καὶ ἐπὶ τούτοις τὴν ἀληθῆ περὶ αὐτῶν δόξαν ἐκ διαιρέσεως ἀφορίσασθαι
+
+================================================================================
+Failed work: tlg4031.tlg002_OGL
+Author ID: tlg4031
+Work number: tlg002
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg4031/tlg002/tlg4031.tlg002.1st1K-grc1.xml
+Best method attempted: semicolon_period
+Longest line length: 1308 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=1673875 chars, count=7584
+  p_tags: max=16951 chars, count=1235
+  div_sections: max=43986 chars, count=9
+  pb: max=5049 chars, count=620
+  semicolon_period: max=1308 chars, count=43245
+  punctuation_all: max=1308 chars, count=49296
+
+Sample of longest line (first 500 chars):
+  [1] τὴν πρὸς Νικόμαχόν τινα γενομένην τοῦ’ Αριστοτέλους πραγματείαν προθέμενοι, καί τινα πρὸς αὐτὴν εἰπεῖν ἐθελήσαντες, τινὸς τῶν μάλιστα λόγου ἀξίων ἡμᾶς πρὸς τοὖργον ἀνερεθίσαντος καί τινα ἐκθέσθαι σαφήνειαν τοῦ πρώτου τῶν ’ Αριστοτέλους Ἠθικῶν Νικομαχείων ἐντειλαμένου, ὃν οὐκ ἦν παραιτεῖσθαι <διὰ τὸ ἐν πολλοῖς αὐτὸν ἀναγκαίοις εὑρεῖν ἡμᾶς εὖ ἐργασάμενον· ἀθετεῖν δὲ τὸν οὕτω πρὸς ἡμᾶς διακείμενον καὶ παραιτεῖσθαι) τι τῶν δυνατῶν ἐπιτάττοντα ἄγνωμον ἅμα καὶ ἀφ̔ ιλόσ‘)ὁ̣ον
+
+================================================================================
+Failed work: tlg4072.tlg003_OGL
+Author ID: tlg4072
+Work number: tlg003
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg4072/tlg003/tlg4072.tlg003.1st1K-grc1.xml
+Best method attempted: punctuation_all
+Longest line length: 1089 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=36033 chars, count=197
+  p_tags: max=11374 chars, count=46
+  div_sections: max=1219 chars, count=19
+  pb: max=1543 chars, count=32
+  semicolon_period: max=1106 chars, count=761
+  punctuation_all: max=1089 chars, count=1124
+
+Sample of longest line (first 500 chars):
+  [1] Τὴν ῥοπήν, γενναιότατε Πέτρε, κοινὸν εἶναι γένος βαρύτητος καὶ κουφότητος Ἀριστοτέλης τε λέγει καὶ Πτολεμαῖος τούτῳ ἀκολουθῶν
+
+================================================================================
+Failed work: tlg9010.tlg001_OGL
+Author ID: tlg9010
+Work number: tlg001
+File: /Users/user1/git/classicsviewer/data-sources/First1KGreek/data/tlg9010/tlg001/tlg9010.tlg001.1st1K-grc1.xml
+Best method attempted: div_sections
+Longest line length: 1026 characters (limit: 1000)
+
+All methods tried:
+  lb_tags: max=5559694 chars, count=55691
+  p_tags: max=17664 chars, count=23680
+  div_sections: max=1026 chars, count=22296
+  pb: max=4322 chars, count=2127
+  semicolon_period: max=1474 chars, count=772767
+  punctuation_all: max=1174 chars, count=845690
+
+Sample of longest line (first 500 chars):
+  Τὸ μὲν παρὸν βιβλίον Σοῦδα, οἱ δὲ ϲυνταξάμενοι τοῦτο ἄνδρεϲ ϲοφοί· Εὔδημοϲ ῥήτωρ περὶ λέξεων κατὰ ϲτοιχεῖον. Ἑλλάδιοϲ, ἐπὶ Θεοδοϲίου τοῦ νέου, περὶ λέξεων κατὰ ϲτοιχεῖον. Ἑὐγένιοϲ Αὐγουϲτοπόλεωϲ τῆϲ ἐν Φρυγίᾳ, παμμιγῆ λέξιν κατὰ ϲτοιχεῖον. Ζώϲιμοϲ Γαζαῖοϲ λέξειϲ ῥητορικὰϲ κατὰ ϲτοιχεῖον. Κεκίλιοϲ Σικελιώτηϲ ἐκλογὴν λέξεων κατὰ ϲτοιχεῖον. Λογγῖνοϲ ὁ Κάϲϲιοϲ λέξειϲ κατὰ ϲτοιχεῖον. Λούπερκοϲ Βηρύτιοϲ Ἀττικὰϲ λέξειϲ. Οὐηϲτῖνοϲ Ἰούλιοϲ ϲοφιϲτὴϲ ἐπιτομὴν τῶν Παμφίλου γλωϲϲῶν, βιβλίων Πάκατοϲ κατὰ ϲτοι...

@@ -1,0 +1,28 @@
+{
+  "greek_file": "../data-sources/First1KGreek/data/tlg0094/tlg001/tlg0094.tlg001.1st1K-grc1.xml",
+  "english_file": "../data-sources/First1KGreek/data/tlg0094/tlg001/tlg0094.tlg001.1st1K-eng1.xml",
+  "alignments": [
+    {
+      "greek_ref": "3",
+      "english_ref": "22.5",
+      "greek_text": "3. Εὑρίσκεται δὲ ἐν αὐτῷ καὶ λίθος πελιδνὸς τῷ χρώματι, λινουργὸς καλούμενος ἀπὸ τοῦ συγκυρήματος· ἐὰν γὰρ βάλῃς αὐτὸν εἰς ὀθόνιον, διʼ ἔρωτος ἕνωσιν τὸ σχῆμα λαμβάνει καὶ ἄργιον γίνεται, καθὼς ἱστορεῖ Ἀντισθένης ἐν γ΄ Μελεαγρίδος. Μέμνηται δὲ τούτων ἀκριβέστερον Διοκλῆς ὁ Ῥόδιος ἐν τοῖς Αἰτωλικοῖς.",
+      "english_text": "There is produced on this mountain a plant which has the name myops ( contracts-the eyes ). If someone throws it into water and washes their face with that solution, they lose their sight. Once they have appeased Artemis, their sight is restored. Dercyllos recounts this in book 3 of his On Aitolia .",
+      "confidence": 0.6252666891111966,
+      "method": "content-similarity"
+    },
+    {
+      "greek_ref": "4",
+      "english_ref": "25.4",
+      "greek_text": "4. Παράκειται δʼ αὐτῷ ὄρος, Λίλαιον προσαγορευομενον ἀπὸ Λιλαίου ποιμένος. Οὗτος γὰρ δεισιδαίμων ὑπάρχων καὶ μόνην σεβόμενος τὴν Σελήνην, νυκτὸς βαθείας ἐξετέλει τὰ μυστήρια τῆς προειρημένης. Βαρέως δὲ οἱ λοιποὶ θεοὶ τὴν ἀτιμίαν φέροντες, ἔπεμψαν αὐτῷ δύο λέοντας ὑπερμεγέθεις· ὑφʼ ὧν διασπαραχθεὶς τὸν βίον ἐξέλιπε. Σελήνη δὲ τὸν εὐεργέτην μετέβαλεν εἰς ὁμώνυμον ὄρος.",
+      "english_text": "Nearby is a mountain called Lilaion after Lilaios, a shepherd. He was very devout; he devoted himself to Selene alone and he would celebrate the mysteries of the aforementioned in the middle of the night. The other gods were deeply offended by this dishonour and sent two enormous lions against him. He was torn apart by them and lost his life. Selene transformed her benefactor into a mountain of the same name.",
+      "confidence": 0.6446423654522905,
+      "method": "content-similarity"
+    }
+  ],
+  "metadata": {
+    "total_greek_segments": 226,
+    "total_english_segments": 124,
+    "aligned_segments": 2,
+    "confidence_threshold": 0.6
+  }
+}
