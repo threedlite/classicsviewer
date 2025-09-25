@@ -28,6 +28,7 @@ targets:
           - "**/.build"
     resources:
       - ClassicsViewer/Resources
+      - ClassicsViewer/LaunchScreen.storyboard
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.classicsviewer.app
@@ -42,9 +43,34 @@ targets:
       - package: SwiftCSV
         product: SwiftCSV
     preBuildScripts:
-      - name: "Check Database"
+      - name: "Copy Database and Audio Files"
         script: |
-          # Check if database exists in bundle
-          if [ ! -f "${SRCROOT}/ClassicsViewer/Resources/perseus_texts.db.zip" ]; then
-            echo "warning: Database file not found in Resources. App will need to download or import database on first launch."
+          # Copy database from data-prep if needed
+          DATABASE_SOURCE="${SRCROOT}/../data-prep/perseus_texts_sample.db.zip"
+          DATABASE_DEST="${SRCROOT}/ClassicsViewer/Resources/perseus_texts.db.zip"
+
+          if [ ! -f "$DATABASE_DEST" ]; then
+            if [ -f "$DATABASE_SOURCE" ]; then
+              echo "Copying database from data-prep..."
+              mkdir -p "${SRCROOT}/ClassicsViewer/Resources"
+              cp "$DATABASE_SOURCE" "$DATABASE_DEST"
+              echo "Database copied successfully"
+            else
+              echo "error: Database source not found at: $DATABASE_SOURCE"
+              echo "error: Please build the sample database first:"
+              echo "error: cd ../data-prep && python3 create_perseus_database.py sample"
+              exit 1
+            fi
+          fi
+
+          # Copy audio file if needed
+          AUDIO_SOURCE="${SRCROOT}/../audio/homer_iliad_chamberlain_audio_7.zip"
+          AUDIO_DEST="${SRCROOT}/ClassicsViewer/Resources/homer_iliad_chamberlain_audio_7.zip"
+
+          if [ ! -f "$AUDIO_DEST" ]; then
+            if [ -f "$AUDIO_SOURCE" ]; then
+              echo "Copying audio file from audio directory..."
+              cp "$AUDIO_SOURCE" "$AUDIO_DEST"
+              echo "Audio file copied successfully"
+            fi
           fi

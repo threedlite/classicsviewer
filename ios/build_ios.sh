@@ -72,6 +72,59 @@ cd "$SCRIPT_DIR"
 
 log_info "Working directory: $(pwd)"
 
+# Copy database from data-prep if needed
+DATABASE_SOURCE="../data-prep/perseus_texts_sample.db.zip"
+DATABASE_DEST="ClassicsViewer/Resources/perseus_texts.db.zip"
+
+if [ ! -f "$DATABASE_DEST" ]; then
+    if [ -f "$DATABASE_SOURCE" ]; then
+        log_info "Copying database from data-prep..."
+        mkdir -p "ClassicsViewer/Resources"
+        cp "$DATABASE_SOURCE" "$DATABASE_DEST"
+        log_success "Database copied successfully"
+    else
+        log_error "Database source not found at: $DATABASE_SOURCE"
+        log_error "Please build the sample database first:"
+        log_error "  cd ../data-prep && python3 create_perseus_database.py sample"
+        exit 1
+    fi
+else
+    log_info "Database already exists at $DATABASE_DEST"
+fi
+
+# Copy audio file if needed
+AUDIO_SOURCE="../audio/homer_iliad_chamberlain_audio_7.zip"
+AUDIO_DEST="ClassicsViewer/Resources/homer_iliad_chamberlain_audio_7.zip"
+
+if [ ! -f "$AUDIO_DEST" ]; then
+    if [ -f "$AUDIO_SOURCE" ]; then
+        log_info "Copying audio file from audio directory..."
+        cp "$AUDIO_SOURCE" "$AUDIO_DEST"
+        log_success "Audio file copied successfully"
+    else
+        log_warning "Audio file not found at: $AUDIO_SOURCE (optional)"
+    fi
+else
+    log_info "Audio file already exists at $AUDIO_DEST"
+fi
+
+# Generate Xcode project if it doesn't exist
+if [ ! -d "$PROJECT" ]; then
+    log_info "Xcode project not found, generating with XcodeGen..."
+    if command -v xcodegen >/dev/null 2>&1; then
+        xcodegen generate
+        if [ -d "$PROJECT" ]; then
+            log_success "Xcode project generated successfully"
+        else
+            log_error "Failed to generate Xcode project"
+            exit 1
+        fi
+    else
+        log_error "XcodeGen is not installed. Install it with: brew install xcodegen"
+        exit 1
+    fi
+fi
+
 # Check if we're in the right directory
 if [ ! -d "$PROJECT" ]; then
     log_error "Project file '$PROJECT' not found in $(pwd)"

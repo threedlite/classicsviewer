@@ -141,19 +141,19 @@ class ZIPHandler {
     }
     
     static func extractDatabase(from zipURL: URL, to destinationURL: URL, progress: ((Double) -> Void)? = nil) throws {
-        print("🔴🔴🔴 ZIPHandler.extractDatabase CALLED")
-        print("🔴🔴🔴 Source: \(zipURL.path)")
-        print("🔴🔴🔴 Destination: \(destinationURL.path)")
+        print(" ZIPHandler.extractDatabase CALLED")
+        print(" Source: \(zipURL.path)")
+        print(" Destination: \(destinationURL.path)")
         
         let logger = Logger(subsystem: "com.classicsviewer.app", category: "DatabaseImport")
         
-        logger.error("🔴 ZIPHandler.extractDatabase - ENTRY POINT CALLED")
-        logger.error("🔴 ZIPHandler.extractDatabase - Source: \(zipURL.path)")
-        logger.error("🔴 ZIPHandler.extractDatabase - Destination: \(destinationURL.path)")
+        logger.error(" ZIPHandler.extractDatabase - ENTRY POINT CALLED")
+        logger.error(" ZIPHandler.extractDatabase - Source: \(zipURL.path)")
+        logger.error(" ZIPHandler.extractDatabase - Destination: \(destinationURL.path)")
         
         // Check if source exists
         if !FileManager.default.fileExists(atPath: zipURL.path) {
-            logger.error("🔴 ZIPHandler.extractDatabase - SOURCE FILE DOES NOT EXIST!")
+            logger.error(" ZIPHandler.extractDatabase - SOURCE FILE DOES NOT EXIST!")
             throw ZIPError.extractionFailed("Source file does not exist")
         }
         
@@ -161,29 +161,29 @@ class ZIPHandler {
         // Check file size first
         let attributes = try FileManager.default.attributesOfItem(atPath: zipURL.path)
         let fileSize = attributes[.size] as? Int64 ?? 0
-        logger.error("🔴 ZIPHandler.extractDatabase - ZIP file size: \(fileSize) bytes (\(fileSize / 1_000_000) MB)")
+        logger.error(" ZIPHandler.extractDatabase - ZIP file size: \(fileSize) bytes (\(fileSize / 1_000_000) MB)")
         
         // Use streaming extraction for large files
         if fileSize > 500_000_000 { // > 500MB
-            logger.error("🔴 ZIPHandler.extractDatabase - Large file detected, using streaming extraction")
+            logger.error(" ZIPHandler.extractDatabase - Large file detected, using streaming extraction")
             do {
-                logger.error("🔴 ZIPHandler.extractDatabase - About to call extractDatabaseUsingSystemUnzip")
+                logger.error(" ZIPHandler.extractDatabase - About to call extractDatabaseUsingSystemUnzip")
                 try extractDatabaseUsingSystemUnzip(from: zipURL, to: destinationURL, progress: progress)
-                logger.error("🔴 ZIPHandler.extractDatabase - extractDatabaseUsingSystemUnzip returned successfully")
+                logger.error(" ZIPHandler.extractDatabase - extractDatabaseUsingSystemUnzip returned successfully")
                 
                 // Verify the file was created
                 if FileManager.default.fileExists(atPath: destinationURL.path) {
                     let extractedSize = try FileManager.default.attributesOfItem(atPath: destinationURL.path)[.size] as? Int64 ?? 0
-                    logger.error("🔴 ZIPHandler.extractDatabase - Successfully extracted \(extractedSize) bytes to \(destinationURL.path)")
+                    logger.error(" ZIPHandler.extractDatabase - Successfully extracted \(extractedSize) bytes to \(destinationURL.path)")
                 } else {
-                    logger.error("🔴 ZIPHandler.extractDatabase - Extraction completed but file not created at \(destinationURL.path)")
+                    logger.error(" ZIPHandler.extractDatabase - Extraction completed but file not created at \(destinationURL.path)")
                     throw ZIPError.extractionFailed("No output file created")
                 }
                 return
             } catch {
-                logger.error("🔴 ZIPHandler.extractDatabase - Streaming extraction failed with error: \(error)")
-                logger.error("🔴 ZIPHandler.extractDatabase - Error type: \(type(of: error))")
-                logger.error("🔴 ZIPHandler.extractDatabase - Error localized: \(error.localizedDescription)")
+                logger.error(" ZIPHandler.extractDatabase - Streaming extraction failed with error: \(error)")
+                logger.error(" ZIPHandler.extractDatabase - Error type: \(type(of: error))")
+                logger.error(" ZIPHandler.extractDatabase - Error localized: \(error.localizedDescription)")
                 throw error
             }
         }
