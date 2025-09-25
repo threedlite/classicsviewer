@@ -81,8 +81,7 @@ CREATE TABLE dictionary_entries (
     entry_xml TEXT,
     entry_html TEXT,
     entry_plain TEXT,
-    source TEXT,
-    CHECK (language IN ('greek', 'latin'))
+    source TEXT
 );
 
 CREATE TABLE lemma_map (

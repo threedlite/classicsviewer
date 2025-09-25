@@ -46,8 +46,7 @@ def load_combined_dictionaries(cursor, build_mode='full'):
             entry_xml TEXT,
             entry_html TEXT,
             entry_plain TEXT,
-            source TEXT,
-            CHECK (language IN ('greek', 'latin'))
+            source TEXT
         )
     """)
     
