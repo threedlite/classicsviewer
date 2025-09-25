@@ -124,16 +124,14 @@ CREATE TABLE dictionary_entries (
             language TEXT NOT NULL,
             entry_xml TEXT,
             entry_html TEXT,
-            short_def TEXT,
-            long_def TEXT,
-            morphology_info TEXT,
-            lemma_key TEXT
+            entry_plain TEXT,
+            source TEXT
         );
 CREATE INDEX idx_dictionary_headword
-        ON dictionary_entries(headword)
+        ON dictionary_entries(headword, language)
     ;
 CREATE INDEX idx_dictionary_headword_ultra
-        ON dictionary_entries(headword_normalized_ultra)
+        ON dictionary_entries(headword_normalized_ultra, language)
     ;
 CREATE TABLE milestone_line_ranges (
             work_id TEXT,
@@ -192,7 +190,7 @@ echo "Compressing database..."
 DB_SIZE=$(du -h "$DB_FILE" | cut -f1)
 echo "Uncompressed size: $DB_SIZE"
 
-zip -9 "${DB_FILE}.zip" "$DB_FILE"
+cd "$(dirname "$DB_FILE")" && zip -9 "$(basename "$DB_FILE").zip" "$(basename "$DB_FILE")"
 ZIP_SIZE=$(du -h "${DB_FILE}.zip" | cut -f1)
 echo "Compressed size: $ZIP_SIZE"
 

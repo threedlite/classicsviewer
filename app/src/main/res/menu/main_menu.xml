@@ -33,5 +33,10 @@
         android:id="@+id/action_manage_dictionary"
         android:title="Manage Dictionary"
         app:showAsAction="never" />
-        
+
+    <item
+        android:id="@+id/action_manage_languages"
+        android:title="Manage Languages"
+        app:showAsAction="never" />
+
 </menu>

@@ -120,19 +120,25 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun setupLanguageSelection() {
-        val languages = listOf(
+        val languages = mutableListOf(
             Language("Greek", "greek"),
             Language("Latin", "latin")
         )
-        
+
+        // Add custom languages from preferences
+        val customLanguages = PreferencesManager.getCustomLanguages(this)
+        customLanguages.forEach { customLang ->
+            languages.add(Language(customLang.displayName, customLang.id))
+        }
+
         val inverted = PreferencesManager.getInvertColors(this)
-        val adapter = LanguageAdapter(languages, inverted) { language ->
+        val adapter = LanguageAdapter(languages, inverted, customLanguages) { language ->
             val intent = Intent(this, AuthorListActivity::class.java)
             intent.putExtra("language", language.code)
             intent.putExtra("language_name", language.name)
             startActivity(intent)
         }
-        
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
@@ -217,6 +223,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_manage_dictionary -> {
                 startActivity(Intent(this, com.classicsviewer.app.ui.UserDictionaryImportActivity::class.java))
+                true
+            }
+            R.id.action_manage_languages -> {
+                startActivity(Intent(this, ManageLanguagesActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -397,8 +407,8 @@ class MainActivity : AppCompatActivity() {
                     val fileSizeMB = externalDbFile.length() / (1024 * 1024)
                     android.util.Log.d("MainActivity", "External database copied, size: ${fileSizeMB}MB")
                     
-                    // Verify the copy
-                    if (externalDbFile.length() < 1000000) {
+                    // Verify the copy - minimum 1KB (sanity check for corrupted copies)
+                    if (externalDbFile.length() < 1000) {
                         throw Exception("Database copy failed - file too small: ${externalDbFile.length()} bytes")
                     }
                     

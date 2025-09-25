@@ -2,6 +2,9 @@ package com.classicsviewer.app.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.classicsviewer.app.CustomLanguageConfig
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 object PreferencesManager {
     private const val PREFS_NAME = "ClassicsViewerPrefs"
@@ -14,6 +17,9 @@ object PreferencesManager {
     private const val KEY_EXTERNAL_DATABASE_COPIED_TIME = "external_database_copied_time"
     private const val KEY_OCCURRENCE_LIMIT = "occurrence_limit"
     private const val KEY_USE_SINAITICUS_FONT = "use_sinaiticus_font"
+    private const val KEY_CUSTOM_LANGUAGES = "custom_languages"
+
+    private val gson = Gson()
     
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -134,5 +140,38 @@ object PreferencesManager {
     
     fun getExternalDatabaseCopiedTime(context: Context): Long {
         return getPrefs(context).getLong(KEY_EXTERNAL_DATABASE_COPIED_TIME, 0L)
+    }
+
+    // Custom language preferences
+    fun getCustomLanguages(context: Context): List<CustomLanguageConfig> {
+        val json = getPrefs(context).getString(KEY_CUSTOM_LANGUAGES, null)
+        if (json.isNullOrEmpty()) return emptyList()
+
+        return try {
+            val type = object : TypeToken<List<CustomLanguageConfig>>() {}.type
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun addCustomLanguage(context: Context, language: CustomLanguageConfig) {
+        val languages = getCustomLanguages(context).toMutableList()
+        // Remove any existing language with the same ID
+        languages.removeAll { it.id == language.id }
+        // Add the new/updated language
+        languages.add(language)
+        saveCustomLanguages(context, languages)
+    }
+
+    fun removeCustomLanguage(context: Context, languageId: String) {
+        val languages = getCustomLanguages(context).toMutableList()
+        languages.removeAll { it.id == languageId }
+        saveCustomLanguages(context, languages)
+    }
+
+    private fun saveCustomLanguages(context: Context, languages: List<CustomLanguageConfig>) {
+        val json = gson.toJson(languages)
+        getPrefs(context).edit().putString(KEY_CUSTOM_LANGUAGES, json).apply()
     }
 }

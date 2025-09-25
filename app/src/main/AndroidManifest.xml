@@ -42,7 +42,8 @@
         <activity android:name=".ui.BookmarkEditorActivity" />
         <activity android:name=".audio.AudioManagementActivity" />
         <activity android:name=".ui.UserDictionaryImportActivity" />
-        
+        <activity android:name=".ManageLanguagesActivity" />
+
         <service android:name=".audio.AudioPlaybackService"
             android:exported="false" />
         

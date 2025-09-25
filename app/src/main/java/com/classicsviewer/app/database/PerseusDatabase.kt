@@ -61,7 +61,7 @@ abstract class PerseusDatabase : RoomDatabase() {
                         // External database should already be copied during selection
                         val externalDbFile = File(context.getDatabasePath("dummy").parent, "external_perseus_texts.db")
                         
-                        if (externalDbFile.exists() && externalDbFile.length() > 1000000) {
+                        if (externalDbFile.exists() && externalDbFile.length() > 1000) {
                             // Open the pre-copied external database
                             android.util.Log.d("PerseusDatabase", "Using pre-copied external database: ${externalDbFile.absolutePath}, size: ${externalDbFile.length() / (1024 * 1024)}MB")
                             

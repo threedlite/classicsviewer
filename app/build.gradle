@@ -32,8 +32,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 21
         targetSdk 36
-        versionCode 32
-        versionName "0.8.32"
+        versionCode 33
+        versionName "0.8.33"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -117,7 +117,10 @@ dependencies {
     
     // OpenCSV for CSV parsing
     implementation 'com.opencsv:opencsv:5.8'
-    
+
+    // Gson for JSON serialization
+    implementation 'com.google.code.gson:gson:2.10.1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
