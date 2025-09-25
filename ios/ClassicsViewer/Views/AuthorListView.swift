@@ -7,7 +7,8 @@ struct AuthorListView: View {
     @State private var searchText = ""
 
     init() {
-        _viewModel = StateObject(wrappedValue: AuthorListViewModel(isGreek: true))
+        // This will be overridden by onAppear with the actual language
+        _viewModel = StateObject(wrappedValue: AuthorListViewModel(language: "greek"))
     }
     
     var body: some View {
@@ -25,11 +26,12 @@ struct AuthorListView: View {
                 }
             }
         }
-        .navigationTitle(appState.selectedLanguage == .greek ? "Greek Authors" : "Latin Authors")
+        .navigationTitle("\(appState.selectedLanguage?.displayName ?? "") Authors")
         .navigationBarTitleDisplayMode(.large)
         .onAppear {
             // Update view model with correct language
-            viewModel.isGreek = appState.selectedLanguage == .greek
+            viewModel.language = appState.selectedLanguage?.id ?? "greek"
+            viewModel.isGreek = viewModel.language == "greek"
             // Load authors if needed
             if viewModel.authors.isEmpty {
                 viewModel.loadAuthors()

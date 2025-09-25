@@ -46,14 +46,24 @@ struct SettingsView: View {
                         Text("Font Size: \(Int(fontSize))pt")
                             .font(.caption)
                             .foregroundColor(.secondary)
-                        
+
                         Slider(value: $fontSize, in: 20...40, step: 1)
                     }
-                    
+
                     // Color scheme
                     Picker("Color Scheme", selection: $colorScheme) {
                         ForEach(ColorScheme.allCases, id: \.self) { scheme in
                             Text(scheme.displayName).tag(scheme)
+                        }
+                    }
+                }
+
+                // Languages Section
+                Section(header: Text("Languages")) {
+                    NavigationLink(destination: ManageLanguagesView()) {
+                        HStack {
+                            Image(systemName: "globe")
+                            Text("Manage Languages")
                         }
                     }
                 }

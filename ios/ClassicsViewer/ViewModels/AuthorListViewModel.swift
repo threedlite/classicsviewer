@@ -14,10 +14,12 @@ class AuthorListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     var isGreek: Bool
-    
+    var language: String = "greek"
+
     init(isGreek: Bool) {
         self.isGreek = isGreek
-        
+        self.language = isGreek ? "greek" : "latin"
+
         // Set up search filtering
         Publishers.CombineLatest($searchText, $showOnlyTranslated)
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
@@ -26,32 +28,43 @@ class AuthorListViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
+
+    init(language: String) {
+        self.language = language
+        self.isGreek = language == "greek"
+
+        // Set up search filtering
+        Publishers.CombineLatest($searchText, $showOnlyTranslated)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .sink { [weak self] searchText, showOnlyTranslated in
+                self?.filterAuthors(searchText: searchText, showOnlyTranslated: showOnlyTranslated)
+            }
+            .store(in: &cancellables)
+    }
+
     func loadAuthors() {
         Task {
             await loadAuthorsAsync()
         }
     }
-    
+
     private func loadAuthorsAsync() async {
         isLoading = true
         errorMessage = nil
 
+        print("DEBUG: Loading authors for language: '\(language)'")
+
         do {
             // No need to open database - async architecture handles it
-
-            if isGreek {
-                authors = try await authorDAO.getGreekAuthors()
-            } else {
-                authors = try await authorDAO.getLatinAuthors()
-            }
-
+            authors = try await authorDAO.getAuthorsByLanguage(language)
+            print("DEBUG: Loaded \(authors.count) authors for language: '\(language)'")
             filteredAuthors = authors
 
             // No need to close database - async architecture handles it
         } catch {
             errorMessage = error.localizedDescription
-            print("ERROR: Failed to load authors: \(error)")
+            print("ERROR: Failed to load authors for language '\(language)': \(error)")
+            print("ERROR: Full error details: \(String(describing: error))")
         }
 
         isLoading = false

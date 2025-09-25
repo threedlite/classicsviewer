@@ -4,6 +4,7 @@ import SQLite3
 protocol AuthorDAOProtocol {
     func getGreekAuthors() async throws -> [Author]
     func getLatinAuthors() async throws -> [Author]
+    func getAuthorsByLanguage(_ language: String) async throws -> [Author]
     func getAuthorWithWorks(authorId: String) async throws -> AuthorWithWorks?
 }
 
@@ -11,27 +12,22 @@ class AuthorDAO: AuthorDAOProtocol {
     // Remove direct database manager reference - will use async version
 
     func getGreekAuthors() async throws -> [Author] {
-        let query = """
-            SELECT id, name, name_alt, language, has_translations
-            FROM authors
-            WHERE language = 'greek'
-            ORDER BY name
-        """
-
-        return try await DatabaseManagerAsync.shared.executeQuery(query) { [self] statement in
-            authorFromStatement(statement)
-        }
+        return try await getAuthorsByLanguage("greek")
     }
 
     func getLatinAuthors() async throws -> [Author] {
+        return try await getAuthorsByLanguage("latin")
+    }
+
+    func getAuthorsByLanguage(_ language: String) async throws -> [Author] {
         let query = """
             SELECT id, name, name_alt, language, has_translations
             FROM authors
-            WHERE language = 'latin'
+            WHERE language = ?
             ORDER BY name
         """
 
-        return try await DatabaseManagerAsync.shared.executeQuery(query) { [self] statement in
+        return try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [language]) { [self] statement in
             authorFromStatement(statement)
         }
     }

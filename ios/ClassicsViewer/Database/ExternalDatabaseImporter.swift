@@ -119,8 +119,10 @@ class ExternalDatabaseImporter: ObservableObject {
         let fileSize = attributes[.size] as? Int64 ?? 0
         logger.info("File size: \(fileSize) bytes")
 
+        // Allow files as small as 1KB to match Android functionality
+        // Custom language databases can be very small
         if fileSize < 1000 {
-            logger.error("File is too small: \(fileSize) bytes")
+            logger.error("File is too small: \(fileSize) bytes (minimum 1KB)")
             throw ImportError.fileTooSmall
         }
 
@@ -314,7 +316,7 @@ class ExternalDatabaseImporter: ObservableObject {
                 let extractedSize = try FileManager.default.attributesOfItem(atPath: tempPath.path)[.size] as? Int64 ?? 0
                 logger.info("Extracted database size: \(extractedSize) bytes (\(extractedSize / 1024 / 1024) MB)")
 
-                if extractedSize < 1000000 { // Less than 1MB is suspicious
+                if extractedSize < 1000 { // Less than 1KB is too small
                     logger.error("Extracted database is too small: \(extractedSize) bytes")
                     throw ImportError.extractionFailed("Extracted database is corrupted or incomplete")
                 }

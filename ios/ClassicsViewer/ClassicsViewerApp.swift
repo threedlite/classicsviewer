@@ -82,12 +82,40 @@ class AppState: ObservableObject {
     @Published var databaseManagersInitialized = false
     @Published var initializationStatus = "Initializing..."
     
-    enum Language: String, CaseIterable {
-        case greek = "Greek"
-        case latin = "Latin"
-        
+    enum Language: Equatable {
+        case greek
+        case latin
+        case custom(String, String) // (id, displayName)
+
         var isGreek: Bool {
-            self == .greek
+            switch self {
+            case .greek:
+                return true
+            case .latin, .custom:
+                return false
+            }
+        }
+
+        var displayName: String {
+            switch self {
+            case .greek:
+                return "Greek"
+            case .latin:
+                return "Latin"
+            case .custom(_, let name):
+                return name
+            }
+        }
+
+        var id: String {
+            switch self {
+            case .greek:
+                return "greek"
+            case .latin:
+                return "latin"
+            case .custom(let id, _):
+                return id
+            }
         }
     }
     

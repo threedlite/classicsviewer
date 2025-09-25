@@ -5,7 +5,7 @@ class DatabaseExtractor {
     static let shared = DatabaseExtractor()
     private init() {}
     
-    private let minimumDatabaseSize: Int64 = 1_048_576 // 1MB minimum
+    private let minimumDatabaseSize: Int64 = 1000 // 1KB minimum
     private let bufferSize = 1_048_576 // 1MB buffer for extraction
     
     enum ExtractionError: LocalizedError {
