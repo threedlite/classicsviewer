@@ -1,0 +1,42 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|216|UNIVERSITY MUSEUM—BABYLONIAN SECTION}}</noinclude>{{c|{{larger|{{sc|Reverse I}}}}}}
+{| 
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{hi|1em|''..............................''}}|| style="width:20em;text-align: left;"|{{hi|1em|..............................}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|1|l}}{{hi|1em|''i-ip-pu-uš {{gap}}{{gap}}ul-ṣa-am''}}|| style="width:20em;text-align: left;"|{{pline|1|l}}{{hi|1em|And he made glad.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|2|l}}{{hi|1em|''iš-ši-ma   {{gap}}{{gap}}i-ni-i-šu''}}|| style="width:20em;text-align: left;"|{{pline|2|l}}{{hi|1em|He lifted up his eyes,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|3|l}}{{hi|1em|''i-ta-mar   {{gap}}{{gap}}a-we-lam''}}|| style="width:20em;text-align: left;"|{{pline|3|l}}{{hi|1em|and beheld the man,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|4|l}}{{hi|1em|''iz<ref>Text ''ta''!</ref>-za-kar-am {{gap}}a-na ḫarimti''}}|| style="width:20em;text-align: left;"|{{pline|4|l}}{{hi|1em|and said unto the hierodule:—}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|5|l}}{{hi|1em|''ša-am-ka-at uk-ki-ši<ref>On ''ekēšu'', drive away, see Zimmern, ''Shurpu'', p. 56. Cf. ''uk-kiš'', {{sc|Myhrman}}, PBS. I 14, 17; ''uk-ki-ši'', King, Cr. App. V ''55;'' etc., etc.</ref> a-we-lam''}}|| style="width:20em;text-align: left;"|{{pline|5|l}}{{hi|1em|“Oh harlot, take away the man.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|6|l}}{{hi|1em|''a-na mi-nim {{gap}}il-li-kam''}}|| style="width:20em;text-align: left;"|{{pline|6|l}}{{hi|1em|Wherefore did he come to me?}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|7|l}}{{hi|1em|''zi-ki-ir-šu {{gap}}lu-uš-šu<ref>The Hebrew cognate of ''mašû'', to forget, is ''našâ'', Arabic ''nasijia'', and occurs here in Babylonian for the first time. See also Brockelman, ''Vergleichende Grammatik'' 160 ''a''.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|7|l}}{{hi|1em|I would forget the memory of him.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|8|l}}{{hi|1em|''ḫa-ri-im-tum iš-ta-si a-we-lam''}}|| style="width:20em;text-align: left;"|{{pline|8|l}}{{hi|1em|The hierodule called unto the man}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|9|l}}{{hi|1em|''i-ba-uš-šu-um-ma i-ta-mar-šu''}}|| style="width:20em;text-align: left;"|{{pline|9|l}}{{hi|1em|and came unto him beholding him.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|10|l}}{{hi|1em|''e-di-il<ref>Probably phonetic variant of ''edir''. The preterite of ''edēru'', to be in misery, has not been found. If this interpretation be correct the preterite ''edir'' is established. For the change ''r'' > l note also ''attalaḫ'' < ''attaraḫ'', Harper, ''Letters 88'', 10, ''bilku'' < ''birku'', RA. 9, 77 II 13; ''uttakkalu'' < ''uttakkaru'', {{sc|Ebeling}}, KTA. 49 IV 10.</ref> {{gap}}e-eš-ta-ḫi-''[''ṭa-am'']}}|| style="width:20em;text-align: left;"|{{pline|10|l}}{{hi|1em|She sorrowed and was astonished}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|11|l}}{{hi|1em|''mi-nu {{gap}}a-la-ku-zu na-aḫ-<ref>Also na-’-[{{gap}}-]ma is possible.</ref> ''[''{{gap}}-'']''ma''}}|| style="width:20em;text-align: left;"|{{pline|11|l}}{{hi|1em|how his ways were ............}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|12|l}}{{hi|1em|''e pi-šu    {{gap}}i-pu-ša-am-''[''ma'']}}|| style="width:20em;text-align: left;"|{{pline|12|l}}{{hi|1em|Behold she opened her mouth}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|13|l}}{{hi|1em|''iz-za-kar-am a-na <sup>ilu</sup>En-''[''ki-dû'']}}|| style="width:20em;text-align: left;"|{{pline|13|l}}{{hi|1em|saying unto Enkidu:—}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|14|l}}{{hi|1em|''bi-ti-iš e-mu-tim [{{gap}}{{gap}}]''}}|| style="width:20em;text-align: left;"|{{pline|14|l}}{{hi|1em|“At home with a family [''to dwell??'']}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|15|l}}{{hi|1em|''ši-ma-a-at {{gap}}ni-ši-i- {{gap}}ma''}}|| style="width:20em;text-align: left;"|{{pline|15|l}}{{hi|1em|is the fate of mankind.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|16|l}}{{hi|1em|''tu-ṣa<ref>The text cannot be correct since it has no intelligible sign. My reading is uncertain.</ref>-ar pa-a-ta-tim<ref>Text uncertain, ''kal-lu-tim'' is possible.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|16|l}}{{hi|1em|Thou shouldest design boundaries(??)}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|17|l}}{{hi|1em|''a-na âli dup-šak-ki-i e ṣi-en''}}|| style="width:20em;text-align: left;"|{{pline|17|l}}{{hi|1em|for a city. The trencher-basket put (upon thy head).}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|18|l}}{{hi|1em|''UG-AD-AD-LIL e-mi ṣa-a-a-ḫa-tim''}}|| style="width:20em;text-align: left;"|{{pline|18|l}}{{hi|1em|...........an abode of comfort.}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}</noinclude>

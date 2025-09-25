@@ -1,0 +1,17 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|220|UNIVERSITY MUSEUM—BABYLONIAN SECTION}}
+{|</noinclude>{{nopt}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|32|l}}{{hi|1em|''šar-ru-tam {{gap}}{{gap}}ša ni-ši''}}|| style="width:20em;text-align: left;"|{{pline|32|l}}{{hi|1em|Royal power over the people}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|33|l}}{{hi|1em|''i-ši-im-kum {{gap}}{{gap}}<sup>ilu</sup>En-lil''}}|| style="width:20em;text-align: left;"|{{pline|33|l}}{{hi|1em|Enlil has decreed for thee.”}}
+|}
+{{rule}}{{rule}}
+{| 
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{hi|1em|''duppu {{gap}}2 kam-ma ''}}|| style="width:20em;text-align: left;"|{{hi|1em|Second tablet.}}
+|- valign="top"
+| style="padding-right: 1em;;text-align: left;width:20em" |{{hi|1em|''šu-tu-ur e-li ..........''}}|| style="width:20em;text-align: left;"|{{hi|1em|Written upon ..........}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{hi|1em|''{{gap}}4 šu-ši<ref>The tablet is reckoned at forty lines in each column.</ref>''}}|| style="width:20em;text-align: left;"|{{hi|1em|240 (lines).}}
+|}
+{{nop}}<noinclude>{{smallrefs}}</noinclude>

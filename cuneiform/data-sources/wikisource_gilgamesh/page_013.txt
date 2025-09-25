@@ -1,0 +1,51 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|217|STEPHEN LANGDON—THE EPIC OF GILGAMESH}}
+{|</noinclude>{{nopt}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|19|l}}{{hi|1em|''a-na šarri Unuk-(ki) ri-bi-tim''}}|| style="width:20em;text-align: left;"|{{pline|19|l}}{{hi|1em|For the king of Erech of the wide places}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|20|l}}{{hi|1em|''pi-ti pu-uk epši<ref>''KAK-ši.''</ref> {{gap}}a-na ḫa-a-a-ri''}}|| style="width:20em;text-align: left;"|{{pline|20|l}}{{hi|1em|open, addressing thy speech as unto a husband.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|21|l}}{{hi|1em|''a-na <sup>ilu</sup>Gilgamiš šarri ša Unuk-(ki) ri-bi-tim''}}|| style="width:20em;text-align: left;"|{{pline|21|l}}{{hi|1em|Unto Gilgamish king of Erech of the wide places}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|22|l}}{{hi|1em|''pi-ti pu-uk {{gap}}{{gap}}epši<ref>''KAK-ši.''</ref>''}}|| style="width:20em;text-align: left;"|{{pline|22|l}}{{hi|1em|open, addressing thy speech}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|23|l}}{{hi|1em|''a-na {{gap}}ha-a-a-ri''}}|| style="width:20em;text-align: left;"|{{pline|23|l}}{{hi|1em|as unto a husband.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|24|l}}{{hi|1em|''áš-ša-at ši-ma-tim i-ra-aḫ-ḫi''}}|| style="width:20em;text-align: left;"|{{pline|24|l}}{{hi|1em|He cohabits with the wife decreed for him,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|25|l}}{{hi|1em|''šu-u {{gap}}pa-na-nu-um-ma''}}|| style="width:20em;text-align: left;"|{{pline|25|l}}{{hi|1em|even he formerly.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|26|l}}{{hi|1em|''mu-uk {{gap}}wa-ar-ka-nu''}}|| style="width:20em;text-align: left;"|{{pline|26|l}}{{hi|1em|But henceforth}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|27|l}}{{hi|1em|''i-na mi-il-ki ša ili ga-bi-ma''}}|| style="width:20em;text-align: left;"|{{pline|27|l}}{{hi|1em|in the counsel which god has spoken,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|28|l}}{{hi|1em|''i-na bi-ti-iḳ {{gap}}a-pu-un-na-ti-šu<ref>Literally nostrils. ''pitik apunnati-šu'', work done in his presence(?). The meaning of the idiom is uncertain.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|28|l}}{{hi|1em|in the work of his presence}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|29|l}}{{hi|1em|''ši- {{gap}}ma- {{gap}}az- {{gap}}{{gap}}zum''}}|| style="width:20em;text-align: left;"|{{pline|29|l}}{{hi|1em|shall be his fate.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|30|l}}{{hi|1em|''a-na zi-ik-ri {{gap}}{{gap}}id-li-im''}}|| style="width:20em;text-align: left;"|{{pline|30|l}}{{hi|1em|At the mention of the hero}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|31|l}}{{hi|1em|''i-ri-ku {{gap}}{{gap}}{{gap}}pa-nu-šu''}}|| style="width:20em;text-align: left;"|{{pline|31|l}}{{hi|1em|his face became pale.}}
+|}
+
+
+{{c|{{larger|{{sc|Reverse II}}}}}}
+............................................................<br>
+{{c|(About five lines broken away)}}
+{| 
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|1|l}}{{hi|1em|''i-il-la-ak- ..........''}}|| style="width:20em;text-align: left;"|{{pline|1|l}}{{hi|1em|going .......................}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|2|l}}{{hi|1em|''ù ša-am-ka-at''[{{gap}}]''ar-ki-šu''}}|| style="width:20em;text-align: left;"|{{pline|2|l}}{{hi|1em|and the harlot ..... after him.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|3|l}}{{hi|1em|''i- ru- ub-ma<ref>Text ''ZU''!</ref> a-na<ref>Text has erroneous form.</ref> libbi Uruk-(ki) ri-bi-tim''}}|| style="width:20em;text-align: left;"|{{pline|3|l}}{{hi|1em|He entered into the midst of Erech of the wide places.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|4|l}}{{hi|1em|''ip-ḫur um-ma-nu-um i-na ṣi-ri-šu''}}|| style="width:20em;text-align: left;"|{{pline|4|l}}{{hi|1em|The artisans gathered about him.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|5|l}}{{hi|1em|''iz-zi-za-am-ma i-na zu-ki-im''}}|| style="width:20em;text-align: left;"|{{pline|5|l}}{{hi|1em|And as he stood in the street}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|6|l}}{{hi|1em|''ša Unuk-(ki) {{gap}}{{gap}}ri-bi-tim''}}|| style="width:20em;text-align: left;"|{{pline|6|l}}{{hi|1em|of Erech of the wide places,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|7|l}}{{hi|1em|''pa-aḫ-ra-a-ma {{gap}}ni-šu''}}|| style="width:20em;text-align: left;"|{{pline|7|l}}{{hi|1em|the people assembled}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}</noinclude>

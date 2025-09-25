@@ -1,0 +1,56 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|214|UNIVERSITY MUSEUM—BABYLONIAN SECTION}}
+{|</noinclude>{{nopt}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|22|l}}{{hi|1em|''al-ka ti-ba i-''[''na'']'' ga-ag-ga-ri''}}|| style="width:20em;text-align: left;"|{{pline|22|l}}{{hi|1em|Come thou, arise from the ground}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|23|l}}{{hi|1em|''ma-a-a?''<ref>Room for a small sign only, perhaps ''A; māi̭āk''? For ''mâka'', there, see {{sc|Behrens}}, LSS. II page 1 and index.</ref> ''-ak {{gap}}{{gap}}ri-i-im''}}|| style="width:20em;text-align: left;"|{{pline|23|l}}{{hi|1em|unto the place yonder (?) of the shepherd.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|24|l}}{{hi|1em|''iš-me a-wa-az-za im-ta-gár ga-ba-ša''}}|| style="width:20em;text-align: left;"|{{pline|24|l}}{{hi|1em|He heard her speak and accepted her words with favor.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|25|l}}{{hi|1em|''mi-il-kum ša sinništi''}}|| style="width:20em;text-align: left;"|{{pline|25|l}}{{hi|1em|The advice of the woman}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|26|l}}{{hi|1em|''im-ta-''[''ku'']''-ut a-na libbi-šu''}}|| style="width:20em;text-align: left;"|{{pline|26|l}}{{hi|1em|fell upon his heart.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|27|l}}{{hi|1em|''iš-ḫu-uṭ li-ib-ša-am''}}|| style="width:20em;text-align: left;"|{{pline|27|l}}{{hi|1em|She tore off one garment}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|28|l}}{{hi|1em|''iš-ti-nam'' {{gap}}[''ú'']''-la-ab-bi-iš-šu''}}|| style="width:20em;text-align: left;"|{{pline|28|l}}{{hi|1em|and clothed him with it.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|29|l}}{{hi|1em|''li-ib- ''[''ša-am'']'' {{gap}}ša-ni-a-am''}}|| style="width:20em;text-align: left;"|{{pline|29|l}}{{hi|1em|With a second garment}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|30|l}}{{hi|1em|''ši-i it-ta-al-ba- áš''}}|| style="width:20em;text-align: left;"|{{pline|30|l}}{{hi|1em|she clothed herself.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|31|l}}{{hi|1em|''ṣa-ab-ta-at {{gap}}ga-az- {{gap}}zu''}}|| style="width:20em;text-align: left;"|{{pline|31|l}}{{hi|1em|She clasped his hand,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|32|l}}{{hi|1em|''ki-ma ? i-ri-id-di-šu''}}|| style="width:20em;text-align: left;"|{{pline|32|l}}{{hi|1em|guiding him like ..............}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|33|l}}{{hi|1em|''a-na gu-up-ri {{gap}}{{gap}}ša ri-i-im''}}|| style="width:20em;text-align: left;"|{{pline|33|l}}{{hi|1em|unto the mighty presence of the shepherd,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|34|l}}{{hi|1em|''a-š''[''ar''{{gap}}{{gap}}] ''tar-ba-ṣi-im''}}|| style="width:20em;text-align: left;"|{{pline|34|l}}{{hi|1em|unto the place of the ... of the sheepfolds.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|35|l}}{{hi|1em|''i-na'' [{{gap}}{{gap}}]''-ḫu-ru ri-i̭a-ú''<ref>Infinitive “to shepherd”; see also {{sc|Poebel}}, PBS. V 106 I, ''ri-i̭a-ú, ri-te-i̭a-ú''.</ref>'}}|| style="width:20em;text-align: left;"|{{pline|35|l}}{{hi|1em|In ......... to shepherd}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|36|l}}{{hi|1em|''.............................''}}|| style="width:20em;text-align: left;"|{{pline|36|l}}{{hi|1em|''.............................''}}
+|}{{c|(About two lines broken away)}}
+<br>
+{{c|{{larger|{{sc|Col.}} III}}}}
+{| 
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|1|l}}{{hi|1em|''ši-iz-ba ša na-ma-áš-te-e''}}|| style="width:20em;text-align: left;"|{{pline|1|l}}{{hi|1em|Milk of the cattle}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|2|l}}{{hi|1em|''i-te-en-{{gap}}ni-{{gap}}{{gap}}iḳ''}}|| style="width:20em;text-align: left;"|{{pline|2|l}}{{hi|1em|he drank.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|3|l}}{{hi|1em|''a-ka-lam {{gap}} iš-ku-nu {{gap}}ma-ḫar-šu''}}|| style="width:20em;text-align: left;"|{{pline|3|l}}{{hi|1em|Food they placed before him.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|4|l}}{{hi|1em|''ip-te-iḳ-ma i-na {{gap}}{{gap}}-aṭ-ṭal''<ref>The text has clearly ''AD-RI''.</ref>}}|| style="width:20em;text-align: left;"|{{pline|4|l}}{{hi|1em|He broke bread<ref>''patāḳu'' has apparently the same sense originally as ''batāḳu'', although the one forms its preterite ''iptiḳ'', and the other ''ibtuḳ''. Cf. also ''maḫāṣu'' break, hammer and construct.</ref>}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|5|l}}{{hi|1em|''ù ip-pa-al-la-{{gap}}{{gap}}as''}}|| style="width:20em;text-align: left;"|{{pline|5|l}}{{hi|1em|gazing and looking.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|6|l}}{{hi|1em|''u-ul i-di {{gap}}<sup>d</sup>En-ki- dû''}}|| style="width:20em;text-align: left;"|{{pline|6|l}}{{hi|1em|But Enkidu understood not.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|7|l}}{{hi|1em|''aklam a-na a-ka-lim''}}|| style="width:20em;text-align: left;"|{{pline|7|l}}{{hi|1em|Bread to eat,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|8|l}}{{hi|1em|''šikaram {{gap}}{{gap}}a-na ša-te-e-im''}}|| style="width:20em;text-align: left;"|{{pline|8|l}}{{hi|1em|beer to drink,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|9|l}}{{hi|1em|''la-a {{gap}}{{gap}}lum-mu- {{gap}}{{gap}}ud''}}|| style="width:20em;text-align: left;"|{{pline|9|l}}{{hi|1em|he had not been taught.}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}</noinclude>

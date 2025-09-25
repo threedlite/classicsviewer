@@ -1,0 +1,21 @@
+{
+  "source": "Wikisource",
+  "work": "The Epic of Gilgamesh",
+  "translator": "Stephen Langdon",
+  "year": 1917,
+  "license": "Public Domain",
+  "pages_downloaded": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "total_pages": 10,
+  "url_pattern": "https://en.wikisource.org/wiki/Page:The_Epic_of_Gilgamesh_(Langdon_1917).djvu/{page_num}"
+}

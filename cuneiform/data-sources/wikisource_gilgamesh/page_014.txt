@@ -1,0 +1,60 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|218|STEPHEN LANGDON—THE EPIC OF GILGAMESH}}
+{|</noinclude>{{nopt}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|8|l}}{{hi|1em|''i-ta-mē-a {{gap}}i-na ṣi-ri-šu pi(?)-it-tam32''}}|| style="width:20em;text-align: left;"|{{pline|8|l}}{{hi|1em|disputing round about him:—}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|9|l}}{{hi|1em|''a-na mi-''[''ni'']''<ref>Omitted by the scribe.</ref> <sup>ilu</sup>Gilgamiš ma-ši-il''}}|| style="width:20em;text-align: left;"|{{pline|9|l}}{{hi|1em|“How is he become like Gilgamish suddenly?}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|10|l}}{{hi|1em|''la-nam {{gap}}ša- pi-  {{gap}}il''}}|| style="width:20em;text-align: left;"|{{pline|10|l}}{{hi|1em|In form he is shorter.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|11|l}}{{hi|1em|''e-ṣi''[{{gap}}{{gap}}''pu'']''-uk-ku-ul''}}|| style="width:20em;text-align: left;"|{{pline|11|l}}{{hi|1em|In ........ he is made powerful.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|12|l}}{{hi|1em|''{{gap}}{{gap}}i{{gap}}? -ak-ta''}}|| style="width:20em;text-align: left;"|{{pline|12|l}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|13|l}}{{hi|1em|''i''[''-{{gap}}{{gap}}-'']''di {{gap}}i-ši?''}}|| style="width:20em;text-align: left;"|{{pline|13|l}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|14|l}}{{hi|1em|''ši-iz-ba {{gap}}ša''[''na-ma-'']''áš-''[''te'']''-e''}}|| style="width:20em;text-align: left;"|{{pline|14|l}}{{hi|1em|Milk of the cattle}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|15|l}}{{hi|1em|''i-te- {{gap}}en- {{gap}}{{gap}}ni-   iḳ''}}|| style="width:20em;text-align: left;"|{{pline|15|l}}{{hi|1em|he drank.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|16|l}}{{hi|1em|''ka-i̭ā-na i-na ''[''libbi'']'' Uruk-(ki) kak-ki-a-tum<ref>Sic! The plural of ''kakku, kakkîtu''(?).</ref>''}}|| style="width:20em;text-align: left;"|{{pline|16|l}}{{hi|1em|Continually in the midst of Erech weapons}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|17|l}}{{hi|1em|''id-lu-tum u-te-el-li- {{gap}}lu''}}|| style="width:20em;text-align: left;"|{{pline|17|l}}{{hi|1em|the heroes purified.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|18|l}}{{hi|1em|''ša-ki-in {{gap}}ip-ša-   {{gap}}nu<ref>Cf. ''e-pi-ša-an-šu-nu libâru'', “May they see their doings,” ''Maḳlu'' VII 17.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|18|l}}{{hi|1em|A project was instituted.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|19|l}}{{hi|1em|''a-na idli ša i-tu-ru {{gap}}zi-mu-šu''}}|| style="width:20em;text-align: left;"|{{pline|19|l}}{{hi|1em|Unto the hero whose countenance was turned away,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|20|l}}{{hi|1em|''a-na <sup>ilu</sup>Gilgamiš ki-ma {{gap}}i-li-im''}}|| style="width:20em;text-align: left;"|{{pline|20|l}}{{hi|1em|unto Gilgamish like a god}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|21|l}}{{hi|1em|''ša-ki-iš-šum<ref>For ''šakin-šum''.</ref> me-iḫ-rum''}}|| style="width:20em;text-align: left;"|{{pline|21|l}}{{hi|1em|he became for him a fellow.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|22|l}}{{hi|1em|''a-na <sup>ilat</sup>Iš-ḫa-ra ma-i̭ā-lum''}}|| style="width:20em;text-align: left;"|{{pline|22|l}}{{hi|1em|For Išhara a couch}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|23|l}}{{hi|1em|''na- {{gap}}''[''di'']''-i- {{gap}}ma''}}|| style="width:20em;text-align: left;"|{{pline|23|l}}{{hi|1em|was laid.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|24|l}}{{hi|1em|''<sup>ilu</sup>Gilgamish id-''[{{gap}}{{gap}}]''na-an''(?)...}}|| style="width:20em;text-align: left;"|{{pline|24|l}}{{hi|1em|Gilgamish ...................}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|25|l}}{{hi|1em|''i-na mu-ši in-ni-''[''{{gap}}-'']''id''}}|| style="width:20em;text-align: left;"|{{pline|25|l}}{{hi|1em|In the night he ..............}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|26|l}}{{hi|1em|''i-na-ak<ref>On the verb ''nâku'' see the Babylonian Book of Proverbs § 27.</ref>-ša-am- {{gap}}ma''}}|| style="width:20em;text-align: left;"|{{pline|26|l}}{{hi|1em|embracing her in sleep.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|27|l}}{{hi|1em|''it-ta-''[{{gap}}{{gap}}]''i-na zûki''}}|| style="width:20em;text-align: left;"|{{pline|27|l}}{{hi|1em|They ........ in the street}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|28|l}}{{hi|1em|''ip-ta-ra-''[''ku''{{gap}}{{gap}}]''-ak-tām''}}|| style="width:20em;text-align: left;"|{{pline|28|l}}{{hi|1em|halting at the ................}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|29|l}}{{hi|1em|''ša {{gap}}<sup>ilu</sup>Gilgamish''}}|| style="width:20em;text-align: left;"|{{pline|29|l}}{{hi|1em|of Gilgamish.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|29|l}}{{hi|1em|''........... da-na''(?)'' ni-iš-šu''}}|| style="width:20em;text-align: left;"|{{pline|29|l}}{{hi|1em|.......... mightily(?)}}
+|}
+
+{{c|{{larger|{{sc|Col. III}}}}}}
+{| 
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|1|l}}{{hi|1em|''ur-''(?)''ḫa .....................''}}|| style="width:20em;text-align: left;"|{{pline|1|l}}{{hi|1em|A road(?) ....................}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|2|l}}{{hi|1em|''<sup>ilu</sup>Gilgamiš ................''}}|| style="width:20em;text-align: left;"|{{pline|2|l}}{{hi|1em|Gilgamish ...................}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|3|l}}{{hi|1em|''i-na ṣi-ri ....................''}}|| style="width:20em;text-align: left;"|{{pline|3|l}}{{hi|1em|in the plain ..................}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}</noinclude>

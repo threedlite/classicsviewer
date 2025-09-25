@@ -1,0 +1,38 @@
+<noinclude><pagequality level="3" user="Onewaymule87" /></noinclude>{{c|{{larger|TRANSLITERATION AND TRANSLATION }}}}
+
+{| 
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|1|l}}{{hi|1em|''it-bi-e-ma <sup>ilu</sup>Gilgamiš šu-na-tam i-pa-aš-šar.''}}|| style="width:20em;text-align: left;"|{{pline|1|l}}{{hi|1em|Gilgamish arose interpreting dreams,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|2|l}}{{hi|1em|''iz-za-kar-am<ref>Here this late text includes both variants ''pašāru'' and ''zakāru''. The earlier texts have only the one or the other.</ref> a-na um-mi-šu''}}|| style="width:20em;text-align: left;"|{{pline|2|l}}{{hi|1em|addressing his mother.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|3|l}}{{hi|1em|''um-mi i-na ša-a-at mu-ši-ti-i̭a''}}|| style="width:20em;text-align: left;"|{{pline|3|l}}{{hi|1em|“My mother! during my night}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|4|l}}{{hi|1em|''ša-am-ḫa-ku-ma at-ta-na-al-la-ak''}}|| style="width:20em;text-align: left;"|{{pline|4|l}}{{hi|1em|I, having become lusty, wandered about}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|5|l}}{{hi|1em|''i-na bi-ri-it id-da-tim''}}|| style="width:20em;text-align: left;"|{{pline|5|l}}{{hi|1em|in the midst of omens.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|6|l}}{{hi|1em|''ib-ba-šu-nim-ma ka-ka-’a<ref>For ''kakabê''; ''b'' becomes ''u̯'' and then is reduced to the breathing.</ref> ša-ma-i''}}|| style="width:20em;text-align: left;"|{{pline|6|l}}{{hi|1em|And there came out stars in the heavens,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|7|l}}{{hi|1em|''ki-?-?-rum<ref>The variants have ''kima kiṣri''; ''ki-[ma]?-rum'' is a possible reading. The standard Assyrian texts regard Enkidu as the subject.</ref> ša a-nim im-ku-ut a-na ṣi-ri-i̭a''}}|| style="width:20em;text-align: left;"|{{pline|7|l}}{{hi|1em|Like a … of heaven he fell upon me.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|8|l}}{{hi|1em|''áš-ši-šu-ma ik-ta-bi-it<ref>Var. ''da-an''</ref> e-li-i̭a''}}|| style="width:20em;text-align: left;"|{{pline|8|l}}{{hi|1em|I bore him but he was too heavy for me.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|9|l}}{{hi|1em|''ilam<ref>''ŠAM-KAK'' = ''ilu'', net. The variant has ''ultaprid ki-is-su-šu'', “he shook his murderous weapon.” For ''kissu'' see ZA. 9,220,4 = CT. 12,14b 36, ''giš-kud'' = ki-is-su.</ref> iš-šu-ma nu-uš-ša-šu<ref>Var. ''nussu'' for ''nuš-šu'' {{=}} ''nušša-šu''. The previous translations of this passage are erroneous.</ref> u-ul el-ti-’i̭''}}|| style="width:20em;text-align: left;"|{{pline|9|l}}{{hi|1em|He bore a net but I was not able to bear it.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|10|l}}{{hi|1em|''ad-ki ma-tum pa-ḫi-ir<ref>This is to my knowledge the first occurence of the infinitive of this verb, ''paḫēru'', not ''paḫāru''.</ref> e-li-šu''}}|| style="width:20em;text-align: left;"|{{pline|10|l}}{{hi|1em|I summoned the land to assemble unto him,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|11|l}}{{hi|1em|''id-lu-tum ú-na-ša-ku ši-pi-šu''}}|| style="width:20em;text-align: left;"|{{pline|11|l}}{{hi|1em|that heroes might kiss his feet.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|12|l}}{{hi|1em|''ú-um-mi-id-ma {{gap}}{{gap}}{{gap}}pu-ti''}}|| style="width:20em;text-align: left;"|{{pline|12|l}}{{hi|1em|He stood up before me<ref>Literally "he attained my front."</ref>}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|13|l}}{{hi|1em|''i-mi- du {{gap}}{{gap}}{{gap}}{{gap}}i̭a-ti''}}|| style="width:20em;text-align: left;"|{{pline|13|l}}{{hi|1em|and they stood over against me.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|14|l}}{{hi|1em|''aš-ši-a-šu-ma at-ba-la-áš-šu a-na ṣi-ri-ki''}}|| style="width:20em;text-align: left;"|{{pline|14|l}}{{hi|1em|I lifted him and carried him away unto thee.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|15|l}}{{hi|1em|''um-mi <sup>ilu</sup>Gilgamiš mu-u-da-a-at ka-la-ma''}}|| style="width:20em;text-align: left;"|{{pline|15|l}}{{hi|1em|The mother of Gilgamish she that knows all things,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|16|l}}{{hi|1em|''iz-za-kar-am a-na <sup>ilu</sup>Gilgamiš''}}|| style="width:20em;text-align: left;"|{{pline|16|l}}{{hi|1em|said unto Gilgamish:—}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}
+{{c|(211)}}</noinclude>

@@ -1,0 +1,46 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|213|STEPHEN LANGDON—THE EPIC OF GILGAMESH}}</noinclude>{{c|{{larger|{{sc|Col. II}}}}}}
+{| 
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|1|l}}{{hi|1em|''aš-šum uš-''[''tu-'']'' ma-ḫa-ru it-ti-ka.''}}|| style="width:20em;text-align: left;"|{{pline|1|l}}{{hi|1em|that he may join with thee in endeavor.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|2|l}}{{hi|1em|''<sup>ilu</sup>Gilgamish šu-na-tam i-pa-šar''}}|| style="width:20em;text-align: left;"|{{pline|2|l}}{{hi|1em|(Thus) Gilgamish solves (his) dream.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|3|l}}{{hi|1em|''<sup>ilu</sup>En-ki-''[''dû w'']''a?-ši-ib ma-ḫar ḫa-ri-im-tim''}}|| style="width:20em;text-align: left;"|{{pline|3|l}}{{hi|1em|Enkidu sitting before the hierodule}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|4|l}}{{hi|1em|''UR ''[{{gap}}{{gap}}]''-ḫa-mu DI-?-al-lu-un''}}||style="width:20em;text-align: left;"|{{pline|4|l}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|5|l}}{{hi|1em|[{{gap}}{{gap}}]'' im-ta-ši a-šar i-wa-al-du''}}|| style="width:20em;text-align: left;"|{{pline|5|l}}{{hi|1em|[{{gap}}{{gap}}] forgot where he was born.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|6|l}}{{hi|1em|''ûmê 6<ref>Restored from Tab. I Col. IV 21.</ref> ù 7 mu-ši- a-tim''}}|| style="width:20em;text-align: left;"|{{pline|6|l}}{{hi|1em|Six days and seven nights}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|7|l}}{{hi|1em|''<sup>ilu</sup>En-ki-dû te-bi-     i-ma''}}|| style="width:20em;text-align: left;"|{{pline|7|l}}{{hi|1em|came forth Enkidu}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|8|l}}{{hi|1em|''ša-''[''am-ka-ta'']     ''ir- ḫi''}}|| style="width:20em;text-align: left;"|{{pline|8|l}}{{hi|1em|and cohabited with the courtesan.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|9|l}}{{hi|1em|''ḫa-''[''ri-im-tu pa-a'']''-ša i-pu-ša-am-ma''}}|| style="width:20em;text-align: left;"|{{pline|9|l}}{{hi|1em|The hierodule opened her mouth}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|10|l}}{{hi|1em|''iz-za-''[''kar-am'']'' a-na <sup>ilu</sup>En-ki-dû<ref>Cf. {{sc|Dhorme}} ''Choix de Textes Religieux'' 198, 33.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|10|l}}{{hi|1em|speaking unto Enkidu.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|11|l}}{{hi|1em|''a-na-ṭal-ka <sup>d</sup>En-ki-dû ki-ma ili ta-ba-áš-ši''}}|| style="width:20em;text-align: left;"|{{pline|11|l}}{{hi|1em|“I behold thee Enkidu; like a god thou art.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|12|l}}{{hi|1em|''am-mi-nim it-ti na-ma-áš-te-e<ref>''namaštû'' a late form which has followed the analogy of ''reštû'' in assuming the feminine ''t'' as part of the root. The long ''û'' is due to analogy with ''namaššû'' a Sumerian loan-word with nisbe ending.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|12|l}}{{hi|1em|Why with the animals}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|13|l}}{{hi|1em|''ta-at-ta-''[''na-al-'']''la -ak ṣi-ra-am''}}|| style="width:20em;text-align: left;"|{{pline|13|l}}{{hi|1em|wanderest thou on the plain?}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|14|l}}{{hi|1em|''al-kam {{gap}}lu-ùr-di- {{gap}}ka''}}|| style="width:20em;text-align: left;"|{{pline|14|l}}{{hi|1em|Come! I will lead thee}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|15|l}}{{hi|1em|''a-na libbi Uruk-(ki) ri-bi-tim''}}|| style="width:20em;text-align: left;"|{{pline|15|l}}{{hi|1em|into the midst of Erech of the wide places,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|16|l}}{{hi|1em|''a-na biti ''[''el-'']''lim mu-ša-bi ša A-nim''}}|| style="width:20em;text-align: left;"|{{pline|16|l}}{{hi|1em|even unto the holy house, dwelling place of Anu.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|17|l}}{{hi|1em|''<sup>d</sup>En-ki-dû ti-bi lu-ru-ka''}}|| style="width:20em;text-align: left;"|{{pline|17|l}}{{hi|1em|Oh Enkidu, arise, I will conduct thee}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|18|l}}{{hi|1em|''a-na É-''[''an-n'']''a mu-ša-bi ša A-nim''}}|| style="width:20em;text-align: left;"|{{pline|18|l}}{{hi|1em|unto Eanna dwelling place of Anu,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|19|l}}{{hi|1em|''a-šar ''[''<sup>ilu</sup>Gilgamiš'']'' it-''[''.........'']'' ne-pi-ši-tim(?)''}}|| style="width:20em;text-align: left;"|{{pline|19|l}}{{hi|1em|where Gilgamish [oppresses] the souls of men(?)}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|20|l}}{{hi|1em|''ù at-''[{{gap}}{{gap}}]''  -di ''[{{gap}}{{gap}}''-'']'' ma''}}|| style="width:20em;text-align: left;"|{{pline|20|l}}{{hi|1em|And as I ............}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|21|l}}{{hi|1em|''ta-''[{{gap}}{{gap}}]'' ra-ma-an-     ka''}}|| style="width:20em;text-align: left;"|{{pline|21|l}}{{hi|1em|thou shalt ........ thyself.}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}</noinclude>

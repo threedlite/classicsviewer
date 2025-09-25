@@ -1,0 +1,49 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|212|UNIVERSITY MUSEUM—BABYLONIAN SECTION}}
+{|</noinclude>{{nopt}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|17|l}}{{hi|1em|''mi-in-di <sup>ilu</sup>Gilgamish ša ki-ma ka-ti''}}|| style="width:20em;text-align: left;"|{{pline|17|l}}{{hi|1em|“Truly oh Gilgamish he is}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|18|l}}{{hi|1em|''i-na ṣi-ri {{gap}}i-wa-li-id-ma''}}|| style="width:20em;text-align: left;"|{{pline|18|l}}{{hi|1em|born<ref>IV¹ of walādu.</ref> in the fields like thee.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|19|l}}{{hi|1em|''ú-ra-ab-bi-šu {{gap}}{{gap}}ša-du-ú''}}|| style="width:20em;text-align: left;"|{{pline|19|l}}{{hi|1em|The mountains have reared him.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|20|l}}{{hi|1em|''ta-mar-šu-ma ''[''sa(?)'']''-ap-ḫa-ta at-ta''}}|| style="width:20em;text-align: left;"|{{pline|20|l}}{{hi|1em|Thou beholdest him and art distracted(?)}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|21|l}}{{hi|1em|''id-lu-tum ú-na-ša-ku ši-pi-šu''<ref>Text ''ma''?</ref>}}|| style="width:20em;text-align: left;"|{{pline|21|l}}{{hi|1em|Heroes kiss his feet.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|22|l}}{{hi|1em|''te-iṭ-ṭi-ra-šu(?) … šu-ú-zu''}}|| style="width:20em;text-align: left;"|{{pline|22|l}}{{hi|1em|Thou shalt spare him….}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|23|l}}{{hi|1em|''ta-tar-ra-''[''’a'']''-šu a-na ṣi-''[''ri-i̭'']''a''}}|| style="width:20em;text-align: left;"|{{pline|23|l}}{{hi|1em|Thou shalt lead him to me.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|24|l}}{{hi|1em|[''iš-(?)'']'' ti-lam-ma<ref>''ištanamma'' > ''ištilamma''.</ref> i-ta-mar ša-ni-tam''}}|| style="width:20em;text-align: left;"|{{pline|24|l}}{{hi|1em|Again he dreamed and saw another dream}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|25|l}}{{hi|1em|[''šu-na-'']''ta i-ta-wa-a-am a-na um-mi-šu''}}|| style="width:20em;text-align: left;"|{{pline|25|l}}{{hi|1em|and reported it unto his mother.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|26|l}}{{hi|1em|[''um-m'']''i a-ta-mar {{gap}}ša-ni-tam''}}|| style="width:20em;text-align: left;"|{{pline|26|l}}{{hi|1em|“My mother, I have seen another}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|27|l}}{{hi|1em|[''šu-na-ta a-ta'']''mar e-mi-a {{gap}}i-na zu-ki-im''}}|| style="width:20em;text-align: left;"|{{pline|27|l}}{{hi|1em|[dream. I beheld] my likeness in the street.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|28|l}}{{hi|1em|[''i-na?'']'' Unuk-(ki) ri-bi-tim<ref>Cf. Code of Hammurapi IV 52 and {{sc|Streck}} in ''Babyloniaca'' II 177.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|28|l}}{{hi|1em|In Erech of the wide spaces<ref>I.e. in the suburb of Erech.</ref>}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|29|l}}{{hi|1em|''ḫa-aṣ-ṣi-nu {{gap}}{{gap}}na-di-i-ma''}}|| style="width:20em;text-align: left;"|{{pline|29|l}}{{hi|1em|he hurled the axe,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|30|l}}{{hi|1em|''e-li-šu {{gap}}{{gap}}pa-aḫ- ru''}}|| style="width:20em;text-align: left;"|{{pline|30|l}}{{hi|1em|and they assembled about him.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|31|l}}{{hi|1em|''ḫa-aṣ-ṣi-nu-um-ma ša-ni bu-nu-šu''}}|| style="width:20em;text-align: left;"|{{pline|31|l}}{{hi|1em|Another axe seemed his visage.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|32|l}}{{hi|1em|''a-mur-šu-ma aḫ-ta-ta a-na-ku''}}|| style="width:20em;text-align: left;"|{{pline|32|l}}{{hi|1em|I saw him and was astounded.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|33|l}}{{hi|1em|''a-ra-am-šu-ma ki-ma áš-ša-tim''}}|| style="width:20em;text-align: left;"|{{pline|33|l}}{{hi|1em|I loved him as a woman,}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|34|l}}{{hi|1em|''a-ḫa-ap-pu-up {{gap}}{{gap}}el-šu''}}|| style="width:20em;text-align: left;"|{{pline|34|l}}{{hi|1em|falling upon him in embrace.}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|35|l}}{{hi|1em|''el-ki-šu-ma áš-ta-ka-an-šu''}}|| style="width:20em;text-align: left;"|{{pline|35|l}}{{hi|1em|I took him and made him}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|36|l}}{{hi|1em|''a-na {{gap}}{{gap}}{{gap}}{{gap}}a-ḫi-i̭a''}}|| style="width:20em;text-align: left;"|{{pline|36|l}}{{hi|1em|my brother.”}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|37|l}}{{hi|1em|''um-mi <sup>ilu</sup>Gilgamish mu-da-at ka-la-ma''}}|| style="width:20em;text-align: left;"|{{pline|37|l}}{{hi|1em|The mother of Gilgamish she that knows all things}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | {{pline|38|l}}{{hi|1em|[''iz-za-kar-am a-na <sup>ilu</sup>Gilgamish'']}}|| style="width:20em;text-align: left;"|{{pline|38|l}}{{hi|1em|[said unto Gilgamish:—]}}
+|- valign="top"
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" | || style="width:20em;text-align: left;"|{{hi|1em|".................................}}
+|}<noinclude>{{smallrefs}}</noinclude>

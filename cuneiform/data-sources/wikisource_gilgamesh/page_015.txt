@@ -1,0 +1,60 @@
+<noinclude><pagequality level="3" user="Onewaymule87" />{{rvh|219|STEPHEN LANGDON—THE EPIC OF GILGAMESH}}
+{|</noinclude>{{nopt}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|4|l}}{{hi|1em|''i-ḫa-an-ni-ib ''[''pi-ir-ta-šu?'']}}|| style="width:20em;text-align: left;"|{{pline|4|l}}{{hi|1em|his hair growing thickly like the corn.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|5|l}}{{hi|1em|''it-bi-ma {{gap}}.......''}}|| style="width:20em;text-align: left;"|{{pline|5|l}}{{hi|1em|He came forth ...}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|6|l}}{{hi|1em|''a-na {{gap}}pa-ni- {{gap}}šu''}}|| style="width:20em;text-align: left;"|{{pline|6|l}}{{hi|1em|into his presence.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|7|l}}{{hi|1em|''it-tam-ḫa-ru i-na ri-bi-tu ma-ti''}}|| style="width:20em;text-align: left;"|{{pline|7|l}}{{hi|1em|They met in the wide park of the land.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|8|l}}{{hi|1em|''<sup>ilu</sup>En-ki-dû ba-ba-am ip-ta-ri-ik''}}|| style="width:20em;text-align: left;"|{{pline|8|l}}{{hi|1em|Enkidu held fast the door}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|9|l}}{{hi|1em|''i-na {{gap}}ši-pi-šu''}}|| style="width:20em;text-align: left;"|{{pline|9|l}}{{hi|1em|with his foot,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|10|l}}{{hi|1em|''<sup>ilu</sup>Gilgamiš e-ri-ba-am u-ul id-di-in''}}|| style="width:20em;text-align: left;"|{{pline|10|l}}{{hi|1em|and permitted not Gilgamish to enter.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|11|l}}{{hi|1em|''iṣ-ṣa-ab-tu-ma ki-ma li-i-im''}}|| style="width:20em;text-align: left;"|{{pline|11|l}}{{hi|1em|They grappled with each other}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|12|l}}{{hi|1em|''i- {{gap}}{{gap}}lu- {{gap}}{{gap}}du<ref>The verb ''la’āṭu'', to pierce, devour, forms its preterite ''iluṭ''; see VAB. IV 216, 1. The present tense which occurs here as ''iluṭ'' also.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|12|l}}{{hi|1em|goring like an ox.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|13|l}}{{hi|1em|''zi-ip-pa-am {{gap}}’i-bu- {{gap}}tu''}}|| style="width:20em;text-align: left;"|{{pline|13|l}}{{hi|1em|The threshold they destroyed.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|14|l}}{{hi|1em|''i-ga-rum {{gap}}ir-tu-tū<ref>Note ''BUL(tu-ku)'' = ''ratātu'' (falsely entered in {{sc|Meissner}}, SAI. 7993), and ''irattutu'' in {{sc|Zimmern}}, ''Shurpu'', Index.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|14|l}}{{hi|1em|The wall they demolished.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|15|l}}{{hi|1em|''<sup>ilu</sup>Gilgamiš ù <sup>ilu</sup>En-ki- {{gap}} dû''}}|| style="width:20em;text-align: left;"|{{pline|15|l}}{{hi|1em|Gilgamish and Enkidu}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|16|l}}{{hi|1em|''iṣ-ṣa-ab-tu-ù- {{gap}}{{gap}}ma''}}|| style="width:20em;text-align: left;"|{{pline|16|l}}{{hi|1em|grappled with each other,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|17|l}}{{hi|1em|''ki-ma li-i-im i-lu-du''}}|| style="width:20em;text-align: left;"|{{pline|17|l}}{{hi|1em|goring like an ox.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|18|l}}{{hi|1em|''zi-ip-pa-am {{gap}}{{gap}}’i-bu- tu''}}|| style="width:20em;text-align: left;"|{{pline|18|l}}{{hi|1em|The threshold they destroyed.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|19|l}}{{hi|1em|''i-ga-rum {{gap}}{{gap}}ir-tu-tū''}}|| style="width:20em;text-align: left;"|{{pline|19|l}}{{hi|1em|The wall they demolished.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|20|l}}{{hi|1em|''ik-mi-is-ma {{gap}}<sup>ilu</sup>Gilgamiš''}}|| style="width:20em;text-align: left;"|{{pline|20|l}}{{hi|1em|Gilgamish bowed}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|21|l}}{{hi|1em|''i-na ga-ga-ag-ga-ri {{gap}}ši-ip-šu''}}|| style="width:20em;text-align: left;"|{{pline|21|l}}{{hi|1em|to the ground at his feet}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|22|l}}{{hi|1em|''ip-ši-iḫ<ref>“For ''ipšaḫ''.”</ref> {{gap}}uṣ-ṣa-šu- {{gap}}ma''}}|| style="width:20em;text-align: left;"|{{pline|22|l}}{{hi|1em|and his javelin reposed.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|23|l}}{{hi|1em|''i-ni-’i {{gap}}{{gap}}i-ra-az-zu''}}|| style="width:20em;text-align: left;"|{{pline|23|l}}{{hi|1em|He turned back his breast.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|24|l}}{{hi|1em|''iš-tu i-ra-zu {{gap}}i-ni-ḫu<ref>Sic! ''ḫu'' reduced to the breathing ''’u''; read ''i-ni-’u''.</ref>''}}|| style="width:20em;text-align: left;"|{{pline|24|l}}{{hi|1em|After he had turned back his breast,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|25|l}}{{hi|1em|''<sup>ilu</sup>En-ki-dû a-na ša-ši-im''}}|| style="width:20em;text-align: left;"|{{pline|25|l}}{{hi|1em|Enkidu unto that one}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|26|l}}{{hi|1em|''iz-za-kar-am a-na <sup>ilu</sup>Gilgamiš''}}|| style="width:20em;text-align: left;"|{{pline|26|l}}{{hi|1em|spoke, even unto Gilgamish.}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|27|l}}{{hi|1em|''ki-ma iš-te-en-ma um-ma-ka''}}|| style="width:20em;text-align: left;"|{{pline|27|l}}{{hi|1em|“Even as one<ref>I.e., an ordinary man.</ref> did thy mother}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|28|l}}{{hi|1em|''ú-{{gap}}li- {{gap}}id- {{gap}}ka''}}|| style="width:20em;text-align: left;"|{{pline|28|l}}{{hi|1em|bear thee,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|29|l}}{{hi|1em|''ri-im-tum ša {{gap}}zu- pu-ri''}}|| style="width:20em;text-align: left;"|{{pline|29|l}}{{hi|1em|she the wild cow of the cattle stalls,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|30|l}}{{hi|1em|''<sup>ilat</sup>Nin- {{gap}}sun- {{gap}}{{gap}}na''}}|| style="width:20em;text-align: left;"|{{pline|30|l}}{{hi|1em|Ninsunna,}}
+|- valign="top" 
+| style="padding-right: 1em;padding-left: 1.5em;text-align: left;width:20em" |{{pline|31|l}}{{hi|1em|''ul-lu e-li mu-ti ri-eš-su''}}|| style="width:20em;text-align: left;"|{{pline|31|l}}{{hi|1em|whose head she exalted more than a husband.}}<noinclude>{{nopt}}
+|}
+{{smallrefs}}</noinclude>

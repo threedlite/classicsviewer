@@ -10,6 +10,12 @@ This application includes cuneiform texts and linguistic data from the Open Rich
 
 ### Akkadian Texts
 
+#### Epic of Gilgamesh (Stephen Langdon 1917)
+Public Domain
+Source: Wikisource (https://en.wikisource.org/wiki/The_Epic_of_Gilgamish)
+Citation: Langdon, Stephen. The Epic of Gilgamish. Philadelphia: University Museum, 1917.
+This edition includes Akkadian transliteration and English translation of the Second Tablet.
+
 #### RINAP (Royal Inscriptions of the Neo-Assyrian Period)
 Copyright © 2011-2022 RINAP Project
 Licensed under CC BY-SA 3.0
@@ -35,6 +41,12 @@ Source: http://oracc.org/cmawro/
 Anti-witchcraft ritual texts from ancient Mesopotamia.
 
 ### Sumerian Texts
+
+#### Stephen Langdon's Sumerian Liturgies and Psalms (1919)
+Public Domain
+Source: Project Gutenberg #31935 (https://www.gutenberg.org/ebooks/31935)
+Citation: Langdon, Stephen. Sumerian Liturgies and Psalms. Philadelphia: University Museum, 1919.
+This work includes Sumerian transliterations and English translations of liturgical texts from ancient Mesopotamia.
 
 #### ETCSRI (Electronic Text Corpus of Sumerian Royal Inscriptions)
 Copyright © 2008-2023 Gábor Zólyomi, Bálint Tanos, Szilvia Sövegjártó
