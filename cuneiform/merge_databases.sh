@@ -29,8 +29,8 @@ echo "Merging data from '$SOURCE_DB' into '$TARGET_DB'"
 
 # Create a backup of the target database
 BACKUP_FILE="${TARGET_DB}.backup.$(date +%Y%m%d_%H%M%S)"
-echo "Creating backup: $BACKUP_FILE"
-cp "$TARGET_DB" "$BACKUP_FILE"
+#echo "Creating backup: $BACKUP_FILE"
+#cp "$TARGET_DB" "$BACKUP_FILE"
 
 # Function to check if table exists
 table_exists() {

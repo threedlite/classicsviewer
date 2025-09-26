@@ -5843,8 +5843,91 @@ def create_database(mode='full'):
     except Exception as e:
         print(f"Warning during translation lookup table creation: {e}")
         print("Continuing...")
-    
+
+    # Close connection before merging cuneiform data
     conn.close()
+
+    # Merge cuneiform data if available (skip for first1ktest mode)
+    if mode != 'first1ktest':
+        print("\n=== MERGING CUNEIFORM DATA ===")
+        cuneiform_dir = script_dir.parent / "cuneiform"
+        merge_script = cuneiform_dir / "merge_databases.sh"
+        sumerian_db = cuneiform_dir / "sumerian_texts.db"
+        akkadian_db = cuneiform_dir / "akkadian_texts.db"
+
+        if merge_script.exists() and (sumerian_db.exists() or akkadian_db.exists()):
+            try:
+                # Make merge script executable
+                os.chmod(merge_script, 0o755)
+
+                # In sample mode, only merge Akkadian data
+                # In other modes (full, extended), merge both Sumerian and Akkadian
+                if mode != 'sample':
+                    # Merge Sumerian data if available (for full and extended modes)
+                    if sumerian_db.exists():
+                        print(f"Merging Sumerian texts from {sumerian_db}...")
+                        result = subprocess.run(
+                            [str(merge_script), str(sumerian_db), str(db_path)],
+                            cwd=str(cuneiform_dir),
+                            capture_output=True,
+                            text=True
+                        )
+                        if result.returncode != 0:
+                            print(f"Warning: Failed to merge Sumerian data: {result.stderr}")
+                        else:
+                            print("✓ Sumerian texts merged successfully")
+                else:
+                    print("Skipping Sumerian texts (sample mode only includes Akkadian)")
+
+                # Merge Akkadian data if available (for all modes except first1ktest)
+                if akkadian_db.exists():
+                    print(f"Merging Akkadian texts from {akkadian_db}...")
+                    result = subprocess.run(
+                        [str(merge_script), str(akkadian_db), str(db_path)],
+                        cwd=str(cuneiform_dir),
+                        capture_output=True,
+                        text=True
+                    )
+                    if result.returncode != 0:
+                        print(f"Warning: Failed to merge Akkadian data: {result.stderr}")
+                    else:
+                        print("✓ Akkadian texts merged successfully")
+
+                # Print final language statistics
+                temp_conn = sqlite3.connect(db_path)
+                temp_cursor = temp_conn.cursor()
+
+                print("\n=== FINAL LANGUAGE STATISTICS ===")
+                temp_cursor.execute("""
+                    SELECT language, COUNT(*) as count
+                    FROM authors
+                    GROUP BY language
+                    ORDER BY count DESC
+                """)
+                for lang, count in temp_cursor.fetchall():
+                    print(f"  {lang.capitalize()}: {count} authors")
+
+                temp_cursor.execute("""
+                    SELECT language, COUNT(*) as count
+                    FROM dictionary_entries
+                    GROUP BY language
+                    ORDER BY count DESC
+                    LIMIT 10
+                """)
+                print("\nDictionary entries by language:")
+                for lang, count in temp_cursor.fetchall():
+                    print(f"  {lang.capitalize()}: {count:,} entries")
+
+                temp_conn.close()
+
+            except Exception as e:
+                print(f"Warning: Could not merge cuneiform data: {e}")
+                print("Continuing without cuneiform texts...")
+        else:
+            print("No cuneiform data found to merge (this is normal if not yet prepared)")
+    else:
+        print("\n=== SKIPPING CUNEIFORM MERGE (first1ktest mode) ===")
+
     print("\n✓ Database created successfully!")
 
 

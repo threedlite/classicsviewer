@@ -135,6 +135,17 @@ The Wiktionary content is used in accordance with the CC BY-SA 3.0 license,
 which permits redistribution and modification with proper attribution.
 
 
+Stephen Langdon's Epic of Gilgamesh (1917) and Sumerian Liturgies and Psalms (1919)
+===================================================================================
+Public Domain
+Source: Wikisource (https://en.wikisource.org/wiki/The_Epic_of_Gilgamish)
+Citation: Langdon, Stephen. The Epic of Gilgamish. Philadelphia: University Museum, 1917.
+This edition includes Akkadian transliteration and English translation of the Second Tablet.
+Source: Project Gutenberg #31935 (https://www.gutenberg.org/ebooks/31935)
+Citation: Langdon, Stephen. Sumerian Liturgies and Psalms. Philadelphia: University Museum, 1919.
+This work includes Sumerian transliterations and English translations of liturgical texts from ancient Mesopotamia.
+
+
 AUDIO RECORDINGS
 ================
 
