@@ -13,6 +13,7 @@ import com.classicsviewer.app.databinding.ActivityManageLanguagesBinding
 import com.classicsviewer.app.utils.PreferencesManager
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.classicsviewer.app.models.CustomLanguageConfig
 
 class ManageLanguagesActivity : BaseActivity() {
 
@@ -205,9 +206,3 @@ class ManageLanguagesActivity : BaseActivity() {
             .show()
     }
 }
-
-data class CustomLanguageConfig(
-    val id: String,
-    val displayName: String,
-    val color: Int
-)

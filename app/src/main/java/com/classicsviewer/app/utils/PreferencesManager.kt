@@ -2,9 +2,8 @@ package com.classicsviewer.app.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.classicsviewer.app.CustomLanguageConfig
+import com.classicsviewer.app.models.CustomLanguageConfig
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 object PreferencesManager {
     private const val PREFS_NAME = "ClassicsViewerPrefs"
@@ -142,25 +141,48 @@ object PreferencesManager {
         return getPrefs(context).getLong(KEY_EXTERNAL_DATABASE_COPIED_TIME, 0L)
     }
 
-    // Custom language preferences
+    // Custom language preferences - using JSONArray to avoid TypeToken issues
     fun getCustomLanguages(context: Context): List<CustomLanguageConfig> {
         val json = getPrefs(context).getString(KEY_CUSTOM_LANGUAGES, null)
-        if (json.isNullOrEmpty()) return emptyList()
+        android.util.Log.d("PreferencesManager", "Loading custom languages, JSON: $json")
+        if (json.isNullOrEmpty()) {
+            android.util.Log.d("PreferencesManager", "No custom languages found in preferences")
+            return emptyList()
+        }
 
         return try {
-            val type = object : TypeToken<List<CustomLanguageConfig>>() {}.type
-            gson.fromJson(json, type)
+            // Parse JSON manually to avoid TypeToken issues with ProGuard
+            val jsonArray = org.json.JSONArray(json)
+            val languages = mutableListOf<CustomLanguageConfig>()
+
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val language = CustomLanguageConfig(
+                    id = jsonObject.getString("id"),
+                    displayName = jsonObject.getString("displayName"),
+                    color = jsonObject.getInt("color")
+                )
+                languages.add(language)
+                android.util.Log.d("PreferencesManager", "Loaded language: id=${language.id}, name=${language.displayName}, color=${language.color}")
+            }
+
+            android.util.Log.d("PreferencesManager", "Successfully loaded ${languages.size} custom languages")
+            languages
         } catch (e: Exception) {
+            android.util.Log.e("PreferencesManager", "Failed to deserialize custom languages: ${e.message}", e)
+            android.util.Log.e("PreferencesManager", "JSON that failed: $json")
             emptyList()
         }
     }
 
     fun addCustomLanguage(context: Context, language: CustomLanguageConfig) {
+        android.util.Log.d("PreferencesManager", "Adding custom language: ${language.id} - ${language.displayName}")
         val languages = getCustomLanguages(context).toMutableList()
         // Remove any existing language with the same ID
         languages.removeAll { it.id == language.id }
         // Add the new/updated language
         languages.add(language)
+        android.util.Log.d("PreferencesManager", "Updated languages list size: ${languages.size}")
         saveCustomLanguages(context, languages)
     }
 
@@ -171,7 +193,39 @@ object PreferencesManager {
     }
 
     private fun saveCustomLanguages(context: Context, languages: List<CustomLanguageConfig>) {
-        val json = gson.toJson(languages)
-        getPrefs(context).edit().putString(KEY_CUSTOM_LANGUAGES, json).apply()
+        android.util.Log.d("PreferencesManager", "Saving ${languages.size} custom languages")
+
+        // Use JSONArray to avoid Gson/ProGuard issues
+        val jsonArray = org.json.JSONArray()
+        for (language in languages) {
+            val jsonObject = org.json.JSONObject()
+            jsonObject.put("id", language.id)
+            jsonObject.put("displayName", language.displayName)
+            jsonObject.put("color", language.color)
+            jsonArray.put(jsonObject)
+        }
+
+        val json = jsonArray.toString()
+        android.util.Log.d("PreferencesManager", "JSON to save: $json")
+
+        val editor = getPrefs(context).edit()
+        editor.putString(KEY_CUSTOM_LANGUAGES, json)
+
+        // Use apply() for better reliability
+        editor.apply()
+
+        // Verify the save by immediately reading back with commit to force sync
+        getPrefs(context).edit().commit() // Force sync
+
+        val savedJson = getPrefs(context).getString(KEY_CUSTOM_LANGUAGES, null)
+        android.util.Log.d("PreferencesManager", "Verification read - saved JSON: $savedJson")
+
+        if (savedJson != json) {
+            android.util.Log.e("PreferencesManager", "WARNING: Saved JSON doesn't match! Expected: $json, Got: $savedJson")
+        }
+
+        // Double-check by calling getCustomLanguages
+        val loadedLanguages = getCustomLanguages(context)
+        android.util.Log.d("PreferencesManager", "Verification: loaded ${loadedLanguages.size} languages after save")
     }
 }

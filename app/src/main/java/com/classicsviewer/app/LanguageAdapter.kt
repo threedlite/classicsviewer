@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.classicsviewer.app.databinding.ItemLanguageBinding
 import com.google.android.material.card.MaterialCardView
+import com.classicsviewer.app.models.CustomLanguageConfig
 
 class LanguageAdapter(
     private val languages: List<Language>,
