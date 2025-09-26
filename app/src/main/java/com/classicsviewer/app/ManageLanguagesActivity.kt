@@ -14,6 +14,8 @@ import com.classicsviewer.app.utils.PreferencesManager
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.classicsviewer.app.models.CustomLanguageConfig
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class ManageLanguagesActivity : BaseActivity() {
 
@@ -32,6 +34,7 @@ class ManageLanguagesActivity : BaseActivity() {
         setupUI()
         loadCustomLanguages()
     }
+
 
     private fun setupUI() {
         // Initialize with default color

@@ -51,33 +51,34 @@ object DatabaseValidator {
             if (!dbFile.exists()) {
                 return ValidationResult(false, "Database file does not exist")
             }
-            
+
             // Get the bundled database schema for comparison
             val bundledDbPath = context.getDatabasePath("perseus_texts.db").absolutePath
             if (!File(bundledDbPath).exists()) {
                 return ValidationResult(false, "Bundled database not found. Please launch the app normally first.")
             }
-            
+
             val externalSize = dbFile.length() / (1024 * 1024)
             val bundledSize = File(bundledDbPath).length() / (1024 * 1024)
-            
+
             android.util.Log.d("DatabaseValidator", "Comparing databases:")
             android.util.Log.d("DatabaseValidator", "  External: ${dbFile.absolutePath} (${externalSize}MB)")
             android.util.Log.d("DatabaseValidator", "  Bundled:  ${bundledDbPath} (${bundledSize}MB)")
-            
+
             // Open both databases for comparison
+            // For very large databases, open without READONLY flag to avoid lock issues
             val externalDb = SQLiteDatabase.openDatabase(
                 dbFile.absolutePath,
                 null,
-                SQLiteDatabase.OPEN_READONLY
+                0  // No flags - allows SQLite more flexibility with large files
             )
-            
+
             val bundledDb = SQLiteDatabase.openDatabase(
                 bundledDbPath,
                 null,
                 SQLiteDatabase.OPEN_READONLY
             )
-            
+
             return externalDb.use { extDb ->
                 bundledDb.use { bunDb ->
                     compareSchemas(extDb, bunDb, dbFile.absolutePath, bundledDbPath)

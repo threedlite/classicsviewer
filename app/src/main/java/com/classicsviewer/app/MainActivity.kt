@@ -366,10 +366,19 @@ class MainActivity : AppCompatActivity() {
                                 // Look for .db files in the ZIP
                                 if (entry.name.endsWith(".db", ignoreCase = true) && !entry.isDirectory) {
                                     android.util.Log.d("MainActivity", "Extracting: ${entry.name}")
-                                    
-                                    externalDbFile.outputStream().use { output ->
-                                        zipStream.copyTo(output)
+                                    android.util.Log.d("MainActivity", "Entry size: ${entry.size} bytes")
+
+                                    var totalBytes = 0L
+                                    externalDbFile.outputStream().buffered(8192).use { output ->
+                                        val buffer = ByteArray(8192)
+                                        var bytes = zipStream.read(buffer)
+                                        while (bytes >= 0) {
+                                            output.write(buffer, 0, bytes)
+                                            totalBytes += bytes
+                                            bytes = zipStream.read(buffer)
+                                        }
                                     }
+                                    android.util.Log.d("MainActivity", "Extracted ${totalBytes} bytes")
                                     extractedDb = true
                                     break // Only extract the first .db file found
                                 }
