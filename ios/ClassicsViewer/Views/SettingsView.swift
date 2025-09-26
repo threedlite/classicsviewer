@@ -71,13 +71,6 @@ struct SettingsView: View {
                 // Database Section
                 Section(header: Text("Database")) {
                     HStack {
-                        Text("Database Version")
-                        Spacer()
-                        Text("0.8.32")
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    HStack {
                         Text("Database Source")
                         Spacer()
                         Text(databaseSource)
@@ -151,7 +144,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("0.8.32")
+                        Text("0.8.39")
                             .foregroundColor(.secondary)
                     }
 
