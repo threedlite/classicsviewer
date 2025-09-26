@@ -5930,6 +5930,14 @@ def create_database(mode='full'):
 
     print("\n✓ Database created successfully!")
 
+    # Ensure WAL is fully checkpointed before compression
+    # This is critical to avoid creating corrupted ZIP files
+    if os.path.exists(db_path):
+        checkpoint_conn = sqlite3.connect(db_path)
+        checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+        checkpoint_conn.close()
+        print("✓ Database WAL checkpointed")
+
 
 def create_philosophical_reference_mappings(cursor, book_id, segments, min_line, max_line, valid_lines):
     """
