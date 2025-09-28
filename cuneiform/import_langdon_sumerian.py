@@ -2,9 +2,11 @@
 """
 Import Stephen Langdon's Sumerian Liturgies and Psalms into database.
 Parses the Gutenberg text format to extract transliteration and translation pairs.
+Creates intermediate CSV for debugging line duplication issues.
 """
 
 import re
+import csv
 import sqlite3
 import sys
 from pathlib import Path
@@ -15,6 +17,7 @@ def parse_sumerian_text(file_path):
     texts = []
     current_text = None
     current_lines = []
+    sequence_number = 0  # Track actual sequence for database
 
     with open(file_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
@@ -31,6 +34,7 @@ def parse_sumerian_text(file_path):
                 current_text['lines'] = current_lines
                 texts.append(current_text)
                 current_lines = []
+                sequence_number = 0  # Reset for new text
 
             # Start new text
             title = line.split('.')[0]  # Remove catalog number
@@ -46,7 +50,7 @@ def parse_sumerian_text(file_path):
             # This line has a number
             line_num_match = re.match(r'^(\d+)\.\s*(.*)', line)
             if line_num_match:
-                line_number = int(line_num_match.group(1))
+                source_line_number = int(line_num_match.group(1))  # Line number from source
                 content = line_num_match.group(2)
 
                 # Check if this is Sumerian (has underscores or special chars)
@@ -57,7 +61,7 @@ def parse_sumerian_text(file_path):
                     next_line = lines[i + 1].strip()
                     next_match = re.match(r'^(\d+)\.\s*(.*)', next_line)
 
-                    if next_match and int(next_match.group(1)) == line_number:
+                    if next_match and int(next_match.group(1)) == source_line_number:
                         # We have a pair!
                         sumerian_text = content.replace('_', '').strip()
                         english_text = next_match.group(2).strip()
@@ -67,8 +71,10 @@ def parse_sumerian_text(file_path):
                         english_text = re.sub(r'\(\d+\)', '', english_text)
 
                         if sumerian_text and english_text != '....':
+                            sequence_number += 1  # Increment sequence for each actual line
                             current_lines.append({
-                                'line_number': line_number,
+                                'line_number': sequence_number,  # Use sequential numbering
+                                'source_line_number': source_line_number,  # Keep original for reference
                                 'sumerian': sumerian_text,
                                 'translation': english_text
                             })
@@ -82,6 +88,60 @@ def parse_sumerian_text(file_path):
         texts.append(current_text)
 
     return texts
+
+def export_to_csv(texts, csv_path='sumerian_texts.csv'):
+    """Export parsed texts to CSV for debugging."""
+
+    rows = []
+    for text_idx, text_data in enumerate(texts, 1):
+        if not text_data.get('lines'):
+            continue
+
+        for line in text_data['lines']:
+            rows.append({
+                'text_id': text_idx,
+                'text_title': text_data['title'],
+                'text_type': text_data['type'],
+                'line_number': line['line_number'],
+                'source_line_number': line.get('source_line_number', line['line_number']),
+                'sumerian': line['sumerian'],
+                'translation': line['translation']
+            })
+
+    # Write to CSV
+    with open(csv_path, 'w', newline='', encoding='utf-8') as f:
+        if rows:
+            fieldnames = ['text_id', 'text_title', 'text_type', 'line_number', 'source_line_number', 'sumerian', 'translation']
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+    print(f"Created {csv_path} with {len(rows)} lines")
+
+    # Show summary statistics
+    text_stats = {}
+    for row in rows:
+        text_id = row['text_id']
+        if text_id not in text_stats:
+            text_stats[text_id] = {
+                'title': row['text_title'],
+                'lines': []
+            }
+        text_stats[text_id]['lines'].append(row['line_number'])
+
+    print("\nLines per text:")
+    for text_id in sorted(text_stats.keys()):
+        stats = text_stats[text_id]
+        line_nums = sorted(set(stats['lines']))  # Remove duplicates and sort
+        duplicates = len(stats['lines']) - len(line_nums)
+        print(f"  Text {text_id} - {stats['title'][:40]}:")
+        print(f"    Total entries: {len(stats['lines'])}, Unique lines: {len(line_nums)}")
+        if duplicates > 0:
+            print(f"    WARNING: {duplicates} duplicate line numbers detected!")
+        if line_nums:
+            print(f"    Line range: {min(line_nums)}-{max(line_nums)}")
+
+    return rows
 
 def import_to_database(db_path, texts):
     """Import parsed Sumerian texts into database."""
@@ -196,7 +256,12 @@ def main():
     for text in texts[:3]:  # Show first 3
         print(f"  - {text['title']}: {len(text.get('lines', []))} lines")
 
+    # Export to CSV for debugging
+    print("\nExporting to CSV for inspection...")
+    rows = export_to_csv(texts)
+
     # Import to database
+    print("\nImporting to database...")
     import_to_database(db_path, texts)
 
 if __name__ == '__main__':
