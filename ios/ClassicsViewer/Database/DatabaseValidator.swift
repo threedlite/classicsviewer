@@ -234,10 +234,8 @@ class DatabaseValidator {
             throw ValidationError.emptyDatabase
         }
         
-        // Validate integrity
-        if !checkDatabaseIntegrity(extDb) {
-            throw ValidationError.invalidSchema
-        }
+        // Skip integrity check for performance (matching Android behavior)
+        // The schema validation above is sufficient
         
         return true
     }
@@ -752,11 +750,8 @@ class DatabaseValidator {
             }
         }
         
-        // Check integrity
-        progressCallback?("Running database integrity check (this may take several minutes, please wait)...")
-        if !checkDatabaseIntegrity(impDb) {
-            issues.append("Database integrity check failed")
-        }
+        // Skip integrity check for performance (matching Android behavior)
+        // The schema validation above is sufficient
         
         logger.info("Validation complete. Found \(issues.count) issues")
         if !issues.isEmpty {
