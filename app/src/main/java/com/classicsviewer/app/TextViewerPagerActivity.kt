@@ -622,9 +622,9 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
         // Check language support
         lifecycleScope.launch {
             try {
-                // Dictionary lookup is now available for both Greek and Latin
-                if (currentLanguage == "greek" || currentLanguage == "latin") {
-                    // Check if Latin dictionary is available
+                // Dictionary lookup is now available for any language
+                if (currentLanguage.isNotEmpty()) {
+                    // Check if Latin dictionary is available (special case for Latin)
                     if (currentLanguage == "latin") {
                         val hasLatinDict = repository.hasLatinDictionary()
                         if (!hasLatinDict) {
@@ -636,11 +636,11 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                             return@launch
                         }
                     }
-                    
+
                     // Look up the lemma for this word with proper error handling
                     val lemma = repository.getLemmaForWord(word, currentLanguage) ?: word
-                    android.util.Log.d("TextViewerPager", "Lemma lookup result: '$lemma' for word: '$word'")
-                    
+                    android.util.Log.d("TextViewerPager", "Lemma lookup result: '$lemma' for word: '$word' (language: $currentLanguage)")
+
                     // Show dictionary
                     val intent = Intent(this@TextViewerPagerActivity, DictionaryActivity::class.java).apply {
                         putExtra("word", word)
@@ -649,8 +649,8 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                     }
                     startActivity(intent)
                 } else {
-                    android.util.Log.w("TextViewerPager", "Unexpected language: $currentLanguage")
-                    Snackbar.make(binding.root, "Dictionary lookup only available for Greek and Latin texts", Snackbar.LENGTH_SHORT).show()
+                    android.util.Log.w("TextViewerPager", "Empty language for word: $word")
+                    Snackbar.make(binding.root, "Unable to determine text language", Snackbar.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 android.util.Log.e("TextViewerPager", "Error during dictionary lookup", e)

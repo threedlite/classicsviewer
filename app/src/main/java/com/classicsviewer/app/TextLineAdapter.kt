@@ -99,9 +99,13 @@ class TextLineAdapter(
             
             while (i < line.text.length) {
                 val char = line.text[i]
-                val isWordChar = char.isLetter() || (char == '\'' && i > 0 && i < line.text.length - 1 && 
-                                                      line.text[i-1].isLetter() && line.text[i+1].isLetter())
-                
+                // Include hyphen as word character for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+                // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+                val isWordChar = char.isLetter() ||
+                                 char == '-' ||
+                                 (char == '\'' && i > 0 && i < line.text.length - 1 &&
+                                  line.text[i-1].isLetter() && line.text[i+1].isLetter())
+
                 if (isWordChar && wordStart == -1) {
                     // Start of a new word
                     wordStart = i
@@ -109,7 +113,7 @@ class TextLineAdapter(
                     // End of current word
                     val wordEnd = i
                     val word = line.text.substring(wordStart, wordEnd)
-                    
+
                     if (word.isNotEmpty()) {
                         spannableString.setSpan(
                             CustomClickableSpan(

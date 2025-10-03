@@ -184,9 +184,13 @@ class TextLineWithSpeakerAdapter(
             
             while (i < line.text.length) {
                 val char = line.text[i]
-                val isWordChar = char.isLetter() || (char == '\'' && i > 0 && i < line.text.length - 1 && 
-                                                      line.text[i-1].isLetter() && line.text[i+1].isLetter())
-                
+                // Include hyphen as word character for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+                // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+                val isWordChar = char.isLetter() ||
+                                 char == '-' ||
+                                 (char == '\'' && i > 0 && i < line.text.length - 1 &&
+                                  line.text[i-1].isLetter() && line.text[i+1].isLetter())
+
                 if (isWordChar && wordStart == -1) {
                     // Start of a new word
                     wordStart = i
@@ -415,9 +419,13 @@ class TextLineWithSpeakerAdapter(
         
         while (i < text.length) {
             val char = text[i]
-            val isWordChar = char.isLetter() || (char == '\'' && i > 0 && i < text.length - 1 && 
-                                                  text[i-1].isLetter() && text[i+1].isLetter())
-            
+            // Include hyphen as word character for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+            // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+            val isWordChar = char.isLetter() ||
+                             char == '-' ||
+                             (char == '\'' && i > 0 && i < text.length - 1 &&
+                              text[i-1].isLetter() && text[i+1].isLetter())
+
             if (isWordChar && wordStart == -1) {
                 // Start of a new word
                 wordStart = i

@@ -245,17 +245,21 @@ struct TappableTextView: UIViewRepresentable {
             // Move backward to find word start
             while wordStart > 0 {
                 let char = text[text.index(text.startIndex, offsetBy: wordStart - 1)]
-                let isWordChar = char.isLetter || (char == "'" && wordStart > 1 && wordStart < text.count - 1)
+                // Include hyphen for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+                // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+                let isWordChar = char.isLetter || char == "-" || (char == "'" && wordStart > 1 && wordStart < text.count - 1)
                 if !isWordChar {
                     break
                 }
                 wordStart -= 1
             }
-            
+
             // Move forward to find word end
             while wordEnd < text.count {
                 let char = text[text.index(text.startIndex, offsetBy: wordEnd)]
-                let isWordChar = char.isLetter || (char == "'" && wordEnd > 0 && wordEnd < text.count - 1)
+                // Include hyphen for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+                // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+                let isWordChar = char.isLetter || char == "-" || (char == "'" && wordEnd > 0 && wordEnd < text.count - 1)
                 if !isWordChar {
                     break
                 }
@@ -268,8 +272,8 @@ struct TappableTextView: UIViewRepresentable {
             let tappedWord = String(text[startIndex..<endIndex]).trimmingCharacters(in: .whitespacesAndNewlines)
             
             if !tappedWord.isEmpty {
-                // Clean the word of punctuation but keep apostrophes within words
-                let cleanWord = tappedWord.filter { $0.isLetter || $0 == "'" || $0 == "'" || $0 == "ʼ" }
+                // Clean the word of punctuation but keep apostrophes and hyphens within words
+                let cleanWord = tappedWord.filter { $0.isLetter || $0 == "'" || $0 == "'" || $0 == "ʼ" || $0 == "-" }
                 
                 if !cleanWord.isEmpty {
                     let normalizedWord = parent.isGreek ? normalizeGreek(cleanWord) : cleanWord.lowercased()
