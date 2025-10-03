@@ -68,21 +68,19 @@ class LemmaOccurrencesActivity : BaseActivity() {
             try {
                 // First, try to find the lemma for this word
                 var actualLemma = searchTerm
-                
-                if (language == "greek") {
-                    // Look up in lemma map to find the dictionary form
-                    val foundLemma = repository.getLemmaForWord(searchTerm, language)
-                    if (foundLemma != null && foundLemma != searchTerm) {
-                        actualLemma = foundLemma
-                        android.util.Log.d("LemmaOccurrences", "Found lemma mapping: $searchTerm -> $actualLemma")
-                        
-                        // Update the title to show the lemma
-                        runOnUiThread {
-                            supportActionBar?.title = "Occurrences: $actualLemma"
-                        }
-                    } else {
-                        android.util.Log.d("LemmaOccurrences", "No lemma mapping found for $searchTerm, using as-is")
+
+                // Try to look up lemma for any language (not just Greek)
+                val foundLemma = repository.getLemmaForWord(searchTerm, language)
+                if (foundLemma != null && foundLemma != searchTerm) {
+                    actualLemma = foundLemma
+                    android.util.Log.d("LemmaOccurrences", "Found lemma mapping: $searchTerm -> $actualLemma (language: $language)")
+
+                    // Update the title to show the lemma
+                    runOnUiThread {
+                        supportActionBar?.title = "Occurrences: $actualLemma"
                     }
+                } else {
+                    android.util.Log.d("LemmaOccurrences", "No lemma mapping found for $searchTerm, using as-is (language: $language)")
                 }
                 
                 // Get the occurrence limit from preferences

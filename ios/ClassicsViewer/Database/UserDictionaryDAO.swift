@@ -174,7 +174,7 @@ class UserDictionaryDAO: UserDictionaryDAOProtocol {
             return nil
         }.compactMap { $0 }
         
-        // If no exact match and it's Greek, try normalized form
+        // If no exact match and it's Greek, try normalized form (only for Greek)
         if results.isEmpty && language == "greek" {
             let normalizedForm = GreekNormalizer.normalize(inflectedForm)
             if normalizedForm != inflectedForm {

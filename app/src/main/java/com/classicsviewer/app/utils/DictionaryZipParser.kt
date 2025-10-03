@@ -193,7 +193,7 @@ class DictionaryZipParser {
                             val language = row[languageIdx]?.trim()?.lowercase() ?: ""
                             val definition = sanitizeField(row[definitionIdx]?.trim()) ?: ""
                             
-                            if (lemma.isNotEmpty() && definition.isNotEmpty() && language in listOf("greek", "latin")) {
+                            if (lemma.isNotEmpty() && definition.isNotEmpty() && language.isNotEmpty()) {
                                 val normalizedLemma = if (language == "greek") {
                                     try {
                                         GreekNormalizer.normalize(lemma)
@@ -302,7 +302,7 @@ class DictionaryZipParser {
                             val lemma = sanitizeField(currentRow[lemmaIdx]?.trim()) ?: ""
                             val language = currentRow[languageIdx]?.trim()?.lowercase() ?: ""
                             
-                            if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language in listOf("greek", "latin")) {
+                            if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
                                 val normalizedWord = if (language == "greek") {
                                     try {
                                         GreekNormalizer.normalize(wordForm)
@@ -311,7 +311,7 @@ class DictionaryZipParser {
                                         null
                                     }
                                 } else null
-                                
+
                                 val normalizedLemma = if (language == "greek") {
                                     try {
                                         GreekNormalizer.normalize(lemma)
@@ -455,7 +455,7 @@ class DictionaryZipParser {
                             val lemma = sanitizeField(currentRow[lemmaIdx]?.trim()) ?: ""
                             val language = currentRow[languageIdx]?.trim()?.lowercase() ?: ""
                             
-                            if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language in listOf("greek", "latin")) {
+                            if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
                                 val normalizedWord = if (language == "greek") {
                                     try {
                                         GreekNormalizer.normalize(wordForm)
@@ -464,7 +464,7 @@ class DictionaryZipParser {
                                         null
                                     }
                                 } else null
-                                
+
                                 val normalizedLemma = if (language == "greek") {
                                     try {
                                         GreekNormalizer.normalize(lemma)

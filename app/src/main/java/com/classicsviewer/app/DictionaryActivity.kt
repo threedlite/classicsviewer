@@ -45,35 +45,39 @@ class DictionaryActivity : BaseActivity() {
         // Initialize repository
         repository = RepositoryFactory.getRepository(this)
         
-        // For Greek, always allow. For Latin, check if custom dictionary exists
+        // Allow any language - check if dictionary exists
+        android.util.Log.d("DictionaryActivity", "Processing word for language: $language")
+
         if (language == "greek") {
-            // Greek always works
+            // Greek always works (bundled dictionary)
             android.util.Log.d("DictionaryActivity", "Processing Greek word")
             continueInitialization(word, lemma, language, displayWord)
-        } else if (language == "latin") {
-            // For Latin, check if we have Latin dictionary (bundled or custom)
-            android.util.Log.d("DictionaryActivity", "Processing Latin word - checking for Latin dictionary")
+        } else {
+            // For other languages (latin, hebrew, etc.), check if dictionary exists
+            android.util.Log.d("DictionaryActivity", "Checking for $language dictionary")
             lifecycleScope.launch {
-                val hasLatinDict = repository.hasLatinDictionary()
-                android.util.Log.d("DictionaryActivity", "Latin word lookup - hasLatinDictionary: $hasLatinDict")
-                
-                if (hasLatinDict) {
-                    // We have Latin dictionary (bundled or custom), proceed
-                    android.util.Log.d("DictionaryActivity", "Latin dictionary found - proceeding with Latin lookup")
+                // For Latin, use existing hasLatinDictionary check
+                // For other languages, proceed optimistically (will show "no definition" if not found)
+                val shouldProceed = if (language == "latin") {
+                    val hasLatinDict = repository.hasLatinDictionary()
+                    android.util.Log.d("DictionaryActivity", "Latin dictionary check: $hasLatinDict")
+                    hasLatinDict
+                } else {
+                    // For other languages (hebrew, etc.), always proceed
+                    // Dictionary lookup will fail gracefully if no entries exist
+                    android.util.Log.d("DictionaryActivity", "Allowing $language (will check dictionary at lookup)")
+                    true
+                }
+
+                if (shouldProceed) {
                     continueInitialization(word, lemma, language, displayWord)
                 } else {
-                    // No Latin dictionary available
-                    android.util.Log.e("DictionaryActivity", "No Latin dictionary found")
-                    binding.definitionText.text = "Latin dictionary not available. Import a custom Latin dictionary to enable this feature."
+                    // Only Latin gets this specific message (legacy behavior)
+                    android.util.Log.e("DictionaryActivity", "No $language dictionary found")
+                    binding.definitionText.text = "$language dictionary not available. Import a custom $language dictionary to enable this feature."
                     binding.occurrencesButton.isEnabled = false
                 }
             }
-        } else {
-            // Unknown language - this is what's being hit
-            android.util.Log.e("DictionaryActivity", "Language check failed: language='$language', expected 'greek' or 'latin'")
-            android.util.Log.e("DictionaryActivity", "Language bytes: ${language.toByteArray().contentToString()}")
-            binding.definitionText.text = "Dictionary lookup is only available for Greek and Latin texts (got: '$language')"
-            binding.occurrencesButton.isEnabled = false
         }
     }
     

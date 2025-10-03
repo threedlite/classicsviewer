@@ -138,8 +138,8 @@ class DictionaryDAO: DictionaryDAOProtocol {
         
         print("DictionaryDAO: No direct entry found for '\(normalizedWord)'")
         
-        // If not found, try lemma map (works for both Greek and Latin)
-        if language == "greek" || language == "latin" {
+        // If not found, try lemma map (works for any language)
+        if !language.isEmpty {
             print("DictionaryDAO: Trying lemma lookup for \(language) word '\(word)'")
             
             // First try with the original word

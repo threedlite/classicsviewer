@@ -1191,9 +1191,9 @@ class ImprovedWordDetailViewModel: ObservableObject {
             var searchCondition: String
             var searchParams: [String]
             
-            if !lemma.isEmpty && language == "greek" {
-                // If we have a lemma, search for all forms of that lemma
-                print("DEBUG: Searching for all forms of lemma '\(lemma)'")
+            if !lemma.isEmpty {
+                // If we have a lemma, search for all forms of that lemma (for any language)
+                print("DEBUG: Searching for all forms of lemma '\(lemma)' (language: \(language))")
                 
                 // Get all word forms that map to this lemma
                 let lemmaFormsQuery = """
