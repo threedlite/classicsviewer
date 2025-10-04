@@ -31,7 +31,13 @@ class FilterableAuthorAdapter(
         val author = filteredAuthors[position]
         val fontSize = PreferencesManager.getFontSize(holder.itemView.context)
         holder.binding.itemText.textSize = fontSize
-        holder.binding.itemText.text = author.name
+
+        // Display both native name and English name if available
+        holder.binding.itemText.text = if (author.nameAlt != null) {
+            "${author.name} (${author.nameAlt})"
+        } else {
+            author.name
+        }
 
         // Apply color inversion
         if (invertColors) {
@@ -77,7 +83,8 @@ class FilterableAuthorAdapter(
             allAuthors
         } else {
             allAuthors.filter { author ->
-                author.name.lowercase(Locale.getDefault()).contains(searchQuery)
+                author.name.lowercase(Locale.getDefault()).contains(searchQuery) ||
+                (author.nameAlt?.lowercase(Locale.getDefault())?.contains(searchQuery) == true)
             }
         }
 

@@ -1,0 +1,13 @@
+language,pattern,replacement,description,priority
+tulu,[\u0CCD],,Remove Kannada/Tulu virama/halant (vowel killer),1
+tulu,[\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCC],,Remove Kannada/Tulu dependent vowel signs,2
+tulu,[\u0CE2-\u0CE3],,Remove Kannada/Tulu vocalic L and LL signs,3
+tulu,ಂ,,Remove Tulu anusvara,4
+tulu,ಃ,,Remove Tulu visarga,5
+tulu,ಁ,,Remove Tulu candrabindu,6
+tulu,[\u200C\u200D],,Remove zero-width non-joiner and joiner,7
+tulu,್,,Remove Tulu halant/virama,8
+tulu,ೕ,,Remove Tulu length mark,9
+tulu,ೖ,,Remove Tulu ai length mark,10
+tulu,ೞ,ಳ,Normalize Tulu llla to lla,11
+tulu,ಽ,,Remove Tulu avagraha,12

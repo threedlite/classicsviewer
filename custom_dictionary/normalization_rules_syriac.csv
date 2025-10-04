@@ -1,0 +1,30 @@
+language,pattern,replacement,description,priority
+syriac,[\u0730-\u074A],,Remove all Syriac vocalization marks,1
+syriac,ܿ,,Remove Syriac Rwaha (supralinear dot West Syriac /o/),2
+syriac,ܾ,,Remove Syriac dotted Zlama angular,3
+syriac,ܽ,,Remove Syriac Rwaha (West Syriac /u/),4
+syriac,ܼ,,Remove Syriac Hbasa (sublinear dot West Syriac /i/),5
+syriac,ܻ,,Remove Syriac dotted Zlama horizontal (East Syriac /i/),6
+syriac,ܺ,,Remove Syriac Hbasa-Esasa (two dots below East Syriac /i/),7
+syriac,ܹ,,Remove Syriac Esasa (dot below East Syriac /e/),8
+syriac,ܸ,,Remove Syriac dotted Zlama (East Syriac /a/),9
+syriac,ܷ,,Remove Syriac Rwaha reversed (East Syriac /u/),10
+syriac,ܶ,,Remove Syriac Rbasa (two dots above East Syriac /e/),11
+syriac,ܵ,,Remove Syriac dotted Zlama (East Syriac /a/),12
+syriac,ܴ,,Remove Syriac Pthaha (West Syriac /a/),13
+syriac,ܳ,,Remove Syriac Zlama horizontal (West Syriac /o/),14
+syriac,ܲ,,Remove Syriac Pthaha dotted,15
+syriac,ܱ,,Remove Syriac Zlama angular,16
+syriac,ܰ,,Remove Syriac Pthaha (East Syriac /a/),17
+syriac,[\u0730-\u073F],,Remove all Syriac points above (catch-all),18
+syriac,[\u0740-\u074A],,Remove all Syriac points below (catch-all),19
+syriac,[\u0308\u030A\u0304\u0307],,Remove combining diacritics (dots and macrons),20
+syriac,[\u0323\u0324\u0325],,Remove combining dots below,21
+syriac,݁,,Remove Syriac Qushshaya (hard pronunciation),22
+syriac,݂,,Remove Syriac Rukkakha (soft pronunciation),23
+syriac,݀,,Remove Syriac feminine dot,24
+syriac,܌,,Remove Syriac Harklean Obelus,25
+syriac,܍,,Remove Syriac Harklean Metobelus,26
+syriac,܏,,Remove Syriac abbreviation mark,27
+syriac,[\u070F],,Remove Syriac abbreviation mark,28
+syriac,[\u0711],,Remove Syriac letter Superscript Alaph,29

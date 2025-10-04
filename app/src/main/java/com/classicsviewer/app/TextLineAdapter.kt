@@ -100,9 +100,16 @@ class TextLineAdapter(
             while (i < line.text.length) {
                 val char = line.text[i]
                 // Include hyphen as word character for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+                // Include slash as word character for Hebrew morpheme boundaries (e.g., "וַֽ/יְהִי֙")
                 // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+                // Include all Unicode combining characters (diacritics, vowel marks, etc.) for all languages
+                // This includes: Arabic harakat, Hebrew nikud, Devanagari matras, Tamil vowel signs, etc.
                 val isWordChar = char.isLetter() ||
                                  char == '-' ||
+                                 char == '/' ||
+                                 Character.getType(char) == Character.NON_SPACING_MARK.toInt() ||  // Combining marks
+                                 Character.getType(char) == Character.COMBINING_SPACING_MARK.toInt() || // Spacing combining marks
+                                 Character.getType(char) == Character.ENCLOSING_MARK.toInt() || // Enclosing marks
                                  (char == '\'' && i > 0 && i < line.text.length - 1 &&
                                   line.text[i-1].isLetter() && line.text[i+1].isLetter())
 

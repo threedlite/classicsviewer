@@ -28,7 +28,7 @@ class TextLineWithSpeakerAdapter(
     private var bookmarkedLines: Set<TextViewerPagerActivity.BookmarkKey> = emptySet(),
     private val audioMappings: Map<Int, com.classicsviewer.app.audio.AudioMapping> = emptyMap(),
     private val onPlayAudio: ((com.classicsviewer.app.audio.AudioMapping) -> Unit)? = null,
-    private val isGreekText: Boolean = true
+    private val language: String = "greek"
 ) : RecyclerView.Adapter<TextLineWithSpeakerAdapter.ViewHolder>() {
     
     private var context: android.content.Context? = null
@@ -85,7 +85,7 @@ class TextLineWithSpeakerAdapter(
         holder.binding.speakerName.textSize = fontSize + 2 // Speaker slightly larger
         
         // Apply custom font for Greek text if enabled
-        if (isGreekText && PreferencesManager.getUseSinaiticusFont(holder.itemView.context) && sinaiticusTypeface != null) {
+        if (language.equals("greek", ignoreCase = true) && PreferencesManager.getUseSinaiticusFont(holder.itemView.context) && sinaiticusTypeface != null) {
             holder.binding.lineText.typeface = sinaiticusTypeface
             holder.binding.speakerName.typeface = sinaiticusTypeface
         } else {
@@ -185,9 +185,15 @@ class TextLineWithSpeakerAdapter(
             while (i < line.text.length) {
                 val char = line.text[i]
                 // Include hyphen as word character for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+                // Include slash as word character for Hebrew morpheme boundaries (e.g., "וַֽ/יְהִי֙")
                 // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+                // Include all Unicode combining characters (diacritics, vowel marks, etc.) for all languages
                 val isWordChar = char.isLetter() ||
                                  char == '-' ||
+                                 char == '/' ||
+                                 Character.getType(char) == Character.NON_SPACING_MARK.toInt() ||
+                                 Character.getType(char) == Character.COMBINING_SPACING_MARK.toInt() ||
+                                 Character.getType(char) == Character.ENCLOSING_MARK.toInt() ||
                                  (char == '\'' && i > 0 && i < line.text.length - 1 &&
                                   line.text[i-1].isLetter() && line.text[i+1].isLetter())
 
@@ -366,7 +372,6 @@ class TextLineWithSpeakerAdapter(
             val wordsWithOnlyMorph = mutableSetOf<String>()
             
             wordsToCheck.forEach { word ->
-                val language = if (isGreekText) "greek" else "latin"
                 val result = repository.getAllDictionaryEntries(word, language)
                 when {
                     result.entries.isEmpty() -> {
@@ -420,9 +425,15 @@ class TextLineWithSpeakerAdapter(
         while (i < text.length) {
             val char = text[i]
             // Include hyphen as word character for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
+            // Include slash as word character for Hebrew morpheme boundaries (e.g., "וַֽ/יְהִי֙")
             // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
+            // Include all Unicode combining characters (diacritics, vowel marks, etc.) for all languages
             val isWordChar = char.isLetter() ||
                              char == '-' ||
+                             char == '/' ||
+                             Character.getType(char) == Character.NON_SPACING_MARK.toInt() ||
+                             Character.getType(char) == Character.COMBINING_SPACING_MARK.toInt() ||
+                             Character.getType(char) == Character.ENCLOSING_MARK.toInt() ||
                              (char == '\'' && i > 0 && i < text.length - 1 &&
                               text[i-1].isLetter() && text[i+1].isLetter())
 

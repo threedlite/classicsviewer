@@ -1,0 +1,33 @@
+language,pattern,replacement,description,priority
+middle_persian,[\u0300-\u036F],,Remove combining diacritical marks,1
+middle_persian,𐮀,𐭠,Psalter aleph to Inscriptional aleph,2
+middle_persian,𐮁,𐭡,Psalter beth to Inscriptional beth,3
+middle_persian,𐮂,𐭢,Psalter gimel to Inscriptional gimel,4
+middle_persian,𐮃,𐭣,Psalter daleth to Inscriptional daleth,5
+middle_persian,𐮄,𐭤,Psalter he to Inscriptional he,6
+middle_persian,𐮅,𐭥,Psalter waw to Inscriptional waw,7
+middle_persian,𐮆,𐭦,Psalter zayin to Inscriptional zayin,8
+middle_persian,𐮇,𐭧,Psalter heth to Inscriptional heth,9
+middle_persian,𐮈,𐭨,Psalter teth to Inscriptional teth,10
+middle_persian,𐮉,𐭩,Psalter yodh to Inscriptional yodh,11
+middle_persian,𐮊,𐭪,Psalter kaph to Inscriptional kaph,12
+middle_persian,𐮋,𐭫,Psalter lamedh to Inscriptional lamedh,13
+middle_persian,𐮌,𐭬,Psalter mem to Inscriptional mem,14
+middle_persian,𐮍,𐭭,Psalter nun to Inscriptional nun,15
+middle_persian,𐮎,𐭮,Psalter samekh to Inscriptional samekh,16
+middle_persian,𐮏,𐭯,Psalter ayin to Inscriptional ayin,17
+middle_persian,𐮐,𐭰,Psalter pe to Inscriptional pe,18
+middle_persian,𐮑,𐭱,Psalter sadhe to Inscriptional sadhe,19
+middle_persian,𐮒,𐭲,Psalter qoph to Inscriptional qoph,20
+middle_persian,𐮓,𐭳,Psalter resh to Inscriptional resh,21
+middle_persian,𐮔,𐭴,Psalter shin to Inscriptional shin,22
+middle_persian,𐮕,𐭵,Psalter taw to Inscriptional taw,23
+middle_persian,𐮖,𐭠,Psalter reversed aleph to Inscriptional aleph,24
+middle_persian,𐭻,𐭠,Inscriptional Pahlavi aleph variant to standard aleph,25
+middle_persian,𐭼,𐭡,Inscriptional Pahlavi beth variant to standard beth,26
+middle_persian,𐭽,𐭤,Inscriptional Pahlavi he variant to standard he,27
+middle_persian,𐭾,𐭥,Inscriptional Pahlavi waw variant to standard waw,28
+middle_persian,𐭿,𐭩,Inscriptional Pahlavi yodh variant to standard yodh,29
+middle_persian,𐮗,𐭥𐭥,Psalter doubled waw ligature to two waws,30
+middle_persian,𐮘,𐭩𐭥,Psalter yodh-waw ligature to yodh+waw,31
+middle_persian,𐮙,𐭭𐭥,Psalter nun-waw ligature to nun+waw,32

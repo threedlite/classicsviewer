@@ -5,12 +5,15 @@ import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.database.UserDatabase
 import com.classicsviewer.app.database.dao.OccurrenceResult
 import com.classicsviewer.app.database.dao.OccurrenceResultWithWords
+import com.classicsviewer.app.database.entities.NormalizationPatternEntity
 import com.classicsviewer.app.lemmatization.GreekLemmatizer
 import com.classicsviewer.app.models.*
 import com.classicsviewer.app.database.dao.LineReferenceWithWords
 import com.classicsviewer.app.utils.GreekNormalizer
+import com.classicsviewer.app.utils.PatternBasedNormalizer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.concurrent.ConcurrentHashMap
 
 class PerseusRepository(private val context: Context) : DataRepository {
     private val database = PerseusDatabase.getInstance(context)
@@ -26,23 +29,70 @@ class PerseusRepository(private val context: Context) : DataRepository {
     private val translationSegmentDao = database.translationSegmentDao()
     private val userDictionaryDao = userDatabase.userDictionaryDao()
     private val userLemmaMappingDao = userDatabase.userLemmaMappingDao()
-    
+    private val normalizationPatternDao = userDatabase.normalizationPatternDao()
+
     private val greekLemmatizer = GreekLemmatizer()
-    
+
+    // Normalization pattern cache
+    private val normalizationCache = ConcurrentHashMap<String, List<NormalizationPatternEntity>>()
+
     // Cache Latin dictionary availability - check once on first access
     private var cachedHasLatinDictionary: Boolean? = null
-    
+
     // Method to invalidate cache when database changes
     fun invalidateLatinDictionaryCache() {
         cachedHasLatinDictionary = null
         android.util.Log.d("PerseusRepository", "Latin dictionary cache invalidated")
     }
-    
+
+    // Method to clear normalization pattern cache
+    fun clearNormalizationCache() {
+        normalizationCache.clear()
+        android.util.Log.d("PerseusRepository", "Normalization pattern cache cleared")
+    }
+
+    /**
+     * Normalize text for any language using the appropriate normalizer.
+     * - Greek: Uses GreekNormalizer (hardcoded)
+     * - Latin: No normalization (returns null)
+     * - Other: Uses PatternBasedNormalizer with database patterns
+     */
+    private suspend fun normalizeText(text: String, language: String): String? {
+        return when (language) {
+            "greek" -> {
+                GreekNormalizer.normalize(text)
+            }
+            "latin" -> {
+                null
+            }
+            else -> {
+                val patterns = normalizationCache.getOrPut(language) {
+                    val fetchedPatterns = normalizationPatternDao.getPatternsForLanguage(language)
+                    android.util.Log.d("PerseusRepository", "Fetched ${fetchedPatterns.size} normalization patterns for language '$language'")
+                    if (fetchedPatterns.isNotEmpty()) {
+                        android.util.Log.d("PerseusRepository", "First pattern: ${fetchedPatterns[0].pattern} -> '${fetchedPatterns[0].replacement}'")
+                    }
+                    fetchedPatterns
+                }
+                android.util.Log.d("PerseusRepository", "Using ${patterns.size} cached patterns for '$language' normalization")
+                if (patterns.isNotEmpty()) {
+                    val normalized = PatternBasedNormalizer.normalize(text, language, patterns)
+                    android.util.Log.d("PerseusRepository", "Normalized '$text' -> '$normalized' using ${patterns.size} patterns")
+                    normalized
+                } else {
+                    android.util.Log.d("PerseusRepository", "No normalization patterns found for language '$language', returning null")
+                    null
+                }
+            }
+        }
+    }
+
     override suspend fun getAuthors(language: String): List<Author> = withContext(Dispatchers.IO) {
         authorDao.getByLanguage(language).map { entity ->
             Author(
                 id = entity.id,
                 name = entity.name,
+                nameAlt = entity.nameAlt,
                 language = entity.language,
                 hasTranslatedWorks = entity.hasTranslations ?: false
             )
@@ -137,11 +187,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
             val userAddedLemmas = mutableSetOf<String>() // Track user entries separately
             
             // FIRST: Check user dictionary for direct match
-            val normalizedWord = if (normalizedLanguage == "greek") {
-                GreekNormalizer.normalize(cleanedWord)
-            } else {
-                cleanedWord.lowercase()
-            }
+            val normalizedWord = normalizeText(cleanedWord, normalizedLanguage) ?: cleanedWord.lowercase()
             
             android.util.Log.d("PerseusRepository", "Checking user dictionary for direct match: word='$cleanedWord', normalized='$normalizedWord', language='$normalizedLanguage'")
             val userEntries = userDictionaryDao.getEntriesForLemma(cleanedWord, normalizedWord, normalizedLanguage)
@@ -173,11 +219,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
             val userMapping = userLemmaMappingDao.getMappingForWord(cleanedWord, normalizedWord, normalizedLanguage)
             if (userMapping != null && userMapping.lemma !in userAddedLemmas) {
                 // Get dictionary entry for the mapped lemma
-                val normalizedLemma = if (normalizedLanguage == "greek") {
-                    GreekNormalizer.normalize(userMapping.lemma)
-                } else {
-                    userMapping.lemma.lowercase()
-                }
+                val normalizedLemma = normalizeText(userMapping.lemma, normalizedLanguage) ?: userMapping.lemma.lowercase()
                 
                 // First try user dictionary
                 val userLemmaEntries = userDictionaryDao.getEntriesForLemma(userMapping.lemma, normalizedLemma, normalizedLanguage)
@@ -428,11 +470,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     
                     // FIRST: Check user dictionary for this lemma (if not already added)
                     if (resolvedLemma !in userAddedLemmas) {
-                        val normalizedResolvedLemma = if (normalizedLanguage == "greek") {
-                            GreekNormalizer.normalize(resolvedLemma)
-                        } else {
-                            resolvedLemma.lowercase()
-                        }
+                        val normalizedResolvedLemma = normalizeText(resolvedLemma, normalizedLanguage) ?: resolvedLemma.lowercase()
                         val userLemmaEntries = userDictionaryDao.getEntriesForLemma(resolvedLemma, normalizedResolvedLemma, normalizedLanguage)
                         for (userEntry in userLemmaEntries) {
                             // Check if definition is actually empty

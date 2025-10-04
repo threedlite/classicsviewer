@@ -1,0 +1,62 @@
+language,pattern,replacement,description,priority
+coptic,[\u0300-\u0301],,Remove combining grave and acute accents,1
+coptic,[\u0304-\u0305],,Remove combining macron and overline,2
+coptic,[\u0308],,Remove combining diaeresis,3
+coptic,[\u0313-\u0314],,Remove combining comma above and reversed comma above,4
+coptic,[\u0323],,Remove combining dot below,5
+coptic,[\u0331],,Remove combining macron below,6
+coptic,̀,,Remove combining grave accent,7
+coptic,́,,Remove combining acute accent,8
+coptic,̄,,Remove combining macron,9
+coptic,̈,,Remove combining diaeresis,10
+coptic,ϩ,ϩ,Normalize hori (same character - for consistency),11
+coptic,ϫ,ϫ,Normalize janja (same character - for consistency),12
+coptic,ϭ,ϭ,Normalize khei (same character - for consistency),13
+coptic,ϯ,ϯ,Normalize ti (same character - for consistency),14
+coptic,ⲁ,ⲁ,Normalize alfa (same character - for consistency),15
+coptic,ⲃ,ⲃ,Normalize beta (same character - for consistency),16
+coptic,⳨,,Remove Old Nubian combining dot below,17
+coptic,⳩,,Remove Coptic combining ni above,18
+coptic,⳪,,Remove Coptic combining spiritus asper,19
+coptic,Ⳬ,,Remove Coptic combining spiritus lenis,20
+coptic,[\u0300-\u036F],,Remove all combining diacritical marks (catch-all),21
+coptic,[\u2CBD-\u2CBE],,Remove Coptic combining diacritics,22
+coptic,Ⲁ,ⲁ,Normalize uppercase alfa to lowercase,23
+coptic,Ⲃ,ⲃ,Normalize uppercase beta to lowercase,24
+coptic,Ⲅ,ⲅ,Normalize uppercase gamma to lowercase,25
+coptic,Ⲇ,ⲇ,Normalize uppercase dalda to lowercase,26
+coptic,Ⲉ,ⲉ,Normalize uppercase ei to lowercase,27
+coptic,Ⲋ,ⲋ,Normalize uppercase so to lowercase,28
+coptic,Ⲍ,ⲍ,Normalize uppercase zata to lowercase,29
+coptic,Ⲏ,ⲏ,Normalize uppercase eta to lowercase,30
+coptic,Ⲑ,ⲑ,Normalize uppercase theta to lowercase,31
+coptic,Ⲓ,ⲓ,Normalize uppercase iota to lowercase,32
+coptic,Ⲕ,ⲕ,Normalize uppercase kappa to lowercase,33
+coptic,Ⲗ,ⲗ,Normalize uppercase lambda to lowercase,34
+coptic,Ⲙ,ⲙ,Normalize uppercase me to lowercase,35
+coptic,Ⲛ,ⲛ,Normalize uppercase ne to lowercase,36
+coptic,Ⲝ,ⲝ,Normalize uppercase ksi to lowercase,37
+coptic,Ⲟ,ⲟ,Normalize uppercase o to lowercase,38
+coptic,Ⲡ,ⲡ,Normalize uppercase pi to lowercase,39
+coptic,Ⲣ,ⲣ,Normalize uppercase ro to lowercase,40
+coptic,Ⲥ,ⲥ,Normalize uppercase sima to lowercase,41
+coptic,Ⲧ,ⲧ,Normalize uppercase tau to lowercase,42
+coptic,Ⲩ,ⲩ,Normalize uppercase he to lowercase,43
+coptic,Ⲫ,ⲫ,Normalize uppercase fi to lowercase,44
+coptic,Ⲭ,ⲭ,Normalize uppercase khi to lowercase,45
+coptic,Ⲯ,ⲯ,Normalize uppercase psi to lowercase,46
+coptic,Ⲱ,ⲱ,Normalize uppercase o to lowercase,47
+coptic,Ⲳ,ⲳ,Normalize uppercase shei to lowercase,48
+coptic,Ⲵ,ⲵ,Normalize uppercase fai to lowercase,49
+coptic,Ⲷ,ⲷ,Normalize uppercase khai to lowercase,50
+coptic,Ⲹ,ⲹ,Normalize uppercase hori to lowercase,51
+coptic,Ⲻ,ⲻ,Normalize uppercase janja to lowercase,52
+coptic,Ⲽ,ⲽ,Normalize uppercase khima to lowercase,53
+coptic,Ⲿ,ⲿ,Normalize uppercase ti to lowercase,54
+coptic,Ϣ,ϣ,Normalize uppercase shai to lowercase,55
+coptic,Ϥ,ϥ,Normalize uppercase fai to lowercase,56
+coptic,Ϧ,ϧ,Normalize uppercase hori to lowercase,57
+coptic,Ϩ,ϩ,Normalize uppercase hori to lowercase,58
+coptic,Ϫ,ϫ,Normalize uppercase janja to lowercase,59
+coptic,Ϭ,ϭ,Normalize uppercase khei to lowercase,60
+coptic,Ϯ,ϯ,Normalize uppercase ti to lowercase,61

@@ -1,0 +1,12 @@
+language,pattern,replacement,description,priority
+sanskrit,[\u0951-\u0954],,Remove Vedic accent marks (svarita udatta anudatta),1
+sanskrit,[\u0900-\u0903],,Remove breathing marks and visarga variants,2
+sanskrit,ः,,Remove visarga (word-final aspiration),3
+sanskrit,ं,,Remove anusvara (nasal),4
+sanskrit,्,,Remove virama/halant (vowel killer),5
+sanskrit,़,,Remove nukta (dot below for non-Sanskrit sounds),6
+sanskrit,ॐ,ओम,Normalize Om symbol to Om spelling,7
+sanskrit,ऀ,,Remove Devanagari sign inverted candrabindu,8
+sanskrit,ॎ,,Remove Devanagari sign prishthamatra e,9
+sanskrit,ॏ,,Remove Devanagari sign aw,10
+sanskrit,[\u094D\u200C\u200D],,Remove zero-width joiners and virama,11

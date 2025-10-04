@@ -1,0 +1,7 @@
+language,pattern,replacement,description,priority
+hebrew,[\u0591-\u05C7],,Remove all nikud (vocalization marks),1
+hebrew,ך,כ,Normalize final kaf to regular kaf,2
+hebrew,ם,מ,Normalize final mem to regular mem,3
+hebrew,ן,נ,Normalize final nun to regular nun,4
+hebrew,ף,פ,Normalize final pe to regular pe,5
+hebrew,ץ,צ,Normalize final tsadi to regular tsadi,6

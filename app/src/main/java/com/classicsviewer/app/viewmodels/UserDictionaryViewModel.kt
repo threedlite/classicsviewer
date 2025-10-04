@@ -73,8 +73,7 @@ class UserDictionaryViewModel(application: Application) : AndroidViewModel(appli
                         mappingCount = result.mappingCount,
                         warnings = result.warnings
                     )
-                    // Reload dictionary info after successful import
-                    loadDictionaryInfo()
+                    // Don't reload - app will restart immediately via observer
                 } else {
                     _importState.value = ImportState.Error(
                         result.errors.firstOrNull() ?: "Import failed"
@@ -94,7 +93,11 @@ class UserDictionaryViewModel(application: Application) : AndroidViewModel(appli
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                repository.clearAllData()
+                // Get the active package and delete it (including the package entry itself)
+                val activePackage = repository.getActivePackage()
+                if (activePackage != null) {
+                    repository.deletePackage(activePackage.id)
+                }
                 _dictionaryInfo.value = null
                 _importState.value = ImportState.Idle
             } catch (e: Exception) {

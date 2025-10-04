@@ -33,7 +33,7 @@ class PerseusXmlParser(private val context: Context) {
                         val inputStream = context.assets.open(ctsPath)
                         val authorName = parseAuthorName(inputStream)
                         if (authorName != null) {
-                            authors.add(Author(authorDir, authorName, language))
+                            authors.add(Author(authorDir, authorName, null, language))
                         }
                     } catch (e: Exception) {
                         // Skip if CTS file not found

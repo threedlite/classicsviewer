@@ -1,0 +1,14 @@
+language,pattern,replacement,description,priority
+kannada,[\u0CCD],,Remove Kannada virama/halant (vowel killer),1
+kannada,[\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCC],,Remove Kannada dependent vowel signs,2
+kannada,[\u0CE2-\u0CE3],,Remove Kannada vocalic L and LL signs,3
+kannada,ಂ,,Remove Kannada anusvara (anusvara),4
+kannada,ಃ,,Remove Kannada visarga (visarga),5
+kannada,಄,,Remove Kannada sign siddham,6
+kannada,ಁ,,Remove Kannada candrabindu,7
+kannada,[\u200C\u200D],,Remove zero-width non-joiner and joiner,8
+kannada,್,,Remove Kannada ottakshara/halant (virama),9
+kannada,ೕ,,Remove Kannada length mark,10
+kannada,ೖ,,Remove Kannada ai length mark,11
+kannada,ೞ,ಳ,Normalize Kannada llla to lla,12
+kannada,ಽ,,Remove Kannada avagraha,13

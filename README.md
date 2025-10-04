@@ -81,6 +81,8 @@ NEW: Akkadian added to all dbs, will appear if added under Manage Languages. Sum
 - Make sure you have Android SDK installed
 - Check that `./gradlew` is executable: `chmod +x gradlew`
 
+- *.md files are mostly genereated by Claude and may not be entirely up-to-date.
+
 ## Data Sources
 
 Texts are from the Perseus Digital Library:

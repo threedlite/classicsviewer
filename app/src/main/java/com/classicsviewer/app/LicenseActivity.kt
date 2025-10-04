@@ -146,6 +146,44 @@ Citation: Langdon, Stephen. Sumerian Liturgies and Psalms. Philadelphia: Univers
 This work includes Sumerian transliterations and English translations of liturgical texts from ancient Mesopotamia.
 
 
+OPEN SCRIPTURES HEBREW BIBLE
+=============================
+
+Hebrew Bible Text with Morphology
+----------------------------------
+Source: Open Scriptures Hebrew Bible (morphhb)
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Repository: https://github.com/openscriptures/morphhb
+Website: https://hb.openscriptures.org/
+
+The Open Scriptures Hebrew Bible project provides the Westminster Leningrad Codex
+(WLC) with full morphological tagging. This enables word-by-word analysis and
+dictionary lookup for the Hebrew text. The morphological codes identify the
+grammatical form of each word (part of speech, tense, person, number, gender, etc.).
+
+Text Base: Westminster Leningrad Codex 4.20
+Morphological Analysis: Open Scriptures Hebrew Bible Project
+Contributors: See https://github.com/openscriptures/morphhb/graphs/contributors
+
+
+Strong's Hebrew Dictionary
+---------------------------
+Source: Open Scriptures Hebrew Lexicon
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Repository: https://github.com/openscriptures/HebrewLexicon
+
+This digital edition of Strong's Hebrew and Aramaic Dictionary provides
+definitions and lemma information for biblical Hebrew words. Strong's numbering
+system (e.g., H1961) allows cross-referencing between different resources.
+
+Original Work: Strong, James. The Exhaustive Concordance of the Bible. 1890.
+Digital Edition: Open Scriptures Hebrew Lexicon Project
+
+
 AUDIO RECORDINGS
 ================
 
@@ -161,6 +199,141 @@ These audio recordings of Homer's Iliad are used under the
 Creative Commons Attribution 4.0 International License. The recordings
 provide pronunciation guidance and bring the ancient text to life through
 oral recitation.
+
+
+PERSIAN TEXTS
+=============
+
+Persian Texts with Translations
+--------------------------------
+Source: Perseus Digital Library - canonical-farsiLit
+License: Creative Commons Attribution-ShareAlike 3.0 United States (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/us/
+
+Repository: https://github.com/PerseusDL/canonical-farsiLit
+
+The Persian texts include works by Hafez (Khwāja Shams-ud-Dīn Muhammad Hāfez-e
+Shīrāzī, c. 1315-1390) with parallel English translations.
+
+Print Source Edition
+--------------------
+Editors: Moḥammad Qazvini and Qāsem Ḡani
+Publisher: Caphana-i Maglis (Majlis Publishing House)
+Publication Place: Tehran
+Date: 1941
+
+Digital Edition Attribution
+---------------------------
+Digital text: ganjoor.net
+TEI XML encoding: Open Philology Project, Tufts University
+Supervised by: Maryam Foradi and Saeed Majidi
+Sponsored by: Open Philology Project, Tufts University
+Funded by: Humboldt Foundation
+Published by: Leipzig University
+License: CC BY-SA 3.0
+
+English Translation
+-------------------
+Translator: H. Wilberforce Clarke
+Publisher: Government of India Central Printing Office, Calcutta, 1891
+Status: Public Domain
+
+The English translation of Hafez's Divan provides parallel text for the Persian
+poetry, enabling readers to understand the mystical and literary depth of the
+original Persian verses.
+
+Additional Restriction
+----------------------
+Users must offer Perseus any modifications they make to the Persian texts.
+
+
+ARABIC TEXTS AND RESOURCES
+===========================
+
+Lane's Arabic-English Lexicon
+------------------------------
+Source: Perseus Digital Library
+License: Creative Commons Attribution-ShareAlike 3.0 United States (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/us/
+
+Original Work: Lane, Edward William. An Arabic-English Lexicon.
+               London: Williams and Norgate, 1863-1893. 8 volumes.
+
+Digital Edition: Perseus Digital Library
+Repository: https://github.com/PerseusDL/canonical-pdlrefwk
+TEI XML Encoding: Alpheios Technical Services, LLC
+
+Lane's Lexicon is a comprehensive classical Arabic dictionary providing detailed
+definitions and usage examples for Arabic roots and derived forms.
+
+Text provided by Perseus Digital Library, with funding from The U.S. Department
+of Education and The Max Planck Society.
+
+
+Mu'allaqa of Imru' al-Qays (Arabic Text)
+-----------------------------------------
+Source: Arabic Wikisource
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+URL: https://ar.wikisource.org/wiki/معلقة_امرئ_القيس
+Author: Imru' al-Qays (امرؤ القيس), Pre-Islamic Arabic poet (c. 501-544 CE)
+Work: Mu'allaqa (معلقة) - One of the Seven Hanging Odes
+
+The Mu'allaqa is one of the seven celebrated pre-Islamic Arabic odes, considered
+among the finest examples of classical Arabic poetry. The text is sourced from
+Arabic Wikisource, a free library of texts in the public domain.
+
+Contributors: Wikisource community
+Wikimedia Foundation: https://www.wikimedia.org/
+
+
+English Translation of Mu'allaqa
+---------------------------------
+Translator: F. E. Johnson (c. 1894)
+Source: English Wikisource
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+From: The Sacred Books and Early Literature of the East, Volume V
+      Editor: Charles F. Horne
+
+URL: https://en.wikisource.org/wiki/The_Sacred_Books_and_Early_Literature_of_the_East/Volume_5/The_Poem_of_Imru-ul-Quais
+
+This English translation provides access to one of the most important works of
+pre-Islamic Arabic literature, described as "the oldest of the 'hanged' poems."
+The translation captures the imagery and style that established Imru' al-Qays
+as a foundational figure in Arabic poetry.
+
+
+Arabic Morphological Analysis (CAMeL Tools)
+--------------------------------------------
+Source: CAMeL Tools - Columbia Arabic Language and Dialect Toolkit
+License: MIT License (Code) + CC BY 4.0 (Morphology Data)
+https://github.com/CAMeL-Lab/camel_tools
+
+Copyright (c) 2018-2024 New York University Abu Dhabi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+Morphological Databases:
+- Gulf Arabic Morphology (calima-glf-01) - CC BY 4.0
+- Levantine Arabic Morphology (calima-lev-01) - CC BY 4.0
+
+Citation:
+CAMeL Tools: An Open Source Python Toolkit for Arabic Natural Language Processing
+Ossama Obeid, Nasser Zalmout, Salam Khalifa, Dima Taji, Mai Oudah, Bashar Alhafni,
+Go Inoue, Fadhl Eryani, Alexander Erdmann, and Nizar Habash.
+In Proceedings of the 12th Language Resources and Evaluation Conference (LREC),
+Marseille, France, 2020.
 
 
 APPLICATION LICENSE

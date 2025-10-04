@@ -7,21 +7,29 @@ import com.classicsviewer.app.database.UserDatabase
 import com.classicsviewer.app.database.entities.UserDictionaryLemmaEntity
 import com.classicsviewer.app.database.entities.UserLemmaMappingEntity
 import com.classicsviewer.app.database.entities.UserDictionaryPackageEntity
+import com.classicsviewer.app.database.entities.NormalizationPatternEntity
 import com.classicsviewer.app.utils.DictionaryImportData
 import com.classicsviewer.app.utils.DictionaryZipParser
+import com.classicsviewer.app.utils.GreekNormalizer
+import com.classicsviewer.app.utils.PatternBasedNormalizer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import java.util.concurrent.ConcurrentHashMap
 
 class UserDictionaryRepository(private val context: Context) {
     private val userDatabase = UserDatabase.getInstance(context)
     private val dictionaryDao = userDatabase.userDictionaryDao()
     private val mappingDao = userDatabase.userLemmaMappingDao()
     private val packageDao = userDatabase.userDictionaryPackageDao()
+    private val normalizationDao = userDatabase.normalizationPatternDao()
     private val zipParser = DictionaryZipParser()
-    
+
+    // Normalization pattern cache (to avoid repeated DB queries)
+    private val normalizationCache = ConcurrentHashMap<String, List<NormalizationPatternEntity>>()
+
     companion object {
         private const val TAG = "UserDictionaryRepo"
         private const val BATCH_SIZE = 100
@@ -109,10 +117,26 @@ class UserDictionaryRepository(private val context: Context) {
                 val lemmaProgress = (lemmaCount.toFloat() / importData.lemmas.size * 5).toInt()
                 progressCallback?.invoke(92 + lemmaProgress, "Importing definitions: ${lemmaCount} / ${importData.lemmas.size}")
             }
-            
+
+            // Import normalization patterns (filter out Greek/Latin)
+            if (importData.normalizationPatterns.isNotEmpty()) {
+                val filteredPatterns = importData.normalizationPatterns.filter {
+                    it.language != "greek" && it.language != "latin"
+                }
+
+                if (filteredPatterns.isNotEmpty()) {
+                    normalizationDao.insertAll(filteredPatterns)
+                    Log.d(TAG, "Inserted ${filteredPatterns.size} normalization patterns")
+                }
+
+                if (filteredPatterns.size < importData.normalizationPatterns.size) {
+                    Log.w(TAG, "Skipped ${importData.normalizationPatterns.size - filteredPatterns.size} Greek/Latin patterns (use existing normalization)")
+                }
+            }
+
             // Clean up temp file
             tempFile.delete()
-            
+
             progressCallback?.invoke(98, "Finalizing import...")
             
             // Update package statistics
@@ -162,6 +186,13 @@ class UserDictionaryRepository(private val context: Context) {
         Log.d(TAG, "Clearing all user dictionary data")
         dictionaryDao.deleteAllLemmas()
         mappingDao.deleteAllMappings()
+        normalizationDao.deleteAll()  // Also clear normalization patterns
+
+        // Clear normalization caches
+        normalizationCache.clear()
+        PatternBasedNormalizer.clearCache()
+
+        // Note: App will be restarted after this to clear all in-memory caches
         // Note: We don't delete packages, they remain for switching
     }
     
@@ -169,7 +200,12 @@ class UserDictionaryRepository(private val context: Context) {
         // Delete all data associated with this package
         dictionaryDao.deleteLemmasByPackageId(packageId)
         mappingDao.deleteMappingsByPackageId(packageId)
+        normalizationDao.deleteByPackageId(packageId)
         packageDao.deletePackageById(packageId)
+
+        // Clear normalization caches
+        normalizationCache.clear()
+        PatternBasedNormalizer.clearCache()
     }
     
     suspend fun setActivePackage(packageId: Long) = withContext(Dispatchers.IO) {
@@ -206,14 +242,10 @@ class UserDictionaryRepository(private val context: Context) {
     }
     
     suspend fun getEntriesForLemma(
-        lemma: String, 
+        lemma: String,
         language: String
     ): List<UserDictionaryLemmaEntity> = withContext(Dispatchers.IO) {
-        val normalized = if (language == "greek") {
-            com.classicsviewer.app.utils.GreekNormalizer.normalize(lemma)
-        } else {
-            lemma.lowercase()
-        }
+        val normalized = normalizeText(lemma, language) ?: lemma.lowercase()
         dictionaryDao.getEntriesForLemma(lemma, normalized, language)
     }
     
@@ -221,11 +253,7 @@ class UserDictionaryRepository(private val context: Context) {
         word: String,
         language: String
     ): UserLemmaMappingEntity? = withContext(Dispatchers.IO) {
-        val normalized = if (language == "greek") {
-            com.classicsviewer.app.utils.GreekNormalizer.normalize(word)
-        } else {
-            word.lowercase()
-        }
+        val normalized = normalizeText(word, language) ?: word.lowercase()
         mappingDao.getMappingForWord(word, normalized, language)
     }
     
@@ -251,4 +279,59 @@ class UserDictionaryRepository(private val context: Context) {
         val totalLemmaCount: Int,
         val totalMappingCount: Int
     )
+
+    // Normalization pattern methods
+
+    /**
+     * Get normalization patterns for a language.
+     * Returns empty list for Greek and Latin (they use existing normalizers).
+     */
+    suspend fun getNormalizationPatterns(language: String): List<NormalizationPatternEntity> {
+        // Greek and Latin use existing normalizers - return empty list
+        if (language == "greek" || language == "latin") {
+            return emptyList()
+        }
+        return normalizationDao.getPatternsForLanguage(language)
+    }
+
+    /**
+     * Check if normalization patterns exist for a language.
+     * Always returns false for Greek and Latin.
+     */
+    suspend fun hasNormalizationPatterns(language: String): Boolean {
+        if (language == "greek" || language == "latin") {
+            return false  // Use existing normalizers
+        }
+        return normalizationDao.countPatternsForLanguage(language) > 0
+    }
+
+    /**
+     * Normalize text for any language using the appropriate normalizer.
+     * - Greek: Uses GreekNormalizer (hardcoded)
+     * - Latin: No normalization (returns null)
+     * - Other: Uses PatternBasedNormalizer with database patterns
+     */
+    suspend fun normalizeText(text: String, language: String): String? {
+        return when (language) {
+            "greek" -> {
+                // Use existing Greek normalizer
+                GreekNormalizer.normalize(text)
+            }
+            "latin" -> {
+                // No Latin normalization currently
+                null
+            }
+            else -> {
+                // Use cached patterns for non-Greek/Latin languages
+                val patterns = normalizationCache.getOrPut(language) {
+                    getNormalizationPatterns(language)
+                }
+                if (patterns.isNotEmpty()) {
+                    PatternBasedNormalizer.normalize(text, language, patterns)
+                } else {
+                    null
+                }
+            }
+        }
+    }
 }

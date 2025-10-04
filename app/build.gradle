@@ -32,8 +32,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 21
         targetSdk 36
-        versionCode 41
-        versionName "0.8.41"
+        versionCode 42
+        versionName "0.8.42"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         

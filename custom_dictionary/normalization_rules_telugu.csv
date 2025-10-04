@@ -1,0 +1,14 @@
+language,pattern,replacement,description,priority
+telugu,[\u0C4D],,Remove Telugu virama/halant (vowel killer),1
+telugu,[\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4C],,Remove Telugu dependent vowel signs,2
+telugu,[\u0C62-\u0C63],,Remove Telugu vocalic L and LL signs,3
+telugu,ం,,Remove Telugu anusvara (sunna),4
+telugu,ః,,Remove Telugu visarga (visargamu),5
+telugu,ఀ,,Remove Telugu sign combining candrabindu,6
+telugu,ఁ,,Remove Telugu candrabindu,7
+telugu,ఄ,,Remove Telugu sign siddham,8
+telugu,[\u200C\u200D],,Remove zero-width non-joiner and joiner,9
+telugu,్,,Remove Telugu halantamu (virama),10
+telugu,ౕ,,Remove Telugu length mark,11
+telugu,ౖ,,Remove Telugu ai length mark,12
+telugu,ఽ,,Remove Telugu avagraha,13

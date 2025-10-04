@@ -1,0 +1,19 @@
+language,pattern,replacement,description,priority
+aramaic,[\u0591-\u05AF],,Remove all Hebrew cantillation marks,1
+aramaic,[\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C5\u05C7],,Remove all Hebrew/Aramaic vocalization points,2
+aramaic,[\u0730-\u074A],,Remove Syriac vocalization marks,3
+aramaic,ܿ,,Remove Syriac Rwaha (supralinear dot),4
+aramaic,ܾ,,Remove Syriac dotted Zlama angular,5
+aramaic,ܼ,,Remove Syriac Hbasa (sublinear dot),6
+aramaic,ܻ,,Remove Syriac dotted Zlama horizontal,7
+aramaic,ܺ,,Remove Syriac Hbasa-Esasa (two dots below),8
+aramaic,ܹ,,Remove Syriac Esasa (dot below),9
+aramaic,ܸ,,Remove Syriac dotted Zlama,10
+aramaic,ܷ,,Remove Syriac Rwaha reversed,11
+aramaic,[\u0730-\u073F],,Remove all Syriac points above,12
+aramaic,[\u0740-\u074A],,Remove all Syriac points below,13
+aramaic,ך,כ,Normalize final kaf to regular kaf,14
+aramaic,ם,מ,Normalize final mem to regular mem,15
+aramaic,ן,נ,Normalize final nun to regular nun,16
+aramaic,ף,פ,Normalize final pe to regular pe,17
+aramaic,ץ,צ,Normalize final tsadi to regular tsadi,18

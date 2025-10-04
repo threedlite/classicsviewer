@@ -1,0 +1,11 @@
+language,pattern,replacement,description,priority
+tamil,[\u0BCD],,Remove Tamil virama/pulli (vowel killer),1
+tamil,[\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCC],,Remove Tamil dependent vowel signs,2
+tamil,ஂ,,Remove Tamil anusvara (anusvaram),3
+tamil,ஃ,,Remove Tamil visarga (aytam),4
+tamil,ௗ,,Remove Tamil au length mark,5
+tamil,[\u200C\u200D],,Remove zero-width non-joiner and joiner,6
+tamil,்,,Remove Tamil pulli (virama marker),7
+tamil,[\u0BD7],,Remove Tamil au length mark,8
+tamil,ௐ,,Remove Tamil om symbol,9
+tamil,[\u0BE6-\u0BEF],,Remove Tamil digits,10

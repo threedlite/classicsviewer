@@ -1,0 +1,17 @@
+language,pattern,replacement,description,priority
+sinhala,[\u0DCA],,Remove Sinhala virama/hal kirima (vowel killer),1
+sinhala,[\u0DCF-\u0DD4\u0DD6],,Remove Sinhala dependent vowel signs,2
+sinhala,[\u0DD8-\u0DDF],,Remove Sinhala additional vowel signs,3
+sinhala,[\u0DDF],,Remove Sinhala gayanukitta,4
+sinhala,[\u0DF2-\u0DF3],,Remove Sinhala vocalic RR and LL signs,5
+sinhala,ං,,Remove Sinhala anusvara (niggahita),6
+sinhala,ඃ,,Remove Sinhala visarga (visargaya),7
+sinhala,ඞ,න,Normalize Sinhala taaluja naasikaya to na,8
+sinhala,ඬ,ඩ,Normalize Sinhala muurdhaja naasiikaya to da,9
+sinhala,ඟ,ග,Normalize prenasalized ga to ga,10
+sinhala,ඦ,ජ,Normalize prenasalized ja to ja,11
+sinhala,ඪ,ඨ,Normalize prenasalized da to da,12
+sinhala,ඳ,ද,Normalize prenasalized da to da,13
+sinhala,ඹ,බ,Normalize prenasalized ba to ba,14
+sinhala,[\u200C\u200D],,Remove zero-width non-joiner and joiner,15
+sinhala,්,,Remove Sinhala al-lakuna (sub-join marker),16

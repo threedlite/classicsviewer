@@ -1,0 +1,5 @@
+language,pattern,replacement,description,priority
+greek,[\u0300-\u036F],,Remove combining diacritics (accents and breathing marks),1
+greek,ς,σ,Normalize final sigma to regular sigma,2
+greek,Ϛ,ΣΤ,Archaic stigma to sigma-tau,3
+greek,ϝ,Β,Archaic digamma to beta (rare),4

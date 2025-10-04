@@ -160,16 +160,15 @@ class TextPageFragment : Fragment() {
                 }
             }
             
-            val isGreek = language.equals("greek", ignoreCase = true)
             val adapter = TextLineWithSpeakerAdapter(
-                lines!!, 
-                callback, 
-                inverted, 
-                lineLongClickCallback, 
+                lines!!,
+                callback,
+                inverted,
+                lineLongClickCallback,
                 bookmarkedLines ?: emptySet(),
                 audioMappings ?: emptyMap(),
                 onPlayAudio,
-                isGreek
+                language
             )
             binding.textRecyclerView.adapter = adapter
             

@@ -5847,86 +5847,9 @@ def create_database(mode='full'):
     # Close connection before merging cuneiform data
     conn.close()
 
-    # Merge cuneiform data if available (skip for first1ktest mode)
-    if mode != 'first1ktest':
-        print("\n=== MERGING CUNEIFORM DATA ===")
-        cuneiform_dir = script_dir.parent / "cuneiform"
-        merge_script = cuneiform_dir / "merge_databases.sh"
-        sumerian_db = cuneiform_dir / "sumerian_texts.db"
-        akkadian_db = cuneiform_dir / "akkadian_texts.db"
-
-        if merge_script.exists() and (sumerian_db.exists() or akkadian_db.exists()):
-            try:
-                # Make merge script executable
-                os.chmod(merge_script, 0o755)
-
-                # In sample mode, only merge Akkadian data
-                # In other modes (full, extended), merge both Sumerian and Akkadian
-                if mode != 'sample':
-                    # Merge Sumerian data if available (for full and extended modes)
-                    if sumerian_db.exists():
-                        print(f"Merging Sumerian texts from {sumerian_db}...")
-                        result = subprocess.run(
-                            [str(merge_script), str(sumerian_db), str(db_path)],
-                            cwd=str(cuneiform_dir),
-                            capture_output=True,
-                            text=True
-                        )
-                        if result.returncode != 0:
-                            print(f"Warning: Failed to merge Sumerian data: {result.stderr}")
-                        else:
-                            print("✓ Sumerian texts merged successfully")
-                else:
-                    print("Skipping Sumerian texts (sample mode only includes Akkadian)")
-
-                # Merge Akkadian data if available (for all modes except first1ktest)
-                if akkadian_db.exists():
-                    print(f"Merging Akkadian texts from {akkadian_db}...")
-                    result = subprocess.run(
-                        [str(merge_script), str(akkadian_db), str(db_path)],
-                        cwd=str(cuneiform_dir),
-                        capture_output=True,
-                        text=True
-                    )
-                    if result.returncode != 0:
-                        print(f"Warning: Failed to merge Akkadian data: {result.stderr}")
-                    else:
-                        print("✓ Akkadian texts merged successfully")
-
-                # Print final language statistics
-                temp_conn = sqlite3.connect(db_path)
-                temp_cursor = temp_conn.cursor()
-
-                print("\n=== FINAL LANGUAGE STATISTICS ===")
-                temp_cursor.execute("""
-                    SELECT language, COUNT(*) as count
-                    FROM authors
-                    GROUP BY language
-                    ORDER BY count DESC
-                """)
-                for lang, count in temp_cursor.fetchall():
-                    print(f"  {lang.capitalize()}: {count} authors")
-
-                temp_cursor.execute("""
-                    SELECT language, COUNT(*) as count
-                    FROM dictionary_entries
-                    GROUP BY language
-                    ORDER BY count DESC
-                    LIMIT 10
-                """)
-                print("\nDictionary entries by language:")
-                for lang, count in temp_cursor.fetchall():
-                    print(f"  {lang.capitalize()}: {count:,} entries")
-
-                temp_conn.close()
-
-            except Exception as e:
-                print(f"Warning: Could not merge cuneiform data: {e}")
-                print("Continuing without cuneiform texts...")
-        else:
-            print("No cuneiform data found to merge (this is normal if not yet prepared)")
-    else:
-        print("\n=== SKIPPING CUNEIFORM MERGE (first1ktest mode) ===")
+    # NOTE: External database merging (cuneiform, Hebrew, Persian) is now handled by
+    # merge_external_databases() which is called AFTER database creation.
+    # This ensures proper foreign key ID mapping using the fixed merge_database.py script.
 
     print("\n✓ Database created successfully!")
 
@@ -6348,6 +6271,82 @@ def create_translation_lookup_table(conn):
     print(f"\nTotal translation mappings: {total_mappings}")
 
 
+def merge_external_databases(db_filename, mode='sample'):
+    """
+    Merge external language databases into the main Perseus database.
+
+    Merge rules by build mode:
+    - sample: Akkadian only (Gilgamesh)
+    - full: Sumerian + Akkadian
+    - extended: Hebrew + Persian + Sumerian + Akkadian
+
+    Args:
+        db_filename: Name of the target database file
+        mode: Build mode ('sample', 'full', 'extended')
+    """
+    import subprocess
+
+    print(f"\n{'='*60}")
+    print(f"MERGING EXTERNAL DATABASES ({mode} mode)")
+    print(f"{'='*60}\n")
+
+    # Define merge rules
+    merge_rules = {
+        'sample': [
+            ('cuneiform/akkadian_texts.db', 'Akkadian'),
+        ],
+        'full': [
+            ('cuneiform/sumerian_texts.db', 'Sumerian'),
+            ('cuneiform/akkadian_texts.db', 'Akkadian'),
+        ],
+        'extended': [
+            ('arabic/arabic_texts.db', 'Arabic'),
+            ('hebrewOT/hebrew_texts.db', 'Hebrew'),
+            ('persian/persian_texts.db', 'Persian'),
+            ('cuneiform/sumerian_texts.db', 'Sumerian'),
+            ('cuneiform/akkadian_texts.db', 'Akkadian'),
+        ]
+    }
+
+    databases_to_merge = merge_rules.get(mode, [])
+
+    if not databases_to_merge:
+        print(f"No external databases to merge for '{mode}' mode")
+        return
+
+    for source_db, description in databases_to_merge:
+        source_path = os.path.join('..', source_db)
+
+        if not os.path.exists(source_path):
+            print(f"⚠ Warning: {source_db} not found, skipping {description}")
+            continue
+
+        print(f"\nMerging {description}...")
+        print(f"  Source: {source_path}")
+        print(f"  Target: {db_filename}")
+
+        # Run the merge script
+        result = subprocess.run(
+            ['python3', '../merge_database.py', source_path, db_filename],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode == 0:
+            print(f"✓ Successfully merged {description}")
+            # Print last few lines of output for verification
+            lines = result.stdout.strip().split('\n')
+            for line in lines[-5:]:
+                if line.strip():
+                    print(f"  {line}")
+        else:
+            print(f"❌ Error merging {description}:")
+            print(result.stderr)
+            raise RuntimeError(f"Failed to merge {source_db}")
+
+    print(f"\n✓ All external databases merged successfully")
+
+
 def compress_and_copy_database(db_filename, is_sample=False):
     """Compress database and copy to asset pack location
     
@@ -6469,6 +6468,9 @@ if __name__ == "__main__":
             create_database(mode='sample')
             print(f"\nSample database build time: {(time.time() - start_time)/60:.1f} minutes")
 
+            # Merge external databases (Akkadian only for sample)
+            merge_external_databases("perseus_texts_sample.db", mode='sample')
+
             # Compress and copy sample database to asset pack
             compress_and_copy_database("perseus_texts_sample.db", is_sample=True)
 
@@ -6481,6 +6483,9 @@ if __name__ == "__main__":
             create_database(mode='full')
             print(f"\nFull database build time: {(time.time() - start_time)/60:.1f} minutes")
 
+            # Merge external databases (Sumerian + Akkadian for full)
+            merge_external_databases("perseus_texts_full.db", mode='full')
+
             # Compress full database (keep in data-prep directory)
             compress_and_copy_database("perseus_texts_full.db", is_sample=False)
 
@@ -6492,6 +6497,9 @@ if __name__ == "__main__":
             start_time = time.time()
             create_database(mode='extended')
             print(f"\nExtended database build time: {(time.time() - start_time)/60:.1f} minutes")
+
+            # Merge external databases (Hebrew + Persian + Sumerian + Akkadian for extended)
+            merge_external_databases("perseus_texts_extended.db", mode='extended')
 
             # Compress extended database (keep in data-prep directory)
             compress_and_copy_database("perseus_texts_extended.db", is_sample=False)

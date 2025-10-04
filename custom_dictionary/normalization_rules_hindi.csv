@@ -1,0 +1,31 @@
+language,pattern,replacement,description,priority
+hindi,[\u0900-\u0903],,Remove Devanagari signs (inverted candrabindu candrabindu anusvara visarga),1
+hindi,ं,,Remove anusvara (nasalization),2
+hindi,ः,,Remove visarga (aspiration),3
+hindi,ँ,,Remove candrabindu (nasalization),4
+hindi,़,,Remove nukta (dot below for Perso-Arabic sounds),5
+hindi,्,,Remove virama/halant (vowel killer),6
+hindi,[\u093A-\u093C],,Remove vowel signs and nukta,7
+hindi,[\u0941-\u0948],,Remove dependent vowel signs,8
+hindi,[\u094D],,Remove virama (consonant cluster marker),9
+hindi,[\u0951-\u0954],,Remove Vedic tone marks (udatta anudatta svarita),10
+hindi,[\u0962-\u0963],,Remove vocalic L signs,11
+hindi,क़,क,Normalize qa to ka (remove nukta from ka),12
+hindi,ख़,ख,Normalize kha to kha (remove nukta from kha),13
+hindi,ग़,ग,Normalize gha to ga (remove nukta from ga),14
+hindi,ज़,ज,Normalize za to ja (remove nukta from ja),15
+hindi,ड़,ड,Normalize ra to da (remove nukta from da),16
+hindi,ढ़,ढ,Normalize rha to dha (remove nukta from dha),17
+hindi,फ़,फ,Normalize fa to pha (remove nukta from pha),18
+hindi,य़,य,Normalize ya with nukta to ya,19
+hindi,ऑ,ओ,Normalize short o to o,20
+hindi,ऒ,ओ,Normalize short o variant to o,21
+hindi,ॉ,ो,Normalize candra o to o matra,22
+hindi,ॊ,ो,Normalize short o matra to o matra,23
+hindi,ॢ,,Remove vocalic l sign,24
+hindi,ॣ,,Remove vocalic ll sign,25
+hindi,[\u200C\u200D],,Remove zero-width non-joiner and joiner,26
+hindi,।,,Remove devanagari danda (phrase separator),27
+hindi,॥,,Remove devanagari double danda (verse separator),28
+hindi,॰,,Remove devanagari abbreviation sign,29
+hindi,ॱ,,Remove avagraha (elision marker),30

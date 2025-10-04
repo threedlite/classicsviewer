@@ -3,6 +3,7 @@ package com.classicsviewer.app.utils
 import android.util.Log
 import com.classicsviewer.app.database.entities.UserDictionaryLemmaEntity
 import com.classicsviewer.app.database.entities.UserLemmaMappingEntity
+import com.classicsviewer.app.database.entities.NormalizationPatternEntity
 import com.opencsv.CSVReaderBuilder
 import java.io.File
 import java.io.InputStreamReader
@@ -11,6 +12,7 @@ import java.util.zip.ZipFile
 data class DictionaryImportData(
     var lemmas: List<UserDictionaryLemmaEntity> = emptyList(),
     var mappings: List<UserLemmaMappingEntity> = emptyList(),
+    var normalizationPatterns: List<NormalizationPatternEntity> = emptyList(),
     val orphanedMappings: MutableList<String> = mutableListOf(),
     val errors: MutableList<String> = mutableListOf()
 )
@@ -20,7 +22,8 @@ class DictionaryZipParser {
         private const val TAG = "DictionaryZipParser"
         private const val DICTIONARY_CSV = "dictionary.csv"
         private const val MORPHOLOGY_CSV = "morphology.csv"
-        
+        private const val NORMALIZATION_CSV = "normalization_rules.csv"
+
         // Safety limit to prevent malicious data
         private const val MAX_FIELD_LENGTH = 50000  // 50KB per field should be more than enough for any definition
     }
@@ -57,23 +60,41 @@ class DictionaryZipParser {
             }
             
             zip.use { zipArchive ->
-                // Extract and parse dictionary.csv
-                val dictEntry = zipArchive.getEntry(DICTIONARY_CSV) 
+                // STEP 1: Extract and parse normalization_rules.csv FIRST (OPTIONAL)
+                // This must happen before dictionary parsing so patterns can be used for normalization
+                val normalizationEntry = zipArchive.getEntry(NORMALIZATION_CSV)
+                if (normalizationEntry != null) {
+                    Log.d(TAG, "Found normalization_rules.csv in ZIP, parsing...")
+                    zipArchive.getInputStream(normalizationEntry).use { stream ->
+                        result.normalizationPatterns = parseNormalizationCSV(
+                            InputStreamReader(stream, Charsets.UTF_8),
+                            packageId
+                        )
+                    }
+                    Log.d(TAG, "Parsed ${result.normalizationPatterns.size} normalization patterns")
+                } else {
+                    Log.d(TAG, "No normalization_rules.csv found in ZIP (optional)")
+                }
+
+                // STEP 2: Extract and parse dictionary.csv
+                // Now normalization patterns are available for use during import
+                val dictEntry = zipArchive.getEntry(DICTIONARY_CSV)
                     ?: throw IllegalArgumentException("Missing $DICTIONARY_CSV in ZIP file")
-                    
+
                 zipArchive.getInputStream(dictEntry).use { stream ->
                     result.lemmas = parseDictionaryCSV(
                         InputStreamReader(stream, Charsets.UTF_8),
                         fileName,
                         importDate,
-                        packageId
+                        packageId,
+                        result.normalizationPatterns  // Pass patterns for normalization
                     )
                 }
-                
-                // Extract and parse morphology.csv with batch callback
+
+                // STEP 3: Extract and parse morphology.csv with batch callback
                 val morphEntry = zipArchive.getEntry(MORPHOLOGY_CSV)
                     ?: throw IllegalArgumentException("Missing $MORPHOLOGY_CSV in ZIP file")
-                    
+
                 zipArchive.getInputStream(morphEntry).use { stream ->
                     if (batchCallback != null) {
                         // Stream processing with batch callback
@@ -82,6 +103,7 @@ class DictionaryZipParser {
                             fileName,
                             importDate,
                             packageId,
+                            result.normalizationPatterns,  // Pass patterns for normalization
                             batchCallback
                         )
                         // Don't accumulate mappings in memory
@@ -91,12 +113,13 @@ class DictionaryZipParser {
                             InputStreamReader(stream, Charsets.UTF_8),
                             fileName,
                             importDate,
-                            packageId
+                            packageId,
+                            result.normalizationPatterns  // Pass patterns for normalization
                         )
                     }
                 }
             }
-            
+
             // Skip validation if streaming (can't validate without all mappings in memory)
             if (batchCallback == null) {
                 // Validate cross-references
@@ -138,7 +161,8 @@ class DictionaryZipParser {
         reader: InputStreamReader,
         fileName: String,
         importDate: Long,
-        packageId: Long
+        packageId: Long,
+        normalizationPatterns: List<NormalizationPatternEntity>
     ): List<UserDictionaryLemmaEntity> {
         val entries = mutableListOf<UserDictionaryLemmaEntity>()
         
@@ -194,14 +218,30 @@ class DictionaryZipParser {
                             val definition = sanitizeField(row[definitionIdx]?.trim()) ?: ""
                             
                             if (lemma.isNotEmpty() && definition.isNotEmpty() && language.isNotEmpty()) {
-                                val normalizedLemma = if (language == "greek") {
-                                    try {
-                                        GreekNormalizer.normalize(lemma)
-                                    } catch (e: Exception) {
-                                        Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
-                                        null
+                                val normalizedLemma = when (language) {
+                                    "greek" -> {
+                                        try {
+                                            GreekNormalizer.normalize(lemma)
+                                        } catch (e: Exception) {
+                                            Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
+                                            null
+                                        }
                                     }
-                                } else null
+                                    else -> {
+                                        // Use pattern-based normalization for non-Greek languages
+                                        val langPatterns = normalizationPatterns.filter { it.language == language }
+                                        if (langPatterns.isNotEmpty()) {
+                                            try {
+                                                PatternBasedNormalizer.normalize(lemma, language, langPatterns)
+                                            } catch (e: Exception) {
+                                                Log.w(TAG, "Failed to normalize $language lemma: $lemma")
+                                                null
+                                            }
+                                        } else {
+                                            null
+                                        }
+                                    }
+                                }
                                 
                                 entries.add(
                                     UserDictionaryLemmaEntity(
@@ -238,6 +278,7 @@ class DictionaryZipParser {
         fileName: String,
         importDate: Long,
         packageId: Long,
+        normalizationPatterns: List<NormalizationPatternEntity>,
         batchCallback: suspend (List<UserLemmaMappingEntity>) -> Unit
     ) {
         val BATCH_SIZE = 1000 // Process in smaller batches
@@ -303,23 +344,49 @@ class DictionaryZipParser {
                             val language = currentRow[languageIdx]?.trim()?.lowercase() ?: ""
                             
                             if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
-                                val normalizedWord = if (language == "greek") {
-                                    try {
-                                        GreekNormalizer.normalize(wordForm)
-                                    } catch (e: Exception) {
-                                        Log.w(TAG, "Failed to normalize Greek word form: $wordForm")
-                                        null
-                                    }
-                                } else null
+                                val langPatterns = normalizationPatterns.filter { it.language == language }
 
-                                val normalizedLemma = if (language == "greek") {
-                                    try {
-                                        GreekNormalizer.normalize(lemma)
-                                    } catch (e: Exception) {
-                                        Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
-                                        null
+                                val normalizedWord = when (language) {
+                                    "greek" -> {
+                                        try {
+                                            GreekNormalizer.normalize(wordForm)
+                                        } catch (e: Exception) {
+                                            Log.w(TAG, "Failed to normalize Greek word form: $wordForm")
+                                            null
+                                        }
                                     }
-                                } else null
+                                    else -> {
+                                        if (langPatterns.isNotEmpty()) {
+                                            try {
+                                                PatternBasedNormalizer.normalize(wordForm, language, langPatterns)
+                                            } catch (e: Exception) {
+                                                Log.w(TAG, "Failed to normalize $language word form: $wordForm")
+                                                null
+                                            }
+                                        } else null
+                                    }
+                                }
+
+                                val normalizedLemma = when (language) {
+                                    "greek" -> {
+                                        try {
+                                            GreekNormalizer.normalize(lemma)
+                                        } catch (e: Exception) {
+                                            Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
+                                            null
+                                        }
+                                    }
+                                    else -> {
+                                        if (langPatterns.isNotEmpty()) {
+                                            try {
+                                                PatternBasedNormalizer.normalize(lemma, language, langPatterns)
+                                            } catch (e: Exception) {
+                                                Log.w(TAG, "Failed to normalize $language lemma: $lemma")
+                                                null
+                                            }
+                                        } else null
+                                    }
+                                }
                                 
                                 val confidence = confidenceIdx?.let {
                                     currentRow.getOrNull(it)?.toDoubleOrNull() ?: 1.0
@@ -383,7 +450,8 @@ class DictionaryZipParser {
         reader: InputStreamReader,
         fileName: String,
         importDate: Long,
-        packageId: Long
+        packageId: Long,
+        normalizationPatterns: List<NormalizationPatternEntity>
     ): List<UserLemmaMappingEntity> {
         val mappings = mutableListOf<UserLemmaMappingEntity>()
         
@@ -456,23 +524,49 @@ class DictionaryZipParser {
                             val language = currentRow[languageIdx]?.trim()?.lowercase() ?: ""
                             
                             if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
-                                val normalizedWord = if (language == "greek") {
-                                    try {
-                                        GreekNormalizer.normalize(wordForm)
-                                    } catch (e: Exception) {
-                                        Log.w(TAG, "Failed to normalize Greek word form: $wordForm")
-                                        null
-                                    }
-                                } else null
+                                val langPatterns = normalizationPatterns.filter { it.language == language }
 
-                                val normalizedLemma = if (language == "greek") {
-                                    try {
-                                        GreekNormalizer.normalize(lemma)
-                                    } catch (e: Exception) {
-                                        Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
-                                        null
+                                val normalizedWord = when (language) {
+                                    "greek" -> {
+                                        try {
+                                            GreekNormalizer.normalize(wordForm)
+                                        } catch (e: Exception) {
+                                            Log.w(TAG, "Failed to normalize Greek word form: $wordForm")
+                                            null
+                                        }
                                     }
-                                } else null
+                                    else -> {
+                                        if (langPatterns.isNotEmpty()) {
+                                            try {
+                                                PatternBasedNormalizer.normalize(wordForm, language, langPatterns)
+                                            } catch (e: Exception) {
+                                                Log.w(TAG, "Failed to normalize $language word form: $wordForm")
+                                                null
+                                            }
+                                        } else null
+                                    }
+                                }
+
+                                val normalizedLemma = when (language) {
+                                    "greek" -> {
+                                        try {
+                                            GreekNormalizer.normalize(lemma)
+                                        } catch (e: Exception) {
+                                            Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
+                                            null
+                                        }
+                                    }
+                                    else -> {
+                                        if (langPatterns.isNotEmpty()) {
+                                            try {
+                                                PatternBasedNormalizer.normalize(lemma, language, langPatterns)
+                                            } catch (e: Exception) {
+                                                Log.w(TAG, "Failed to normalize $language lemma: $lemma")
+                                                null
+                                            }
+                                        } else null
+                                    }
+                                }
                                 
                                 val confidence = confidenceIdx?.let {
                                     currentRow.getOrNull(it)?.toDoubleOrNull() ?: 1.0
@@ -517,5 +611,128 @@ class DictionaryZipParser {
         
         Log.d(TAG, "Parsed ${mappings.size} morphology mappings")
         return mappings
+    }
+
+    private fun parseNormalizationCSV(
+        reader: InputStreamReader,
+        packageId: Long
+    ): List<NormalizationPatternEntity> {
+        val patterns = mutableListOf<NormalizationPatternEntity>()
+
+        try {
+            val csvReader = CSVReaderBuilder(reader)
+                .withSkipLines(1)  // Skip header row
+                .build()
+
+            var row: Array<String>?
+            var lineNum = 1  // Start at 1 for header
+
+            while (csvReader.readNext().also { row = it } != null) {
+                lineNum++
+                val currentRow = row ?: continue
+
+                // Expected columns: language, pattern, replacement, description, priority
+                if (currentRow.size < 5) {
+                    Log.w(TAG, "Skipping malformed normalization rule at line $lineNum: expected 5 columns, got ${currentRow.size}")
+                    continue
+                }
+
+                val language = currentRow[0]?.trim()?.lowercase() ?: ""
+                val patternRaw = currentRow[1]?.trim() ?: ""
+
+                if (lineNum == 2) {  // Log first data row
+                    Log.d(TAG, "CSV gave us: '$patternRaw'")
+                    Log.d(TAG, "Contains backslash? ${patternRaw.contains("\\")}")
+                    Log.d(TAG, "Char codes: ${patternRaw.map { it.code }.joinToString(",")}")
+                }
+
+                val pattern = unescapeUnicode(patternRaw)
+                val replacement = unescapeUnicode(currentRow[2]?.trim() ?: "")
+                val description = currentRow.getOrNull(3)?.trim()
+                val priorityStr = currentRow.getOrNull(4)?.trim() ?: ""
+
+                if (lineNum == 2) {  // Log first data row
+                    Log.d(TAG, "After unescape: '$pattern'")
+                }
+
+                // Validate required fields
+                if (language.isEmpty()) {
+                    Log.w(TAG, "Skipping normalization rule at line $lineNum: empty language")
+                    continue
+                }
+
+                if (pattern.isEmpty()) {
+                    Log.w(TAG, "Skipping normalization rule at line $lineNum: empty pattern")
+                    continue
+                }
+
+                // Parse priority (default to 999 if invalid)
+                val priority = try {
+                    priorityStr.toInt()
+                } catch (e: NumberFormatException) {
+                    Log.w(TAG, "Invalid priority '$priorityStr' at line $lineNum, defaulting to 999")
+                    999
+                }
+
+                // Validate regex pattern
+                try {
+                    Regex(pattern)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Skipping normalization rule at line $lineNum: invalid regex pattern '$pattern': ${e.message}")
+                    continue
+                }
+
+                patterns.add(
+                    NormalizationPatternEntity(
+                        packageId = packageId,
+                        language = language,
+                        pattern = pattern,
+                        replacement = replacement,
+                        description = description,
+                        priority = priority
+                    )
+                )
+            }
+
+            csvReader.close()
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error parsing normalization CSV", e)
+            throw IllegalArgumentException("Failed to parse normalization_rules.csv: ${e.message}")
+        }
+
+        return patterns
+    }
+
+    /**
+     * Convert Unicode escape sequences (\\uXXXX) in a string to actual Unicode characters.
+     * For example: "[\\u064B-\\u065F]" -> "[ً-ٟ]"
+     */
+    private fun unescapeUnicode(input: String): String {
+        if (!input.contains("\\u")) {
+            return input  // Fast path - no escapes
+        }
+
+        val sb = StringBuilder()
+        var i = 0
+        while (i < input.length) {
+            if (i < input.length - 5 && input[i] == '\\' && input[i + 1] == 'u') {
+                // Found \uXXXX
+                try {
+                    val hexCode = input.substring(i + 2, i + 6)
+                    val codePoint = hexCode.toInt(16)
+                    sb.append(codePoint.toChar())
+                    i += 6  // Skip \uXXXX
+                } catch (e: Exception) {
+                    // Invalid escape sequence - keep as-is
+                    sb.append(input[i])
+                    i++
+                }
+            } else {
+                sb.append(input[i])
+                i++
+            }
+        }
+        return sb.toString()
     }
 }

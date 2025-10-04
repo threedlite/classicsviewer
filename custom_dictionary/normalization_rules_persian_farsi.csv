@@ -1,0 +1,11 @@
+language,pattern,replacement,description,priority
+persian,[\u064B-\u065F\u0670],,Remove Arabic diacritics (zabar zēr pēš tanwīn etc),1
+persian,\u0640,,Remove tatweel/kashida (elongation character),2
+persian,[أإآٱ],ا,Normalize all alif variants to plain alif,3
+persian,ؤ,و,Normalize hamza on waw to plain waw,4
+persian,ئ,ی,Normalize hamza on ya to plain ya,5
+persian,ى,ی,Normalize Arabic ya to Persian ya,6
+persian,ي,ی,Normalize Arabic yeh to Persian yeh,7
+persian,ك,ک,Normalize Arabic kaf to Persian kaf,8
+persian,ة,ه,Normalize taa marbuta to haa,9
+persian,ء,,Remove standalone hamza,10

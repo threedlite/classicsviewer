@@ -1,0 +1,15 @@
+language,pattern,replacement,description,priority
+persian,[\u064B-\u0652],,"Remove Arabic diacritics (fatha, damma, kasra, sukun, shadda, tanwin)",1
+persian,\u0670,,"Remove alef khanjariyah (superscript alef)",2
+persian,\u0653,,"Remove maddah",3
+persian,\u0654,,"Remove hamza above",4
+persian,\u0655,,"Remove hamza below",5
+persian,\u200C,,"Remove zero-width non-joiner (ZWNJ)",6
+persian,ى,ی,"Normalize Arabic yeh (U+0649) to Farsi yeh (U+06CC)",7
+persian,ي,ی,"Normalize Arabic yeh with hamza (U+064A) to Farsi yeh (U+06CC)",8
+persian,ك,کـ,"Normalize Arabic kaf (U+0643) to Farsi kaf (U+06A9)",9
+persian,ؤ,و,"Normalize waw with hamza to plain waw",10
+persian,ئ,ی,"Normalize yeh with hamza to plain yeh",10
+persian,أ,ا,"Normalize alef with hamza above to plain alef",11
+persian,إ,ا,"Normalize alef with hamza below to plain alef",12
+persian,آ,ا,"Normalize alef with madda to plain alef",13

@@ -745,7 +745,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
         if (currentPageIndex != 0) {
             com.google.android.material.snackbar.Snackbar.make(
                 binding.root,
-                "This feature only works on Greek/Latin text pages",
+                "This feature only works on text pages",
                 com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
             ).show()
             return
@@ -794,7 +794,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             // Show a message to the user
             com.google.android.material.snackbar.Snackbar.make(
                 binding.root,
-                "This feature only works on Greek/Latin text pages",
+                "This feature only works on text pages",
                 com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
             ).show()
         }

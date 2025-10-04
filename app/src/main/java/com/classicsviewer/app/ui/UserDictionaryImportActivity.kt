@@ -65,21 +65,14 @@ class UserDictionaryImportActivity : BaseActivity() {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(
                         this,
-                        "Dictionary imported successfully\n${state.lemmaCount} entries, ${state.mappingCount} mappings",
-                        Toast.LENGTH_LONG
+                        "Dictionary imported successfully\n${state.lemmaCount} entries, ${state.mappingCount} mappings\nRestarting...",
+                        Toast.LENGTH_SHORT
                     ).show()
-                    
-                    // Invalidate Latin dictionary cache after successful import
-                    val repository = com.classicsviewer.app.data.RepositoryFactory.getRepository(this)
-                    if (repository is com.classicsviewer.app.data.PerseusRepository) {
-                        repository.invalidateLatinDictionaryCache()
-                    }
-                    
-                    if (state.warnings.isNotEmpty()) {
-                        showWarningsDialog(state.warnings)
-                    }
-                    
+
                     viewModel.resetImportState()
+
+                    // Restart app immediately to clear all caches and load new dictionary
+                    restartApp()
                 }
                 is UserDictionaryViewModel.ImportState.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -149,15 +142,63 @@ class UserDictionaryImportActivity : BaseActivity() {
     }
     
     private fun removeDictionary() {
-        viewModel.clearDictionary()
-        
-        // Invalidate Latin dictionary cache after removing dictionary
-        val repository = com.classicsviewer.app.data.RepositoryFactory.getRepository(this)
-        if (repository is com.classicsviewer.app.data.PerseusRepository) {
-            repository.invalidateLatinDictionaryCache()
+        lifecycleScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            try {
+                viewModel.clearDictionary()
+
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    Toast.makeText(this@UserDictionaryImportActivity,
+                        "Dictionary removed - restarting...",
+                        Toast.LENGTH_SHORT).show()
+
+                    // Use the same restart method
+                    restartApp()
+                }
+            } catch (e: Exception) {
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    Toast.makeText(this@UserDictionaryImportActivity,
+                        "Error: ${e.message}",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
         }
-        
-        Toast.makeText(this, "Dictionary removed", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun restartApp() {
+        try {
+            android.util.Log.d("UserDictionaryImport", "Starting app restart...")
+
+            // Force app restart - identical to MainActivity database import
+            val intent = packageManager.getLaunchIntentForPackage(packageName)
+            if (intent == null) {
+                android.util.Log.e("UserDictionaryImport", "Failed to get launch intent for package: $packageName")
+                return
+            }
+
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+            android.util.Log.d("UserDictionaryImport", "Starting activity with intent")
+            startActivity(intent)
+
+            // Exclude from recents and finish
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                android.util.Log.d("UserDictionaryImport", "Calling finishAndRemoveTask()")
+                finishAndRemoveTask()
+            } else {
+                android.util.Log.d("UserDictionaryImport", "Calling finish()")
+                finish()
+            }
+
+            // Delay to ensure cleanup, then exit
+            android.util.Log.d("UserDictionaryImport", "Scheduling System.exit(0) in 100ms")
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                android.util.Log.d("UserDictionaryImport", "Executing System.exit(0)")
+                System.exit(0)
+            }, 100)
+        } catch (e: Exception) {
+            android.util.Log.e("UserDictionaryImport", "Exception during restart", e)
+            Toast.makeText(this, "Restart failed: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
     
     private fun showWarningsDialog(warnings: List<String>) {
@@ -195,11 +236,13 @@ class UserDictionaryImportActivity : BaseActivity() {
                         viewModel.setActivePackage(selectedPackage.id)
                         Toast.makeText(
                             this@UserDictionaryImportActivity,
-                            "Switched to: ${selectedPackage.packageName}",
+                            "Switched to: ${selectedPackage.packageName} - restarting...",
                             Toast.LENGTH_SHORT
                         ).show()
                         dialog.dismiss()
-                        viewModel.loadDictionaryInfo() // Refresh the UI
+
+                        // Restart app to clear all caches
+                        restartApp()
                     }
                 }
                 .setNegativeButton("Cancel", null)
