@@ -23,7 +23,7 @@ import com.classicsviewer.app.database.helpers.NormalizationPatternHelper
         UserLemmaMappingEntity::class,
         UserDictionaryPackageEntity::class
     ],
-    version = 6,
+    version = 8,
     exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -35,7 +35,41 @@ abstract class UserDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: UserDatabase? = null
-        
+
+        private val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Ensure normalization_patterns table exists
+                // (no-op if it already exists from previous version)
+                database.execSQL("""
+                    CREATE TABLE IF NOT EXISTS normalization_patterns (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        package_id INTEGER NOT NULL,
+                        language TEXT NOT NULL,
+                        pattern TEXT NOT NULL,
+                        replacement TEXT NOT NULL,
+                        description TEXT,
+                        priority INTEGER NOT NULL,
+                        created_at INTEGER NOT NULL
+                    )
+                """)
+
+                database.execSQL("""
+                    CREATE INDEX IF NOT EXISTS index_normalization_patterns_language
+                    ON normalization_patterns(language)
+                """)
+
+                database.execSQL("""
+                    CREATE INDEX IF NOT EXISTS index_normalization_patterns_package_id
+                    ON normalization_patterns(package_id)
+                """)
+
+                database.execSQL("""
+                    CREATE INDEX IF NOT EXISTS index_normalization_patterns_lang_pkg_pri
+                    ON normalization_patterns(language, package_id, priority)
+                """)
+            }
+        }
+
         fun getInstance(context: Context): UserDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -43,6 +77,7 @@ abstract class UserDatabase : RoomDatabase() {
                     UserDatabase::class.java,
                     "user_data.db"
                 )
+                .addMigrations(MIGRATION_7_8)
                 .fallbackToDestructiveMigration()
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onOpen(db: SupportSQLiteDatabase) {
