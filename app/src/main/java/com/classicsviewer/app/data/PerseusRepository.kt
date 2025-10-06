@@ -29,7 +29,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
     private val translationSegmentDao = database.translationSegmentDao()
     private val userDictionaryDao = userDatabase.userDictionaryDao()
     private val userLemmaMappingDao = userDatabase.userLemmaMappingDao()
-    private val userNormalizationPatternDao = userDatabase.normalizationPatternDao()
+    private val userNormalizationPatternHelper = UserDatabase.getNormalizationPatternHelper(context)
 
     private val greekLemmatizer = GreekLemmatizer()
 
@@ -99,7 +99,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
             else -> {
                 val patterns = normalizationCache.getOrPut(language) {
                     // First check user database for custom imported patterns (takes priority)
-                    val userPatterns = userNormalizationPatternDao.getPatternsForLanguage(language)
+                    val userPatterns = userNormalizationPatternHelper.getPatternsForLanguage(language)
 
                     if (userPatterns.isNotEmpty()) {
                         android.util.Log.d("PerseusRepository", "Found ${userPatterns.size} user normalization patterns for language '$language' (using instead of bundled)")

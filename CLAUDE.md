@@ -107,6 +107,41 @@ When you see `java.lang.IllegalStateException: Pre-packaged database has an inva
 - **Room validates EXACT schema match** - Even minor differences like nullable vs non-null will crash the app
 - **Always test with pm clear** - Old databases can mask schema issues
 
+### CRITICAL: Backwards Compatibility - Never Change Room Schema Versions
+
+**IMPORTANT FOR FUTURE DEVELOPMENT**: To preserve existing user data and prevent crashes on app upgrades:
+
+1. **NEVER increment Room database versions** for either PerseusDatabase or UserDatabase
+2. **NEVER add or remove entities** from the `@Database` entities list
+3. **NEVER change tracked table schemas** - any change will break existing installations
+4. **DO use dynamic table creation** for new features:
+   - Create new tables via SQL in RoomDatabase.Callback().onOpen()
+   - Access new tables using raw SQL queries through helper classes (not Room DAOs)
+   - Example: `normalization_patterns` table in UserDatabase
+   - Pattern: Helper class with SupportSQLiteDatabase access, not Room entity
+
+**Why this matters**: When users upgrade the app:
+- Their existing databases remain on device (perseus_texts.db, user_data.db)
+- Room validates schema hash against tracked entities
+- Any mismatch = instant crash on app launch
+- Version bumps require migrations which can fail or lose data
+
+**Approved pattern for new tables**:
+```kotlin
+// In UserDatabase.kt - add callback, not entity
+.addCallback(object : RoomDatabase.Callback() {
+    override fun onOpen(db: SupportSQLiteDatabase) {
+        super.onOpen(db)
+        createNewTableIfNeeded(db)  // Create via SQL
+    }
+})
+
+// Access via helper, not DAO
+fun getNewTableHelper(context: Context): NewTableHelper {
+    return NewTableHelper(getInstance(context).openHelper.writableDatabase)
+}
+```
+
 ## Play Asset Delivery
 
 **IMPORTANT**: This app uses Google Play Asset Delivery for efficient database distribution.

@@ -10,22 +10,20 @@ import com.classicsviewer.app.database.dao.BookmarkDao
 import com.classicsviewer.app.database.dao.UserDictionaryDao
 import com.classicsviewer.app.database.dao.UserLemmaMappingDao
 import com.classicsviewer.app.database.dao.UserDictionaryPackageDao
-import com.classicsviewer.app.database.dao.NormalizationPatternDao
 import com.classicsviewer.app.database.entities.BookmarkEntity
 import com.classicsviewer.app.database.entities.UserDictionaryLemmaEntity
 import com.classicsviewer.app.database.entities.UserLemmaMappingEntity
 import com.classicsviewer.app.database.entities.UserDictionaryPackageEntity
-import com.classicsviewer.app.database.entities.NormalizationPatternEntity
+import com.classicsviewer.app.database.helpers.NormalizationPatternHelper
 
 @Database(
     entities = [
         BookmarkEntity::class,
         UserDictionaryLemmaEntity::class,
         UserLemmaMappingEntity::class,
-        UserDictionaryPackageEntity::class,
-        NormalizationPatternEntity::class
+        UserDictionaryPackageEntity::class
     ],
-    version = 7,
+    version = 6,
     exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -33,7 +31,6 @@ abstract class UserDatabase : RoomDatabase() {
     abstract fun userDictionaryDao(): UserDictionaryDao
     abstract fun userLemmaMappingDao(): UserLemmaMappingDao
     abstract fun userDictionaryPackageDao(): UserDictionaryPackageDao
-    abstract fun normalizationPatternDao(): NormalizationPatternDao
     
     companion object {
         @Volatile
@@ -57,6 +54,11 @@ abstract class UserDatabase : RoomDatabase() {
                 INSTANCE = instance
                 instance
             }
+        }
+
+        fun getNormalizationPatternHelper(context: Context): NormalizationPatternHelper {
+            val database = getInstance(context)
+            return NormalizationPatternHelper(database.openHelper.writableDatabase)
         }
 
         private fun createNormalizationTableIfNeeded(db: SupportSQLiteDatabase) {

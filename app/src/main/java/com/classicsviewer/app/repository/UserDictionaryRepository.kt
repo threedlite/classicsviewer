@@ -24,7 +24,7 @@ class UserDictionaryRepository(private val context: Context) {
     private val dictionaryDao = userDatabase.userDictionaryDao()
     private val mappingDao = userDatabase.userLemmaMappingDao()
     private val packageDao = userDatabase.userDictionaryPackageDao()
-    private val normalizationDao = userDatabase.normalizationPatternDao()
+    private val normalizationHelper = UserDatabase.getNormalizationPatternHelper(context)
     private val zipParser = DictionaryZipParser()
 
     // Normalization pattern cache (to avoid repeated DB queries)
@@ -125,7 +125,7 @@ class UserDictionaryRepository(private val context: Context) {
                 }
 
                 if (filteredPatterns.isNotEmpty()) {
-                    normalizationDao.insertAll(filteredPatterns)
+                    normalizationHelper.insertAll(filteredPatterns)
                     Log.d(TAG, "Inserted ${filteredPatterns.size} normalization patterns")
                 }
 
@@ -186,7 +186,7 @@ class UserDictionaryRepository(private val context: Context) {
         Log.d(TAG, "Clearing all user dictionary data")
         dictionaryDao.deleteAllLemmas()
         mappingDao.deleteAllMappings()
-        normalizationDao.deleteAll()  // Also clear normalization patterns
+        normalizationHelper.deleteAll()  // Also clear normalization patterns
 
         // Clear normalization caches
         normalizationCache.clear()
@@ -200,7 +200,7 @@ class UserDictionaryRepository(private val context: Context) {
         // Delete all data associated with this package
         dictionaryDao.deleteLemmasByPackageId(packageId)
         mappingDao.deleteMappingsByPackageId(packageId)
-        normalizationDao.deleteByPackageId(packageId)
+        normalizationHelper.deleteByPackageId(packageId)
         packageDao.deletePackageById(packageId)
 
         // Clear normalization caches
@@ -291,7 +291,7 @@ class UserDictionaryRepository(private val context: Context) {
         if (language == "greek" || language == "latin") {
             return emptyList()
         }
-        return normalizationDao.getPatternsForLanguage(language)
+        return normalizationHelper.getPatternsForLanguage(language)
     }
 
     /**
@@ -302,7 +302,7 @@ class UserDictionaryRepository(private val context: Context) {
         if (language == "greek" || language == "latin") {
             return false  // Use existing normalizers
         }
-        return normalizationDao.countPatternsForLanguage(language) > 0
+        return normalizationHelper.countPatternsForLanguage(language) > 0
     }
 
     /**
