@@ -35,6 +35,7 @@ import android.os.Handler
 import android.os.Looper
 import java.util.zip.ZipInputStream
 import java.io.BufferedInputStream
+import com.classicsviewer.app.models.CustomLanguageConfig
 
 class MainActivity : AppCompatActivity() {
     
@@ -110,23 +111,115 @@ class MainActivity : AppCompatActivity() {
                 return
             }
             
-            // Database ready, show language selection
+            // Database ready, auto-detect languages from database
+            autoDetectLanguages()
+
             checkDatabaseSource()
             setupLanguageSelection()
-            
+
             // Extract default audio if needed (in background)
             extractDefaultAudioIfNeeded()
         }
     }
     
-    private fun setupLanguageSelection() {
-        val languages = mutableListOf(
-            Language("Greek", "greek"),
-            Language("Latin", "latin")
-        )
+    private fun autoDetectLanguages() {
+        lifecycleScope.launch {
+            try {
+                // Get all distinct languages from the database
+                val db = PerseusDatabase.getInstance(this@MainActivity)
+                val allLanguages = withContext(Dispatchers.IO) {
+                    db.authorDao().getAllLanguages()
+                }
 
-        // Add custom languages from preferences
+                android.util.Log.d("MainActivity", "Auto-detecting languages from database: $allLanguages")
+
+                // Get existing custom languages
+                val existingCustomLanguages = PreferencesManager.getCustomLanguages(this@MainActivity)
+                val existingLanguageIds = existingCustomLanguages.map { it.id }.toSet()
+
+                // Preferred order for auto-detected languages
+                val preferredOrder = listOf(
+                    "greek",
+                    "latin",
+                    "sumerian",
+                    "akkadian",
+                    "sanskrit",
+                    "persian",
+                    "hebrew",
+                    "arabic"
+                )
+
+                var languagesAdded = false
+
+                // First, add languages in preferred order if they exist in database and not already added
+                preferredOrder.forEach { languageId ->
+                    if (allLanguages.contains(languageId) && !existingLanguageIds.contains(languageId)) {
+                        val displayName = convertLanguageIdToDisplayName(languageId)
+                        val color = generateDefaultColor(languageId)
+
+                        val customLanguage = CustomLanguageConfig(languageId, displayName, color)
+                        PreferencesManager.addCustomLanguage(this@MainActivity, customLanguage)
+
+                        android.util.Log.d("MainActivity", "Auto-added language: $languageId -> $displayName (color: ${String.format("#%06X", 0xFFFFFF and color)})")
+                        languagesAdded = true
+                    }
+                }
+
+                // Then add any remaining languages not in preferred order
+                allLanguages.forEach { languageId ->
+                    if (!preferredOrder.contains(languageId) && !existingLanguageIds.contains(languageId)) {
+                        val displayName = convertLanguageIdToDisplayName(languageId)
+                        val color = generateDefaultColor(languageId)
+
+                        val customLanguage = CustomLanguageConfig(languageId, displayName, color)
+                        PreferencesManager.addCustomLanguage(this@MainActivity, customLanguage)
+
+                        android.util.Log.d("MainActivity", "Auto-added language (not in preferred order): $languageId -> $displayName (color: ${String.format("#%06X", 0xFFFFFF and color)})")
+                        languagesAdded = true
+                    }
+                }
+
+                // Refresh the language selection UI if any languages were added
+                if (languagesAdded) {
+                    setupLanguageSelection()
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("MainActivity", "Error auto-detecting languages", e)
+            }
+        }
+    }
+
+    private fun convertLanguageIdToDisplayName(languageId: String): String {
+        // Replace underscores with spaces, then capitalize each word
+        return languageId.replace('_', ' ')
+            .split(' ')
+            .joinToString(" ") { word ->
+                word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+            }
+    }
+
+    private fun generateDefaultColor(languageId: String): Int {
+        // Generate colors with reduced saturation to match Greek/Latin aesthetic
+        return when (languageId.lowercase()) {
+            "greek" -> 0xFF5A8A5C.toInt()     // Loeb Greek green
+            "latin" -> 0xFFB85450.toInt()     // Loeb Latin red
+            "sanskrit" -> 0xFFB9AF5F.toInt()  // Desaturated yellow
+            "hebrew" -> 0xFF8C64A0.toInt()    // Desaturated purple
+            "arabic" -> 0xFFDCDCDC.toInt()    // Light grey/white
+            "persian" -> 0xFFBE8755.toInt()   // Desaturated orange
+            "sumerian" -> 0xFF5A73AA.toInt()  // Desaturated blue
+            "akkadian" -> 0xFFAF9B7D.toInt()  // Desaturated tan
+            else -> 0xFF808080.toInt()        // Grey for unknown languages
+        }
+    }
+
+    private fun setupLanguageSelection() {
+        // Get custom languages from preferences (includes order and customizations)
         val customLanguages = PreferencesManager.getCustomLanguages(this)
+
+        val languages = mutableListOf<Language>()
+
+        // Add all custom languages in their saved order
         customLanguages.forEach { customLang ->
             languages.add(Language(customLang.displayName, customLang.id))
         }
@@ -167,11 +260,11 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val audioExtractor = DefaultAudioExtractor(this@MainActivity)
-                
+
                 // Check if extraction is needed
                 if (audioExtractor.needsExtraction()) {
                     android.util.Log.d("MainActivity", "Extracting default audio package...")
-                    
+
                     // Only extract if we have the audio in assets
                     if (audioExtractor.hasDefaultAudioInAssets()) {
                         val success = audioExtractor.extractDefaultAudio()
@@ -193,7 +286,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true

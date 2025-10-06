@@ -9,6 +9,10 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import re
 import json
+import csv
+import zipfile
+import tempfile
+import shutil
 from datetime import datetime
 import unicodedata
 from typing import Dict, List, Tuple, Optional, Set
@@ -6271,14 +6275,187 @@ def create_translation_lookup_table(conn):
     print(f"\nTotal translation mappings: {total_mappings}")
 
 
+def import_lexicons_for_languages(db_filename, languages, lexicon_paths):
+    """
+    Import lexicons (dictionary + morphology) for specified languages.
+
+    Args:
+        db_filename: Name of the target database file
+        languages: List of language names that were merged (e.g., ['Arabic', 'Hebrew'])
+        lexicon_paths: Dict mapping language names to lexicon ZIP paths
+    """
+    languages_to_import = [lang for lang in languages if lang in lexicon_paths]
+
+    if not languages_to_import:
+        print("\nNo lexicons to import (Greek/Latin already included)")
+        return
+
+    print(f"\n{'='*60}")
+    print(f"IMPORTING LEXICONS")
+    print(f"{'='*60}\n")
+
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+
+    for language in languages_to_import:
+        lexicon_zip = lexicon_paths[language]
+
+        if not os.path.exists(lexicon_zip):
+            print(f"⚠ Warning: Lexicon not found for {language}: {lexicon_zip}")
+            continue
+
+        print(f"\nImporting {language} lexicon...")
+        print(f"  Source: {lexicon_zip}")
+
+        # Extract ZIP to temporary directory
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with zipfile.ZipFile(lexicon_zip, 'r') as zip_ref:
+                zip_ref.extractall(temp_dir)
+
+            # Import dictionary.csv into dictionary_entries table
+            dict_path = os.path.join(temp_dir, 'dictionary.csv')
+            if os.path.exists(dict_path):
+                print(f"  Importing dictionary...")
+                with open(dict_path, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    dict_count = 0
+                    for row in reader:
+                        # Incorporate transliteration into entry_html and entry_plain if available
+                        transliteration = row.get('transliteration', '')
+                        definition = row.get('definition', '')
+                        html_definition = row.get('html_definition', '')
+
+                        if transliteration:
+                            # Add transliteration to plain definition
+                            entry_plain = f"[{transliteration}] {definition}"
+                            # Add transliteration to HTML definition
+                            if html_definition:
+                                entry_html = f'<div><span class="transliteration" style="color: #666; font-style: italic;">[{transliteration}]</span> {html_definition}</div>'
+                            else:
+                                entry_html = f'<div><span class="transliteration" style="color: #666; font-style: italic;">[{transliteration}]</span> {definition}</div>'
+                        else:
+                            entry_plain = definition
+                            entry_html = html_definition if html_definition else f'<div>{definition}</div>'
+
+                        cursor.execute('''
+                            INSERT OR IGNORE INTO dictionary_entries
+                            (headword, headword_normalized_ultra, language, entry_xml, entry_html, entry_plain, source)
+                            VALUES (?, NULL, ?, '', ?, ?, ?)
+                        ''', (row['lemma'], row['language'], entry_html, entry_plain, row.get('source_name', '')))
+                        dict_count += 1
+                    print(f"  ✓ Imported {dict_count:,} dictionary entries")
+
+            # Import morphology.csv into lemma_map table
+            morph_path = os.path.join(temp_dir, 'morphology.csv')
+            if os.path.exists(morph_path):
+                print(f"  Importing morphology...")
+                with open(morph_path, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    morph_count = 0
+                    for row in reader:
+                        # Combine pos and root into morph_info
+                        morph_info_parts = []
+                        if row.get('pos'):
+                            morph_info_parts.append(f"pos:{row['pos']}")
+                        if row.get('root'):
+                            morph_info_parts.append(f"root:{row['root']}")
+                        morph_info = '; '.join(morph_info_parts) if morph_info_parts else None
+
+                        cursor.execute('''
+                            INSERT OR IGNORE INTO lemma_map
+                            (word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info)
+                            VALUES (?, NULL, ?, ?, ?, ?)
+                        ''', (row['word_form'], row['lemma'],
+                              float(row.get('confidence', 1.0)), row.get('source_name', ''), morph_info))
+                        morph_count += 1
+                        if morph_count % 100000 == 0:
+                            print(f"    ... {morph_count:,} morphology forms")
+                    print(f"  ✓ Imported {morph_count:,} morphology forms")
+
+            # Import normalization_rules.csv into normalization_patterns table
+            norm_path = os.path.join(temp_dir, 'normalization_rules.csv')
+            if os.path.exists(norm_path):
+                print(f"  Importing normalization rules...")
+                with open(norm_path, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    norm_count = 0
+                    for row in reader:
+                        cursor.execute('''
+                            INSERT OR IGNORE INTO normalization_patterns
+                            (language, pattern, replacement, description, priority)
+                            VALUES (?, ?, ?, ?, ?)
+                        ''', (row['language'], row['pattern'], row['replacement'],
+                              row.get('description', ''), int(row.get('priority', 999))))
+                        norm_count += 1
+                    print(f"  ✓ Imported {norm_count} normalization rules")
+
+    # Post-process lemma_map to populate word_form_normalized_ultra
+    print("\nApplying normalization to lemma_map entries...")
+    cursor = conn.cursor()
+
+    # Get all normalization patterns by language
+    patterns_by_lang = {}
+    cursor.execute("SELECT language, pattern, replacement, priority FROM normalization_patterns ORDER BY priority")
+    for row in cursor.fetchall():
+        lang, pattern_str, replacement, priority = row
+        if lang not in patterns_by_lang:
+            patterns_by_lang[lang] = []
+        patterns_by_lang[lang].append((re.compile(pattern_str), replacement))
+
+    # Helper to detect language from word using Unicode ranges
+    def detect_language(word):
+        if not word:
+            return None
+        # Check first character's Unicode range
+        c = ord(word[0])
+        if 0x0590 <= c <= 0x05FF:  # Hebrew
+            return 'hebrew'
+        elif 0x0600 <= c <= 0x06FF:  # Arabic
+            return 'arabic'
+        elif 0x0900 <= c <= 0x097F:  # Devanagari (Sanskrit)
+            return 'sanskrit'
+        return None
+
+    # Apply normalization to entries
+    cursor.execute("SELECT id, word_form FROM lemma_map WHERE word_form_normalized_ultra IS NULL")
+    all_entries = cursor.fetchall()
+
+    updated_count = 0
+    for entry_id, word_form in all_entries:
+        lang = detect_language(word_form)
+        if lang and lang in patterns_by_lang:
+            # Apply normalization
+            import unicodedata
+            normalized = unicodedata.normalize('NFD', word_form)
+            for pattern, replacement in patterns_by_lang[lang]:
+                normalized = pattern.sub(replacement, normalized)
+            normalized = unicodedata.normalize('NFC', normalized)
+
+            # Update if normalization changed the word
+            if normalized != word_form:
+                cursor.execute("UPDATE lemma_map SET word_form_normalized_ultra = ? WHERE id = ?",
+                             (normalized, entry_id))
+                updated_count += 1
+
+    if updated_count > 0:
+        print(f"✓ Populated word_form_normalized_ultra for {updated_count:,} entries")
+    else:
+        print("✓ No normalization needed for lemma_map entries")
+
+    conn.commit()
+    conn.close()
+
+    print(f"\n✓ All lexicons imported successfully")
+
+
 def merge_external_databases(db_filename, mode='sample'):
     """
     Merge external language databases into the main Perseus database.
 
     Merge rules by build mode:
-    - sample: Akkadian only (Gilgamesh)
+    - sample: (none)
     - full: Sumerian + Akkadian
-    - extended: Hebrew + Persian + Sumerian + Akkadian
+    - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian
 
     Args:
         db_filename: Name of the target database file
@@ -6293,7 +6470,6 @@ def merge_external_databases(db_filename, mode='sample'):
     # Define merge rules
     merge_rules = {
         'sample': [
-            ('cuneiform/akkadian_texts.db', 'Akkadian'),
         ],
         'full': [
             ('cuneiform/sumerian_texts.db', 'Sumerian'),
@@ -6303,9 +6479,20 @@ def merge_external_databases(db_filename, mode='sample'):
             ('arabic/arabic_texts.db', 'Arabic'),
             ('hebrewOT/hebrew_texts.db', 'Hebrew'),
             ('persian/persian_texts.db', 'Persian'),
+            ('sanskrit/sanskrit_texts.db', 'Sanskrit'),
             ('cuneiform/sumerian_texts.db', 'Sumerian'),
             ('cuneiform/akkadian_texts.db', 'Akkadian'),
         ]
+    }
+
+    # Lexicon paths for languages (Greek/Latin already included, don't import those)
+    lexicon_paths = {
+        'Arabic': '../arabic/arabic_lexicon.zip',
+        'Hebrew': '../hebrewOT/hebrew_lexicon.zip',
+        'Sanskrit': '../sanskrit/dcs_sanskrit_lexicon.zip',
+        'Sumerian': '../cuneiform/sumerian_lexicon.zip',
+        'Akkadian': '../cuneiform/akkadian_lexicon.zip',
+        # Persian: no lexicon available
     }
 
     databases_to_merge = merge_rules.get(mode, [])
@@ -6313,6 +6500,9 @@ def merge_external_databases(db_filename, mode='sample'):
     if not databases_to_merge:
         print(f"No external databases to merge for '{mode}' mode")
         return
+
+    # Track which languages were successfully merged
+    merged_languages = []
 
     for source_db, description in databases_to_merge:
         source_path = os.path.join('..', source_db)
@@ -6339,12 +6529,17 @@ def merge_external_databases(db_filename, mode='sample'):
             for line in lines[-5:]:
                 if line.strip():
                     print(f"  {line}")
+            # Track successful merge
+            merged_languages.append(description)
         else:
             print(f"❌ Error merging {description}:")
             print(result.stderr)
             raise RuntimeError(f"Failed to merge {source_db}")
 
     print(f"\n✓ All external databases merged successfully")
+
+    # Import lexicons for merged languages (excluding Greek/Latin which are already included)
+    import_lexicons_for_languages(db_filename, merged_languages, lexicon_paths)
 
 
 def compress_and_copy_database(db_filename, is_sample=False):
@@ -6468,7 +6663,7 @@ if __name__ == "__main__":
             create_database(mode='sample')
             print(f"\nSample database build time: {(time.time() - start_time)/60:.1f} minutes")
 
-            # Merge external databases (Akkadian only for sample)
+            # Merge external databases 
             merge_external_databases("perseus_texts_sample.db", mode='sample')
 
             # Compress and copy sample database to asset pack
@@ -6483,7 +6678,7 @@ if __name__ == "__main__":
             create_database(mode='full')
             print(f"\nFull database build time: {(time.time() - start_time)/60:.1f} minutes")
 
-            # Merge external databases (Sumerian + Akkadian for full)
+            # Merge external databases
             merge_external_databases("perseus_texts_full.db", mode='full')
 
             # Compress full database (keep in data-prep directory)
@@ -6498,7 +6693,7 @@ if __name__ == "__main__":
             create_database(mode='extended')
             print(f"\nExtended database build time: {(time.time() - start_time)/60:.1f} minutes")
 
-            # Merge external databases (Hebrew + Persian + Sumerian + Akkadian for extended)
+            # Merge external databases 
             merge_external_databases("perseus_texts_extended.db", mode='extended')
 
             # Compress extended database (keep in data-prep directory)

@@ -146,6 +146,67 @@ Citation: Langdon, Stephen. Sumerian Liturgies and Psalms. Philadelphia: Univers
 This work includes Sumerian transliterations and English translations of liturgical texts from ancient Mesopotamia.
 
 
+CUNEIFORM DICTIONARIES (ORACC)
+===============================
+
+ePSD2 - Electronic Pennsylvania Sumerian Dictionary
+----------------------------------------------------
+Source: The Pennsylvania Sumerian Dictionary Project, University of Pennsylvania
+License: Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Copyright: The Pennsylvania Sumerian Dictionary Project, 2017-
+Project URL: http://oracc.museum.upenn.edu/epsd2/
+Data Source: http://oracc.museum.upenn.edu/epsd2/JSON/
+
+The ePSD2 provides comprehensive Sumerian dictionary entries including:
+- 15,940+ Sumerian word entries with meanings and grammatical information
+- Morphological forms and normalizations for accurate word matching
+- Guide words (English translations) for all entries
+- Usage attestations from cuneiform corpus
+
+The electronic Pennsylvania Sumerian Dictionary is the second edition of the
+comprehensive reference dictionary for the Sumerian language, maintained by
+scholars at the University of Pennsylvania Museum.
+
+Citation:
+The Pennsylvania Sumerian Dictionary Project. ePSD2: electronic Pennsylvania
+Sumerian Dictionary. 2017-. http://oracc.museum.upenn.edu/epsd2/
+
+The ePSD2 is part of the ORACC (Open Richly Annotated Cuneiform Corpus) project,
+which provides open access to cuneiform text editions and linguistic resources.
+
+
+RINAP - Royal Inscriptions of the Neo-Assyrian Period (Akkadian Dictionary)
+----------------------------------------------------------------------------
+Source: Royal Inscriptions of the Neo-Assyrian Period Project
+License: Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Copyright: RINAP Project, 2011-2022
+Project URL: http://oracc.museum.upenn.edu/rinap/
+Data Source: http://oracc.museum.upenn.edu/json/rinap.zip
+
+The RINAP Akkadian glossary provides dictionary entries including:
+- 3,651+ Akkadian word entries from Neo-Assyrian royal inscriptions
+- Morphological forms and normalizations for word matching
+- Guide words (English meanings) for all entries
+- Attestations from cuneiform texts
+
+Project Directors: Grant Frame and Joshua Jeffers
+
+The RINAP project provides annotated editions of Neo-Assyrian royal inscriptions
+with comprehensive linguistic analysis, enabling accurate dictionary lookup for
+Akkadian texts.
+
+Citation:
+Frame, Grant and Joshua Jeffers. The Royal Inscriptions of the Neo-Assyrian
+Period (RINAP) Project. 2011-2022. http://oracc.museum.upenn.edu/rinap/
+
+Both cuneiform dictionaries are part of the ORACC project and use romanized
+transliteration matching the format of the texts in this application.
+
+
 OPEN SCRIPTURES HEBREW BIBLE
 =============================
 
@@ -334,6 +395,65 @@ Ossama Obeid, Nasser Zalmout, Salam Khalifa, Dima Taji, Mai Oudah, Bashar Alhafn
 Go Inoue, Fadhl Eryani, Alexander Erdmann, and Nizar Habash.
 In Proceedings of the 12th Language Resources and Evaluation Conference (LREC),
 Marseille, France, 2020.
+
+
+SANSKRIT RESOURCES
+==================
+
+Digital Corpus of Sanskrit (DCS) - Sanskrit Dictionary and Morphology
+----------------------------------------------------------------------
+Source: Digital Corpus of Sanskrit (DCS) by Oliver Hellwig
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Repository: https://github.com/OliverHellwig/sanskrit
+Website: http://www.sanskrit-linguistics.org/dcs/
+
+The DCS provides comprehensive Sanskrit dictionary entries and morphological
+analysis based on a corpus of 5.5 million words from classical Sanskrit texts.
+The digital corpus includes:
+
+- 179,806 Sanskrit dictionary lemmas with grammatical information and meanings
+- 4.7 million morphological form mappings for inflected words
+- Sandhi-split compound analysis for enhanced coverage
+- 87.9% coverage on classical texts like the Bhagavad Gita
+
+Corpus Statistics:
+- 744,757 text lines
+- 5,464,818 annotated words
+- Texts from classical Sanskrit literature
+
+Citation:
+Hellwig, Oliver (2010-2024). Digital Corpus of Sanskrit (DCS).
+Available at: http://www.sanskrit-linguistics.org/dcs/
+
+Contributors: Open collaboration project
+Data Format: CoNLL-U (Universal Dependencies)
+Morphological Tags: Vedic Treebank annotation system
+
+The DCS data is used in this application under CC BY 4.0, which permits
+redistribution and adaptation with proper attribution.
+
+
+Sanskrit Parser - Sandhi Splitting Enhancement
+-----------------------------------------------
+Source: sanskrit_parser Python library
+License: MIT License
+Repository: https://github.com/kmadathil/sanskrit_parser
+
+Copyright (c) 2017-2024 Sanskrit Parser Contributors
+
+This application uses sanskrit_parser for automated sandhi (word junction)
+analysis to improve dictionary lookup coverage for compound Sanskrit words.
+The tool splits compounds into component words, enabling more comprehensive
+morphological analysis.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so.
 
 
 APPLICATION LICENSE

@@ -88,6 +88,24 @@ def load_combined_dictionaries(cursor, build_mode='full'):
         ON lemma_map(lemma)
     """)
 
+    # Create normalization_patterns table for non-Greek/Latin languages
+    cursor.execute("DROP TABLE IF EXISTS normalization_patterns")
+    cursor.execute("""
+        CREATE TABLE normalization_patterns (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            language TEXT NOT NULL,
+            pattern TEXT NOT NULL,
+            replacement TEXT NOT NULL,
+            description TEXT,
+            priority INTEGER NOT NULL
+        )
+    """)
+
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_normalization_language
+        ON normalization_patterns(language, priority)
+    """)
+
     # Skip data loading for first1ktest mode
     if build_mode == 'first1ktest':
         print("✓ Empty dictionary tables created for first1ktest mode")

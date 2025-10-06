@@ -1,0 +1,15 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Database files (too large for git)
+*.db
+*.db.zip
+
+# Downloaded data
+data-sources/*.html
+data-sources/*.json
+data-sources/*_api.json

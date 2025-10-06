@@ -16,6 +16,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.classicsviewer.app.models.CustomLanguageConfig
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import android.widget.ScrollView
+import android.text.TextWatcher
+import android.text.Editable
 
 class ManageLanguagesActivity : BaseActivity() {
 
@@ -55,6 +60,30 @@ class ManageLanguagesActivity : BaseActivity() {
             updateLanguagePreview()
             false
         }
+
+        // Auto-populate display name from language ID
+        binding.languageIdInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                // Only auto-populate if display name is empty
+                val displayName = binding.languageNameInput.text?.toString()
+                if (displayName.isNullOrBlank() && !s.isNullOrBlank()) {
+                    val autoDisplayName = convertLanguageIdToDisplayName(s.toString())
+                    binding.languageNameInput.setText(autoDisplayName)
+                    updateLanguagePreview()
+                }
+            }
+        })
+    }
+
+    private fun convertLanguageIdToDisplayName(languageId: String): String {
+        // Replace underscores with spaces, then capitalize each word
+        return languageId.replace('_', ' ')
+            .split(' ')
+            .joinToString(" ") { word ->
+                word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+            }
     }
 
     private fun showColorPicker() {
@@ -162,12 +191,6 @@ class ManageLanguagesActivity : BaseActivity() {
             return
         }
 
-        // Don't allow overriding Greek or Latin
-        if (languageId == "greek" || languageId == "latin") {
-            Toast.makeText(this, "Cannot override built-in languages", Toast.LENGTH_SHORT).show()
-            return
-        }
-
         // Save the custom language configuration
         val customLanguage = CustomLanguageConfig(languageId, displayName, selectedColor)
         PreferencesManager.addCustomLanguage(this, customLanguage)
@@ -186,14 +209,52 @@ class ManageLanguagesActivity : BaseActivity() {
     }
 
     private fun loadCustomLanguages() {
-        val customLanguages = PreferencesManager.getCustomLanguages(this)
-        customLanguagesAdapter = CustomLanguagesAdapter(customLanguages) { language ->
-            // Handle delete
-            showDeleteConfirmation(language)
-        }
+        val customLanguages = PreferencesManager.getCustomLanguages(this).toMutableList()
+        customLanguagesAdapter = CustomLanguagesAdapter(
+            customLanguages,
+            onEditClick = { language -> showEditDialog(language) },
+            onDeleteClick = { language -> showDeleteConfirmation(language) },
+            onOrderChanged = { newOrder ->
+                PreferencesManager.setCustomLanguagesOrder(this, newOrder)
+            }
+        )
 
         binding.customLanguagesRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.customLanguagesRecyclerView.adapter = customLanguagesAdapter
+
+        // Add drag-and-drop support
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val fromPos = viewHolder.adapterPosition
+                val toPos = target.adapterPosition
+                customLanguagesAdapter.onItemMove(fromPos, toPos)
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // Not used
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(binding.customLanguagesRecyclerView)
+    }
+
+    private fun showEditDialog(language: CustomLanguageConfig) {
+        // Pre-fill the form with existing values
+        binding.languageIdInput.setText(language.id)
+        binding.languageNameInput.setText(language.displayName)
+        selectedColor = language.color
+        updateColorPreview(selectedColor)
+        updateLanguagePreview()
+
+        // Scroll to top so user sees the form
+        binding.languageIdInput.requestFocus()
     }
 
     private fun showDeleteConfirmation(language: CustomLanguageConfig) {

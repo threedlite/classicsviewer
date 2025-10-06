@@ -192,6 +192,10 @@ object PreferencesManager {
         saveCustomLanguages(context, languages)
     }
 
+    fun setCustomLanguagesOrder(context: Context, languages: List<CustomLanguageConfig>) {
+        saveCustomLanguages(context, languages)
+    }
+
     private fun saveCustomLanguages(context: Context, languages: List<CustomLanguageConfig>) {
         android.util.Log.d("PreferencesManager", "Saving ${languages.size} custom languages")
 

@@ -39,6 +39,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/editLanguageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+        <Button
             android:id="@+id/deleteLanguageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

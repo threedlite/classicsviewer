@@ -29,9 +29,40 @@ class PerseusRepository(private val context: Context) : DataRepository {
     private val translationSegmentDao = database.translationSegmentDao()
     private val userDictionaryDao = userDatabase.userDictionaryDao()
     private val userLemmaMappingDao = userDatabase.userLemmaMappingDao()
-    private val normalizationPatternDao = userDatabase.normalizationPatternDao()
+    private val userNormalizationPatternDao = userDatabase.normalizationPatternDao()
 
     private val greekLemmatizer = GreekLemmatizer()
+
+    // Helper function to query normalization_patterns table with graceful fallback
+    private suspend fun getPerseusNormalizationPatterns(language: String): List<NormalizationPatternEntity> = withContext(Dispatchers.IO) {
+        try {
+            val cursor = database.openHelper.readableDatabase.query(
+                "SELECT id, language, pattern, replacement, description, priority FROM normalization_patterns WHERE language = ? ORDER BY priority ASC",
+                arrayOf(language)
+            )
+
+            val patterns = mutableListOf<NormalizationPatternEntity>()
+            cursor.use {
+                while (it.moveToNext()) {
+                    patterns.add(NormalizationPatternEntity(
+                        id = it.getLong(0),
+                        packageId = 0L,
+                        language = it.getString(1),
+                        pattern = it.getString(2),
+                        replacement = it.getString(3),
+                        description = it.getString(4),
+                        priority = it.getInt(5),
+                        createdAt = 0L
+                    ))
+                }
+            }
+            patterns
+        } catch (e: Exception) {
+            // Table doesn't exist or query failed - return empty list
+            android.util.Log.d("PerseusRepository", "normalization_patterns table not available (older database), using user patterns only")
+            emptyList()
+        }
+    }
 
     // Normalization pattern cache
     private val normalizationCache = ConcurrentHashMap<String, List<NormalizationPatternEntity>>()
@@ -67,12 +98,18 @@ class PerseusRepository(private val context: Context) : DataRepository {
             }
             else -> {
                 val patterns = normalizationCache.getOrPut(language) {
-                    val fetchedPatterns = normalizationPatternDao.getPatternsForLanguage(language)
-                    android.util.Log.d("PerseusRepository", "Fetched ${fetchedPatterns.size} normalization patterns for language '$language'")
-                    if (fetchedPatterns.isNotEmpty()) {
-                        android.util.Log.d("PerseusRepository", "First pattern: ${fetchedPatterns[0].pattern} -> '${fetchedPatterns[0].replacement}'")
+                    // First check user database for custom imported patterns (takes priority)
+                    val userPatterns = userNormalizationPatternDao.getPatternsForLanguage(language)
+
+                    if (userPatterns.isNotEmpty()) {
+                        android.util.Log.d("PerseusRepository", "Found ${userPatterns.size} user normalization patterns for language '$language' (using instead of bundled)")
+                        userPatterns
+                    } else {
+                        // Fall back to Perseus database for bundled patterns
+                        val perseusPatterns = getPerseusNormalizationPatterns(language)
+                        android.util.Log.d("PerseusRepository", "Found ${perseusPatterns.size} bundled normalization patterns for language '$language'")
+                        perseusPatterns
                     }
-                    fetchedPatterns
                 }
                 android.util.Log.d("PerseusRepository", "Using ${patterns.size} cached patterns for '$language' normalization")
                 if (patterns.isNotEmpty()) {
@@ -271,7 +308,127 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     }
                 }
             }
-        
+
+            // For non-Greek/Latin languages, also check ALL user lemma mappings (morphology should be appended)
+            if (normalizedLanguage != "greek" && normalizedLanguage != "latin") {
+                android.util.Log.d("PerseusRepository", "Checking all user morphology mappings for $normalizedLanguage word: '$cleanedWord'")
+                val allUserMappings = userLemmaMappingDao.getAllMappingsForWord(cleanedWord, normalizedWord, normalizedLanguage)
+                android.util.Log.d("PerseusRepository", "Found ${allUserMappings.size} user morphology mappings for $normalizedLanguage")
+
+                for (mapping in allUserMappings) {
+                    if (mapping.lemma in userAddedLemmas) {
+                        continue  // Skip if we already added this lemma
+                    }
+
+                    // Try to get dictionary entry for the lemma
+                    val mappingNormalizedLemma = normalizeText(mapping.lemma, normalizedLanguage) ?: mapping.lemma.lowercase()
+                    val userLemmaEntries = userDictionaryDao.getEntriesForLemma(mapping.lemma, mappingNormalizedLemma, normalizedLanguage)
+
+                    if (userLemmaEntries.isNotEmpty()) {
+                        for (userEntry in userLemmaEntries) {
+                            val definition = if (!userEntry.definitionHtml.isNullOrEmpty()) userEntry.definitionHtml else userEntry.definitionPlain
+                            val finalDefinition = if (definition.isNullOrEmpty() && !mapping.morphInfo.isNullOrEmpty()) {
+                                val morphForms = mapping.morphInfo.split("|").map { it.trim() }
+                                if (morphForms.size > 1) {
+                                    "Forms: ${morphForms.joinToString(", ")}"
+                                } else {
+                                    "Form: ${mapping.morphInfo}"
+                                }
+                            } else if (definition.isNullOrEmpty()) {
+                                "Dictionary entry for: ${mapping.lemma} (no definition available)"
+                            } else {
+                                definition
+                            }
+
+                            entries.add(DictionaryEntry(
+                                lemma = mapping.lemma,
+                                definition = finalDefinition,
+                                morphInfo = mapping.morphInfo,
+                                isDirectMatch = false,
+                                confidence = mapping.confidence ?: 0.8,
+                                source = "User: ${userEntry.sourceName}",
+                                hasNonTreebankPath = true
+                            ))
+                        }
+                        userAddedLemmas.add(mapping.lemma)
+                    } else if (!mapping.morphInfo.isNullOrEmpty()) {
+                        // No user dictionary entry, but we have morphology from user mappings
+                        entries.add(DictionaryEntry(
+                            lemma = mapping.lemma,
+                            definition = if (mapping.morphInfo.contains("|")) {
+                                val morphForms = mapping.morphInfo.split("|").map { it.trim() }
+                                "Forms: ${morphForms.joinToString(", ")}"
+                            } else {
+                                "Form: ${mapping.morphInfo}"
+                            },
+                            morphInfo = mapping.morphInfo,
+                            isDirectMatch = false,
+                            confidence = mapping.confidence ?: 0.8,
+                            source = "User morphology",
+                            hasNonTreebankPath = true
+                        ))
+                        userAddedLemmas.add(mapping.lemma)
+                    }
+                }
+            }
+
+            // For non-Greek/Latin languages, also check Perseus database lemma_map (bundled morphology)
+            if (normalizedLanguage != "greek" && normalizedLanguage != "latin") {
+                android.util.Log.d("PerseusRepository", "Checking Perseus database lemma_map for $normalizedLanguage word: '$cleanedWord' (normalized: '$normalizedWord')")
+
+                // First try exact match with diacritics (preserves meaning distinctions)
+                var perseusLemmaMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(cleanedWord)
+                android.util.Log.d("PerseusRepository", "Found ${perseusLemmaMappings.size} exact matches in Perseus lemma_map")
+
+                // If no exact match, try normalized lookup (without diacritics)
+                if (perseusLemmaMappings.isEmpty()) {
+                    perseusLemmaMappings = database.lemmaMapDao().getAllLemmaMappingsByUltraNormalized(normalizedWord)
+                    android.util.Log.d("PerseusRepository", "Found ${perseusLemmaMappings.size} normalized matches in Perseus lemma_map")
+                }
+
+                for (mapping in perseusLemmaMappings) {
+                    if (mapping.lemma in userAddedLemmas || mapping.lemma in addedLemmas) {
+                        continue  // Skip if we already added this lemma
+                    }
+
+                    // Try to get dictionary entry for the lemma from Perseus database
+                    val perseusLemmaEntries = dictionaryDao.getAllEntriesForHeadword(mapping.lemma, normalizedLanguage)
+
+                    if (perseusLemmaEntries.isNotEmpty()) {
+                        for (perseusEntry in perseusLemmaEntries) {
+                            val definition = perseusEntry.entryHtml ?: perseusEntry.entryPlain ?: ""
+                            entries.add(DictionaryEntry(
+                                lemma = mapping.lemma,
+                                definition = definition,
+                                morphInfo = mapping.morphInfo,
+                                isDirectMatch = false,
+                                confidence = mapping.confidence,
+                                source = perseusEntry.source,
+                                hasNonTreebankPath = true
+                            ))
+                        }
+                        addedLemmas.add(mapping.lemma)
+                    } else if (!mapping.morphInfo.isNullOrEmpty()) {
+                        // No dictionary entry, but we have morphology from Perseus mappings
+                        entries.add(DictionaryEntry(
+                            lemma = mapping.lemma,
+                            definition = if (mapping.morphInfo.contains("|")) {
+                                val morphForms = mapping.morphInfo.split("|").map { it.trim() }
+                                "Forms: ${morphForms.joinToString(", ")}"
+                            } else {
+                                "Form: ${mapping.morphInfo}"
+                            },
+                            morphInfo = mapping.morphInfo,
+                            isDirectMatch = false,
+                            confidence = mapping.confidence,
+                            source = "Perseus morphology",
+                            hasNonTreebankPath = true
+                        ))
+                        addedLemmas.add(mapping.lemma)
+                    }
+                }
+            }
+
             // Then try built-in dictionary lookup with cleaned word - get ALL entries from ALL sources
             val directEntries = dictionaryDao.getAllEntriesForHeadword(cleanedWord, normalizedLanguage)
             for (directEntry in directEntries) {
@@ -287,7 +444,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
             if (directEntries.isNotEmpty()) {
                 addedLemmas.add(cleanedWord)
             }
-            
+
             // If no direct match and we have an acute variant, try that too
             if (directEntries.isEmpty() && acuteVariant != null && acuteVariant != cleanedWord) {
                 val acuteEntries = dictionaryDao.getAllEntriesForHeadword(acuteVariant, normalizedLanguage)
@@ -354,18 +511,18 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     }
                 }
                 
-                // For Latin, also check user lemma mappings since built-in Latin support is limited
-                if (normalizedLanguage == "latin") {
-                    // For Latin, we need to use lowercase for lookups
-                    val latinNormalizedWord = cleanedWord.lowercase()
-                    android.util.Log.d("PerseusRepository", "Checking user mappings for Latin word: '$cleanedWord' (normalized: '$latinNormalizedWord')")
-                    var userMappings = userLemmaMappingDao.getAllMappingsForWord(latinNormalizedWord, latinNormalizedWord, normalizedLanguage)
+                // Also check user lemma mappings for all languages (user morphology should be appended)
+                if (normalizedLanguage == "latin" || normalizedLanguage == "greek") {
+                    // For Latin/Greek, we need appropriate normalization for lookups
+                    val lookupWord = if (normalizedLanguage == "latin") cleanedWord.lowercase() else cleanedWord
+                    android.util.Log.d("PerseusRepository", "Checking user mappings for $normalizedLanguage word: '$cleanedWord' (lookup: '$lookupWord')")
+                    var userMappings = userLemmaMappingDao.getAllMappingsForWord(lookupWord, lookupWord, normalizedLanguage)
                     
-                    // If no user mappings found, try Latin variants
-                    if (userMappings.isEmpty()) {
+                    // If no user mappings found and it's Latin, try Latin variants
+                    if (userMappings.isEmpty() && normalizedLanguage == "latin") {
                         val latinVariants = generateLatinVariants(cleanedWord)
                         for (variant in latinVariants) {
-                            if (variant != latinNormalizedWord) {
+                            if (variant != lookupWord) {
                                 val variantUserMappings = userLemmaMappingDao.getAllMappingsForWord(variant, variant, normalizedLanguage)
                                 if (variantUserMappings.isNotEmpty()) {
                                     android.util.Log.d("PerseusRepository", "Found ${variantUserMappings.size} user mappings for Latin variant: $variant")

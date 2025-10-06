@@ -1,0 +1,13 @@
+backports.functools-lru-cache==2.0.0
+click==8.3.0
+indic-transliteration==2.3.75
+markdown-it-py==4.0.0
+mdurl==0.1.2
+Pygments==2.19.2
+regex==2025.9.18
+rich==14.1.0
+roman==5.1
+shellingham==1.5.4
+toml==0.10.2
+typer==0.19.2
+typing_extensions==4.15.0

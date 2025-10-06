@@ -1,8 +1,11 @@
 language,pattern,replacement,description,priority
-arabic,[\u064B-\u065F\u0670],,Remove all tashkeel (diacritics/vocalization),1
-arabic,\u0640,,Remove tatweel/kashida (elongation character),2
-arabic,[أإآ],ا,Normalize all alif variants to plain alif,3
-arabic,ؤ,و,Normalize hamza on waw to plain waw,4
-arabic,ئ,ي,Normalize hamza on ya to plain ya,5
-arabic,ى,ي,Normalize alif maqsura to ya,6
-arabic,ة,ه,Normalize taa marbuta to haa (optional - some prefer to keep distinct),7
+arabic,\u0651,,Remove shadda (gemination mark),1
+arabic,\u0652,,Remove sukun (no vowel mark),2
+arabic,\u064B,,Remove tanween fathatan,3
+arabic,\u064C,,Remove tanween dammatan,4
+arabic,\u064D,,Remove tanween kasratan,5
+arabic,\u0653,,Remove madda,6
+arabic,\u0654,,Remove hamza above,7
+arabic,\u0655,,Remove hamza below,8
+arabic,\u0670,,Remove alif khanjariyah,9
+arabic,\u0640,,Remove tatweel/kashida (elongation character),10

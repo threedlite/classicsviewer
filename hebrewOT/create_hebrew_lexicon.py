@@ -87,6 +87,9 @@ def parse_strong_lexicon():
         hebrew_word = w_elem.text or ''
         hebrew_word = hebrew_word.strip()
 
+        # Extract transliteration from xlit attribute
+        transliteration = w_elem.get('xlit', '')
+
         # Extract definition
         meaning_elem = entry.find('.//meaning', LEXICON_NS)
         usage_elem = entry.find('.//usage', LEXICON_NS)
@@ -108,6 +111,7 @@ def parse_strong_lexicon():
             entries.append({
                 'lemma': hebrew_word,
                 'language': 'hebrew',
+                'transliteration': transliteration,
                 'definition': definition,
                 'html_definition': '',
                 'source_name': f"Strong's {entry_id}"
@@ -140,6 +144,9 @@ def parse_bdb_lexicon():
         hebrew_word = w_elem.text or ''
         hebrew_word = hebrew_word.strip()
 
+        # Extract transliteration from xlit attribute
+        transliteration = w_elem.get('xlit', '')
+
         # Extract definition (concatenate all text)
         definition_text = extract_text_recursive(entry)
 
@@ -155,6 +162,7 @@ def parse_bdb_lexicon():
             entries.append({
                 'lemma': hebrew_word,
                 'language': 'hebrew',
+                'transliteration': transliteration,
                 'definition': definition_text,
                 'html_definition': '',
                 'source_name': f"BDB ({entry_id})"
@@ -164,8 +172,12 @@ def parse_bdb_lexicon():
     return entries
 
 
-def parse_morphhb_morphology():
-    """Parse morphhb OSIS XML files to extract word→lemma morphology mappings."""
+def parse_morphhb_morphology(strongs_dict):
+    """Parse morphhb OSIS XML files to extract word→lemma morphology mappings.
+
+    Args:
+        strongs_dict: Dictionary mapping Strong's numbers to Hebrew lemmas
+    """
     print("Parsing morphhb OSIS files for morphology...")
 
     if not os.path.exists(MORPHHB_DIR):
@@ -205,6 +217,14 @@ def parse_morphhb_morphology():
                 base_lemma = lemma_parts[-1] if lemma_parts else lemma
                 base_lemma = base_lemma.strip()
 
+                # Convert Strong's number to Hebrew lemma
+                # Strong's numbers in morphhb can have suffixes like "a", "b", "c"
+                # Extract just the number part
+                strongs_num = re.sub(r'[^\d]', '', base_lemma)
+
+                # Look up Hebrew lemma from Strong's dictionary
+                hebrew_lemma = strongs_dict.get(strongs_num, base_lemma)
+
                 # Parse morphology code
                 morph_info = parse_morph_code(morph)
 
@@ -213,7 +233,7 @@ def parse_morphhb_morphology():
                 if word_clean not in morphology_map:
                     morphology_map[word_clean] = {
                         'word_form': word_clean,
-                        'lemma': base_lemma,
+                        'lemma': hebrew_lemma,
                         'morph_info': morph_info,
                         'language': 'hebrew',
                         'confidence': 1.0,
@@ -248,7 +268,7 @@ def write_dictionary_csv(entries, output_file):
     print(f"Writing dictionary CSV to {output_file}...")
 
     with open(output_file, 'w', encoding='utf-8', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['lemma', 'language', 'definition', 'html_definition', 'source_name'])
+        writer = csv.DictWriter(f, fieldnames=['lemma', 'language', 'transliteration', 'definition', 'html_definition', 'source_name'])
         writer.writeheader()
         writer.writerows(entries)
 
@@ -331,8 +351,20 @@ def main():
     all_dict_entries = strong_entries + bdb_entries
     print(f"\nTotal dictionary entries: {len(all_dict_entries)}")
 
+    # Step 3.5: Build Strong's number → Hebrew lemma mapping
+    print("\nBuilding Strong's number to Hebrew lemma mapping...")
+    strongs_dict = {}
+    for entry in strong_entries:
+        # Extract Strong's number from source_name like "Strong's H121"
+        source = entry['source_name']
+        match = re.search(r'H(\d+)', source)
+        if match:
+            strongs_num = match.group(1)
+            strongs_dict[strongs_num] = entry['lemma']
+    print(f"  Mapped {len(strongs_dict)} Strong's numbers to Hebrew lemmas")
+
     # Step 4: Parse morphhb for morphology
-    morphology_entries = parse_morphhb_morphology()
+    morphology_entries = parse_morphhb_morphology(strongs_dict)
 
     # Step 5: Write CSVs
     write_dictionary_csv(all_dict_entries, HEBREW_DICT_CSV)

@@ -1,0 +1,7 @@
+language,pattern,replacement,description,priority
+sanskrit,[\u0900-\u0903],,Remove combining marks (candrabindu anusvara visarga),1
+sanskrit,[\u093C],,Remove nukta,2
+sanskrit,[\u0951-\u0952],,Remove Vedic accents (udatta anudatta),3
+sanskrit,[\u0964-\u0965],,Remove dandas (sentence markers),4
+sanskrit,ः$,,Remove final visarga for normalization,5
+sanskrit,ं$,,Remove final anusvara for normalization,6
