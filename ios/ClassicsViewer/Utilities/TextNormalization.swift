@@ -77,51 +77,62 @@ struct GreekNormalizer {
 }
 
 class TextNormalization {
-    
+
     // MARK: - Word Normalization (matching Android)
-    
-    static func normalizeWord(_ word: String, isGreek: Bool) -> String {
-        // Remove punctuation
-        var normalized = word.replacingOccurrences(
-            of: "[.,;:!?·]", 
-            with: "", 
-            options: .regularExpression
-        )
-        
-        if isGreek {
-            // For Greek: NFD normalization, remove diacriticals, lowercase, fix final sigma
-            normalized = normalized.decomposedStringWithCanonicalMapping
-            
-            // Remove all diacritical marks
-            normalized = normalized.replacingOccurrences(
-                of: "[\\u{0300}-\\u{036f}]", 
-                with: "", 
+
+    /// Normalize word with pattern-based normalization support
+    /// - Parameters:
+    ///   - word: The word to normalize
+    ///   - language: Language code (e.g., "greek", "latin", "hebrew", "arabic")
+    ///   - patterns: Optional normalization patterns for non-Greek/Latin languages
+    /// - Returns: Normalized word
+    static func normalizeWord(_ word: String, language: String, patterns: [NormalizationPattern]? = nil) -> String {
+        if language == "greek" {
+            return GreekNormalizer.normalize(word)
+        } else if language == "latin" {
+            // Latin: just lowercase and remove non-letters
+            let noPunctuation = word.replacingOccurrences(
+                of: "[.,;:!?·]",
+                with: "",
                 options: .regularExpression
             )
-            
-            // Lowercase
-            normalized = normalized.lowercased()
-            
-            // Replace final sigma (ς) with regular sigma (σ)
-            normalized = normalized.replacingOccurrences(of: "ς", with: "σ")
-            
-            // Keep only Greek letters (removes apostrophes, etc.)
-            normalized = normalized.replacingOccurrences(
-                of: "[^α-ωΑ-Ω]", 
-                with: "", 
+            return noPunctuation.lowercased().replacingOccurrences(
+                of: "[^a-zA-Z]",
+                with: "",
                 options: .regularExpression
             )
+        } else if let patterns = patterns, !patterns.isEmpty {
+            // Use pattern-based normalization for other languages
+            return PatternBasedNormalizer.normalize(word, language: language, patterns: patterns)
         } else {
-            // For Latin: just lowercase and remove non-letters
-            normalized = normalized.lowercased()
-            normalized = normalized.replacingOccurrences(
-                of: "[^a-zA-Z]", 
-                with: "", 
-                options: .regularExpression
+            // Fallback: basic lowercase normalization
+            return word.lowercased()
+        }
+    }
+
+    /// Normalize word with user-specific patterns
+    /// - Parameters:
+    ///   - word: The word to normalize
+    ///   - language: Language code
+    ///   - patterns: User-specific normalization patterns
+    /// - Returns: Normalized word
+    static func normalizeWord(_ word: String, language: String, patterns: [UserNormalizationPattern]) -> String {
+        let normalPatterns = patterns.map { userPattern in
+            NormalizationPattern(
+                id: userPattern.id,
+                language: userPattern.language,
+                pattern: userPattern.pattern,
+                replacement: userPattern.replacement,
+                description: userPattern.description,
+                priority: userPattern.priority
             )
         }
-        
-        return normalized
+        return normalizeWord(word, language: language, patterns: normalPatterns)
+    }
+
+    /// Legacy method for backward compatibility
+    static func normalizeWord(_ word: String, isGreek: Bool) -> String {
+        return normalizeWord(word, language: isGreek ? "greek" : "latin", patterns: nil)
     }
     
     // MARK: - Morphological Code Formatting (matching Android)

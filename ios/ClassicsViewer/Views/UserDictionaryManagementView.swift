@@ -178,17 +178,17 @@ struct UserDictionaryManagementView: View {
             }
             
             // Extract and parse ZIP contents
-            var (metadata, lemmas, mappings) = try await extractDictionaryZip(data)
-            
+            var (metadata, lemmas, mappings, normalizationPatterns) = try await extractDictionaryZip(data)
+
             // Override package_name with actual filename and display name
             metadata["package_name"] = fileName
             metadata["display_name"] = fileName.replacingOccurrences(of: ".zip", with: "").replacingOccurrences(of: "_", with: " ").capitalized
-            
+
             await MainActor.run {
                 importProgress = 0.5
                 importStatus = "Importing \(lemmas.count) lemmas..."
             }
-            
+
             // Check if a package with the same name already exists
             let existingPackage = packages.first { $0.packageName == fileName }
             if let existing = existingPackage {
@@ -196,12 +196,13 @@ struct UserDictionaryManagementView: View {
                 try await userDictDAO.deletePackage(packageId: existing.id!)
                 logger.info("Replacing existing dictionary package: \(fileName)")
             }
-            
+
             // Import to database
             let packageId = try await userDictDAO.importDictionaryPackage(
                 metadata: metadata,
                 lemmas: lemmas,
-                mappings: mappings
+                mappings: mappings,
+                normalizationPatterns: normalizationPatterns
             )
             
             // Disable all other packages and enable the new one (radio button behavior)
@@ -249,30 +250,30 @@ struct UserDictionaryManagementView: View {
         await importDictionary(from: url)
     }
     
-    private func extractDictionaryZip(_ data: Data) async throws -> ([String: Any], [[String: Any]], [[String: Any]]?) {
+    private func extractDictionaryZip(_ data: Data) async throws -> ([String: Any], [[String: Any]], [[String: Any]]?, [[String: Any]]?) {
         // Extract ZIP and parse CSV files
         let tempDir = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true)
         defer {
             try? FileManager.default.removeItem(at: tempDir)
         }
-        
+
         // Save ZIP to temp file
         let zipPath = tempDir.appendingPathComponent("dict.zip")
         try data.write(to: zipPath)
-        
+
         // Extract ZIP
         try ZIPHandler.extractAll(from: zipPath, to: tempDir)
-        
+
         // Parse dictionary.csv
         let dictPath = tempDir.appendingPathComponent("dictionary.csv")
         guard FileManager.default.fileExists(atPath: dictPath.path) else {
             throw NSError(domain: "DictionaryImport", code: 1, userInfo: [NSLocalizedDescriptionKey: "Missing dictionary.csv in ZIP file"])
         }
-        
+
         let dictCSV = try String(contentsOf: dictPath, encoding: .utf8)
         let lemmas = try parseDictionaryCSV(dictCSV)
-        
+
         // Parse morphology.csv (optional)
         var mappings: [[String: Any]]? = nil
         let morphPath = tempDir.appendingPathComponent("morphology.csv")
@@ -280,10 +281,20 @@ struct UserDictionaryManagementView: View {
             let morphCSV = try String(contentsOf: morphPath, encoding: .utf8)
             mappings = try parseMorphologyCSV(morphCSV)
         }
-        
+
+        // Parse normalization_rules.csv (optional)
+        var normalizationPatterns: [[String: Any]]? = nil
+        let normPath = tempDir.appendingPathComponent("normalization_rules.csv")
+        if FileManager.default.fileExists(atPath: normPath.path) {
+            print("Found normalization_rules.csv, parsing...")
+            let normCSV = try String(contentsOf: normPath, encoding: .utf8)
+            normalizationPatterns = try parseNormalizationRulesCSV(normCSV)
+            print("Parsed \(normalizationPatterns?.count ?? 0) normalization patterns")
+        }
+
         // Extract language from first lemma or default to greek
         let language = (lemmas.first?["language"] as? String) ?? "greek"
-        
+
         // Create metadata from the parsed data
         let metadata: [String: Any] = [
             "package_name": "user_dict_\(Date().timeIntervalSince1970)",
@@ -292,8 +303,8 @@ struct UserDictionaryManagementView: View {
             "language": language,
             "source_info": "CSV Import"
         ]
-        
-        return (metadata, lemmas, mappings)
+
+        return (metadata, lemmas, mappings, normalizationPatterns)
     }
     
     private func parseDictionaryCSV(_ csv: String) throws -> [[String: Any]] {
@@ -385,10 +396,54 @@ struct UserDictionaryManagementView: View {
             
             result.append(entry)
         }
-        
+
         return result
     }
-    
+
+    private func parseNormalizationRulesCSV(_ csv: String) throws -> [[String: Any]] {
+        var result: [[String: Any]] = []
+
+        // Use SwiftCSV to parse
+        let parsedCSV = try CSV<Named>(string: csv)
+
+        // Check required columns (matches Android format)
+        guard parsedCSV.header.contains("language"),
+              parsedCSV.header.contains("pattern"),
+              parsedCSV.header.contains("replacement"),
+              parsedCSV.header.contains("priority") else {
+            throw NSError(domain: "DictionaryImport", code: 4, userInfo: [NSLocalizedDescriptionKey: "Invalid normalization_rules.csv header - missing required columns (language, pattern, replacement, priority)"])
+        }
+
+        // Parse each row
+        for row in parsedCSV.rows {
+            guard let language = row["language"],
+                  let pattern = row["pattern"],
+                  let replacement = row["replacement"],
+                  let priorityStr = row["priority"],
+                  !language.isEmpty,
+                  !pattern.isEmpty else {
+                continue
+            }
+
+            let priority = Int(priorityStr) ?? 999
+
+            var entry: [String: Any] = [
+                "language": language.lowercased(),
+                "pattern": pattern,
+                "replacement": replacement,
+                "priority": priority
+            ]
+
+            if let description = row["description"], !description.isEmpty {
+                entry["description"] = description
+            }
+
+            result.append(entry)
+        }
+
+        return result
+    }
+
     private func selectPackage(_ package: UserDictionaryPackage) async {
         do {
             // If package is already enabled, disable it

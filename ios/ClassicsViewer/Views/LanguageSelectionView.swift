@@ -4,10 +4,6 @@ struct LanguageSelectionView: View {
     @EnvironmentObject var appState: AppState
     @State private var customLanguages: [CustomLanguageConfig] = []
 
-    // Android Material Design colors
-    let greekColor = Color(red: 0.298, green: 0.686, blue: 0.314) // #4CAF50 Material Green 500
-    let latinColor = Color(red: 0.957, green: 0.263, blue: 0.212) // #F44336 Material Red 500
-
     var body: some View {
         VStack(spacing: 30) {
             Spacer()
@@ -20,35 +16,7 @@ struct LanguageSelectionView: View {
 
             ScrollView {
                 VStack(spacing: 20) {
-                    // Greek button
-                    Button(action: {
-                        appState.selectLanguage(.greek)
-                    }) {
-                        Text("Greek")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 30)
-                            .background(greekColor)
-                            .cornerRadius(8)
-                    }
-
-                    // Latin button
-                    Button(action: {
-                        appState.selectLanguage(.latin)
-                    }) {
-                        Text("Latin")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 30)
-                            .background(latinColor)
-                            .cornerRadius(8)
-                    }
-
-                    // Custom language buttons
+                    // All language buttons (including Greek and Latin)
                     ForEach(customLanguages) { language in
                         Button(action: {
                             appState.selectLanguage(.custom(language.id, language.displayName))
@@ -71,12 +39,112 @@ struct LanguageSelectionView: View {
             Spacer()
         }
         .onAppear {
-            loadCustomLanguages()
+            Task {
+                await autoDetectLanguages()
+                loadCustomLanguages()
+            }
         }
     }
 
     private func loadCustomLanguages() {
         customLanguages = UserDefaults.standard.customLanguages
+    }
+
+    private func autoDetectLanguages() async {
+        do {
+            // Get all distinct languages from the database
+            let authorDAO = AuthorDAO()
+            let allLanguages = try await authorDAO.getAllLanguages()
+
+            print("Auto-detecting languages from database: \(allLanguages)")
+
+            // Get existing custom languages
+            let existingCustomLanguages = UserDefaults.standard.customLanguages
+            let existingLanguageIds = Set(existingCustomLanguages.map { $0.id })
+
+            // Preferred order for auto-detected languages (matching Android)
+            let preferredOrder = [
+                "greek", "latin", "sumerian", "akkadian",
+                "sanskrit", "persian", "hebrew", "arabic"
+            ]
+
+            var languagesAdded = false
+
+            // First, add languages in preferred order if they exist in database and not already added
+            for languageId in preferredOrder {
+                if allLanguages.contains(languageId) && !existingLanguageIds.contains(languageId) {
+                    let displayName = convertLanguageIdToDisplayName(languageId)
+                    let color = generateDefaultColor(for: languageId)
+
+                    let customLanguage = CustomLanguageConfig(
+                        id: languageId,
+                        displayName: displayName,
+                        color: color
+                    )
+                    UserDefaults.standard.addCustomLanguage(customLanguage)
+
+                    print("Auto-added language: \(languageId) -> \(displayName)")
+                    languagesAdded = true
+                }
+            }
+
+            // Then add any remaining languages not in preferred order
+            for languageId in allLanguages {
+                if !preferredOrder.contains(languageId) && !existingLanguageIds.contains(languageId) {
+                    let displayName = convertLanguageIdToDisplayName(languageId)
+                    let color = generateDefaultColor(for: languageId)
+
+                    let customLanguage = CustomLanguageConfig(
+                        id: languageId,
+                        displayName: displayName,
+                        color: color
+                    )
+                    UserDefaults.standard.addCustomLanguage(customLanguage)
+
+                    print("Auto-added language (not in preferred order): \(languageId) -> \(displayName)")
+                    languagesAdded = true
+                }
+            }
+
+            // Refresh the UI if any languages were added
+            if languagesAdded {
+                loadCustomLanguages()
+            }
+        } catch {
+            print("Error auto-detecting languages: \(error)")
+        }
+    }
+
+    private func convertLanguageIdToDisplayName(_ languageId: String) -> String {
+        // Replace underscores with spaces, then capitalize each word
+        return languageId.replacingOccurrences(of: "_", with: " ")
+            .split(separator: " ")
+            .map { $0.capitalized }
+            .joined(separator: " ")
+    }
+
+    private func generateDefaultColor(for languageId: String) -> Int {
+        // Generate colors matching Android (Loeb-style aesthetic)
+        switch languageId.lowercased() {
+        case "greek":
+            return 0xFF5A8A5C     // Loeb Greek green
+        case "latin":
+            return 0xFFB85450     // Loeb Latin red
+        case "sanskrit":
+            return 0xFFC39B5A     // Desaturated saffron
+        case "hebrew":
+            return 0xFF6B7BA8     // Desaturated indigo
+        case "arabic":
+            return 0xFFDCDCDC     // Light grey/white
+        case "persian":
+            return 0xFF9B7BA8     // Desaturated purple
+        case "sumerian":
+            return 0xFF5A73AA     // Desaturated blue
+        case "akkadian":
+            return 0xFFAF9B7D     // Desaturated tan
+        default:
+            return 0xFF808080     // Grey for unknown languages
+        }
     }
 
     private func textColorForBackground(_ color: Color) -> Color {

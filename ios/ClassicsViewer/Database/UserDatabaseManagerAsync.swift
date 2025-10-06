@@ -212,6 +212,22 @@ actor UserDatabaseManagerAsync {
             )
         """)
 
+        // Normalization Patterns Table (dynamic creation - NOT tracked as Room entity in Android)
+        // This matches Android's UserDatabase pattern: created via callback, not as an entity
+        try await execute("""
+            CREATE TABLE IF NOT EXISTS normalization_patterns (
+                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                package_id INTEGER NOT NULL,
+                language TEXT NOT NULL,
+                pattern TEXT NOT NULL,
+                replacement TEXT NOT NULL,
+                description TEXT,
+                priority INTEGER NOT NULL,
+                created_at INTEGER NOT NULL,
+                FOREIGN KEY (package_id) REFERENCES user_dictionary_packages(id) ON DELETE CASCADE
+            )
+        """)
+
         // Create indexes
         try await execute("CREATE INDEX IF NOT EXISTS idx_user_dictionary_lemmas_package ON user_dictionary_lemmas(package_id)")
         try await execute("CREATE INDEX IF NOT EXISTS idx_user_dictionary_lemmas_lemma ON user_dictionary_lemmas(lemma)")
@@ -220,6 +236,13 @@ actor UserDatabaseManagerAsync {
         try await execute("CREATE INDEX IF NOT EXISTS idx_audio_files_package ON audio_files(package_id)")
         try await execute("CREATE INDEX IF NOT EXISTS idx_audio_files_work ON audio_files(work_id)")
         try await execute("CREATE INDEX IF NOT EXISTS idx_audio_files_book ON audio_files(book_id)")
+
+        // Normalization patterns indexes
+        try await execute("CREATE INDEX IF NOT EXISTS idx_normalization_patterns_language ON normalization_patterns(language)")
+        try await execute("CREATE INDEX IF NOT EXISTS idx_normalization_patterns_package ON normalization_patterns(package_id)")
+        try await execute("CREATE INDEX IF NOT EXISTS idx_normalization_patterns_lang_pkg_pri ON normalization_patterns(language, package_id, priority)")
+
+        print("UserDatabaseManagerAsync: All tables and indexes created successfully")
     }
 
     /// Ensure database is ready before operations

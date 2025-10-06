@@ -16,56 +16,85 @@ struct ImprovedWordDetailView: View {
     @AppStorage("fontSize") private var fontSize: Double = 20
     
     var body: some View {
+        mainContent
+            .onAppear(perform: onAppearAction)
+            .onChange(of: selectedTab, perform: onTabChange)
+            .sheet(item: $navigateToWord, content: createWordDetailSheet)
+            .alert("Search", isPresented: $showingSearchDialog, actions: alertActions)
+    }
+
+    private var mainContent: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // Word header
-                VStack(spacing: 8) {
-                    Text(word.word)
-                        .font(.system(size: fontSize * 2))
-                        .fontWeight(.bold)
-                    
-                    // Show morphological info if available
-                    if let morphInfo = detailViewModel.wordMorphInfo, !morphInfo.isEmpty {
-                        Text(formatMorphInfo(morphInfo))
-                            .font(.system(size: fontSize * 0.85, weight: .medium))
-                            .foregroundColor(.blue)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 4)
-                            .background(Color.blue.opacity(0.1))
-                            .cornerRadius(4)
-                    }
-                    
-                    if !detailViewModel.lemma.isEmpty && detailViewModel.lemma != word.word {
-                        HStack {
-                            Text("Lemma:")
-                                .foregroundColor(.secondary)
-                            Text(detailViewModel.lemma)
-                                .fontWeight(.medium)
-                        }
-                        .font(.system(size: fontSize))
-                    }
-                    
-                    if !detailViewModel.morphInfo.isEmpty {
-                        Text(detailViewModel.morphInfo)
-                            .font(.system(size: fontSize * 0.8))
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                }
-                .padding()
-                
-                // Tab selection
-                Picker("", selection: $selectedTab) {
-                    Text("Dictionary").tag(0)
-                    Text("Occurrences").tag(1)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
-                
+                wordHeaderView
+                tabPickerView
+
                 // Content - Use conditional rendering instead of TabView to avoid gesture conflicts
                 if selectedTab == 0 {
-                    // Dictionary tab
-                    if detailViewModel.isLoadingDictionary {
+                    dictionaryTabView
+                } else {
+                    occurrencesTabView
+                }
+            }
+            .navigationTitle("Word Details")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .toolbar(content: toolbarContent)
+        }
+    }
+
+    private func onAppearAction() {
+        Task {
+            await detailViewModel.loadDictionary(for: word)
+        }
+        // Prepopulate search text
+        let cleanedWord = word.word.replacingOccurrences(of: "[.,;:!?·]", with: "", options: .regularExpression)
+        searchText = cleanedWord
+    }
+
+    private func performSearch() {
+        // Implement search by looking up the word the user entered
+        Task {
+            if let matchingWord = try? await WordDAO().getWordsAtPositions(
+                bookId: word.bookId,
+                lineNumber: word.lineNumber,
+                positions: [word.wordPosition]
+            ).first {
+                searchedWord = matchingWord
+                navigateToWord = matchingWord
+            }
+        }
+    }
+
+    private func onTabChange(_ newValue: Int) {
+        // Load occurrences only when user switches to that tab
+        if newValue == 1 && !hasRequestedOccurrences {
+            hasRequestedOccurrences = true
+            Task {
+                await detailViewModel.loadOccurrences(for: word)
+            }
+        }
+    }
+
+    private func createWordDetailSheet(selectedWord: Word) -> some View {
+        ImprovedWordDetailView(word: selectedWord, viewModel: viewModel)
+    }
+
+    @ViewBuilder
+    private func alertActions() -> some View {
+        TextField("Enter word", text: $searchText)
+        Button("Search") {
+            performSearch()
+        }
+        Button("Cancel", role: .cancel) {}
+    }
+
+    // MARK: - Tab Content Views
+
+    private var dictionaryTabView: some View {
+        Group {
+            // Dictionary tab
+            if detailViewModel.isLoadingDictionary {
                         VStack {
                             Spacer()
                             ProgressView("Loading dictionary...")
@@ -164,9 +193,13 @@ struct ImprovedWordDetailView: View {
                             Spacer()
                         }
                     }
-                } else {
-                    // Occurrences tab
-                    if detailViewModel.isLoadingOccurrences || (!detailViewModel.hasLoadedOccurrences && detailViewModel.occurrences.isEmpty) {
+                }
+        }
+
+    private var occurrencesTabView: some View {
+        Group {
+            // Occurrences tab
+            if detailViewModel.isLoadingOccurrences || (!detailViewModel.hasLoadedOccurrences && detailViewModel.occurrences.isEmpty) {
                         VStack(spacing: 20) {
                             Spacer()
                             ProgressView()
@@ -221,37 +254,7 @@ struct ImprovedWordDetailView: View {
                                         .buttonStyle(PlainButtonStyle())
                                     } else {
                                         // Different book - use NavigationLink
-                                        NavigationLink(destination: {
-                                            // Parse the book ID to get work ID
-                                            let components = occurrence.bookId.split(separator: ".")
-                                            let workId = components.count >= 3 ? "\(components[0]).\(components[1])" : ""
-                                            let authorId = components.count >= 1 ? String(components[0]) : ""
-                                            let language = occurrence.bookId.hasPrefix("tlg") ? "greek" : "latin"
-                                            
-                                            // Calculate target page for initial navigation
-                                            let targetPage = (occurrence.lineNumber - 1) / 100 + 1
-                                            
-                                            return ReaderView(
-                                                book: Book(
-                                                    id: occurrence.bookId,
-                                                    workId: workId,
-                                                    bookNumber: 1,
-                                                    label: "Book",
-                                                    startLine: 1,
-                                                    endLine: nil,
-                                                    lineCount: nil
-                                                ),
-                                                author: Author(
-                                                    id: authorId,
-                                                    name: occurrence.authorName,
-                                                    nameAlt: nil,
-                                                    language: language,
-                                                    hasTranslations: 1
-                                                ),
-                                                initialPage: targetPage,
-                                                targetLineNumber: occurrence.lineNumber
-                                            )
-                                        }()) {
+                                        NavigationLink(destination: createReaderView(for: occurrence)) {
                                             WordOccurrenceRow(occurrence: occurrence, index: index, totalCount: detailViewModel.occurrences.count, fontSize: fontSize)
                                         }
                                         .buttonStyle(PlainButtonStyle())
@@ -262,68 +265,9 @@ struct ImprovedWordDetailView: View {
                         }
                     }
                 }
-            }
-            .navigationTitle("Word Details")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden()
-            .toolbar(content: toolbarContent)
         }
-        .onAppear {
-            // Only load dictionary on initial appear
-            print("DEBUG ImprovedWordDetailView: onAppear called for word: '\(word.word)'")
-            Task {
-                print("DEBUG ImprovedWordDetailView: Starting loadDictionary task")
-                await detailViewModel.loadDictionary(for: word)
-                print("DEBUG ImprovedWordDetailView: loadDictionary task completed")
-            }
 
-            // Prepopulate search text with cleaned current word (matching Android behavior)
-            let cleanedWord = word.word.replacingOccurrences(of: "[.,;:!?·]", with: "", options: .regularExpression)
-            searchText = cleanedWord
-        }
-        .onChange(of: selectedTab) { newValue in
-            // Load occurrences only when user switches to that tab
-            if newValue == 1 && !hasRequestedOccurrences {
-                hasRequestedOccurrences = true
-                Task {
-                    await detailViewModel.loadOccurrences(for: word)
-                }
-            }
-        }
-        .sheet(item: $navigateToWord) { newWord in
-            ImprovedWordDetailView(
-                word: newWord,
-                viewModel: viewModel
-            )
-        }
-        .alert("Search Greek Dictionary", isPresented: $showingSearchDialog) {
-            TextField("Enter Greek word (e.g., λόγος, και, θεα)", text: $searchText)
-                .keyboardType(.default)
-                .autocorrectionDisabled(true)
-            Button("Search") {
-                if !searchText.trimmingCharacters(in: .whitespaces).isEmpty {
-                    // Create a new WordDetailView with the searched word
-                    searchedWord = Word(
-                        id: 0,
-                        word: searchText.trimmingCharacters(in: .whitespaces),
-                        bookId: word.bookId, // Use same book context
-                        lineNumber: 0,
-                        sequenceNumber: 0,
-                        wordPosition: 0
-                    )
-                    searchText = ""
-                }
-            }
-            Button("Cancel", role: .cancel) {
-                searchText = ""
-            }
-        } message: {
-            Text("Enter a Greek word to look up:")
-        }
-        .sheet(item: $searchedWord) { word in
-            ImprovedWordDetailView(word: word, viewModel: viewModel)
-        }
-    }
+    // MARK: - Toolbar
 
     @ToolbarContentBuilder
     private func toolbarContent() -> some ToolbarContent {
@@ -454,39 +398,115 @@ struct ImprovedWordDetailView: View {
             
             print("DEBUG: Created new Word object: \(newWord.word)")
             print("DEBUG: Setting navigateToWord")
-            
+
             // Navigate to the new word
             navigateToWord = newWord
         } else {
             print("DEBUG: Cleaned word is empty")
         }
     }
+
+    // MARK: - Extracted View Components
+
+    private var wordHeaderView: some View {
+        VStack(spacing: 8) {
+            Text(word.word)
+                .font(.system(size: fontSize * 2))
+                .fontWeight(.bold)
+
+            // Show morphological info if available
+            if let morphInfo = detailViewModel.wordMorphInfo, !morphInfo.isEmpty {
+                Text(formatMorphInfo(morphInfo))
+                    .font(.system(size: fontSize * 0.85, weight: .medium))
+                    .foregroundColor(.blue)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(4)
+            }
+
+            if !detailViewModel.lemma.isEmpty && detailViewModel.lemma != word.word {
+                HStack {
+                    Text("Lemma:")
+                        .foregroundColor(.secondary)
+                    Text(detailViewModel.lemma)
+                        .fontWeight(.medium)
+                }
+                .font(.system(size: fontSize))
+            }
+
+            if !detailViewModel.morphInfo.isEmpty {
+                Text(detailViewModel.morphInfo)
+                    .font(.system(size: fontSize * 0.8))
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding()
+    }
+
+    private var tabPickerView: some View {
+        Picker("", selection: $selectedTab) {
+            Text("Dictionary").tag(0)
+            Text("Occurrences").tag(1)
+        }
+        .pickerStyle(SegmentedPickerStyle())
+        .padding(.horizontal)
+    }
+
+    private func createReaderView(for occurrence: WordOccurrence) -> ReaderView {
+        let components = occurrence.bookId.split(separator: ".")
+        let workId = components.count >= 3 ? "\(components[0]).\(components[1])" : ""
+        let authorId = components.count >= 1 ? String(components[0]) : ""
+        let targetPage = (occurrence.lineNumber - 1) / 100 + 1
+
+        return ReaderView(
+            book: Book(
+                id: occurrence.bookId,
+                workId: workId,
+                bookNumber: 1,
+                label: "Book",
+                startLine: 1,
+                endLine: nil,
+                lineCount: nil
+            ),
+            author: Author(
+                id: authorId,
+                name: occurrence.authorName,
+                nameAlt: nil,
+                language: occurrence.language,
+                hasTranslations: 1
+            ),
+            initialPage: targetPage,
+            targetLineNumber: occurrence.lineNumber
+        )
+    }
 }
 
 // Helper view for occurrence row
 struct WordOccurrenceRow: View {
-    let occurrence: (bookId: String, authorName: String, workTitle: String, lineNumber: Int, lineText: String, matchingPositions: [Int])
+    let occurrence: WordOccurrence
     let index: Int
     let totalCount: Int
     let fontSize: Double
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             // Author and work header
             HStack {
-                Text("\(occurrence.authorName) - \(occurrence.workTitle)")
+                Text("\(occurrence.authorName) - \(occurrence.bookTitle)")
                     .font(.system(size: fontSize * 0.8))
                     .fontWeight(.medium)
                     .foregroundColor(.blue)
-                
+
                 Spacer()
-                
+
                 Text("Line \(occurrence.lineNumber)")
                     .font(.system(size: fontSize * 0.8))
                     .foregroundColor(.secondary)
             }
             .padding(.horizontal)
-            
+
             // Line text with highlighting
             highlightedLineText()
                 .font(.system(size: fontSize))
@@ -504,7 +524,7 @@ struct WordOccurrenceRow: View {
     
     @ViewBuilder
     private func highlightedLineText() -> some View {
-        if occurrence.matchingPositions.isEmpty {
+        if occurrence.wordPositions.isEmpty {
             // No positions to highlight, show plain text
             Text(occurrence.lineText)
         } else {
@@ -513,29 +533,29 @@ struct WordOccurrenceRow: View {
             Text(attributedString)
         }
     }
-    
+
     private func buildHighlightedAttributedString() -> AttributedString {
         var result = AttributedString()
         let words = occurrence.lineText.split(separator: " ", omittingEmptySubsequences: false).map(String.init)
-        
+
         for (index, word) in words.enumerated() {
             let wordPosition = index + 1  // Word positions are 1-based in database
-            
+
             var wordAttr = AttributedString(word)
-            if occurrence.matchingPositions.contains(wordPosition) {
+            if occurrence.wordPositions.contains(wordPosition) {
                 // Highlighted word
                 wordAttr.font = .body.bold()
                 wordAttr.backgroundColor = Color.yellow.opacity(0.3)
             }
-            
+
             result.append(wordAttr)
-            
+
             // Add space after word (except for last word)
             if index < words.count - 1 {
                 result.append(AttributedString(" "))
             }
         }
-        
+
         return result
     }
 }
@@ -834,7 +854,7 @@ class ImprovedWordDetailViewModel: ObservableObject {
     @Published var wordMorphInfo: String? = nil  // Morphological info for the actual word tapped
     @Published var dictionaryEntries: [DictionaryMatch] = []
     @Published var normalizedConfidences: [Int] = []
-    @Published var occurrences: [(bookId: String, authorName: String, workTitle: String, lineNumber: Int, lineText: String, matchingPositions: [Int])] = []
+    @Published var occurrences: [WordOccurrence] = []
     @Published var totalOccurrenceCount = 0
     @Published var isLoadingDictionary = false
     @Published var isLoadingOccurrences = false
@@ -850,13 +870,29 @@ class ImprovedWordDetailViewModel: ObservableObject {
         dictionaryEntries = []
         
         do {
-                // Database lifecycle managed by async architecture
-            
-            // Determine language from book ID
-            let language = word.bookId.contains("tlg") ? "greek" : "latin"
-            
-            // Dictionary lookup now works for both Greek and Latin
-            // (removed the Greek-only check)
+            // Database lifecycle managed by async architecture
+
+            // Determine language from book ID by querying the database
+            // bookId format is like "atharvaveda.1", need to join through books table
+            let languageQuery = """
+                SELECT a.language
+                FROM books b
+                JOIN works w ON b.work_id = w.id
+                JOIN authors a ON w.author_id = a.id
+                WHERE b.id = ?
+            """
+            let languageResults = try await DatabaseManagerAsync.shared.executeQuery(
+                languageQuery,
+                parameters: [word.bookId]
+            ) { statement in
+                if let langCString = sqlite3_column_text(statement, 0) {
+                    return String(cString: langCString)
+                }
+                return nil
+            }
+
+            let language = languageResults.compactMap({ $0 }).first ?? "latin"
+            print("Detected language for book '\(word.bookId)': '\(language)'")
             
             // First, get morphological info for the word if it's Greek
             if language == "greek" {
@@ -1173,13 +1209,29 @@ class ImprovedWordDetailViewModel: ObservableObject {
         }
         
         do {
-                // Database lifecycle managed by async architecture
-            
-            // Determine language
-            let language = word.bookId.contains("tlg") ? "greek" : "latin"
-            
-            // Occurrences lookup now works for both Greek and Latin
-            // (removed the Greek-only check)
+            // Database lifecycle managed by async architecture
+
+            // Determine language from book ID by querying the database
+            // bookId format is like "atharvaveda.1", need to join through books table
+            let languageQuery = """
+                SELECT a.language
+                FROM books b
+                JOIN works w ON b.work_id = w.id
+                JOIN authors a ON w.author_id = a.id
+                WHERE b.id = ?
+            """
+            let languageResults = try await DatabaseManagerAsync.shared.executeQuery(
+                languageQuery,
+                parameters: [word.bookId]
+            ) { statement in
+                if let langCString = sqlite3_column_text(statement, 0) {
+                    return String(cString: langCString)
+                }
+                return nil
+            }
+
+            let language = languageResults.compactMap({ $0 }).first ?? "latin"
+            print("Detected language for occurrences search, book '\(word.bookId)': '\(language)'")
             
             // Get the search term
             let searchTerm = lemma.isEmpty ? word.word : lemma  // Use original word or lemma
@@ -1305,13 +1357,15 @@ class ImprovedWordDetailViewModel: ObservableObject {
                     matchingPositions = positionsString.split(separator: ",").compactMap { Int($0) }
                 }
 
-                return (
+                return WordOccurrence(
+                    word: searchTerm,
                     bookId: bookId,
+                    bookTitle: workTitle,
                     authorName: authorName,
-                    workTitle: workTitle,
                     lineNumber: lineNumber,
                     lineText: lineText,
-                    matchingPositions: matchingPositions
+                    wordPositions: matchingPositions,
+                    language: language
                 )
             }
 

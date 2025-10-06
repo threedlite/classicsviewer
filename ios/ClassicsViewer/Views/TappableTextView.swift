@@ -88,15 +88,22 @@ struct TappableTextView: UIViewRepresentable {
     }
     
     private func createAttributedText() -> NSAttributedString {
-        let font = isGreek ? 
+        // Use Times New Roman for Greek, system font for other scripts
+        // System font handles Devanagari, Arabic, Hebrew, etc. properly
+        let font = isGreek ?
             UIFont(name: "Times New Roman", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize) :
             UIFont.systemFont(ofSize: fontSize)
-        
+
         let attributedString = NSMutableAttributedString(string: text)
-        
+
+        // IMPORTANT: Use NSString length for NSRange, not Swift String count
+        // This prevents range errors with multi-byte Unicode like Devanagari
+        let nsText = text as NSString
+        let fullRange = NSRange(location: 0, length: nsText.length)
+
         // Set base font and color
-        attributedString.addAttribute(.font, value: font, range: NSRange(location: 0, length: text.count))
-        attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: text.count))
+        attributedString.addAttribute(.font, value: font, range: fullRange)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: fullRange)
         
         // Apply highlighting if we have words to highlight
         if !wordsWithoutDefinitions.isEmpty || !wordsWithMorphologyOnly.isEmpty || !searchHighlightedWords.isEmpty {
@@ -237,39 +244,44 @@ struct TappableTextView: UIViewRepresentable {
             guard characterIndex < textStorage.length else { return }
             
             let text = parent.text
-            
-            // Find word boundaries around the tapped character using same logic as Android
-            var wordStart = characterIndex
-            var wordEnd = characterIndex
-            
+
+            // Convert characterIndex (UTF-16 position) to String.Index
+            guard let tappedIndex = text.utf16Index(at: characterIndex) else {
+                print("DEBUG: Could not convert character index")
+                return
+            }
+
+            // Find word boundaries around the tapped character
+            var wordStart = tappedIndex
+            var wordEnd = tappedIndex < text.endIndex ? text.index(after: tappedIndex) : text.endIndex
+
             // Move backward to find word start
-            while wordStart > 0 {
-                let char = text[text.index(text.startIndex, offsetBy: wordStart - 1)]
+            while wordStart > text.startIndex {
+                let prevIndex = text.index(before: wordStart)
+                let char = text[prevIndex]
                 // Include hyphen for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
-                // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
-                let isWordChar = char.isLetter || char == "-" || (char == "'" && wordStart > 1 && wordStart < text.count - 1)
+                // Include apostrophe variants
+                let isWordChar = char.isLetter || char == "-" || char == "'" || char == "'" || char == "ʼ"
                 if !isWordChar {
                     break
                 }
-                wordStart -= 1
+                wordStart = prevIndex
             }
 
             // Move forward to find word end
-            while wordEnd < text.count {
-                let char = text[text.index(text.startIndex, offsetBy: wordEnd)]
+            while wordEnd < text.endIndex {
+                let char = text[wordEnd]
                 // Include hyphen for Akkadian/cuneiform transliteration (e.g., "it-bi-e-ma")
-                // Include apostrophe when between letters (e.g., "Ἀτρεΐδης")
-                let isWordChar = char.isLetter || char == "-" || (char == "'" && wordEnd > 0 && wordEnd < text.count - 1)
+                // Include apostrophe variants
+                let isWordChar = char.isLetter || char == "-" || char == "'" || char == "'" || char == "ʼ"
                 if !isWordChar {
                     break
                 }
-                wordEnd += 1
+                wordEnd = text.index(after: wordEnd)
             }
             
-            // Extract the word
-            let startIndex = text.index(text.startIndex, offsetBy: wordStart)
-            let endIndex = text.index(text.startIndex, offsetBy: wordEnd)
-            let tappedWord = String(text[startIndex..<endIndex]).trimmingCharacters(in: .whitespacesAndNewlines)
+            // Extract the word (wordStart and wordEnd are already String.Index)
+            let tappedWord = String(text[wordStart..<wordEnd]).trimmingCharacters(in: .whitespacesAndNewlines)
             
             if !tappedWord.isEmpty {
                 // Clean the word of punctuation but keep apostrophes and hyphens within words
@@ -310,6 +322,15 @@ struct TappableTextView: UIViewRepresentable {
             // This uses NFD decomposition to handle ALL diacritic combinations
             return GreekNormalizer.normalize(word)
         }
+    }
+}
+
+// Extension to safely convert UTF-16 offsets to String.Index
+extension String {
+    func utf16Index(at offset: Int) -> String.Index? {
+        guard offset >= 0 && offset <= self.utf16.count else { return nil }
+        return self.utf16.index(self.utf16.startIndex, offsetBy: offset, limitedBy: self.utf16.endIndex)
+            .flatMap { String.Index($0, within: self) }
     }
 }
 

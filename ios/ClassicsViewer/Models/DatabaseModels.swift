@@ -217,6 +217,7 @@ struct WordOccurrence: Identifiable, Hashable {
     let lineNumber: Int
     let lineText: String
     let wordPositions: [Int]
+    let language: String  // e.g., "greek", "latin", "sanskrit"
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -293,6 +294,28 @@ struct AudioFile: Identifiable, Hashable {
     let mimeType: String
 }
 
+// MARK: - Normalization Pattern Models
+
+struct NormalizationPattern: Identifiable, Hashable {
+    let id: Int?
+    let language: String
+    let pattern: String
+    let replacement: String
+    let description: String?
+    let priority: Int
+}
+
+struct UserNormalizationPattern: Identifiable, Hashable {
+    let id: Int?
+    let packageId: Int
+    let language: String
+    let pattern: String
+    let replacement: String
+    let description: String?
+    let priority: Int
+    let createdAt: Date
+}
+
 // MARK: - Search Results
 
 struct SearchResult: Identifiable {
@@ -300,7 +323,7 @@ struct SearchResult: Identifiable {
     let query: String
     let occurrences: [WordOccurrence]
     let searchType: SearchType
-    
+
     enum SearchType {
         case exact
         case normalized

@@ -24,7 +24,8 @@ class WordDAO: WordDAOProtocol {
                 a.name as author_name,
                 w.line_number,
                 tl.line_text,
-                GROUP_CONCAT(w.word_position) as positions
+                GROUP_CONCAT(w.word_position) as positions,
+                a.language
             FROM words w
             JOIN books bk ON w.book_id = bk.id
             JOIN works wo ON bk.work_id = wo.id
@@ -75,27 +76,29 @@ class WordDAO: WordDAOProtocol {
               let workTitleCString = sqlite3_column_text(statement, 3),
               let authorNameCString = sqlite3_column_text(statement, 4),
               let lineTextCString = sqlite3_column_text(statement, 6),
-              let positionsCString = sqlite3_column_text(statement, 7) else {
+              let positionsCString = sqlite3_column_text(statement, 7),
+              let languageCString = sqlite3_column_text(statement, 8) else {
             return nil
         }
-        
+
         let word = String(cString: wordCString)
         let bookId = String(cString: bookIdCString)
         let workTitle = String(cString: workTitleCString)
         let authorName = String(cString: authorNameCString)
         let lineNumber = Int(sqlite3_column_int(statement, 5))
         let lineText = String(cString: lineTextCString)
-        
+        let language = String(cString: languageCString)
+
         // Add book label to title if available
         var bookTitle = workTitle
         if let labelCString = sqlite3_column_text(statement, 2) {
             let label = String(cString: labelCString)
             bookTitle = "\(workTitle) - \(label)"
         }
-        
+
         let positionsString = String(cString: positionsCString)
         let wordPositions = positionsString.split(separator: ",").compactMap { Int($0) }
-        
+
         return WordOccurrence(
             word: word,
             bookId: bookId,
@@ -103,7 +106,8 @@ class WordDAO: WordDAOProtocol {
             authorName: authorName,
             lineNumber: lineNumber,
             lineText: lineText,
-            wordPositions: wordPositions
+            wordPositions: wordPositions,
+            language: language
         )
     }
     

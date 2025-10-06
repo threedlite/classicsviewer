@@ -130,7 +130,8 @@ struct OccurrenceDetailView_Previews: PreviewProvider {
                 authorName: "Homer",
                 lineNumber: 100,
                 lineText: "ἄνδρα μοι ἔννεπε, Μοῦσα, πολύτροπον, ὃς μάλα πολλὰ",
-                wordPositions: [1]
+                wordPositions: [1],
+                language: "greek"
             ))
         }
     }

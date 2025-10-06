@@ -30,16 +30,26 @@ struct DictionaryMatchEntry {
 class DictionaryDAO: DictionaryDAOProtocol {
     // Use async database manager
     private let userDictDAO = UserDictionaryDAO()
-    
+    private let normalizationDAO = NormalizationPatternDAO()
+    private let userNormalizationHelper = UserNormalizationPatternHelper()
+
     func getDictionaryEntry(_ word: String, language: String) async throws -> DictionaryResult? {
         print("DictionaryDAO: Looking up word='\(word)', language='\(language)'")
-        
-        // Normalize the word for dictionary lookup
-        // The dictionary has headword_normalized_ultra which should match our normalization
-        let normalizedWord = language == "greek" ? GreekNormalizer.normalize(word) : word.lowercased()
-        
+
+        // For dictionary lookup: only normalize Greek text
+        // For other languages, use exact word (matches Android approach)
+        let normalizedWord: String
+        if language == "greek" {
+            normalizedWord = GreekNormalizer.normalize(word)
+        } else if language == "latin" {
+            normalizedWord = word.lowercased()
+        } else {
+            // Sanskrit and others: use exact word without normalization
+            normalizedWord = word
+        }
+
         print("DictionaryDAO: Normalized '\(word)' to '\(normalizedWord)'")
-        
+
         // FIRST: Check user dictionary (if enabled)
         do {
             let userEntries = try await userDictDAO.searchUserDictionary(lemma: normalizedWord, language: language)
@@ -76,24 +86,49 @@ class DictionaryDAO: DictionaryDAOProtocol {
             print("DictionaryDAO: User dictionary check failed: \(error)")
         }
         
-        // First try direct dictionary lookup
-        let query = """
-            SELECT id, headword, entry_plain, entry_html, language, source 
-            FROM dictionary_entries 
-            WHERE headword_normalized_ultra = ? AND language = ?
-            ORDER BY 
-                CASE source
-                    WHEN 'lsj' THEN 1
-                    WHEN 'cunliffe' THEN 2
-                    WHEN 'wiktionary' THEN 3
-                    ELSE 4
-                END
-            LIMIT 1
-        """
-        
-        print("DictionaryDAO: Executing query with normalized word '\(normalizedWord)' and language '\(language)'")
-        
-        let results: [DictionaryResult] = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [normalizedWord, language]) { statement in
+        // First try direct dictionary lookup (matching Android's approach)
+        // For Greek: use headword_normalized_ultra for fallback
+        // For other languages: use exact headword match
+        let query: String
+        let queryParam: String
+
+        if language == "greek" {
+            // Greek can use ultra-normalized column
+            query = """
+                SELECT id, headword, entry_plain, entry_html, language, source
+                FROM dictionary_entries
+                WHERE headword_normalized_ultra = ? AND language = ?
+                ORDER BY
+                    CASE source
+                        WHEN 'lsj' THEN 1
+                        WHEN 'cunliffe' THEN 2
+                        WHEN 'wiktionary' THEN 3
+                        ELSE 4
+                    END
+                LIMIT 1
+            """
+            queryParam = normalizedWord
+        } else {
+            // Non-Greek languages: match exact headword (Android approach)
+            query = """
+                SELECT id, headword, entry_plain, entry_html, language, source
+                FROM dictionary_entries
+                WHERE headword = ? AND language = ?
+                ORDER BY
+                    CASE source
+                        WHEN 'lsj' THEN 1
+                        WHEN 'cunliffe' THEN 2
+                        WHEN 'wiktionary' THEN 3
+                        ELSE 4
+                    END
+                LIMIT 1
+            """
+            queryParam = normalizedWord
+        }
+
+        print("DictionaryDAO: Executing query with word '\(queryParam)' and language '\(language)'")
+
+        let results: [DictionaryResult] = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [queryParam, language]) { statement in
             let id = Int(sqlite3_column_int(statement, 0))
             
             guard let wordCString = sqlite3_column_text(statement, 1),
@@ -211,27 +246,48 @@ class DictionaryDAO: DictionaryDAOProtocol {
     func getDictionaryEntryByHeadword(_ headword: String, language: String) async throws -> DictionaryResult? {
         print("DictionaryDAO: Looking up by exact headword='\(headword)', language='\(language)'")
         
-        // First try exact match, then try with normalized form (for macron variations)
-        let query = """
-            SELECT id, headword, entry_plain, entry_html, language, source 
-            FROM dictionary_entries 
-            WHERE (headword = ? OR headword_normalized_ultra = ?) AND language = ?
-            ORDER BY 
-                CASE source
-                    WHEN 'lsj' THEN 1
-                    WHEN 'cunliffe' THEN 2
-                    WHEN 'wiktionary' THEN 3
-                    ELSE 4
-                END
-            LIMIT 1
-        """
-        
-        // Normalize the headword for the ultra-normalized comparison
-        let normalizedHeadword = language == "greek" ? GreekNormalizer.normalize(headword) : headword.lowercased()
-        
-        print("DictionaryDAO: Executing query with headword '\(headword)' (normalized: '\(normalizedHeadword)') and language '\(language)'")
-        
-        let results: [DictionaryResult] = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [headword, normalizedHeadword, language]) { statement in
+        // For Sanskrit and other non-Greek languages: only match exact headword
+        // For Greek: also try normalized form (for macron variations)
+        let query: String
+        let queryParams: [Any]
+
+        if language == "greek" {
+            query = """
+                SELECT id, headword, entry_plain, entry_html, language, source
+                FROM dictionary_entries
+                WHERE (headword = ? OR headword_normalized_ultra = ?) AND language = ?
+                ORDER BY
+                    CASE source
+                        WHEN 'lsj' THEN 1
+                        WHEN 'cunliffe' THEN 2
+                        WHEN 'wiktionary' THEN 3
+                        ELSE 4
+                    END
+                LIMIT 1
+            """
+            let normalizedHeadword = GreekNormalizer.normalize(headword)
+            queryParams = [headword, normalizedHeadword, language]
+        } else {
+            // Non-Greek: exact headword match only (Android approach)
+            query = """
+                SELECT id, headword, entry_plain, entry_html, language, source
+                FROM dictionary_entries
+                WHERE headword = ? AND language = ?
+                ORDER BY
+                    CASE source
+                        WHEN 'lsj' THEN 1
+                        WHEN 'cunliffe' THEN 2
+                        WHEN 'wiktionary' THEN 3
+                        ELSE 4
+                    END
+                LIMIT 1
+            """
+            queryParams = [headword, language]
+        }
+
+        print("DictionaryDAO: Executing query with headword '\(headword)' and language '\(language)'")
+
+        let results: [DictionaryResult] = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: queryParams) { statement in
             let id = Int(sqlite3_column_int(statement, 0))
             
             guard let wordCString = sqlite3_column_text(statement, 1),
@@ -357,8 +413,8 @@ class DictionaryDAO: DictionaryDAOProtocol {
         
         // Clean punctuation but preserve apostrophes for elided forms
         let cleanedWord = word.replacingOccurrences(of: "[.,;:!?·]", with: "", options: .regularExpression)
-        
-        // Normalize the word
+
+        // Normalize the word (for user dictionary and lemma lookups - NOT for direct headword match)
         let normalizedWord = language == "greek" ? GreekNormalizer.normalize(cleanedWord) : cleanedWord.lowercased()
         
         // FIRST: Check user dictionary (if enabled) - both direct and via mappings
@@ -428,11 +484,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
         }
         
         // First try direct dictionary lookup - get ALL entries from ALL sources
+        // Android queries exact headword without normalization
         let directQuery = """
-            SELECT headword, entry_plain, entry_html, source 
-            FROM dictionary_entries 
+            SELECT headword, entry_plain, entry_html, source
+            FROM dictionary_entries
             WHERE headword = ? AND language = ?
-            ORDER BY 
+            ORDER BY
                 CASE source
                     WHEN 'lsj' THEN 1
                     WHEN 'cunliffe' THEN 2
@@ -440,7 +497,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
                     ELSE 4
                 END
         """
-        
+
         print("DictionaryDAO: Executing direct query for cleanedWord='\(cleanedWord)', language='\(language)'")
         let directResults: [(String, String?, String?, String?)] = try await DatabaseManagerAsync.shared.executeQuery(directQuery, parameters: [cleanedWord, language]) { statement in
             guard let headwordCString = sqlite3_column_text(statement, 0) else {
@@ -473,7 +530,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
             let definition = result.2 ?? result.1 ?? ""
             print("DictionaryDAO: Found direct match - headword='\(result.0)', source='\(result.3 ?? "unknown")'")
             entries.append(DictionaryMatchEntry(
-                lemma: cleanedWord,
+                lemma: result.0,  // Use actual headword from database (matches Android)
                 definition: definition,
                 morphInfo: nil,  // Base forms don't have morphological info
                 isDirectMatch: true,
@@ -481,7 +538,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 source: result.3,
                 hasNonTreebankPath: true  // Direct matches always have non-treebank path
             ))
-            addedLemmas.add(cleanedWord)
+            addedLemmas.add(result.0)  // Track actual headword
         }
         
         // If no direct match and we have an acute variant, try that too
@@ -526,9 +583,9 @@ class DictionaryDAO: DictionaryDAOProtocol {
             }
         }
         
-        // If it's Greek, get all possible lemmas from lemma map
-        if language == "greek" {
-            print("DictionaryDAO: Getting all lemmas for Greek word")
+        // Get all possible lemmas from lemma map (works for all languages, not just Greek)
+        if language == "greek" || language == "sanskrit" || !language.isEmpty {
+            print("DictionaryDAO: Getting all lemmas for \(language) word")
             
             // Get all lemma mappings with confidence scores and source
             let lemmaMapQuery = """
@@ -722,22 +779,43 @@ class DictionaryDAO: DictionaryDAOProtocol {
                     }
                     
                     // Get ALL entries for the resolved lemma from ALL sources
-                    // Check both exact headword match AND normalized match (to handle macron variations)
-                    let resolvedLemmaNormalized = GreekNormalizer.normalize(resolvedLemma)
-                    let lemmaEntriesQuery = """
-                        SELECT headword, entry_plain, entry_html, source 
-                        FROM dictionary_entries 
-                        WHERE (headword = ? OR headword_normalized_ultra = ?) AND language = ?
-                        ORDER BY 
-                            CASE source
-                                WHEN 'lsj' THEN 1
-                                WHEN 'cunliffe' THEN 2
-                                WHEN 'wiktionary' THEN 3
-                                ELSE 4
-                            END
-                    """
-                    
-                    let lemmaResults: [(String, String?, String?, String?)] = try await DatabaseManagerAsync.shared.executeQuery(lemmaEntriesQuery, parameters: [resolvedLemma, resolvedLemmaNormalized, language]) { statement in
+                    let lemmaEntriesQuery: String
+                    let lemmaQueryParams: [Any]
+
+                    if language == "greek" {
+                        // Greek: check both exact headword and normalized form (for macron variations)
+                        let resolvedLemmaNormalized = GreekNormalizer.normalize(resolvedLemma)
+                        lemmaEntriesQuery = """
+                            SELECT headword, entry_plain, entry_html, source
+                            FROM dictionary_entries
+                            WHERE (headword = ? OR headword_normalized_ultra = ?) AND language = ?
+                            ORDER BY
+                                CASE source
+                                    WHEN 'lsj' THEN 1
+                                    WHEN 'cunliffe' THEN 2
+                                    WHEN 'wiktionary' THEN 3
+                                    ELSE 4
+                                END
+                        """
+                        lemmaQueryParams = [resolvedLemma, resolvedLemmaNormalized, language]
+                    } else {
+                        // Sanskrit and others: exact headword only
+                        lemmaEntriesQuery = """
+                            SELECT headword, entry_plain, entry_html, source
+                            FROM dictionary_entries
+                            WHERE headword = ? AND language = ?
+                            ORDER BY
+                                CASE source
+                                    WHEN 'lsj' THEN 1
+                                    WHEN 'cunliffe' THEN 2
+                                    WHEN 'wiktionary' THEN 3
+                                    ELSE 4
+                                END
+                        """
+                        lemmaQueryParams = [resolvedLemma, language]
+                    }
+
+                    let lemmaResults: [(String, String?, String?, String?)] = try await DatabaseManagerAsync.shared.executeQuery(lemmaEntriesQuery, parameters: lemmaQueryParams) { statement in
                         guard let headwordCString = sqlite3_column_text(statement, 0) else {
                             return nil
                         }
@@ -985,6 +1063,54 @@ class DictionaryDAO: DictionaryDAOProtocol {
             return 2
         default:
             return 3
+        }
+    }
+
+    // MARK: - Normalization Helper
+
+    /// Normalize word for dictionary lookup using pattern-based normalization when available
+    private func normalizeForLookup(_ word: String, language: String) async throws -> String {
+        if language == "greek" {
+            return GreekNormalizer.normalize(word)
+        } else if language == "latin" {
+            return word.lowercased()
+        } else {
+            // Try to load patterns for this language (Perseus database first, then user database)
+            var patterns: [NormalizationPattern] = []
+
+            // Load from Perseus database
+            do {
+                patterns = try await normalizationDAO.getPatternsByLanguage(language)
+            } catch {
+                print("DictionaryDAO: Failed to load Perseus normalization patterns for \(language): \(error)")
+            }
+
+            // If no Perseus patterns, try user database
+            if patterns.isEmpty {
+                do {
+                    let userPatterns = try await userNormalizationHelper.getPatternsByLanguage(language)
+                    patterns = userPatterns.map { userPattern in
+                        NormalizationPattern(
+                            id: userPattern.id,
+                            language: userPattern.language,
+                            pattern: userPattern.pattern,
+                            replacement: userPattern.replacement,
+                            description: userPattern.description,
+                            priority: userPattern.priority
+                        )
+                    }
+                } catch {
+                    print("DictionaryDAO: Failed to load user normalization patterns for \(language): \(error)")
+                }
+            }
+
+            // Apply pattern-based normalization if patterns available
+            if !patterns.isEmpty {
+                return PatternBasedNormalizer.normalize(word, language: language, patterns: patterns)
+            } else {
+                // Fallback to basic lowercase
+                return word.lowercased()
+            }
         }
     }
 }

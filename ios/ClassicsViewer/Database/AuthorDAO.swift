@@ -6,6 +6,7 @@ protocol AuthorDAOProtocol {
     func getLatinAuthors() async throws -> [Author]
     func getAuthorsByLanguage(_ language: String) async throws -> [Author]
     func getAuthorWithWorks(authorId: String) async throws -> AuthorWithWorks?
+    func getAllLanguages() async throws -> [String]
 }
 
 class AuthorDAO: AuthorDAOProtocol {
@@ -43,9 +44,9 @@ class AuthorDAO: AuthorDAOProtocol {
         let authors = try await DatabaseManagerAsync.shared.executeQuery(authorQuery, parameters: [authorId]) { [self] statement in
             authorFromStatement(statement)
         }
-        
+
         guard let author = authors.first else { return nil }
-        
+
         // Then get the works
         let worksQuery = """
             SELECT id, author_id, title, title_alt, title_english, type, urn, description
@@ -53,12 +54,23 @@ class AuthorDAO: AuthorDAOProtocol {
             WHERE author_id = ?
             ORDER BY id
         """
-        
+
         let works = try await DatabaseManagerAsync.shared.executeQuery(worksQuery, parameters: [authorId]) { [self] statement in
             workFromStatement(statement)
         }
-        
+
         return AuthorWithWorks(author: author, works: works)
+    }
+
+    func getAllLanguages() async throws -> [String] {
+        let query = "SELECT DISTINCT language FROM authors"
+
+        return try await DatabaseManagerAsync.shared.executeQuery(query, parameters: []) { statement in
+            guard let languageCString = sqlite3_column_text(statement, 0) else {
+                return nil
+            }
+            return String(cString: languageCString)
+        }
     }
     
     private func authorFromStatement(_ statement: OpaquePointer) -> Author? {

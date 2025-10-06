@@ -3,6 +3,7 @@ import SwiftUI
 struct ManageLanguagesView: View {
     @State private var languageId = "akkadian"  // Default value matches Android
     @State private var displayName = "Akkadian"  // Default value matches Android
+    @State private var oldLanguageId = "akkadian"  // Track previous value for auto-populate
     @State private var selectedColor = Color.gray
     @State private var selectedColorInt: Int = 0xFF808080
     @State private var showingColorPicker = false
@@ -11,6 +12,7 @@ struct ManageLanguagesView: View {
     @State private var languageToDelete: CustomLanguageConfig?
     @State private var showingToast = false
     @State private var toastMessage = ""
+    @State private var editingLanguageId: String?  // Track which language is being edited
 
     var body: some View {
         ScrollView {
@@ -25,6 +27,13 @@ struct ManageLanguagesView: View {
                         .textCase(.lowercase)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
+                        .onChange(of: languageId) { newValue in
+                            // Auto-populate display name if it's empty (matching Android)
+                            if displayName.isEmpty || displayName == convertLanguageIdToDisplayName(oldLanguageId) {
+                                displayName = convertLanguageIdToDisplayName(newValue)
+                            }
+                            oldLanguageId = newValue
+                        }
                 }
 
                 // Display Name Input
@@ -34,9 +43,6 @@ struct ManageLanguagesView: View {
                         .foregroundColor(.secondary)
                     TextField("Display Name", text: $displayName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onChange(of: displayName) { _ in
-                            // Update preview when name changes
-                        }
                 }
 
                 // Button Color Section
@@ -103,11 +109,19 @@ struct ManageLanguagesView: View {
                         ForEach(customLanguages) { language in
                             CustomLanguageRow(
                                 language: language,
+                                onEdit: {
+                                    editLanguage(language)
+                                },
                                 onDelete: {
                                     languageToDelete = language
                                     showingDeleteAlert = true
                                 }
                             )
+                        }
+                        .onMove { from, to in
+                            customLanguages.move(fromOffsets: from, toOffset: to)
+                            // Save the new order
+                            saveCustomLanguagesOrder()
                         }
                     }
                 }
@@ -116,6 +130,11 @@ struct ManageLanguagesView: View {
         }
         .navigationTitle("Manage Languages")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if !customLanguages.isEmpty {
+                EditButton()  // Enables drag-and-drop reordering
+            }
+        }
         .onAppear {
             loadCustomLanguages()
         }
@@ -154,6 +173,31 @@ struct ManageLanguagesView: View {
         customLanguages = UserDefaults.standard.customLanguages
     }
 
+    private func saveCustomLanguagesOrder() {
+        // Save the reordered list back to UserDefaults
+        if let encoded = try? JSONEncoder().encode(customLanguages) {
+            UserDefaults.standard.set(encoded, forKey: "customLanguages")
+        }
+    }
+
+    private func editLanguage(_ language: CustomLanguageConfig) {
+        // Pre-fill the form with existing values (matching Android behavior)
+        languageId = language.id
+        displayName = language.displayName
+        oldLanguageId = language.id
+        selectedColorInt = language.color
+        selectedColor = language.swiftUIColor
+        editingLanguageId = language.id
+    }
+
+    private func convertLanguageIdToDisplayName(_ languageId: String) -> String {
+        // Replace underscores with spaces, then capitalize each word (matching Android)
+        return languageId.replacingOccurrences(of: "_", with: " ")
+            .split(separator: " ")
+            .map { $0.capitalized }
+            .joined(separator: " ")
+    }
+
     private func saveLanguageConfiguration() {
         let trimmedId = languageId.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let trimmedName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -182,6 +226,11 @@ struct ManageLanguagesView: View {
             color: selectedColorInt
         )
 
+        // If editing, remove the old one first (unless ID hasn't changed)
+        if let editingId = editingLanguageId, editingId != trimmedId {
+            UserDefaults.standard.removeCustomLanguage(withId: editingId)
+        }
+
         UserDefaults.standard.addCustomLanguage(customLanguage)
 
         showToast("Language configuration saved")
@@ -189,8 +238,10 @@ struct ManageLanguagesView: View {
         // Reset form to defaults matching Android
         languageId = "akkadian"
         displayName = "Akkadian"
+        oldLanguageId = "akkadian"
         selectedColor = .gray
         selectedColorInt = 0xFF808080
+        editingLanguageId = nil
 
         // Reload the list
         loadCustomLanguages()
@@ -234,6 +285,7 @@ struct ManageLanguagesView: View {
 // Row for displaying custom languages - matches Android item_custom_language.xml
 struct CustomLanguageRow: View {
     let language: CustomLanguageConfig
+    let onEdit: () -> Void
     let onDelete: () -> Void
 
     var body: some View {
@@ -259,7 +311,14 @@ struct CustomLanguageRow: View {
 
                 Spacer()
 
-                // Delete button on the right
+                // Edit button
+                Button("Edit") {
+                    onEdit()
+                }
+                .foregroundColor(textColorForBackground(language.swiftUIColor))
+                .padding(.trailing, 8)
+
+                // Delete button
                 Button("Delete") {
                     onDelete()
                 }

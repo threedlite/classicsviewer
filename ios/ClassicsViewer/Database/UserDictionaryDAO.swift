@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 
 protocol UserDictionaryDAOProtocol {
-    func importDictionaryPackage(metadata: [String: Any], lemmas: [[String: Any]], mappings: [[String: Any]]?) async throws -> Int
+    func importDictionaryPackage(metadata: [String: Any], lemmas: [[String: Any]], mappings: [[String: Any]]?, normalizationPatterns: [[String: Any]]?) async throws -> Int
     func getPackages(language: String?) async throws -> [UserDictionaryPackage]
     func getEnabledPackages(language: String) async throws -> [UserDictionaryPackage]
     func setPackageEnabled(packageId: Int, enabled: Bool) async throws
@@ -13,8 +13,8 @@ protocol UserDictionaryDAOProtocol {
 
 class UserDictionaryDAO: UserDictionaryDAOProtocol {
     
-    func importDictionaryPackage(metadata: [String: Any], lemmas: [[String: Any]], mappings: [[String: Any]]?) async throws -> Int {
-        
+    func importDictionaryPackage(metadata: [String: Any], lemmas: [[String: Any]], mappings: [[String: Any]]?, normalizationPatterns: [[String: Any]]?) async throws -> Int {
+
         // Insert package
         let packageName = metadata["package_name"] as? String ?? "Unknown Package"
         let displayName = metadata["display_name"] as? String ?? packageName
@@ -24,15 +24,15 @@ class UserDictionaryDAO: UserDictionaryDAOProtocol {
         let fileSize = metadata["file_size"] as? Int
         let lemmaCount = lemmas.count
         let importDate = Date()
-        
+
         try await UserDatabaseManagerAsync.shared.execute("""
-            INSERT INTO user_dictionary_packages 
+            INSERT INTO user_dictionary_packages
             (package_name, display_name, description, language, source_info, import_date, file_size, lemma_count, is_enabled)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
         """, parameters: [packageName, displayName, description, language, sourceInfo, importDate, fileSize, lemmaCount])
-        
+
         let packageId = Int(await UserDatabaseManagerAsync.shared.getLastInsertRowId())
-        
+
         // Insert lemmas
         for lemmaData in lemmas {
             let lemma = lemmaData["lemma"] as? String ?? ""
@@ -41,23 +41,23 @@ class UserDictionaryDAO: UserDictionaryDAOProtocol {
             let definitionHtml = lemmaData["definition_html"] as? String
             let sourceName = lemmaData["source_name"] as? String ?? "User Import"
             let importFileName = lemmaData["import_file_name"] as? String ?? packageName
-            
+
             try await UserDatabaseManagerAsync.shared.execute("""
                 INSERT INTO user_dictionary_lemmas
-                (package_id, lemma, lemma_normalized_ultra, language, definition_plain, definition_html, 
+                (package_id, lemma, lemma_normalized_ultra, language, definition_plain, definition_html,
                  source_name, import_file_name, import_date, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, parameters: [packageId, lemma, lemmaNormalizedUltra, language, definitionPlain, definitionHtml, 
+            """, parameters: [packageId, lemma, lemmaNormalizedUltra, language, definitionPlain, definitionHtml,
                             sourceName, importFileName, importDate, importDate])
         }
-        
+
         // Insert mappings if provided
         if let mappings = mappings {
             for mappingData in mappings {
                 let inflectedForm = mappingData["inflected_form"] as? String ?? ""
                 let lemma = mappingData["lemma"] as? String ?? ""
                 let source = mappingData["source"] as? String ?? "User Import"
-                
+
                 try await UserDatabaseManagerAsync.shared.execute("""
                     INSERT INTO user_lemma_mappings
                     (inflected_form, lemma, language, source, package_id)
@@ -65,7 +65,29 @@ class UserDictionaryDAO: UserDictionaryDAOProtocol {
                 """, parameters: [inflectedForm, lemma, language, source, packageId])
             }
         }
-        
+
+        // Insert normalization patterns if provided
+        if let normalizationPatterns = normalizationPatterns, !normalizationPatterns.isEmpty {
+            print("UserDictionaryDAO: Importing \(normalizationPatterns.count) normalization patterns")
+
+            let helper = UserNormalizationPatternHelper()
+            let patterns = normalizationPatterns.map { patternData -> UserNormalizationPattern in
+                UserNormalizationPattern(
+                    id: nil,
+                    packageId: packageId,
+                    language: patternData["language"] as? String ?? language,
+                    pattern: patternData["pattern"] as? String ?? "",
+                    replacement: patternData["replacement"] as? String ?? "",
+                    description: patternData["description"] as? String,
+                    priority: patternData["priority"] as? Int ?? 999,
+                    createdAt: importDate
+                )
+            }
+
+            try await helper.insertPatterns(patterns)
+            print("UserDictionaryDAO: Successfully imported \(patterns.count) normalization patterns")
+        }
+
         return packageId
     }
     
