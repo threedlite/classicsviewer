@@ -6,9 +6,11 @@ All Sanskrit resources used in ClassicsViewer are properly licensed for commerci
 
 **Status**: ✅ **FULLY COMPLIANT**
 
+---
+
 ## Sources Used
 
-### 1. Digital Corpus of Sanskrit (DCS) - Dictionary & Morphology
+### 1. Digital Corpus of Sanskrit (DCS) - Rig Veda & Morphology
 
 **Source**: Digital Corpus of Sanskrit by Oliver Hellwig
 **License**: Creative Commons Attribution 4.0 International (CC BY 4.0)
@@ -16,9 +18,10 @@ All Sanskrit resources used in ClassicsViewer are properly licensed for commerci
 **Website**: http://www.sanskrit-linguistics.org/dcs/
 
 **What we use**:
-- 179,806 dictionary lemmas with definitions
-- 4,700,299 morphology mappings (word → lemma)
-- Extracted from 5.5 million annotated words
+- **Rig Veda Text**: pada-and-analysis.dat (10,551 verses, 39,830 padas)
+- **Dictionary**: 179,806 lemmas with definitions
+- **Morphology**: 4,700,299 word→lemma mappings (including 3,699 sandhi-enhanced)
+- **Extracted from**: 5.5 million annotated words across 268 classical texts
 
 **License Terms**:
 - ✅ Commercial use allowed
@@ -36,8 +39,9 @@ Source: http://www.sanskrit-linguistics.org/dcs/
 
 **Our modifications**:
 - Converted IAST transliteration → Devanagari script
-- Added sandhi-split compound mappings (1,956 compounds)
-- Reformatted to ClassicsViewer CSV schema
+- Added sandhi-split compound mappings (1,956 compounds automatically resolved)
+- Reformatted to ClassicsViewer CSV/database schema
+- Combined padas into verses for readability
 
 ---
 
@@ -49,8 +53,8 @@ Source: http://www.sanskrit-linguistics.org/dcs/
 
 **What we use**:
 - Automated sandhi (word junction) splitting for compound words
-- Used during database creation only (not in app)
-- Improves coverage from 40% → 88%
+- Used during database creation only (not in app runtime)
+- Improves lexicon coverage from 40% → 88%
 
 **License Terms**:
 - ✅ Commercial use allowed
@@ -79,7 +83,7 @@ Repository: https://github.com/kmadathil/sanskrit_parser
 
 **License Terms**:
 - ✅ Commercial use allowed
-- ✅ Share-alike requirement (our app is MIT/open source)
+- ✅ Share-alike requirement (our app is MIT/open source ✓)
 - ✅ Requires attribution
 
 **Attribution**:
@@ -100,7 +104,7 @@ URL: https://sa.wikisource.org/wiki/भगवद्गीता
 **URL**: https://en.wikisource.org/wiki/The_Bhagavad_Gita_(Arnold_translation)
 
 **What we use**:
-- English prose translation (18 chapters)
+- English prose translation (18 chapters, chapter-level segments)
 
 **License Terms**:
 - ✅ Public Domain (no restrictions)
@@ -122,15 +126,35 @@ URL: https://sa.wikisource.org/wiki/भगवद्गीता
 
 ---
 
+### 6. Rig Veda Translation - Ralph T.H. Griffith
+
+**Source**: Sacred-texts.com / English translation
+**Translator**: Ralph T.H. Griffith (1896)
+**License**: Public Domain
+**URL**: http://www.sacred-texts.com/hin/rigveda/
+
+**What we use**:
+- English translation of Rig Veda
+- 10,218 translated verses (94.6% coverage of 10,551 total verses)
+- Citation-based format matching DCS structure
+
+**License Terms**:
+- ✅ Public Domain (no restrictions)
+- Published 1896, well before copyright cutoff
+
+---
+
 ## License Compatibility Matrix
 
 | Resource | License | Commercial Use | Attribution Required | Share-Alike |
 |----------|---------|----------------|---------------------|-------------|
+| DCS Rig Veda Sanskrit | CC BY 4.0 | ✅ Yes | ✅ Yes | ❌ No |
 | DCS Dictionary/Morphology | CC BY 4.0 | ✅ Yes | ✅ Yes | ❌ No |
 | Sanskrit Parser | MIT | ✅ Yes | ✅ Yes (minimal) | ❌ No |
 | Bhagavad Gita Sanskrit | CC BY-SA 4.0 | ✅ Yes | ✅ Yes | ✅ Yes |
 | Arnold Translation | Public Domain | ✅ Yes | ❌ No | ❌ No |
 | Besant Translation | Public Domain | ✅ Yes | ❌ No | ❌ No |
+| Griffith Translation | Public Domain | ✅ Yes | ❌ No | ❌ No |
 
 **ClassicsViewer App License**: MIT (open source, commercial use allowed)
 
@@ -171,16 +195,138 @@ Before using any new Sanskrit source:
 
 ---
 
-## Current Implementation
+## Current Implementation Summary
 
-**Dictionary/Morphology**: DCS (CC BY 4.0) - 88% coverage
-**Texts**: Bhagavad Gita from Wikisource (CC BY-SA 4.0)
-**Translations**: Arnold (Public Domain) + Besant (Public Domain)
-**Tools**: sanskrit_parser (MIT)
+### Texts Database (sanskrit_texts.db.zip)
 
-**Status**: ✅ Production ready, fully compliant
+**Bhagavad Gita**:
+- Sanskrit: CC BY-SA 4.0 (Wikisource)
+- English (Arnold): Public Domain
+- English (Besant): Public Domain
+
+**Rig Veda**:
+- Sanskrit: CC BY 4.0 (DCS - Oliver Hellwig)
+- English (Griffith): Public Domain
+
+**Combined**:
+- 11,251 verses
+- 171,351 words
+- 10,694 translation segments
+- File size: 4.67 MB compressed
+
+### Lexicon (dcs_sanskrit_lexicon.zip)
+
+**Source**: DCS (CC BY 4.0)
+- 179,806 dictionary entries
+- 4,700,299 morphology mappings
+- 88.0% coverage on Bhagavad Gita
+- File size: 34.5 MB compressed
+
+### Build Tools
+
+**sanskrit_parser**: MIT License (build-time only, not distributed)
 
 ---
 
-**Last Updated**: October 5, 2025
-**Version**: 1.0 (DCS-based implementation)
+## Required App Attribution
+
+The following attributions must be included in the app's license screen:
+
+```
+=== Sanskrit Texts ===
+
+Bhagavad Gita (Sanskrit)
+Source: Sanskrit Wikisource
+License: CC BY-SA 4.0
+URL: https://sa.wikisource.org/wiki/भगवद्गीता
+
+Bhagavad Gita (English - Arnold)
+Translator: Edwin Arnold (1885)
+License: Public Domain
+
+Bhagavad Gita (English - Besant)
+Translator: Annie Besant (1922)
+License: Public Domain
+
+Rig Veda (Sanskrit)
+Source: Digital Corpus of Sanskrit (DCS)
+Author: Oliver Hellwig
+License: CC BY 4.0
+URL: http://www.sanskrit-linguistics.org/dcs/
+
+Rig Veda (English)
+Translator: Ralph T.H. Griffith (1896)
+License: Public Domain
+
+=== Sanskrit Lexicon ===
+
+Digital Corpus of Sanskrit (DCS)
+Author: Oliver Hellwig
+License: CC BY 4.0
+Source: http://www.sanskrit-linguistics.org/dcs/
+Corpus: 5.5 million words from 268 classical texts
+```
+
+---
+
+## Future Expansion Compliance
+
+When adding new texts from DCS (see `DCS_TEXTS_CATALOG.md`):
+
+**All DCS texts**: CC BY 4.0
+- ✅ Commercial use allowed
+- ✅ Requires attribution (already included for DCS)
+
+**Translations**: Must verify individually
+- Pre-1928 works: Generally Public Domain in USA
+- Modern translations: Check specific license
+- Sacred-texts.com: Many Public Domain translations available
+- Wikisource: Check individual work licenses
+
+---
+
+## Academic Citations
+
+For academic use, cite:
+
+**DCS:**
+```
+Hellwig, Oliver (2010-2024). Digital Corpus of Sanskrit (DCS).
+Available at: http://www.sanskrit-linguistics.org/dcs/
+```
+
+**Sanskrit Parser:**
+```
+sanskrit_parser. Available at: https://github.com/kmadathil/sanskrit_parser
+```
+
+**Bhagavad Gita Translations:**
+```
+Arnold, Edwin (1885). The Bhagavad Gita (The Song Celestial).
+Available at: https://en.wikisource.org/wiki/The_Bhagavad_Gita_(Arnold_translation)
+
+Besant, Annie (1922). Bhagavad-Gita (4th edition).
+Available at: https://en.wikisource.org/wiki/Bhagavad-Gita_(Besant_4th)
+```
+
+**Rig Veda Translation:**
+```
+Griffith, Ralph T.H. (1896). The Rig Veda.
+Available at: http://www.sacred-texts.com/hin/rigveda/
+```
+
+---
+
+## Status
+
+**Current Implementation**: ✅ Production ready, fully compliant
+
+**Texts**: Bhagavad Gita (700 verses) + Rig Veda (10,551 verses)
+**Lexicon**: DCS dictionary + morphology (88% coverage)
+**All licenses**: Commercial-use compatible
+**Attribution**: Complete and properly included
+
+---
+
+**Last Updated**: October 6, 2025
+**Version**: 2.0 (Bhagavad Gita + Rig Veda + DCS Lexicon)

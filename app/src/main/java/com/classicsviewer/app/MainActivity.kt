@@ -203,10 +203,10 @@ class MainActivity : AppCompatActivity() {
         return when (languageId.lowercase()) {
             "greek" -> 0xFF5A8A5C.toInt()     // Loeb Greek green
             "latin" -> 0xFFB85450.toInt()     // Loeb Latin red
-            "sanskrit" -> 0xFFB9AF5F.toInt()  // Desaturated yellow
-            "hebrew" -> 0xFF8C64A0.toInt()    // Desaturated purple
+            "sanskrit" -> 0xFFC39B5A.toInt()  // Desaturated saffron
+            "hebrew" -> 0xFF6B7BA8.toInt()    // Desaturated indigo
             "arabic" -> 0xFFDCDCDC.toInt()    // Light grey/white
-            "persian" -> 0xFFBE8755.toInt()   // Desaturated orange
+            "persian" -> 0xFF9B7BA8.toInt()   // Desaturated purple
             "sumerian" -> 0xFF5A73AA.toInt()  // Desaturated blue
             "akkadian" -> 0xFFAF9B7D.toInt()  // Desaturated tan
             else -> 0xFF808080.toInt()        // Grey for unknown languages
