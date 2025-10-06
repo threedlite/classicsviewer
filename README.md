@@ -5,7 +5,7 @@ If you have trouble cloning this repo set GIT_LFS_SKIP_SMUDGE=1
 An Android app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required.
 
 NOTE: If you just want all the Perseus authors (90+), copy data-prep/perseus_texts_full.db.zip (700MB+) to phone, e.g. in Downloads folder, then in the app select "Select external database" and select that file.
-If git-lfs is not working, file (for version 0.8.19+) is also available at: https://drive.google.com/file/d/1_l7CcZOrSGUlk7NRdzACxWVDFMeoXe4A/view?usp=sharing
+If git-lfs is not working, file (for version 0.8.19+) is also available at:  https://drive.google.com/file/d/1pDvFgMshF56LRU9UAfc1fIdYSaaS5c-A/view?usp=sharing
 
 
 NEW: Audio file for entire Iliad prosody-aware line by line (menu option manage audio), project audio folder or: https://drive.google.com/file/d/1fOOfQeMP53Kz3dvnu-5X9Qd76VSmzjBm/view?usp=sharing 
@@ -13,9 +13,10 @@ Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecom
 
 
 NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed.
-perseus_texts_extended.db.zip  via Github LFS or Google Drive link:  https://drive.google.com/file/d/1RZIPF8WFjXZfwKsZyT74Un46wzQwhvNW/view?usp=sharing
+perseus_texts_extended.db.zip  via Github LFS or Google Drive link:  https://drive.google.com/file/d/1EhxEsUYAm2TrkPuhrQEuEYLXdjz0tmYv/view?usp=sharing
 
-NEW: Akkadian added to all dbs, will appear if added under Manage Languages. Sumerian added to full and extended dbs.
+
+NEW: Akkadian and Sumerian added to full db. Extended db has in addition some Sanskrit, Persian, Arabic, Hebrew.  Some dictionary support mainly for Sanskrit.  An Arabic classical treebank licensed CC-BY-SA without NC would have allowed more.
 
 
 
