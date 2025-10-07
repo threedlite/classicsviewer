@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +26,6 @@ import android.text.Editable
 class ManageLanguagesActivity : BaseActivity() {
 
     private lateinit var binding: ActivityManageLanguagesBinding
-    private var selectedColor: Int = 0xFF808080.toInt() // Default gray color
     private lateinit var customLanguagesAdapter: CustomLanguagesAdapter
 
 
@@ -42,39 +42,106 @@ class ManageLanguagesActivity : BaseActivity() {
 
 
     private fun setupUI() {
-        // Initialize with default color
-        updateColorPreview(selectedColor)
+        // Add button
+        binding.addLanguageButton.setOnClickListener {
+            showAddEditDialog(null)
+        }
+    }
 
-        // Color picker button
-        binding.pickColorButton.setOnClickListener {
-            showColorPicker()
+    private fun showAddEditDialog(existingLanguage: CustomLanguageConfig?) {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_edit_language, null)
+
+        val languageIdInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.languageIdInput)
+        val languageNameInput = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.languageNameInput)
+        val colorPreview = dialogView.findViewById<View>(R.id.colorPreview)
+        val pickColorButton = dialogView.findViewById<Button>(R.id.pickColorButton)
+        val languagePreviewCard = dialogView.findViewById<MaterialCardView>(R.id.languagePreviewCard)
+        val languagePreviewText = dialogView.findViewById<TextView>(R.id.languagePreviewText)
+
+        var selectedColor = existingLanguage?.color ?: 0xFF808080.toInt()
+
+        // Pre-fill if editing
+        if (existingLanguage != null) {
+            languageIdInput.setText(existingLanguage.id)
+            languageIdInput.isEnabled = false // Don't allow changing ID when editing
+            languageNameInput.setText(existingLanguage.displayName)
         }
 
-        // Save button
-        binding.saveButton.setOnClickListener {
-            saveLanguageConfiguration()
+        // Update preview function
+        val updatePreview = {
+            val displayName = languageNameInput.text?.toString() ?: "Language"
+            languagePreviewText.text = displayName
+            colorPreview.setBackgroundColor(selectedColor)
+            languagePreviewCard.setCardBackgroundColor(selectedColor)
+
+            val brightness = getBrightness(selectedColor)
+            val textColor = if (brightness > 128) Color.BLACK else Color.WHITE
+            languagePreviewText.setTextColor(textColor)
+        }
+
+        updatePreview()
+
+        // Auto-populate display name from language ID (only when adding new)
+        if (existingLanguage == null) {
+            languageIdInput.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable?) {
+                    val displayName = languageNameInput.text?.toString()
+                    if (displayName.isNullOrBlank() && !s.isNullOrBlank()) {
+                        val autoDisplayName = convertLanguageIdToDisplayName(s.toString())
+                        languageNameInput.setText(autoDisplayName)
+                        updatePreview()
+                    }
+                }
+            })
         }
 
         // Update preview when name changes
-        binding.languageNameInput.setOnEditorActionListener { _, _, _ ->
-            updateLanguagePreview()
-            false
-        }
-
-        // Auto-populate display name from language ID
-        binding.languageIdInput.addTextChangedListener(object : TextWatcher {
+        languageNameInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                // Only auto-populate if display name is empty
-                val displayName = binding.languageNameInput.text?.toString()
-                if (displayName.isNullOrBlank() && !s.isNullOrBlank()) {
-                    val autoDisplayName = convertLanguageIdToDisplayName(s.toString())
-                    binding.languageNameInput.setText(autoDisplayName)
-                    updateLanguagePreview()
-                }
+                updatePreview()
             }
         })
+
+        // Color picker button
+        pickColorButton.setOnClickListener {
+            showColorPickerDialog(selectedColor) { newColor ->
+                selectedColor = newColor
+                updatePreview()
+            }
+        }
+
+        // Create dialog
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(if (existingLanguage != null) "Edit Language" else "Add Language")
+            .setView(dialogView)
+            .setPositiveButton("Save") { _, _ ->
+                val languageId = languageIdInput.text?.toString()?.trim()?.lowercase()
+                val displayName = languageNameInput.text?.toString()?.trim()
+
+                if (languageId.isNullOrEmpty()) {
+                    Toast.makeText(this, "Please enter a language ID", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                if (displayName.isNullOrEmpty()) {
+                    Toast.makeText(this, "Please enter a display name", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                val customLanguage = CustomLanguageConfig(languageId, displayName, selectedColor)
+                PreferencesManager.addCustomLanguage(this, customLanguage)
+
+                Toast.makeText(this, "Language saved", Toast.LENGTH_SHORT).show()
+                loadCustomLanguages()
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        dialog.show()
     }
 
     private fun convertLanguageIdToDisplayName(languageId: String): String {
@@ -86,7 +153,7 @@ class ManageLanguagesActivity : BaseActivity() {
             }
     }
 
-    private fun showColorPicker() {
+    private fun showColorPickerDialog(currentColor: Int, onColorSelected: (Int) -> Unit) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_color_picker, null)
         val colorPreview = dialogView.findViewById<View>(R.id.colorPreview)
         val redSeekBar = dialogView.findViewById<SeekBar>(R.id.redSeekBar)
@@ -98,9 +165,9 @@ class ManageLanguagesActivity : BaseActivity() {
         val hexValue = dialogView.findViewById<TextView>(R.id.hexValue)
 
         // Set initial values from current color
-        val red = Color.red(selectedColor)
-        val green = Color.green(selectedColor)
-        val blue = Color.blue(selectedColor)
+        val red = Color.red(currentColor)
+        val green = Color.green(currentColor)
+        val blue = Color.blue(currentColor)
 
         redSeekBar.progress = red
         greenSeekBar.progress = green
@@ -108,8 +175,8 @@ class ManageLanguagesActivity : BaseActivity() {
         redValue.text = red.toString()
         greenValue.text = green.toString()
         blueValue.text = blue.toString()
-        colorPreview.setBackgroundColor(selectedColor)
-        hexValue.text = String.format("#%06X", 0xFFFFFF and selectedColor)
+        colorPreview.setBackgroundColor(currentColor)
+        hexValue.text = String.format("#%06X", 0xFFFFFF and currentColor)
 
         val updateColor = {
             val newColor = Color.rgb(
@@ -140,33 +207,17 @@ class ManageLanguagesActivity : BaseActivity() {
             .setTitle("Pick Button Color")
             .setView(dialogView)
             .setPositiveButton("OK") { _, _ ->
-                selectedColor = Color.rgb(
+                val selectedColor = Color.rgb(
                     redSeekBar.progress,
                     greenSeekBar.progress,
                     blueSeekBar.progress
                 )
-                updateColorPreview(selectedColor)
-                updateLanguagePreview()
+                onColorSelected(selectedColor)
             }
             .setNegativeButton("Cancel", null)
             .create()
 
         dialog.show()
-    }
-
-    private fun updateColorPreview(color: Int) {
-        binding.colorPreview.setBackgroundColor(color)
-        binding.languagePreviewCard.setCardBackgroundColor(color)
-    }
-
-    private fun updateLanguagePreview() {
-        val displayName = binding.languageNameInput.text?.toString() ?: "Language"
-        binding.languagePreviewText.text = displayName
-
-        // Set text color based on background brightness
-        val brightness = getBrightness(selectedColor)
-        val textColor = if (brightness > 128) Color.BLACK else Color.WHITE
-        binding.languagePreviewText.setTextColor(textColor)
     }
 
     private fun getBrightness(color: Int): Int {
@@ -177,50 +228,8 @@ class ManageLanguagesActivity : BaseActivity() {
         return ((red * 299) + (green * 587) + (blue * 114)) / 1000
     }
 
-    private fun saveLanguageConfiguration() {
-        val languageId = binding.languageIdInput.text?.toString()?.trim()?.lowercase()
-        val displayName = binding.languageNameInput.text?.toString()?.trim()
-
-        if (languageId.isNullOrEmpty()) {
-            Toast.makeText(this, "Please enter a language ID", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (displayName.isNullOrEmpty()) {
-            Toast.makeText(this, "Please enter a display name", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // Save the custom language configuration
-        val customLanguage = CustomLanguageConfig(languageId, displayName, selectedColor)
-        PreferencesManager.addCustomLanguage(this, customLanguage)
-
-        Toast.makeText(this, "Language configuration saved", Toast.LENGTH_SHORT).show()
-
-        // Reset form
-        binding.languageIdInput.setText("")
-        binding.languageNameInput.setText("")
-        selectedColor = 0xFF808080.toInt()
-        updateColorPreview(selectedColor)
-        updateLanguagePreview()
-
-        // Reload the list
-        loadCustomLanguages()
-    }
-
     private fun loadCustomLanguages() {
         val customLanguages = PreferencesManager.getCustomLanguages(this).toMutableList()
-        customLanguagesAdapter = CustomLanguagesAdapter(
-            customLanguages,
-            onEditClick = { language -> showEditDialog(language) },
-            onDeleteClick = { language -> showDeleteConfirmation(language) },
-            onOrderChanged = { newOrder ->
-                PreferencesManager.setCustomLanguagesOrder(this, newOrder)
-            }
-        )
-
-        binding.customLanguagesRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.customLanguagesRecyclerView.adapter = customLanguagesAdapter
 
         // Add drag-and-drop support
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
@@ -242,19 +251,22 @@ class ManageLanguagesActivity : BaseActivity() {
             }
         })
 
+        customLanguagesAdapter = CustomLanguagesAdapter(
+            customLanguages,
+            onEditClick = { language -> showAddEditDialog(language) },
+            onDeleteClick = { language -> showDeleteConfirmation(language) },
+            onOrderChanged = { newOrder ->
+                PreferencesManager.setCustomLanguagesOrder(this, newOrder)
+            },
+            onStartDrag = { viewHolder ->
+                itemTouchHelper.startDrag(viewHolder)
+            }
+        )
+
+        binding.customLanguagesRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.customLanguagesRecyclerView.adapter = customLanguagesAdapter
+
         itemTouchHelper.attachToRecyclerView(binding.customLanguagesRecyclerView)
-    }
-
-    private fun showEditDialog(language: CustomLanguageConfig) {
-        // Pre-fill the form with existing values
-        binding.languageIdInput.setText(language.id)
-        binding.languageNameInput.setText(language.displayName)
-        selectedColor = language.color
-        updateColorPreview(selectedColor)
-        updateLanguagePreview()
-
-        // Scroll to top so user sees the form
-        binding.languageIdInput.requestFocus()
     }
 
     private fun showDeleteConfirmation(language: CustomLanguageConfig) {

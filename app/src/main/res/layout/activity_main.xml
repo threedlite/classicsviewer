@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Select Language"
+        android:text=""
         android:textSize="24sp"
         android:textStyle="bold"
         android:paddingLeft="16dp"

@@ -251,6 +251,8 @@
             android:layout_height="wrap_content"
             android:text="Refresh Database"
             android:textAlignment="textStart"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
             android:padding="16dp"
             style="?android:attr/borderlessButtonStyle" />
 
@@ -270,6 +272,8 @@
             android:layout_height="wrap_content"
             android:text="Licenses &amp; Credits"
             android:textAlignment="textStart"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
             android:padding="16dp"
             style="?android:attr/borderlessButtonStyle" />
 
@@ -332,7 +336,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Instructions for loading other Perseus data available at:"
+                android:text="Instructions for loading other Perseus data and other languages available at:"
                 android:textSize="12sp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:paddingTop="16dp" />
@@ -342,8 +346,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="https://github.com/threedlite/classicsviewer"
-                android:textSize="12sp"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="14sp"
+                android:textColor="#2196F3"
                 android:paddingTop="4dp"
                 android:autoLink="web"
                 android:linksClickable="true" />

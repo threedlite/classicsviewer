@@ -16,7 +16,7 @@ NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekA
 perseus_texts_extended.db.zip  via Github LFS or Google Drive link:  https://drive.google.com/file/d/1EhxEsUYAm2TrkPuhrQEuEYLXdjz0tmYv/view?usp=sharing
 
 
-NEW: Akkadian and Sumerian added to full db. Extended db has in addition some Sanskrit, Persian, Arabic, Hebrew.  Some dictionary support mainly for Sanskrit.  An Arabic classical treebank licensed CC-BY-SA without NC would have allowed more.
+NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
 
 
 

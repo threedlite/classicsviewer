@@ -2,9 +2,11 @@ package com.classicsviewer.app
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -15,7 +17,8 @@ class CustomLanguagesAdapter(
     private val languages: MutableList<CustomLanguageConfig>,
     private val onEditClick: (CustomLanguageConfig) -> Unit,
     private val onDeleteClick: (CustomLanguageConfig) -> Unit,
-    private val onOrderChanged: (List<CustomLanguageConfig>) -> Unit
+    private val onOrderChanged: (List<CustomLanguageConfig>) -> Unit,
+    private val onStartDrag: (RecyclerView.ViewHolder) -> Unit
 ) : RecyclerView.Adapter<CustomLanguagesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,6 +27,7 @@ class CustomLanguagesAdapter(
         val idText: TextView = view.findViewById(R.id.customLanguageId)
         val editButton: Button = view.findViewById(R.id.editLanguageButton)
         val deleteButton: Button = view.findViewById(R.id.deleteLanguageButton)
+        val dragHandle: ImageView = view.findViewById(R.id.dragHandle)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,6 +55,14 @@ class CustomLanguagesAdapter(
 
         holder.deleteButton.setOnClickListener {
             onDeleteClick(language)
+        }
+
+        // Set up drag handle
+        holder.dragHandle.setOnTouchListener { _, event ->
+            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                onStartDrag(holder)
+            }
+            false
         }
     }
 

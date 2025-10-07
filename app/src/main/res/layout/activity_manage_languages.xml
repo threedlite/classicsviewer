@@ -9,111 +9,17 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/languageIdInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="Language ID (e.g., akkadian, sumerian)"
-        app:boxBackgroundMode="outline">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/languageIdInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="akkadian" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/languageNameInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="Display Name (e.g., Akkadian, Sumerian)"
-        app:boxBackgroundMode="outline">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/languageNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Akkadian" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button Color"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="16dp">
-
-        <View
-            android:id="@+id/colorPreview"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#808080"
-            android:layout_marginEnd="16dp" />
-
-        <Button
-            android:id="@+id/pickColorButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pick Color" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/previewLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preview"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/languagePreviewCard"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
-
-        <TextView
-            android:id="@+id/languagePreviewText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Akkadian"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white" />
-
-    </com.google.android.material.card.MaterialCardView>
-
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/addLanguageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save Language Configuration"
-        android:layout_marginTop="16dp" />
+        android:text="Add Language"
+        android:layout_marginBottom="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/customLanguagesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="24dp" />
+        android:layout_weight="1" />
 
 </LinearLayout>

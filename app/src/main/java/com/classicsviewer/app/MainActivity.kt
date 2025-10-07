@@ -125,18 +125,6 @@ class MainActivity : AppCompatActivity() {
     private fun autoDetectLanguages() {
         lifecycleScope.launch {
             try {
-                // Get all distinct languages from the database
-                val db = PerseusDatabase.getInstance(this@MainActivity)
-                val allLanguages = withContext(Dispatchers.IO) {
-                    db.authorDao().getAllLanguages()
-                }
-
-                android.util.Log.d("MainActivity", "Auto-detecting languages from database: $allLanguages")
-
-                // Get existing custom languages
-                val existingCustomLanguages = PreferencesManager.getCustomLanguages(this@MainActivity)
-                val existingLanguageIds = existingCustomLanguages.map { it.id }.toSet()
-
                 // Preferred order for auto-detected languages
                 val preferredOrder = listOf(
                     "greek",
@@ -149,11 +137,36 @@ class MainActivity : AppCompatActivity() {
                     "arabic"
                 )
 
+                // One-time migration: fix any existing ordering issues
+                if (!PreferencesManager.hasFixedLanguageOrder(this@MainActivity)) {
+                    android.util.Log.d("MainActivity", "Running one-time language order fix")
+                    PreferencesManager.reorderLanguagesByPreferredOrder(this@MainActivity, preferredOrder)
+                    PreferencesManager.setHasFixedLanguageOrder(this@MainActivity)
+                }
+
+                // Get all distinct languages from the database
+                val db = PerseusDatabase.getInstance(this@MainActivity)
+                val allLanguages = withContext(Dispatchers.IO) {
+                    db.authorDao().getAllLanguages()
+                }
+
+                android.util.Log.d("MainActivity", "Auto-detecting languages from database: $allLanguages")
+
+                // Get existing custom languages and suppressed languages
+                val existingCustomLanguages = PreferencesManager.getCustomLanguages(this@MainActivity)
+                val existingLanguageIds = existingCustomLanguages.map { it.id }.toSet()
+                val suppressedLanguages = PreferencesManager.getSuppressedLanguages(this@MainActivity)
+
+                android.util.Log.d("MainActivity", "Existing languages: $existingLanguageIds")
+                android.util.Log.d("MainActivity", "Suppressed languages: $suppressedLanguages")
+
                 var languagesAdded = false
 
                 // First, add languages in preferred order if they exist in database and not already added
                 preferredOrder.forEach { languageId ->
-                    if (allLanguages.contains(languageId) && !existingLanguageIds.contains(languageId)) {
+                    if (allLanguages.contains(languageId)
+                        && !existingLanguageIds.contains(languageId)
+                        && !suppressedLanguages.contains(languageId)) {
                         val displayName = convertLanguageIdToDisplayName(languageId)
                         val color = generateDefaultColor(languageId)
 
@@ -167,7 +180,9 @@ class MainActivity : AppCompatActivity() {
 
                 // Then add any remaining languages not in preferred order
                 allLanguages.forEach { languageId ->
-                    if (!preferredOrder.contains(languageId) && !existingLanguageIds.contains(languageId)) {
+                    if (!preferredOrder.contains(languageId)
+                        && !existingLanguageIds.contains(languageId)
+                        && !suppressedLanguages.contains(languageId)) {
                         val displayName = convertLanguageIdToDisplayName(languageId)
                         val color = generateDefaultColor(languageId)
 
@@ -179,8 +194,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                // Refresh the language selection UI if any languages were added
+                // If languages were added, reorder by preferred order
                 if (languagesAdded) {
+                    PreferencesManager.reorderLanguagesByPreferredOrder(this@MainActivity, preferredOrder)
+                }
+
+                // Refresh the UI
+                withContext(Dispatchers.Main) {
                     setupLanguageSelection()
                 }
             } catch (e: Exception) {
@@ -394,14 +414,14 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun selectExternalDatabase() {
-        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
             .setTitle("Select External Database")
             .setMessage("Select a SQLite database file (*.db) or compressed database (*.zip) from your device. The database schema will be validated before use.")
             .setPositiveButton("Select") { _, _ ->
                 // Filter for database and zip files
                 databaseFilePicker.launch(arrayOf(
                     "application/x-sqlite3",
-                    "application/vnd.sqlite3", 
+                    "application/vnd.sqlite3",
                     "application/zip",
                     "application/x-zip-compressed",
                     "application/octet-stream",
@@ -410,6 +430,14 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+
+        // Set button text colors for better visibility
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
     
     private fun handleDatabaseSelection(uri: Uri) {

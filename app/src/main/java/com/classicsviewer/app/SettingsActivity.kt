@@ -199,7 +199,7 @@ class SettingsActivity : BaseActivity() {
             "This will refresh the bundled database. Continue?"
         }
         
-        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
             .setTitle("Refresh Database")
             .setMessage(message)
             .setPositiveButton("Yes") { _, _ ->
@@ -207,7 +207,7 @@ class SettingsActivity : BaseActivity() {
                     try {
                         // Force close any existing database instance
                         PerseusDatabase.destroyInstance()
-                        
+
                         if (externalDbUri != null) {
                             // Delete the cached external database
                             val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
@@ -221,12 +221,12 @@ class SettingsActivity : BaseActivity() {
                                 dbFile.delete()
                             }
                         }
-                        
+
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@SettingsActivity, 
-                                "Database will be refreshed on next launch. Please restart the app.", 
+                            Toast.makeText(this@SettingsActivity,
+                                "Database will be refreshed on next launch. Please restart the app.",
                                 Toast.LENGTH_LONG).show()
-                            
+
                             // Force app restart
                             val intent = packageManager.getLaunchIntentForPackage(packageName)
                             intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -235,8 +235,8 @@ class SettingsActivity : BaseActivity() {
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(this@SettingsActivity, 
-                                "Error: ${e.message}", 
+                            Toast.makeText(this@SettingsActivity,
+                                "Error: ${e.message}",
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -244,6 +244,14 @@ class SettingsActivity : BaseActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+
+        // Set button text colors for better visibility
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
     
 }

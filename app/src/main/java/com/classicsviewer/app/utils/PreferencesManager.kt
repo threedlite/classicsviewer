@@ -17,6 +17,9 @@ object PreferencesManager {
     private const val KEY_OCCURRENCE_LIMIT = "occurrence_limit"
     private const val KEY_USE_SINAITICUS_FONT = "use_sinaiticus_font"
     private const val KEY_CUSTOM_LANGUAGES = "custom_languages"
+    private const val KEY_SUPPRESSED_LANGUAGES = "suppressed_languages"
+    private const val KEY_HAS_RUN_AUTO_DETECT_LANGUAGES = "has_run_auto_detect_languages"
+    private const val KEY_HAS_FIXED_LANGUAGE_ORDER = "has_fixed_language_order"
 
     private val gson = Gson()
     
@@ -178,22 +181,51 @@ object PreferencesManager {
     fun addCustomLanguage(context: Context, language: CustomLanguageConfig) {
         android.util.Log.d("PreferencesManager", "Adding custom language: ${language.id} - ${language.displayName}")
         val languages = getCustomLanguages(context).toMutableList()
-        // Remove any existing language with the same ID
-        languages.removeAll { it.id == language.id }
-        // Add the new/updated language
-        languages.add(language)
+
+        // Find the position of existing language with same ID (if any)
+        val existingIndex = languages.indexOfFirst { it.id == language.id }
+
+        if (existingIndex >= 0) {
+            // Update in place to preserve order
+            languages[existingIndex] = language
+            android.util.Log.d("PreferencesManager", "Updated existing language at position $existingIndex")
+        } else {
+            // New language - add to end
+            languages.add(language)
+            android.util.Log.d("PreferencesManager", "Added new language at end")
+        }
+
         android.util.Log.d("PreferencesManager", "Updated languages list size: ${languages.size}")
         saveCustomLanguages(context, languages)
+
+        // Remove from suppressed list (user is manually adding it back)
+        removeSuppressedLanguage(context, language.id)
     }
 
     fun removeCustomLanguage(context: Context, languageId: String) {
         val languages = getCustomLanguages(context).toMutableList()
         languages.removeAll { it.id == languageId }
         saveCustomLanguages(context, languages)
+
+        // Add to suppressed list so it won't be auto-detected again
+        addSuppressedLanguage(context, languageId)
     }
 
     fun setCustomLanguagesOrder(context: Context, languages: List<CustomLanguageConfig>) {
         saveCustomLanguages(context, languages)
+    }
+
+    fun reorderLanguagesByPreferredOrder(context: Context, preferredOrder: List<String>) {
+        val languages = getCustomLanguages(context).toMutableList()
+
+        // Sort by preferred order, with unknown languages at the end
+        languages.sortWith(compareBy { language ->
+            val index = preferredOrder.indexOf(language.id)
+            if (index >= 0) index else Int.MAX_VALUE
+        })
+
+        saveCustomLanguages(context, languages)
+        android.util.Log.d("PreferencesManager", "Reordered languages by preferred order")
     }
 
     private fun saveCustomLanguages(context: Context, languages: List<CustomLanguageConfig>) {
@@ -231,5 +263,65 @@ object PreferencesManager {
         // Double-check by calling getCustomLanguages
         val loadedLanguages = getCustomLanguages(context)
         android.util.Log.d("PreferencesManager", "Verification: loaded ${loadedLanguages.size} languages after save")
+    }
+
+    // Auto-detect languages flag
+    fun hasRunAutoDetectLanguages(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_HAS_RUN_AUTO_DETECT_LANGUAGES, false)
+    }
+
+    fun setHasRunAutoDetectLanguages(context: Context) {
+        getPrefs(context).edit().putBoolean(KEY_HAS_RUN_AUTO_DETECT_LANGUAGES, true).apply()
+    }
+
+    // Language order migration flag
+    fun hasFixedLanguageOrder(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_HAS_FIXED_LANGUAGE_ORDER, false)
+    }
+
+    fun setHasFixedLanguageOrder(context: Context) {
+        getPrefs(context).edit().putBoolean(KEY_HAS_FIXED_LANGUAGE_ORDER, true).apply()
+    }
+
+    // Suppressed languages (explicitly deleted, won't be auto-added)
+    fun getSuppressedLanguages(context: Context): Set<String> {
+        val json = getPrefs(context).getString(KEY_SUPPRESSED_LANGUAGES, null)
+        if (json.isNullOrEmpty()) {
+            return emptySet()
+        }
+
+        return try {
+            val jsonArray = org.json.JSONArray(json)
+            val suppressed = mutableSetOf<String>()
+            for (i in 0 until jsonArray.length()) {
+                suppressed.add(jsonArray.getString(i))
+            }
+            suppressed
+        } catch (e: Exception) {
+            android.util.Log.e("PreferencesManager", "Failed to load suppressed languages: ${e.message}", e)
+            emptySet()
+        }
+    }
+
+    fun addSuppressedLanguage(context: Context, languageId: String) {
+        val suppressed = getSuppressedLanguages(context).toMutableSet()
+        suppressed.add(languageId)
+        saveSuppressedLanguages(context, suppressed)
+        android.util.Log.d("PreferencesManager", "Added $languageId to suppressed languages")
+    }
+
+    fun removeSuppressedLanguage(context: Context, languageId: String) {
+        val suppressed = getSuppressedLanguages(context).toMutableSet()
+        suppressed.remove(languageId)
+        saveSuppressedLanguages(context, suppressed)
+        android.util.Log.d("PreferencesManager", "Removed $languageId from suppressed languages")
+    }
+
+    private fun saveSuppressedLanguages(context: Context, suppressed: Set<String>) {
+        val jsonArray = org.json.JSONArray()
+        for (languageId in suppressed) {
+            jsonArray.put(languageId)
+        }
+        getPrefs(context).edit().putString(KEY_SUPPRESSED_LANGUAGES, jsonArray.toString()).apply()
     }
 }
