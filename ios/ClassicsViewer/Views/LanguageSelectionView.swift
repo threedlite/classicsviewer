@@ -52,27 +52,40 @@ struct LanguageSelectionView: View {
 
     private func autoDetectLanguages() async {
         do {
+            // Preferred order for auto-detected languages (matching Android exactly)
+            let preferredOrder = [
+                "greek", "latin", "sumerian", "akkadian",
+                "sanskrit", "persian", "hebrew", "arabic"
+            ]
+
+            // One-time migration: fix any existing ordering issues (matches Android)
+            if !UserDefaults.standard.hasFixedLanguageOrder {
+                print("Running one-time language order fix")
+                UserDefaults.standard.reorderLanguagesByPreferredOrder(preferredOrder)
+                UserDefaults.standard.hasFixedLanguageOrder = true
+            }
+
             // Get all distinct languages from the database
             let authorDAO = AuthorDAO()
             let allLanguages = try await authorDAO.getAllLanguages()
 
             print("Auto-detecting languages from database: \(allLanguages)")
 
-            // Get existing custom languages
+            // Get existing custom languages and suppressed languages
             let existingCustomLanguages = UserDefaults.standard.customLanguages
             let existingLanguageIds = Set(existingCustomLanguages.map { $0.id })
+            let suppressedLanguages = UserDefaults.standard.suppressedLanguages
 
-            // Preferred order for auto-detected languages (matching Android)
-            let preferredOrder = [
-                "greek", "latin", "sumerian", "akkadian",
-                "sanskrit", "persian", "hebrew", "arabic"
-            ]
+            print("Existing languages: \(existingLanguageIds)")
+            print("Suppressed languages: \(suppressedLanguages)")
 
             var languagesAdded = false
 
             // First, add languages in preferred order if they exist in database and not already added
             for languageId in preferredOrder {
-                if allLanguages.contains(languageId) && !existingLanguageIds.contains(languageId) {
+                if allLanguages.contains(languageId)
+                    && !existingLanguageIds.contains(languageId)
+                    && !suppressedLanguages.contains(languageId) {
                     let displayName = convertLanguageIdToDisplayName(languageId)
                     let color = generateDefaultColor(for: languageId)
 
@@ -90,7 +103,9 @@ struct LanguageSelectionView: View {
 
             // Then add any remaining languages not in preferred order
             for languageId in allLanguages {
-                if !preferredOrder.contains(languageId) && !existingLanguageIds.contains(languageId) {
+                if !preferredOrder.contains(languageId)
+                    && !existingLanguageIds.contains(languageId)
+                    && !suppressedLanguages.contains(languageId) {
                     let displayName = convertLanguageIdToDisplayName(languageId)
                     let color = generateDefaultColor(for: languageId)
 
@@ -106,10 +121,13 @@ struct LanguageSelectionView: View {
                 }
             }
 
-            // Refresh the UI if any languages were added
+            // If languages were added, reorder by preferred order (matches Android)
             if languagesAdded {
-                loadCustomLanguages()
+                UserDefaults.standard.reorderLanguagesByPreferredOrder(preferredOrder)
             }
+
+            // Refresh the UI
+            loadCustomLanguages()
         } catch {
             print("Error auto-detecting languages: \(error)")
         }
