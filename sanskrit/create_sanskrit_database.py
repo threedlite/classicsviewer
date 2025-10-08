@@ -530,7 +530,8 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
     print(f"  Loaded {total_books} books, {total_chapters} chapters, {total_verses} verses")
 
     # Load translations
-    translations = defaultdict(lambda: defaultdict(dict))
+    # Group by (book, chapter) to combine multiple verses per section
+    translations = defaultdict(lambda: defaultdict(list))
 
     if os.path.exists(translation_file):
         print(f"  Reading {translation_file}...")
@@ -547,7 +548,8 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                     chapter = int(match.group(2))
                     verse = int(match.group(3))
                     translation_text = match.group(4).strip()
-                    translations[book][chapter][verse] = translation_text
+                    # Append to list for this (book, chapter) combination
+                    translations[book][chapter].append(translation_text)
                     continue
 
                 # Try 2-part citation format: "1.1 Translation text..."
@@ -557,14 +559,14 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                     chapter = 1  # Single chapter per book for 2-part format
                     verse = int(match.group(2))
                     translation_text = match.group(3).strip()
-                    translations[book][chapter][verse] = translation_text
+                    translations[book][chapter].append(translation_text)
 
         translation_count = sum(
             len(verses)
             for chapters in translations.values()
             for verses in chapters.values()
         )
-        print(f"  Loaded {translation_count} translations")
+        print(f"  Loaded {translation_count} translation segments")
     else:
         print(f"  Warning: Translation file not found: {translation_file}")
 
@@ -606,6 +608,9 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
         for chapter_num in sorted(chapters.keys()):
             verses = chapters[chapter_num]
 
+            # Track start/end lines for this chapter
+            chapter_start_line = line_number
+
             for verse_num in sorted(verses.keys()):
                 sentences = verses[verse_num]
 
@@ -626,18 +631,25 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                     ''', (None, word, book_id, line_number, line_number, word_pos))
                     total_word_count += 1
 
-                # Insert translation if available
-                if book_num in translations and chapter_num in translations[book_num] and verse_num in translations[book_num][chapter_num]:
-                    translation_text = translations[book_num][chapter_num][verse_num]
+                total_verse_count += 1
+                line_number += 1
+
+            # Insert translation once per chapter (after all verses processed)
+            # This covers all verses in this chapter with a single translation segment
+            chapter_end_line = line_number - 1
+            if book_num in translations and chapter_num in translations[book_num]:
+                translation_list = translations[book_num][chapter_num]
+                if translation_list:
+                    # Combine all translation verses for this section into one text
+                    # Number each verse for readability
+                    numbered_translations = [f"[{i+1}] {text}" for i, text in enumerate(translation_list)]
+                    translation_text = ' '.join(numbered_translations)
 
                     cursor.execute('''
                         INSERT INTO translation_segments (id, book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (None, book_id, line_number, line_number, line_number, translation_text, translator_name, None))
+                    ''', (None, book_id, chapter_start_line, chapter_end_line, chapter_start_line, translation_text, translator_name, None))
                     total_translation_count += 1
-
-                total_verse_count += 1
-                line_number += 1
 
     print(f"\n  ✓ Loaded {total_verse_count:,} verses, {total_word_count:,} words, {total_translation_count:,} translations")
     return total_verse_count, total_word_count, total_translation_count

@@ -6663,8 +6663,14 @@ if __name__ == "__main__":
             create_database(mode='sample')
             print(f"\nSample database build time: {(time.time() - start_time)/60:.1f} minutes")
 
-            # Merge external databases 
+            # Merge external databases
             merge_external_databases("perseus_texts_sample.db", mode='sample')
+
+            # Checkpoint WAL after merges to ensure all changes are in main database file
+            checkpoint_conn = sqlite3.connect("perseus_texts_sample.db")
+            checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            checkpoint_conn.close()
+            print("✓ Database WAL checkpointed after merges")
 
             # Compress and copy sample database to asset pack
             compress_and_copy_database("perseus_texts_sample.db", is_sample=True)
@@ -6681,6 +6687,12 @@ if __name__ == "__main__":
             # Merge external databases
             merge_external_databases("perseus_texts_full.db", mode='full')
 
+            # Checkpoint WAL after merges to ensure all changes are in main database file
+            checkpoint_conn = sqlite3.connect("perseus_texts_full.db")
+            checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            checkpoint_conn.close()
+            print("✓ Database WAL checkpointed after merges")
+
             # Compress full database (keep in data-prep directory)
             compress_and_copy_database("perseus_texts_full.db", is_sample=False)
 
@@ -6693,8 +6705,14 @@ if __name__ == "__main__":
             create_database(mode='extended')
             print(f"\nExtended database build time: {(time.time() - start_time)/60:.1f} minutes")
 
-            # Merge external databases 
+            # Merge external databases
             merge_external_databases("perseus_texts_extended.db", mode='extended')
+
+            # Checkpoint WAL after merges to ensure all changes are in main database file
+            checkpoint_conn = sqlite3.connect("perseus_texts_extended.db")
+            checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            checkpoint_conn.close()
+            print("✓ Database WAL checkpointed after merges")
 
             # Compress extended database (keep in data-prep directory)
             compress_and_copy_database("perseus_texts_extended.db", is_sample=False)
