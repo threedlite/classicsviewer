@@ -17,6 +17,18 @@ perseus_texts_extended.db.zip  via Github LFS or Google Drive link:  https://dri
 
 
 NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
+  | Language | Authors | Works |
+  |----------|---------|-------|
+  | Greek    | 367     | 1,855 |
+  | Latin    | 40      | 230   |
+  | Hebrew   | 39      | 39    |
+  | Sumerian | 1       | 11    |
+  | Sanskrit | 7       | 7     |
+  | Akkadian | 1       | 1     |
+  | Arabic   | 1       | 1     |
+  | Persian  | 1       | 1     |
+  | TOTAL    | 457     | 2,145 |
+
 
 
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
