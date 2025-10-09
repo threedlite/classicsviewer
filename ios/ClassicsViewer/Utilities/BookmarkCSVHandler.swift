@@ -37,23 +37,25 @@ class BookmarkCSVHandler {
     }
     
     // MARK: - CSV Import
-    
+
     static func importBookmarks(from csvContent: String) throws -> [Bookmark] {
-        let lines = csvContent.components(separatedBy: .newlines)
-            .filter { !$0.isEmpty }
-        
-        // Skip header if present
-        let dataLines = lines.count > 0 && lines[0].starts(with: "work_id") ? Array(lines.dropFirst()) : lines
-        
+        // Parse CSV content handling multi-line fields properly
+        let records = parseCSVContent(csvContent)
+
+        // Skip header row if present
+        let dataRecords = records.count > 0 && records[0].first?.starts(with: "work_id") == true
+            ? Array(records.dropFirst())
+            : records
+
         var bookmarks: [Bookmark] = []
-        
-        for line in dataLines {
-            if let bookmark = parseBookmarkFromCSVLine(line) {
+
+        for fields in dataRecords {
+            if let bookmark = parseBookmarkFromCSVFields(fields) {
                 bookmarks.append(bookmark)
             }
-            // Note: parseBookmarkFromCSVLine returns nil for invalid lines, doesn't throw
+            // Note: parseBookmarkFromCSVFields returns nil for invalid records, doesn't throw
         }
-        
+
         return bookmarks
     }
     
@@ -65,8 +67,7 @@ class BookmarkCSVHandler {
         return "\"\(escaped)\""
     }
     
-    private static func parseBookmarkFromCSVLine(_ line: String) -> Bookmark? {
-        let fields = parseCSVLine(line)
+    private static func parseBookmarkFromCSVFields(_ fields: [String]) -> Bookmark? {
         
         // Android format has 11 fields (includes sequence_number)
         // Accept both 10 fields (old iOS format) and 11 fields (Android format)
@@ -140,43 +141,82 @@ class BookmarkCSVHandler {
         )
     }
     
-    private static func parseCSVLine(_ line: String) -> [String] {
-        var fields: [String] = []
+    private static func parseCSVContent(_ content: String) -> [[String]] {
+        var records: [[String]] = []
+        var currentRecord: [String] = []
         var currentField = ""
         var inQuotes = false
-        var i = line.startIndex
-        
-        while i < line.endIndex {
-            let char = line[i]
-            
-            if char == "\"" {
+        var i = content.startIndex
+
+        while i < content.endIndex {
+            let char = content[i]
+
+            switch char {
+            case "\"":
                 if inQuotes {
-                    // Check if it's an escaped quote
-                    let nextIndex = line.index(after: i)
-                    if nextIndex < line.endIndex && line[nextIndex] == "\"" {
+                    // Check if it's an escaped quote (two consecutive quotes)
+                    let nextIndex = content.index(after: i)
+                    if nextIndex < content.endIndex && content[nextIndex] == "\"" {
                         currentField.append("\"")
-                        i = line.index(after: nextIndex)
-                        continue
+                        i = nextIndex  // Skip next quote
                     } else {
+                        // Toggle quote state
                         inQuotes = false
                     }
                 } else {
+                    // Toggle quote state
                     inQuotes = true
                 }
-            } else if char == "," && !inQuotes {
-                fields.append(currentField)
-                currentField = ""
-            } else {
+
+            case ",":
+                if !inQuotes {
+                    // Field separator outside quotes
+                    currentRecord.append(currentField)
+                    currentField = ""
+                } else {
+                    // Regular character inside quotes
+                    currentField.append(char)
+                }
+
+            case "\n", "\r":
+                if !inQuotes {
+                    // Record separator outside quotes
+                    currentRecord.append(currentField)
+                    currentField = ""
+
+                    // Add record if it has fields
+                    if !currentRecord.isEmpty {
+                        records.append(currentRecord)
+                        currentRecord = []
+                    }
+
+                    // Skip \r\n (Windows line endings)
+                    if char == "\r" {
+                        let nextIndex = content.index(after: i)
+                        if nextIndex < content.endIndex && content[nextIndex] == "\n" {
+                            i = nextIndex
+                        }
+                    }
+                } else {
+                    // Newline inside quotes - preserve it
+                    currentField.append(char)
+                }
+
+            default:
+                // Regular character
                 currentField.append(char)
             }
-            
-            i = line.index(after: i)
+
+            i = content.index(after: i)
         }
-        
-        // Add the last field
-        fields.append(currentField)
-        
-        return fields
+
+        // Add last field and record
+        currentRecord.append(currentField)
+        if !currentRecord.isEmpty {
+            records.append(currentRecord)
+        }
+
+        return records
     }
 }
 
