@@ -396,14 +396,15 @@ class BookmarksActivity : BaseActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val bookmarks = mutableListOf<BookmarkEntity>()
-                
+
                 contentResolver.openInputStream(uri)?.use { inputStream ->
                     BufferedReader(InputStreamReader(inputStream)).use { reader ->
-                        // Skip header line
-                        reader.readLine()
-                        
-                        reader.forEachLine { line ->
-                            val values = parseCSVLine(line)
+                        // Read entire content
+                        val content = reader.readText()
+                        val records = parseCSVContent(content)
+
+                        // Skip header row
+                        records.drop(1).forEach { values ->
                             if (values.size >= 11) {
                                 try {
                                     bookmarks.add(BookmarkEntity(
@@ -420,22 +421,22 @@ class BookmarksActivity : BaseActivity() {
                                         lastAccessed = values[10].toLong()
                                     ))
                                 } catch (e: Exception) {
-                                    // Skip malformed lines
+                                    // Skip malformed records
                                 }
                             }
                         }
                     }
                 }
-                
+
                 val importedCount = viewModel.importBookmarks(bookmarks)
-                
+
                 withContext(Dispatchers.Main) {
                     com.google.android.material.snackbar.Snackbar.make(
                         recyclerView,
                         "Imported $importedCount of ${bookmarks.size} bookmarks",
                         com.google.android.material.snackbar.Snackbar.LENGTH_LONG
                     ).show()
-                    
+
                     // Refresh current tab
                     when (tabLayout.selectedTabPosition) {
                         0 -> observeAllBookmarks()
@@ -458,35 +459,63 @@ class BookmarksActivity : BaseActivity() {
     private fun escapeCSV(value: String): String {
         return value.replace("\"", "\"\"")
     }
-    
-    private fun parseCSVLine(line: String): List<String> {
-        val result = mutableListOf<String>()
-        var current = StringBuilder()
+
+    private fun parseCSVContent(content: String): List<List<String>> {
+        val records = mutableListOf<List<String>>()
+        var currentRecord = mutableListOf<String>()
+        var currentField = StringBuilder()
         var inQuotes = false
         var i = 0
-        
-        while (i < line.length) {
+
+        while (i < content.length) {
+            val char = content[i]
+
             when {
-                line[i] == '"' -> {
-                    if (inQuotes && i + 1 < line.length && line[i + 1] == '"') {
-                        current.append('"')
+                // Handle escaped quotes (two consecutive quotes)
+                char == '"' && inQuotes && i + 1 < content.length && content[i + 1] == '"' -> {
+                    currentField.append('"')
+                    i++ // Skip next quote
+                }
+                // Toggle quote state
+                char == '"' -> {
+                    inQuotes = !inQuotes
+                }
+                // Field separator (comma) outside quotes
+                char == ',' && !inQuotes -> {
+                    currentRecord.add(currentField.toString())
+                    currentField = StringBuilder()
+                }
+                // Record separator (newline) outside quotes
+                (char == '\n' || char == '\r') && !inQuotes -> {
+                    // Add current field
+                    currentRecord.add(currentField.toString())
+                    currentField = StringBuilder()
+
+                    // Add record if it has fields
+                    if (currentRecord.isNotEmpty()) {
+                        records.add(currentRecord)
+                        currentRecord = mutableListOf()
+                    }
+
+                    // Skip \r\n (Windows line endings)
+                    if (char == '\r' && i + 1 < content.length && content[i + 1] == '\n') {
                         i++
-                    } else {
-                        inQuotes = !inQuotes
                     }
                 }
-                line[i] == ',' && !inQuotes -> {
-                    result.add(current.toString())
-                    current = StringBuilder()
-                }
+                // Regular character or newline inside quotes
                 else -> {
-                    current.append(line[i])
+                    currentField.append(char)
                 }
             }
             i++
         }
-        result.add(current.toString())
-        
-        return result
+
+        // Add last field and record
+        currentRecord.add(currentField.toString())
+        if (currentRecord.isNotEmpty()) {
+            records.add(currentRecord)
+        }
+
+        return records
     }
 }
