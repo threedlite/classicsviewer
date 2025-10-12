@@ -33,6 +33,14 @@ class PerseusRepository(private val context: Context) : DataRepository {
 
     private val greekLemmatizer = GreekLemmatizer()
 
+    // Data class for compound word decomposition results
+    private data class CompoundParts(
+        val prefix: String,
+        val prefixMeaning: String,
+        val stem: String,
+        val stemLemma: String
+    )
+
     // Helper function to query normalization_patterns table with graceful fallback
     private suspend fun getPerseusNormalizationPatterns(language: String): List<NormalizationPatternEntity> = withContext(Dispatchers.IO) {
         try {
@@ -750,7 +758,21 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     }
                 }
             }
-        
+
+            // Try compound word decomposition for Greek words if still no results
+            if (entries.isEmpty() && normalizedLanguage == "greek" && cleanedWord.length >= 6) {
+                android.util.Log.d("PerseusRepository", "Attempting compound word decomposition for: $cleanedWord")
+
+                val compoundParts = decomposeCompoundWord(cleanedWord)
+                if (compoundParts != null) {
+                    android.util.Log.d("PerseusRepository",
+                        "Decomposed: ${compoundParts.prefix}- (${compoundParts.prefixMeaning}) + ${compoundParts.stemLemma}")
+                    val compoundEntries = createCompoundEntry(compoundParts)
+                    entries.addAll(compoundEntries)
+                    addedLemmas.add(compoundParts.prefix + compoundParts.stemLemma)
+                }
+            }
+
             // Deduplicate entries before sorting - keep only one entry per lemma+source combination
             // This prevents showing the same LSJ entry multiple times
             val deduplicatedEntries = entries.distinctBy { entry ->
@@ -1506,5 +1528,150 @@ class PerseusRepository(private val context: Context) : DataRepository {
         }
         
         return variants.distinct()
+    }
+
+    /**
+     * Decompose a Greek compound word into prefix + stem
+     * Returns CompoundParts if successfully decomposed, null otherwise
+     */
+    private suspend fun decomposeCompoundWord(word: String): CompoundParts? = withContext(Dispatchers.IO) {
+        // Define Greek prefixes with meanings (longest first for greedy matching)
+        val prefixes = listOf(
+            // Verbal prefixes (preverbs) - longer ones first (4 chars)
+            "κατα" to "down, against",
+            "μετα" to "with, after",
+            "παρα" to "beside, from",
+            "περι" to "around, about",
+            "προσ" to "toward, at",
+            "υπερ" to "over, above",
+            "αντι" to "against",
+            "αυτο" to "self, own",       // compound prefix (4 chars)
+            "πολυ" to "many, much",      // adjectival prefix (4 chars)
+            // 3-character prefixes
+            "απο" to "away from",
+            "δια" to "through",
+            "επι" to "upon, at",
+            "εισ" to "into",
+            "συν" to "with, together",
+            "συμ" to "with, together",  // assimilated form
+            "συλ" to "with, together",  // assimilated form
+            "συγ" to "with, together",  // assimilated form
+            "υπο" to "under",
+            "ανα" to "up, again",
+            "προ" to "before",
+            "δυσ" to "bad, difficult",
+            // 2-character prefixes
+            "εκ" to "out of",
+            "εξ" to "out of",  // before vowels
+            "εν" to "in, on",
+            "ευ" to "good, well",
+            "αν" to "not, without",  // check before single α
+            // 1-character prefix (last resort)
+            "α" to "not, without"
+        )
+
+        // Normalize word to match prefixes (strip diacritics for comparison)
+        val normalizedWord = normalizeGreekUltra(word)
+        android.util.Log.d("PerseusRepository", "Compound decomposition: word='$word' normalized='$normalizedWord'")
+
+        // Try each prefix
+        for ((prefix, meaning) in prefixes) {
+            // Normalize prefix for comparison
+            val normalizedPrefix = normalizeGreekUltra(prefix)
+
+            if (normalizedWord.startsWith(normalizedPrefix) && normalizedWord.length > normalizedPrefix.length + 2) {
+                // Extract stem using ORIGINAL word to preserve diacritics
+                // Find the actual prefix length in the original word by comparing character counts
+                val prefixLength = prefix.length
+                val stem = word.substring(prefixLength)
+
+                android.util.Log.d("PerseusRepository", "Matched prefix: '$prefix' (normalized: '$normalizedPrefix'), stem: '$stem'")
+
+                // Check if stem exists in dictionary or lemma_map
+                val stemLemma = findStemLemma(stem)
+                if (stemLemma != null) {
+                    android.util.Log.d("PerseusRepository", "Decomposed compound: $word = $prefix- ($meaning) + $stemLemma")
+                    return@withContext CompoundParts(
+                        prefix = prefix,
+                        prefixMeaning = meaning,
+                        stem = stem,
+                        stemLemma = stemLemma
+                    )
+                }
+            }
+        }
+
+        null
+    }
+
+    /**
+     * Find the dictionary lemma for a potential stem
+     * Leverages the full dictionary lookup infrastructure including morphology
+     */
+    private suspend fun findStemLemma(stem: String): String? = withContext(Dispatchers.IO) {
+        // Use the SAME comprehensive lookup as normal dictionary queries
+        // This gives us access to:
+        // - Full lemma_map coverage (thousands of inflected forms)
+        // - Morphologically related forms
+        // - Ultra-normalized search
+        // - User-imported morphology
+        android.util.Log.d("PerseusRepository", "Finding stem lemma for: '$stem' using full dictionary lookup")
+
+        val results = getAllDictionaryEntries(stem, "greek")
+
+        if (results.entries.isNotEmpty()) {
+            val lemma = results.entries.first().lemma
+            android.util.Log.d("PerseusRepository", "Found stem lemma: '$stem' -> '$lemma' (${results.entries.size} entries)")
+            return@withContext lemma
+        }
+
+        android.util.Log.d("PerseusRepository", "No lemma found for stem: '$stem'")
+        null
+    }
+
+    /**
+     * Create a dictionary entry for a compound word showing its decomposition
+     */
+    private suspend fun createCompoundEntry(parts: CompoundParts): List<DictionaryEntry> = withContext(Dispatchers.IO) {
+        val stemEntries = dictionaryDao.getAllEntriesForHeadword(parts.stemLemma, "greek")
+
+        if (stemEntries.isEmpty()) {
+            // Even if no dictionary entry, show the decomposition
+            return@withContext listOf(DictionaryEntry(
+                lemma = parts.prefix + parts.stemLemma,
+                definition = buildString {
+                    append("<p><i>Compound word analysis:</i></p>")
+                    append("<p><b>${parts.prefix}-</b> (${parts.prefixMeaning}) + ")
+                    append("<b>${parts.stemLemma}</b></p>")
+                    append("<p>(No dictionary entry found for stem)</p>")
+                },
+                morphInfo = "compound: ${parts.prefix}- + ${parts.stemLemma}",
+                isDirectMatch = false,
+                confidence = 0.7,
+                source = "compound analysis",
+                hasNonTreebankPath = true
+            ))
+        }
+
+        stemEntries.map { stemEntry ->
+            val compoundDefinition = buildString {
+                append("<p><i>Compound word analysis:</i></p>")
+                append("<p><b>${parts.prefix}-</b> (${parts.prefixMeaning}) + ")
+                append("<b>${parts.stemLemma}</b></p>")
+                append("<hr/>")
+                append("<p><b>Stem definition:</b></p>")
+                append(stemEntry.entryHtml ?: stemEntry.entryPlain ?: "")
+            }
+
+            DictionaryEntry(
+                lemma = parts.prefix + parts.stemLemma,
+                definition = compoundDefinition,
+                morphInfo = "compound: ${parts.prefix}- + ${parts.stemLemma}",
+                isDirectMatch = false,
+                confidence = 0.7,  // Lower than direct matches but higher than ultra-normalized
+                source = "${stemEntry.source} (compound analysis)",
+                hasNonTreebankPath = true
+            )
+        }
     }
 }
