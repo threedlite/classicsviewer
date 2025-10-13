@@ -25,12 +25,9 @@ class AgeVerificationActivity : AppCompatActivity() {
     private var retryAttempts = 0
     private val maxRetryAttempts = 3
 
-    // Error codes that are retryable
-    private val retryableErrorCodes = setOf(
-        -1,  // API_NOT_AVAILABLE
-        -3,  // NETWORK_ERROR
-        -6   // PLAY_STORE_VERSION_OUTDATED
-    )
+    // Network error means age data is not cached and cannot be retrieved
+    // This should block access until user connects to internet
+    private val NETWORK_ERROR = -3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,15 +85,23 @@ class AgeVerificationActivity : AppCompatActivity() {
 
                 val errorMessage = exception.message?.lowercase() ?: ""
 
+                // Check for network errors - these must block access
+                // Network error means age data needs to be fetched but can't reach servers
+                if (errorMessage.contains("network") ||
+                    errorMessage.contains("connection") ||
+                    errorMessage.contains("no available network")) {
+                    Log.e(TAG, "Network error during age verification - blocking access until connected")
+                    handleNetworkError()
+                }
                 // Check if API is not yet implemented (beta/unsupported region)
-                if (errorMessage.contains("not yet implemented") ||
-                    errorMessage.contains("not implemented") ||
-                    errorMessage.contains("unsupported") ||
-                    errorMessage.contains("unavailable")) {
+                else if (errorMessage.contains("not yet implemented") ||
+                         errorMessage.contains("not implemented")) {
                     Log.w(TAG, "Age Signals API not yet implemented - allowing access (API active Jan 1, 2026)")
-                    // API not ready yet, allow access
+                    // API not ready yet in this region, allow access
                     proceedToApp()
-                } else {
+                }
+                // Other errors - retry but ultimately block access
+                else {
                     handleVerificationError(
                         "Age verification failed: ${exception.message}",
                         isRetryable = true
@@ -141,6 +146,30 @@ class AgeVerificationActivity : AppCompatActivity() {
         } else {
             Log.w(TAG, "User does not meet age requirement (must be 18+)")
             showAgeRestrictionDialog()
+        }
+    }
+
+    private fun handleNetworkError() {
+        Log.e(TAG, "Network error - age data not cached, internet required")
+
+        binding.verificationProgress.visibility = View.GONE
+
+        if (retryAttempts < maxRetryAttempts) {
+            retryAttempts++
+            binding.verificationMessage.text =
+                "No internet connection.\n\nAge verification requires an internet connection.\n\nRetrying automatically... (Attempt $retryAttempts/$maxRetryAttempts)"
+
+            // Retry after delay
+            lifecycleScope.launch {
+                delay(3000) // Wait 3 seconds before retry
+                checkAgeSignals()
+            }
+        } else {
+            // Max retries reached - require user to connect and retry manually
+            binding.verificationMessage.text =
+                "No internet connection.\n\nThis app requires age verification, which needs an internet connection.\n\nPlease connect to the internet and tap Retry."
+            binding.retryButton.visibility = View.VISIBLE
+            Toast.makeText(this, "Internet connection required for age verification", Toast.LENGTH_LONG).show()
         }
     }
 
