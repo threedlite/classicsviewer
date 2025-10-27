@@ -7,6 +7,7 @@ Extracts English verse translations from each discourse
 import re
 import json
 import os
+import html
 
 def parse_discourse(html_content, discourse_num):
     """Parse a single discourse HTML file and extract verse translations"""
@@ -49,15 +50,21 @@ def parse_discourse(html_content, discourse_num):
         verse_num = int(verse_num_str)
 
         # Clean up the verse text
+        # Remove <style> tags and their contents
+        verse_text = re.sub(r'<style[^>]*>.*?</style>', '', verse_text, flags=re.DOTALL)
         # Remove footnote references like <sup>...<a href="#cite_note-1">...</a></sup>
-        verse_text = re.sub(r'<sup[^>]*>.*?</sup>', '', verse_text)
-        # Remove other HTML tags
-        verse_text = re.sub(r'<[^>]+>', '', verse_text)
+        verse_text = re.sub(r'<sup[^>]*>.*?</sup>', '', verse_text, flags=re.DOTALL)
+        # Remove <link> tags
+        verse_text = re.sub(r'<link[^>]*/?>', '', verse_text)
+        # Remove all other HTML tags (complete and incomplete)
+        verse_text = re.sub(r'<[^>]*>?', '', verse_text)
         # Decode HTML entities
+        verse_text = html.unescape(verse_text)
+        # Additional manual decoding for common entities
         verse_text = verse_text.replace('&quot;', '"')
-        verse_text = verse_text.replace('&#91;', '[')
-        verse_text = verse_text.replace('&#93;', ']')
         verse_text = verse_text.replace('&amp;', '&')
+        verse_text = verse_text.replace('&lt;', '<')
+        verse_text = verse_text.replace('&gt;', '>')
         # Normalize whitespace
         verse_text = re.sub(r'\s+', ' ', verse_text)
         verse_text = verse_text.strip()

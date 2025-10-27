@@ -5,23 +5,15 @@ If you have trouble cloning this repo set GIT_LFS_SKIP_SMUDGE=1
 An Android app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required.
 
 NOTE: If you just want all the Perseus authors (90+), copy data-prep/perseus_texts_full.db.zip (700MB+) to phone, e.g. in Downloads folder, then in the app select "Select external database" and select that file. It is not necessary to unzip it. A built perseus_texts_full.db.zip is also available at:  
-https://drive.google.com/file/d/1pDvFgMshF56LRU9UAfc1fIdYSaaS5c-A/view?usp=sharing
-or
 https://www.patreon.com/posts/classics-viewer-141298606
+https://www.patreon.com/file?h=141298606&m=548855598
 Patreon links added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
 
 NEW: Audio file homer_iliad_chamberlain_audio.zip for entire Iliad prosody-aware line by line (menu option: Manage Audio):
-https://drive.google.com/file/d/1fOOfQeMP53Kz3dvnu-5X9Qd76VSmzjBm/view?usp=sharing 
-or
-https://www.patreon.com/posts/iliad-audio-for-141299909 
+https://www.patreon.com/posts/iliad-audio-for-141299909   (free)
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
-
-NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed. perseus_texts_extended.db.zip  
-Google Drive link:  https://drive.google.com/file/d/1vjLVGXjIBNuA-qP0WqV9yUKd2KIMjIS1/view?usp=sharing
-or
-https://www.patreon.com/posts/classics-viewer-141298606
-
+NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed. perseus_texts_extended.db.zip    https://www.patreon.com/file?h=141298606&m=554975788  (free)
 
 NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
   | Language | Authors | Works |
@@ -36,10 +28,7 @@ NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some 
   | Persian  | 1       | 1     |
   | TOTAL    | 457     | 2,145 |
 
-
-
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
-
 
 
 
