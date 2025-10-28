@@ -456,14 +456,8 @@ def analyze_first1k_work_splitting(xml_path):
         # First try to find a method within the limit
         for method in method_priority:
             if analysis_results[method]['count'] > 0:
-                # For div_sections with good chapter structure, allow slightly longer lines
-                # since we'll split them into sentences later
-                if method == 'div_sections' and has_good_chapter_structure:
-                    # Allow up to 4000 chars for chapters (they'll be split into lines)
-                    if analysis_results[method]['max_length'] <= 4000:
-                        selected_method = method
-                        break
-                elif analysis_results[method]['max_length'] <= MAX_ALLOWED_LINE_LENGTH:
+                # All methods must respect the 2000-char UI limit
+                if analysis_results[method]['max_length'] <= MAX_ALLOWED_LINE_LENGTH:
                     selected_method = method
                     break
 
@@ -808,6 +802,48 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                         'section': str(i),
                         'text': part.strip()
                     })
+
+        elif selected_method == 'l_lines':
+            # Each <l> tag becomes a line (poetry)
+            section_num = 1
+            for l in body.iter('l'):
+                text = extract_text_from_first1k_element(l)
+                if text.strip():
+                    text = re.sub(r'\s+', ' ', text).strip()
+                    # Add line number if available
+                    line_num = l.get('n', '')
+                    if line_num:
+                        sections.append({
+                            'section': line_num,
+                            'text': text
+                        })
+                    else:
+                        sections.append({
+                            'section': str(section_num),
+                            'text': text
+                        })
+                    section_num += 1
+
+        elif selected_method == 'ab_verses':
+            # Each <ab> tag becomes a verse (biblical texts)
+            section_num = 1
+            for ab in body.iter('ab'):
+                text = extract_text_from_first1k_element(ab)
+                if text.strip():
+                    text = re.sub(r'\s+', ' ', text).strip()
+                    # Add verse number if available
+                    verse_num = ab.get('n', '')
+                    if verse_num:
+                        sections.append({
+                            'section': verse_num,
+                            'text': text
+                        })
+                    else:
+                        sections.append({
+                            'section': str(section_num),
+                            'text': text
+                        })
+                    section_num += 1
 
         elif selected_method == 'p_tags':
             # Each <p> becomes a section

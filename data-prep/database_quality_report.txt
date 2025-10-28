@@ -1,13 +1,13 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-10-27T08:52:07.026301
+Generated: 2025-10-28T06:49:06.579828
 
 Total Authors: 407
 Total Works: 2085
-Total Books: 212149
-Total Lines: 4,385,455
+Total Books: 212153
+Total Lines: 4,385,731
 Translation Segments: 287,107
-Build Time: 10.5 minutes
-Database Size: 9503.5MB → 2374.7MB compressed (25.0%)
+Build Time: 10.3 minutes
+Database Size: 9498.7MB → 2374.6MB compressed (25.0%)
 Dictionary Entries: 85,800
 Lemma Mappings: 2,324,026
 
@@ -7174,22 +7174,22 @@ Aeschylus / Agamemnon (OGL) / Chapter 85 - 100 lines
 Aeschylus / Agamemnon (OGL) / Chapter 86 - 42 lines
 Aeschylus / Eumenides - 1,041 lines, max_char=46 [Perseus]
 Aeschylus / Eumenides translations: Herbert Weir Smyth 363 segments [Direct]
-Aeschylus / Eumenides (OGL) - 1,033 lines, max_char=243 [First1KGreek]
+Aeschylus / Eumenides (OGL) - 1,032 lines, max_char=358 [First1KGreek]
 Aeschylus / Libation Bearers - 1,075 lines, max_char=46 [Perseus]
 Aeschylus / Libation Bearers translations: Herbert Weir Smyth 395 segments [Direct]
-Aeschylus / Libation Bearers (OGL) - 1,067 lines, max_char=212 [First1KGreek]
+Aeschylus / Libation Bearers (OGL) - 1,064 lines, max_char=314 [First1KGreek]
 Aeschylus / Persians - 1,064 lines, max_char=62 [Perseus]
 Aeschylus / Persians translations: Herbert Weir Smyth 379 segments [Direct]
-Aeschylus / Persians (OGL) - 1,063 lines, max_char=495 [First1KGreek]
+Aeschylus / Persians (OGL) - 1,062 lines, max_char=914 [First1KGreek]
 Aeschylus / Prometheus Bound - 1,096 lines, max_char=55 [Perseus]
 Aeschylus / Prometheus Bound translations: Herbert Weir Smyth 393 segments [Direct]
-Aeschylus / Prometheus Bound (OGL) - 1,098 lines, max_char=212 [First1KGreek]
+Aeschylus / Prometheus Bound (OGL) - 1,097 lines, max_char=332 [First1KGreek]
 Aeschylus / Seven Against Thebes - 1,070 lines, max_char=46 [Perseus]
 Aeschylus / Seven Against Thebes translations: Herbert Weir Smyth 373 segments [Direct]
-Aeschylus / Seven Against Thebes (OGL) - 1,069 lines, max_char=256 [First1KGreek]
+Aeschylus / Seven Against Thebes (OGL) - 1,068 lines, max_char=366 [First1KGreek]
 Aeschylus / Suppliant Maidens - 1,072 lines, max_char=44 [Perseus]
 Aeschylus / Suppliant Maidens translations: Herbert Weir Smyth 349 segments [Direct]
-Aeschylus / Supplices (OGL) - 1,076 lines, max_char=203 [First1KGreek]
+Aeschylus / Supplices (OGL) - 1,073 lines, max_char=269 [First1KGreek]
 
 [Aesop]
 Aesop / Fabulae (OGL) - 2,540 lines total, 528 books, max_lines/book=35, max_char=1,247 [First1KGreek]
@@ -10351,7 +10351,7 @@ Alexander of Aphrodisias / In Aristotelis Meteorologicorum Libros Commentaria (O
 Alexander of Aphrodisias / In Aristotelis Meteorologicorum Libros Commentaria (OGL) / Chapter 3 - 791 lines
 Alexander of Aphrodisias / In Aristotelis Meteorologicorum Libros Commentaria (OGL) / Chapter 4 - 1,039 lines
 Alexander of Aphrodisias / In Aristotelis Sophisticos Elenchos Commentarius [Sp.] (OGL) - 166 lines, max_char=27,589 [First1KGreek]
-Alexander of Aphrodisias / In Aristotelis Topicorum Libros Octo Commentaria (OGL) - 13 lines, max_char=91 [First1KGreek]
+Alexander of Aphrodisias / In Aristotelis Topicorum Libros Octo Commentaria (OGL) - 13 lines, max_char=90 [First1KGreek]
 Alexander of Aphrodisias / In Librum De Sensu Commentarium (OGL) - 5,829 lines total, 2 books, max_lines/book=2,965, max_char=1,604 [First1KGreek]
 Alexander of Aphrodisias / In Librum De Sensu Commentarium (OGL) / Chapter 1 - 2,965 lines
 Alexander of Aphrodisias / In Librum De Sensu Commentarium (OGL) / Chapter 2 - 2,864 lines
@@ -11701,7 +11701,7 @@ Anonymi In Aristotelis Categorias / Paraphrasis Categoriarum (OGL) / Chapter 12 
 
 [Anonymi In Aristotelis Ethica Nicomachea]
 Anonymi In Aristotelis Ethica Nicomachea / In Ethica Nicomachea Paraphrasis (Pseudepigraphum Olim A Constantino Palaeocappa confectum et olim sub auctore Heliodoro
-    Prusensi vel Andronico Rhodio vel Olympiodoro) (OGL) - 44 lines, max_char=99 [First1KGreek]
+    Prusensi vel Andronico Rhodio vel Olympiodoro) (OGL) - 44 lines, max_char=66 [First1KGreek]
 
 [Anonymi In Aristotelis Librum Alterum Analyticorum Posteriorum]
 Anonymi In Aristotelis Librum Alterum Analyticorum Posteriorum / Anonymi In Analyticorum Posteriorum Librum Alterum Commentarium (OGL) - 2,057 lines total, 150 books, max_lines/book=33, max_char=938 [First1KGreek]
@@ -12136,7 +12136,7 @@ Anonymus Ad Avircium Marcellum contra Cataphrygas / Ad Avircium Marcellum contra
 
 [Anonymus Londinensis]
 Anonymus Londinensis / Anonymus Londinensis Fragmenta (OGL) - 22 lines, max_char=66 [First1KGreek]
-Anonymus Londinensis / Iatrica (OGL) - 1,885 lines, max_char=110 [First1KGreek]
+Anonymus Londinensis / Iatrica (OGL) - 1,885 lines, max_char=108 [First1KGreek]
 
 [Antigoni Epistula]
 Antigoni Epistula / Epistula (OGL) - 1 lines, max_char=638 [First1KGreek]
@@ -21098,7 +21098,7 @@ Bion of Phlossa / Fragmenta / Ode 18 - 2 lines
 Bruti Epistulae / Epistles (OGL) - 70 lines, max_char=1,056 [First1KGreek]
 
 [Callimachus]
-Callimachus / Aetia (OGL) - 1 lines, max_char=0 [First1KGreek]
+Callimachus / Aetia (OGL) - 1 lines, max_char=35 [First1KGreek]
 Callimachus / Epigrams - 293 lines total, 61 books, max_lines/book=16, max_char=55 [Perseus]
 Callimachus / Epigrams / Ode 1 - 16 lines
 Callimachus / Epigrams / Ode 2 - 6 lines
@@ -25795,7 +25795,7 @@ Chionis Epistulae / Epistles (OGL) / Chapter 62 - 2 lines
 Chionis Epistulae / Epistles (OGL) / Chapter 63 - 10 lines
 
 [Chronicon Paschale]
-Chronicon Paschale / Chronicon Paschale (OGL) - 1,871 lines, max_char=136 [First1KGreek]
+Chronicon Paschale / Chronicon Paschale (OGL) - 1,871 lines, max_char=135 [First1KGreek]
 
 [Chrysippus]
 Chrysippus / Fragmenta  Moralia (OGL) - 774 lines, max_char=8,091 [First1KGreek]
@@ -26669,7 +26669,7 @@ Claudius Ptolemaeus / Apotelesmatica (= Tetrabiblos) (OGL) / Chapter 672 - 14 li
 Claudius Ptolemaeus / Apotelesmatica (= Tetrabiblos) (OGL) / Chapter 673 - 9 lines
 Claudius Ptolemaeus / Apotelesmatica (= Tetrabiblos) (OGL) / Chapter 674 - 16 lines
 Claudius Ptolemaeus / Apotelesmatica (= Tetrabiblos) (OGL) / Chapter 675 - 14 lines
-Claudius Ptolemaeus / Musica (OGL) - 9 lines, max_char=35 [First1KGreek]
+Claudius Ptolemaeus / Musica (OGL) - 9 lines, max_char=148 [First1KGreek]
 Claudius Ptolemaeus / Syntaxis mathematica (OGL) - 60,343 lines total, 169 books, max_lines/book=3,474, max_char=1,677 [First1KGreek]
 Claudius Ptolemaeus / Syntaxis mathematica (OGL) / Chapter 1 - 1,900 lines
 Claudius Ptolemaeus / Syntaxis mathematica (OGL) / Chapter 2 - 33 lines
@@ -30412,7 +30412,7 @@ Demosthenes / Unknown Pleader Against Phaenippus, On an Exchange of Properties -
 Demosthenes / Unknown Pleader Against Phaenippus, On an Exchange of Properties translations: Augustus Taber Murray 41 segments [Direct]
 
 [Dexippus]
-Dexippus / In Aristotelis Categorias Commentarium (OGL) - 24 lines, max_char=188 [First1KGreek]
+Dexippus / In Aristotelis Categorias Commentarium (OGL) - 24 lines, max_char=187 [First1KGreek]
 
 [Dialexeis]
 Dialexeis / Fragmenta (OGL) - 322 lines total, 133 books, max_lines/book=30, max_char=1,679 [First1KGreek]
@@ -31858,7 +31858,7 @@ Dionysius of Halicarnassus / Libri secundi de antiquis oratoribus reliquiae - 25
 Dionysius of Halicarnassus / Libri secundi de antiquis oratoribus reliquiae (OGL) - 13 lines, max_char=308 [First1KGreek]
 
 [Dionysius, Calliphontis]
-Dionysius, Calliphontis / Descriptio Graeciae (OGL) - 152 lines, max_char=63 [First1KGreek]
+Dionysius, Calliphontis / Descriptio Graeciae (OGL) - 152 lines, max_char=80 [First1KGreek]
 
 [Diophantus Alexandrinus]
 Diophantus Alexandrinus / Fragmentum [Sp.] (e cod. Paris. 453) (OGL) - 22 lines, max_char=3,194 [First1KGreek]
@@ -51621,7 +51621,7 @@ Eustratius / In Aristotelis Ethica Nicomachea I Commentaria (OGL) / Chapter 8 - 
 Eustratius / In Aristotelis Ethica Nicomachea I Commentaria (OGL) / Chapter 9 - 1,309 lines
 
 [Eutocius]
-Eutocius / Commentarii in libros de sphaera et cylindro (OGL) - 3 lines, max_char=40 [First1KGreek]
+Eutocius / Commentarii in libros de sphaera et cylindro (OGL) - 3 lines, max_char=39 [First1KGreek]
 Eutocius / Commentarius in dimensionem circuli (OGL) - 571 lines total, 132 books, max_lines/book=61, max_char=1,328 [First1KGreek]
 Eutocius / Commentarius in dimensionem circuli (OGL) / Chapter 1 - 26 lines
 Eutocius / Commentarius in dimensionem circuli (OGL) / Chapter 2 - 26 lines
@@ -52309,7 +52309,7 @@ Galen / Ad Glauconem de methodo medendi (OGL) / Chapter 28 - 41 lines
 Galen / Ad Glauconem de methodo medendi (OGL) / Chapter 29 - 13 lines
 Galen / Ad Glauconem de methodo medendi (OGL) / Chapter 30 - 24 lines
 Galen / Ad Glauconem de methodo medendi (OGL) / Chapter 31 - 35 lines
-Galen / Adhortatio ad artes addiscendas (OGL) - 56 lines, max_char=48 [First1KGreek]
+Galen / Adhortatio ad artes addiscendas (OGL) - 56 lines, max_char=76 [First1KGreek]
 Galen / Adversus Lycum (OGL) - 296 lines total, 7 books, max_lines/book=65, max_char=1,390 [First1KGreek]
 Galen / Adversus Lycum (OGL) / Chapter 1 - 59 lines
 Galen / Adversus Lycum (OGL) / Chapter 2 - 21 lines
@@ -53306,7 +53306,7 @@ Galen / De animi cuiuslibet peccatorum dignotione et curatione (OGL) / Chapter 4
 Galen / De animi cuiuslibet peccatorum dignotione et curatione (OGL) / Chapter 5 - 26 lines
 Galen / De animi cuiuslibet peccatorum dignotione et curatione (OGL) / Chapter 6 - 15 lines
 Galen / De animi cuiuslibet peccatorum dignotione et curatione (OGL) / Chapter 7 - 13 lines
-Galen / De antidotis (OGL) - 954 lines, max_char=77 [First1KGreek]
+Galen / De antidotis (OGL) - 954 lines, max_char=90 [First1KGreek]
 Galen / De atra bile (OGL) - 189 lines total, 9 books, max_lines/book=52, max_char=1,216 [First1KGreek]
 Galen / De atra bile (OGL) / Chapter 1 - 52 lines
 Galen / De atra bile (OGL) / Chapter 2 - 21 lines
@@ -53708,7 +53708,7 @@ Galen / De curandi ratione per venae sectionem (OGL) / Chapter 20 - 4 lines
 Galen / De curandi ratione per venae sectionem (OGL) / Chapter 21 - 48 lines
 Galen / De curandi ratione per venae sectionem (OGL) / Chapter 22 - 47 lines
 Galen / De curandi ratione per venae sectionem (OGL) / Chapter 23 - 11 lines
-Galen / De diebus decretoriis (OGL) - 10 lines, max_char=50 [First1KGreek]
+Galen / De diebus decretoriis (OGL) - 10 lines, max_char=88 [First1KGreek]
 Galen / De differentiis febrium (OGL) - 878 lines total, 34 books, max_lines/book=192, max_char=1,967 [First1KGreek]
 Galen / De differentiis febrium (OGL) / Chapter 1 - 162 lines
 Galen / De differentiis febrium (OGL) / Chapter 2 - 12 lines
@@ -61845,16 +61845,16 @@ Hermetica / Fragmenta (OGL) / Chapter 340 - 3 lines
 Hermetica / Fragmenta (OGL) / Chapter 341 - 3 lines
 Hermetica / Fragmenta (OGL) / Chapter 342 - 2 lines
 Hermetica / Fragmenta (OGL) / Chapter 343 - 2 lines
-Hermetica / Hieros logos (OGL) - 9 lines, max_char=0 [First1KGreek]
-Hermetica / Poimandres (OGL) - 47 lines, max_char=0 [First1KGreek]
+Hermetica / Hieros logos (OGL) - 9 lines, max_char=286 [First1KGreek]
+Hermetica / Poimandres (OGL) - 46 lines, max_char=294 [First1KGreek]
 Hermetica / tlg004 (OGL) - 15 lines, max_char=733 [First1KGreek]
-Hermetica / tlg005 (OGL) - 22 lines, max_char=0 [First1KGreek]
+Hermetica / tlg005 (OGL) - 19 lines, max_char=289 [First1KGreek]
 Hermetica / tlg006 (OGL) - 10 lines, max_char=700 [First1KGreek]
-Hermetica / tlg007 (OGL) - 6 lines, max_char=0 [First1KGreek]
+Hermetica / tlg007 (OGL) - 6 lines, max_char=277 [First1KGreek]
 Hermetica / tlg008 (OGL) - 6 lines, max_char=683 [First1KGreek]
-Hermetica / tlg009 (OGL) - 21 lines, max_char=0 [First1KGreek]
+Hermetica / tlg009 (OGL) - 19 lines, max_char=292 [First1KGreek]
 Hermetica / tlg010 (OGL) - 36 lines, max_char=776 [First1KGreek]
-Hermetica / tlg011 (OGL) - 45 lines, max_char=0 [First1KGreek]
+Hermetica / tlg011 (OGL) - 42 lines, max_char=285 [First1KGreek]
 Hermetica / tlg012 (OGL) - 30 lines, max_char=891 [First1KGreek]
 Hermetica / tlg013 (OGL) - 113 lines, max_char=1,608 [First1KGreek]
 Hermetica / tlg014 (OGL) - 10 lines, max_char=668 [First1KGreek]
@@ -76962,14 +76962,14 @@ Lysias / On the Scrutiny of Evandros translations: W.R.M. Lamb 24 segments [Dire
 Lysis / Epistula ad Hipparchum (OGL) - 6 lines, max_char=1,245 [First1KGreek]
 
 [Manetho Astrologus]
-Manetho Astrologus / Apotelesmatica (OGL) - 3,018 lines, max_char=90 [First1KGreek]
+Manetho Astrologus / Apotelesmatica (OGL) - 3,015 lines, max_char=134 [First1KGreek]
 
 [Marcellus of Ankara]
 Marcellus of Ankara / Fragmenta (OGL) - 129 lines, max_char=5,502 [First1KGreek]
 
 [Marcianus, of Heraclea]
 Marcianus, of Heraclea / Artemidori Geographia (Epitome Marciani) (OGL) - 22 lines, max_char=406 [First1KGreek]
-Marcianus, of Heraclea / Menippi periplus maris interni (epitome Marciani) (OGL) - 2 lines, max_char=131 [First1KGreek]
+Marcianus, of Heraclea / Menippi periplus maris interni (epitome Marciani) (OGL) - 2 lines, max_char=55 [First1KGreek]
 Marcianus, of Heraclea / Periplus maris exteri (OGL) - 1,895 lines total, 134 books, max_lines/book=188, max_char=1,455 [First1KGreek]
 Marcianus, of Heraclea / Periplus maris exteri (OGL) / Chapter 1 - 188 lines
 Marcianus, of Heraclea / Periplus maris exteri (OGL) / Chapter 2 - 43 lines
@@ -77448,8 +77448,8 @@ Martyrium Polycarpi / Martyrium Polycarpi (OGL) / Chapter 81 - 3 lines
 Martyrium Polycarpi / Martyrium Polycarpi (OGL) / Chapter 82 - 7 lines
 
 [Matron of Pitana]
-Matron of Pitana / Convivium Atticum (OGL) - 122 lines, max_char=53 [First1KGreek]
-Matron of Pitana / Fragmenta (OGL) - 20 lines, max_char=52 [First1KGreek]
+Matron of Pitana / Convivium Atticum (OGL) - 122 lines, max_char=87 [First1KGreek]
+Matron of Pitana / Fragmenta (OGL) - 20 lines, max_char=64 [First1KGreek]
 
 [Maximus of Tyre]
 Maximus of Tyre / Dialexeis (OGL) - 40,661 lines total, 2310 books, max_lines/book=439, max_char=1,742 [First1KGreek]
@@ -80954,7 +80954,7 @@ New Testament / Mark / Chapter 15 - 46 lines
 New Testament / Mark translations: Rainbow Missions, Inc. 47 segments [Direct]
 New Testament / Mark / Chapter 16 - 21 lines
 New Testament / Mark translations: Rainbow Missions, Inc. 20 segments [Direct]
-New Testament / Mark Chapter 1 (OGL) - 46 lines, max_char=207 [First1KGreek]
+New Testament / Mark Chapter 1 (OGL) - 46 lines, max_char=185 [First1KGreek]
 New Testament / Matthew - 1,068 lines total, 28 books, max_lines/book=75, max_char=236 [Perseus]
 New Testament / Matthew / Chapter 1 - 25 lines
 New Testament / Matthew translations: Rainbow Missions, Inc. 25 segments [Direct]
@@ -90614,7 +90614,7 @@ Paraphrases in Dioynsium Periegetam / Paraphrases in Dioynsium Periegetam (OGL) 
 Parmenides / Fragmenta (OGL) - 26 lines, max_char=7,186 [First1KGreek]
 
 [Parodica Anonyma]
-Parodica Anonyma / Incertorum fragmenta (OGL) - 65 lines, max_char=992 [First1KGreek]
+Parodica Anonyma / Incertorum fragmenta (OGL) - 65 lines, max_char=763 [First1KGreek]
 
 [Parthenius of Nicaea]
 Parthenius of Nicaea / Narrationes Amatoriae - 754 lines, max_char=418 [Perseus]
@@ -102550,7 +102550,7 @@ Porphyrius / Vita Pythagorae (OGL) / Chapter 57 - 20 lines
 Porphyrius / Vita Pythagorae (OGL) / Chapter 58 - 12 lines
 Porphyrius / Vita Pythagorae (OGL) / Chapter 59 - 12 lines
 Porphyrius / Vita Pythagorae (OGL) / Chapter 60 - 28 lines
-Porphyrius / Zetemata codicis Vaticani (OGL) - 121 lines, max_char=104 [First1KGreek]
+Porphyrius / Zetemata codicis Vaticani (OGL) - 121 lines, max_char=67 [First1KGreek]
 
 [Proclus]
 Proclus / Chrestomathy - 26 lines, max_char=757 [Perseus]
@@ -103554,7 +103554,7 @@ Pseudo-Lucian / Demosthenis encomium (OGL) / Chapter 49 - 3 lines
 Pseudo-Lucian / Demosthenis encomium (OGL) / Chapter 50 - 2 lines
 Pseudo-Lucian / Halcyon (OGL) - 15 lines, max_char=1,398 [First1KGreek]
 Pseudo-Lucian / Ocypus (OGL) - 174 lines, max_char=582 [First1KGreek]
-Pseudo-Lucian / Philopatris (OGL) - 22 lines, max_char=0 [First1KGreek]
+Pseudo-Lucian / Philopatris (OGL) - 21 lines, max_char=48 [First1KGreek]
 Pseudo-Lucian / The Loves (OGL) - 211 lines total, 54 books, max_lines/book=16, max_char=1,924 [First1KGreek]
 Pseudo-Lucian / The Loves (OGL) / Chapter 1 - 2 lines
 Pseudo-Lucian / The Loves (OGL) / Chapter 2 - 3 lines
@@ -103844,7 +103844,7 @@ Pseudo-Polemon / Physiognomonica (Epitome Adamantiana) (OGL) / Chapter 74 - 23 l
 Pseudo-Polemon / Physiognomonica (OGL) - 16 lines, max_char=1,834 [First1KGreek]
 
 [Pseudo-Scymnus]
-Pseudo-Scymnus / Ad Nicomedem regem, vv. 1-980 (OGL) - 980 lines, max_char=45 [First1KGreek]
+Pseudo-Scymnus / Ad Nicomedem regem, vv. 1-980 (OGL) - 980 lines, max_char=81 [First1KGreek]
 
 [Pythagoras]
 Pythagoras / Epistles (OGL) - 2 lines, max_char=792 [First1KGreek]
@@ -152602,6 +152602,7 @@ Septuaginta / Esdras i (liber apocryphus) (OGL) / Chapter 436 - 2 lines
 Septuaginta / Esdras i (liber apocryphus) (OGL) / Chapter 437 - 2 lines
 Septuaginta / Esdras i (liber apocryphus) (OGL) / Chapter 438 - 3 lines
 Septuaginta / Esdras i (liber apocryphus) (OGL) / Chapter 439 - 2 lines
+Septuaginta / Esdras ii (Ezra et Nehemias in textu Masoretico) (OGL) - 2 lines, max_char=44 [First1KGreek]
 Septuaginta / Esther (OGL) - 1,559 lines total, 277 books, max_lines/book=64, max_char=1,991 [First1KGreek]
 Septuaginta / Esther (OGL) / Chapter 1 - 9 lines
 Septuaginta / Esther (OGL) / Chapter 2 - 5 lines
@@ -161601,6 +161602,7 @@ Septuaginta / Josue Cod. Vaticanus + Cod. Alexandrinus) (OGL) / Chapter 682 - 4 
 Septuaginta / Josue Cod. Vaticanus + Cod. Alexandrinus) (OGL) / Chapter 683 - 3 lines
 Septuaginta / Josue Cod. Vaticanus + Cod. Alexandrinus) (OGL) / Chapter 684 - 4 lines
 Septuaginta / Josue Cod. Vaticanus + Cod. Alexandrinus) (OGL) / Chapter 685 - 15 lines
+Septuaginta / Judices (Cod. Alexandrinus) (OGL) - 105 lines, max_char=58 [First1KGreek]
 Septuaginta / Judith (OGL) - 2,164 lines total, 355 books, max_lines/book=47, max_char=1,999 [First1KGreek]
 Septuaginta / Judith (OGL) / Chapter 1 - 42 lines
 Septuaginta / Judith (OGL) / Chapter 2 - 5 lines
@@ -162843,6 +162845,7 @@ Septuaginta / Leviticus (OGL) / Chapter 882 - 2 lines
 Septuaginta / Leviticus (OGL) / Chapter 883 - 3 lines
 Septuaginta / Leviticus (OGL) / Chapter 884 - 3 lines
 Septuaginta / Leviticus (OGL) / Chapter 885 - 9 lines
+Septuaginta / Machabaeorum i (OGL) - 2 lines, max_char=53 [First1KGreek]
 Septuaginta / Machabaeorum ii (OGL) - 2,985 lines total, 568 books, max_lines/book=60, max_char=1,588 [First1KGreek]
 Septuaginta / Machabaeorum ii (OGL) / Chapter 1 - 22 lines
 Septuaginta / Machabaeorum ii (OGL) / Chapter 2 - 3 lines
@@ -173409,6 +173412,7 @@ Septuaginta / Regnorum II (Samuelis II In Textu Masoretico) (OGL) / Chapter 716 
 Septuaginta / Regnorum II (Samuelis II In Textu Masoretico) (OGL) / Chapter 717 - 3 lines
 Septuaginta / Regnorum II (Samuelis II In Textu Masoretico) (OGL) / Chapter 718 - 4 lines
 Septuaginta / Regnorum II (Samuelis II In Textu Masoretico) (OGL) / Chapter 719 - 10 lines
+Septuaginta / Regnorum III (Regum I In Textu Masoretico) (OGL) - 4 lines, max_char=43 [First1KGreek]
 Septuaginta / Regnorum IV (Regum II In Textu Masoretico) (OGL) - 3,991 lines total, 746 books, max_lines/book=61, max_char=1,549 [First1KGreek]
 Septuaginta / Regnorum IV (Regum II In Textu Masoretico) (OGL) / Chapter 1 - 28 lines
 Septuaginta / Regnorum IV (Regum II In Textu Masoretico) (OGL) / Chapter 2 - 2 lines
@@ -179115,7 +179119,7 @@ Silius Italicus, Tiberius Catius / Punica / Book 17 - 654 lines
 [Simplicius]
 Simplicius / In Aristotelis Categorias Commentarium (OGL) - 6 lines, max_char=44 [First1KGreek]
 Simplicius / In Aristotelis Libros De Anima Commentaria [Sp.?] (fort. auctore Prisciano Lydo) (OGL) - 12 lines, max_char=61 [First1KGreek]
-Simplicius / In Aristotelis Physicorum Libros Commentaria (OGL) - 360 lines, max_char=610 [First1KGreek]
+Simplicius / In Aristotelis Physicorum Libros Commentaria (OGL) - 360 lines, max_char=608 [First1KGreek]
 Simplicius / In Aristotelis Quattuor Libros De Caelo Commentaria (OGL) - 112 lines, max_char=59 [First1KGreek]
 
 [Socrates Epistulae]
@@ -179500,7 +179504,7 @@ Solonis Epistulae / Epistles (OGL) - 4 lines, max_char=1,906 [First1KGreek]
 [Sophocles]
 Sophocles / Ajax - 1,376 lines, max_char=56 [Perseus]
 Sophocles / Ajax translations: Richard Jebb 528 segments [Direct]
-Sophocles / Ajax (OGL) - 1,402 lines, max_char=50 [First1KGreek]
+Sophocles / Ajax (OGL) - 1,402 lines, max_char=100 [First1KGreek]
 Sophocles / Antigone - 1,257 lines, max_char=59 [Perseus]
 Sophocles / Antigone translations: Richard Jebb 297 segments [Direct]
 Sophocles / Electra - 1,486 lines, max_char=62 [Perseus]
