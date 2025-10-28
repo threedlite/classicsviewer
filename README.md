@@ -13,7 +13,7 @@ NEW: Audio file homer_iliad_chamberlain_audio.zip for entire Iliad prosody-aware
 https://www.patreon.com/posts/iliad-audio-for-141299909   (free)
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
-NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed. perseus_texts_extended.db.zip    https://www.patreon.com/file?h=141298606&m=554975788  (free)
+NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed. perseus_texts_extended.db.zip    https://www.patreon.com/file?h=141298606&m=555498325  (free)
 
 NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
   | Language | Authors | Works |
