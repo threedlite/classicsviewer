@@ -109,4 +109,7 @@ This project uses texts from the Perseus Digital Library. See LicenseActivity.kt
 ## Other unaffiliated projects
 A more in-depth morphological system, which I have not incorporated but is likely to be more accurate, is here: https://bitbucket.org/ben-crowell/lemming/src/master/README.md
 
+## A project based on similar source corpora with CC-BY-SA 4 license. There may be a possibility of incorporating their parsing and lemmatization strategies in the future.
+https://github.com/OperaGraecaAdnotata/OGA
+
 
