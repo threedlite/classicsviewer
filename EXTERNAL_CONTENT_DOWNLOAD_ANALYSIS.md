@@ -90,3 +90,45 @@ What happens if:
 - Extraction fails (corrupt ZIP)?
 - Not enough space during extraction?
 - Database doesn't match expected schema?
+
+## Hosting Platform Analysis: Zenodo vs Patreon
+
+### Zenodo (Recommended)
+
+**Perfect for This Use Case**:
+- **Academic/Research Focus**: CERN-backed repository designed for scholarly data (classical texts fit perfectly)
+- **Free Hosting**: No cost for academic/educational content
+- **Large File Support**: Up to 50GB per dataset (2.3GB extended DB is no problem)
+- **No Account Required**: Users can download without signing up
+- **Stable Direct Links**: Permanent URLs that won't break
+- **Unlimited Bandwidth**: No download restrictions or throttling
+
+**Technical Benefits**:
+- **DOI Assignment**: Citeable, permanent identifier for database versions
+- **Versioning Built-in**: Can update database and maintain version history
+- **API Access**: Could potentially integrate programmatic downloads
+- **Long-term Preservation**: Designed for 20+ year data availability
+- **Metadata Support**: Can document database contents, versions, etc.
+
+**Practical Benefits**:
+- **Professional**: Looks more legitimate than Patreon for educational resources
+- **No Monetization Confusion**: Zenodo is clearly for open data, not paid content
+- **Better Reliability**: Designed for large scientific data, not creator support
+- **Community Norms**: Zenodo is standard for open educational/research datasets
+
+### Patreon (Not Recommended)
+
+**Disadvantages**:
+- **Not Designed for File Hosting**: It's a creator support platform
+- **May Require Account**: Depending on settings, users might need to sign up
+- **Link Stability**: Links can change, may be tied to post/membership status
+- **Wrong Context**: Suggests monetization rather than open educational resource
+- **Less Professional**: For an academic classical texts app
+
+### Recommendation
+**Use Zenodo** for:
+- Extended database (2.3GB compressed)
+- Audio files (Homer readings, etc.)
+- Future content expansions
+
+This aligns better with the app's educational mission and the open-source nature of Perseus/First1K texts.
