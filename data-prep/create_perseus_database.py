@@ -5285,12 +5285,13 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
     
     print("✓ Quality report saved to database_quality_report.txt")
 
-def create_database(mode='full'):
+def create_database(mode='full', custom_csv_path=None):
     """Create database from Perseus data
 
     Args:
-        mode: 'full' for all authors, 'sample' for limited set from SAMPLE_AUTHORS.md,
+        mode: 'full' for all authors, 'sample' for limited set from SAMPLE_AUTHORS.csv,
               'extended' for full Perseus + non-duplicate First1KGreek works,
+        custom_csv_path: Optional path to custom CSV file (only used with mode='sample')
               'first1ktest' for First1KGreek texts only (skips Perseus and dictionaries)
     """
     import time
@@ -5346,7 +5347,11 @@ def create_database(mode='full'):
     sample_authors = set()
     sample_works = {}  # Dict mapping author -> set of work titles
     if mode == 'sample':
-        sample_authors_file = script_dir / "SAMPLE_AUTHORS.csv"
+        # Use custom CSV path if provided, otherwise use default SAMPLE_AUTHORS.csv
+        if custom_csv_path:
+            sample_authors_file = Path(custom_csv_path)
+        else:
+            sample_authors_file = script_dir / "SAMPLE_AUTHORS.csv"
         if sample_authors_file.exists():
             import csv
             with open(sample_authors_file, 'r') as f:
@@ -6677,15 +6682,18 @@ if __name__ == "__main__":
     try:
         # Determine which databases to build
         build_mode = sys.argv[1] if len(sys.argv) > 1 else "both"
+        custom_csv_path = sys.argv[2] if len(sys.argv) > 2 else None
 
         if build_mode not in ["sample", "full", "extended", "first1ktest", "both"]:
             print(f"Invalid build mode: {build_mode}")
-            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both]")
+            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
             print("  extended: Full Perseus + non-duplicate First1KGreek works")
             print("  first1ktest: First1KGreek texts only (skips Perseus and dictionaries)")
             print("  both: Build both sample and full databases")
+            print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
+            print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
             sys.exit(1)
 
         overall_start = time.time()
@@ -6694,9 +6702,11 @@ if __name__ == "__main__":
         if build_mode in ["sample", "both"]:
             print("\n" + "="*60)
             print("BUILDING SAMPLE DATABASE")
+            if custom_csv_path:
+                print(f"Using custom author list: {custom_csv_path}")
             print("="*60)
             start_time = time.time()
-            create_database(mode='sample')
+            create_database(mode='sample', custom_csv_path=custom_csv_path)
             print(f"\nSample database build time: {(time.time() - start_time)/60:.1f} minutes")
 
             # Merge external databases
