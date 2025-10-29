@@ -1,5 +1,6 @@
 # External Content Download Analysis
-Due to 2GB Play Store total asset size limit, files have to be hosted externally.
+Due to 4GB Play Store total cumulative size limit, files have to be hosted externally.
+https://developer.android.com/guide/app-bundle/faq#what_are_google_play_app_size_limits_when_using_aabs
 
 ## Proposed Feature
 
