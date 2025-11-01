@@ -25,8 +25,11 @@ echo "Starting process with caffeinate to prevent system idle sleep..."
 echo "Process will run continuously until completion."
 echo ""
 
-# Run with caffeinate to prevent idle sleep
-caffeinate -i python3 generate_cltk_dictionary.py "$AUTHORS_CSV" "$NUM_WORKERS" > "$LOGFILE" 2>&1 &
+# Activate venv and run with caffeinate to prevent idle sleep
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+VENV_PATH="$SCRIPT_DIR/../venv/bin/activate"
+
+caffeinate -i bash -c "source '$VENV_PATH' && python3 generate_cltk_dictionary.py '$AUTHORS_CSV' '$NUM_WORKERS'" > "$LOGFILE" 2>&1 &
 
 PID=$!
 echo "Background process started with PID: $PID"

@@ -5,7 +5,8 @@ Evaluate CLTK (Classical Language Toolkit) with Stanford Stanza as a source for 
 ## Installation
 
 ```bash
-# Create and activate virtual environment
+# Create and activate virtual environment (from project root)
+cd /Users/user1/git/classicsviewer
 python3 -m venv venv
 source venv/bin/activate  # On macOS/Linux
 # OR: venv\Scripts\activate  # On Windows
@@ -14,7 +15,18 @@ source venv/bin/activate  # On macOS/Linux
 pip install 'cltk[stanza]'
 ```
 
+**What gets installed**: The `cltk[stanza]` package installs:
+- `cltk` 2.0.2 - Classical Language Toolkit core
+- `stanza` 1.11.0 - Stanford NLP library for neural network-based NLP
+- `torch` 2.9.0 - PyTorch machine learning framework (74.5 MB)
+- `numpy` 2.3.4 - Numerical computing library
+- `pydantic` 2.12.3 - Data validation using Python type annotations
+- Plus other dependencies (protobuf, requests, networkx, etc.)
+- Total install size: ~100 MB of Python packages
+
 **Note**: First run downloads ~500MB of Stanza models for Ancient Greek.
+
+**IMPORTANT**: The `run_cltk_no_sleep.sh` script automatically uses the virtual environment. It looks for `venv` in the parent directory (`../venv`) and activates it before running. You don't need to manually activate the venv when using the wrapper script.
 
 ## Main Script: `generate_cltk_dictionary.py`
 
