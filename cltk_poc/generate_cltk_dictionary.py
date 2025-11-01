@@ -1405,45 +1405,48 @@ def analyze_compounds_batch(
 
 def format_compound_definition(decompositions: List[CompoundDecomposition], max_results: int = 5) -> str:
     """
-    Format compound decompositions as a definition string.
+    Format compound decompositions as a user-friendly definition string.
+
+    Extracts unique left and right lemmas from all decompositions,
+    preserving score-based ordering.
 
     Args:
         decompositions: List of ranked decompositions (sorted by score)
-        max_results: Maximum number of decompositions to output (default: 5)
+        max_results: Maximum number of unique lemmas per part to display
 
     Returns:
-        Formatted definition string with top N results
+        Formatted string: "Compound parts possible lemma matches: (a,b,c,d,e) (f,g,h,i,j)"
     """
     if not decompositions:
         return ""
 
-    # Limit to top N results
-    top_decomps = decompositions[:max_results]
-    total_count = len(decompositions)
+    # Collect unique left lemmas in score order (best first)
+    left_lemmas_seen = set()
+    left_lemmas = []
+    for decomp in decompositions:
+        left_norm = normalize_greek(decomp.left_lemma.lower())
+        if left_norm not in left_lemmas_seen:
+            left_lemmas_seen.add(left_norm)
+            left_lemmas.append(decomp.left_lemma)
+            if len(left_lemmas) >= max_results:
+                break
 
-    parts = [f"Partial lemma matches ({total_count} found, showing top {len(top_decomps)}):"]
+    # Collect unique right lemmas in score order (best first)
+    right_lemmas_seen = set()
+    right_lemmas = []
+    for decomp in decompositions:
+        right_norm = normalize_greek(decomp.right_lemma.lower())
+        if right_norm not in right_lemmas_seen:
+            right_lemmas_seen.add(right_norm)
+            right_lemmas.append(decomp.right_lemma)
+            if len(right_lemmas) >= max_results:
+                break
 
-    for idx, decomp in enumerate(top_decomps, 1):
-        # Format left part
-        left = f"{decomp.left_form} → {decomp.left_lemma}"
-        if decomp.left_pos:
-            left += f" ({decomp.left_pos}"
-            if decomp.left_features:
-                left += f": {decomp.left_features}"
-            left += ")"
+    # Format as: "Compound parts possible lemma matches: (a,b,c) (d,e,f)"
+    left_part = "(" + ", ".join(left_lemmas) + ")"
+    right_part = "(" + ", ".join(right_lemmas) + ")"
 
-        # Format right part
-        right = f"{decomp.right_form} → {decomp.right_lemma}"
-        if decomp.right_pos:
-            right += f" ({decomp.right_pos}"
-            if decomp.right_features:
-                right += f": {decomp.right_features}"
-            right += ")"
-
-        # Include score for ranking transparency
-        parts.append(f"{idx}. {left} + {right} [score: {decomp.score:.1f}]")
-
-    return " ".join(parts)
+    return f"Compound parts possible lemmas: {left_part} - {right_part}"
 
 
 def generate_compounds(
@@ -1542,10 +1545,17 @@ def save_morphology_csv(results: List[MorphologyResult], output_file: Path) -> i
 def save_dictionary_csv(compound_entries: List[Dict[str, str]], output_file: Path) -> int:
     """Save compound decompositions to dictionary CSV (always create file)"""
     with open(output_file, 'w', encoding='utf-8', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['word_form', 'lemma', 'definition', 'language'])
+        writer = csv.DictWriter(f, fieldnames=['headword', 'definition', 'language', 'source_name'])
         writer.writeheader()
         if compound_entries:
-            writer.writerows(compound_entries)
+            # Convert entries to proper dictionary format
+            for entry in compound_entries:
+                writer.writerow({
+                    'headword': entry.get('lemma', entry.get('word_form', '')),
+                    'definition': entry['definition'],
+                    'language': entry['language'],
+                    'source_name': 'CLTK ensemble'
+                })
 
     return len(compound_entries)
 
