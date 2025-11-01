@@ -14,6 +14,7 @@ import com.classicsviewer.app.utils.GreekNormalizer
 import com.classicsviewer.app.utils.PatternBasedNormalizer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
@@ -220,13 +221,30 @@ class UserDictionaryRepository(private val context: Context) {
     
     // Query operations
     suspend fun getCurrentDictionaryInfo(): DictionaryInfo? = withContext(Dispatchers.IO) {
-        val fileName = dictionaryDao.getCurrentDictionaryFileName()
+        // First check if there's an active package
+        var fileName = dictionaryDao.getCurrentDictionaryFileName()
+
+        // If no active package but packages exist, activate the first one
+        if (fileName == null) {
+            val packageCount = packageDao.getPackageCount()
+            if (packageCount > 0) {
+                Log.w(TAG, "Found $packageCount packages but none active - auto-activating first package")
+                val allPackages = packageDao.getAllPackages().first()
+                if (allPackages.isNotEmpty()) {
+                    val firstPackage = allPackages.first()
+                    Log.w(TAG, "Activating package: ${firstPackage.packageName} (id=${firstPackage.id})")
+                    packageDao.activatePackage(firstPackage.id)
+                    fileName = firstPackage.fileName
+                }
+            }
+        }
+
         if (fileName != null) {
             val greekLemmas = dictionaryDao.getLemmaCount("greek")
             val latinLemmas = dictionaryDao.getLemmaCount("latin")
             val greekMappings = mappingDao.getMappingCount("greek")
             val latinMappings = mappingDao.getMappingCount("latin")
-            
+
             DictionaryInfo(
                 fileName = fileName,
                 greekLemmaCount = greekLemmas,

@@ -226,6 +226,7 @@ class TextLineWithSpeakerAdapter(
                                 wordEnd,
                                 SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
                             )
+                            android.util.Log.d("BOLD_WORD", "Word styled BOLD (no definition): $word")
                         }
                         // Italic words with only morphological entries
                         else if (wordsWithOnlyMorphology.contains(word)) {
@@ -235,6 +236,7 @@ class TextLineWithSpeakerAdapter(
                                 wordEnd,
                                 SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
                             )
+                            android.util.Log.d("ITALIC_WORD", "Word styled ITALIC (morphology only): $word")
                         }
                     }
                     wordStart = -1
@@ -266,6 +268,7 @@ class TextLineWithSpeakerAdapter(
                             line.text.length,
                             SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
+                        android.util.Log.d("BOLD_WORD", "Word styled BOLD (no definition): $word")
                     }
                     // Italic words with only morphological entries
                     else if (wordsWithOnlyMorphology.contains(word)) {
@@ -275,6 +278,7 @@ class TextLineWithSpeakerAdapter(
                             line.text.length,
                             SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
+                        android.util.Log.d("ITALIC_WORD", "Word styled ITALIC (morphology only): $word")
                     }
                 }
             }
@@ -372,7 +376,7 @@ class TextLineWithSpeakerAdapter(
             val wordsWithOnlyMorph = mutableSetOf<String>()
             
             wordsToCheck.forEach { word ->
-                val result = repository.getAllDictionaryEntries(word, language)
+                val result = repository.getAllDictionaryEntries(word, language, skipCompoundDecomposition = false)
                 when {
                     result.entries.isEmpty() -> {
                         // No entries at all - mark for bold

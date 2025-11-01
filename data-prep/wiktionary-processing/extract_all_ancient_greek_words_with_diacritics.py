@@ -21,6 +21,88 @@ def clean_punctuation(text):
     # Only remove specific punctuation marks
     return re.sub(r'[.,;·]', '', text)
 
+def parse_template(template_text):
+    """Parse a Wiktionary template and extract meaningful content"""
+    match = re.match(r'\{\{([^|{}]+)(?:\|(.+?))?\}\}', template_text, re.DOTALL)
+    if not match:
+        return None
+
+    template_name = match.group(1).strip()
+    params_text = match.group(2) if match.group(2) else ''
+
+    # Split parameters carefully with nested templates
+    params = []
+    current_param = ''
+    depth = 0
+    for char in params_text:
+        if char == '{':
+            depth += 1
+        elif char == '}':
+            depth -= 1
+        elif char == '|' and depth == 0:
+            params.append(current_param.strip())
+            current_param = ''
+            continue
+        current_param += char
+    if current_param.strip():
+        params.append(current_param.strip())
+
+    return template_name, params
+
+def extract_definition_from_template(template_text):
+    """Extract human-readable definition from a template"""
+    result = parse_template(template_text)
+    if not result:
+        return None
+
+    template_name, params = result
+
+    if template_name in ['inflection of', 'infl of']:
+        if len(params) >= 2:
+            lemma = params[1]
+            forms = ' '.join(params[2:]) if len(params) > 2 else ''
+            return f"inflection of {lemma} ({forms})"
+    elif template_name == 'place':
+        place_type = params[1] if len(params) > 1 else ''
+        location = params[2] if len(params) > 2 else ''
+        for p in params:
+            if p.startswith('t='):
+                return p[2:]
+        location = re.sub(r'\[\[([^\]]+)\]\]', r'\1', location)
+        return f"{place_type} {location}".strip()
+    elif template_name in ['lb', 'label']:
+        if len(params) > 1:
+            return ' '.join(params[1:])
+
+    return None
+
+def clean_wiki_markup(text):
+    """Clean wiki markup from text"""
+    if not text:
+        return ''
+
+    # Remove templates recursively
+    while '{{' in text:
+        match = re.search(r'\{\{[^{}]+\}\}', text)
+        if not match:
+            break
+        template = match.group(0)
+        replacement = extract_definition_from_template(template) or ''
+        text = text[:match.start()] + replacement + text[match.end():]
+
+    # Clean wiki links
+    text = re.sub(r'\[\[([^|\]]+)\|([^\]]+)\]\]', r'\2', text)
+    text = re.sub(r'\[\[([^\]]+)\]\]', r'\1', text)
+
+    # Remove HTML and references
+    text = re.sub(r'<[^>]+>', '', text)
+    text = re.sub(r'<ref[^>]*>.*?</ref>', '', text, flags=re.DOTALL)
+
+    # Clean whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+
+    return text
+
 def extract_lemma_from_template(template_text):
     """Extract lemma from various inflection templates"""
     lemmas = []
@@ -240,7 +322,98 @@ def extract_all_greek_words(cache_path, output_path):
     print(f"Saving {len(standalone_lemmas):,} standalone lemmas to {standalone_output}...")
     with open(standalone_output, 'w', encoding='utf-8') as f:
         json.dump(standalone_lemmas, f, ensure_ascii=False, indent=2)
-    
+
+    # Create comprehensive definitions file for extract_wiktionary_final.py
+    # Extract definitions from ALL Ancient Greek pages using comprehensive parsing
+    print("\nCreating comprehensive definitions file for dictionary build...")
+    print("Using template parsing and comprehensive extraction...")
+
+    definitions_dict = {}
+    pages_processed = 0
+    stats = {'with_definitions': 0, 'with_etymology': 0, 'with_pos_only': 0}
+
+    for word, content in all_pages.items():
+        if not is_ancient_greek_entry(content):
+            continue
+
+        pages_processed += 1
+        cleaned_word = clean_punctuation(word)
+        if not cleaned_word:
+            continue
+
+        # Extract Ancient Greek section
+        ag_match = re.search(r'==Ancient Greek==(.*?)(?:\n==[^=]|\Z)', content, re.DOTALL)
+        if not ag_match:
+            continue
+
+        ag_section = ag_match.group(1)
+
+        # Determine part of speech
+        pos = None
+        for p, pattern in [('proper noun', r'===Proper noun==='), ('noun', r'===Noun==='),
+                          ('verb', r'===Verb==='), ('adjective', r'===Adjective==='),
+                          ('adverb', r'===Adverb==='), ('numeral', r'===Numeral==='),
+                          ('particle', r'===Particle==='), ('conjunction', r'===Conjunction==='),
+                          ('preposition', r'===Preposition==='), ('pronoun', r'===Pronoun===')]:
+            if re.search(pattern, ag_section, re.IGNORECASE):
+                pos = p
+                break
+
+        # Extract definition lines
+        def_lines = re.findall(r'^#\s+(.+)$', ag_section, re.MULTILINE)
+
+        if def_lines:
+            # Clean and combine definitions
+            cleaned_defs = []
+            for def_line in def_lines[:5]:
+                cleaned = clean_wiki_markup(def_line)
+                if cleaned and len(cleaned) > 2:
+                    cleaned_defs.append(cleaned)
+
+            if cleaned_defs:
+                definitions_dict[cleaned_word] = {
+                    'entry_plain': '; '.join(cleaned_defs),
+                    'part_of_speech': pos or 'unknown',
+                    'type': 'lemma'
+                }
+                stats['with_definitions'] += 1
+                continue
+
+        # Fallback: try etymology
+        etym_match = re.search(r'===Etymology===\s*\n(.+?)(?:\n===|\Z)', ag_section, re.DOTALL)
+        if etym_match:
+            etymology = etym_match.group(1)
+            meaning_match = re.search(r't=([^,}\]]+)', etymology)
+            if meaning_match:
+                definitions_dict[cleaned_word] = {
+                    'entry_plain': meaning_match.group(1).strip(),
+                    'part_of_speech': pos or 'unknown',
+                    'type': 'lemma'
+                }
+                stats['with_etymology'] += 1
+                continue
+
+        # Last resort: just record the POS
+        if pos:
+            definitions_dict[cleaned_word] = {
+                'entry_plain': pos,
+                'part_of_speech': pos,
+                'type': 'lemma'
+            }
+            stats['with_pos_only'] += 1
+
+    print(f"  Processed {pages_processed:,} Ancient Greek pages")
+    print(f"  Extracted {len(definitions_dict):,} definitions:")
+    print(f"    - Full definitions: {stats['with_definitions']:,}")
+    print(f"    - From etymology: {stats['with_etymology']:,}")
+    print(f"    - POS only: {stats['with_pos_only']:,}")
+    print(f"  Coverage: {len(definitions_dict) / pages_processed * 100:.1f}%")
+
+    definitions_output = Path(__file__).parent / "wiktionary_definitions_complete.json"
+    print(f"Saving {len(definitions_dict):,} definitions to {definitions_output}...")
+    with open(definitions_output, 'w', encoding='utf-8') as f:
+        json.dump(definitions_dict, f, ensure_ascii=False, indent=2)
+
     print("\nExtraction complete!")
     return output_data, standalone_lemmas
 

@@ -6,6 +6,7 @@ import com.classicsviewer.app.database.UserDatabase
 import com.classicsviewer.app.database.dao.OccurrenceResult
 import com.classicsviewer.app.database.dao.OccurrenceResultWithWords
 import com.classicsviewer.app.database.entities.NormalizationPatternEntity
+import com.classicsviewer.app.database.entities.PrefixAssimilationRuleEntity
 import com.classicsviewer.app.lemmatization.GreekLemmatizer
 import com.classicsviewer.app.models.*
 import com.classicsviewer.app.database.dao.LineReferenceWithWords
@@ -40,6 +41,54 @@ class PerseusRepository(private val context: Context) : DataRepository {
         val stem: String,
         val stemLemma: String
     )
+
+    // Data class for grouping prefix variants
+    private data class PrefixGroup(
+        val basePrefix: String,
+        val meaning: String,
+        val assimilatedForms: List<String>
+    )
+
+    // Helper function to query prefix_assimilation_rules table with graceful fallback
+    private suspend fun getPrefixAssimilationRules(language: String): List<PrefixGroup> = withContext(Dispatchers.IO) {
+        android.util.Log.d("PerseusRepository", "getPrefixAssimilationRules called for language: $language")
+        try {
+            android.util.Log.d("PerseusRepository", "Querying prefix_assimilation_rules table...")
+            val cursor = database.openHelper.readableDatabase.query(
+                "SELECT base_prefix, assimilated_form, meaning, priority FROM prefix_assimilation_rules WHERE language = ? ORDER BY base_prefix, priority ASC",
+                arrayOf(language)
+            )
+            android.util.Log.d("PerseusRepository", "Query executed, processing results...")
+
+            val rulesByPrefix = mutableMapOf<String, MutableList<Pair<String, String>>>()
+            cursor.use {
+                while (it.moveToNext()) {
+                    val basePrefix = it.getString(0)
+                    val assimilatedForm = it.getString(1)
+                    val meaning = it.getString(2) ?: ""
+
+                    if (!rulesByPrefix.containsKey(basePrefix)) {
+                        rulesByPrefix[basePrefix] = mutableListOf()
+                    }
+                    rulesByPrefix[basePrefix]!!.add(Pair(assimilatedForm, meaning))
+                }
+            }
+
+            // Convert to PrefixGroup list, sorted by prefix length (longest first)
+            rulesByPrefix.map { (basePrefix, forms) ->
+                val meaning = forms.firstOrNull()?.second ?: ""
+                val assimilatedForms = forms.map { it.first }
+                PrefixGroup(basePrefix, meaning, assimilatedForms)
+            }.sortedByDescending { it.basePrefix.length }
+        } catch (e: Exception) {
+            // Table doesn't exist or query failed - return empty list
+            android.util.Log.d("PerseusRepository", "prefix_assimilation_rules table not available (older database)")
+            emptyList()
+        }
+    }
+
+    // Cache for prefix assimilation rules
+    private val prefixAssimilationCache = ConcurrentHashMap<String, List<PrefixGroup>>()
 
     // Helper function to query normalization_patterns table with graceful fallback
     private suspend fun getPerseusNormalizationPatterns(language: String): List<NormalizationPatternEntity> = withContext(Dispatchers.IO) {
@@ -203,7 +252,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
         }
     }
     
-    override suspend fun getAllDictionaryEntries(word: String, language: String): DictionaryResultMultiple = withContext(Dispatchers.IO) {
+    override suspend fun getAllDictionaryEntries(word: String, language: String, skipCompoundDecomposition: Boolean): DictionaryResultMultiple = withContext(Dispatchers.IO) {
         try {
             // Clean punctuation first, but preserve apostrophes for elided forms
             var cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
@@ -261,7 +310,26 @@ class PerseusRepository(private val context: Context) : DataRepository {
             }
             
             // Also check user lemma mappings for this word
+            android.util.Log.d("PerseusRepository", "=== USER MAPPING LOOKUP DEBUG ===")
+            android.util.Log.d("PerseusRepository", "Input: cleanedWord='$cleanedWord', normalizedWord='$normalizedWord', language='$normalizedLanguage'")
+
             val userMapping = userLemmaMappingDao.getMappingForWord(cleanedWord, normalizedWord, normalizedLanguage)
+
+            android.util.Log.d("PerseusRepository", "getMappingForWord() returned: ${if (userMapping != null) "FOUND - lemma='${userMapping.lemma}', confidence=${userMapping.confidence}" else "NULL (NOT FOUND)"}")
+
+            // Debug: Also try getAllMappingsForWord to see if any exist
+            val allUserMappings = userLemmaMappingDao.getAllMappingsForWord(cleanedWord, normalizedWord, normalizedLanguage)
+            android.util.Log.d("PerseusRepository", "getAllMappingsForWord() found ${allUserMappings.size} total mappings")
+            if (allUserMappings.isNotEmpty()) {
+                android.util.Log.d("PerseusRepository", "First few mappings:")
+                allUserMappings.take(3).forEach {
+                    android.util.Log.d("PerseusRepository", "  word_form='${it.wordForm}' | normalized='${it.wordFormNormalizedUltra}' | lemma='${it.lemma}' | confidence=${it.confidence} | source='${it.sourceName}'")
+                }
+            } else {
+                android.util.Log.d("PerseusRepository", "NO MAPPINGS FOUND - checking why...")
+                android.util.Log.d("PerseusRepository", "  cleanedWord exact match would need: word_form='$cleanedWord'")
+                android.util.Log.d("PerseusRepository", "  normalized match would need: word_form_normalized_ultra='$normalizedWord'")
+            }
             if (userMapping != null && userMapping.lemma !in userAddedLemmas) {
                 // Get dictionary entry for the mapped lemma
                 val normalizedLemma = normalizeText(userMapping.lemma, normalizedLanguage) ?: userMapping.lemma.lowercase()
@@ -759,11 +827,12 @@ class PerseusRepository(private val context: Context) : DataRepository {
                 }
             }
 
-            // Try compound word decomposition for Greek words if still no results
-            if (entries.isEmpty() && normalizedLanguage == "greek" && cleanedWord.length >= 6) {
-                android.util.Log.d("PerseusRepository", "Attempting compound word decomposition for: $cleanedWord")
+            // Try compound word decomposition for Greek and Latin words if still no results
+            // Skip if called recursively from within findStemLemma to prevent infinite loops
+            if (!skipCompoundDecomposition && entries.isEmpty() && (normalizedLanguage == "greek" || normalizedLanguage == "latin") && cleanedWord.length >= 6) {
+                android.util.Log.d("PerseusRepository", "Attempting compound word decomposition for: $cleanedWord (language: $normalizedLanguage)")
 
-                val compoundParts = decomposeCompoundWord(cleanedWord)
+                val compoundParts = decomposeCompoundWord(cleanedWord, normalizedLanguage)
                 if (compoundParts != null) {
                     android.util.Log.d("PerseusRepository",
                         "Decomposed: ${compoundParts.prefix}- (${compoundParts.prefixMeaning}) + ${compoundParts.stemLemma}")
@@ -811,16 +880,49 @@ class PerseusRepository(private val context: Context) : DataRepository {
             android.util.Log.d("PerseusRepository", "Before sorting: ${entries.map { "${it.lemma}(${it.source})" }.joinToString(", ")}")
             android.util.Log.d("PerseusRepository", "After sorting: ${sortedEntries.map { "${it.lemma}(${it.source})" }.joinToString(", ")}")
             android.util.Log.d("PerseusRepository", "Returning ${sortedEntries.size} dictionary entries (${sortedEntries.count { it.source?.contains("LSJ", true) == true }} LSJ entries)")
-        
+
+            // MORPHOLOGY-ONLY FIX: If no entries found but user mappings exist, create morphological entries
+            val finalEntries = if (sortedEntries.isEmpty()) {
+                android.util.Log.d("PerseusRepository", "No dictionary entries found - checking for morphology-only mappings")
+                // Check if there are user morphology mappings for this word
+                val morphologyMappings = userLemmaMappingDao.getAllMappingsForWord(cleanedWord, normalizedWord, normalizedLanguage)
+                if (morphologyMappings.isNotEmpty()) {
+                    android.util.Log.d("PerseusRepository", "Found ${morphologyMappings.size} morphology-only mappings - creating morphological entries")
+                    val morphEntries = mutableListOf<DictionaryEntry>()
+                    for (mapping in morphologyMappings) {
+                        val morphDefinition = if (!mapping.morphInfo.isNullOrEmpty()) {
+                            "Morphological entry: ${mapping.morphInfo}"
+                        } else {
+                            "Morphological entry"
+                        }
+                        morphEntries.add(DictionaryEntry(
+                            lemma = mapping.lemma,
+                            definition = morphDefinition,
+                            morphInfo = mapping.morphInfo,
+                            isDirectMatch = false,
+                            confidence = mapping.confidence,
+                            source = "User: ${mapping.sourceName}",
+                            hasNonTreebankPath = true
+                        ))
+                        android.util.Log.d("PerseusRepository", "Created morphological entry: ${mapping.wordForm} -> ${mapping.lemma}")
+                    }
+                    morphEntries
+                } else {
+                    sortedEntries
+                }
+            } else {
+                sortedEntries
+            }
+
             // If no entries found and word starts with uppercase, try lowercase version (only for non-Greek)
-            if (sortedEntries.isEmpty() && word.isNotEmpty() && word[0].isUpperCase() && normalizedLanguage != "greek") {
+            if (finalEntries.isEmpty() && word.isNotEmpty() && word[0].isUpperCase() && normalizedLanguage != "greek") {
                 android.util.Log.d("PerseusRepository", "No entries found for uppercase word '$word', trying lowercase")
                 val lowercaseWord = word[0].lowercase() + word.substring(1)
-                return@withContext getAllDictionaryEntries(lowercaseWord, language)
+                return@withContext getAllDictionaryEntries(lowercaseWord, language, skipCompoundDecomposition = false)
             }
-            
+
             // If no entries found and it's Greek, try ultra-normalized search (handles uppercase too)
-            if (sortedEntries.isEmpty() && normalizedLanguage == "greek") {
+            if (finalEntries.isEmpty() && normalizedLanguage == "greek") {
                 android.util.Log.d("PerseusRepository", "No entries found, trying ultra-normalized search for '$cleanedWord'")
                 val ultraNormalized = normalizeGreekUltra(cleanedWord)
                 android.util.Log.d("PerseusRepository", "Ultra-normalized form: '$ultraNormalized'")
@@ -901,8 +1003,8 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     )))
                 }
             }
-        
-            DictionaryResultMultiple(entries = sortedEntries)
+
+            DictionaryResultMultiple(entries = finalEntries)
             
         } catch (e: Exception) {
             android.util.Log.e("PerseusRepository", "Error in getAllDictionaryEntries", e)
@@ -1531,73 +1633,121 @@ class PerseusRepository(private val context: Context) : DataRepository {
     }
 
     /**
-     * Decompose a Greek compound word into prefix + stem
+     * Decompose a compound word into prefix + stem (works for Greek and Latin)
      * Returns CompoundParts if successfully decomposed, null otherwise
      */
-    private suspend fun decomposeCompoundWord(word: String): CompoundParts? = withContext(Dispatchers.IO) {
-        // Define Greek prefixes with meanings (longest first for greedy matching)
-        val prefixes = listOf(
-            // Verbal prefixes (preverbs) - longer ones first (4 chars)
+    private suspend fun decomposeCompoundWord(word: String, language: String = "greek"): CompoundParts? {
+        // Load prefix assimilation rules from database (with caching) - same pattern as normalization
+        val prefixGroups = withContext(Dispatchers.IO) {
+            prefixAssimilationCache.getOrPut(language) {
+                getPrefixAssimilationRules(language)
+            }
+        }
+
+        if (prefixGroups.isEmpty()) {
+            android.util.Log.d("PerseusRepository", "No prefix assimilation rules loaded for $language, falling back to basic prefixes")
+            // Fallback to basic Greek prefixes if no rules loaded
+            return decomposeCompoundWordFallback(word, language)
+        }
+
+        return withContext(Dispatchers.IO) {
+
+        // Normalize word to match prefixes (strip diacritics for comparison)
+        val normalizedWord = if (language == "greek") normalizeGreekUltra(word) else word.lowercase()
+        android.util.Log.d("PerseusRepository", "Compound decomposition: word='$word' normalized='$normalizedWord' language='$language'")
+
+        // Try each prefix group with all its assimilated forms
+        for (prefixGroup in prefixGroups) {
+            for (assimilatedForm in prefixGroup.assimilatedForms) {
+                val normalizedPrefix = if (language == "greek") normalizeGreekUltra(assimilatedForm) else assimilatedForm.lowercase()
+
+                if (normalizedWord.startsWith(normalizedPrefix) && normalizedWord.length > normalizedPrefix.length + 2) {
+                    // Extract stem using ORIGINAL word to preserve diacritics
+                    val stem = word.substring(assimilatedForm.length)
+
+                    android.util.Log.d("PerseusRepository", "Matched prefix: '$assimilatedForm' (base: '${prefixGroup.basePrefix}'), stem: '$stem'")
+
+                    // Try to find stem (with vowel restoration if needed)
+                    var stemLemma = findStemLemma(stem, language)
+
+                    // If stem not found, try vowel restoration (for contracted forms)
+                    if (stemLemma == null && language == "greek") {
+                        stemLemma = findStemWithVowelRestoration(stem)
+                    }
+
+                    if (stemLemma != null) {
+                        android.util.Log.d("PerseusRepository", "Decomposed compound: $word = ${prefixGroup.basePrefix}- (${prefixGroup.meaning}) + $stemLemma")
+                        return@withContext CompoundParts(
+                            prefix = prefixGroup.basePrefix,
+                            prefixMeaning = prefixGroup.meaning,
+                            stem = stem,
+                            stemLemma = stemLemma
+                        )
+                    }
+                }
+            }
+        }
+
+        null
+        }
+    }
+
+    /**
+     * Fallback method using basic Greek prefixes if assimilation rules not available
+     */
+    private suspend fun decomposeCompoundWordFallback(word: String, language: String): CompoundParts? = withContext(Dispatchers.IO) {
+        if (language != "greek") return@withContext null
+
+        // Basic Greek prefixes (longest first)
+        val basicPrefixes = listOf(
             "κατα" to "down, against",
-            "μετα" to "with, after",
-            "παρα" to "beside, from",
-            "περι" to "around, about",
-            "προσ" to "toward, at",
-            "υπερ" to "over, above",
-            "αντι" to "against",
-            "αυτο" to "self, own",       // compound prefix (4 chars)
-            "πολυ" to "many, much",      // adjectival prefix (4 chars)
-            // 3-character prefixes
+            "συν" to "with, together",
             "απο" to "away from",
             "δια" to "through",
             "επι" to "upon, at",
-            "εισ" to "into",
-            "συν" to "with, together",
-            "συμ" to "with, together",  // assimilated form
-            "συλ" to "with, together",  // assimilated form
-            "συγ" to "with, together",  // assimilated form
-            "υπο" to "under",
-            "ανα" to "up, again",
-            "προ" to "before",
-            "δυσ" to "bad, difficult",
-            // 2-character prefixes
             "εκ" to "out of",
-            "εξ" to "out of",  // before vowels
-            "εν" to "in, on",
-            "ευ" to "good, well",
-            "αν" to "not, without",  // check before single α
-            // 1-character prefix (last resort)
-            "α" to "not, without"
+            "εν" to "in, on"
         )
 
-        // Normalize word to match prefixes (strip diacritics for comparison)
         val normalizedWord = normalizeGreekUltra(word)
-        android.util.Log.d("PerseusRepository", "Compound decomposition: word='$word' normalized='$normalizedWord'")
-
-        // Try each prefix
-        for ((prefix, meaning) in prefixes) {
-            // Normalize prefix for comparison
+        for ((prefix, meaning) in basicPrefixes) {
             val normalizedPrefix = normalizeGreekUltra(prefix)
-
             if (normalizedWord.startsWith(normalizedPrefix) && normalizedWord.length > normalizedPrefix.length + 2) {
-                // Extract stem using ORIGINAL word to preserve diacritics
-                // Find the actual prefix length in the original word by comparing character counts
-                val prefixLength = prefix.length
-                val stem = word.substring(prefixLength)
-
-                android.util.Log.d("PerseusRepository", "Matched prefix: '$prefix' (normalized: '$normalizedPrefix'), stem: '$stem'")
-
-                // Check if stem exists in dictionary or lemma_map
-                val stemLemma = findStemLemma(stem)
+                val stem = word.substring(prefix.length)
+                val stemLemma = findStemLemma(stem, language)
                 if (stemLemma != null) {
-                    android.util.Log.d("PerseusRepository", "Decomposed compound: $word = $prefix- ($meaning) + $stemLemma")
-                    return@withContext CompoundParts(
-                        prefix = prefix,
-                        prefixMeaning = meaning,
-                        stem = stem,
-                        stemLemma = stemLemma
-                    )
+                    return@withContext CompoundParts(prefix, meaning, stem, stemLemma)
                 }
+            }
+        }
+        null
+    }
+
+    /**
+     * Try to find a stem by restoring initial vowels lost in contraction
+     * Examples: ρθόω → ορθόω, ικέω → οικέω
+     */
+    private suspend fun findStemWithVowelRestoration(stem: String): String? = withContext(Dispatchers.IO) {
+        // Common initial vowels to try restoring
+        val vowels = listOf("ο", "α", "ε", "ι", "η", "ω", "υ")
+
+        for (vowel in vowels) {
+            val restoredStem = vowel + stem
+            val lemma = findStemLemma(restoredStem, "greek")
+            if (lemma != null) {
+                android.util.Log.d("PerseusRepository", "Vowel restoration successful: '$stem' → '$restoredStem' → '$lemma'")
+                return@withContext lemma
+            }
+        }
+
+        // Try with rough breathing variants
+        val roughBreathingVowels = listOf("ὁ", "ἁ", "ἑ", "ἱ", "ὑ")
+        for (vowel in roughBreathingVowels) {
+            val restoredStem = vowel + stem
+            val lemma = findStemLemma(restoredStem, "greek")
+            if (lemma != null) {
+                android.util.Log.d("PerseusRepository", "Vowel restoration (rough breathing) successful: '$stem' → '$restoredStem' → '$lemma'")
+                return@withContext lemma
             }
         }
 
@@ -1608,16 +1758,17 @@ class PerseusRepository(private val context: Context) : DataRepository {
      * Find the dictionary lemma for a potential stem
      * Leverages the full dictionary lookup infrastructure including morphology
      */
-    private suspend fun findStemLemma(stem: String): String? = withContext(Dispatchers.IO) {
+    private suspend fun findStemLemma(stem: String, language: String = "greek"): String? = withContext(Dispatchers.IO) {
         // Use the SAME comprehensive lookup as normal dictionary queries
         // This gives us access to:
         // - Full lemma_map coverage (thousands of inflected forms)
         // - Morphologically related forms
         // - Ultra-normalized search
         // - User-imported morphology
-        android.util.Log.d("PerseusRepository", "Finding stem lemma for: '$stem' using full dictionary lookup")
+        // IMPORTANT: Skip compound decomposition to prevent infinite recursion loops
+        android.util.Log.d("PerseusRepository", "Finding stem lemma for: '$stem' language='$language' using full dictionary lookup")
 
-        val results = getAllDictionaryEntries(stem, "greek")
+        val results = getAllDictionaryEntries(stem, language, skipCompoundDecomposition = true)
 
         if (results.entries.isNotEmpty()) {
             val lemma = results.entries.first().lemma

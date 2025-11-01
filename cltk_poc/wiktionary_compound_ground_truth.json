@@ -1,0 +1,6643 @@
+{
+  "total_entries": 605,
+  "unique_words": 599,
+  "compounds": {
+    "ὀφθαλμός": [
+      {
+        "components": [
+          "ὄψ",
+          "θάλαμος",
+          "t1=eye",
+          "t2=chamber"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δεκατέσσαρες": [
+      {
+        "components": [
+          "δέκᾰ",
+          "τέσσᾰρες",
+          "t1=ten",
+          "t2=four"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παραδειγματίζω": [
+      {
+        "components": [
+          "παρά",
+          "t1=beside",
+          "δειγματίζω",
+          "t2=to show, demonstrate"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τιμωρέω": [
+      {
+        "components": [
+          "τῑμή",
+          "t1=honour",
+          "ὁράω",
+          "t2=to see"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐξίστημι": [
+      {
+        "components": [
+          "ἐκ",
+          "ῐ̔́στημῐ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θεομάχος": [
+      {
+        "components": [
+          "θεός",
+          "t1=god",
+          "μάχομαι",
+          "t2=I fight"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στρατηγός": [
+      {
+        "components": [
+          "στρατός",
+          "t1=army",
+          "ἄγω",
+          "t2=to lead",
+          "-ος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αὐτός": [
+      {
+        "components": [
+          "αὖ",
+          "τόν",
+          "t1=back, again, other",
+          "t2=the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱπποτοξότης": [
+      {
+        "components": [
+          "ῐ̔́ππος",
+          "τοξότης",
+          "t1=horse",
+          "t2=archer"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἡδονόπληκτος": [
+      {
+        "components": [
+          "ἡδονή",
+          "t1=pleasure",
+          "πλήσσω",
+          "t2=to strike"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στα": [
+      {
+        "components": [
+          "εἰς",
+          "τά",
+          "t1=to, in",
+          "t2=the"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πλουτοκρατία": [
+      {
+        "components": [
+          "πλοῦτος",
+          "t1=wealth",
+          "-κρᾰτῐ́ᾱ",
+          "t2=form of government"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καμηλοπάρδαλις": [
+      {
+        "components": [
+          "κάμηλος",
+          "t1=camel",
+          "πάρδαλις",
+          "t2=leopard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἄκανθος": [
+      {
+        "components": [
+          "ἀκή",
+          "ἄνθος",
+          "t1=thorn",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀφροδίτη": [
+      {
+        "components": [
+          "ἀφρός",
+          "t1=sea foam, froth",
+          "-δίτη"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀρίστιππος": [
+      {
+        "components": [
+          "ἄριστος",
+          "ἵππος",
+          "t1=best",
+          "t2=horse"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀριστογείτων": [
+      {
+        "components": [
+          "ἄριστος",
+          "t1=best",
+          "γείτων",
+          "t2=neighbour"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀριστοτέλης": [
+      {
+        "components": [
+          "ἄριστος",
+          "t1=best, excellent",
+          "τέλος",
+          "t2=completion, perfection",
+          "-ης"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Χρύσιππος": [
+      {
+        "components": [
+          "χρυσός",
+          "t1=gold",
+          "ἵππος",
+          "t2=horse"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Κλυταιμνήστρα": [
+      {
+        "components": [
+          "κλῠτός",
+          "t1=celebrated",
+          "μήδομαι",
+          "t2=to plan, be cunning"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νόμισμα": [
+      {
+        "components": [
+          "νομίζω",
+          "-μα",
+          "t1=to use customarily",
+          "t2=nominal suffix"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τώρα": [
+      {
+        "components": [
+          "τῇ",
+          "ὥρα"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Δημοφῶν": [
+      {
+        "components": [
+          "δῆμος",
+          "φωνή",
+          "t1=people",
+          "t2=voice"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Δέξιππος": [
+      {
+        "components": [
+          "δέχομαι",
+          "ἵππος",
+          "t1=to receive",
+          "t2=a horse"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εισαγγελέας": [
+      {
+        "components": [
+          "εἰς",
+          "t1=in, into, to",
+          "ἀγγέλλω",
+          "t2=to carry, to deliver, to announce",
+          "-εύς",
+          "t3=",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἡλίου πόλις": [
+      {
+        "components": [
+          "Ἥλῐος",
+          "t1=sun",
+          "πόλῐς",
+          "t2=city"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θερμοκρασία": [
+      {
+        "components": [
+          "θερμός",
+          "κρᾶσις",
+          "t1=warm",
+          "t2=mixture, climate"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χορηγός": [
+      {
+        "components": [
+          "χορός",
+          "t1=chorus",
+          "ἄγω",
+          "t2=to lead"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Πελοπόννησος": [
+      {
+        "components": [
+          "Πέλοψ",
+          "νῆσος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Πείσανδρος": [
+      {
+        "components": [
+          "πείθω",
+          "t1=to convince",
+          "ἀνήρ",
+          "t2=a man"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Πλούταρχος": [
+      {
+        "components": [
+          "πλοῦτος",
+          "ἀρχός",
+          "t1=riches; Pluto",
+          "t2=ruler"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εκγύμναση": [
+      {
+        "components": [
+          "εκ",
+          "γύμναση"
+        ],
+        "source": "etymology_plus"
+      }
+    ],
+    "Ξενοφῶν": [
+      {
+        "components": [
+          "ξένος",
+          "φῶν",
+          "t1=guest",
+          "t2=shining"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἠριγένεια": [
+      {
+        "components": [
+          "ἦρι",
+          "t1=early in the morning",
+          "pos1=Epic adverb"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εφημερίδα": [
+      {
+        "components": [
+          "ἐπί",
+          "ἡμέρᾱ",
+          "alt1=ἐπ(ί)",
+          "t1=upon”, “on",
+          "t2=day",
+          "nocat=yes"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱερόδουλος": [
+      {
+        "components": [
+          "ἱερός",
+          "t1=sacred",
+          "δοῦλος",
+          "t2=slave"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φαλακρός": [
+      {
+        "components": [
+          "φαλός",
+          "t1=white",
+          "ἄκρος",
+          "t2=topmost"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χειρουργέω": [
+      {
+        "components": [
+          "χείρ",
+          "t1=hand",
+          "ἔργον",
+          "t2=work"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πολυμαθής": [
+      {
+        "components": [
+          "πολύς",
+          "t1=much"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καλόγερος": [
+      {
+        "components": [
+          "καλός",
+          "γῆρας",
+          "t1=good",
+          "t2=old age",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λοχαγός": [
+      {
+        "components": [
+          "λόχος",
+          "t1=a file in the phalanx",
+          "ἄγω",
+          "t2=to lead",
+          "-ος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στην": [
+      {
+        "components": [
+          "εἰς",
+          "τήν",
+          "t1=to, in",
+          "t2=the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στρουθοκάμηλος": [
+      {
+        "components": [
+          "στρουθός",
+          "κάμηλος",
+          "t1=sparrow",
+          "t2=camel"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυκάνθρωπος": [
+      {
+        "components": [
+          "λύκος",
+          "ἄνθρωπος",
+          "t1=wolf",
+          "t2=man, human"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παρίστημι": [
+      {
+        "components": [
+          "πᾰρᾰ́",
+          "ῐ̔́στημῐ",
+          "t1=near",
+          "t2=to stand"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπαινέω": [
+      {
+        "components": [
+          "ἐπῐ́",
+          "αἰνέω",
+          "t2=to approve"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπιστήμη": [
+      {
+        "components": [
+          "ἐπί",
+          "ἵστημι"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θερμόμετρο": [
+      {
+        "components": [
+          "θερμός",
+          "μέτρον",
+          "t1=warm",
+          "t2=measure"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νομοθέτης": [
+      {
+        "components": [
+          "νόμος",
+          "gloss1=law",
+          "τίθημι",
+          "gloss2=lay",
+          "-της"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἕκαστος": [
+      {
+        "components": [
+          "ἑκάς",
+          "t1=far off",
+          "τις",
+          "t2=someone"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χιονόμπαλα": [
+      {
+        "components": [
+          "χιόνι",
+          "μπάλα"
+        ],
+        "source": "etymology_plus"
+      }
+    ],
+    "ξεχνάω": [
+      {
+        "components": [
+          "ξε-",
+          "χάνω",
+          "t1=un-, de-, out-",
+          "t2=lose",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀνδρόγυνος": [
+      {
+        "components": [
+          "ἀνήρ",
+          "t1=man",
+          "γυνή",
+          "t2=woman"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κάτοικος": [
+      {
+        "components": [
+          "κᾰτᾰ-",
+          "t1=[[fully]]",
+          "οἶκος",
+          "t2=[[home]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στον": [
+      {
+        "components": [
+          "εἰς",
+          "τόν",
+          "t1=to, in",
+          "t2=the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στους": [
+      {
+        "components": [
+          "εἰς",
+          "τούς",
+          "t1=to, in",
+          "t2=the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στις": [
+      {
+        "components": [
+          "εἰς",
+          "τάς",
+          "t1=to, in",
+          "t2=the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λευκόχρυσος": [
+      {
+        "components": [
+          "λευκός",
+          "χρῡσός",
+          "t1=white",
+          "t2=gold"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ποδάγρα": [
+      {
+        "components": [
+          "πούς",
+          "ἄγρᾱ",
+          "t1=foot",
+          "t2=hunting"
+        ],
+        "source": "compound_template"
+      },
+      {
+        "components": [
+          "nocat=1",
+          "πούς",
+          "ἄγρᾱ",
+          "t1=foot",
+          "t2=hunting"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στη": [
+      {
+        "components": [
+          "εἰς",
+          "τήν",
+          "t1=to, in",
+          "t2=the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πάγουρος": [
+      {
+        "components": [
+          "πάγος",
+          "t1=crag, rock",
+          "οὐρά",
+          "t2=tail"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ελαιόδεντρο": [
+      {
+        "components": [
+          "ἐλαίᾱ",
+          "δένδρον",
+          "t1=olive",
+          "t2=tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γλυκάνισο": [
+      {
+        "components": [
+          "γλυκύς",
+          "ἄνισον",
+          "t1=sweet",
+          "t2=aniseed",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἁμαμηλίς": [
+      {
+        "components": [
+          "ᾰ̔́μᾰ",
+          "μῆλον",
+          "t1=at the same time [with]",
+          "t2=apple"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἕνδεκα": [
+      {
+        "components": [
+          "εἷς",
+          "δέκᾰ",
+          "pos1=masculine and neuter stem: {{m",
+          "grc",
+          "ἑν-",
+          "tr=-"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπιούσιος": [
+      {
+        "components": [
+          "ἐπ-",
+          "t1=on",
+          "εἶμῐ",
+          "t2=go, come"
+        ],
+        "source": "compound_template"
+      },
+      {
+        "components": [
+          "ἐπῐ-",
+          "t1=on",
+          "οὖσᾰ",
+          "t2=being, actual",
+          "-ῐος",
+          "pos3=adjectival suffix"
+        ],
+        "source": "compound_template"
+      },
+      {
+        "components": [
+          "ἐπῐ-",
+          "t1=on",
+          "οὐσῐ́ᾱ",
+          "t2=essence, existence, substance",
+          "-ῐος",
+          "pos3=adjectival suffix"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἄγαμος": [
+      {
+        "components": [
+          "ἀ-",
+          "γάμος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπάνω": [
+      {
+        "components": [
+          "ἐπί",
+          "t1=on",
+          "ἄνω",
+          "t2=upwards"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εὐοῖ": [
+      {
+        "components": [
+          "nocat=1",
+          "εὖ",
+          "t1=good",
+          "υἱός",
+          "t2=son"
+        ],
+        "source": "compound_template"
+      },
+      {
+        "components": [
+          "nocat=1",
+          "εὖ",
+          "t1=good",
+          "οἶνος",
+          "t2=wine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόμυια": [
+      {
+        "components": [
+          "κύων",
+          "μυῖα"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εξέδρα": [
+      {
+        "components": [
+          "ἐξ",
+          "ἕδρα",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἄφοβος": [
+      {
+        "components": [
+          "ἀ-",
+          "φόβος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δηλαδή": [
+      {
+        "components": [
+          "δῆλᾰ",
+          "t1=neuter plural of {{l",
+          "grc",
+          "δῆλος",
+          "t=visible, manifest"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξύμωρος": [
+      {
+        "components": [
+          "ὀξύς",
+          "μωρός",
+          "gloss1=sharp, keen, pointed",
+          "gloss2=dull, stupid, foolish"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καταιγίς": [
+      {
+        "components": [
+          "κᾰτα-",
+          "t1=down",
+          "αἰγῐ́ς",
+          "t2=storm"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνοκέφαλος": [
+      {
+        "components": [
+          "κύων",
+          "t1=dog",
+          "κεφαλή",
+          "alt2=κέφαλος",
+          "t2=head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πολυγαμία": [
+      {
+        "components": [
+          "πολύς",
+          "t1=many",
+          "γᾰ́μος",
+          "t2=marriage"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Δευτερονόμιο": [
+      {
+        "components": [
+          "δεύτερος",
+          "νόμος",
+          "t1=second",
+          "t2=law",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μνημεῖον": [
+      {
+        "components": [
+          "μνᾰ́ομαι",
+          "-μη",
+          "t1=I am mindful of"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Αγαρηνός": [
+      {
+        "components": [
+          "Ἄγαρ",
+          "-ηνός",
+          "t1=Hagar",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁμολογέω": [
+      {
+        "components": [
+          "ὁμός",
+          "t1=same",
+          "λόγος",
+          "t2=reasoning"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "προσέχω": [
+      {
+        "components": [
+          "πρός",
+          "ἔχω",
+          "t1=to, towards, with",
+          "t2=to have, hold"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐφίστημι": [
+      {
+        "components": [
+          "ἐπί",
+          "ῐ̔́στημῐ",
+          "t1=upon",
+          "t2=to stand"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑαυτοῦ": [
+      {
+        "components": [
+          "οὗ",
+          "alt1=ἕο",
+          "t1=him",
+          "αὐτός",
+          "alt2=αὐτοῦ",
+          "t2=self"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ανδρωνυμικό": [
+      {
+        "components": [
+          "ἀνήρ",
+          "ὄνυμα",
+          "t1=husband",
+          "t2=name",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παιδεραστής": [
+      {
+        "components": [
+          "παῖς",
+          "t1=boy",
+          "ἐραστής",
+          "t2=lover"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἑβδομηκοντακωμῆται": [
+      {
+        "components": [
+          "ἑβδομήκοντᾰ",
+          "κωμήτης",
+          "t1=seventy",
+          "t2=villager"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "-τικός": [
+      {
+        "components": [
+          "-τος",
+          "pos1=verbal adjective suffix",
+          "-κός",
+          "pos2=adjective suffix"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐφημερία": [
+      {
+        "components": [
+          "ἐπί",
+          "ἡμέρᾱ",
+          "alt1=ἐπ(ί)",
+          "t1=upon”, “on",
+          "t2=day",
+          "nocat=yes"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κρηνοφύλαξ": [
+      {
+        "components": [
+          "κρήνη",
+          "φῠ́λᾰξ",
+          "t1=well, spring, fountain",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἰνωποφύλαξ": [
+      {
+        "components": [
+          "Ἰνωπός",
+          "φῠ́λᾰξ",
+          "alt1=Ἰ̄νωπός",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψιλογραφέω": [
+      {
+        "components": [
+          "ψῑλός",
+          "γρᾰ́φος",
+          "t1=[of the sounds /e/ and /y/] written with the single letters ⟨ε⟩ and ⟨υ⟩ [rather than the [[digraph]]s ⟨αι⟩ and ⟨οι⟩]",
+          "t2=written character, letter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψιλοποιέω": [
+      {
+        "components": [
+          "ψῑλός",
+          "ποιέω",
+          "t1=[of vowels] written without the dasia [∴ with the psile]",
+          "t2=compose”, “write"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στασίαρχος": [
+      {
+        "components": [
+          "στάσις",
+          "ἀρχός",
+          "t1=sedition",
+          "t2=leader"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στασιάρχης": [
+      {
+        "components": [
+          "στάσις",
+          "ἀρχός",
+          "t1=sedition",
+          "t2=leader"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παιδοφίλης": [
+      {
+        "components": [
+          "παῖς",
+          "φιλέω",
+          "t1=boy",
+          "t2=love"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρηστομάθεια": [
+      {
+        "components": [
+          "χρηστός",
+          "μανθάνω",
+          "t1=useful",
+          "t2=learn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "διακοιρανέων": [
+      {
+        "components": [
+          "διά",
+          "κοιρᾰνέω",
+          "t1=over",
+          "t2=be lord or master"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τρισάθλιος": [
+      {
+        "components": [
+          "τρῐ́ς",
+          "ἄθλῐος",
+          "t1=thrice",
+          "t2=unhappy"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γυναικονόμος": [
+      {
+        "components": [
+          "γῠνή",
+          "νόμος",
+          "t1=woman",
+          "t2=law"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παιδονόμος": [
+      {
+        "components": [
+          "παῖς",
+          "νόμος",
+          "t1=child",
+          "t2=law"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θεόσοφος": [
+      {
+        "components": [
+          "θεός",
+          "σοφός",
+          "t1=a god, God",
+          "t2=skilled, wise"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀριστοφάνειος": [
+      {
+        "components": [
+          "ἄρῐστος",
+          "φαίνω",
+          "t1=best",
+          "t2=appear"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Σωσίπατρος": [
+      {
+        "components": [
+          "σῴζω",
+          "πᾰτήρ",
+          "t1=save",
+          "t2=father"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παρώνυμος": [
+      {
+        "components": [
+          "πᾰρᾰ́",
+          "ὄνῠμᾰ",
+          "t1=from; besides",
+          "t2=name"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀπόθεος": [
+      {
+        "components": [
+          "ἀπό",
+          "θεός",
+          "t1=from, away from",
+          "t2=god"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούπαις": [
+      {
+        "components": [
+          "βοῦς",
+          "παῖς",
+          "t1=ox",
+          "t2=child"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Βουκέφαλος": [
+      {
+        "components": [
+          "βοῦς",
+          "κεφᾰλή",
+          "t1=ox",
+          "t2=head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁλοσηρικός": [
+      {
+        "components": [
+          "ὅλος",
+          "σηρῐκός",
+          "t1=entirely",
+          "t2=silken"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τεσσαρεσκαίδεκα": [
+      {
+        "components": [
+          "τέσσᾰρες",
+          "καί",
+          "δέκᾰ",
+          "t1=four",
+          "t2=and",
+          "t3=ten"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑβδομηκοστόπρωτος": [
+      {
+        "components": [
+          "ἑβδομηκοστός",
+          "πρῶτος",
+          "t1=seventieth",
+          "t2=first"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μουνογενής": [
+      {
+        "components": [
+          "μοῦνος",
+          "γένος",
+          "t1=only",
+          "t2=offspring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μακροθυμία": [
+      {
+        "components": [
+          "μᾰκρός",
+          "θῡμός",
+          "t1=long",
+          "t2=soul; temper, passion"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόμαζον": [
+      {
+        "components": [
+          "κῠ́ων",
+          "μᾶζᾰ",
+          "t1=dog",
+          "pos1=oblique stem: {{m",
+          "grc",
+          "κῠν-",
+          "tr=-"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαρδόνυξ": [
+      {
+        "components": [
+          "σάρδιον",
+          "ὄνυξ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παντοκρατής": [
+      {
+        "components": [
+          "πᾶς",
+          "t1=all"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φερ' ειπείν": [
+      {
+        "components": [
+          "φέρω",
+          "εἰπεῖν"
+        ],
+        "source": "etymology_plus"
+      }
+    ],
+    "βραχυδάκτυλος": [
+      {
+        "components": [
+          "βρᾰχῠ́ς",
+          "δᾰ́κτῠλος",
+          "t1=short",
+          "t2=finger"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόδους": [
+      {
+        "components": [
+          "κῠ́ων",
+          "ὀδούς",
+          "pos1=stem: {{m",
+          "grc",
+          "κῠν-",
+          "tr=-"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόδων": [
+      {
+        "components": [
+          "κῠ́ων",
+          "ὀδών",
+          "pos1=stem: {{m",
+          "grc",
+          "κῠν-",
+          "tr=-"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δήθεν": [
+      {
+        "components": [
+          "δή",
+          "-θεν",
+          "t1=certainly",
+          "t2=",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αὐτάρ": [
+      {
+        "components": [
+          "αὖτε",
+          "ἄρα"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στου": [
+      {
+        "components": [
+          "εἰς",
+          "τοῦ",
+          "t1=to, in",
+          "t2=of the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στων": [
+      {
+        "components": [
+          "εἰς",
+          "τῶν",
+          "t1=to, in",
+          "t2=of the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στης": [
+      {
+        "components": [
+          "εἰς",
+          "τῆς",
+          "t1=to, in",
+          "t2=of the",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ῥοδοδάκτυλος": [
+      {
+        "components": [
+          "ῥόδον",
+          "t1=rose",
+          "δάκτυλος",
+          "t2=finger"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἠδέ": [
+      {
+        "components": [
+          "ἦ",
+          "δέ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "-δήποτε": [
+      {
+        "components": [
+          "δή",
+          "ποτέ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μεσημβρία": [
+      {
+        "components": [
+          "μέσον",
+          "ἦμαρ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀμφιθέατρον": [
+      {
+        "components": [
+          "ἀμφί",
+          "t1=on both sides",
+          "θέᾱτρον",
+          "t2=theatre"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Πολύμνια": [
+      {
+        "components": [
+          "πολῠ́ς",
+          "ῠ̔́μνος",
+          "t1=many",
+          "t2=hymn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μονόφθογγος": [
+      {
+        "components": [
+          "μόνος",
+          "φθόγγος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ὑψιπύλη": [
+      {
+        "components": [
+          "ὕψος",
+          "πύλη"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἰσομέτρητος": [
+      {
+        "components": [
+          "ῐ̓́σος",
+          "μέτρον",
+          "t1=equal",
+          "t2=measure"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λεπτομέρεια": [
+      {
+        "components": [
+          "λεπτός",
+          "μέρος",
+          "t1=small, thin, narrow",
+          "t2=part, share",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσόκαρπος": [
+      {
+        "components": [
+          "χρῡσός",
+          "κᾰρπός",
+          "t1=gold",
+          "t2=fruit"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κοκκοθραύστης": [
+      {
+        "components": [
+          "κόκκος",
+          "θραύστης",
+          "t1=kernel",
+          "t2=one who breaks {{n-g",
+          "or"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λευκομέλας": [
+      {
+        "components": [
+          "λευκός",
+          "μέλᾱς",
+          "t1=white",
+          "t2=black"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "διοξειῶν": [
+      {
+        "components": [
+          "διά",
+          "alt1=δῐ(ὰ)",
+          "pos1=preposition",
+          "ὀξειῶν",
+          "pos2=genitive plural feminine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Μητρόδωρος": [
+      {
+        "components": [
+          "μήτηρ",
+          "t1=mother",
+          "δῶρον",
+          "t2=gift"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀπολλόδωρος": [
+      {
+        "components": [
+          "Ἀπόλλων",
+          "t1=the god Apollo",
+          "δῶρον",
+          "t2=gift"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Φιλόδημος": [
+      {
+        "components": [
+          "φίλος",
+          "t1=beloved, loving",
+          "δῆμος",
+          "t2=people"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νέω": [
+      {
+        "components": [
+          "νέος",
+          "t1=new",
+          "ἔτος",
+          "t2=year",
+          "lit=new year"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἠμέν": [
+      {
+        "components": [
+          "ἦ",
+          "μέν"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παυσίλυπος": [
+      {
+        "components": [
+          "παῦσις",
+          "t1=stopping, ceasing",
+          "λύπη",
+          "t2=pain, grief, sorrow"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νεκράγγελος": [
+      {
+        "components": [
+          "νεκρός",
+          "alt1=νεκρο-",
+          "t1=dead",
+          "ἄγγελος",
+          "t2=messenger"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Εὐρυάλη": [
+      {
+        "components": [
+          "εὐρύς",
+          "ἄλη",
+          "t1=wide",
+          "t2=wandering, roaming"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νεκρόμαντις": [
+      {
+        "components": [
+          "νεκρός",
+          "alt1=νεκρο-",
+          "t1=dead",
+          "μάντις",
+          "t2=prophet"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εὐρύπρωκτος": [
+      {
+        "components": [
+          "εὐρύς",
+          "πρωκτός"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Θεαίτητος": [
+      {
+        "components": [
+          "θεός",
+          "t1=god",
+          "αἰτητός",
+          "t2=asked, required"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Διονυσόδωρος": [
+      {
+        "components": [
+          "Δῐόνῡσος",
+          "δῶρον",
+          "t1=the god Dionysos",
+          "t2=gift",
+          "-ος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυκλοτερής": [
+      {
+        "components": [
+          "κύκλος",
+          "t1=circle",
+          "τείρω",
+          "-ής"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀλληγορία": [
+      {
+        "components": [
+          "ἄλλος",
+          "ἀγορεύω",
+          "t1=other",
+          "t2=I speak"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Κλεοπτόλεμος": [
+      {
+        "components": [
+          "κλέος",
+          "t1=fame",
+          "πτόλεμος",
+          "t2=war"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπίσταμαι": [
+      {
+        "components": [
+          "ἐπι-",
+          "ἵστημι"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Πυθοκλῆς": [
+      {
+        "components": [
+          "Πυθώ",
+          "-κλῆς",
+          "t1=Python",
+          "t2=glory"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εφήμερος": [
+      {
+        "components": [
+          "ἐπί",
+          "ἡμέρᾱ",
+          "alt1=ἐπ(ί)",
+          "t1=upon”, “on",
+          "t2=day",
+          "nocat=yes"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κοσμήτωρ": [
+      {
+        "components": [
+          "κοσμέω",
+          "t1=order",
+          "-τωρ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αναβαθμίδα": [
+      {
+        "components": [
+          "ἀνα-",
+          "t1=up, upwards",
+          "βαθμίς",
+          "t2=step, rung",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πετροσέλινον": [
+      {
+        "components": [
+          "πέτρος",
+          "t1=rock",
+          "σέλινον",
+          "t2=celery"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μικροσκόπιο": [
+      {
+        "components": [
+          "μικρός",
+          "σκοπέω",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑκηβόλος": [
+      {
+        "components": [
+          "ἑκών",
+          "βόλος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θηριομάχος": [
+      {
+        "components": [
+          "θηρίον",
+          "t1=wild beast",
+          "μάχομαι",
+          "t2=I fight"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγήνωρ": [
+      {
+        "components": [
+          "ἄγω",
+          "t1=lead",
+          "-ήνωρ",
+          "t2=man"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππόδαμος": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πυράγρα": [
+      {
+        "components": [
+          "πῦρ",
+          "ἄγρᾱ",
+          "t1=fire",
+          "t2=catching"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μηλολόνθη": [
+      {
+        "components": [
+          "μῆλον",
+          "t1=apple, fruit",
+          "ὄλλυμι",
+          "t2=destroy"
+        ],
+        "source": "compound_template"
+      },
+      {
+        "components": [
+          "μῆλον",
+          "t1=sheep",
+          "ὄλυνθος",
+          "t2=wild fig"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φιλύρα": [
+      {
+        "components": [
+          "φίλος",
+          "ὕρον",
+          "t1=friend",
+          "t2=swarm of bees"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "συκόμορος": [
+      {
+        "components": [
+          "σῦκον",
+          "μόρον",
+          "t1=fig",
+          "t2=mulberry"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀστυπάλαια": [
+      {
+        "components": [
+          "ἄστυ",
+          "παλαιός",
+          "t1=city",
+          "t2=ancient"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσόλιθος": [
+      {
+        "components": [
+          "χρυσός",
+          "λίθος",
+          "t1=gold",
+          "t2=stone"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Χαρίλαος": [
+      {
+        "components": [
+          "χάρις",
+          "λαός",
+          "t1=beauty, elegance",
+          "t2=people"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑλλέβορος": [
+      {
+        "components": [
+          "ἐλλός",
+          "βιβρώσκω",
+          "t1=deer",
+          "t2=to eat"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κοροπλάθος": [
+      {
+        "components": [
+          "κόρος",
+          "πλάσσω",
+          "t1=puppet, doll",
+          "t2=to model"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λιθόκολλα": [
+      {
+        "components": [
+          "λίθος",
+          "κόλλα",
+          "t1=stone",
+          "t2=glue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κονιορτός": [
+      {
+        "components": [
+          "κόνις",
+          "ὄρνυμι",
+          "t1=dust",
+          "t2=to raise"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούλιμος": [
+      {
+        "components": [
+          "βοῦς",
+          "λῑμός",
+          "t1=ox",
+          "t2=hunger"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τραγάκανθα": [
+      {
+        "components": [
+          "τράγος",
+          "ἄκανθα",
+          "t1=goat",
+          "t2=thorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Βιάνωρ": [
+      {
+        "components": [
+          "βίᾱ",
+          "ἀνήρ",
+          "t1=bodily strength",
+          "t2=man, husband"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐνίστημι": [
+      {
+        "components": [
+          "ἐν",
+          "ῐ̔́στημῐ"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χέρνιψ": [
+      {
+        "components": [
+          "χείρ",
+          "νίζω",
+          "t1=hand",
+          "t2=to wash"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δενδρολίβανον": [
+      {
+        "components": [
+          "δένδρον",
+          "λίβανος",
+          "t1=tree",
+          "t2=frankincense"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίμηλον": [
+      {
+        "components": [
+          "χαμαί",
+          "μῆλον",
+          "t1=near the ground",
+          "t2=apple"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυροβάλανος": [
+      {
+        "components": [
+          "μύρον",
+          "βάλανος",
+          "t1=unguent, perfume",
+          "t2=acorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑοσκύαμος": [
+      {
+        "components": [
+          "ὗς",
+          "κύαμος",
+          "t1=swine",
+          "t2=bean"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαιρέφυλλον": [
+      {
+        "components": [
+          "χαίρω",
+          "φύλλον",
+          "t1=to enjoy",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πεντάφυλλον": [
+      {
+        "components": [
+          "πεντα-",
+          "φύλλον",
+          "t1=five",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαρκοκόλλα": [
+      {
+        "components": [
+          "σάρξ",
+          "κόλλα",
+          "t1=flesh",
+          "t2=glue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυρμηκολέων": [
+      {
+        "components": [
+          "μύρμηξ",
+          "λέων",
+          "t1=ant",
+          "t2=lion"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μαχαιρόφυλλον": [
+      {
+        "components": [
+          "μάχαιρα",
+          "φύλλον",
+          "t1=knife",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίπιτυς": [
+      {
+        "components": [
+          "χαμαί",
+          "πίτυς",
+          "t1=near the ground",
+          "t2=pine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀφιοῦχος": [
+      {
+        "components": [
+          "ὄφις",
+          "ἔχω",
+          "t1=snake",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόροδον": [
+      {
+        "components": [
+          "κῠ́ων",
+          "ῥόδον",
+          "t1=dog",
+          "pos1=oblique stem: {{m",
+          "grc",
+          "κῠν-",
+          "tr=-"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱμαντόπους": [
+      {
+        "components": [
+          "ἱμάς",
+          "πούς",
+          "t1=leathern strap",
+          "t2=foot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀμπελόδεσμος": [
+      {
+        "components": [
+          "ἄμπελος",
+          "δεσμός",
+          "t1=vine",
+          "t2=bond, fetter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππόβοτος": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ποταμογείτων": [
+      {
+        "components": [
+          "ποταμός",
+          "γείτων",
+          "t1=river",
+          "t2=neighbour"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀμπελόκαρπον": [
+      {
+        "components": [
+          "ἄμπελος",
+          "καρπός",
+          "t1=vine",
+          "t2=fruit"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δενδρομαλάχη": [
+      {
+        "components": [
+          "δένδρον",
+          "μαλάχη",
+          "t1=tree",
+          "t2=mallow"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξυάκανθα": [
+      {
+        "components": [
+          "ὀξῠ́ς",
+          "ἄκανθα",
+          "t1=sharp",
+          "t2=thorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ναυσικλειτός": [
+      {
+        "components": [
+          "ναῦς",
+          "κλειτός",
+          "t1=ship",
+          "t2=famous"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σακκοπήρα": [
+      {
+        "components": [
+          "σάκκος",
+          "πήρα",
+          "t1=sack",
+          "t2=wallet"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀσκοπήρα": [
+      {
+        "components": [
+          "ἀσκός",
+          "πήρα",
+          "t1=wineskin",
+          "t2=wallet"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χοιροτροφεῖον": [
+      {
+        "components": [
+          "χοῖρος",
+          "τροφεῖον",
+          "t1=pig",
+          "t2=poultry house"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀσκοθύλακος": [
+      {
+        "components": [
+          "ἀσκός",
+          "θῡ́λακος",
+          "t1=wineskin",
+          "t2=sack, bag"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δροσόλιθος": [
+      {
+        "components": [
+          "δρόσος",
+          "λίθος",
+          "t1=dew",
+          "t2=stone"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ῥοδόδενδρον": [
+      {
+        "components": [
+          "ῥόδον",
+          "δένδρον",
+          "t1=rose",
+          "t2=tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιάκτη": [
+      {
+        "components": [
+          "χαμαί",
+          "ἀκτέα",
+          "t1=near the ground",
+          "t2=elder"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γαλεάγρα": [
+      {
+        "components": [
+          "γαλέη",
+          "ἄγρᾱ",
+          "t1=weasel",
+          "t2=hunting"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀρνιθόγαλον": [
+      {
+        "components": [
+          "ὄρνις",
+          "γάλα",
+          "t1=bird",
+          "t2=milk"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυάγρα": [
+      {
+        "components": [
+          "μῦς",
+          "ἄγρᾱ",
+          "t1=mouse",
+          "t2=hunting"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βρεφοτροφεῖον": [
+      {
+        "components": [
+          "βρέφος",
+          "τροφεῖον",
+          "t1=baby",
+          "t2=small room, chamber"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὠτογλυφίς": [
+      {
+        "components": [
+          "οὖς",
+          "γλυφίς",
+          "t1=ear",
+          "t2=pen knife, chisel"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀδοντάγρα": [
+      {
+        "components": [
+          "ὀδούς",
+          "ἄγρᾱ",
+          "t1=tooth",
+          "t2=catching"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ποδοστράβη": [
+      {
+        "components": [
+          "πούς",
+          "στραβός",
+          "t1=foot",
+          "t2=distorted"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαικυπάρισσος": [
+      {
+        "components": [
+          "χαμαί",
+          "κῠπᾰ́ρῐσσος",
+          "t1=near the ground",
+          "t2=cypress"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τραγοπώγων": [
+      {
+        "components": [
+          "τράγος",
+          "πώγων",
+          "t1=goat",
+          "t2=beard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τραγέλαφος": [
+      {
+        "components": [
+          "τράγος",
+          "t1=billy goat",
+          "ἔλαφος",
+          "t2=deer"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱεροφύλαξ": [
+      {
+        "components": [
+          "ἱερός",
+          "t1=holy",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀστρολάβος": [
+      {
+        "components": [
+          "ἄστρον",
+          "λαμβάνω",
+          "t1=star",
+          "t2=to take"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούφθαλμον": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "ὀφθαλμός",
+          "t2=eye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λιθολάβος": [
+      {
+        "components": [
+          "λίθος",
+          "λαμβάνω",
+          "t1=stone",
+          "t2=to take"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀμπελόπρασον": [
+      {
+        "components": [
+          "ἄμπελος",
+          "πράσον",
+          "t1=vine",
+          "t2=leek"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀρνόγλωσσον": [
+      {
+        "components": [
+          "ἀρήν",
+          "t1=lamb",
+          "γλῶσσα",
+          "t2=tongue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ξιφομάχαιρα": [
+      {
+        "components": [
+          "ξίφος",
+          "t1=sword",
+          "μάχαιρα",
+          "t2=knife, dagger"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λευκάκανθα": [
+      {
+        "components": [
+          "λευκός",
+          "ἄκανθα",
+          "t1=goat",
+          "t2=thorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δορυδρέπανον": [
+      {
+        "components": [
+          "δόρυ",
+          "t1=spear, lance",
+          "δρέπανον",
+          "t2=scythe/[[sickle]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσολαβής": [
+      {
+        "components": [
+          "χρυσός",
+          "λαμβάνω",
+          "t1=gold",
+          "t2=to take"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόσβατος": [
+      {
+        "components": [
+          "κύων",
+          "βάτος",
+          "t1=dog",
+          "t2=blackberry"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούπλευρος": [
+      {
+        "components": [
+          "βοῦς",
+          "πλευρά",
+          "t1=ox",
+          "t2=rib, side"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τυρόκνηστις": [
+      {
+        "components": [
+          "τυρός",
+          "t1=cheese",
+          "κνήστις",
+          "t2=grater"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐλαφόβοσκον": [
+      {
+        "components": [
+          "ἔλαφος",
+          "t1=deer",
+          "βιβρώσκω",
+          "t2=to eat"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιδάφνη": [
+      {
+        "components": [
+          "χαμαί",
+          "δάφνη",
+          "t1=near the ground",
+          "t2=laurel"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαυροκτόνος": [
+      {
+        "components": [
+          "σαύρα",
+          "κτόνος",
+          "t1=lizard",
+          "t2=murder"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσόγονον": [
+      {
+        "components": [
+          "χρυσός",
+          "γόνος",
+          "t1=gold",
+          "t2=fruit, product"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ζυγόδεσμον": [
+      {
+        "components": [
+          "ζυγόν",
+          "δεσμός",
+          "t1=yoke",
+          "t2=bond, fetter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούγλωσσον": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "γλῶσσα",
+          "t2=tongue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λιθάργυρος": [
+      {
+        "components": [
+          "λίθος",
+          "ἄργυρος",
+          "t1=stone",
+          "t2=silver"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αἰγοκέφαλος": [
+      {
+        "components": [
+          "αἴξ",
+          "κεφαλή",
+          "t1=goat",
+          "t2=head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐλαιόφυλλον": [
+      {
+        "components": [
+          "ἐλαία",
+          "φύλλον",
+          "t1=olive tree",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γλυκυσίδη": [
+      {
+        "components": [
+          "γλυκύς",
+          "t1=sweet",
+          "σίδη",
+          "t2=pomegranate"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λινόζωστις": [
+      {
+        "components": [
+          "λίνον",
+          "t1=flax",
+          "ζώννῡμι",
+          "t2=to gird"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίδρυς": [
+      {
+        "components": [
+          "χαμαί",
+          "t1=near the ground",
+          "δρῦς",
+          "t2=oak"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀνδρόσαιμον": [
+      {
+        "components": [
+          "ἀνήρ",
+          "t1=man",
+          "αἷμα",
+          "t2=blood"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὕδραυλις": [
+      {
+        "components": [
+          "ὕδωρ",
+          "t1=water",
+          "αὐλός",
+          "t2=pipe"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀντίπαλος": [
+      {
+        "components": [
+          "ἀντῐ́",
+          "πάλη",
+          "t1=against",
+          "t2=wrestling, fight"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λιθόσπερμον": [
+      {
+        "components": [
+          "λίθος",
+          "σπέρμα",
+          "t1=stone",
+          "t2=seed"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαισύκη": [
+      {
+        "components": [
+          "χαμαί",
+          "συκῆ",
+          "t1=near the ground",
+          "t2=fig-tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στρωματόδεσμον": [
+      {
+        "components": [
+          "στρῶμα",
+          "δεσμός",
+          "t1=bedclothes",
+          "t2=bond, fetter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαγηνοβόλος": [
+      {
+        "components": [
+          "σαγήνη",
+          "βόλος",
+          "t1=seine",
+          "t2=cast of a net"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λευκόφθαλμος": [
+      {
+        "components": [
+          "λευκός",
+          "ὀφθαλμός",
+          "t1=white",
+          "t2=eye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ναοφύλαξ": [
+      {
+        "components": [
+          "νᾱός",
+          "t1=inmost part of a temple",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      },
+      {
+        "components": [
+          "ναῦς",
+          "t1=ship",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυριόφυλλον": [
+      {
+        "components": [
+          "μῡρίος",
+          "φύλλον",
+          "t1=ten thousand",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαικέρασος": [
+      {
+        "components": [
+          "χαμαί",
+          "κερασός",
+          "t1=near the ground",
+          "t2=bird cherry"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θηλυπτερίς": [
+      {
+        "components": [
+          "θῆλυς",
+          "t1=female",
+          "πτέρις",
+          "t2=fern"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ναύκληρος": [
+      {
+        "components": [
+          "ναῦς",
+          "t1=ship",
+          "κλῆρος",
+          "t2=lot; clergy"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυοσωτίς": [
+      {
+        "components": [
+          "μῦς",
+          "t1=mouse",
+          "οὖς",
+          "t2=ear"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούτομον": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "τέμνω",
+          "t2=to cut"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἔχεκλος": [
+      {
+        "components": [
+          "ἔχω",
+          "t1=to hold",
+          "κλέος",
+          "t2=fame"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίκισσος": [
+      {
+        "components": [
+          "χαμαί",
+          "κισσός",
+          "t1=near the ground",
+          "t2=ivy"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κνιπολόγος": [
+      {
+        "components": [
+          "κνίψ",
+          "λέγω",
+          "t1=insect",
+          "t2=to gather, pick up"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μελαγκόρυφος": [
+      {
+        "components": [
+          "μέλας",
+          "κορυφή",
+          "t1=black",
+          "t2=top of the head, crown"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νηττοφόνος": [
+      {
+        "components": [
+          "νῆττα",
+          "t1=duck",
+          "φόνος",
+          "t2=murder, slaughter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ποδανιπτήρ": [
+      {
+        "components": [
+          "πούς",
+          "t1=foot",
+          "νιπτήρ",
+          "t2=washbasin"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πύγαργος": [
+      {
+        "components": [
+          "πῡγή",
+          "ἀργός",
+          "t1=rump, tail",
+          "t2=white, bright"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱστόποδες": [
+      {
+        "components": [
+          "ἱστός",
+          "t1=mast, beam, loom",
+          "πούς",
+          "t2=foot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δρυοπτερίς": [
+      {
+        "components": [
+          "δρῦς",
+          "t1=oak",
+          "πτέρις",
+          "t2=fern"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Λαοθόη": [
+      {
+        "components": [
+          "λᾱός",
+          "t1=people",
+          "θοός",
+          "t2=quick, swift"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἱππόθοος": [
+      {
+        "components": [
+          "ἵππος",
+          "θοός",
+          "t1=horse",
+          "t2=quick"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τριχομανές": [
+      {
+        "components": [
+          "θρίξ",
+          "t1=hair",
+          "μαίνομαι",
+          "t2=to be mad"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀλκάθοος": [
+      {
+        "components": [
+          "ἀλκή",
+          "θοός",
+          "t1=prowess, force",
+          "t2=quick"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἡμεροκαλλές": [
+      {
+        "components": [
+          "ἡμέρα",
+          "t1=day",
+          "κάλλος",
+          "t2=beautiful"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λατύπη": [
+      {
+        "components": [
+          "λᾶας",
+          "t1=stone",
+          "τυπή",
+          "t2=blow"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ναυσίθοος": [
+      {
+        "components": [
+          "ναῦς",
+          "θοός",
+          "t1=ship",
+          "t2=quick"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἁλιπόρφυρος": [
+      {
+        "components": [
+          "ἅλς",
+          "πορφύρα",
+          "t1=salt; sea",
+          "t2=purple-fish"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οἰνοχόη": [
+      {
+        "components": [
+          "οἶνος",
+          "t1=wine",
+          "χέω",
+          "t2=to pour"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κεντρομυρσίνη": [
+      {
+        "components": [
+          "κέντρον",
+          "μυρσίνη",
+          "t1=goad, spur",
+          "t2=myrtle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυχνοῦχος": [
+      {
+        "components": [
+          "λύχνος",
+          "ἔχω",
+          "t1=lamp",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀνόχειλος": [
+      {
+        "components": [
+          "ὄνος",
+          "t1=donkey",
+          "χεῖλος",
+          "t2=lip"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐχινόπους": [
+      {
+        "components": [
+          "ἐχῖνος",
+          "πούς",
+          "t1=hedgehog",
+          "t2=foot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱπποσέλινον": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "σέλινον",
+          "t2=celery"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀβελισκολύχνιον": [
+      {
+        "components": [
+          "ὀβελίσκος",
+          "t1=spit, obelisk",
+          "λυχνίον",
+          "t2=lampholder"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιβάλανος": [
+      {
+        "components": [
+          "χαμαί",
+          "βάλανος",
+          "t1=near the ground",
+          "t2=acorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυχνοκαΐα": [
+      {
+        "components": [
+          "λύχνος",
+          "καίω",
+          "t1=lamp",
+          "t2=to light, kindle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυλήκορον": [
+      {
+        "components": [
+          "μύλη",
+          "t1=mill",
+          "κόρος",
+          "t2=besom"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παυσικάπη": [
+      {
+        "components": [
+          "παῦσις",
+          "t1=stopping, ceasing",
+          "κάπτω",
+          "t2=to gulp down"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φοινίκουρος": [
+      {
+        "components": [
+          "φοῖνιξ",
+          "οὐρά",
+          "t1=crimson",
+          "t2=tail"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππόφλομος": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "φλόμος",
+          "t2=mullein"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνόγλωσσον": [
+      {
+        "components": [
+          "κύων",
+          "t1=dog",
+          "γλῶσσα",
+          "t2=tongue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαλκήλατος": [
+      {
+        "components": [
+          "χᾰλκός",
+          "ἐλαύνω",
+          "t1=brass",
+          "t2=to strike, forge"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φελλόδρυς": [
+      {
+        "components": [
+          "φελλός",
+          "t1=cork oak",
+          "δρῦς",
+          "t2=oak"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θηριόδηγμα": [
+      {
+        "components": [
+          "θηρίον",
+          "t1=beast, poisonous animal",
+          "δῆγμα",
+          "t2=bite"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἀμφιθόη": [
+      {
+        "components": [
+          "ἀμφί",
+          "t1=on both sides",
+          "θοός",
+          "t2=quick, swift"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κρεοστάθμη": [
+      {
+        "components": [
+          "κρέας",
+          "t1=flesh, meat",
+          "στάθμη",
+          "t2=carpenter's line"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουδάκη": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=cow",
+          "δάκνω",
+          "t2=to bite"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αἰγόκερας": [
+      {
+        "components": [
+          "αἴξ",
+          "t1=goat",
+          "κέρας",
+          "t2=horn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εὐρόνοτος": [
+      {
+        "components": [
+          "Εὖρος",
+          "t1=east wind",
+          "νότος",
+          "t2=south wind"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑόσερις": [
+      {
+        "components": [
+          "ὗς",
+          "σέρις",
+          "t1=swine",
+          "t2=endive or chicory"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουπόρος": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "πείρω",
+          "t2=to pierce"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ταγηνοστρόφιον": [
+      {
+        "components": [
+          "τάγηνον",
+          "στρόφιον",
+          "t1=frying pan",
+          "t2=band, headband"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χυτρόπους": [
+      {
+        "components": [
+          "χύτρα",
+          "πούς",
+          "t1=earthen pot, pipkin",
+          "t2=foot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δημιόπρατος": [
+      {
+        "components": [
+          "δήμιος",
+          "t1=public",
+          "πρᾱτός",
+          "t2=for sale"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἰπνολέβης": [
+      {
+        "components": [
+          "ἰπνός",
+          "t1=oven, furnace",
+          "λέβης",
+          "t2=kettle, cauldron"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αἰγόλεθρος": [
+      {
+        "components": [
+          "αἴξ",
+          "ὄλεθρος",
+          "t1=goat",
+          "t2=plague, bane"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βοάνθεμον": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "ἄνθεμον",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πύραυνος": [
+      {
+        "components": [
+          "πῦρ",
+          "t1=fire",
+          "αὔω",
+          "t2=to light a fire"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Θρασύμηλος": [
+      {
+        "components": [
+          "θρᾰσῠ́ς",
+          "t1=bold",
+          "μῆλον",
+          "t2=apple; sheep"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίλυκος": [
+      {
+        "components": [
+          "χαμαί",
+          "λύκος",
+          "t1=near the ground",
+          "t2=wolf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀσκοπυτίνη": [
+      {
+        "components": [
+          "ἀσκός",
+          "t1=skin, hide",
+          "πυτίνη",
+          "t2=flagon"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Μοσσύνοικοι": [
+      {
+        "components": [
+          "μόσσῡν",
+          "t1=wooden tower",
+          "οἰκέω",
+          "t2=to dwell, live"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χειρόνιπτρον": [
+      {
+        "components": [
+          "χείρ",
+          "t1=hand",
+          "νίπτρον",
+          "t2=water for washing"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξύβαφον": [
+      {
+        "components": [
+          "ὀξύς",
+          "t1=sharp",
+          "βάπτω",
+          "t2=to dip"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Γόργιππος": [
+      {
+        "components": [
+          "γοργός",
+          "t1=fierce, terrible",
+          "ἵππος",
+          "t2=horse"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἡνίοχος": [
+      {
+        "components": [
+          "ἡνία",
+          "t1=bridle, rein",
+          "ἔχω",
+          "t2=to hold"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυάκανθος": [
+      {
+        "components": [
+          "μῦς",
+          "t1=mouse",
+          "ἄκανθος",
+          "t2=thorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιπεύκη": [
+      {
+        "components": [
+          "χαμαί",
+          "πεύκη",
+          "t1=near the ground",
+          "t2=pine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χιλιόφυλλος": [
+      {
+        "components": [
+          "χίλιοι",
+          "t1=thousand",
+          "φῠ́λλον",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψευδοκῆρυξ": [
+      {
+        "components": [
+          "ψευδής",
+          "t1=false",
+          "κῆρυξ",
+          "t2=herald"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριόρροδον": [
+      {
+        "components": [
+          "ἄγριος",
+          "ῥόδον",
+          "t1=wild",
+          "t2=rose"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κραταιόγονον": [
+      {
+        "components": [
+          "κραταιός",
+          "t1=strong, mighty",
+          "γόνος",
+          "t2=fruit, seed"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούκερας": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "κέρας",
+          "t2=horn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξύσχοινος": [
+      {
+        "components": [
+          "ὀξύς",
+          "t1=sharp",
+          "σχοῖνος",
+          "t2=rush"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πλημοχόη": [
+      {
+        "components": [
+          "πλήμη",
+          "t1=flood tide",
+          "χέω",
+          "t2=to pour"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χηναλώπηξ": [
+      {
+        "components": [
+          "χήν",
+          "t1=goose",
+          "ἀλώπηξ",
+          "t2=fox"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Δημολέων": [
+      {
+        "components": [
+          "δῆμος",
+          "λέων",
+          "t1=people",
+          "t2=lion"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀνοκρόταλος": [
+      {
+        "components": [
+          "ὄνος",
+          "t1=ass, donkey",
+          "κρόταλον",
+          "t2=rattle, clapper"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμελαία": [
+      {
+        "components": [
+          "χαμαί",
+          "t1=near the ground, on the ground",
+          "ἐλαία",
+          "t2=olive tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁλόστεον": [
+      {
+        "components": [
+          "ὅλος",
+          "t1=entire, whole",
+          "ὀστέον",
+          "t2=bone"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσάνθεμον": [
+      {
+        "components": [
+          "χρῡσός",
+          "t1=gold",
+          "ἄνθεμον",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑλίχρυσος": [
+      {
+        "components": [
+          "ἕλειος",
+          "t1=muddy, swampy",
+          "χρυσός",
+          "t2=gold"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψωρανθεμίς": [
+      {
+        "components": [
+          "ψώρα",
+          "ἀνθεμίς",
+          "t1=scabies, mange",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στενόστομος": [
+      {
+        "components": [
+          "στενός",
+          "στόμα",
+          "t1=narrow",
+          "t2=mouth"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "περδικοθήρας": [
+      {
+        "components": [
+          "πέρδιξ",
+          "t1=partridge",
+          "θηράω",
+          "t2=to hunt"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑπτακότυλος": [
+      {
+        "components": [
+          "ἑπτά",
+          "t1=seven",
+          "κοτύλη",
+          "t2=cotyle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "συροπέρδιξ": [
+      {
+        "components": [
+          "Σύρος",
+          "πέρδιξ",
+          "t1=Syrian",
+          "t2=partridge"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουμελία": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "μελία",
+          "t2=manna ash"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κυνοῦχος": [
+      {
+        "components": [
+          "κύων",
+          "ἔχω",
+          "t1=dog",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυκοσκυτάλιον": [
+      {
+        "components": [
+          "λύκος",
+          "t1=wolf",
+          "σκυτάλιον",
+          "t2=little staff, baton"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καλαμάγρωστις": [
+      {
+        "components": [
+          "κάλαμος",
+          "t1=reed",
+          "ἄγρωστις",
+          "t2=quackgrass"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀρκόφθαλμον": [
+      {
+        "components": [
+          "ἄρκος",
+          "t1=bear",
+          "ὀφθαλμός",
+          "t2=eye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑδρέλαιον": [
+      {
+        "components": [
+          "ὕδωρ",
+          "ἔλαιον",
+          "t1=water",
+          "t2=oil"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Τηλέπυλος": [
+      {
+        "components": [
+          "τῆλε",
+          "t1=far off, far away",
+          "πύλη",
+          "t2=wing of gates"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ναύβολος": [
+      {
+        "components": [
+          "ναῦς",
+          "t1=ship",
+          "βόλος",
+          "t2=throw, cast of a net"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὄναγρος": [
+      {
+        "components": [
+          "ὄνος",
+          "ἄγριος",
+          "t1=ass, donkey",
+          "t2=wild"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψευδοβούνιον": [
+      {
+        "components": [
+          "ψευδής",
+          "βούνιον",
+          "t1=false",
+          "t2=earthnut"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱερακοπόδιον": [
+      {
+        "components": [
+          "ἱέραξ",
+          "πόδιον",
+          "t1=hawk, falcon",
+          "t2=little foot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυγγούριον": [
+      {
+        "components": [
+          "λύγξ",
+          "t1=lynx",
+          "οὖρον",
+          "t2=urine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀργυρόλιθος": [
+      {
+        "components": [
+          "ἄργυρος",
+          "λίθος",
+          "t1=silver",
+          "t2=stone"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γαμψῶνυξ": [
+      {
+        "components": [
+          "γαμψός",
+          "ὄνυξ",
+          "t1=crooked",
+          "t2=nail, talon"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σπερμολόγος": [
+      {
+        "components": [
+          "σπέρμα",
+          "λέγω",
+          "t1=seed",
+          "t2=to gather"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ναύαρχος": [
+      {
+        "components": [
+          "ναῦς",
+          "t1=ship",
+          "ἀρχός",
+          "t2=ruler"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σκορπιοκτόνον": [
+      {
+        "components": [
+          "σκορπίος",
+          "t1=scorpion",
+          "κτείνω",
+          "t2=to kill"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πέλλυτρα": [
+      {
+        "components": [
+          "πούς",
+          "t1=foot",
+          "ἔλυτρον",
+          "t2=covering"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μελισσόφυλλον": [
+      {
+        "components": [
+          "μέλισσα",
+          "t1=honey bee",
+          "φύλλον",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμεύνη": [
+      {
+        "components": [
+          "χαμαί",
+          "εὐνή",
+          "t1=near the ground",
+          "t2=bed; abode"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑρμοδάκτυλον": [
+      {
+        "components": [
+          "Ἑρμῆς",
+          "t1=Hermes",
+          "δάκτυλος",
+          "t2=finger"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὠμοπλάτη": [
+      {
+        "components": [
+          "ὦμος",
+          "πλάτη",
+          "t1=shoulder",
+          "t2=flat object"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κεδρελάτη": [
+      {
+        "components": [
+          "κέδρος",
+          "t1=cedar",
+          "ἐλάτη",
+          "t2=fir"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θεοτόκος": [
+      {
+        "components": [
+          "θεο-",
+          "t1=god",
+          "-τόκος",
+          "t2=who bears, gives birth"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιμυρσίνη": [
+      {
+        "components": [
+          "χαμαί",
+          "μυρσίνη",
+          "t1=near the ground",
+          "t2=myrtle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱεροβοτάνη": [
+      {
+        "components": [
+          "ἱερός",
+          "βοτάνη",
+          "t1=sacred, holy",
+          "t2=grass, herb, fodder"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κρεάγρα": [
+      {
+        "components": [
+          "κρέας",
+          "ἄγρᾱ",
+          "t1=meat",
+          "t2=hunting"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ξυλαλόη": [
+      {
+        "components": [
+          "ξύλον",
+          "t1=wood",
+          "ἀλόη",
+          "t2=aloe"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χωλίαμβος": [
+      {
+        "components": [
+          "χωλός",
+          "t1=lame, limping",
+          "ἴαμβος",
+          "t2=iamb"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λινόσπερμον": [
+      {
+        "components": [
+          "λίνον",
+          "σπέρμα",
+          "t1=flax",
+          "t2=seed"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀρόσπιζος": [
+      {
+        "components": [
+          "ὄρος",
+          "σπίζα",
+          "-ος",
+          "t1=mountain",
+          "t2=chaffinch"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀκρωμία": [
+      {
+        "components": [
+          "ἄκρος",
+          "t1=outermost",
+          "ὦμος",
+          "t2=shoulder",
+          "-ία"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριοκρόμμυον": [
+      {
+        "components": [
+          "ἄγριος",
+          "κρόμμυον",
+          "t1=wild",
+          "t2=onion"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παραδοξολόγος": [
+      {
+        "components": [
+          "παράδοξος",
+          "-λόγος",
+          "t1=unexpected, strange",
+          "t2=to gather"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀχετόκρανον": [
+      {
+        "components": [
+          "ὀχετός",
+          "t1=waterpipe, aqueduct",
+          "κάρα",
+          "t2=head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐχήνια": [
+      {
+        "components": [
+          "ἔχω",
+          "t1=to hold",
+          "ἡνία",
+          "t2=bridle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στέγαρχος": [
+      {
+        "components": [
+          "στέγος",
+          "t1=roof; house",
+          "ἀρχός",
+          "t2=ruler"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οἰκοδεσπότης": [
+      {
+        "components": [
+          "οἶκος",
+          "t1=household",
+          "δεσπότης",
+          "t2=master, ruler"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καμηλοπόδιον": [
+      {
+        "components": [
+          "κάμηλος",
+          "πόδιον",
+          "t1=camel",
+          "t2=little foot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σταθμοῦχος": [
+      {
+        "components": [
+          "σταθμός",
+          "ἔχω",
+          "t1=standing place",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιλεύκη": [
+      {
+        "components": [
+          "χαμαί",
+          "λεύκη",
+          "t1=near the ground",
+          "t2=white poplar"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βαλανάγρα": [
+      {
+        "components": [
+          "βάλανος",
+          "ἄγρᾱ",
+          "t1=acorn",
+          "t2=hunting"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑπερήφανος": [
+      {
+        "components": [
+          "ῠ̔πέρ",
+          "φᾱνός",
+          "t1=over, above",
+          "t2=appearing, shining, bright, resplendent"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑπεράφανος": [
+      {
+        "components": [
+          "ῠ̔πέρ",
+          "φᾱνός",
+          "t1=over, above",
+          "t2=appearing, shining, bright, resplendent"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἁλικάκκαβον": [
+      {
+        "components": [
+          "ἅλς",
+          "t1=salt",
+          "κακκάβη",
+          "t2=three-legged pot; partridge"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱερόγλυφος": [
+      {
+        "components": [
+          "ἱερός",
+          "γλυφή",
+          "t1=sacred, holy",
+          "t2=carved work"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γλωσσοπέτρα": [
+      {
+        "components": [
+          "γλῶσσα",
+          "πέτρᾱ",
+          "t1=tongue",
+          "t2=stone"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίρωψ": [
+      {
+        "components": [
+          "χαμαί",
+          "t1=near the ground",
+          "ῥώψ",
+          "t2=brushwood"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θυμελαία": [
+      {
+        "components": [
+          "θύμον",
+          "t1=thyme",
+          "ἐλαία",
+          "t2=olive tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυκοπέρσιον": [
+      {
+        "components": [
+          "λύκος",
+          "t1=wolf",
+          "πέρσιον",
+          "t2=fruit of persea"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρύσοφρυς": [
+      {
+        "components": [
+          "χρῡσός",
+          "t1=gold",
+          "ὀφρῡ́ς",
+          "t2=eyebrow"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νομοφύλαξ": [
+      {
+        "components": [
+          "νόμος",
+          "t1=law",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριόκαρδον": [
+      {
+        "components": [
+          "ἄγριος",
+          "κάρδος",
+          "t1=wild",
+          "t2=cardoon"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιράφανος": [
+      {
+        "components": [
+          "χαμαί",
+          "ῥάφανος",
+          "t1=near the ground",
+          "t2=cabbage"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουκράνιον": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "κρᾱνίον",
+          "t2=cranium, head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γαζοφύλαξ": [
+      {
+        "components": [
+          "γάζα",
+          "t1=treasure",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γαφάγας": [
+      {
+        "components": [
+          "[[γῆ",
+          "γᾶ]]",
+          "t1=earth, land",
+          "φαγεῖν",
+          "t2=to eat"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κισσόφυλλον": [
+      {
+        "components": [
+          "κισσός",
+          "t1=ivy",
+          "φύλλον",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πυρροκόραξ": [
+      {
+        "components": [
+          "πυρρός",
+          "t1=red, fiery",
+          "κόραξ",
+          "t2=crow"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱστοδόκη": [
+      {
+        "components": [
+          "ἱστός",
+          "[[δοχή",
+          "δοκή]]",
+          "t1=mast",
+          "t2=container"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυκόστομος": [
+      {
+        "components": [
+          "λύκος",
+          "t1=wolf",
+          "στόμα",
+          "t2=mouth"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φασσοφόνος": [
+      {
+        "components": [
+          "φάσσα",
+          "t1=dove",
+          "φόνος",
+          "t2=murder, slaughter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πυρκαϊά": [
+      {
+        "components": [
+          "πῦρ",
+          "t1=fire",
+          "καίω",
+          "t2=to light, kindle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱπποκορυστής": [
+      {
+        "components": [
+          "ἵππος",
+          "κορυστής",
+          "t1=horse",
+          "t2=helmed man"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εὐρυμέτωπος": [
+      {
+        "components": [
+          "εὐρύς",
+          "t1=broad",
+          "μέτωπον",
+          "t2=forehead"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαρκοκήλη": [
+      {
+        "components": [
+          "σάρξ",
+          "κήλη",
+          "t1=flesh",
+          "t2=tumour, hernia"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φέρομβρον": [
+      {
+        "components": [
+          "φέρω",
+          "t1=to bring",
+          "ὄμβρος",
+          "t2=thunderstorm"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λευκάνθεμον": [
+      {
+        "components": [
+          "λευκός",
+          "t1=white",
+          "ἄνθεμον",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὠλέκρανον": [
+      {
+        "components": [
+          "ὠλένη",
+          "t1=elbow",
+          "κρᾱνίον",
+          "t2=head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυγαλέη": [
+      {
+        "components": [
+          "μῦς",
+          "t1=mouse",
+          "γᾰλέη",
+          "t2=mustelid"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σκευοφύλαξ": [
+      {
+        "components": [
+          "σκεῦος",
+          "t1=equipment, utensil",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μύλοικος": [
+      {
+        "components": [
+          "μύλη",
+          "οἶκος",
+          "t1=mill, hand-mill",
+          "t2=house, dwelling"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χειράγρα": [
+      {
+        "components": [
+          "χείρ",
+          "ἄγρᾱ",
+          "t1=hand",
+          "t2=catching"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίγειρον": [
+      {
+        "components": [
+          "χαμαί",
+          "αἴγειρος",
+          "t1=near the ground",
+          "t2=black poplar"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θησαυροφύλαξ": [
+      {
+        "components": [
+          "θησαυρός",
+          "t1=treasure",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁλόσχοινος": [
+      {
+        "components": [
+          "ὅλος",
+          "t1=entire, whole",
+          "σχοῖνος",
+          "t2=rush, reed"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μηνιγγοφύλαξ": [
+      {
+        "components": [
+          "μῆνῐγξ",
+          "t1=membrane, meninx",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξύγαρον": [
+      {
+        "components": [
+          "ὀξύς",
+          "t1=sharp",
+          "γάρος",
+          "t2=garum"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀκροποσθία": [
+      {
+        "components": [
+          "ἄκρος",
+          "t1=highest, topmost",
+          "ποσθῐ́ᾱ",
+          "t2=foreskin"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριόφυλλον": [
+      {
+        "components": [
+          "ἄγριος",
+          "φύλλον",
+          "t1=wild",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κισσάμπελος": [
+      {
+        "components": [
+          "κῐσσός",
+          "ἄμπελος",
+          "t1=ivy",
+          "t2=vine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππότιλος": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "τῖλος",
+          "t2=thin stool, as in diarrhea"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξυμυρσίνη": [
+      {
+        "components": [
+          "ὀξῠ́ς",
+          "μυρσίνη",
+          "t1=sharp, acid",
+          "t2=myrtle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φιλτροδότης": [
+      {
+        "components": [
+          "φίλτρον",
+          "t1=love charm",
+          "δότης",
+          "t2=giver, dispenser"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κερκοπίθηκος": [
+      {
+        "components": [
+          "κέρκος",
+          "t1=tail",
+          "πίθηκος",
+          "t2=ape"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἰσόπυρον": [
+      {
+        "components": [
+          "ἴσος",
+          "t1=equal to",
+          "πῦρ",
+          "t2=fire"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μελίκρατον": [
+      {
+        "components": [
+          "μέλι",
+          "t1=honey",
+          "κεράννῡμι",
+          "t2=to mix, mingle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριοβάλανος": [
+      {
+        "components": [
+          "ἄγριος",
+          "βάλανος",
+          "t1=wild",
+          "t2=acorn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σκηπτοῦχος": [
+      {
+        "components": [
+          "σκήπτω",
+          "ἔχω",
+          "t1=to prop, stay",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σκηνοφύλαξ": [
+      {
+        "components": [
+          "σκηνή",
+          "t1=tent, booth",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χιλιοδύναμις": [
+      {
+        "components": [
+          "χῑ́λιοι",
+          "δῠ́νᾰμῐς",
+          "t1=thousand",
+          "t2=power"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σταφυλάγρα": [
+      {
+        "components": [
+          "στᾰφῠλή",
+          "ἄγρᾱ",
+          "t1=bunch of grapes; uvula",
+          "t2=catching, catch"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱστοπέδη": [
+      {
+        "components": [
+          "ἱστός",
+          "πέδη",
+          "t1=mast",
+          "t2=fetter, shackle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εὐρύπορος": [
+      {
+        "components": [
+          "εὐρύς",
+          "t1=broad",
+          "πόρος",
+          "t2=way, passage"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπιπλοκήλη": [
+      {
+        "components": [
+          "ἐπῐ́πλοον",
+          "κήλη",
+          "t1=omentum",
+          "t2=tumour, hernia"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐντεροκήλη": [
+      {
+        "components": [
+          "ἔντερον",
+          "κήλη",
+          "t1=intestine",
+          "t2=tumour, hernia"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σώσανδρον": [
+      {
+        "components": [
+          "σῶς",
+          "ἀνήρ",
+          "t1=safe, sound",
+          "t2=man"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριοπήγανον": [
+      {
+        "components": [
+          "ἄγριος",
+          "πήγανον",
+          "t1=wild",
+          "t2=rue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Τιμόδημος": [
+      {
+        "components": [
+          "τῑμή",
+          "t1=honor, esteem",
+          "δῆμος",
+          "t2=people"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁρμοφύλαξ": [
+      {
+        "components": [
+          "ὅρμος",
+          "t1=anchorage, haven",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στρατοφύλαξ": [
+      {
+        "components": [
+          "στρᾰτός",
+          "t1=army",
+          "φῠ́λᾰξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χειρομύλη": [
+      {
+        "components": [
+          "χείρ",
+          "μῠ́λη",
+          "t1=hand",
+          "t2=mill"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριομυρίκη": [
+      {
+        "components": [
+          "ἄγριος",
+          "t1=wild",
+          "μυρίκη",
+          "t2=tamarisk"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δεκαστάδιον": [
+      {
+        "components": [
+          "δέκᾰ",
+          "t1=ten",
+          "στᾰ́δῐον",
+          "t2=stadium"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψιλὸν πνεῦμα": [
+      {
+        "components": [
+          "ψῑλός",
+          "t1=bare, bald",
+          "πνεῦμα",
+          "t2=breath"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππολειχήν": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "λειχήν",
+          "t2=liverwort"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ῥαβδοῦχος": [
+      {
+        "components": [
+          "ῥᾰ́βδος",
+          "ἔχω",
+          "t1=rod, staff",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πυκνόκομον": [
+      {
+        "components": [
+          "πῠκνός",
+          "κόμη",
+          "t1=close, compact, thick",
+          "t2=hair of the head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τερατολόγος": [
+      {
+        "components": [
+          "τέρας",
+          "-λόγος",
+          "t1=marvel, wonder",
+          "t2=-logist"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μαγδωλοφύλαξ": [
+      {
+        "components": [
+          "μᾰ́γδωλος",
+          "t1=watchtower",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιπλάτανος": [
+      {
+        "components": [
+          "χαμαί",
+          "πλᾰ́τᾰνος",
+          "t1=near the ground",
+          "t2=plane tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱπποπρόσωπος": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "πρόσωπον",
+          "t2=face"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱερόμυρτος": [
+      {
+        "components": [
+          "ἱερός",
+          "μῠ́ρτος",
+          "t1=sacred, holy",
+          "t2=myrtle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριόπρασον": [
+      {
+        "components": [
+          "ἄγριος",
+          "πράσον",
+          "t1=wild",
+          "t2=leek"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εἰρηνοφύλαξ": [
+      {
+        "components": [
+          "εἰρήνη",
+          "t1=peace",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θηλύπρινος": [
+      {
+        "components": [
+          "θῆλυς",
+          "t1=female",
+          "πρῖνος",
+          "t2=holm oak"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γερροχελώνη": [
+      {
+        "components": [
+          "γέρρον",
+          "t1=wicker-work",
+          "χελώνη",
+          "t2=tortoise"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀροφύλαξ": [
+      {
+        "components": [
+          "ὄρος",
+          "t1=mountain",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑλμινθοβότανον": [
+      {
+        "components": [
+          "ἕλμινς",
+          "βοτάνη",
+          "t1=parasitic worm",
+          "t2=plant, herb"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χιμαιροφύλαξ": [
+      {
+        "components": [
+          "χίμαιρα",
+          "t1=she-goat",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μηνάνθος": [
+      {
+        "components": [
+          "μήνη",
+          "ἄνθος",
+          "t1=moon",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "συκόφυλλον": [
+      {
+        "components": [
+          "σῦκον",
+          "t1=fig",
+          "φύλλον",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐρυσίσκηπτρον": [
+      {
+        "components": [
+          "ἐρεύθω",
+          "σκῆπτρον",
+          "t1=make red",
+          "t2=staff, baton, sceptre"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγριοκινάρα": [
+      {
+        "components": [
+          "ἄγριος",
+          "t1=wild",
+          "κινάρα",
+          "t2=artichoke"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θαλασσόμελι": [
+      {
+        "components": [
+          "θάλασσα",
+          "t1=sea",
+          "μέλι",
+          "t2=honey"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαρκόπυον": [
+      {
+        "components": [
+          "σάρξ",
+          "t1=flesh",
+          "πύον",
+          "t2=pus"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱπποφορβός": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "*φορβός",
+          "t2=feeder"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ῥισκοφύλαξ": [
+      {
+        "components": [
+          "ῥίσκος",
+          "t1=coffer, chest",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀρτυγοτροφεῖον": [
+      {
+        "components": [
+          "ὄρτῠξ",
+          "τροφεῖον",
+          "t1=quail",
+          "t2=small room, chamber"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ξενοφύλαξ": [
+      {
+        "components": [
+          "ξένος",
+          "t1=foreigner",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θεοφύλαξ": [
+      {
+        "components": [
+          "θεός",
+          "t1=god, deity",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γαρέλαιον": [
+      {
+        "components": [
+          "γάρος",
+          "ἔλαιον",
+          "t1=fish sauce",
+          "t2=oil"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οὐρανοῦχος": [
+      {
+        "components": [
+          "οὐρᾰνός",
+          "ἔχω",
+          "t1=sky, heaven",
+          "t2=to hold"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βούτραγος": [
+      {
+        "components": [
+          "βοῦς",
+          "τράγος",
+          "t1=ox",
+          "t2=goat"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψηφολογεῖον": [
+      {
+        "components": [
+          "ψῆφος",
+          "λογεῖον",
+          "t1=pebble; vote",
+          "t2=stage, platform"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱερακοπρόσωπος": [
+      {
+        "components": [
+          "ἱέρᾱξ",
+          "t1=hawk",
+          "πρόσωπον",
+          "t2=face"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σκωραμίς": [
+      {
+        "components": [
+          "σκῶρ",
+          "t1=dung, ordure",
+          "ἀμίς",
+          "t2=chamber pot"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ζυγουλκός": [
+      {
+        "components": [
+          "ζυγόν",
+          "t1=yoke",
+          "ἕλκω",
+          "t2=to drag"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαλαζοφύλαξ": [
+      {
+        "components": [
+          "χᾰ́λᾰζα",
+          "t1=hail",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουσέλινον": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "σέλινον",
+          "t2=celery"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁπλιταγωγός": [
+      {
+        "components": [
+          "ὁπλῑ́της",
+          "t1=hoplite",
+          "ἀγωγός",
+          "t2=leading, guiding; drawing"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μυριόφθαλμος": [
+      {
+        "components": [
+          "μῡρῐ́ος",
+          "ὀφθᾰλμός",
+          "t1=countless, infinite",
+          "t2=eye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παιδοφύλαξ": [
+      {
+        "components": [
+          "παῖς",
+          "t1=child",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πικρόγλωσσος": [
+      {
+        "components": [
+          "πῐκρός",
+          "γλῶσσα",
+          "t1=sharp; bitter",
+          "t2=tongue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νυκτοφύλαξ": [
+      {
+        "components": [
+          "νύξ",
+          "t1=night",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πορνοβοσκός": [
+      {
+        "components": [
+          "πόρνη",
+          "t1=prostitute",
+          "βόσκω",
+          "t2=feed, tend, nourish"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσοφύλαξ": [
+      {
+        "components": [
+          "χρῡσός",
+          "t1=gold",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δεσμοφύλαξ": [
+      {
+        "components": [
+          "δεσμός",
+          "t1=bonds, imprisonment",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀρφανοφύλαξ": [
+      {
+        "components": [
+          "ὀρφᾰνός",
+          "t1=orphan",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξάλμη": [
+      {
+        "components": [
+          "ὄξος",
+          "t1=vinegar",
+          "ἅλμη",
+          "t2=brine"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁροφύλαξ": [
+      {
+        "components": [
+          "ὅρος",
+          "t1=boundary, limit",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀγροφύλαξ": [
+      {
+        "components": [
+          "ἀγρός",
+          "t1=countryside",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οἰκοφύλαξ": [
+      {
+        "components": [
+          "οἶκος",
+          "t1=house",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μηλοφύλαξ": [
+      {
+        "components": [
+          "μῆλον",
+          "t1=sheep",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψευδοπόρφυρον": [
+      {
+        "components": [
+          "ψευδής",
+          "πορφύρα",
+          "t1=false",
+          "t2=purple dye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "στρωματοφύλαξ": [
+      {
+        "components": [
+          "στρῶμᾰ",
+          "t1=mattress, bedcloth",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁδοφύλαξ": [
+      {
+        "components": [
+          "ὁδός",
+          "t1=street, road",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μετοικοφύλαξ": [
+      {
+        "components": [
+          "μέτοικος",
+          "t1=metoecus",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αἰγιαλοφύλαξ": [
+      {
+        "components": [
+          "αἰγῐᾰλός",
+          "t1=shore, beach",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίστρωτος": [
+      {
+        "components": [
+          "χᾰμαί",
+          "στρωτός",
+          "t1=near the ground",
+          "t2=spread, stretched"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱμαντόδεσμος": [
+      {
+        "components": [
+          "ἱμάς",
+          "δεσμός",
+          "t1=leather strap or thong",
+          "t2=bond, fetter"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οἰνοφύλαξ": [
+      {
+        "components": [
+          "οἶνος",
+          "t1=wine",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑδνόφυλλον": [
+      {
+        "components": [
+          "ὕδνον",
+          "t1=truffle",
+          "φύλλον",
+          "t2=leaf"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καλοπέδιλα": [
+      {
+        "components": [
+          "κᾶλον",
+          "t1=wood",
+          "πέδῑλον",
+          "t2=sandal"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πυργοφύλαξ": [
+      {
+        "components": [
+          "πῠ́ργος",
+          "t1=tower",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λιμενοφύλαξ": [
+      {
+        "components": [
+          "λῐμήν",
+          "t1=harbour, port",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βιβλιοκάπηλος": [
+      {
+        "components": [
+          "βῐβλῐ́ον",
+          "t1=small book, tablet",
+          "κᾰ́πηλος",
+          "t2=retail dealer"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βιβλιοφύλαξ": [
+      {
+        "components": [
+          "βῐβλῐ́ον",
+          "t1=small book, tablet",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσοκόλλα": [
+      {
+        "components": [
+          "χρῡσός",
+          "κόλλα",
+          "t1=gold",
+          "t2=glue"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πολιτοφύλαξ": [
+      {
+        "components": [
+          "πολῑ́της",
+          "t1=citizen",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀπισθοφύλαξ": [
+      {
+        "components": [
+          "ὄπισθεν",
+          "t1=behind, at the back",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψευδόχρυσος": [
+      {
+        "components": [
+          "ψευδής",
+          "t1=false",
+          "χρῡσός",
+          "t2=gold"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐφηβοφύλαξ": [
+      {
+        "components": [
+          "ἔφηβος",
+          "t1=adolescent",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱστοκεραία": [
+      {
+        "components": [
+          "ἱστός",
+          "t1=mast",
+          "κεραία",
+          "t2=projecting beam"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μόναυλος": [
+      {
+        "components": [
+          "μόνος",
+          "t1=alone, solitary, single",
+          "αὐλός",
+          "t2=flute"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἡμεροφύλαξ": [
+      {
+        "components": [
+          "ἡμέρα",
+          "t1=day",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πλαγίαυλος": [
+      {
+        "components": [
+          "πλάγιος",
+          "t1=aslant, sideways",
+          "αὐλός",
+          "t2=flute"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὑόφθαλμος": [
+      {
+        "components": [
+          "ὗς",
+          "t1=swine",
+          "ὀφθαλμός",
+          "t2=eye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δολίχαυλος": [
+      {
+        "components": [
+          "δολῐχός",
+          "t1=long",
+          "αὐλός",
+          "t2=flute; tube"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καρποφύλαξ": [
+      {
+        "components": [
+          "κᾰρπός",
+          "t1=fruit",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τειχοφύλαξ": [
+      {
+        "components": [
+          "τεῖχος",
+          "t1=wall",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ξιφοδρέπανον": [
+      {
+        "components": [
+          "ξῐ́φος",
+          "δρέπᾰνον",
+          "t1=sword",
+          "t2=sickle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀξυκέφαλος": [
+      {
+        "components": [
+          "ὀξύς",
+          "κεφᾰλή",
+          "t1=sharp, pointed",
+          "t2=head"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαιλίβανος": [
+      {
+        "components": [
+          "χᾰμαί",
+          "λῐ́βᾰνος",
+          "t1=near the ground",
+          "t2=frankincense"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κεστροφύλαξ": [
+      {
+        "components": [
+          "κέστρος",
+          "t1=bolt discharged from engines",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσόμηλον": [
+      {
+        "components": [
+          "χρῡσός",
+          "μῆλον",
+          "t1=gold",
+          "t2=apple"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁπλοφύλαξ": [
+      {
+        "components": [
+          "ὅπλον",
+          "t1=tool, implement; weapon",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ὕσπορος": [
+      {
+        "components": [
+          "ὗς",
+          "t1=swine",
+          "πόρος",
+          "t2=passage, ford"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χωροφύλαξ": [
+      {
+        "components": [
+          "χώρᾱ",
+          "t1=place, country, nation",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱεροκῆρυξ": [
+      {
+        "components": [
+          "ἱερός",
+          "t1=holy",
+          "κῆρυξ",
+          "t2=herald"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ψευδοσέλινον": [
+      {
+        "components": [
+          "ψευδής",
+          "t1=false",
+          "σέλῑνον",
+          "t2=celery"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουσός": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "σεύω",
+          "t2=to chase, drive, impel"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κερτομέω": [
+      {
+        "components": [
+          "κείρω",
+          "t1=to shear, shave",
+          "τέμνω",
+          "t2=to cut, hew"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παλαιστροφύλαξ": [
+      {
+        "components": [
+          "πᾰλαίστρᾱ",
+          "t1=wrestling-school",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαλκομόλυβδος": [
+      {
+        "components": [
+          "χᾰλκός",
+          "μόλῠβδος",
+          "t1=copper",
+          "t2=lead"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θαλασσαίγλη": [
+      {
+        "components": [
+          "θάλασσα",
+          "t1=sea",
+          "αἴγλη",
+          "t2=light, radiance"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαρκόμφαλον": [
+      {
+        "components": [
+          "σάρξ",
+          "t1=flesh",
+          "ὀμφαλός",
+          "t2=navel"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χειλοφύλαξ": [
+      {
+        "components": [
+          "χεῖλος",
+          "t1=lip",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δημοκόλαξ": [
+      {
+        "components": [
+          "δῆμος",
+          "t1=people, mob",
+          "κόλᾰξ",
+          "t2=flatterer, fawner"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Τιμῶναξ": [
+      {
+        "components": [
+          "τῑμή",
+          "t1=honour, esteem",
+          "ἄναξ",
+          "t2=king"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σκηρίπτω": [
+      {
+        "components": [
+          "σκήπτω",
+          "t1=to prop, stay",
+          "στηρίζω",
+          "t2=to be firmly set or fixed"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τιμωρός": [
+      {
+        "components": [
+          "τῑμή",
+          "t1=price, value, honor",
+          "ὁράω",
+          "t2=to guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οἰκοτύραννος": [
+      {
+        "components": [
+          "οἶκος",
+          "t1=house, home, estate",
+          "τῠ́ρᾰννος",
+          "t2=tyrant"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "νεκροφύλαξ": [
+      {
+        "components": [
+          "νεκρός",
+          "alt1=νεκρο-",
+          "t1=dead",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δολιχοδρόμος": [
+      {
+        "components": [
+          "δόλῐχος",
+          "δρόμος",
+          "t1=long course in the arena",
+          "t2=race, running"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παιδοδιδάσκαλος": [
+      {
+        "components": [
+          "παῖς",
+          "t1=child",
+          "δῐδᾰ́σκᾰλος",
+          "t2=teacher, instructor"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μάδρυα": [
+      {
+        "components": [
+          "[[μῆλον",
+          "μᾶλον]]",
+          "t1=apple",
+          "δρῦς",
+          "t2=tree"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χρυσολάχανον": [
+      {
+        "components": [
+          "χρῡσός",
+          "λᾰ́χᾰνον",
+          "t1=gold",
+          "t2=vegetable"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππόκρημνος": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "κρημνός",
+          "t2=crag, precipice"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κοκκύμηλον": [
+      {
+        "components": [
+          "κόκκῠξ",
+          "μῆλον",
+          "t1=cuckoo",
+          "t2=apple"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "συκοτράγος": [
+      {
+        "components": [
+          "σῦκον",
+          "t1=fig",
+          "τράγω",
+          "t2=to munch",
+          "-ος"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λυκόσκορδον": [
+      {
+        "components": [
+          "λύκος",
+          "t1=wolf",
+          "σκόρδον",
+          "t2=garlic"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ῥᾴθυμος": [
+      {
+        "components": [
+          "ῥᾶ",
+          "t1=easily",
+          "θῡμός",
+          "t2=soul, heart"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βουκόρυζα": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "κόρῡζᾰ",
+          "t2=rheum, mucus"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μελανοπλόκαμος": [
+      {
+        "components": [
+          "μέλας",
+          "t1=black",
+          "πλόκᾰμος",
+          "t2=braid, tress"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "γαστρίμαργος": [
+      {
+        "components": [
+          "γᾰστήρ",
+          "t1=belly",
+          "μᾰ́ργος",
+          "t2=greedy, gluttonous"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χοιροπίθηκος": [
+      {
+        "components": [
+          "χοῖρος",
+          "t1=hog",
+          "πίθηκος",
+          "t2=ape"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ξανθόλευκος": [
+      {
+        "components": [
+          "ξᾰνθός",
+          "λευκός",
+          "t1=yellow",
+          "t2=white"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μελίμηλον": [
+      {
+        "components": [
+          "μέλι",
+          "t1=honey",
+          "μῆλον",
+          "t2=apple"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εὐρυπέδιλος": [
+      {
+        "components": [
+          "εὐρύς",
+          "t1=broad",
+          "πέδῑλον",
+          "t2=sandal"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "οἰωνόμαντις": [
+      {
+        "components": [
+          "οἰωνός",
+          "t1=bird used in ornithomancy",
+          "μᾰ́ντῐς",
+          "t2=seer, oracle"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "δημοπίθηκος": [
+      {
+        "components": [
+          "δῆμος",
+          "t1=people",
+          "πῐ́θηκος",
+          "t2=ape"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀποβάλσαμον": [
+      {
+        "components": [
+          "ὀπός",
+          "t1=plant juice",
+          "βᾰ́λσᾰμον",
+          "t2=balm"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εἱργμοφύλαξ": [
+      {
+        "components": [
+          "εἱργμός",
+          "t1=prison",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "κοιτωνοφύλαξ": [
+      {
+        "components": [
+          "κοιτών",
+          "t1=bedchamber",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "σαρκολαβίς": [
+      {
+        "components": [
+          "σᾰ́ρξ",
+          "λᾰβῐ́ς",
+          "t1=flesh",
+          "t2=forceps"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χάλκανθον": [
+      {
+        "components": [
+          "χαλκός",
+          "t1=copper",
+          "ἄνθος",
+          "t2=flower"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀρυζοτροφέω": [
+      {
+        "components": [
+          "ὄρῠζον",
+          "τρέφω"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παλιγκάπηλος": [
+      {
+        "components": [
+          "πᾰ́λῐν",
+          "t1=back, backwords",
+          "κᾰ́πηλος",
+          "t2=retail dealer"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐλαιόγαρον": [
+      {
+        "components": [
+          "ἔλαιον",
+          "t1=oil",
+          "γάρος",
+          "t2=garum"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "χαμαίζηλος": [
+      {
+        "components": [
+          "χᾰμαί",
+          "ζῆλος",
+          "t1=near the ground",
+          "t2=zeal, fervour"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱματιοφύλαξ": [
+      {
+        "components": [
+          "ῑ̔μᾰ́τῐον",
+          "t1=cloth",
+          "φύλαξ",
+          "t2=guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "αἰγοπρόσωπος": [
+      {
+        "components": [
+          "αἴξ",
+          "t1=goat",
+          "πρόσωπον",
+          "t2=face"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Δημοῦχος": [
+      {
+        "components": [
+          "δῆμος",
+          "ἔχω",
+          "t1=people",
+          "t2=to bear, carry, bring"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "θεομαχέω": [
+      {
+        "components": [
+          "θεός",
+          "t1=god",
+          "μάχομαι",
+          "t2=to fight"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὀχλοκρατία": [
+      {
+        "components": [
+          "ὄχλος",
+          "t1=mob",
+          "-κρᾰτῐ́ᾱ",
+          "t2=form of government"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Παλιμβόθρα": [
+      {
+        "components": [
+          "πάλιν",
+          "t1=back",
+          "βόθρος",
+          "t2=trench",
+          "nocat=1"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ὁποῖος": [
+      {
+        "components": [
+          "ὁ",
+          "t1=that",
+          "ποῖος",
+          "t2=which? what?"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τειχοφυλακέω": [
+      {
+        "components": [
+          "τεῖχος",
+          "t1=[[wall]]",
+          "*φυλακέω",
+          "t2=to [[guard]], from {{affix",
+          "grc",
+          "φύλαξ",
+          "t1=a [[guard]]",
+          "-έω",
+          "t2= a verb forming suffix"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πολιοφυλακέω": [
+      {
+        "components": [
+          "πόλις",
+          "t1=a city",
+          "*φυλακέω",
+          "t2=to guard"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "διαλυσίφιλος": [
+      {
+        "components": [
+          "δῐᾰ́λῠσῐς",
+          "t1=[[dissolving]]",
+          "φίλος",
+          "t2=[[love]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μηδέπω": [
+      {
+        "components": [
+          "μηδέ",
+          "t1=[[not even]]",
+          "πω",
+          "t2=[[yet]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τροχήλατος": [
+      {
+        "components": [
+          "τροχός",
+          "t1=a [[wheel]]",
+          "ἐλαύνω",
+          "t2=[[drive]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑπταλόφος": [
+      {
+        "components": [
+          "ἑπτά",
+          "t1=[[seven]]",
+          "λόφος",
+          "t2=[[hill]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "εἰσάγω": [
+      {
+        "components": [
+          "εἰς",
+          "ἄγω",
+          "t1=into",
+          "t2=to lead"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "πορφυρογέννητος": [
+      {
+        "components": [
+          "πορφύρᾱ",
+          "t1=[[purple]] dye",
+          "γεννητός",
+          "t2=[[born]]"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "λευκερῳδιός": [
+      {
+        "components": [
+          "λευκός",
+          "t1=white",
+          "ἐρῳδιός",
+          "t2=heron"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φρεατορύκτης": [
+      {
+        "components": [
+          "φρέᾱρ",
+          "ὀρῠ́κτης"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "φρεατοτύπανον": [
+      {
+        "components": [
+          "φρέᾱρ",
+          "τῠ́πᾰνον"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "μελάνθριξ": [
+      {
+        "components": [
+          "μέλᾱς",
+          "pos1=neuter: {{m",
+          "grc",
+          "μέλᾰν"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἑκάστοτε": [
+      {
+        "components": [
+          "ἑκᾰ́ς",
+          "τότε"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἐπινέμεσις": [
+      {
+        "components": [
+          "ἐπι-",
+          "Νέμεσις",
+          "t2=goddess of retribution"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "καλόκαιρος": [
+      {
+        "components": [
+          "κᾰλός",
+          "καιρός"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἱππιατρός": [
+      {
+        "components": [
+          "ἵππος",
+          "t1=horse",
+          "ἰᾱτρός",
+          "t2=physician"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τραχεῖα ἀρτηρία": [
+      {
+        "components": [
+          "τρᾱχεῖᾰ",
+          "ᾰ̓ρτηρῐ́ᾱ",
+          "t1=rough",
+          "t2=windpipe, artery"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Πολυύμνια": [
+      {
+        "components": [
+          "πολῠ́ς",
+          "ῠ̔́μνος",
+          "t1=many",
+          "t2=hymn"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "βόαξ": [
+      {
+        "components": [
+          "βοῦς",
+          "t1=ox",
+          "ὤψ",
+          "t2=eye"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παλιμπλάζομαι": [
+      {
+        "components": [
+          "πάλιν",
+          "πλάζω"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "Ἱππῶναξ": [
+      {
+        "components": [
+          "ἵππος",
+          "ἄναξ",
+          "t1=horse",
+          "t2=king"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "ἀμφίστημι": [
+      {
+        "components": [
+          "ἐπί",
+          "ἵστημι "
+        ],
+        "source": "etymology_plus"
+      }
+    ],
+    "ὀψίγονος": [
+      {
+        "components": [
+          "ὀψέ",
+          "t1=late"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "παντάπασι": [
+      {
+        "components": [
+          "πάντα",
+          "πᾶσι"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τοίνυν": [
+      {
+        "components": [
+          "τοι",
+          "νῦν"
+        ],
+        "source": "compound_template"
+      }
+    ],
+    "τοιχωρύχος": [
+      {
+        "components": [
+          "τοῖχος",
+          "ὀρύσσω",
+          "t1=wall",
+          "t2=to dig up"
+        ],
+        "source": "compound_template"
+      }
+    ]
+  }
+}

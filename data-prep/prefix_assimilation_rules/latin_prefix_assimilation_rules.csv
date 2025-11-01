@@ -1,0 +1,72 @@
+language,base_prefix,assimilated_form,meaning,phonological_rule,priority,examples
+latin,con,con,with; together,none,1,concedo
+latin,con,com,with; together,nasal_assimilation,2,compono (before p/b/m)
+latin,con,col,with; together,nasal_assimilation,3,colloquor (before l)
+latin,con,cor,with; together,nasal_assimilation,4,corrumpo (before r)
+latin,con,co,with; together,nasal_deletion,5,coeo (before vowel/h)
+latin,ad,ad,to; toward,none,1,addo
+latin,ad,ap,to; toward,consonant_assimilation,2,apporto (before p)
+latin,ad,ac,to; toward,consonant_assimilation,3,accedo (before c)
+latin,ad,af,to; toward,consonant_assimilation,4,affero (before f)
+latin,ad,ag,to; toward,consonant_assimilation,5,aggrego (before g)
+latin,ad,al,to; toward,consonant_assimilation,6,allego (before l)
+latin,ad,an,to; toward,consonant_assimilation,7,annuo (before n)
+latin,ad,ar,to; toward,consonant_assimilation,8,arripio (before r)
+latin,ad,as,to; toward,consonant_assimilation,9,ascribo (before s)
+latin,ad,at,to; toward,consonant_assimilation,10,attendo (before t)
+latin,sub,sub,under; up from below,none,1,subdo
+latin,sub,sup,under; up from below,consonant_assimilation,2,supporto (before p)
+latin,sub,suc,under; up from below,consonant_assimilation,3,succumbo (before c)
+latin,sub,suf,under; up from below,consonant_assimilation,4,suffero (before f)
+latin,sub,sug,under; up from below,consonant_assimilation,5,suggero (before g)
+latin,sub,sum,under; up from below,consonant_assimilation,6,summo (before m)
+latin,sub,sur,under; up from below,consonant_assimilation,7,surripio (before r)
+latin,sub,sus,under; up from below,consonant_assimilation,8,suscipio (before c+vowel)
+latin,in,in,in; into; not,none,1,induco
+latin,in,im,in; into; not,nasal_assimilation,2,importo (before p/b/m)
+latin,in,il,in; into; not,nasal_assimilation,3,illego (before l)
+latin,in,ir,in; into; not,nasal_assimilation,4,irrigo (before r)
+latin,ex,ex,out; from,none,1,exeo
+latin,ex,e,out; from,x_deletion,2,educo (before consonant)
+latin,ex,ef,out; from,x_assimilation,3,effero (before f)
+latin,ob,ob,toward; against,none,1,obdo
+latin,ob,oc,toward; against,consonant_assimilation,2,occurro (before c)
+latin,ob,of,toward; against,consonant_assimilation,3,offero (before f)
+latin,ob,og,toward; against,consonant_assimilation,4,oggero (before g)
+latin,ob,op,toward; against,consonant_assimilation,5,opprimo (before p)
+latin,ob,os,toward; against,consonant_assimilation,6,ostendo (before t/s)
+latin,dis,dis,apart; away,none,1,discedo
+latin,dis,di,apart; away,s_deletion,2,dirigo (before consonant)
+latin,dis,dif,apart; away,s_assimilation,3,differo (before f)
+latin,per,per,through; thoroughly,none,1,perfero
+latin,per,pel,through; thoroughly,r_assimilation,2,pellicio (before l)
+latin,re,re,back; again,none,1,refero
+latin,re,red,back; again,vowel_addition,2,reddo (before vowel)
+latin,trans,trans,across; beyond,none,1,transfero
+latin,trans,tra,across; beyond,nasal_deletion,2,traduco (before consonant)
+latin,ab,ab,from; away from,none,1,abeo
+latin,ab,a,from; away from,b_deletion,2,aufero (before consonant)
+latin,ab,abs,from; away from,b_variant,3,abscedo (before c/t)
+latin,pro,pro,forward; for,none,1,profero
+latin,pro,prod,forward; for,vowel_addition,2,prodeo (before vowel)
+latin,prae,prae,before; in front,none,1,praefero
+latin,prae,pra,before; in front,e_deletion,2,praverto (rare variant)
+latin,de,de,down; from,none,1,defero
+latin,inter,inter,between; among,none,1,interfero
+latin,circum,circum,around,none,1,circumfero
+latin,circum,circu,around,m_deletion,2,circueo (before vowel)
+latin,cum,cum,with; together,none,1,cumulo
+latin,ante,ante,before,none,1,antecedo
+latin,post,post,after; behind,none,1,postfero
+latin,super,super,over; above,none,1,superfero
+latin,intro,intro,within; inside,none,1,introduco
+latin,extra,extra,outside; beyond,none,1,extraho
+latin,contra,contra,against; opposite,none,1,contradico
+latin,intra,intra,within,none,1,intromitto
+latin,ultra,ultra,beyond,none,1,ultramontanus
+latin,infra,infra,below; beneath,none,1,infrascriptus
+latin,supra,supra,above; beyond,none,1,suprascriptus
+latin,praeter,praeter,beyond; past,none,1,praetereo
+latin,retro,retro,backward; back,none,1,retrogredior
+latin,se,se,apart; aside,none,1,seduco
+latin,se,sed,apart; aside,vowel_addition,2,sedo (variant)

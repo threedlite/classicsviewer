@@ -19,7 +19,7 @@ import argparse
 import sys
 import csv
 from collections import defaultdict
-from typing import List, Set, Tuple, Dict
+from typing import List, Set, Tuple, Dict, Optional
 
 class DictionaryCoverageChecker:
     def __init__(self, db_path: str):
@@ -108,6 +108,60 @@ class DictionaryCoverageChecker:
         # Lowercase and convert final sigma
         lowercased = without_combining.lower().replace('ς', 'σ')
         return lowercased
+
+    def try_compound_decomposition(self, word: str, language: str) -> Optional[Tuple[bool, List[str]]]:
+        """
+        Try to decompose a compound word into prefix + stem.
+        Returns (has_definition, sources) if successful, None otherwise.
+        Matches the Android app's compound decomposition logic.
+        """
+        # Only for Greek words longer than 5 characters
+        if language != 'greek' or len(word) < 6:
+            return None
+
+        # Load prefix assimilation rules from database
+        cursor = self.conn.execute("""
+            SELECT base_prefix, assimilated_form, priority
+            FROM prefix_assimilation_rules
+            WHERE language = ?
+            ORDER BY priority ASC, LENGTH(assimilated_form) DESC
+        """, (language,))
+
+        prefix_groups = {}
+        for row in cursor:
+            base = row['base_prefix']
+            assim = row['assimilated_form']
+            if base not in prefix_groups:
+                prefix_groups[base] = []
+            prefix_groups[base].append(assim)
+
+        # Try each prefix group
+        for base_prefix, assimilated_forms in prefix_groups.items():
+            # Try assimilated forms first (sorted by length, longest first)
+            for prefix in sorted(assimilated_forms, key=len, reverse=True):
+                if word.startswith(prefix):
+                    stem = word[len(prefix):]
+
+                    # Check if stem has a lemma mapping (ultra-normalized)
+                    stem_ultra = self.normalize_greek_ultra(stem)
+                    cursor = self.conn.execute("""
+                        SELECT DISTINCT l.lemma, d.source, d.entry_plain, d.entry_html
+                        FROM lemma_map l
+                        LEFT JOIN dictionary_entries d ON l.lemma = d.headword AND d.language = ?
+                        WHERE l.word_form_normalized_ultra = ?
+                        AND d.source IS NOT NULL
+                        ORDER BY l.confidence DESC
+                        LIMIT 1
+                    """, (language, stem_ultra))
+
+                    row = cursor.fetchone()
+                    if row and row['source']:
+                        # Found a definition for the stem
+                        entry_text = row['entry_html'] or row['entry_plain'] or ""
+                        if "Morphological entry" not in entry_text:
+                            return (True, ['compound: ' + row['source']])
+
+        return None
 
     def check_word_in_dictionary(self, word: str, language: str) -> Tuple[str, List[str]]:
         """
@@ -238,6 +292,13 @@ class DictionaryCoverageChecker:
                     elif row['morph_info']:
                         has_morphology = True
 
+        # Step 5: Try compound word decomposition with prefix assimilation
+        if not has_definition and not has_morphology and len(cleaned_word) > 5:
+            compound_result = self.try_compound_decomposition(cleaned_word, language)
+            if compound_result:
+                has_definition, compound_sources = compound_result
+                sources.extend(compound_sources)
+
         # Determine status
         if has_definition:
             return ("has_definition", sources)
@@ -363,9 +424,12 @@ class DictionaryCoverageChecker:
                     'language'
                 ])
 
-                # Write all words with their status
+                # Write ONLY missing words (no_entry or morphology_only)
                 for word in sorted(all_words):
                     status, sources = word_details[word]
+                    # Skip words that have definitions
+                    if status == "has_definition":
+                        continue
                     writer.writerow([
                         word,
                         status,
@@ -473,9 +537,12 @@ class DictionaryCoverageChecker:
                     'language'
                 ])
 
-                # Write all unique words
+                # Write ONLY missing words (no_entry or morphology_only)
                 for word in sorted(all_word_details.keys()):
                     status, sources = all_word_details[word]
+                    # Skip words that have definitions
+                    if status == "has_definition":
+                        continue
                     writer.writerow([
                         word,
                         status,

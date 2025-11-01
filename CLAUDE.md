@@ -1,5 +1,7 @@
 # Classics Viewer - Android app for reading classical texts
 
+Always use venv to run python code.
+
 Important: 
   Claude: Do not add, delete, or modify features not related to what is being worked on!  Investigate the impact of changes before making them. Avoid regressions. Test and verify fixes before declaring them fixed. Do not overstate effectiveness of changes without careful checking. BE PATIENT with database builds - sample takes 2-3 minutes, full takes 8-10 minutes. DO NOT assume builds are stuck just because they take time. The build may appear to pause at certain points (especially during translation lookup creation) but is still actively processing - check with `ps aux | grep python3` to verify it's still running. NEVER run multiple copies of create_perseus_database.py simultaneously as this will corrupt the database! If you see no new output for 30-60 seconds, that's NORMAL - the script is processing large data structures in memory. Always check db size and zip before packaging or deploying it. When you redeploy apk, clear app data, and uninstall the app first. Be sure you know what directory you are in before executing commands. Make sure you are in the right directory before running builds.
   Do not add, delete, or modify the contents of the folder "data-sources" in any way!

@@ -6489,6 +6489,179 @@ def import_lexicons_for_languages(db_filename, languages, lexicon_paths):
     print(f"\n✓ All lexicons imported successfully")
 
 
+def insert_oga_lemmas(db_filename, min_frequency=3):
+    """
+    Extract word→lemma mappings from OGA corpus and insert into lemma_map table.
+
+    Uses INSERT OR IGNORE to ensure existing Wiktionary/morphology data takes precedence.
+    Only OGA lemmas for word forms not already in the database will be added.
+
+    Args:
+        db_filename: Name of the target database file
+        min_frequency: Minimum times a mapping must appear to be included (default: 3)
+    """
+    import zipfile
+    from collections import Counter
+
+    print(f"\n{'='*60}")
+    print(f"INSERTING OGA LEMMAS")
+    print(f"{'='*60}\n")
+
+    # Path to OGA corpus
+    oga_corpus_path = "../data-sources/opera_graeca_adnotata_v0.2.0/workspace/oga.zip"
+
+    if not os.path.exists(oga_corpus_path):
+        print(f"❌ ERROR: OGA corpus not found at {oga_corpus_path}")
+        print("The OGA corpus is required for building the database.")
+        print("Please extract opera_graeca_adnotata_v0.2.0.zip to ../data-sources/")
+        raise FileNotFoundError(f"Required OGA corpus not found at {oga_corpus_path}")
+
+    print(f"Extracting lemmas from OGA corpus (1,999 texts)...")
+    print(f"Minimum frequency filter: {min_frequency}")
+    print("This will take ~5 minutes...\n")
+
+    lemma_counts = Counter()
+    stats = {
+        'texts_processed': 0,
+        'texts_failed': 0,
+        'total_tokens': 0
+    }
+
+    def parse_token_file_content(content: str) -> Dict[str, str]:
+        """Parse OGA token file content"""
+        tokens = {}
+        pattern = r'<mark id="(t_\d+)"[^>]*/>(?:\s*<!--\[?\d*\]?-->)?\s*<!--([^-]+)-->'
+        for match in re.finditer(pattern, content):
+            token_id = match.group(1)
+            word = match.group(2).strip()
+            if word not in ['.', ',', '·', ';', ':', '!', '?', '[0]'] and not word.isdigit():
+                tokens[token_id] = word
+        return tokens
+
+    def parse_lemma_file_content(content: str) -> Dict[str, str]:
+        """Parse OGA lemma file content"""
+        lemmas = {}
+        try:
+            root = ET.fromstring(content)
+            for feat in root.iter('feat'):
+                href = feat.get('{http://www.w3.org/1999/xlink}href')
+                value = feat.get('value')
+                if href and value:
+                    token_id = href.lstrip('#')
+                    if value not in ['.', ',', '·', ';', ':', '!', '?']:
+                        lemmas[token_id] = value
+        except Exception:
+            pass
+        return lemmas
+
+    # Extract lemmas from corpus
+    with zipfile.ZipFile(oga_corpus_path, 'r') as zf:
+        all_files = zf.namelist()
+        text_dirs = set()
+
+        for filename in all_files:
+            if 'tok01_lemma01.xml' in filename:
+                text_dir = '/'.join(filename.split('/')[:-1])
+                text_dirs.add(text_dir)
+
+        print(f"Found {len(text_dirs)} texts in corpus")
+
+        for i, text_dir in enumerate(sorted(text_dirs), 1):
+            urn = text_dir.split('/')[-1]
+            token_file = f"{text_dir}/{urn}.tok01.xml"
+            lemma_file = f"{text_dir}/{urn}.tok01_lemma01.xml"
+
+            try:
+                token_content = zf.read(token_file).decode('utf-8')
+                tokens = parse_token_file_content(token_content)
+
+                lemma_content = zf.read(lemma_file).decode('utf-8')
+                lemmas = parse_lemma_file_content(lemma_content)
+
+                for token_id, word in tokens.items():
+                    if token_id in lemmas:
+                        lemma = lemmas[token_id]
+                        word_normalized = normalize_greek(word)
+                        if word_normalized:
+                            lemma_counts[(word_normalized, lemma)] += 1
+
+                stats['texts_processed'] += 1
+                stats['total_tokens'] += len(tokens)
+
+                if i % 100 == 0:
+                    print(f"  [{i:4d}/1999] Processed {stats['texts_processed']} texts, "
+                          f"{len(lemma_counts)} unique pairs so far...")
+
+            except Exception as e:
+                stats['texts_failed'] += 1
+
+    print(f"\n✓ Extraction complete!")
+    print(f"  Texts processed: {stats['texts_processed']}")
+    print(f"  Texts failed: {stats['texts_failed']}")
+    print(f"  Total tokens: {stats['total_tokens']:,}")
+    print(f"  Unique (word, lemma) pairs: {len(lemma_counts):,}")
+
+    # Filter by frequency
+    print(f"\nFiltering lemmas (min_frequency >= {min_frequency})...")
+    filtered_lemmas = {
+        mapping: count
+        for mapping, count in lemma_counts.items()
+        if count >= min_frequency
+    }
+
+    print(f"  Before filtering: {len(lemma_counts):,} pairs")
+    print(f"  After filtering:  {len(filtered_lemmas):,} pairs")
+    print(f"  Removed:          {len(lemma_counts) - len(filtered_lemmas):,} low-frequency pairs")
+
+    # Insert into database
+    print(f"\nInserting OGA lemmas into {db_filename}...")
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+
+    # Count existing entries before insertion
+    cursor.execute("SELECT COUNT(*) FROM lemma_map WHERE source = 'wiktionary'")
+    wiktionary_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM lemma_map")
+    before_count = cursor.fetchone()[0]
+
+    print(f"  Existing entries: {before_count:,} (including {wiktionary_count:,} from Wiktionary)")
+    print(f"  Attempting to insert {len(filtered_lemmas):,} OGA lemmas...")
+
+    inserted_count = 0
+    for (word_normalized, lemma), frequency in filtered_lemmas.items():
+        # INSERT OR IGNORE: only inserts if word_form doesn't already exist
+        # This ensures Wiktionary/existing morphology always takes precedence
+        # Compute ultra-normalized form for efficient lookups
+        word_ultra = normalize_greek_ultra(word_normalized)
+        cursor.execute("""
+            INSERT OR IGNORE INTO lemma_map
+            (word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info)
+            VALUES (?, ?, ?, 1.0, 'oga', NULL)
+        """, (word_normalized, word_ultra, lemma))
+
+        if cursor.rowcount > 0:
+            inserted_count += 1
+
+    conn.commit()
+
+    # Count after insertion
+    cursor.execute("SELECT COUNT(*) FROM lemma_map")
+    after_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM lemma_map WHERE source = 'oga'")
+    oga_count = cursor.fetchone()[0]
+
+    conn.close()
+
+    print(f"\n✓ OGA lemma insertion complete!")
+    print(f"  Before: {before_count:,} entries")
+    print(f"  After:  {after_count:,} entries")
+    print(f"  Added:  {after_count - before_count:,} new OGA entries")
+    print(f"  Skipped: {len(filtered_lemmas) - (after_count - before_count):,} duplicates (Wiktionary took precedence)")
+    print(f"  Total OGA entries in database: {oga_count:,}")
+
+
 def merge_external_databases(db_filename, mode='sample'):
     """
     Merge external language databases into the main Perseus database.
@@ -6680,13 +6853,25 @@ if __name__ == "__main__":
         sys.exit(1)
 
     try:
-        # Determine which databases to build
-        build_mode = sys.argv[1] if len(sys.argv) > 1 else "both"
-        custom_csv_path = sys.argv[2] if len(sys.argv) > 2 else None
+        # Parse command-line arguments
+        build_mode = "both"
+        custom_csv_path = None
+        skip_oga = False
+
+        # Check for --skip-oga flag
+        args = [arg for arg in sys.argv[1:] if arg != '--skip-oga']
+        if '--skip-oga' in sys.argv[1:]:
+            skip_oga = True
+
+        # Get build mode and custom CSV path
+        if len(args) > 0:
+            build_mode = args[0]
+        if len(args) > 1:
+            custom_csv_path = args[1]
 
         if build_mode not in ["sample", "full", "extended", "first1ktest", "both"]:
             print(f"Invalid build mode: {build_mode}")
-            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path]")
+            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [--skip-oga]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
             print("  extended: Full Perseus + non-duplicate First1KGreek works")
@@ -6694,7 +6879,15 @@ if __name__ == "__main__":
             print("  both: Build both sample and full databases")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
             print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
+            print("\nOptional --skip-oga flag: Skip OGA lemma extraction")
+            print("  Example: python create_perseus_database.py full --skip-oga")
             sys.exit(1)
+
+        # Display OGA status
+        if skip_oga:
+            print("\n⚠ OGA lemma extraction will be SKIPPED (--skip-oga flag set)")
+        else:
+            print("\n✓ OGA lemma extraction will be included (use --skip-oga to disable)")
 
         overall_start = time.time()
 
@@ -6711,6 +6904,12 @@ if __name__ == "__main__":
 
             # Merge external databases
             merge_external_databases("perseus_texts_sample.db", mode='sample')
+
+            # Insert OGA lemmas (unless --skip-oga flag set)
+            if not skip_oga:
+                insert_oga_lemmas("perseus_texts_sample.db")
+            else:
+                print("\n⚠ Skipping OGA lemma extraction (--skip-oga flag set)")
 
             # Checkpoint WAL after merges to ensure all changes are in main database file
             checkpoint_conn = sqlite3.connect("perseus_texts_sample.db")
@@ -6733,6 +6932,12 @@ if __name__ == "__main__":
             # Merge external databases
             merge_external_databases("perseus_texts_full.db", mode='full')
 
+            # Insert OGA lemmas (unless --skip-oga flag set)
+            if not skip_oga:
+                insert_oga_lemmas("perseus_texts_full.db")
+            else:
+                print("\n⚠ Skipping OGA lemma extraction (--skip-oga flag set)")
+
             # Checkpoint WAL after merges to ensure all changes are in main database file
             checkpoint_conn = sqlite3.connect("perseus_texts_full.db")
             checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
@@ -6753,6 +6958,12 @@ if __name__ == "__main__":
 
             # Merge external databases
             merge_external_databases("perseus_texts_extended.db", mode='extended')
+
+            # Insert OGA lemmas (unless --skip-oga flag set)
+            if not skip_oga:
+                insert_oga_lemmas("perseus_texts_extended.db")
+            else:
+                print("\n⚠ Skipping OGA lemma extraction (--skip-oga flag set)")
 
             # Checkpoint WAL after merges to ensure all changes are in main database file
             checkpoint_conn = sqlite3.connect("perseus_texts_extended.db")

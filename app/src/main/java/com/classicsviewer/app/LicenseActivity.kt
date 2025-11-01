@@ -115,6 +115,13 @@ The texts are made available under CC BY-SA 4.0, which permits sharing and
 adaptation with appropriate attribution and share-alike terms.
 
 
+OPERA GRAECA ADNOTATA
+=====================
+
+Giuseppe G. A. Celano. Opera Graeca Adnotata: Building a 34M+ Token Multilayer Corpus for Ancient Greek. arXiv https://arxiv.org/abs/2404.00739.
+https://github.com/OperaGraecaAdnotata/OGA
+
+
 WIKTIONARY MORPHOLOGICAL DATA
 =============================
 

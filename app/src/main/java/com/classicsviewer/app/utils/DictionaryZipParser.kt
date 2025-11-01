@@ -76,19 +76,22 @@ class DictionaryZipParser {
                     Log.d(TAG, "No normalization_rules.csv found in ZIP (optional)")
                 }
 
-                // STEP 2: Extract and parse dictionary.csv
+                // STEP 2: Extract and parse dictionary.csv (optional - for morphology-only imports like CLTK)
                 // Now normalization patterns are available for use during import
                 val dictEntry = zipArchive.getEntry(DICTIONARY_CSV)
-                    ?: throw IllegalArgumentException("Missing $DICTIONARY_CSV in ZIP file")
-
-                zipArchive.getInputStream(dictEntry).use { stream ->
-                    result.lemmas = parseDictionaryCSV(
-                        InputStreamReader(stream, Charsets.UTF_8),
-                        fileName,
-                        importDate,
-                        packageId,
-                        result.normalizationPatterns  // Pass patterns for normalization
-                    )
+                if (dictEntry != null) {
+                    Log.d(TAG, "Found dictionary.csv in ZIP, parsing...")
+                    zipArchive.getInputStream(dictEntry).use { stream ->
+                        result.lemmas = parseDictionaryCSV(
+                            InputStreamReader(stream, Charsets.UTF_8),
+                            fileName,
+                            importDate,
+                            packageId,
+                            result.normalizationPatterns  // Pass patterns for normalization
+                        )
+                    }
+                } else {
+                    Log.d(TAG, "No dictionary.csv found in ZIP (optional - using morphology only)")
                 }
 
                 // STEP 3: Extract and parse morphology.csv with batch callback
@@ -217,7 +220,7 @@ class DictionaryZipParser {
                             val language = row[languageIdx]?.trim()?.lowercase() ?: ""
                             val definition = sanitizeField(row[definitionIdx]?.trim()) ?: ""
                             
-                            if (lemma.isNotEmpty() && definition.isNotEmpty() && language.isNotEmpty()) {
+                            if (lemma.isNotEmpty() && language.isNotEmpty()) {
                                 val normalizedLemma = when (language) {
                                     "greek" -> {
                                         try {
@@ -284,6 +287,9 @@ class DictionaryZipParser {
         val BATCH_SIZE = 1000 // Process in smaller batches
         val mappings = mutableListOf<UserLemmaMappingEntity>()
         var totalProcessed = 0
+        var rejectedRowSize = 0
+        var rejectedEmpty = 0
+        var rejectedNormalization = 0
         
         try {
             val csvReader = try {
@@ -338,12 +344,22 @@ class DictionaryZipParser {
                 while (row != null) {
                     try {
                         val currentRow = row
-                        if (currentRow != null && currentRow.size > wordFormIdx && currentRow.size > lemmaIdx && currentRow.size > languageIdx) {
+                        if (currentRow == null || currentRow.size <= wordFormIdx || currentRow.size <= lemmaIdx || currentRow.size <= languageIdx) {
+                            rejectedRowSize++
+                            if (rejectedRowSize <= 5) {
+                                Log.w(TAG, "REJECTED at line $lineNumber: Row size ${currentRow?.size ?: 0} too small (need > $wordFormIdx, $lemmaIdx, $languageIdx)")
+                            }
+                        } else {
                             val wordForm = sanitizeField(currentRow[wordFormIdx]?.trim()) ?: ""
                             val lemma = sanitizeField(currentRow[lemmaIdx]?.trim()) ?: ""
                             val language = currentRow[languageIdx]?.trim()?.lowercase() ?: ""
-                            
-                            if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
+
+                            if (wordForm.isEmpty() || lemma.isEmpty() || language.isEmpty()) {
+                                rejectedEmpty++
+                                if (rejectedEmpty <= 5) {
+                                    Log.w(TAG, "REJECTED at line $lineNumber: Empty fields - word='$wordForm' lemma='$lemma' lang='$language'")
+                                }
+                            } else if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
                                 val langPatterns = normalizationPatterns.filter { it.language == language }
 
                                 val normalizedWord = when (language) {
@@ -351,7 +367,10 @@ class DictionaryZipParser {
                                         try {
                                             GreekNormalizer.normalize(wordForm)
                                         } catch (e: Exception) {
-                                            Log.w(TAG, "Failed to normalize Greek word form: $wordForm")
+                                            rejectedNormalization++
+                                            if (rejectedNormalization <= 5) {
+                                                Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: Greek word '$wordForm' - ${e.message}")
+                                            }
                                             null
                                         }
                                     }
@@ -360,7 +379,10 @@ class DictionaryZipParser {
                                             try {
                                                 PatternBasedNormalizer.normalize(wordForm, language, langPatterns)
                                             } catch (e: Exception) {
-                                                Log.w(TAG, "Failed to normalize $language word form: $wordForm")
+                                                rejectedNormalization++
+                                                if (rejectedNormalization <= 5) {
+                                                    Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: $language word '$wordForm' - ${e.message}")
+                                                }
                                                 null
                                             }
                                         } else null
@@ -372,7 +394,10 @@ class DictionaryZipParser {
                                         try {
                                             GreekNormalizer.normalize(lemma)
                                         } catch (e: Exception) {
-                                            Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
+                                            rejectedNormalization++
+                                            if (rejectedNormalization <= 5) {
+                                                Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: Greek lemma '$lemma' - ${e.message}")
+                                            }
                                             null
                                         }
                                     }
@@ -381,17 +406,20 @@ class DictionaryZipParser {
                                             try {
                                                 PatternBasedNormalizer.normalize(lemma, language, langPatterns)
                                             } catch (e: Exception) {
-                                                Log.w(TAG, "Failed to normalize $language lemma: $lemma")
+                                                rejectedNormalization++
+                                                if (rejectedNormalization <= 5) {
+                                                    Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: $language lemma '$lemma' - ${e.message}")
+                                                }
                                                 null
                                             }
                                         } else null
                                     }
                                 }
-                                
+
                                 val confidence = confidenceIdx?.let {
                                     currentRow.getOrNull(it)?.toDoubleOrNull() ?: 1.0
                                 } ?: 1.0
-                                
+
                                 mappings.add(
                                     UserLemmaMappingEntity(
                                         packageId = packageId,
@@ -407,7 +435,12 @@ class DictionaryZipParser {
                                         importDate = importDate
                                     )
                                 )
-                                
+
+                                // Log first few successful imports
+                                if (totalProcessed + mappings.size <= 3) {
+                                    Log.d(TAG, "IMPORTED line $lineNumber: '$wordForm' → '$lemma' (normalized: ${normalizedWord != null})")
+                                }
+
                                 // Send batch when reaching BATCH_SIZE
                                 if (mappings.size >= BATCH_SIZE) {
                                     batchCallback(mappings.toList())
@@ -504,8 +537,11 @@ class DictionaryZipParser {
                 var lineNumber = 2 // Start at 2 (header is line 1)
                 var row: Array<String>? = csv.readNext()
                 var processedCount = 0
+                var rejectedRowSize = 0
+                var rejectedEmpty = 0
+                var rejectedNormalization = 0
                 val BATCH_SIZE = 5000 // Clear list periodically to avoid memory issues
-                
+
                 // Stream through CSV one row at a time instead of loading all into memory
                 while (row != null) {
                     try {
@@ -516,14 +552,24 @@ class DictionaryZipParser {
                             // Note: In a real implementation, we'd insert to DB here and clear the list
                             // For now, we'll keep accumulating but log progress
                         }
-                        
+
                         val currentRow = row
-                        if (currentRow != null && currentRow.size > wordFormIdx && currentRow.size > lemmaIdx && currentRow.size > languageIdx) {
+                        if (currentRow == null || currentRow.size <= wordFormIdx || currentRow.size <= lemmaIdx || currentRow.size <= languageIdx) {
+                            rejectedRowSize++
+                            if (rejectedRowSize <= 5) {
+                                Log.w(TAG, "REJECTED at line $lineNumber: Row size ${currentRow?.size ?: 0} too small (need > $wordFormIdx, $lemmaIdx, $languageIdx)")
+                            }
+                        } else {
                             val wordForm = sanitizeField(currentRow[wordFormIdx]?.trim()) ?: ""
                             val lemma = sanitizeField(currentRow[lemmaIdx]?.trim()) ?: ""
                             val language = currentRow[languageIdx]?.trim()?.lowercase() ?: ""
-                            
-                            if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
+
+                            if (wordForm.isEmpty() || lemma.isEmpty() || language.isEmpty()) {
+                                rejectedEmpty++
+                                if (rejectedEmpty <= 5) {
+                                    Log.w(TAG, "REJECTED at line $lineNumber: Empty fields - word='$wordForm' lemma='$lemma' lang='$language'")
+                                }
+                            } else if (wordForm.isNotEmpty() && lemma.isNotEmpty() && language.isNotEmpty()) {
                                 val langPatterns = normalizationPatterns.filter { it.language == language }
 
                                 val normalizedWord = when (language) {
@@ -531,7 +577,10 @@ class DictionaryZipParser {
                                         try {
                                             GreekNormalizer.normalize(wordForm)
                                         } catch (e: Exception) {
-                                            Log.w(TAG, "Failed to normalize Greek word form: $wordForm")
+                                            rejectedNormalization++
+                                            if (rejectedNormalization <= 5) {
+                                                Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: Greek word '$wordForm' - ${e.message}")
+                                            }
                                             null
                                         }
                                     }
@@ -540,7 +589,10 @@ class DictionaryZipParser {
                                             try {
                                                 PatternBasedNormalizer.normalize(wordForm, language, langPatterns)
                                             } catch (e: Exception) {
-                                                Log.w(TAG, "Failed to normalize $language word form: $wordForm")
+                                                rejectedNormalization++
+                                                if (rejectedNormalization <= 5) {
+                                                    Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: $language word '$wordForm' - ${e.message}")
+                                                }
                                                 null
                                             }
                                         } else null
@@ -552,7 +604,10 @@ class DictionaryZipParser {
                                         try {
                                             GreekNormalizer.normalize(lemma)
                                         } catch (e: Exception) {
-                                            Log.w(TAG, "Failed to normalize Greek lemma: $lemma")
+                                            rejectedNormalization++
+                                            if (rejectedNormalization <= 5) {
+                                                Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: Greek lemma '$lemma' - ${e.message}")
+                                            }
                                             null
                                         }
                                     }
@@ -561,17 +616,20 @@ class DictionaryZipParser {
                                             try {
                                                 PatternBasedNormalizer.normalize(lemma, language, langPatterns)
                                             } catch (e: Exception) {
-                                                Log.w(TAG, "Failed to normalize $language lemma: $lemma")
+                                                rejectedNormalization++
+                                                if (rejectedNormalization <= 5) {
+                                                    Log.w(TAG, "NORMALIZATION FAILED at line $lineNumber: $language lemma '$lemma' - ${e.message}")
+                                                }
                                                 null
                                             }
                                         } else null
                                     }
                                 }
-                                
+
                                 val confidence = confidenceIdx?.let {
                                     currentRow.getOrNull(it)?.toDoubleOrNull() ?: 1.0
                                 } ?: 1.0
-                                
+
                                 mappings.add(
                                     UserLemmaMappingEntity(
                                         packageId = packageId,
@@ -588,13 +646,18 @@ class DictionaryZipParser {
                                     )
                                 )
                                 processedCount++
+
+                                // Log first few successful imports to verify
+                                if (processedCount <= 3) {
+                                    Log.d(TAG, "IMPORTED line $lineNumber: '$wordForm' → '$lemma' (normalized: ${normalizedWord != null})")
+                                }
                             }
                         }
                     } catch (e: Exception) {
                         Log.e(TAG, "Error parsing morphology.csv line $lineNumber: ${e.message}")
                     }
                     lineNumber++
-                    
+
                     // Read next row - streaming approach
                     row = try {
                         csv.readNext()
@@ -603,6 +666,13 @@ class DictionaryZipParser {
                         null
                     }
                 }
+
+                // Log final statistics
+                Log.d(TAG, "=== IMPORT STATISTICS ===")
+                Log.d(TAG, "Successfully imported: $processedCount entries")
+                Log.d(TAG, "Rejected (row size): $rejectedRowSize")
+                Log.d(TAG, "Rejected (empty fields): $rejectedEmpty")
+                Log.d(TAG, "Normalization warnings: $rejectedNormalization")
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to parse morphology CSV", e)

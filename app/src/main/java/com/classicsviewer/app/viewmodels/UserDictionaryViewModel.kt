@@ -89,24 +89,23 @@ class UserDictionaryViewModel(application: Application) : AndroidViewModel(appli
         }
     }
     
-    fun clearDictionary() {
-        viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                // Get the active package and delete it (including the package entry itself)
-                val activePackage = repository.getActivePackage()
-                if (activePackage != null) {
-                    repository.deletePackage(activePackage.id)
-                }
-                _dictionaryInfo.value = null
-                _importState.value = ImportState.Idle
-            } catch (e: Exception) {
-                _importState.value = ImportState.Error(
-                    "Failed to clear dictionary: ${e.message}"
-                )
-            } finally {
-                _isLoading.value = false
+    suspend fun clearDictionary() {
+        _isLoading.postValue(true)
+        try {
+            // Get the active package and delete it (including the package entry itself)
+            val activePackage = repository.getActivePackage()
+            if (activePackage != null) {
+                repository.deletePackage(activePackage.id)
             }
+            _dictionaryInfo.postValue(null)
+            _importState.postValue(ImportState.Idle)
+        } catch (e: Exception) {
+            _importState.postValue(ImportState.Error(
+                "Failed to clear dictionary: ${e.message}"
+            ))
+            throw e  // Re-throw so the caller knows it failed
+        } finally {
+            _isLoading.postValue(false)
         }
     }
     

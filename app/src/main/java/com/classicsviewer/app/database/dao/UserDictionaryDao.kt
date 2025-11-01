@@ -43,6 +43,9 @@ interface UserDictionaryDao {
         WHERE udl.language = :language AND udp.is_active = 1
     """)
     suspend fun getLemmaCount(language: String): Int
+
+    @Query("SELECT COUNT(*) FROM user_dictionary_lemmas")
+    suspend fun getTotalLemmaCountAnyPackage(): Int
     
     @Query("""
         SELECT COUNT(*) FROM user_dictionary_lemmas udl

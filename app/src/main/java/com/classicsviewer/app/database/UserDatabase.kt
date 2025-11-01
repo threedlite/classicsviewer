@@ -83,6 +83,7 @@ abstract class UserDatabase : RoomDatabase() {
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         super.onOpen(db)
                         createNormalizationTableIfNeeded(db)
+                        autoActivatePackageIfNeeded(db)
                     }
                 })
                 .build()
@@ -138,7 +139,53 @@ abstract class UserDatabase : RoomDatabase() {
                 android.util.Log.d("UserDatabase", "normalization_patterns table created successfully")
             }
         }
-        
+
+        private fun autoActivatePackageIfNeeded(db: SupportSQLiteDatabase) {
+            try {
+                android.util.Log.d("UserDatabase", "autoActivatePackageIfNeeded: Starting check")
+
+                // Check lemma counts for debugging
+                val totalLemmasCursor = db.query("SELECT COUNT(*) FROM user_dictionary_lemmas")
+                var totalLemmas = 0
+                if (totalLemmasCursor.moveToFirst()) {
+                    totalLemmas = totalLemmasCursor.getInt(0)
+                }
+                totalLemmasCursor.close()
+                android.util.Log.w("UserDatabase", "Total lemmas in database (any package): $totalLemmas")
+
+                // Check if there's an active package
+                val activeCursor = db.query("SELECT COUNT(*) FROM user_dictionary_packages WHERE is_active = 1")
+                var hasActive = false
+                if (activeCursor.moveToFirst()) {
+                    hasActive = activeCursor.getInt(0) > 0
+                }
+                activeCursor.close()
+
+                android.util.Log.d("UserDatabase", "autoActivatePackageIfNeeded: hasActive=$hasActive")
+
+                if (!hasActive) {
+                    // Check if any packages exist
+                    val packageCursor = db.query("SELECT id, package_name FROM user_dictionary_packages ORDER BY import_date DESC LIMIT 1")
+                    if (packageCursor.moveToFirst()) {
+                        val packageId = packageCursor.getLong(0)
+                        val packageName = packageCursor.getString(1)
+                        packageCursor.close()
+
+                        android.util.Log.w("UserDatabase", "No active package found - auto-activating package: $packageName (id=$packageId)")
+                        db.execSQL("UPDATE user_dictionary_packages SET is_active = 1 WHERE id = ?", arrayOf(packageId))
+                        android.util.Log.w("UserDatabase", "Package activated successfully")
+                    } else {
+                        android.util.Log.d("UserDatabase", "autoActivatePackageIfNeeded: No packages found in database")
+                        packageCursor.close()
+                    }
+                } else {
+                    android.util.Log.d("UserDatabase", "autoActivatePackageIfNeeded: Active package already exists")
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("UserDatabase", "Error auto-activating package", e)
+            }
+        }
+
         fun destroyInstance() {
             INSTANCE?.close()
             INSTANCE = null

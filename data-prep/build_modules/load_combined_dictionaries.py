@@ -5,6 +5,7 @@ This replaces the old LSJ, Cunliffe, and Wiktionary loading functions.
 """
 
 import json
+import csv
 from pathlib import Path
 from .normalization_utils import normalize_greek_ultra
 
@@ -26,10 +27,88 @@ def load_combined_dictionaries(cursor, build_mode='full'):
         print("\nRunning complete extraction pipeline...")
         print("NOTE: All files will be regenerated from scratch (except all_greek_wiktionary_pages.json)")
 
-        # Always run the complete pipeline to ensure fresh data
-        from . import run_complete_pipeline
-        print("Running complete pipeline...")
-        run_complete_pipeline.main()
+        # Run the complete pipeline inline
+        import subprocess
+        import sys
+
+        build_modules_dir = Path(__file__).parent
+        data_prep_dir = build_modules_dir.parent
+        wiktionary_dir = data_prep_dir / "wiktionary-processing"
+
+        print("COMPLETE DICTIONARY AND MORPHOLOGY PIPELINE")
+        print("="*60)
+
+        # Step 1: Ensure Greek pages are extracted (one-time only)
+        greek_pages_file = wiktionary_dir / "all_greek_wiktionary_pages.json"
+        if not greek_pages_file.exists():
+            print(f"\nExtracting Greek pages from Wiktionary (one-time, ~10 minutes)...")
+            subprocess.run([sys.executable, "extract_all_greek_pages.py"], cwd=wiktionary_dir, check=True, timeout=1200)
+        else:
+            print(f"\n✓ Greek pages already extracted: {greek_pages_file}")
+
+        # Step 2: Extract all morphology data
+        print("\n\nSTEP 2: EXTRACTING MORPHOLOGY DATA")
+
+        morphology_scripts = [
+            ("extract_ancient_greek_conjugations.py", "Ancient Greek verb conjugations", 300),
+            ("extract_ancient_greek_declensions.py", "Ancient Greek noun declensions", 300),
+            ("extract_all_ancient_greek_words_with_diacritics.py", "All Ancient Greek words with diacritics (includes 48k definitions)", 300),
+            ("extract_inflection_of_template_fixed.py", "Inflection_of template mappings", 300),
+            ("extract_declension_mappings_fixed.py", "Declension template mappings", 300)
+        ]
+
+        for script, desc, timeout in morphology_scripts:
+            print(f"\nExtracting {desc}...")
+            subprocess.run([sys.executable, script], cwd=wiktionary_dir, check=True, timeout=timeout)
+
+        # Step 3: Combine morphology
+        print("\nCombining all Ancient Greek morphology...")
+        subprocess.run([sys.executable, "combine_all_ancient_greek_morphology.py"], cwd=wiktionary_dir, check=True, timeout=300)
+
+        # Step 4: Extract dictionary data
+        print("\n\nSTEP 3: EXTRACTING DICTIONARY DATA")
+
+        dictionary_scripts = [
+            ("extract_cunliffe_new.py", "Cunliffe dictionary", 300),
+            ("extract_lsj_fixed.py", "LSJ dictionary", 300),
+            ("extract_wiktionary_final.py", "Wiktionary dictionary entries", 600)
+        ]
+
+        for script, desc, timeout in dictionary_scripts:
+            print(f"\nExtracting {desc}...")
+            subprocess.run([sys.executable, script], cwd=build_modules_dir, check=True, timeout=timeout)
+
+        # Step 5: Combine dictionaries and create lemma mappings
+        print("\n\nSTEP 4: COMBINING DICTIONARIES")
+
+        # First create the base combined files - use fixed version
+        combine_script = build_modules_dir / "quick_combine_minimal_fixed.py"
+        if combine_script.exists():
+            print("\nCreating combined dictionary and base lemma mappings...")
+            subprocess.run([sys.executable, "quick_combine_minimal_fixed.py"], cwd=build_modules_dir, check=True, timeout=300)
+        else:
+            # Fallback to original if fixed doesn't exist
+            combine_script = build_modules_dir / "quick_combine_minimal.py"
+            if combine_script.exists():
+                print("\nCreating combined dictionary and base lemma mappings...")
+                subprocess.run([sys.executable, "quick_combine_minimal.py"], cwd=build_modules_dir, check=True, timeout=300)
+            else:
+                raise FileNotFoundError("Missing combine script")
+
+        # Step 6: Generate variants
+        print("\n\nSTEP 5: GENERATING VARIANTS")
+
+        variant_scripts = [
+            ("normalize_unicode.py", "Normalizing Unicode", 60),
+            ("add_grave_accent_variants.py", "Adding grave accent variants", 300),
+            ("add_enclitic_variants.py", "Adding enclitic variants", 60)
+        ]
+
+        for script, desc, timeout in variant_scripts:
+            print(f"\n{desc}...")
+            subprocess.run([sys.executable, script], cwd=build_modules_dir, check=True, timeout=timeout)
+
+        print("\n✓ Pipeline complete")
     
     # The complete pipeline already handles morphology extraction
     wiktionary_dir = Path(__file__).parent.parent / "wiktionary-processing"
@@ -104,6 +183,41 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     cursor.execute("""
         CREATE INDEX IF NOT EXISTS idx_normalization_language
         ON normalization_patterns(language, priority)
+    """)
+
+    # Create prefix_assimilation_rules table for compound word decomposition
+    cursor.execute("DROP TABLE IF EXISTS prefix_assimilation_rules")
+    cursor.execute("""
+        CREATE TABLE prefix_assimilation_rules (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            language TEXT NOT NULL,
+            base_prefix TEXT NOT NULL,
+            assimilated_form TEXT NOT NULL,
+            meaning TEXT,
+            phonological_rule TEXT,
+            priority INTEGER NOT NULL,
+            examples TEXT
+        )
+    """)
+
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_language
+        ON prefix_assimilation_rules(language)
+    """)
+
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_base
+        ON prefix_assimilation_rules(base_prefix)
+    """)
+
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_form
+        ON prefix_assimilation_rules(assimilated_form)
+    """)
+
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_lang_priority
+        ON prefix_assimilation_rules(language, priority)
     """)
 
     # Skip data loading for first1ktest mode
@@ -297,7 +411,70 @@ def load_combined_dictionaries(cursor, build_mode='full'):
             raise RuntimeError(f"Failed to load Whitaker's Latin for {build_mode} database build") from e
     else:
         print(f"  Skipping Whitaker's Latin dictionary ({build_mode} database)")
-    
+
+    # Load prefix assimilation rules for compound word decomposition
+    print("\nLoading prefix assimilation rules...")
+    import csv
+    import os
+
+    # Get the data-prep directory (parent of build_modules)
+    data_prep_dir = Path(__file__).parent.parent
+    assimilation_rules_dir = data_prep_dir / "prefix_assimilation_rules"
+
+    rules_imported = 0
+
+    # Import Greek prefix assimilation rules
+    greek_rules_file = assimilation_rules_dir / "greek_prefix_assimilation_rules.csv"
+    if greek_rules_file.exists():
+        with open(greek_rules_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                cursor.execute('''
+                    INSERT INTO prefix_assimilation_rules
+                    (language, base_prefix, assimilated_form, meaning, phonological_rule, priority, examples)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    row['language'],
+                    row['base_prefix'],
+                    row['assimilated_form'],
+                    row.get('meaning', ''),
+                    row.get('phonological_rule', ''),
+                    int(row['priority']),
+                    row.get('examples', '')
+                ))
+                rules_imported += 1
+        print(f"  ✓ Imported {rules_imported} Greek prefix assimilation rules")
+    else:
+        print(f"  ⚠ Greek prefix assimilation rules not found: {greek_rules_file}")
+
+    # Import Latin prefix assimilation rules
+    latin_rules_file = assimilation_rules_dir / "latin_prefix_assimilation_rules.csv"
+    if latin_rules_file.exists():
+        latin_rules_count = 0
+        with open(latin_rules_file, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                cursor.execute('''
+                    INSERT INTO prefix_assimilation_rules
+                    (language, base_prefix, assimilated_form, meaning, phonological_rule, priority, examples)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    row['language'],
+                    row['base_prefix'],
+                    row['assimilated_form'],
+                    row.get('meaning', ''),
+                    row.get('phonological_rule', ''),
+                    int(row['priority']),
+                    row.get('examples', '')
+                ))
+                latin_rules_count += 1
+        print(f"  ✓ Imported {latin_rules_count} Latin prefix assimilation rules")
+        rules_imported += latin_rules_count
+    else:
+        print(f"  ⚠ Latin prefix assimilation rules not found: {latin_rules_file}")
+
+    print(f"  Total prefix assimilation rules: {rules_imported}")
+
     # Print statistics
     cursor.execute("SELECT COUNT(*) FROM dictionary_entries WHERE language = 'greek'")
     greek_dict_count = cursor.fetchone()[0]

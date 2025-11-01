@@ -260,7 +260,7 @@ class DictionaryActivity : BaseActivity() {
             }
             
             // Get all possible dictionary entries (using original word with punctuation for lookup)
-            val result = repository.getAllDictionaryEntries(originalWord, language)
+            val result = repository.getAllDictionaryEntries(originalWord, language, skipCompoundDecomposition = false)
             
             if (result.entries.isNotEmpty()) {
                 // Keep ALL entries - don't deduplicate by lemma to show all morphological forms

@@ -119,12 +119,20 @@ def main():
     
     # Process Wiktionary - NOW ADDS ALL ENTRIES REGARDLESS OF EXISTING ONES
     print("Processing Wiktionary...")
+    wiktionary_skipped = 0
     for headword, data in wiktionary_data.items():
         definition = data["definition"]
         # Skip morphological placeholders for inflected forms
         if "orphological entry" in definition and len(data.get("inflected_forms", [])) == 0:
+            wiktionary_skipped += 1
             continue
-        
+
+        # CRITICAL FIX: Skip Wiktionary "inflection of" entries - these are morphological notes, not definitions
+        # The morphology is already captured in lemma_map, we don't need dictionary entries for them
+        if definition.startswith("inflection of"):
+            wiktionary_skipped += 1
+            continue
+
         entry_key = (headword, "wiktionary")
         if entry_key not in seen_entries:
             seen_entries.add(entry_key)
@@ -161,7 +169,8 @@ def main():
                         "morph_info": None
                     })
     
-    print(f"\nTotal dictionary entries: {len(dictionary_entries_list)}")
+    print(f"\nWiktionary entries skipped (no real definitions): {wiktionary_skipped}")
+    print(f"Total dictionary entries: {len(dictionary_entries_list)}")
     print(f"Total lemma mappings: {len(lemma_mappings)}")
     
     # Convert list back to dict format expected by load_combined_dictionaries.py

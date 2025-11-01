@@ -16,6 +16,10 @@ git clone https://github.com/cltk/arabic_text_perseus.git
 git clone https://github.com/PerseusDL/canonical-farsiLit
 git clone https://github.com/OliverHellwig/sanskrit.git
 #wget https://drive.google.com/open?id=1zKHtrnRTqW6TroOoepFgTGBsPT9D6i6k  # DCS db (72M) for https://github.com/OliverHellwig/sanskrit/blob/master/dcs/data/readme.md
+wget https://zenodo.org/records/14206061/files/opera_graeca_adnotata_v0.2.0.zip # https://github.com/OperaGraecaAdnotata/OGA?tab=readme-ov-file  # (optional)
+#git clone git clone https://github.com/greekwordnet/greekwordnet-archive.git
+git clone https://github.com/cltk/cltk
+
 
 # ORACC Cuneiform Dictionaries (Sumerian + Akkadian)
 wget http://oracc.museum.upenn.edu/json/epsd2.zip  # ePSD2 Sumerian Dictionary (~203 MB)

@@ -67,7 +67,7 @@ def extract_wiktionary_data():
     
     # Paths to Wiktionary processed data
     morphology_file = Path(__file__).parent.parent / "wiktionary-processing" / "extract_all_ancient_greek_words_with_diacritics.json"
-    definitions_file = Path(__file__).parent.parent / "wiktionary-processing" / "wiktionary_extraction_results" / "wiktionary_definitions_complete.json"
+    definitions_file = Path(__file__).parent.parent / "wiktionary-processing" / "wiktionary_definitions_complete.json"
     
     # Also try loading LSJ and Cunliffe for better definitions
     lsj_file = Path(__file__).parent / "extract_lsj_fixed.json"
@@ -120,14 +120,21 @@ def extract_wiktionary_data():
             lemma_to_forms[normalized_lemma].add(word_form)
     
     print(f"Found {len(lemma_to_forms)} unique lemmas")
-    
-    # Load definitions if available
-    definitions_data = {}
-    if definitions_file.exists():
-        print("Loading Wiktionary definitions...")
-        with open(definitions_file, 'r', encoding='utf-8') as f:
-            definitions_data = json.load(f)
-        print(f"Found {len(definitions_data)} definition entries")
+
+    # Load definitions - REQUIRED component
+    if not definitions_file.exists():
+        raise FileNotFoundError(
+            f"CRITICAL: Wiktionary definitions file missing: {definitions_file}\n"
+            f"This is a required component for the dictionary build.\n"
+            f"You need to create a script to extract Ancient Greek definitions from:\n"
+            f"  {morphology_file.parent / 'all_greek_wiktionary_pages.json'}\n"
+            f"The file should contain definitions for ~48,486 Ancient Greek words."
+        )
+
+    print("Loading Wiktionary definitions...")
+    with open(definitions_file, 'r', encoding='utf-8') as f:
+        definitions_data = json.load(f)
+    print(f"Found {len(definitions_data)} definition entries")
     
     # Load LSJ and Cunliffe as fallback sources for better definitions
     lsj_data = {}
@@ -301,18 +308,39 @@ def extract_wiktionary_data():
                 "definition": definition
             }
     
-    # Second pass: add entries for inflected forms that map to non-existent lemmas
+    # Second pass: add entries for ALL words in comprehensive definitions file
+    # This captures the 48k definitions that don't have inflected forms
+    comprehensive_added = 0
+    for word, entry in definitions_data.items():
+        cleaned_word = clean_punctuation(word)
+        if cleaned_word and cleaned_word not in dictionary_data:
+            # Extract definition
+            if isinstance(entry, dict) and 'entry_plain' in entry:
+                definition = entry['entry_plain']
+            else:
+                definition = format_definition(entry)
+
+            if definition and len(definition) > 2:
+                dictionary_data[cleaned_word] = {
+                    "inflected_forms": [],
+                    "definition": definition
+                }
+                comprehensive_added += 1
+
+    print(f"Added {comprehensive_added} entries from comprehensive Wiktionary definitions")
+
+    # Third pass: add entries for inflected forms that map to non-existent lemmas
     # This ensures every word can be looked up
     orphan_forms = set()
     for mapping in mappings:
         word_form = clean_punctuation(mapping.get('word_form', ''))
         lemma = clean_punctuation(mapping.get('lemma', ''))
-        
+
         if word_form and lemma and lemma not in dictionary_data:
             orphan_forms.add(word_form)
-    
+
     print(f"Found {len(orphan_forms)} orphan forms (forms whose lemmas aren't in dictionary)")
-    
+
     # Add orphan forms as their own entries
     for form in orphan_forms:
         if form not in dictionary_data:  # Don't overwrite existing entries
@@ -320,9 +348,10 @@ def extract_wiktionary_data():
                 "inflected_forms": [],
                 "definition": "Inflected form (morphological entry)"
             }
-    
+
     print(f"\nCreated {len(dictionary_data)} dictionary entries:")
-    print(f"  - {lemmas_with_defs} with definitions")
+    print(f"  - {lemmas_with_defs} with definitions from lemmas with inflected forms")
+    print(f"  - {comprehensive_added} from comprehensive Wiktionary definitions")
     print(f"  - {lemmas_without_defs} morphology-only entries")
     print(f"  - {len(orphan_forms)} orphan form entries")
     
