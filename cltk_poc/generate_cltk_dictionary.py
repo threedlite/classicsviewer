@@ -788,7 +788,7 @@ def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]
         (work_index, author, work_title, morphology_results, compound_entries)
     """
     global _worker_nlp, _worker_id
-    db_path, author, work_title, work_index, min_split, valid_lemmas, lemmas_normalized = args
+    db_path, author, work_title, work_index, min_split, valid_lemmas, actual_words, lemmas_normalized = args
 
     # Extract words from database
     db_conn = sqlite3.connect(db_path)
@@ -811,7 +811,7 @@ def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]
 
     # Generate compound decompositions for this work (pass worker_id for labeling)
     options = ProcessingOptions(min_split_length=min_split)
-    compound_entries = generate_compounds(nlp, results, valid_lemmas, lemmas_normalized, options, worker_id=_worker_id)
+    compound_entries = generate_compounds(nlp, results, valid_lemmas, actual_words, lemmas_normalized, options, worker_id=_worker_id)
 
     return (work_index, author, db_title, results, compound_entries)
 
@@ -840,7 +840,7 @@ def process_all_works(
     # Load valid lemmas once (shared across all workers)
     print("\nLoading Perseus lemma database...")
     db_conn = sqlite3.connect(db_path)
-    valid_lemmas, _, lemmas_normalized = load_valid_lemmas_and_words(db_conn)
+    valid_lemmas, actual_words, lemmas_normalized = load_valid_lemmas_and_words(db_conn)
     db_conn.close()
 
     # Prepare list of all works to process
@@ -848,7 +848,7 @@ def process_all_works(
     work_index = 0
     for author, requested_works in works_by_author.items():
         for work_title in requested_works:
-            work_list.append((db_path, author, work_title, work_index, min_split, valid_lemmas, lemmas_normalized))
+            work_list.append((db_path, author, work_title, work_index, min_split, valid_lemmas, actual_words, lemmas_normalized))
             work_index += 1
 
     if num_workers > 1:
@@ -1424,6 +1424,9 @@ def format_compound_definition(decompositions: List[CompoundDecomposition], max_
     left_lemmas_seen = set()
     left_lemmas = []
     for decomp in decompositions:
+        # Skip blank or single-character lemmas
+        if not decomp.left_lemma or len(decomp.left_lemma.strip()) <= 1:
+            continue
         left_norm = normalize_greek(decomp.left_lemma.lower())
         if left_norm not in left_lemmas_seen:
             left_lemmas_seen.add(left_norm)
@@ -1435,6 +1438,9 @@ def format_compound_definition(decompositions: List[CompoundDecomposition], max_
     right_lemmas_seen = set()
     right_lemmas = []
     for decomp in decompositions:
+        # Skip blank or single-character lemmas
+        if not decomp.right_lemma or len(decomp.right_lemma.strip()) <= 1:
+            continue
         right_norm = normalize_greek(decomp.right_lemma.lower())
         if right_norm not in right_lemmas_seen:
             right_lemmas_seen.add(right_norm)
@@ -1446,13 +1452,14 @@ def format_compound_definition(decompositions: List[CompoundDecomposition], max_
     left_part = "(" + ", ".join(left_lemmas) + ")"
     right_part = "(" + ", ".join(right_lemmas) + ")"
 
-    return f"Compound parts possible lemmas: {left_part} - {right_part}"
+    return f"Compound parts possible matches: {left_part} - {right_part}"
 
 
 def generate_compounds(
     nlp,
     morphology_results: List[MorphologyResult],
     valid_lemmas: Set[str],
+    actual_words: Set[str],
     lemmas_normalized: Set[str],
     options: ProcessingOptions,
     worker_id: int = None
@@ -1460,17 +1467,29 @@ def generate_compounds(
     """Generate compound decompositions for words that need them (batched for efficiency)"""
 
     # Find words that need compound analysis:
-    # 1. Failed to lemmatize (no lemma)
-    # 2. Lemma not in Perseus dictionary (likely unknown compound or rare word)
+    # Only create compound entries if:
+    # 1. The word form itself is NOT in our dictionary, AND
+    # 2. CLTK failed to lemmatize it OR the lemma is also not in our dictionary
     compound_candidates = []
 
     for r in morphology_results:
-        if not r.success or not r.lemma:
-            # Failed to lemmatize
-            compound_candidates.append(r.word_form)
-        elif r.lemma.lower() not in valid_lemmas:
-            # Lemma not in Perseus dictionary - could be unknown compound
-            compound_candidates.append(r.word_form)
+        word_lower = r.word_form.lower()
+
+        # Skip if word form is already in Perseus dictionary (as lemma or word)
+        if word_lower in valid_lemmas:
+            continue
+        if word_lower in actual_words:
+            continue
+
+        # Skip if CLTK successfully lemmatized to something in Perseus
+        if r.success and r.lemma:
+            lemma_lower = r.lemma.lower()
+            if lemma_lower in valid_lemmas or lemma_lower in actual_words:
+                # Word has a known lemma in Perseus - no compound analysis needed
+                continue
+
+        # This word needs compound analysis (no known form or lemma in Perseus)
+        compound_candidates.append(r.word_form)
 
     if not compound_candidates:
         worker_label = f"[W{worker_id}] " if worker_id else ""
@@ -1479,7 +1498,7 @@ def generate_compounds(
 
     worker_label = f"[W{worker_id}] " if worker_id else ""
     print(f"\n{worker_label}Analyzing {len(compound_candidates)} words for compound structure...")
-    print(f"  {worker_label}(Words whose lemmas are not found in Perseus dictionary)")
+    print(f"  {worker_label}(Words not found in Perseus dictionary)")
     print(f"  {worker_label}Using batched analysis for maximum efficiency...")
 
     # Batch analyze ALL candidates at once
