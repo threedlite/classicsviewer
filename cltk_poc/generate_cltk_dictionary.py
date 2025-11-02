@@ -620,7 +620,7 @@ def score_decomposition(
 class ProcessingOptions:
     """Configuration options for CLTK processing"""
     min_split_length: int = 4
-    num_workers: int = 2  # Number of parallel workers for work-level processing
+    num_workers: int = 6  # Number of parallel workers for work-level processing
 
 
 @dataclass
@@ -1140,17 +1140,25 @@ def find_best_cross_decomposition(decompositions: List[CompoundDecomposition]) -
 
     # Create synthetic decomposition if we found a better combination
     if best_left_decomp and best_right_decomp:
+        # CRITICAL BUG FIX: Can't mix left_form and right_form from different splits!
+        # The forms are position-dependent and won't add up correctly.
+        # Instead: Use left decomp's split point to recalculate right_form from original word
+        original = best_left_decomp.original
+        split_point = best_left_decomp.split_point
+        left_form = original[:split_point]
+        right_form = original[split_point:]
+
         return CompoundDecomposition(
-            original=best_left_decomp.original,
-            left_form=best_left_decomp.left_form,
+            original=original,
+            left_form=left_form,
             left_lemma=best_left_decomp.left_lemma,
             left_pos=best_left_decomp.left_pos,
             left_features=best_left_decomp.left_features,
-            right_form=best_right_decomp.right_form,
+            right_form=right_form,
             right_lemma=best_right_decomp.right_lemma,
             right_pos=best_right_decomp.right_pos,
             right_features=best_right_decomp.right_features,
-            split_point=best_left_decomp.split_point,  # Use left's split point
+            split_point=split_point,
             score=best_combined_score,
             left_matches=best_left_decomp.left_matches,
             right_matches=best_right_decomp.right_matches
@@ -1185,8 +1193,7 @@ def load_valid_lemmas_and_words(db_conn: sqlite3.Connection) -> tuple[Set[str], 
         for row in cursor:
             word = row[0].lower()
             actual_words.add(word)
-            lemmas.add(word)  # Also add to lemmas
-            lemmas_normalized.add(normalize_greek(word))  # Add normalized version
+            # Do NOT add corpus words to lemmas - they are inflected forms, not lemmas!
 
         print(f"  ✓ Loaded {len(lemmas)} valid lemmas ({len(lemmas_normalized)} normalized) and {len(actual_words)} corpus words for validation")
     except Exception as e:
@@ -1310,10 +1317,16 @@ def analyze_compounds_batch(
 
     for word, splits in word_splits.items():
         decompositions = []
+        debug_word = word.lower() in ['λεπτοψαμάθων', 'προστομίων']
+
+        if debug_word:
+            print(f"\nDEBUG: Processing {word}, {len(splits)} possible splits")
 
         for left, right in splits:
             # Get cached analysis
             if left not in parts_analysis or right not in parts_analysis:
+                if debug_word:
+                    print(f"  DEBUG: Split {left}|{right} - parts_analysis missing: left={left not in parts_analysis}, right={right not in parts_analysis}")
                 continue
 
             left_word = parts_analysis[left]
@@ -1322,8 +1335,13 @@ def analyze_compounds_batch(
             left_lemma = left_word.lemma if hasattr(left_word, 'lemma') else None
             right_lemma = right_word.lemma if hasattr(right_word, 'lemma') else None
 
+            if debug_word:
+                print(f"  DEBUG: Split {left}|{right} - lemmas: left={left_lemma}, right={right_lemma}")
+
             # Must have both lemmas
             if not (left_lemma and right_lemma):
+                if debug_word:
+                    print(f"    DEBUG: SKIPPED - missing lemma")
                 continue
 
             # ENSEMBLE APPROACH: Get lemma candidates using ALL data sources
@@ -1483,20 +1501,29 @@ def generate_compounds(
     for r in morphology_results:
         word_lower = r.word_form.lower()
 
-        # Skip if word form is already in Perseus dictionary (as lemma or word)
+        # Debug logging for specific words
+        debug_word = word_lower in ['λεπτοψαμάθων', 'προστομίων']
+
+        # Skip if word form is already in Perseus dictionary (as a headword/lemma)
         if word_lower in valid_lemmas:
-            continue
-        if word_lower in actual_words:
+            if debug_word:
+                print(f"DEBUG: {word_lower} SKIPPED - word form in valid_lemmas")
             continue
 
-        # Skip if CLTK successfully lemmatized to something in Perseus
+        # Skip if CLTK successfully lemmatized to something in Perseus dictionary
         if r.success and r.lemma:
             lemma_lower = r.lemma.lower()
-            if lemma_lower in valid_lemmas or lemma_lower in actual_words:
-                # Word has a known lemma in Perseus - no compound analysis needed
+            if debug_word:
+                print(f"DEBUG: {word_lower} -> lemma {lemma_lower}, in valid_lemmas: {lemma_lower in valid_lemmas}")
+            if lemma_lower in valid_lemmas:
+                # Word has a known lemma in Perseus dictionary - no compound analysis needed
+                if debug_word:
+                    print(f"DEBUG: {word_lower} SKIPPED - lemma in valid_lemmas")
                 continue
 
-        # This word needs compound analysis (no known form or lemma in Perseus)
+        # This word needs compound analysis (no dictionary entry for word or lemma)
+        if debug_word:
+            print(f"DEBUG: {word_lower} ADDED to compound_candidates")
         compound_candidates.append(r.word_form)
 
     if not compound_candidates:
@@ -1524,26 +1551,34 @@ def generate_compounds(
         # 2. Both parts are very short (likely wrong split)
         # 3. Neither part has Perseus matches (likely inflected forms misidentified as compounds)
 
+        debug_word = word.lower() in ['λεπτοψαμάθων', 'προστομίων']
+
         if not decompositions:
             filtered_count += 1
             filter_reasons['no_decompositions'] = filter_reasons.get('no_decompositions', 0) + 1
+            if debug_word:
+                print(f"DEBUG FILTER: {word} - no_decompositions")
             continue
 
         best_decomp = decompositions[0]
+        if debug_word:
+            print(f"DEBUG FILTER: {word} - best decomp: {best_decomp.left_form}|{best_decomp.right_form} -> {best_decomp.left_lemma}|{best_decomp.right_lemma}, score={best_decomp.score}")
 
-        # Filter 1: Minimum score threshold (ensemble scores typically 100-1000+ for good matches)
-        # BUT: Cross-decomposition scores can be lower, so use conservative threshold
-        MIN_SCORE = 20  # Very conservative threshold - let other filters do the work
-        if best_decomp.score < MIN_SCORE:
-            filtered_count += 1
-            filter_reasons['low_score'] = filter_reasons.get('low_score', 0) + 1
-            continue
+        # Filter 1: DISABLED - Minimum score threshold
+        # Other filters (particle detection, empty parens) catch most false positives
+        # MIN_SCORE = 20
+        # if best_decomp.score < MIN_SCORE:
+        #     filtered_count += 1
+        #     filter_reasons['low_score'] = filter_reasons.get('low_score', 0) + 1
+        #     continue
 
         # Filter 2: Both parts must have minimum length
         MIN_PART_LENGTH = 3
         if len(best_decomp.left_form) < MIN_PART_LENGTH or len(best_decomp.right_form) < MIN_PART_LENGTH:
             filtered_count += 1
             filter_reasons['short_parts'] = filter_reasons.get('short_parts', 0) + 1
+            if debug_word:
+                print(f"DEBUG FILTER: {word} - FILTERED: short_parts")
             continue
 
         # Filter 3: BOTH parts should have Perseus matches for high-quality compounds
@@ -1551,12 +1586,17 @@ def generate_compounds(
         has_left_match = best_decomp.left_matches and len(best_decomp.left_matches) > 0
         has_right_match = best_decomp.right_matches and len(best_decomp.right_matches) > 0
 
+        if debug_word:
+            print(f"DEBUG FILTER: {word} - has_left_match={has_left_match}, has_right_match={has_right_match}")
+
         # Require both matches UNLESS we have very high confidence
         if not (has_left_match and has_right_match):
             # Allow through if score is exceptionally high (strong evidence from one side)
             if best_decomp.score < 200:
                 filtered_count += 1
                 filter_reasons['missing_matches'] = filter_reasons.get('missing_matches', 0) + 1
+                if debug_word:
+                    print(f"DEBUG FILTER: {word} - FILTERED: missing_matches (score={best_decomp.score})")
                 continue
 
         # Filter 5: Reject if right part is just a particle/article
@@ -1569,6 +1609,8 @@ def generate_compounds(
             if right_lemma in PARTICLES or right_lemma in ARTICLES:
                 filtered_count += 1
                 filter_reasons['particle_right'] = filter_reasons.get('particle_right', 0) + 1
+                if debug_word:
+                    print(f"DEBUG FILTER: {word} - FILTERED: particle_right ({right_lemma})")
                 continue
 
         # Filter 6: Reject common inflected verb endings (ONLY if we have strong evidence)
@@ -1609,12 +1651,20 @@ def generate_compounds(
         # Format definition for final checks
         definition = format_compound_definition(decompositions)
 
+        if debug_word:
+            print(f"DEBUG FILTER: {word} - definition: {definition}")
+
         # Filter 7: Final check - reject if formatted definition has empty parts
         # This catches edge cases where lemmas got filtered out during formatting
         if '()' in definition:
             filtered_count += 1
             filter_reasons['empty_parens'] = filter_reasons.get('empty_parens', 0) + 1
+            if debug_word:
+                print(f"DEBUG FILTER: {word} - FILTERED: empty_parens")
             continue
+
+        if debug_word:
+            print(f"DEBUG FILTER: {word} - PASSED ALL FILTERS!")
 
         compound_entries.append({
             'word_form': word.lower(),
