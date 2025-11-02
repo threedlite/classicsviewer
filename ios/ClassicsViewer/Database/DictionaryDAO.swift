@@ -4,7 +4,7 @@ import SQLite3
 protocol DictionaryDAOProtocol {
     func getDictionaryEntry(_ word: String, language: String) async throws -> DictionaryResult?
     func getDictionaryEntryByHeadword(_ headword: String, language: String) async throws -> DictionaryResult?
-    func getAllDictionaryEntries(_ word: String, language: String) async throws -> [DictionaryMatchEntry]
+    func getAllDictionaryEntries(_ word: String, language: String, skipCompoundDecomposition: Bool) async throws -> [DictionaryMatchEntry]
     func getMainDictionaryEntriesOnly(_ word: String, language: String) async throws -> [DictionaryMatchEntry]
 }
 
@@ -404,7 +404,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
     }
     
     // Get ALL dictionary entries for a word (from all sources, with morphology support)
-    func getAllDictionaryEntries(_ word: String, language: String) async throws -> [DictionaryMatchEntry] {
+    func getAllDictionaryEntries(_ word: String, language: String, skipCompoundDecomposition: Bool = false) async throws -> [DictionaryMatchEntry] {
         print("!!! DictionaryDAO.getAllDictionaryEntries CALLED !!!")
         print("DictionaryDAO.getAllDictionaryEntries: Getting all dictionary entries for word='\(word)', language='\(language)'")
         
@@ -870,7 +870,61 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 }
             }
         }
-        
+
+        // NEW: Try compound word decomposition if no entries found
+        // Matches Android PerseusRepository.kt line 835
+        if entries.isEmpty && !skipCompoundDecomposition {
+            // Only for Greek and Latin
+            if language.lowercased() == "greek" || language.lowercased() == "latin" {
+                // Only for words >= 6 characters
+                if cleanedWord.count >= 6 {
+                    print("DictionaryDAO: No entries found, attempting compound decomposition for '\(cleanedWord)'")
+
+                    let helper = DictionaryLookupHelper()
+                    if let compound = try await helper.decomposeCompoundWord(
+                        word: cleanedWord,
+                        language: language,
+                        dictionaryDAO: self
+                    ) {
+                        print("DictionaryDAO: Successfully decomposed '\(cleanedWord)' → prefix: '\(compound.prefix)' (\(compound.prefixMeaning)), stem: '\(compound.stem)'")
+
+                        // Create synthetic entry showing decomposition
+                        let syntheticDefinition = """
+                            [Compound Word]
+                            Prefix: \(compound.prefix) (\(compound.prefixMeaning))
+                            Stem: \(compound.stem)\(compound.stemLemma != nil ? "\n→ See: \(compound.stemLemma!)" : "")
+                            """
+
+                        let syntheticEntry = DictionaryMatchEntry(
+                            lemma: cleanedWord,
+                            definition: syntheticDefinition,
+                            morphInfo: "compound word decomposition",
+                            isDirectMatch: false,
+                            confidence: 0.8,
+                            source: "compound_analysis",
+                            hasNonTreebankPath: true
+                        )
+
+                        entries.append(syntheticEntry)
+
+                        // Also add the stem's dictionary entries if found
+                        if let stemLemma = compound.stemLemma {
+                            print("DictionaryDAO: Looking up stem lemma '\(stemLemma)'")
+                            let stemEntries = try await getAllDictionaryEntries(
+                                stemLemma,
+                                language: language,
+                                skipCompoundDecomposition: true  // Don't recurse
+                            )
+                            print("DictionaryDAO: Found \(stemEntries.count) entries for stem '\(stemLemma)'")
+                            entries.append(contentsOf: stemEntries)
+                        }
+                    } else {
+                        print("DictionaryDAO: Could not decompose '\(cleanedWord)' as compound word")
+                    }
+                }
+            }
+        }
+
         // If no entries found and it's Greek, try ultra-normalized search (like Android)
         if entries.isEmpty && language == "greek" {
             print("DictionaryDAO: No entries found, trying ultra-normalized search for '\(cleanedWord)'")
