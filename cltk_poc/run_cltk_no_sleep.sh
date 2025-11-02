@@ -29,7 +29,7 @@ echo ""
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 VENV_PATH="$SCRIPT_DIR/../venv/bin/activate"
 
-caffeinate -i bash -c "source '$VENV_PATH' && python3 generate_cltk_dictionary.py '$AUTHORS_CSV' '$NUM_WORKERS'" > "$LOGFILE" 2>&1 &
+caffeinate -i bash -c "source '$VENV_PATH' && python3 generate_cltk_dictionary.py '$AUTHORS_CSV' --workers '$NUM_WORKERS'" > "$LOGFILE" 2>&1 &
 
 PID=$!
 echo "Background process started with PID: $PID"
