@@ -78,9 +78,18 @@ class UserDictionaryRepository(private val context: Context) {
             } ?: throw IllegalArgumentException("Cannot open file from URI")
             
             progressCallback?.invoke(10, "Creating dictionary package...")
-            
+
             // Create a new package for this import
             val packageName = originalFileName.removeSuffix(".zip")
+
+            // Check if a package with this name already exists and delete it
+            val existingPackage = packageDao.getPackageByName(packageName)
+            if (existingPackage != null) {
+                Log.d(TAG, "Package '$packageName' already exists (id=${existingPackage.id}), deleting old data...")
+                progressCallback?.invoke(10, "Removing existing package...")
+                deletePackage(existingPackage.id)
+            }
+
             val packageEntity = UserDictionaryPackageEntity(
                 packageName = packageName,
                 fileName = originalFileName,

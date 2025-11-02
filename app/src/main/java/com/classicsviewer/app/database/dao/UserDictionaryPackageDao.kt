@@ -17,7 +17,10 @@ interface UserDictionaryPackageDao {
     
     @Query("SELECT * FROM user_dictionary_packages WHERE id = :packageId")
     suspend fun getPackageById(packageId: Long): UserDictionaryPackageEntity?
-    
+
+    @Query("SELECT * FROM user_dictionary_packages WHERE package_name = :packageName")
+    suspend fun getPackageByName(packageName: String): UserDictionaryPackageEntity?
+
     @Insert
     suspend fun insertPackage(packageEntity: UserDictionaryPackageEntity): Long
     

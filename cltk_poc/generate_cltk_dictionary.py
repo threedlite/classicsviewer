@@ -925,7 +925,7 @@ def process_all_works(
                         all_results.extend(results)
 
                         # Generate compounds for this work
-                        compounds = generate_compounds(nlp, results, valid_lemmas, lemmas_normalized, options)
+                        compounds = generate_compounds(nlp, results, valid_lemmas, actual_words, lemmas_normalized, options)
                         all_compounds.extend(compounds)
 
                         compound_info = f", {len(compounds)} compounds" if compounds else ""
@@ -1504,10 +1504,110 @@ def generate_compounds(
     # Batch analyze ALL candidates at once
     word_decompositions = analyze_compounds_batch(compound_candidates, nlp, valid_lemmas, lemmas_normalized, options.min_split_length, worker_id=worker_id)
 
-    # Convert to dictionary entries
+    # Convert to dictionary entries (with quality filtering)
     compound_entries = []
+    filtered_count = 0
+    filter_reasons = {}  # Track why things were filtered
+
     for word, decompositions in word_decompositions.items():
+        # Quality filter: Only include decompositions with reasonable confidence
+        # Skip if:
+        # 1. Best decomposition score is too low (likely nonsense)
+        # 2. Both parts are very short (likely wrong split)
+        # 3. Neither part has Perseus matches (likely inflected forms misidentified as compounds)
+
+        if not decompositions:
+            filtered_count += 1
+            filter_reasons['no_decompositions'] = filter_reasons.get('no_decompositions', 0) + 1
+            continue
+
+        best_decomp = decompositions[0]
+
+        # Filter 1: Minimum score threshold (ensemble scores typically 100-1000+ for good matches)
+        # BUT: Cross-decomposition scores can be lower, so use conservative threshold
+        MIN_SCORE = 20  # Very conservative threshold - let other filters do the work
+        if best_decomp.score < MIN_SCORE:
+            filtered_count += 1
+            filter_reasons['low_score'] = filter_reasons.get('low_score', 0) + 1
+            continue
+
+        # Filter 2: Both parts must have minimum length
+        MIN_PART_LENGTH = 3
+        if len(best_decomp.left_form) < MIN_PART_LENGTH or len(best_decomp.right_form) < MIN_PART_LENGTH:
+            filtered_count += 1
+            filter_reasons['short_parts'] = filter_reasons.get('short_parts', 0) + 1
+            continue
+
+        # Filter 3: BOTH parts should have Perseus matches for high-quality compounds
+        # Exception: Allow if score is very high (>200), indicating strong evidence
+        has_left_match = best_decomp.left_matches and len(best_decomp.left_matches) > 0
+        has_right_match = best_decomp.right_matches and len(best_decomp.right_matches) > 0
+
+        # Require both matches UNLESS we have very high confidence
+        if not (has_left_match and has_right_match):
+            # Allow through if score is exceptionally high (strong evidence from one side)
+            if best_decomp.score < 200:
+                filtered_count += 1
+                filter_reasons['missing_matches'] = filter_reasons.get('missing_matches', 0) + 1
+                continue
+
+        # Filter 5: Reject if right part is just a particle/article
+        # These are wrong splits (e.g., "στράτευμ" → στρατεύω + τε)
+        PARTICLES = {'δέ', 'τε', 'κε', 'νυ', 'αὖ', 'γάρ', 'μέν', 'ἄν', 'περ', 'τοι', 'ῥα'}
+        ARTICLES = {'ὁ', 'ἡ', 'τό', 'τόν', 'τήν', 'τούς', 'τάς', 'οἱ', 'αἱ', 'τά'}
+
+        if has_right_match and best_decomp.right_matches:
+            right_lemma = best_decomp.right_matches[0][0]  # Best match lemma
+            if right_lemma in PARTICLES or right_lemma in ARTICLES:
+                filtered_count += 1
+                filter_reasons['particle_right'] = filter_reasons.get('particle_right', 0) + 1
+                continue
+
+        # Filter 6: Reject common inflected verb endings (ONLY if we have strong evidence)
+        # These patterns indicate inflected forms misidentified as compounds
+        # Only filter these if the left part matches a known verb lemma
+        INFLECTED_VERB_ENDINGS = {
+            # High confidence verb endings
+            'οιντ', 'αιντ', 'ειντ',  # optative plural (e.g., γίγνοιντ)
+            'ομεθ', 'ομεθα',  # 1st person plural middle (e.g., πεπλήγμεθ)
+            'εται', 'νται',  # 3rd person middle/passive
+            'ετο', 'ντο',  # imperfect middle/passive
+            'ετ', 'ετε',  # 3rd person / 2nd plural present/imperfect
+            'ομεν', 'ομαι',  # 1st person forms
+        }
+
+        word_lower = word.lower()
+        has_verb_ending = any(word_lower.endswith(ending) for ending in INFLECTED_VERB_ENDINGS)
+
+        if has_verb_ending and has_left_match and best_decomp.left_matches:
+            # Check if left part is close to the full lemma (suggesting inflection, not compound)
+            left_lemma = best_decomp.left_matches[0][0].lower()
+            left_form = best_decomp.left_form.lower()
+
+            # If left form IS the lemma (or very close), this is inflected not compound
+            if left_form == left_lemma or normalize_greek(left_form) == normalize_greek(left_lemma):
+                filtered_count += 1
+                filter_reasons['inflected_verb_lemma_match'] = filter_reasons.get('inflected_verb_lemma_match', 0) + 1
+                continue
+
+            # Also filter if the left form is much longer than would be expected for a compound stem
+            # Real compound stems are usually short (e.g., "ἱππο-", "χρυσ-")
+            # Inflected forms have the full verb stem (e.g., "ἱκετεύ-" from ἱκετεύω)
+            if len(left_form) > len(word_lower) * 0.75:  # Left part is >75% of word
+                filtered_count += 1
+                filter_reasons['inflected_verb_long_left'] = filter_reasons.get('inflected_verb_long_left', 0) + 1
+                continue
+
+        # Format definition for final checks
         definition = format_compound_definition(decompositions)
+
+        # Filter 7: Final check - reject if formatted definition has empty parts
+        # This catches edge cases where lemmas got filtered out during formatting
+        if '()' in definition:
+            filtered_count += 1
+            filter_reasons['empty_parens'] = filter_reasons.get('empty_parens', 0) + 1
+            continue
+
         compound_entries.append({
             'word_form': word.lower(),
             'lemma': word.lower(),
@@ -1518,6 +1618,12 @@ def generate_compounds(
     compounds_found = len(compound_entries)
     worker_label = f"[W{worker_id}] " if worker_id else ""
     print(f"\n{worker_label}✓ Found {compounds_found} compound words ({compounds_found/len(compound_candidates)*100:.1f}% of candidates)")
+    if filtered_count > 0:
+        print(f"  {worker_label}Filtered out {filtered_count} low-quality decompositions")
+        if filter_reasons:
+            print(f"  {worker_label}Filter breakdown:")
+            for reason, count in sorted(filter_reasons.items(), key=lambda x: x[1], reverse=True):
+                print(f"    {worker_label}{reason}: {count}")
     return compound_entries
 
 
@@ -1564,13 +1670,13 @@ def save_morphology_csv(results: List[MorphologyResult], output_file: Path) -> i
 def save_dictionary_csv(compound_entries: List[Dict[str, str]], output_file: Path) -> int:
     """Save compound decompositions to dictionary CSV (always create file)"""
     with open(output_file, 'w', encoding='utf-8', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=['headword', 'definition', 'language', 'source_name'])
+        writer = csv.DictWriter(f, fieldnames=['lemma', 'definition', 'language', 'source_name'])
         writer.writeheader()
         if compound_entries:
             # Convert entries to proper dictionary format
             for entry in compound_entries:
                 writer.writerow({
-                    'headword': entry.get('lemma', entry.get('word_form', '')),
+                    'lemma': entry.get('lemma', entry.get('word_form', '')),
                     'definition': entry['definition'],
                     'language': entry['language'],
                     'source_name': 'CLTK ensemble'
