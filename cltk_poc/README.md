@@ -28,6 +28,8 @@ pip install 'cltk[stanza]'
 
 **IMPORTANT**: The `run_cltk_no_sleep.sh` script automatically uses the virtual environment. It looks for `venv` in the parent directory (`../venv`) and activates it before running. You don't need to manually activate the venv when using the wrapper script.
 
+**NOTE**: When killing the process, be sure to kill all the worker processes as well, not just the main process.
+
 ## Main Script: `generate_cltk_dictionary.py`
 
 **NEW UNIFIED SCRIPT** - Generates both morphology mappings and compound word decompositions in a single optimized workflow.
@@ -260,8 +262,6 @@ python3 create_perseus_database.py sample
 
 ### Parallelization Efficiency
 - **Homeric Hymns**: 4.0 min (2 workers) → 3.0 min (4 workers) = **1.33x speedup**
-- **Diminishing returns**: Beyond 4 workers due to database I/O bottleneck
-- **Recommended**: 2-4 workers for most systems
 - **Architecture**: Work-level parallelization - each worker processes complete works independently
 
 ### Memory Safety
