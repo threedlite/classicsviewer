@@ -776,7 +776,7 @@ def init_worker():
     _worker_nlp = NLP(language_code="grc", backend="stanza", suppress_banner=True)
 
 
-def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]]) -> Tuple[int, str, str, List[MorphologyResult], List[Dict[str, str]]]:
+def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]]) -> Tuple[int, str, str, str, List[MorphologyResult], List[Dict[str, str]]]:
     """
     Worker function to process an entire work: extract words + CLTK analysis + compound analysis.
     Uses shared NLP instance initialized once per worker (not once per work).
@@ -785,7 +785,7 @@ def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]
         args: (db_path, author, work_title, work_index, min_split, valid_lemmas, lemmas_normalized)
 
     Returns:
-        (work_index, author, work_title, morphology_results, compound_entries)
+        (work_index, author, requested_title, db_title, morphology_results, compound_entries)
     """
     global _worker_nlp, _worker_id
     db_path, author, work_title, work_index, min_split, valid_lemmas, actual_words, lemmas_normalized = args
@@ -798,7 +798,7 @@ def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]
         db_conn.close()
 
     if not words or not db_title:
-        return (work_index, author, work_title, [], [])
+        return (work_index, author, work_title, None, [], [])
 
     # Sort words for deterministic processing
     sorted_words = sorted(words)
@@ -813,7 +813,7 @@ def process_work_worker(args: Tuple[Path, str, str, int, int, Set[str], Set[str]
     options = ProcessingOptions(min_split_length=min_split)
     compound_entries = generate_compounds(nlp, results, valid_lemmas, actual_words, lemmas_normalized, options, worker_id=_worker_id)
 
-    return (work_index, author, db_title, results, compound_entries)
+    return (work_index, author, work_title, db_title, results, compound_entries)
 
 
 def process_all_works(
@@ -862,7 +862,7 @@ def process_all_works(
 
         with mp.Pool(num_workers, initializer=init_worker) as pool:
             # Use imap_unordered for progress tracking
-            for work_idx, author, db_title, results, compounds in pool.imap_unordered(process_work_worker, work_list):
+            for work_idx, author, requested_title, db_title, results, compounds in pool.imap_unordered(process_work_worker, work_list):
                 if results:
                     all_results.extend(results)
                     all_compounds.extend(compounds)
@@ -870,7 +870,11 @@ def process_all_works(
 
                     if author not in found_works:
                         found_works[author] = set()
-                    found_works[author].add(db_title)
+                    # Add both the requested title (from CSV) and database title (from DB)
+                    # This fixes validation when CSV and DB use different names
+                    found_works[author].add(requested_title)
+                    if db_title and db_title != requested_title:
+                        found_works[author].add(db_title)
 
                     # Progress update with ETA to full completion
                     completed += 1
@@ -933,7 +937,11 @@ def process_all_works(
 
                         if author not in found_works:
                             found_works[author] = set()
+                        # Add both the requested title (from CSV) and database title (from DB)
+                        # This fixes validation when CSV and DB use different names
                         found_works[author].add(work_title)
+                        if db_title and db_title != work_title:
+                            found_works[author].add(db_title)
         finally:
             db_conn.close()
 
