@@ -2198,36 +2198,52 @@ def parse_cts_metadata(cts_path):
 
 def get_text_content(elem, preserve_milestones=False):
     """Get all text content from element and its children, excluding editorial elements
-    
+
     Args:
         elem: XML element to extract text from
         preserve_milestones: If True, insert milestone references as [ref] in the text
     """
     text_parts = []
-    
+
     # Skip editorial elements entirely
     excluded_tags = {'note', 'foreign', 'ref', 'bibl' }
     tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
-    
+
     if tag_name in excluded_tags:
         return ''
-    
+
+    # Preserve <hi rend="bold"> tags for interlinear translations
+    if tag_name == 'hi' and elem.get('rend') == 'bold':
+        # Reconstruct the opening tag
+        text_parts.append('<hi rend="bold">')
+        if elem.text:
+            text_parts.append(elem.text)
+        # Process children
+        for child in elem:
+            child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
+            if child_tag not in excluded_tags:
+                text_parts.append(get_text_content(child, preserve_milestones))
+            if child.tail:
+                text_parts.append(child.tail)
+        text_parts.append('</hi>')
+        return ''.join(text_parts)
+
     # Add element's text
     if elem.text:
         text_parts.append(elem.text)
-    
+
     # Process children
     for child in elem:
         # Skip editorial elements
         child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
-        
+
         # Handle milestone tags specially when preserving
         if preserve_milestones and child_tag == 'milestone':
             # Check if this is a Bekker or Stephanus reference
             resp = child.get('resp', '').lower()
             unit = child.get('unit', '')
             n = child.get('n', '')
-            
+
             if resp in ['bekker', 'stephanus']:
                 if unit in ['page', 'section'] and n:
                     # Insert the reference in brackets
@@ -2235,11 +2251,11 @@ def get_text_content(elem, preserve_milestones=False):
                 # Skip line milestones - they're too granular for our purposes
         elif child_tag not in excluded_tags:
             text_parts.append(get_text_content(child, preserve_milestones))
-        
+
         # Always add tail text after child (this is text that comes after the child element)
         if child.tail:
             text_parts.append(child.tail)
-    
+
     return ''.join(text_parts).strip()
 
 
@@ -3289,6 +3305,19 @@ def process_translations(work_dir, work_id, cursor):
     """Process English translations for a work"""
     # Find English translation files
     translation_files = list(work_dir.glob("*eng*.xml"))
+
+    # Special case: Add synthetic line-by-line translations for Homer
+    if work_id == "tlg0012.tlg001":  # Iliad
+        synthetic_translation_path = Path(__file__).parent.parent / "seg_trans" / "tlg0012.tlg001.perseus-eng99.xml"
+        if synthetic_translation_path.exists():
+            translation_files.append(synthetic_translation_path)
+            print(f"      Adding synthetic Iliad interlinear translation from: {synthetic_translation_path.name}")
+    elif work_id == "tlg0012.tlg002":  # Odyssey
+        synthetic_translation_path = Path(__file__).parent.parent / "seg_trans" / "tlg0012.tlg002.perseus-eng99.xml"
+        if synthetic_translation_path.exists():
+            translation_files.append(synthetic_translation_path)
+            print(f"      Adding synthetic Odyssey interlinear translation from: {synthetic_translation_path.name}")
+
     if not translation_files:
         return
 

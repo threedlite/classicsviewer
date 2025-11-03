@@ -1,5 +1,6 @@
 package com.classicsviewer.app
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,8 +68,37 @@ class TranslationAdapter(
             holder.binding.speakerName.visibility = View.GONE
         }
         
-        // Show translation text
-        holder.binding.translationText.text = segment.text
+        // Show translation text - safely render only <hi rend="bold"> as bold
+        holder.binding.translationText.text = if (segment.text.contains("<hi rend=\"bold\">")) {
+            // Extract and escape segments, only allowing our specific bold tags
+            val parts = segment.text.split("<hi rend=\"bold\">")
+            val result = StringBuilder()
+
+            for ((index, part) in parts.withIndex()) {
+                if (index == 0) {
+                    // First part - just escape and add
+                    result.append(android.text.TextUtils.htmlEncode(part))
+                } else {
+                    // Part after opening tag - find closing tag
+                    val closeIndex = part.indexOf("</hi>")
+                    if (closeIndex != -1) {
+                        val boldText = part.substring(0, closeIndex)
+                        val afterBold = part.substring(closeIndex + 5)
+                        result.append("<b>")
+                        result.append(android.text.TextUtils.htmlEncode(boldText))
+                        result.append("</b>")
+                        result.append(android.text.TextUtils.htmlEncode(afterBold))
+                    } else {
+                        // Malformed - just escape it all
+                        result.append(android.text.TextUtils.htmlEncode(part))
+                    }
+                }
+            }
+
+            Html.fromHtml(result.toString(), Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            segment.text  // Plain text if no formatting
+        }
         
         // Show translator if available
         if (!segment.translator.isNullOrBlank()) {

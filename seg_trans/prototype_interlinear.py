@@ -129,12 +129,15 @@ class InterlinearGenerator:
 
         # Look for numbered definitions: "0. word" "I. word" "1. word" "A. word" ": word"
         patterns = [
-            r'^:\s+([^\n]+)',                # Priority 0 - simple colon (e.g., ": I, me, my")
-            r'(?:^|\n)A\.\s+([^\n]+)',      # Priority 1 - LSJ primary definition
-            r'(?:^|\n)0\.\s+([^\n]+)',      # Priority 2
-            r'(?:^|\n)I\.\s+([^\n]+)',      # Priority 3
-            r'(?:^|\n)1\.\s+([^\n]+)',      # Priority 4
-            r'^([^:\n]+)$',                  # Priority 5 - plain text entry (e.g., "than, as")
+            r'^:\s+([^\n]+)',                          # Priority 0 - simple colon (e.g., ": I, me, my")
+            r'^[^.\n]+\.\s+([A-Z][^\n]+)\.\s*\(',     # Priority 1 - Cunliffe style "ἄν. Description. (Cf..."
+            r'(?:^|\n)A\.\s+([^\n]+)',                # Priority 2 - LSJ primary definition
+            r'(?:^|\n)0\.\s+([^\n]+)',                # Priority 3
+            r'(?:^|\n)I\.\s+([^\n]+)',                # Priority 4 - LSJ main section
+            r'(?:^|\n)\s+1\.\s+([^\n]+)',             # Priority 5 - LSJ subsection (indented)
+            r'(?:^|\n)5\.\s+([^\n]+)',                # Priority 6 - main meaning in some dictionaries
+            r'(?:^|\n)1\.\s+([^\n]+)',                # Priority 7 - numbered definition
+            r'^([^:\n]+)$',                            # Priority 8 - plain text entry (e.g., "than, as")
         ]
 
         for pattern_priority, pattern in enumerate(patterns):
@@ -161,6 +164,30 @@ class InterlinearGenerator:
                 if re.match(r'^(?:[IVX]+|Trans|Mid|Act|Pass|Intrans)\.?$', gloss):
                     continue
 
+                # Skip LSJ section headers that get picked up as glosses
+                # But only if they appear to be section markers (short, standalone)
+                if re.match(r'^(?:In act\.|In mid\.)$', gloss, re.IGNORECASE):
+                    continue
+
+                # Skip onomatopoeia that aren't real translations (like "baa" for βῆ)
+                if gloss.lower() in ['baa', 'boo', 'hiss', 'buzz', 'moo']:
+                    continue
+
+                # Skip LSJ section markers that specify context or category
+                # These are common in LSJ entries to categorize usage (e.g., "Of men", "Of fire", "Of persons")
+                lsj_markers = ['Of men', 'Of fire', 'Of gods', 'Of things', 'Of persons', 'Of life',
+                               'Of two', 'Of fighting', 'Of armour', 'Of inanimate', 'Of hair', 'Of good', 'famous']
+                if gloss in lsj_markers:
+                    continue
+
+                # Skip LSJ cross-reference markers like "partly . ." which appear in article ὁ
+                if 'partly' in gloss.lower() and ('. .' in gloss or '..' in gloss):
+                    continue
+
+                # Skip "Cf. L. sum" and similar Latin cross-references (L. = Latin)
+                if gloss.startswith('Cf. L.') or gloss.startswith('cf. L.'):
+                    continue
+
                 # Skip if the result is just a grammatical category (e.g., "verb", "noun", "adjective")
                 # These are Wiktionary form-of entries, not actual definitions
                 if re.match(r'^(?:verb|noun|adjective|adverb|pronoun|particle|preposition|conjunction)s?$', gloss, re.IGNORECASE):
@@ -168,7 +195,13 @@ class InterlinearGenerator:
 
                 # Skip if the result is just a dialect/style marker (e.g., "Epic", "Ionic", "Doric")
                 # These are Wiktionary alternative-form markers, not actual definitions
-                if re.match(r'^(?:Epic|Ionic|Doric|Attic|Aeolic|Homeric)$', gloss):
+                if re.match(r'^(?:Epic|Ionic|Doric|Attic|Aeolic|Homeric|poetic|prose)$', gloss, re.IGNORECASE):
+                    continue
+
+                # Skip any gloss that contains 3+ dialect words (generic filter)
+                # e.g. "Epic Ionic Aeolic poetic _ Attic" or any combination
+                dialect_pattern = r'\b(?:Epic|Ionic|Aeolic|Doric|Attic|Homeric|poetic|prose)\b'
+                if len(re.findall(dialect_pattern, gloss, re.IGNORECASE)) >= 3:
                     continue
 
                 # Skip if contains grammatical junk or abbreviations
@@ -205,27 +238,28 @@ class InterlinearGenerator:
                     continue
 
                 # Handle comma-separated glosses
-                # Skip grammatical descriptions like "Adversative particle, but" to get "but"
-                # But keep standalone descriptions like "Temporal particle."
+                # Split "Adversative particle, but" to get "but"
+                # But keep descriptive phrases like "Conditional or limiting particle"
                 if ',' in gloss and len(gloss) > 15:  # Only split if gloss is verbose
                     parts = [p.strip() for p in gloss.split(',')]
-                    # Skip parts that are grammatical descriptions
+                    # Skip parts that are ONLY grammatical descriptions
                     gram_descriptions = ['particle', 'adverb', 'preposition', 'conjunction', 'pronoun', 'article']
                     found_non_gram = False
-                    for part in parts:
-                        # Skip if it's a grammatical description
-                        if any(desc in part.lower() for desc in gram_descriptions):
+                    for i, part in enumerate(parts):
+                        # If first part is JUST "X particle/adverb/etc", skip to next part
+                        if i == 0 and any(part.lower().endswith(f' {desc}') or part.lower() == desc for desc in gram_descriptions):
                             continue
                         # Use this part if it's short and simple
                         if 2 < len(part) < 30:
                             gloss = part
                             found_non_gram = True
                             break
-                    # If all parts were grammatical, keep original (e.g., "Temporal particle.")
+                    # If all parts were grammatical, keep original (e.g., "Conditional or limiting particle")
                     # Otherwise we've updated gloss above
 
                 # Skip if too long (probably not a good gloss)
-                if len(gloss) > 30:
+                # Allow slightly longer for descriptive particle/conjunction definitions
+                if len(gloss) > 35:
                     continue
 
                 # Lowercase first letter if it starts with "A " or "An " (articles)
@@ -275,10 +309,12 @@ class InterlinearGenerator:
                 lemma = lemma_row['lemma']
 
                 # Get dictionary definition for this lemma (may have multiple entries)
+                # Order by source to ensure deterministic ordering (e.g., LSJ before Wiktionary)
                 query = """
                 SELECT entry_plain
                 FROM dictionary_entries
                 WHERE headword = ? AND language = 'greek'
+                ORDER BY source, entry_plain
                 """
                 cursor.execute(query, (lemma,))
                 dict_results = cursor.fetchall()
@@ -287,6 +323,13 @@ class InterlinearGenerator:
                 for dict_row in dict_results:
                     if dict_row['entry_plain']:
                         gloss, pattern_priority = self.extract_english_gloss(dict_row['entry_plain'], word)
+
+                        # Double-check for LSJ markers that might have gotten through
+                        lsj_markers = ['Of men', 'Of fire', 'Of gods', 'Of things', 'Of persons', 'Of life',
+                                       'Of two', 'Of fighting', 'Of armour', 'Of inanimate', 'Of hair', 'Of good', 'famous']
+                        if gloss in lsj_markers:
+                            gloss = None
+
                         if gloss:
                             # Score by: pattern priority (0-3), length, Murray match
                             # Lower score is better
@@ -511,10 +554,44 @@ class InterlinearGenerator:
 
 
 def main():
-    """Generate interlinear translation for all 24 books of the Iliad"""
+    """Generate interlinear translation for Homer's works"""
+    import sys
+
+    # Determine which work to process
+    work = 'iliad'  # default
+    if len(sys.argv) > 1:
+        work = sys.argv[1].lower()
+
+    # Work configurations
+    works_config = {
+        'iliad': {
+            'title': 'ILIAD',
+            'book_pattern': 'tlg0012.tlg001.%',
+            'work_id': 'tlg0012.tlg001',
+            'xml_filename': 'tlg0012.tlg001.perseus-eng99.xml',
+            'txt_filename': 'iliad_full_interlinear.txt',
+            'tei_title': 'Iliad',
+            'tei_subtitle': 'The Iliad'
+        },
+        'odyssey': {
+            'title': 'ODYSSEY',
+            'book_pattern': 'tlg0012.tlg002.%',
+            'work_id': 'tlg0012.tlg002',
+            'xml_filename': 'tlg0012.tlg002.perseus-eng99.xml',
+            'txt_filename': 'odyssey_full_interlinear.txt',
+            'tei_title': 'Odyssey',
+            'tei_subtitle': 'The Odyssey'
+        }
+    }
+
+    if work not in works_config:
+        print(f"ERROR: Unknown work '{work}'. Use 'iliad' or 'odyssey'")
+        sys.exit(1)
+
+    config = works_config[work]
 
     print("=" * 80)
-    print("ILIAD INTERLINEAR TRANSLATION GENERATOR")
+    print(f"{config['title']} INTERLINEAR TRANSLATION GENERATOR")
     print("=" * 80)
     print(f"Database: {DB_PATH}")
     print(f"Translation: {TRANSLATION_LANG} (Murray)")
@@ -525,10 +602,10 @@ def main():
         print("Please ensure perseus_texts_sample.db exists")
         return
 
-    # Get all Iliad books
+    # Get all books for this work
     conn = sqlite3.connect(str(DB_PATH))
     cursor = conn.cursor()
-    cursor.execute("SELECT DISTINCT book_id FROM text_lines WHERE book_id LIKE 'tlg0012.tlg001.%' ORDER BY book_id")
+    cursor.execute("SELECT DISTINCT book_id FROM text_lines WHERE book_id LIKE ? ORDER BY book_id", (config['book_pattern'],))
     book_ids = [row[0] for row in cursor.fetchall()]
     conn.close()
 
@@ -563,7 +640,7 @@ def main():
         print("=" * 80)
 
         # Save to text file in pipe-delimited format
-        output_file = Path(__file__).parent / "iliad_full_interlinear.txt"
+        output_file = Path(__file__).parent / config['txt_filename']
         print(f"\nWriting text file: {output_file.name}")
         with open(output_file, 'w', encoding='utf-8') as f:
             for book_num in sorted(all_results.keys()):
@@ -589,8 +666,8 @@ def main():
                     # Blank line between entries
                     f.write("\n")
 
-        # Save to XML file in Perseus format (matching eng3 structure)
-        xml_output_file = Path(__file__).parent / "tlg0012.tlg001.perseus-eng99.xml"
+        # Save to XML file in Perseus format
+        xml_output_file = Path(__file__).parent / config['xml_filename']
         print(f"Writing XML file: {xml_output_file.name}")
         with open(xml_output_file, 'w', encoding='utf-8') as f:
             # Write XML header
@@ -601,7 +678,7 @@ def main():
             f.write('    <teiHeader>\n')
             f.write('        <fileDesc>\n')
             f.write('            <titleStmt>\n')
-            f.write('                <title>Iliad</title>\n')
+            f.write(f'                <title>{config["tei_title"]}</title>\n')
             f.write('                <author>Homer</author>\n')
             f.write('                <editor role="translator">Interlinear (AI-generated from app dictionary and translations)</editor>\n')
             f.write('                <sponsor>Derived from LSJ, Murray, Cunliffe, Wikitionary, Perseus</sponsor>\n')
@@ -624,7 +701,7 @@ def main():
             f.write('                <biblStruct>\n')
             f.write('                    <monogr>\n')
             f.write('                        <author>Homer</author>\n')
-            f.write('                        <title>The Iliad</title>\n')
+            f.write(f'                        <title>{config["tei_subtitle"]}</title>\n')
             f.write('                        <title type="sub">Interlinear Translation</title>\n')
             f.write('                        <editor role="translator">AI-generated</editor>\n')
             f.write('                        <imprint>\n')
