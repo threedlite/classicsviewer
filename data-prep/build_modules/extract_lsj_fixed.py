@@ -55,14 +55,29 @@ def extract_text_content(element) -> str:
 def extract_inflected_forms(entry_elem, headword) -> List[str]:
     """Extract inflected forms from the entry - only from grammatical contexts"""
     inflected_forms = set()
-    
+
+    # Articles and common particles that should never be extracted as inflected forms
+    # These often appear in declension tables (e.g., "τὸ λέχος") and get incorrectly extracted
+    ARTICLE_PARTICLES = {
+        'ὁ', 'ἡ', 'τό', 'τὸ', 'οἱ', 'αἱ', 'τά', 'τὰ', 'τα',  # articles
+        'τοῦ', 'τῆς', 'τῶν',  # genitive articles
+        'τῷ', 'τῇ', 'τοῖς', 'ταῖς',  # dative articles
+        'τόν', 'τὸν', 'τήν', 'τὴν', 'τούς', 'τοὺς', 'τάς', 'τὰς',  # accusative articles
+        'ἐν', 'εἰς', 'ἐκ', 'ἐξ', 'ἔς', 'ἀπό', 'ἀπ', 'κατά', 'κατ', 'μετά', 'μετ',  # common prepositions
+        'καί', 'καὶ', 'δέ', 'δὲ', 'τε', 'γάρ', 'γὰρ', 'ἀλλά', 'ἀλλὰ',  # common particles
+        'ὡς', 'ὥς', 'ὅτι', 'εἰ', 'ἐάν', 'ἐὰν', 'ἄν', 'ἂν',  # common conjunctions
+        'τι', 'τί', 'τις', 'τίς',  # indefinite/interrogative pronouns (too common)
+        'εὐ', 'εὖ', 'κα', 'ος',  # common prefixes/particles that get extracted incorrectly
+    }
+
     # 1. Extract forms from orth elements within form groups
     for form_elem in entry_elem.findall('.//form'):
         for orth_elem in form_elem.findall('.//orth'):
             form = extract_text_content(orth_elem)
             if form and is_greek_word(form):
                 form = clean_punctuation(form)
-                if form and form != headword:
+                # Filter out: same as headword, too short, or common articles/particles
+                if form and form != headword and len(form) > 2 and form not in ARTICLE_PARTICLES:
                     inflected_forms.add(form)
     
     # 2. Look for verb forms in grammatical patterns with explicit markers
@@ -116,22 +131,24 @@ def extract_inflected_forms(entry_elem, headword) -> List[str]:
             for match in re.finditer(pattern, gram_text, re.IGNORECASE):
                 form = match.group(1)
                 form = clean_punctuation(form)
-                if form and form != headword and len(form) > 1:
+                # Use same filters as orth extraction
+                if form and form != headword and len(form) > 2 and form not in ARTICLE_PARTICLES:
                     inflected_forms.add(form)
-    
+
     # Also check in the main entry text but only with grammatical markers
     full_text = extract_text_content(entry_elem)
-    
+
     # Skip if this entry contains crasis explanation to avoid false positives
     if 'crasis for' in full_text.lower():
         # For crasis entries, don't extract from general patterns
         return sorted(list(inflected_forms))
-    
+
     for pattern in grammatical_patterns:
         for match in re.finditer(pattern, full_text, re.IGNORECASE):
             form = match.group(1)
             form = clean_punctuation(form)
-            if form and form != headword and len(form) > 1:
+            # Use same filters as orth extraction
+            if form and form != headword and len(form) > 2 and form not in ARTICLE_PARTICLES:
                 inflected_forms.add(form)
     
     # 3. Extract alternate forms from specific patterns
@@ -148,7 +165,8 @@ def extract_inflected_forms(entry_elem, headword) -> List[str]:
         for match in re.finditer(pattern, full_text, re.IGNORECASE):
             form = match.group(1)
             form = clean_punctuation(form)
-            if form and form != headword and len(form) > 1 and len(form) < 20:
+            # Use same filters as other extractions
+            if form and form != headword and len(form) > 2 and len(form) < 20 and form not in ARTICLE_PARTICLES:
                 inflected_forms.add(form)
     
     return sorted(list(inflected_forms))

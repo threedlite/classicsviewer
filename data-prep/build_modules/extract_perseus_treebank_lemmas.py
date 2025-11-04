@@ -55,12 +55,14 @@ def extract_form_lemma_pairs(xml_file):
     return pairs
 
 def extract_treebank_lemmas():
-    """Process all Greek treebank XML files and extract lemma mappings.
-    
+    """Process all Greek treebank XML files and extract lemma mappings with frequency counts.
+
     Returns:
-        dict: Dictionary mapping forms to lists of possible lemmas
+        dict: Dictionary with two keys:
+            - 'lemmas': dict mapping forms to lists of possible lemmas
+            - 'counts': dict mapping (form, lemma) tuples to occurrence counts
     """
-    
+
     # Paths relative to data-prep directory
     script_dir = os.path.dirname(os.path.abspath(__file__))
     data_prep_dir = os.path.dirname(script_dir)
@@ -71,41 +73,52 @@ def extract_treebank_lemmas():
     if not base_path.exists():
         raise FileNotFoundError(f"CRITICAL: Perseus Treebank directory missing: {treebank_dir}\n"
                                "The Perseus Treebank provides high-quality lemma mappings and is required for the build.")
-    
+
     # Dictionary to store form -> set of possible lemmas
     form_to_lemmas = defaultdict(set)
-    
+
+    # Counter to track how many times each (form, lemma) pair occurs
+    from collections import Counter
+    mapping_counts = Counter()
+
     # Statistics
     total_files = 0
     total_pairs = 0
-    
+
     print("Extracting lemmas from Perseus Treebank...")
-    
+
     # Process all Greek XML files
     greek_patterns = ['**/Greek/**/*.xml', '**/greek/**/*.xml', '**/AGDT2/**/*.xml']
-    
+
     for pattern in greek_patterns:
         for xml_file in base_path.glob(pattern):
             # Skip non-text files (like TAGSETS.xml)
             if 'TAGSETS' in str(xml_file) or 'README' in str(xml_file):
                 continue
-            
+
             pairs = extract_form_lemma_pairs(xml_file)
-            
+
             for form, lemma in pairs:
                 form_to_lemmas[form].add(lemma)
-            
+                mapping_counts[(form, lemma)] += 1
+
             total_files += 1
             total_pairs += len(pairs)
-    
+
     print(f"  Processed {total_files} treebank files")
     print(f"  Found {total_pairs} total form-lemma pairs")
     print(f"  Unique forms with lemmas: {len(form_to_lemmas)}")
-    
+
     # Convert sets to lists for JSON serialization
-    result = {form: list(lemmas) for form, lemmas in form_to_lemmas.items()}
-    
-    return result
+    lemmas_dict = {form: list(lemmas) for form, lemmas in form_to_lemmas.items()}
+
+    # Convert Counter to regular dict with string keys for JSON serialization
+    counts_dict = {f"{form}|||{lemma}": count for (form, lemma), count in mapping_counts.items()}
+
+    return {
+        'lemmas': lemmas_dict,
+        'counts': counts_dict
+    }
 
 def save_treebank_lemmas(output_file='perseus_treebank_lemmas.json'):
     """Extract and save treebank lemmas to a JSON file.

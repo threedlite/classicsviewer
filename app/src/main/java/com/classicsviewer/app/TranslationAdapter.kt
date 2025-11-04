@@ -1,9 +1,14 @@
 package com.classicsviewer.app
 
+import android.graphics.Typeface
 import android.text.Html
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
+import android.widget.TableRow
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.classicsviewer.app.databinding.ItemTranslationSegmentBinding
 import com.classicsviewer.app.fragments.TranslationDisplayItem
@@ -68,38 +73,40 @@ class TranslationAdapter(
             holder.binding.speakerName.visibility = View.GONE
         }
         
-        // Show translation text - safely render only <hi rend="bold"> as bold
-        holder.binding.translationText.text = if (segment.text.contains("<hi rend=\"bold\">")) {
-            // Extract and escape segments, only allowing our specific bold tags
-            val parts = segment.text.split("<hi rend=\"bold\">")
-            val result = StringBuilder()
+        // Show translation text
+        // Check for interlinear format (contains Markdown tables with pipe syntax)
+        // Only process as interlinear if translator is "Interlinear" to avoid processing other translations
+        if (segment.text.contains("| ") && segment.translator?.contains("Interlinear") == true) {
+            // This is interlinear format with Markdown tables
+            // Hide TextView, show interlinear container
+            holder.binding.translationText.visibility = View.GONE
+            holder.binding.interlinearScrollView.visibility = View.VISIBLE
 
-            for ((index, part) in parts.withIndex()) {
-                if (index == 0) {
-                    // First part - just escape and add
-                    result.append(android.text.TextUtils.htmlEncode(part))
-                } else {
-                    // Part after opening tag - find closing tag
-                    val closeIndex = part.indexOf("</hi>")
-                    if (closeIndex != -1) {
-                        val boldText = part.substring(0, closeIndex)
-                        val afterBold = part.substring(closeIndex + 5)
-                        result.append("<b>")
-                        result.append(android.text.TextUtils.htmlEncode(boldText))
-                        result.append("</b>")
-                        result.append(android.text.TextUtils.htmlEncode(afterBold))
-                    } else {
-                        // Malformed - just escape it all
-                        result.append(android.text.TextUtils.htmlEncode(part))
-                    }
-                }
+            // Clear previous content
+            holder.binding.interlinearContainer.removeAllViews()
+
+            // Parse Markdown tables and create views
+            val tables = parseMarkdownTables(segment.text)
+            tables.forEach { rows ->
+                val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context)
+                holder.binding.interlinearContainer.addView(table)
             }
-
-            Html.fromHtml(result.toString(), Html.FROM_HTML_MODE_LEGACY)
         } else {
-            segment.text  // Plain text if no formatting
+            // Regular translation text
+            holder.binding.translationText.visibility = View.VISIBLE
+            holder.binding.interlinearScrollView.visibility = View.GONE
+
+            holder.binding.translationText.text = if (segment.text.contains("<")) {
+                // Allow specific HTML tags: <hi rend="bold">, <b>
+                val sanitized = segment.text
+                    .replace("<hi rend=\"bold\">", "<b>")
+                    .replace("</hi>", "</b>")
+                Html.fromHtml(sanitized, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                segment.text  // Plain text if no formatting
+            }
         }
-        
+
         // Show translator if available
         if (!segment.translator.isNullOrBlank()) {
             holder.binding.translatorName.visibility = View.VISIBLE
@@ -110,4 +117,121 @@ class TranslationAdapter(
     }
     
     override fun getItemCount() = segments.size
+
+    /**
+     * Parse Markdown table structure
+     * Expected format: | greek |\n| **gloss** |\n| lemma morph |  (separated by double space for next word)
+     * Only supports tables and bold (**text**) - no other Markdown syntax
+     */
+    private fun parseMarkdownTables(markdown: String): List<List<String>> {
+        val tables = mutableListOf<List<String>>()
+
+        // Split by double space to get individual word tables
+        val wordTables = markdown.split("  ")
+
+        for (wordTable in wordTables) {
+            val rows = mutableListOf<String>()
+
+            // Split by newline to get individual rows
+            val lines = wordTable.trim().split("\n")
+
+            for (line in lines) {
+                // Extract content between pipes: | content |
+                val match = Regex("""\|\s*(.*?)\s*\|""").find(line.trim())
+                if (match != null) {
+                    var content = match.groupValues[1].trim()
+
+                    // Handle bold: **text** -> text (we'll apply bold styling in createWordTable)
+                    // Only allow bold, nothing else
+                    content = content.replace(Regex("""\*\*(.*?)\*\*"""), "$1")
+
+                    rows.add(content)
+                }
+            }
+
+            if (rows.size == 3) {  // Only add if we have exactly 3 rows (greek, gloss, morph)
+                tables.add(rows)
+            }
+        }
+
+        return tables
+    }
+
+    /**
+     * Create a TableLayout view for a single word's interlinear data
+     * rows[0] = Greek word
+     * rows[1] = English gloss (bold)
+     * rows[2] = lemma + morphology
+     */
+    private fun createWordTable(rows: List<String>, fontSize: Float, invertColors: Boolean, context: android.content.Context): TableLayout {
+        return TableLayout(context).apply {
+            layoutParams = ViewGroup.MarginLayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                marginEnd = 16 // Space between word tables
+            }
+
+            // Add each row
+            rows.forEachIndexed { index, text ->
+                val row = TableRow(context).apply {
+                    layoutParams = TableLayout.LayoutParams(
+                        TableLayout.LayoutParams.WRAP_CONTENT,
+                        TableLayout.LayoutParams.WRAP_CONTENT
+                    )
+                }
+
+                val cell = TextView(context).apply {
+                    this.text = text
+                    this.textSize = when (index) {
+                        0 -> fontSize * 1.1f  // Greek word - slightly larger
+                        1 -> fontSize * 0.9f  // English gloss
+                        else -> fontSize * 0.8f  // Morphology - smaller
+                    }
+                    this.gravity = Gravity.CENTER
+                    setPadding(8, 4, 8, 4)
+
+                    // Apply styling based on row
+                    when (index) {
+                        1 -> {
+                            // English gloss - bold
+                            setTypeface(null, Typeface.BOLD)
+                        }
+                        2 -> {
+                            // Morphology - italic
+                            setTypeface(null, Typeface.ITALIC)
+                        }
+                    }
+
+                    // Apply colors
+                    if (invertColors) {
+                        setTextColor(when (index) {
+                            0 -> 0xFF000000.toInt()  // Greek - black
+                            1 -> 0xFF000000.toInt()  // Gloss - black
+                            else -> 0xFF666666.toInt()  // Morph - gray
+                        })
+                        setBackgroundColor(0xFFFFFFFF.toInt())
+                    } else {
+                        setTextColor(when (index) {
+                            0 -> 0xFFFFFFFF.toInt()  // Greek - white
+                            1 -> 0xFFFFFFFF.toInt()  // Gloss - white
+                            else -> 0xFF999999.toInt()  // Morph - light gray
+                        })
+                        setBackgroundColor(0xFF000000.toInt())
+                    }
+                }
+
+                row.addView(cell)
+                addView(row)
+            }
+
+            // Add border around table
+            if (invertColors) {
+                setBackgroundColor(0xFFEEEEEE.toInt())
+            } else {
+                setBackgroundColor(0xFF222222.toInt())
+            }
+            setPadding(4, 4, 4, 4)
+        }
+    }
 }

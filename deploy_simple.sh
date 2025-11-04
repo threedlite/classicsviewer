@@ -32,9 +32,9 @@ if echo "$ZIP_CONTENTS" | grep -q "perseus_texts_sample.db"; then
     echo "✓ Database ZIP fixed"
 fi
 
-# 2. Build and install debug APK
+# 2. Build and install debug APK (disable incremental builds to ensure latest database)
 echo "Building and installing debug APK..."
-./gradlew installDebug
+./gradlew installDebug --no-build-cache --rerun-tasks
 
 # 3. Clear app data for fresh start
 echo "Clearing app data..."

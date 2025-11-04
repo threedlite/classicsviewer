@@ -22,11 +22,13 @@ Only build the apk with the sample db, not the full db, it is too large.
 **CORRECT APPROACH - RUN IN BACKGROUND**:
 ```bash
 # For gradle builds - Run in background:
-nohup ./gradlew bundleRelease > aab_build.log 2>&1 &
+nohup ./gradlew clean assembleDebug > build.log 2>&1 &
+# Or for release builds:
+nohup ./gradlew clean bundleRelease > aab_build.log 2>&1 &
 # Monitor progress:
-tail -f aab_build.log
+tail -f build.log
 # Check completion:
-ls -lah app/build/outputs/bundle/release/app-release.aab
+ls -lah app/build/outputs/apk/debug/app-debug.apk
 
 # For database creation - Run in background:
 cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1 &
@@ -36,6 +38,27 @@ cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1
 # For any long-running command:
 nohup [COMMAND] > output.log 2>&1 &
 ```
+
+**CRITICAL GRADLE BUILD REQUIREMENT**:
+- ⚠️ **ALWAYS use `clean` before building**: `./gradlew clean assembleDebug` or `./gradlew clean bundleRelease`
+- **NEVER build without clean** - stale build artifacts can cause runtime issues
+- Clean ensures all Kotlin files are recompiled and resources are properly regenerated
+
+**CRITICAL DEPLOYMENT REQUIREMENT**:
+- ⚠️ **ALWAYS deploy to phone after making code changes**
+- After building, immediately uninstall and reinstall the app on the connected device
+- This ensures you're testing the actual changes you made
+- Standard deployment sequence:
+  ```bash
+  # 1. Build the app
+  nohup ./gradlew clean assembleDebug > build.log 2>&1 &
+  # 2. Wait for build to complete
+  tail -f build.log  # Wait for "BUILD SUCCESSFUL"
+  # 3. Deploy to phone
+  adb uninstall com.classicsviewer.app.debug
+  adb shell pm clear com.classicsviewer.app.debug
+  adb install app/build/outputs/apk/debug/app-debug.apk
+  ```
 
 **KEY POINTS**:
 - ✅ You CAN run any command using `nohup ... &` to run in background

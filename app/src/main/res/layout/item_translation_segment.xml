@@ -33,6 +33,22 @@
         android:textSize="16sp"
         android:lineSpacingMultiplier="1.2" />
 
+    <!-- Interlinear table container (for table-based interlinear) -->
+    <HorizontalScrollView
+        android:id="@+id/interlinearScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:scrollbars="horizontal">
+
+        <LinearLayout
+            android:id="@+id/interlinearContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp" />
+    </HorizontalScrollView>
+
     <!-- Translator attribution -->
     <TextView
         android:id="@+id/translatorName"

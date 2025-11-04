@@ -324,17 +324,37 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     if not treebank_data:
         raise RuntimeError("CRITICAL: Perseus Treebank extraction returned no data. This is a required component.")
 
-    # Convert treebank format to our mapping format
-    for form, lemmas in treebank_data.items():
+    # Convert treebank format to our mapping format with frequency-based confidence
+    lemmas_dict = treebank_data['lemmas']
+    counts_dict = treebank_data['counts']
+
+    # Calculate frequency-weighted confidence for each mapping
+    for form, lemmas in lemmas_dict.items():
+        # Get total count for this form across all lemmas
+        total_count_for_form = sum(counts_dict.get(f"{form}|||{l}", 0) for l in lemmas)
+
         for lemma in lemmas:
+            # Get count for this specific form->lemma mapping
+            count = counts_dict.get(f"{form}|||{lemma}", 1)
+            frequency_weight = count / total_count_for_form if total_count_for_form > 0 else 1.0
+
+            # Base confidence 0.95 for treebank, weighted by frequency
+            # Examples:
+            # - καὶ → καί appears 50,000 times out of 50,008 total καὶ occurrences = 0.9998 * 0.95 = 0.9498
+            # - καὶ → φαίνω appears 4 times out of 50,008 total καὶ occurrences = 0.00008 * 0.95 = 0.000076
+            # - καὶ → υνκνοων appears 4 times out of 50,008 total καὶ occurrences = 0.00008 * 0.95 = 0.000076
+            base_confidence = 0.95
+            weighted_confidence = base_confidence * frequency_weight
+
             treebank_mappings.append({
                 'word_form': form,
                 'lemma': lemma,
-                'confidence': 0.95,  # High confidence for hand-annotated data
+                'confidence': weighted_confidence,
                 'source': 'perseus_treebank',
                 'morph_info': ''
             })
-    print(f"  Loaded {len(treebank_mappings)} Perseus Treebank mappings")
+
+    print(f"  Loaded {len(treebank_mappings)} Perseus Treebank mappings with frequency-weighted confidence")
     
     # Load dictionary-based mappings (always use final version with all variants)
     lemma_file = Path(__file__).parent / "add_enclitic_variants.json"

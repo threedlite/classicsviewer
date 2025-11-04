@@ -254,31 +254,74 @@ class PerseusRepository(private val context: Context) : DataRepository {
     
     override suspend fun getAllDictionaryEntries(word: String, language: String, skipCompoundDecomposition: Boolean): DictionaryResultMultiple = withContext(Dispatchers.IO) {
         try {
+            // Hard-coded priority lemmas for 20 most common 1-2 letter words in Iliad Book 1
+            // This ensures these high-frequency particles/conjunctions always show the correct primary lemma first
+            // Format: word_form -> Triple(lemma, gloss, occurrence_count)
+            val commonWordPriority = mapOf(
+                "δʼ" to Triple("δέ", "and, but", 152),           // elided form
+                "δὲ" to Triple("δέ", "and, but", 58),
+                "τε" to Triple("τε", "and, both", 54),
+                "δέ" to Triple("δέ", "and, but", 29),
+                "ἐν" to Triple("ἐν", "in, on, at", 26),
+                "ὣς" to Triple("ὡς", "thus, so", 22),
+                "τʼ" to Triple("τε", "and", 21),                 // elided form
+                "οὔ" to Triple("οὐ", "not", 20),
+                "ἦ" to Triple("ἦ", "truly, indeed", 19),
+                "ἢ" to Triple("ἤ", "or, than", 19),
+                "σὺ" to Triple("σύ", "you", 19),
+                "ὅ" to Triple("ὅς", "who, which", 18),
+                "ὃ" to Triple("ὅς", "who, which", 18),
+                "τι" to Triple("τις", "something, anything", 17),
+                "δὴ" to Triple("δή", "indeed, certainly", 17),
+                "γε" to Triple("γε", "at least, indeed", 17),
+                "οὐ" to Triple("οὐ", "not", 16),
+                "εἰ" to Triple("εἰ", "if", 16),
+                "γʼ" to Triple("γε", "at least", 14),            // elided form
+                "ἐς" to Triple("εἰς", "into, to", 13)
+            )
+
             // Clean punctuation first, but preserve apostrophes for elided forms
             var cleanedWord = word.replace(Regex("[.,;:!?·]"), "")
-            
+
             // Normalize apostrophes for Greek words
             if (language.equals("greek", ignoreCase = true)) {
                 val beforeNormalization = cleanedWord
                 cleanedWord = normalizeApostrophes(cleanedWord)
                 android.util.Log.d("PerseusRepository", "Apostrophe normalization: '$beforeNormalization' -> '$cleanedWord'")
             }
-            
+
             // For Greek words, also create acute accent variant if word has grave accents
             val acuteVariant = if (language.equals("greek", ignoreCase = true) && hasGraveAccent(cleanedWord)) {
                 convertGraveToAcute(cleanedWord)
             } else {
                 null
             }
-            
+
             // Normalize language parameter to match database (database uses lowercase)
             val normalizedLanguage = language.lowercase().trim()
-            
+
             android.util.Log.d("PerseusRepository", "getAllDictionaryEntries: word='$word', cleaned='$cleanedWord', language='$normalizedLanguage' (original: '$language')")
-        
+
             val entries = mutableListOf<DictionaryEntry>()
             val addedLemmas = mutableSetOf<String>()
             val userAddedLemmas = mutableSetOf<String>() // Track user entries separately
+
+            // DISABLED: Check if this is a common word that should get a priority gloss entry
+            // val priorityInfo = commonWordPriority[cleanedWord]
+            // if (priorityInfo != null && normalizedLanguage == "greek") {
+            //     val (lemma, gloss, count) = priorityInfo
+            //     android.util.Log.d("PerseusRepository", "Adding priority entry for common word: '$cleanedWord' -> '$lemma' ($gloss)")
+            //     entries.add(DictionaryEntry(
+            //         lemma = lemma,
+            //         definition = gloss,
+            //         morphInfo = null,
+            //         isDirectMatch = true,
+            //         confidence = 1.0,
+            //         source = "list",
+            //         hasNonTreebankPath = true
+            //     ))
+            //     addedLemmas.add(lemma)
+            // }
             
             // FIRST: Check user dictionary for direct match
             val normalizedWord = normalizeText(cleanedWord, normalizedLanguage) ?: cleanedWord.lowercase()
@@ -514,6 +557,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     morphInfo = null,
                     isDirectMatch = true,
                     source = directEntry.source,
+                    confidence = 1.0,  // High confidence for direct dictionary match
                     hasNonTreebankPath = true // Direct dictionary matches are always valid
                 ))
             }
@@ -756,9 +800,12 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     // Then get ALL dictionary entries for the resolved lemma from ALL built-in sources
                     val lemmaEntries = dictionaryDao.getAllEntriesForHeadword(resolvedLemma, normalizedLanguage)
                     
-                    
+
                     for (entry in lemmaEntries) {
-                        val hasNonTreebank = lemmasWithNonTreebankSource.contains(lemma)
+                        // CRITICAL: If lemma has dictionary entries, it's ALWAYS non-treebank
+                        // because dictionary_entries table contains actual definitions, not just treebank morphology
+                        // This ensures proper sorting priority for lemmas with dictionary entries
+                        val hasNonTreebank = lemmasWithNonTreebankSource.contains(lemma) || lemmaEntries.isNotEmpty()
                         // Debug log to verify treebank-only detection
                         if (!hasNonTreebank) {
                             android.util.Log.d("PerseusRepository", "Marking as treebank-only: $lemma -> ${entry.source} (via Treebank)")
@@ -857,7 +904,38 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     if (entry.hasNonTreebankPath) 0 else 1000  // Large gap to ensure separation
                 },
                 { entry ->
-                    // Second priority: source ranking (User entries come FIRST)
+                    // SECOND priority: Minimal entry penalty
+                    // Deprioritize entries without actual definition content
+                    // This ensures entries with real definitions appear before cross-reference stubs
+                    // Also specifically deprioritize etymology-only entries
+                    val plainDef = entry.definition?.replace(Regex("<[^>]+>"), "")?.trim() ?: ""
+
+                    // Check if entry is ONLY etymology (no definition after etymology section)
+                    val isEtymologyOnly = if (plainDef.startsWith("Etymology:") || plainDef.startsWith("†")) {
+                        // Remove etymology prefix and check remaining content
+                        val contentAfterEtymology = plainDef
+                            .replace(Regex("^Etymology:.*?(?=\\n[A-Z]\\.|\\n[IVX]+\\.|\\n\\d+\\.|\\Z)", RegexOption.DOT_MATCHES_ALL), "")
+                            .replace(Regex("^†[^\\n]*?\\n"), "")
+                            .trim()
+                        // If nothing meaningful left, it's etymology-only
+                        val hasDefinition = contentAfterEtymology.contains(Regex("[A-Z]\\.|[IVX]+\\.|^\\d+\\.", RegexOption.MULTILINE))
+                        !hasDefinition && contentAfterEtymology.length < 50
+                    } else false
+
+                    // Also check for minimal cross-reference entries
+                    val contentAfterEtymology = plainDef.replace(Regex("^Etymology:.*?\\n", RegexOption.DOT_MATCHES_ALL), "").trim()
+                    val hasActualContent = contentAfterEtymology.contains(Regex("[a-zA-Z]{3,}"))
+                    val isMinimal = !hasActualContent
+
+                    // Heavy penalty for etymology-only, lighter for other minimal entries
+                    when {
+                        isEtymologyOnly -> 2000
+                        isMinimal -> 1000
+                        else -> 0
+                    }
+                },
+                { entry ->
+                    // THIRD priority: source ranking (User entries come FIRST)
                     when {
                         entry.source?.startsWith("User:") == true -> -1  // User entries highest priority
                         entry.source?.lowercase() == "lsj" -> 0
@@ -867,18 +945,24 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     }
                 },
                 { entry ->
-                    // Third priority: ascending length of the dictionary form (lemma)
+                    // FOURTH priority: confidence (higher confidence first - use negative for descending sort)
+                    // This ensures that within the same source, higher confidence lemmas appear first
+                    // e.g., for οὗ from LSJ: οὗ (conf=1.0) appears before ὅς (conf=0.9)
+                    -(entry.confidence ?: 0.0)
+                },
+                { entry ->
+                    // FIFTH priority: ascending length of the dictionary form (lemma)
                     entry.lemma.length
                 },
                 { entry ->
-                    // Fourth priority: alphabetical order as tiebreaker for same length
+                    // SIXTH priority: alphabetical order as tiebreaker for same length
                     entry.lemma
                 }
             ))
             
-            // Debug logging to verify sorting
-            android.util.Log.d("PerseusRepository", "Before sorting: ${entries.map { "${it.lemma}(${it.source})" }.joinToString(", ")}")
-            android.util.Log.d("PerseusRepository", "After sorting: ${sortedEntries.map { "${it.lemma}(${it.source})" }.joinToString(", ")}")
+            // Debug logging to verify sorting WITH CONFIDENCE VALUES
+            android.util.Log.d("PerseusRepository", "Before sorting: ${entries.map { "${it.lemma}(${it.source},conf=${it.confidence})" }.joinToString(", ")}")
+            android.util.Log.d("PerseusRepository", "After sorting: ${sortedEntries.map { "${it.lemma}(${it.source},conf=${it.confidence})" }.joinToString(", ")}")
             android.util.Log.d("PerseusRepository", "Returning ${sortedEntries.size} dictionary entries (${sortedEntries.count { it.source?.contains("LSJ", true) == true }} LSJ entries)")
 
             // MORPHOLOGY-ONLY FIX: If no entries found but user mappings exist, create morphological entries

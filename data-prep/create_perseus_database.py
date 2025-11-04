@@ -23,6 +23,7 @@ import fcntl
 import atexit
 from build_modules.load_combined_dictionaries import load_combined_dictionaries
 from build_modules.normalization_utils import normalize_greek, normalize_greek_ultra
+from build_modules.generate_interlinear.generate_interlinear import generate_interlinear_translations
 
 
 class EntityResolver:
@@ -3306,17 +3307,8 @@ def process_translations(work_dir, work_id, cursor):
     # Find English translation files
     translation_files = list(work_dir.glob("*eng*.xml"))
 
-    # Special case: Add synthetic line-by-line translations for Homer
-    if work_id == "tlg0012.tlg001":  # Iliad
-        synthetic_translation_path = Path(__file__).parent.parent / "seg_trans" / "tlg0012.tlg001.perseus-eng99.xml"
-        if synthetic_translation_path.exists():
-            translation_files.append(synthetic_translation_path)
-            print(f"      Adding synthetic Iliad interlinear translation from: {synthetic_translation_path.name}")
-    elif work_id == "tlg0012.tlg002":  # Odyssey
-        synthetic_translation_path = Path(__file__).parent.parent / "seg_trans" / "tlg0012.tlg002.perseus-eng99.xml"
-        if synthetic_translation_path.exists():
-            translation_files.append(synthetic_translation_path)
-            print(f"      Adding synthetic Odyssey interlinear translation from: {synthetic_translation_path.name}")
+    # Note: Interlinear translations are now generated and imported after the main build
+    # via generate_interlinear_translations() and import_interlinear_translations()
 
     if not translation_files:
         return
@@ -3587,6 +3579,171 @@ def process_translations(work_dir, work_id, cursor):
             print(f"    🔧 Entity resolver rescued {entity_resolver_used_count} translation(s) for {work_id}")
         if translation_failure_count > 0:
             print(f"    ⚠️  {translation_failure_count} translation(s) failed for {work_id}")
+
+def _extract_text_with_bold(element):
+    """
+    Extract text from XML element, preserving <hi rend="bold"> tags.
+    All other content is escaped (including <, >, &) but not quotes.
+    Only <hi rend="bold"> and </hi> tags are allowed in the output.
+    """
+    import html
+    result = []
+
+    # Process element text
+    if element.text:
+        result.append(html.escape(element.text, quote=False))
+
+    # Process children
+    for child in element:
+        # Check if this is a <hi rend="bold"> element
+        if child.tag.endswith('hi') and child.get('rend') == 'bold':
+            # Preserve as <hi rend="bold"> tag (Android code expects this format)
+            result.append('<hi rend="bold">')
+            if child.text:
+                result.append(html.escape(child.text, quote=False))
+            # Process any nested children (shouldn't happen in interlinear, but just in case)
+            for nested in child:
+                result.append(html.escape(''.join(nested.itertext()), quote=False))
+                if nested.tail:
+                    result.append(html.escape(nested.tail, quote=False))
+            result.append('</hi>')
+        else:
+            # Not a bold element - just extract and escape text
+            child_text = ''.join(child.itertext())
+            if child_text:
+                result.append(html.escape(child_text, quote=False))
+
+        # Process tail text (text after the element)
+        if child.tail:
+            result.append(html.escape(child.tail, quote=False))
+
+    return ''.join(result).strip()
+
+def get_all_greek_work_ids(db_filename):
+    """Get all Greek work IDs from the database
+
+    Returns a list of work IDs (e.g., ['tlg0012.tlg001', 'tlg0012.tlg002', ...])
+    """
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+
+    # Get all unique Greek work IDs (pattern: tlgXXXX.tlgXXX)
+    cursor.execute("""
+        SELECT DISTINCT work_id
+        FROM works
+        WHERE language = 'grc'
+        ORDER BY work_id
+    """)
+
+    work_ids = [row[0] for row in cursor.fetchall()]
+    conn.close()
+
+    print(f"Found {len(work_ids)} Greek works in database")
+    return work_ids
+
+def import_interlinear_translations(db_filename, work_ids=None):
+    """Import generated interlinear translations into the database
+
+    Args:
+        db_filename: Path to database file
+        work_ids: List of work IDs to import. If None, defaults to Homer's works.
+    """
+    interlinear_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+
+    # Default to Homer if no work_ids specified
+    if work_ids is None:
+        work_ids = ['tlg0012.tlg001', 'tlg0012.tlg002']
+
+    # Build map of work IDs to their interlinear XML files
+    interlinear_files = {}
+    for work_id in work_ids:
+        xml_file = interlinear_dir / f'{work_id}.perseus-eng99.xml'
+        interlinear_files[work_id] = xml_file
+
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+
+    for work_id, xml_file in interlinear_files.items():
+        if not xml_file.exists():
+            raise FileNotFoundError(f"CRITICAL ERROR: Required interlinear file not found: {xml_file}\n"
+                                    f"The generate_interlinear step must have failed. Check build logs.")
+
+        print(f"  Processing {xml_file.name}...")
+
+        try:
+            tree, entity_resolver_used = parse_xml_with_entity_resolver(xml_file)
+            root = tree.getroot()
+
+            # Extract translator name (should be "Interlinear (AI-generated...)")
+            translator = None
+            for elem in root.iter():
+                if 'editor' in elem.tag.lower() and elem.get('role') == 'translator':
+                    translator = elem.text
+                    if translator:
+                        translator = translator.strip()
+                        break
+
+            if not translator:
+                translator = "Interlinear (AI-generated from app dictionary and translations)"
+
+            print(f"    Translator: {translator}")
+
+            # Find all books in the translation
+            segments_imported = 0
+            for book_div in root.iter():
+                if not (book_div.tag.endswith('div') and
+                       book_div.get('type') == 'textpart' and
+                       book_div.get('subtype') == 'Book'):
+                    continue
+
+                book_n = book_div.get('n', '')
+                if not book_n:
+                    continue
+
+                # Construct book_id with zero-padding (e.g., tlg0012.tlg001.001 for Iliad Book 1)
+                book_id = f"{work_id}.{int(book_n):03d}"
+
+                # Extract all line elements
+                for line_elem in book_div.iter():
+                    if not line_elem.tag.endswith('l'):
+                        continue
+
+                    line_n = line_elem.get('n', '')
+                    if not line_n or not line_n.isdigit():
+                        continue
+
+                    line_num = int(line_n)
+
+                    # Convert XML to text, preserving <hi rend="bold"> as <b> tags
+                    # This preserves formatting for interlinear translations
+                    translation_text = _extract_text_with_bold(line_elem)
+
+                    if translation_text:
+                        # Insert translation segment for this line
+                        cursor.execute("""
+                            INSERT OR IGNORE INTO translation_segments
+                            (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """, (book_id, line_num, line_num, line_num, translation_text, translator, None))
+                        segments_imported += 1
+
+            conn.commit()
+            print(f"    ✓ Imported {segments_imported} interlinear segments for {work_id}")
+
+        except Exception as e:
+            print(f"    ✗ Error importing {xml_file.name}: {e}")
+            import traceback
+            traceback.print_exc()
+
+    # Regenerate translation lookup table to include new interlinear translations
+    print("\n  Regenerating translation lookup table...")
+    try:
+        create_translation_lookup_table(conn)
+    except Exception as e:
+        print(f"  ⚠️  Warning during translation lookup table regeneration: {e}")
+
+    conn.close()
+    print("✓ Interlinear translations imported")
 
 def process_prose_with_books(root, work_id, cursor, language):
     """Process prose texts that have book divisions (like Herodotus)"""
@@ -6657,8 +6814,23 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
     print(f"  Existing entries: {before_count:,} (including {wiktionary_count:,} from Wiktionary)")
     print(f"  Attempting to insert {len(filtered_lemmas):,} OGA lemmas...")
 
+    # Define particles and articles that should not map to each other
+    # This prevents bad OGA mappings like τε → ὁ (particle → article)
+    PARTICLES = {'τε', 'δέ', 'δὲ', 'δʼ', 'γάρ', 'γὰρ', 'τʼ', 'τοι', 'μέν', 'μὲν',
+                 'ἄν', 'ἂν', 'κε', 'περ', 'που', 'τοί', 'ῥα', 'ἄρα', 'ἄρ', 'ἀλλά', 'ἀλλὰ'}
+    ARTICLES = {'ὁ', 'ἡ', 'τό', 'τὸ', 'οἱ', 'αἱ', 'τά', 'τὰ',
+                'τοῦ', 'τῆς', 'τῶν', 'τῷ', 'τῇ', 'τοῖς', 'ταῖς',
+                'τόν', 'τὸν', 'τήν', 'τὴν', 'τούς', 'τοὺς', 'τάς', 'τὰς'}
+
     inserted_count = 0
+    skipped_bad_mappings = 0
     for (word_normalized, lemma), frequency in filtered_lemmas.items():
+        # Skip obviously bad mappings: particles → articles or articles → particles
+        if (word_normalized in PARTICLES and lemma in ARTICLES) or \
+           (word_normalized in ARTICLES and lemma in PARTICLES):
+            skipped_bad_mappings += 1
+            continue
+
         # INSERT OR IGNORE: only inserts if word_form doesn't already exist
         # This ensures Wiktionary/existing morphology always takes precedence
         # Compute ultra-normalized form for efficient lookups
@@ -6666,7 +6838,7 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
         cursor.execute("""
             INSERT OR IGNORE INTO lemma_map
             (word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info)
-            VALUES (?, ?, ?, 1.0, 'oga', NULL)
+            VALUES (?, ?, ?, 0.7, 'oga', NULL)
         """, (word_normalized, word_ultra, lemma))
 
         if cursor.rowcount > 0:
@@ -6688,6 +6860,7 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
     print(f"  After:  {after_count:,} entries")
     print(f"  Added:  {after_count - before_count:,} new OGA entries")
     print(f"  Skipped: {len(filtered_lemmas) - (after_count - before_count):,} duplicates (Wiktionary took precedence)")
+    print(f"  Filtered out: {skipped_bad_mappings:,} bad particle↔article mappings")
     print(f"  Total OGA entries in database: {oga_count:,}")
 
 
@@ -6785,12 +6958,13 @@ def merge_external_databases(db_filename, mode='sample'):
     import_lexicons_for_languages(db_filename, merged_languages, lexicon_paths)
 
 
-def compress_and_copy_database(db_filename, is_sample=False):
+def compress_and_copy_database(db_filename, is_sample=False, suffix=""):
     """Compress database and copy to asset pack location
-    
+
     Args:
         db_filename: Name of the database file to compress
         is_sample: If True, this is the sample database that goes to asset pack
+        suffix: Optional suffix to add to ZIP filename (e.g., "_interlineated")
     """
     import shutil
     import os
@@ -6838,7 +7012,9 @@ def compress_and_copy_database(db_filename, is_sample=False):
                 os.remove(temp_db_path)
             
             # Also create a named ZIP file for the sample database (like we do for full)
-            sample_zip_path = f"{db_filename}.zip"
+            # Use suffix if provided (e.g., "_interlineated")
+            base_name = db_filename.replace('.db', '')
+            sample_zip_path = f"{base_name}{suffix}.db.zip"
             print(f"\nCompressing sample database to {sample_zip_path}...")
             with zipfile.ZipFile(sample_zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
                 zf.write(db_filename, "perseus_texts.db")
@@ -6852,7 +7028,9 @@ def compress_and_copy_database(db_filename, is_sample=False):
             print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
         else:
             # For full database, keep it in data-prep with its full name
-            zip_path = f"{db_filename}.zip"
+            # Use suffix if provided (e.g., "_interlineated")
+            base_name = db_filename.replace('.db', '')
+            zip_path = f"{base_name}{suffix}.db.zip"
             print(f"\nCompressing full database to {zip_path}...")
             with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
                 zf.write(db_filename, "perseus_texts.db")
@@ -6886,11 +7064,14 @@ if __name__ == "__main__":
         build_mode = "both"
         custom_csv_path = None
         skip_oga = False
+        interlineate = False
 
-        # Check for --skip-oga flag
-        args = [arg for arg in sys.argv[1:] if arg != '--skip-oga']
+        # Check for flags
+        args = [arg for arg in sys.argv[1:] if arg not in ['--skip-oga', '--interlineate']]
         if '--skip-oga' in sys.argv[1:]:
             skip_oga = True
+        if '--interlineate' in sys.argv[1:]:
+            interlineate = True
 
         # Get build mode and custom CSV path
         if len(args) > 0:
@@ -6900,7 +7081,7 @@ if __name__ == "__main__":
 
         if build_mode not in ["sample", "full", "extended", "first1ktest", "both"]:
             print(f"Invalid build mode: {build_mode}")
-            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [--skip-oga]")
+            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [--skip-oga] [--interlineate]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
             print("  extended: Full Perseus + non-duplicate First1KGreek works")
@@ -6910,6 +7091,9 @@ if __name__ == "__main__":
             print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
             print("\nOptional --skip-oga flag: Skip OGA lemma extraction")
             print("  Example: python create_perseus_database.py full --skip-oga")
+            print("\nOptional --interlineate flag: Generate interlinear for ALL Greek works (not just Homer)")
+            print("  Example: python create_perseus_database.py sample --interlineate")
+            print("  Creates database with '_interlineated' suffix")
             sys.exit(1)
 
         # Display OGA status
@@ -6917,6 +7101,12 @@ if __name__ == "__main__":
             print("\n⚠ OGA lemma extraction will be SKIPPED (--skip-oga flag set)")
         else:
             print("\n✓ OGA lemma extraction will be included (use --skip-oga to disable)")
+
+        # Display interlineate status
+        if interlineate:
+            print("\n✓ Full interlineation mode ENABLED - will generate interlinear for ALL Greek works")
+        else:
+            print("\n✓ Limited interlineation - will generate only for Homer's Iliad and Odyssey")
 
         overall_start = time.time()
 
@@ -6946,6 +7136,10 @@ if __name__ == "__main__":
             checkpoint_conn.close()
             print("✓ Database WAL checkpointed after merges")
 
+            # NOTE: Interlinear generation disabled for sample database to reduce build time
+            # Interlinear translations are only included in full/extended databases
+            print("\n⚠ Skipping interlinear generation for sample database")
+
             # Compress and copy sample database to asset pack
             compress_and_copy_database("perseus_texts_sample.db", is_sample=True)
 
@@ -6973,8 +7167,44 @@ if __name__ == "__main__":
             checkpoint_conn.close()
             print("✓ Database WAL checkpointed after merges")
 
+            # Generate interlinear translations
+            print("\n" + "="*60)
+            print("GENERATING INTERLINEAR TRANSLATIONS")
+            print("="*60)
+            interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+
+            # Determine which works to process
+            if interlineate:
+                # Get all Greek works from the database
+                work_ids = get_all_greek_work_ids("perseus_texts_full.db")
+                print(f"Full interlineation mode: Processing {len(work_ids)} Greek works")
+            else:
+                # Just Homer's works
+                work_ids = ['tlg0012.tlg001', 'tlg0012.tlg002']
+                print(f"Limited interlineation mode: Processing Homer's Iliad and Odyssey")
+
+            generate_interlinear_translations(
+                db_path=Path("perseus_texts_full.db"),
+                output_dir=interlinear_output_dir,
+                work_ids=work_ids
+            )
+
+            # Import generated interlinear translations into database
+            print("\n" + "="*60)
+            print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
+            print("="*60)
+            import_interlinear_translations("perseus_texts_full.db", work_ids=work_ids)
+
+            # Checkpoint WAL after importing translations
+            checkpoint_conn = sqlite3.connect("perseus_texts_full.db")
+            checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            checkpoint_conn.close()
+            print("✓ Database WAL checkpointed after importing translations")
+
             # Compress full database (keep in data-prep directory)
-            compress_and_copy_database("perseus_texts_full.db", is_sample=False)
+            # Use suffix if full interlineation was performed
+            suffix = "_interlineated" if interlineate else ""
+            compress_and_copy_database("perseus_texts_full.db", is_sample=False, suffix=suffix)
 
         # Build extended database
         if build_mode == "extended":
@@ -7000,8 +7230,44 @@ if __name__ == "__main__":
             checkpoint_conn.close()
             print("✓ Database WAL checkpointed after merges")
 
+            # Generate interlinear translations
+            print("\n" + "="*60)
+            print("GENERATING INTERLINEAR TRANSLATIONS")
+            print("="*60)
+            interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+
+            # Determine which works to process
+            if interlineate:
+                # Get all Greek works from the database
+                work_ids = get_all_greek_work_ids("perseus_texts_extended.db")
+                print(f"Full interlineation mode: Processing {len(work_ids)} Greek works")
+            else:
+                # Just Homer's works
+                work_ids = ['tlg0012.tlg001', 'tlg0012.tlg002']
+                print(f"Limited interlineation mode: Processing Homer's Iliad and Odyssey")
+
+            generate_interlinear_translations(
+                db_path=Path("perseus_texts_extended.db"),
+                output_dir=interlinear_output_dir,
+                work_ids=work_ids
+            )
+
+            # Import generated interlinear translations into database
+            print("\n" + "="*60)
+            print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
+            print("="*60)
+            import_interlinear_translations("perseus_texts_extended.db", work_ids=work_ids)
+
+            # Checkpoint WAL after importing translations
+            checkpoint_conn = sqlite3.connect("perseus_texts_extended.db")
+            checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            checkpoint_conn.close()
+            print("✓ Database WAL checkpointed after importing translations")
+
             # Compress extended database (keep in data-prep directory)
-            compress_and_copy_database("perseus_texts_extended.db", is_sample=False)
+            # Use suffix if full interlineation was performed
+            suffix = "_interlineated" if interlineate else ""
+            compress_and_copy_database("perseus_texts_extended.db", is_sample=False, suffix=suffix)
 
         # Build first1ktest database
         if build_mode == "first1ktest":

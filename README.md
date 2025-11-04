@@ -16,17 +16,31 @@ Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecom
 NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed. perseus_texts_extended.db.zip   https://www.patreon.com/file?h=141298606&m=558176691   (free)
 
 NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
-  | Language | Authors | Works |
-  |----------|---------|-------|
-  | Greek    | 367     | 1,855 |
-  | Latin    | 40      | 230   |
-  | Hebrew   | 39      | 39    |
-  | Sumerian | 1       | 11    |
-  | Sanskrit | 7       | 7     |
-  | Akkadian | 1       | 1     |
-  | Arabic   | 1       | 1     |
-  | Persian  | 1       | 1     |
-  | TOTAL    | 457     | 2,145 |
+
+
+  SAMPLE DATABASE:
+  - Greek: 10 authors, 259 works
+  - Latin: 2 authors, 6 works
+  - Total: 12 authors, 265 works
+
+  FULL DATABASE:
+  - Akkadian: 1 author, 1 work
+  - Greek: 91 authors, 772 works
+  - Latin: 40 authors, 230 works
+  - Sumerian: 1 author, 11 works
+  - Total: 133 authors, 1,014 works
+
+  EXTENDED DATABASE:
+  - Akkadian: 1 author, 1 work
+  - Arabic: 1 author, 1 work
+  - Greek: 367 authors, 1,855 works
+  - Hebrew: 39 authors, 39 works
+  - Latin: 40 authors, 230 works
+  - Persian: 1 author, 1 work
+  - Sanskrit: 7 authors, 7 works
+  - Sumerian: 1 author, 11 works
+  - Total: 457 authors, 2,145 works
+
 
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
 
