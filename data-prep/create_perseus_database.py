@@ -3641,14 +3641,18 @@ def get_all_greek_work_ids(db_filename):
     print(f"Found {len(work_ids)} Greek works in database")
     return work_ids
 
-def import_interlinear_translations(db_filename, work_ids=None):
+def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=None):
     """Import generated interlinear translations into the database
 
     Args:
         db_filename: Path to database file
         work_ids: List of work IDs to import. If None, defaults to Homer's works.
+        interlinear_dir: Path to directory containing interlinear XML files. If None, uses default.
     """
-    interlinear_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+    if interlinear_dir is None:
+        interlinear_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+    else:
+        interlinear_dir = Path(interlinear_dir)
 
     # Default to Homer if no work_ids specified
     if work_ids is None:
@@ -7065,13 +7069,27 @@ if __name__ == "__main__":
         custom_csv_path = None
         skip_oga = False
         interlineate = False
+        interlineate_folder = None
 
-        # Check for flags
-        args = [arg for arg in sys.argv[1:] if arg not in ['--skip-oga', '--interlineate']]
-        if '--skip-oga' in sys.argv[1:]:
-            skip_oga = True
-        if '--interlineate' in sys.argv[1:]:
-            interlineate = True
+        # Check for flags and their arguments
+        args = []
+        i = 1
+        while i < len(sys.argv):
+            arg = sys.argv[i]
+            if arg == '--skip-oga':
+                skip_oga = True
+            elif arg == '--interlineate':
+                interlineate = True
+            elif arg == '--interlineate-folder':
+                if i + 1 < len(sys.argv):
+                    interlineate_folder = sys.argv[i + 1]
+                    i += 1  # Skip the next argument as it's the folder path
+                else:
+                    print("Error: --interlineate-folder requires a path argument")
+                    sys.exit(1)
+            else:
+                args.append(arg)
+            i += 1
 
         # Get build mode and custom CSV path
         if len(args) > 0:
@@ -7081,7 +7099,7 @@ if __name__ == "__main__":
 
         if build_mode not in ["sample", "full", "extended", "first1ktest", "both"]:
             print(f"Invalid build mode: {build_mode}")
-            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [--skip-oga] [--interlineate]")
+            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
             print("  extended: Full Perseus + non-duplicate First1KGreek works")
@@ -7094,6 +7112,9 @@ if __name__ == "__main__":
             print("\nOptional --interlineate flag: Generate interlinear for ALL Greek works (not just Homer)")
             print("  Example: python create_perseus_database.py sample --interlineate")
             print("  Creates database with '_interlineated' suffix")
+            print("\nOptional --interlineate-folder PATH: Use pregenerated interlinear XML files from PATH")
+            print("  Example: python create_perseus_database.py extended --interlineate-folder /path/to/xml/files")
+            print("  Skips generation and uses existing XML files instead")
             sys.exit(1)
 
         # Display OGA status
@@ -7103,10 +7124,12 @@ if __name__ == "__main__":
             print("\n✓ OGA lemma extraction will be included (use --skip-oga to disable)")
 
         # Display interlineate status
-        if interlineate:
+        if interlineate_folder:
+            print(f"\n✓ Using pregenerated interlinear XML files from: {interlineate_folder}")
+        elif interlineate:
             print("\n✓ Full interlineation mode ENABLED - will generate interlinear for ALL Greek works")
         else:
-            print("\n✓ Limited interlineation - will generate only for Homer's Iliad and Odyssey")
+            print("\n✓ Limited interlineation - will generate only for select works")
 
         overall_start = time.time()
 
@@ -7171,7 +7194,13 @@ if __name__ == "__main__":
             print("\n" + "="*60)
             print("GENERATING INTERLINEAR TRANSLATIONS")
             print("="*60)
-            interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+
+            # Use custom folder if provided, otherwise use default
+            if interlineate_folder:
+                interlinear_output_dir = Path(interlineate_folder)
+                print(f"Using pregenerated XML files from: {interlinear_output_dir}")
+            else:
+                interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
 
             # Determine which works to process
             if interlineate:
@@ -7179,21 +7208,38 @@ if __name__ == "__main__":
                 work_ids = get_all_greek_work_ids("perseus_texts_full.db")
                 print(f"Full interlineation mode: Processing {len(work_ids)} Greek works")
             else:
-                # Just Homer's works
-                work_ids = ['tlg0012.tlg001', 'tlg0012.tlg002']
-                print(f"Limited interlineation mode: Processing Homer's Iliad and Odyssey")
+                # Full mode default: Homer + select Perseus canonical works
+                work_ids = [
+                    'tlg0012.tlg001',  # Homer - Iliad
+                    'tlg0012.tlg002',  # Homer - Odyssey
+                    'tlg0059.tlg004',  # Plato - Phaedo
+                    'tlg0086.tlg034',  # Aristotle - Poetics
+                    'tlg0085.tlg002',  # Aeschylus - Persians
+                    'tlg0011.tlg002',  # Sophocles - Antigone
+                    'tlg0006.tlg017',  # Euripides - Bacchae
+                    'tlg0032.tlg006',  # Xenophon - Anabasis
+                    'tlg0020.tlg001',  # Hesiod - Theogony
+                    'tlg0033.tlg001',  # Pindar - Olympian Odes
+                    'tlg0007.tlg047',  # Plutarch - Alexander
+                    'tlg0094.tlg002',  # Pseudo-Plutarch - Concerning Music
+                ]
+                print(f"Limited interlineation mode: Processing {len(work_ids)} select works")
 
-            generate_interlinear_translations(
-                db_path=Path("perseus_texts_full.db"),
-                output_dir=interlinear_output_dir,
-                work_ids=work_ids
-            )
+            # Only generate if not using pregenerated folder
+            if not interlineate_folder:
+                generate_interlinear_translations(
+                    db_path=Path("perseus_texts_full.db"),
+                    output_dir=interlinear_output_dir,
+                    work_ids=work_ids
+                )
+            else:
+                print("Skipping generation - using pregenerated XML files")
 
             # Import generated interlinear translations into database
             print("\n" + "="*60)
             print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
             print("="*60)
-            import_interlinear_translations("perseus_texts_full.db", work_ids=work_ids)
+            import_interlinear_translations("perseus_texts_full.db", work_ids=work_ids, interlinear_dir=interlinear_output_dir)
 
             # Checkpoint WAL after importing translations
             checkpoint_conn = sqlite3.connect("perseus_texts_full.db")
@@ -7234,7 +7280,13 @@ if __name__ == "__main__":
             print("\n" + "="*60)
             print("GENERATING INTERLINEAR TRANSLATIONS")
             print("="*60)
-            interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
+
+            # Use custom folder if provided, otherwise use default
+            if interlineate_folder:
+                interlinear_output_dir = Path(interlineate_folder)
+                print(f"Using pregenerated XML files from: {interlinear_output_dir}")
+            else:
+                interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
 
             # Determine which works to process
             if interlineate:
@@ -7242,21 +7294,40 @@ if __name__ == "__main__":
                 work_ids = get_all_greek_work_ids("perseus_texts_extended.db")
                 print(f"Full interlineation mode: Processing {len(work_ids)} Greek works")
             else:
-                # Just Homer's works
-                work_ids = ['tlg0012.tlg001', 'tlg0012.tlg002']
-                print(f"Limited interlineation mode: Processing Homer's Iliad and Odyssey")
+                # Extended mode default: Homer + select canonical works
+                work_ids = [
+                    'tlg0012.tlg001',  # Homer - Iliad
+                    'tlg0012.tlg002',  # Homer - Odyssey
+                    'tlg0059.tlg004',  # Plato - Phaedo
+                    'tlg0086.tlg034',  # Aristotle - Poetics
+                    'tlg0085.tlg002',  # Aeschylus - Persians
+                    'tlg0011.tlg002',  # Sophocles - Antigone
+                    'tlg0006.tlg017',  # Euripides - Bacchae
+                    'tlg0032.tlg006',  # Xenophon - Anabasis
+                    'tlg0317.tlg001',  # Acta Joannis - Acts of John
+                    'tlg0020.tlg001',  # Hesiod - Theogony
+                    'tlg0033.tlg001',  # Pindar - Olympian Odes
+                    'tlg0007.tlg047',  # Plutarch - Alexander
+                    'tlg0094.tlg002',  # Pseudo-Plutarch - Concerning Music
+                    'tlg5023.tlg001',  # Scholia in Euripidem (scholia vetera)
+                ]
+                print(f"Limited interlineation mode: Processing {len(work_ids)} select works")
 
-            generate_interlinear_translations(
-                db_path=Path("perseus_texts_extended.db"),
-                output_dir=interlinear_output_dir,
-                work_ids=work_ids
-            )
+            # Only generate if not using pregenerated folder
+            if not interlineate_folder:
+                generate_interlinear_translations(
+                    db_path=Path("perseus_texts_extended.db"),
+                    output_dir=interlinear_output_dir,
+                    work_ids=work_ids
+                )
+            else:
+                print("Skipping generation - using pregenerated XML files")
 
             # Import generated interlinear translations into database
             print("\n" + "="*60)
             print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
             print("="*60)
-            import_interlinear_translations("perseus_texts_extended.db", work_ids=work_ids)
+            import_interlinear_translations("perseus_texts_extended.db", work_ids=work_ids, interlinear_dir=interlinear_output_dir)
 
             # Checkpoint WAL after importing translations
             checkpoint_conn = sqlite3.connect("perseus_texts_extended.db")
