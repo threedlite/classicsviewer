@@ -890,7 +890,9 @@ class InterlinearGenerator:
         greek_lines = self.get_greek_lines(book_id, start_line, end_line)
 
         if not greek_lines:
-            raise ValueError(f"No Greek text found for {book_id} lines {start_line}-{end_line}")
+            print(f"⚠️  WARNING: No Greek text found for {book_id} lines {start_line}-{end_line}")
+            print(f"Returning empty results for this book.")
+            return []  # Return empty list instead of crashing
 
         print(f"Found {len(greek_lines)} Greek lines")
 
@@ -1099,6 +1101,9 @@ def _generate_work(work_id: str, output_dir: Path):
     print("=" * 80)
 
     if not DB_PATH.exists():
+        print(f"\n❌ FATAL ERROR: Database not found at {DB_PATH}")
+        print(f"Cannot proceed without database.")
+        print(f"{'=' * 80}")
         raise FileNotFoundError(f"Database not found at {DB_PATH}")
 
     # Get all books for this work
@@ -1119,7 +1124,12 @@ def _generate_work(work_id: str, output_dir: Path):
     conn.close()
 
     if not book_ids:
-        raise ValueError(f"No books found for work ID {work_id}")
+        print(f"\n⚠️  WARNING: No books found for work ID {work_id}")
+        print(f"This work exists in the database but has no text content.")
+        print(f"Skipping this work.")
+        print(f"{'=' * 80}")
+        # Don't raise - just return early, work will be marked as complete with 0 books
+        return
 
     if work_metadata:
         work_title, author_name = work_metadata
@@ -1195,7 +1205,11 @@ def _generate_work(work_id: str, output_dir: Path):
             output_file.unlink()
         if xml_output_file.exists():
             xml_output_file.unlink()
-        print(f"\nERROR: {e}")
+        print(f"\n{'=' * 80}")
+        print(f"✗ FAILED: Work {work_id}")
+        print(f"{'=' * 80}")
+        print(f"ERROR: {e}")
         import traceback
         traceback.print_exc()
+        print(f"{'=' * 80}")
         raise  # Re-raise so worker process reports failure
