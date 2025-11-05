@@ -19,6 +19,7 @@ git clone https://github.com/OliverHellwig/sanskrit.git
 wget https://zenodo.org/records/14206061/files/opera_graeca_adnotata_v0.2.0.zip # https://github.com/OperaGraecaAdnotata/OGA?tab=readme-ov-file  # (optional)
 #git clone git clone https://github.com/greekwordnet/greekwordnet-archive.git
 git clone https://github.com/cltk/cltk
+git clone https://github.com/LukeMurphey/perseus-greek-and-roman-texts.git
 
 
 # ORACC Cuneiform Dictionaries (Sumerian + Akkadian)
