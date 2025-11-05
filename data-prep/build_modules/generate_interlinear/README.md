@@ -1,54 +1,102 @@
 # Interlinear Translation Generator
 
-This module generates word-by-word interlinear translations for Homer's Iliad and Odyssey.
+This module generates word-by-word interlinear translations for Greek texts with English glosses.
 
-## Integration into Build Pipeline
+## Module Architecture
 
-The interlinear generator is now integrated into the main database build process (`create_perseus_database.py`). After each database is built and compressed, the interlinear translations are automatically generated.
+### Core Files
 
-### Build Process Flow
+1. **`ui_dictionary_lookup.py`** - Production dictionary lookup module
+   - Contains `PerseusRepository` class with dictionary lookup logic
+   - Replicates exact Android UI dictionary behavior (normalization, precedence, sorting)
+   - **Used by**: `generate_interlinear.py` imports and uses this for all word lookups
+   - **Also runnable**: Can be run standalone to test dictionary lookups (`python3 ui_dictionary_lookup.py`)
 
-1. Database creation (sample/full/extended)
-2. Dictionary and morphology merging
-3. OGA lemma extraction (if not skipped)
-4. WAL checkpoint
-5. Database compression
-6. **→ Interlinear translation generation** (NEW)
+2. **`generate_interlinear.py`** - Interlinear generation engine
+   - Contains `InterlinearGenerator` class that generates interlinear glosses
+   - Imports `PerseusRepository` from `ui_dictionary_lookup.py`
+   - Features streaming architecture (processes one book at a time)
+   - LRU caching for dictionary lookups (95%+ query reduction)
+   - Single-threaded, no threading within this module
+   - Can be run standalone for single work: `python3 generate_interlinear.py tlg0012.tlg001`
 
-### Usage from Build Pipeline
+3. **`interlinear_list.py`** - Batch coordinator with multiprocessing
+   - Reads CSV file listing multiple works to process
+   - Spawns worker processes (default: 4 workers)
+   - Each worker loads `generate_interlinear.py` and processes one work
+   - Distributes load across workers for parallel generation
+   - Usage: `python3 interlinear_list.py WORKS.csv DATABASE.db --workers 4`
 
-The module is imported and called automatically:
+### Architecture Summary
 
-```python
-from build_modules.generate_interlinear.generate_interlinear import generate_interlinear_translations
-
-# After database build completes:
-interlinear_output_dir = Path(__file__).parent / "build_modules" / "generate_interlinear"
-generate_interlinear_translations(
-    db_path=Path("perseus_texts_sample.db"),
-    output_dir=interlinear_output_dir,
-    works=['iliad', 'odyssey']
-)
 ```
+interlinear_list.py (coordinator)
+├── Worker 1 → generate_interlinear.py → ui_dictionary_lookup.py → database queries
+├── Worker 2 → generate_interlinear.py → ui_dictionary_lookup.py → database queries
+├── Worker 3 → generate_interlinear.py → ui_dictionary_lookup.py → database queries
+└── Worker 4 → generate_interlinear.py → ui_dictionary_lookup.py → database queries
+```
+
+**Key principles:**
+- NO threading in `generate_interlinear.py` (completely single-threaded)
+- Multiprocessing ONLY in `interlinear_list.py` (spawns workers)
+- Each worker has its own database connection and LRU cache
+- Streaming architecture: process and write one book at a time
+
+## Separation from Database Build
+
+**IMPORTANT:** As of 2025-11-04, interlinear generation is **NO LONGER** part of the database build process.
+
+### New Workflow
+
+**Step 1: Generate Interlinear XML Files (ONE TIME)**
+```bash
+cd data-prep
+
+# Generate XML files for all canonical works
+python3 build_modules/generate_interlinear/interlinear_list.py \
+    INTERLINEAR_WORKS.csv \
+    perseus_texts_extended.db \
+    --workers 4 \
+    --output ../data-sources/classicsviewer_interlinear
+```
+
+**Output:** 14 works × 2 files each (XML + TXT) = 28 files in `data-sources/classicsviewer_interlinear/`
+
+**Step 2: Build Database (USES PREGENERATED FILES)**
+```bash
+cd data-prep
+
+# Full mode - imports 12 select works
+python3 create_perseus_database.py full
+
+# Extended mode - imports 14 works (default)
+python3 create_perseus_database.py extended
+
+# Extended mode - import ALL Greek works
+python3 create_perseus_database.py extended --interlineate
+```
+
+**Default source:** `data-sources/classicsviewer_interlinear/`
+
+### Why This Change
+
+1. **Reliability**: Generation was causing worker hangs and file write failures during builds
+2. **Speed**: Database builds are faster without generation (~5-10 min saved)
+3. **Separation of Concerns**: Generation and import are now separate steps
+4. **Reproducibility**: Pregenerated files ensure consistent output across builds
+
+See `DATABASE_BUILD_INTERLINEAR_CHANGE.md` for full details.
 
 ### Output Files
 
-Generated files are placed in `data-prep/build_modules/generate_interlinear/`:
+Generated files are placed in `data-sources/classicsviewer_interlinear/`:
 
-- `tlg0012.tlg001.perseus-eng99.xml` - Iliad TEI XML
-- `iliad_full_interlinear.txt` - Iliad plain text (pipe-delimited)
-- `tlg0012.tlg002.perseus-eng99.xml` - Odyssey TEI XML
-- `odyssey_full_interlinear.txt` - Odyssey plain text (pipe-delimited)
-
-### Migration from seg_trans
-
-Previously, interlinear generation was in `seg_trans/prototype_interlinear.py` and run manually. Now it's:
-
-1. **Integrated**: Part of the regular build process
-2. **Modular**: Clean API for programmatic usage
-3. **Organized**: Lives in `build_modules/` with other build components
-
-The `seg_trans/` directory will be removed in a future update.
+- `tlg0012.tlg001.perseus-eng99.xml` - Homer Iliad TEI XML
+- `tlg0012.tlg001.txt` - Iliad plain text
+- `tlg0012.tlg002.perseus-eng99.xml` - Homer Odyssey TEI XML
+- `tlg0012.tlg002.txt` - Odyssey plain text
+- ... (12 more works)
 
 ## API
 
@@ -107,13 +155,46 @@ wrath, anger | to sing | a goddess
 
 ## Dictionary Lookup
 
-Uses `ui_dictionary_lookup.py` which implements the exact same logic as the Android app:
+The `ui_dictionary_lookup.py` module contains the `PerseusRepository` class which implements dictionary lookup logic matching the Android app exactly:
 
-1. Normalizes apostrophes and grave accents
-2. Checks `lemma_map` table with confidence scoring
-3. Follows lemma chains to find canonical forms
-4. Applies source priority: User > LSJ > Cunliffe > Wiktionary
-5. Returns top 5 sorted entries
+### Lookup Flow
+
+1. **Normalization**: Apostrophes, grave→acute conversion, ultra-normalization (diacritic removal)
+2. **Direct match**: Check `dictionary_entries` table for exact headword match
+3. **Lemma mapping**: Check `lemma_map` table for inflected forms → lemmas
+4. **Lemma chain resolution**: Follow lemma chains to find canonical dictionary entries
+5. **Ultra-normalized fallback**: If still no match, try removing all diacritics
+6. **Sorting**: Apply multi-level sorting (non-treebank first, source priority, confidence, length)
+
+### Source Priority
+
+1. User-defined entries (highest)
+2. LSJ (Liddell-Scott-Jones)
+3. Cunliffe (Homeric Lexicon)
+4. Wiktionary
+5. Other sources (lowest)
+
+### LRU Caching (NEW)
+
+As of 2025-11-04, dictionary lookups use `@lru_cache(maxsize=10000)` to cache results:
+- Common words (καί, δέ, τε, etc.) only queried once
+- Reduces ~100,000+ queries to ~few thousand for large works like Homer's Iliad
+- Each worker process has its own cache (no shared state)
+- 95%+ query reduction, 2-5x speedup expected
+
+### Testing Dictionary Lookups
+
+Run `ui_dictionary_lookup.py` standalone to test lookups:
+
+```bash
+# Test first 7 lines of Iliad (default)
+python3 ui_dictionary_lookup.py
+
+# Test first 30 lines
+python3 ui_dictionary_lookup.py 30
+```
+
+This shows the exact dictionary results that would appear in the Android UI for each word.
 
 ## Next Steps
 

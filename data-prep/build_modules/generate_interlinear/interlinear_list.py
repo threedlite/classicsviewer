@@ -6,6 +6,32 @@ Parallel Interlinear Generator from Author/Work CSV
 Generates interlinear translation XML files for works listed in a CSV file,
 using multi-threading to process works in parallel.
 
+⚠️  IMPORTANT: Process Management
+---------------------------------
+This script uses multiprocessing with 'spawn' method, creating multiple worker processes.
+
+**BEFORE RESTARTING OR MODIFYING CODE:**
+1. Kill ALL related Python processes (not just the main script!)
+2. Clear Python bytecode cache (__pycache__, *.pyc files)
+3. Verify no workers are still running
+
+Commands to ensure clean restart:
+    # Kill all Python processes
+    pkill -9 python
+
+    # Or kill specific interlinear processes
+    pkill -9 -f interlinear_list.py
+
+    # Clear Python cache
+    find . -name "*.pyc" -delete
+    find . -name "__pycache__" -type d -exec rm -rf {} +
+
+    # Verify no processes remain
+    ps aux | grep python
+
+⚠️  If you don't kill worker processes, they will continue running with OLD CODE
+    even after you modify and restart the main script! This causes corrupted output.
+
 Usage:
     python3 interlinear_list.py <input_csv> <database_path> [options]
 
@@ -55,16 +81,33 @@ def lookup_work_id(db_path: str, author: str, work_title: str) -> Optional[str]:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Query for work_id matching author and title
+    # Try exact match on title first
     cursor.execute("""
-        SELECT work_id
-        FROM works
-        WHERE author_name = ? AND work_title = ?
+        SELECT w.id
+        FROM works w
+        JOIN authors a ON w.author_id = a.id
+        WHERE a.name = ? AND w.title = ?
         LIMIT 1
     """, (author, work_title))
 
     result = cursor.fetchone()
-    conn.close()
+    if result:
+        conn.close()
+        return result[0]
+
+    # Try exact match on title_english
+    cursor.execute("""
+        SELECT w.id
+        FROM works w
+        JOIN authors a ON w.author_id = a.id
+        WHERE a.name = ? AND w.title_english = ?
+        LIMIT 1
+    """, (author, work_title))
+
+    result = cursor.fetchone()
+    if result:
+        conn.close()
+        return result[0]
 
     return result[0] if result else None
 
@@ -124,10 +167,16 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
         import sys
         from pathlib import Path
 
-        # Add build_modules/generate_interlinear to path
-        sys.path.insert(0, str(Path(__file__).parent / 'build_modules' / 'generate_interlinear'))
+        # Get the directory containing this script and its parent (build_modules)
+        script_dir = Path(__file__).parent.resolve()
+        build_modules_dir = script_dir.parent
 
-        from generate_interlinear import generate_interlinear_translations
+        # Add build_modules to path so we can import as a package
+        if str(build_modules_dir) not in sys.path:
+            sys.path.insert(0, str(build_modules_dir))
+
+        # Import as package to preserve relative imports
+        from generate_interlinear.generate_interlinear import generate_interlinear_translations
 
         # Generate interlinear for this work
         # generate_interlinear_translations expects a db_path and output_dir
@@ -245,7 +294,11 @@ def main():
 
     # Parse options
     num_workers = 4
-    output_dir = Path(__file__).parent / 'build_modules' / 'generate_interlinear'
+    # Default output: go up to data-prep, then to data-sources/classicsviewer_interlinear
+    script_dir = Path(__file__).parent.resolve()
+    build_modules_dir = script_dir.parent
+    data_prep_dir = build_modules_dir.parent
+    output_dir = data_prep_dir.parent / 'data-sources' / 'classicsviewer_interlinear'
 
     i = 3
     while i < len(sys.argv):
