@@ -117,6 +117,10 @@ def load_works_from_csv(csv_path: Path, db_path: str) -> List[Tuple[str, str, st
     """
     Load works from CSV file and resolve to work_ids.
 
+    Supports two CSV formats:
+    1. With WorkID column: Uses work_id directly (no database lookup needed)
+    2. Without WorkID column: Looks up work_id from Author/Work (legacy format)
+
     Returns:
         List of (author, work_title, work_id) tuples
     """
@@ -133,13 +137,18 @@ def load_works_from_csv(csv_path: Path, db_path: str) -> List[Tuple[str, str, st
             if not author or not work_title:
                 continue
 
-            # Look up work_id in database
-            work_id = lookup_work_id(db_path, author, work_title)
-
-            if work_id:
+            # Check if CSV has WorkID column (preferred method)
+            if 'WorkID' in row and row['WorkID'].strip():
+                work_id = row['WorkID'].strip()
                 works.append((author, work_title, work_id))
             else:
-                not_found.append((author, work_title))
+                # Legacy format: Look up work_id in database
+                work_id = lookup_work_id(db_path, author, work_title)
+
+                if work_id:
+                    works.append((author, work_title, work_id))
+                else:
+                    not_found.append((author, work_title))
 
     if not_found:
         print(f"\n⚠ Warning: {len(not_found)} works not found in database:")
@@ -241,10 +250,14 @@ def generate_interlinear_parallel(
         for args in work_args:
             results.append(process_work_worker(args))
     else:
-        # Parallel processing
+        # Parallel processing with dynamic work queue
         print(f"Running in PARALLEL mode ({num_workers} workers)")
+        print("Using dynamic work queue (imap_unordered) for optimal load balancing")
         with mp.Pool(num_workers) as pool:
-            results = pool.map(process_work_worker, work_args)
+            # Use imap_unordered with chunksize=1 for best load balancing
+            # This ensures workers dynamically pull tasks from queue as they finish
+            # preventing idle workers when some tasks take longer than others
+            results = list(pool.imap_unordered(process_work_worker, work_args, chunksize=1))
 
     # Sort results by work index to maintain order
     results.sort(key=lambda x: x[0])
