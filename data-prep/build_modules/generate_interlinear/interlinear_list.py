@@ -81,12 +81,12 @@ def lookup_work_id(db_path: str, author: str, work_title: str) -> Optional[str]:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Try exact match on title first
+    # Try exact match on title first (trim whitespace in comparison)
     cursor.execute("""
         SELECT w.id
         FROM works w
         JOIN authors a ON w.author_id = a.id
-        WHERE a.name = ? AND w.title = ?
+        WHERE trim(a.name) = ? AND trim(w.title) = ?
         LIMIT 1
     """, (author, work_title))
 
@@ -95,12 +95,12 @@ def lookup_work_id(db_path: str, author: str, work_title: str) -> Optional[str]:
         conn.close()
         return result[0]
 
-    # Try exact match on title_english
+    # Try exact match on title_english (trim whitespace in comparison)
     cursor.execute("""
         SELECT w.id
         FROM works w
         JOIN authors a ON w.author_id = a.id
-        WHERE a.name = ? AND w.title_english = ?
+        WHERE trim(a.name) = ? AND trim(w.title_english) = ?
         LIMIT 1
     """, (author, work_title))
 
@@ -109,7 +109,8 @@ def lookup_work_id(db_path: str, author: str, work_title: str) -> Optional[str]:
         conn.close()
         return result[0]
 
-    return result[0] if result else None
+    conn.close()
+    return None
 
 
 def load_works_from_csv(csv_path: Path, db_path: str) -> List[Tuple[str, str, str]]:
