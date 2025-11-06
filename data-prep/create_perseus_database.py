@@ -7228,22 +7228,12 @@ if __name__ == "__main__":
                 work_ids = get_all_greek_work_ids("perseus_texts_full.db")
                 print(f"Full interlineation mode: Importing {len(work_ids)} Greek works")
             else:
-                # Full mode default: Homer + select Perseus canonical works
+                # Full mode default: only Iliad and Odyssey
                 work_ids = [
                     'tlg0012.tlg001',  # Homer - Iliad
                     'tlg0012.tlg002',  # Homer - Odyssey
-                    'tlg0059.tlg004',  # Plato - Phaedo
-                    'tlg0086.tlg034',  # Aristotle - Poetics
-                    'tlg0085.tlg002',  # Aeschylus - Persians
-                    'tlg0011.tlg002',  # Sophocles - Antigone
-                    'tlg0006.tlg017',  # Euripides - Bacchae
-                    'tlg0032.tlg006',  # Xenophon - Anabasis
-                    'tlg0020.tlg001',  # Hesiod - Theogony
-                    'tlg0033.tlg001',  # Pindar - Olympian Odes
-                    'tlg0007.tlg047',  # Plutarch - Alexander
-                    'tlg0094.tlg002',  # Pseudo-Plutarch - Concerning Music
                 ]
-                print(f"Limited interlineation mode: Importing {len(work_ids)} select works")
+                print(f"Full mode: Importing only Iliad and Odyssey")
 
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")
@@ -7304,29 +7294,14 @@ if __name__ == "__main__":
             print(f"Using pregenerated XML files from: {interlinear_output_dir}")
 
             # Determine which works to import
-            if interlineate:
-                # Get all Greek works from the database
-                work_ids = get_all_greek_work_ids("perseus_texts_extended.db")
-                print(f"Full interlineation mode: Importing {len(work_ids)} Greek works")
-            else:
-                # Extended mode default: Homer + select canonical works
-                work_ids = [
-                    'tlg0012.tlg001',  # Homer - Iliad
-                    'tlg0012.tlg002',  # Homer - Odyssey
-                    'tlg0059.tlg004',  # Plato - Phaedo
-                    'tlg0086.tlg034',  # Aristotle - Poetics
-                    'tlg0085.tlg002',  # Aeschylus - Persians
-                    'tlg0011.tlg002',  # Sophocles - Antigone
-                    'tlg0006.tlg017',  # Euripides - Bacchae
-                    'tlg0032.tlg006',  # Xenophon - Anabasis
-                    'tlg0317.tlg001_OGL',  # Acta Joannis - Acts of John
-                    'tlg0020.tlg001',  # Hesiod - Theogony
-                    'tlg0033.tlg001',  # Pindar - Olympian Odes
-                    'tlg0007.tlg047',  # Plutarch - Alexander
-                    'tlg0094.tlg002',  # Pseudo-Plutarch - Concerning Music (De musica)
-                    'tlg5023.tlg001_OGL',  # Scholia in Euripidem (scholia vetera)
-                ]
-                print(f"Limited interlineation mode: Importing {len(work_ids)} select works")
+            # Extended mode ALWAYS imports all available interlinear files
+            print("Extended mode: Scanning for all available interlinear XML files...")
+            work_ids = []
+            for xml_file in interlinear_output_dir.glob('*.perseus-eng99.xml'):
+                work_id = xml_file.stem.replace('.perseus-eng99', '')
+                work_ids.append(work_id)
+            work_ids.sort()
+            print(f"Found {len(work_ids)} interlinear files to import")
 
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")
