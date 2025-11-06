@@ -42,6 +42,9 @@ NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some 
 
 
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
+ 
+NEW: (Beta) AI-generated word-by-word aligned translations with roughly 80-90% coverage have been added for Iliad and Odyssey in full the db, and all the Greek works in the extended db. This should help bridge the gap with the prose translations that are aligned by line range only, or else are missing. 
+
 
 
 
