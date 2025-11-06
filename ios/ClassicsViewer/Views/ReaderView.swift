@@ -20,7 +20,8 @@ struct ReaderView: View {
     @State private var definitionCheckCancelled = false
     @GestureState private var dragOffset: CGSize = .zero
     @EnvironmentObject var searchContext: SearchNavigationContext
-    
+    @Environment(\.colorScheme) private var colorScheme
+
     init(book: Book, author: Author, initialPage: Int? = nil, targetLineNumber: Int? = nil) {
         let vm = ReaderViewModel(book: book, author: author)
         if let page = initialPage {
@@ -342,24 +343,35 @@ struct ReaderView: View {
             ForEach(Array(viewModel.translations.enumerated()), id: \.element.id) { index, segment in
                 VStack(alignment: .leading, spacing: 8) {
                     // Show speaker if present and different from previous
-                    if shouldShowTranslationSpeaker(at: index), 
+                    if shouldShowTranslationSpeaker(at: index),
                        let speaker = segment.speaker, !speaker.isEmpty {
                         Text(speaker.uppercased())
                             .font(.system(size: viewModel.fontSize * 1.5, weight: .bold))
                             .foregroundColor(speakerColor)
                             .padding(.bottom, 4)
                     }
-                    
+
                     Text("Lines \(segment.startLine)-\(segment.endLine ?? segment.startLine)")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    
-                    Text(segment.translationText)
-                        .font(.system(size: viewModel.fontSize))
-                        .lineSpacing(4)
+
+                    // Check for interlinear format (contains Markdown tables with pipe syntax)
+                    // Only process as interlinear if translator is "Interlinear" to avoid processing other translations
+                    if segment.translationText.contains("| ") && segment.translator?.contains("Interlinear") == true {
+                        // This is interlinear format with Markdown tables
+                        InterlinearTextView(
+                            text: segment.translationText,
+                            fontSize: viewModel.fontSize
+                        )
+                    } else {
+                        // Regular translation text
+                        Text(segment.translationText)
+                            .font(.system(size: viewModel.fontSize))
+                            .lineSpacing(4)
+                    }
                 }
             }
-            
+
             if viewModel.translations.isEmpty {
                 Text("No translation available for this section")
                     .font(.body)
@@ -383,7 +395,6 @@ struct ReaderView: View {
     
     private var speakerColor: Color {
         // Match Android colors for speakers in translations
-        @Environment(\.colorScheme) var colorScheme
         return colorScheme == .dark ? Color(hex: "#66B2FF") : Color(hex: "#0066CC")
     }
     

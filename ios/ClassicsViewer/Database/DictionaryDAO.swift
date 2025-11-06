@@ -411,8 +411,19 @@ class DictionaryDAO: DictionaryDAOProtocol {
         var entries: [DictionaryMatchEntry] = []
         let addedLemmas = NSMutableSet()
         
-        // Clean punctuation but preserve apostrophes for elided forms
-        let cleanedWord = word.replacingOccurrences(of: "[.,;:!?·]", with: "", options: .regularExpression)
+        // Clean punctuation and normalize apostrophes (includes NFC Unicode normalization)
+        // Matches Android PerseusRepository.kt lines 284-298
+        let normalizedResult: (cleaned: String, acuteVariant: String?) = language == "greek" ?
+            GreekTextNormalization.prepareForDictionaryLookup(word, convertGrave: true) :
+            (cleaned: word.replacingOccurrences(of: "[.,;:!?·]", with: "", options: .regularExpression), acuteVariant: nil)
+
+        let cleanedWord = normalizedResult.cleaned
+        let acuteVariant = normalizedResult.acuteVariant
+
+        print("DictionaryDAO: Cleaned word '\(word)' -> '\(cleanedWord)'")
+        if let acute = acuteVariant {
+            print("DictionaryDAO: Created acute variant: '\(acute)'")
+        }
 
         // Normalize the word (for user dictionary and lemma lookups - NOT for direct headword match)
         let normalizedWord = language == "greek" ? GreekNormalizer.normalize(cleanedWord) : cleanedWord.lowercased()
@@ -470,18 +481,9 @@ class DictionaryDAO: DictionaryDAOProtocol {
             print("DictionaryDAO: User mappings lookup failed safely: \(error)")
         }
         
-        // For Greek words, also create acute accent variant if word has grave accents
-        var acuteVariant: String? = nil
-        if language == "greek" && (cleanedWord.contains("ὰ") || cleanedWord.contains("ὲ") || cleanedWord.contains("ὶ") || cleanedWord.contains("ὸ") || cleanedWord.contains("ὺ") || cleanedWord.contains("ὼ") || cleanedWord.contains("ὴ")) {
-            acuteVariant = cleanedWord
-                .replacingOccurrences(of: "ὰ", with: "ά")
-                .replacingOccurrences(of: "ὲ", with: "έ")
-                .replacingOccurrences(of: "ὶ", with: "ί")
-                .replacingOccurrences(of: "ὸ", with: "ό")
-                .replacingOccurrences(of: "ὺ", with: "ύ")
-                .replacingOccurrences(of: "ὼ", with: "ώ")
-                .replacingOccurrences(of: "ὴ", with: "ή")
-        }
+        // Acute variant is now created above with GreekTextNormalization.prepareForDictionaryLookup
+        // This includes support for vowels with breathing marks (smooth/rough)
+        // Matches Android PerseusRepository.kt lines 294-298
         
         // First try direct dictionary lookup - get ALL entries from ALL sources
         // Android queries exact headword without normalization
@@ -1064,7 +1066,19 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 return entry1.hasNonTreebankPath // true (has non-treebank) comes before false (treebank-only)
             }
 
-            // Second priority: source ranking
+            // SECOND priority: Minimal entry penalty
+            // Deprioritize entries without actual definition content
+            // This ensures entries with real definitions appear before cross-reference stubs
+            // Also specifically deprioritize etymology-only entries
+            // Matches Android PerseusRepository.kt lines 906-936
+            let penalty1 = getEntryQualityPenalty(entry1)
+            let penalty2 = getEntryQualityPenalty(entry2)
+
+            if penalty1 != penalty2 {
+                return penalty1 < penalty2 // Lower penalty comes first
+            }
+
+            // THIRD priority: source ranking
             let source1Priority = getSourcePriority(entry1.source)
             let source2Priority = getSourcePriority(entry2.source)
 
@@ -1072,12 +1086,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 return source1Priority < source2Priority
             }
 
-            // Third priority: ascending length of the dictionary form (lemma)
+            // FOURTH priority: ascending length of the dictionary form (lemma)
             if entry1.lemma.count != entry2.lemma.count {
                 return entry1.lemma.count < entry2.lemma.count
             }
 
-            // Fourth priority: alphabetical order as tiebreaker for same length
+            // FIFTH priority: alphabetical order as tiebreaker for same length
             return entry1.lemma < entry2.lemma
         }
         
@@ -1117,6 +1131,54 @@ class DictionaryDAO: DictionaryDAOProtocol {
             return 2
         default:
             return 3
+        }
+    }
+
+    /// Get quality penalty for dictionary entry
+    /// Matches Android PerseusRepository.kt lines 906-936
+    /// Higher penalty = lower quality entry = sorted later
+    private func getEntryQualityPenalty(_ entry: DictionaryMatchEntry) -> Int {
+        // Strip HTML tags to get plain definition
+        let plainDef = entry.definition.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // Check if entry is ONLY etymology (no definition after etymology section)
+        let isEtymologyOnly: Bool
+        if plainDef.hasPrefix("Etymology:") || plainDef.hasPrefix("†") {
+            // Remove etymology prefix and check remaining content
+            var contentAfterEtymology = plainDef
+            // Remove "Etymology: ..." until we hit definition markers or end
+            // Note: Swift's String.range doesn't support dotMatchesLineSeparators, so we use [\s\S] to match any character including newlines
+            if let range = contentAfterEtymology.range(of: "^Etymology:[\\s\\S]*?(?=\\n[A-Z]\\.|\\n[IVX]+\\.|\\n\\d+\\.|\\Z)", options: .regularExpression) {
+                contentAfterEtymology.removeSubrange(range)
+            }
+            // Remove "† ..." lines
+            if let range = contentAfterEtymology.range(of: "^†[^\\n]*?\\n", options: .regularExpression) {
+                contentAfterEtymology.removeSubrange(range)
+            }
+            contentAfterEtymology = contentAfterEtymology.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            // Check if there's actual definition content
+            let hasDefinition = contentAfterEtymology.range(of: "[A-Z]\\.|[IVX]+\\.|^\\d+\\.", options: [.regularExpression, .anchored]) != nil
+            isEtymologyOnly = !hasDefinition && contentAfterEtymology.count < 50
+        } else {
+            isEtymologyOnly = false
+        }
+
+        // Check for minimal cross-reference entries
+        // Note: Swift's String.range doesn't support dotMatchesLineSeparators, so we use [\s\S] to match any character including newlines
+        let contentAfterEtymology = plainDef.replacingOccurrences(of: "^Etymology:[\\s\\S]*?\\n", with: "", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let hasActualContent = contentAfterEtymology.range(of: "[a-zA-Z]{3,}", options: .regularExpression) != nil
+        let isMinimal = !hasActualContent
+
+        // Heavy penalty for etymology-only, lighter for other minimal entries
+        if isEtymologyOnly {
+            return 2000
+        } else if isMinimal {
+            return 1000
+        } else {
+            return 0
         }
     }
 
