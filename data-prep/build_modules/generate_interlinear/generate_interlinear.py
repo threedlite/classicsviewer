@@ -335,17 +335,20 @@ class InterlinearGenerator:
         # LSJ structure: Look for first definition after section markers
         # CRITICAL PRIORITY ORDER:
         # 1. FIRST try simple text at beginning (before section markers) - e.g., "in, among. c. dat."
-        # 2. THEN try ROMAN numerals (I., II., III.) - these are PRIMARY sections
-        # 3. THEN try Arabic numbered sections (1., 2.) - these are SUB-sections
+        # 2. THEN try numbered intro (0.) - this is the primary definition in many LSJ entries
+        # 3. THEN try letter sections (A., B., C.) - these are major subsections
+        # 4. THEN try ROMAN numerals (I., II., III.) - these are alternative/secondary meanings
+        # 5. THEN try Arabic numbered sections (1., 2.) - these are fine-grained subsections
+        # This ensures καί returns "and" (from "0. and" or "A. and") not "but" (from "II. but")
         patterns = [
             r'^([^0-9IVXABC\n][^\n]{3,}?)(?:\n|$)',  # Simple text at start (min 3 chars, not starting with UPPERCASE marker)
-            r'(?:^|\n)I\.\s+([^\n]+)',       # "I. definition" - PRIMARY section
-            r'(?:^|\n)II\.\s+([^\n]+)',      # "II. definition"
-            r'(?:^|\n)A\.\s+([^\n]+)',       # "A. definition"
-            r'(?:^|\n)B\.\s+([^\n]+)',       # "B. definition" (common in ὁ entry)
-            r'(?:^|\n)0\.\s+([^\n]+)',       # "0. definition"
-            r'(?:^|\n)1\.\s+([^\n]+)',       # "1. definition" - sub-section
-            r'(?:^|\n)2\.\s+([^\n]+)',       # "2. definition" - sub-section
+            r'(?:^|\n)0\.\s+([^\n]+)',       # "0. definition" - primary definition in many LSJ entries
+            r'(?:^|\n)A\.\s+([^\n]+)',       # "A. definition" - first major subsection
+            r'(?:^|\n)B\.\s+([^\n]+)',       # "B. definition" - second major subsection
+            r'(?:^|\n)I\.\s+([^\n]+)',       # "I. definition" - Roman numeral sections (often alternative meanings)
+            r'(?:^|\n)II\.\s+([^\n]+)',      # "II. definition" - secondary meaning
+            r'(?:^|\n)1\.\s+([^\n]+)',       # "1. definition" - numbered subsection
+            r'(?:^|\n)2\.\s+([^\n]+)',       # "2. definition" - numbered subsection
             r'^([^(\n]+?)(?:\(|$)',          # Text before parenthesis (fallback)
         ]
 

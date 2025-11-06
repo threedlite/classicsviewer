@@ -23,15 +23,18 @@ class DictionaryEntry:
     confidence: Optional[float] = None
     source: Optional[str] = None
     has_non_treebank_path: bool = True
+    insertion_order: int = 0  # Track insertion order for stable sorting
 
 
 class PerseusRepository:
     """Python replica of PerseusRepository.kt dictionary lookup logic"""
 
-    def __init__(self, db_path: str):
+    def __init__(self, db_path: str, debug: bool = False):
         self.db_path = db_path
         self.conn = sqlite3.connect(db_path)
         self.conn.row_factory = sqlite3.Row
+        self.debug = debug
+        self.prefix_cache = {}  # Cache for prefix assimilation rules
 
     def normalize_apostrophes(self, word: str) -> str:
         """Normalize all apostrophe variants to U+02BC (ʼ)"""
@@ -151,7 +154,198 @@ class PerseusRepository:
 
         return lemma
 
-    def get_all_dictionary_entries(self, word: str, language: str = "greek") -> List[DictionaryEntry]:
+    def find_morphologically_related_forms(self, word: str, language: str) -> List[str]:
+        """
+        Find morphologically related forms for a word.
+        Matches PerseusRepository.kt findMorphologicallyRelatedForms()
+        """
+        related_forms = []
+        cursor = self.conn.cursor()
+
+        if language == "greek":
+            # λαων (gen pl) -> try λαοι (nom pl), λαος (nom sg), etc.
+            if word.endswith("ων") and len(word) >= 4:
+                stem = word[:-2]  # Remove ων
+                candidates = [
+                    stem + "οι",   # nom pl
+                    stem + "ος",   # nom sg
+                    stem + "ου",   # gen sg
+                    stem + "ον",   # acc sg
+                    stem + "οις",  # dat pl
+                    stem + "ους"   # acc pl
+                ]
+                for candidate in candidates:
+                    cursor.execute("SELECT 1 FROM lemma_map WHERE word_form = ? LIMIT 1", (candidate,))
+                    if cursor.fetchone():
+                        related_forms.append(candidate)
+
+            # Similar patterns for -οι and -ος endings
+            elif word.endswith("οι") and len(word) >= 4:
+                stem = word[:-2]
+                candidates = [stem + "ος", stem + "ων", stem + "ου"]
+                for candidate in candidates:
+                    cursor.execute("SELECT 1 FROM lemma_map WHERE word_form = ? LIMIT 1", (candidate,))
+                    if cursor.fetchone():
+                        related_forms.append(candidate)
+
+            elif word.endswith("ος") and len(word) >= 4:
+                stem = word[:-2]
+                candidates = [stem + "οι", stem + "ων", stem + "ου"]
+                for candidate in candidates:
+                    cursor.execute("SELECT 1 FROM lemma_map WHERE word_form = ? LIMIT 1", (candidate,))
+                    if cursor.fetchone():
+                        related_forms.append(candidate)
+
+        return related_forms
+
+    def get_prefix_assimilation_rules(self, language: str) -> List[Tuple[str, str, List[str]]]:
+        """
+        Load prefix assimilation rules from database and group by base prefix.
+        Returns: List of (base_prefix, meaning, [assimilated_forms]) tuples sorted by prefix length (longest first)
+        Matches PerseusRepository.kt getPrefixAssimilationRules()
+        """
+        if language in self.prefix_cache:
+            return self.prefix_cache[language]
+
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            SELECT base_prefix, assimilated_form, meaning
+            FROM prefix_assimilation_rules
+            WHERE language = ?
+            ORDER BY base_prefix, priority ASC
+        """, (language,))
+
+        rules_by_prefix = {}
+        for row in cursor.fetchall():
+            base_prefix = row['base_prefix']
+            assimilated_form = row['assimilated_form']
+            meaning = row['meaning'] or ""
+
+            if base_prefix not in rules_by_prefix:
+                rules_by_prefix[base_prefix] = (meaning, [])
+            rules_by_prefix[base_prefix][1].append(assimilated_form)
+
+        # Convert to list of tuples and sort by prefix length (longest first)
+        # CRITICAL: Kotlin sorts by basePrefix.length descending (line 82 in PerseusRepository.kt)
+        # This ensures longer prefixes like "αν" match before shorter ones like "α"
+        result = [(prefix, meaning, forms) for prefix, (meaning, forms) in rules_by_prefix.items()]
+        result.sort(key=lambda x: len(x[0]), reverse=True)
+        self.prefix_cache[language] = result
+        return result
+
+    def find_stem_lemma(self, stem: str, language: str) -> Optional[str]:
+        """
+        Find lemma for a stem by doing a full dictionary lookup (without compound decomposition).
+        Matches PerseusRepository.kt findStemLemma()
+
+        CRITICAL: Ultra-normalized search MUST be enabled in nested calls!
+        - skipCompoundDecomposition prevents infinite recursion (no compound decomposition)
+        - But ultra-normalized search still runs to find inflected forms via lemma_map
+        - This is how Kotlin finds "ψάλλει" → "ψάλλω" and "αγνοεῖ" → "ἀγνοέω"
+        """
+        # First try direct lookup WITH ultra-normalized search (matches actual Kotlin behavior)
+        results = self.get_all_dictionary_entries(stem, language, skip_compound_decomposition=True, allow_ultra_normalized=True)
+        if results:
+            return results[0].lemma
+
+        # If no results and Greek, try vowel restoration for contracted forms
+        # Matches Kotlin's findStemWithVowelRestoration() - lines 1871-1896
+        # Try plain vowels first, then rough breathing vowels (NOT smooth breathing)
+        if language == "greek" and len(stem) >= 3:
+            # Try common initial vowels (plain - no breathing marks)
+            for test_vowel in ['ο', 'α', 'ε', 'ι', 'η', 'ω', 'υ']:
+                test_word = test_vowel + stem
+                results = self.get_all_dictionary_entries(test_word, language, skip_compound_decomposition=True, allow_ultra_normalized=True)
+                if results:
+                    return results[0].lemma
+
+            # Try rough breathing variants (NOT smooth breathing - Kotlin only tries rough)
+            for test_vowel in ['ὁ', 'ἁ', 'ἑ', 'ἱ', 'ὑ']:
+                test_word = test_vowel + stem
+                results = self.get_all_dictionary_entries(test_word, language, skip_compound_decomposition=True, allow_ultra_normalized=True)
+                if results:
+                    return results[0].lemma
+
+        return None
+
+    def decompose_compound_word(self, word: str, language: str) -> Optional[Tuple[str, str, str, str]]:
+        """
+        Decompose a compound word into prefix + stem.
+        Returns: (base_prefix, prefix_meaning, stem, stem_lemma) or None
+        Matches PerseusRepository.kt decomposeCompoundWord()
+        """
+        prefix_groups = self.get_prefix_assimilation_rules(language)
+        if not prefix_groups:
+            return None
+
+        # Normalize word to match prefixes
+        normalized_word = self.normalize_greek_ultra(word) if language == "greek" else word.lower()
+
+        # Try each prefix group
+        for base_prefix, meaning, assimilated_forms in prefix_groups:
+            # Try each assimilated form (longest first for greedy matching)
+            for assimilated_form in sorted(assimilated_forms, key=len, reverse=True):
+                # Normalize the prefix form for comparison
+                norm_prefix = self.normalize_greek_ultra(assimilated_form) if language == "greek" else assimilated_form.lower()
+
+                if normalized_word.startswith(norm_prefix):
+                    # Extract stem
+                    stem_start_pos = len(assimilated_form)
+                    stem = word[stem_start_pos:]
+
+                    if len(stem) >= 3:  # Stem must be at least 3 characters
+                        # Find lemma for stem
+                        stem_lemma = self.find_stem_lemma(stem, language)
+                        if stem_lemma:
+                            return (base_prefix, meaning, stem, stem_lemma)
+
+        return None
+
+    def create_compound_entry(self, base_prefix: str, prefix_meaning: str, stem: str, stem_lemma: str, language: str) -> List[DictionaryEntry]:
+        """
+        Create dictionary entries for a compound word.
+        Matches PerseusRepository.kt createCompoundEntry()
+        """
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            SELECT headword, entry_html, entry_plain, source
+            FROM dictionary_entries
+            WHERE headword = ? AND language = ?
+        """, (stem_lemma, language))
+
+        stem_entries = cursor.fetchall()
+
+        if not stem_entries:
+            # No dictionary entry for stem
+            return [DictionaryEntry(
+                lemma=base_prefix + stem_lemma,
+                definition=f"<p><i>Compound word analysis:</i></p><p><b>{base_prefix}-</b> ({prefix_meaning}) + <b>{stem_lemma}</b></p><p>(No dictionary entry found for stem)</p>",
+                morph_info=f"compound: {base_prefix}- + {stem_lemma}",
+                is_direct_match=False,
+                confidence=0.7,
+                source="compound analysis",
+                has_non_treebank_path=True
+            )]
+
+        # Create entry for each stem dictionary entry
+        entries = []
+        for stem_entry in stem_entries:
+            stem_def = stem_entry['entry_html'] or stem_entry['entry_plain'] or ""
+            compound_def = f"<p><i>Compound word analysis:</i></p><p><b>{base_prefix}-</b> ({prefix_meaning}) + <b>{stem_lemma}</b></p><hr/>{stem_def}"
+
+            entries.append(DictionaryEntry(
+                lemma=base_prefix + stem_lemma,
+                definition=compound_def,
+                morph_info=f"compound: {base_prefix}- + {stem_lemma}",
+                is_direct_match=False,
+                confidence=0.7,
+                source=f"{stem_entry['source']} (compound analysis)",
+                has_non_treebank_path=True
+            ))
+
+        return entries
+
+    def get_all_dictionary_entries(self, word: str, language: str = "greek", skip_compound_decomposition: bool = False, allow_ultra_normalized: bool = False) -> List[DictionaryEntry]:
         """
         Main dictionary lookup method - replicates getAllDictionaryEntries() from Kotlin.
         Returns 0-5 sorted dictionary entries following Android UI logic.
@@ -199,9 +393,22 @@ class PerseusRepository:
 
         entries = []
         added_lemmas = set()
+        user_added_lemmas = set()  # Track lemmas with user morphology entries (matches Kotlin's userAddedLemmas)
+        insertion_counter = [0]  # Track insertion order for stable sorting (matches Kotlin's behavior) - use list for mutability
+
+        def add_entry(entry: DictionaryEntry):
+            """Helper to add entry with insertion order tracking"""
+            entry.insertion_order = insertion_counter[0]
+            insertion_counter[0] += 1
+            entries.append(entry)
 
         # STEP 1: Check dictionary for direct match
         cursor = self.conn.cursor()
+
+        # DEBUG: Log the SQL query matching Kotlin's DictionaryDao.getAllEntriesForHeadword
+        if self.debug:
+            print(f"DEBUG: Direct dictionary lookup for '{cleaned_word}' (language={normalized_language})")
+
         cursor.execute("""
             SELECT headword, entry_html, entry_plain, source
             FROM dictionary_entries
@@ -209,9 +416,15 @@ class PerseusRepository:
         """, (cleaned_word, normalized_language))
 
         direct_entries = cursor.fetchall()
+
+        # DEBUG: Log direct match results
+        if self.debug and direct_entries:
+            print(f"DEBUG: Found {len(direct_entries)} direct dictionary entries")
+            for entry in direct_entries:
+                print(f"  - {entry['headword']} ({entry['source']})")
         for entry in direct_entries:
             definition = entry['entry_html'] or entry['entry_plain'] or ""
-            entries.append(DictionaryEntry(
+            add_entry(DictionaryEntry(
                 lemma=entry['headword'],
                 definition=definition,
                 is_direct_match=True,
@@ -221,16 +434,48 @@ class PerseusRepository:
             ))
             added_lemmas.add(entry['headword'])
 
+        # STEP 1b: If no direct match, try acute variant (matches Kotlin lines 572-591)
+        if not direct_entries and acute_variant and acute_variant != cleaned_word:
+            cursor.execute("""
+                SELECT headword, entry_html, entry_plain, source
+                FROM dictionary_entries
+                WHERE headword = ? AND language = ?
+            """, (acute_variant, normalized_language))
+
+            acute_entries = cursor.fetchall()
+            for entry in acute_entries:
+                definition = entry['entry_html'] or entry['entry_plain'] or ""
+                add_entry(DictionaryEntry(
+                    lemma=entry['headword'],
+                    definition=definition,
+                    is_direct_match=True,
+                    source=entry['source'],
+                    confidence=1.0,
+                    has_non_treebank_path=True
+                ))
+                added_lemmas.add(entry['headword'])
+
         # STEP 2: For Greek/Latin, ALWAYS check lemma_map (even if we found direct matches)
         # This matches Kotlin behavior at line 544
         if normalized_language in ("greek", "latin"):
+            # DEBUG: Log lemma_map lookup matching Kotlin's LemmaMapDao.getAllLemmaMappingsForWord
+            if self.debug:
+                print(f"DEBUG: Lemma map lookup for '{cleaned_word}'")
+
             cursor.execute("""
                 SELECT word_form, lemma, morph_info, confidence, source
                 FROM lemma_map
                 WHERE word_form = ?
+                ORDER BY confidence DESC
             """, (cleaned_word,))
 
             lemma_mappings = cursor.fetchall()
+
+            # DEBUG: Log lemma mappings found
+            if self.debug and lemma_mappings:
+                print(f"DEBUG: Found {len(lemma_mappings)} lemma mappings:")
+                for mapping in lemma_mappings:
+                    print(f"  - {mapping['word_form']} → {mapping['lemma']} (conf={mapping['confidence']}, source={mapping['source']})")
 
             # Also try acute variant if available
             if not lemma_mappings and acute_variant and acute_variant != cleaned_word:
@@ -245,18 +490,46 @@ class PerseusRepository:
             if normalized_language == "greek" and not lemma_mappings:
                 if any(cleaned_word.endswith(ap) for ap in ["'", "'", "ʼ"]):
                     prefix = cleaned_word.rstrip("'ʼ'")
+
+                    # CRITICAL: Match Kotlin's exact filtering logic
+                    # 1. Get ALL prefix matches (ordered by LENGTH ASC, confidence DESC)
+                    # 2. Filter by maxLength
+                    # 3. Take first 10
+                    # This matches PerseusRepository.kt lines 698-706
+
+                    # IMPORTANT: SQLite's LIKE with Greek characters needs explicit case handling.
+                    # Kotlin's query matches both lowercase (δ) and uppercase (Δ) variants.
+                    # For prefix 'δαιμόνι', it also matches 'Δαιμόνι᾽' and other uppercase variants.
+                    # This is critical because uppercase variants can have higher confidence and
+                    # push out lower-confidence entries from the top 10.
+
+                    prefix_upper = prefix[0].upper() + prefix[1:] if len(prefix) > 0 else prefix
+
                     cursor.execute("""
                         SELECT word_form, lemma, morph_info, confidence, source
                         FROM lemma_map
-                        WHERE word_form LIKE ?
-                        ORDER BY LENGTH(word_form) ASC
-                        LIMIT 10
-                    """, (prefix + '%',))
+                        WHERE (word_form LIKE ? OR word_form LIKE ?)
+                        ORDER BY LENGTH(word_form) ASC, confidence DESC
+                    """, (prefix + '%', prefix_upper + '%'))
+                    all_prefix_mappings = list(cursor.fetchall())
 
-                    lemma_mappings = cursor.fetchall()
-                    # Filter by length
+                    # For single-letter prefix, also try uppercase variant
+                    # This handles cases like κʼ → Κ (uppercase single letter)
+                    if len(prefix) == 1:
+                        cursor.execute("""
+                            SELECT word_form, lemma, morph_info, confidence, source
+                            FROM lemma_map
+                            WHERE word_form = ? OR lemma = ?
+                        """, (prefix.upper(), prefix.upper()))
+                        uppercase_mappings = cursor.fetchall()
+                        all_prefix_mappings.extend(uppercase_mappings)
+
+                    # Filter by length FIRST (like Kotlin does)
                     max_length = len(prefix) + (2 if len(prefix) == 1 else 4)
-                    lemma_mappings = [m for m in lemma_mappings if len(m['word_form']) <= max_length]
+                    filtered_mappings = [m for m in all_prefix_mappings if len(m['word_form']) <= max_length]
+
+                    # THEN take first 10 (like Kotlin's .take(10))
+                    lemma_mappings = filtered_mappings[:10]
 
             # Track which lemmas have non-treebank sources
             lemmas_with_non_treebank = set()
@@ -266,8 +539,8 @@ class PerseusRepository:
                     normalized_lemma = unicodedata.normalize('NFC', mapping['lemma'])
                     lemmas_with_non_treebank.add(normalized_lemma)
 
-            # Group by lemma and keep best mapping (prefer one with morph_info, then highest confidence)
-            # Matches DictionaryActivity.kt line 214: prefer the one with morph_info
+            # Group by lemma and keep best mapping by highest confidence
+            # Matches PerseusRepository.kt line 710-713: maxByOrNull { it.confidence }
             lemma_groups = {}
             for mapping in lemma_mappings:
                 lemma = mapping['lemma']
@@ -275,18 +548,8 @@ class PerseusRepository:
                     lemma_groups[lemma] = mapping
                 else:
                     current = lemma_groups[lemma]
-                    # Prefer mapping with morph_info (non-empty string)
-                    current_morph = current['morph_info'] and current['morph_info'].strip()
-                    mapping_morph = mapping['morph_info'] and mapping['morph_info'].strip()
-
-                    if mapping_morph and not current_morph:
-                        # New mapping has morph_info, current doesn't - use new
-                        lemma_groups[lemma] = mapping
-                    elif not mapping_morph and current_morph:
-                        # Current has morph_info, new doesn't - keep current
-                        pass
-                    # If both have or both don't have morph_info, prefer higher confidence
-                    elif (mapping['confidence'] or 0.0) > (current['confidence'] or 0.0):
+                    # Simply prefer higher confidence (matches Kotlin logic)
+                    if (mapping['confidence'] or 0.0) > (current['confidence'] or 0.0):
                         lemma_groups[lemma] = mapping
 
             # Get dictionary entries for each unique lemma (sorted by confidence)
@@ -303,11 +566,38 @@ class PerseusRepository:
                 # Follow lemma chain to find canonical form
                 resolved_lemma = self.resolve_lemma_chain(lemma, normalized_language)
 
-                # Get all dictionary entries for this resolved lemma
+                # CRITICAL: Track user morphology entries separately
+                # This matches Kotlin's userAddedLemmas set at line 796
+                # Only create morphology-only entry if resolved lemma not already in user_added_lemmas
+                if resolved_lemma not in user_added_lemmas:
+                    if lemma_mapping['morph_info']:
+                        morph_info = lemma_mapping['morph_info']
+                        if '|' in morph_info:
+                            # Handle pipe-delimited morphology
+                            morph_forms = [f.strip() for f in morph_info.split('|')]
+                            definition = f"Forms: {', '.join(morph_forms)}"
+                        else:
+                            definition = f"Form: {morph_info}"
+
+                        add_entry(DictionaryEntry(
+                            lemma=resolved_lemma,
+                            definition=definition,
+                            morph_info=morph_info,
+                            is_direct_match=False,
+                            confidence=lemma_mapping['confidence'],
+                            source="User morphology",
+                            has_non_treebank_path=True
+                        ))
+                        user_added_lemmas.add(resolved_lemma)
+
+                # Then get all dictionary entries for this resolved lemma
+                # CRITICAL: Must ORDER BY id (primary key = rowid) to match Kotlin's getAllEntriesForHeadword behavior
+                # which returns entries in database insertion order (rowid/id order)
                 cursor.execute("""
-                    SELECT headword, entry_html, entry_plain, source
+                    SELECT headword, entry_html, entry_plain, source, id
                     FROM dictionary_entries
                     WHERE headword = ? AND language = ?
+                    ORDER BY id
                 """, (resolved_lemma, normalized_language))
 
                 lemma_entries = cursor.fetchall()
@@ -317,7 +607,7 @@ class PerseusRepository:
 
                 # CRITICAL: If lemma has dictionary entries, it's ALWAYS non-treebank
                 # Because dictionary_entries table contains actual definitions, not just treebank morphology
-                # This matches Kotlin behavior at line 773
+                # This matches Kotlin behavior at line 808
                 if lemma_entries:
                     has_non_treebank = True
 
@@ -329,7 +619,7 @@ class PerseusRepository:
                     if not has_non_treebank:
                         source = f"{source} (via Treebank)"
 
-                    entries.append(DictionaryEntry(
+                    add_entry(DictionaryEntry(
                         lemma=resolved_lemma,
                         definition=definition,
                         morph_info=lemma_mapping['morph_info'],
@@ -339,35 +629,166 @@ class PerseusRepository:
                         has_non_treebank_path=has_non_treebank
                     ))
 
+                # CRITICAL: Add ORIGINAL lemma to added_lemmas, not resolved
+                # This matches Kotlin at line 826 where it adds 'lemma' not 'resolvedLemma'
+                # This prevents processing the same lemma mapping twice
                 if lemma_entries:
                     added_lemmas.add(lemma)
 
-        # STEP 3: If still no entries and Greek, try ultra-normalized search
-        if not entries and normalized_language == "greek":
+        # STEP 2.5: For Greek/Latin, check morphologically related forms
+        # Matches PerseusRepository.kt line 841-874
+        if normalized_language in ("greek", "latin"):
+            related_forms = self.find_morphologically_related_forms(cleaned_word, normalized_language)
+            for related_form in related_forms:
+                # CRITICAL: Must ORDER BY confidence DESC to match Kotlin's getAllLemmaMappingsForWord
+                cursor.execute("""
+                    SELECT word_form, lemma, morph_info, confidence, source
+                    FROM lemma_map
+                    WHERE word_form = ?
+                    ORDER BY confidence DESC
+                """, (related_form,))
+
+                related_mappings = cursor.fetchall()
+                for mapping in related_mappings:
+                    lemma = unicodedata.normalize('NFC', mapping['lemma'])
+
+                    # Skip if already processed or self-referential
+                    if lemma in added_lemmas or lemma == related_form:
+                        continue
+
+                    # Get dictionary entries for this lemma
+                    # CRITICAL: Must ORDER BY id (primary key = rowid) to match Kotlin's getAllEntriesForHeadword behavior
+                    # which returns entries in database insertion order (rowid/id order)
+                    cursor.execute("""
+                        SELECT headword, entry_html, entry_plain, source, id
+                        FROM dictionary_entries
+                        WHERE headword = ? AND language = ?
+                        ORDER BY id
+                    """, (lemma, normalized_language))
+
+                    related_entries = cursor.fetchall()
+                    has_non_treebank = mapping['source'] != 'perseus_treebank'
+
+                    # DEBUG: Log the entries we got from ORDER BY id
+                    if self.debug and related_entries:
+                        print(f"DEBUG: Related lemma '{lemma}' has {len(related_entries)} dictionary entries (ORDER BY id):")
+                        for idx, entry in enumerate(related_entries):
+                            print(f"  [{idx}] {entry['source']} (id={entry['id']})")
+
+                    for entry in related_entries:
+                        definition = entry['entry_html'] or entry['entry_plain'] or ""
+                        # CRITICAL: Add " (via Treebank)" suffix if mapping source is treebank-only
+                        # This matches Kotlin line 890: source = if (!hasNonTreebank) "${relatedEntry.source} (via Treebank)" else relatedEntry.source
+                        source = entry['source'] if has_non_treebank else f"{entry['source']} (via Treebank)"
+                        # DEBUG: Log when add_entry is called
+                        if self.debug:
+                            print(f"DEBUG: Calling add_entry for {lemma}({source}) - insertion_counter={insertion_counter[0]}, has_non_treebank={has_non_treebank}")
+                        add_entry(DictionaryEntry(
+                            lemma=lemma,
+                            definition=definition,
+                            morph_info=f"inferred from related form: {related_form} ({mapping['morph_info'] or ''})",
+                            is_direct_match=False,
+                            confidence=(mapping['confidence'] or 0.0) * 0.8,  # Lower confidence for inferred
+                            source=source,
+                            has_non_treebank_path=has_non_treebank
+                        ))
+
+                    if related_entries:
+                        added_lemmas.add(lemma)
+
+        # STEP 2.6: Try compound word decomposition for Greek/Latin if still no results
+        # Matches PerseusRepository.kt lines 903-916
+        # Only run if not called recursively (skip_compound_decomposition parameter)
+        if not skip_compound_decomposition and not entries and normalized_language in ("greek", "latin") and len(cleaned_word) >= 6:
+            compound_parts = self.decompose_compound_word(cleaned_word, normalized_language)
+            if compound_parts:
+                base_prefix, prefix_meaning, stem, stem_lemma = compound_parts
+                compound_entries = self.create_compound_entry(base_prefix, prefix_meaning, stem, stem_lemma, normalized_language)
+                for entry in compound_entries:
+                    add_entry(entry)
+                added_lemmas.add(base_prefix + stem_lemma)
+
+        # STEP 2.7: Ultra-normalized search (only when explicitly allowed)
+        # Matches PerseusRepository.kt lines 1065-1114
+        # This runs in main lookup flow ONLY when allow_ultra_normalized=True (from find_stem_lemma)
+        # For direct user lookups, this is disabled to match device behavior
+        if allow_ultra_normalized and not entries and normalized_language == "greek":
+            if self.debug:
+                print(f"DEBUG: No entries found, trying ultra-normalized search for '{cleaned_word}'")
+
             ultra_normalized = self.normalize_greek_ultra(cleaned_word)
 
+            # Try direct dictionary lookup with ultra-normalized form
+            cursor = self.conn.cursor()
             cursor.execute("""
                 SELECT headword, entry_html, entry_plain, source
                 FROM dictionary_entries
                 WHERE headword_normalized_ultra = ? AND language = ?
             """, (ultra_normalized, normalized_language))
 
-            ultra_entries = cursor.fetchall()
-            for entry in ultra_entries:
-                if entry['headword'] not in added_lemmas:
-                    definition = entry['entry_html'] or entry['entry_plain'] or ""
-                    entries.append(DictionaryEntry(
-                        lemma=entry['headword'],
-                        definition=definition,
-                        morph_info="found via simplified form",
-                        is_direct_match=True,
-                        confidence=0.7,
-                        source=entry['source'],
-                        has_non_treebank_path=True
-                    ))
-                    added_lemmas.add(entry['headword'])
+            ultra_direct = cursor.fetchone()
+            if ultra_direct:
+                if self.debug:
+                    print(f"DEBUG: Found entry via ultra-normalization: {ultra_direct['headword']}")
+                add_entry(DictionaryEntry(
+                    lemma=ultra_direct['headword'],
+                    definition=ultra_direct['entry_html'] or ultra_direct['entry_plain'] or "",
+                    morph_info="found via simplified form",
+                    is_direct_match=True,
+                    confidence=0.7,
+                    source=ultra_direct['source'],
+                    has_non_treebank_path=True
+                ))
 
-        # STEP 4: Deduplicate entries
+            # Also try lemma mappings with ultra-normalized form
+            cursor.execute("""
+                SELECT lemma, morph_info, confidence, source
+                FROM lemma_map
+                WHERE word_form_normalized_ultra = ?
+                LIMIT 5
+            """, (ultra_normalized,))
+
+            ultra_mappings = cursor.fetchall()
+            if self.debug and ultra_mappings:
+                print(f"DEBUG: Found {len(ultra_mappings)} ultra-normalized lemma mappings")
+
+            for mapping in ultra_mappings:
+                lemma = mapping['lemma']
+
+                # Skip if we already added this lemma
+                if lemma in added_lemmas:
+                    continue
+
+                # Get dictionary entries for this lemma
+                cursor.execute("""
+                    SELECT headword, entry_html, entry_plain, source, id
+                    FROM dictionary_entries
+                    WHERE headword = ? AND language = ?
+                    ORDER BY id
+                """, (lemma, normalized_language))
+
+                ultra_entries = cursor.fetchall()
+                for ultra_entry in ultra_entries:
+                    if self.debug:
+                        print(f"DEBUG: Adding ultra-normalized lemma: {lemma} (source: {ultra_entry['source']})")
+
+                    has_non_treebank = mapping['source'] != 'perseus_treebank'
+                    source = ultra_entry['source'] if has_non_treebank else f"{ultra_entry['source']} (via Treebank)"
+
+                    add_entry(DictionaryEntry(
+                        lemma=lemma,
+                        definition=ultra_entry['entry_html'] or ultra_entry['entry_plain'] or "",
+                        morph_info=f"found via simplified form: {mapping['morph_info'] or ''}",
+                        is_direct_match=False,
+                        confidence=(mapping['confidence'] or 0.0) * 0.6,
+                        source=source,
+                        has_non_treebank_path=has_non_treebank
+                    ))
+
+                if ultra_entries:
+                    added_lemmas.add(lemma)
+
+        # STEP 3: Deduplicate entries
         seen_keys = set()
         deduplicated = []
         for entry in entries:
@@ -378,7 +799,7 @@ class PerseusRepository:
                 seen_keys.add(key)
                 deduplicated.append(entry)
 
-        # STEP 5: Sort entries - matches Kotlin sorting logic exactly
+        # STEP 4: Sort entries - matches Kotlin sorting logic exactly
         # DISABLED: Get priority lemma for common words if applicable
         # priority_info = COMMON_WORD_PRIORITY.get(cleaned_word)
         # priority_lemma = priority_info[0] if priority_info else None
@@ -447,9 +868,19 @@ class PerseusRepository:
             # SIXTH: Alphabetical
             priority_6 = entry.lemma
 
-            return (priority_0, priority_1, priority_2, priority_3, priority_4, priority_5, priority_6)
+            # SEVENTH: Insertion order (CRITICAL for stable sort matching Kotlin's behavior)
+            # When all other priorities are equal, preserve the order entries were added
+            # This ensures that database rowid order is preserved when confidence/source/etc are identical
+            priority_7 = entry.insertion_order
+
+            return (priority_0, priority_1, priority_2, priority_3, priority_4, priority_5, priority_6, priority_7)
 
         sorted_entries = sorted(deduplicated, key=sort_key)
+
+        # DEBUG: Log final sorted results matching Kotlin's "After sorting" format
+        if self.debug and sorted_entries:
+            entries_str = ", ".join([f"{e.lemma}({e.source},conf={e.confidence})" for e in sorted_entries])
+            print(f"DEBUG: After sorting: {entries_str}")
 
         return sorted_entries
 

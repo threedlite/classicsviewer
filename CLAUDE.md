@@ -229,16 +229,54 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
    - Contains only authors from SAMPLE_AUTHORS.md
    - Smaller size for initial Play Store release
 
-2. **`data-prep/perseus_texts_full.db`** - Full database source  
+2. **`data-prep/perseus_texts_full.db`** - Full database source
    - Created by `create_perseus_database.py full`
    - Contains all ~100 Greek and Latin authors
    - Original uncompressed SQLite (1.4GB)
    - For local debugging and future release
 
-3. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
+3. **`data-prep/perseus_texts_extended.db`** - Extended database source
+   - Created by `create_perseus_database.py extended`
+   - Contains Perseus + 991 non-duplicate First1KGreek works
+   - Original uncompressed SQLite (14GB)
+   - For comprehensive Greek text coverage
+
+4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
    - On-device location after extraction
    - Uncompressed database from whichever version was deployed
    - Created on first app launch
+
+## Interlinear Generation
+
+### Database Selection for Interlinear Generation:
+**CRITICAL**: Always match the CSV file to the correct database:
+
+- **`INTERLINEAR_ALL_GREEK_WITH_IDS.csv`** → Use `perseus_texts_extended.db`
+  - Contains 1,855 Greek works (Perseus + First1KGreek)
+  - Requires extended database with all Greek works
+
+- **`INTERLINEAR_SAMPLE.csv`** → Use `perseus_texts_sample.db`
+  - Contains only works from SAMPLE_AUTHORS.md
+
+- **`INTERLINEAR_FULL.csv`** → Use `perseus_texts_full.db`
+  - Contains Perseus Greek and Latin works only
+
+### Running Interlinear Generation:
+```bash
+# Always run from build_modules/generate_interlinear directory
+cd build_modules/generate_interlinear
+
+# For all Greek works (Perseus + First1K):
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../perseus_texts_extended.db 8
+
+# For sample works only:
+./run_interlinear_no_sleep.sh INTERLINEAR_SAMPLE.csv ../../perseus_texts_sample.db 8
+
+# For full Perseus works:
+./run_interlinear_no_sleep.sh INTERLINEAR_FULL.csv ../../perseus_texts_full.db 8
+```
+
+Output location: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
 
 ## Translation Alignment System
 
