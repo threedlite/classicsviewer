@@ -16,11 +16,6 @@ This script uses multiprocessing with 'spawn' method, creating multiple worker p
 3. Verify no workers are still running
 
 Commands to ensure clean restart:
-    # Kill all Python processes
-    pkill -9 python
-
-    # Or kill specific interlinear processes
-    pkill -9 -f interlinear_list.py
 
     # Clear Python cache
     find . -name "*.pyc" -delete
@@ -253,11 +248,27 @@ def generate_interlinear_parallel(
         # Parallel processing with dynamic work queue
         print(f"Running in PARALLEL mode ({num_workers} workers)")
         print("Using dynamic work queue (imap_unordered) for optimal load balancing")
+        print()
+
+        results = []
         with mp.Pool(num_workers) as pool:
             # Use imap_unordered with chunksize=1 for best load balancing
             # This ensures workers dynamically pull tasks from queue as they finish
             # preventing idle workers when some tasks take longer than others
-            results = list(pool.imap_unordered(process_work_worker, work_args, chunksize=1))
+            for i, result in enumerate(pool.imap_unordered(process_work_worker, work_args, chunksize=1)):
+                results.append(result)
+                work_idx, author, work_title, success, error_msg = result
+                completed = i + 1
+                elapsed = time.time() - start_time
+                rate = completed / elapsed if elapsed > 0 else 0
+                remaining = len(works) - completed
+                eta_seconds = remaining / rate if rate > 0 else 0
+                eta_minutes = eta_seconds / 60
+
+                status = "✓" if success else "✗"
+                print(f"{status} Work {completed}/{len(works)} complete: {author} - {work_title}")
+                print(f"  [{completed/len(works)*100:.1f}%] Elapsed: {elapsed/60:.1f}m | Rate: {rate*60:.1f} works/min | ETA: {eta_minutes:.1f}m")
+                print()
 
     # Sort results by work index to maintain order
     results.sort(key=lambda x: x[0])

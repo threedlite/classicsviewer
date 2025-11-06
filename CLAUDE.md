@@ -248,19 +248,6 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 
 ## Interlinear Generation
 
-### Database Selection for Interlinear Generation:
-**CRITICAL**: Always match the CSV file to the correct database:
-
-- **`INTERLINEAR_ALL_GREEK_WITH_IDS.csv`** → Use `perseus_texts_extended.db`
-  - Contains 1,855 Greek works (Perseus + First1KGreek)
-  - Requires extended database with all Greek works
-
-- **`INTERLINEAR_SAMPLE.csv`** → Use `perseus_texts_sample.db`
-  - Contains only works from SAMPLE_AUTHORS.md
-
-- **`INTERLINEAR_FULL.csv`** → Use `perseus_texts_full.db`
-  - Contains Perseus Greek and Latin works only
-
 ### Running Interlinear Generation:
 ```bash
 # Always run from build_modules/generate_interlinear directory
@@ -269,11 +256,6 @@ cd build_modules/generate_interlinear
 # For all Greek works (Perseus + First1K):
 ./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../perseus_texts_extended.db 8
 
-# For sample works only:
-./run_interlinear_no_sleep.sh INTERLINEAR_SAMPLE.csv ../../perseus_texts_sample.db 8
-
-# For full Perseus works:
-./run_interlinear_no_sleep.sh INTERLINEAR_FULL.csv ../../perseus_texts_full.db 8
 ```
 
 Output location: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`

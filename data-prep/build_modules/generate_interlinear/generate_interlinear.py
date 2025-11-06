@@ -12,13 +12,13 @@ by spawned worker processes. Python bytecode cache (*.pyc, __pycache__) can
 cause workers to load OLD versions of this code even after modifications.
 
 **After ANY code changes to this file:**
-1. Kill ALL Python processes: pkill -9 python
-2. Clear cache: find . -name "*.pyc" -delete && find . -name "__pycache__" -exec rm -rf {} +
+1. Kill ALL of this processes threads Python processes FIRST (before starting new ones):
+   - kill by PID for specific cleanup needed
+   - CRITICAL: Don't start new processes until all old ones are killed!
+2. Clear Python bytecode cache:
+   - find . -name "*.pyc" -delete && find . -name "__pycache__" -exec rm -rf {} +
 3. Restart generation from scratch
 
-**Key fixes implemented here:**
-- Lines 79-90: Wiktionary qualifier extraction (extracts "the" from "rarely in _ Epic... the")
-- Lines 253-256: Sanity check to reject wrong data (prevents εἰ showing as "the")
 """
 
 import sqlite3
@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import List, Dict
 import html
 from functools import lru_cache
+import time
 
 # Import the proper dictionary lookup from ui_dictionary_lookup (same directory)
 # CRITICAL: Must be imported as relative import to maintain correct module state
@@ -43,6 +44,9 @@ class InterlinearGenerator:
         self.conn = None
         # Use the proper dictionary lookup implementation
         self.repo = PerseusRepository(db_path)
+        # Performance tracking
+        self.lookup_count = 0
+        self.total_db_time = 0.0
 
     def __enter__(self):
         self.conn = sqlite3.connect(self.db_path)
@@ -57,6 +61,7 @@ class InterlinearGenerator:
 
     def get_greek_lines(self, book_id: str, start_line: int, end_line: int) -> List[Dict]:
         """Extract Greek text lines from database"""
+        start_time = time.time()
         cursor = self.conn.cursor()
         query = """
         SELECT line_number, line_text
@@ -72,6 +77,11 @@ class InterlinearGenerator:
                 'line_number': row['line_number'],
                 'text_content': row['line_text']
             })
+
+        query_time = time.time() - start_time
+        if query_time > 0.1:  # Log queries slower than 100ms
+            print(f"  [PERF] text_lines query for {book_id}: {query_time:.3f}s")
+
         return lines
 
     def tokenize_greek(self, text: str) -> List[str]:
@@ -337,17 +347,20 @@ class InterlinearGenerator:
         # 1. FIRST try simple text at beginning (before section markers) - e.g., "in, among. c. dat."
         # 2. THEN try numbered intro (0.) - this is the primary definition in many LSJ entries
         # 3. THEN try letter sections (A., B., C.) - these are major subsections
-        # 4. THEN try ROMAN numerals (I., II., III.) - these are alternative/secondary meanings
-        # 5. THEN try Arabic numbered sections (1., 2.) - these are fine-grained subsections
-        # This ensures καί returns "and" (from "0. and" or "A. and") not "but" (from "II. but")
+        # 4. THEN try Arabic "1." at START of text - this is section I.1 (primary definition)
+        # 5. THEN try ROMAN numerals (I., II., III.) - these are major sections
+        # 6. THEN try Arabic numbered sections (1., 2.) elsewhere - these are subsections
+        # This ensures we get section I definitions before section II definitions
         patterns = [
             r'^([^0-9IVXABC\n][^\n]{3,}?)(?:\n|$)',  # Simple text at start (min 3 chars, not starting with UPPERCASE marker)
             r'(?:^|\n)0\.\s+([^\n]+)',       # "0. definition" - primary definition in many LSJ entries
             r'(?:^|\n)A\.\s+([^\n]+)',       # "A. definition" - first major subsection
             r'(?:^|\n)B\.\s+([^\n]+)',       # "B. definition" - second major subsection
-            r'(?:^|\n)I\.\s+([^\n]+)',       # "I. definition" - Roman numeral sections (often alternative meanings)
-            r'(?:^|\n)II\.\s+([^\n]+)',      # "II. definition" - secondary meaning
-            r'(?:^|\n)1\.\s+([^\n]+)',       # "1. definition" - numbered subsection
+            r'^1\.\s+([^\n]+)',              # "1. definition" at START - this is section I.1 (primary)
+            r'(?:^|\n)I\.\s+([^\n]+)',       # "I. definition" - Roman numeral section I
+            r'(?:^|\n)II\.\s+([^\n]+)',      # "II. definition" - Roman numeral section II (secondary meaning)
+            r'(?:^|\n)III\.\s+([^\n]+)',     # "III. definition" - Roman numeral section III
+            r'(?:^|\n)1\.\s+([^\n]+)',       # "1. definition" elsewhere - numbered subsection
             r'(?:^|\n)2\.\s+([^\n]+)',       # "2. definition" - numbered subsection
             r'^([^(\n]+?)(?:\(|$)',          # Text before parenthesis (fallback)
         ]
@@ -776,18 +789,27 @@ class InterlinearGenerator:
             return "???"
         return text if text else "???"
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=30000)
     def _cached_lookup_word(self, word: str) -> tuple:
         """
         Cache word lookups - returns (gloss, lemma, morph) tuple.
 
-        LRU cache with 10,000 entries means common words like καί, δέ, τε, ἐν, etc.
+        LRU cache means common words like καί, δέ, τε, ἐν, etc.
         are only looked up once and then retrieved from cache instantly.
-
-        For the Iliad (~125,000 words), this reduces ~100,000+ database queries
-        to just a few thousand unique word lookups.
         """
+        start_time = time.time()
         entries = self.repo.get_all_dictionary_entries(word, "greek")
+        db_time = time.time() - start_time
+
+        self.lookup_count += 1
+        self.total_db_time += db_time
+
+        # Log cache stats every 1000 lookups
+        if self.lookup_count % 1000 == 0:
+            cache_info = self._cached_lookup_word.cache_info()
+            hit_rate = cache_info.hits / (cache_info.hits + cache_info.misses) * 100 if (cache_info.hits + cache_info.misses) > 0 else 0
+            avg_db_time = (self.total_db_time / self.lookup_count) * 1000  # Convert to ms
+            print(f"  [PERF] Cache: {hit_rate:.1f}% hit rate, {cache_info.currsize}/30000 entries, avg DB time: {avg_db_time:.2f}ms")
 
         # Process entries to extract gloss, lemma, morph
         gloss = None
@@ -889,8 +911,10 @@ class InterlinearGenerator:
         """Main function to generate interlinear translation"""
 
         # Step 1: Get Greek text
+        t0 = time.time()
         print(f"Extracting Greek lines {start_line}-{end_line}...")
         greek_lines = self.get_greek_lines(book_id, start_line, end_line)
+        text_fetch_time = time.time() - t0
 
         if not greek_lines:
             print(f"⚠️  WARNING: No Greek text found for {book_id} lines {start_line}-{end_line}")
@@ -900,6 +924,7 @@ class InterlinearGenerator:
         print(f"Found {len(greek_lines)} Greek lines")
 
         # Step 2: Process each line
+        t1 = time.time()
         print(f"Processing lines and generating glosses...")
         lines_data = []
 
@@ -925,6 +950,11 @@ class InterlinearGenerator:
                 'words': words,
                 'word_gloss': word_gloss
             })
+
+        processing_time = time.time() - t1
+        total_time = time.time() - t0
+
+        print(f"  [PERF] Book {book_id}: text_fetch={text_fetch_time:.2f}s, processing={processing_time:.2f}s, total={total_time:.2f}s")
 
         return lines_data
 

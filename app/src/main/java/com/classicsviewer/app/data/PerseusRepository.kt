@@ -1062,7 +1062,8 @@ class PerseusRepository(private val context: Context) : DataRepository {
                         val definitionKey = (entry.definition ?: "").take(100)
                         "${entry.lemma}_${entry.source}_$definitionKey"
                     }
-                    return@withContext DictionaryResultMultiple(entries = dedupedEntries.sortedWith(compareBy(
+
+                    val sortedEntries = dedupedEntries.sortedWith(compareBy(
                         { entry ->
                             // FIRST priority: entries with non-treebank paths come before treebank-only entries
                             if (entry.hasNonTreebankPath) 0 else 1000  // Large gap to ensure separation
@@ -1084,7 +1085,15 @@ class PerseusRepository(private val context: Context) : DataRepository {
                             // Fourth priority: alphabetical order as tiebreaker for same length
                             entry.lemma
                         }
-                    )))
+                    ))
+
+                    // Log final results in detail
+                    android.util.Log.i("DICT_RESULT", "WORD='$cleanedWord' COUNT=${sortedEntries.size}")
+                    sortedEntries.forEachIndexed { index, entry ->
+                        android.util.Log.i("DICT_RESULT", "[$index] lemma='${entry.lemma}' source='${entry.source}' conf=${entry.confidence}")
+                    }
+
+                    return@withContext DictionaryResultMultiple(entries = sortedEntries)
                 }
             }
 
