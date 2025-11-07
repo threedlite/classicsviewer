@@ -260,6 +260,22 @@ cd build_modules/generate_interlinear
 
 Output location: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
 
+### Stopping Interlinear Generation:
+**IMPORTANT**: Always use specific PIDs to stop processes, NOT `pkill`
+
+```bash
+# Step 1: Find all Python processes
+ps aux | grep -E "interlinear|spawn_main|python" | grep -v grep
+
+# Step 2: Kill specific PIDs (replace with actual PIDs from step 1)
+kill -9 [PID1] [PID2] [PID3] ...
+
+# Step 3: Verify all stopped
+ps aux | grep python | grep -v grep
+```
+
+**Why**: `pkill` doesn't reliably catch all multiprocessing worker processes. Always identify PIDs first, then kill them explicitly.
+
 ## Translation Alignment System
 
 ### Background
