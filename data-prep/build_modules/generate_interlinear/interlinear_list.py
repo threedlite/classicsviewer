@@ -165,12 +165,21 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
     Returns:
         (work_index, author, work_title, success, error_message)
     """
+    import sys
+    from pathlib import Path
+
     work_index, author, work_title, work_id, db_path, output_dir = args
+
+    # Log work start
+    print(f"\n{'='*80}")
+    print(f"STARTING WORK #{work_index}: {work_id}")
+    print(f"Author: {author}")
+    print(f"Title: {work_title}")
+    print(f"{'='*80}\n")
+    sys.stdout.flush()  # Force flush to see output immediately
 
     try:
         # Import the generate_interlinear module
-        import sys
-        from pathlib import Path
 
         # Get the directory containing this script and its parent (build_modules)
         script_dir = Path(__file__).parent.resolve()
@@ -197,6 +206,45 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
         import traceback
         error_msg = f"{str(e)}\n{traceback.format_exc()}"
         return (work_index, author, work_title, False, error_msg)
+
+
+def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path]) -> List[Tuple[int, str, str, bool, str]]:
+    """
+    Worker function that processes a chunk of works assigned to one worker.
+
+    Args:
+        args: (worker_id, work_list, db_path, output_dir)
+              where work_list is [(work_index, author, work_title, work_id), ...]
+
+    Returns:
+        List of (work_index, author, work_title, success, error_message) for all works processed
+    """
+    import sys  # Import sys for stdout flush
+    worker_id, work_list, db_path, output_dir = args
+    results = []
+
+    print(f"\n{'='*80}")
+    print(f"WORKER {worker_id} STARTING - {len(work_list)} works assigned")
+    print(f"{'='*80}\n")
+    sys.stdout.flush()
+
+    for work_index, author, work_title, work_id in work_list:
+        # Process this work
+        result = process_work_worker((work_index, author, work_title, work_id, db_path, output_dir))
+        results.append(result)
+
+        # Report completion immediately
+        success = result[3]
+        status = "✓" if success else "✗"
+        print(f"\n{status} WORKER {worker_id} completed work #{work_index}: {author} - {work_title}")
+        sys.stdout.flush()
+
+    print(f"\n{'='*80}")
+    print(f"WORKER {worker_id} FINISHED - {len(work_list)} works completed")
+    print(f"{'='*80}\n")
+    sys.stdout.flush()
+
+    return results
 
 
 def generate_interlinear_parallel(
@@ -230,7 +278,7 @@ def generate_interlinear_parallel(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Get work sizes (number of books) and sort by size descending
-    # This ensures largest works are processed first for better load balancing
+    # This ensures largest works are distributed evenly across workers
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
@@ -245,10 +293,16 @@ def generate_interlinear_parallel(
     # Sort by book_count descending (largest works first)
     work_sizes.sort(key=lambda x: x[3], reverse=True)
 
+    # Calculate total books for accurate ETA
+    total_books = sum(size[3] for size in work_sizes)
+
     print(f"\nWork size distribution:")
-    print(f"  Largest work: {work_sizes[0][3]} books ({work_sizes[0][1]})")
+    print(f"  Total books: {total_books:,}")
+    print(f"  Largest work: {work_sizes[0][3]} books ({work_sizes[0][1]} - {work_sizes[0][2]})")
+    if len(work_sizes) > 1:
+        print(f"  Second largest: {work_sizes[1][3]} books ({work_sizes[1][1]} - {work_sizes[1][2]})")
     print(f"  Smallest work: {work_sizes[-1][3]} books ({work_sizes[-1][1]})")
-    print(f"  Sorted works by size (largest first) for optimal load balancing\n")
+    print(f"  Sorted works by size (largest first) with round-robin distribution\n")
 
     # Prepare work batches with indices for ordering
     work_args = [
@@ -266,30 +320,82 @@ def generate_interlinear_parallel(
         for args in work_args:
             results.append(process_work_worker(args))
     else:
-        # Parallel processing with dynamic work queue
+        # Parallel processing with pre-assigned chunks (true round-robin)
         print(f"Running in PARALLEL mode ({num_workers} workers)")
-        print("Using dynamic work queue (imap_unordered) for optimal load balancing")
+        print("Using PRE-ASSIGNED CHUNKS: largest works distributed round-robin")
         print()
 
-        results = []
-        with mp.Pool(num_workers) as pool:
-            # Use imap_unordered with chunksize=1 for best load balancing
-            # This ensures workers dynamically pull tasks from queue as they finish
-            # preventing idle workers when some tasks take longer than others
-            for i, result in enumerate(pool.imap_unordered(process_work_worker, work_args, chunksize=1)):
-                results.append(result)
-                work_idx, author, work_title, success, error_msg = result
-                completed = i + 1
-                elapsed = time.time() - start_time
-                rate = completed / elapsed if elapsed > 0 else 0
-                remaining = len(works) - completed
-                eta_seconds = remaining / rate if rate > 0 else 0
-                eta_minutes = eta_seconds / 60
+        # Distribute works round-robin to workers
+        worker_chunks = [[] for _ in range(num_workers)]
+        for i, (work_index, author, work_title, work_id, _, _) in enumerate(work_args):
+            worker_id = i % num_workers
+            worker_chunks[worker_id].append((work_index, author, work_title, work_id))
 
-                status = "✓" if success else "✗"
-                print(f"{status} Work {completed}/{len(works)} complete: {author} - {work_title}")
-                print(f"  [{completed/len(works)*100:.1f}%] Elapsed: {elapsed/60:.1f}m | Rate: {rate*60:.1f} works/min | ETA: {eta_minutes:.1f}m")
-                print()
+        # Show worker assignments
+        print("Worker assignments:")
+        for worker_id in range(num_workers):
+            chunk_size = len(worker_chunks[worker_id])
+            if chunk_size > 0:
+                first_work = worker_chunks[worker_id][0]
+                work_idx, author, title, work_id = first_work
+                book_count = work_sizes[work_idx][3]
+                print(f"  Worker {worker_id}: {chunk_size} works, first = {work_id} - {title} ({book_count} books)")
+        print()
+
+        # Create worker arguments
+        worker_args = [
+            (worker_id, worker_chunks[worker_id], db_path, output_dir)
+            for worker_id in range(num_workers)
+            if len(worker_chunks[worker_id]) > 0
+        ]
+
+        # Track results and books for accurate ETA
+        results = []
+        completed_count = 0
+        completed_books = 0
+
+        # Create a lookup dict for work sizes
+        work_size_lookup = {work_sizes[i][2]: work_sizes[i][3] for i in range(len(work_sizes))}
+
+        with mp.Pool(num_workers) as pool:
+            # Submit each worker's chunk as a separate task
+            async_results = []
+            for worker_arg in worker_args:
+                async_result = pool.apply_async(process_worker_chunk, args=(worker_arg,))
+                async_results.append(async_result)
+
+            # Wait for all workers to complete and collect results
+            for async_result in async_results:
+                worker_results = async_result.get()  # This blocks until worker completes
+                # Process each result from this worker
+                for result in worker_results:
+                    results.append(result)
+                    work_idx, author, work_title, success, error_msg = result
+                    completed_count += 1
+
+                    # Get work_id from work_sizes using work_idx
+                    work_id = work_sizes[work_idx][2]
+                    books_in_work = work_size_lookup.get(work_id, 0)
+                    completed_books += books_in_work
+
+                    elapsed = time.time() - start_time
+
+                    # Calculate ETA based on books processed, not just work count
+                    books_rate = completed_books / elapsed if elapsed > 0 else 0
+                    remaining_books = total_books - completed_books
+                    eta_seconds = remaining_books / books_rate if books_rate > 0 else 0
+                    eta_minutes = eta_seconds / 60
+
+                    # Also show works rate for context
+                    works_rate = completed_count / elapsed if elapsed > 0 else 0
+
+                    status = "✓" if success else "✗"
+                    print(f"\n{status} Work {completed_count}/{len(works)} complete: {author} - {work_title}")
+                    print(f"  [{completed_count/len(works)*100:.1f}%] Elapsed: {elapsed/60:.1f}m | Books: {completed_books:,}/{total_books:,} ({completed_books/total_books*100:.1f}%)")
+                    print(f"  Rate: {works_rate*60:.1f} works/min, {books_rate*60:.1f} books/min | ETA: {eta_minutes:.1f}m")
+                    sys.stdout.flush()
+
+        print("\n\nAll workers completed!")
 
     # Sort results by work index to maintain order
     results.sort(key=lambda x: x[0])

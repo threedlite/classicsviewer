@@ -1031,7 +1031,7 @@ def generate_interlinear_translations(db_path: Path, output_dir: Path, work_ids=
         print(f"{'=' * 80}")
         _generate_work(work_id, output_dir)
         work_percent = work_idx / total_works * 100
-        print(f"\n✓ Work {work_id} complete ({work_percent:.1f}% of all works)")
+        print(f"\nWork {work_id} done ({work_percent:.1f}% of all works)")
 
 
 def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
