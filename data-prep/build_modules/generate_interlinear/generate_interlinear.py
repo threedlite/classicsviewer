@@ -797,8 +797,17 @@ class InterlinearGenerator:
         LRU cache means common words like καί, δέ, τε, ἐν, etc.
         are only looked up once and then retrieved from cache instantly.
         """
+        # CRITICAL: Try original word first (for proper names), then lowercase fallback
+        # Some words may be capitalized in dictionary (proper names like Ἀχιλλεύς)
+        # But most words are stored lowercase (λυθῆναι not Λυθῆναι)
+        # This matches Android UI behavior which tries both
         start_time = time.time()
         entries = self.repo.get_all_dictionary_entries(word, "greek")
+
+        # If no results and word starts with uppercase, try lowercase
+        if (not entries or len(entries) == 0) and word and word[0].isupper():
+            entries = self.repo.get_all_dictionary_entries(word.lower(), "greek")
+
         db_time = time.time() - start_time
 
         self.lookup_count += 1
@@ -824,6 +833,8 @@ class InterlinearGenerator:
             preferred_morph = None
             # Use the PerseusRepository's database connection
             cursor = self.repo.conn.cursor()
+
+            # Try original word first, then lowercase fallback (same strategy as entries lookup)
             cursor.execute("""
                 SELECT morph_info FROM lemma_map
                 WHERE word_form = ? AND morph_info IS NOT NULL AND morph_info != ''
@@ -831,6 +842,17 @@ class InterlinearGenerator:
                 LIMIT 1
             """, (word,))
             row = cursor.fetchone()
+
+            # If no result and word is capitalized, try lowercase
+            if not row and word and word[0].isupper():
+                cursor.execute("""
+                    SELECT morph_info FROM lemma_map
+                    WHERE word_form = ? AND morph_info IS NOT NULL AND morph_info != ''
+                    ORDER BY confidence DESC
+                    LIMIT 1
+                """, (word.lower(),))
+                row = cursor.fetchone()
+
             if row:
                 preferred_morph = row[0]
             # PREFER LSJ/Cunliffe over Wiktionary for better quality
