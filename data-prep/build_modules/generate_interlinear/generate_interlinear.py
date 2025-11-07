@@ -959,7 +959,8 @@ class InterlinearGenerator:
 
         # Step 1: Get Greek text
         t0 = time.time()
-        print(f"Extracting Greek lines {start_line}-{end_line}...")
+        # Book-level logging removed for cleaner output
+        # print(f"Extracting Greek lines {start_line}-{end_line}...")
         greek_lines = self.get_greek_lines(book_id, start_line, end_line)
         text_fetch_time = time.time() - t0
 
@@ -968,11 +969,11 @@ class InterlinearGenerator:
             print(f"Returning empty results for this book.")
             return []  # Return empty list instead of crashing
 
-        print(f"Found {len(greek_lines)} Greek lines")
+        # print(f"Found {len(greek_lines)} Greek lines")
 
         # Step 2: Process each line
         t1 = time.time()
-        print(f"Processing lines and generating glosses...")
+        # print(f"Processing lines and generating glosses...")
         lines_data = []
 
         for line in greek_lines:
@@ -1001,7 +1002,7 @@ class InterlinearGenerator:
         processing_time = time.time() - t1
         total_time = time.time() - t0
 
-        print(f"  [PERF] Book {book_id}: text_fetch={text_fetch_time:.2f}s, processing={processing_time:.2f}s, total={total_time:.2f}s")
+        # print(f"  [PERF] Book {book_id}: text_fetch={text_fetch_time:.2f}s, processing={processing_time:.2f}s, total={total_time:.2f}s")
 
         return lines_data
 
@@ -1242,7 +1243,8 @@ def _generate_work(work_id: str, output_dir: Path):
             for idx, book_id in enumerate(book_ids, 1):
                 book_num = int(book_id.split('.')[-1])
                 percent_complete = (idx - 1) / len(book_ids) * 100
-                print(f"\n[{idx}/{len(book_ids)} - {percent_complete:.1f}% complete] Processing Book {book_num}...")
+                # Book-level progress removed - only show work-level completions
+                # print(f"\n[{idx}/{len(book_ids)} - {percent_complete:.1f}% complete] Processing Book {book_num}...")
 
                 # Get line range for this book
                 conn = sqlite3.connect(str(DB_PATH))
@@ -1251,7 +1253,7 @@ def _generate_work(work_id: str, output_dir: Path):
                 start_line, end_line = cursor.fetchone()
                 conn.close()
 
-                print(f"  Lines {start_line}-{end_line} ({end_line - start_line + 1} lines)")
+                # print(f"  Lines {start_line}-{end_line} ({end_line - start_line + 1} lines)")
 
                 # Generate interlinear for THIS book only
                 book_results = generator.generate_interlinear(book_id, start_line, end_line)
@@ -1265,7 +1267,7 @@ def _generate_work(work_id: str, output_dir: Path):
 
                 # book_results goes out of scope here - memory freed!
                 percent_complete = idx / len(book_ids) * 100
-                print(f"  ✓ Book {book_num} complete ({percent_complete:.1f}% total)")
+                # print(f"  ✓ Book {book_num} complete ({percent_complete:.1f}% total)")
 
             # Write XML footer once at end
             _write_xml_footer(xml_file)
