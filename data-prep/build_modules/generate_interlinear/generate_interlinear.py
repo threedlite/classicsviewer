@@ -817,6 +817,22 @@ class InterlinearGenerator:
         morph = None
 
         if entries and len(entries) > 0:
+            # CRITICAL: Get morph_info directly from lemma_map table via PerseusRepository
+            # Android DictionaryActivity.kt lines 212-216 queries ALL lemma mappings
+            # and picks first one with morphInfo, regardless of confidence
+            # This ensures we get morphology even when dictionary entries come from high-confidence sources without morph
+            preferred_morph = None
+            # Use the PerseusRepository's database connection
+            cursor = self.repo.conn.cursor()
+            cursor.execute("""
+                SELECT morph_info FROM lemma_map
+                WHERE word_form = ? AND morph_info IS NOT NULL AND morph_info != ''
+                ORDER BY confidence DESC
+                LIMIT 1
+            """, (word,))
+            row = cursor.fetchone()
+            if row:
+                preferred_morph = row[0]
             # PREFER LSJ/Cunliffe over Wiktionary for better quality
             # First, try LSJ and Cunliffe entries
             for entry in entries:
@@ -884,6 +900,11 @@ class InterlinearGenerator:
                 lemma = first_entry.lemma
                 morph = first_entry.morph_info
                 gloss = self.extract_gloss_from_entry(first_entry)
+
+            # CRITICAL: If we didn't get morph from entries, use the preferred morphology from database
+            # This mirrors Android UI behavior in DictionaryActivity.kt
+            if not morph:
+                morph = preferred_morph
 
         # Fallback if no gloss found
         if not gloss or gloss == "???":
