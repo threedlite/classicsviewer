@@ -32,7 +32,11 @@ import time
 # Import the proper dictionary lookup from ui_dictionary_lookup (same directory)
 # CRITICAL: Must be imported as relative import to maintain correct module state
 # DO NOT add try/except fallback - if this fails, the build should fail
-from .ui_dictionary_lookup import PerseusRepository, DictionaryEntry
+try:
+    from .ui_dictionary_lookup import PerseusRepository, DictionaryEntry
+except ImportError:
+    # Fallback for direct execution (testing)
+    from ui_dictionary_lookup import PerseusRepository, DictionaryEntry
 
 # Database path - will be set when called from build script
 DB_PATH = None
@@ -346,20 +350,20 @@ class InterlinearGenerator:
         # CRITICAL PRIORITY ORDER:
         # 1. FIRST try simple text at beginning (before section markers) - e.g., "in, among. c. dat."
         # 2. THEN try numbered intro (0.) - this is the primary definition in many LSJ entries
-        # 3. THEN try letter sections (A., B., C.) - these are major subsections
-        # 4. THEN try Arabic "1." at START of text - this is section I.1 (primary definition)
-        # 5. THEN try ROMAN numerals (I., II., III.) - these are major sections
+        # 3. THEN try Arabic "1." at START of text - this is section I.1 (primary definition)
+        # 4. THEN try ROMAN numerals (I., II., III.) - these are major sections (MUST come before letter sections)
+        # 5. THEN try letter sections (A., B., C.) - these are major subsections WITHIN Roman numeral sections
         # 6. THEN try Arabic numbered sections (1., 2.) elsewhere - these are subsections
-        # This ensures we get section I definitions before section II definitions
+        # This ensures we get section I definitions before section II definitions, and Roman numerals before letters
         patterns = [
             r'^([^0-9IVXABC\n][^\n]{3,}?)(?:\n|$)',  # Simple text at start (min 3 chars, not starting with UPPERCASE marker)
             r'(?:^|\n)0\.\s+([^\n]+)',       # "0. definition" - primary definition in many LSJ entries
-            r'(?:^|\n)A\.\s+([^\n]+)',       # "A. definition" - first major subsection
-            r'(?:^|\n)B\.\s+([^\n]+)',       # "B. definition" - second major subsection
             r'^1\.\s+([^\n]+)',              # "1. definition" at START - this is section I.1 (primary)
-            r'(?:^|\n)I\.\s+([^\n]+)',       # "I. definition" - Roman numeral section I
+            r'(?:^|\n)I\.\s+([^\n]+)',       # "I. definition" - Roman numeral section I (PRIMARY - must come before A., B., C.)
             r'(?:^|\n)II\.\s+([^\n]+)',      # "II. definition" - Roman numeral section II (secondary meaning)
             r'(?:^|\n)III\.\s+([^\n]+)',     # "III. definition" - Roman numeral section III
+            r'(?:^|\n)A\.\s+([^\n]+)',       # "A. definition" - first major subsection (within a Roman numeral section)
+            r'(?:^|\n)B\.\s+([^\n]+)',       # "B. definition" - second major subsection (within a Roman numeral section)
             r'(?:^|\n)1\.\s+([^\n]+)',       # "1. definition" elsewhere - numbered subsection
             r'(?:^|\n)2\.\s+([^\n]+)',       # "2. definition" - numbered subsection
             r'^([^(\n]+?)(?:\(|$)',          # Text before parenthesis (fallback)

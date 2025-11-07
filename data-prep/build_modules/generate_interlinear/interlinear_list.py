@@ -208,19 +208,22 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
         return (work_index, author, work_title, False, error_msg)
 
 
-def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path]) -> List[Tuple[int, str, str, bool, str]]:
+def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path, dict, int, int, float]) -> List[Tuple[int, str, str, bool, str]]:
     """
     Worker function that processes a chunk of works assigned to one worker.
 
     Args:
-        args: (worker_id, work_list, db_path, output_dir)
+        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_books, start_time)
               where work_list is [(work_index, author, work_title, work_id), ...]
 
     Returns:
         List of (work_index, author, work_title, success, error_message) for all works processed
     """
-    import sys  # Import sys for stdout flush
-    worker_id, work_list, db_path, output_dir = args
+    import sys
+    import time
+    import sqlite3
+
+    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_books, start_time = args
     results = []
 
     print(f"\n{'='*80}")
@@ -228,15 +231,51 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
     print(f"{'='*80}\n")
     sys.stdout.flush()
 
-    for work_index, author, work_title, work_id in work_list:
+    # Track actual books completed for accurate ETA
+    import os
+    output_path = str(output_dir)
+    local_works_completed = 0
+    local_books_completed = 0
+
+    for i, (work_index, author, work_title, work_id) in enumerate(work_list):
         # Process this work
         result = process_work_worker((work_index, author, work_title, work_id, db_path, output_dir))
         results.append(result)
 
-        # Report completion immediately
+        # Report completion immediately with ETA
         success = result[3]
         status = "✓" if success else "✗"
-        print(f"\n{status} WORKER {worker_id} completed work #{work_index}: {author} - {work_title}")
+
+        # Track actual books for this work
+        books_in_work = work_size_lookup.get(work_id, 0)
+        local_works_completed += 1
+        local_books_completed += books_in_work
+
+        # Count completed XML files for global progress estimate
+        try:
+            global_works_completed = len([f for f in os.listdir(output_path) if f.endswith('.xml')])
+        except:
+            global_works_completed = local_works_completed
+
+        elapsed = time.time() - start_time
+
+        # Calculate accurate books completed by reading file count and using actual work sizes
+        # This is still approximate for global count, but uses real book counts per work
+        # We can't know exact global books without shared state, but we can estimate better
+        avg_books_per_work = total_books / total_works if total_works > 0 else 0
+        estimated_global_books = global_works_completed * avg_books_per_work
+
+        # Calculate ETA based on estimated global books
+        books_rate = estimated_global_books / elapsed if elapsed > 0 else 0
+        remaining_books = total_books - estimated_global_books
+        eta_seconds = remaining_books / books_rate if books_rate > 0 else 0
+        eta_minutes = eta_seconds / 60
+
+        works_rate = global_works_completed / elapsed if elapsed > 0 else 0
+
+        print(f"\n{status} [Worker {worker_id}] Work {global_works_completed}/{total_works} complete: {author} - {work_title} ({books_in_work:,} books)")
+        print(f"  [{global_works_completed/total_works*100:.1f}%] Elapsed: {elapsed/60:.1f}m | Books: ~{int(estimated_global_books):,}/{total_books:,} (~{estimated_global_books/total_books*100:.1f}%)")
+        print(f"  Rate: {works_rate*60:.1f} works/min, {books_rate*60:.1f} books/min | ETA: {eta_minutes:.1f}m")
         sys.stdout.flush()
 
     print(f"\n{'='*80}")
@@ -342,9 +381,12 @@ def generate_interlinear_parallel(
                 print(f"  Worker {worker_id}: {chunk_size} works, first = {work_id} - {title} ({book_count} books)")
         print()
 
-        # Create worker arguments
+        # Create a lookup dict for work sizes (must be before worker_args uses it)
+        work_size_lookup = {work_sizes[i][2]: work_sizes[i][3] for i in range(len(work_sizes))}
+
+        # Create worker arguments with additional context for ETA calculation
         worker_args = [
-            (worker_id, worker_chunks[worker_id], db_path, output_dir)
+            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_books, start_time)
             for worker_id in range(num_workers)
             if len(worker_chunks[worker_id]) > 0
         ]
@@ -354,9 +396,6 @@ def generate_interlinear_parallel(
         completed_count = 0
         completed_books = 0
 
-        # Create a lookup dict for work sizes
-        work_size_lookup = {work_sizes[i][2]: work_sizes[i][3] for i in range(len(work_sizes))}
-
         with mp.Pool(num_workers) as pool:
             # Submit each worker's chunk as a separate task
             async_results = []
@@ -364,36 +403,20 @@ def generate_interlinear_parallel(
                 async_result = pool.apply_async(process_worker_chunk, args=(worker_arg,))
                 async_results.append(async_result)
 
-            # Wait for all workers to complete and collect results
+            # Workers will report their own progress in real-time
+            # Just wait for all workers to finish (no need to process results here)
+            print("\nWorkers are processing... Progress will be logged by workers.\n")
+            sys.stdout.flush()
+
+            # Wait for all async results to complete
             for async_result in async_results:
-                worker_results = async_result.get()  # This blocks until worker completes
-                # Process each result from this worker
+                async_result.wait()  # Just wait, don't get results
+
+            # Now collect all results for final summary
+            for async_result in async_results:
+                worker_results = async_result.get()
                 for result in worker_results:
                     results.append(result)
-                    work_idx, author, work_title, success, error_msg = result
-                    completed_count += 1
-
-                    # Get work_id from work_sizes using work_idx
-                    work_id = work_sizes[work_idx][2]
-                    books_in_work = work_size_lookup.get(work_id, 0)
-                    completed_books += books_in_work
-
-                    elapsed = time.time() - start_time
-
-                    # Calculate ETA based on books processed, not just work count
-                    books_rate = completed_books / elapsed if elapsed > 0 else 0
-                    remaining_books = total_books - completed_books
-                    eta_seconds = remaining_books / books_rate if books_rate > 0 else 0
-                    eta_minutes = eta_seconds / 60
-
-                    # Also show works rate for context
-                    works_rate = completed_count / elapsed if elapsed > 0 else 0
-
-                    status = "✓" if success else "✗"
-                    print(f"\n{status} Work {completed_count}/{len(works)} complete: {author} - {work_title}")
-                    print(f"  [{completed_count/len(works)*100:.1f}%] Elapsed: {elapsed/60:.1f}m | Books: {completed_books:,}/{total_books:,} ({completed_books/total_books*100:.1f}%)")
-                    print(f"  Rate: {works_rate*60:.1f} works/min, {books_rate*60:.1f} books/min | ETA: {eta_minutes:.1f}m")
-                    sys.stdout.flush()
 
         print("\n\nAll workers completed!")
 
