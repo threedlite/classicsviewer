@@ -229,10 +229,31 @@ def generate_interlinear_parallel(
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Get work sizes (number of books) and sort by size descending
+    # This ensures largest works are processed first for better load balancing
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    work_sizes = []
+    for author, work_title, work_id in works:
+        cursor.execute("SELECT COUNT(*) FROM books WHERE work_id = ?", (work_id,))
+        book_count = cursor.fetchone()[0]
+        work_sizes.append((author, work_title, work_id, book_count))
+
+    conn.close()
+
+    # Sort by book_count descending (largest works first)
+    work_sizes.sort(key=lambda x: x[3], reverse=True)
+
+    print(f"\nWork size distribution:")
+    print(f"  Largest work: {work_sizes[0][3]} books ({work_sizes[0][1]})")
+    print(f"  Smallest work: {work_sizes[-1][3]} books ({work_sizes[-1][1]})")
+    print(f"  Sorted works by size (largest first) for optimal load balancing\n")
+
     # Prepare work batches with indices for ordering
     work_args = [
         (i, author, work_title, work_id, db_path, output_dir)
-        for i, (author, work_title, work_id) in enumerate(works)
+        for i, (author, work_title, work_id, _) in enumerate(work_sizes)
     ]
 
     start_time = time.time()
