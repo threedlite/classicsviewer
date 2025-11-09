@@ -18,7 +18,6 @@ struct ReaderView: View {
     @State private var wordsWithMorphologyOnly: Set<String> = []
     @State private var definitionCheckProgress: Float = 0.0
     @State private var definitionCheckCancelled = false
-    @GestureState private var dragOffset: CGSize = .zero
     @EnvironmentObject var searchContext: SearchNavigationContext
     @Environment(\.colorScheme) private var colorScheme
 
@@ -53,13 +52,13 @@ struct ReaderView: View {
                 ReaderBottomBar(
                     currentPage: viewModel.currentPage,
                     totalPages: viewModel.totalPages,
-                    showTranslation: viewModel.showTranslation,
+                    currentViewLabel: viewModel.currentViewLabel,
                     hasTranslations: viewModel.hasTranslations,
                     isLoading: viewModel.isLoading,
                     onPreviousPage: viewModel.previousPage,
                     onNextPage: viewModel.nextPage,
-                    onToggleTranslation: viewModel.toggleTranslation,
-                    onPageTap: { showingPagePicker = true }
+                    onPageTap: { showingPagePicker = true },
+                    onCycleView: viewModel.navigateToNextView
                 )
             }
             
@@ -73,14 +72,14 @@ struct ReaderView: View {
                         .fontWeight(.semibold)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
-                    
+
                     Text(viewModel.navigationSubtitle)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .lineLimit(1)
                 }
             }
-            
+
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     if checkingDefinitions {
@@ -222,10 +221,10 @@ struct ReaderView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    if viewModel.showTranslation {
-                        translationView
-                    } else {
+                    if viewModel.currentViewIndex == 0 {
                         greekTextView
+                    } else {
+                        translationView
                     }
                 }
                 .padding()
@@ -235,7 +234,7 @@ struct ReaderView: View {
                         // Find the relative position within the current page
                         let startLine = (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1
                         let relativeLineIndex = targetLine - startLine
-                        
+
                         if relativeLineIndex >= 0 && relativeLineIndex < viewModel.lines.count {
                             let targetLineId = viewModel.lines[relativeLineIndex].id
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -251,7 +250,7 @@ struct ReaderView: View {
                     if let targetLine = viewModel.targetLineNumber {
                         let startLine = (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1
                         let relativeLineIndex = targetLine - startLine
-                        
+
                         if relativeLineIndex >= 0 && relativeLineIndex < viewModel.lines.count {
                             let targetLineId = viewModel.lines[relativeLineIndex].id
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -265,9 +264,6 @@ struct ReaderView: View {
                     }
                 }
             }
-            .gesture(swipeGesture)
-            .offset(x: dragOffset.width)
-            .animation(.interactiveSpring(), value: dragOffset)
         }
     }
     
@@ -339,8 +335,9 @@ struct ReaderView: View {
     }
     
     private var translationView: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            ForEach(Array(viewModel.translations.enumerated()), id: \.element.id) { index, segment in
+        let translations = viewModel.getCurrentTranslations()
+        return VStack(alignment: .leading, spacing: 20) {
+            ForEach(Array(translations.enumerated()), id: \.element.id) { index, segment in
                 VStack(alignment: .leading, spacing: 8) {
                     // Show speaker if present and different from previous
                     if shouldShowTranslationSpeaker(at: index),
@@ -372,7 +369,7 @@ struct ReaderView: View {
                 }
             }
 
-            if viewModel.translations.isEmpty {
+            if translations.isEmpty {
                 Text("No translation available for this section")
                     .font(.body)
                     .foregroundColor(.secondary)
@@ -381,56 +378,23 @@ struct ReaderView: View {
             }
         }
     }
-    
+
     private func shouldShowTranslationSpeaker(at index: Int) -> Bool {
-        let segment = viewModel.translations[index]
+        let translations = viewModel.getCurrentTranslations()
+        guard index < translations.count else { return false }
+        let segment = translations[index]
         guard let speaker = segment.speaker, !speaker.isEmpty else { return false }
         
         // Show speaker if it's the first segment or if speaker changed
         if index == 0 { return true }
-        
-        let previousSegment = viewModel.translations[index - 1]
+
+        let previousSegment = translations[index - 1]
         return previousSegment.speaker != speaker
     }
     
     private var speakerColor: Color {
         // Match Android colors for speakers in translations
         return colorScheme == .dark ? Color(hex: "#66B2FF") : Color(hex: "#0066CC")
-    }
-    
-    private var swipeGesture: some Gesture {
-        DragGesture()
-            .updating($dragOffset) { value, state, _ in
-                if abs(value.translation.width) > abs(value.translation.height) {
-                    state = value.translation
-                }
-            }
-            .onEnded { value in
-                let horizontalThreshold: CGFloat = 100
-                let pageThreshold: CGFloat = 50
-
-                // Check if it's primarily a horizontal swipe
-                if abs(value.translation.width) > abs(value.translation.height) {
-                    // Large horizontal swipe = toggle translation
-                    if abs(value.translation.width) > horizontalThreshold {
-                        viewModel.toggleTranslation()
-                    }
-                    // Smaller horizontal swipe = page navigation
-                    else if abs(value.translation.width) > pageThreshold {
-                        if value.translation.width > 0 {
-                            // Swipe right - previous page
-                            if viewModel.currentPage > 1 {
-                                viewModel.previousPage()
-                            }
-                        } else {
-                            // Swipe left - next page
-                            if viewModel.currentPage < viewModel.totalPages {
-                                viewModel.nextPage()
-                            }
-                        }
-                    }
-                }
-            }
     }
 }
 
@@ -568,7 +532,7 @@ extension ReaderView {
     }
     private func checkDefinitionsForCurrentPage() async {
         // Only works on Greek/Latin text view, not translation
-        guard !viewModel.showTranslation else {
+        guard viewModel.currentViewIndex == 0 else {
             return
         }
         
@@ -1049,46 +1013,54 @@ class BookmarkChecker: ObservableObject {
 struct ReaderBottomBar: View {
     let currentPage: Int
     let totalPages: Int
-    let showTranslation: Bool
+    let currentViewLabel: String
     let hasTranslations: Bool
     let isLoading: Bool
     let onPreviousPage: () -> Void
     let onNextPage: () -> Void
-    let onToggleTranslation: () -> Void
     let onPageTap: () -> Void
-    
+    let onCycleView: () -> Void
+
     var body: some View {
-        HStack {
-            Button(action: onPreviousPage) {
-                Image(systemName: "chevron.left")
-                    .font(.system(size: 20, weight: .medium))
+        VStack(spacing: 8) {
+            // View indicator (Greek / English (Translator))
+            Button(action: onCycleView) {
+                HStack(spacing: 4) {
+                    Text(currentViewLabel)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.secondary)
+                    if hasTranslations {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .font(.system(size: 12))
+                            .foregroundColor(.blue)
+                    }
+                }
             }
-            .disabled(currentPage <= 1 || isLoading)
-            
-            Spacer()
-            
-            Button(action: onPageTap) {
-                Text("Page \(currentPage) of \(totalPages)")
-                    .font(.system(size: 16, weight: .medium))
+            .disabled(!hasTranslations || isLoading)
+
+            HStack {
+                Button(action: onPreviousPage) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 20, weight: .medium))
+                }
+                .disabled(currentPage <= 1 || isLoading)
+
+                Spacer()
+
+                Button(action: onPageTap) {
+                    Text("Page \(currentPage) of \(totalPages)")
+                        .font(.system(size: 16, weight: .medium))
+                }
+                .disabled(isLoading)
+
+                Spacer()
+
+                Button(action: onNextPage) {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 20, weight: .medium))
+                }
+                .disabled(currentPage >= totalPages || isLoading)
             }
-            .disabled(isLoading)
-            
-            Spacer()
-            
-            Button(action: onToggleTranslation) {
-                Image(systemName: showTranslation ? "doc.plaintext" : "globe")
-                    .font(.system(size: 20, weight: .medium))
-                    .foregroundColor(hasTranslations ? Color.primary : Color.gray)
-            }
-            .disabled(isLoading || !hasTranslations)
-            
-            Spacer()
-            
-            Button(action: onNextPage) {
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 20, weight: .medium))
-            }
-            .disabled(currentPage >= totalPages || isLoading)
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 12)

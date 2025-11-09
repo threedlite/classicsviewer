@@ -5,15 +5,14 @@ import Combine
 @MainActor
 class ReaderViewModel: ObservableObject {
     @Published var lines: [TextLine] = []
-    @Published var translations: [TranslationSegment] = []
+    @Published var translationsByTranslator: [String: [TranslationSegment]] = [:]
     @Published var currentPage = 1
     @Published var totalPages = 1
     @Published var isLoading = false
-    @Published var showTranslation = false
+    @Published var currentViewIndex = 0 // 0 = Greek/Latin, 1+ = translations
     @Published var work: Work?
     @Published var hasTranslations = true // Default to true until we check
     @Published var availableTranslators: [String] = []
-    @Published var selectedTranslator: String?
     // Fixed at 100 lines per page
     let linesPerPage: LinesPerPage = .hundred
     @Published var fontSize: CGFloat = 20
@@ -117,27 +116,45 @@ class ReaderViewModel: ObservableObject {
             // Database lifecycle managed by async architecture
             availableTranslators = try await translationDAO.getAvailableTranslators(bookId: book.id)
             print("DEBUG: Found \(availableTranslators.count) translator(s): \(availableTranslators)")
-            
-            // Set default translator if available
-            if selectedTranslator == nil && !availableTranslators.isEmpty {
-                selectedTranslator = availableTranslators.first
-                print("DEBUG: Selected default translator: \(selectedTranslator ?? "none")")
-            }
         } catch {
             print("ERROR: Failed to load available translators: \(error)")
         }
     }
     
-    func switchTranslator(to translator: String) {
-        guard availableTranslators.contains(translator) else { return }
-        selectedTranslator = translator
-        
-        // Reload translations if currently showing them
-        if showTranslation {
-            Task {
-                await loadCurrentPage()
-            }
+    func switchToView(index: Int) {
+        let maxIndex = availableTranslators.isEmpty ? 0 : availableTranslators.count
+        guard index >= 0 && index <= maxIndex else { return }
+        currentViewIndex = index
+    }
+
+    func navigateToNextView() {
+        let maxIndex = availableTranslators.count
+        if currentViewIndex < maxIndex {
+            currentViewIndex += 1
+        } else {
+            // Cycle back to beginning
+            currentViewIndex = 0
         }
+    }
+
+    func navigateToPreviousView() {
+        if currentViewIndex > 0 {
+            currentViewIndex -= 1
+        }
+    }
+
+    var currentViewLabel: String {
+        if currentViewIndex == 0 {
+            return author.language.prefix(1).uppercased() + author.language.dropFirst()
+        } else if currentViewIndex - 1 < availableTranslators.count {
+            let translator = availableTranslators[currentViewIndex - 1]
+            // Remove parenthetical content from translator name
+            if let parenIndex = translator.firstIndex(of: "(") {
+                return translator[..<parenIndex].trimmingCharacters(in: .whitespaces)
+            }
+            return translator
+        }
+        return "English"
     }
     
     func loadCurrentPage() async {
@@ -183,38 +200,29 @@ class ReaderViewModel: ObservableObject {
                 }
                 
                 print("DEBUG: Loaded \(newLines.count) lines")
-                
-                // Load translations if showing
-                var newTranslations: [TranslationSegment] = []
-                if showTranslation {
-                    if let translator = selectedTranslator {
-                        // Load translations for specific translator
-                        newTranslations = try await translationDAO.getTranslationsByTranslator(
-                            bookId: book.id,
-                            translator: translator,
-                            startLine: startLine,
-                            endLine: endLine
-                        )
-                    } else {
-                        // Load default translations (first available translator)
-                        newTranslations = try await translationDAO.getTranslations(
-                            bookId: book.id,
-                            startLine: startLine,
-                            endLine: endLine
-                        )
-                    }
-                    print("DEBUG: Loaded \(newTranslations.count) translation segments")
+
+                // Load translations for all translators
+                var translationsMap: [String: [TranslationSegment]] = [:]
+                for translator in availableTranslators {
+                    let segments = try await translationDAO.getTranslationsByTranslator(
+                        bookId: book.id,
+                        translator: translator,
+                        startLine: startLine,
+                        endLine: endLine
+                    )
+                    translationsMap[translator] = segments
+                    print("DEBUG: Loaded \(segments.count) segments for \(translator)")
                 }
-                
-                guard !Task.isCancelled else { 
+
+                guard !Task.isCancelled else {
                     await MainActor.run { isLoading = false }
-                    return 
+                    return
                 }
-                
+
                 // Update UI on main thread
                 await MainActor.run {
                     self.lines = newLines
-                    self.translations = newTranslations
+                    self.translationsByTranslator = translationsMap
                 }
                 
                 // Load bookmarks for current page
@@ -257,24 +265,20 @@ class ReaderViewModel: ObservableObject {
         }
     }
     
-    func toggleTranslation() {
-        showTranslation.toggle()
-        if showTranslation && translations.isEmpty {
-            Task {
-                await loadCurrentPage()
-            }
+    func getCurrentTranslations() -> [TranslationSegment] {
+        if currentViewIndex == 0 {
+            return []
         }
+        let translatorIndex = currentViewIndex - 1
+        if translatorIndex < availableTranslators.count {
+            let translator = availableTranslators[translatorIndex]
+            return translationsByTranslator[translator] ?? []
+        }
+        return []
     }
-    
-    // Lines per page is fixed to match Android - removed changeLinesPerPage method
-    // Font size is controlled through Settings only - removed changeFontSize method
-    
-    func translationForLine(_ lineNumber: Int) -> String? {
-        // Find translation segment that covers this line
-        return translations.first { segment in
-            segment.startLine <= lineNumber &&
-            (segment.endLine == nil || segment.endLine! >= lineNumber)
-        }?.translationText
+
+    var isShowingTranslation: Bool {
+        return currentViewIndex > 0
     }
     
     // MARK: - Title and Subtitle for Navigation

@@ -73,13 +73,15 @@ struct InterlinearTextView: View {
     private func createWordTable(rows: [String]) -> some View {
         let isLight = colorScheme == .light
 
-        VStack(spacing: 4) {
+        VStack(spacing: 0) {
             // Row 0: Greek word - slightly larger
             Text(rows[0])
                 .font(.system(size: fontSize * 1.1, design: .serif))
                 .foregroundColor(isLight ? .black : .white)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
+                .frame(maxWidth: .infinity)
+                .background(isLight ? .white : .black)
 
             // Row 1: English gloss - bold
             Text(rows[1])
@@ -87,6 +89,8 @@ struct InterlinearTextView: View {
                 .foregroundColor(isLight ? .black : .white)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
+                .frame(maxWidth: .infinity)
+                .background(isLight ? .white : .black)
 
             // Row 2: Morphology - italic, smaller
             Text(rows[2])
@@ -95,9 +99,12 @@ struct InterlinearTextView: View {
                 .foregroundColor(isLight ? Color(hex: "#666666") : Color(hex: "#999999"))
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
+                .frame(maxWidth: .infinity)
+                .background(isLight ? .white : .black)
         }
         .background(isLight ? Color(hex: "#EEEEEE") : Color(hex: "#222222"))
         .cornerRadius(4)
+        .padding(4)
     }
 }
 

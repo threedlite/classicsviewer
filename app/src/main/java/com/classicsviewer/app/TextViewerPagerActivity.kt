@@ -325,7 +325,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                         // Scroll position is already being tracked continuously via onTranslationScrollChanged
                         currentPageIndex = position
                         binding.pageIndicator.text = when {
-                            position == 0 -> if (language == "greek") "Greek" else "Latin"
+                            position == 0 -> language.replaceFirstChar { it.uppercase() }
                             position - 1 < availableTranslators.size -> {
                                 "English (${availableTranslators[position - 1]})"
                             }
@@ -356,7 +356,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             }
             
             // Update page indicator for initial page
-            binding.pageIndicator.text = if (language == "greek") "Greek" else "Latin"
+            binding.pageIndicator.text = language.replaceFirstChar { it.uppercase() }
             
             // Show toast about translations if available
             if (availableTranslators.isNotEmpty() && currentPageIndex == 0) {
