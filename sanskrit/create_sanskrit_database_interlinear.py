@@ -254,7 +254,7 @@ def load_bhagavad_gita(cursor):
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (None, book_id, verse_num, verse_num, verse_text, None, None))
 
-            # Tokenize and insert words
+            # Tokenize and insert words (BG doesn't have lemma data from Wikisource)
             words = tokenize_sanskrit(verse_text)
             for word_pos, word in enumerate(words, 1):
                 cursor.execute('''
@@ -418,7 +418,7 @@ def load_rigveda(cursor):
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 ''', (None, book_id, line_number, line_number, verse_text, None, None))
 
-                # Insert words
+                # Insert words (Rig Veda uses pada format which is pre-split, but has no lemma data)
                 words = tokenize_sanskrit(verse_text)
                 for word_pos, word in enumerate(words, 1):
                     cursor.execute('''
@@ -549,8 +549,8 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
 
     print(f"  Reading CoNLL-U files from {text_dir}...")
 
-    # Structure: book → chapter → verse → [sentences]
-    text_data = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    # Structure: book → chapter → verse → {'text': str, 'words': [(word, lemma)]}
+    text_data = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {'text': [], 'words': []})))
 
     # Parse all CoNLL-U files
     conllu_files = [f for f in os.listdir(text_dir) if f.endswith('.conllu') and not f.endswith('_parsed')]
@@ -562,6 +562,7 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
         with open(file_path, 'r', encoding='utf-8') as f:
             current_chapter = None
             verse_counter = 0  # Track verses within current chapter
+            current_sentence_words = []  # Accumulate segmented words for current sentence
 
             for line in f:
                 line = line.strip()
@@ -600,10 +601,57 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                         verse_counter += 1
                         verse_num = verse_counter
                         chapter_num = 1  # Single "chapter" per book
-                        text_data[book_num][chapter_num][verse_num].append(text_devanagari)
+                        text_data[book_num][chapter_num][verse_num]['text'].append(text_devanagari)
                     else:
                         # Use explicit verse number
-                        text_data[book_num][chapter_num][verse_num].append(text_devanagari)
+                        text_data[book_num][chapter_num][verse_num]['text'].append(text_devanagari)
+
+                    current_sentence_words = []  # Reset for new sentence
+
+                # Parse CoNLL-U token lines to extract segmented words and lemmas
+                elif line and not line.startswith('#') and current_chapter:
+                    fields = line.split('\t')
+                    if len(fields) >= 10:
+                        token_id = fields[0]
+                        # Skip multi-word tokens (e.g., "1-2")
+                        if '-' not in token_id and '.' not in token_id:
+                            # Extract lemma from field 2 (column index 2)
+                            lemma_iast = fields[2]  # The dictionary headword
+                            lemma = iast_to_devanagari(lemma_iast) if lemma_iast != '_' else None
+
+                            # Extract Unsandhied field from misc column (column 9)
+                            misc = fields[9]
+                            unsandhied = None
+                            for pair in misc.split('|'):
+                                if pair.startswith('Unsandhied='):
+                                    unsandhied_iast = pair.replace('Unsandhied=', '')
+                                    # Special case: _ means use the lemma for display
+                                    if unsandhied_iast != '_':
+                                        unsandhied = iast_to_devanagari(unsandhied_iast)
+                                    break
+
+                            # If no Unsandhied or it's _, use lemma or form
+                            if not unsandhied:
+                                # Try lemma first (for special characters like OM)
+                                if lemma:
+                                    unsandhied = lemma
+                                else:
+                                    form_iast = fields[1]  # The word form
+                                    unsandhied = iast_to_devanagari(form_iast)
+
+                            # Store tuple of (unsandhied_word, lemma)
+                            current_sentence_words.append((unsandhied, lemma))
+
+                # Blank line indicates end of sentence - save accumulated words
+                elif line == '' and current_sentence_words and current_chapter:
+                    book_num, chapter_num, verse_num = current_chapter
+
+                    if verse_counter is not None:
+                        text_data[book_num][chapter_num][verse_num]['words'].extend(current_sentence_words)
+                    else:
+                        text_data[book_num][chapter_num][verse_num]['words'].extend(current_sentence_words)
+
+                    current_sentence_words = []
 
     total_books = len(text_data)
     total_chapters = sum(len(chapters) for chapters in text_data.values())
@@ -696,26 +744,36 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
 
         line_number = 1
 
-        for chapter_num in sorted(chapters.keys()):
+        for chapter_num in sorted(chapters.keys(), key=lambda x: x if x is not None else 0):
             verses = chapters[chapter_num]
 
             # Track start/end lines for this chapter
             chapter_start_line = line_number
 
             for verse_num in sorted(verses.keys()):
-                sentences = verses[verse_num]
+                verse_data = verses[verse_num]
 
-                # Combine sentences into verse
-                verse_text = ' '.join(sentences)
+                # Combine text sentences into verse (for display)
+                verse_text = ' '.join(verse_data['text'])
+
+                # Use segmented words (for dictionary lookup)
+                verse_words = verse_data['words']
+
+                # If no segmented words available, fall back to space-based tokenization
+                if not verse_words:
+                    verse_words = [(w, None) for w in tokenize_sanskrit(verse_text)]
+
+                # For display, show the segmented words separated by spaces
+                # This makes word boundaries visible and enables dictionary lookup
+                display_text = ' '.join(word for word, _ in verse_words)
 
                 cursor.execute('''
                     INSERT INTO text_lines (id, book_id, line_number, sequence_number, line_text, line_xml, speaker)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', (None, book_id, line_number, line_number, verse_text, None, None))
+                ''', (None, book_id, line_number, line_number, display_text, None, None))
 
-                # Insert words
-                words = tokenize_sanskrit(verse_text)
-                for word_pos, word in enumerate(words, 1):
+                # Insert segmented words (lemmas will be looked up during interlinear generation)
+                for word_pos, (word, lemma) in enumerate(verse_words, 1):
                     cursor.execute('''
                         INSERT INTO words (id, word, book_id, line_number, sequence_number, word_position)
                         VALUES (?, ?, ?, ?, ?, ?)
@@ -744,6 +802,85 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
 
     print(f"\n  ✓ Loaded {total_verse_count:,} verses, {total_word_count:,} words, {total_translation_count:,} translations")
     return total_verse_count, total_word_count, total_translation_count
+
+def create_translation_lookup_table(conn):
+    """
+    Create a lookup table mapping every line to its translation segment(s).
+
+    This is essential for the Android app to efficiently find translations.
+    Similar to the Greek database translation_lookup table.
+    """
+    cursor = conn.cursor()
+
+    # Drop and recreate the lookup table
+    cursor.execute("DROP TABLE IF EXISTS translation_lookup")
+    cursor.execute("""
+        CREATE TABLE translation_lookup (
+            book_id TEXT NOT NULL,
+            line_number INTEGER NOT NULL,
+            segment_id INTEGER NOT NULL,
+            PRIMARY KEY (book_id, line_number, segment_id),
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+            FOREIGN KEY (segment_id) REFERENCES translation_segments(id) ON DELETE CASCADE
+        )
+    """)
+
+    # Create indexes to match Room entity definition exactly
+    cursor.execute("CREATE INDEX index_translation_lookup_book_id_line_number ON translation_lookup(book_id, line_number)")
+    cursor.execute("CREATE INDEX index_translation_lookup_segment_id ON translation_lookup(segment_id)")
+
+    # Get all books with translations
+    cursor.execute("""
+        SELECT DISTINCT b.id
+        FROM books b
+        WHERE EXISTS (SELECT 1 FROM translation_segments ts WHERE ts.book_id = b.id)
+    """)
+
+    books = [row[0] for row in cursor.fetchall()]
+    total_mappings = 0
+
+    for book_id in books:
+        # Get translation segments
+        cursor.execute("""
+            SELECT id, start_line, end_line
+            FROM translation_segments
+            WHERE book_id = ?
+            ORDER BY start_line
+        """, (book_id,))
+
+        segments = cursor.fetchall()
+        if not segments:
+            continue
+
+        # Get actual line numbers from text_lines
+        cursor.execute("""
+            SELECT DISTINCT line_number
+            FROM text_lines
+            WHERE book_id = ?
+        """, (book_id,))
+        valid_lines = set(row[0] for row in cursor.fetchall())
+
+        book_mappings = 0
+
+        # For each segment, map all lines in its range
+        for seg_id, start, end in segments:
+            if end is None:
+                end = start
+
+            # Map each line in the segment's range
+            for line_num in range(start, end + 1):
+                if line_num in valid_lines:
+                    cursor.execute("""
+                        INSERT OR IGNORE INTO translation_lookup
+                        VALUES (?, ?, ?)
+                    """, (book_id, line_num, seg_id))
+                    book_mappings += 1
+
+        total_mappings += book_mappings
+
+    print(f"  ✓ Created {total_mappings:,} line-to-translation mappings")
+    conn.commit()
+
 
 def main():
     # Parse command line arguments
@@ -989,6 +1126,10 @@ def main():
 
     cursor.execute('SELECT COUNT(*) FROM translation_segments')
     total_translations = cursor.fetchone()[0]
+
+    # Create translation lookup table for efficient translation retrieval
+    print("\nCreating translation lookup table...")
+    create_translation_lookup_table(conn)
 
     # Commit and close
     conn.commit()
