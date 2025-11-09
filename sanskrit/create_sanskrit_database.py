@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 """
-Create Sanskrit texts database for ClassicsViewer
-
-Modes:
-- sample: Bhagavad Gita + Rig Veda + 5 DCS texts with translations (7 texts total)
-- full: All 268 DCS works (~738,000 verses, 5.6M words)
-
-Usage:
-  python3 create_sanskrit_database.py sample   # Create sample database (default)
-  python3 create_sanskrit_database.py full     # Create full database with all DCS works
+Create complete Sanskrit texts database for ClassicsViewer
+Includes: Bhagavad Gita + Rig Veda + 5 DCS texts with translations
 
 Sources:
 - Bhagavad Gita: Sanskrit Wikisource (CC BY-SA 4.0)
   - English translations: Edwin Arnold (Public Domain), Annie Besant (Public Domain)
 - Rig Veda: DCS pada-and-analysis.dat (CC BY 4.0)
   - English translation: Ralph T.H. Griffith (1896) (Public Domain)
-- Sample DCS texts with English translations:
-  - Atharvaveda (Śaunaka), Vājasaneyisaṃhitā, Upanishads
-- Full DCS corpus: 268 works (CC BY 4.0)
-  - Most works do not have English translations
+- Atharvaveda (Śaunaka): DCS CoNLL-U files (CC BY 4.0)
+  - English translation: William Dwight Whitney (1905) (Public Domain)
+- Vājasaneyisaṃhitā (Yajur Veda): DCS CoNLL-U files (CC BY 4.0)
+  - English translation: Ralph T.H. Griffith (1899) (Public Domain)
+- Chāndogyopaniṣad: DCS CoNLL-U files (CC BY 4.0)
+  - English translation: Patrick Olivelle (modern, with permission)
+- Aitareyopaniṣad: DCS CoNLL-U files (CC BY 4.0)
+  - English translation: Patrick Olivelle (modern, with permission)
+- Śvetāśvataropaniṣad: DCS CoNLL-U files (CC BY 4.0)
+  - English translation: Patrick Olivelle (modern, with permission)
 
 License: CC BY 4.0, CC BY-SA 4.0 & Public Domain (commercial use allowed)
 """
@@ -205,21 +204,20 @@ def load_bhagavad_gita(cursor):
                 verse_num = verse['number']
                 besant_translations[chapter_num][verse_num] = verse['text']
 
-    # Insert author (qualified ID to avoid collision with potential DCS version)
-    # Use work name as author name for consistency with DCS texts
-    author_id = 'vyasa_wikisource'
+    # Insert author
+    author_id = 'vyasa'
     cursor.execute('''
         INSERT INTO authors (id, name, name_alt, language, has_translations)
         VALUES (?, ?, ?, ?, ?)
-    ''', (author_id, 'भगवद्गीता', 'Bhagavad Gita (Wikisource)', 'sanskrit', 1))
+    ''', (author_id, 'व्यासः', 'Ved Vyasa', 'sanskrit', 1))
 
-    # Create work (qualified ID to avoid collision with potential DCS version)
-    work_id = 'bhagavad_gita_wikisource'
+    # Create work
+    work_id = 'bhagavad_gita'
     cursor.execute('''
         INSERT INTO works (id, author_id, title, title_alt, title_english, type, urn, description)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (work_id, author_id, 'भगवद्गीता', None, 'Bhagavad Gita (Wikisource, with translations)', 'poetry', None,
-          'The Bhagavad Gita, 700-verse Hindu scripture that is part of the Mahabharata. Source: Wikisource with Arnold and Besant translations'))
+    ''', (work_id, author_id, 'भगवद्गीता', None, 'Bhagavad Gita', 'poetry', None,
+          'The Bhagavad Gita, 700-verse Hindu scripture that is part of the Mahabharata'))
 
     total_verses = 0
     total_words = 0
@@ -365,21 +363,20 @@ def load_rigveda(cursor):
     else:
         print(f"  Warning: Translation file not found: {translation_file}")
 
-    # Insert author (qualified ID to avoid collision with DCS CoNLL-U version)
-    # Use work name as author name for consistency with DCS texts
-    author_id = 'rishis_pada'
+    # Insert author
+    author_id = 'rishis'
     cursor.execute('''
         INSERT INTO authors (id, name, name_alt, language, has_translations)
         VALUES (?, ?, ?, ?, ?)
-    ''', (author_id, 'ऋग्वेदः', 'Rig Veda (pada format)', 'sanskrit', 1))
+    ''', (author_id, 'ऋषयः', 'Various Rishis', 'sanskrit', 1))
 
-    # Create work (qualified ID to avoid collision with DCS version)
-    work_id = 'rigveda_pada'
+    # Create work
+    work_id = 'rigveda'
     cursor.execute('''
         INSERT INTO works (id, author_id, title, title_alt, title_english, type, urn, description)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (work_id, author_id, 'ऋग्वेदः', 'Ṛgveda', 'Rig Veda (pada format, complete with Griffith translation)', 'poetry', None,
-          'The Rig Veda, oldest of the four Vedas, collection of 10 mandalas. Source: DCS pada format with complete Griffith translation'))
+    ''', (work_id, author_id, 'ऋग्वेदः', 'Ṛgveda', 'Rig Veda', 'poetry', None,
+          'The Rig Veda, oldest of the four Vedas, collection of 10 mandalas'))
 
     total_verses = 0
     total_words = 0
@@ -443,89 +440,6 @@ def load_rigveda(cursor):
     print(f"\n  ✓ Loaded {total_verses:,} verses, {total_words:,} words, {total_translations:,} translations")
     return total_verses, total_words, total_translations
 
-def parse_citation_part(part_str):
-    """
-    Parse a citation part that may be numeric or textual.
-
-    Examples:
-        "1" -> 1
-        "Sū." -> hash("Sū.") % 100000  (deterministic number)
-        "Prathama adhyāyaḥ" -> hash("Prathama adhyāyaḥ") % 100000
-        "43.2" -> hash("43.2") % 100000
-
-    Returns an integer that can be used for ordering/indexing.
-    """
-    part_str = part_str.strip()
-
-    # Try to parse as integer first
-    try:
-        return int(part_str)
-    except ValueError:
-        pass
-
-    # Try to parse as float and convert to int
-    try:
-        return int(float(part_str))
-    except ValueError:
-        pass
-
-    # For non-numeric strings, create a deterministic hash-based number
-    # Use hash mod to keep numbers reasonable but unique
-    return abs(hash(part_str)) % 100000
-
-def discover_dcs_works():
-    """
-    Discover all works in the DCS corpus by scanning the conllu files directory
-
-    Returns:
-        List of dicts with work metadata: text_name, text_dir, work_id
-    """
-    dcs_base = '../data-sources/sanskrit/dcs/data/conllu/files'
-
-    if not os.path.exists(dcs_base):
-        print(f"Warning: DCS directory not found: {dcs_base}")
-        return []
-
-    works = []
-
-    # Scan all subdirectories
-    for entry in sorted(os.listdir(dcs_base)):
-        text_dir = os.path.join(dcs_base, entry)
-
-        # Skip non-directories
-        if not os.path.isdir(text_dir):
-            continue
-
-        # Check if directory contains conllu files
-        conllu_files = [f for f in os.listdir(text_dir) if f.endswith('.conllu') and not f.endswith('_parsed')]
-        if not conllu_files:
-            continue
-
-        # Extract text name from first conllu file
-        first_file = os.path.join(text_dir, conllu_files[0])
-        text_name = None
-
-        with open(first_file, 'r', encoding='utf-8') as f:
-            for line in f:
-                if line.startswith('## text:'):
-                    text_name = line.replace('## text:', '').strip()
-                    break
-
-        if not text_name:
-            text_name = entry  # Fallback to directory name
-
-        # Create work_id from text name (lowercase, no spaces/special chars)
-        work_id = re.sub(r'[^a-z0-9]+', '_', text_name.lower()).strip('_')
-
-        works.append({
-            'text_name': text_name,
-            'text_dir': text_dir,
-            'work_id': work_id,
-            'dir_name': entry
-        })
-
-    return works
-
 def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, work_info, translator_name):
     """
     Generic loader for DCS texts with CoNLL-U files
@@ -534,10 +448,10 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
         cursor: Database cursor
         text_name: Display name for logging
         text_dir: Directory path containing CoNLL-U files
-        translation_file: Path to translation file (can be None)
+        translation_file: Path to translation file
         author_info: Dict with 'id', 'name', 'name_alt' for author
         work_info: Dict with 'id', 'title', 'title_alt', 'title_english', 'type', 'description' for work
-        translator_name: Name of translator for attribution (can be None)
+        translator_name: Name of translator for attribution
     """
     print("\n" + "=" * 70)
     print(f"Loading {text_name}...")
@@ -576,15 +490,15 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                         # Format: "ŚvetU, 1" - Only chapter number
                         # Treat chapter as book, track verses sequentially
                         prefix = parts[0]
-                        book_num = parse_citation_part(parts[1])
+                        book_num = int(parts[1])
                         current_chapter = (book_num, None, None)
                         verse_counter = 0  # Reset verse counter for new chapter
                     elif len(parts) >= 3:
                         # Format: "AU, 1, 1" or "ChUp, 1, 1, 1"
                         prefix = parts[0]
-                        book_num = parse_citation_part(parts[1])
-                        chapter_num = parse_citation_part(parts[2])
-                        verse_num = parse_citation_part(parts[3]) if len(parts) > 3 else chapter_num
+                        book_num = int(parts[1])
+                        chapter_num = int(parts[2])
+                        verse_num = int(parts[3]) if len(parts) > 3 else chapter_num
                         current_chapter = (book_num, chapter_num, verse_num)
                         verse_counter = None  # Don't use counter for explicit citations
 
@@ -619,7 +533,7 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
     # Group by (book, chapter) to combine multiple verses per section
     translations = defaultdict(lambda: defaultdict(list))
 
-    if translation_file and os.path.exists(translation_file):
+    if os.path.exists(translation_file):
         print(f"  Reading {translation_file}...")
         with open(translation_file, 'r', encoding='utf-8') as f:
             for line in f:
@@ -653,19 +567,14 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
             for verses in chapters.values()
         )
         print(f"  Loaded {translation_count} translation segments")
-    elif translation_file:
+    else:
         print(f"  Warning: Translation file not found: {translation_file}")
-    # else: No translation file specified, skip silently
 
-    # Check if author already exists (for full mode where works share authors)
-    cursor.execute('SELECT id FROM authors WHERE id = ?', (author_info['id'],))
-    if not cursor.fetchone():
-        # Insert author
-        has_translations = 1 if (translation_file and os.path.exists(translation_file)) else 0
-        cursor.execute('''
-            INSERT INTO authors (id, name, name_alt, language, has_translations)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (author_info['id'], author_info['name'], author_info['name_alt'], 'sanskrit', has_translations))
+    # Insert author
+    cursor.execute('''
+        INSERT INTO authors (id, name, name_alt, language, has_translations)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (author_info['id'], author_info['name'], author_info['name_alt'], 'sanskrit', 1))
 
     # Insert work
     cursor.execute('''
@@ -746,220 +655,149 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
     return total_verse_count, total_word_count, total_translation_count
 
 def main():
-    # Parse command line arguments
-    mode = 'sample'  # Default mode
-    if len(sys.argv) > 1:
-        mode = sys.argv[1].lower()
-        if mode not in ['sample', 'full']:
-            print(f"Error: Invalid mode '{mode}'. Use 'sample' or 'full'")
-            print("Usage: python3 create_sanskrit_database.py [sample|full]")
-            return 1
-
     print("=" * 70)
     print("Sanskrit Texts Database Creation")
-    if mode == 'sample':
-        print("Mode: SAMPLE (7 texts with translations)")
-    else:
-        print("Mode: FULL (All 268 DCS works)")
+    print("7 texts: Bhagavad Gita + Rig Veda + 5 DCS texts with translations")
     print("=" * 70)
 
     if not HAS_TRANSLITERATION:
         print("\nWarning: indic-transliteration not installed")
         print("For full functionality: pip install indic-transliteration\n")
 
-    # Create database with mode-specific filename
-    if mode == 'sample':
-        db_path = 'sanskrit_texts.db'
-    else:
-        db_path = 'sanskrit_texts_full.db'
-
+    # Create database
+    db_path = 'sanskrit_texts.db'
     conn, cursor = create_database(db_path)
 
     # Track all statistics
     all_stats = []
 
-    # Load Bhagavad Gita (in both modes - uses Wikisource, not DCS)
-    # Use unique IDs to avoid collision with potential DCS version
+    # Load Bhagavad Gita
     bg_verses, bg_words, bg_translations = load_bhagavad_gita(cursor)
-    all_stats.append(('Bhagavad Gita (Wikisource, with translations)', bg_verses, bg_words, bg_translations))
+    all_stats.append(('Bhagavad Gita', bg_verses, bg_words, bg_translations))
 
-    # Load Rig Veda (in both modes - uses DCS pada format, not conllu)
-    # Use unique IDs to avoid collision with DCS CoNLL-U version
+    # Load Rig Veda
     rv_verses, rv_words, rv_translations = load_rigveda(cursor)
-    all_stats.append(('Rig Veda (pada format, complete with Griffith translation)', rv_verses, rv_words, rv_translations))
+    all_stats.append(('Rig Veda', rv_verses, rv_words, rv_translations))
 
-    if mode == 'sample':
-        # Sample mode: Load 5 specific texts with English translations
-        # Load Aitareyopaniṣad
-        au_verses, au_words, au_translations = load_dcs_text(
-            cursor,
-            text_name='Aitareyopaniṣad',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Aitareyopaniṣad',
-            translation_file='../data-sources/sanskrit/translations/AU-Olivelle.txt',
-            author_info={
-                'id': 'aitareyopanishad',
-                'name': 'ऐतरेयोपनिषद्',
-                'name_alt': 'Aitareya Upanishad'
-            },
-            work_info={
-                'id': 'aitareyopanishad',
-                'title': 'ऐतरेयोपनिषद्',
-                'title_alt': 'Aitareyopaniṣad',
-                'title_english': 'Aitareya Upanishad',
-                'type': 'philosophy',
-                'description': 'Principal Upanishad from the Rig Veda, teaching about the self (ātman)',
-                'book_label_prefix': 'Adhyāya'
-            },
-            translator_name='Patrick Olivelle'
-        )
-        all_stats.append(('Aitareyopaniṣad', au_verses, au_words, au_translations))
+    # Load Aitareyopaniṣad
+    au_verses, au_words, au_translations = load_dcs_text(
+        cursor,
+        text_name='Aitareyopaniṣad',
+        text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Aitareyopaniṣad',
+        translation_file='../data-sources/sanskrit/translations/AU-Olivelle.txt',
+        author_info={
+            'id': 'vedic_sages',
+            'name': 'वैदिकऋषयः',
+            'name_alt': 'Vedic Sages'
+        },
+        work_info={
+            'id': 'aitareyopanishad',
+            'title': 'ऐतरेयोपनिषद्',
+            'title_alt': 'Aitareyopaniṣad',
+            'title_english': 'Aitareya Upanishad',
+            'type': 'philosophy',
+            'description': 'Principal Upanishad from the Rig Veda, teaching about the self (ātman)',
+            'book_label_prefix': 'Adhyāya'
+        },
+        translator_name='Patrick Olivelle'
+    )
+    all_stats.append(('Aitareyopaniṣad', au_verses, au_words, au_translations))
 
-        # Load Chāndogyopaniṣad
-        chup_verses, chup_words, chup_translations = load_dcs_text(
-            cursor,
-            text_name='Chāndogyopaniṣad',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Chāndogyopaniṣad',
-            translation_file='../data-sources/sanskrit/translations/ChUp-Olivelle.txt',
-            author_info={
-                'id': 'chandogyopanishad',
-                'name': 'छान्दोग्योपनिषद्',
-                'name_alt': 'Chandogya Upanishad'
-            },
-            work_info={
-                'id': 'chandogyopanishad',
-                'title': 'छान्दोग्योपनिषद्',
-                'title_alt': 'Chāndogyopaniṣad',
-                'title_english': 'Chandogya Upanishad',
-                'type': 'philosophy',
-                'description': 'One of the oldest and largest Upanishads, teaching Vedantic philosophy',
-                'book_label_prefix': 'Prapāṭhaka'
-            },
-            translator_name='Patrick Olivelle'
-        )
-        all_stats.append(('Chāndogyopaniṣad', chup_verses, chup_words, chup_translations))
+    # Load Chāndogyopaniṣad
+    chup_verses, chup_words, chup_translations = load_dcs_text(
+        cursor,
+        text_name='Chāndogyopaniṣad',
+        text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Chāndogyopaniṣad',
+        translation_file='../data-sources/sanskrit/translations/ChUp-Olivelle.txt',
+        author_info={
+            'id': 'sama_vedic_sages',
+            'name': 'सामवेदिकऋषयः',
+            'name_alt': 'Sama Vedic Sages'
+        },
+        work_info={
+            'id': 'chandogyopanishad',
+            'title': 'छान्दोग्योपनिषद्',
+            'title_alt': 'Chāndogyopaniṣad',
+            'title_english': 'Chandogya Upanishad',
+            'type': 'philosophy',
+            'description': 'One of the oldest and largest Upanishads, teaching Vedantic philosophy',
+            'book_label_prefix': 'Prapāṭhaka'
+        },
+        translator_name='Patrick Olivelle'
+    )
+    all_stats.append(('Chāndogyopaniṣad', chup_verses, chup_words, chup_translations))
 
-        # Load Śvetāśvataropaniṣad
-        svet_verses, svet_words, svet_translations = load_dcs_text(
-            cursor,
-            text_name='Śvetāśvataropaniṣad',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Śvetāśvataropaniṣad',
-            translation_file='../data-sources/sanskrit/translations/SvetUp-Olivelle.txt',
-            author_info={
-                'id': 'svetasvataropanishad',
-                'name': 'श्वेताश्वतरोपनिषद्',
-                'name_alt': 'Svetasvatara Upanishad'
-            },
-            work_info={
-                'id': 'svetasvataropanishad',
-                'title': 'श्वेताश्वतरोपनिषद्',
-                'title_alt': 'Śvetāśvataropaniṣad',
-                'title_english': 'Svetasvatara Upanishad',
-                'type': 'philosophy',
-                'description': 'Important theistic Upanishad teaching yoga and meditation',
-                'book_label_prefix': 'Adhyāya'
-            },
-            translator_name='Patrick Olivelle'
-        )
-        all_stats.append(('Śvetāśvataropaniṣad', svet_verses, svet_words, svet_translations))
+    # Load Śvetāśvataropaniṣad
+    svet_verses, svet_words, svet_translations = load_dcs_text(
+        cursor,
+        text_name='Śvetāśvataropaniṣad',
+        text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Śvetāśvataropaniṣad',
+        translation_file='../data-sources/sanskrit/translations/SvetUp-Olivelle.txt',
+        author_info={
+            'id': 'svetasvatara',
+            'name': 'श्वेताश्वतरः',
+            'name_alt': 'Śvetāśvatara'
+        },
+        work_info={
+            'id': 'svetasvataropanishad',
+            'title': 'श्वेताश्वतरोपनिषद्',
+            'title_alt': 'Śvetāśvataropaniṣad',
+            'title_english': 'Svetasvatara Upanishad',
+            'type': 'philosophy',
+            'description': 'Important theistic Upanishad teaching yoga and meditation',
+            'book_label_prefix': 'Adhyāya'
+        },
+        translator_name='Patrick Olivelle'
+    )
+    all_stats.append(('Śvetāśvataropaniṣad', svet_verses, svet_words, svet_translations))
 
-        # Load Atharvaveda (Śaunaka)
-        av_verses, av_words, av_translations = load_dcs_text(
-            cursor,
-            text_name='Atharvaveda (Śaunaka)',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Atharvaveda (Śaunaka)',
-            translation_file='../data-sources/sanskrit/dcs/data/atharvaveda-shaunaka/translations/whitney.txt',
-            author_info={
-                'id': 'atharvaveda',
-                'name': 'अथर्ववेदः',
-                'name_alt': 'Atharva Veda'
-            },
-            work_info={
-                'id': 'atharvaveda',
-                'title': 'अथर्ववेदः',
-                'title_alt': 'Atharvaveda (Śaunaka)',
-                'title_english': 'Atharva Veda',
-                'type': 'poetry',
-                'description': 'The fourth Veda, collection of spells, charms, incantations, and hymns',
-                'book_label_prefix': 'Kāṇḍa'
-            },
-            translator_name='William Dwight Whitney'
-        )
-        all_stats.append(('Atharvaveda', av_verses, av_words, av_translations))
+    # Load Atharvaveda (Śaunaka)
+    av_verses, av_words, av_translations = load_dcs_text(
+        cursor,
+        text_name='Atharvaveda (Śaunaka)',
+        text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Atharvaveda (Śaunaka)',
+        translation_file='../data-sources/sanskrit/dcs/data/atharvaveda-shaunaka/translations/whitney.txt',
+        author_info={
+            'id': 'atharvan_rishis',
+            'name': 'अथर्वऋषयः',
+            'name_alt': 'Atharvan Rishis'
+        },
+        work_info={
+            'id': 'atharvaveda',
+            'title': 'अथर्ववेदः',
+            'title_alt': 'Atharvaveda (Śaunaka)',
+            'title_english': 'Atharva Veda',
+            'type': 'poetry',
+            'description': 'The fourth Veda, collection of spells, charms, incantations, and hymns',
+            'book_label_prefix': 'Kāṇḍa'
+        },
+        translator_name='William Dwight Whitney'
+    )
+    all_stats.append(('Atharvaveda', av_verses, av_words, av_translations))
 
-        # Load Vājasaneyisaṃhitā (Yajur Veda)
-        vs_verses, vs_words, vs_translations = load_dcs_text(
-            cursor,
-            text_name='Vājasaneyisaṃhitā (Yajur Veda)',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Vājasaneyisaṃhitā (Mādhyandina)',
-            translation_file='../data-sources/sanskrit/translations/VS-Griffith.txt',
-            author_info={
-                'id': 'vajasaneyisamhita',
-                'name': 'वाजसनेयिसंहिता',
-                'name_alt': 'Vajasaneyi Samhita (White Yajur Veda)'
-            },
-            work_info={
-                'id': 'vajasaneyisamhita',
-                'title': 'वाजसनेयिसंहिता',
-                'title_alt': 'Vājasaneyisaṃhitā',
-                'title_english': 'Vajasaneyi Samhita (White Yajur Veda)',
-                'type': 'poetry',
-                'description': 'The White Yajur Veda, sacrificial formulas and prose instructions',
-                'book_label_prefix': 'Adhyāya'
-            },
-            translator_name='Ralph T.H. Griffith'
-        )
-        all_stats.append(('Vājasaneyisaṃhitā', vs_verses, vs_words, vs_translations))
-
-    else:
-        # Full mode: Load all DCS works
-        print("\n" + "=" * 70)
-        print("Loading all DCS works...")
-        print("=" * 70)
-
-        dcs_works = discover_dcs_works()
-        print(f"\nDiscovered {len(dcs_works)} DCS works")
-
-        for idx, work_meta in enumerate(dcs_works, 1):
-            text_name = work_meta['text_name']
-            text_dir = work_meta['text_dir']
-            work_id = work_meta['work_id']
-
-            print(f"\n[{idx}/{len(dcs_works)}] Processing {text_name}...")
-
-            # Convert text name to Devanagari for display
-            text_devanagari = iast_to_devanagari(text_name)
-
-            # Use work name as author name (since most Sanskrit texts don't have individual authors)
-            author_info = {
-                'id': work_id,
-                'name': text_devanagari,
-                'name_alt': text_name
-            }
-
-            work_info = {
-                'id': work_id,
-                'title': text_devanagari,
-                'title_alt': text_name,
-                'title_english': text_name,  # Use IAST as English title
-                'type': 'text',  # Generic type
-                'description': f'{text_name} from the Digital Corpus of Sanskrit',
-                'book_label_prefix': 'Book'
-            }
-
-            try:
-                verses, words, translations = load_dcs_text(
-                    cursor,
-                    text_name=text_name,
-                    text_dir=text_dir,
-                    translation_file=None,  # No translations for most works
-                    author_info=author_info,
-                    work_info=work_info,
-                    translator_name=None
-                )
-                all_stats.append((text_name, verses, words, translations))
-            except Exception as e:
-                print(f"  ✗ Error loading {text_name}: {e}")
-                continue
+    # Load Vājasaneyisaṃhitā (Yajur Veda)
+    vs_verses, vs_words, vs_translations = load_dcs_text(
+        cursor,
+        text_name='Vājasaneyisaṃhitā (Yajur Veda)',
+        text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Vājasaneyisaṃhitā (Mādhyandina)',
+        translation_file='../data-sources/sanskrit/translations/VS-Griffith.txt',
+        author_info={
+            'id': 'yajur_rishis',
+            'name': 'यजुर्वैदिकऋषयः',
+            'name_alt': 'Yajur Vedic Rishis'
+        },
+        work_info={
+            'id': 'vajasaneyisamhita',
+            'title': 'वाजसनेयिसंहिता',
+            'title_alt': 'Vājasaneyisaṃhitā',
+            'title_english': 'Vajasaneyi Samhita (White Yajur Veda)',
+            'type': 'poetry',
+            'description': 'The White Yajur Veda, sacrificial formulas and prose instructions',
+            'book_label_prefix': 'Adhyāya'
+        },
+        translator_name='Ralph T.H. Griffith'
+    )
+    all_stats.append(('Vājasaneyisaṃhitā', vs_verses, vs_words, vs_translations))
 
     # Check if any texts loaded
     total_verses_loaded = sum(stat[1] for stat in all_stats)
@@ -994,13 +832,9 @@ def main():
     conn.commit()
     conn.close()
 
-    # Compress database with mode-specific filename
+    # Compress database
     print("\nCompressing database...")
-    if mode == 'sample':
-        zip_path = 'sanskrit_texts.db.zip'
-    else:
-        zip_path = 'sanskrit_texts_full.db.zip'
-
+    zip_path = 'sanskrit_texts.db.zip'
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
         zipf.write(db_path)
 
@@ -1011,22 +845,13 @@ def main():
     print("\n" + "=" * 70)
     print("Database Creation Complete!")
     print("=" * 70)
-    print(f"\nMode: {mode.upper()}")
     print(f"\nContents:")
     print(f"  Authors: {author_count}")
     print(f"  Works: {work_count}")
     print(f"  Books: {book_count}")
-
-    if mode == 'sample' or len(all_stats) <= 20:
-        # Show individual text stats for sample mode or if few texts
-        print(f"\nTexts loaded:")
-        for text_name, verses, words, translations in all_stats:
-            print(f"  - {text_name}: {verses:,} verses, {words:,} words, {translations:,} translations")
-    else:
-        # Show summary for full mode
-        print(f"\nTexts loaded: {len(all_stats)} works")
-        print(f"  (First 5: {', '.join([s[0] for s in all_stats[:5]])}...)")
-
+    print(f"\nTexts loaded:")
+    for text_name, verses, words, translations in all_stats:
+        print(f"  - {text_name}: {verses:,} verses, {words:,} words, {translations:,} translations")
     print(f"\nStatistics:")
     print(f"  Total verses: {total_verses:,}")
     print(f"  Total words: {total_words:,}")
@@ -1039,9 +864,8 @@ def main():
     print(f"  ✓ Bhagavad Gita Sanskrit: CC BY-SA 4.0 (Wikisource)")
     print(f"  ✓ BG English (Arnold, Besant): Public Domain")
     print(f"  ✓ DCS Sanskrit texts: CC BY 4.0 (Oliver Hellwig)")
-    if mode == 'sample':
-        print(f"  ✓ RV, AV, VS English (Griffith, Whitney): Public Domain")
-        print(f"  ✓ Upanishads English (Olivelle): Used with permission")
+    print(f"  ✓ RV, AV, VS English (Griffith, Whitney): Public Domain")
+    print(f"  ✓ Upanishads English (Olivelle): Used with permission")
     print(f"\nReady for ClassicsViewer integration!")
 
     return 0

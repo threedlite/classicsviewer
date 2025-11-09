@@ -1,5 +1,5 @@
 # Classics Viewer
-Note: If you have trouble loading the app after an update, uninstall and reinstall.
+Note: If you have trouble loading the app after an update, save bookmarks, uninstall and reinstall.  Only updating the app will not update the data.  
 If you have trouble cloning this repo set GIT_LFS_SKIP_SMUDGE=1
 
 An Android app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required.
