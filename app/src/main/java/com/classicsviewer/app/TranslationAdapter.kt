@@ -16,7 +16,8 @@ import com.classicsviewer.app.utils.PreferencesManager
 
 class TranslationAdapter(
     val items: List<TranslationDisplayItem>,
-    private val invertColors: Boolean = false
+    private val invertColors: Boolean = false,
+    private val onWordClick: ((String) -> Unit)? = null
 ) : RecyclerView.Adapter<TranslationAdapter.ViewHolder>() {
     
     // Maintain private reference for internal use
@@ -193,6 +194,14 @@ class TranslationAdapter(
 
                     // Apply styling based on row
                     when (index) {
+                        0 -> {
+                            // Greek word - make clickable
+                            isClickable = true
+                            isFocusable = true
+                            setOnClickListener {
+                                onWordClick?.invoke(text)
+                            }
+                        }
                         1 -> {
                             // English gloss - bold
                             setTypeface(null, Typeface.BOLD)

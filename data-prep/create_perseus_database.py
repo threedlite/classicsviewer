@@ -5489,6 +5489,35 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
     
     print("✓ Quality report saved to database_quality_report.txt")
 
+def insert_build_metadata(cursor, mode='full'):
+    """Insert build metadata as a system dictionary entry.
+
+    Args:
+        cursor: Database cursor
+        mode: Build mode (sample, full, extended, etc.)
+    """
+    from datetime import datetime
+
+    # Get current timestamp in ISO 8601 format
+    build_timestamp = datetime.now().isoformat()
+
+    # Insert as a dictionary entry with language='system'
+    cursor.execute("""
+        INSERT INTO dictionary_entries
+        (headword, headword_normalized_ultra, language, entry_xml, entry_html, entry_plain, source)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (
+        'build_time',
+        None,  # No normalized form needed for system metadata
+        'system',
+        f'<entry><timestamp>{build_timestamp}</timestamp><mode>{mode}</mode></entry>',
+        f'Build Time: {build_timestamp}<br>Mode: {mode}',
+        f'Build Time: {build_timestamp}\nMode: {mode}',
+        'database_build_metadata'
+    ))
+
+    print(f"✓ Build metadata inserted: {build_timestamp} (mode: {mode})")
+
 def create_database(mode='full', custom_csv_path=None):
     """Create database from Perseus data
 
@@ -5933,6 +5962,9 @@ def create_database(mode='full', custom_csv_path=None):
         # Import combined dictionary data (Cunliffe, LSJ, Wiktionary)
         # Pass build mode to control morphology inclusion
         load_combined_dictionaries(cursor, build_mode=mode)
+
+        # Insert build metadata (timestamp and mode)
+        insert_build_metadata(cursor, mode=mode)
 
         # Skip the old LSJ loading code
 
@@ -7177,9 +7209,41 @@ if __name__ == "__main__":
             checkpoint_conn.close()
             print("✓ Database WAL checkpointed after merges")
 
-            # NOTE: Interlinear generation disabled for sample database to reduce build time
-            # Interlinear translations are only included in full/extended databases
-            print("\n⚠ Skipping interlinear generation for sample database")
+            # Generate interlinear translations (same as full database: Iliad and Odyssey only)
+            print("\n" + "="*60)
+            print("GENERATING INTERLINEAR TRANSLATIONS")
+            print("="*60)
+
+            # ALWAYS use pregenerated XML files - never generate during database build
+            if interlineate_folder:
+                interlinear_output_dir = Path(interlineate_folder)
+            else:
+                # Default to pregenerated files in data-sources/classicsviewer_interlinear/
+                interlinear_output_dir = Path(__file__).parent.parent / "data-sources" / "classicsviewer_interlinear"
+
+            print(f"Using pregenerated XML files from: {interlinear_output_dir}")
+
+            # Sample mode: only Iliad and Odyssey (same as full mode default)
+            work_ids = [
+                'tlg0012.tlg001',  # Homer - Iliad
+                'tlg0012.tlg002',  # Homer - Odyssey
+            ]
+            print(f"Sample mode: Importing only Iliad and Odyssey")
+
+            # NO GENERATION - Always use pregenerated files
+            print("✓ Skipping generation - using pregenerated interlinear XML files")
+
+            # Import generated interlinear translations into database
+            print("\n" + "="*60)
+            print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
+            print("="*60)
+            import_interlinear_translations("perseus_texts_sample.db", work_ids=work_ids, interlinear_dir=interlinear_output_dir, mode='full')
+
+            # Checkpoint WAL after importing translations
+            checkpoint_conn = sqlite3.connect("perseus_texts_sample.db")
+            checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            checkpoint_conn.close()
+            print("✓ Database WAL checkpointed after importing translations")
 
             # Compress and copy sample database to asset pack
             compress_and_copy_database("perseus_texts_sample.db", is_sample=True)

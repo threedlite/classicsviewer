@@ -26,6 +26,39 @@ def normalize_greek(text):
     text = ''.join(c for c in text if c.isalpha() and ('\u0370' <= c <= '\u03ff' or '\u1f00' <= c <= '\u1fff'))
     return text
 
+def remove_length_marks(text):
+    """
+    Remove vowel length marks (macrons and breves) from Greek text.
+    This is needed because Wiktionary uses these marks in declension templates
+    (e.g., ᾰ̓πολογῐ́ᾱ) but we need to match them with standard forms.
+
+    Replaces:
+    - ᾱ (alpha with macron) → α
+    - ᾰ (alpha with breve) → α
+    - ῑ (iota with macron) → ι
+    - ῐ (iota with breve) → ι
+    - ῡ (upsilon with macron) → υ
+    - ῠ (upsilon with breve) → υ
+    Also handles combining macron (\u0304) and breve (\u0306)
+    """
+    if not text:
+        return ""
+
+    # Replace precomposed vowels with length marks
+    replacements = {
+        'ᾱ': 'α', 'ᾰ': 'α',  # alpha
+        'ῑ': 'ι', 'ῐ': 'ι',  # iota
+        'ῡ': 'υ', 'ῠ': 'υ',  # upsilon
+    }
+
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+
+    # Remove combining macron and breve
+    text = text.replace('\u0304', '').replace('\u0306', '')
+
+    return text
+
 class AncientGreekDecliner:
     """Parse and expand Ancient Greek declension templates"""
     
@@ -81,11 +114,15 @@ class AncientGreekDecliner:
             return forms
             
         params = match.group(1).split('|')
-        
+
+        # Normalize first parameter to check endings (remove length marks)
+        # This is needed because Wiktionary templates use ᾱ/ᾰ etc.
+        param0_normalized = remove_length_marks(params[0]) if params else ''
+
         # Try to identify declension pattern from template name
-        if 'grc-decl-1st' in template or params[0].endswith('α') or params[0].endswith('η'):
+        if 'grc-decl-1st' in template or param0_normalized.endswith('α') or param0_normalized.endswith('η'):
             forms.extend(self.generate_first_declension(params))
-        elif 'grc-decl-2nd' in template or params[0].endswith('ος') or params[0].endswith('ον'):
+        elif 'grc-decl-2nd' in template or param0_normalized.endswith('ος') or param0_normalized.endswith('ον'):
             forms.extend(self.generate_second_declension(params))
         elif 'grc-decl-3rd' in template:
             forms.extend(self.generate_third_declension(params))
@@ -97,12 +134,12 @@ class AncientGreekDecliner:
     def generate_first_declension(self, params: List[str]) -> List[Dict]:
         """Generate first declension forms"""
         forms = []
-        
+
         if not params or not params[0]:
             return forms
-            
-        # Get the stem
-        nom_sing = params[0]
+
+        # Get the stem - normalize length marks first
+        nom_sing = remove_length_marks(params[0])
         if nom_sing.endswith('α'):
             stem = nom_sing[:-1]
             pattern = 'first_fem_alpha'
@@ -150,12 +187,12 @@ class AncientGreekDecliner:
     def generate_second_declension(self, params: List[str]) -> List[Dict]:
         """Generate second declension forms"""
         forms = []
-        
+
         if not params or not params[0]:
             return forms
-            
-        # Get the stem
-        nom_sing = params[0]
+
+        # Get the stem - normalize length marks first
+        nom_sing = remove_length_marks(params[0])
         if nom_sing.endswith('ος'):
             stem = nom_sing[:-2]
             pattern = 'second_masc'

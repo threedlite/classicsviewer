@@ -6,6 +6,7 @@ This replaces the old LSJ, Cunliffe, and Wiktionary loading functions.
 
 import json
 import csv
+import unicodedata
 from pathlib import Path
 from .normalization_utils import normalize_greek_ultra
 
@@ -271,16 +272,19 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     for key, entry in dictionary_entries.items():
         # key might be "headword_source" format for multiple sources
         # entry contains the actual headword field
-        
+
+        # CRITICAL: Normalize headword to NFC form for consistent storage
+        headword_nfc = unicodedata.normalize('NFC', entry['headword'])
+
         # Compute ultra-normalized form for Greek words
-        headword_ultra = normalize_greek_ultra(entry['headword']) if entry['language'] == 'greek' else None
-        
+        headword_ultra = normalize_greek_ultra(headword_nfc) if entry['language'] == 'greek' else None
+
         cursor.execute("""
-            INSERT INTO dictionary_entries 
+            INSERT INTO dictionary_entries
             (headword, headword_normalized_ultra, language, entry_xml, entry_html, entry_plain, source)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
-            entry['headword'],
+            headword_nfc,
             headword_ultra,
             entry['language'],
             entry.get('entry_xml', ''),
@@ -395,17 +399,24 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     # Multiple mappings for same word form are valid (homographs)
     mappings_imported = 0
     for mapping in all_lemma_mappings:
-        # Compute ultra-normalized form
-        word_form_ultra = normalize_greek_ultra(mapping['word_form'])
-        
+        # CRITICAL: Normalize to NFC form before storing
+        # This ensures consistent storage format that matches user input (NFC)
+        # Wiktionary data comes in partially decomposed form, but SQLite doesn't
+        # consistently normalize, so we must do it explicitly
+        word_form_nfc = unicodedata.normalize('NFC', mapping['word_form'])
+        lemma_nfc = unicodedata.normalize('NFC', mapping['lemma'])
+
+        # Compute ultra-normalized form (removes all diacritics)
+        word_form_ultra = normalize_greek_ultra(word_form_nfc)
+
         cursor.execute("""
             INSERT OR IGNORE INTO lemma_map
             (word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info)
             VALUES (?, ?, ?, ?, ?, ?)
         """, (
-            mapping['word_form'],
+            word_form_nfc,
             word_form_ultra,
-            mapping['lemma'],
+            lemma_nfc,
             mapping.get('confidence', 1.0),
             mapping.get('source', ''),
             mapping.get('morph_info')

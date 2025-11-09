@@ -235,7 +235,7 @@ class TextPageFragment : Fragment() {
         }
         
         val inverted = PreferencesManager.getInvertColors(requireContext())
-        val adapter = TranslationAdapter(translationItems, inverted)
+        val adapter = TranslationAdapter(translationItems, inverted, onWordClick)
         binding.textRecyclerView.adapter = adapter
         
         // Check if we have a saved scroll position (targetLineNumber)

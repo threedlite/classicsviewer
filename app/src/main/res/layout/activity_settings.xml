@@ -307,6 +307,16 @@
             android:paddingEnd="16dp"
             android:paddingBottom="16dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="For interlinear translations - Tap any Greek word to view its full dictionary entry with alternate meanings. Note: Interlinear data is automatically generated and may contain errors."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.3"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp" />
+
         <!-- Build Info Section -->
         <LinearLayout
             android:layout_width="match_parent"
