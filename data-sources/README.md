@@ -9,6 +9,9 @@ git clone https://github.com/PerseusDL/canonical-pdlrefwk.git
 git clone https://github.com/mk270/whitakers-words.git
 git clone https://github.com/OpenGreekAndLatin/First1KGreek.git
 #git clone https://github.com/scaife-viewer/scaife-viewer.git
+#https://github.com/scaife-viewer/atlas-data-prep.git  # not open license sources
+#https://github.com/IohannesArnold/lewis-short-json.git # TODO license?
+#https://github.com/IohannesArnold/perseus-lexica-to-json.git # TODO license?
 git clone https://github.com/openscriptures/morphhb.git
 git clone https://github.com/openscriptures/HebrewLexicon.git
 #git clone https://github.com/laneslexicon/lexicon_xml.git; git checkout originals
