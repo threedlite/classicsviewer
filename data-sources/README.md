@@ -28,3 +28,13 @@ git clone https://github.com/LukeMurphey/perseus-greek-and-roman-texts.git
 # ORACC Cuneiform Dictionaries (Sumerian + Akkadian)
 wget http://oracc.museum.upenn.edu/json/epsd2.zip  # ePSD2 Sumerian Dictionary (~203 MB)
 wget http://oracc.museum.upenn.edu/json/rinap.zip  # RINAP Akkadian Glossary (~24 MB)
+
+
+# TODO investigate: 
+#The Ancient Greek Dependency Treebanks, available under a CC BY-SA 3.0 license.
+#The Pedalion Trees, available under a CC BY-SA 4.0 license.
+#The Harrington Trees, available under a CC BY-SA 4.0 license.
+
+
+
+
