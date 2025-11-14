@@ -1,15 +1,15 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-11-06T23:01:28.061499
+Generated: 2025-11-14T14:42:28.890872
 
 Total Authors: 407
 Total Works: 2085
-Total Books: 212153
-Total Lines: 4,385,731
-Translation Segments: 287,108
-Build Time: 10.3 minutes
-Database Size: 9500.6MB → 2959.9MB compressed (31.2%)
-Dictionary Entries: 100,483
-Lemma Mappings: 2,335,790
+Total Books: 212166
+Total Lines: 4,386,338
+Translation Segments: 281,828
+Build Time: 10.4 minutes
+Database Size: 9530.8MB → 3049.6MB compressed (32.0%)
+Dictionary Entries: 100,484
+Lemma Mappings: 2,352,130
 
 === DETAILED BREAKDOWN ===
 
@@ -41378,6 +41378,33 @@ Euclid / Phaenomena (demonstrationes alterae recensionis b)  (OGL) / Chapter 3 -
 Euclid / Phaenomena (demonstrationes alterae recensionis b)  (OGL) / Chapter 4 - 18 lines
 Euclid / Phaenomena (recensio b) (OGL) - 13 lines, max_char=472 [First1KGreek]
 Euclid / Sectio canonis [Sp.] (OGL) - 70 lines, max_char=1,453 [First1KGreek]
+Euclid / The Thirteen Books of Euclid's Elements - 607 lines total, 13 books, max_lines/book=130, max_char=8,193 [Perseus]
+Euclid / The Thirteen Books of Euclid's Elements / Book 1 - 84 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 81 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 2 - 15 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 16 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 3 - 48 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 48 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 4 - 23 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 23 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 5 - 43 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 43 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 6 - 38 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 37 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 7 - 61 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 61 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 8 - 27 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 27 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 9 - 36 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 36 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 10 - 130 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 131 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 11 - 67 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 67 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 12 - 17 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 18 segments [Direct]
+Euclid / The Thirteen Books of Euclid's Elements / Book 13 - 18 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Thomas Little Heath 18 segments [Direct]
 
 [Eunapius]
 Eunapius / Vitae Sophistarum (OGL) - 18 lines, max_char=1,745 [First1KGreek]

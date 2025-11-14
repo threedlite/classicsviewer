@@ -168,6 +168,14 @@ class InterlinearGenerator:
         # These patterns indicate morphology returned wrong lemma
         if result and result != "???":
             result_lower = result.lower()
+
+            # Reject part-of-speech-only definitions (stub entries from Wiktionary)
+            # These are entries that contain ONLY a POS tag like "adjective", "noun", "verb"
+            # Common in incomplete Wiktionary entries
+            pos_only_pattern = r'^(adjective|noun|verb|adverb|pronoun|preposition|conjunction|interjection|particle|article)s?\.?$'
+            if re.match(pos_only_pattern, result_lower.strip()):
+                return "???"
+
             # Reject verb definitions that are clearly wrong for particles
             # "to recall to memory" / "make famous" are from μνάομαι (wrong lemma for δέ)
             if "make famous" in result_lower or "recall to memory" in result_lower:

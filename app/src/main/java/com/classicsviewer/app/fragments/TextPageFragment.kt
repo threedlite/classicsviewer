@@ -389,6 +389,11 @@ class TextPageFragment : Fragment() {
             android.util.Log.e("TextPageFragment", "Adapter is not TextLineWithSpeakerAdapter")
         }
     }
+
+    fun refreshAdapter() {
+        // Recreate the adapter to apply new wrap settings
+        binding?.textRecyclerView?.adapter?.notifyDataSetChanged()
+    }
 }
 
 // Data class for translation display

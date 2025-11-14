@@ -79,23 +79,42 @@ class TranslationAdapter(
         // Only process as interlinear if translator is "Interlinear" to avoid processing other translations
         if (segment.text.contains("| ") && segment.translator?.contains("Interlinear") == true) {
             // This is interlinear format with Markdown tables
-            // Hide TextView, show interlinear container
+            // Hide TextView
             holder.binding.translationText.visibility = View.GONE
-            holder.binding.interlinearScrollView.visibility = View.VISIBLE
 
-            // Clear previous content
-            holder.binding.interlinearContainer.removeAllViews()
+            // Check wrap preference
+            val wrapEnabled = PreferencesManager.getWrapInterlinear(holder.itemView.context)
 
-            // Parse Markdown tables and create views
-            val tables = parseMarkdownTables(segment.text)
-            tables.forEach { rows ->
-                val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context)
-                holder.binding.interlinearContainer.addView(table)
+            if (wrapEnabled) {
+                // Use wrapping container
+                holder.binding.interlinearScrollView.visibility = View.GONE
+                holder.binding.interlinearWrapContainer.visibility = View.VISIBLE
+                holder.binding.interlinearWrapContainer.removeAllViews()
+
+                // Parse Markdown tables and create views
+                val tables = parseMarkdownTables(segment.text)
+                tables.forEach { rows ->
+                    val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context)
+                    holder.binding.interlinearWrapContainer.addView(table)
+                }
+            } else {
+                // Use horizontal scrolling container
+                holder.binding.interlinearScrollView.visibility = View.VISIBLE
+                holder.binding.interlinearWrapContainer.visibility = View.GONE
+                holder.binding.interlinearContainer.removeAllViews()
+
+                // Parse Markdown tables and create views
+                val tables = parseMarkdownTables(segment.text)
+                tables.forEach { rows ->
+                    val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context)
+                    holder.binding.interlinearContainer.addView(table)
+                }
             }
         } else {
             // Regular translation text
             holder.binding.translationText.visibility = View.VISIBLE
             holder.binding.interlinearScrollView.visibility = View.GONE
+            holder.binding.interlinearWrapContainer.visibility = View.GONE
 
             holder.binding.translationText.text = if (segment.text.contains("<")) {
                 // Allow specific HTML tags: <hi rend="bold">, <b>

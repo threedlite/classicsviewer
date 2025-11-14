@@ -19,5 +19,11 @@
         android:title="Continuous Audio"
         android:checkable="true"
         app:showAsAction="never" />
-        
+
+    <item
+        android:id="@+id/action_wrap_interlinear"
+        android:title="Wrap interlinear text"
+        android:checkable="true"
+        app:showAsAction="never" />
+
 </menu>

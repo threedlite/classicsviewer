@@ -708,11 +708,11 @@ class PerseusRepository:
                     add_entry(entry)
                 added_lemmas.add(base_prefix + stem_lemma)
 
-        # STEP 2.7: Ultra-normalized search (only when explicitly allowed)
-        # Matches PerseusRepository.kt lines 1065-1114
-        # This runs in main lookup flow ONLY when allow_ultra_normalized=True (from find_stem_lemma)
-        # For direct user lookups, this is disabled to match device behavior
-        if allow_ultra_normalized and not entries and normalized_language == "greek":
+        # STEP 2.7: Ultra-normalized search (fallback when no entries found)
+        # Matches PerseusRepository.kt lines 1009-1098
+        # This runs unconditionally as a last resort when no other method found entries
+        # Applies 0.6x confidence penalty to ultra-normalized matches
+        if not entries and normalized_language == "greek":
             if self.debug:
                 print(f"DEBUG: No entries found, trying ultra-normalized search for '{cleaned_word}'")
 

@@ -20,6 +20,7 @@ object PreferencesManager {
     private const val KEY_SUPPRESSED_LANGUAGES = "suppressed_languages"
     private const val KEY_HAS_RUN_AUTO_DETECT_LANGUAGES = "has_run_auto_detect_languages"
     private const val KEY_HAS_FIXED_LANGUAGE_ORDER = "has_fixed_language_order"
+    private const val KEY_WRAP_INTERLINEAR = "wrap_interlinear"
 
     private val gson = Gson()
     
@@ -67,9 +68,18 @@ object PreferencesManager {
     fun getUseSinaiticusFont(context: Context): Boolean {
         return getPrefs(context).getBoolean(KEY_USE_SINAITICUS_FONT, false)
     }
-    
+
     fun setUseSinaiticusFont(context: Context, use: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_USE_SINAITICUS_FONT, use).apply()
+    }
+
+    // Wrap interlinear text preference
+    fun getWrapInterlinear(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_WRAP_INTERLINEAR, false)
+    }
+
+    fun setWrapInterlinear(context: Context, wrap: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_WRAP_INTERLINEAR, wrap).apply()
     }
     
     // Navigation state persistence

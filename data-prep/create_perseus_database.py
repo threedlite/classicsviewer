@@ -3374,7 +3374,13 @@ def process_translations(work_dir, work_id, cursor):
                 print(f"      ⚠️  Translator not found, using 'Unknown'")
             else:
                 print(f"      Translator: {translator}")
-            
+
+            # Check if this is Euclid's Elements translation (ONLY this work)
+            if work_id == 'tlg1799.tlg001':
+                process_euclid_translation(root, work_id, cursor, translator)
+                translation_success_count += 1
+                continue  # Skip to next translation file
+
             # Check if this is a New Testament text (needs special chapter handling)
             is_new_testament = work_id.startswith('tlg0031')
             
@@ -4490,12 +4496,17 @@ def process_text_file(xml_path, work_id, cursor, language):
         
         # Check if this is a New Testament text FIRST (before prose detection)
         is_new_testament = work_id.startswith('tlg0031')
-        
+
         if is_new_testament:
             # Handle New Testament texts specially with chapters as books
             process_new_testament_text(root, work_id, cursor, language)
             return
-        
+
+        # Check if this is Euclid's Elements (ONLY this work)
+        if work_id == 'tlg1799.tlg001':
+            process_euclid_elements(root, work_id, cursor, language)
+            return  # Exit early, don't run any other processing
+
         # Check if this is a dramatic text with different structure
         author_id = work_id.split('.')[0]
         # Drama authors: Aeschylus, Sophocles, Euripides, Aristophanes (ONLY these are true dramas)
@@ -4808,6 +4819,208 @@ def process_text_file(xml_path, work_id, cursor, language):
         print(f"    Error processing {xml_path}: {e}")
         import traceback
         traceback.print_exc()
+
+def process_euclid_elements(root, work_id, cursor, language):
+    """
+    Process Euclid's Elements with its hierarchical structure.
+    Book → Type (def/post/comm_not/prop) → Number → Paragraph
+
+    IMPORTANT: ONLY called for tlg1799.tlg001 - no other works affected.
+
+    Args:
+        root: XML root element
+        work_id: Work identifier (must be 'tlg1799.tlg001')
+        cursor: Database cursor
+        language: 'greek'
+    """
+    ns = {'tei': 'http://www.tei-c.org/ns/1.0'}
+
+    print(f"      Processing Euclid's Elements with hierarchical structure")
+
+    # Find all book divisions (Books 1-13)
+    books = root.findall('.//tei:div[@subtype="book"]', ns)
+
+    if not books:
+        print(f"      Warning: No book divisions found in Euclid")
+        return
+
+    for book_div in books:
+        book_n = book_div.get('n')
+        book_num = int(book_n) if book_n and book_n.isdigit() else 1
+        book_id = f"{work_id}.{book_num:03d}"
+
+        all_lines = []
+        line_num = 0
+
+        # Type labels for prepending to text
+        type_labels = {
+            'def': 'DEF',           # Definitions
+            'post': 'POST',         # Postulates
+            'comm_not': 'CN',       # Common Notions
+            'prop': 'PROP'          # Propositions
+        }
+
+        # Process each type division (definitions, postulates, propositions, etc.)
+        for type_div in book_div.findall('.//tei:div[@subtype="type"]', ns):
+            type_n = type_div.get('n', '')
+            type_label = type_labels.get(type_n, type_n.upper())
+
+            # Process each numbered item within this type
+            for num_div in type_div.findall('.//tei:div[@subtype="number"]', ns):
+                num_n = num_div.get('n', '')
+
+                # Get ALL paragraphs and combine their text into ONE line
+                # This matches Scaife's approach: one numbered section = one line
+                paras = num_div.findall('.//tei:p', ns)
+                if paras:
+                    # Combine all paragraph text with space separator
+                    para_texts = []
+                    for para in paras:
+                        para_text = ''.join(para.itertext()).strip()
+                        if para_text:
+                            para_texts.append(para_text)
+
+                    text = ' '.join(para_texts)
+
+                    # Only process if we have non-empty text
+                    if text and len(text) > 5:
+                        line_num += 1
+
+                        # Prepend reference label: [DEF.1], [PROP.47], etc.
+                        labeled_text = f"[{type_label}.{num_n}] {text}"
+
+                        all_lines.append({
+                            'number': line_num,
+                            'text': labeled_text,
+                            'xml': ET.tostring(num_div, encoding='unicode')
+                        })
+
+        # Insert book into database
+        if all_lines:
+            cursor.execute("""
+                INSERT OR REPLACE INTO books
+                (id, work_id, book_number, label, start_line, end_line, line_count)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (book_id, work_id, book_num, f"Book {book_num}",
+                  1, len(all_lines), len(all_lines)))
+
+            # Clear any existing data for this book (in case of rebuild)
+            cursor.execute("DELETE FROM text_lines WHERE book_id = ?", (book_id,))
+            cursor.execute("DELETE FROM words WHERE book_id = ?", (book_id,))
+
+            # Insert all lines with sequence numbers
+            for seq_num, line in enumerate(all_lines, 1):
+                cursor.execute("""
+                    INSERT INTO text_lines
+                    (book_id, line_number, sequence_number, line_text, line_xml, speaker)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, (book_id, line['number'], seq_num, line['text'], line['xml'], None))
+
+                # Insert words for dictionary lookup and occurrence highlighting
+                words = line['text'].split()
+                for word_pos, word in enumerate(words, 1):
+                    if word.strip():
+                        cursor.execute("""
+                            INSERT INTO words
+                            (word, book_id, line_number, sequence_number, word_position)
+                            VALUES (?, ?, ?, ?, ?)
+                        """, (word, book_id, line['number'], seq_num, word_pos))
+
+            print(f"      ✅ Book {book_num}: {len(all_lines)} items")
+        else:
+            print(f"      ⚠️  Book {book_num}: No content found")
+
+    print(f"      ✅ Euclid's Elements: Processed {len(books)} books")
+
+def process_euclid_translation(root, work_id, cursor, translator):
+    """
+    Process Euclid's Elements English translation.
+    Matches the exact structure of the Greek text for perfect alignment.
+
+    IMPORTANT: ONLY called for tlg1799.tlg001 translation files.
+
+    Args:
+        root: XML root element from tlg1799.tlg001.perseus-eng2.xml
+        work_id: Work identifier (must be 'tlg1799.tlg001')
+        cursor: Database cursor
+        translator: Translator name (should be 'Thomas Little Heath')
+    """
+    ns = {'tei': 'http://www.tei-c.org/ns/1.0'}
+
+    print(f"      Processing Euclid's English translation ({translator})")
+
+    # Find translation div
+    trans_div = root.find('.//tei:div[@type="translation"]', ns)
+    if not trans_div:
+        print(f"      Warning: No translation div found")
+        return
+
+    # Find all book divisions
+    books = trans_div.findall('.//tei:div[@subtype="book"]', ns)
+
+    if not books:
+        print(f"      Warning: No book divisions found in translation")
+        return
+
+    for book_div in books:
+        book_n = book_div.get('n')
+        book_num = int(book_n) if book_n and book_n.isdigit() else 1
+        book_id = f"{work_id}.{book_num:03d}"
+
+        # Track line number to match Greek text exactly
+        line_num = 0
+
+        # Type labels for prepending to English text
+        type_labels = {
+            'def': 'DEF',           # Definitions
+            'post': 'POST',         # Postulates
+            'comm_not': 'CN',       # Common Notions
+            'prop': 'PROP'          # Propositions
+        }
+
+        # Process each type division (definitions, postulates, propositions, etc.)
+        for type_div in book_div.findall('.//tei:div[@subtype="type"]', ns):
+            type_n = type_div.get('n', '')
+            type_label = type_labels.get(type_n, type_n.upper())
+
+            # Process each numbered item within this type
+            for num_div in type_div.findall('.//tei:div[@subtype="number"]', ns):
+                num_n = num_div.get('n', '')
+
+                # Get ALL paragraphs and combine their text into ONE segment
+                # This matches the Greek text structure: one numbered section = one segment
+                paras = num_div.findall('.//tei:p', ns)
+                if paras:
+                    # Combine all paragraph text with space separator
+                    para_texts = []
+                    for para in paras:
+                        para_text = ''.join(para.itertext()).strip()
+                        if para_text:
+                            para_texts.append(para_text)
+
+                    text = ' '.join(para_texts)
+
+                    # Only process if we have non-empty text
+                    if text and len(text) > 5:
+                        line_num += 1
+
+                        # Prepend reference label to English translation: [DEF.1], [PROP.47], etc.
+                        labeled_text = f"[{type_label}.{num_n}] {text}"
+
+                        # Insert translation segment aligned to matching line number
+                        # Greek line N corresponds to English segment with start_line=N
+                        cursor.execute("""
+                            INSERT INTO translation_segments
+                            (book_id, start_line, end_line, sequence_number, translation_text, translator)
+                            VALUES (?, ?, ?, ?, ?, ?)
+                        """, (book_id, line_num, line_num, line_num, labeled_text, translator))
+
+        if line_num > 0:
+            print(f"      ✅ Book {book_num} translation: {line_num} segments")
+        else:
+            print(f"      ⚠️  Book {book_num} translation: No content found")
+
+    print(f"      ✅ Euclid's translation: Processed {len(books)} books")
 
 def process_perseus_author(author_dir, language, cursor, sample_works=None, work_filter=None, is_first1k=False):
     """Process all works for a single author

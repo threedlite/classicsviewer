@@ -666,6 +666,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         menu.findItem(R.id.action_continuous_playback)?.isChecked = continuousPlaybackMode
+        menu.findItem(R.id.action_wrap_interlinear)?.isChecked = PreferencesManager.getWrapInterlinear(this)
         return super.onPrepareOptionsMenu(menu)
     }
     
@@ -684,16 +685,35 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             R.id.action_continuous_playback -> {
                 continuousPlaybackMode = !continuousPlaybackMode
                 item.isChecked = continuousPlaybackMode
-                
+
                 // Save preference
                 getSharedPreferences("audio_prefs", MODE_PRIVATE).edit()
                     .putBoolean("continuous_playback", continuousPlaybackMode)
                     .apply()
-                
+
                 val message = if (continuousPlaybackMode) {
                     "Continuous audio playback enabled"
                 } else {
                     "Continuous audio playback disabled"
+                }
+                Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+                true
+            }
+            R.id.action_wrap_interlinear -> {
+                val currentWrap = PreferencesManager.getWrapInterlinear(this)
+                val newWrap = !currentWrap
+                item.isChecked = newWrap
+
+                // Save preference
+                PreferencesManager.setWrapInterlinear(this, newWrap)
+
+                // Refresh the current page to apply the new setting
+                refreshCurrentPage()
+
+                val message = if (newWrap) {
+                    "Interlinear text wrapping enabled"
+                } else {
+                    "Interlinear text wrapping disabled"
                 }
                 Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
                 true
@@ -712,8 +732,25 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             else -> super.onOptionsItemSelected(item)
         }
     }
-    
-    
+
+    private fun refreshCurrentPage() {
+        // Recreate the entire adapter to force fragments to rebind with new settings
+        val currentItem = binding.textViewPager.currentItem
+        val adapter = binding.textViewPager.adapter
+
+        // Save scroll position
+        val fragment = supportFragmentManager.findFragmentByTag("f$currentItem")
+
+        // Recreate adapter
+        binding.textViewPager.adapter = null
+        binding.textViewPager.adapter = adapter
+
+        // Restore page position
+        binding.textViewPager.post {
+            binding.textViewPager.setCurrentItem(currentItem, false)
+        }
+    }
+
     private fun observeBookmarksForBook() {
         bookmarkViewModel.getBookmarksByBook(bookId).observe(this) { bookmarks ->
             // Update the set of bookmarked line keys (line number + sequence number)
