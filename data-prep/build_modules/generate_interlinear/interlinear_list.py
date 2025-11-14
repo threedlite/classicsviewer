@@ -208,22 +208,22 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
         return (work_index, author, work_title, False, error_msg)
 
 
-def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path, dict, int, int, float]) -> List[Tuple[int, str, str, bool, str]]:
+def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path, dict, int, int, float, dict]) -> List[Tuple[int, str, str, bool, str]]:
     """
     Worker function that processes a chunk of works assigned to one worker.
 
     Args:
-        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_books, start_time)
+        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_books, start_time, completed_tracker)
               where work_list is [(work_index, author, work_title, work_id), ...]
+              completed_tracker is a shared dict to track completed books
 
     Returns:
         List of (work_index, author, work_title, success, error_message) for all works processed
     """
     import sys
     import time
-    import sqlite3
 
-    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_books, start_time = args
+    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_books, start_time, completed_tracker = args
     results = []
 
     print(f"\n{'='*80}")
@@ -231,36 +231,29 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
     print(f"{'='*80}\n")
     sys.stdout.flush()
 
-    # Track actual books completed for accurate ETA
-    import os
-    output_path = str(output_dir)
-    local_works_completed = 0
-    local_books_completed = 0
-
     for i, (work_index, author, work_title, work_id) in enumerate(work_list):
         # Process this work
         result = process_work_worker((work_index, author, work_title, work_id, db_path, output_dir))
         results.append(result)
 
-        # Report completion immediately with ETA
+        # Report completion immediately with progress
         success = result[3]
         status = "✓" if success else "✗"
 
         # Track actual books for this work
         books_in_work = work_size_lookup.get(work_id, 0)
-        local_works_completed += 1
-        local_books_completed += books_in_work
 
-        # Count completed XML files for global progress estimate
-        try:
-            global_works_completed = len([f for f in os.listdir(output_path) if f.endswith('.xml')])
-        except:
-            global_works_completed = local_works_completed
+        # Mark this work as completed in shared tracker
+        completed_tracker[work_id] = books_in_work
+
+        # Calculate global books completed from shared tracker
+        global_books_completed = sum(completed_tracker.values())
 
         elapsed = time.time() - start_time
+        progress_pct = (global_books_completed / total_books * 100) if total_books > 0 else 0
 
         print(f"\n{status} [Worker {worker_id}] {author} - {work_title}")
-        print(f"  Progress: {global_works_completed}/{total_works} works ({global_works_completed/total_works*100:.1f}%) | Elapsed: {elapsed/60:.1f}m")
+        print(f"  Progress: {global_books_completed:,}/{total_books:,} books ({progress_pct:.1f}%) | Elapsed: {elapsed/60:.1f}m")
         sys.stdout.flush()
 
     print(f"\n{'='*80}")
@@ -369,17 +362,19 @@ def generate_interlinear_parallel(
         # Create a lookup dict for work sizes (must be before worker_args uses it)
         work_size_lookup = {work_sizes[i][2]: work_sizes[i][3] for i in range(len(work_sizes))}
 
+        # Create a shared dict to track completed works across all workers
+        manager = mp.Manager()
+        completed_tracker = manager.dict()
+
         # Create worker arguments with additional context for ETA calculation
         worker_args = [
-            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_books, start_time)
+            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_books, start_time, completed_tracker)
             for worker_id in range(num_workers)
             if len(worker_chunks[worker_id]) > 0
         ]
 
-        # Track results and books for accurate ETA
+        # Track results
         results = []
-        completed_count = 0
-        completed_books = 0
 
         with mp.Pool(num_workers) as pool:
             # Submit each worker's chunk as a separate task
