@@ -259,23 +259,8 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
 
         elapsed = time.time() - start_time
 
-        # Calculate accurate books completed by reading file count and using actual work sizes
-        # This is still approximate for global count, but uses real book counts per work
-        # We can't know exact global books without shared state, but we can estimate better
-        avg_books_per_work = total_books / total_works if total_works > 0 else 0
-        estimated_global_books = global_works_completed * avg_books_per_work
-
-        # Calculate ETA based on estimated global books
-        books_rate = estimated_global_books / elapsed if elapsed > 0 else 0
-        remaining_books = total_books - estimated_global_books
-        eta_seconds = remaining_books / books_rate if books_rate > 0 else 0
-        eta_minutes = eta_seconds / 60
-
-        works_rate = global_works_completed / elapsed if elapsed > 0 else 0
-
-        print(f"\n{status} [Worker {worker_id}] Work {global_works_completed}/{total_works} complete: {author} - {work_title} ({books_in_work:,} books)")
-        print(f"  [{global_works_completed/total_works*100:.1f}%] Elapsed: {elapsed/60:.1f}m | Books: ~{int(estimated_global_books):,}/{total_books:,} (~{estimated_global_books/total_books*100:.1f}%)")
-        print(f"  Rate: {works_rate*60:.1f} works/min, {books_rate*60:.1f} books/min | ETA: {eta_minutes:.1f}m")
+        print(f"\n{status} [Worker {worker_id}] {author} - {work_title}")
+        print(f"  Progress: {global_works_completed}/{total_works} works ({global_works_completed/total_works*100:.1f}%) | Elapsed: {elapsed/60:.1f}m")
         sys.stdout.flush()
 
     print(f"\n{'='*80}")
