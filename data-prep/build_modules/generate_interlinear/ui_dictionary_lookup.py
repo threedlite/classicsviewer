@@ -775,10 +775,14 @@ class PerseusRepository:
                     has_non_treebank = mapping['source'] != 'perseus_treebank'
                     source = ultra_entry['source'] if has_non_treebank else f"{ultra_entry['source']} (via Treebank)"
 
+                    # Clean up morph_info to avoid trailing ": " when mapping has no morph_info
+                    morph_suffix = mapping['morph_info'] or ''
+                    morph_text = f"found via simplified form: {morph_suffix}" if morph_suffix else "found via simplified form"
+
                     add_entry(DictionaryEntry(
                         lemma=lemma,
                         definition=ultra_entry['entry_html'] or ultra_entry['entry_plain'] or "",
-                        morph_info=f"found via simplified form: {mapping['morph_info'] or ''}",
+                        morph_info=morph_text,
                         is_direct_match=False,
                         confidence=(mapping['confidence'] or 0.0) * 0.6,
                         source=source,
