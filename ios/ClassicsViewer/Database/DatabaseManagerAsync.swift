@@ -113,6 +113,8 @@ actor DatabaseManagerAsync {
         // Check file size
         let attributes = try fileManager.attributesOfItem(atPath: databasePath)
         let fileSize = attributes[.size] as? Int64 ?? 0
+        print("DatabaseManagerAsync: Opening database at \(databasePath)")
+        print("DatabaseManagerAsync: Database file size: \(fileSize) bytes (\(Double(fileSize) / 1_000_000_000.0) GB)")
         if fileSize < 1000 { // Less than 1KB is too small
             print("DatabaseManagerAsync: Database file too small (\(fileSize) bytes)")
             throw DatabaseError.corruptedDatabase

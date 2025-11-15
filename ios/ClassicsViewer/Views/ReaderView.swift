@@ -269,6 +269,24 @@ struct ReaderView: View {
     
     private var greekTextView: some View {
         VStack(alignment: .leading, spacing: viewModel.lineSpacing) {
+            if viewModel.lines.isEmpty {
+                VStack(spacing: 20) {
+                    Image(systemName: "doc.text.magnifyingglass")
+                        .font(.system(size: 60))
+                        .foregroundColor(.secondary)
+                    Text("No text available")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                    Text("Book: \(viewModel.book.id)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Text("Total lines: \(viewModel.totalPages * viewModel.linesPerPage.rawValue)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(40)
+            }
             ForEach(Array(viewModel.lines.enumerated()), id: \.element.id) { index, line in
                 LineTextView(
                     line: line,
@@ -358,7 +376,20 @@ struct ReaderView: View {
                         // This is interlinear format with Markdown tables
                         InterlinearTextView(
                             text: segment.translationText,
-                            fontSize: viewModel.fontSize
+                            fontSize: viewModel.fontSize,
+                            onWordTapped: { greekWord in
+                                // Create a Word object for dictionary lookup
+                                // Use line number from the segment
+                                let word = Word(
+                                    id: 0,
+                                    word: greekWord,
+                                    bookId: viewModel.book.id,
+                                    lineNumber: segment.startLine,
+                                    sequenceNumber: 0,
+                                    wordPosition: 0
+                                )
+                                selectedWord = word
+                            }
                         )
                     } else {
                         // Regular translation text

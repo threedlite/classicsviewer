@@ -8,16 +8,61 @@ import SwiftUI
 struct InterlinearTextView: View {
     let text: String
     let fontSize: CGFloat
+    let onWordTapped: ((String) -> Void)?
 
     @Environment(\.colorScheme) var colorScheme
+    @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
+
+    init(text: String, fontSize: CGFloat, onWordTapped: ((String) -> Void)? = nil) {
+        self.text = text
+        self.fontSize = fontSize
+        self.onWordTapped = onWordTapped
+    }
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .top, spacing: 16) {
-                ForEach(Array(parseMarkdownTables(text).enumerated()), id: \.offset) { index, rows in
-                    if rows.count == 3 {
-                        createWordTable(rows: rows)
+        if wrapInterlinear {
+            // For wrapping, we need to be very conservative about size
+            // Parse tables and check count
+            let tables = parseMarkdownTables(text)
+            let validTables = tables.filter { $0.count == 3 }
+
+            if validTables.count <= 100 {
+                // Small enough for wrapping
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 100, maximum: 150), spacing: 8)], alignment: .leading, spacing: 8) {
+                        ForEach(Array(validTables.enumerated()), id: \.offset) { index, rows in
+                            createWordTable(rows: rows)
+                        }
                     }
+                    .padding(.horizontal)
+                }
+            } else {
+                // Too large - fall back to horizontal with message
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("⚠️ \(validTables.count) words - too large for wrapping. Using horizontal scroll.")
+                        .font(.caption)
+                        .foregroundColor(.orange)
+                        .padding(.horizontal)
+                        .padding(.bottom, 4)
+
+                    horizontalScrollView(validTables: validTables)
+                }
+            }
+        } else {
+            // Horizontal scroll mode
+            let tables = parseMarkdownTables(text)
+            let validTables = tables.filter { $0.count == 3 }
+            horizontalScrollView(validTables: validTables)
+        }
+    }
+
+    /// Horizontal scroll view for interlinear text
+    @ViewBuilder
+    private func horizontalScrollView(validTables: [[String]]) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(alignment: .top, spacing: 16) {
+                ForEach(Array(validTables.enumerated()), id: \.offset) { index, rows in
+                    createWordTable(rows: rows)
                 }
             }
             .padding(.horizontal)
@@ -105,6 +150,62 @@ struct InterlinearTextView: View {
         .background(isLight ? Color(hex: "#EEEEEE") : Color(hex: "#222222"))
         .cornerRadius(4)
         .padding(4)
+        .onTapGesture {
+            // Tap on the word table to look up the Greek word (rows[0])
+            onWordTapped?(rows[0])
+        }
+    }
+}
+
+// MARK: - FlowLayout
+/// Custom layout that wraps items to the next line when they don't fit
+/// Similar to Android's FlexboxLayout
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 8
+    var containerWidth: CGFloat?
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let width = containerWidth ?? proposal.replacingUnspecifiedDimensions().width
+        let result = FlowResult(in: width, subviews: subviews, spacing: spacing)
+        return result.size
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let width = containerWidth ?? bounds.width
+        let result = FlowResult(in: width, subviews: subviews, spacing: spacing)
+        for (index, subview) in subviews.enumerated() {
+            subview.place(at: CGPoint(x: bounds.minX + result.positions[index].x, y: bounds.minY + result.positions[index].y), proposal: .unspecified)
+        }
+    }
+
+    struct FlowResult {
+        var size: CGSize = .zero
+        var positions: [CGPoint] = []
+
+        init(in containerWidth: CGFloat, subviews: Subviews, spacing: CGFloat) {
+            var currentX: CGFloat = 0
+            var currentY: CGFloat = 0
+            var lineHeight: CGFloat = 0
+            var maxWidthUsed: CGFloat = 0
+
+            for subview in subviews {
+                let size = subview.sizeThatFits(.unspecified)
+
+                if currentX + size.width > containerWidth && currentX > 0 {
+                    // Move to next line
+                    currentX = 0
+                    currentY += lineHeight + spacing
+                    lineHeight = 0
+                }
+
+                positions.append(CGPoint(x: currentX, y: currentY))
+                currentX += size.width + spacing
+                lineHeight = max(lineHeight, size.height)
+                maxWidthUsed = max(maxWidthUsed, currentX)
+            }
+
+            self.size = CGSize(width: maxWidthUsed, height: currentY + lineHeight)
+        }
     }
 }
 

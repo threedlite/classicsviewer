@@ -7,7 +7,8 @@ struct SettingsView: View {
     @EnvironmentObject var appState: AppState
     @AppStorage("fontSize") private var fontSize: Double = 20
     @AppStorage("colorScheme") private var colorScheme: ColorScheme = .system
-    
+    @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
+
     @State private var showingDatabaseImporter = false
     @State private var showingImportAlert = false
     @State private var importAlertMessage = ""
@@ -56,6 +57,9 @@ struct SettingsView: View {
                             Text(scheme.displayName).tag(scheme)
                         }
                     }
+
+                    // Wrap Interlinear Text
+                    Toggle("Wrap Interlinear Text", isOn: $wrapInterlinear)
                 }
 
                 // Languages Section

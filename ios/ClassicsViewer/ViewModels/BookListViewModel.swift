@@ -18,11 +18,18 @@ class BookListViewModel: ObservableObject {
     private func loadBooksAsync(for workId: String) async {
         isLoading = true
         errorMessage = nil
-        
+
         do {
             print("DEBUG: Loading books for work \(workId)")
-            // Database lifecycle managed by async architecture
-            
+
+            // Check if this work exists in works table
+            let workDAO = WorkDAO()
+            if let work = try await workDAO.getWork(workId: workId) {
+                print("DEBUG: Work found in database - id: \(work.id), title: \(work.title)")
+            } else {
+                print("DEBUG: WARNING - Work NOT found in works table!")
+            }
+
             books = try await bookDAO.getBooksForWork(workId: workId)
             print("DEBUG: Loaded \(books.count) books")
             

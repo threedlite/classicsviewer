@@ -23,10 +23,53 @@ class BookDAO: BookDAOProtocol {
             WHERE work_id = ?
             ORDER BY book_number
         """
-        
-        return try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [workId]) { [self] statement in
+
+        print("DEBUG BookDAO: Querying books for work_id: '\(workId)' (length: \(workId.count))")
+        print("DEBUG BookDAO: work_id bytes: \(workId.utf8.map { String(format: "%02x", $0) }.joined(separator: " "))")
+        let books = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [workId]) { [self] statement in
             bookFromStatement(statement)
         }
+        print("DEBUG BookDAO: Found \(books.count) books for work_id: \(workId)")
+        if books.isEmpty {
+            // Check if ANY books exist
+            let countQuery = "SELECT COUNT(*) FROM books WHERE work_id = ?"
+            let counts = try await DatabaseManagerAsync.shared.executeQuery(countQuery, parameters: [workId]) { statement in
+                Int(sqlite3_column_int(statement, 0))
+            }
+            print("DEBUG BookDAO: Direct count query returned: \(counts.first ?? 0)")
+
+            // Check if books table has ANY rows
+            let totalCountQuery = "SELECT COUNT(*) FROM books"
+            let totalCounts = try await DatabaseManagerAsync.shared.executeQuery(totalCountQuery, parameters: []) { statement in
+                Int(sqlite3_column_int(statement, 0))
+            }
+            print("DEBUG BookDAO: Total books in database: \(totalCounts.first ?? 0)")
+
+            // Sample some book IDs to see what's there
+            let sampleQuery = "SELECT id, work_id FROM books LIMIT 5"
+            let samples = try await DatabaseManagerAsync.shared.executeQuery(sampleQuery, parameters: []) { statement in
+                let id = String(cString: sqlite3_column_text(statement, 0))
+                let workId = String(cString: sqlite3_column_text(statement, 1))
+                return (id, workId)
+            }
+            print("DEBUG BookDAO: Sample book entries:")
+            for (id, wid) in samples {
+                print("  - id: \(id), work_id: \(wid)")
+            }
+
+            // Check for Euclid books specifically
+            let euclidQuery = "SELECT id, work_id FROM books WHERE work_id LIKE 'tlg1799%' ORDER BY work_id LIMIT 20"
+            let euclidBooks = try await DatabaseManagerAsync.shared.executeQuery(euclidQuery, parameters: []) { statement in
+                let id = String(cString: sqlite3_column_text(statement, 0))
+                let workId = String(cString: sqlite3_column_text(statement, 1))
+                return (id, workId)
+            }
+            print("DEBUG BookDAO: Euclid books in database (\(euclidBooks.count)):")
+            for (id, wid) in euclidBooks {
+                print("  - id: \(id), work_id: \(wid)")
+            }
+        }
+        return books
     }
     
     func getBooksByAuthor(authorId: String) async throws -> [Book] {
