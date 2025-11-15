@@ -249,6 +249,9 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 ## Interlinear Generation
 
 ### Running Interlinear Generation:
+
+**CRITICAL**: ALWAYS use `run_interlinear_no_sleep.sh`. NEVER run without the no-sleep script as sleep delays waste hours of processing time.
+
 ```bash
 # Always run from build_modules/generate_interlinear directory
 cd build_modules/generate_interlinear
