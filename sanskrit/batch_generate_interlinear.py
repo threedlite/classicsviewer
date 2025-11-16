@@ -6,7 +6,7 @@ Unified script for batch processing Sanskrit works.
 
 Features:
 - Generate interlinear text files (.interlinear.txt)
-- Generate TEI XML files (.dcs-eng.xml) with translations
+- Generate TEI XML files (.dcs-eng99.xml) with translations
 - Single-threaded or parallel processing
 - Multiple modes: all works, only DCS, only with translations
 
@@ -111,7 +111,7 @@ def process_work_sequential(db_path: str, work_info: Dict, output_dir: Path) -> 
     try:
         # Generate both interlinear text and TEI XML with single generator instance
         interlinear_file = output_dir / f"{work_id}.interlinear.txt"
-        tei_file = output_dir / f"{work_id}.dcs-eng.xml"
+        tei_file = output_dir / f"{work_id}.dcs-eng99.xml"
 
         with SanskritInterlinearGenerator(db_path) as gen:
             gen.write_interlinear_file(work_id, interlinear_file)
@@ -168,7 +168,7 @@ def process_work_parallel(args: Tuple[str, Dict, Path]) -> Dict:
     try:
         # Generate both interlinear text and TEI XML with single generator instance
         interlinear_file = output_dir / f"{work_id}.interlinear.txt"
-        tei_file = output_dir / f"{work_id}.dcs-eng.xml"
+        tei_file = output_dir / f"{work_id}.dcs-eng99.xml"
 
         with SanskritInterlinearGenerator(db_path) as gen:
             gen.write_interlinear_file(work_id, interlinear_file)
@@ -265,7 +265,7 @@ def batch_generate(db_path: str, output_dir: Path, num_workers: int = 1):
     print()
     print("Files generated:")
     print(f"  - {len(successful)} interlinear text files (.interlinear.txt)")
-    print(f"  - {tei_generated} TEI XML files (.dcs-eng.xml)")
+    print(f"  - {tei_generated} TEI XML files (.dcs-eng99.xml)")
 
     # Print failures if any
     if failed:
@@ -322,7 +322,7 @@ def main():
         description='Batch generate Sanskrit interlinear and TEI XML files for all works',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Generates both .interlinear.txt and .dcs-eng.xml files for every work in the database.
+Generates both .interlinear.txt and .dcs-eng99.xml files for every work in the database.
 
 Examples:
   # Generate all works (sequential)
@@ -339,8 +339,8 @@ Examples:
     parser.add_argument('database', help='Path to Sanskrit database')
     parser.add_argument('--parallel', type=int, default=1, metavar='N',
                        help='Number of parallel workers (default: 1 = sequential)')
-    parser.add_argument('--output', type=Path, default=Path('interlinear'),
-                       help='Output directory (default: ./interlinear)')
+    parser.add_argument('--output', type=Path, default=Path('../data-sources/classicsviewer_interlinear'),
+                       help='Output directory (default: ../data-sources/classicsviewer_interlinear)')
 
     args = parser.parse_args()
 

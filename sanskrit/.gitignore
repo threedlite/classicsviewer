@@ -13,3 +13,23 @@ __pycache__/
 data-sources/*.html
 data-sources/*.json
 data-sources/*_api.json
+
+# Generated data files (too large)
+dcs_sanskrit_dictionary.csv
+dcs_sanskrit_morphology.csv
+dcs_extraction_stats.json
+dcs_missing_words.txt
+
+# Generated interlinear output
+interlinear/
+
+# Test files
+test_*.txt
+test_*.xml
+bhagavad_gita_wikisource/
+bhagavad_gita/
+
+# Build logs
+build.log
+interlinear.log
+extended_build*.log

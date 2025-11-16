@@ -4,7 +4,7 @@ Sanskrit Interlinear and TEI XML Generation
 
 Generates word-by-word interlinear translations for Sanskrit texts in two formats:
 1. Plain text format (.interlinear.txt) - matching Greek interlinear format
-2. TEI XML format (.dcs-eng.xml) - matching Greek TEI XML format
+2. TEI XML format (.dcs-eng99.xml) - matching Greek TEI XML format
 
 For DCS texts: Uses pre-identified lemmas from CoNLL-U data
 For custom texts (BG, RV): Falls back to morphology lookup
@@ -22,9 +22,12 @@ XML format:  <l n="N">| word1 |
 
 import sqlite3
 import time
+import re
+import html
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
+from functools import lru_cache
 from sanskrit_dictionary_lookup import SanskritRepository, extract_gloss
 
 
@@ -35,6 +38,32 @@ class WordData:
     word_position: int
     lemma: Optional[str] = None
     pos_tag: Optional[str] = None
+
+
+def sanitize_xml_text(text: str) -> str:
+    """
+    Sanitize text for safe XML inclusion.
+
+    Removes control characters (ASCII 0-31 except tab, newline, CR)
+    and escapes XML special characters (&, <, >, ", ').
+
+    Args:
+        text: Raw text string
+
+    Returns:
+        XML-safe string
+    """
+    if not text:
+        return ""
+
+    # Remove control characters (0x00-0x1F except 0x09 tab, 0x0A newline, 0x0D CR)
+    # Also remove 0x7F (DEL)
+    text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', text)
+
+    # Escape XML special characters
+    text = html.escape(text, quote=True)
+
+    return text
 
 
 class SanskritInterlinearGenerator:
@@ -65,9 +94,6 @@ class SanskritInterlinearGenerator:
             'words_missing': 0,
             'cache_hits': 0,
         }
-
-        # Simple word-to-gloss cache
-        self.gloss_cache = {}
 
     def get_work_info(self, work_id: str) -> Dict:
         """Get work metadata from database."""
@@ -135,11 +161,36 @@ class SanskritInterlinearGenerator:
 
         return words
 
+    @lru_cache(maxsize=50000)
+    def _cached_dictionary_lookup(self, word: str, lemma: str) -> tuple:
+        """
+        Cached dictionary lookup using LRU cache.
+
+        Uses LRU cache to avoid repeated lookups of common words.
+        Returns tuple of (gloss, found_flag) for statistics tracking.
+
+        Args:
+            word: Word form
+            lemma: Lemma (or empty string if not available)
+
+        Returns:
+            Tuple of (gloss_string, was_found_boolean)
+        """
+        # Normalize lemma (None → empty string for cache key)
+        lemma_normalized = lemma if lemma else None
+
+        # Lookup in dictionary
+        entry = self.repo.lookup_best_match(word, lemma_normalized)
+
+        if entry:
+            gloss = extract_gloss(entry.definition, max_length=40)
+            return (gloss, True)
+        else:
+            return ("?", False)
+
     def lookup_word_gloss(self, word_data: WordData) -> str:
         """
-        Look up gloss for a word.
-
-        Uses cache to avoid repeated lookups.
+        Look up gloss for a word using LRU cache.
 
         Args:
             word_data: Word to look up
@@ -148,32 +199,20 @@ class SanskritInterlinearGenerator:
             Concise gloss or "?" if not found
         """
         word = word_data.word
-        lemma = word_data.lemma
+        lemma = word_data.lemma if word_data.lemma else ""
 
-        # Check cache first
-        cache_key = f"{word}:{lemma}" if lemma else word
-        if cache_key in self.gloss_cache:
-            self.stats['cache_hits'] += 1
-            cached_gloss = self.gloss_cache[cache_key]
-            # Count cache hits as found/missing based on the cached gloss
-            if cached_gloss != "?":
-                self.stats['words_found'] += 1
-            else:
-                self.stats['words_missing'] += 1
-            return cached_gloss
+        # Use cached lookup
+        gloss, was_found = self._cached_dictionary_lookup(word, lemma)
 
-        # Lookup in dictionary
-        entry = self.repo.lookup_best_match(word, lemma)
-
-        if entry:
-            gloss = extract_gloss(entry.definition, max_length=40)
-            self.gloss_cache[cache_key] = gloss
+        # Update statistics
+        self.stats['words_total'] += 1
+        if was_found:
             self.stats['words_found'] += 1
-            return gloss
+            # Cache hits tracked by LRU mechanism
         else:
-            self.gloss_cache[cache_key] = "?"  # Cache misses too
             self.stats['words_missing'] += 1
-            return "?"
+
+        return gloss
 
     def generate_line_interlinear(self, book_id: str, line_number: int) -> Tuple[str, str]:
         """
@@ -196,10 +235,9 @@ class SanskritInterlinearGenerator:
         word_parts = []
         gloss_parts = []
         for word_data in words:
-            gloss = self.lookup_word_gloss(word_data)
+            gloss = self.lookup_word_gloss(word_data)  # words_total tracked inside
             word_parts.append(word_data.word)
             gloss_parts.append(gloss)
-            self.stats['words_total'] += 1
 
         self.stats['lines_processed'] += 1
         words_line = " | ".join(word_parts)
@@ -345,32 +383,35 @@ class SanskritInterlinearGenerator:
         if not words:
             return ""
 
-        # Start with opening <l> tag
-        xml_parts = [f'<l n="{line_number}">']
+        # Build content parts (without tags)
+        xml_parts = []
 
         for i, word_data in enumerate(words):
-            # Lookup gloss
+            # Lookup gloss and sanitize all text for XML
             gloss = self.lookup_word_gloss(word_data)
+            word_clean = sanitize_xml_text(word_data.word)
+            gloss_clean = sanitize_xml_text(gloss)
+            lemma_clean = sanitize_xml_text(word_data.lemma) if word_data.lemma else "?"
 
             # First word: no leading separator
             if i == 0:
-                xml_parts.append(f"| {word_data.word} |")
-                xml_parts.append(f"| **{gloss}** |")
-                if word_data.lemma:
-                    xml_parts.append(f"| {word_data.lemma} |")
-                else:
-                    xml_parts.append("| ? |")
+                xml_parts.append(f"| {word_clean} |")
+                xml_parts.append(f"| **{gloss_clean}** |")
+                xml_parts.append(f"| {lemma_clean} |")
             else:
-                # Subsequent words: add "  |" separator before word
-                xml_parts.append(f"  | {word_data.word} |")
-                xml_parts.append(f"| **{gloss}** |")
-                if word_data.lemma:
-                    xml_parts.append(f"| {word_data.lemma} |")
-                else:
-                    xml_parts.append("| ? |")
+                # Subsequent words: append separator to previous lemma line, then add word on same line
+                xml_parts[-1] += f"  | {word_clean} |"
+                xml_parts.append(f"| **{gloss_clean}** |")
+                xml_parts.append(f"| {lemma_clean} |")
 
-        # Close the <l> tag
-        xml_parts.append("</l>")
+        # Format matching Greek: <l n="X">first_part
+        # middle_parts
+        # last_part</l>
+        if xml_parts:
+            # Prepend opening tag to first line
+            xml_parts[0] = f'<l n="{line_number}">{xml_parts[0]}'
+            # Append closing tag to last line
+            xml_parts[-1] = f'{xml_parts[-1]}</l>'
 
         return "\n".join(xml_parts)
 
@@ -395,11 +436,8 @@ class SanskritInterlinearGenerator:
         for line_num in line_numbers:
             line_xml = self.generate_line_xml(book_id, line_num)
             if line_xml:
-                # Indent the <l> content
-                indented_lines = []
-                for line in line_xml.split('\n'):
-                    indented_lines.append(f"                    {line}")
-                xml_parts.append("\n".join(indented_lines))
+                # Add line XML without indentation (matches Greek format)
+                xml_parts.append(f"                    {line_xml}")
 
         xml_parts.append("                </div>")
 
@@ -419,6 +457,10 @@ class SanskritInterlinearGenerator:
         work_info = self.get_work_info(work_id)
         books = self.get_books_for_work(work_id)
 
+        # Sanitize work metadata for XML
+        title = sanitize_xml_text(work_info["title_english"] or work_info["title"])
+        author = sanitize_xml_text(work_info["author"])
+
         xml_lines = []
 
         # XML declaration and TEI header
@@ -429,8 +471,8 @@ class SanskritInterlinearGenerator:
         xml_lines.append('    <teiHeader>')
         xml_lines.append('        <fileDesc>')
         xml_lines.append('            <titleStmt>')
-        xml_lines.append(f'                <title>{work_info["title_english"] or work_info["title"]} - Interlinear Translation</title>')
-        xml_lines.append(f'                <author>{work_info["author"]}</author>')
+        xml_lines.append(f'                <title>{title} - Interlinear Translation</title>')
+        xml_lines.append(f'                <author>{author}</author>')
         xml_lines.append('                <editor role="translator">Interlinear (Beta, AI-generated from app dictionary)</editor>')
         xml_lines.append('                <sponsor>Derived from DCS dictionary</sponsor>')
         xml_lines.append('                <principal></principal>')
@@ -451,8 +493,8 @@ class SanskritInterlinearGenerator:
         xml_lines.append('            <sourceDesc>')
         xml_lines.append('                <biblStruct>')
         xml_lines.append('                    <monogr>')
-        xml_lines.append(f'                        <author>{work_info["author"]}</author>')
-        xml_lines.append(f'                        <title>{work_info["title_english"] or work_info["title"]}</title>')
+        xml_lines.append(f'                        <author>{author}</author>')
+        xml_lines.append(f'                        <title>{title}</title>')
         xml_lines.append('                        <title type="sub">Interlinear Translation</title>')
         xml_lines.append('                        <editor role="translator">AI-generated</editor>')
         xml_lines.append('                        <imprint>')
@@ -520,8 +562,10 @@ class SanskritInterlinearGenerator:
         print(f"Total words: {total_words:,}")
         print(f"  Found in dictionary: {found:,} ({100*found/total_words:.1f}%)")
         print(f"  Missing: {missing:,} ({100*missing/total_words:.1f}%)")
-        print(f"Cache hits: {self.stats['cache_hits']:,}")
-        print(f"Cache size: {len(self.gloss_cache):,} entries")
+
+        # Get LRU cache info
+        cache_info = self._cached_dictionary_lookup.cache_info()
+        print(f"LRU Cache - Hits: {cache_info.hits:,}, Misses: {cache_info.misses:,}, Size: {cache_info.currsize:,}")
 
     def close(self):
         """Close database connections."""
@@ -544,7 +588,7 @@ def test_single_work(db_path: str, work_id: str, output_dir: Path):
 
     output_dir.mkdir(parents=True, exist_ok=True)
     txt_file = output_dir / f"{work_id}.interlinear.txt"
-    xml_file = output_dir / f"{work_id}.dcs-eng.xml"
+    xml_file = output_dir / f"{work_id}.dcs-eng99.xml"
 
     with SanskritInterlinearGenerator(db_path) as generator:
         # Generate text format

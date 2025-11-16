@@ -11,6 +11,7 @@ Note: DCS data is in IAST transliteration. This script converts to Devanagari.
 import csv
 import json
 import os
+import re
 import logging
 from pathlib import Path
 from collections import defaultdict
@@ -107,6 +108,9 @@ def extract_dictionary():
             else:
                 definition = ""
 
+            # Remove control characters (0x00-0x1F except tab/newline/CR, and 0x7F DEL)
+            definition = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]', '', definition)
+
             html_definition = f"<div>{definition}</div>"
 
             writer.writerow([
@@ -132,6 +136,10 @@ def enhance_with_sandhi(morphology_list, word_to_lemma_map):
     print("=" * 60)
 
     try:
+        # Suppress sanskrit_parser debug logging
+        import logging
+        logging.getLogger('sanskrit_parser').setLevel(logging.WARNING)
+
         from sanskrit_parser import Parser
 
         # Initialize parser
@@ -336,11 +344,13 @@ def extract_morphology_from_conllu(lemma_dict):
     stats['sandhi_splits'] = sandhi_splits
     stats['sandhi_mappings'] = sandhi_mappings
 
-    # Write morphology CSV
+    # Write morphology CSV in format compatible with create_perseus_database.py
+    # Format: word_form,lemma,root,pos,language,confidence,source_name
     with open(DCS_MORPH_OUTPUT, 'w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['word_form', 'lemma', 'root', 'pos', 'language', 'confidence', 'source_name'])
 
+        # Write all morphology entries (duplicates allowed for frequency tracking)
         for mapping in morphology:
             writer.writerow([
                 mapping['word_form'],

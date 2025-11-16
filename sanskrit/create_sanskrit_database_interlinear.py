@@ -93,7 +93,7 @@ def create_database(db_path):
             type TEXT,
             urn TEXT,
             description TEXT,
-            FOREIGN KEY (author_id) REFERENCES authors(id)
+            FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
         )
     ''')
 
@@ -106,7 +106,7 @@ def create_database(db_path):
             start_line INTEGER,
             end_line INTEGER,
             line_count INTEGER,
-            FOREIGN KEY (work_id) REFERENCES works(id)
+            FOREIGN KEY (work_id) REFERENCES works(id) ON DELETE CASCADE
         )
     ''')
 
@@ -119,7 +119,7 @@ def create_database(db_path):
             line_text TEXT NOT NULL,
             line_xml TEXT,
             speaker TEXT,
-            FOREIGN KEY (book_id) REFERENCES books(id)
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
         )
     ''')
 
@@ -131,7 +131,7 @@ def create_database(db_path):
             line_number INTEGER NOT NULL,
             sequence_number INTEGER NOT NULL,
             word_position INTEGER NOT NULL,
-            FOREIGN KEY (book_id) REFERENCES books(id)
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
         )
     ''')
 
@@ -141,20 +141,94 @@ def create_database(db_path):
             book_id TEXT NOT NULL,
             start_line INTEGER NOT NULL,
             end_line INTEGER,
-            sequence_number INTEGER NOT NULL,
+            sequence_number INTEGER,
             translation_text TEXT NOT NULL,
             translator TEXT,
             speaker TEXT,
-            FOREIGN KEY (book_id) REFERENCES books(id)
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE milestone_line_ranges (
+            work_id TEXT,
+            milestone TEXT,
+            start_line INTEGER,
+            end_line INTEGER,
+            PRIMARY KEY (work_id, milestone)
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE dictionary_entries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            headword TEXT NOT NULL,
+            headword_normalized_ultra TEXT,
+            language TEXT NOT NULL,
+            entry_xml TEXT,
+            entry_html TEXT,
+            entry_plain TEXT,
+            source TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE lemma_map (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            word_form TEXT NOT NULL,
+            word_form_normalized_ultra TEXT,
+            lemma TEXT NOT NULL,
+            confidence REAL NOT NULL DEFAULT 1.0,
+            source TEXT,
+            morph_info TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE normalization_patterns (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            language TEXT NOT NULL,
+            pattern TEXT NOT NULL,
+            replacement TEXT NOT NULL,
+            description TEXT,
+            priority INTEGER NOT NULL
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE prefix_assimilation_rules (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            language TEXT NOT NULL,
+            base_prefix TEXT NOT NULL,
+            assimilated_form TEXT NOT NULL,
+            meaning TEXT,
+            phonological_rule TEXT,
+            priority INTEGER NOT NULL,
+            examples TEXT
         )
     ''')
 
     # Create indexes
     print("Creating indexes...")
+    cursor.execute('CREATE INDEX idx_authors_language ON authors(language)')
+    cursor.execute('CREATE INDEX idx_works_author ON works(author_id)')
     cursor.execute('CREATE INDEX idx_books_work ON books(work_id)')
     cursor.execute('CREATE INDEX idx_text_lines_book ON text_lines(book_id)')
-    cursor.execute('CREATE INDEX idx_words_book ON words(book_id)')
+    cursor.execute('CREATE INDEX idx_text_lines_sequence ON text_lines(book_id, sequence_number)')
+    cursor.execute('CREATE INDEX idx_words_word ON words(word)')
+    cursor.execute('CREATE INDEX idx_words_book_line_seq ON words(book_id, line_number, sequence_number)')
     cursor.execute('CREATE INDEX idx_translation_segments_book ON translation_segments(book_id)')
+    cursor.execute('CREATE INDEX idx_translation_segments_lines ON translation_segments(book_id, start_line)')
+    cursor.execute('CREATE INDEX idx_dictionary_headword ON dictionary_entries(headword, language)')
+    cursor.execute('CREATE INDEX idx_dictionary_headword_ultra ON dictionary_entries(headword_normalized_ultra, language)')
+    cursor.execute('CREATE INDEX idx_lemma_map_word ON lemma_map(word_form)')
+    cursor.execute('CREATE INDEX idx_lemma_map_word_ultra ON lemma_map(word_form_normalized_ultra)')
+    cursor.execute('CREATE INDEX idx_lemma_map_lemma ON lemma_map(lemma)')
+    cursor.execute('CREATE INDEX idx_normalization_language ON normalization_patterns(language, priority)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_language ON prefix_assimilation_rules(language)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_base ON prefix_assimilation_rules(base_prefix)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_form ON prefix_assimilation_rules(assimilated_form)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_lang_priority ON prefix_assimilation_rules(language, priority)')
 
     conn.commit()
     return conn, cursor
@@ -230,7 +304,7 @@ def load_bhagavad_gita(cursor):
         chapter_num = chapter_data['chapter']
         verses = chapter_data['verses']
 
-        book_id = f'bhagavad_gita.{chapter_num}'
+        book_id = f'{work_id}.{chapter_num}'
         book_label = f'Chapter {chapter_num}'
 
         start_line = verses[0]['number']
@@ -389,7 +463,7 @@ def load_rigveda(cursor):
     for book_num in sorted(rigveda_data.keys()):
         hymns = rigveda_data[book_num]
 
-        book_id = f'rigveda.{book_num}'
+        book_id = f'{work_id}.{book_num}'
         book_label = f'Mandala {book_num}'
 
         line_count = sum(len(stanzas) for stanzas in hymns.values())
@@ -409,14 +483,17 @@ def load_rigveda(cursor):
             for stanza_num in sorted(stanzas.keys()):
                 padas = stanzas[stanza_num]
 
-                # Combine padas into verse
+                # Combine padas into verse with traditional citation
                 padas_sorted = sorted(padas, key=lambda x: x['pada'])
                 verse_text = ' '.join(pada['text_devanagari'] for pada in padas_sorted)
+
+                # Prepend traditional Rig Veda citation [mandala.hymn.stanza]
+                verse_text_with_citation = f"[{book_num}.{hymn_num}.{stanza_num}] {verse_text}"
 
                 cursor.execute('''
                     INSERT INTO text_lines (id, book_id, line_number, sequence_number, line_text, line_xml, speaker)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', (None, book_id, line_number, line_number, verse_text, None, None))
+                ''', (None, book_id, line_number, line_number, verse_text_with_citation, None, None))
 
                 # Insert words (Rig Veda uses pada format which is pre-split, but has no lemma data)
                 words = tokenize_sanskrit(verse_text)
@@ -882,34 +959,189 @@ def create_translation_lookup_table(conn):
     conn.commit()
 
 
-def main():
-    # Parse command line arguments
-    mode = 'sample'  # Default mode
-    if len(sys.argv) > 1:
-        mode = sys.argv[1].lower()
-        if mode not in ['sample', 'full']:
-            print(f"Error: Invalid mode '{mode}'. Use 'sample' or 'full'")
-            print("Usage: python3 create_sanskrit_database.py [sample|full]")
-            return 1
+def import_sanskrit_lexicon(conn):
+    """
+    Import Sanskrit lexicon data from dcs_sanskrit_lexicon.zip.
 
+    Imports:
+    - dictionary.csv → dictionary_entries table
+    - morphology.csv → lemma_map table
+    - normalization_rules.csv → normalization_patterns table
+    """
+    import csv
+    import zipfile
+    import tempfile
+    import re
+
+    lexicon_zip = 'dcs_sanskrit_lexicon.zip'
+
+    if not os.path.exists(lexicon_zip):
+        print(f"  ⚠ Warning: Lexicon not found: {lexicon_zip}")
+        print("  Skipping lexicon import - tables will be empty")
+        return
+
+    cursor = conn.cursor()
+
+    # Extract ZIP to temporary directory
+    with tempfile.TemporaryDirectory() as temp_dir:
+        with zipfile.ZipFile(lexicon_zip, 'r') as zip_ref:
+            zip_ref.extractall(temp_dir)
+
+        # Import dictionary.csv into dictionary_entries table
+        dict_path = os.path.join(temp_dir, 'dictionary.csv')
+        if os.path.exists(dict_path):
+            print(f"  Importing dictionary...")
+            with open(dict_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                dict_count = 0
+                for row in reader:
+                    # Incorporate transliteration into entry_html and entry_plain if available
+                    transliteration = row.get('transliteration', '')
+                    definition = row.get('definition', '')
+                    html_definition = row.get('html_definition', '')
+
+                    if transliteration:
+                        # Add transliteration to plain definition
+                        entry_plain = f"[{transliteration}] {definition}"
+                        # Add transliteration to HTML definition
+                        if html_definition:
+                            entry_html = f'<div><span class="transliteration" style="color: #666; font-style: italic;">[{transliteration}]</span> {html_definition}</div>'
+                        else:
+                            entry_html = f'<div><span class="transliteration" style="color: #666; font-style: italic;">[{transliteration}]</span> {definition}</div>'
+                    else:
+                        entry_plain = definition
+                        entry_html = html_definition if html_definition else f'<div>{definition}</div>'
+
+                    cursor.execute('''
+                        INSERT OR IGNORE INTO dictionary_entries
+                        (headword, headword_normalized_ultra, language, entry_xml, entry_html, entry_plain, source)
+                        VALUES (?, NULL, ?, '', ?, ?, ?)
+                    ''', (row['lemma'], row['language'], entry_html, entry_plain, row.get('source_name', '')))
+                    dict_count += 1
+                print(f"  ✓ Imported {dict_count:,} dictionary entries")
+
+        # Import morphology.csv into lemma_map table
+        morph_path = os.path.join(temp_dir, 'morphology.csv')
+        if os.path.exists(morph_path):
+            print(f"  Importing morphology...")
+            with open(morph_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                morph_count = 0
+                for row in reader:
+                    # Combine pos and root into morph_info
+                    morph_info_parts = []
+                    if row.get('pos'):
+                        morph_info_parts.append(f"pos:{row['pos']}")
+                    if row.get('root'):
+                        morph_info_parts.append(f"root:{row['root']}")
+                    morph_info = '; '.join(morph_info_parts) if morph_info_parts else None
+
+                    cursor.execute('''
+                        INSERT OR IGNORE INTO lemma_map
+                        (word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info)
+                        VALUES (?, NULL, ?, ?, ?, ?)
+                    ''', (row['word_form'], row['lemma'],
+                          float(row.get('confidence', 1.0)), row.get('source_name', ''), morph_info))
+                    morph_count += 1
+                    if morph_count % 100000 == 0:
+                        print(f"    ... {morph_count:,} morphology forms")
+                print(f"  ✓ Imported {morph_count:,} morphology forms")
+
+        # Import normalization_rules.csv into normalization_patterns table
+        norm_path = os.path.join(temp_dir, 'normalization_rules.csv')
+        if os.path.exists(norm_path):
+            print(f"  Importing normalization rules...")
+            with open(norm_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                norm_count = 0
+                for row in reader:
+                    cursor.execute('''
+                        INSERT OR IGNORE INTO normalization_patterns
+                        (language, pattern, replacement, description, priority)
+                        VALUES (?, ?, ?, ?, ?)
+                    ''', (row['language'], row['pattern'], row['replacement'],
+                          row.get('description', ''), int(row.get('priority', 999))))
+                    norm_count += 1
+                print(f"  ✓ Imported {norm_count} normalization rules")
+
+    # Post-process to populate normalized fields
+    print("  Applying normalization to lemma_map and dictionary entries...")
+
+    # Get all normalization patterns by language
+    patterns_by_lang = {}
+    cursor.execute("SELECT language, pattern, replacement, priority FROM normalization_patterns ORDER BY priority")
+    for row in cursor.fetchall():
+        lang, pattern_str, replacement, priority = row
+        if lang not in patterns_by_lang:
+            patterns_by_lang[lang] = []
+        patterns_by_lang[lang].append((re.compile(pattern_str), replacement))
+
+    # Apply normalization to Sanskrit lemma_map entries
+    if 'sanskrit' in patterns_by_lang:
+        import unicodedata
+        patterns = patterns_by_lang['sanskrit']
+
+        # Normalize lemma_map
+        cursor.execute("SELECT id, word_form FROM lemma_map WHERE word_form_normalized_ultra IS NULL")
+        lemma_entries = cursor.fetchall()
+        updated_lemma = 0
+
+        for entry_id, word_form in lemma_entries:
+            # Apply NFD normalization, then patterns, then NFC
+            normalized = unicodedata.normalize('NFD', word_form)
+            for pattern, replacement in patterns:
+                normalized = pattern.sub(replacement, normalized)
+            normalized = unicodedata.normalize('NFC', normalized)
+
+            # Update if normalization changed the word
+            if normalized != word_form:
+                cursor.execute("UPDATE lemma_map SET word_form_normalized_ultra = ? WHERE id = ?",
+                             (normalized, entry_id))
+                updated_lemma += 1
+
+        if updated_lemma > 0:
+            print(f"  ✓ Normalized {updated_lemma:,} lemma_map entries")
+        else:
+            print(f"  ✓ No normalization needed for lemma_map entries")
+
+        # Normalize dictionary_entries
+        cursor.execute("SELECT id, headword FROM dictionary_entries WHERE headword_normalized_ultra IS NULL")
+        dict_entries = cursor.fetchall()
+        updated_dict = 0
+
+        for entry_id, headword in dict_entries:
+            # Apply NFD normalization, then patterns, then NFC
+            normalized = unicodedata.normalize('NFD', headword)
+            for pattern, replacement in patterns:
+                normalized = pattern.sub(replacement, normalized)
+            normalized = unicodedata.normalize('NFC', normalized)
+
+            # Update if normalization changed the word
+            if normalized != headword:
+                cursor.execute("UPDATE dictionary_entries SET headword_normalized_ultra = ? WHERE id = ?",
+                             (normalized, entry_id))
+                updated_dict += 1
+
+        if updated_dict > 0:
+            print(f"  ✓ Normalized {updated_dict:,} dictionary entries")
+        else:
+            print(f"  ✓ No normalization needed for dictionary entries")
+
+    conn.commit()
+
+
+def main():
     print("=" * 70)
     print("Sanskrit Texts Database Creation")
-    if mode == 'sample':
-        print("Mode: SAMPLE (7 texts with translations)")
-    else:
-        print("Mode: FULL (All 268 DCS works)")
+    print("All 268 DCS works")
     print("=" * 70)
 
     if not HAS_TRANSLITERATION:
         print("\nWarning: indic-transliteration not installed")
         print("For full functionality: pip install indic-transliteration\n")
 
-    # Create database with mode-specific filename
-    if mode == 'sample':
-        db_path = 'sanskrit_texts.db'
-    else:
-        db_path = 'sanskrit_texts_full.db'
-
+    # Create database
+    db_path = 'sanskrit_texts.db'
     conn, cursor = create_database(db_path)
 
     # Track all statistics
@@ -925,178 +1157,81 @@ def main():
     rv_verses, rv_words, rv_translations = load_rigveda(cursor)
     all_stats.append(('Rig Veda (pada format, complete with Griffith translation)', rv_verses, rv_words, rv_translations))
 
-    if mode == 'sample':
-        # Sample mode: Load 5 specific texts with English translations
-        # Load Aitareyopaniṣad
-        au_verses, au_words, au_translations = load_dcs_text(
-            cursor,
-            text_name='Aitareyopaniṣad',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Aitareyopaniṣad',
-            translation_file='../data-sources/sanskrit/translations/AU-Olivelle.txt',
-            author_info={
-                'id': 'aitareyopanishad',
-                'name': 'ऐतरेयोपनिषद्',
-                'name_alt': 'Aitareya Upanishad'
-            },
-            work_info={
-                'id': 'aitareyopanishad',
-                'title': 'ऐतरेयोपनिषद्',
-                'title_alt': 'Aitareyopaniṣad',
-                'title_english': 'Aitareya Upanishad',
-                'type': 'philosophy',
-                'description': 'Principal Upanishad from the Rig Veda, teaching about the self (ātman)',
-                'book_label_prefix': 'Adhyāya'
-            },
-            translator_name='Patrick Olivelle'
-        )
-        all_stats.append(('Aitareyopaniṣad', au_verses, au_words, au_translations))
+    # Mapping of DCS work names to translation files
+    # Based on DCS translations directory
+    translation_map = {
+        'Aitareyopaniṣad': ('../data-sources/sanskrit/translations/AU-Olivelle.txt', 'Patrick Olivelle'),
+        'Chāndogyopaniṣad': ('../data-sources/sanskrit/translations/ChUp-Olivelle.txt', 'Patrick Olivelle'),
+        'Śvetāśvataropaniṣad': ('../data-sources/sanskrit/translations/SvetUp-Olivelle.txt', 'Patrick Olivelle'),
+        'Āpastambagṛhyasūtra': ('../data-sources/sanskrit/translations/ApGS-Oldenberg.txt', 'H. Oldenberg'),
+        'Gobhilagṛhyasūtra': ('../data-sources/sanskrit/translations/GobhGS-Oldenberg.txt', 'H. Oldenberg'),
+        'Hiraṇyakeśigṛhyasūtra': ('../data-sources/sanskrit/translations/HirGS-Oldenberg.txt', 'Hermann Oldenberg'),
+        'Śāṅkhāyanagṛhyasūtra': ('../data-sources/sanskrit/translations/SankhGS-Oldenberg.txt', 'Hermann Oldenberg'),
+        'Śatapathabrāhmaṇa': ('../data-sources/sanskrit/translations/SB-Eggeling.txt', 'Eggeling'),
+        'Vājasaneyīsaṃhitā': ('../data-sources/sanskrit/translations/VS-Griffith.txt', 'Griffith'),
+    }
 
-        # Load Chāndogyopaniṣad
-        chup_verses, chup_words, chup_translations = load_dcs_text(
-            cursor,
-            text_name='Chāndogyopaniṣad',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Chāndogyopaniṣad',
-            translation_file='../data-sources/sanskrit/translations/ChUp-Olivelle.txt',
-            author_info={
-                'id': 'chandogyopanishad',
-                'name': 'छान्दोग्योपनिषद्',
-                'name_alt': 'Chandogya Upanishad'
-            },
-            work_info={
-                'id': 'chandogyopanishad',
-                'title': 'छान्दोग्योपनिषद्',
-                'title_alt': 'Chāndogyopaniṣad',
-                'title_english': 'Chandogya Upanishad',
-                'type': 'philosophy',
-                'description': 'One of the oldest and largest Upanishads, teaching Vedantic philosophy',
-                'book_label_prefix': 'Prapāṭhaka'
-            },
-            translator_name='Patrick Olivelle'
-        )
-        all_stats.append(('Chāndogyopaniṣad', chup_verses, chup_words, chup_translations))
+    # Load all DCS works
+    print("\n" + "=" * 70)
+    print("Loading all DCS works...")
+    print("=" * 70)
 
-        # Load Śvetāśvataropaniṣad
-        svet_verses, svet_words, svet_translations = load_dcs_text(
-            cursor,
-            text_name='Śvetāśvataropaniṣad',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Śvetāśvataropaniṣad',
-            translation_file='../data-sources/sanskrit/translations/SvetUp-Olivelle.txt',
-            author_info={
-                'id': 'svetasvataropanishad',
-                'name': 'श्वेताश्वतरोपनिषद्',
-                'name_alt': 'Svetasvatara Upanishad'
-            },
-            work_info={
-                'id': 'svetasvataropanishad',
-                'title': 'श्वेताश्वतरोपनिषद्',
-                'title_alt': 'Śvetāśvataropaniṣad',
-                'title_english': 'Svetasvatara Upanishad',
-                'type': 'philosophy',
-                'description': 'Important theistic Upanishad teaching yoga and meditation',
-                'book_label_prefix': 'Adhyāya'
-            },
-            translator_name='Patrick Olivelle'
-        )
-        all_stats.append(('Śvetāśvataropaniṣad', svet_verses, svet_words, svet_translations))
+    dcs_works = discover_dcs_works()
+    print(f"\nDiscovered {len(dcs_works)} DCS works")
 
-        # Load Atharvaveda (Śaunaka)
-        av_verses, av_words, av_translations = load_dcs_text(
-            cursor,
-            text_name='Atharvaveda (Śaunaka)',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Atharvaveda (Śaunaka)',
-            translation_file='../data-sources/sanskrit/dcs/data/atharvaveda-shaunaka/translations/whitney.txt',
-            author_info={
-                'id': 'atharvaveda',
-                'name': 'अथर्ववेदः',
-                'name_alt': 'Atharva Veda'
-            },
-            work_info={
-                'id': 'atharvaveda',
-                'title': 'अथर्ववेदः',
-                'title_alt': 'Atharvaveda (Śaunaka)',
-                'title_english': 'Atharva Veda',
-                'type': 'poetry',
-                'description': 'The fourth Veda, collection of spells, charms, incantations, and hymns',
-                'book_label_prefix': 'Kāṇḍa'
-            },
-            translator_name='William Dwight Whitney'
-        )
-        all_stats.append(('Atharvaveda', av_verses, av_words, av_translations))
+    for idx, work_meta in enumerate(dcs_works, 1):
+        text_name = work_meta['text_name']
+        text_dir = work_meta['text_dir']
+        work_id = work_meta['work_id']
 
-        # Load Vājasaneyisaṃhitā (Yajur Veda)
-        vs_verses, vs_words, vs_translations = load_dcs_text(
-            cursor,
-            text_name='Vājasaneyisaṃhitā (Yajur Veda)',
-            text_dir='../data-sources/sanskrit/dcs/data/conllu/files/Vājasaneyisaṃhitā (Mādhyandina)',
-            translation_file='../data-sources/sanskrit/translations/VS-Griffith.txt',
-            author_info={
-                'id': 'vajasaneyisamhita',
-                'name': 'वाजसनेयिसंहिता',
-                'name_alt': 'Vajasaneyi Samhita (White Yajur Veda)'
-            },
-            work_info={
-                'id': 'vajasaneyisamhita',
-                'title': 'वाजसनेयिसंहिता',
-                'title_alt': 'Vājasaneyisaṃhitā',
-                'title_english': 'Vajasaneyi Samhita (White Yajur Veda)',
-                'type': 'poetry',
-                'description': 'The White Yajur Veda, sacrificial formulas and prose instructions',
-                'book_label_prefix': 'Adhyāya'
-            },
-            translator_name='Ralph T.H. Griffith'
-        )
-        all_stats.append(('Vājasaneyisaṃhitā', vs_verses, vs_words, vs_translations))
+        print(f"\n[{idx}/{len(dcs_works)}] Processing {text_name}...")
 
-    else:
-        # Full mode: Load all DCS works
-        print("\n" + "=" * 70)
-        print("Loading all DCS works...")
-        print("=" * 70)
+        # Convert text name to Devanagari for display
+        text_devanagari = iast_to_devanagari(text_name)
 
-        dcs_works = discover_dcs_works()
-        print(f"\nDiscovered {len(dcs_works)} DCS works")
+        # Check if translation is available for this work
+        translation_file = None
+        translator_name = None
+        if text_name in translation_map:
+            trans_path, trans_name = translation_map[text_name]
+            if os.path.exists(trans_path):
+                translation_file = trans_path
+                translator_name = trans_name
+                print(f"  ✓ Found translation by {translator_name}")
+            else:
+                print(f"  Warning: Translation file not found: {trans_path}")
 
-        for idx, work_meta in enumerate(dcs_works, 1):
-            text_name = work_meta['text_name']
-            text_dir = work_meta['text_dir']
-            work_id = work_meta['work_id']
+        # Use work name as author name (since most Sanskrit texts don't have individual authors)
+        author_info = {
+            'id': work_id,
+            'name': text_devanagari,
+            'name_alt': text_name
+        }
 
-            print(f"\n[{idx}/{len(dcs_works)}] Processing {text_name}...")
+        work_info = {
+            'id': work_id,
+            'title': text_devanagari,
+            'title_alt': text_name,
+            'title_english': text_name,  # Use IAST as English title
+            'type': 'text',  # Generic type
+            'description': f'{text_name} from the Digital Corpus of Sanskrit',
+            'book_label_prefix': 'Book'
+        }
 
-            # Convert text name to Devanagari for display
-            text_devanagari = iast_to_devanagari(text_name)
-
-            # Use work name as author name (since most Sanskrit texts don't have individual authors)
-            author_info = {
-                'id': work_id,
-                'name': text_devanagari,
-                'name_alt': text_name
-            }
-
-            work_info = {
-                'id': work_id,
-                'title': text_devanagari,
-                'title_alt': text_name,
-                'title_english': text_name,  # Use IAST as English title
-                'type': 'text',  # Generic type
-                'description': f'{text_name} from the Digital Corpus of Sanskrit',
-                'book_label_prefix': 'Book'
-            }
-
-            try:
-                verses, words, translations = load_dcs_text(
-                    cursor,
-                    text_name=text_name,
-                    text_dir=text_dir,
-                    translation_file=None,  # No translations for most works
-                    author_info=author_info,
-                    work_info=work_info,
-                    translator_name=None
-                )
-                all_stats.append((text_name, verses, words, translations))
-            except Exception as e:
-                print(f"  ✗ Error loading {text_name}: {e}")
-                continue
+        try:
+            verses, words, translations = load_dcs_text(
+                cursor,
+                text_name=text_name,
+                text_dir=text_dir,
+                translation_file=translation_file,
+                author_info=author_info,
+                work_info=work_info,
+                translator_name=translator_name
+            )
+            all_stats.append((text_name, verses, words, translations))
+        except Exception as e:
+            print(f"  ✗ Error loading {text_name}: {e}")
+            continue
 
     # Check if any texts loaded
     total_verses_loaded = sum(stat[1] for stat in all_stats)
@@ -1131,19 +1266,82 @@ def main():
     print("\nCreating translation lookup table...")
     create_translation_lookup_table(conn)
 
+    # Import lexicon data
+    print("\nImporting Sanskrit lexicon data...")
+    import_sanskrit_lexicon(conn)
+
+    # Get lexicon statistics
+    cursor.execute('SELECT COUNT(*) FROM dictionary_entries')
+    dict_entries = cursor.fetchone()[0]
+
+    cursor.execute('SELECT COUNT(*) FROM lemma_map')
+    lemma_mappings = cursor.fetchone()[0]
+
+    cursor.execute('SELECT COUNT(*) FROM normalization_patterns')
+    norm_patterns = cursor.fetchone()[0]
+
     # Commit and close
     conn.commit()
     conn.close()
 
-    # Compress database with mode-specific filename
-    print("\nCompressing database...")
-    if mode == 'sample':
-        zip_path = 'sanskrit_texts.db.zip'
-    else:
-        zip_path = 'sanskrit_texts_full.db.zip'
+    # Generate and import interlinear translations
+    print("\n" + "=" * 70)
+    print("GENERATING INTERLINEAR TRANSLATIONS")
+    print("=" * 70)
 
-    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        zipf.write(db_path)
+    interlinear_dir = 'interlinear_output'
+    os.makedirs(interlinear_dir, exist_ok=True)
+
+    # Import the batch generation script
+    print(f"\nGenerating interlinear XML files to {interlinear_dir}/...")
+    from batch_generate_interlinear import main as generate_interlinear
+    import sys
+
+    # Save original argv
+    original_argv = sys.argv
+
+    # Set up arguments for batch generation
+    sys.argv = ['batch_generate_interlinear.py', db_path, '--output', interlinear_dir, '--parallel', '8']
+
+    try:
+        generate_interlinear()
+    finally:
+        # Restore original argv
+        sys.argv = original_argv
+
+    # Verify interlinear files were generated
+    import glob
+    xml_files = glob.glob(os.path.join(interlinear_dir, '*.dcs-eng99.xml'))
+    print(f"\n✓ Generated {len(xml_files)} interlinear XML files")
+
+    # Import interlinear translations
+    print("\n" + "=" * 70)
+    print("IMPORTING INTERLINEAR TRANSLATIONS")
+    print("=" * 70)
+
+    from import_sanskrit_interlinear import import_sanskrit_interlinear
+    import_sanskrit_interlinear(db_path, interlinear_dir)
+
+    # Get final interlinear statistics
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM translation_segments WHERE translator LIKE 'Interlinear%'")
+    interlinear_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(DISTINCT book_id) FROM translation_segments WHERE translator LIKE 'Interlinear%'")
+    interlinear_books = cursor.fetchone()[0]
+
+    conn.close()
+
+    print(f"\n✓ Imported {interlinear_count:,} interlinear segments for {interlinear_books} books")
+
+    # Compress database
+    print("\nCompressing database...")
+    zip_path = 'sanskrit_texts.db.zip'
+
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zipf:
+        zipf.write(db_path, arcname='sanskrit_texts.db')
 
     # Get file sizes
     db_size = os.path.getsize(db_path) / 1024 / 1024  # MB
@@ -1152,38 +1350,36 @@ def main():
     print("\n" + "=" * 70)
     print("Database Creation Complete!")
     print("=" * 70)
-    print(f"\nMode: {mode.upper()}")
     print(f"\nContents:")
     print(f"  Authors: {author_count}")
     print(f"  Works: {work_count}")
     print(f"  Books: {book_count}")
 
-    if mode == 'sample' or len(all_stats) <= 20:
-        # Show individual text stats for sample mode or if few texts
-        print(f"\nTexts loaded:")
-        for text_name, verses, words, translations in all_stats:
-            print(f"  - {text_name}: {verses:,} verses, {words:,} words, {translations:,} translations")
-    else:
-        # Show summary for full mode
-        print(f"\nTexts loaded: {len(all_stats)} works")
-        print(f"  (First 5: {', '.join([s[0] for s in all_stats[:5]])}...)")
+    # Show summary for all works
+    print(f"\nTexts loaded: {len(all_stats)} works")
+    print(f"  (First 5: {', '.join([s[0] for s in all_stats[:5]])}...)")
 
     print(f"\nStatistics:")
     print(f"  Total verses: {total_verses:,}")
     print(f"  Total words: {total_words:,}")
     print(f"  Unique words: {unique_words:,}")
     print(f"  Translations: {total_translations:,}")
+    print(f"  Interlinear translations: {interlinear_count:,} ({interlinear_books} books)")
+    print(f"\nLexicon:")
+    print(f"  Dictionary entries: {dict_entries:,}")
+    print(f"  Lemma mappings: {lemma_mappings:,}")
+    print(f"  Normalization patterns: {norm_patterns}")
     print(f"\nFiles:")
     print(f"  Database: {db_path} ({db_size:.2f} MB)")
     print(f"  Compressed: {zip_path} ({zip_size:.2f} MB)")
     print(f"\nLicenses:")
     print(f"  ✓ Bhagavad Gita Sanskrit: CC BY-SA 4.0 (Wikisource)")
     print(f"  ✓ BG English (Arnold, Besant): Public Domain")
+    print(f"  ✓ Rig Veda English (Griffith): Public Domain")
     print(f"  ✓ DCS Sanskrit texts: CC BY 4.0 (Oliver Hellwig)")
-    if mode == 'sample':
-        print(f"  ✓ RV, AV, VS English (Griffith, Whitney): Public Domain")
-        print(f"  ✓ Upanishads English (Olivelle): Used with permission")
+    print(f"  ✓ DCS Lexicon: CC BY 4.0 (Oliver Hellwig)")
     print(f"\nReady for ClassicsViewer integration!")
+    print(f"This database can be used standalone or merged into extended database.")
 
     return 0
 
