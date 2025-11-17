@@ -12,9 +12,11 @@ NEW: Audio file homer_iliad_chamberlain_audio.zip for entire Iliad prosody-aware
 https://www.patreon.com/posts/iliad-audio-for-141299909   (free)
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
-NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 10G+ uncompressed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
+NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
 
 NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
+
+NEW: Word wrap option for interlinear translations. 270 Sanskrit works from DCS with rough generated interlinear translations added to extended db. Sanskrit also available as a separate db. 
 
 
   SAMPLE DATABASE:
@@ -36,7 +38,7 @@ NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some 
   - Hebrew: 39 authors, 39 works
   - Latin: 40 authors, 230 works
   - Persian: 1 author, 1 work
-  - Sanskrit: 7 authors, 7 works
+  - Sanskrit: 270 authors, 270 works
   - Sumerian: 1 author, 11 works
   - Total: 457 authors, 2,145 works
 
