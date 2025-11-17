@@ -719,7 +719,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                 true
             }
             R.id.action_check_definitions -> {
-                MaterialAlertDialogBuilder(this)
+                val dialog = MaterialAlertDialogBuilder(this)
                     .setTitle("Check Definitions")
                     .setMessage("Find all words without definitions on page?")
                     .setPositiveButton("Yes") { _, _ ->
@@ -727,6 +727,14 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                     }
                     .setNegativeButton("Cancel", null)
                     .show()
+
+                // Make buttons visible on all devices
+                dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+                    resources.getColor(android.R.color.holo_blue_light, null)
+                )
+                dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+                    resources.getColor(android.R.color.holo_blue_light, null)
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

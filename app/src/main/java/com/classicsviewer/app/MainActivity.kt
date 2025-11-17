@@ -327,7 +327,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_reset_database -> {
-                resetToBundledDatabase()
+                confirmResetToBundledDatabase()
                 true
             }
             R.id.action_manage_audio -> {
@@ -607,6 +607,25 @@ class MainActivity : AppCompatActivity() {
         return result.ifEmpty { uri.lastPathSegment ?: "" }
     }
     
+    private fun confirmResetToBundledDatabase() {
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Reset to Bundled Database")
+            .setMessage("This will remove any external database and reset to the app's bundled database. The app will restart. Continue?")
+            .setPositiveButton("Reset") { _, _ ->
+                resetToBundledDatabase()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+    }
+
     private fun resetToBundledDatabase() {
         // Clear the external database preference
         PreferencesManager.clearExternalDatabaseUri(this)

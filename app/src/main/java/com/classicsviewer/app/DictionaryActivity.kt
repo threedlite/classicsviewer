@@ -196,6 +196,15 @@ class DictionaryActivity : BaseActivity() {
 
         // Show the dialog and focus on the input
         dialog.show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+
         input.requestFocus()
     }
     

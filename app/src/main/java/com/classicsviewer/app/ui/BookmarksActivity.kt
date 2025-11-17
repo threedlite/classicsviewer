@@ -294,6 +294,14 @@ class BookmarksActivity : BaseActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
         
         // Focus and show keyboard
         input.requestFocus()
@@ -304,7 +312,7 @@ class BookmarksActivity : BaseActivity() {
     }
     
     private fun confirmDeleteBookmark(bookmark: BookmarkEntity) {
-        MaterialAlertDialogBuilder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Delete Bookmark")
             .setMessage("Are you sure you want to delete this bookmark?")
             .setPositiveButton("Delete") { _, _ ->
@@ -312,6 +320,14 @@ class BookmarksActivity : BaseActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
     
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

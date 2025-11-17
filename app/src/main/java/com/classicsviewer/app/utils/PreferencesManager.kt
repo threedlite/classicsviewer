@@ -75,7 +75,7 @@ object PreferencesManager {
 
     // Wrap interlinear text preference
     fun getWrapInterlinear(context: Context): Boolean {
-        return getPrefs(context).getBoolean(KEY_WRAP_INTERLINEAR, false)
+        return getPrefs(context).getBoolean(KEY_WRAP_INTERLINEAR, true)
     }
 
     fun setWrapInterlinear(context: Context, wrap: Boolean) {

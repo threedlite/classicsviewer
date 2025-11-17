@@ -142,7 +142,7 @@ class AudioManagementActivity : BaseActivity() {
     private fun confirmDeletePackage(packageId: Long) {
         val packageToDelete = packages.find { it.id == packageId }
         packageToDelete?.let { pkg ->
-            com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
                 .setTitle("Delete Audio Package")
                 .setMessage("Delete '${pkg.packageName}'? This will remove all audio files for this package.")
                 .setPositiveButton("Delete") { _, _ ->
@@ -150,6 +150,14 @@ class AudioManagementActivity : BaseActivity() {
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
+
+            // Make buttons visible on all devices
+            dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+                resources.getColor(android.R.color.holo_blue_light, null)
+            )
+            dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+                resources.getColor(android.R.color.holo_blue_light, null)
+            )
         }
     }
     

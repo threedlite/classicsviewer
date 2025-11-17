@@ -131,7 +131,7 @@ class UserDictionaryImportActivity : BaseActivity() {
     }
     
     private fun confirmRemoveDictionary() {
-        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
             .setTitle("Remove Dictionary")
             .setMessage("Remove the custom dictionary? This will delete all imported entries and morphology mappings.")
             .setPositiveButton("Remove") { _, _ ->
@@ -139,6 +139,14 @@ class UserDictionaryImportActivity : BaseActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
     
     private fun removeDictionary() {

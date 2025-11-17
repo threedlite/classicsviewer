@@ -142,6 +142,14 @@ class ManageLanguagesActivity : BaseActivity() {
             .create()
 
         dialog.show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
 
     private fun convertLanguageIdToDisplayName(languageId: String): String {
@@ -218,6 +226,14 @@ class ManageLanguagesActivity : BaseActivity() {
             .create()
 
         dialog.show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
 
     private fun getBrightness(color: Int): Int {
@@ -270,7 +286,7 @@ class ManageLanguagesActivity : BaseActivity() {
     }
 
     private fun showDeleteConfirmation(language: CustomLanguageConfig) {
-        MaterialAlertDialogBuilder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Delete Language")
             .setMessage("Delete ${language.displayName}?")
             .setPositiveButton("Delete") { _, _ ->
@@ -280,5 +296,13 @@ class ManageLanguagesActivity : BaseActivity() {
             }
             .setNegativeButton("Cancel", null)
             .show()
+
+        // Make buttons visible on all devices
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
     }
 }
