@@ -1758,74 +1758,82 @@ LOCK_FILE = Path(__file__).parent / ".perseus_db_build.lock"
 lock_fd = None
 
 def acquire_lock():
-    """Acquire exclusive lock to prevent multiple instances"""
+    """Acquire exclusive lock to prevent multiple instances using OS-level file locking"""
     global lock_fd
+    import fcntl
 
-    # Check if lock file exists
-    if LOCK_FILE.exists():
+    try:
+        # Open (or create) the lock file and keep it open
+        fd = os.open(str(LOCK_FILE), os.O_CREAT | os.O_WRONLY, 0o644)
+
+        # Try to acquire an exclusive lock (non-blocking)
+        # This will fail immediately if another process holds the lock
         try:
-            with open(LOCK_FILE, 'r') as f:
-                old_pid = int(f.read().strip())
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except (IOError, OSError) as e:
+            # Lock is held by another process
+            os.close(fd)
 
-            # Check if that PID is still running a create_perseus_database process
-            import subprocess
-            result = subprocess.run(['pgrep', '-fl', 'create_perseus_database'],
-                                  capture_output=True, text=True)
-
-            if str(old_pid) in result.stdout:
-                # Process is still running
-                print(f"\n{'='*60}")
-                print(f"ERROR: Another instance is already running (PID: {old_pid})")
-                print(f"{'='*60}")
-                print("Check with: pgrep -fl create_perseus_database")
-                print("If incorrect, remove lock file and try again:")
-                print(f"  rm {LOCK_FILE}")
-                print(f"{'='*60}\n")
-                return False
-            else:
-                # Process not found, remove stale lock
-                print("Removing stale lock file (process not found)...")
-                try:
-                    os.remove(LOCK_FILE)
-                except:
-                    pass
-        except (ValueError, FileNotFoundError):
-            # Bad lock file, remove it
+            # Try to read the PID from the lock file
             try:
-                os.remove(LOCK_FILE)
+                with open(LOCK_FILE, 'r') as f:
+                    old_pid = f.read().strip()
+            except:
+                old_pid = "unknown"
+
+            print(f"\n{'='*60}")
+            print(f"ERROR: Another instance is already running (PID: {old_pid})")
+            print(f"{'='*60}")
+            print("The lock file is held by another process.")
+            print("Check with: ps aux | grep create_perseus_database")
+            print("If the process is stuck, kill it and the lock will auto-release.")
+            print(f"{'='*60}\n")
+            return False
+
+        # We got the lock! Truncate the file and write our PID
+        os.ftruncate(fd, 0)
+        os.write(fd, f"{os.getpid()}\n".encode())
+        os.fsync(fd)  # Ensure PID is written to disk
+
+        # Keep the file descriptor open - this maintains the lock
+        lock_fd = fd
+        return True
+
+    except Exception as e:
+        print(f"\n{'='*60}")
+        print(f"ERROR: Could not acquire lock: {e}")
+        print(f"{'='*60}\n")
+        if fd:
+            try:
+                os.close(fd)
             except:
                 pass
-
-    # Try to create lock file atomically
-    try:
-        # Use O_CREAT | O_EXCL for atomic file creation
-        fd = os.open(str(LOCK_FILE), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-        os.write(fd, f"{os.getpid()}\n".encode())
-        os.close(fd)
-        lock_fd = fd  # Keep track for cleanup
-        return True
-    except FileExistsError:
-        # Someone else created it between our check and create
-        print(f"\n{'='*60}")
-        print("ERROR: Lock file was just created by another process")
-        print("Another instance may be starting up")
-        print(f"{'='*60}\n")
-        return False
-    except Exception as e:
-        print(f"ERROR: Could not create lock file: {e}")
         return False
 
 def release_lock():
-    """Release the lock file"""
+    """Release the lock file by closing the file descriptor"""
     global lock_fd
-    if lock_fd:
+    import fcntl
+
+    if lock_fd is not None:
         try:
+            # Unlock the file (though closing will also release the lock)
             fcntl.flock(lock_fd, fcntl.LOCK_UN)
-            lock_fd.close()
         except:
             pass
+
+        try:
+            # Close the file descriptor - this releases the OS lock
+            os.close(lock_fd)
+        except:
+            pass
+
+        lock_fd = None
+
+    # Remove the lock file (optional cleanup - lock is already released)
     try:
-        os.remove(LOCK_FILE)
+        if LOCK_FILE.exists():
+            os.remove(LOCK_FILE)
     except:
         pass
 
@@ -5491,13 +5499,14 @@ def analyze_first1k_overlap(data_sources_path):
 
     return first1k_works
 
-def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
+def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode='full'):
     """Generate detailed quality report
 
     Args:
         cursor: Database cursor
         build_time_minutes: Build time in minutes (optional)
         zip_info: Dict with 'size_mb' and 'original_size_mb' (optional)
+        mode: Build mode (sample, full, extended, first1ktest) for filename
     """
     from collections import defaultdict
     import json
@@ -5510,6 +5519,7 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
     report_lines = []
     report_lines.append("=== PERSEUS TEXTS DATABASE QUALITY REPORT ===")
     report_lines.append(f"Generated: {datetime.now().isoformat()}")
+    report_lines.append(f"Mode: {mode}")
     report_lines.append("")
 
     # Get statistics
@@ -5551,6 +5561,57 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
             report_lines.append(f"Lemma Mappings: {total_lemma:,}")
 
     report_lines.append("")
+
+    # Add language-based statistics
+    report_lines.append("=== STATISTICS BY LANGUAGE ===")
+    report_lines.append("")
+
+    # Get authors and word counts by language
+    cursor.execute("""
+        SELECT
+            a.language,
+            COUNT(DISTINCT a.id) as author_count,
+            COUNT(DISTINCT w.id) as work_count,
+            SUM(b.line_count) as total_lines
+        FROM authors a
+        LEFT JOIN works w ON a.id = w.author_id
+        LEFT JOIN books b ON w.id = b.work_id
+        GROUP BY a.language
+        ORDER BY author_count DESC, a.language
+    """)
+
+    language_stats = cursor.fetchall()
+
+    # Get word counts by language using the words table
+    language_word_counts = {}
+    for lang_stat in language_stats:
+        language = lang_stat[0]
+
+        # Get word count for this language by joining through authors
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM words wd
+            JOIN books b ON wd.book_id = b.id
+            JOIN works w ON b.work_id = w.id
+            JOIN authors a ON w.author_id = a.id
+            WHERE a.language = ?
+        """, (language,))
+
+        word_count = cursor.fetchone()[0]
+        language_word_counts[language] = word_count
+
+    # Display language statistics
+    for lang_stat in language_stats:
+        language, author_count, work_count, total_lines = lang_stat
+        word_count = language_word_counts.get(language, 0)
+
+        report_lines.append(f"{language}:")
+        report_lines.append(f"  Authors: {author_count}")
+        report_lines.append(f"  Works: {work_count}")
+        report_lines.append(f"  Lines: {total_lines:,}")
+        report_lines.append(f"  Words: {word_count:,}")
+        report_lines.append("")
+
     report_lines.append("=== DETAILED BREAKDOWN ===")
     report_lines.append("")
     
@@ -5597,13 +5658,15 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
 
         # Check if translation lookup table exists (indicates advanced alignment)
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='translation_lookup'")
-        if cursor.fetchone():
+        has_lookup_table = cursor.fetchone()
+        if has_lookup_table:
             # Get coverage from lookup table
             cursor.execute("SELECT COUNT(DISTINCT tl.line_number) FROM translation_lookup tl WHERE tl.book_id = ?", (book_id,))
             lookup_coverage = cursor.fetchone()[0] or 0
 
             cursor.execute("SELECT line_count FROM books WHERE id = ?", (book_id,))
-            book_line_count = cursor.fetchone()[0] or 1
+            book_line_count_result = cursor.fetchone()
+            book_line_count = book_line_count_result[0] if book_line_count_result else 1
 
             coverage_percent = (lookup_coverage / book_line_count * 100) if book_line_count > 0 else 0
 
@@ -5696,11 +5759,50 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None):
                 trans_list.append(f"{trans['translator']} {trans['segments']} segments [{quality_info}]")
             report_lines.append(f"{author_name} / {work_title} translations: {', '.join(trans_list)}")
     
-    # Save as text file
-    with open('database_quality_report.txt', 'w', encoding='utf-8') as f:
+    # Save as text file with mode-specific filename
+    report_filename = f'database_quality_report_{mode}.txt'
+    with open(report_filename, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
-    
-    print("✓ Quality report saved to database_quality_report.txt")
+
+    print(f"✓ Quality report saved to {report_filename}")
+
+def generate_quality_report_final(db_filename, mode='full', build_start_time=None):
+    """Generate quality report after all external databases have been merged.
+
+    Args:
+        db_filename: Path to the database file
+        mode: Build mode (sample, full, extended, first1ktest)
+        build_start_time: Start time for build duration calculation (optional)
+    """
+    import sqlite3
+    import os
+    import time
+
+    # Connect to database
+    conn = sqlite3.connect(db_filename)
+    cursor = conn.cursor()
+
+    # Calculate build time if provided
+    build_time_minutes = None
+    if build_start_time is not None:
+        build_time_minutes = (time.time() - build_start_time) / 60
+
+    # Get ZIP file information if it exists
+    zip_info = None
+    zip_path = f"{db_filename}.zip"
+    if os.path.exists(zip_path):
+        original_size_mb = os.path.getsize(db_filename) / (1024 * 1024)
+        zip_size_mb = os.path.getsize(zip_path) / (1024 * 1024)
+        zip_info = {
+            'original_size_mb': original_size_mb,
+            'size_mb': zip_size_mb
+        }
+
+    # Generate the quality report
+    generate_quality_report(cursor, build_time_minutes, zip_info, mode)
+
+    # Close connection
+    conn.close()
 
 def insert_build_metadata(cursor, mode='full'):
     """Insert build metadata as a system dictionary entry.
@@ -6272,23 +6374,8 @@ def create_database(mode='full', custom_csv_path=None):
     # Generate manifest file
     generate_manifest(cursor)
 
-    # Calculate build time for quality report
-    build_time_minutes = (time.time() - build_start_time) / 60
-
-    # Get ZIP file information if it exists
-    import os
-    zip_info = None
-    zip_path = f"{db_filename}.zip"
-    if os.path.exists(zip_path):
-        original_size_mb = os.path.getsize(db_filename) / (1024 * 1024)
-        zip_size_mb = os.path.getsize(zip_path) / (1024 * 1024)
-        zip_info = {
-            'original_size_mb': original_size_mb,
-            'size_mb': zip_size_mb
-        }
-
-    # Generate quality report with build info
-    generate_quality_report(cursor, build_time_minutes, zip_info)
+    # NOTE: Quality report generation moved to after external database merges
+    # See calls to generate_quality_report_final() in main() function
     
     # Print translation coverage
     cursor.execute("""
@@ -7461,6 +7548,12 @@ if __name__ == "__main__":
             # Compress and copy sample database to asset pack
             compress_and_copy_database("perseus_texts_sample.db", is_sample=True)
 
+            # Generate quality report after all merges and compression
+            print("\n" + "="*60)
+            print("GENERATING QUALITY REPORT")
+            print("="*60)
+            generate_quality_report_final("perseus_texts_sample.db", mode='sample', build_start_time=start_time)
+
         # Build full database
         if build_mode in ["full", "both"]:
             print("\n" + "="*60)
@@ -7532,6 +7625,12 @@ if __name__ == "__main__":
             suffix = "_interlineated" if interlineate else ""
             compress_and_copy_database("perseus_texts_full.db", is_sample=False, suffix=suffix)
 
+            # Generate quality report after all merges and compression
+            print("\n" + "="*60)
+            print("GENERATING QUALITY REPORT")
+            print("="*60)
+            generate_quality_report_final("perseus_texts_full.db", mode='full', build_start_time=start_time)
+
         # Build extended database
         if build_mode == "extended":
             print("\n" + "="*60)
@@ -7600,6 +7699,12 @@ if __name__ == "__main__":
             suffix = "_interlineated" if interlineate else ""
             compress_and_copy_database("perseus_texts_extended.db", is_sample=False, suffix=suffix)
 
+            # Generate quality report after all merges and compression
+            print("\n" + "="*60)
+            print("GENERATING QUALITY REPORT")
+            print("="*60)
+            generate_quality_report_final("perseus_texts_extended.db", mode='extended', build_start_time=start_time)
+
         # Build first1ktest database
         if build_mode == "first1ktest":
             print("\n" + "="*60)
@@ -7611,6 +7716,12 @@ if __name__ == "__main__":
 
             # Compress first1k test database (keep in data-prep directory)
             compress_and_copy_database("first1k_test.db", is_sample=False)
+
+            # Generate quality report after compression
+            print("\n" + "="*60)
+            print("GENERATING QUALITY REPORT")
+            print("="*60)
+            generate_quality_report_final("first1k_test.db", mode='first1ktest', build_start_time=start_time)
 
         print(f"\nTotal build time: {(time.time() - overall_start)/60:.1f} minutes")
     finally:
