@@ -96,6 +96,84 @@ function normalizeLatin(text) {
     return normalized_text;
 }
 
+// Sanskrit text normalization function
+function normalizeSanskrit(text) {
+    if (!text) return '';
+
+    // NFD normalization
+    let normalized = text.normalize('NFD');
+
+    // Remove Devanagari combining marks (candrabindu, anusvara, visarga)
+    normalized = normalized.replace(/[\u0900-\u0903]/g, '');
+
+    // Remove nukta
+    normalized = normalized.replace(/[\u093C]/g, '');
+
+    // Remove Vedic accents (udatta, anudatta)
+    normalized = normalized.replace(/[\u0951-\u0952]/g, '');
+
+    // Remove dandas (sentence markers)
+    normalized = normalized.replace(/[\u0964-\u0965]/g, '');
+
+    // Remove final visarga
+    normalized = normalized.replace(/ः$/g, '');
+
+    // Remove final anusvara
+    normalized = normalized.replace(/ं$/g, '');
+
+    return normalized;
+}
+
+// Cache for normalization patterns loaded from database
+let normalizationPatterns = {};
+
+// Load normalization patterns from database for all languages
+function loadNormalizationPatterns() {
+    db.all(`SELECT language, pattern, replacement, priority FROM normalization_patterns ORDER BY priority`, [], (err, rows) => {
+        if (err) {
+            console.error('Failed to load normalization patterns:', err);
+            return;
+        }
+
+        normalizationPatterns = {};
+        rows.forEach(row => {
+            if (!normalizationPatterns[row.language]) {
+                normalizationPatterns[row.language] = [];
+            }
+            normalizationPatterns[row.language].push({
+                pattern: new RegExp(row.pattern, 'g'),
+                replacement: row.replacement
+            });
+        });
+
+        console.log(`Loaded normalization patterns for languages: ${Object.keys(normalizationPatterns).join(', ')}`);
+    });
+}
+
+// Generic normalization function using database patterns
+function normalizeText(text, language) {
+    if (!text) return '';
+
+    // Use hardcoded functions for Greek and Latin (they have complex normalization)
+    if (language === 'greek') {
+        return normalizeGreekUltra(text);
+    } else if (language === 'latin') {
+        return normalizeLatin(text);
+    }
+
+    // For other languages, apply NFD normalization first
+    let normalized = text.normalize('NFD');
+
+    // Apply language-specific patterns from database if available
+    if (normalizationPatterns[language]) {
+        normalizationPatterns[language].forEach(({ pattern, replacement }) => {
+            normalized = normalized.replace(pattern, replacement);
+        });
+    }
+
+    return normalized;
+}
+
 // Initialize database connection
 function initDatabase() {
     if (!fs.existsSync(dbPath)) {
@@ -109,24 +187,51 @@ function initDatabase() {
             process.exit(1);
         }
         console.log('Connected to Perseus database');
+
+        // Load normalization patterns for all languages
+        loadNormalizationPatterns();
     });
 }
 
 // Routes
 app.get('/', (req, res) => {
     const selectedLanguage = req.cookies.language || 'greek';
-    res.render('index', { language: selectedLanguage });
+
+    // Get available languages from database
+    db.all(`
+        SELECT DISTINCT a.language
+        FROM authors a
+        ORDER BY a.language
+    `, [], (err, rows) => {
+        if (err) {
+            console.error('Error fetching languages:', err);
+            // Fallback to default languages
+            res.render('index', {
+                language: selectedLanguage,
+                languages: ['greek', 'latin']
+            });
+        } else {
+            const languages = rows.map(row => row.language);
+            res.render('index', {
+                language: selectedLanguage,
+                languages: languages
+            });
+        }
+    });
 });
 
 // Set language preference
 app.post('/api/language', (req, res) => {
     const { language } = req.body;
-    if (language === 'greek' || language === 'latin') {
-        res.cookie('language', language, { maxAge: 365 * 24 * 60 * 60 * 1000 }); // 1 year
-        res.json({ success: true });
-    } else {
-        res.status(400).json({ error: 'Invalid language' });
-    }
+    // Validate that language exists in database
+    db.get('SELECT COUNT(*) as count FROM authors WHERE language = ?', [language], (err, row) => {
+        if (err || !row || row.count === 0) {
+            res.status(400).json({ error: 'Invalid language' });
+        } else {
+            res.cookie('language', language, { maxAge: 365 * 24 * 60 * 60 * 1000 }); // 1 year
+            res.json({ success: true });
+        }
+    });
 });
 
 // License page
@@ -137,8 +242,8 @@ app.get('/license', (req, res) => {
 // API Routes
 app.get('/api/authors/:language', (req, res) => {
     const language = req.params.language;
-    const query = `SELECT id, name, has_translations as has_translated_works FROM authors WHERE language = ? ORDER BY name`;
-    
+    const query = `SELECT id, name, name_alt, has_translations as has_translated_works FROM authors WHERE language = ? ORDER BY name`;
+
     db.all(query, [language], (err, rows) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -203,37 +308,40 @@ app.get('/api/text/:bookId/:startLine/:endLine', (req, res) => {
 app.get('/api/translation/:bookId/:startLine/:endLine', (req, res) => {
     const { bookId, startLine, endLine } = req.params;
     const { translator } = req.query; // Optional translator filter
-    
+
     let query = `
-        SELECT DISTINCT ts.* 
+        SELECT DISTINCT ts.*
         FROM translation_segments ts
-        WHERE ts.book_id = ? 
+        WHERE ts.book_id = ?
     `;
-    
+
     const params = [bookId];
-    
+
     // Add translator filter if specified
     if (translator) {
         query += ` AND ts.translator = ? `;
         params.push(translator);
+    } else {
+        // Exclude interlinear translations by default
+        query += ` AND ts.translator NOT LIKE 'Interlinear%' `;
     }
-    
+
     query += `
         AND (
             (ts.start_line <= ? AND (ts.end_line IS NULL OR ts.end_line >= ?))
             OR
             EXISTS (
-                SELECT 1 FROM translation_lookup tl 
-                WHERE tl.book_id = ? 
+                SELECT 1 FROM translation_lookup tl
+                WHERE tl.book_id = ?
                 AND tl.segment_id = ts.id
                 AND tl.line_number BETWEEN ? AND ?
             )
         )
         ORDER BY ts.start_line
     `;
-    
+
     params.push(endLine, startLine, bookId, startLine, endLine);
-    
+
     db.all(query, params, (err, rows) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -246,13 +354,14 @@ app.get('/api/translation/:bookId/:startLine/:endLine', (req, res) => {
 app.get('/api/translators/:bookId', (req, res) => {
     const { bookId } = req.params;
     const query = `
-        SELECT DISTINCT translator 
-        FROM translation_segments 
-        WHERE book_id = ? 
-        AND translator IS NOT NULL 
+        SELECT DISTINCT translator
+        FROM translation_segments
+        WHERE book_id = ?
+        AND translator IS NOT NULL
+        AND translator NOT LIKE 'Interlinear%'
         ORDER BY translator
     `;
-    
+
     db.all(query, [bookId], (err, rows) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -265,8 +374,10 @@ app.get('/api/translators/:bookId', (req, res) => {
 // Enhanced dictionary lookup with lemma mapping and morphology
 app.get('/api/dictionary/:word/:language', (req, res) => {
     const { word, language } = req.params;
-    const normalizedWord = language === 'greek' ? normalizeGreekUltra(word) : normalizeLatin(word);
-    
+    const normalizedWord = normalizeText(word, language);
+
+    console.log(`Dictionary lookup: word="${word}", language="${language}", normalized="${normalizedWord}"`);
+
     // Get morphological info and lemmas for the word
     const morphQuery = `
         SELECT DISTINCT lemma, morph_info, confidence, source as morph_source
@@ -281,17 +392,20 @@ app.get('/api/dictionary/:word/:language', (req, res) => {
         
         // First try direct lookup
         let query = `
-            SELECT id, headword, entry_plain, entry_html, source 
-            FROM dictionary_entries 
-            WHERE headword_normalized_ultra = ? AND language = ?
+            SELECT id, headword, entry_plain, entry_html, source
+            FROM dictionary_entries
+            WHERE (headword_normalized_ultra = ? OR headword = ?) AND language = ?
             LIMIT 5
         `;
-        
-        db.all(query, [normalizedWord, language], (err, directEntries) => {
+
+        db.all(query, [normalizedWord, word, language], (err, directEntries) => {
             if (err) {
+                console.error('Direct lookup error:', err);
                 return res.status(500).json({ error: err.message });
             }
-            
+
+            console.log(`Direct lookup found ${directEntries.length} entries`);
+
             // Then try lemma lookup
             query = `
                 SELECT DISTINCT de.id, de.headword, de.entry_plain, de.entry_html, de.source
@@ -300,12 +414,15 @@ app.get('/api/dictionary/:word/:language', (req, res) => {
                 WHERE lm.word_form_normalized_ultra = ?
                 LIMIT 5
             `;
-            
+
             db.all(query, [language, normalizedWord], (err, lemmaEntries) => {
                 if (err) {
+                    console.error('Lemma lookup error:', err);
                     return res.status(500).json({ error: err.message });
                 }
-                
+
+                console.log(`Lemma lookup found ${lemmaEntries.length} entries`);
+
                 // Combine results, removing duplicates
                 const allEntries = [...directEntries];
                 const seenIds = new Set(directEntries.map(e => e.id));
@@ -316,7 +433,9 @@ app.get('/api/dictionary/:word/:language', (req, res) => {
                         seenIds.add(entry.id);
                     }
                 }
-                
+
+                console.log(`Total entries returned: ${allEntries.length}`);
+
                 // Return entries with morph info separately
                 res.json({
                     morph_info: morphInfo,
@@ -412,8 +531,10 @@ app.get('/api/lemma/:word/:language', (req, res) => {
 app.get('/api/occurrences/:word/:bookId?', (req, res) => {
     const { word, bookId } = req.params;
     const language = req.query.language || 'greek';
-    const normalizedWord = language === 'greek' ? normalizeGreekUltra(word) : normalizeLatin(word);
+    const normalizedWord = normalizeText(word, language);
     const limit = parseInt(req.query.limit) || 500;
+
+    console.log(`Occurrences lookup: word="${word}", language="${language}", normalized="${normalizedWord}"`);
     
     // First, find the lemma for this word
     const findLemmaQuery = `
@@ -427,8 +548,9 @@ app.get('/api/occurrences/:word/:bookId?', (req, res) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        
+
         const lemma = lemmaRow ? lemmaRow.lemma : normalizedWord;
+        console.log(`Found lemma: "${lemma}" for normalized word: "${normalizedWord}"`);
         
         // Now get all word forms for this lemma (Android approach)
         const getFormsQuery = `
@@ -441,11 +563,13 @@ app.get('/api/occurrences/:word/:bookId?', (req, res) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            
+
             const forms = wordForms.map(f => f.word_form);
             if (forms.length === 0) {
                 forms.push(word); // Fallback to original word
             }
+
+            console.log(`Found ${forms.length} word forms for lemma "${lemma}":`, forms.slice(0, 5));
             
             // Build query for occurrences using lemma_map like Android
             let query = `
@@ -465,6 +589,7 @@ app.get('/api/occurrences/:word/:bookId?', (req, res) => {
                 JOIN works wk ON b.work_id = wk.id
                 JOIN authors a ON wk.author_id = a.id
                 WHERE lm.lemma = ?
+                AND w.word != '_'
             `;
             
             const params = [lemma];
@@ -505,7 +630,13 @@ app.get('/api/occurrences/:word/:bookId?', (req, res) => {
                         word_position: occ.word_position
                     });
                 });
-                
+
+                // Log first occurrence for debugging
+                if (occurrences.length > 0) {
+                    const first = occurrences[0];
+                    console.log(`First occurrence: word="${first.word}", position=${first.word_position}, line="${first.line_text.substring(0, 100)}"`);
+                }
+
                 res.json({
                     word: word,
                     lemma: lemma,
@@ -515,6 +646,72 @@ app.get('/api/occurrences/:word/:bookId?', (req, res) => {
                 });
             });
         });
+    });
+});
+
+// Get interlinear translation for a book
+app.get('/api/interlinear/:bookId', (req, res) => {
+    const { bookId } = req.params;
+
+    // Query translation_segments for interlinear data
+    // Interlinear is stored as a translator type with pipe-delimited format in translation_text
+    const query = `
+        SELECT ts.start_line, ts.end_line, ts.translation_text
+        FROM translation_segments ts
+        WHERE ts.book_id = ?
+        AND ts.translator = 'Interlinear (Beta, AI-generated from app dictionary)'
+        ORDER BY ts.start_line
+    `;
+
+    db.all(query, [bookId], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'No interlinear translation available for this work' });
+        }
+
+        // Parse the pipe-delimited format from translation_text
+        // Format: | word | **gloss** | morphology |  | next_word | etc.
+        const interlinearData = {};
+
+        for (const row of rows) {
+            const lineNumber = row.start_line; // Each row is one line
+            const content = row.translation_text;
+
+            // Split by pipe and process
+            const parts = content.split('|').map(p => p.trim()).filter(p => p);
+
+            const words = [];
+
+            // Process in groups of 3: word, gloss (in **), morphology
+            for (let i = 0; i < parts.length; i += 3) {
+                if (i + 1 < parts.length) {
+                    const word = parts[i];
+                    let gloss = parts[i + 1];
+                    const morph = i + 2 < parts.length ? parts[i + 2] : '';
+
+                    // Extract gloss from **text** format
+                    const glossMatch = gloss.match(/\*\*(.*?)\*\*/);
+                    if (glossMatch) {
+                        gloss = glossMatch[1];
+                    }
+
+                    words.push({
+                        word: word,
+                        gloss: gloss,
+                        morph: morph
+                    });
+                }
+            }
+
+            if (words.length > 0) {
+                interlinearData[lineNumber] = { words: words };
+            }
+        }
+
+        res.json(interlinearData);
     });
 });
 

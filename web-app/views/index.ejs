@@ -16,16 +16,13 @@
             </a>
             <div class="navbar-nav ms-auto">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-light" id="greekBtn" 
-                            onclick="setLanguage('greek')" 
-                            <%= language === 'greek' ? 'disabled' : '' %>>
-                        Greek
-                    </button>
-                    <button type="button" class="btn btn-outline-light" id="latinBtn" 
-                            onclick="setLanguage('latin')"
-                            <%= language === 'latin' ? 'disabled' : '' %>>
-                        Latin
-                    </button>
+                    <% languages.forEach(lang => { %>
+                        <button type="button" class="btn btn-outline-light" id="<%= lang %>Btn"
+                                onclick="setLanguage('<%= lang %>')"
+                                <%= language === lang ? 'disabled' : '' %>>
+                            <%= lang.charAt(0).toUpperCase() + lang.slice(1) %>
+                        </button>
+                    <% }); %>
                 </div>
             </div>
         </div>
@@ -109,9 +106,10 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 id="contentTitle">Select an author and work</h5>
-                            <div class="btn-group btn-group-sm" role="group">
+                            <div class="btn-group btn-group-sm" role="group" id="viewToggle">
                                 <button type="button" class="btn btn-outline-primary" id="textBtn" onclick="showText()">Text</button>
                                 <button type="button" class="btn btn-outline-primary" id="translationBtn" onclick="showTranslation()">Translation</button>
+                                <button type="button" class="btn btn-outline-primary" id="interlinearBtn" onclick="showInterlinear()">Interlinear</button>
                             </div>
                         </div>
                     </div>
@@ -201,6 +199,10 @@
     </div>
 
     <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize currentLanguage before loading app.js
+        currentLanguage = '<%= language %>';
+    </script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>

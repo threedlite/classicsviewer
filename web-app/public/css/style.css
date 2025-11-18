@@ -262,3 +262,81 @@ body {
 .list-group-item strong {
     font-weight: 600;
 }
+
+/* Interlinear translation styling */
+.interlinear-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-left: 60px; /* Align with text after line number */
+    padding: 0.5rem 0;
+}
+
+.interlinear-word-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    padding: 0.25rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.interlinear-word {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+}
+
+.interlinear-word:hover {
+    background-color: #e9ecef;
+    border-radius: 3px;
+}
+
+.interlinear-gloss {
+    font-size: 0.9rem;
+    color: #495057;
+    text-align: center;
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.interlinear-morph {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-align: center;
+    padding: 0.25rem 0.5rem;
+    font-style: italic;
+    width: 100%;
+    margin-top: 0.25rem;
+}
+
+/* Responsive design for interlinear */
+@media (max-width: 768px) {
+    .interlinear-container {
+        margin-left: 10px;
+        gap: 0.5rem;
+    }
+
+    .interlinear-word-table {
+        min-width: 60px;
+    }
+
+    .interlinear-word {
+        font-size: 1rem;
+    }
+
+    .interlinear-gloss {
+        font-size: 0.8rem;
+    }
+
+    .interlinear-morph {
+        font-size: 0.7rem;
+    }
+}

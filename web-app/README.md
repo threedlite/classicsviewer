@@ -11,12 +11,13 @@ A local web application for viewing classical Greek and Latin texts from the Per
 - Similar UI to the Android app with:
   - Language selection (Greek/Latin)
   - Author and work browsing
-  - Text and translation viewing
+  - Text, translation, and **interlinear translation** viewing
   - Page navigation
   - **Dictionary lookup**: Click any word to see definitions
   - **Word occurrences**: Find all occurrences of a word with highlighted context
   - Side panel with tabs for dictionary and occurrences
   - **Reading position persistence**: Automatically saves and restores your last reading position (author, work, book, page) when you reload the page
+  - **Interlinear translations**: Word-by-word glosses with clickable Greek/Latin words for instant dictionary lookup
 
 ## Prerequisites
 
@@ -52,6 +53,7 @@ docker-compose up
 - `GET /api/books/:workId` - List books in a work
 - `GET /api/text/:bookId/:startLine/:endLine` - Get text lines
 - `GET /api/translation/:bookId/:startLine/:endLine` - Get translations
+- `GET /api/interlinear/:bookId` - Get interlinear translation data for a book (reads from database translation_segments)
 - `GET /api/dictionary/:word/:language` - Look up word in dictionary
 - `GET /api/occurrences/:word/:bookId?` - Find word occurrences (bookId optional)
 - `POST /api/language` - Set language preference

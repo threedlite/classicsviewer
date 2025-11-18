@@ -1,13 +1,19 @@
 // Classics Viewer Web App
-let currentLanguage = '<%= language %>';
+// currentLanguage is set by inline script in HTML
 let currentAuthor = null;
 let currentWork = null;
 let currentBook = null;
 let currentPage = 1;
 let linesPerPage = 30;
-let viewMode = 'text'; // 'text' or 'translation'
+let viewMode = 'text'; // 'text', 'translation', or 'interlinear'
 let availableTranslators = [];
 let selectedTranslator = null;
+let interlinearData = null; // Cache interlinear data for the current work
+
+// Get current selected language
+function getCurrentLanguage() {
+    return currentLanguage;
+}
 
 // Cookie utility functions
 function setCookie(name, value, days = 365) {
@@ -107,7 +113,7 @@ let filteredWorks = [];
 
 // Load authors for the selected language
 async function loadAuthors() {
-    const language = document.getElementById('greekBtn').disabled ? 'greek' : 'latin';
+    const language = getCurrentLanguage();
 
     try {
         showLoading('authorList');
@@ -142,11 +148,17 @@ function displayAuthors() {
         item.href = '#';
         item.className = 'list-group-item list-group-item-action';
 
+        // Format display name: show both Devanagari and English for Sanskrit
+        let displayName = author.name;
+        if (author.name_alt) {
+            displayName = `${author.name} <span class="text-muted small">(${author.name_alt})</span>`;
+        }
+
         // Bold text for authors with translations (like Android)
         if (author.has_translated_works) {
-            item.innerHTML = `<strong>${author.name}</strong>`;
+            item.innerHTML = `<strong>${displayName}</strong>`;
         } else {
-            item.textContent = author.name;
+            item.innerHTML = displayName;
         }
 
         item.dataset.authorId = author.id; // Store ID for restoration
@@ -321,11 +333,14 @@ async function selectWork(workId, workTitle, element) {
         item.classList.remove('active');
     });
     element.classList.add('active');
-    
+
     // Scroll the selected work into view
     element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    
+
     currentWork = { id: workId, title: workTitle };
+
+    // Reset interlinear data cache when changing works
+    interlinearData = null;
     
     // Check if this work has multiple books
     try {
@@ -369,15 +384,18 @@ function showBookSelection(books, workTitle) {
 
 // Select a book and load the first page
 async function selectBook(bookId, bookTitle, startLine, endLine, bookLabel = null) {
-    currentBook = { 
-        id: bookId, 
-        title: bookTitle, 
+    currentBook = {
+        id: bookId,
+        title: bookTitle,
         label: bookLabel || bookTitle, // Store label for multi-book works
-        startLine: startLine, 
-        endLine: endLine 
+        startLine: startLine,
+        endLine: endLine
     };
     currentPage = 1;
-    
+
+    // Reset interlinear data cache when changing books
+    interlinearData = null;
+
     // Load available translators for this book
     await loadAvailableTranslators(bookId);
     
@@ -401,8 +419,10 @@ async function loadPage() {
     
     if (viewMode === 'text') {
         await loadText(startLine, endLine);
-    } else {
+    } else if (viewMode === 'translation') {
         await loadTranslation(startLine, endLine);
+    } else if (viewMode === 'interlinear') {
+        await loadInterlinear(startLine, endLine);
     }
     
     // Update page info
@@ -430,7 +450,7 @@ async function loadText(startLine, endLine) {
         const contentArea = document.getElementById('contentArea');
         contentArea.innerHTML = '';
         
-        const language = document.getElementById('greekBtn').disabled ? 'greek' : 'latin';
+        const language = getCurrentLanguage();
         const textClass = language === 'greek' ? 'greek-text' : 'latin-text';
         
         lines.forEach(line => {
@@ -570,11 +590,116 @@ async function loadTranslation(startLine, endLine) {
     }
 }
 
+// Load interlinear translation
+async function loadInterlinear(startLine, endLine) {
+    try {
+        // Load interlinear data if not already cached for this book
+        if (!interlinearData) {
+            showLoading('contentArea');
+            const response = await fetch(`/api/interlinear/${currentBook.id}`);
+
+            if (!response.ok) {
+                throw new Error('No interlinear translation available');
+            }
+
+            interlinearData = await response.json();
+        }
+
+        // Get text lines for this page
+        const textResponse = await fetch(`/api/text/${currentBook.id}/${startLine}/${endLine}`);
+        const lines = await textResponse.json();
+
+        const contentArea = document.getElementById('contentArea');
+        contentArea.innerHTML = '';
+
+        if (Object.keys(interlinearData).length === 0) {
+            contentArea.innerHTML = '<p class="text-muted text-center mt-5">No interlinear translation available for this work.</p>';
+            return;
+        }
+
+        const language = getCurrentLanguage();
+        const textClass = language === 'greek' ? 'greek-text' : 'latin-text';
+
+        lines.forEach(line => {
+            const lineDiv = document.createElement('div');
+            lineDiv.className = 'text-line';
+
+            const lineNumber = document.createElement('span');
+            lineNumber.className = 'line-number';
+            lineNumber.textContent = line.line_number;
+            lineDiv.appendChild(lineNumber);
+
+            // Check if we have interlinear data for this line
+            const interlinear = interlinearData[line.line_number];
+
+            if (interlinear && interlinear.words) {
+                // Create interlinear display
+                const interlinearContainer = document.createElement('div');
+                interlinearContainer.className = 'interlinear-container';
+
+                // Display each word with its gloss and morphology
+                for (let i = 0; i < interlinear.words.length; i++) {
+                    const wordData = interlinear.words[i];
+                    const wordTable = document.createElement('div');
+                    wordTable.className = 'interlinear-word-table';
+
+                    // Greek/Latin word (clickable)
+                    const wordDiv = document.createElement('div');
+                    wordDiv.className = `interlinear-word ${textClass} clickable-word`;
+                    wordDiv.textContent = wordData.word;
+                    wordDiv.onclick = () => lookupWord(wordData.word);
+
+                    // English gloss
+                    const glossDiv = document.createElement('div');
+                    glossDiv.className = 'interlinear-gloss';
+                    glossDiv.textContent = wordData.gloss;
+
+                    // Morphology (if present)
+                    if (wordData.morph && wordData.morph.trim()) {
+                        const morphDiv = document.createElement('div');
+                        morphDiv.className = 'interlinear-morph';
+                        morphDiv.textContent = wordData.morph;
+
+                        wordTable.appendChild(wordDiv);
+                        wordTable.appendChild(glossDiv);
+                        wordTable.appendChild(morphDiv);
+                    } else {
+                        wordTable.appendChild(wordDiv);
+                        wordTable.appendChild(glossDiv);
+                    }
+
+                    interlinearContainer.appendChild(wordTable);
+                }
+
+                lineDiv.appendChild(interlinearContainer);
+            } else {
+                // No interlinear data, show regular text
+                const lineText = document.createElement('span');
+                lineText.className = textClass;
+                lineText.innerHTML = makeWordsClickable(line.line_text, language);
+                lineDiv.appendChild(lineText);
+            }
+
+            contentArea.appendChild(lineDiv);
+        });
+
+        // Disable next button if we got fewer lines than requested
+        if (lines.length < linesPerPage) {
+            document.getElementById('nextBtn').disabled = true;
+        }
+    } catch (error) {
+        console.error('Error loading interlinear:', error);
+        const contentArea = document.getElementById('contentArea');
+        contentArea.innerHTML = '<p class="text-muted text-center mt-5">Interlinear translation not available for this work.</p>';
+    }
+}
+
 // View mode switching
 function showText() {
     viewMode = 'text';
     document.getElementById('textBtn').classList.add('active');
     document.getElementById('translationBtn').classList.remove('active');
+    document.getElementById('interlinearBtn').classList.remove('active');
     if (currentBook) {
         loadPage();
     }
@@ -584,6 +709,17 @@ function showTranslation() {
     viewMode = 'translation';
     document.getElementById('translationBtn').classList.add('active');
     document.getElementById('textBtn').classList.remove('active');
+    document.getElementById('interlinearBtn').classList.remove('active');
+    if (currentBook) {
+        loadPage();
+    }
+}
+
+function showInterlinear() {
+    viewMode = 'interlinear';
+    document.getElementById('interlinearBtn').classList.add('active');
+    document.getElementById('textBtn').classList.remove('active');
+    document.getElementById('translationBtn').classList.remove('active');
     if (currentBook) {
         loadPage();
     }
@@ -645,7 +781,7 @@ function makeWordsClickable(text, language) {
 
 // Word lookup
 async function lookupWord(word) {
-    const language = document.getElementById('greekBtn').disabled ? 'greek' : 'latin';
+    const language = getCurrentLanguage();
     
     // Show panel
     const panel = document.getElementById('wordInfoPanel');
@@ -687,8 +823,9 @@ async function fetchDictionary(word, language) {
         
         // Display morph info next to the selected word
         const morphElement = document.getElementById('selectedWordMorph');
-        if (morphElement && morphInfo) {
-            morphElement.textContent = morphInfo;
+        if (morphElement && morphInfo && morphInfo.length > 0) {
+            // Display the first morph_info entry
+            morphElement.textContent = morphInfo[0].morph_info || '';
         } else if (morphElement) {
             morphElement.textContent = '';
         }
@@ -740,7 +877,7 @@ async function fetchDictionary(word, language) {
 // Fetch word occurrences
 async function fetchOccurrences(word, bookId) {
     try {
-        const language = document.getElementById('greekBtn').disabled ? 'greek' : 'latin';
+        const language = getCurrentLanguage();
         const url = bookId 
             ? `/api/occurrences/${encodeURIComponent(word)}/${bookId}?limit=500&language=${language}`
             : `/api/occurrences/${encodeURIComponent(word)}?limit=500&language=${language}`;
@@ -1074,7 +1211,7 @@ async function performSearch() {
     const searchTerm = document.getElementById('searchInput').value.trim();
     if (!searchTerm) return;
 
-    const language = document.getElementById('greekBtn').disabled ? 'greek' : 'latin';
+    const language = getCurrentLanguage();
     const lemmaSearch = document.getElementById('lemmaSearch').checked;
 
     try {
