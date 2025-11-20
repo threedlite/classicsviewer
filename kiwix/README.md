@@ -1,11 +1,5 @@
 # Kiwix ZIM File Generation for Classics Viewer
 
-
-Note: To reassemble classicsviewer_full_latin.zim, run:
-cat classicsviewer_full_latin.zim.part01 classicsviewer_full_latin.zim.part02 > classicsviewer_full_latin.zim 
-This is due to Github LFS size limits.
-
-
 ## What is Kiwix?
 
 Kiwix is an offline reader for web content, designed to make knowledge available to people with limited or no internet access. It reads ZIM files, which are highly compressed archives containing websites or other content. Kiwix is widely used for:
@@ -27,33 +21,34 @@ This directory contains tools to create a Kiwix ZIM file from the Perseus Classi
 
 Installation:
 
-Install Kiwix app first https://kiwix.org/en/. 
+Install Kiwix app first https://kiwix.org/en/.
 
 For mobile, install from App Store (Apple or Google). Copy the zim file to the phone in the existing Kiwix folder which should be in internal storage. For Android it might something like /storage/emulated/0/Android/media/org.kiwix.kiwixmobile/
 
-Install the Classics Viewer vim file library (sample or full) into Kiwix using file selector.
-
-
+Install the Classics Viewer zim file library (sample or full) into Kiwix using file selector.
 
 ### Content Overview
 
 The ZIM file contains:
 - **Sample database**: 10 Greek authors + 2 Latin authors (278 works, 705 books)
 - **Full database**: 88 Greek authors + 40 Latin authors (999 works, 2,563 books)
+- **Extended database**: All Perseus + 991 non-duplicate First1KGreek works
 - Complete texts with aligned translations
+- **Interlinear translations**: Word-by-word translations with morphology for Homer's Iliad and Odyssey
 - Advanced translation alignment supporting Bekker numbering, section-based texts, and offset translations
-- Comprehensive dictionary with 37,715+ entries from LSJ and Cunliffe
+- Comprehensive dictionary with 61,070+ entries from LSJ, Cunliffe, and Wiktionary
 - Morphological information showing grammatical forms
 - Hierarchical navigation (Language → Author → Work → Book)
 - Responsive HTML with CSS styling optimized for offline reading
+- Multi-script support (Greek, Latin, Sanskrit, Arabic, Hebrew, Persian, Akkadian, Sumerian)
 
 ## Requirements
 
 - Python 3.8+
 - SQLite3
-- Perseus database (`perseus_texts_sample.db` or `perseus_texts_full.db`)
+- Perseus database (`perseus_texts_sample.db`, `perseus_texts_full.db`, or `perseus_texts_extended.db`)
 - Python libzim library (for ZIM creation)
-- ~300MB disk space for sample, ~1.5GB for full database
+- ~300MB disk space for sample, ~1.5GB for full database, ~5GB for extended
 
 ## Installation
 
@@ -75,76 +70,120 @@ pip install libzim
 
 ```bash
 cd kiwix
-./BUILD_ZIM_SAMPLE.sh
+./build_sample_clean.sh
 ```
 
-This creates `perseus_sample.zim` (~318MB) in about 8-10 minutes.
+This creates `classicsviewer_sample.zim` (~951MB) containing:
+- 12 authors (10 Greek, 2 Latin)
+- 913,993 dictionary entries
+- 1,711 text pages
+- Interlinear translations for Homer's Iliad and Odyssey
 
-### Manual Build Steps
-
-**1. Generate HTML content:**
-```bash
-source venv/bin/activate  # Activate virtual environment
-python3 create_zim_content_optimized.py --sample
-```
-This generates ~260,000 HTML files (one for each word form + text pages) in ~70 seconds.
-
-**2. Create ZIM file:**
-```bash
-python3 create_zim_optimized.py --input zim_content_optimized --output perseus_sample.zim
-```
-This packages the HTML files into a compressed ZIM archive in ~7 minutes.
+Build time: ~15 minutes total (3.7 min content generation + 11 min ZIM packaging)
 
 ### Full Database Build
 
 For the complete 128 author database:
 ```bash
-# First create the full database (takes ~10 minutes)
-cd ../data-prep
-python3 create_perseus_database.py full
-
-# Then generate ZIM (takes ~9 minutes total)
-cd ../kiwix
-./BUILD_ZIM_FULL.sh
+cd kiwix
+./build_full_clean.sh
 ```
 
-This creates `perseus_full.zim` (~402MB) containing 88 Greek and 40 Latin authors.
+This creates `classicsviewer_full.zim` containing 88 Greek and 40 Latin authors.
+
+### Extended Database Build
+
+For Perseus + First1KGreek (991 additional works):
+```bash
+cd kiwix
+./build_extended_clean.sh
+```
+
+This creates `classicsviewer_extended.zim` containing 391 total authors and 1,849 works.
 
 ## Features
 
+### Interlinear Translations
+
+The ZIM files include word-by-word interlinear translations for select works:
+- **Homer's Iliad**: All 24 books with word/gloss/morphology
+- **Homer's Odyssey**: All 24 books with word/gloss/morphology
+- More works being added
+
+Access interlinear via the translation dropdown:
+1. Navigate to a work with interlinear data (e.g., Homer → Iliad → Book 1)
+2. In the translation panel, select "Interlinear (Beta, AI-generated from app dictionary)"
+3. View word-by-word breakdowns with:
+   - **Word**: The Greek word in its original form
+   - **Gloss**: English translation/meaning
+   - **Morph**: Grammatical information (case, number, gender, tense, etc.)
+
 ### Dictionary System
-- **37,715+ dictionary entries** from LSJ (Liddell-Scott-Jones) and Cunliffe's Homeric lexicon
-- **257,000+ word form pages** - every Greek word form has its own dictionary page
+- **61,070+ dictionary entries** from LSJ (Liddell-Scott-Jones), Cunliffe's Homeric lexicon, and Wiktionary
+- **643,399+ word form pages** - every Greek/Latin word form has its own dictionary page
 - Click any Greek word to see its dictionary entry with:
   - The clicked word form at the top
   - Expanded morphological information (e.g., "accusative singular" not "acc s")
   - Lemma (dictionary form) if different
   - All dictionary definitions sorted by source (LSJ, Cunliffe, Wiktionary)
 - **Elision handling**: Words with apostrophes (μυρί', ἄλγε') automatically map to full forms
-- **Grave accent fixes**: καὶ correctly maps to καί (not καὶγάρ)
+- **Grave accent fixes**: καὶ correctly maps to καί
 - Words without dictionary entries are not underlined/linked
 
 ### Translation Alignment
 The system automatically handles complex translation numbering:
 - **Direct alignment**: Line-by-line matching
-- **Bekker numbering**: For Aristotle's works (e.g., 1447a8)  
+- **Bekker numbering**: For Aristotle's works (e.g., 1447a8)
 - **Section-based**: Prose works using section numbers instead of lines
 - **Offset translations**: Consistent numeric offsets
 - **Partial coverage**: Works with incomplete translations
 
+### Multi-Language Support
+Extended database includes:
+- **Sanskrit** texts with Devanagari script support
+- **Arabic** texts with right-to-left rendering
+- **Hebrew** texts with right-to-left rendering
+- **Persian** texts with Naskh script
+- **Akkadian** cuneiform texts
+- **Sumerian** cuneiform texts
+
+All languages have proper font stack and CSS styling.
+
 ### Performance Optimizations
 - **Pre-loaded data**: All database content loaded into memory once
-- **Pre-computed paths**: All 257,000+ dictionary links calculated upfront
-- **Batch processing**: Efficient handling of 260,000+ files
+- **Pre-computed paths**: All 643,399+ dictionary links calculated upfront
+- **Batch processing**: Efficient handling of 764,651+ files
 - **Fast lookups**: Reverse indices for morphological forms
+
+## Build Process
+
+The build scripts follow this process:
+
+1. **Clean environment**: Remove old build artifacts
+2. **Generate HTML content**: Create all HTML pages from database (~70 seconds)
+3. **Copy assets**: Include CSS stylesheets
+4. **Create ZIM file**: Package HTML into compressed ZIM format (~7 minutes)
+5. **Cleanup**: Remove temporary HTML files
+
+### Build Scripts
+
+- `build_sample_clean.sh`: Sample database (12 authors)
+- `build_full_clean.sh`: Full database (128 authors)
+- `build_extended_clean.sh`: Extended database (391 authors)
+
+Each script:
+- Sources the Python virtual environment
+- Runs `create_zim_content_optimized.py` with appropriate database
+- Packages content with `create_zim_optimized.py`
+- Reports statistics and file size
 
 ## Generated Structure
 
 ```
 zim_content_optimized/
-├── index.html                    # Main entry page
+├── index.html                    # Main entry page with language selection
 ├── dictionary/
-│   └── greek/                    # 257,000+ dictionary pages
+│   └── greek/                    # 643,399+ dictionary pages
 │       ├── zrrOsc6v.html         # καί entry
 │       ├── zrrOseG9tg.html       # καὶ entry (maps to καί)
 │       └── ... (one file per word form)
@@ -161,121 +200,34 @@ zim_content_optimized/
 │       └── ...
 ├── latin/
 │   └── ... (similar structure)
+├── sanskrit/
+│   └── ... (similar structure, extended only)
+├── arabic/
+│   └── ... (similar structure, extended only)
 └── assets/
-    └── css/style.css
+    └── css/style.css             # Unified stylesheet with multi-script support
 ```
-
-## Features
-
-### Implemented
-- ✅ Hierarchical navigation
-- ✅ Text and translation display
-- ✅ Translation alignment with lookup table
-- ✅ Multiple translator support
-- ✅ Basic dictionary lookup (click on Greek words)
-- ✅ Pagination for long texts
-- ✅ Breadcrumb navigation
-- ✅ Responsive design
-
-### Planned Enhancements
-- 📝 Full-text search
-- 📝 Enhanced dictionary with morphology
-- 📝 Reading position save/restore
-- 📝 Dark mode toggle
-- 📝 Font size adjustment
 
 ## File Sizes and Performance
 
 ### Sample Database (12 authors)
-- **HTML files**: 1.4GB uncompressed (260,000+ files)
-- **ZIM file**: ~318MB compressed
-- **Generation time**: ~70 seconds for HTML, ~7 minutes for ZIM
-- **Compression ratio**: ~77% reduction
+- **Source DB**: 650MB uncompressed
+- **HTML files**: ~1.4GB uncompressed (915,526 files)
+- **ZIM file**: ~951MB compressed
+- **Generation time**: ~15 minutes total (3.7 min content + 11 min packaging)
+- **Content**: 1,711 text pages, 913,993 dictionary entries
+- **Authors**: 10 Greek, 2 Latin
 
 ### Full Database (128 authors)
-- **HTML files**: 1.5GB uncompressed (265,809 files)
-- **ZIM file**: ~402MB compressed
-- **Generation time**: ~81 seconds for HTML, ~7.5 minutes for ZIM, ~9 minutes total
-- **Compression ratio**: ~73% reduction
-- **Content**: 88 Greek authors, 40 Latin authors, 999 works, 2,563 books, 257,549 dictionary pages
+- **Source DB**: 1.4GB uncompressed
+- **HTML files**: ~1.5GB uncompressed (765,000+ files)
+- **ZIM file**: ~1.2GB compressed (estimated)
+- **Content**: 88 Greek authors, 40 Latin authors, 999 works, 2,563 books
 
-## Testing
+### Extended Database (391 authors)
+- **Source DB**: 5.5GB uncompressed, 1.3GB compressed
+- **HTML files**: ~5GB uncompressed (estimated)
+- **ZIM file**: ~3GB compressed (estimated)
+- **Content**: Perseus + 991 First1KGreek works, 1,849 total works
+- **Languages**: Greek, Latin, Sanskrit, Arabic, Hebrew, Persian, Akkadian, Sumerian
 
-### 1. Test generated HTML locally
-```bash
-cd zim_content_optimized
-python3 -m http.server 8000
-# Open http://localhost:8000
-```
-
-### 2. Test ZIM file in Kiwix
-```bash
-
-Mac command to open zim in Kiwix:
-open -a Kiwix classicsviewer_sample.zim
-
- or
-
-# Desktop
-kiwix-desktop perseus_sample.zim
-
-# Server mode (for browser testing)
-kiwix-serve --port 8080 perseus_sample.zim
-# Open http://localhost:8080
-```
-
-### 3. Verify key features
-- Navigate to Greek → Homer → Iliad → Book 1
-- Line 2: Check that μυρί' and ἄλγε' are clickable (elision handling)
-- Line 7: Click καὶ - should show both LSJ and CUNLIFFE entries
-- Any Greek word: Click to see morphology and dictionary entries
-
-## Troubleshooting
-
-### Database not found
-Ensure the Perseus database exists:
-```bash
-cd ../data-prep
-python3 create_perseus_database.py sample
-```
-
-### zimwriterfs not found
-Install zim-tools package for your platform (see Installation section)
-
-### Out of memory during generation
-Use `--sample` mode for testing, or increase system swap space
-
-### Greek text not displaying correctly
-Ensure UTF-8 encoding is properly set in HTML headers
-
-## Development
-
-### Adding new features
-
-1. Modify templates in `create_zim_content.py`
-2. Test with sample mode first
-3. Validate output HTML
-4. Generate full content
-5. Test in Kiwix reader
-
-### Customizing appearance
-
-Edit the CSS generation in `generate_css()` method
-
-### Adding JavaScript functionality
-
-Modify `generate_javascript()` method - keep it minimal for offline use
-
-## License
-
-Content is from Perseus Digital Library (CC-BY-SA 3.0 license)
-and Wikitionary (CC-BY-SA 4.0 license)
-Code is provided under MIT license
-
-## Support
-
-For issues or questions:
-1. Check existing issues in the main Classics Viewer repository
-2. Test with sample mode first
-3. Verify database integrity
-4. Check Kiwix compatibility

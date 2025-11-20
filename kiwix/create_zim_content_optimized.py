@@ -15,6 +15,7 @@ import html
 import json
 import re
 import base64
+import hashlib
 import unicodedata
 from pathlib import Path
 from typing import Dict, List, Set
@@ -23,6 +24,19 @@ import time
 from collections import defaultdict
 import fcntl
 import sys
+
+def get_safe_filename(word: str, max_length: int = 200) -> str:
+    """Generate a safe filename from a word, handling long names with hashing."""
+    # Use base64 encoding
+    safe_name = base64.urlsafe_b64encode(word.encode('utf-8')).decode('ascii').rstrip('=')
+
+    # If filename would be too long, use hash instead
+    if len(safe_name) > max_length:
+        # Use MD5 hash for consistent, short filenames
+        hash_digest = hashlib.md5(word.encode('utf-8')).hexdigest()
+        return hash_digest
+
+    return safe_name
 
 def normalize_greek(word: str) -> str:
     """Normalize Greek text like Android does - only remove punctuation, keep diacritics."""
@@ -44,6 +58,68 @@ def normalize_greek_ultra(word: str) -> str:
     lowercased = without_combining.lower()
     # Normalize final sigma
     return lowercased.replace('ς', 'σ')
+
+def normalize_sanskrit(word: str) -> str:
+    """Normalize Sanskrit (Devanagari) text."""
+    if not word:
+        return ''
+
+    # NFD normalization
+    normalized = unicodedata.normalize('NFD', word)
+
+    # Remove Devanagari combining marks (candrabindu, anusvara, visarga)
+    normalized = re.sub(r'[\u0900-\u0903]', '', normalized)
+
+    # Remove nukta
+    normalized = re.sub(r'[\u093C]', '', normalized)
+
+    # Remove Vedic accents (udatta, anudatta)
+    normalized = re.sub(r'[\u0951-\u0952]', '', normalized)
+
+    # Remove dandas (sentence markers)
+    normalized = re.sub(r'[\u0964-\u0965]', '', normalized)
+
+    # Remove final visarga
+    normalized = re.sub(r'ः$', '', normalized)
+
+    # Remove final anusvara
+    normalized = re.sub(r'ं$', '', normalized)
+
+    return normalized
+
+def normalize_text(word: str, language: str, db_connection=None) -> str:
+    """Generic normalization dispatcher for all languages."""
+    if not word:
+        return ''
+
+    # Use hardcoded functions for Greek and Latin (they have complex normalization)
+    if language == 'greek':
+        return normalize_greek_ultra(word)
+    elif language == 'latin':
+        return normalize_latin(word)
+    elif language == 'sanskrit':
+        return normalize_sanskrit(word)
+    else:
+        # For other languages, apply NFD normalization first
+        normalized = unicodedata.normalize('NFD', word)
+
+        # Apply language-specific patterns from database if available
+        if db_connection:
+            try:
+                cursor = db_connection.execute("""
+                    SELECT pattern, replacement
+                    FROM normalization_patterns
+                    WHERE language = ?
+                    ORDER BY priority
+                """, (language,))
+
+                for row in cursor:
+                    normalized = re.sub(row['pattern'], row['replacement'], normalized)
+            except sqlite3.OperationalError:
+                # Table doesn't exist, just return NFD normalized
+                pass
+
+        return normalized
 
 def is_latin_text(text: str) -> bool:
     """Determine if text is Latin (vs Greek) based on character set."""
@@ -153,14 +229,111 @@ class OptimizedZimGenerator:
             'start_time': time.time()
         }
         
-        print("Loading data into memory for fast processing...")
-        
+        print("Loading data into memory for fast processing...", flush=True)
+
         # PRE-LOAD EVERYTHING INTO MEMORY
         self.preload_all_data()
 
     def is_latin_word(self, word: str) -> bool:
         """Check if a word is Latin based on character set."""
         return is_latin_text(word)
+
+    def get_language_for_word(self, word: str) -> str:
+        """Determine language for a word based on character set."""
+        if not word:
+            return 'greek'  # Default
+
+        # Remove punctuation and whitespace for analysis
+        clean_text = re.sub(r'[0-9\s\.,;:!?\(\)\[\]\-]', '', word)
+        if not clean_text:
+            return 'greek'
+
+        # Check character ranges
+        latin_chars = 0
+        greek_chars = 0
+        devanagari_chars = 0
+
+        for char in clean_text:
+            # Normalize to remove diacritics for checking
+            normalized = unicodedata.normalize('NFD', char)
+            base_char = normalized[0] if normalized else char
+
+            if 'a' <= base_char.lower() <= 'z':
+                latin_chars += 1
+            elif '\u0370' <= base_char <= '\u03ff' or '\u1f00' <= base_char <= '\u1fff':
+                # Greek and Greek Extended blocks
+                greek_chars += 1
+            elif '\u0900' <= base_char <= '\u097f':
+                # Devanagari block (Sanskrit)
+                devanagari_chars += 1
+
+        # Return language with most characters
+        char_counts = {
+            'latin': latin_chars,
+            'greek': greek_chars,
+            'sanskrit': devanagari_chars
+        }
+
+        # Return language with highest count, default to greek if tie
+        max_lang = max(char_counts, key=char_counts.get)
+        if char_counts[max_lang] > 0:
+            return max_lang
+        return 'greek'  # Default fallback
+
+    def book_has_interlinear(self, book_id: str) -> bool:
+        """Check if book has interlinear translation."""
+        cursor = self.db.execute("""
+            SELECT COUNT(*) as count
+            FROM translation_segments
+            WHERE book_id = ?
+            AND translator LIKE 'Interlinear%'
+        """, (book_id,))
+        result = cursor.fetchone()
+        return result['count'] > 0 if result else False
+
+    def load_interlinear_for_book(self, book_id: str) -> Dict[int, List[Dict]]:
+        """Load all interlinear data for a book.
+        Returns dict mapping line_number -> list of {word, gloss, morph}
+        """
+        cursor = self.db.execute("""
+            SELECT start_line, end_line, translation_text
+            FROM translation_segments
+            WHERE book_id = ?
+            AND translator = 'Interlinear (Beta, AI-generated from app dictionary)'
+            ORDER BY start_line
+        """, (book_id,))
+
+        interlinear_data = {}
+        for row in cursor:
+            line_number = row['start_line']
+            content = row['translation_text']
+
+            # Parse pipe-delimited format: | word | **gloss** | morphology |
+            parts = [p.strip() for p in content.split('|') if p.strip()]
+
+            words = []
+            # Process in groups of 3: word, gloss (in **), morphology
+            for i in range(0, len(parts), 3):
+                if i + 1 < len(parts):
+                    word = parts[i]
+                    gloss = parts[i + 1]
+                    morph = parts[i + 2] if i + 2 < len(parts) else ''
+
+                    # Extract gloss from **text** format
+                    gloss_match = re.search(r'\*\*(.*?)\*\*', gloss)
+                    if gloss_match:
+                        gloss = gloss_match.group(1)
+
+                    words.append({
+                        'word': word,
+                        'gloss': gloss,
+                        'morph': morph
+                    })
+
+            if words:
+                interlinear_data[line_number] = words
+
+        return interlinear_data
 
     def resolve_lemma_chain(self, lemma, visited=None, max_depth=3):
         """Follow lemma chain to find the form with meaningful dictionary entries.
@@ -209,9 +382,9 @@ class OptimizedZimGenerator:
     def preload_all_data(self):
         """Pre-load all data to avoid repeated queries."""
         start = time.time()
-        
+
         # 1. Load all lemma mappings with morphological info
-        print("  Loading lemma mappings...")
+        print("  Loading lemma mappings...", flush=True)
         # Now also load source and confidence to prioritize treebank data
         cursor = self.db.execute("""
             SELECT word_form, word_form_normalized_ultra, lemma, morph_info, source, confidence
@@ -261,12 +434,12 @@ class OptimizedZimGenerator:
                 # Build reverse index: lemma -> list of (form, morph_info)
                 self.lemma_to_forms[lemma].append((word_form, row['morph_info']))
 
-        print(f"    Loaded {len(self.word_to_lemma):,} word-to-lemma mappings")
-        print(f"    - Perseus Treebank: {treebank_count:,} mappings")
-        print(f"    Loaded {len(self.normalized_to_lemma):,} ultra-normalized mappings")
+        print(f"    Loaded {len(self.word_to_lemma):,} word-to-lemma mappings", flush=True)
+        print(f"    - Perseus Treebank: {treebank_count:,} mappings", flush=True)
+        print(f"    Loaded {len(self.normalized_to_lemma):,} ultra-normalized mappings", flush=True)
         
         # 2. Load all dictionary entries
-        print("  Loading dictionary entries...")
+        print("  Loading dictionary entries...", flush=True)
         # Order by source priority (LSJ first, then CUNLIFFE, then others) and entry length
         cursor = self.db.execute("""
             SELECT headword, source, entry_plain as entry_text 
@@ -289,17 +462,15 @@ class OptimizedZimGenerator:
                 'text': row['entry_text']
             })
             total_entries += 1
-        print(f"    Loaded {total_entries:,} dictionary entries for {len(self.dictionary_entries):,} unique headwords")
+        print(f"    Loaded {total_entries:,} dictionary entries for {len(self.dictionary_entries):,} unique headwords", flush=True)
         
         # 3. Pre-compute all dictionary paths for word forms
-        print("  Pre-computing dictionary paths...")
+        print("  Pre-computing dictionary paths...", flush=True)
         self.word_form_to_path = {}
         for word_form in self.word_to_lemma.keys():
-            safe_word = base64.urlsafe_b64encode(
-                word_form.encode('utf-8')
-            ).decode('ascii').rstrip('=')
+            safe_word = get_safe_filename(word_form)
             # Determine language based on character set
-            lang_dir = 'latin' if is_latin_text(word_form) else 'greek'
+            lang_dir = self.get_language_for_word(word_form)
             self.word_form_to_path[word_form] = f'/dictionary/{lang_dir}/{safe_word}.html'
         
         # 4. Cache for word -> dictionary path (including punctuation stripping)
@@ -309,23 +480,29 @@ class OptimizedZimGenerator:
         self.words_needing_pages = {}
         
         # 5. Load all authors/works/books structure
-        print("  Loading corpus structure...")
+        print("  Loading corpus structure...", flush=True)
         self.load_corpus_structure()
         
         elapsed = time.time() - start
-        print(f"  Data loading complete in {elapsed:.1f} seconds\n")
+        print(f"  Data loading complete in {elapsed:.1f} seconds\n", flush=True)
     
     def load_corpus_structure(self):
         """Load entire corpus structure into memory."""
+        # Get available languages from database
+        cursor = self.db.execute("SELECT DISTINCT language FROM authors ORDER BY language")
+        self.languages = [row['language'] for row in cursor]
+        print(f"    Found languages: {', '.join(self.languages)}", flush=True)
+
         # Authors - load all authors from the database
         # The sample database already only contains sample authors
         cursor = self.db.execute("SELECT * FROM authors ORDER BY language, name")
-        
-        self.authors_by_lang = {'greek': [], 'latin': []}
+
+        self.authors_by_lang = {lang: [] for lang in self.languages}
         for row in cursor:
             author = dict(row)
-            self.authors_by_lang[author['language']].append(author)
-        
+            if author['language'] in self.authors_by_lang:
+                self.authors_by_lang[author['language']].append(author)
+
         # Works - load all at once
         cursor = self.db.execute("SELECT * FROM works ORDER BY author_id, id")
         self.works_by_author = defaultdict(list)
@@ -334,7 +511,7 @@ class OptimizedZimGenerator:
             work = dict(row)
             self.works_by_author[work['author_id']].append(work)
             self.work_details[work['id']] = work
-        
+
         # Books - load all at once
         cursor = self.db.execute("SELECT * FROM books ORDER BY work_id, book_number")
         self.books_by_work = defaultdict(list)
@@ -343,16 +520,17 @@ class OptimizedZimGenerator:
             book = dict(row)
             self.books_by_work[book['work_id']].append(book)
             self.book_details[book['id']] = book
-        
-        print(f"    Loaded {len(self.authors_by_lang['greek'])} Greek authors")
-        print(f"    Loaded {len(self.authors_by_lang['latin'])} Latin authors")
-        print(f"    Loaded {len(self.work_details)} works")
-        print(f"    Loaded {len(self.book_details)} books")
+
+        # Print summary for each language
+        for lang in self.languages:
+            print(f"    Loaded {len(self.authors_by_lang[lang])} {lang.capitalize()} authors", flush=True)
+        print(f"    Loaded {len(self.work_details)} works", flush=True)
+        print(f"    Loaded {len(self.book_details)} books", flush=True)
     
     def generate(self):
         """Generate all content with optimizations."""
-        print("Starting optimized ZIM generation...")
-        print("="*50)
+        print("Starting optimized ZIM generation...", flush=True)
+        print("="*50, flush=True)
         
         # Create output directory
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -364,52 +542,53 @@ class OptimizedZimGenerator:
         if css_source.exists():
             import shutil
             shutil.copy2(css_source, css_dir / 'style.css')
-            print("Copied style.css to output directory")
+            print("Copied style.css to output directory", flush=True)
         else:
-            print("Warning: style.css not found, pages may not display correctly")
+            print("Warning: style.css not found, pages may not display correctly", flush=True)
         
         # Generate dictionary pages first (parallelizable in future)
         self.generate_all_dictionary_pages()
-        
+
         # Generate text pages (this will populate self.words_needing_pages)
-        for language in ['greek', 'latin']:
+        for language in self.languages:
             self.generate_language_content(language)
-        
+
         # Generate additional dictionary pages for words found during text processing
         self.generate_additional_dictionary_pages()
-        
-        # Generate index pages
+
+        # Generate index pages (including main language selection index)
         self.generate_index_pages()
         
         # Print statistics
         elapsed = time.time() - self.stats['start_time']
-        print("\n" + "="*50)
-        print("Generation Complete!")
-        print(f"  Authors: {self.stats['authors']}")
-        print(f"  Works: {self.stats['works']}")
-        print(f"  Books: {self.stats['books']}")
-        print(f"  Pages: {self.stats['pages']}")
-        print(f"  Dictionary entries: {self.stats['dictionary_entries']}")
-        print(f"  Total time: {elapsed:.1f} seconds ({elapsed/60:.1f} minutes)")
-        print(f"  Pages per second: {self.stats['pages']/elapsed:.1f}")
-        print("="*50)
+        print("\n" + "="*50, flush=True)
+        print("Generation Complete!", flush=True)
+        print(f"  Authors: {self.stats['authors']}", flush=True)
+        print(f"  Works: {self.stats['works']}", flush=True)
+        print(f"  Books: {self.stats['books']}", flush=True)
+        print(f"  Pages: {self.stats['pages']}", flush=True)
+        print(f"  Dictionary entries: {self.stats['dictionary_entries']}", flush=True)
+        print(f"  Total time: {elapsed:.1f} seconds ({elapsed/60:.1f} minutes)", flush=True)
+        print(f"  Pages per second: {self.stats['pages']/elapsed:.1f}", flush=True)
+        print("="*50, flush=True)
     
     def generate_all_dictionary_pages(self):
-        """Generate dictionary pages for every unique word form (Greek and Latin)."""
-        # Create directories for both languages
-        greek_dir = self.output_dir / 'dictionary' / 'greek'
-        greek_dir.mkdir(parents=True, exist_ok=True)
-        latin_dir = self.output_dir / 'dictionary' / 'latin'
-        latin_dir.mkdir(parents=True, exist_ok=True)
+        """Generate dictionary pages for every unique word form (all languages)."""
+        # Create directories for all languages
+        dict_dirs = {}
+        for language in self.languages:
+            lang_dir = self.output_dir / 'dictionary' / language
+            lang_dir.mkdir(parents=True, exist_ok=True)
+            dict_dirs[language] = lang_dir
 
-        print(f"\nGenerating dictionary pages for all word forms...")
+        print(f"\nGenerating dictionary pages for all word forms...", flush=True)
         word_count = 0
         generated_pages = set()  # Track which pages we've already generated
 
         # Generate a page for EVERY word form
         for word_form, lemma in self.word_to_lemma.items():
             if word_count % 5000 == 0:
-                print(f"  Generated {word_count:,} dictionary pages...")
+                print(f"  Generated {word_count:,} dictionary pages...", flush=True)
             
             # Get morphological info for this specific word form
             morph_info = self.word_to_morph.get(word_form, None)
@@ -422,19 +601,17 @@ class OptimizedZimGenerator:
             # Generate HTML showing word -> morph -> lemma -> definitions
             html_content = self.generate_word_dictionary_html(word_form, lemma, morph_info, dict_entries)
 
-            # Determine if this is Latin or Greek based on character set
-            is_latin = self.is_latin_word(word_form)
-            target_dir = latin_dir if is_latin else greek_dir
+            # Determine language based on character set
+            language = self.get_language_for_word(word_form)
+            target_dir = dict_dirs.get(language, dict_dirs['greek'])  # Fallback to greek
 
-            # Save with base64 filename
-            safe_filename = base64.urlsafe_b64encode(
-                word_form.encode('utf-8')
-            ).decode('ascii').rstrip('=')
+            # Save with safe filename
+            safe_filename = get_safe_filename(word_form)
 
-            (target_dir / f"{safe_filename}.html").write_text(html_content)
+            (target_dir / f"{safe_filename}.html").write_text(html_content, encoding='utf-8')
             generated_pages.add(word_form)
             word_count += 1
-        
+
         # Also generate pages for lemmas that might not have word forms
         for headword in self.dictionary_entries.keys():
             if headword not in self.word_to_lemma.values() and headword not in generated_pages:
@@ -443,25 +620,23 @@ class OptimizedZimGenerator:
                 html_content = self.generate_word_dictionary_html(headword, headword, None, dict_entries)
 
                 # Determine language
-                is_latin = self.is_latin_word(headword)
-                target_dir = latin_dir if is_latin else greek_dir
+                language = self.get_language_for_word(headword)
+                target_dir = dict_dirs.get(language, dict_dirs['greek'])  # Fallback to greek
 
-                safe_filename = base64.urlsafe_b64encode(
-                    headword.encode('utf-8')
-                ).decode('ascii').rstrip('=')
+                safe_filename = get_safe_filename(headword)
 
-                (target_dir / f"{safe_filename}.html").write_text(html_content)
+                (target_dir / f"{safe_filename}.html").write_text(html_content, encoding='utf-8')
                 generated_pages.add(headword)
                 word_count += 1
         
         # Generate pages for inflected forms that need lemma-based lookups
-        print(f"  Generating additional dictionary pages for inflected forms...")
+        print(f"  Generating additional dictionary pages for inflected forms...", flush=True)
         # Disabled - now handled in text processing
         # self.generate_inflected_form_pages(dict_dir, generated_pages)
         word_count = len(generated_pages)
         
         self.stats['dictionary_entries'] = word_count
-        print(f"  Dictionary generation complete: {word_count} pages")
+        print(f"  Dictionary generation complete: {word_count} pages", flush=True)
     
     def generate_additional_dictionary_pages(self):
         """Generate dictionary pages for words found during text processing."""
@@ -471,16 +646,16 @@ class OptimizedZimGenerator:
         dict_dir = self.output_dir / 'dictionary' / 'greek'
         dict_dir.mkdir(parents=True, exist_ok=True)
         
-        print(f"\nGenerating {len(self.words_needing_pages)} additional dictionary pages...")
+        print(f"\nGenerating {len(self.words_needing_pages)} additional dictionary pages...", flush=True)
         
         # Debug: Show what we're generating for elided forms
         elided_samples = [(k,v) for k,v in self.words_needing_pages.items() if k in ['δ', 'τ', 'θ', 'μυρί', 'ἄλγε', 'κατ', 'ἀλλ']]
         if elided_samples:
-            print(f"  Sample elided forms: {elided_samples}")
+            print(f"  Sample elided forms: {elided_samples}", flush=True)
             # Also show if the lemmas have dictionary entries
             for word, lemma in elided_samples:
                 has_entries = lemma in self.dictionary_entries
-                print(f"    {word} -> {lemma}: has_entries={has_entries}")
+                print(f"    {word} -> {lemma}: has_entries={has_entries}", flush=True)
         
         count = 0
         
@@ -491,20 +666,18 @@ class OptimizedZimGenerator:
             
             # Debug for critical elided forms
             if word_form in ['δ', 'τ', 'θ'] and not dict_entries:
-                print(f"    WARNING: No entries found for {word_form} -> {lemma} -> {resolved_lemma}")
+                print(f"    WARNING: No entries found for {word_form} -> {lemma} -> {resolved_lemma}", flush=True)
             
             # Generate page showing the lemma's definitions
             html_content = self.generate_word_dictionary_html(word_form, lemma, None, dict_entries)
-            
-            safe_filename = base64.urlsafe_b64encode(
-                word_form.encode('utf-8')
-            ).decode('ascii').rstrip('=')
-            
-            (dict_dir / f"{safe_filename}.html").write_text(html_content)
+
+            safe_filename = get_safe_filename(word_form)
+
+            (dict_dir / f"{safe_filename}.html").write_text(html_content, encoding='utf-8')
             count += 1
             
         self.stats['dictionary_entries'] += count
-        print(f"  Added {count} additional dictionary pages")
+        print(f"  Added {count} additional dictionary pages", flush=True)
     
     def generate_inflected_form_pages(self, dict_dir, generated_pages):
         """Generate dictionary pages for inflected forms that aren't in word_to_lemma."""
@@ -556,15 +729,15 @@ class OptimizedZimGenerator:
                     safe_filename = base64.urlsafe_b64encode(
                         elided.encode('utf-8')
                     ).decode('ascii').rstrip('=')
-                    
-                    (dict_dir / f"{safe_filename}.html").write_text(html_content)
+
+                    (dict_dir / f"{safe_filename}.html").write_text(html_content, encoding='utf-8')
                     generated_pages.add(elided)
         
         # The main dictionary generation already handles all word forms in word_to_lemma
         # The elided particles have been handled above
         # No need for additional corpus scanning since lemma candidate generation
         # happens dynamically when a word is clicked in the viewer
-        print(f"    Added {len(elided_particles)} dictionary pages for elided particles")
+        print(f"    Added {len(elided_particles)} dictionary pages for elided particles", flush=True)
     
     def expand_morph_tags(self, morph_str: str) -> str:
         """Expand morphological abbreviations to full words."""
@@ -775,11 +948,11 @@ class OptimizedZimGenerator:
     
     def generate_language_content(self, language: str):
         """Generate all content for a language."""
-        print(f"\nProcessing {language} texts...")
+        print(f"\nProcessing {language} texts...", flush=True)
         
         authors = self.authors_by_lang[language]
         for author_idx, author in enumerate(authors):
-            print(f"  [{author_idx+1}/{len(authors)}] {author['name']}")
+            print(f"  [{author_idx+1}/{len(authors)}] {author['name']}", flush=True)
             self.generate_author_content(author, language)
             self.stats['authors'] += 1
     
@@ -798,31 +971,38 @@ class OptimizedZimGenerator:
         """Generate all pages for a work using batch loading."""
         work_dir = self.output_dir / language / 'authors' / author['id'] / work['id']
         work_dir.mkdir(parents=True, exist_ok=True)
-        
+
         books = self.books_by_work.get(work['id'], [])
-        
+
         for book_idx, book in enumerate(books):
             # BATCH LOAD ENTIRE BOOK
             book_id = book['id']
-            
+
             # Load all lines at once
             cursor = self.db.execute("""
-                SELECT line_number, line_text, speaker 
-                FROM text_lines 
-                WHERE book_id = ? 
+                SELECT line_number, line_text, speaker
+                FROM text_lines
+                WHERE book_id = ?
                 ORDER BY line_number
             """, (book_id,))
             all_lines = list(cursor)
-            
+
             # Debug for Homer
             if 'tlg0012' in book_id and book['book_number'] == 1:
-                print(f"DEBUG: Book {book_id} has {len(all_lines)} lines")
-            
+                print(f"DEBUG: Book {book_id} has {len(all_lines)} lines", flush=True)
+
+            # Check if this book has interlinear translation
+            has_interlinear = self.book_has_interlinear(book_id)
+            interlinear_data = {}
+            if has_interlinear:
+                interlinear_data = self.load_interlinear_for_book(book_id)
+                print(f"  Loaded interlinear data for {book_id}: {len(interlinear_data)} lines", flush=True)
+
             # Load all translations at once
             cursor = self.db.execute("""
-                SELECT DISTINCT ts.* 
+                SELECT DISTINCT ts.*
                 FROM translation_segments ts
-                WHERE ts.book_id = ? 
+                WHERE ts.book_id = ?
                 ORDER BY ts.translator, ts.start_line
             """, (book_id,))
             all_translations = list(cursor)
@@ -862,7 +1042,8 @@ class OptimizedZimGenerator:
                 html_content = self.generate_page_html_optimized(
                     book, page_lines, page_translations,
                     work, author, language,
-                    page_num, total_pages
+                    page_num, total_pages,
+                    interlinear_data
                 )
                 
                 # Save page
@@ -870,23 +1051,24 @@ class OptimizedZimGenerator:
                     filename = f'book-{book_idx+1}.html'
                 else:
                     filename = f'book-{book_idx+1}-p{page_num+1}.html'
-                
-                (work_dir / filename).write_text(html_content)
+
+                (work_dir / filename).write_text(html_content, encoding='utf-8')
                 self.stats['pages'] += 1
             
             self.stats['books'] += 1
     
-    def generate_page_html_optimized(self, book, lines, translations, 
-                                    work, author, language, 
-                                    page_num, total_pages):
+    def generate_page_html_optimized(self, book, lines, translations,
+                                    work, author, language,
+                                    page_num, total_pages,
+                                    interlinear_data=None):
         """Generate HTML with pre-computed paths."""
         # Build text HTML
         text_html = []
         for line in lines:
             line_text = html.escape(line['line_text'] or '')
             
-            # Link words using pre-computed paths for both Greek and Latin
-            if line_text and language in ['greek', 'latin']:
+            # Link words using pre-computed paths for all languages
+            if line_text:
                 words = line_text.split()
                 linked_words = []
                 
@@ -909,17 +1091,15 @@ class OptimizedZimGenerator:
                                     path = self.word_form_to_path[cleaned_lower]
                                 else:
                                     # Create path for Latin word even if not in dictionary
-                                    safe_word = base64.urlsafe_b64encode(
-                                        cleaned.encode('utf-8')
-                                    ).decode('ascii').rstrip('=')
+                                    safe_word = get_safe_filename(cleaned)
                                     path = f'/dictionary/latin/{safe_word}.html'
                                     # Mark for page generation
                                     if cleaned not in self.words_needing_pages:
                                         # Try to find lemma
                                         lemma = self.word_to_lemma.get(cleaned_lower, cleaned)
                                         self.words_needing_pages[cleaned] = lemma
-                        else:
-                            # Greek processing (existing logic)
+                        elif language == 'greek':
+                            # Greek processing with elision and accent handling
                             # Check if word ends with apostrophe (elision)
                             has_apostrophe = word.endswith(("᾽", "'", "ʼ"))
 
@@ -964,10 +1144,8 @@ class OptimizedZimGenerator:
                                 if cleaned.lower() in elided_particles:
                                     restored_form = elided_particles[cleaned.lower()]
                                     # Create path for the elided form
-                                    safe_word = base64.urlsafe_b64encode(
-                                        cleaned.encode('utf-8')
-                                    ).decode('ascii').rstrip('=')
-                                    path = f'/dictionary/greek/{safe_word}.html'
+                                    safe_word = get_safe_filename(cleaned)
+                                    path = f'/dictionary/{language}/{safe_word}.html'
 
                                     # Mark that we need a page for this elided form
                                     # The restored form IS the lemma for particles
@@ -977,7 +1155,7 @@ class OptimizedZimGenerator:
 
                                     # Debug output for critical elided particles
                                     if cleaned in ['δ', 'τ', 'θ', 'μυρί', 'ἄλγε', 'κατ', 'ἀλλ']:
-                                        print(f"DEBUG: Adding elided particle: {cleaned} -> {restored_form}")
+                                        print(f"DEBUG: Adding elided particle: {cleaned} -> {restored_form}", flush=True)
                                 else:
                                     # For other elided forms (not particles), try to restore them
                                     elided_base = word.rstrip("᾽'ʼ.,;·:!?()[]")
@@ -1006,10 +1184,8 @@ class OptimizedZimGenerator:
                                             # Found the full form, get its lemma
                                             lemma = self.word_to_lemma[form]
                                             # Create path for the elided form
-                                            safe_word = base64.urlsafe_b64encode(
-                                                cleaned.encode('utf-8')
-                                            ).decode('ascii').rstrip('=')
-                                            path = f'/dictionary/greek/{safe_word}.html'
+                                            safe_word = get_safe_filename(cleaned)
+                                            path = f'/dictionary/{language}/{safe_word}.html'
                                             # Mark that we need a page for this elided form
                                             # Only add if not already present (preserve first good mapping)
                                             if cleaned not in self.words_needing_pages:
@@ -1017,10 +1193,8 @@ class OptimizedZimGenerator:
                                             break
                                         elif form in self.dictionary_entries:
                                             # The restored form is itself a dictionary headword
-                                            safe_word = base64.urlsafe_b64encode(
-                                                cleaned.encode('utf-8')
-                                            ).decode('ascii').rstrip('=')
-                                            path = f'/dictionary/greek/{safe_word}.html'
+                                            safe_word = get_safe_filename(cleaned)
+                                            path = f'/dictionary/{language}/{safe_word}.html'
                                             # Only add if not already present (preserve first good mapping)
                                             if cleaned not in self.words_needing_pages:
                                                 self.words_needing_pages[cleaned] = form
@@ -1035,10 +1209,8 @@ class OptimizedZimGenerator:
                                         break
                                     elif word_variant in self.word_to_lemma:
                                         # Word has a lemma mapping, create dictionary page path
-                                        safe_word = base64.urlsafe_b64encode(
-                                            word_variant.encode('utf-8')
-                                        ).decode('ascii').rstrip('=')
-                                        path = f'/dictionary/greek/{safe_word}.html'
+                                        safe_word = get_safe_filename(word_variant)
+                                        path = f'/dictionary/{language}/{safe_word}.html'
                                         break
                             else:
                                 # Special handling for accent variations of common particles
@@ -1059,16 +1231,12 @@ class OptimizedZimGenerator:
                                             path = self.word_form_to_path[variant]
                                             break
                                         elif variant in self.word_to_lemma:
-                                            safe_word = base64.urlsafe_b64encode(
-                                                variant.encode('utf-8')
-                                            ).decode('ascii').rstrip('=')
-                                            path = f'/dictionary/greek/{safe_word}.html'
+                                            safe_word = get_safe_filename(variant)
+                                            path = f'/dictionary/{language}/{safe_word}.html'
                                             break
                                         elif variant in self.dictionary_entries:
-                                            safe_word = base64.urlsafe_b64encode(
-                                                variant.encode('utf-8')
-                                            ).decode('ascii').rstrip('=')
-                                            path = f'/dictionary/greek/{safe_word}.html'
+                                            safe_word = get_safe_filename(variant)
+                                            path = f'/dictionary/{language}/{safe_word}.html'
                                             self.word_form_to_path[variant] = path
                                             break
 
@@ -1079,10 +1247,8 @@ class OptimizedZimGenerator:
                                     # Found via ultra-normalized lookup
                                     lemma = self.normalized_to_lemma[ultra_normalized]
                                     # Create path for the cleaned word
-                                    safe_word = base64.urlsafe_b64encode(
-                                        cleaned.encode('utf-8')
-                                    ).decode('ascii').rstrip('=')
-                                    path = f'/dictionary/greek/{safe_word}.html'
+                                    safe_word = get_safe_filename(cleaned)
+                                    path = f'/dictionary/{language}/{safe_word}.html'
                                     # Mark that we need to generate a page for this word showing the lemma's definitions
                                     self.words_needing_pages[cleaned] = lemma
                                 else:
@@ -1095,18 +1261,14 @@ class OptimizedZimGenerator:
                                             break
                                         elif candidate in self.word_to_lemma:
                                             # Found a lemma mapping for this candidate
-                                            safe_word = base64.urlsafe_b64encode(
-                                                candidate.encode('utf-8')
-                                            ).decode('ascii').rstrip('=')
-                                            path = f'/dictionary/greek/{safe_word}.html'
+                                            safe_word = get_safe_filename(candidate)
+                                            path = f'/dictionary/{language}/{safe_word}.html'
                                             break
                                         # Also check if the candidate itself is a dictionary headword
                                         elif candidate in self.dictionary_entries:
                                             # Create path for the headword directly
-                                            safe_word = base64.urlsafe_b64encode(
-                                                candidate.encode('utf-8')
-                                            ).decode('ascii').rstrip('=')
-                                            path = f'/dictionary/greek/{safe_word}.html'
+                                            safe_word = get_safe_filename(candidate)
+                                            path = f'/dictionary/{language}/{safe_word}.html'
                                             # Add to our mapping for future use
                                             self.word_form_to_path[candidate] = path
                                             break
@@ -1115,9 +1277,9 @@ class OptimizedZimGenerator:
                         
                         # Debug elision handling
                         if word in ["δ'", "τ'", "θ'", "μυρί'", "ἄλγε'"]:
-                            print(f"DEBUG: Processing {word}: has_apostrophe={has_apostrophe}, path={path}, cleaned={cleaned}")
+                            print(f"DEBUG: Processing {word}: has_apostrophe={has_apostrophe}, path={path}, cleaned={cleaned}", flush=True)
                             if cleaned in self.words_needing_pages:
-                                print(f"  -> Will create page for {cleaned} mapping to {self.words_needing_pages[cleaned]}")
+                                print(f"  -> Will create page for {cleaned} mapping to {self.words_needing_pages[cleaned]}", flush=True)
                         
                         # The old duplicate elision handling has been removed - it's now handled earlier
                         if False and has_apostrophe and not path:
@@ -1154,10 +1316,8 @@ class OptimizedZimGenerator:
                                 particle_found = True
                                 restored_form = elided_particles[cleaned.lower()]
                                 # Create path for the elided form
-                                safe_word = base64.urlsafe_b64encode(
-                                    cleaned.encode('utf-8')
-                                ).decode('ascii').rstrip('=')
-                                path = f'/dictionary/greek/{safe_word}.html'
+                                safe_word = get_safe_filename(cleaned)
+                                path = f'/dictionary/{language}/{safe_word}.html'
                                 
                                 # Always add to words_needing_pages for particles
                                 # The restored form IS the lemma for particles
@@ -1165,7 +1325,7 @@ class OptimizedZimGenerator:
                                 
                                 # Debug for critical particles
                                 if cleaned in ['δ', 'τ', 'θ']:
-                                    print(f"DEBUG: Found particle {cleaned} -> {restored_form}")
+                                    print(f"DEBUG: Found particle {cleaned} -> {restored_form}", flush=True)
                             
                             # If not a known particle, try general elision restoration for ANY apostrophe
                             if not particle_found and has_apostrophe and not path:
@@ -1174,10 +1334,8 @@ class OptimizedZimGenerator:
                                 elided_base = word.rstrip("᾽'ʼ.,;·:!?()[]")
                                 
                                 # Create path for the elided form
-                                safe_word = base64.urlsafe_b64encode(
-                                    cleaned.encode('utf-8')  # Use cleaned not elided_base
-                                ).decode('ascii').rstrip('=')
-                                path = f'/dictionary/greek/{safe_word}.html'
+                                safe_word = get_safe_filename(cleaned)
+                                path = f'/dictionary/{language}/{safe_word}.html'
                                 
                                 # Try to find what this elides to
                                 found_restoration = False
@@ -1234,7 +1392,34 @@ class OptimizedZimGenerator:
                                     else:
                                         # Last resort - store it as-is and hope we can find something
                                         self.words_needing_pages[cleaned] = cleaned
-                        
+                        else:
+                            # Generic handling for all other languages (Sanskrit, Arabic, Hebrew, Persian, Akkadian, Sumerian)
+                            # Use basic text normalization (removes punctuation, keeps diacritics/marks)
+                            cleaned = normalize_text(word, language)
+                            path = None
+
+                            # Try to find dictionary path
+                            if cleaned and cleaned in self.word_form_to_path:
+                                path = self.word_form_to_path[cleaned]
+                            elif cleaned:
+                                # Try lowercase
+                                cleaned_lower = cleaned.lower()
+                                if cleaned_lower in self.word_form_to_path:
+                                    path = self.word_form_to_path[cleaned_lower]
+                                elif cleaned_lower in self.word_to_lemma:
+                                    # Word has a lemma mapping, create dictionary page path
+                                    safe_word = get_safe_filename(cleaned_lower)
+                                    path = f'/dictionary/{language}/{safe_word}.html'
+                                else:
+                                    # Create path even if not in dictionary
+                                    safe_word = get_safe_filename(cleaned)
+                                    path = f'/dictionary/{language}/{safe_word}.html'
+                                    # Mark for page generation
+                                    if cleaned not in self.words_needing_pages:
+                                        # Try to find lemma
+                                        lemma = self.word_to_lemma.get(cleaned_lower, cleaned)
+                                        self.words_needing_pages[cleaned] = lemma
+
                         self.word_to_dict_path[word] = path
                     
                     path = self.word_to_dict_path[word]
@@ -1252,28 +1437,86 @@ class OptimizedZimGenerator:
             # Add speaker if present
             if line['speaker']:
                 line_text = f'<span class="speaker">{html.escape(line["speaker"])}: </span>{line_text}'
-            
-            text_html.append(f'<div class="line">'
-                           f'<span class="line-number">{line["line_number"]}</span>'
-                           f'{line_text}</div>')
+
+            # Build main text line (no interlinear here - that goes in translation panel)
+            line_html = f'<div class="line"><span class="line-number">{line["line_number"]}</span>{line_text}</div>'
+            text_html.append(line_html)
         
-        # Build translation HTML
+        # Build translation HTML with dropdown selector
         trans_html = []
+        translator_options = []
+
+        # Add other translations first, but filter out any existing interlinear ones to avoid duplicates
         if translations:
-            # Just use first translator for simplicity
-            translator = list(translations.keys())[0]
-            trans_list = translations[translator]
-            
-            # Remove duplicates and sort
-            seen = set()
-            unique_trans = []
-            for trans in trans_list:
-                if trans['id'] not in seen:
-                    seen.add(trans['id'])
-                    unique_trans.append(trans)
-            
-            for trans in unique_trans:
-                trans_html.append(f'<div class="line">{html.escape(trans["translation_text"] or "")}</div>')
+            # Filter out translations with "Interlinear" in the name
+            non_interlinear_translations = {k: v for k, v in translations.items() if 'Interlinear' not in k and 'interlinear' not in k}
+            translator_options.extend(list(non_interlinear_translations.keys()))
+
+        # Add interlinear as LAST option if available
+        if interlinear_data:
+            translator_options.append('Interlinear (Beta, AI-generated from app dictionary)')
+
+        # Build dropdown
+        if translator_options:
+            dropdown_html = '<select id="translation-select" onchange="switchTranslation(this.value)">'
+            for idx, trans_name in enumerate(translator_options):
+                selected = ' selected' if idx == 0 else ''
+                dropdown_html += f'<option value="trans-{idx}"{selected}>{html.escape(trans_name)}</option>'
+            dropdown_html += '</select>'
+            trans_html.append(f'<div class="translation-selector">{dropdown_html}</div>')
+
+        # Build regular translation content first (use filtered translations to match dropdown)
+        if translations:
+            # Use the filtered non_interlinear_translations to match the dropdown
+            non_interlinear_translations = {k: v for k, v in translations.items() if 'Interlinear' not in k and 'interlinear' not in k}
+            for idx, (translator, trans_list) in enumerate(non_interlinear_translations.items()):
+                # Remove duplicates and sort
+                seen = set()
+                unique_trans = []
+                for trans in trans_list:
+                    if trans['id'] not in seen:
+                        seen.add(trans['id'])
+                        unique_trans.append(trans)
+
+                trans_lines = []
+                for trans in unique_trans:
+                    trans_lines.append(f'<div class="line">{html.escape(trans["translation_text"] or "")}</div>')
+
+                display_style = ' style="display:none;"' if idx > 0 else ''
+                trans_html.append(f'<div id="trans-{idx}" class="translation-content"{display_style}>{''.join(trans_lines)}</div>')
+
+        # Build interlinear translation content LAST
+        if interlinear_data:
+            interlinear_html_lines = []
+            for line in lines:
+                if line['line_number'] in interlinear_data:
+                    interlinear_words = interlinear_data[line['line_number']]
+                    line_interlinear = f'<div class="line"><span class="line-number">{line["line_number"]}</span><div class="interlinear-line">'
+                    for word_info in interlinear_words:
+                        word_text = word_info['word']
+                        gloss = html.escape(word_info['gloss'])
+                        morph = html.escape(word_info['morph'])
+
+                        # Get dictionary path for this word (same as original text)
+                        dict_path = self.word_to_dict_path.get(word_text, '')
+
+                        # If word has dictionary entry, make it clickable
+                        if dict_path:
+                            word_html = f'<a href="{dict_path}">{html.escape(word_text)}</a>'
+                        else:
+                            word_html = html.escape(word_text)
+
+                        line_interlinear += f'<span class="interlinear-word"><span class="word">{word_html}</span><span class="gloss">{gloss}</span><span class="morph">{morph}</span></span>'
+                    line_interlinear += '</div></div>'
+                    interlinear_html_lines.append(line_interlinear)
+
+            # Only create interlinear div if we have content
+            if interlinear_html_lines:
+                # Interlinear gets the last index
+                interlinear_idx = len(translator_options) - 1
+                # Always show interlinear by default (it's the only properly formatted translation)
+                display_style = ''
+                trans_html.append(f'<div id="trans-{interlinear_idx}" class="translation-content"{display_style}>{''.join(interlinear_html_lines)}</div>')
         
         # Simple navigation
         nav_html = []
@@ -1291,6 +1534,17 @@ class OptimizedZimGenerator:
     <meta charset="UTF-8">
     <title>{html.escape(work.get("title_english") or work["title"])} - Book {book["book_number"]}</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <script>
+    function switchTranslation(transId) {{
+        // Hide all translation content
+        var contents = document.getElementsByClassName('translation-content');
+        for (var i = 0; i < contents.length; i++) {{
+            contents[i].style.display = 'none';
+        }}
+        // Show selected translation
+        document.getElementById(transId).style.display = 'block';
+    }}
+    </script>
 </head>
 <body>
     <div class="container">
@@ -1311,29 +1565,117 @@ class OptimizedZimGenerator:
 </html>'''
     
     def generate_index_pages(self):
-        """Generate index pages."""
-        # Main index
-        (self.output_dir / 'index.html').write_text('''<!DOCTYPE html>
+        """Generate index pages with dynamic language support."""
+        # Build language buttons HTML
+        language_buttons = []
+        for language in self.languages:
+            lang_display = language.capitalize()
+            css_class = f"{language}-button"
+            language_buttons.append(
+                f'<a href="{language}/index.html" class="language-button {css_class}">{lang_display}</a>'
+            )
+
+        # Main index with dynamic language buttons
+        main_index_html = f'''<!DOCTYPE html>
 <html>
 <head>
-    <title>Classics Viewer</title>
+    <title>Perseus Classical Library</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Classics Viewer</h1>
+        <h1>Perseus Classical Library</h1>
+        <p>Select a language:</p>
         <div class="language-buttons">
-            <a href="greek/index.html" class="language-button greek-button">Greek</a>
-            <a href="latin/index.html" class="language-button latin-button">Latin</a>
+            {' '.join(language_buttons)}
         </div>
+        <p style="margin-top: 30px; text-align: center;">
+            <a href="/licenses.html">Licenses & Credits</a>
+        </p>
     </div>
 </body>
-</html>''')
-        
+</html>'''
+
+        (self.output_dir / 'index.html').write_text(main_index_html, encoding='utf-8')
+
+        # Generate licenses page
+        self.generate_licenses_page()
+
         # Generate language index pages
-        for language in ['greek', 'latin']:
+        for language in self.languages:
             self.generate_language_index(language)
-    
+
+    def generate_licenses_page(self):
+        """Generate licenses and credits page matching Android app."""
+        licenses_html = '''<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Licenses & Credits</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .license-section { margin: 30px 0; }
+        .license-section h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .license-section h3 { color: #333; margin-top: 20px; }
+        .license-section p { line-height: 1.6; }
+        .license-text { background: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Licenses & Credits</h1>
+
+        <div class="license-section">
+            <h2>PERSEUS DIGITAL LIBRARY TEXTS</h2>
+            <p>The texts in this application are from the Perseus Digital Library.</p>
+            <p>Perseus greek and latin data as of October 15, 2025</p>
+            <div class="license-text">
+                <strong>License:</strong> Creative Commons Attribution-ShareAlike 3.0 United States License<br>
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">http://creativecommons.org/licenses/by-sa/3.0/us/</a>
+            </div>
+            <p><strong>Perseus Digital Library</strong><br>
+            Editor-in-Chief: Gregory R. Crane<br>
+            Tufts University<br>
+            <a href="http://www.perseus.tufts.edu/">http://www.perseus.tufts.edu/</a></p>
+        </div>
+
+        <div class="license-section">
+            <h2>DICTIONARIES</h2>
+
+            <h3>Greek-English Lexicon (LSJ)</h3>
+            <p><strong>Title:</strong> A Greek-English Lexicon<br>
+            <strong>Authors:</strong> Henry George Liddell, Robert Scott<br>
+            <strong>Revised by:</strong> Sir Henry Stuart Jones with the assistance of Roderick McKenzie<br>
+            <strong>Publisher:</strong> Clarendon Press, Oxford<br>
+            <strong>First Edition:</strong> 1843<br>
+            <strong>Ninth Edition:</strong> 1940<br>
+            <strong>ISBN:</strong> 978-0-19-864226-8</p>
+            <p>The digital version is provided by the Perseus Digital Library under the same Creative Commons license as above.</p>
+
+            <h3>Wiktionary Content</h3>
+            <p>Ancient Greek morphology and additional dictionary entries from Wiktionary.</p>
+            <div class="license-text">
+                <strong>License:</strong> Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)<br>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a>
+            </div>
+            <p>The Wiktionary content is used in accordance with the CC BY-SA 4.0 license, which allows for remixing and redistribution with attribution.</p>
+        </div>
+
+        <div class="license-section">
+            <h2>APPLICATION LICENSE</h2>
+            <p>This Kiwix ZIM file provides offline access to texts and dictionaries from the Perseus Digital Library, making classical texts accessible without an internet connection.</p>
+            <p>All classical texts and dictionary data remain under their original licenses as specified above.</p>
+        </div>
+
+        <p style="margin-top: 30px; text-align: center;">
+            <a href="/index.html">← Back to Home</a>
+        </p>
+    </div>
+</body>
+</html>'''
+        (self.output_dir / 'licenses.html').write_text(licenses_html, encoding='utf-8')
+
     def generate_language_index(self, language):
         """Generate index page for a language."""
         lang_dir = self.output_dir / language
@@ -1346,6 +1688,7 @@ class OptimizedZimGenerator:
             (lang_dir / 'index.html').write_text(f'''<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>{language.title()} Authors</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -1356,17 +1699,27 @@ class OptimizedZimGenerator:
         <a href="../index.html">Back to Home</a>
     </div>
 </body>
-</html>''')
+</html>''', encoding='utf-8')
             return
         
         # Build author list HTML
         author_links = []
         for author in authors:
-            author_links.append(f'<li><a href="authors/{author["id"]}/index.html">{html.escape(author["name"])}</a></li>')
+            # Support name_alt for authors (e.g., Devanagari + English)
+            author_display = html.escape(author["name"])
+            if author.get("name_alt"):
+                author_display += f' <span class="alt-name">({html.escape(author["name_alt"])})</span>'
+
+            # Bold if has translations
+            if author.get("has_translations"):
+                author_display = f'<strong>{author_display}</strong>'
+
+            author_links.append(f'<li><a href="authors/{author["id"]}/index.html">{author_display}</a></li>')
         
         html_content = f'''<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>{language.title()} Authors</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -1380,8 +1733,8 @@ class OptimizedZimGenerator:
     </div>
 </body>
 </html>'''
-        
-        (lang_dir / 'index.html').write_text(html_content)
+
+        (lang_dir / 'index.html').write_text(html_content, encoding='utf-8')
         
         # Generate author index pages
         for author in authors:
@@ -1411,6 +1764,7 @@ class OptimizedZimGenerator:
         html_content = f'''<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>{html.escape(author["name"])}</title>
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -1424,8 +1778,8 @@ class OptimizedZimGenerator:
     </div>
 </body>
 </html>'''
-        
-        (author_dir / 'index.html').write_text(html_content)
+
+        (author_dir / 'index.html').write_text(html_content, encoding='utf-8')
 
 def main():
     print("DEBUG: main() called", flush=True)
@@ -1439,8 +1793,8 @@ def main():
         lockfile.write(str(os.getpid()))
         lockfile.flush()
     except IOError:
-        print("Error: Another instance of the ZIM content generator is already running.")
-        print("If this is incorrect, remove /tmp/zim_content_generator.lock and try again.")
+        print("Error: Another instance of the ZIM content generator is already running.", flush=True)
+        print("If this is incorrect, remove /tmp/zim_content_generator.lock and try again.", flush=True)
         sys.exit(1)
     
     try:
