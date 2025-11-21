@@ -210,13 +210,16 @@ def generate_greek_lemma_candidates(word: str) -> List[str]:
     return unique_candidates
 
 class OptimizedZimGenerator:
-    def __init__(self, db_path: str, output_dir: str, sample_mode: bool = False):
+    def __init__(self, db_path: str, output_dir: str, sample_mode: bool = False, language_filter: str = None):
         """Initialize with optimizations."""
         print(f"DEBUG: Initializing OptimizedZimGenerator with db_path={db_path}", flush=True)
         self.db = sqlite3.connect(db_path)
         self.db.row_factory = sqlite3.Row
         self.output_dir = Path(output_dir)
         self.sample_mode = sample_mode
+        self.language_filter = language_filter.lower() if language_filter else None
+        if self.language_filter:
+            print(f"DEBUG: Filtering for language: {self.language_filter}", flush=True)
         print("DEBUG: Connected to database", flush=True)
         
         # Statistics
@@ -404,8 +407,16 @@ class OptimizedZimGenerator:
         self.lemma_to_forms = defaultdict(list)  # Reverse index for fast lookup
 
         treebank_count = 0
+        skipped_lemmas = 0
         for row in cursor:
             word_form = row['word_form']
+
+            # Filter by language if specified
+            if self.language_filter:
+                word_lang = self.get_language_for_word(word_form)
+                if word_lang != self.language_filter:
+                    skipped_lemmas += 1
+                    continue
 
             # Only keep the highest confidence/priority mapping for each word
             if word_form in self.word_to_lemma:
@@ -437,14 +448,16 @@ class OptimizedZimGenerator:
         print(f"    Loaded {len(self.word_to_lemma):,} word-to-lemma mappings", flush=True)
         print(f"    - Perseus Treebank: {treebank_count:,} mappings", flush=True)
         print(f"    Loaded {len(self.normalized_to_lemma):,} ultra-normalized mappings", flush=True)
-        
+        if self.language_filter and skipped_lemmas > 0:
+            print(f"    Skipped {skipped_lemmas:,} lemma mappings for other languages", flush=True)
+
         # 2. Load all dictionary entries
         print("  Loading dictionary entries...", flush=True)
         # Order by source priority (LSJ first, then CUNLIFFE, then others) and entry length
         cursor = self.db.execute("""
-            SELECT headword, source, entry_plain as entry_text 
-            FROM dictionary_entries 
-            ORDER BY 
+            SELECT headword, source, entry_plain as entry_text
+            FROM dictionary_entries
+            ORDER BY
                 headword,
                 CASE LOWER(source)
                     WHEN 'lsj' THEN 1
@@ -456,13 +469,23 @@ class OptimizedZimGenerator:
         """)
         self.dictionary_entries = defaultdict(list)
         total_entries = 0
+        skipped_entries = 0
         for row in cursor:
-            self.dictionary_entries[row['headword']].append({
+            headword = row['headword']
+            # Filter by language if specified
+            if self.language_filter:
+                word_lang = self.get_language_for_word(headword)
+                if word_lang != self.language_filter:
+                    skipped_entries += 1
+                    continue
+            self.dictionary_entries[headword].append({
                 'source': row['source'],
                 'text': row['entry_text']
             })
             total_entries += 1
         print(f"    Loaded {total_entries:,} dictionary entries for {len(self.dictionary_entries):,} unique headwords", flush=True)
+        if self.language_filter and skipped_entries > 0:
+            print(f"    Skipped {skipped_entries:,} entries for other languages", flush=True)
         
         # 3. Pre-compute all dictionary paths for word forms
         print("  Pre-computing dictionary paths...", flush=True)
@@ -490,12 +513,25 @@ class OptimizedZimGenerator:
         """Load entire corpus structure into memory."""
         # Get available languages from database
         cursor = self.db.execute("SELECT DISTINCT language FROM authors ORDER BY language")
-        self.languages = [row['language'] for row in cursor]
+        all_languages = [row['language'] for row in cursor]
+
+        # Apply language filter if specified
+        if self.language_filter:
+            self.languages = [lang for lang in all_languages if lang == self.language_filter]
+            if not self.languages:
+                print(f"    WARNING: Language '{self.language_filter}' not found in database", flush=True)
+                print(f"    Available languages: {', '.join(all_languages)}", flush=True)
+                self.languages = []
+        else:
+            self.languages = all_languages
+
         print(f"    Found languages: {', '.join(self.languages)}", flush=True)
 
-        # Authors - load all authors from the database
-        # The sample database already only contains sample authors
-        cursor = self.db.execute("SELECT * FROM authors ORDER BY language, name")
+        # Authors - load all authors from the database (filtered by language if needed)
+        if self.language_filter:
+            cursor = self.db.execute("SELECT * FROM authors WHERE language = ? ORDER BY language, name", (self.language_filter,))
+        else:
+            cursor = self.db.execute("SELECT * FROM authors ORDER BY language, name")
 
         self.authors_by_lang = {lang: [] for lang in self.languages}
         for row in cursor:
@@ -503,17 +539,35 @@ class OptimizedZimGenerator:
             if author['language'] in self.authors_by_lang:
                 self.authors_by_lang[author['language']].append(author)
 
-        # Works - load all at once
-        cursor = self.db.execute("SELECT * FROM works ORDER BY author_id, id")
+        # Get list of author IDs to filter works/books (if language filtering is active)
+        author_ids = set()
+        for lang_authors in self.authors_by_lang.values():
+            for author in lang_authors:
+                author_ids.add(author['id'])
+
+        # Works - load filtered by author IDs
+        if self.language_filter and author_ids:
+            placeholders = ','.join('?' * len(author_ids))
+            cursor = self.db.execute(f"SELECT * FROM works WHERE author_id IN ({placeholders}) ORDER BY author_id, id", tuple(author_ids))
+        else:
+            cursor = self.db.execute("SELECT * FROM works ORDER BY author_id, id")
+
         self.works_by_author = defaultdict(list)
         self.work_details = {}
+        work_ids = set()
         for row in cursor:
             work = dict(row)
             self.works_by_author[work['author_id']].append(work)
             self.work_details[work['id']] = work
+            work_ids.add(work['id'])
 
-        # Books - load all at once
-        cursor = self.db.execute("SELECT * FROM books ORDER BY work_id, book_number")
+        # Books - load filtered by work IDs
+        if self.language_filter and work_ids:
+            placeholders = ','.join('?' * len(work_ids))
+            cursor = self.db.execute(f"SELECT * FROM books WHERE work_id IN ({placeholders}) ORDER BY work_id, book_number", tuple(work_ids))
+        else:
+            cursor = self.db.execute("SELECT * FROM books ORDER BY work_id, book_number")
+
         self.books_by_work = defaultdict(list)
         self.book_details = {}
         for row in cursor:
@@ -603,7 +657,11 @@ class OptimizedZimGenerator:
 
             # Determine language based on character set
             language = self.get_language_for_word(word_form)
-            target_dir = dict_dirs.get(language, dict_dirs['greek'])  # Fallback to greek
+            # Use the detected language dir, or fallback to the first available language dir
+            default_dir = next(iter(dict_dirs.values())) if dict_dirs else None
+            target_dir = dict_dirs.get(language, default_dir)
+            if target_dir is None:
+                continue  # Skip if no directory available
 
             # Save with safe filename
             safe_filename = get_safe_filename(word_form)
@@ -621,7 +679,10 @@ class OptimizedZimGenerator:
 
                 # Determine language
                 language = self.get_language_for_word(headword)
-                target_dir = dict_dirs.get(language, dict_dirs['greek'])  # Fallback to greek
+                default_dir = next(iter(dict_dirs.values())) if dict_dirs else None
+                target_dir = dict_dirs.get(language, default_dir)
+                if target_dir is None:
+                    continue  # Skip if no directory available
 
                 safe_filename = get_safe_filename(headword)
 
@@ -1801,6 +1862,7 @@ def main():
         parser = argparse.ArgumentParser()
         parser.add_argument('--sample', action='store_true', help='Use sample database')
         parser.add_argument('--extended', action='store_true', help='Use extended database (Perseus + First1KGreek)')
+        parser.add_argument('--language', help='Filter by language (greek, latin, sanskrit, arabic, hebrew, persian, akkadian, sumerian)')
         parser.add_argument('--output', default='zim_content_optimized', help='Output directory')
         args = parser.parse_args()
 
@@ -1813,7 +1875,7 @@ def main():
             db_path = '../data-prep/perseus_texts_full.db'
         
         # Run generator
-        generator = OptimizedZimGenerator(db_path, args.output, args.sample or args.extended)
+        generator = OptimizedZimGenerator(db_path, args.output, args.sample or args.extended, args.language)
         generator.generate()
     finally:
         # Release lock and remove file

@@ -101,6 +101,33 @@ cd kiwix
 
 This creates `classicsviewer_extended.zim` containing 391 total authors and 1,849 works.
 
+### Language-Specific Builds
+
+To create smaller ZIM files for individual languages from the extended database:
+
+```bash
+cd kiwix
+./build_by_language.sh <language>
+```
+
+Available languages:
+- `greek` - Greek texts only (Perseus + First1K Greek authors)
+- `latin` - Latin texts only (Perseus Latin authors)
+- `sanskrit` - Sanskrit texts only
+- `arabic` - Arabic texts only
+- `hebrew` - Hebrew texts only
+- `persian` - Persian texts only
+- `akkadian` - Akkadian texts only
+- `sumerian` - Sumerian texts only
+- `all` - Build all language ZIMs sequentially
+
+Example:
+```bash
+./build_by_language.sh greek
+```
+
+This creates `classicsviewer_greek.zim` containing only Greek texts, translations, and dictionary entries.
+
 ## Features
 
 ### Interlinear Translations
