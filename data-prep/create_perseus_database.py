@@ -7523,12 +7523,13 @@ if __name__ == "__main__":
 
             print(f"Using pregenerated XML files from: {interlinear_output_dir}")
 
-            # Sample mode: only Iliad and Odyssey (same as full mode default)
+            # Sample mode: Iliad, Odyssey (Greek) + Aeneid (Latin)
             work_ids = [
                 'tlg0012.tlg001',  # Homer - Iliad
                 'tlg0012.tlg002',  # Homer - Odyssey
+                'phi0690.phi003',  # Virgil - Aeneid
             ]
-            print(f"Sample mode: Importing only Iliad and Odyssey")
+            print(f"Sample mode: Importing Iliad, Odyssey, and Aeneid")
 
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")
@@ -7598,12 +7599,13 @@ if __name__ == "__main__":
                 work_ids = get_all_greek_work_ids("perseus_texts_full.db")
                 print(f"Full interlineation mode: Importing {len(work_ids)} Greek works")
             else:
-                # Full mode default: only Iliad and Odyssey
+                # Full mode default: Iliad, Odyssey (Greek) + Aeneid (Latin)
                 work_ids = [
                     'tlg0012.tlg001',  # Homer - Iliad
                     'tlg0012.tlg002',  # Homer - Odyssey
+                    'phi0690.phi003',  # Virgil - Aeneid
                 ]
-                print(f"Full mode: Importing only Iliad and Odyssey")
+                print(f"Full mode: Importing Iliad, Odyssey, and Aeneid")
 
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")

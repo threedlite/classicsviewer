@@ -630,7 +630,7 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                         if (!hasLatinDict) {
                             Snackbar.make(
                                 binding.root,
-                                "Latin dictionary not available. Import a custom Latin dictionary to enable this feature.",
+                                "Latin dictionary not available. Import a custom Latin dictionary to enable this feature, or import full or extended db.",
                                 Snackbar.LENGTH_LONG
                             ).show()
                             return@launch

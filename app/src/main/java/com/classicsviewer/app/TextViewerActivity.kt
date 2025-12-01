@@ -108,7 +108,7 @@ class TextViewerActivity : BaseActivity() {
                 if (!hasLatinDict) {
                     com.google.android.material.snackbar.Snackbar.make(
                         binding.root,
-                        "Latin dictionary not available. Import a custom Latin dictionary to enable this feature.",
+                        "Latin dictionary not available. Import a custom Latin dictionary to enable this feature, or import full or extended db.",
                         com.google.android.material.snackbar.Snackbar.LENGTH_LONG
                     ).show()
                     return@launch

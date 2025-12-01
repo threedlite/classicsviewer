@@ -315,21 +315,51 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
     definitions_count = 0
     morphology_entries = []
     dictionary_entries = []
-    
+
+    # Whitaker's frequency codes: A=very frequent, B=frequent, C=common, D=lesser, E=uncommon, F=very rare, X=unknown
+    # Lower number = more frequent (for sorting)
+    freq_priority = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'X': 7}
+
     with open(dictline_path, 'r', encoding='utf-8') as f:
         for line in f:
             if not line.strip():
                 continue
-            
+
             if len(line) > 90:
                 lemma_part = line[0:76].strip()
                 lemma = lemma_part.split()[0] if lemma_part else None
-                
+
                 # Extract part of speech (position 76-82 in Whitaker's format)
                 pos_part = line[76:83].strip() if len(line) > 82 else None
                 pos = pos_part.split()[0] if pos_part else None
-                
-                # Skip the frequency/age codes and get definition from position 110
+
+                # Extract frequency code and noun type from flags section (position 83-110)
+                # Format: "2 1 M P          X X X A O" - tokens are:
+                # [0-1]=decl, [2]=gender, [3]=type, [4-6]=Age/Area/Geo, [7]=Frequency, [8]=Source
+                # For nouns: [2]=gender (M/F/N/C), [3]=type (P=personal, T=thing, etc.)
+                flags_part = line[83:110] if len(line) > 110 else ""
+                flags_tokens = flags_part.split()
+                freq_code = 'X'  # default to unknown
+                is_personal = 0  # secondary sort: 0=personal (prefer), 1=non-personal
+
+                if len(flags_tokens) >= 8:
+                    freq_code = flags_tokens[7]  # 8th token is frequency
+                    # For nouns, check if it's a personal noun (M P, F P, C P)
+                    # Personal nouns refer to people and should be preferred over "thing" variants
+                    if pos == 'N' and len(flags_tokens) >= 4:
+                        noun_type = flags_tokens[3]  # P=personal, T=thing, L=locale, etc.
+                        is_personal = 0 if noun_type == 'P' else 1
+                elif len(flags_tokens) >= 5:
+                    # For shorter formats (verbs etc), frequency is still near end
+                    # Try to find a valid frequency code
+                    for i in range(len(flags_tokens) - 1, -1, -1):
+                        if flags_tokens[i] in freq_priority:
+                            freq_code = flags_tokens[i]
+                            break
+
+                freq_sort = freq_priority.get(freq_code, 7)
+
+                # Get definition from position 110
                 definition_part = line[110:] if len(line) > 110 else None
                 if definition_part and lemma:
                     definition = definition_part.strip()
@@ -337,10 +367,10 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                     definition = re.sub(r'\s+', ' ', definition)
                     definition = definition.replace('|', '; ')
                     definition = definition.replace('=>', ':')
-                    
+
                     if not definition or re.match(r'^[;:\s]+$', definition):
                         continue
-                    
+
                     # Add part of speech label if available
                     if pos:
                         pos_label = {
@@ -355,24 +385,36 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                             'NUM': '(num.) '
                         }.get(pos, '')
                         definition = pos_label + definition
-                    
+
                     # Limit definition length
                     if len(definition) > 400:
                         definition = definition[:400] + "..."
-                    
+
                     if lemma and len(lemma) > 0 and not re.match(r'^[0-9]+$', lemma):
-                        # Add dictionary entry
+                        # Add dictionary entry with frequency and personal-noun flag for sorting
                         dictionary_entries.append({
                             'headword': lemma,
                             'language': 'latin',
                             'definition': definition,
-                            'source': 'Whitaker'
+                            'source': 'Whitaker',
+                            'freq_sort': freq_sort,  # for sorting only, not stored in DB
+                            'is_personal': is_personal  # 0=personal noun (prefer), 1=other
                         })
                         definitions_count += 1
-                        
+
                         # Generate morphology entries for this dictionary entry
                         morph_entries = inflection_engine.generate_morphology_for_dictionary(line)
                         morphology_entries.extend(morph_entries)
+
+    # Sort dictionary entries by headword, then by frequency (most common first),
+    # then by personal noun flag (personal nouns like "man" preferred over things like "venom")
+    # This ensures that when we query with LIMIT 1, we get the most common/relevant meaning
+    dictionary_entries.sort(key=lambda x: (x['headword'], x['freq_sort'], x['is_personal']))
+
+    # Remove sort keys before inserting (not DB columns)
+    for entry in dictionary_entries:
+        del entry['freq_sort']
+        del entry['is_personal']
     
     print(f"Extracted {definitions_count} Latin definitions from Whitaker's")
     print(f"Generated {len(morphology_entries)} morphology entries")

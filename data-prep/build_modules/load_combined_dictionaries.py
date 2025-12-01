@@ -428,7 +428,7 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     
     print(f"✓ Imported {mappings_imported} lemma mappings")
     
-    # Load Whitaker's Latin dictionary and morphology (full and extended databases)
+    # Load Whitaker's Latin dictionary and morphology (full and extended databases only)
     if build_mode in ['full', 'extended']:
         try:
             from .load_whitakers_latin import load_whitakers_latin
