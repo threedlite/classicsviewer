@@ -11,9 +11,31 @@ Similar to Greek ui_dictionary_lookup.py but leverages DCS pre-identified lemmas
 
 import sqlite3
 import csv
+import re
 from pathlib import Path
 from typing import Optional, Dict, List, Tuple
 from dataclasses import dataclass
+
+
+def normalize_sanskrit(text: str) -> str:
+    """
+    Normalize Sanskrit text using the same patterns as Kotlin's PatternBasedNormalizer.
+
+    These patterns match the normalization_patterns table in the database.
+    """
+    # Pattern 1: Remove combining marks (candrabindu, anusvara, visarga)
+    text = re.sub(r'[\u0900-\u0903]', '', text)
+    # Pattern 2: Remove nukta
+    text = re.sub(r'[\u093C]', '', text)
+    # Pattern 3: Remove Vedic accents (udatta, anudatta)
+    text = re.sub(r'[\u0951-\u0952]', '', text)
+    # Pattern 4: Remove dandas (sentence markers)
+    text = re.sub(r'[\u0964-\u0965]', '', text)
+    # Pattern 5: Remove final visarga
+    text = re.sub(r'ः$', '', text)
+    # Pattern 6: Remove final anusvara
+    text = re.sub(r'ं$', '', text)
+    return text
 
 
 # ============================================================================
@@ -117,20 +139,44 @@ class SanskritRepository:
     2. By word form (custom texts) - uses morphology table
     """
 
-    def __init__(self, db_path: str):
+    def __init__(self, db_path: str, use_database: bool = True):
         """
         Initialize repository with database connection.
 
         Args:
             db_path: Path to Sanskrit database file
+            use_database: If True, use database tables (lemma_map, dictionary_entries).
+                         If False, fall back to CSV files.
         """
         self.db_path = db_path
         self.conn = sqlite3.connect(db_path)
         self.conn.row_factory = sqlite3.Row
+        self.use_database = use_database
 
-        # Load DCS dictionary and morphology into memory for fast lookups
-        self.dcs_dictionary = self._load_dcs_dictionary()
-        self.dcs_morphology = self._load_dcs_morphology()
+        # Check if database has the required tables
+        if use_database:
+            cursor = self.conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('lemma_map', 'dictionary_entries')"
+            )
+            tables = [row[0] for row in cursor.fetchall()]
+            if 'lemma_map' in tables and 'dictionary_entries' in tables:
+                print(f"Using database tables for lookups (lemma_map + dictionary_entries)")
+                self.dcs_dictionary = None  # Will query DB directly
+                self.dcs_morphology = None  # Will query DB directly
+                # Get counts for info
+                dict_count = self.conn.execute("SELECT COUNT(*) FROM dictionary_entries").fetchone()[0]
+                morph_count = self.conn.execute("SELECT COUNT(*) FROM lemma_map").fetchone()[0]
+                print(f"  Dictionary entries: {dict_count:,}")
+                print(f"  Lemma mappings: {morph_count:,}")
+            else:
+                print(f"Database missing required tables, falling back to CSV files")
+                self.use_database = False
+                self.dcs_dictionary = self._load_dcs_dictionary()
+                self.dcs_morphology = self._load_dcs_morphology()
+        else:
+            # Load DCS dictionary and morphology from CSV into memory
+            self.dcs_dictionary = self._load_dcs_dictionary()
+            self.dcs_morphology = self._load_dcs_morphology()
 
     def _load_dcs_dictionary(self) -> Dict[str, Dict]:
         """Load DCS dictionary CSV into memory."""
@@ -293,17 +339,51 @@ class SanskritRepository:
         Returns:
             DictionaryEntry if found, None otherwise
         """
-        if lemma in self.dcs_dictionary:
-            entry = self.dcs_dictionary[lemma]
-            return DictionaryEntry(
-                lemma=lemma,
-                lemma_id=entry['lemma_id'],
-                definition=entry['definition'],
-                grammar='',  # Grammar info included in definition
-                source=entry['source']
+        if self.use_database:
+            # Query database - match Kotlin's getAllEntriesForHeadword query
+            cursor = self.conn.execute(
+                "SELECT headword, entry_plain, source FROM dictionary_entries WHERE headword = ? AND language = 'sanskrit'",
+                (lemma,)
             )
+            row = cursor.fetchone()
+            if row:
+                return DictionaryEntry(
+                    lemma=row['headword'],
+                    lemma_id=None,
+                    definition=row['entry_plain'] or '',
+                    grammar='',
+                    source=row['source'] or 'DCS'
+                )
 
-        return None
+            # Fallback: Try normalized lookup (matches Kotlin's getEntryByUltraNormalized)
+            # Apply the same normalization as Kotlin before querying
+            normalized_lemma = normalize_sanskrit(lemma)
+            cursor = self.conn.execute(
+                "SELECT headword, entry_plain, source FROM dictionary_entries WHERE headword_normalized_ultra = ? AND language = 'sanskrit'",
+                (normalized_lemma,)
+            )
+            row = cursor.fetchone()
+            if row:
+                return DictionaryEntry(
+                    lemma=row['headword'],
+                    lemma_id=None,
+                    definition=row['entry_plain'] or '',
+                    grammar='',
+                    source=row['source'] or 'DCS'
+                )
+            return None
+        else:
+            # Use in-memory dictionary
+            if lemma in self.dcs_dictionary:
+                entry = self.dcs_dictionary[lemma]
+                return DictionaryEntry(
+                    lemma=lemma,
+                    lemma_id=entry['lemma_id'],
+                    definition=entry['definition'],
+                    grammar='',  # Grammar info included in definition
+                    source=entry['source']
+                )
+            return None
 
     def lookup_by_form(self, word_form: str) -> Optional[DictionaryEntry]:
         """
@@ -317,19 +397,51 @@ class SanskritRepository:
         Returns:
             DictionaryEntry if found, None otherwise
         """
-        # Try morphology lookup FIRST (inflected form → lemma)
-        # This is more accurate than direct dictionary lookup for inflected forms
-        if word_form in self.dcs_morphology:
-            lemma = self.dcs_morphology[word_form]
-            entry = self.lookup_by_lemma(lemma)
-            if entry:
-                return entry
+        if self.use_database:
+            # Query lemma_map table for word form -> lemma mapping
+            # Match Kotlin: ORDER BY confidence DESC to get best match
+            cursor = self.conn.execute(
+                "SELECT lemma FROM lemma_map WHERE word_form = ? ORDER BY confidence DESC LIMIT 1",
+                (word_form,)
+            )
+            row = cursor.fetchone()
+            if row:
+                lemma = row['lemma']
+                entry = self.lookup_by_lemma(lemma)
+                if entry:
+                    return entry
 
-        # Fall back to direct lookup only if morphology doesn't have it
-        if word_form in self.dcs_dictionary:
+            # Fallback: Try normalized lookup (matches Kotlin's getAllLemmaMappingsByUltraNormalized)
+            # Apply the same normalization as Kotlin before querying
+            normalized_form = normalize_sanskrit(word_form)
+            cursor = self.conn.execute(
+                "SELECT lemma FROM lemma_map WHERE word_form_normalized_ultra = ? ORDER BY confidence DESC LIMIT 1",
+                (normalized_form,)
+            )
+            row = cursor.fetchone()
+            if row:
+                lemma = row['lemma']
+                entry = self.lookup_by_lemma(lemma)
+                if entry:
+                    return entry
+
+            # Fall back to direct dictionary lookup
             return self.lookup_by_lemma(word_form)
+        else:
+            # Use in-memory morphology
+            # Try morphology lookup FIRST (inflected form → lemma)
+            # This is more accurate than direct dictionary lookup for inflected forms
+            if word_form in self.dcs_morphology:
+                lemma = self.dcs_morphology[word_form]
+                entry = self.lookup_by_lemma(lemma)
+                if entry:
+                    return entry
 
-        return None
+            # Fall back to direct lookup only if morphology doesn't have it
+            if word_form in self.dcs_dictionary:
+                return self.lookup_by_lemma(word_form)
+
+            return None
 
     # ========================================================================
     # COMPOUND WORD DECOMPOSITION
@@ -421,6 +533,53 @@ class SanskritRepository:
             grammar=f"compound: {prefix}- + {stem}",
             source="compound analysis"
         )
+
+    _lemma_cache: Dict[str, Optional[str]] = {}  # Class-level cache for lemma lookups
+
+    def get_lemma_for_word(self, word: str) -> Optional[str]:
+        """
+        Get the lemma for a word form from database or CSV.
+
+        This method provides a unified interface for lemma lookup that works
+        in both database mode and CSV mode. Results are cached for performance.
+
+        Args:
+            word: Word form in Devanagari
+
+        Returns:
+            Lemma string if found, None otherwise
+        """
+        # Check cache first
+        if word in self._lemma_cache:
+            return self._lemma_cache[word]
+
+        result = None
+        if self.use_database:
+            # Query lemma_map table
+            cursor = self.conn.execute(
+                "SELECT lemma FROM lemma_map WHERE word_form = ? ORDER BY confidence DESC LIMIT 1",
+                (word,)
+            )
+            row = cursor.fetchone()
+            if row:
+                result = row['lemma']
+            else:
+                # Try normalized lookup
+                normalized_form = normalize_sanskrit(word)
+                cursor = self.conn.execute(
+                    "SELECT lemma FROM lemma_map WHERE word_form_normalized_ultra = ? ORDER BY confidence DESC LIMIT 1",
+                    (normalized_form,)
+                )
+                row = cursor.fetchone()
+                if row:
+                    result = row['lemma']
+        else:
+            # Use in-memory morphology
+            result = self.dcs_morphology.get(word) if self.dcs_morphology else None
+
+        # Cache the result (even None results to avoid repeated lookups)
+        self._lemma_cache[word] = result
+        return result
 
     def lookup_best_match(self, word: str, lemma: Optional[str] = None) -> Optional[DictionaryEntry]:
         """
@@ -521,14 +680,15 @@ def extract_gloss(definition: str, max_length: int = 50) -> str:
             text = text[close_idx + 1:].strip()
 
             # Check for POS-only entries (no actual definition)
-            if not text or len(text) < 3:
+            # Look for Latin/English characters - if none, it's not a useful gloss
+            if not text or not re.search(r'[a-zA-Z]', text):
                 return "?"
 
     # Step 2: Check for purely technical/grammatical entries
     if text.startswith('[gramm.]'):
         # Remove marker but continue - might have useful info after
         text = text.replace('[gramm.]', '').strip()
-        if not text or len(text) < 3:
+        if not text or not re.search(r'[a-zA-Z]', text):
             return "?"
 
     # Step 3: Split on semicolons to separate different glosses

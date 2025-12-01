@@ -1336,16 +1336,8 @@ def main():
 
     print(f"\n✓ Imported {interlinear_count:,} interlinear segments for {interlinear_books} books")
 
-    # Compress database
-    print("\nCompressing database...")
-    zip_path = 'sanskrit_texts.db.zip'
-
-    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zipf:
-        zipf.write(db_path, arcname='sanskrit_texts.db')
-
-    # Get file sizes
+    # Get file size (ZIP created by pipeline script after all steps complete)
     db_size = os.path.getsize(db_path) / 1024 / 1024  # MB
-    zip_size = os.path.getsize(zip_path) / 1024 / 1024  # MB
 
     print("\n" + "=" * 70)
     print("Database Creation Complete!")
@@ -1371,7 +1363,6 @@ def main():
     print(f"  Normalization patterns: {norm_patterns}")
     print(f"\nFiles:")
     print(f"  Database: {db_path} ({db_size:.2f} MB)")
-    print(f"  Compressed: {zip_path} ({zip_size:.2f} MB)")
     print(f"\nLicenses:")
     print(f"  ✓ Bhagavad Gita Sanskrit: CC BY-SA 4.0 (Wikisource)")
     print(f"  ✓ BG English (Arnold, Besant): Public Domain")

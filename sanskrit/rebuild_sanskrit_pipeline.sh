@@ -7,7 +7,7 @@ echo "======================================================================="
 
 # Step 1: Build Sanskrit database
 echo ""
-echo "Step 1/4: Building Sanskrit database (270 works)..."
+echo "Step 1/5: Building Sanskrit database (270 works)..."
 python3 create_sanskrit_database_interlinear.py full
 if [ ! -f "sanskrit_texts.db" ]; then
     echo "ERROR: sanskrit_texts.db not created"
@@ -25,7 +25,7 @@ echo "✓ Verified: 270 works in database"
 
 # Step 2: Generate interlinear XML files
 echo ""
-echo "Step 2/4: Generating interlinear XML files (540 files)..."
+echo "Step 2/5: Generating interlinear XML files (540 files)..."
 mkdir -p interlinear_output
 python3 batch_generate_interlinear.py sanskrit_texts.db \
     --output interlinear_output \
@@ -41,7 +41,7 @@ echo "✓ Verified: 270 interlinear XML files generated"
 
 # Step 3: Verify book IDs match between database and XML
 echo ""
-echo "Step 3/4: Verifying database/XML consistency..."
+echo "Step 3/5: Verifying database/XML consistency..."
 python3 verify_interlinear_ready.py interlinear_output
 if [ $? -ne 0 ]; then
     echo "ERROR: Verification failed - book IDs don't match"
@@ -51,7 +51,7 @@ echo "✓ Verified: All book IDs match between database and XML"
 
 # Step 4: Add interlinear to Sanskrit database
 echo ""
-echo "Step 4/4: Importing Sanskrit interlinear into database..."
+echo "Step 4/5: Importing Sanskrit interlinear into database..."
 # Import Sanskrit interlinear directly into sanskrit_texts.db
 python3 import_sanskrit_interlinear.py sanskrit_texts.db interlinear_output
 
@@ -72,11 +72,23 @@ if [ "$INTERLINEAR_BOOKS" -lt 2000 ]; then
     echo "⚠️  Warning: Expected ~2136 books with interlinear, found $INTERLINEAR_BOOKS"
 fi
 
+# Step 5: Compress final database (after all modifications)
+echo ""
+echo "Step 5/5: Compressing final database..."
+rm -f sanskrit_texts.db.zip
+zip -9 sanskrit_texts.db.zip sanskrit_texts.db
+if [ ! -f "sanskrit_texts.db.zip" ]; then
+    echo "ERROR: Failed to create sanskrit_texts.db.zip"
+    exit 1
+fi
+ZIP_SIZE=$(ls -lh sanskrit_texts.db.zip | awk '{print $5}')
+echo "✓ Created: sanskrit_texts.db.zip ($ZIP_SIZE)"
+
 echo ""
 echo "======================================================================="
 echo "✅ Sanskrit Pipeline Complete"
 echo "======================================================================="
-echo "Output: sanskrit_texts.db"
+echo "Output: sanskrit_texts.db ($ZIP_SIZE compressed)"
 echo "Sanskrit works: $SANSKRIT_WORKS"
 echo "Books with interlinear: $INTERLINEAR_BOOKS"
 echo ""

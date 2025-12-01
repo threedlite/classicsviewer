@@ -149,8 +149,8 @@ class SanskritInterlinearGenerator:
         words = []
         for row in cursor.fetchall():
             word = row['word']
-            # Look up lemma via morphology (dcs_sanskrit_morphology.csv loaded by SanskritRepository)
-            lemma = self.repo.dcs_morphology.get(word)
+            # Look up lemma via morphology (database or CSV, handled by SanskritRepository)
+            lemma = self.repo.get_lemma_for_word(word)
 
             words.append(WordData(
                 word=word,
