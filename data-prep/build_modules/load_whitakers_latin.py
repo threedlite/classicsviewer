@@ -406,16 +406,9 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                         morph_entries = inflection_engine.generate_morphology_for_dictionary(line)
                         morphology_entries.extend(morph_entries)
 
-    # Sort dictionary entries by headword, then by frequency (most common first),
-    # then by personal noun flag (personal nouns like "man" preferred over things like "venom")
-    # This ensures that when we query with LIMIT 1, we get the most common/relevant meaning
+    # Initial sort (will be re-done after UNIQUES.LAT entries are added)
     dictionary_entries.sort(key=lambda x: (x['headword'], x['freq_sort'], x['is_personal']))
 
-    # Remove sort keys before inserting (not DB columns)
-    for entry in dictionary_entries:
-        del entry['freq_sort']
-        del entry['is_personal']
-    
     print(f"Extracted {definitions_count} Latin definitions from Whitaker's")
     print(f"Generated {len(morphology_entries)} morphology entries")
     
@@ -450,14 +443,26 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                             'headword': word_form,
                             'language': 'latin',
                             'definition': definition,
-                            'source': 'Whitaker UNIQUES'
+                            'source': 'Whitaker UNIQUES',
+                            'freq_sort': 4,  # D = lesser frequency for special forms
+                            'is_personal': 1  # non-personal
                         })
                         uniques_count += 1
             
             i += 1
         
         print(f"Extracted {uniques_count} special forms from UNIQUES.LAT")
-    
+
+    # Re-sort after adding UNIQUES entries to ensure frequency ordering is correct
+    dictionary_entries.sort(key=lambda x: (x['headword'], x['freq_sort'], x['is_personal']))
+
+    # Remove sort keys before inserting (not DB columns)
+    for entry in dictionary_entries:
+        if 'freq_sort' in entry:
+            del entry['freq_sort']
+        if 'is_personal' in entry:
+            del entry['is_personal']
+
     # Insert dictionary entries into database
     print("\nInserting Whitaker's dictionary entries into database...")
     for entry in dictionary_entries:

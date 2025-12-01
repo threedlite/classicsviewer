@@ -37,15 +37,28 @@ class LatinRepository:
         self.conn.row_factory = sqlite3.Row
         self.debug = debug
 
+    def normalize_apostrophes(self, word: str) -> str:
+        """Normalize all apostrophe variants to U+0027 (standard apostrophe)."""
+        return (word
+                .replace("'", "'")   # U+0027 APOSTROPHE (no change)
+                .replace("\u2019", "'")   # U+2019 RIGHT SINGLE QUOTATION MARK → U+0027
+                .replace("ʼ", "'")   # U+02BC MODIFIER LETTER APOSTROPHE → U+0027
+                .replace("′", "'")   # U+2032 PRIME → U+0027
+                .replace("´", "'"))  # U+00B4 ACUTE ACCENT → U+0027
+
     def normalize_latin(self, word: str) -> str:
         """
         Normalize Latin word for lookup.
 
+        - Normalizes apostrophe variants
         - Removes macrons (ā→a, ē→e, etc.)
         - Converts to lowercase
         - Handles u/v and i/j variants
         """
-        # First normalize to NFD (decomposed form)
+        # First normalize apostrophes
+        word = self.normalize_apostrophes(word)
+
+        # Then normalize to NFD (decomposed form)
         decomposed = unicodedata.normalize('NFD', word)
 
         # Remove combining characters (macrons, etc.)

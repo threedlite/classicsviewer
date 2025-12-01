@@ -44,7 +44,7 @@ class PerseusRepository:
         # Normalize all apostrophe variants
         return (nfc_normalized
                 .replace("'", "ʼ")   # U+0027 APOSTROPHE → U+02BC
-                .replace("'", "ʼ")   # U+2019 RIGHT SINGLE QUOTATION MARK → U+02BC
+                .replace("\u2019", "ʼ")   # U+2019 RIGHT SINGLE QUOTATION MARK → U+02BC
                 .replace("᾿", "ʼ")   # U+1FBF GREEK PSILI → U+02BC
                 .replace("′", "ʼ")   # U+2032 PRIME → U+02BC
                 .replace("´", "ʼ"))  # U+00B4 ACUTE ACCENT → U+02BC
