@@ -342,20 +342,14 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                 freq_code = 'X'  # default to unknown
                 is_personal = 0  # secondary sort: 0=personal (prefer), 1=non-personal
 
-                if len(flags_tokens) >= 8:
-                    freq_code = flags_tokens[7]  # 8th token is frequency
+                if len(flags_tokens) >= 2:
+                    # Frequency is always second-to-last, source is last
+                    freq_code = flags_tokens[-2]  # second from end is frequency
                     # For nouns, check if it's a personal noun (M P, F P, C P)
                     # Personal nouns refer to people and should be preferred over "thing" variants
                     if pos == 'N' and len(flags_tokens) >= 4:
                         noun_type = flags_tokens[3]  # P=personal, T=thing, L=locale, etc.
                         is_personal = 0 if noun_type == 'P' else 1
-                elif len(flags_tokens) >= 5:
-                    # For shorter formats (verbs etc), frequency is still near end
-                    # Try to find a valid frequency code
-                    for i in range(len(flags_tokens) - 1, -1, -1):
-                        if flags_tokens[i] in freq_priority:
-                            freq_code = flags_tokens[i]
-                            break
 
                 freq_sort = freq_priority.get(freq_code, 7)
 
