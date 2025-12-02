@@ -6,6 +6,7 @@ This integrates Latin definitions and inflections directly into the main diction
 
 import os
 import re
+from functools import cmp_to_key
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
@@ -434,7 +435,9 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                 flags_part = line[83:110] if len(line) > 110 else ""
                 flags_tokens = flags_part.split()
                 freq_code = 'X'  # default to unknown
-                is_personal = 0  # secondary sort: 0=personal (prefer), 1=non-personal
+                # noun_priority: secondary sort for entries with same headword and frequency
+                # Only affects noun-to-noun comparisons: 0 = personal nouns, 1 = thing nouns and all non-nouns
+                noun_priority = 1  # default: same as thing nouns (no preference vs nouns)
 
                 if len(flags_tokens) >= 2:
                     # Frequency is always second-to-last, source is last
@@ -443,7 +446,7 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                     # Personal nouns refer to people and should be preferred over "thing" variants
                     if pos == 'N' and len(flags_tokens) >= 4:
                         noun_type = flags_tokens[3]  # P=personal, T=thing, L=locale, etc.
-                        is_personal = 0 if noun_type == 'P' else 1
+                        noun_priority = 0 if noun_type == 'P' else 1
 
                 freq_sort = freq_priority.get(freq_code, 7)
 
@@ -479,14 +482,15 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                         definition = definition[:400] + "..."
 
                     if lemma and len(lemma) > 0 and not re.match(r'^[0-9]+$', lemma):
-                        # Add dictionary entry with frequency and personal-noun flag for sorting
+                        # Add dictionary entry with frequency and noun_priority for sorting
                         dictionary_entries.append({
                             'headword': lemma,
                             'language': 'latin',
                             'definition': definition,
                             'source': 'Whitaker',
                             'freq_sort': freq_sort,  # for sorting only, not stored in DB
-                            'is_personal': is_personal  # 0=personal noun (prefer), 1=other
+                            'noun_priority': noun_priority,  # 0=personal noun, 1=thing noun
+                            'is_noun': (pos == 'N')  # for custom sort comparator
                         })
                         definitions_count += 1
 
@@ -494,8 +498,28 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                         morph_entries = inflection_engine.generate_morphology_for_dictionary(line)
                         morphology_entries.extend(morph_entries)
 
+    # Custom comparator: freq is primary, noun_priority only used when comparing two nouns
+    def compare_entries(a, b):
+        # First compare by headword
+        if a['headword'] < b['headword']:
+            return -1
+        if a['headword'] > b['headword']:
+            return 1
+        # Then by frequency
+        if a['freq_sort'] < b['freq_sort']:
+            return -1
+        if a['freq_sort'] > b['freq_sort']:
+            return 1
+        # Only use noun_priority if BOTH are nouns
+        if a.get('is_noun') and b.get('is_noun'):
+            if a['noun_priority'] < b['noun_priority']:
+                return -1
+            if a['noun_priority'] > b['noun_priority']:
+                return 1
+        return 0
+
     # Initial sort (will be re-done after UNIQUES.LAT entries are added)
-    dictionary_entries.sort(key=lambda x: (x['headword'], x['freq_sort'], x['is_personal']))
+    dictionary_entries.sort(key=cmp_to_key(compare_entries))
 
     print(f"Extracted {definitions_count} Latin definitions from Whitaker's")
     print(f"Generated {len(morphology_entries)} morphology entries")
@@ -533,7 +557,8 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                             'definition': definition,
                             'source': 'Whitaker UNIQUES',
                             'freq_sort': 4,  # D = lesser frequency for special forms
-                            'is_personal': 1  # non-personal
+                            'noun_priority': 1,  # same as thing nouns
+                            'is_noun': False  # UNIQUES are typically not nouns
                         })
                         uniques_count += 1
             
@@ -541,15 +566,17 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
         
         print(f"Extracted {uniques_count} special forms from UNIQUES.LAT")
 
-    # Re-sort after adding UNIQUES entries to ensure frequency ordering is correct
-    dictionary_entries.sort(key=lambda x: (x['headword'], x['freq_sort'], x['is_personal']))
+    # Re-sort after adding UNIQUES entries using same custom comparator
+    dictionary_entries.sort(key=cmp_to_key(compare_entries))
 
     # Remove sort keys before inserting (not DB columns)
     for entry in dictionary_entries:
         if 'freq_sort' in entry:
             del entry['freq_sort']
-        if 'is_personal' in entry:
-            del entry['is_personal']
+        if 'noun_priority' in entry:
+            del entry['noun_priority']
+        if 'is_noun' in entry:
+            del entry['is_noun']
 
     # Insert dictionary entries into database
     print("\nInserting Whitaker's dictionary entries into database...")
