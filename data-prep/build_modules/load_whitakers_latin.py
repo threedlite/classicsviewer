@@ -99,20 +99,52 @@ class LatinInflectionEngine:
                     }
                     self.inflection_patterns.append(pattern)
                     pattern_count += 1
-        
+                elif parts[0] == 'PRON' and len(parts) >= 8:
+                    # Parse pronoun inflections
+                    # Format: PRON decl variant case number gender stem_pos ending_len [ending] age freq
+                    # Note: if ending_len is 0, there's no ending token - parts[8] is age instead
+                    ending_len = int(parts[7])
+                    if ending_len > 0 and len(parts) > 8:
+                        ending = parts[8]
+                    else:
+                        ending = ''
+                    pattern = {
+                        'pos': 'PRON',
+                        'declension': int(parts[1]),
+                        'variant': int(parts[2]),
+                        'case': parts[3],
+                        'number': parts[4],
+                        'gender': parts[5],
+                        'stem_pos': int(parts[6]),
+                        'ending_len': ending_len,
+                        'ending': ending
+                    }
+                    self.inflection_patterns.append(pattern)
+                    pattern_count += 1
+
         print(f"Loaded {pattern_count} inflection patterns")
     
     def generate_morphology_for_dictionary(self, dictionary_line: str) -> List[Dict]:
         """Generate morphology entries from a DICTLINE.GEN entry"""
         if len(dictionary_line) < 100:
             return []
-        
+
         stems_part = dictionary_line[0:76].strip()
         pos_part = dictionary_line[76:88].strip() if len(dictionary_line) > 76 else None
-        
+
         if not pos_part:
             return []
-        
+
+        # Extract frequency code from flags section (position 83-110)
+        # Format: "2 1 M P          X X X A O" - frequency is second from end
+        # Whitaker's codes: A=very frequent, B=frequent, C=common, D=lesser, E=uncommon, F=very rare, X=unknown
+        # Map to confidence: higher frequency = higher confidence for better sorting
+        freq_confidence_map = {'A': 0.95, 'B': 0.90, 'C': 0.85, 'D': 0.80, 'E': 0.75, 'F': 0.70, 'X': 0.65}
+        flags_part = dictionary_line[83:110] if len(dictionary_line) > 110 else ""
+        flags_tokens = flags_part.split()
+        freq_code = flags_tokens[-2] if len(flags_tokens) >= 2 else 'X'
+        confidence = freq_confidence_map.get(freq_code, 0.65)
+
         morphology_entries = []
         pos_info = pos_part.split()
         
@@ -155,7 +187,7 @@ class LatinInflectionEngine:
                         'word_form': form,
                         'lemma': stems[0],
                         'morph_info': ' '.join(morph_info),
-                        'confidence': 0.8,
+                        'confidence': confidence,
                         'source': "Whitaker"
                     })
                 
@@ -191,7 +223,7 @@ class LatinInflectionEngine:
                         'word_form': form,
                         'lemma': stems[0],
                         'morph_info': ' '.join(morph_info),
-                        'confidence': 0.8,
+                        'confidence': confidence,
                         'source': "Whitaker"
                     })
         
@@ -228,7 +260,7 @@ class LatinInflectionEngine:
                         'word_form': form,
                         'lemma': stems[0],
                         'morph_info': ' '.join(morph_info),
-                        'confidence': 0.8,
+                        'confidence': confidence,
                         'source': "Whitaker"
                     })
         
@@ -273,10 +305,72 @@ class LatinInflectionEngine:
                         'word_form': form,
                         'lemma': stems[0],
                         'morph_info': ' '.join(morph_info),
-                        'confidence': 0.8,
+                        'confidence': confidence,
                         'source': "Whitaker"
                     })
-        
+
+        elif pos_info[0] == 'PRON':
+            # Pronoun: PRON decl variant type
+            # Examples from DICTLINE.GEN:
+            # - ill ill PRON 6 1 ADJECT (ille - that)
+            # - h hu PRON 3 1 ADJECT (hic - this)
+            # - i e PRON 4 1 PERS (is - he/she/it)
+            # - ego m PRON 5 1 PERS (ego - I)
+            # - tu t PRON 5 2 PERS (tu - you)
+            # - qu cu PRON 1 0 REL (qui - who)
+            declension = int(pos_info[1]) if len(pos_info) > 1 and pos_info[1].isdigit() else 0
+            variant = int(pos_info[2]) if len(pos_info) > 2 and pos_info[2].isdigit() else 0
+
+            stems = [s for s in stems_part.split() if s and s != 'zzz']
+
+            if len(stems) >= 1:
+                # Generate pronoun forms using inflection patterns
+                for pattern in self.inflection_patterns:
+                    if pattern['pos'] != 'PRON':
+                        continue
+
+                    # Match declension (0 in pattern means any)
+                    if pattern['declension'] != declension and pattern['declension'] != 0:
+                        continue
+
+                    # Match variant:
+                    # - Pattern variant 0 matches any dictionary entry variant
+                    # - Dictionary entry variant 0 matches any pattern variant
+                    # - Otherwise, variants must match exactly
+                    if pattern['variant'] != 0 and variant != 0 and pattern['variant'] != variant:
+                        continue
+
+                    # Get the appropriate stem
+                    stem_idx = pattern['stem_pos'] - 1
+                    if stem_idx < 0 or stem_idx >= len(stems):
+                        stem_to_use = stems[0] if stems else None
+                    else:
+                        stem_to_use = stems[stem_idx]
+
+                    if not stem_to_use:
+                        continue
+
+                    # Apply ending to stem
+                    form = stem_to_use + pattern['ending']
+
+                    # Create morphology info string
+                    morph_info = []
+                    if pattern.get('case') and pattern['case'] != 'X':
+                        morph_info.append(pattern['case'].lower())
+                    if pattern.get('number') and pattern['number'] != 'X':
+                        morph_info.append(pattern['number'].lower())
+                    if pattern.get('gender') and pattern['gender'] != 'X':
+                        morph_info.append(pattern['gender'].lower())
+                    morph_info.append('pron')  # Mark as pronoun
+
+                    morphology_entries.append({
+                        'word_form': form,
+                        'lemma': stems[0],
+                        'morph_info': ' '.join(morph_info),
+                        'confidence': confidence,
+                        'source': "Whitaker"
+                    })
+
         return morphology_entries
 
 
