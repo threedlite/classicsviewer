@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.classicsviewer.app.data.AssetPackDatabaseHelper
 import com.classicsviewer.app.databinding.ActivityDatabaseExtractionBinding
@@ -16,12 +19,22 @@ class DatabaseExtractionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDatabaseExtractionBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Enable edge-to-edge display for Android 15+ compatibility
+        enableEdgeToEdge()
+
         super.onCreate(savedInstanceState)
         binding = ActivityDatabaseExtractionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
         supportActionBar?.hide()
-        
+
+        // Apply window insets to avoid content being hidden behind system bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         // Apply color inversion setting
         val inverted = PreferencesManager.getInvertColors(this)
         if (inverted) {

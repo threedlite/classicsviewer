@@ -5,9 +5,12 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,6 +25,7 @@ import com.classicsviewer.app.data.RepositoryFactory
 import com.classicsviewer.app.databinding.ActivityTextViewerPagerBinding
 import com.classicsviewer.app.fragments.TextPageFragment
 import com.classicsviewer.app.models.TextLine
+import com.classicsviewer.app.models.TextSearchResult
 import com.classicsviewer.app.models.TranslationSegment
 import com.classicsviewer.app.ui.BookmarksActivity
 import com.classicsviewer.app.utils.PreferencesManager
@@ -72,6 +76,11 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     
     // Track last viewed line for each translator when viewing translations
     private var lastViewedLineByTranslator: MutableMap<String, Int> = mutableMapOf()
+
+    // Text search state
+    private var searchResults: List<TextSearchResult> = emptyList()
+    private var currentSearchIndex: Int = -1
+    private var lastSearchQuery: String = ""
     
     private val audioServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -672,6 +681,10 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_find_in_text -> {
+                showFindInTextDialog()
+                true
+            }
             R.id.action_view_bookmarks -> {
                 val intent = Intent(this, BookmarksActivity::class.java).apply {
                     putExtra("work_id", workId)
@@ -844,7 +857,181 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             ).show()
         }
     }
-    
+
+    private fun showFindInTextDialog() {
+        val inverted = PreferencesManager.getInvertColors(this)
+
+        val container = FrameLayout(this).apply {
+            setPadding(48, 16, 48, 16)
+        }
+
+        val input = EditText(this).apply {
+            hint = "Enter text to find (e.g., 78)"
+            inputType = InputType.TYPE_CLASS_TEXT
+            setPadding(16, 16, 16, 16)
+            textSize = 18f
+
+            if (inverted) {
+                setTextColor(0xFF000000.toInt())
+                setHintTextColor(0xFF666666.toInt())
+                setBackgroundColor(0xFFF0F0F0.toInt())
+            } else {
+                setTextColor(0xFFFFFFFF.toInt())
+                setHintTextColor(0xFF999999.toInt())
+                setBackgroundColor(0xFF2C2C2C.toInt())
+            }
+
+            // Pre-fill with last search if available
+            if (lastSearchQuery.isNotEmpty()) {
+                setText(lastSearchQuery)
+                setSelection(lastSearchQuery.length)
+            }
+        }
+
+        container.addView(input)
+
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Find in Text")
+            .setMessage("Search within \"$workTitle\":")
+            .setView(container)
+            .setPositiveButton("Find") { _, _ ->
+                val query = input.text.toString().trim()
+                if (query.isNotEmpty()) {
+                    performTextSearch(query)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .setNeutralButton("Find Next") { _, _ ->
+                if (searchResults.isNotEmpty()) {
+                    navigateToNextSearchResult()
+                } else if (lastSearchQuery.isNotEmpty()) {
+                    performTextSearch(lastSearchQuery)
+                } else {
+                    Snackbar.make(binding.root, "No previous search", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            .create()
+
+        dialog.show()
+
+        // Style buttons
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEUTRAL)?.setTextColor(
+            resources.getColor(android.R.color.holo_green_light, null)
+        )
+
+        input.requestFocus()
+    }
+
+    private fun performTextSearch(query: String) {
+        lastSearchQuery = query
+        currentSearchIndex = -1
+
+        android.util.Log.d("TextSearch", "Starting search for: '$query' in bookId=$bookId, totalLines=$totalLines")
+        Snackbar.make(binding.root, "Searching...", Snackbar.LENGTH_SHORT).show()
+
+        lifecycleScope.launch {
+            val allResults = mutableListOf<TextSearchResult>()
+
+            // Search in current book's text (all lines, not just current page)
+            android.util.Log.d("TextSearch", "Fetching lines 1 to $totalLines")
+            val allLines = repository.getTextLines(workId, bookId, 1, totalLines)
+            android.util.Log.d("TextSearch", "Got ${allLines.size} lines")
+
+            val lowerQuery = query.lowercase()
+
+            for (line in allLines) {
+                val lowerText = line.text.lowercase()
+                var startIndex = 0
+
+                while (true) {
+                    val matchIndex = lowerText.indexOf(lowerQuery, startIndex)
+                    if (matchIndex < 0) break
+
+                    allResults.add(TextSearchResult(
+                        bookId = bookId,
+                        bookNumber = bookNumber,
+                        lineNumber = line.lineNumber,
+                        sequenceNumber = line.sequenceNumber,
+                        lineText = line.text,
+                        matchStartIndex = matchIndex,
+                        matchEndIndex = matchIndex + query.length,
+                        resultIndex = 0,
+                        totalResults = 0
+                    ))
+
+                    startIndex = matchIndex + 1
+                }
+            }
+
+            android.util.Log.d("TextSearch", "Found ${allResults.size} matches")
+
+            // Update indices
+            searchResults = allResults.mapIndexed { index, result ->
+                result.copy(resultIndex = index + 1, totalResults = allResults.size)
+            }
+
+            if (searchResults.isEmpty()) {
+                android.util.Log.d("TextSearch", "No matches found")
+                Snackbar.make(binding.root, "No matches found for \"$query\"", Snackbar.LENGTH_LONG).show()
+            } else {
+                android.util.Log.d("TextSearch", "Navigating to first result")
+                // Navigate to first result
+                navigateToNextSearchResult()
+            }
+        }
+    }
+
+    private fun navigateToNextSearchResult() {
+        if (searchResults.isEmpty()) {
+            Snackbar.make(binding.root, "No search results", Snackbar.LENGTH_SHORT).show()
+            return
+        }
+
+        currentSearchIndex = (currentSearchIndex + 1) % searchResults.size
+        val result = searchResults[currentSearchIndex]
+
+        Snackbar.make(
+            binding.root,
+            "Result ${result.resultIndex} of ${result.totalResults}",
+            Snackbar.LENGTH_SHORT
+        ).show()
+
+        // Check if result is on current page
+        if (result.lineNumber < currentStartLine || result.lineNumber > currentEndLine) {
+            // Calculate new page range containing the target line
+            val pageSize = currentEndLine - currentStartLine + 1
+            val newStartLine = ((result.lineNumber - 1) / pageSize) * pageSize + 1
+            val newEndLine = minOf(newStartLine + pageSize - 1, totalLines)
+
+            // Set target for scrolling after page loads
+            targetLineNumber = result.lineNumber
+            targetSequenceNumber = result.sequenceNumber
+            navigateToNewRange(newStartLine, newEndLine)
+        } else {
+            // Same page - scroll to the line
+            // Switch to Greek/Latin page if on translation
+            if (currentPageIndex != 0) {
+                binding.textViewPager.setCurrentItem(0, false)
+            }
+
+            // Find the current Greek fragment and scroll
+            binding.textViewPager.post {
+                val fragments = supportFragmentManager.fragments
+                val textFragment = fragments.firstOrNull {
+                    it is TextPageFragment && it.isVisible
+                } as? TextPageFragment
+
+                textFragment?.scrollToLine(result.lineNumber, result.sequenceNumber)
+            }
+        }
+    }
+
     private fun bookmarkLine(line: com.classicsviewer.app.models.TextLine) {
         lifecycleScope.launch {
             // Check if bookmark already exists

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
+    <item
+        android:id="@+id/action_find_in_text"
+        android:title="Find in Text"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/action_view_bookmarks"
         android:title="View Bookmarks"

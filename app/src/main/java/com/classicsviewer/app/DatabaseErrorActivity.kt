@@ -3,7 +3,10 @@ package com.classicsviewer.app
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.classicsviewer.app.databinding.ActivityDatabaseErrorBinding
 import com.classicsviewer.app.utils.PreferencesManager
 
@@ -12,12 +15,22 @@ class DatabaseErrorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDatabaseErrorBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Enable edge-to-edge display for Android 15+ compatibility
+        enableEdgeToEdge()
+
         super.onCreate(savedInstanceState)
         binding = ActivityDatabaseErrorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
         supportActionBar?.hide()
-        
+
+        // Apply window insets to avoid content being hidden behind system bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         // Apply color inversion setting
         val inverted = PreferencesManager.getInvertColors(this)
         if (inverted) {

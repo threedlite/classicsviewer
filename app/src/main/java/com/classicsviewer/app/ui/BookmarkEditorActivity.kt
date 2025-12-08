@@ -12,8 +12,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.classicsviewer.app.R
 import com.classicsviewer.app.database.entities.BookmarkEntity
@@ -88,10 +91,20 @@ class BookmarkEditorActivity : AppCompatActivity() {
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Enable edge-to-edge display for Android 15+ compatibility
+        enableEdgeToEdge()
+
         super.onCreate(savedInstanceState)
         binding = ActivityBookmarkEditorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
+        // Apply window insets to avoid content being hidden behind system bars
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         // Setup action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         

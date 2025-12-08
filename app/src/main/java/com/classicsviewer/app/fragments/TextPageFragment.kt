@@ -394,6 +394,12 @@ class TextPageFragment : Fragment() {
         // Recreate the adapter to apply new wrap settings
         binding?.textRecyclerView?.adapter?.notifyDataSetChanged()
     }
+
+    fun scrollToLine(lineNumber: Int, sequenceNumber: Int) {
+        targetLineNumber = lineNumber
+        targetSequenceNumber = sequenceNumber
+        scrollToTargetLine()
+    }
 }
 
 // Data class for translation display
