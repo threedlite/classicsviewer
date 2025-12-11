@@ -121,7 +121,7 @@ struct InterlinearTextView: View {
         VStack(spacing: 0) {
             // Row 0: Greek word - slightly larger
             Text(rows[0])
-                .font(.system(size: fontSize * 1.1, design: .serif))
+                .font(.system(size: fontSize * 1.1))
                 .foregroundColor(isLight ? .black : .white)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)

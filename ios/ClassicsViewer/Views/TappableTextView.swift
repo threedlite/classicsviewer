@@ -88,11 +88,9 @@ struct TappableTextView: UIViewRepresentable {
     }
     
     private func createAttributedText() -> NSAttributedString {
-        // Use Times New Roman for Greek, system font for other scripts
-        // System font handles Devanagari, Arabic, Hebrew, etc. properly
-        let font = isGreek ?
-            UIFont(name: "Times New Roman", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize) :
-            UIFont.systemFont(ofSize: fontSize)
+        // Use system font (San Francisco) for all scripts - always available sans-serif
+        // System font handles Greek, Devanagari, Arabic, Hebrew, etc. properly
+        let font = UIFont.systemFont(ofSize: fontSize)
 
         let attributedString = NSMutableAttributedString(string: text)
 
@@ -127,23 +125,17 @@ struct TappableTextView: UIViewRepresentable {
                     // Check for search highlighting first (highest priority)
                     if isSearchHighlighted(wordString) {
                         // Bold yellow background for search terms
-                        let boldFont = isGreek ?
-                            UIFont(name: "Times New Roman Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) :
-                            UIFont.boldSystemFont(ofSize: fontSize)
+                        let boldFont = UIFont.boldSystemFont(ofSize: fontSize)
                         attributedString.addAttribute(.font, value: boldFont, range: nsRange)
                         attributedString.addAttribute(.backgroundColor, value: UIColor.yellow.withAlphaComponent(0.6), range: nsRange)
                     } else if wordsWithoutDefinitions.contains(wordString) {
                         // Bold red for no definition
-                        let boldFont = isGreek ?
-                            UIFont(name: "Times New Roman Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) :
-                            UIFont.boldSystemFont(ofSize: fontSize)
+                        let boldFont = UIFont.boldSystemFont(ofSize: fontSize)
                         attributedString.addAttribute(.font, value: boldFont, range: nsRange)
                         attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: nsRange)
                     } else if wordsWithMorphologyOnly.contains(wordString) {
                         // Italic orange for morphology only
-                        let italicFont = isGreek ?
-                            UIFont(name: "Times New Roman Italic", size: fontSize) ?? UIFont.italicSystemFont(ofSize: fontSize) :
-                            UIFont.italicSystemFont(ofSize: fontSize)
+                        let italicFont = UIFont.italicSystemFont(ofSize: fontSize)
                         attributedString.addAttribute(.font, value: italicFont, range: nsRange)
                         attributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: nsRange)
                     }
@@ -161,21 +153,15 @@ struct TappableTextView: UIViewRepresentable {
                 // Check for search highlighting first (highest priority)
                 if isSearchHighlighted(wordString) {
                     // Bold yellow background for search terms
-                    let boldFont = isGreek ?
-                        UIFont(name: "Times New Roman Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) :
-                        UIFont.boldSystemFont(ofSize: fontSize)
+                    let boldFont = UIFont.boldSystemFont(ofSize: fontSize)
                     attributedString.addAttribute(.font, value: boldFont, range: nsRange)
                     attributedString.addAttribute(.backgroundColor, value: UIColor.yellow.withAlphaComponent(0.6), range: nsRange)
                 } else if wordsWithoutDefinitions.contains(wordString) {
-                    let boldFont = isGreek ?
-                        UIFont(name: "Times New Roman Bold", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) :
-                        UIFont.boldSystemFont(ofSize: fontSize)
+                    let boldFont = UIFont.boldSystemFont(ofSize: fontSize)
                     attributedString.addAttribute(.font, value: boldFont, range: nsRange)
                     attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: nsRange)
                 } else if wordsWithMorphologyOnly.contains(wordString) {
-                    let italicFont = isGreek ?
-                        UIFont(name: "Times New Roman Italic", size: fontSize) ?? UIFont.italicSystemFont(ofSize: fontSize) :
-                        UIFont.italicSystemFont(ofSize: fontSize)
+                    let italicFont = UIFont.italicSystemFont(ofSize: fontSize)
                     attributedString.addAttribute(.font, value: italicFont, range: nsRange)
                     attributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: nsRange)
                 }
@@ -346,9 +332,7 @@ struct AlternativeTappableTextView: View {
     
     var body: some View {
         Text(text)
-            .font(isGreek ? 
-                .custom("Times New Roman", size: fontSize) :
-                .system(size: fontSize))
+            .font(.system(size: fontSize))
             .onTapGesture { location in
                 // For now, just return the first word as a test
                 let words = text.split(separator: " ").map(String.init)

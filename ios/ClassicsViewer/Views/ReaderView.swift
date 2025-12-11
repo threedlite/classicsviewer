@@ -490,7 +490,6 @@ struct LineTextView: View {
             if showSpeaker, let speaker = line.speaker, !speaker.isEmpty {
                 Text(speaker.uppercased())
                     .font(.system(size: fontSize + 2, weight: .bold))
-                    .fontDesign(isGreek ? .serif : .default)
                     .padding(.leading, 52) // Align with text (40 + 12 spacing)
                     .padding(.top, 8)
                     .onTapGesture {
@@ -945,7 +944,6 @@ struct NoteEditDialog: View {
                     
                     Text(line.lineText)
                         .font(.system(size: 16))
-                        .fontDesign(author.isGreek ? .serif : .default)
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
