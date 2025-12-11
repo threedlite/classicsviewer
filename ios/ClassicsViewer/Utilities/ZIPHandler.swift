@@ -163,9 +163,10 @@ class ZIPHandler {
         let fileSize = attributes[.size] as? Int64 ?? 0
         logger.error(" ZIPHandler.extractDatabase - ZIP file size: \(fileSize) bytes (\(fileSize / 1_000_000) MB)")
         
-        // Use streaming extraction for large files
-        if fileSize > 500_000_000 { // > 500MB
-            logger.error(" ZIPHandler.extractDatabase - Large file detected, using streaming extraction")
+        // Use streaming extraction for database-sized files to avoid memory pressure
+        // Any database ZIP >10MB should use streaming to stay memory-safe
+        if fileSize > 10_000_000 { // > 10MB
+            logger.error(" ZIPHandler.extractDatabase - File >10MB detected, using streaming extraction")
             do {
                 logger.error(" ZIPHandler.extractDatabase - About to call extractDatabaseUsingSystemUnzip")
                 try extractDatabaseUsingSystemUnzip(from: zipURL, to: destinationURL, progress: progress)
@@ -238,9 +239,11 @@ class ZIPHandler {
         let fileSize = fileAttributes[.size] as? Int64 ?? 0
         logger.error("🔵 ZIP file size: \(fileSize) bytes")
 
-        // For large files (>100MB), use system unzip command instead of loading into memory
-        if fileSize > 100_000_000 {
-            logger.error("🔵 Large file detected, using system unzip command for memory efficiency")
+        // For files >10MB, use streaming extraction to avoid memory pressure
+        // This is critical for database imports which can be 100MB+ compressed
+        // The streaming approach uses ~10MB of memory regardless of file size
+        if fileSize > 10_000_000 {
+            logger.error("🔵 File >10MB detected, using streaming extraction for memory efficiency")
             try extractUsingSystemCommand(from: zipURL, to: destinationURL, progress: progress)
             return
         }

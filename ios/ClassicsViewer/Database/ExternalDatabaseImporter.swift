@@ -193,6 +193,7 @@ class ExternalDatabaseImporter: ObservableObject {
         }
 
         // Copy the file to our app's temporary directory to ensure we maintain access
+        // CRITICAL: Use streaming copy to avoid loading entire file into memory
         let tempInputURL: URL
         if fileExtension == "zip" {
             tempInputURL = FileManager.default.temporaryDirectory.appendingPathComponent("import_\(UUID().uuidString).zip")
@@ -202,19 +203,16 @@ class ExternalDatabaseImporter: ObservableObject {
                 logger.error("🟢 About to copy from: \(url.path)")
                 logger.error("🟢 About to copy to: \(tempInputURL.path)")
 
-                // Try alternative copy method using Data
-                let fileData = try Data(contentsOf: url)
-                logger.error("🟢 Read \(fileData.count) bytes from source file")
-
-                try fileData.write(to: tempInputURL)
-                logger.error("🟢 Wrote data to temp file")
+                // Use streaming copy to avoid memory pressure on large files
+                // This copies in 1MB chunks instead of loading entire file into memory
+                try streamingCopyFile(from: url, to: tempInputURL)
 
                 let copiedSize = (try? FileManager.default.attributesOfItem(atPath: tempInputURL.path)[.size] as? Int64) ?? 0
-                logger.error("🟢 ZIP file copied successfully, size: \(copiedSize) bytes")
+                logger.error("🟢 ZIP file copied successfully (streaming), size: \(copiedSize) bytes")
 
-                // Verify the copy
-                if copiedSize != fileData.count {
-                    logger.error("🟢 WARNING: Size mismatch! Original: \(fileData.count), Copied: \(copiedSize)")
+                // Verify the copy matches original
+                if copiedSize != fileSize {
+                    logger.error("🟢 WARNING: Size mismatch! Original: \(fileSize), Copied: \(copiedSize)")
                 }
             } catch {
                 logger.error("🟢 Failed to copy ZIP file: \(error)")
@@ -642,11 +640,82 @@ class ExternalDatabaseImporter: ObservableObject {
         let path: String
         let size: Int64
         let lastModified: Date
-        
+
         var sizeFormatted: String {
             let formatter = ByteCountFormatter()
             formatter.countStyle = .file
             return formatter.string(fromByteCount: size)
         }
+    }
+
+    // MARK: - Streaming File Copy
+
+    /// Copies a file using streaming to avoid loading the entire file into memory.
+    /// Critical for large database ZIP files (300MB+) that would cause out-of-memory crashes.
+    private func streamingCopyFile(from sourceURL: URL, to destinationURL: URL) throws {
+        let logger = Logger(subsystem: "com.classicsviewer.app", category: "DatabaseImport")
+
+        // Remove destination if it exists
+        if FileManager.default.fileExists(atPath: destinationURL.path) {
+            try FileManager.default.removeItem(at: destinationURL)
+        }
+
+        // Open source for reading
+        guard let inputStream = InputStream(url: sourceURL) else {
+            throw ImportError.extractionFailed("Cannot open source file for reading")
+        }
+
+        // Create and open output stream
+        guard let outputStream = OutputStream(url: destinationURL, append: false) else {
+            throw ImportError.extractionFailed("Cannot create destination file for writing")
+        }
+
+        inputStream.open()
+        outputStream.open()
+
+        defer {
+            inputStream.close()
+            outputStream.close()
+        }
+
+        // Check streams opened successfully
+        if inputStream.streamStatus == .error {
+            throw ImportError.extractionFailed("Failed to open source file: \(inputStream.streamError?.localizedDescription ?? "unknown error")")
+        }
+        if outputStream.streamStatus == .error {
+            throw ImportError.extractionFailed("Failed to create destination file: \(outputStream.streamError?.localizedDescription ?? "unknown error")")
+        }
+
+        // Use 1MB buffer for efficient streaming (same as Android approach)
+        let bufferSize = 1024 * 1024
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        defer { buffer.deallocate() }
+
+        var totalBytesCopied: Int64 = 0
+
+        while inputStream.hasBytesAvailable {
+            let bytesRead = inputStream.read(buffer, maxLength: bufferSize)
+
+            if bytesRead < 0 {
+                throw ImportError.extractionFailed("Error reading source file: \(inputStream.streamError?.localizedDescription ?? "unknown error")")
+            }
+
+            if bytesRead == 0 {
+                break // End of file
+            }
+
+            var bytesWritten = 0
+            while bytesWritten < bytesRead {
+                let writeResult = outputStream.write(buffer.advanced(by: bytesWritten), maxLength: bytesRead - bytesWritten)
+                if writeResult < 0 {
+                    throw ImportError.extractionFailed("Error writing destination file: \(outputStream.streamError?.localizedDescription ?? "unknown error")")
+                }
+                bytesWritten += writeResult
+            }
+
+            totalBytesCopied += Int64(bytesRead)
+        }
+
+        logger.info("Streaming copy completed: \(totalBytesCopied) bytes copied")
     }
 }
