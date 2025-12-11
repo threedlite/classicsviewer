@@ -156,85 +156,55 @@ def analyze_first1k_work_splitting(xml_path):
                 }
 
         # Method 2: Check for <p> tags
-        p_segments = []
-        # Only iterate over <p> tags in the body, not in metadata
-        search_root = body if body is not None else root.find('.//text')
-        if search_root is None:
-            search_root = root.find('.//div[@type="edition"]') or root.find('.//div[@type="textpart"]')
-        if search_root is not None:
-            for p in search_root.iter('p'):
-                text = extract_text_from_first1k_element(p)
-                if text.strip():
-                    text = re.sub(r'\s+', ' ', text).strip()
-                    # Only include Greek text for analysis
-                    if is_greek_text(text):
-                        p_segments.append(text)
+        # Use split_body_on_tag to get accurate max_length (same as parsing will use)
+        if body is not None:
+            p_segments = split_body_on_tag(body, 'p')
+            p_segments = [s for s in p_segments if s.strip() and is_greek_text(s)]
+            if p_segments:
+                max_length = max(len(s) for s in p_segments)
+                analysis_results['p_tags'] = {
+                    'max_length': max_length,
+                    'count': len(p_segments),
+                    'segments': p_segments[:5]
+                }
 
-        if p_segments:
-            max_length = max(len(s) for s in p_segments)
-            analysis_results['p_tags'] = {
-                'max_length': max_length,
-                'count': len(p_segments),
-                'segments': p_segments[:5]
-            }
+        # Method 2b: Check for <ab> tags (verses) and <l> tags (lines)
+        # Use split_body_on_tag to get accurate max_length (same as parsing will use)
+        if body is not None:
+            # Check for <ab> tags
+            ab_segments = split_body_on_tag(body, 'ab')
+            ab_segments = [s for s in ab_segments if s.strip() and is_greek_text(s)]
+            if ab_segments:
+                max_length = max(len(s) for s in ab_segments)
+                analysis_results['ab_verses'] = {
+                    'max_length': max_length,
+                    'count': len(ab_segments),
+                    'segments': ab_segments[:5]
+                }
 
-        # Method 2b: Check for <ab> tags (verses in biblical texts) and <l> tags (lines in poetry)
-        ab_segments = []
-        l_segments = []
-        if search_root is not None:
-            # Check for <ab> tags (verses)
-            for ab in search_root.iter('ab'):
-                text = extract_text_from_first1k_element(ab)
-                if text.strip():
-                    text = re.sub(r'\s+', ' ', text).strip()
-                    # Add verse number if available
-                    verse_num = ab.get('n', '')
-                    if verse_num and is_greek_text(text):
-                        ab_segments.append(f"[{verse_num}] {text}")
-                    elif is_greek_text(text):
-                        ab_segments.append(text)
-
-            # Check for <l> tags (lines in poetry)
-            for l in search_root.iter('l'):
-                text = extract_text_from_first1k_element(l)
-                if text.strip():
-                    text = re.sub(r'\s+', ' ', text).strip()
-                    # Add line number if available
-                    line_num = l.get('n', '')
-                    if line_num and is_greek_text(text):
-                        l_segments.append(f"[{line_num}] {text}")
-                    elif is_greek_text(text):
-                        l_segments.append(text)
-
-        if ab_segments:
-            max_length = max(len(s) for s in ab_segments)
-            analysis_results['ab_verses'] = {
-                'max_length': max_length,
-                'count': len(ab_segments),
-                'segments': ab_segments[:5]
-            }
-
-        if l_segments:
-            max_length = max(len(s) for s in l_segments)
-            analysis_results['l_lines'] = {
-                'max_length': max_length,
-                'count': len(l_segments),
-                'segments': l_segments[:5]
-            }
+            # Check for <l> tags
+            l_segments = split_body_on_tag(body, 'l')
+            l_segments = [s for s in l_segments if s.strip() and is_greek_text(s)]
+            if l_segments:
+                max_length = max(len(s) for s in l_segments)
+                analysis_results['l_lines'] = {
+                    'max_length': max_length,
+                    'count': len(l_segments),
+                    'segments': l_segments[:5]
+                }
 
         # Method 3a: Check for <div> with specific types
         div_segments = []
         # Only iterate over <div> tags in the body, not in metadata
-        if search_root is not None:
-            for div in search_root.iter('div'):
+        if body is not None:
+            for div in body.iter('div'):
                 # Skip preface sections
                 if div.get('n') == 'preface':
                     continue
                 if div.get('type') in ['section', 'chapter', 'textpart', 'book'] or \
                    div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis']:
                     text = extract_text_from_first1k_element(div)
-                    if text.strip():
-                        text = re.sub(r'\s+', ' ', text).strip()
+                    if text:
                         # Only include Greek text for analysis
                         if is_greek_text(text):
                             div_segments.append(text)
@@ -317,8 +287,7 @@ def analyze_first1k_work_splitting(xml_path):
 
         # Method 4: Check for newlines in text
         if full_text and '\n' in full_text:
-            lines = full_text.split('\n')
-            lines = [re.sub(r'\s+', ' ', line).strip() for line in lines if line.strip()]
+            lines = [line for line in full_text.split('\n') if line]
             if lines:
                 max_length = max(len(s) for s in lines)
                 analysis_results['newlines'] = {
@@ -364,7 +333,7 @@ def analyze_first1k_work_splitting(xml_path):
                     if not best_segments:
                         best_segments = split_body_on_lb(body)
                 elif method_name == 'newlines' and full_text:
-                    best_segments = [re.sub(r'\s+', ' ', line).strip() for line in full_text.split('\n') if line.strip()]
+                    best_segments = [line for line in full_text.split('\n') if line]
                 break
 
         # Now apply semicolon/period splitting
@@ -374,7 +343,7 @@ def analyze_first1k_work_splitting(xml_path):
             for i, segment_text in enumerate(best_segments, 1):
                 parts = re.split(r'[;.]', segment_text)
                 for part in parts:
-                    part = re.sub(r'\s+', ' ', part).strip()
+                    part = part.strip()
                     if part:
                         combined_segments.append(f"[{i}] {part}")
             if combined_segments:
@@ -387,7 +356,7 @@ def analyze_first1k_work_splitting(xml_path):
         elif full_text:
             # Fallback to full text if no segments available
             segments = re.split(r'[;.]', full_text)
-            segments = [re.sub(r'\s+', ' ', s).strip() for s in segments if s.strip()]
+            segments = [s.strip() for s in segments if s.strip()]
             if segments:
                 segments_with_nums = [f"[{i}] {s}" for i, s in enumerate(segments, 1)]
                 max_length = max(len(s) for s in segments_with_nums)
@@ -405,7 +374,7 @@ def analyze_first1k_work_splitting(xml_path):
             for i, segment_text in enumerate(best_segments, 1):
                 parts = re.split(r'[;.\u00B7\u0387]', segment_text)  # Include Unicode middle dots
                 for part in parts:
-                    part = re.sub(r'\s+', ' ', part).strip()
+                    part = part.strip()
                     if part:
                         combined_segments.append(f"[{i}] {part}")
             if combined_segments:
@@ -418,7 +387,7 @@ def analyze_first1k_work_splitting(xml_path):
         elif full_text:
             # Fallback to full text if no segments available
             segments = re.split(r'[;.\u00B7\u0387]', full_text)  # Include Unicode middle dots
-            segments = [re.sub(r'\s+', ' ', s).strip() for s in segments if s.strip()]
+            segments = [s.strip() for s in segments if s.strip()]
             if segments:
                 segments_with_nums = [f"[{i}] {s}" for i, s in enumerate(segments, 1)]
                 max_length = max(len(s) for s in segments_with_nums)
@@ -430,7 +399,8 @@ def analyze_first1k_work_splitting(xml_path):
 
         # Method 7: No splitting (use original structure)
         if full_text:
-            clean_text = re.sub(r'\s+', ' ', full_text).strip()
+            # Replace newlines with spaces for single-line representation
+            clean_text = ' '.join(full_text.split())
             analysis_results['no_split'] = {
                 'max_length': len(clean_text),
                 'count': 1,
@@ -456,8 +426,20 @@ def analyze_first1k_work_splitting(xml_path):
             method_priority = ['l_lines', 'ab_verses', 'lb_tags', 'p_tags', 'div_sections', 'milestone', 'pb', 'quote_cit', 'newlines', 'semicolon_period', 'punctuation_all', 'no_split']
 
         # First try to find a method within the limit
+        # Require a minimum count to avoid selecting methods with just 1-2 segments
+        # when other methods have thousands of segments (e.g., Ptolemy has 1 <l> but 3468 <p>)
+        MIN_SEGMENT_COUNT = 10  # Minimum segments to be considered a valid method
+
+        # Find the max count across all methods to establish baseline
+        max_segment_count = max(analysis_results[m]['count'] for m in method_priority)
+
         for method in method_priority:
-            if analysis_results[method]['count'] > 0:
+            method_count = analysis_results[method]['count']
+            if method_count > 0:
+                # Skip methods with very few segments if better alternatives exist
+                # A method with <10 segments is only valid if no other method has >10
+                if method_count < MIN_SEGMENT_COUNT and max_segment_count >= MIN_SEGMENT_COUNT:
+                    continue
                 # All methods must respect the 2000-char UI limit
                 if analysis_results[method]['max_length'] <= MAX_ALLOWED_LINE_LENGTH:
                     selected_method = method
@@ -468,7 +450,11 @@ def analyze_first1k_work_splitting(xml_path):
         if selected_method is None:
             shortest_max = float('inf')
             for method in method_priority:
-                if analysis_results[method]['count'] > 0:
+                method_count = analysis_results[method]['count']
+                if method_count > 0:
+                    # Apply same minimum count check
+                    if method_count < MIN_SEGMENT_COUNT and max_segment_count >= MIN_SEGMENT_COUNT:
+                        continue
                     if analysis_results[method]['max_length'] < shortest_max:
                         shortest_max = analysis_results[method]['max_length']
                         selected_method = method
@@ -525,6 +511,62 @@ def split_body_on_lb(elem):
 
     return text_parts
 
+def split_body_on_tag(elem, tag_name):
+    """
+    Split entire body text on a specific tag (like <l> or <ab>).
+    Captures ALL text, using the tag as split points.
+    """
+    if elem is None:
+        return []
+
+    text_parts = []
+    current_text = []
+
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+
+    def process_element(el):
+        tag = el.tag.split('}')[-1] if '}' in el.tag else el.tag
+
+        # Skip excluded tags entirely
+        if tag in excluded_tags:
+            return
+
+        if el.text:
+            current_text.append(el.text)
+
+        for child in el:
+            child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
+
+            if child_tag == tag_name:
+                # Save current text as a segment before the split tag
+                if current_text:
+                    text = ''.join(current_text)
+                    text = re.sub(r'\s+', ' ', text).strip()
+                    if text:
+                        text_parts.append(text)
+                current_text.clear()
+                # Process the content inside the split tag
+                process_element(child)
+            elif child_tag in excluded_tags:
+                # Skip excluded tags but get tail
+                pass
+            else:
+                process_element(child)
+
+            if child.tail:
+                current_text.append(child.tail)
+
+    process_element(elem)
+
+    # Add any remaining text
+    if current_text:
+        text = ''.join(current_text)
+        text = re.sub(r'\s+', ' ', text).strip()
+        if text:
+            text_parts.append(text)
+
+    return text_parts
+
 def split_on_elements(elem, tag_names):
     """
     Split text on specified XML elements (milestone, pb, quote, cit, etc).
@@ -555,8 +597,8 @@ def split_on_elements(elem, tag_names):
                 # Process the split element itself if it contains text
                 if child.tag in ['quote', 'cit']:
                     inner_text = extract_text_from_first1k_element(child)
-                    if inner_text.strip():
-                        text_parts.append(re.sub(r'\s+', ' ', inner_text).strip())
+                    if inner_text:
+                        text_parts.append(inner_text)
             elif child.tag != 'note':
                 process_element(child)
 
@@ -806,61 +848,34 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                     })
 
         elif selected_method == 'l_lines':
-            # Each <l> tag becomes a line (poetry)
-            section_num = 1
-            for l in body.iter('l'):
-                text = extract_text_from_first1k_element(l)
-                if text.strip():
-                    text = re.sub(r'\s+', ' ', text).strip()
-                    # Add line number if available
-                    line_num = l.get('n', '')
-                    if line_num:
-                        sections.append({
-                            'section': line_num,
-                            'text': text
-                        })
-                    else:
-                        sections.append({
-                            'section': str(section_num),
-                            'text': text
-                        })
-                    section_num += 1
+            # Split on <l> tags - captures ALL text, uses <l> as split points
+            parts = split_body_on_tag(body, 'l')
+            for i, part in enumerate(parts, 1):
+                if part.strip():
+                    sections.append({
+                        'section': str(i),
+                        'text': part.strip()
+                    })
 
         elif selected_method == 'ab_verses':
-            # Each <ab> tag becomes a verse (biblical texts)
-            section_num = 1
-            for ab in body.iter('ab'):
-                text = extract_text_from_first1k_element(ab)
-                if text.strip():
-                    text = re.sub(r'\s+', ' ', text).strip()
-                    # Add verse number if available
-                    verse_num = ab.get('n', '')
-                    if verse_num:
-                        sections.append({
-                            'section': verse_num,
-                            'text': text
-                        })
-                    else:
-                        sections.append({
-                            'section': str(section_num),
-                            'text': text
-                        })
-                    section_num += 1
+            # Split on <ab> tags - captures ALL text, uses <ab> as split points
+            parts = split_body_on_tag(body, 'ab')
+            for i, part in enumerate(parts, 1):
+                if part.strip():
+                    sections.append({
+                        'section': str(i),
+                        'text': part.strip()
+                    })
 
         elif selected_method == 'p_tags':
-            # Each <p> becomes a section
-            section_num = 1
-            # Only iterate within body, not metadata
-            for p in body.iter('p'):
-                text = extract_text_from_first1k_element(p)
-                if text.strip():
-                    text = re.sub(r'\s+', ' ', text).strip()
-                    # NEVER skip content - include all paragraphs
+            # Split on <p> tags - captures ALL text, uses <p> as split points
+            parts = split_body_on_tag(body, 'p')
+            for i, part in enumerate(parts, 1):
+                if part.strip():
                     sections.append({
-                        'section': str(section_num),
-                        'text': text
+                        'section': str(i),
+                        'text': part.strip()
                     })
-                    section_num += 1
 
         elif selected_method == 'div_sections':
             # Use div structural elements
@@ -959,7 +974,6 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
             lines = full_text.split('\n')
             section_num = 1
             for line in lines:
-                line = re.sub(r'\s+', ' ', line).strip()
                 if line:
                     sections.append({
                         'section': str(section_num),
@@ -973,7 +987,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
             p_sections = []
             for p_num, p in enumerate(root.iter('p'), 1):
                 p_text = extract_text_from_first1k_element(p)
-                if p_text.strip():
+                if p_text:
                     p_sections.append((p_num, p_text))
 
             if p_sections:
@@ -982,7 +996,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 for p_num, p_text in p_sections:
                     parts = re.split(r'[;.]', p_text)
                     for part in parts:
-                        part = re.sub(r'\s+', ' ', part).strip()
+                        part = part.strip()
                         if part:
                             sections.append({
                                 'section': str(section_num),
@@ -995,7 +1009,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 segments = re.split(r'[;.]', full_text)
                 section_num = 1
                 for segment in segments:
-                    segment = re.sub(r'\s+', ' ', segment).strip()
+                    segment = segment.strip()
                     if segment:
                         sections.append({
                             'section': str(section_num),
@@ -1008,7 +1022,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
             p_sections = []
             for p_num, p in enumerate(root.iter('p'), 1):
                 p_text = extract_text_from_first1k_element(p)
-                if p_text.strip():
+                if p_text:
                     p_sections.append((p_num, p_text))
 
             if p_sections:
@@ -1017,7 +1031,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 for p_num, p_text in p_sections:
                     parts = re.split(r'[;.\u00B7\u0387]', p_text)  # Include Unicode middle dots
                     for part in parts:
-                        part = re.sub(r'\s+', ' ', part).strip()
+                        part = part.strip()
                         if part:
                             sections.append({
                                 'section': str(section_num),
@@ -1030,7 +1044,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 segments = re.split(r'[;.\u00B7\u0387]', full_text)  # Include Unicode middle dots
                 section_num = 1
                 for segment in segments:
-                    segment = re.sub(r'\s+', ' ', segment).strip()
+                    segment = segment.strip()
                     if segment:
                         sections.append({
                             'section': str(section_num),
@@ -1041,8 +1055,9 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
         elif selected_method == 'no_split':
             # Keep as single section (should be rare)
             text = extract_text_from_first1k_element(body)
-            if text.strip():
-                text = re.sub(r'\s+', ' ', text).strip()
+            if text:
+                # Collapse newlines into spaces for single-section output
+                text = ' '.join(text.split())
                 sections.append({
                     'section': '1',
                     'text': text
@@ -1094,7 +1109,8 @@ def parse_first1k_greek_with_chapters(xml_path):
                             else:
                                 # No p element or empty - use normal extraction
                                 text = extract_text_from_first1k_element(section_div)
-                                text = re.sub(r'\s+', ' ', text).strip()
+                                # Collapse newlines to spaces
+                                text = ' '.join(text.split()) if text else ''
                                 if text:
                                     chapter_sections.append({
                                         'section': section_n,
@@ -1247,6 +1263,13 @@ def extract_text_from_element_simple(elem):
     Simple text extraction that doesn't insert line breaks.
     Used for extracting text from <l> elements.
     """
+    # Skip editorial elements entirely
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+
+    tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
+    if tag_name in excluded_tags:
+        return ''
+
     text_parts = []
 
     # Get element's direct text
@@ -1255,20 +1278,22 @@ def extract_text_from_element_simple(elem):
 
     # Process child elements
     for child in elem:
-        # Skip editorial notes
-        if child.tag == 'note' and child.get('type') == 'editorial':
-            continue
+        child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
 
-        # Get child's text
-        if child.text:
-            text_parts.append(child.text)
+        # Skip excluded tags content but still get tail (text after the tag)
+        if child_tag not in excluded_tags:
+            # Get child's text recursively
+            child_text = extract_text_from_element_simple(child)
+            if child_text:
+                text_parts.append(child_text)
 
-        # Get tail text
+        # Get tail text (text after the child element - this is often legitimate Greek)
         if child.tail:
             text_parts.append(child.tail)
 
-    # Join without adding line breaks
-    return ' '.join(text_parts)
+    # Join and normalize whitespace
+    result = ''.join(text_parts)
+    return ' '.join(result.split())
 
 def parse_first1k_translation(xml_path):
     """
@@ -1298,11 +1323,12 @@ def parse_first1k_translation(xml_path):
 
                 for p in div.iter('p'):
                     p_text = extract_text_from_first1k_element(p)
-                    if p_text.strip():
-                        # Clean up the text
-                        p_text = re.sub(r'\s+', ' ', p_text)
-                        p_text = re.sub(r'\[[\d\w]+\]', '', p_text)  # Remove [327a] style references
-                        text_parts.append(p_text.strip())
+                    if p_text:
+                        # Collapse newlines to spaces and remove [327a] style references
+                        p_text = ' '.join(p_text.split())
+                        p_text = re.sub(r'\[[\d\w]+\]', '', p_text)
+                        if p_text.strip():
+                            text_parts.append(p_text.strip())
 
                 if text_parts:
                     translations.append({
@@ -1320,6 +1346,13 @@ def extract_text_from_first1k_element(elem):
     Extract all text from an element, including tail text.
     Preserves line breaks from <lb/> tags.
     """
+    # Skip editorial elements entirely
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+
+    tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
+    if tag_name in excluded_tags:
+        return ''
+
     text_parts = []
 
     # Get element's direct text
@@ -1328,24 +1361,22 @@ def extract_text_from_first1k_element(elem):
 
     # Process child elements
     for child in elem:
-        # Skip pure editorial notes if needed, but keep inline apparatus
-        if child.tag == 'note' and child.get('type') == 'editorial':
-            continue
+        child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
 
         # Handle line breaks
-        if child.tag == 'lb':
+        if child_tag == 'lb':
             text_parts.append('\n')
         # Handle page breaks - add newline for these too
-        elif child.tag == 'pb':
+        elif child_tag == 'pb':
             text_parts.append('\n')
-        # Recursively extract text from nested elements
-        else:
+        # Skip excluded tags content but still get tail
+        elif child_tag not in excluded_tags:
             # Get all text from this child element (recursive)
             child_text = extract_text_from_first1k_element(child)
             if child_text:
                 text_parts.append(child_text)
 
-        # Get tail text (text after the child element)
+        # Get tail text (text after the child element - this is often legitimate Greek)
         if child.tail:
             text_parts.append(child.tail)
 
@@ -2206,17 +2237,22 @@ def parse_cts_metadata(cts_path):
         print(f"Error parsing CTS metadata {cts_path}: {e}")
         return None
 
-def get_text_content(elem, preserve_milestones=False):
+def get_text_content(elem, preserve_milestones=False, bekker_page_state=None):
     """Get all text content from element and its children, excluding editorial elements
 
     Args:
         elem: XML element to extract text from
         preserve_milestones: If True, insert milestone references as [ref] in the text
+        bekker_page_state: Mutable list [current_bekker_page] to track state across recursive calls
     """
     text_parts = []
 
+    # Initialize Bekker page state if not provided (use list for mutability across calls)
+    if bekker_page_state is None:
+        bekker_page_state = [None]
+
     # Skip editorial elements entirely
-    excluded_tags = {'note', 'foreign', 'ref', 'bibl' }
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
     tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
 
     if tag_name in excluded_tags:
@@ -2232,7 +2268,7 @@ def get_text_content(elem, preserve_milestones=False):
         for child in elem:
             child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
             if child_tag not in excluded_tags:
-                text_parts.append(get_text_content(child, preserve_milestones))
+                text_parts.append(get_text_content(child, preserve_milestones, bekker_page_state))
             if child.tail:
                 text_parts.append(child.tail)
         text_parts.append('</hi>')
@@ -2247,26 +2283,40 @@ def get_text_content(elem, preserve_milestones=False):
         # Skip editorial elements
         child_tag = child.tag.split('}')[-1] if '}' in child.tag else child.tag
 
-        # Handle milestone tags specially when preserving
+        # Handle milestone tags specially when preserving (only for Plato/Aristotle)
         if preserve_milestones and child_tag == 'milestone':
             # Check if this is a Bekker or Stephanus reference
             resp = child.get('resp', '').lower()
             unit = child.get('unit', '')
             n = child.get('n', '')
 
-            if resp in ['bekker', 'stephanus']:
-                if unit in ['page', 'section'] and n:
-                    # Insert the reference in brackets
+            if resp == 'bekker':
+                if unit in ['page', 'section'] and n and re.match(r'\d+[a-z]$', n):
+                    # Track current Bekker page for combining with line numbers
+                    bekker_page_state[0] = n
+                elif unit == 'line' and n and bekker_page_state[0]:
+                    # Combine page + line for full Bekker ref (e.g., 1214a5)
+                    text_parts.append(f'[{bekker_page_state[0]}{n}] ')
+            elif resp == 'stephanus':
+                # For Stephanus, only include lettered sections (57a, 57b, etc.)
+                # Skip page-only refs (57) since they're redundant with the lettered sections
+                if unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                     text_parts.append(f'[{n}] ')
-                # Skip line milestones - they're too granular for our purposes
+            # Also handle Stephanus-pattern sections without resp attribute
+            # Some Perseus XML milestones inconsistently lack resp="Stephanus"
+            elif unit == 'section' and n and re.match(r'\d+[a-z]$', n):
+                text_parts.append(f'[{n}] ')
         elif child_tag not in excluded_tags:
-            text_parts.append(get_text_content(child, preserve_milestones))
+            text_parts.append(get_text_content(child, preserve_milestones, bekker_page_state))
 
         # Always add tail text after child (this is text that comes after the child element)
         if child.tail:
             text_parts.append(child.tail)
 
-    return ''.join(text_parts).strip()
+    # Join parts and normalize whitespace
+    result = ''.join(text_parts)
+    result = ' '.join(result.split())  # Normalize all whitespace to single spaces
+    return result
 
 
 def get_section_line_mapping(cursor, book_id, max_section, segment_count=None):
@@ -2774,7 +2824,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                     para_text = get_text_content(para).strip()
                     text_hash = hash(para_text)
                     
-                    if para_text and len(para_text) > 20 and text_hash not in processed_text_hashes:
+                    if para_text and text_hash not in processed_text_hashes:
                         processed_text_hashes.add(text_hash)
                         segments.append({
                             'start_line': para_num,
@@ -3288,14 +3338,14 @@ def process_prose_translation(root, book_id, cursor, translator):
             except ValueError:
                 continue
             
-            # Extract all text from this section
+            # Extract all text from this section, filtering out editorial notes
             section_text = ""
             for p in elem.iter():
                 if p.tag.endswith('p'):
-                    text = ''.join(p.itertext()).strip()
+                    text = get_text_content(p)
                     if text:
                         section_text += text + " "
-            
+
             if section_text.strip():
                 sections.append({
                     'number': section_num,
@@ -3809,7 +3859,10 @@ def process_prose_with_books(root, work_id, cursor, language):
                     current_milestone = n
             elif resp == 'Stephanus' and n:
                 current_milestone = n
-        
+            # Fallback for Stephanus-pattern sections without resp attribute
+            elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
+                current_milestone = n
+
         if not (book_div.tag.endswith('div') and 
                 book_div.get('type') == 'textpart' and 
                 book_div.get('subtype', '').lower() == 'book'):
@@ -3844,9 +3897,12 @@ def process_prose_with_books(root, work_id, cursor, language):
                         current_milestone = n
                 elif resp == 'Stephanus' and n:
                     current_milestone = n
-            
-            if (elem.tag.endswith('div') and 
-                elem.get('type') == 'textpart' and 
+                # Fallback for Stephanus-pattern sections without resp attribute
+                elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
+                    current_milestone = n
+
+            if (elem.tag.endswith('div') and
+                elem.get('type') == 'textpart' and
                 elem.get('subtype') in ['section', 'chapter', 'bekker_page']):
                 
                 section_n = elem.get('n', str(line_num + 1))
@@ -3854,32 +3910,37 @@ def process_prose_with_books(root, work_id, cursor, language):
                 # Extract paragraphs from this section
                 for p in elem.iter():
                     if p.tag.endswith('p'):
-                        text = ''.join(p.itertext()).strip()
-                        if text and len(text) > 5:  # Skip very short text
+                        # Use get_text_content to properly filter editorial notes
+                        # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
+                        bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
+                        text = get_text_content(p, preserve_milestones=(is_plato or is_aristotle), bekker_page_state=bekker_page_state)
+                        if bekker_page_state:
+                            current_bekker_page = bekker_page_state[0]
+                        if text:
                             # Split long paragraphs into sentences
                             if language == 'greek':
-                                sentences = re.split(r'[.!?·;]\s+', text)
+                                # For Plato/Aristotle, preserve milestone markers when splitting
+                                if is_plato or is_aristotle:
+                                    sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
+                                else:
+                                    sentences = re.split(r'[.!?·;]\s+', text)
                             else:
-                                sentences = re.split(r'[.!?]\s+', text)
-                            
+                                if is_plato or is_aristotle:
+                                    sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
+                                else:
+                                    sentences = re.split(r'[.!?]\s+', text)
+
                             # Process each sentence as a line
                             for sentence in sentences:
                                 sentence = sentence.strip()
-                                # Filter out editorial notes
-                                if (sentence and len(sentence) > 10 and 
-                                    not re.match(r'^[A-Z]:', sentence) and
-                                    not sentence.startswith('em.') and
-                                    not sentence.startswith('add.') and
-                                    'Nauck' not in sentence and
-                                    'Mullach' not in sentence and
-                                    not sentence.startswith('id.')):
+                                if sentence:
                                     line_num += 1
                                     all_lines.append({
                                         'number': line_num,
                                         'text': sentence,
                                         'section': section_n,
                                         'xml': '',
-                                        'milestone': current_milestone if (is_plato or is_aristotle) else None
+                                        'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
                                     })
         
         if all_lines:
@@ -3980,7 +4041,11 @@ def process_prose_text(root, work_id, cursor, language):
             elif resp == 'Stephanus' and n:
                 # Stephanus uses complete references (e.g., 57a)
                 current_milestone = n
-        
+            # Fallback for Stephanus-pattern sections without resp attribute
+            # Some Perseus XML milestones inconsistently lack resp="Stephanus"
+            elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
+                current_milestone = n
+
         if (elem.tag.endswith('div') and 
             elem.get('type') == 'textpart' and 
             elem.get('subtype') in ['section', 'chapter']):
@@ -3992,28 +4057,31 @@ def process_prose_text(root, work_id, cursor, language):
             for p in elem.iter():
                 if p.tag.endswith('p'):
                     paragraphs_found = True
-                    text = ''.join(p.itertext()).strip()
-                    if text and len(text) > 5:  # Skip very short text
+                    # Use get_text_content to properly filter editorial notes
+                    # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
+                    bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
+                    text = get_text_content(p, preserve_milestones=(is_plato or is_aristotle), bekker_page_state=bekker_page_state)
+                    if bekker_page_state:
+                        current_bekker_page = bekker_page_state[0]
+                    if text:
                         # Split long paragraphs into sentences for better readability
                         # Greek uses · or ; as sentence separators, plus standard . ! ?
                         if language == 'greek':
-                            # Split on Greek punctuation
-                            sentences = re.split(r'[.!?·;]\s+', text)
+                            # For Plato/Aristotle, preserve milestone markers when splitting
+                            if is_plato or is_aristotle:
+                                sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
+                            else:
+                                sentences = re.split(r'[.!?·;]\s+', text)
                         else:
-                            # Split on Latin punctuation
-                            sentences = re.split(r'[.!?]\s+', text)
-                        
+                            if is_plato or is_aristotle:
+                                sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
+                            else:
+                                sentences = re.split(r'[.!?]\s+', text)
+
                         # Process each sentence as a line
                         for sentence in sentences:
                             sentence = sentence.strip()
-                            # Filter out editorial notes and very short sentences
-                            if (sentence and len(sentence) > 10 and 
-                                not re.match(r'^[A-Z]:', sentence) and  # Skip "W:" style notes
-                                not sentence.startswith('em.') and      # Skip "em." notes
-                                not sentence.startswith('add.') and     # Skip "add." notes
-                                'Nauck' not in sentence and             # Skip Nauck references
-                                'Mullach' not in sentence and           # Skip Mullach references
-                                not sentence.startswith('id.')):        # Skip "id." references
+                            if sentence:
                                 line_num += 1
                                 # Add milestone reference for Plato/Aristotle
                                 if (is_plato or is_aristotle) and current_milestone:
@@ -4023,9 +4091,9 @@ def process_prose_text(root, work_id, cursor, language):
                                     'text': sentence,
                                     'section': section_n,
                                     'xml': '',
-                                    'milestone': current_milestone if (is_plato or is_aristotle) else None
+                                    'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
                                 })
-            
+
             # If no paragraphs found, treat the entire section text as prose
             if not paragraphs_found:
                 # Extract text but exclude notes and milestones
@@ -4033,43 +4101,27 @@ def process_prose_text(root, work_id, cursor, language):
                 for text_elem in elem.iter():
                     if (text_elem.tag.endswith('p') or  # Include paragraph text
                         (text_elem.tag.endswith('div') and text_elem == elem)):  # Include direct div text
-                        if not (text_elem.tag.endswith('note') or 
+                        if not (text_elem.tag.endswith('note') or
                                 text_elem.tag.endswith('milestone')):
                             elem_text = text_elem.text or ''
                             if elem_text.strip():
                                 text_parts.append(elem_text.strip())
-                
+
                 text = ' '.join(text_parts)
-                text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
-                
+
                 # Also try getting just direct text content, filtering notes
-                if not text or len(text) < 20:
-                    all_text = []
-                    for child in elem:
-                        if not (child.tag.endswith('note') or 
-                                child.tag.endswith('milestone') or
-                                'anchored' in child.attrib):
-                            child_text = ''.join(child.itertext())
-                            if child_text.strip():
-                                all_text.append(child_text.strip())
-                    text = ' '.join(all_text)
-                    text = re.sub(r'\s+', ' ', text)
-                
-                if text and len(text) > 20:  # Skip very short sections
+                if not text:
+                    text = get_text_content(elem, preserve_milestones=False)
+
+                if text:
                     if language == 'greek':
                         sentences = re.split(r'[.!?·;]\s+', text)
                     else:
                         sentences = re.split(r'[.!?]\s+', text)
-                    
+
                     for sentence in sentences:
                         sentence = sentence.strip()
-                        # Filter out editorial notes and very short sentences
-                        if (sentence and len(sentence) > 20 and 
-                            not re.match(r'^[A-Z]:', sentence) and  # Skip "W:" style notes
-                            not sentence.startswith('em.') and      # Skip "em." notes
-                            not sentence.startswith('add.') and     # Skip "add." notes
-                            'Nauck' not in sentence and             # Skip Nauck references
-                            'Mullach' not in sentence):             # Skip Mullach references
+                        if sentence:
                             line_num += 1
                             # Add milestone reference for Plato/Aristotle
                             if (is_plato or is_aristotle) and current_milestone:
@@ -4151,10 +4203,10 @@ def process_new_testament_text(root, work_id, cursor, language):
             verse_num = parse_line_number(verse_n)
             if verse_num is None:
                 continue
-            
-            # Get all text from this verse
-            text = ''.join(verse_div.itertext()).strip()
-            
+
+            # Get all text from this verse, filtering out editorial notes
+            text = get_text_content(verse_div)
+
             if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
                 verses.append({
                     'number': verse_num,
@@ -4254,7 +4306,10 @@ def extract_milestone_line_ranges(cursor, work_id):
             elif resp_lower == 'stephanus' and n:
                 # Stephanus uses complete references (e.g., 57a)
                 current_milestone = n
-        
+            # Also capture Stephanus-pattern sections even without resp attribute
+            elif unit == 'section' and n and re.match(r'\d+[a-z]$', n):
+                current_milestone = n
+
         # Track actual text content
         if elem.tag.endswith('p'):
             # First check for milestones INSIDE this paragraph
@@ -4271,16 +4326,19 @@ def extract_milestone_line_ranges(cursor, work_id):
                         if child_unit in ['page', 'section'] and re.match(r'\d+[a-z]$', child_n):
                             current_bekker_page = child_n
                         elif child_unit == 'line' and current_bekker_page:
+                            # Combine page + line for full Bekker ref (e.g., 1214a5)
                             para_milestone = f"{current_bekker_page}{child_n}"
                             para_milestones.append(para_milestone)
                     elif child_resp == 'stephanus' and child_n:
                         para_milestones.append(child_n)
-            
-            # Get all text from this paragraph
-            text = ''.join(elem.itertext()).strip()
+                    # Also capture Stephanus-pattern sections even without resp attribute
+                    # Handles inconsistent Perseus XML where some milestones lack resp="Stephanus"
+                    elif child_unit == 'section' and child_n and re.match(r'\d+[a-z]$', child_n):
+                        para_milestones.append(child_n)
+
+            # Get all text from this paragraph, filtering out editorial notes
+            text = get_text_content(elem)
             if text and not text.startswith('Gregory'):
-                # Clean up text for matching
-                text = ' '.join(text.split())  # Normalize whitespace
                 
                 # Use paragraph-specific milestones if found, otherwise use current milestone
                 if para_milestones:
@@ -4408,8 +4466,8 @@ def handle_tei_format(root, work_id, cursor, language):
 
     # Process each ab element as a line
     for line_num, ab in enumerate(ab_elements, 1):
-        # Get text content, preserving inner structure
-        text = ''.join(ab.itertext()).strip()
+        # Get text content, filtering out editorial notes
+        text = get_text_content(ab)
 
         if text:  # Only process non-empty sections
             # Store the line
@@ -4466,8 +4524,8 @@ def handle_tei_format_first1k(root, work_id, cursor, language):
 
     # Process each line element
     for line_num, l_elem in enumerate(l_elements, 1):
-        # Get text content, preserving inner structure
-        text = ''.join(l_elem.itertext()).strip()
+        # Get text content, filtering out editorial notes
+        text = get_text_content(l_elem).strip()
 
         if text:  # Only process non-empty lines
             # Store the line
@@ -4559,8 +4617,8 @@ def process_text_file(xml_path, work_id, cursor, language):
                     line_n = elem.get('n')
                     line_num = parse_line_number(line_n)
                     if line_num is not None:
-                        text = ''.join(elem.itertext()).strip()
-                        
+                        text = get_text_content(elem).strip()
+
                         if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern', 'This pointer']):
                             lines.append({
                                 'number': line_num,
@@ -4646,8 +4704,8 @@ def process_text_file(xml_path, work_id, cursor, language):
                                 line_n = elem.get('n')
                                 line_num = parse_line_number(line_n)
                                 if line_num is not None:
-                                    text = ''.join(elem.itertext()).strip()
-                                    
+                                    text = get_text_content(elem).strip()
+
                                     if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
                                         lines.append({
                                             'number': sequential_line_num,
@@ -4664,8 +4722,8 @@ def process_text_file(xml_path, work_id, cursor, language):
                             line_n = elem.get('n')
                             line_num = parse_line_number(line_n)
                             if line_num is not None:
-                                text = ''.join(elem.itertext()).strip()
-                                
+                                text = get_text_content(elem).strip()
+
                                 if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
                                     lines.append({
                                         'number': line_num,
@@ -4727,14 +4785,14 @@ def process_text_file(xml_path, work_id, cursor, language):
                             line_n = elem.get('n')
                             line_num = parse_line_number(line_n)
                             if line_num is not None:
-                                text = ''.join(elem.itertext()).strip()
+                                text = get_text_content(elem).strip()
                                 if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
                                     lines.append({
                                         'number': line_num,
                                         'text': text,
                                         'xml': ET.tostring(elem, encoding='unicode')
                                     })
-                    
+
                     if lines:
                         # Sort lines by their number
                         lines.sort(key=lambda x: x['number'])
@@ -4782,8 +4840,8 @@ def process_text_file(xml_path, work_id, cursor, language):
                         line_n = elem.get('n')
                         line_num = parse_line_number(line_n)
                         if line_num is not None:
-                            text = ''.join(elem.itertext()).strip()
-                            
+                            text = get_text_content(elem).strip()
+
                             if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
                                 lines.append({
                                     'number': line_num,
@@ -4881,17 +4939,17 @@ def process_euclid_elements(root, work_id, cursor, language):
                 # This matches Scaife's approach: one numbered section = one line
                 paras = num_div.findall('.//tei:p', ns)
                 if paras:
-                    # Combine all paragraph text with space separator
+                    # Combine all paragraph text with space separator, filtering out editorial notes
                     para_texts = []
                     for para in paras:
-                        para_text = ''.join(para.itertext()).strip()
+                        para_text = get_text_content(para)
                         if para_text:
                             para_texts.append(para_text)
 
                     text = ' '.join(para_texts)
 
                     # Only process if we have non-empty text
-                    if text and len(text) > 5:
+                    if text:
                         line_num += 1
 
                         # Prepend reference label: [DEF.1], [PROP.47], etc.
@@ -4999,17 +5057,17 @@ def process_euclid_translation(root, work_id, cursor, translator):
                 # This matches the Greek text structure: one numbered section = one segment
                 paras = num_div.findall('.//tei:p', ns)
                 if paras:
-                    # Combine all paragraph text with space separator
+                    # Combine all paragraph text with space separator, filtering out editorial notes
                     para_texts = []
                     for para in paras:
-                        para_text = ''.join(para.itertext()).strip()
+                        para_text = get_text_content(para)
                         if para_text:
                             para_texts.append(para_text)
 
                     text = ' '.join(para_texts)
 
                     # Only process if we have non-empty text
-                    if text and len(text) > 5:
+                    if text:
                         line_num += 1
 
                         # Prepend reference label to English translation: [DEF.1], [PROP.47], etc.

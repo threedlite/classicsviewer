@@ -13,10 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import com.classicsviewer.app.databinding.ActivityAgeVerificationBinding
 import com.classicsviewer.app.utils.PreferencesManager
 import com.google.android.gms.tasks.Task
+import com.google.android.play.agesignals.AgeSignalsException
 import com.google.android.play.agesignals.AgeSignalsManager
 import com.google.android.play.agesignals.AgeSignalsManagerFactory
 import com.google.android.play.agesignals.AgeSignalsRequest
 import com.google.android.play.agesignals.AgeSignalsResult
+import com.google.android.play.agesignals.model.AgeSignalsErrorCode
 import com.google.android.play.agesignals.model.AgeSignalsVerificationStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -96,29 +98,60 @@ class AgeVerificationActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Age signals check failed", exception)
 
-                val errorMessage = exception.message?.lowercase() ?: ""
+                // Check error code if this is an AgeSignalsException
+                val errorCode = (exception as? AgeSignalsException)?.errorCode
+                Log.d(TAG, "Age signals error code: $errorCode")
 
-                // Check for network errors - these must block access
-                // Network error means age data needs to be fetched but can't reach servers
-                if (errorMessage.contains("network") ||
-                    errorMessage.contains("connection") ||
-                    errorMessage.contains("no available network")) {
-                    Log.e(TAG, "Network error during age verification - blocking access until connected")
-                    handleNetworkError()
-                }
-                // Check if API is not yet implemented (beta/unsupported region)
-                else if (errorMessage.contains("not yet implemented") ||
-                         errorMessage.contains("not implemented")) {
-                    Log.w(TAG, "Age Signals API not yet implemented - allowing access (API active Jan 1, 2026)")
-                    // API not ready yet in this region, allow access
-                    proceedToApp()
-                }
-                // Other errors - retry but ultimately block access
-                else {
-                    handleVerificationError(
-                        "Age verification failed: ${exception.message}",
-                        isRetryable = true
-                    )
+                when (errorCode) {
+                    // Network error - block access until connected
+                    AgeSignalsErrorCode.NETWORK_ERROR -> {
+                        Log.e(TAG, "Network error during age verification - blocking access until connected")
+                        handleNetworkError()
+                    }
+                    // Service binding failed - expected for debug builds not from Play Store
+                    AgeSignalsErrorCode.CANNOT_BIND_TO_SERVICE -> {
+                        Log.w(TAG, "Cannot bind to Play Store service - allowing access (debug build or sideloaded)")
+                        proceedToApp()
+                    }
+                    // App not installed from Play Store
+                    AgeSignalsErrorCode.APP_NOT_OWNED -> {
+                        Log.w(TAG, "App not installed from Play Store - allowing access")
+                        proceedToApp()
+                    }
+                    // API not available in this region
+                    AgeSignalsErrorCode.API_NOT_AVAILABLE -> {
+                        Log.w(TAG, "Age Signals API not available - allowing access (unsupported region)")
+                        proceedToApp()
+                    }
+                    // Play Store or Play Services issues - allow access but log
+                    AgeSignalsErrorCode.PLAY_STORE_NOT_FOUND,
+                    AgeSignalsErrorCode.PLAY_SERVICES_NOT_FOUND,
+                    AgeSignalsErrorCode.PLAY_STORE_VERSION_OUTDATED,
+                    AgeSignalsErrorCode.PLAY_SERVICES_VERSION_OUTDATED -> {
+                        Log.w(TAG, "Play Store/Services issue (code $errorCode) - allowing access")
+                        proceedToApp()
+                    }
+                    // Transient errors - retry
+                    AgeSignalsErrorCode.CLIENT_TRANSIENT_ERROR -> {
+                        handleVerificationError(
+                            "Age verification failed: ${exception.message}",
+                            isRetryable = true
+                        )
+                    }
+                    // Unknown error code or not an AgeSignalsException - check message
+                    else -> {
+                        val errorMessage = exception.message?.lowercase() ?: ""
+                        if (errorMessage.contains("not yet implemented") ||
+                            errorMessage.contains("not implemented")) {
+                            Log.w(TAG, "Age Signals API not yet implemented - allowing access (API active Jan 1, 2026)")
+                            proceedToApp()
+                        } else {
+                            handleVerificationError(
+                                "Age verification failed: ${exception.message}",
+                                isRetryable = true
+                            )
+                        }
+                    }
                 }
             }
     }
@@ -128,8 +161,8 @@ class AgeVerificationActivity : AppCompatActivity() {
         // Note: userStatus() returns an @IntDef annotated value
         // Cast to Int for comparison (despite Kotlin warning, this works at runtime)
         val statusValue = result.userStatus() as? Int ?: -1
-        val ageLower = result.ageLower()
-        val ageUpper = result.ageUpper()
+        val ageLower: Int? = result.ageLower()
+        val ageUpper: Int? = result.ageUpper()
 
         Log.d(TAG, "Age signals result - userStatus: $statusValue, ageLower: $ageLower, ageUpper: $ageUpper")
 
@@ -140,11 +173,11 @@ class AgeVerificationActivity : AppCompatActivity() {
             statusValue == 0 -> true  // VERIFIED
 
             // For supervised accounts or other statuses, check age range
-            // ageLower returns primitive int, -1 indicates no value
-            ageLower >= 18 -> true
+            // ageLower/ageUpper return null when age data is not available
+            ageLower != null && ageLower >= 18 -> true
 
-            // If age signals are not available (both are -1), we might be in an unsupported region
-            ageLower == -1 && ageUpper == -1 -> {
+            // If age signals are not available (both null), we might be in an unsupported region
+            ageLower == null && ageUpper == null -> {
                 Log.w(TAG, "Age signals returned no age range - might be unsupported region")
                 // In unsupported regions, we allow access (API only active in specific jurisdictions)
                 true

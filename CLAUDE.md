@@ -259,7 +259,13 @@ cd build_modules/generate_interlinear
 # For all Greek works (Perseus + First1K):
 ./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../perseus_texts_extended.db 8
 
+# For all Latin works:
+./run_latin_interlinear_no_sleep.sh INTERLINEAR_ALL_LATIN_WITH_IDS.csv ../../perseus_texts_full.db 8
 ```
+
+### Interlinear Build Times (8 workers):
+- **Greek (1,855 works, 3.05M lines)**: ~12.9 hours
+- **Latin (230 works)**: ~15 seconds
 
 Output location: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
 
@@ -499,7 +505,7 @@ cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1
 ### Database Build Process
 - **Sample database creation**: ~2-3 minutes (subset of authors from SAMPLE_AUTHORS.csv)
 - **Full database creation**: ~4-5 minutes (100 Greek authors and 95 Latin authors)
-- **Extended database creation**: ~4.5 minutes (Perseus + 991 First1K works)
+- **Extended database creation**: ~24 minutes (Perseus + First1K + interlinear + all lexicons)
 - Creates comprehensive translation lookup table for all texts
 - **Schema validation**: Room expects exact match between SQLite and entity definitions
 
@@ -509,7 +515,7 @@ The extended mode includes non-duplicate works from the First1KGreek collection:
 - **391 total authors** (196 more than full mode)
 - **1,849 total works** (nearly double the full mode)
 - **2.8 million text lines**, **43.69 million words**
-- **Database size**: 5.5GB uncompressed, 1.3GB compressed ZIP
+- **Database size**: 16.5GB uncompressed, 3.3GB compressed ZIP
 - **Only 7% have English translations** - primarily for Greek students
 - Works include: Byzantine texts, patristic writings, commentaries, scholiasts
 - **Source tracking**: Database quality report shows `[Perseus]` or `[First1KGreek]` at work level
