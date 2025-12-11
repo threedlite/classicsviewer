@@ -675,20 +675,10 @@ class DatabaseSchemaValidator {
 
 extension DatabaseExtractor {
     /// Extract database from ZIP to specific path (for validation purposes)
+    /// Uses memory-efficient streaming extraction via ZIPHandler
     func extractDatabaseFromZip(at zipURL: URL, to destinationPath: String) async throws {
-        _ = FileManager.default
-        
-        // Read ZIP file
-        guard let zipData = try? Data(contentsOf: zipURL) else {
-            throw ExtractionError.resourceNotFound
-        }
-        
-        // Extract using the same logic as main extraction
-        guard let decompressedData = try? (zipData as NSData).decompressed(using: .zlib) as Data else {
-            throw ExtractionError.extractionFailed("Failed to decompress ZIP data")
-        }
-        
-        // Write to destination
-        try decompressedData.write(to: URL(fileURLWithPath: destinationPath))
+        // Use the memory-efficient ZIPHandler instead of loading everything into memory
+        // This is critical for large databases (100MB+ compressed, 1GB+ uncompressed)
+        try ZIPHandler.extractDatabase(from: zipURL, to: URL(fileURLWithPath: destinationPath), progress: nil)
     }
 }

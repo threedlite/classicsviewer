@@ -331,6 +331,7 @@ actor DatabaseManagerAsync {
     }
 
     /// Extract database from bundle
+    /// Uses memory-efficient streaming extraction via ZIPHandler
     func extractDatabase(progress: Progress? = nil) async throws {
         print("DatabaseManagerAsync: Starting database extraction...")
 
@@ -348,20 +349,15 @@ actor DatabaseManagerAsync {
             try FileManager.default.removeItem(at: databaseURL)
         }
 
-        // Extract the database
+        // Extract using memory-efficient streaming via ZIPHandler
+        // This is critical for large databases (100MB+ compressed, 1GB+ uncompressed)
         progress?.totalUnitCount = 100
         progress?.completedUnitCount = 10
 
         do {
-            let zipData = try Data(contentsOf: bundleURL)
-            progress?.completedUnitCount = 50
-
-            // Decompress the database
-            let decompressedData = try (zipData as NSData).decompressed(using: .zlib) as Data
-            progress?.completedUnitCount = 90
-
-            // Write to documents directory
-            try decompressedData.write(to: databaseURL)
+            try ZIPHandler.extractDatabase(from: bundleURL, to: databaseURL) { extractProgress in
+                progress?.completedUnitCount = Int64(10 + extractProgress * 90)
+            }
             progress?.completedUnitCount = 100
 
             print("DatabaseManagerAsync: Database extracted successfully to \(databaseURL.path)")

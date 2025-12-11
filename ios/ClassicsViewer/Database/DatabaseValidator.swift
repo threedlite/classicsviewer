@@ -949,14 +949,17 @@ class DatabaseValidator {
             logger.error("🔍 Cannot get file attributes: \(error)")
         }
         
-        // Try to read first 16 bytes directly
-        logger.info("🔍 Attempting direct file read...")
+        // Try to read first 16 bytes directly using FileHandle (memory-efficient)
+        // CRITICAL: Do NOT use Data(contentsOf:) as it loads the entire file into memory
+        logger.info("🔍 Attempting direct file read (first 16 bytes only)...")
         do {
-            let data = try Data(contentsOf: url, options: [.mappedIfSafe])
-            let prefixData = data.prefix(16)
-            logger.info("🔍 Successfully read \(data.count) bytes from file")
+            let fileHandle = try FileHandle(forReadingFrom: url)
+            defer { try? fileHandle.close() }
+
+            let prefixData = fileHandle.readData(ofLength: 16)
+            logger.info("🔍 Successfully read first 16 bytes from file")
             logger.info("🔍 First 16 bytes: \(prefixData.map { String(format: "%02x", $0) }.joined(separator: " "))")
-            
+
             // Check for SQLite header
             let sqliteHeader = "SQLite format 3\0".data(using: .ascii)!
             if prefixData.starts(with: sqliteHeader) {
