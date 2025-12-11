@@ -18,6 +18,13 @@ struct ReaderView: View {
     @State private var wordsWithMorphologyOnly: Set<String> = []
     @State private var definitionCheckProgress: Float = 0.0
     @State private var definitionCheckCancelled = false
+    // Find in text state
+    @State private var showingFindInText = false
+    @State private var findQuery: String = ""
+    @State private var lastFindQuery: String = ""
+    @State private var findResults: [FindResult] = []
+    @State private var currentFindIndex: Int = -1
+    @State private var isSearching = false
     @EnvironmentObject var searchContext: SearchNavigationContext
     @Environment(\.colorScheme) private var colorScheme
 
@@ -80,7 +87,15 @@ struct ReaderView: View {
                 }
             }
 
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                // Find in text button
+                Button(action: {
+                    showingFindInText = true
+                }) {
+                    Image(systemName: "magnifyingglass")
+                }
+
+                // Check definitions button
                 Button(action: {
                     if checkingDefinitions {
                         // If already checking, cancel the operation
@@ -166,6 +181,27 @@ struct ReaderView: View {
                     viewModel.refreshBookmarks()
                 }
             )
+        }
+        .sheet(isPresented: $showingFindInText) {
+            FindInTextSheet(
+                query: $findQuery,
+                lastQuery: lastFindQuery,
+                resultsCount: findResults.count,
+                currentIndex: currentFindIndex,
+                isSearching: isSearching,
+                onFind: { query in
+                    Task {
+                        await performFindInText(query: query)
+                    }
+                },
+                onFindNext: {
+                    navigateToNextFindResult()
+                },
+                onFindPrevious: {
+                    navigateToPreviousFindResult()
+                }
+            )
+            .presentationDetents([.height(280)])
         }
         .alert("Check Definitions", isPresented: $showingCheckDefinitions) {
             Button("Cancel", role: .cancel) { }
@@ -301,7 +337,7 @@ struct ReaderView: View {
                     wordsWithoutDefinitions: wordsWithoutDefinitions,
                     wordsWithMorphologyOnly: wordsWithMorphologyOnly,
                     highlightedWords: searchContext.highlightedWords,
-                    isHighlightedLine: isHighlightedLine(line),
+                    isHighlightedLine: isHighlightedLine(line) || isFindHighlightedLine(line),
                     onWordTapped: { word in
                         print("DEBUG: greekTextView onWordTapped called with word: \(word.word)")
                         selectedWord = word
@@ -662,7 +698,224 @@ extension ReaderView {
         print("- Words without definitions: \(wordsWithoutDefinitions.count)")
         print("- Words with morphology only: \(wordsWithMorphologyOnly.count)")
     }
-    
+
+    // MARK: - Find in Text Functions
+
+    private func performFindInText(query: String) async {
+        guard !query.isEmpty else { return }
+
+        await MainActor.run {
+            isSearching = true
+            findResults = []
+            currentFindIndex = -1
+            lastFindQuery = query
+        }
+
+        // Fetch all lines from the book
+        let lineDAO = LineDAO()
+        do {
+            let endLine = viewModel.book.lineCount ?? viewModel.book.endLine ?? 10000
+            let allLines = try await lineDAO.getLines(
+                bookId: viewModel.book.id,
+                startLine: 1,
+                endLine: endLine
+            )
+
+            var results: [FindResult] = []
+            let lowercaseQuery = query.lowercased()
+
+            for line in allLines {
+                let lowercaseText = line.lineText.lowercased()
+                var searchStart = lowercaseText.startIndex
+
+                // Find all occurrences in this line
+                while let range = lowercaseText.range(of: lowercaseQuery, range: searchStart..<lowercaseText.endIndex) {
+                    results.append(FindResult(
+                        lineNumber: line.lineNumber,
+                        sequenceNumber: line.sequenceNumber,
+                        lineText: line.lineText,
+                        matchStartIndex: lowercaseText.distance(from: lowercaseText.startIndex, to: range.lowerBound),
+                        matchEndIndex: lowercaseText.distance(from: lowercaseText.startIndex, to: range.upperBound)
+                    ))
+                    searchStart = range.upperBound
+                }
+            }
+
+            await MainActor.run {
+                findResults = results
+                isSearching = false
+                if !results.isEmpty {
+                    currentFindIndex = 0
+                    navigateToFindResult(at: 0)
+                }
+            }
+        } catch {
+            print("Error searching text: \(error)")
+            await MainActor.run {
+                isSearching = false
+            }
+        }
+    }
+
+    private func navigateToNextFindResult() {
+        guard !findResults.isEmpty else { return }
+        currentFindIndex = (currentFindIndex + 1) % findResults.count
+        navigateToFindResult(at: currentFindIndex)
+    }
+
+    private func navigateToPreviousFindResult() {
+        guard !findResults.isEmpty else { return }
+        currentFindIndex = currentFindIndex <= 0 ? findResults.count - 1 : currentFindIndex - 1
+        navigateToFindResult(at: currentFindIndex)
+    }
+
+    private func navigateToFindResult(at index: Int) {
+        guard index >= 0 && index < findResults.count else { return }
+        let result = findResults[index]
+
+        // Calculate target page
+        let targetPage = (result.lineNumber - 1) / viewModel.linesPerPage.rawValue + 1
+
+        if viewModel.currentPage != targetPage {
+            viewModel.goToPage(targetPage)
+        }
+
+        // Set target line for scrolling
+        viewModel.targetLineNumber = result.lineNumber
+    }
+
+    private func isFindHighlightedLine(_ line: TextLine) -> Bool {
+        guard currentFindIndex >= 0 && currentFindIndex < findResults.count else { return false }
+        return line.lineNumber == findResults[currentFindIndex].lineNumber
+    }
+}
+
+// MARK: - Find Result Model
+
+struct FindResult: Identifiable {
+    let id = UUID()
+    let lineNumber: Int
+    let sequenceNumber: Int
+    let lineText: String
+    let matchStartIndex: Int
+    let matchEndIndex: Int
+}
+
+// MARK: - Find In Text Sheet
+
+struct FindInTextSheet: View {
+    @Binding var query: String
+    let lastQuery: String
+    let resultsCount: Int
+    let currentIndex: Int
+    let isSearching: Bool
+    let onFind: (String) -> Void
+    let onFindNext: () -> Void
+    let onFindPrevious: () -> Void
+
+    @Environment(\.dismiss) private var dismiss
+    @FocusState private var isQueryFocused: Bool
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 20) {
+                // Search field
+                HStack {
+                    TextField("Enter text to find", text: $query)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .focused($isQueryFocused)
+                        .onSubmit {
+                            if !query.isEmpty {
+                                onFind(query)
+                            }
+                        }
+
+                    if !query.isEmpty {
+                        Button(action: { query = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+
+                // Results info
+                if isSearching {
+                    HStack {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                        Text("Searching...")
+                            .foregroundColor(.secondary)
+                    }
+                } else if resultsCount > 0 {
+                    Text("Result \(currentIndex + 1) of \(resultsCount)")
+                        .foregroundColor(.secondary)
+                } else if !lastQuery.isEmpty {
+                    Text("No matches found for '\(lastQuery)'")
+                        .foregroundColor(.secondary)
+                }
+
+                // Buttons
+                HStack(spacing: 16) {
+                    // Previous result
+                    Button(action: onFindPrevious) {
+                        Image(systemName: "chevron.up")
+                            .font(.title2)
+                    }
+                    .disabled(resultsCount == 0 || isSearching)
+                    .frame(width: 44, height: 44)
+                    .background(Color(.systemGray5))
+                    .cornerRadius(8)
+
+                    // Find button
+                    Button(action: {
+                        if !query.isEmpty {
+                            onFind(query)
+                        }
+                    }) {
+                        Text("Find")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 44)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(query.isEmpty || isSearching)
+
+                    // Next result
+                    Button(action: onFindNext) {
+                        Image(systemName: "chevron.down")
+                            .font(.title2)
+                    }
+                    .disabled(resultsCount == 0 || isSearching)
+                    .frame(width: 44, height: 44)
+                    .background(Color(.systemGray5))
+                    .cornerRadius(8)
+                }
+                .padding(.horizontal)
+
+                Spacer()
+            }
+            .padding(.top)
+            .navigationTitle("Find in Text")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
+            .onAppear {
+                // Pre-fill with last query if exists
+                if query.isEmpty && !lastQuery.isEmpty {
+                    query = lastQuery
+                }
+                isQueryFocused = true
+            }
+        }
+    }
 }
 
 // MARK: - Note Edit Dialog
