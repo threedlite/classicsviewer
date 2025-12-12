@@ -72,24 +72,39 @@ cd "$SCRIPT_DIR"
 
 log_info "Working directory: $(pwd)"
 
-# Copy database from data-prep if needed
-DATABASE_SOURCE="../data-prep/perseus_texts_sample.db.zip"
+# iOS uses a specific database built from IOS_SAMPLE_AUTHORS.csv
+DATABASE_SOURCE="../data-prep/perseus_texts_ios.db.zip"
 DATABASE_DEST="ClassicsViewer/Resources/perseus_texts.db.zip"
+IOS_AUTHORS_CSV="../data-prep/IOS_SAMPLE_AUTHORS.csv"
 
-if [ ! -f "$DATABASE_DEST" ]; then
+# Always rebuild database if IOS_SAMPLE_AUTHORS.csv is newer than the zip
+if [ -f "$IOS_AUTHORS_CSV" ]; then
+    if [ ! -f "$DATABASE_SOURCE" ] || [ "$IOS_AUTHORS_CSV" -nt "$DATABASE_SOURCE" ]; then
+        log_info "Building iOS database from IOS_SAMPLE_AUTHORS.csv..."
+        log_warning "This will take 2-3 minutes..."
+        (cd ../data-prep && python3 create_perseus_database.py sample IOS_SAMPLE_AUTHORS.csv ios)
+        if [ $? -ne 0 ]; then
+            log_error "Failed to build iOS database"
+            exit 1
+        fi
+        log_success "iOS database built successfully"
+    fi
+fi
+
+if [ ! -f "$DATABASE_DEST" ] || [ "$DATABASE_SOURCE" -nt "$DATABASE_DEST" ]; then
     if [ -f "$DATABASE_SOURCE" ]; then
-        log_info "Copying database from data-prep..."
+        log_info "Copying iOS database from data-prep..."
         mkdir -p "ClassicsViewer/Resources"
         cp "$DATABASE_SOURCE" "$DATABASE_DEST"
         log_success "Database copied successfully"
     else
-        log_error "Database source not found at: $DATABASE_SOURCE"
-        log_error "Please build the sample database first:"
-        log_error "  cd ../data-prep && python3 create_perseus_database.py sample"
+        log_error "iOS database source not found at: $DATABASE_SOURCE"
+        log_error "Please build the iOS database first:"
+        log_error "  cd ../data-prep && python3 create_perseus_database.py sample IOS_SAMPLE_AUTHORS.csv ios"
         exit 1
     fi
 else
-    log_info "Database already exists at $DATABASE_DEST"
+    log_info "iOS database already up-to-date at $DATABASE_DEST"
 fi
 
 # Copy audio file if needed

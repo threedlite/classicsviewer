@@ -5891,7 +5891,7 @@ def insert_build_metadata(cursor, mode='full'):
 
     print(f"✓ Build metadata inserted: {build_timestamp} (mode: {mode})")
 
-def create_database(mode='full', custom_csv_path=None):
+def create_database(mode='full', custom_csv_path=None, output_name=None):
     """Create database from Perseus data
 
     Args:
@@ -5899,6 +5899,7 @@ def create_database(mode='full', custom_csv_path=None):
               'extended' for full Perseus + non-duplicate First1KGreek works,
         custom_csv_path: Optional path to custom CSV file (only used with mode='sample')
               'first1ktest' for First1KGreek texts only (skips Perseus and dictionaries)
+        output_name: Optional custom output name suffix (e.g., 'ios' -> perseus_texts_ios.db)
     """
     import time
 
@@ -5907,7 +5908,10 @@ def create_database(mode='full', custom_csv_path=None):
 
     # Paths
     script_dir = Path(__file__).parent
-    if mode == 'extended':
+    if output_name:
+        # Custom output name (e.g., 'ios' -> 'perseus_texts_ios.db')
+        db_filename = f"perseus_texts_{output_name}.db"
+    elif mode == 'extended':
         db_filename = "perseus_texts_extended.db"
     elif mode == 'full':
         db_filename = "perseus_texts_full.db"
@@ -7366,38 +7370,58 @@ def merge_external_databases(db_filename, mode='sample'):
     import_lexicons_for_languages(db_filename, merged_languages, lexicon_paths)
 
 
-def compress_and_copy_database(db_filename, is_sample=False, suffix=""):
+def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_name=None):
     """Compress database and copy to asset pack location
 
     Args:
         db_filename: Name of the database file to compress
         is_sample: If True, this is the sample database that goes to asset pack
         suffix: Optional suffix to add to ZIP filename (e.g., "_interlineated")
+        output_name: If provided (e.g., "ios"), skip Android asset copy and only create named ZIP
     """
     import shutil
     import os
     import zipfile
-    
-    # For debug builds
-    debug_asset_dir = "../app/src/debug/assets"
-    os.makedirs(debug_asset_dir, exist_ok=True)
-    
-    # For release builds (not used anymore since we use Play Asset Delivery)
-    main_asset_dir = "../app/src/main/assets"
-    os.makedirs(main_asset_dir, exist_ok=True)
-    
-    # For Play Asset Delivery module
-    perseus_database_dir = "../perseus_database/src/main/assets"
-    os.makedirs(perseus_database_dir, exist_ok=True)
-    
+
     if os.path.exists(db_filename):
+        # For custom output names (e.g., iOS), only create the named ZIP file
+        # Don't copy to Android asset directories
+        if output_name:
+            base_name = db_filename.replace('.db', '')
+            zip_path = f"{base_name}{suffix}.db.zip"
+            print(f"\nCompressing {output_name} database to {zip_path}...")
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+                # Archive name inside zip must be perseus_texts.db for app compatibility
+                zf.write(db_filename, "perseus_texts.db")
+
+            # Get file sizes
+            original_size = os.path.getsize(db_filename) / (1024 * 1024)
+            compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
+
+            print(f"Database compressed: {zip_path}")
+            print(f"Original size: {original_size:.1f}MB")
+            print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
+            return
+
+        # For debug builds
+        debug_asset_dir = "../app/src/debug/assets"
+        os.makedirs(debug_asset_dir, exist_ok=True)
+
+        # For release builds (not used anymore since we use Play Asset Delivery)
+        main_asset_dir = "../app/src/main/assets"
+        os.makedirs(main_asset_dir, exist_ok=True)
+
+        # For Play Asset Delivery module
+        perseus_database_dir = "../perseus_database/src/main/assets"
+        os.makedirs(perseus_database_dir, exist_ok=True)
+
         # For sample database, copy to the standard location expected by the app
         if is_sample:
             # First, rename the database to the standard name
             temp_db_path = "perseus_texts.db"
             if db_filename != temp_db_path:
                 shutil.copy(db_filename, temp_db_path)
-            
+
             # Create compressed version with the standard name expected by app
             # Copy to debug, main assets, and perseus_database module
             for asset_dir in [debug_asset_dir, main_asset_dir, perseus_database_dir]:
@@ -7406,19 +7430,19 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix=""):
                 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
                     # Archive name inside zip must be perseus_texts.db for app compatibility
                     zf.write(temp_db_path, "perseus_texts.db")
-                
+
                 # Get file sizes
                 original_size = os.path.getsize(temp_db_path) / (1024 * 1024)
                 compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
-                
+
                 print(f"Database compressed: {zip_path}")
                 print(f"Original size: {original_size:.1f}MB")
                 print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
-            
+
             # Clean up temporary file if we created one
             if db_filename != temp_db_path and os.path.exists(temp_db_path):
                 os.remove(temp_db_path)
-            
+
             # Also create a named ZIP file for the sample database (like we do for full)
             # Use suffix if provided (e.g., "_interlineated")
             base_name = db_filename.replace('.db', '')
@@ -7426,11 +7450,11 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix=""):
             print(f"\nCompressing sample database to {sample_zip_path}...")
             with zipfile.ZipFile(sample_zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
                 zf.write(db_filename, "perseus_texts.db")
-            
+
             # Get file sizes
             original_size = os.path.getsize(db_filename) / (1024 * 1024)
             compressed_size = os.path.getsize(sample_zip_path) / (1024 * 1024)
-            
+
             print(f"Sample database compressed: {sample_zip_path}")
             print(f"Original size: {original_size:.1f}MB")
             print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
@@ -7495,15 +7519,18 @@ if __name__ == "__main__":
                 args.append(arg)
             i += 1
 
-        # Get build mode and custom CSV path
+        # Get build mode, custom CSV path, and output name
         if len(args) > 0:
             build_mode = args[0]
         if len(args) > 1:
             custom_csv_path = args[1]
+        output_name = None
+        if len(args) > 2:
+            output_name = args[2]  # e.g., "ios" -> perseus_texts_ios.db
 
         if build_mode not in ["sample", "full", "extended", "first1ktest", "both"]:
             print(f"Invalid build mode: {build_mode}")
-            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
+            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
             print("  extended: Full Perseus + non-duplicate First1KGreek works")
@@ -7511,6 +7538,9 @@ if __name__ == "__main__":
             print("  both: Build both sample and full databases")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
             print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
+            print("\nOptional output_name: Custom output database name suffix (only for sample mode)")
+            print("  Example: python create_perseus_database.py sample IOS_SAMPLE_AUTHORS.csv ios")
+            print("  Creates: perseus_texts_ios.db instead of perseus_texts_sample.db")
             print("\nOptional --skip-oga flag: Skip OGA lemma extraction")
             print("  Example: python create_perseus_database.py full --skip-oga")
             print("\nOptional --interlineate flag: Import interlinear for ALL Greek works (uses pregenerated files)")
@@ -7543,26 +7573,32 @@ if __name__ == "__main__":
 
         # Build sample database
         if build_mode in ["sample", "both"]:
+            # Determine database filename
+            if output_name:
+                sample_db_filename = f"perseus_texts_{output_name}.db"
+            else:
+                sample_db_filename = "perseus_texts_sample.db"
+
             print("\n" + "="*60)
-            print("BUILDING SAMPLE DATABASE")
+            print(f"BUILDING DATABASE: {sample_db_filename}")
             if custom_csv_path:
                 print(f"Using custom author list: {custom_csv_path}")
             print("="*60)
             start_time = time.time()
-            create_database(mode='sample', custom_csv_path=custom_csv_path)
+            create_database(mode='sample', custom_csv_path=custom_csv_path, output_name=output_name)
             print(f"\nSample database build time: {(time.time() - start_time)/60:.1f} minutes")
 
             # Merge external databases
-            merge_external_databases("perseus_texts_sample.db", mode='sample')
+            merge_external_databases(sample_db_filename, mode='sample')
 
             # Insert OGA lemmas (unless --skip-oga flag set)
             if not skip_oga:
-                insert_oga_lemmas("perseus_texts_sample.db")
+                insert_oga_lemmas(sample_db_filename)
             else:
                 print("\n⚠ Skipping OGA lemma extraction (--skip-oga flag set)")
 
             # Checkpoint WAL after merges to ensure all changes are in main database file
-            checkpoint_conn = sqlite3.connect("perseus_texts_sample.db")
+            checkpoint_conn = sqlite3.connect(sample_db_filename)
             checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
             checkpoint_conn.close()
             print("✓ Database WAL checkpointed after merges")
@@ -7581,13 +7617,33 @@ if __name__ == "__main__":
 
             print(f"Using pregenerated XML files from: {interlinear_output_dir}")
 
-            # Sample mode: Iliad, Odyssey (Greek) + Aeneid (Latin)
-            work_ids = [
-                'tlg0012.tlg001',  # Homer - Iliad
-                'tlg0012.tlg002',  # Homer - Odyssey
-                'phi0690.phi003',  # Virgil - Aeneid
-            ]
-            print(f"Sample mode: Importing Iliad, Odyssey, and Aeneid")
+            # iOS builds: import interlinear for ALL works that have files available
+            # Regular sample builds: only Iliad, Odyssey, Aeneid
+            if output_name == 'ios':
+                # Get all work IDs from the database and import interlinear for all that have files
+                conn = sqlite3.connect(sample_db_filename)
+                cursor = conn.execute("SELECT id FROM works")
+                all_work_ids = [row[0] for row in cursor.fetchall()]
+                conn.close()
+
+                # Filter to works that have interlinear files available
+                work_ids = []
+                for work_id in all_work_ids:
+                    # Check for both regular and OGL versions
+                    xml_file = interlinear_output_dir / f'{work_id}.perseus-eng99.xml'
+                    xml_file_ogl = interlinear_output_dir / f'{work_id}_OGL.perseus-eng99.xml'
+                    if xml_file.exists() or xml_file_ogl.exists():
+                        work_ids.append(work_id)
+
+                print(f"iOS mode: Found {len(work_ids)} works with interlinear files available (out of {len(all_work_ids)} total works)")
+            else:
+                # Sample mode: Iliad, Odyssey (Greek) + Aeneid (Latin)
+                work_ids = [
+                    'tlg0012.tlg001',  # Homer - Iliad
+                    'tlg0012.tlg002',  # Homer - Odyssey
+                    'phi0690.phi003',  # Virgil - Aeneid
+                ]
+                print(f"Sample mode: Importing Iliad, Odyssey, and Aeneid")
 
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")
@@ -7596,22 +7652,22 @@ if __name__ == "__main__":
             print("\n" + "="*60)
             print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
             print("="*60)
-            import_interlinear_translations("perseus_texts_sample.db", work_ids=work_ids, interlinear_dir=interlinear_output_dir, mode='full')
+            import_interlinear_translations(sample_db_filename, work_ids=work_ids, interlinear_dir=interlinear_output_dir, mode='full')
 
             # Checkpoint WAL after importing translations
-            checkpoint_conn = sqlite3.connect("perseus_texts_sample.db")
+            checkpoint_conn = sqlite3.connect(sample_db_filename)
             checkpoint_conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
             checkpoint_conn.close()
             print("✓ Database WAL checkpointed after importing translations")
 
             # Compress and copy sample database to asset pack
-            compress_and_copy_database("perseus_texts_sample.db", is_sample=True)
+            compress_and_copy_database(sample_db_filename, is_sample=True, output_name=output_name)
 
             # Generate quality report after all merges and compression
             print("\n" + "="*60)
             print("GENERATING QUALITY REPORT")
             print("="*60)
-            generate_quality_report_final("perseus_texts_sample.db", mode='sample', build_start_time=start_time)
+            generate_quality_report_final(sample_db_filename, mode='sample', build_start_time=start_time)
 
         # Build full database
         if build_mode in ["full", "both"]:
