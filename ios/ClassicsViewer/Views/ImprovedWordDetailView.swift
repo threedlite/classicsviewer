@@ -18,7 +18,9 @@ struct ImprovedWordDetailView: View {
     var body: some View {
         mainContent
             .onAppear(perform: onAppearAction)
-            .onChange(of: selectedTab, perform: onTabChange)
+            .onChange(of: selectedTab) {
+                onTabChange(selectedTab)
+            }
             .sheet(item: $navigateToWord, content: createWordDetailSheet)
             .alert("Search", isPresented: $showingSearchDialog, actions: alertActions)
     }

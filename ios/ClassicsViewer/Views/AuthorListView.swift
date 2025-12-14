@@ -61,8 +61,8 @@ struct AuthorListView: View {
                     .foregroundColor(.secondary)
                 TextField("Search authors...", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .onChange(of: searchText) { newValue in
-                        viewModel.searchText = newValue
+                    .onChange(of: searchText) {
+                        viewModel.searchText = searchText
                     }
                 if !searchText.isEmpty {
                     Button(action: {
@@ -80,8 +80,8 @@ struct AuthorListView: View {
             Toggle("Show only with translations", isOn: $showOnlyTranslated)
                 .padding(.horizontal)
                 .padding(.bottom, 8)
-                .onChange(of: showOnlyTranslated) { newValue in
-                    viewModel.showOnlyTranslated = newValue
+                .onChange(of: showOnlyTranslated) {
+                    viewModel.showOnlyTranslated = showOnlyTranslated
                 }
 
             if viewModel.filteredAuthors.count < viewModel.authors.count {

@@ -267,12 +267,12 @@ struct AddEditLanguageDialog: View {
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                             .disabled(existingLanguage != nil)  // Don't allow changing ID when editing
-                            .onChange(of: languageId) { newValue in
+                            .onChange(of: languageId) {
                                 // Auto-populate display name if it's empty (matching Android)
                                 if displayName.isEmpty || displayName == convertLanguageIdToDisplayName(oldLanguageId) {
-                                    displayName = convertLanguageIdToDisplayName(newValue)
+                                    displayName = convertLanguageIdToDisplayName(languageId)
                                 }
-                                oldLanguageId = newValue
+                                oldLanguageId = languageId
                             }
                     }
 

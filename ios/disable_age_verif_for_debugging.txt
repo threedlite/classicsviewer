@@ -1,0 +1,24 @@
+diff --git a/ios/ClassicsViewer/Views/AgeVerificationView.swift b/ios/ClassicsViewer/Views/AgeVerificationView.swift
+index b5628b5..5600b3f 100644
+--- a/ios/ClassicsViewer/Views/AgeVerificationView.swift
++++ b/ios/ClassicsViewer/Views/AgeVerificationView.swift
+@@ -9,6 +9,12 @@ struct AgeVerificationView: View {
+     @EnvironmentObject var appState: AppState
+ 
+     var body: some View {
++        #if targetEnvironment(simulator)
++        // TEMPORARY: Skip age verification on simulator for testing
++        Color.clear.onAppear {
++            appState.isAgeVerified = true
++        }
++        #else
+         // Runtime check for Mac - compile-time checks don't work for "Designed for iPad" apps
+         if ProcessInfo.processInfo.isiOSAppOnMac {
+             // Mac: Cannot verify age, block access
+@@ -20,6 +26,7 @@ struct AgeVerificationView: View {
+             AgeVerificationView_iOS()
+                 .environmentObject(appState)
+         }
++        #endif
+     }
+ }

@@ -63,7 +63,7 @@ struct BookmarksView: View {
         .onAppear {
             viewModel.loadBookmarks(filter: bookmarkFilter)
         }
-        .onChange(of: selectedTab) { _ in
+        .onChange(of: selectedTab) {
             viewModel.loadBookmarks(filter: bookmarkFilter)
         }
         .fileImporter(

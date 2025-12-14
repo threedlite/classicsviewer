@@ -1,10 +1,31 @@
 import SwiftUI
 import DeclaredAgeRange
 
-// Age verification view using Apple's DeclaredAgeRange API (iOS 26+)
-// Blocks access unless user is verified as 18+
+// Age verification using iOS 26+ DeclaredAgeRange API
+// App requires iOS 26 minimum, so no fallback needed
+// Mac is not supported - age verification not available on macOS
 
 struct AgeVerificationView: View {
+    @EnvironmentObject var appState: AppState
+
+    var body: some View {
+        // Runtime check for Mac - compile-time checks don't work for "Designed for iPad" apps
+        if ProcessInfo.processInfo.isiOSAppOnMac {
+            // Mac: Cannot verify age, block access
+            AgeVerificationBlockedView(
+                message: "This app is not available on Mac.\n\nAge verification is required but not supported on macOS.\n\nPlease use this app on an iPhone or iPad running iOS 26 or later."
+            )
+        } else {
+            // iOS device: Use DeclaredAgeRange API
+            AgeVerificationView_iOS()
+                .environmentObject(appState)
+        }
+    }
+}
+
+// MARK: - iOS Implementation
+
+struct AgeVerificationView_iOS: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.requestAgeRange) private var requestAgeRange
 
@@ -105,6 +126,11 @@ struct AgeVerificationView: View {
                     NSLog("AgeVerification: User is under 18 (\(ageInfo)) - blocking access")
                     showAgeRestriction(message: "This app is restricted to users 18 years of age and older.\n\nYou do not meet the age requirement to use this application.")
                 }
+
+            @unknown default:
+                // Unknown response type - block access for safety
+                NSLog("AgeVerification: Unknown response type - blocking access")
+                showAgeRestriction(message: "Age verification returned an unexpected response.\n\nFor safety, access is denied. Please update the app and try again.")
             }
         } catch {
             NSLog("AgeVerification: Error checking age: \(error.localizedDescription)")
@@ -146,6 +172,39 @@ struct AgeVerificationView: View {
     private func proceedToApp() {
         isVerifying = false
         appState.isAgeVerified = true
+    }
+}
+
+// MARK: - Blocked View (for Mac or unsupported platforms)
+
+struct AgeVerificationBlockedView: View {
+    let message: String
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                Spacer()
+
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 60))
+                    .foregroundColor(.yellow)
+
+                Text("Age Verification")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+
+                Text(message)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                    .padding()
+
+                Spacer()
+            }
+            .padding()
+        }
     }
 }
 

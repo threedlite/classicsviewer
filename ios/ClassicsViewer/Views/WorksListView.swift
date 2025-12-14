@@ -194,8 +194,8 @@ struct WorksListView: View {
                     .foregroundColor(.secondary)
                 TextField("Search works...", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .onChange(of: searchText) { newValue in
-                        viewModel.searchText = newValue
+                    .onChange(of: searchText) {
+                        viewModel.searchText = searchText
                     }
                 if !searchText.isEmpty {
                     Button(action: {
@@ -213,8 +213,8 @@ struct WorksListView: View {
             Toggle("Show only with translations", isOn: $showOnlyTranslated)
                 .padding(.horizontal)
                 .padding(.bottom, 8)
-                .onChange(of: showOnlyTranslated) { newValue in
-                    viewModel.showOnlyTranslated = newValue
+                .onChange(of: showOnlyTranslated) {
+                    viewModel.showOnlyTranslated = showOnlyTranslated
                 }
 
             if viewModel.filteredWorks.count < viewModel.worksWithTranslations.count {

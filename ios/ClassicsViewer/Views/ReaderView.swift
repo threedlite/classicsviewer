@@ -118,14 +118,14 @@ struct ReaderView: View {
             // Handle search navigation if coming from search
             handleSearchNavigation()
         }
-        .onChange(of: searchContext.currentResultIndex) { _ in
+        .onChange(of: searchContext.currentResultIndex) {
             handleSearchNavigation()
         }
         .onReceive(NotificationCenter.default.publisher(for: .navigateToReader)) { notification in
             handleReaderNavigation(notification)
         }
-        .onChange(of: shouldNavigate) { navigate in
-            if navigate && targetLineNumber > 0 {
+        .onChange(of: shouldNavigate) {
+            if shouldNavigate && targetLineNumber > 0 {
                 print("DEBUG: onChange triggered - navigating to line \(targetLineNumber)")
                 let targetPage = (targetLineNumber - 1) / 100 + 1
                 print("DEBUG: Calculated target page: \(targetPage)")
@@ -281,7 +281,7 @@ struct ReaderView: View {
                         }
                     }
                 }
-                .onChange(of: viewModel.lines) { _ in
+                .onChange(of: viewModel.lines) {
                     // Also scroll when lines are updated (e.g., page changes)
                     if let targetLine = viewModel.targetLineNumber {
                         let startLine = (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1
