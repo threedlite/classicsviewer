@@ -63,6 +63,71 @@ def parse_xml_with_entity_resolver(xml_path):
         else:
             raise e
 
+# ============= NESTED DIV DETECTION FOR DUPLICATION FIX =============
+
+def has_nested_textpart_divs(elem, processable_subtypes=None):
+    """
+    Check if a div element has nested textpart div children that will ALSO be processed
+    by the current parsing function. This prevents processing paragraphs at both parent
+    and child levels (causing duplication).
+
+    Args:
+        elem: The XML element to check
+        processable_subtypes: List of subtypes that will be processed separately.
+                             If None or empty, returns False (process all paragraphs).
+
+    Returns True ONLY if this elem contains child divs with subtypes that ARE in the
+    processable_subtypes list (meaning they'll be processed separately).
+
+    Returns False if:
+    - processable_subtypes is None/empty
+    - No nested divs exist
+    - Nested divs have subtypes NOT in processable_subtypes (they won't be processed separately)
+
+    CRITICAL: This function must be precise - returning True incorrectly causes text loss,
+    returning False incorrectly causes duplication.
+    """
+    if not processable_subtypes:
+        return False
+
+    for child in elem:  # Direct children only, NOT iter()
+        if child.tag.endswith('div'):
+            child_subtype = child.get('subtype', '').lower()
+
+            # Only return True if child has a subtype that will be processed separately
+            if child_subtype and child_subtype in [s.lower() for s in processable_subtypes]:
+                return True
+
+    return False
+
+
+def get_paragraphs_for_div(elem, processable_subtypes=None):
+    """
+    Get the appropriate paragraphs to process for a div element.
+
+    Args:
+        elem: The XML element to get paragraphs from
+        processable_subtypes: List of subtypes that will be processed separately.
+                             Pass the same list used in the parent loop's filter.
+
+    If the div has nested children with subtypes in processable_subtypes, only return
+    direct <p> children (the nested divs will handle their own paragraphs).
+
+    If the div has no such nested children (either no children, or children with different
+    subtypes that won't be processed separately), return all descendant <p> tags.
+
+    This prevents duplication while ensuring no text is lost.
+    """
+    if has_nested_textpart_divs(elem, processable_subtypes):
+        # Has nested divs that will be processed separately
+        # Only process direct <p> children to avoid duplication
+        return [p for p in elem if p.tag.endswith('p')]
+    else:
+        # Leaf textpart OR nested divs won't be processed separately
+        # Process all descendant paragraphs using iter()
+        return [p for p in elem.iter() if p.tag.endswith('p')]
+
+
 # ============= FIRST1K PARSER FIX =============
 
 # Maximum allowed line length for mobile app stability
@@ -1220,12 +1285,14 @@ def parse_first1k_greek(xml_path):
                         text_parts = []
 
                         # Try paragraphs first
-                        for p in div.iter('p'):
+                        # Use get_paragraphs_for_div() to prevent duplication when divs are nested
+                        # Pass processable subtypes so we only skip when nested divs will be processed
+                        for p in get_paragraphs_for_div(div, ['chapter', 'section', 'episode', 'hypothesis']):
                             p_text = extract_text_from_first1k_element(p)
                             if p_text.strip():
                                 text_parts.append(p_text.strip())
 
-                        # If no paragraphs, get div text
+                        # If no paragraphs, get div text directly
                         if not text_parts:
                             div_text = extract_text_from_first1k_element(div)
                             if div_text.strip():
@@ -3904,44 +3971,45 @@ def process_prose_with_books(root, work_id, cursor, language):
             if (elem.tag.endswith('div') and
                 elem.get('type') == 'textpart' and
                 elem.get('subtype') in ['section', 'chapter', 'bekker_page']):
-                
-                section_n = elem.get('n', str(line_num + 1))
-                
-                # Extract paragraphs from this section
-                for p in elem.iter():
-                    if p.tag.endswith('p'):
-                        # Use get_text_content to properly filter editorial notes
-                        # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
-                        bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
-                        text = get_text_content(p, preserve_milestones=(is_plato or is_aristotle), bekker_page_state=bekker_page_state)
-                        if bekker_page_state:
-                            current_bekker_page = bekker_page_state[0]
-                        if text:
-                            # Split long paragraphs into sentences
-                            if language == 'greek':
-                                # For Plato/Aristotle, preserve milestone markers when splitting
-                                if is_plato or is_aristotle:
-                                    sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
-                                else:
-                                    sentences = re.split(r'[.!?·;]\s+', text)
-                            else:
-                                if is_plato or is_aristotle:
-                                    sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
-                                else:
-                                    sentences = re.split(r'[.!?]\s+', text)
 
-                            # Process each sentence as a line
-                            for sentence in sentences:
-                                sentence = sentence.strip()
-                                if sentence:
-                                    line_num += 1
-                                    all_lines.append({
-                                        'number': line_num,
-                                        'text': sentence,
-                                        'section': section_n,
-                                        'xml': '',
-                                        'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
-                                    })
+                section_n = elem.get('n', str(line_num + 1))
+
+                # Extract paragraphs from this section
+                # Use get_paragraphs_for_div() to prevent duplication when divs are nested
+                # Pass processable subtypes so we only skip when nested divs will be processed
+                for p in get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page']):
+                    # Use get_text_content to properly filter editorial notes
+                    # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
+                    bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
+                    text = get_text_content(p, preserve_milestones=(is_plato or is_aristotle), bekker_page_state=bekker_page_state)
+                    if bekker_page_state:
+                        current_bekker_page = bekker_page_state[0]
+                    if text:
+                        # Split long paragraphs into sentences
+                        if language == 'greek':
+                            # For Plato/Aristotle, preserve milestone markers when splitting
+                            if is_plato or is_aristotle:
+                                sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
+                            else:
+                                sentences = re.split(r'[.!?·;]\s+', text)
+                        else:
+                            if is_plato or is_aristotle:
+                                sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
+                            else:
+                                sentences = re.split(r'[.!?]\s+', text)
+
+                        # Process each sentence as a line
+                        for sentence in sentences:
+                            sentence = sentence.strip()
+                            if sentence:
+                                line_num += 1
+                                all_lines.append({
+                                    'number': line_num,
+                                    'text': sentence,
+                                    'section': section_n,
+                                    'xml': '',
+                                    'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
+                                })
         
         if all_lines:
             # Insert book with actual line count
@@ -4046,53 +4114,54 @@ def process_prose_text(root, work_id, cursor, language):
             elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                 current_milestone = n
 
-        if (elem.tag.endswith('div') and 
-            elem.get('type') == 'textpart' and 
+        if (elem.tag.endswith('div') and
+            elem.get('type') == 'textpart' and
             elem.get('subtype') in ['section', 'chapter']):
-            
-            section_n = elem.get('n', str(line_num + 1))
-            
-            # First try to extract paragraphs from this section
-            paragraphs_found = False
-            for p in elem.iter():
-                if p.tag.endswith('p'):
-                    paragraphs_found = True
-                    # Use get_text_content to properly filter editorial notes
-                    # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
-                    bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
-                    text = get_text_content(p, preserve_milestones=(is_plato or is_aristotle), bekker_page_state=bekker_page_state)
-                    if bekker_page_state:
-                        current_bekker_page = bekker_page_state[0]
-                    if text:
-                        # Split long paragraphs into sentences for better readability
-                        # Greek uses · or ; as sentence separators, plus standard . ! ?
-                        if language == 'greek':
-                            # For Plato/Aristotle, preserve milestone markers when splitting
-                            if is_plato or is_aristotle:
-                                sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
-                            else:
-                                sentences = re.split(r'[.!?·;]\s+', text)
-                        else:
-                            if is_plato or is_aristotle:
-                                sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
-                            else:
-                                sentences = re.split(r'[.!?]\s+', text)
 
-                        # Process each sentence as a line
-                        for sentence in sentences:
-                            sentence = sentence.strip()
-                            if sentence:
-                                line_num += 1
-                                # Add milestone reference for Plato/Aristotle
-                                if (is_plato or is_aristotle) and current_milestone:
-                                    line_to_milestone[line_num] = current_milestone
-                                all_lines.append({
-                                    'number': line_num,
-                                    'text': sentence,
-                                    'section': section_n,
-                                    'xml': '',
-                                    'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
-                                })
+            section_n = elem.get('n', str(line_num + 1))
+
+            # First try to extract paragraphs from this section
+            # Use get_paragraphs_for_div() to prevent duplication when divs are nested
+            # Pass processable subtypes so we only skip when nested divs will be processed
+            paragraphs_to_process = get_paragraphs_for_div(elem, ['section', 'chapter'])
+            paragraphs_found = len(paragraphs_to_process) > 0
+            for p in paragraphs_to_process:
+                # Use get_text_content to properly filter editorial notes
+                # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
+                bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
+                text = get_text_content(p, preserve_milestones=(is_plato or is_aristotle), bekker_page_state=bekker_page_state)
+                if bekker_page_state:
+                    current_bekker_page = bekker_page_state[0]
+                if text:
+                    # Split long paragraphs into sentences for better readability
+                    # Greek uses · or ; as sentence separators, plus standard . ! ?
+                    if language == 'greek':
+                        # For Plato/Aristotle, preserve milestone markers when splitting
+                        if is_plato or is_aristotle:
+                            sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
+                        else:
+                            sentences = re.split(r'[.!?·;]\s+', text)
+                    else:
+                        if is_plato or is_aristotle:
+                            sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
+                        else:
+                            sentences = re.split(r'[.!?]\s+', text)
+
+                    # Process each sentence as a line
+                    for sentence in sentences:
+                        sentence = sentence.strip()
+                        if sentence:
+                            line_num += 1
+                            # Add milestone reference for Plato/Aristotle
+                            if (is_plato or is_aristotle) and current_milestone:
+                                line_to_milestone[line_num] = current_milestone
+                            all_lines.append({
+                                'number': line_num,
+                                'text': sentence,
+                                'section': section_n,
+                                'xml': '',
+                                'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
+                            })
 
             # If no paragraphs found, treat the entire section text as prose
             if not paragraphs_found:

@@ -341,6 +341,13 @@ def _write_book_to_xml(f, book_num: int, book_results: List[Dict]):
             lemma = w['lemma'] if w['lemma'] else '?'
             morph = w['morph'] if w['morph'] else ''
 
+            # CRITICAL: Escape XML special characters to prevent malformed XML
+            # Latin texts may contain <word> for editorial additions which break XML parsing
+            latin = html.escape(latin)
+            gloss = html.escape(gloss)
+            lemma = html.escape(lemma)
+            morph = html.escape(morph)
+
             lemma_morph = f'{lemma} {morph}' if morph else lemma
             table = f'| {latin} |\n| **{gloss}** |\n| {lemma_morph} |'
             word_tables.append(table)

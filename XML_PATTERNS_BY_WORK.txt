@@ -1,0 +1,4264 @@
+XML STRUCTURAL PATTERNS - WORKS BY PATTERN
+============================================================
+
+Total unique patterns: 225
+Total works analyzed: 3439
+
+============================================================
+PATTERN: edition → section → p
+COUNT: 579 works
+------------------------------------------------------------
+  phi0474.phi001 [Perseus Latin]
+  phi0474.phi002 [Perseus Latin]
+  phi0474.phi003 [Perseus Latin]
+  phi0474.phi004 [Perseus Latin]
+  phi0474.phi006 [Perseus Latin]
+  phi0474.phi007 [Perseus Latin]
+  phi0474.phi008 [Perseus Latin]
+  phi0474.phi009 [Perseus Latin]
+  phi0474.phi010 [Perseus Latin]
+  phi0474.phi012 [Perseus Latin]
+  phi0474.phi014 [Perseus Latin]
+  phi0474.phi015 [Perseus Latin]
+  phi0474.phi016 [Perseus Latin]
+  phi0474.phi017 [Perseus Latin]
+  phi0474.phi018 [Perseus Latin]
+  phi0474.phi019 [Perseus Latin]
+  phi0474.phi020 [Perseus Latin]
+  phi0474.phi021 [Perseus Latin]
+  phi0474.phi022 [Perseus Latin]
+  phi0474.phi023 [Perseus Latin]
+  phi0474.phi024 [Perseus Latin]
+  phi0474.phi025 [Perseus Latin]
+  phi0474.phi026 [Perseus Latin]
+  phi0474.phi028 [Perseus Latin]
+  phi0474.phi029 [Perseus Latin]
+  phi0474.phi030 [Perseus Latin]
+  phi0474.phi031 [Perseus Latin]
+  phi0474.phi032 [Perseus Latin]
+  phi0474.phi033 [Perseus Latin]
+  phi0474.phi034 [Perseus Latin]
+  phi0474.phi038 [Perseus Latin]
+  phi0474.phi039 [Perseus Latin]
+  phi0474.phi040 [Perseus Latin]
+  phi0474.phi041 [Perseus Latin]
+  phi0474.phi042 [Perseus Latin]
+  phi0474.phi046 [Perseus Latin]
+  phi0474.phi051 [Perseus Latin]
+  phi0474.phi052 [Perseus Latin]
+  phi0474.phi054 [Perseus Latin]
+  phi0474.phi072 [Perseus Latin]
+  phi1017.phi011 [Perseus Latin]
+  phi1212.phi001 [Perseus Latin]
+  stoa0045.stoa001 [Perseus Latin]
+  stoa0045.stoa005 [Perseus Latin]
+  stoa0045.stoa006 [Perseus Latin]
+  stoa0045.stoa014 [Perseus Latin]
+  stoa0045.stoa022 [Perseus Latin]
+  stoa0045.stoa028 [Perseus Latin]
+  stoa0058.stoa003 [Perseus Latin]
+  stoa0058.stoa006 [Perseus Latin]
+  stoa0058.stoa023 [Perseus Latin]
+  stoa0058.stoa025 [Perseus Latin]
+  stoa0058.stoa028 [Perseus Latin]
+  tlg0007.tlg067 [Perseus Greek]
+  tlg0007.tlg068 [Perseus Greek]
+  tlg0007.tlg069 [Perseus Greek]
+  tlg0007.tlg070 [Perseus Greek]
+  tlg0007.tlg071 [Perseus Greek]
+  tlg0007.tlg072 [Perseus Greek]
+  tlg0007.tlg073 [Perseus Greek]
+  tlg0007.tlg074 [Perseus Greek]
+  tlg0007.tlg075 [Perseus Greek]
+  tlg0007.tlg076 [Perseus Greek]
+  tlg0007.tlg077 [Perseus Greek]
+  tlg0007.tlg078 [Perseus Greek]
+  tlg0007.tlg079 [Perseus Greek]
+  tlg0007.tlg080 [Perseus Greek]
+  tlg0007.tlg082a [Perseus Greek]
+  tlg0007.tlg083 [Perseus Greek]
+  tlg0007.tlg084a [Perseus Greek]
+  tlg0007.tlg084b [Perseus Greek]
+  tlg0007.tlg085 [Perseus Greek]
+  tlg0007.tlg086 [Perseus Greek]
+  tlg0007.tlg088 [Perseus Greek]
+  tlg0007.tlg089 [Perseus Greek]
+  tlg0007.tlg090 [Perseus Greek]
+  tlg0007.tlg091 [Perseus Greek]
+  tlg0007.tlg092 [Perseus Greek]
+  tlg0007.tlg093 [Perseus Greek]
+  tlg0007.tlg094 [Perseus Greek]
+  tlg0007.tlg095 [Perseus Greek]
+  tlg0007.tlg096 [Perseus Greek]
+  tlg0007.tlg097 [Perseus Greek]
+  tlg0007.tlg098 [Perseus Greek]
+  tlg0007.tlg099 [Perseus Greek]
+  tlg0007.tlg100 [Perseus Greek]
+  tlg0007.tlg101 [Perseus Greek]
+  tlg0007.tlg102 [Perseus Greek]
+  tlg0007.tlg103 [Perseus Greek]
+  tlg0007.tlg104 [Perseus Greek]
+  tlg0007.tlg105 [Perseus Greek]
+  tlg0007.tlg106 [Perseus Greek]
+  tlg0007.tlg107 [Perseus Greek]
+  tlg0007.tlg108 [Perseus Greek]
+  tlg0007.tlg109 [Perseus Greek]
+  tlg0007.tlg110 [Perseus Greek]
+  tlg0007.tlg111 [Perseus Greek]
+  tlg0007.tlg113 [Perseus Greek]
+  tlg0007.tlg115 [Perseus Greek]
+  tlg0007.tlg116 [Perseus Greek]
+  tlg0007.tlg117 [Perseus Greek]
+  tlg0007.tlg118 [Perseus Greek]
+  tlg0007.tlg119 [Perseus Greek]
+  tlg0007.tlg120 [Perseus Greek]
+  tlg0007.tlg122 [Perseus Greek]
+  tlg0007.tlg123 [Perseus Greek]
+  tlg0007.tlg125 [Perseus Greek]
+  tlg0007.tlg126 [Perseus Greek]
+  tlg0007.tlg127 [Perseus Greek]
+  tlg0007.tlg128 [Perseus Greek]
+  tlg0007.tlg129 [Perseus Greek]
+  tlg0007.tlg130 [Perseus Greek]
+  tlg0007.tlg131 [Perseus Greek]
+  tlg0007.tlg132 [Perseus Greek]
+  tlg0007.tlg134 [Perseus Greek]
+  tlg0007.tlg135 [Perseus Greek]
+  tlg0007.tlg136 [Perseus Greek]
+  tlg0007.tlg137 [Perseus Greek]
+  tlg0007.tlg138 [Perseus Greek]
+  tlg0007.tlg139 [Perseus Greek]
+  tlg0007.tlg140 [Perseus Greek]
+  tlg0007.tlg141 [Perseus Greek]
+  tlg0010.tlg001 [Perseus Greek]
+  tlg0010.tlg002 [Perseus Greek]
+  tlg0010.tlg003 [Perseus Greek]
+  tlg0010.tlg004 [Perseus Greek]
+  tlg0010.tlg005 [Perseus Greek]
+  tlg0010.tlg006 [Perseus Greek]
+  tlg0010.tlg007 [Perseus Greek]
+  tlg0010.tlg008 [Perseus Greek]
+  tlg0010.tlg009 [Perseus Greek]
+  tlg0010.tlg010 [Perseus Greek]
+  tlg0010.tlg011 [Perseus Greek]
+  tlg0010.tlg012 [Perseus Greek]
+  tlg0010.tlg013 [Perseus Greek]
+  tlg0010.tlg014 [Perseus Greek]
+  tlg0010.tlg015 [Perseus Greek]
+  tlg0010.tlg016 [Perseus Greek]
+  tlg0010.tlg017 [Perseus Greek]
+  tlg0010.tlg018 [Perseus Greek]
+  tlg0010.tlg019 [Perseus Greek]
+  tlg0010.tlg020 [Perseus Greek]
+  tlg0010.tlg021 [Perseus Greek]
+  tlg0014.tlg001 [Perseus Greek]
+  tlg0014.tlg002 [Perseus Greek]
+  tlg0014.tlg003 [Perseus Greek]
+  tlg0014.tlg004 [Perseus Greek]
+  tlg0014.tlg005 [Perseus Greek]
+  tlg0014.tlg006 [Perseus Greek]
+  tlg0014.tlg007 [Perseus Greek]
+  tlg0014.tlg008 [Perseus Greek]
+  tlg0014.tlg009 [Perseus Greek]
+  tlg0014.tlg010 [Perseus Greek]
+  tlg0014.tlg011 [Perseus Greek]
+  tlg0014.tlg012 [Perseus Greek]
+  tlg0014.tlg013 [Perseus Greek]
+  tlg0014.tlg014 [Perseus Greek]
+  tlg0014.tlg015 [Perseus Greek]
+  tlg0014.tlg016 [Perseus Greek]
+  tlg0014.tlg017 [Perseus Greek]
+  tlg0014.tlg018 [Perseus Greek]
+  tlg0014.tlg019 [Perseus Greek]
+  tlg0014.tlg020 [Perseus Greek]
+  tlg0014.tlg021 [Perseus Greek]
+  tlg0014.tlg022 [Perseus Greek]
+  tlg0014.tlg023 [Perseus Greek]
+  tlg0014.tlg024 [Perseus Greek]
+  tlg0014.tlg025 [Perseus Greek]
+  tlg0014.tlg026 [Perseus Greek]
+  tlg0014.tlg027 [Perseus Greek]
+  tlg0014.tlg028 [Perseus Greek]
+  tlg0014.tlg029 [Perseus Greek]
+  tlg0014.tlg030 [Perseus Greek]
+  tlg0014.tlg031 [Perseus Greek]
+  tlg0014.tlg032 [Perseus Greek]
+  tlg0014.tlg033 [Perseus Greek]
+  tlg0014.tlg034 [Perseus Greek]
+  tlg0014.tlg035 [Perseus Greek]
+  tlg0014.tlg036 [Perseus Greek]
+  tlg0014.tlg037 [Perseus Greek]
+  tlg0014.tlg038 [Perseus Greek]
+  tlg0014.tlg039 [Perseus Greek]
+  tlg0014.tlg040 [Perseus Greek]
+  tlg0014.tlg041 [Perseus Greek]
+  tlg0014.tlg042 [Perseus Greek]
+  tlg0014.tlg043 [Perseus Greek]
+  tlg0014.tlg044 [Perseus Greek]
+  tlg0014.tlg045 [Perseus Greek]
+  tlg0014.tlg046 [Perseus Greek]
+  tlg0014.tlg047 [Perseus Greek]
+  tlg0014.tlg048 [Perseus Greek]
+  tlg0014.tlg049 [Perseus Greek]
+  tlg0014.tlg050 [Perseus Greek]
+  tlg0014.tlg051 [Perseus Greek]
+  tlg0014.tlg052 [Perseus Greek]
+  tlg0014.tlg053 [Perseus Greek]
+  tlg0014.tlg054 [Perseus Greek]
+  tlg0014.tlg055 [Perseus Greek]
+  tlg0014.tlg056 [Perseus Greek]
+  tlg0014.tlg057 [Perseus Greek]
+  tlg0014.tlg058 [Perseus Greek]
+  tlg0014.tlg059 [Perseus Greek]
+  tlg0014.tlg060 [Perseus Greek]
+  tlg0014.tlg061 [Perseus Greek]
+  tlg0017.tlg001 [Perseus Greek]
+  tlg0017.tlg002 [Perseus Greek]
+  tlg0017.tlg003 [Perseus Greek]
+  tlg0017.tlg004 [Perseus Greek]
+  tlg0017.tlg005 [Perseus Greek]
+  tlg0017.tlg006 [Perseus Greek]
+  tlg0017.tlg007 [Perseus Greek]
+  tlg0017.tlg008 [Perseus Greek]
+  tlg0017.tlg009 [Perseus Greek]
+  tlg0017.tlg010 [Perseus Greek]
+  tlg0017.tlg011 [Perseus Greek]
+  tlg0017.tlg012 [Perseus Greek]
+  tlg0018.tlg001 [First1K]
+  tlg0018.tlg003 [First1K]
+  tlg0018.tlg004 [First1K]
+  tlg0018.tlg005 [First1K]
+  tlg0018.tlg006 [First1K]
+  tlg0018.tlg007 [First1K]
+  tlg0018.tlg008 [First1K]
+  tlg0018.tlg009 [First1K]
+  tlg0018.tlg010 [First1K]
+  tlg0018.tlg011 [First1K]
+  tlg0018.tlg012 [First1K]
+  tlg0018.tlg013 [First1K]
+  tlg0018.tlg014 [First1K]
+  tlg0018.tlg015 [First1K]
+  tlg0018.tlg016 [First1K]
+  tlg0018.tlg017 [First1K]
+  tlg0018.tlg018 [First1K]
+  tlg0018.tlg020 [First1K]
+  tlg0018.tlg021 [First1K]
+  tlg0018.tlg023 [First1K]
+  tlg0018.tlg025 [First1K]
+  tlg0018.tlg026 [First1K]
+  tlg0018.tlg027 [First1K]
+  tlg0018.tlg028 [First1K]
+  tlg0018.tlg029 [First1K]
+  tlg0018.tlg030 [First1K]
+  tlg0018.tlg031 [First1K]
+  tlg0026.tlg001 [Perseus Greek]
+  tlg0026.tlg002 [Perseus Greek]
+  tlg0026.tlg003 [Perseus Greek]
+  tlg0027.tlg001 [Perseus Greek]
+  tlg0027.tlg002 [Perseus Greek]
+  tlg0027.tlg003 [Perseus Greek]
+  tlg0027.tlg004 [Perseus Greek]
+  tlg0028.tlg001 [Perseus Greek]
+  tlg0028.tlg005 [Perseus Greek]
+  tlg0028.tlg006 [Perseus Greek]
+  tlg0029.tlg004 [Perseus Greek]
+  tlg0029.tlg005 [Perseus Greek]
+  tlg0029.tlg006 [Perseus Greek]
+  tlg0030.tlg001 [Perseus Greek]
+  tlg0030.tlg002 [Perseus Greek]
+  tlg0030.tlg003 [Perseus Greek]
+  tlg0030.tlg004 [Perseus Greek]
+  tlg0030.tlg005 [Perseus Greek]
+  tlg0030.tlg006 [Perseus Greek]
+  tlg0032.tlg005 [Perseus Greek]
+  tlg0034.tlg001 [Perseus Greek]
+  tlg0039.tlg001 [First1K]
+  tlg0057.tlg019 [First1K]
+  tlg0057.tlg033 [First1K]
+  tlg0059.tlg001 [Perseus Greek]
+  tlg0059.tlg002 [Perseus Greek]
+  tlg0059.tlg003 [Perseus Greek]
+  tlg0059.tlg004 [Perseus Greek]
+  tlg0059.tlg005 [Perseus Greek]
+  tlg0059.tlg006 [Perseus Greek]
+  tlg0059.tlg007 [Perseus Greek]
+  tlg0059.tlg008 [Perseus Greek]
+  tlg0059.tlg009 [Perseus Greek]
+  tlg0059.tlg010 [Perseus Greek]
+  tlg0059.tlg011 [Perseus Greek]
+  tlg0059.tlg012 [Perseus Greek]
+  tlg0059.tlg013 [Perseus Greek]
+  tlg0059.tlg014 [Perseus Greek]
+  tlg0059.tlg015 [Perseus Greek]
+  tlg0059.tlg016 [Perseus Greek]
+  tlg0059.tlg017 [Perseus Greek]
+  tlg0059.tlg018 [Perseus Greek]
+  tlg0059.tlg019 [Perseus Greek]
+  tlg0059.tlg020 [Perseus Greek]
+  tlg0059.tlg021 [Perseus Greek]
+  tlg0059.tlg022 [Perseus Greek]
+  tlg0059.tlg023 [Perseus Greek]
+  tlg0059.tlg024 [Perseus Greek]
+  tlg0059.tlg025 [Perseus Greek]
+  tlg0059.tlg026 [Perseus Greek]
+  tlg0059.tlg027 [Perseus Greek]
+  tlg0059.tlg028 [Perseus Greek]
+  tlg0059.tlg029 [Perseus Greek]
+  tlg0059.tlg031 [Perseus Greek]
+  tlg0059.tlg032 [Perseus Greek]
+  tlg0059.tlg033 [Perseus Greek]
+  tlg0059.tlg035 [Perseus Greek]
+  tlg0061.tlg001 [First1K]
+  tlg0061.tlg003 [First1K]
+  tlg0062.tlg002 [Perseus Greek]
+  tlg0062.tlg003 [Perseus Greek]
+  tlg0062.tlg004 [Perseus Greek]
+  tlg0062.tlg005 [Perseus Greek]
+  tlg0062.tlg006 [Perseus Greek]
+  tlg0062.tlg007 [Perseus Greek]
+  tlg0062.tlg008 [Perseus Greek]
+  tlg0062.tlg009 [Perseus Greek]
+  tlg0062.tlg010 [Perseus Greek]
+  tlg0062.tlg011 [Perseus Greek]
+  tlg0062.tlg013 [Perseus Greek]
+  tlg0062.tlg014 [Perseus Greek]
+  tlg0062.tlg027 [Perseus Greek]
+  tlg0062.tlg028 [Perseus Greek]
+  tlg0062.tlg029 [Perseus Greek]
+  tlg0062.tlg033 [Perseus Greek]
+  tlg0062.tlg036 [Perseus Greek]
+  tlg0062.tlg037 [Perseus Greek]
+  tlg0062.tlg038 [Perseus Greek]
+  tlg0062.tlg041 [Perseus Greek]
+  tlg0062.tlg042 [Perseus Greek]
+  tlg0062.tlg048 [Perseus Greek]
+  tlg0062.tlg049 [Perseus Greek]
+  tlg0062.tlg051 [Perseus Greek]
+  tlg0062.tlg052 [Perseus Greek]
+  tlg0062.tlg053 [Perseus Greek]
+  tlg0062.tlg054 [Perseus Greek]
+  tlg0062.tlg056 [Perseus Greek]
+  tlg0062.tlg057 [Perseus Greek]
+  tlg0062.tlg058 [Perseus Greek]
+  tlg0062.tlg059 [Perseus Greek]
+  tlg0062.tlg060 [Perseus Greek]
+  tlg0062.tlg062 [Perseus Greek]
+  tlg0062.tlg064 [Perseus Greek]
+  tlg0074.tlg006 [Perseus Greek]
+  tlg0074.tlg008 [First1K]
+  tlg0081.tlg002 [Perseus Greek]
+  tlg0081.tlg003 [Perseus Greek]
+  tlg0081.tlg005 [Perseus Greek]
+  tlg0081.tlg006 [Perseus Greek]
+  tlg0081.tlg007 [Perseus Greek]
+  tlg0081.tlg008 [Perseus Greek]
+  tlg0081.tlg010 [Perseus Greek]
+  tlg0081.tlg011 [Perseus Greek]
+  tlg0081.tlg012 [Perseus Greek]
+  tlg0081.tlg013 [First1K]
+  tlg0082.tlg003 [First1K]
+  tlg0086.tlg003 [First1K]
+  tlg0086.tlg004 [First1K]
+  tlg0086.tlg019 [First1K]
+  tlg0086.tlg045 [Perseus Greek]
+  tlg0086.tlg046 [First1K]
+  tlg0086.tlg054 [First1K]
+  tlg0087.tlg002 [First1K]
+  tlg0087.tlg010 [First1K]
+  tlg0087.tlg012 [First1K]
+  tlg0087.tlg015 [First1K]
+  tlg0087.tlg016 [First1K]
+  tlg0087.tlg017 [First1K]
+  tlg0087.tlg018 [First1K]
+  tlg0087.tlg019 [First1K]
+  tlg0087.tlg020 [First1K]
+  tlg0087.tlg023 [First1K]
+  tlg0087.tlg024 [First1K]
+  tlg0087.tlg025 [First1K]
+  tlg0087.tlg027 [First1K]
+  tlg0087.tlg028 [First1K]
+  tlg0087.tlg029 [First1K]
+  tlg0087.tlg030 [First1K]
+  tlg0087.tlg031 [First1K]
+  tlg0087.tlg032 [First1K]
+  tlg0093.tlg006 [First1K]
+  tlg0093.tlg010x05 [First1K]
+  tlg0093.tlg010x06 [First1K]
+  tlg0093.tlg010x07 [First1K]
+  tlg0093.tlg010x08 [First1K]
+  tlg0094.tlg002 [Perseus Greek]
+  tlg0233.tlg001 [First1K]
+  tlg0284.tlg055 [Perseus Greek]
+  tlg0358.tlg002 [First1K]
+  tlg0358.tlg005 [First1K]
+  tlg0362.tlg001 [First1K]
+  tlg0509.tlg001 [First1K]
+  tlg0526.tlg002 [Perseus Greek]
+  tlg0535.tlg001 [Perseus Greek]
+  tlg0537.tlg010 [First1K]
+  tlg0537.tlg011 [First1K]
+  tlg0537.tlg012 [First1K]
+  tlg0537.tlg013 [First1K]
+  tlg0537.tlg014 [First1K]
+  tlg0540.tlg001 [Perseus Greek]
+  tlg0540.tlg002 [Perseus Greek]
+  tlg0540.tlg003 [Perseus Greek]
+  tlg0540.tlg004 [Perseus Greek]
+  tlg0540.tlg005 [Perseus Greek]
+  tlg0540.tlg006 [Perseus Greek]
+  tlg0540.tlg007 [Perseus Greek]
+  tlg0540.tlg008 [Perseus Greek]
+  tlg0540.tlg009 [Perseus Greek]
+  tlg0540.tlg010 [Perseus Greek]
+  tlg0540.tlg011 [Perseus Greek]
+  tlg0540.tlg012 [Perseus Greek]
+  tlg0540.tlg013 [Perseus Greek]
+  tlg0540.tlg014 [Perseus Greek]
+  tlg0540.tlg015 [Perseus Greek]
+  tlg0540.tlg016 [Perseus Greek]
+  tlg0540.tlg017 [Perseus Greek]
+  tlg0540.tlg018 [Perseus Greek]
+  tlg0540.tlg019 [Perseus Greek]
+  tlg0540.tlg020 [Perseus Greek]
+  tlg0540.tlg021 [Perseus Greek]
+  tlg0540.tlg022 [Perseus Greek]
+  tlg0540.tlg023 [Perseus Greek]
+  tlg0540.tlg024 [Perseus Greek]
+  tlg0540.tlg025 [Perseus Greek]
+  tlg0540.tlg026 [Perseus Greek]
+  tlg0540.tlg027 [Perseus Greek]
+  tlg0540.tlg028 [Perseus Greek]
+  tlg0540.tlg029 [Perseus Greek]
+  tlg0540.tlg030 [Perseus Greek]
+  tlg0540.tlg031 [Perseus Greek]
+  tlg0540.tlg032 [Perseus Greek]
+  tlg0540.tlg033 [Perseus Greek]
+  tlg0540.tlg034 [Perseus Greek]
+  tlg0550.tlg001 [First1K]
+  tlg0557.tlg004 [First1K]
+  tlg0557.tlg005 [First1K]
+  tlg0559.tlg012 [First1K]
+  tlg0565.tlg003 [First1K]
+  tlg0565.tlg004 [First1K]
+  tlg0580.tlg001 [First1K]
+  tlg0592.tlg001 [First1K]
+  tlg0592.tlg005 [First1K]
+  tlg0593.1st1K001 [First1K]
+  tlg0593.1st1K002 [First1K]
+  tlg0609.tlg001 [First1K]
+  tlg0618.tlg001 [First1K]
+  tlg0627.tlg001 [Perseus Greek]
+  tlg0627.tlg002 [Perseus Greek]
+  tlg0627.tlg003 [Perseus Greek]
+  tlg0627.tlg004 [Perseus Greek]
+  tlg0627.tlg005 [Perseus Greek]
+  tlg0627.tlg007 [Perseus Greek]
+  tlg0627.tlg008 [Perseus Greek]
+  tlg0627.tlg009 [Perseus Greek]
+  tlg0627.tlg010 [Perseus Greek]
+  tlg0627.tlg011 [Perseus Greek]
+  tlg0627.tlg027 [Perseus Greek]
+  tlg0627.tlg028 [Perseus Greek]
+  tlg0627.tlg029 [Perseus Greek]
+  tlg0627.tlg030 [Perseus Greek]
+  tlg0627.tlg041 [First1K]
+  tlg0627.tlg046 [First1K]
+  tlg0627.tlg046 [Perseus Greek]
+  tlg0627.tlg051 [Perseus Greek]
+  tlg0628.tlg001 [First1K]
+  tlg0633.tlg001 [First1K]
+  tlg0638.tlg007 [Perseus Greek]
+  tlg0639.tlg001 [First1K]
+  tlg0643.opp003 [First1K]
+  tlg0649.tlg002 [First1K]
+  tlg0649.tlg003 [First1K]
+  tlg0666.tlg001 [First1K]
+  tlg0732.tlg001 [First1K]
+  tlg0732.tlg014 [First1K]
+  tlg0733.tlg001 [First1K]
+  tlg0751.tlg005 [First1K]
+  tlg1129.tlg001 [First1K]
+  tlg1271.tlg003 [First1K]
+  tlg1271.tlg004 [First1K]
+  tlg1271.tlg005 [First1K]
+  tlg1271.tlg011 [First1K]
+  tlg1271.tlg012 [First1K]
+  tlg1286.tlg001 [First1K]
+  tlg1286.tlg002 [First1K]
+  tlg1286.tlg003 [First1K]
+  tlg1286.tlg004 [First1K]
+  tlg1286.tlg005 [First1K]
+  tlg1286.tlg006 [First1K]
+  tlg1286.tlg007 [First1K]
+  tlg1286.tlg008 [First1K]
+  tlg1286.tlg009 [First1K]
+  tlg1286.tlg010 [First1K]
+  tlg1286.tlg011 [First1K]
+  tlg1286.tlg012 [First1K]
+  tlg1286.tlg013 [First1K]
+  tlg1286.tlg014 [First1K]
+  tlg1286.tlg016 [First1K]
+  tlg1286.tlg017 [First1K]
+  tlg1286.tlg018 [First1K]
+  tlg1286.tlg019 [First1K]
+  tlg1337.tlg003 [First1K]
+  tlg1402.tlg002 [First1K]
+  tlg1402.tlg004 [First1K]
+  tlg1409.opp003 [First1K]
+  tlg1414.tlg001 [First1K]
+  tlg1441.tlg001 [First1K]
+  tlg1447.tlg009 [First1K]
+  tlg1626.tlg001 [First1K]
+  tlg1749.tlg001 [First1K]
+  tlg1750.tlg001 [First1K]
+  tlg1750.tlg002 [First1K]
+  tlg1750.tlg003 [First1K]
+  tlg1750.tlg004 [First1K]
+  tlg1763.tlg001 [First1K]
+  tlg1799.tlg007 [First1K]
+  tlg1799.tlg008 [First1K]
+  tlg1799.tlg015 [First1K]
+  tlg1802.tlg001 [First1K]
+  tlg1805.tlg001 [First1K]
+  tlg1805.tlg003 [First1K]
+  tlg1805.tlg004 [First1K]
+  tlg1805.tlg005 [First1K]
+  tlg1805.tlg006 [First1K]
+  tlg1805.tlg007 [First1K]
+  tlg1805.tlg008 [First1K]
+  tlg1805.tlg009 [First1K]
+  tlg1805.tlg010 [First1K]
+  tlg2003.tlg001 [Perseus Greek]
+  tlg2003.tlg002 [Perseus Greek]
+  tlg2003.tlg003 [Perseus Greek]
+  tlg2003.tlg004 [Perseus Greek]
+  tlg2003.tlg005 [Perseus Greek]
+  tlg2003.tlg006 [Perseus Greek]
+  tlg2003.tlg007 [Perseus Greek]
+  tlg2003.tlg008 [Perseus Greek]
+  tlg2003.tlg009 [Perseus Greek]
+  tlg2003.tlg010 [Perseus Greek]
+  tlg2003.tlg011 [Perseus Greek]
+  tlg2003.tlg012 [Perseus Greek]
+  tlg2016.tlg001 [First1K]
+  tlg2018.tlg011 [First1K]
+  tlg2023.tlg003 [First1K]
+  tlg2034.tlg002 [First1K]
+  tlg2034.tlg005 [First1K]
+  tlg2038.tlg001 [First1K]
+  tlg2042.tlg013 [First1K]
+  tlg2137.tlg001 [First1K]
+  tlg2138.tlg001 [First1K]
+  tlg2139.tlg001 [First1K]
+  tlg2178.tlg002 [First1K]
+  tlg2189.tlg003 [First1K]
+  tlg2233.tlg002 [First1K]
+  tlg2601.tlg001 [First1K]
+  tlg2632.tlg001 [First1K]
+  tlg2948.tlg001 [First1K]
+  tlg2949.tlg001 [First1K]
+  tlg3135.tlg012 [First1K]
+  tlg3156.tlg001 [First1K]
+  tlg4037.tlg001 [First1K]
+  tlg4072.tlg001 [First1K]
+  tlg4086.tlg001 [First1K]
+  tlg4086.tlg002 [First1K]
+  tlg4102.tlg003 [First1K]
+  tlg4102.tlg007 [First1K]
+  tlg4174.tlg001 [First1K]
+  tlg5019.tlg001 [First1K]
+  tlg5022.tlg003 [First1K]
+  tlg5022.tlg005 [First1K]
+  tlg5031.tlg001 [First1K]
+  tlg5031.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → chapter → p
+COUNT: 474 works
+------------------------------------------------------------
+  phi0588.abo001 [Perseus Latin]
+  phi0588.abo002 [Perseus Latin]
+  phi0588.abo003 [Perseus Latin]
+  phi0588.abo004 [Perseus Latin]
+  phi0588.abo005 [Perseus Latin]
+  phi0588.abo006 [Perseus Latin]
+  phi0588.abo007 [Perseus Latin]
+  phi0588.abo008 [Perseus Latin]
+  phi0588.abo009 [Perseus Latin]
+  phi0588.abo010 [Perseus Latin]
+  phi0588.abo011 [Perseus Latin]
+  phi0588.abo012 [Perseus Latin]
+  phi0588.abo013 [Perseus Latin]
+  phi0588.abo014 [Perseus Latin]
+  phi0588.abo015 [Perseus Latin]
+  phi0588.abo016 [Perseus Latin]
+  phi0588.abo017 [Perseus Latin]
+  phi0588.abo018 [Perseus Latin]
+  phi0588.abo019 [Perseus Latin]
+  phi0588.abo020 [Perseus Latin]
+  phi0588.abo021 [Perseus Latin]
+  phi0588.abo022 [Perseus Latin]
+  phi0588.abo023 [Perseus Latin]
+  phi0588.abo024 [Perseus Latin]
+  phi0588.abo025 [Perseus Latin]
+  phi0631.phi001 [Perseus Latin]
+  phi0631.phi002 [Perseus Latin]
+  phi1212.phi003 [Perseus Latin]
+  phi1348.abo013 [Perseus Latin]
+  phi1348.abo014 [Perseus Latin]
+  phi1348.abo015 [Perseus Latin]
+  phi1348.abo016 [Perseus Latin]
+  phi1348.abo017 [Perseus Latin]
+  phi1348.abo018 [Perseus Latin]
+  phi1348.abo019 [Perseus Latin]
+  phi1348.abo020 [Perseus Latin]
+  phi1348.abo021 [Perseus Latin]
+  phi1348.abo022 [Perseus Latin]
+  phi2331.phi001 [Perseus Latin]
+  phi2331.phi002 [Perseus Latin]
+  phi2331.phi003 [Perseus Latin]
+  phi2331.phi004 [Perseus Latin]
+  phi2331.phi005 [Perseus Latin]
+  phi2331.phi006 [Perseus Latin]
+  phi2331.phi007 [Perseus Latin]
+  phi2331.phi008 [Perseus Latin]
+  phi2331.phi009 [Perseus Latin]
+  phi2331.phi010 [Perseus Latin]
+  phi2331.phi011 [Perseus Latin]
+  phi2331.phi012 [Perseus Latin]
+  phi2331.phi013 [Perseus Latin]
+  phi2331.phi014 [Perseus Latin]
+  phi2331.phi015 [Perseus Latin]
+  phi2331.phi016 [Perseus Latin]
+  phi2331.phi017 [Perseus Latin]
+  phi2331.phi018 [Perseus Latin]
+  phi2331.phi019 [Perseus Latin]
+  phi2331.phi020 [Perseus Latin]
+  phi2331.phi021 [Perseus Latin]
+  phi2331.phi022 [Perseus Latin]
+  phi2331.phi023 [Perseus Latin]
+  phi2331.phi024 [Perseus Latin]
+  phi2331.phi025 [Perseus Latin]
+  phi2331.phi026 [Perseus Latin]
+  phi2331.phi027 [Perseus Latin]
+  phi2331.phi028 [Perseus Latin]
+  phi2331.phi029 [Perseus Latin]
+  phi2331.phi030 [Perseus Latin]
+  stoa0033a.tlg028 [First1K]
+  stoa0033a.tlg043 [First1K]
+  stoa0146d.stoa001 [First1K]
+  stoa0275.stoa001 [Perseus Latin]
+  stoa0275.stoa003 [Perseus Latin]
+  stoa0275.stoa004 [Perseus Latin]
+  stoa0275.stoa005 [Perseus Latin]
+  stoa0275.stoa007 [Perseus Latin]
+  stoa0275.stoa008 [Perseus Latin]
+  stoa0275.stoa010 [Perseus Latin]
+  stoa0275.stoa011 [Perseus Latin]
+  stoa0275.stoa012 [Perseus Latin]
+  stoa0275.stoa013 [Perseus Latin]
+  stoa0275.stoa015 [Perseus Latin]
+  stoa0275.stoa016 [Perseus Latin]
+  stoa0275.stoa017 [Perseus Latin]
+  stoa0275.stoa018 [Perseus Latin]
+  stoa0275.stoa019 [Perseus Latin]
+  stoa0275.stoa020 [Perseus Latin]
+  stoa0275.stoa021 [Perseus Latin]
+  stoa0275.stoa022 [Perseus Latin]
+  stoa0275.stoa023 [Perseus Latin]
+  stoa0275.stoa024 [Perseus Latin]
+  stoa0275.stoa025 [Perseus Latin]
+  stoa0275.stoa026 [Perseus Latin]
+  stoa0275.stoa028 [Perseus Latin]
+  stoa0275.stoa029 [Perseus Latin]
+  stoa0275.stoa030 [Perseus Latin]
+  tlg0007.tlg114 [Perseus Greek]
+  tlg0057.tlg001 [First1K]
+  tlg0057.tlg002 [First1K]
+  tlg0057.tlg003 [First1K]
+  tlg0057.tlg004 [First1K]
+  tlg0057.tlg006 [First1K]
+  tlg0057.tlg007 [First1K]
+  tlg0057.tlg012 [First1K]
+  tlg0057.tlg013 [First1K]
+  tlg0057.tlg014 [First1K]
+  tlg0057.tlg015 [First1K]
+  tlg0057.tlg016 [First1K]
+  tlg0057.tlg019 [First1K]
+  tlg0057.tlg020 [First1K]
+  tlg0057.tlg022 [First1K]
+  tlg0057.tlg023 [First1K]
+  tlg0057.tlg024 [First1K]
+  tlg0057.tlg027 [First1K]
+  tlg0057.tlg028 [First1K]
+  tlg0057.tlg029 [First1K]
+  tlg0057.tlg030 [First1K]
+  tlg0057.tlg031 [First1K]
+  tlg0057.tlg034 [First1K]
+  tlg0057.tlg035 [First1K]
+  tlg0057.tlg038 [First1K]
+  tlg0057.tlg039 [First1K]
+  tlg0057.tlg041 [First1K]
+  tlg0057.tlg042 [First1K]
+  tlg0057.tlg043 [First1K]
+  tlg0057.tlg046 [First1K]
+  tlg0057.tlg047 [First1K]
+  tlg0057.tlg048 [First1K]
+  tlg0057.tlg049 [First1K]
+  tlg0057.tlg050 [First1K]
+  tlg0057.tlg051 [First1K]
+  tlg0057.tlg052 [First1K]
+  tlg0057.tlg053 [First1K]
+  tlg0057.tlg054 [First1K]
+  tlg0057.tlg055 [First1K]
+  tlg0057.tlg058 [First1K]
+  tlg0057.tlg063 [First1K]
+  tlg0057.tlg068 [First1K]
+  tlg0057.tlg069 [First1K]
+  tlg0057.tlg070 [First1K]
+  tlg0057.tlg071 [First1K]
+  tlg0057.tlg072 [First1K]
+  tlg0057.tlg073 [First1K]
+  tlg0057.tlg074 [First1K]
+  tlg0057.tlg079 [First1K]
+  tlg0057.tlg081 [First1K]
+  tlg0057.tlg082 [First1K]
+  tlg0057.tlg083 [First1K]
+  tlg0057.tlg093 [First1K]
+  tlg0057.tlg094 [First1K]
+  tlg0057.tlg096 [First1K]
+  tlg0057.tlg102 [First1K]
+  tlg0057.tlg103 [First1K]
+  tlg0081.tlg004 [Perseus Greek]
+  tlg0081.tlg006 [First1K]
+  tlg0081.tlg007 [First1K]
+  tlg0081.tlg009 [Perseus Greek]
+  tlg0086.tlg006 [First1K]
+  tlg0086.tlg008 [First1K]
+  tlg0086.tlg015 [First1K]
+  tlg0086.tlg016 [First1K]
+  tlg0086.tlg017 [First1K]
+  tlg0086.tlg018 [First1K]
+  tlg0086.tlg020 [First1K]
+  tlg0086.tlg021 [First1K]
+  tlg0086.tlg024 [First1K]
+  tlg0086.tlg037 [First1K]
+  tlg0086.tlg040 [First1K]
+  tlg0086.tlg042 [First1K]
+  tlg0086.tlg043 [First1K]
+  tlg0086.tlg052 [First1K]
+  tlg0317.tlg001 [First1K]
+  tlg0317.tlg002 [First1K]
+  tlg0357.tlg001 [First1K]
+  tlg0527.tlg034 [First1K]
+  tlg0527.tlg040 [First1K]
+  tlg0527.tlg048 [First1K]
+  tlg0527.tlg051 [First1K]
+  tlg0530.tlg005 [First1K]
+  tlg0530.tlg006 [First1K]
+  tlg0530.tlg012 [First1K]
+  tlg0530.tlg043 [First1K]
+  tlg0552.tlg002 [First1K]
+  tlg0552.tlg003 [First1K]
+  tlg0552.tlg004 [First1K]
+  tlg0552.tlg006 [First1K]
+  tlg0552.tlg007 [First1K]
+  tlg0552.tlg009 [First1K]
+  tlg0552.tlg010 [First1K]
+  tlg0552.tlg011 [First1K]
+  tlg0552.tlg012 [First1K]
+  tlg0555.tlg001 [First1K]
+  tlg0555.tlg001 [Perseus Greek]
+  tlg0555.tlg005 [First1K]
+  tlg0555.tlg006 [First1K]
+  tlg0555.tlg006 [Perseus Greek]
+  tlg0555.tlg007 [First1K]
+  tlg0559.tlg005 [First1K]
+  tlg0559.tlg007 [First1K]
+  tlg0559.tlg014 [First1K]
+  tlg0607.tlg001 [First1K]
+  tlg0610.perseus002 [First1K]
+  tlg0615.tlg001 [First1K]
+  tlg0627.tlg001 [First1K]
+  tlg0627.tlg002 [First1K]
+  tlg0627.tlg003 [First1K]
+  tlg0627.tlg004 [First1K]
+  tlg0627.tlg005 [First1K]
+  tlg0627.tlg007 [First1K]
+  tlg0627.tlg008 [First1K]
+  tlg0627.tlg009 [First1K]
+  tlg0627.tlg010 [First1K]
+  tlg0627.tlg011 [First1K]
+  tlg0627.tlg013 [First1K]
+  tlg0627.tlg014 [First1K]
+  tlg0627.tlg015 [First1K]
+  tlg0627.tlg017 [First1K]
+  tlg0627.tlg018 [First1K]
+  tlg0627.tlg019 [First1K]
+  tlg0627.tlg020 [First1K]
+  tlg0627.tlg021 [First1K]
+  tlg0627.tlg022 [First1K]
+  tlg0627.tlg024a [First1K]
+  tlg0627.tlg024b [First1K]
+  tlg0627.tlg025 [First1K]
+  tlg0627.tlg026 [First1K]
+  tlg0627.tlg027 [First1K]
+  tlg0627.tlg028 [First1K]
+  tlg0627.tlg029 [First1K]
+  tlg0627.tlg030 [First1K]
+  tlg0627.tlg032 [First1K]
+  tlg0627.tlg033 [First1K]
+  tlg0627.tlg035 [First1K]
+  tlg0627.tlg037 [First1K]
+  tlg0627.tlg038 [First1K]
+  tlg0627.tlg039 [First1K]
+  tlg0627.tlg042 [First1K]
+  tlg0627.tlg043 [First1K]
+  tlg0627.tlg045 [First1K]
+  tlg0627.tlg047 [First1K]
+  tlg0627.tlg048 [First1K]
+  tlg0627.tlg049 [First1K]
+  tlg0627.tlg050 [First1K]
+  tlg0627.tlg051 [First1K]
+  tlg0627.tlg052 [First1K]
+  tlg0627.tlg053 [First1K]
+  tlg0627.tlg055 [First1K]
+  tlg0644.tlg001 [First1K]
+  tlg0645.tlg001 [First1K]
+  tlg0645.tlg002 [First1K]
+  tlg0652.tlg001 [Perseus Greek]
+  tlg0693.tlg001 [First1K]
+  tlg0693.tlg002 [First1K]
+  tlg0732.tlg004 [First1K]
+  tlg0732.tlg006 [First1K]
+  tlg0732.tlg007 [First1K]
+  tlg0732.tlg008 [First1K]
+  tlg0732.tlg013 [First1K]
+  tlg0751.tlg034 [First1K]
+  tlg1181.tlg001 [First1K]
+  tlg1205.tlg002 [First1K]
+  tlg1447.tlg001 [First1K]
+  tlg1484.tlg001 [First1K]
+  tlg1487.tlg001 [First1K]
+  tlg1487.tlg002 [First1K]
+  tlg1553.tlg001 [First1K]
+  tlg1699.tlg001 [First1K]
+  tlg1699.tlg002 [First1K]
+  tlg1699.tlg003 [First1K]
+  tlg1699.tlg004 [First1K]
+  tlg1699.tlg005 [First1K]
+  tlg1699.tlg006 [First1K]
+  tlg1699.tlg007 [First1K]
+  tlg1699.tlg008 [First1K]
+  tlg1701.tlg001 [First1K]
+  tlg1765.tlg003 [First1K]
+  tlg1765.tlg005 [First1K]
+  tlg1766.tlg001 [First1K]
+  tlg1799.tlg009 [First1K]
+  tlg1799.tlg010 [First1K]
+  tlg1799.tlg011 [First1K]
+  tlg1799.tlg012 [First1K]
+  tlg1799.tlg014 [First1K]
+  tlg1799.tlg015 [First1K]
+  tlg2001.tlg038 [First1K]
+  tlg2001.tlg039 [First1K]
+  tlg2001.tlg040 [First1K]
+  tlg2001.tlg041 [First1K]
+  tlg2001.tlg042 [First1K]
+  tlg2018.tlg021 [First1K]
+  tlg2022.tlg007 [First1K]
+  tlg2022.tlg008 [First1K]
+  tlg2022.tlg009 [First1K]
+  tlg2022.tlg010 [First1K]
+  tlg2022.tlg011 [First1K]
+  tlg2023.tlg002 [First1K]
+  tlg2034.tlg006 [First1K]
+  tlg2034.tlg007 [First1K]
+  tlg2034.tlg015 [First1K]
+  tlg2035.tlg117 [First1K]
+  tlg2035.tlg130 [First1K]
+  tlg2035.tlg131 [First1K]
+  tlg2035.tlg132 [First1K]
+  tlg2042.tlg007 [First1K]
+  tlg2042.tlg057 [First1K]
+  tlg2049.tlg001 [First1K]
+  tlg2050.tlg001 [First1K]
+  tlg2058.tlg001 [First1K]
+  tlg2200.tlg00401 [First1K]
+  tlg2200.tlg00402 [First1K]
+  tlg2200.tlg00403 [First1K]
+  tlg2200.tlg00404 [First1K]
+  tlg2200.tlg00405 [First1K]
+  tlg2200.tlg00406 [First1K]
+  tlg2200.tlg00407 [First1K]
+  tlg2200.tlg00408 [First1K]
+  tlg2200.tlg00409 [First1K]
+  tlg2200.tlg00410 [First1K]
+  tlg2200.tlg00411 [First1K]
+  tlg2200.tlg00426 [First1K]
+  tlg2200.tlg00427 [First1K]
+  tlg2200.tlg00428 [First1K]
+  tlg2200.tlg00429 [First1K]
+  tlg2200.tlg00430 [First1K]
+  tlg2200.tlg00431 [First1K]
+  tlg2200.tlg00432 [First1K]
+  tlg2200.tlg00433 [First1K]
+  tlg2200.tlg00434 [First1K]
+  tlg2200.tlg00435 [First1K]
+  tlg2200.tlg00436 [First1K]
+  tlg2200.tlg00437 [First1K]
+  tlg2200.tlg00438 [First1K]
+  tlg2200.tlg00439 [First1K]
+  tlg2200.tlg00440 [First1K]
+  tlg2200.tlg00441 [First1K]
+  tlg2200.tlg00442 [First1K]
+  tlg2200.tlg00443 [First1K]
+  tlg2200.tlg00444 [First1K]
+  tlg2200.tlg00445 [First1K]
+  tlg2200.tlg00446 [First1K]
+  tlg2200.tlg00447 [First1K]
+  tlg2200.tlg00448 [First1K]
+  tlg2200.tlg00449 [First1K]
+  tlg2200.tlg00450 [First1K]
+  tlg2200.tlg00451 [First1K]
+  tlg2200.tlg00452 [First1K]
+  tlg2200.tlg00453 [First1K]
+  tlg2200.tlg00454 [First1K]
+  tlg2200.tlg00455 [First1K]
+  tlg2200.tlg00456 [First1K]
+  tlg2200.tlg00457 [First1K]
+  tlg2200.tlg00458 [First1K]
+  tlg2200.tlg00459 [First1K]
+  tlg2200.tlg00460 [First1K]
+  tlg2200.tlg00461 [First1K]
+  tlg2200.tlg00462 [First1K]
+  tlg2200.tlg00463 [First1K]
+  tlg2200.tlg00464 [First1K]
+  tlg2200.tlg00501 [First1K]
+  tlg2200.tlg00502 [First1K]
+  tlg2200.tlg00504 [First1K]
+  tlg2200.tlg00505 [First1K]
+  tlg2200.tlg00506 [First1K]
+  tlg2200.tlg00507 [First1K]
+  tlg2200.tlg00508 [First1K]
+  tlg2200.tlg00509 [First1K]
+  tlg2200.tlg00510 [First1K]
+  tlg2200.tlg00511 [First1K]
+  tlg2200.tlg00512 [First1K]
+  tlg2200.tlg00513 [First1K]
+  tlg2200.tlg00514 [First1K]
+  tlg2200.tlg00515 [First1K]
+  tlg2200.tlg00516 [First1K]
+  tlg2200.tlg00517 [First1K]
+  tlg2200.tlg00518 [First1K]
+  tlg2200.tlg00519 [First1K]
+  tlg2200.tlg00520 [First1K]
+  tlg2200.tlg00521 [First1K]
+  tlg2200.tlg00522 [First1K]
+  tlg2200.tlg00523 [First1K]
+  tlg2200.tlg00525 [First1K]
+  tlg2200.tlg00526 [First1K]
+  tlg2200.tlg00527 [First1K]
+  tlg2200.tlg00528 [First1K]
+  tlg2200.tlg00529 [First1K]
+  tlg2200.tlg00530 [First1K]
+  tlg2200.tlg00531 [First1K]
+  tlg2200.tlg00532 [First1K]
+  tlg2200.tlg00533 [First1K]
+  tlg2200.tlg00535 [First1K]
+  tlg2200.tlg00536 [First1K]
+  tlg2200.tlg00537 [First1K]
+  tlg2200.tlg00538 [First1K]
+  tlg2200.tlg00539 [First1K]
+  tlg2200.tlg00541 [First1K]
+  tlg2200.tlg00542 [First1K]
+  tlg2200.tlg00547 [First1K]
+  tlg2200.tlg00548 [First1K]
+  tlg2200.tlg00550 [First1K]
+  tlg2200.tlg00551 [First1K]
+  tlg2200.tlg008 [First1K]
+  tlg2371.tlg001 [First1K]
+  tlg4013.tlg001 [First1K]
+  tlg4013.tlg003 [First1K]
+  tlg4013.tlg004 [First1K]
+  tlg4013.tlg005 [First1K]
+  tlg4015.tlg001 [First1K]
+  tlg4015.tlg002 [First1K]
+  tlg4015.tlg004 [First1K]
+  tlg4015.tlg006 [First1K]
+  tlg4015.tlg007 [First1K]
+  tlg4015.tlg008 [First1K]
+  tlg4015.tlg009 [First1K]
+  tlg4017.tlg001 [First1K]
+  tlg4018.tlg001 [First1K]
+  tlg4019.tlg001 [First1K]
+  tlg4019.tlg002 [First1K]
+  tlg4019.tlg003 [First1K]
+  tlg4020.tlg001 [First1K]
+  tlg4020.tlg002 [First1K]
+  tlg4021.tlg001 [First1K]
+  tlg4021.tlg002 [First1K]
+  tlg4027.tlg001 [First1K]
+  tlg4030.tlg001 [First1K]
+  tlg4031.tlg002 [First1K]
+  tlg4033.tlg003 [First1K]
+  tlg4034.tlg002 [First1K]
+  tlg4034.tlg003 [First1K]
+  tlg4034.tlg004 [First1K]
+  tlg4034.tlg005 [First1K]
+  tlg4036.tlg001 [First1K]
+  tlg4089.tlg004 [First1K]
+  tlg4091.tlg001 [Perseus Greek]
+  tlg4102.tlg001 [First1K]
+  tlg4102.tlg002 [First1K]
+  tlg4102.tlg004 [First1K]
+  tlg4102.tlg008 [First1K]
+  tlg4102.tlg010 [First1K]
+  tlg4102.tlg012 [First1K]
+  tlg4102.tlg013 [First1K]
+  tlg4102.tlg019 [First1K]
+  tlg4102.tlg020 [First1K]
+  tlg4102.tlg021 [First1K]
+  tlg4102.tlg022 [First1K]
+  tlg4102.tlg023 [First1K]
+  tlg4102.tlg024 [First1K]
+  tlg4102.tlg034 [First1K]
+  tlg4102.tlg035 [First1K]
+  tlg4102.tlg036 [First1K]
+  tlg4102.tlg037 [First1K]
+  tlg4102.tlg038 [First1K]
+  tlg4102.tlg040 [First1K]
+  tlg4102.tlg041 [First1K]
+  tlg4102.tlg042 [First1K]
+  tlg4102.tlg043 [First1K]
+  tlg4102.tlg044 [First1K]
+  tlg4102.tlg045 [First1K]
+  tlg4102.tlg046 [First1K]
+  tlg4102.tlgX01 [First1K]
+  tlg4102.tlgX02 [First1K]
+  tlg4170.tlg001a [First1K]
+  tlg4170.tlg001b [First1K]
+  tlg4170.tlg001c [First1K]
+  tlg4170.tlg001d [First1K]
+  tlg4193.tlg012 [First1K]
+  tlg5023.tlg010 [First1K]
+  tlg9004.tlg001 [First1K]
+  tlg9006.tlg016 [First1K]
+  tlg9019.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → section → p
+COUNT: 429 works
+------------------------------------------------------------
+  phi0474.phi012 [Perseus Latin]
+  phi0474.phi052 [Perseus Latin]
+  tlg0007.tlg067 [Perseus Greek]
+  tlg0007.tlg068 [Perseus Greek]
+  tlg0007.tlg069 [Perseus Greek]
+  tlg0007.tlg070 [Perseus Greek]
+  tlg0007.tlg071 [Perseus Greek]
+  tlg0007.tlg072 [Perseus Greek]
+  tlg0007.tlg073 [Perseus Greek]
+  tlg0007.tlg074 [Perseus Greek]
+  tlg0007.tlg075 [Perseus Greek]
+  tlg0007.tlg076 [Perseus Greek]
+  tlg0007.tlg077 [Perseus Greek]
+  tlg0007.tlg078 [Perseus Greek]
+  tlg0007.tlg079 [Perseus Greek]
+  tlg0007.tlg080 [Perseus Greek]
+  tlg0007.tlg081 [Perseus Greek]
+  tlg0007.tlg082a [Perseus Greek]
+  tlg0007.tlg083 [Perseus Greek]
+  tlg0007.tlg084a [Perseus Greek]
+  tlg0007.tlg084b [Perseus Greek]
+  tlg0007.tlg085 [Perseus Greek]
+  tlg0007.tlg086 [Perseus Greek]
+  tlg0007.tlg088 [Perseus Greek]
+  tlg0007.tlg089 [Perseus Greek]
+  tlg0007.tlg090 [Perseus Greek]
+  tlg0007.tlg091 [Perseus Greek]
+  tlg0007.tlg092 [Perseus Greek]
+  tlg0007.tlg093 [Perseus Greek]
+  tlg0007.tlg094 [Perseus Greek]
+  tlg0007.tlg095 [Perseus Greek]
+  tlg0007.tlg096 [Perseus Greek]
+  tlg0007.tlg097 [Perseus Greek]
+  tlg0007.tlg098 [Perseus Greek]
+  tlg0007.tlg099 [Perseus Greek]
+  tlg0007.tlg100 [Perseus Greek]
+  tlg0007.tlg101 [Perseus Greek]
+  tlg0007.tlg102 [Perseus Greek]
+  tlg0007.tlg103 [Perseus Greek]
+  tlg0007.tlg104 [Perseus Greek]
+  tlg0007.tlg105 [Perseus Greek]
+  tlg0007.tlg106 [Perseus Greek]
+  tlg0007.tlg107 [Perseus Greek]
+  tlg0007.tlg108 [Perseus Greek]
+  tlg0007.tlg109 [Perseus Greek]
+  tlg0007.tlg110 [Perseus Greek]
+  tlg0007.tlg111 [Perseus Greek]
+  tlg0007.tlg113 [Perseus Greek]
+  tlg0007.tlg115 [Perseus Greek]
+  tlg0007.tlg116 [Perseus Greek]
+  tlg0007.tlg117 [Perseus Greek]
+  tlg0007.tlg118 [Perseus Greek]
+  tlg0007.tlg119 [Perseus Greek]
+  tlg0007.tlg120 [Perseus Greek]
+  tlg0007.tlg122 [Perseus Greek]
+  tlg0007.tlg123 [Perseus Greek]
+  tlg0007.tlg126 [Perseus Greek]
+  tlg0007.tlg127 [Perseus Greek]
+  tlg0007.tlg128 [Perseus Greek]
+  tlg0007.tlg129 [Perseus Greek]
+  tlg0007.tlg130 [Perseus Greek]
+  tlg0007.tlg131 [Perseus Greek]
+  tlg0007.tlg132 [Perseus Greek]
+  tlg0007.tlg134 [Perseus Greek]
+  tlg0007.tlg137 [Perseus Greek]
+  tlg0007.tlg138 [Perseus Greek]
+  tlg0007.tlg139 [Perseus Greek]
+  tlg0007.tlg140 [Perseus Greek]
+  tlg0007.tlg141 [Perseus Greek]
+  tlg0010.tlg001 [Perseus Greek]
+  tlg0010.tlg002 [Perseus Greek]
+  tlg0010.tlg003 [Perseus Greek]
+  tlg0010.tlg004 [Perseus Greek]
+  tlg0010.tlg005 [Perseus Greek]
+  tlg0010.tlg006 [Perseus Greek]
+  tlg0010.tlg007 [Perseus Greek]
+  tlg0010.tlg008 [Perseus Greek]
+  tlg0010.tlg009 [Perseus Greek]
+  tlg0010.tlg010 [Perseus Greek]
+  tlg0010.tlg011 [Perseus Greek]
+  tlg0010.tlg012 [Perseus Greek]
+  tlg0010.tlg013 [Perseus Greek]
+  tlg0010.tlg014 [Perseus Greek]
+  tlg0010.tlg015 [Perseus Greek]
+  tlg0010.tlg016 [Perseus Greek]
+  tlg0010.tlg017 [Perseus Greek]
+  tlg0010.tlg018 [Perseus Greek]
+  tlg0010.tlg019 [Perseus Greek]
+  tlg0010.tlg020 [Perseus Greek]
+  tlg0010.tlg021 [Perseus Greek]
+  tlg0014.tlg001 [Perseus Greek]
+  tlg0014.tlg002 [Perseus Greek]
+  tlg0014.tlg003 [Perseus Greek]
+  tlg0014.tlg004 [Perseus Greek]
+  tlg0014.tlg005 [Perseus Greek]
+  tlg0014.tlg006 [Perseus Greek]
+  tlg0014.tlg007 [Perseus Greek]
+  tlg0014.tlg008 [Perseus Greek]
+  tlg0014.tlg009 [Perseus Greek]
+  tlg0014.tlg010 [Perseus Greek]
+  tlg0014.tlg011 [Perseus Greek]
+  tlg0014.tlg012 [Perseus Greek]
+  tlg0014.tlg013 [Perseus Greek]
+  tlg0014.tlg014 [Perseus Greek]
+  tlg0014.tlg015 [Perseus Greek]
+  tlg0014.tlg016 [Perseus Greek]
+  tlg0014.tlg017 [Perseus Greek]
+  tlg0014.tlg018 [Perseus Greek]
+  tlg0014.tlg019 [Perseus Greek]
+  tlg0014.tlg020 [Perseus Greek]
+  tlg0014.tlg021 [Perseus Greek]
+  tlg0014.tlg022 [Perseus Greek]
+  tlg0014.tlg023 [Perseus Greek]
+  tlg0014.tlg024 [Perseus Greek]
+  tlg0014.tlg025 [Perseus Greek]
+  tlg0014.tlg026 [Perseus Greek]
+  tlg0014.tlg027 [Perseus Greek]
+  tlg0014.tlg028 [Perseus Greek]
+  tlg0014.tlg029 [Perseus Greek]
+  tlg0014.tlg030 [Perseus Greek]
+  tlg0014.tlg031 [Perseus Greek]
+  tlg0014.tlg032 [Perseus Greek]
+  tlg0014.tlg033 [Perseus Greek]
+  tlg0014.tlg034 [Perseus Greek]
+  tlg0014.tlg035 [Perseus Greek]
+  tlg0014.tlg036 [Perseus Greek]
+  tlg0014.tlg037 [Perseus Greek]
+  tlg0014.tlg038 [Perseus Greek]
+  tlg0014.tlg039 [Perseus Greek]
+  tlg0014.tlg040 [Perseus Greek]
+  tlg0014.tlg041 [Perseus Greek]
+  tlg0014.tlg042 [Perseus Greek]
+  tlg0014.tlg043 [Perseus Greek]
+  tlg0014.tlg044 [Perseus Greek]
+  tlg0014.tlg045 [Perseus Greek]
+  tlg0014.tlg046 [Perseus Greek]
+  tlg0014.tlg047 [Perseus Greek]
+  tlg0014.tlg048 [Perseus Greek]
+  tlg0014.tlg049 [Perseus Greek]
+  tlg0014.tlg050 [Perseus Greek]
+  tlg0014.tlg051 [Perseus Greek]
+  tlg0014.tlg052 [Perseus Greek]
+  tlg0014.tlg053 [Perseus Greek]
+  tlg0014.tlg054 [Perseus Greek]
+  tlg0014.tlg055 [Perseus Greek]
+  tlg0014.tlg056 [Perseus Greek]
+  tlg0014.tlg057 [Perseus Greek]
+  tlg0014.tlg058 [Perseus Greek]
+  tlg0014.tlg059 [Perseus Greek]
+  tlg0014.tlg060 [Perseus Greek]
+  tlg0014.tlg061 [Perseus Greek]
+  tlg0017.tlg001 [Perseus Greek]
+  tlg0017.tlg002 [Perseus Greek]
+  tlg0017.tlg003 [Perseus Greek]
+  tlg0017.tlg004 [Perseus Greek]
+  tlg0017.tlg005 [Perseus Greek]
+  tlg0017.tlg006 [Perseus Greek]
+  tlg0017.tlg007 [Perseus Greek]
+  tlg0017.tlg008 [Perseus Greek]
+  tlg0017.tlg009 [Perseus Greek]
+  tlg0017.tlg010 [Perseus Greek]
+  tlg0017.tlg011 [Perseus Greek]
+  tlg0017.tlg012 [Perseus Greek]
+  tlg0018.tlg001 [First1K]
+  tlg0018.tlg004 [First1K]
+  tlg0018.tlg005 [First1K]
+  tlg0018.tlg006 [First1K]
+  tlg0018.tlg007 [First1K]
+  tlg0018.tlg008 [First1K]
+  tlg0018.tlg009 [First1K]
+  tlg0018.tlg010 [First1K]
+  tlg0018.tlg011 [First1K]
+  tlg0018.tlg012 [First1K]
+  tlg0018.tlg013 [First1K]
+  tlg0018.tlg014 [First1K]
+  tlg0018.tlg015 [First1K]
+  tlg0018.tlg016 [First1K]
+  tlg0018.tlg017 [First1K]
+  tlg0018.tlg018 [First1K]
+  tlg0018.tlg020 [First1K]
+  tlg0018.tlg021 [First1K]
+  tlg0018.tlg023 [First1K]
+  tlg0018.tlg025 [First1K]
+  tlg0018.tlg026 [First1K]
+  tlg0018.tlg027 [First1K]
+  tlg0018.tlg028 [First1K]
+  tlg0018.tlg029 [First1K]
+  tlg0018.tlg030 [First1K]
+  tlg0018.tlg031 [First1K]
+  tlg0026.tlg001 [Perseus Greek]
+  tlg0026.tlg002 [Perseus Greek]
+  tlg0026.tlg003 [Perseus Greek]
+  tlg0027.tlg003 [Perseus Greek]
+  tlg0028.tlg001 [Perseus Greek]
+  tlg0028.tlg005 [Perseus Greek]
+  tlg0028.tlg006 [Perseus Greek]
+  tlg0029.tlg004 [Perseus Greek]
+  tlg0029.tlg005 [Perseus Greek]
+  tlg0029.tlg006 [Perseus Greek]
+  tlg0030.tlg001 [Perseus Greek]
+  tlg0030.tlg002 [Perseus Greek]
+  tlg0030.tlg003 [Perseus Greek]
+  tlg0030.tlg004 [Perseus Greek]
+  tlg0030.tlg005 [Perseus Greek]
+  tlg0030.tlg006 [Perseus Greek]
+  tlg0032.tlg005 [Perseus Greek]
+  tlg0034.tlg001 [Perseus Greek]
+  tlg0059.tlg001 [Perseus Greek]
+  tlg0059.tlg002 [Perseus Greek]
+  tlg0059.tlg003 [Perseus Greek]
+  tlg0059.tlg004 [Perseus Greek]
+  tlg0059.tlg005 [Perseus Greek]
+  tlg0059.tlg006 [Perseus Greek]
+  tlg0059.tlg007 [Perseus Greek]
+  tlg0059.tlg008 [Perseus Greek]
+  tlg0059.tlg009 [Perseus Greek]
+  tlg0059.tlg010 [Perseus Greek]
+  tlg0059.tlg011 [Perseus Greek]
+  tlg0059.tlg012 [Perseus Greek]
+  tlg0059.tlg013 [Perseus Greek]
+  tlg0059.tlg014 [Perseus Greek]
+  tlg0059.tlg015 [Perseus Greek]
+  tlg0059.tlg016 [Perseus Greek]
+  tlg0059.tlg017 [Perseus Greek]
+  tlg0061.tlg001 [Perseus Greek]
+  tlg0061.tlg003 [Perseus Greek]
+  tlg0061.tlg006 [Perseus Greek]
+  tlg0062.tlg002 [Perseus Greek]
+  tlg0062.tlg003 [Perseus Greek]
+  tlg0062.tlg004 [Perseus Greek]
+  tlg0062.tlg005 [Perseus Greek]
+  tlg0062.tlg006 [Perseus Greek]
+  tlg0062.tlg007 [Perseus Greek]
+  tlg0062.tlg008 [Perseus Greek]
+  tlg0062.tlg009 [Perseus Greek]
+  tlg0062.tlg010 [Perseus Greek]
+  tlg0062.tlg011 [Perseus Greek]
+  tlg0062.tlg013 [Perseus Greek]
+  tlg0062.tlg014 [Perseus Greek]
+  tlg0062.tlg022 [Perseus Greek]
+  tlg0062.tlg027 [Perseus Greek]
+  tlg0062.tlg028 [Perseus Greek]
+  tlg0062.tlg029 [Perseus Greek]
+  tlg0062.tlg030 [Perseus Greek]
+  tlg0062.tlg031 [Perseus Greek]
+  tlg0062.tlg032 [Perseus Greek]
+  tlg0062.tlg033 [Perseus Greek]
+  tlg0062.tlg034 [Perseus Greek]
+  tlg0062.tlg035 [Perseus Greek]
+  tlg0062.tlg036 [Perseus Greek]
+  tlg0062.tlg037 [Perseus Greek]
+  tlg0062.tlg038 [Perseus Greek]
+  tlg0062.tlg039 [Perseus Greek]
+  tlg0062.tlg040 [Perseus Greek]
+  tlg0062.tlg041 [Perseus Greek]
+  tlg0062.tlg042 [Perseus Greek]
+  tlg0062.tlg043 [Perseus Greek]
+  tlg0062.tlg044 [Perseus Greek]
+  tlg0062.tlg045 [Perseus Greek]
+  tlg0062.tlg046 [Perseus Greek]
+  tlg0062.tlg047 [Perseus Greek]
+  tlg0062.tlg048 [Perseus Greek]
+  tlg0062.tlg049 [Perseus Greek]
+  tlg0062.tlg050 [Perseus Greek]
+  tlg0062.tlg051 [Perseus Greek]
+  tlg0062.tlg052 [Perseus Greek]
+  tlg0062.tlg053 [Perseus Greek]
+  tlg0062.tlg054 [Perseus Greek]
+  tlg0062.tlg055 [Perseus Greek]
+  tlg0062.tlg056 [Perseus Greek]
+  tlg0062.tlg057 [Perseus Greek]
+  tlg0062.tlg058 [Perseus Greek]
+  tlg0062.tlg059 [Perseus Greek]
+  tlg0062.tlg060 [Perseus Greek]
+  tlg0062.tlg061 [Perseus Greek]
+  tlg0062.tlg062 [Perseus Greek]
+  tlg0062.tlg063 [Perseus Greek]
+  tlg0062.tlg064 [Perseus Greek]
+  tlg0094.tlg002 [Perseus Greek]
+  tlg0317.tlg001 [First1K]
+  tlg0526.tlg002 [Perseus Greek]
+  tlg0535.tlg001 [Perseus Greek]
+  tlg0540.tlg001 [Perseus Greek]
+  tlg0540.tlg002 [Perseus Greek]
+  tlg0540.tlg003 [Perseus Greek]
+  tlg0540.tlg004 [Perseus Greek]
+  tlg0540.tlg005 [Perseus Greek]
+  tlg0540.tlg006 [Perseus Greek]
+  tlg0540.tlg007 [Perseus Greek]
+  tlg0540.tlg008 [Perseus Greek]
+  tlg0540.tlg009 [Perseus Greek]
+  tlg0540.tlg010 [Perseus Greek]
+  tlg0540.tlg011 [Perseus Greek]
+  tlg0540.tlg012 [Perseus Greek]
+  tlg0540.tlg013 [Perseus Greek]
+  tlg0540.tlg014 [Perseus Greek]
+  tlg0540.tlg015 [Perseus Greek]
+  tlg0540.tlg016 [Perseus Greek]
+  tlg0540.tlg017 [Perseus Greek]
+  tlg0540.tlg018 [Perseus Greek]
+  tlg0540.tlg019 [Perseus Greek]
+  tlg0540.tlg020 [Perseus Greek]
+  tlg0540.tlg021 [Perseus Greek]
+  tlg0540.tlg022 [Perseus Greek]
+  tlg0540.tlg023 [Perseus Greek]
+  tlg0540.tlg024 [Perseus Greek]
+  tlg0540.tlg025 [Perseus Greek]
+  tlg0540.tlg026 [Perseus Greek]
+  tlg0540.tlg027 [Perseus Greek]
+  tlg0540.tlg028 [Perseus Greek]
+  tlg0540.tlg029 [Perseus Greek]
+  tlg0540.tlg030 [Perseus Greek]
+  tlg0540.tlg031 [Perseus Greek]
+  tlg0540.tlg032 [Perseus Greek]
+  tlg0540.tlg033 [Perseus Greek]
+  tlg0540.tlg034 [Perseus Greek]
+  tlg0627.tlg001 [Perseus Greek]
+  tlg0627.tlg002 [Perseus Greek]
+  tlg0627.tlg003 [Perseus Greek]
+  tlg0627.tlg004 [Perseus Greek]
+  tlg0627.tlg007 [Perseus Greek]
+  tlg0627.tlg008 [Perseus Greek]
+  tlg0627.tlg009 [Perseus Greek]
+  tlg0627.tlg010 [Perseus Greek]
+  tlg0627.tlg011 [Perseus Greek]
+  tlg0627.tlg014 [Perseus Greek]
+  tlg0627.tlg027 [Perseus Greek]
+  tlg0627.tlg028 [Perseus Greek]
+  tlg0627.tlg029 [Perseus Greek]
+  tlg0627.tlg030 [Perseus Greek]
+  tlg0627.tlg046 [Perseus Greek]
+  tlg0627.tlg051 [Perseus Greek]
+  tlg2016.tlg001 [First1K]
+  tlg2018.tlg011 [First1K]
+  tlg2038.tlg001 [First1K]
+  tlg2948.tlg001 [First1K]
+  tlg4037.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → chapter → section → p
+COUNT: 199 works
+------------------------------------------------------------
+  phi1014.phi003 [Perseus Latin]
+  phi1348.abo011 [Perseus Latin]
+  phi1348.abo012 [Perseus Latin]
+  phi1351.phi001 [Perseus Latin]
+  phi1351.phi002 [Perseus Latin]
+  stoa0203.stoa001 [Perseus Latin]
+  stoa0275.stoa009 [Perseus Latin]
+  stoa0275.stoa027 [Perseus Latin]
+  tlg0007.tlg001 [Perseus Greek]
+  tlg0007.tlg002 [Perseus Greek]
+  tlg0007.tlg003 [Perseus Greek]
+  tlg0007.tlg004 [Perseus Greek]
+  tlg0007.tlg005 [Perseus Greek]
+  tlg0007.tlg006 [Perseus Greek]
+  tlg0007.tlg007 [Perseus Greek]
+  tlg0007.tlg008 [Perseus Greek]
+  tlg0007.tlg009 [Perseus Greek]
+  tlg0007.tlg010 [Perseus Greek]
+  tlg0007.tlg011 [Perseus Greek]
+  tlg0007.tlg012 [Perseus Greek]
+  tlg0007.tlg013 [Perseus Greek]
+  tlg0007.tlg014 [Perseus Greek]
+  tlg0007.tlg015 [Perseus Greek]
+  tlg0007.tlg016 [Perseus Greek]
+  tlg0007.tlg017 [Perseus Greek]
+  tlg0007.tlg018 [Perseus Greek]
+  tlg0007.tlg019 [Perseus Greek]
+  tlg0007.tlg020 [Perseus Greek]
+  tlg0007.tlg021 [Perseus Greek]
+  tlg0007.tlg022 [Perseus Greek]
+  tlg0007.tlg023 [Perseus Greek]
+  tlg0007.tlg024 [Perseus Greek]
+  tlg0007.tlg025 [Perseus Greek]
+  tlg0007.tlg026 [Perseus Greek]
+  tlg0007.tlg027 [Perseus Greek]
+  tlg0007.tlg028 [Perseus Greek]
+  tlg0007.tlg029 [Perseus Greek]
+  tlg0007.tlg030 [Perseus Greek]
+  tlg0007.tlg031 [Perseus Greek]
+  tlg0007.tlg032 [Perseus Greek]
+  tlg0007.tlg033 [Perseus Greek]
+  tlg0007.tlg034 [Perseus Greek]
+  tlg0007.tlg035 [Perseus Greek]
+  tlg0007.tlg036 [Perseus Greek]
+  tlg0007.tlg037 [Perseus Greek]
+  tlg0007.tlg038 [Perseus Greek]
+  tlg0007.tlg039 [Perseus Greek]
+  tlg0007.tlg040 [Perseus Greek]
+  tlg0007.tlg041 [Perseus Greek]
+  tlg0007.tlg042 [Perseus Greek]
+  tlg0007.tlg043 [Perseus Greek]
+  tlg0007.tlg044 [Perseus Greek]
+  tlg0007.tlg045 [Perseus Greek]
+  tlg0007.tlg046 [Perseus Greek]
+  tlg0007.tlg047 [Perseus Greek]
+  tlg0007.tlg048 [Perseus Greek]
+  tlg0007.tlg049 [Perseus Greek]
+  tlg0007.tlg050 [Perseus Greek]
+  tlg0007.tlg053 [Perseus Greek]
+  tlg0007.tlg054 [Perseus Greek]
+  tlg0007.tlg055 [Perseus Greek]
+  tlg0007.tlg056 [Perseus Greek]
+  tlg0007.tlg057 [Perseus Greek]
+  tlg0007.tlg058 [Perseus Greek]
+  tlg0007.tlg059 [Perseus Greek]
+  tlg0007.tlg060 [Perseus Greek]
+  tlg0007.tlg061 [Perseus Greek]
+  tlg0007.tlg062 [Perseus Greek]
+  tlg0007.tlg063 [Perseus Greek]
+  tlg0007.tlg064 [Perseus Greek]
+  tlg0007.tlg065 [Perseus Greek]
+  tlg0007.tlg066 [Perseus Greek]
+  tlg0007.tlg081 [Perseus Greek]
+  tlg0007.tlg082 [Perseus Greek]
+  tlg0007.tlg082b [Perseus Greek]
+  tlg0007.tlg087 [Perseus Greek]
+  tlg0007.tlg121 [Perseus Greek]
+  tlg0007.tlg133 [Perseus Greek]
+  tlg0032.tlg003 [Perseus Greek]
+  tlg0032.tlg004 [Perseus Greek]
+  tlg0032.tlg008 [Perseus Greek]
+  tlg0032.tlg009 [Perseus Greek]
+  tlg0032.tlg010 [Perseus Greek]
+  tlg0032.tlg011 [Perseus Greek]
+  tlg0032.tlg012 [Perseus Greek]
+  tlg0032.tlg013 [Perseus Greek]
+  tlg0032.tlg014 [Perseus Greek]
+  tlg0057.tlg073 [First1K]
+  tlg0058.tlg001 [Perseus Greek]
+  tlg0065.tlg001 [First1K]
+  tlg0074.tlg002 [Perseus Greek]
+  tlg0074.tlg003 [Perseus Greek]
+  tlg0074.tlg004 [Perseus Greek]
+  tlg0074.tlg005 [Perseus Greek]
+  tlg0081.tlg015 [Perseus Greek]
+  tlg0086.tlg007 [First1K]
+  tlg0086.tlg023 [First1K]
+  tlg0086.tlg027 [First1K]
+  tlg0086.tlg032 [First1K]
+  tlg0086.tlg041 [First1K]
+  tlg0087.tlg013 [First1K]
+  tlg0087.tlg026 [First1K]
+  tlg0090.tlg001 [First1K]
+  tlg0090.tlg001 [Perseus Greek]
+  tlg0092.tlg001 [First1K]
+  tlg0093.ogl001 [First1K]
+  tlg0093.ogl002 [First1K]
+  tlg0093.tlg005 [First1K]
+  tlg0093.tlg009 [Perseus Greek]
+  tlg0093.tlg010x01 [First1K]
+  tlg0093.tlg010x02 [First1K]
+  tlg0093.tlg010x03 [First1K]
+  tlg0093.tlg010x04 [First1K]
+  tlg0094.tlg001 [First1K]
+  tlg0358.tlg001 [First1K]
+  tlg0533.tlg006 [First1K]
+  tlg0548.tlg002 [Perseus Greek]
+  tlg0551.tlg007 [Perseus Greek]
+  tlg0551.tlg008 [Perseus Greek]
+  tlg0551.tlg009 [Perseus Greek]
+  tlg0551.tlg012 [Perseus Greek]
+  tlg0551.tlg013 [Perseus Greek]
+  tlg0551.tlg014 [Perseus Greek]
+  tlg0552.tlg013 [First1K]
+  tlg0556.tlg001 [Perseus Greek]
+  tlg0557.tlg002 [Perseus Greek]
+  tlg0559.tlg011 [First1K]
+  tlg0559.tlg015 [First1K]
+  tlg0560.tlg001 [Perseus Greek]
+  tlg0564.tlg001 [First1K]
+  tlg0572.tlg001 [First1K]
+  tlg0592.tlg003 [First1K]
+  tlg0606.tlg001 [First1K]
+  tlg0645.tlg003 [First1K]
+  tlg0646.tlg004 [First1K]
+  tlg0648.tlg001 [Perseus Greek]
+  tlg0655.tlg001 [Perseus Greek]
+  tlg0657.tlg001 [First1K]
+  tlg0708.tlg001 [First1K]
+  tlg0732.tlg003 [First1K]
+  tlg1118.tlg003 [First1K]
+  tlg1205.tlg002 [First1K]
+  tlg1210.tlg001 [First1K]
+  tlg1216.tlg001 [First1K]
+  tlg1216.tlg001 [Perseus Greek]
+  tlg1247.tlg001 [First1K]
+  tlg1271.tlg001 [First1K]
+  tlg1271.tlg002 [First1K]
+  tlg1271.tlg006 [First1K]
+  tlg1309.tlg001 [First1K]
+  tlg1311.tlg001 [First1K]
+  tlg1383.tlg001 [First1K]
+  tlg1402.tlg001 [First1K]
+  tlg1402.tlg003 [First1K]
+  tlg1463.tlg001 [First1K]
+  tlg1617.tlg001 [First1K]
+  tlg1622.tlg001 [First1K]
+  tlg1799.tlg016 [First1K]
+  tlg2018.tlg003 [First1K]
+  tlg2018.tlg022 [First1K]
+  tlg2018.tlg023 [First1K]
+  tlg2021.tlg001 [First1K]
+  tlg2023.tlg001 [First1K]
+  tlg2023.tlg006 [First1K]
+  tlg2029.tlg001 [First1K]
+  tlg2034.tlg014 [First1K]
+  tlg2035.tlg002 [First1K]
+  tlg2035.tlg003 [First1K]
+  tlg2040.tlg002 [Perseus Greek]
+  tlg2042.tlg008 [First1K]
+  tlg2200.tlg00503 [First1K]
+  tlg2200.tlg00524 [First1K]
+  tlg2200.tlg00534 [First1K]
+  tlg2200.tlg00540 [First1K]
+  tlg2233.tlg001 [First1K]
+  tlg2934.tlg066 [Perseus Greek]
+  tlg2959.tlg002 [First1K]
+  tlg2959.tlg004 [First1K]
+  tlg2959.tlg005 [First1K]
+  tlg2959.tlg006 [First1K]
+  tlg2959.tlg011 [First1K]
+  tlg2959.tlg012 [First1K]
+  tlg4026.tlg001 [First1K]
+  tlg4029.tlg002 [Perseus Greek]
+  tlg4072.tlg003 [First1K]
+  tlg5022.tlg006 [First1K]
+  tlg5023.tlg011 [First1K]
+  tlg5023.tlg012 [First1K]
+  tlg5023.tlg013 [First1K]
+  tlg5023.tlg014 [First1K]
+
+============================================================
+PATTERN: book → p
+COUNT: 146 works
+------------------------------------------------------------
+  phi0914.phi0011 [Perseus Latin]
+  phi0914.phi00110 [Perseus Latin]
+  phi0914.phi00111s [Perseus Latin]
+  phi0914.phi00112s [Perseus Latin]
+  phi0914.phi00113s [Perseus Latin]
+  phi0914.phi00114s [Perseus Latin]
+  phi0914.phi00115s [Perseus Latin]
+  phi0914.phi00116s [Perseus Latin]
+  phi0914.phi00117s [Perseus Latin]
+  phi0914.phi00118s [Perseus Latin]
+  phi0914.phi00119s [Perseus Latin]
+  phi0914.phi0012 [Perseus Latin]
+  phi0914.phi00120s [Perseus Latin]
+  phi0914.phi00121 [Perseus Latin]
+  phi0914.phi00122 [Perseus Latin]
+  phi0914.phi00123 [Perseus Latin]
+  phi0914.phi00124 [Perseus Latin]
+  phi0914.phi00125 [Perseus Latin]
+  phi0914.phi00126 [Perseus Latin]
+  phi0914.phi00127 [Perseus Latin]
+  phi0914.phi00128 [Perseus Latin]
+  phi0914.phi00129 [Perseus Latin]
+  phi0914.phi0013 [Perseus Latin]
+  phi0914.phi00130 [Perseus Latin]
+  phi0914.phi00131 [Perseus Latin]
+  phi0914.phi00132 [Perseus Latin]
+  phi0914.phi00133 [Perseus Latin]
+  phi0914.phi00134 [Perseus Latin]
+  phi0914.phi00135 [Perseus Latin]
+  phi0914.phi00136 [Perseus Latin]
+  phi0914.phi00137 [Perseus Latin]
+  phi0914.phi00138 [Perseus Latin]
+  phi0914.phi00139 [Perseus Latin]
+  phi0914.phi0014 [Perseus Latin]
+  phi0914.phi00140 [Perseus Latin]
+  phi0914.phi00141 [Perseus Latin]
+  phi0914.phi00142 [Perseus Latin]
+  phi0914.phi00143 [Perseus Latin]
+  phi0914.phi00144 [Perseus Latin]
+  phi0914.phi00145 [Perseus Latin]
+  phi0914.phi0015 [Perseus Latin]
+  phi0914.phi0016 [Perseus Latin]
+  phi0914.phi0017 [Perseus Latin]
+  phi0914.phi0018 [Perseus Latin]
+  phi0914.phi0019 [Perseus Latin]
+  phi0914.phi001fr [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → chapter → p
+COUNT: 110 works
+------------------------------------------------------------
+  phi0836.phi002 [Perseus Latin]
+  phi0978.phi001 [Perseus Latin]
+  phi1014.phi001 [Perseus Latin]
+  phi1014.phi002 [Perseus Latin]
+  phi1212.phi002 [Perseus Latin]
+  phi1351.phi004 [Perseus Latin]
+  stoa0121.stoa001 [First1K]
+  stoa0275.stoa002 [Perseus Latin]
+  stoa0275.stoa006 [Perseus Latin]
+  stoa0275.stoa014 [Perseus Latin]
+  stoa0276.stoa002 [Perseus Latin]
+  tlg0008.tlg001 [Perseus Greek]
+  tlg0057.tlg008 [First1K]
+  tlg0057.tlg009 [First1K]
+  tlg0057.tlg010 [First1K]
+  tlg0057.tlg011 [First1K]
+  tlg0057.tlg017 [First1K]
+  tlg0057.tlg018 [First1K]
+  tlg0057.tlg021 [First1K]
+  tlg0057.tlg032 [First1K]
+  tlg0057.tlg036 [First1K]
+  tlg0057.tlg044 [First1K]
+  tlg0057.tlg045 [First1K]
+  tlg0057.tlg056 [First1K]
+  tlg0057.tlg057 [First1K]
+  tlg0057.tlg059 [First1K]
+  tlg0057.tlg060 [First1K]
+  tlg0057.tlg061 [First1K]
+  tlg0057.tlg062 [First1K]
+  tlg0057.tlg064 [First1K]
+  tlg0057.tlg065 [First1K]
+  tlg0057.tlg066 [First1K]
+  tlg0057.tlg067 [First1K]
+  tlg0057.tlg075 [First1K]
+  tlg0057.tlg076 [First1K]
+  tlg0057.tlg077 [First1K]
+  tlg0057.tlg078 [First1K]
+  tlg0057.tlg085 [First1K]
+  tlg0057.tlg095 [First1K]
+  tlg0057.tlg100 [First1K]
+  tlg0057.tlg101 [First1K]
+  tlg0081.tlg016 [First1K]
+  tlg0086.tlg002 [First1K]
+  tlg0086.tlg005 [First1K]
+  tlg0086.tlg012 [First1K]
+  tlg0086.tlg013 [First1K]
+  tlg0086.tlg014 [First1K]
+  tlg0086.tlg026 [First1K]
+  tlg0086.tlg031 [First1K]
+  tlg0086.tlg036 [First1K]
+  tlg0086.tlg044 [First1K]
+  tlg0094.tlg003 [Perseus Greek]
+  tlg0363.tlg007 [Perseus Greek]
+  tlg0530.tlg029 [First1K]
+  tlg0545.tlg001 [Perseus Greek]
+  tlg0545.tlg002 [Perseus Greek]
+  tlg0552.tlg001 [First1K]
+  tlg0552.tlg005 [First1K]
+  tlg0552.tlg008 [First1K]
+  tlg0555.tlg002 [First1K]
+  tlg0559.tlg001 [First1K]
+  tlg0559.tlg002 [First1K]
+  tlg0559.tlg004 [First1K]
+  tlg0559.tlg006 [First1K]
+  tlg0565.tlg001 [First1K]
+  tlg0613.tlg001 [Perseus Greek]
+  tlg0627.tlg006 [First1K]
+  tlg0627.tlg016 [First1K]
+  tlg0627.tlg023 [First1K]
+  tlg0627.tlg031 [First1K]
+  tlg0627.tlg036 [First1K]
+  tlg0638.tlg001 [Perseus Greek]
+  tlg0638.tlg006 [Perseus Greek]
+  tlg0658.tlg001 [First1K]
+  tlg0719.tlg001 [Perseus Greek]
+  tlg0719.tlg002 [Perseus Greek]
+  tlg0719.tlg003 [Perseus Greek]
+  tlg0719.tlg004 [Perseus Greek]
+  tlg0732.tlg012 [First1K]
+  tlg1431.tlg003 [First1K]
+  tlg1600.tlg001 [Perseus Greek]
+  tlg1725.tlg001 [First1K]
+  tlg2018.tlg002 [First1K]
+  tlg2018.tlg002 [Perseus Greek]
+  tlg2018.tlg009 [First1K]
+  tlg2018.tlg010 [First1K]
+  tlg2032.tlg001 [First1K]
+  tlg2034.tlg027 [First1K]
+  tlg2042.tlg001 [First1K]
+  tlg2042.tlg029 [First1K]
+  tlg2057.tlg002 [First1K]
+  tlg2115.tlg060 [First1K]
+  tlg2586.tlg001 [First1K]
+  tlg2703.tlg001 [First1K]
+  tlg2733.tlg001 [First1K]
+  tlg3135.tlg001 [First1K]
+  tlg3135.tlg011 [First1K]
+  tlg4089.tlg003 [First1K]
+  tlg4102.tlgX03 [First1K]
+  tlg9010.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → chapter → section → p
+COUNT: 95 works
+------------------------------------------------------------
+  tlg0007.tlg001 [Perseus Greek]
+  tlg0007.tlg002 [Perseus Greek]
+  tlg0007.tlg003 [Perseus Greek]
+  tlg0007.tlg004 [Perseus Greek]
+  tlg0007.tlg005 [Perseus Greek]
+  tlg0007.tlg006 [Perseus Greek]
+  tlg0007.tlg007 [Perseus Greek]
+  tlg0007.tlg008 [Perseus Greek]
+  tlg0007.tlg009 [Perseus Greek]
+  tlg0007.tlg010 [Perseus Greek]
+  tlg0007.tlg011 [Perseus Greek]
+  tlg0007.tlg012 [Perseus Greek]
+  tlg0007.tlg013 [Perseus Greek]
+  tlg0007.tlg014 [Perseus Greek]
+  tlg0007.tlg015 [Perseus Greek]
+  tlg0007.tlg016 [Perseus Greek]
+  tlg0007.tlg017 [Perseus Greek]
+  tlg0007.tlg018 [Perseus Greek]
+  tlg0007.tlg019 [Perseus Greek]
+  tlg0007.tlg020 [Perseus Greek]
+  tlg0007.tlg021 [Perseus Greek]
+  tlg0007.tlg022 [Perseus Greek]
+  tlg0007.tlg023 [Perseus Greek]
+  tlg0007.tlg024 [Perseus Greek]
+  tlg0007.tlg025 [Perseus Greek]
+  tlg0007.tlg026 [Perseus Greek]
+  tlg0007.tlg027 [Perseus Greek]
+  tlg0007.tlg028 [Perseus Greek]
+  tlg0007.tlg029 [Perseus Greek]
+  tlg0007.tlg030 [Perseus Greek]
+  tlg0007.tlg031 [Perseus Greek]
+  tlg0007.tlg032 [Perseus Greek]
+  tlg0007.tlg033 [Perseus Greek]
+  tlg0007.tlg034 [Perseus Greek]
+  tlg0007.tlg035 [Perseus Greek]
+  tlg0007.tlg036 [Perseus Greek]
+  tlg0007.tlg037 [Perseus Greek]
+  tlg0007.tlg038 [Perseus Greek]
+  tlg0007.tlg039 [Perseus Greek]
+  tlg0007.tlg040 [Perseus Greek]
+  tlg0007.tlg041 [Perseus Greek]
+  tlg0007.tlg042 [Perseus Greek]
+  tlg0007.tlg043 [Perseus Greek]
+  tlg0007.tlg044 [Perseus Greek]
+  tlg0007.tlg045 [Perseus Greek]
+  tlg0007.tlg046 [Perseus Greek]
+  tlg0007.tlg047 [Perseus Greek]
+  tlg0007.tlg048 [Perseus Greek]
+  tlg0007.tlg049 [Perseus Greek]
+  tlg0007.tlg050 [Perseus Greek]
+  tlg0007.tlg053 [Perseus Greek]
+  tlg0007.tlg054 [Perseus Greek]
+  tlg0007.tlg055 [Perseus Greek]
+  tlg0007.tlg056 [Perseus Greek]
+  tlg0007.tlg057 [Perseus Greek]
+  tlg0007.tlg058 [Perseus Greek]
+  tlg0007.tlg059 [Perseus Greek]
+  tlg0007.tlg060 [Perseus Greek]
+  tlg0007.tlg061 [Perseus Greek]
+  tlg0007.tlg062 [Perseus Greek]
+  tlg0007.tlg063 [Perseus Greek]
+  tlg0007.tlg064 [Perseus Greek]
+  tlg0007.tlg066 [Perseus Greek]
+  tlg0007.tlg081 [Perseus Greek]
+  tlg0007.tlg082 [Perseus Greek]
+  tlg0007.tlg082b [Perseus Greek]
+  tlg0007.tlg087 [Perseus Greek]
+  tlg0007.tlg133 [Perseus Greek]
+  tlg0032.tlg003 [Perseus Greek]
+  tlg0032.tlg004 [Perseus Greek]
+  tlg0032.tlg008 [Perseus Greek]
+  tlg0032.tlg009 [Perseus Greek]
+  tlg0032.tlg010 [Perseus Greek]
+  tlg0032.tlg011 [Perseus Greek]
+  tlg0032.tlg012 [Perseus Greek]
+  tlg0032.tlg013 [Perseus Greek]
+  tlg0032.tlg014 [Perseus Greek]
+  tlg0090.tlg001 [First1K]
+  tlg0090.tlg001 [Perseus Greek]
+  tlg0548.tlg002 [Perseus Greek]
+  tlg0551.tlg007 [Perseus Greek]
+  tlg0551.tlg008 [Perseus Greek]
+  tlg0551.tlg009 [Perseus Greek]
+  tlg0551.tlg014 [Perseus Greek]
+  tlg0646.tlg004 [Perseus Greek]
+  tlg1216.tlg001 [Perseus Greek]
+  tlg1271.tlg001 [Perseus Greek]
+  tlg1271.tlg002 [Perseus Greek]
+  tlg1311.tlg001 [Perseus Greek]
+  tlg1622.tlg001 [Perseus Greek]
+  tlg2035.tlg003 [First1K]
+
+============================================================
+PATTERN: edition → l
+COUNT: 85 works
+------------------------------------------------------------
+  phi0893.phi006 [Perseus Latin]
+  phi0959.phi005 [Perseus Latin]
+  phi0959.phi010 [Perseus Latin]
+  tlg0005.tlg003 [First1K]
+  tlg0006.tlg001 [Perseus Greek]
+  tlg0006.tlg002 [Perseus Greek]
+  tlg0006.tlg003 [Perseus Greek]
+  tlg0006.tlg004 [Perseus Greek]
+  tlg0006.tlg005 [Perseus Greek]
+  tlg0006.tlg006 [Perseus Greek]
+  tlg0006.tlg007 [Perseus Greek]
+  tlg0006.tlg008 [Perseus Greek]
+  tlg0006.tlg009 [Perseus Greek]
+  tlg0006.tlg010 [Perseus Greek]
+  tlg0006.tlg011 [Perseus Greek]
+  tlg0006.tlg012 [Perseus Greek]
+  tlg0006.tlg013 [Perseus Greek]
+  tlg0006.tlg014 [Perseus Greek]
+  tlg0006.tlg015 [Perseus Greek]
+  tlg0006.tlg016 [Perseus Greek]
+  tlg0006.tlg017 [Perseus Greek]
+  tlg0006.tlg018 [Perseus Greek]
+  tlg0006.tlg019 [Perseus Greek]
+  tlg0013.tlg001 [Perseus Greek]
+  tlg0013.tlg002 [Perseus Greek]
+  tlg0013.tlg004 [Perseus Greek]
+  tlg0013.tlg005 [Perseus Greek]
+  tlg0013.tlg006 [Perseus Greek]
+  tlg0013.tlg007 [Perseus Greek]
+  tlg0013.tlg008 [Perseus Greek]
+  tlg0013.tlg009 [Perseus Greek]
+  tlg0013.tlg010 [Perseus Greek]
+  tlg0013.tlg011 [Perseus Greek]
+  tlg0013.tlg012 [Perseus Greek]
+  tlg0013.tlg013 [Perseus Greek]
+  tlg0013.tlg014 [Perseus Greek]
+  tlg0013.tlg015 [Perseus Greek]
+  tlg0013.tlg016 [Perseus Greek]
+  tlg0013.tlg017 [Perseus Greek]
+  tlg0013.tlg018 [Perseus Greek]
+  tlg0013.tlg019 [Perseus Greek]
+  tlg0013.tlg020 [Perseus Greek]
+  tlg0013.tlg021 [Perseus Greek]
+  tlg0013.tlg022 [Perseus Greek]
+  tlg0013.tlg023 [Perseus Greek]
+  tlg0013.tlg024 [Perseus Greek]
+  tlg0013.tlg025 [Perseus Greek]
+  tlg0013.tlg026 [Perseus Greek]
+  tlg0013.tlg027 [Perseus Greek]
+  tlg0013.tlg028 [Perseus Greek]
+  tlg0013.tlg029 [Perseus Greek]
+  tlg0013.tlg030 [Perseus Greek]
+  tlg0013.tlg031 [Perseus Greek]
+  tlg0013.tlg032 [Perseus Greek]
+  tlg0013.tlg033 [Perseus Greek]
+  tlg0020.tlg001 [Perseus Greek]
+  tlg0020.tlg002 [Perseus Greek]
+  tlg0020.tlg003 [Perseus Greek]
+  tlg0022.tlg001 [First1K]
+  tlg0022.tlg002 [First1K]
+  tlg0035.tlg001 [Perseus Greek]
+  tlg0035.tlg002 [Perseus Greek]
+  tlg0035.tlg003 [Perseus Greek]
+  tlg0035.tlg004 [Perseus Greek]
+  tlg0036.tlg001 [Perseus Greek]
+  tlg0061.tlg005 [First1K]
+  tlg0084.tlg001 [First1K]
+  tlg0341.tlg002 [Perseus Greek]
+  tlg0533.tlg015 [Perseus Greek]
+  tlg0533.tlg016 [Perseus Greek]
+  tlg0533.tlg017 [Perseus Greek]
+  tlg0533.tlg018 [Perseus Greek]
+  tlg0533.tlg019 [Perseus Greek]
+  tlg0533.tlg020 [Perseus Greek]
+  tlg0647.tlg001 [Perseus Greek]
+  tlg0653.tlg001 [Perseus Greek]
+  tlg0676.tlg001 [First1K]
+  tlg1486.tlg001 [First1K]
+  tlg4081.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → chapter → verse → p
+COUNT: 85 works
+------------------------------------------------------------
+  tlg0031.tlg001 [Perseus Greek]
+  tlg0031.tlg002 [Perseus Greek]
+  tlg0031.tlg003 [Perseus Greek]
+  tlg0031.tlg004 [Perseus Greek]
+  tlg0031.tlg005 [Perseus Greek]
+  tlg0031.tlg006 [Perseus Greek]
+  tlg0031.tlg007 [Perseus Greek]
+  tlg0031.tlg008 [Perseus Greek]
+  tlg0031.tlg009 [Perseus Greek]
+  tlg0031.tlg010 [Perseus Greek]
+  tlg0031.tlg011 [Perseus Greek]
+  tlg0031.tlg012 [Perseus Greek]
+  tlg0031.tlg013 [Perseus Greek]
+  tlg0031.tlg014 [Perseus Greek]
+  tlg0031.tlg015 [Perseus Greek]
+  tlg0031.tlg016 [Perseus Greek]
+  tlg0031.tlg017 [Perseus Greek]
+  tlg0031.tlg018 [Perseus Greek]
+  tlg0031.tlg019 [Perseus Greek]
+  tlg0031.tlg020 [Perseus Greek]
+  tlg0031.tlg021 [Perseus Greek]
+  tlg0031.tlg022 [Perseus Greek]
+  tlg0031.tlg023 [Perseus Greek]
+  tlg0031.tlg024 [Perseus Greek]
+  tlg0031.tlg025 [Perseus Greek]
+  tlg0031.tlg026 [Perseus Greek]
+  tlg0031.tlg027 [Perseus Greek]
+  tlg0527.tlg001 [First1K]
+  tlg0527.tlg002 [First1K]
+  tlg0527.tlg003 [First1K]
+  tlg0527.tlg004 [First1K]
+  tlg0527.tlg005 [First1K]
+  tlg0527.tlg006 [First1K]
+  tlg0527.tlg008 [First1K]
+  tlg0527.tlg010 [First1K]
+  tlg0527.tlg011 [First1K]
+  tlg0527.tlg012 [First1K]
+  tlg0527.tlg013 [First1K]
+  tlg0527.tlg014 [First1K]
+  tlg0527.tlg015 [First1K]
+  tlg0527.tlg016 [First1K]
+  tlg0527.tlg017 [First1K]
+  tlg0527.tlg018 [First1K]
+  tlg0527.tlg019 [First1K]
+  tlg0527.tlg020 [First1K]
+  tlg0527.tlg021 [First1K]
+  tlg0527.tlg023 [First1K]
+  tlg0527.tlg024 [First1K]
+  tlg0527.tlg025 [First1K]
+  tlg0527.tlg026 [First1K]
+  tlg0527.tlg027 [First1K]
+  tlg0527.tlg036 [First1K]
+  tlg0527.tlg037 [First1K]
+  tlg0527.tlg038 [First1K]
+  tlg0527.tlg039 [First1K]
+  tlg0527.tlg041 [First1K]
+  tlg0527.tlg042 [First1K]
+  tlg0527.tlg043 [First1K]
+  tlg0527.tlg044 [First1K]
+  tlg0527.tlg045 [First1K]
+  tlg0527.tlg046 [First1K]
+  tlg0527.tlg047 [First1K]
+  tlg0527.tlg048 [First1K]
+  tlg0527.tlg049 [First1K]
+  tlg0527.tlg050 [First1K]
+  tlg0527.tlg053 [First1K]
+  tlg0527.tlg054 [First1K]
+  tlg0527.tlg055 [First1K]
+  tlg0527.tlg056 [First1K]
+  tlg0527.tlg057 [First1K]
+  tlg0527.tlg058 [First1K]
+  tlg0527.tlg059 [First1K]
+  tlg1463.tlg001 [First1K]
+  tlg2042.tlg061 [First1K]
+  tlg2042.tlg066 [First1K]
+  tlg2042.tlg067 [First1K]
+  tlg2042.tlg068 [First1K]
+  tlg2042.tlg069 [First1K]
+  tlg2042.tlg070 [First1K]
+  tlg2042.tlg071 [First1K]
+  tlg2042.tlg072 [First1K]
+  tlg2042.tlg073 [First1K]
+  tlg2042.tlg074 [First1K]
+  tlg2042.tlg077 [First1K]
+
+============================================================
+PATTERN: edition → book → chapter → section → p
+COUNT: 84 works
+------------------------------------------------------------
+  phi0448.phi001 [Perseus Latin]
+  phi0448.phi002 [Perseus Latin]
+  phi0845.phi002 [Perseus Latin]
+  phi0860.phi001 [Perseus Latin]
+  phi0914.phi001 [Perseus Latin]
+  phi1002.phi001 [Perseus Latin]
+  phi1017.phi013 [Perseus Latin]
+  phi1017.phi014 [Perseus Latin]
+  phi1038.phi001 [Perseus Latin]
+  phi1056.phi001 [Perseus Latin]
+  phi1254.phi001 [Perseus Latin]
+  stoa0023.stoa001 [Perseus Latin]
+  stoa0255.stoa004 [Perseus Latin]
+  stoa0255.stoa006 [Perseus Latin]
+  stoa0255.stoa007 [Perseus Latin]
+  stoa0255.stoa008 [Perseus Latin]
+  stoa0255.stoa009 [Perseus Latin]
+  stoa0255.stoa010 [Perseus Latin]
+  stoa0255.stoa011 [Perseus Latin]
+  stoa0255.stoa012 [Perseus Latin]
+  stoa0255.stoa013 [Perseus Latin]
+  stoa0255.stoa014 [Perseus Latin]
+  tlg0003.tlg001 [Perseus Greek]
+  tlg0004.tlg001 [Perseus Greek]
+  tlg0007.tlg051 [Perseus Greek]
+  tlg0007.tlg052 [Perseus Greek]
+  tlg0007.tlg112 [Perseus Greek]
+  tlg0015.tlg001 [First1K]
+  tlg0016.tlg001 [Perseus Greek]
+  tlg0032.tlg001 [Perseus Greek]
+  tlg0032.tlg002 [Perseus Greek]
+  tlg0032.tlg006 [Perseus Greek]
+  tlg0032.tlg007 [Perseus Greek]
+  tlg0057.tlg037 [First1K]
+  tlg0057.tlg089 [First1K]
+  tlg0060.tlg001 [Perseus Greek]
+  tlg0074.tlg001 [Perseus Greek]
+  tlg0081.tlg001 [Perseus Greek]
+  tlg0086.tlg022 [First1K]
+  tlg0086.tlg030 [First1K]
+  tlg0086.tlg038 [Perseus Greek]
+  tlg0093.tlg001 [First1K]
+  tlg0093.tlg002 [First1K]
+  tlg0099.tlg001 [Perseus Greek]
+  tlg0385.tlg001 [Perseus Greek]
+  tlg0525.tlg001 [Perseus Greek]
+  tlg0532.tlg001 [Perseus Greek]
+  tlg0543.tlg001 [Perseus Greek]
+  tlg0544.tlg001 [First1K]
+  tlg0548.tlg001 [Perseus Greek]
+  tlg0551.tlg017 [Perseus Greek]
+  tlg0554.tlg001 [Perseus Greek]
+  tlg0555.tlg004 [Perseus Greek]
+  tlg0557.tlg001 [Perseus Greek]
+  tlg0559.tlg010 [First1K]
+  tlg0561.tlg001 [Perseus Greek]
+  tlg0562.tlg001 [Perseus Greek]
+  tlg0614.tlg001 [First1K]
+  tlg0638.tlg003 [Perseus Greek]
+  tlg0641.tlg001 [Perseus Greek]
+  tlg0656.tlg001 [First1K]
+  tlg0656.tlg002 [First1K]
+  tlg1210.tlg002 [First1K]
+  tlg1271.tlg010 [First1K]
+  tlg1419.tlg001 [First1K]
+  tlg1482.tlg001 [First1K]
+  tlg1719.tlg001 [First1K]
+  tlg2000.tlg001 [First1K]
+  tlg2018.tlg001 [First1K]
+  tlg2018.tlg002 [First1K]
+  tlg2018.tlg005 [First1K]
+  tlg2018.tlg007 [First1K]
+  tlg2018.tlg009 [First1K]
+  tlg2018.tlg020 [First1K]
+  tlg2042.tlg019 [First1K]
+  tlg2042.tlg079 [First1K]
+  tlg2048.tlg001 [First1K]
+  tlg2655.tlg002 [First1K]
+  tlg2959.tlg003 [First1K]
+  tlg4029.tlg001 [Perseus Greek]
+  tlg4084.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → chapter → verse → p
+COUNT: 67 works
+------------------------------------------------------------
+  tlg0031.tlg001 [Perseus Greek]
+  tlg0031.tlg002 [Perseus Greek]
+  tlg0031.tlg003 [Perseus Greek]
+  tlg0031.tlg004 [Perseus Greek]
+  tlg0031.tlg005 [Perseus Greek]
+  tlg0031.tlg006 [Perseus Greek]
+  tlg0031.tlg007 [Perseus Greek]
+  tlg0031.tlg008 [Perseus Greek]
+  tlg0031.tlg009 [Perseus Greek]
+  tlg0031.tlg010 [Perseus Greek]
+  tlg0031.tlg011 [Perseus Greek]
+  tlg0031.tlg012 [Perseus Greek]
+  tlg0031.tlg013 [Perseus Greek]
+  tlg0031.tlg014 [Perseus Greek]
+  tlg0031.tlg015 [Perseus Greek]
+  tlg0031.tlg016 [Perseus Greek]
+  tlg0031.tlg017 [Perseus Greek]
+  tlg0031.tlg018 [Perseus Greek]
+  tlg0031.tlg019 [Perseus Greek]
+  tlg0031.tlg020 [Perseus Greek]
+  tlg0031.tlg021 [Perseus Greek]
+  tlg0031.tlg022 [Perseus Greek]
+  tlg0031.tlg023 [Perseus Greek]
+  tlg0031.tlg024 [Perseus Greek]
+  tlg0031.tlg025 [Perseus Greek]
+  tlg0031.tlg026 [Perseus Greek]
+  tlg0031.tlg027 [Perseus Greek]
+  tlg0527.tlg001 [Perseus Greek]
+  tlg0527.tlg002 [Perseus Greek]
+  tlg0527.tlg003 [Perseus Greek]
+  tlg0527.tlg004 [Perseus Greek]
+  tlg0527.tlg005 [Perseus Greek]
+  tlg0527.tlg006 [Perseus Greek]
+  tlg0527.tlg008 [Perseus Greek]
+  tlg0527.tlg010 [Perseus Greek]
+  tlg0527.tlg011 [Perseus Greek]
+  tlg0527.tlg012 [Perseus Greek]
+  tlg0527.tlg013 [Perseus Greek]
+  tlg0527.tlg014 [Perseus Greek]
+  tlg0527.tlg015 [Perseus Greek]
+  tlg0527.tlg016 [Perseus Greek]
+  tlg0527.tlg018 [Perseus Greek]
+  tlg0527.tlg019 [Perseus Greek]
+  tlg0527.tlg027 [Perseus Greek]
+  tlg0527.tlg029 [Perseus Greek]
+  tlg0527.tlg030 [Perseus Greek]
+  tlg0527.tlg031 [Perseus Greek]
+  tlg0527.tlg032 [Perseus Greek]
+  tlg0527.tlg036 [Perseus Greek]
+  tlg0527.tlg037 [Perseus Greek]
+  tlg0527.tlg038 [Perseus Greek]
+  tlg0527.tlg039 [Perseus Greek]
+  tlg0527.tlg040 [Perseus Greek]
+  tlg0527.tlg041 [Perseus Greek]
+  tlg0527.tlg042 [Perseus Greek]
+  tlg0527.tlg043 [Perseus Greek]
+  tlg0527.tlg044 [Perseus Greek]
+  tlg0527.tlg045 [Perseus Greek]
+  tlg0527.tlg046 [Perseus Greek]
+  tlg0527.tlg047 [Perseus Greek]
+  tlg0527.tlg048 [Perseus Greek]
+  tlg0527.tlg049 [Perseus Greek]
+  tlg0527.tlg051 [Perseus Greek]
+  tlg0527.tlg053 [Perseus Greek]
+  tlg0527.tlg056 [Perseus Greek]
+  tlg1463.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → l
+COUNT: 57 works
+------------------------------------------------------------
+  tlg0006.tlg001 [Perseus Greek]
+  tlg0006.tlg002 [Perseus Greek]
+  tlg0006.tlg003 [Perseus Greek]
+  tlg0006.tlg004 [Perseus Greek]
+  tlg0006.tlg005 [Perseus Greek]
+  tlg0006.tlg006 [Perseus Greek]
+  tlg0006.tlg007 [Perseus Greek]
+  tlg0006.tlg008 [Perseus Greek]
+  tlg0006.tlg009 [Perseus Greek]
+  tlg0006.tlg010 [Perseus Greek]
+  tlg0006.tlg011 [Perseus Greek]
+  tlg0006.tlg012 [Perseus Greek]
+  tlg0006.tlg013 [Perseus Greek]
+  tlg0006.tlg014 [Perseus Greek]
+  tlg0006.tlg015 [Perseus Greek]
+  tlg0006.tlg016 [Perseus Greek]
+  tlg0006.tlg017 [Perseus Greek]
+  tlg0006.tlg018 [Perseus Greek]
+  tlg0006.tlg019 [Perseus Greek]
+  tlg0011.tlg008 [Perseus Greek]
+  tlg0013.tlg001 [Perseus Greek]
+  tlg0013.tlg002 [Perseus Greek]
+  tlg0013.tlg004 [Perseus Greek]
+  tlg0013.tlg005 [Perseus Greek]
+  tlg0013.tlg006 [Perseus Greek]
+  tlg0013.tlg007 [Perseus Greek]
+  tlg0013.tlg008 [Perseus Greek]
+  tlg0013.tlg009 [Perseus Greek]
+  tlg0013.tlg010 [Perseus Greek]
+  tlg0013.tlg011 [Perseus Greek]
+  tlg0013.tlg012 [Perseus Greek]
+  tlg0013.tlg013 [Perseus Greek]
+  tlg0013.tlg014 [Perseus Greek]
+  tlg0013.tlg015 [Perseus Greek]
+  tlg0013.tlg016 [Perseus Greek]
+  tlg0013.tlg017 [Perseus Greek]
+  tlg0013.tlg018 [Perseus Greek]
+  tlg0013.tlg019 [Perseus Greek]
+  tlg0013.tlg020 [Perseus Greek]
+  tlg0013.tlg021 [Perseus Greek]
+  tlg0013.tlg022 [Perseus Greek]
+  tlg0013.tlg023 [Perseus Greek]
+  tlg0013.tlg024 [Perseus Greek]
+  tlg0013.tlg025 [Perseus Greek]
+  tlg0013.tlg026 [Perseus Greek]
+  tlg0013.tlg027 [Perseus Greek]
+  tlg0013.tlg028 [Perseus Greek]
+  tlg0013.tlg029 [Perseus Greek]
+  tlg0013.tlg030 [Perseus Greek]
+  tlg0013.tlg031 [Perseus Greek]
+  tlg0013.tlg032 [Perseus Greek]
+  tlg0013.tlg033 [Perseus Greek]
+  tlg0020.tlg001 [Perseus Greek]
+  tlg0020.tlg002 [Perseus Greek]
+  tlg0020.tlg003 [Perseus Greek]
+  tlg0085.tlg005 [Perseus Greek]
+
+============================================================
+PATTERN: edition → Jebb_page → p
+COUNT: 54 works
+------------------------------------------------------------
+  tlg0284.tlg001 [Perseus Greek]
+  tlg0284.tlg002 [Perseus Greek]
+  tlg0284.tlg003 [Perseus Greek]
+  tlg0284.tlg004 [Perseus Greek]
+  tlg0284.tlg005 [Perseus Greek]
+  tlg0284.tlg006 [Perseus Greek]
+  tlg0284.tlg007 [Perseus Greek]
+  tlg0284.tlg008 [Perseus Greek]
+  tlg0284.tlg009 [Perseus Greek]
+  tlg0284.tlg010 [Perseus Greek]
+  tlg0284.tlg011 [Perseus Greek]
+  tlg0284.tlg012 [Perseus Greek]
+  tlg0284.tlg013 [Perseus Greek]
+  tlg0284.tlg014 [Perseus Greek]
+  tlg0284.tlg015 [Perseus Greek]
+  tlg0284.tlg016 [Perseus Greek]
+  tlg0284.tlg017 [Perseus Greek]
+  tlg0284.tlg018 [Perseus Greek]
+  tlg0284.tlg019 [Perseus Greek]
+  tlg0284.tlg020 [Perseus Greek]
+  tlg0284.tlg021 [Perseus Greek]
+  tlg0284.tlg022 [Perseus Greek]
+  tlg0284.tlg023 [Perseus Greek]
+  tlg0284.tlg024 [Perseus Greek]
+  tlg0284.tlg025 [Perseus Greek]
+  tlg0284.tlg026 [Perseus Greek]
+  tlg0284.tlg027 [Perseus Greek]
+  tlg0284.tlg028 [Perseus Greek]
+  tlg0284.tlg029 [Perseus Greek]
+  tlg0284.tlg030 [Perseus Greek]
+  tlg0284.tlg031 [Perseus Greek]
+  tlg0284.tlg032 [Perseus Greek]
+  tlg0284.tlg033 [Perseus Greek]
+  tlg0284.tlg034 [Perseus Greek]
+  tlg0284.tlg035 [Perseus Greek]
+  tlg0284.tlg036 [Perseus Greek]
+  tlg0284.tlg037 [Perseus Greek]
+  tlg0284.tlg038 [Perseus Greek]
+  tlg0284.tlg039 [Perseus Greek]
+  tlg0284.tlg040 [Perseus Greek]
+  tlg0284.tlg041 [Perseus Greek]
+  tlg0284.tlg042 [Perseus Greek]
+  tlg0284.tlg043 [Perseus Greek]
+  tlg0284.tlg044 [Perseus Greek]
+  tlg0284.tlg045 [Perseus Greek]
+  tlg0284.tlg046 [Perseus Greek]
+  tlg0284.tlg047 [Perseus Greek]
+  tlg0284.tlg048 [Perseus Greek]
+  tlg0284.tlg049 [Perseus Greek]
+  tlg0284.tlg050 [Perseus Greek]
+  tlg0284.tlg051 [Perseus Greek]
+  tlg0284.tlg052 [Perseus Greek]
+  tlg0284.tlg053 [Perseus Greek]
+  tlg0284.tlg054 [Perseus Greek]
+
+============================================================
+PATTERN: edition → fragment → p
+COUNT: 51 works
+------------------------------------------------------------
+  ogl0001.ogl001 [First1K]
+  tlg0083.tlg003 [First1K]
+  tlg0319.tlg004 [First1K]
+  tlg0358.tlg004 [First1K]
+  tlg0521.tlg008 [First1K]
+  tlg0545.tlg004 [First1K]
+  tlg0557.tlg003 [Perseus Greek]
+  tlg0579.tlg010 [First1K]
+  tlg0620.tlg002 [First1K]
+  tlg0626.tlg002 [First1K]
+  tlg0628.tlg002 [First1K]
+  tlg0634.tlg001 [First1K]
+  tlg1146.tlg001 [First1K]
+  tlg1147.tlg003 [First1K]
+  tlg1188.tlg002 [First1K]
+  tlg1193.tlg001 [First1K]
+  tlg1264.tlg001 [First1K]
+  tlg1264.tlg002 [First1K]
+  tlg1264.tlg003 [First1K]
+  tlg1264.tlg004 [First1K]
+  tlg1269.tlg002 [First1K]
+  tlg1287.tlg001 [First1K]
+  tlg1304.tlg002 [First1K]
+  tlg1319.tlg002 [First1K]
+  tlg1320.tlg001 [First1K]
+  tlg1329.tlg001 [First1K]
+  tlg1347.tlg004 [First1K]
+  tlg1390.tlg004 [First1K]
+  tlg1402.tlg005 [First1K]
+  tlg1434.tlg004 [First1K]
+  tlg1542.tlg001 [First1K]
+  tlg1548.tlg001 [First1K]
+  tlg1551.tlg002 [First1K]
+  tlg1562.tlg002 [First1K]
+  tlg1596.tlg002 [First1K]
+  tlg1602.tlg001 [First1K]
+  tlg1634.tlg002 [First1K]
+  tlg1664.tlg001 [First1K]
+  tlg1665.tlg001 [First1K]
+  tlg1692.tlg005 [First1K]
+  tlg2018.tlg010 [First1K]
+  tlg2042.tlg012 [First1K]
+  tlg2136.tlg001 [First1K]
+  tlg2140.tlg001 [First1K]
+  tlg2640.tlg001 [First1K]
+  tlg2691.tlg002 [First1K]
+  tlg2959.tlg007 [First1K]
+  tlg2959.tlg008 [First1K]
+  tlg2970.tlg001 [First1K]
+  tlg4026.tlg002 [First1K]
+  tlg4026.tlg003 [First1K]
+
+============================================================
+PATTERN: edition → book → section → p
+COUNT: 41 works
+------------------------------------------------------------
+  phi0474.phi036 [Perseus Latin]
+  phi0474.phi037 [Perseus Latin]
+  phi0474.phi043 [Perseus Latin]
+  phi0474.phi045 [Perseus Latin]
+  phi0474.phi047 [Perseus Latin]
+  phi0474.phi048 [Perseus Latin]
+  phi0474.phi050 [Perseus Latin]
+  phi0474.phi053 [Perseus Latin]
+  phi0474.phi055 [Perseus Latin]
+  tlg0018.tlg002 [First1K]
+  tlg0018.tlg019 [First1K]
+  tlg0018.tlg022 [First1K]
+  tlg0018.tlg024 [First1K]
+  tlg0057.tlg010 [Perseus Greek]
+  tlg0059.tlg030 [Perseus Greek]
+  tlg0059.tlg034 [Perseus Greek]
+  tlg0062.tlg001 [Perseus Greek]
+  tlg0062.tlg012 [Perseus Greek]
+  tlg0082.tlg004 [First1K]
+  tlg0086.tlg009 [Perseus Greek]
+  tlg0086.tlg010 [Perseus Greek]
+  tlg0086.tlg025 [Perseus Greek]
+  tlg0086.tlg048 [First1K]
+  tlg0088.tlg001 [First1K]
+  tlg0099.tlg004 [First1K]
+  tlg0363.tlg001 [First1K]
+  tlg0526.tlg001 [Perseus Greek]
+  tlg0526.tlg003 [Perseus Greek]
+  tlg0526.tlg004 [Perseus Greek]
+  tlg0542.tlg001 [First1K]
+  tlg0544.tlg002 [First1K]
+  tlg0553.tlg001 [First1K]
+  tlg0616.tlg001 [First1K]
+  tlg0640.tlg001 [First1K]
+  tlg0731.tlg003 [First1K]
+  tlg1725.tlg001 [First1K]
+  tlg2034.tlg003 [First1K]
+  tlg2583.tlg001 [First1K]
+  tlg4015.tlg005 [First1K]
+  tlg5022.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → section → sp
+COUNT: 40 works
+------------------------------------------------------------
+  tlg0061.tlg002 [First1K]
+  tlg0061.tlg004 [First1K]
+  tlg0061.tlg006 [First1K]
+  tlg0061.tlg007 [First1K]
+  tlg0061.tlg008 [First1K]
+  tlg0062.tlg015 [Perseus Greek]
+  tlg0062.tlg016 [Perseus Greek]
+  tlg0062.tlg017 [Perseus Greek]
+  tlg0062.tlg018 [Perseus Greek]
+  tlg0062.tlg019 [Perseus Greek]
+  tlg0062.tlg020 [Perseus Greek]
+  tlg0062.tlg021 [Perseus Greek]
+  tlg0062.tlg022 [Perseus Greek]
+  tlg0062.tlg023 [Perseus Greek]
+  tlg0062.tlg024 [Perseus Greek]
+  tlg0062.tlg025 [Perseus Greek]
+  tlg0062.tlg026 [Perseus Greek]
+  tlg0062.tlg030 [Perseus Greek]
+  tlg0062.tlg031 [Perseus Greek]
+  tlg0062.tlg032 [Perseus Greek]
+  tlg0062.tlg034 [Perseus Greek]
+  tlg0062.tlg035 [Perseus Greek]
+  tlg0062.tlg039 [Perseus Greek]
+  tlg0062.tlg040 [Perseus Greek]
+  tlg0062.tlg043 [Perseus Greek]
+  tlg0062.tlg044 [Perseus Greek]
+  tlg0062.tlg045 [Perseus Greek]
+  tlg0062.tlg046 [Perseus Greek]
+  tlg0062.tlg047 [Perseus Greek]
+  tlg0062.tlg050 [Perseus Greek]
+  tlg0062.tlg055 [Perseus Greek]
+  tlg0062.tlg061 [Perseus Greek]
+  tlg0062.tlg063 [Perseus Greek]
+  tlg0062.tlg065 [Perseus Greek]
+  tlg0062.tlg070 [Perseus Greek]
+  tlg2022.tlg003 [First1K]
+
+============================================================
+PATTERN: translation → chapter → p
+COUNT: 31 works
+------------------------------------------------------------
+  phi0631.phi001 [Perseus Latin]
+  phi0631.phi002 [Perseus Latin]
+  phi1348.abo011 [Perseus Latin]
+  phi1348.abo012 [Perseus Latin]
+  phi1348.abo013 [Perseus Latin]
+  phi1348.abo014 [Perseus Latin]
+  phi1348.abo015 [Perseus Latin]
+  phi1348.abo016 [Perseus Latin]
+  phi1348.abo017 [Perseus Latin]
+  phi1348.abo018 [Perseus Latin]
+  phi1348.abo019 [Perseus Latin]
+  phi1348.abo020 [Perseus Latin]
+  phi1348.abo021 [Perseus Latin]
+  phi1348.abo022 [Perseus Latin]
+  tlg0007.tlg082 [Perseus Greek]
+  tlg0007.tlg114 [Perseus Greek]
+  tlg0007.tlg121 [Perseus Greek]
+  tlg0007.tlg125 [Perseus Greek]
+  tlg0086.tlg034 [Perseus Greek]
+  tlg0094.tlg001 [First1K]
+  tlg0094.tlg001 [Perseus Greek]
+  tlg0552.tlg011 [First1K]
+  tlg0557.tlg002 [Perseus Greek]
+  tlg1413.tlg001 [First1K]
+  tlg1484.tlg001 [Perseus Greek]
+  tlg1553.tlg001 [First1K]
+  tlg2034.tlg006 [First1K]
+  tlg2042.tlg028 [First1K]
+
+============================================================
+PATTERN: edition → poem → l
+COUNT: 30 works
+------------------------------------------------------------
+  phi0660.phi003 [Perseus Latin]
+  phi0893.phi002 [Perseus Latin]
+  phi0893.phi003 [Perseus Latin]
+  phi0959.phi002 [Perseus Latin]
+  phi0959.phi003 [Perseus Latin]
+  stoa0045.stoa007 [Perseus Latin]
+  stoa0045.stoa008 [Perseus Latin]
+  stoa0045.stoa010 [Perseus Latin]
+  stoa0045.stoa021 [Perseus Latin]
+  stoa0045.stoa026 [Perseus Latin]
+  stoa0089.stoa001 [Perseus Latin]
+  stoa0089.stoa003 [Perseus Latin]
+  stoa0089.stoa006 [Perseus Latin]
+  stoa0089.stoa007 [Perseus Latin]
+  stoa0089.stoa010 [Perseus Latin]
+  stoa0089.stoa011 [Perseus Latin]
+  stoa0089.stoa012 [Perseus Latin]
+  stoa0089.stoa013 [Perseus Latin]
+  stoa0089.stoa014 [Perseus Latin]
+  stoa0238.stoa001 [Perseus Latin]
+  stoa0238.stoa004 [Perseus Latin]
+  stoa0238.stoa008 [Perseus Latin]
+  tlg0005.tlg002 [Perseus Greek]
+  tlg0033.tlg001 [Perseus Greek]
+  tlg0033.tlg002 [Perseus Greek]
+  tlg0033.tlg003 [Perseus Greek]
+  tlg0033.tlg004 [Perseus Greek]
+  tlg0035.tlg005 [Perseus Greek]
+  tlg0199.tlg001 [Perseus Greek]
+  tlg0199.tlg002 [Perseus Greek]
+
+============================================================
+PATTERN: edition → p
+COUNT: 30 works
+------------------------------------------------------------
+  tlg0085.tlg003 [First1K]
+  tlg0085.tlg004 [First1K]
+  tlg0087.tlg007 [First1K]
+  tlg0087.tlg021 [First1K]
+  tlg0357.tlg001 [First1K]
+  tlg0361.tlg001 [First1K]
+  tlg0363.tlg007 [First1K]
+  tlg0527.tlg034 [First1K]
+  tlg0527.tlg052 [First1K]
+  tlg0559.tlg016 [First1K]
+  tlg0591.1st1K001 [First1K]
+  tlg0591.1st1K002 [First1K]
+  tlg0671.tlg001 [First1K]
+  tlg1220.tlg001 [First1K]
+  tlg1701.tlg002 [First1K]
+  tlg2001.tlg044 [First1K]
+  tlg2021.tlg003 [First1K]
+  tlg2036.tlg001 [First1K]
+  tlg2041.tlg001 [First1K]
+  tlg2200.tlg00545 [First1K]
+  tlg2200.tlg00546 [First1K]
+  tlg2200.tlg00549 [First1K]
+  tlg2959.tlg010 [First1K]
+  tlg4016.tlg001 [First1K]
+  tlg4016.tlg002 [First1K]
+  tlg4016.tlg003 [First1K]
+  tlg4016.tlg004 [First1K]
+  tlg4102.tlg005 [First1K]
+  tlg4102.tlg006 [First1K]
+  tlg5022.tlg004 [First1K]
+
+============================================================
+PATTERN: translation → section → sp
+COUNT: 29 works
+------------------------------------------------------------
+  tlg0062.tlg015 [Perseus Greek]
+  tlg0062.tlg016 [Perseus Greek]
+  tlg0062.tlg017 [Perseus Greek]
+  tlg0062.tlg018 [Perseus Greek]
+  tlg0062.tlg019 [Perseus Greek]
+  tlg0062.tlg020 [Perseus Greek]
+  tlg0062.tlg021 [Perseus Greek]
+  tlg0062.tlg022 [Perseus Greek]
+  tlg0062.tlg023 [Perseus Greek]
+  tlg0062.tlg024 [Perseus Greek]
+  tlg0062.tlg025 [Perseus Greek]
+  tlg0062.tlg026 [Perseus Greek]
+  tlg0062.tlg055 [Perseus Greek]
+  tlg0062.tlg061 [Perseus Greek]
+  tlg0062.tlg063 [Perseus Greek]
+  tlg0062.tlg065 [Perseus Greek]
+  tlg0062.tlg070 [Perseus Greek]
+
+============================================================
+PATTERN: book → chapter → p
+COUNT: 25 works
+------------------------------------------------------------
+  phi0914.phi00121 [Perseus Latin]
+  phi0914.phi00122 [Perseus Latin]
+  phi0914.phi00123 [Perseus Latin]
+  phi0914.phi00124 [Perseus Latin]
+  phi0914.phi00125 [Perseus Latin]
+  phi0914.phi00126 [Perseus Latin]
+  phi0914.phi00127 [Perseus Latin]
+  phi0914.phi00128 [Perseus Latin]
+  phi0914.phi00129 [Perseus Latin]
+  phi0914.phi00130 [Perseus Latin]
+  phi0914.phi00131 [Perseus Latin]
+  phi0914.phi00132 [Perseus Latin]
+  phi0914.phi00133 [Perseus Latin]
+  phi0914.phi00134 [Perseus Latin]
+  phi0914.phi00135 [Perseus Latin]
+  phi0914.phi00136 [Perseus Latin]
+  phi0914.phi00137 [Perseus Latin]
+  phi0914.phi00138 [Perseus Latin]
+  phi0914.phi00139 [Perseus Latin]
+  phi0914.phi00140 [Perseus Latin]
+  phi0914.phi00141 [Perseus Latin]
+  phi0914.phi00142 [Perseus Latin]
+  phi0914.phi00143 [Perseus Latin]
+  phi0914.phi00144 [Perseus Latin]
+  phi0914.phi00145 [Perseus Latin]
+
+============================================================
+PATTERN: edition → paragraph → p
+COUNT: 24 works
+------------------------------------------------------------
+  tlg0064.tlg001 [First1K]
+  tlg0071.tlg001 [First1K]
+  tlg0082.tlg001 [First1K]
+  tlg0082.tlg002 [First1K]
+  tlg0086.tlg003 [First1K]
+  tlg0087.tlg004 [First1K]
+  tlg0087.tlg009 [First1K]
+  tlg0087.tlg009a [First1K]
+  tlg0363.tlg011 [First1K]
+  tlg0555.tlg008 [Perseus Greek]
+  tlg0565.tlg002 [First1K]
+  tlg1724.tlg001 [First1K]
+  tlg2003.tlg017 [Perseus Greek]
+  tlg2027.tlg002 [First1K]
+  tlg2039.tlg003 [First1K]
+  tlg2039.tlg004 [First1K]
+  tlg2039.tlg005 [First1K]
+  tlg2042.tlg050 [First1K]
+  tlg2042.tlg051 [First1K]
+  tlg2042.tlg052 [First1K]
+  tlg2042.tlg053 [First1K]
+  tlg2042.tlg054 [First1K]
+  tlg2042.tlg055 [First1K]
+  tlg3118.tlg002 [First1K]
+
+============================================================
+PATTERN: translation → book → chapter → section → p
+COUNT: 24 works
+------------------------------------------------------------
+  phi1002.phi001 [Perseus Latin]
+  phi1056.phi001 [Perseus Latin]
+  stoa0023.stoa001 [Perseus Latin]
+  tlg0003.tlg001 [Perseus Greek]
+  tlg0004.tlg001 [Perseus Greek]
+  tlg0007.tlg051 [Perseus Greek]
+  tlg0007.tlg052 [Perseus Greek]
+  tlg0007.tlg112 [Perseus Greek]
+  tlg0032.tlg001 [Perseus Greek]
+  tlg0032.tlg002 [Perseus Greek]
+  tlg0032.tlg006 [Perseus Greek]
+  tlg0032.tlg007 [Perseus Greek]
+  tlg0086.tlg038 [Perseus Greek]
+  tlg0099.tlg001 [Perseus Greek]
+  tlg0525.tlg001 [Perseus Greek]
+  tlg0544.tlg001 [First1K]
+  tlg0548.tlg001 [Perseus Greek]
+  tlg0551.tlg017 [Perseus Greek]
+  tlg1419.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: p
+COUNT: 23 works
+------------------------------------------------------------
+  phi0474.phi020 [Perseus Latin]
+  phi0474.phi021 [Perseus Latin]
+  phi0474.phi022 [Perseus Latin]
+  phi0474.phi023 [Perseus Latin]
+  phi0474.phi024 [Perseus Latin]
+  phi0474.phi025 [Perseus Latin]
+  phi0474.phi026 [Perseus Latin]
+  phi0474.phi027 [Perseus Latin]
+  phi0474.phi028 [Perseus Latin]
+  phi0474.phi029 [Perseus Latin]
+  phi0474.phi030 [Perseus Latin]
+  phi0474.phi031 [Perseus Latin]
+  phi0474.phi032 [Perseus Latin]
+  phi0474.phi033 [Perseus Latin]
+  phi0474.phi034 [Perseus Latin]
+  phi0692.phi012 [Perseus Latin]
+  phi0692.phi013 [Perseus Latin]
+  phi0914.phi00145 [Perseus Latin]
+  phi0972.phi001 [Perseus Latin]
+  stoa0058.stoa003 [Perseus Latin]
+  stoa0058.stoa006 [Perseus Latin]
+  stoa0058.stoa023 [Perseus Latin]
+  stoa0058.stoa028 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → p
+COUNT: 21 works
+------------------------------------------------------------
+  phi0474.phi049 [Perseus Latin]
+  phi0631.phi003 [Perseus Latin]
+  tlg0057.tlg040 [First1K]
+  tlg0087.tlg001 [First1K]
+  tlg0087.tlg005 [First1K]
+  tlg0087.tlg006 [First1K]
+  tlg0087.tlg014 [First1K]
+  tlg0563.tlg001 [First1K]
+  tlg0731.tlg001 [First1K]
+  tlg1252.tlg002 [First1K]
+  tlg1551.tlg001 [First1K]
+  tlg1765.tlg004 [First1K]
+  tlg2042.tlg005 [First1K]
+  tlg2042.tlg030 [First1K]
+  tlg2115.tlg060 [First1K]
+  tlg2768.tlg001 [First1K]
+  tlg2959.tlg001 [First1K]
+  tlg3135.tlg001 [Perseus Greek]
+  tlg4024.tlg001 [First1K]
+  tlg5028.tlg001 [First1K]
+  tlg5037.tlg004 [First1K]
+
+============================================================
+PATTERN: translation → act → l
+COUNT: 20 works
+------------------------------------------------------------
+  phi0119.phi001 [Perseus Latin]
+  phi0119.phi002 [Perseus Latin]
+  phi0119.phi003 [Perseus Latin]
+  phi0119.phi004 [Perseus Latin]
+  phi0119.phi005 [Perseus Latin]
+  phi0119.phi006 [Perseus Latin]
+  phi0119.phi007 [Perseus Latin]
+  phi0119.phi008 [Perseus Latin]
+  phi0119.phi009 [Perseus Latin]
+  phi0119.phi010 [Perseus Latin]
+  phi0119.phi011 [Perseus Latin]
+  phi0119.phi012 [Perseus Latin]
+  phi0119.phi013 [Perseus Latin]
+  phi0119.phi014 [Perseus Latin]
+  phi0119.phi015 [Perseus Latin]
+  phi0119.phi016 [Perseus Latin]
+  phi0119.phi017 [Perseus Latin]
+  phi0119.phi018 [Perseus Latin]
+  phi0119.phi019 [Perseus Latin]
+  phi0119.phi020 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → l
+COUNT: 19 works
+------------------------------------------------------------
+  phi0550.phi001 [Perseus Latin]
+  phi0690.phi002 [Perseus Latin]
+  phi0959.phi004 [Perseus Latin]
+  phi0959.phi006 [Perseus Latin]
+  phi0959.phi007 [Perseus Latin]
+  phi1020.phi001 [Perseus Latin]
+  phi1020.phi003 [Perseus Latin]
+  phi1035.phi001 [Perseus Latin]
+  phi1345.phi001 [Perseus Latin]
+  stoa0089.stoa002 [Perseus Latin]
+  stoa0089.stoa004 [Perseus Latin]
+  stoa0089.stoa008 [Perseus Latin]
+  stoa0238.stoa003 [Perseus Latin]
+  tlg0001.tlg001 [Perseus Greek]
+  tlg0012.tlg002 [Perseus Greek]
+  tlg0023.tlg001 [Perseus Greek]
+  tlg0024.tlg001 [Perseus Greek]
+  tlg2045.tlg001 [Perseus Greek]
+  tlg2046.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: translation → book → chapter → p
+COUNT: 16 works
+------------------------------------------------------------
+  phi0448.phi001 [Perseus Latin]
+  phi0836.phi002 [Perseus Latin]
+  tlg0003.tlg001 [Perseus Greek]
+  tlg0094.tlg003 [Perseus Greek]
+  tlg0543.tlg001 [Perseus Greek]
+  tlg0557.tlg001 [Perseus Greek]
+  tlg0719.tlg001 [Perseus Greek]
+  tlg0719.tlg002 [Perseus Greek]
+  tlg0719.tlg003 [Perseus Greek]
+  tlg0719.tlg004 [Perseus Greek]
+  tlg2018.tlg002 [First1K]
+  tlg2042.tlg030 [First1K]
+
+============================================================
+PATTERN: translation → book → section → p
+COUNT: 16 works
+------------------------------------------------------------
+  tlg0018.tlg002 [First1K]
+  tlg0018.tlg019 [First1K]
+  tlg0018.tlg022 [First1K]
+  tlg0018.tlg024 [First1K]
+  tlg0059.tlg030 [Perseus Greek]
+  tlg0059.tlg034 [Perseus Greek]
+  tlg0062.tlg001 [Perseus Greek]
+  tlg0062.tlg012 [Perseus Greek]
+  tlg0062.tlg069 [Perseus Greek]
+  tlg0526.tlg001 [Perseus Greek]
+  tlg0526.tlg003 [Perseus Greek]
+  tlg0526.tlg004 [Perseus Greek]
+  tlg0544.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → section
+COUNT: 16 works
+------------------------------------------------------------
+  tlg0059.tlg018 [Perseus Greek]
+  tlg0059.tlg019 [Perseus Greek]
+  tlg0059.tlg020 [Perseus Greek]
+  tlg0059.tlg021 [Perseus Greek]
+  tlg0059.tlg022 [Perseus Greek]
+  tlg0059.tlg023 [Perseus Greek]
+  tlg0059.tlg024 [Perseus Greek]
+  tlg0059.tlg025 [Perseus Greek]
+  tlg0059.tlg026 [Perseus Greek]
+  tlg0059.tlg027 [Perseus Greek]
+  tlg0059.tlg028 [Perseus Greek]
+  tlg0059.tlg029 [Perseus Greek]
+  tlg0059.tlg031 [Perseus Greek]
+  tlg0059.tlg032 [Perseus Greek]
+  tlg0059.tlg033 [Perseus Greek]
+  tlg0059.tlg035 [Perseus Greek]
+
+============================================================
+PATTERN: edition → sp
+COUNT: 15 works
+------------------------------------------------------------
+  phi1017.phi001 [Perseus Latin]
+  phi1017.phi002 [Perseus Latin]
+  phi1017.phi003 [Perseus Latin]
+  phi1017.phi004 [Perseus Latin]
+  phi1017.phi005 [Perseus Latin]
+  phi1017.phi006 [Perseus Latin]
+  phi1017.phi007 [Perseus Latin]
+  phi1017.phi008 [Perseus Latin]
+  phi1017.phi009 [Perseus Latin]
+  phi1017.phi010 [Perseus Latin]
+  tlg0011.tlg003 [First1K]
+  tlg0011.tlg008 [Perseus Greek]
+  tlg0036.tlg002 [Perseus Greek]
+  tlg0062.tlg071 [Perseus Greek]
+
+============================================================
+PATTERN: translation → commentary → p
+COUNT: 15 works
+------------------------------------------------------------
+  phi0474.phi001 [Perseus Latin]
+  phi0474.phi002 [Perseus Latin]
+  phi0474.phi003 [Perseus Latin]
+  phi0474.phi004 [Perseus Latin]
+  phi0474.phi006 [Perseus Latin]
+  phi0474.phi007 [Perseus Latin]
+  phi0474.phi008 [Perseus Latin]
+  phi0474.phi009 [Perseus Latin]
+  phi0474.phi010 [Perseus Latin]
+  phi0474.phi014 [Perseus Latin]
+  phi0474.phi015 [Perseus Latin]
+  phi0474.phi016 [Perseus Latin]
+  phi0474.phi017 [Perseus Latin]
+  phi0474.phi018 [Perseus Latin]
+  phi0474.phi019 [Perseus Latin]
+
+============================================================
+PATTERN: translation → p
+COUNT: 14 works
+------------------------------------------------------------
+  heb0001.heb010 [First1K]
+  phi0134.phi001 [Perseus Latin]
+  phi0134.phi003 [Perseus Latin]
+  phi0134.phi004 [Perseus Latin]
+  phi0134.phi005 [Perseus Latin]
+  phi0134.phi006 [Perseus Latin]
+  phi0474.phi051 [Perseus Latin]
+  tlg0007.tlg065 [Perseus Greek]
+  tlg0061.tlg004 [Perseus Greek]
+  tlg0062.tlg018 [Perseus Greek]
+  tlg0062.tlg019 [Perseus Greek]
+  tlg0527.tlg048 [First1K]
+
+============================================================
+PATTERN: edition → book → poem → l
+COUNT: 14 works
+------------------------------------------------------------
+  phi0620.phi001 [Perseus Latin]
+  phi0660.phi001 [Perseus Latin]
+  phi0893.phi001 [Perseus Latin]
+  phi0893.phi004 [Perseus Latin]
+  phi0893.phi005 [Perseus Latin]
+  phi0959.phi001 [Perseus Latin]
+  phi0959.phi008 [Perseus Latin]
+  phi0959.phi009 [Perseus Latin]
+  phi0975.phi001 [Perseus Latin]
+  phi1276.phi001 [Perseus Latin]
+  phi1294.phi002 [Perseus Latin]
+  stoa0045.stoa002 [Perseus Latin]
+  stoa0089.stoa005 [Perseus Latin]
+  stoa0089.stoa009 [Perseus Latin]
+
+============================================================
+PATTERN: edition → work → p
+COUNT: 13 works
+------------------------------------------------------------
+  tlg0057.tlg025 [First1K]
+  tlg0057.tlg035 [First1K]
+  tlg0057.tlg084 [First1K]
+  tlg0057.tlg107 [First1K]
+  tlg0057.tlg114 [First1K]
+  tlg0059.tlg037 [First1K]
+  tlg0530.tlg032 [First1K]
+  tlg0627.tlg040 [First1K]
+  tlg1126.tlg003 [First1K]
+  tlg1799.tlg013 [First1K]
+  tlg1799.tlg017 [First1K]
+  tlg4075.tlg002 [First1K]
+  tlg5022.tlg007 [First1K]
+
+============================================================
+PATTERN: edition → episode → sp
+COUNT: 12 works
+------------------------------------------------------------
+  tlg0011.tlg001 [Perseus Greek]
+  tlg0011.tlg002 [Perseus Greek]
+  tlg0011.tlg003 [Perseus Greek]
+  tlg0011.tlg004 [Perseus Greek]
+  tlg0011.tlg005 [Perseus Greek]
+  tlg0011.tlg006 [Perseus Greek]
+  tlg0011.tlg007 [Perseus Greek]
+  tlg0085.tlg003 [Perseus Greek]
+  tlg0085.tlg004 [Perseus Greek]
+  tlg0085.tlg005 [Perseus Greek]
+  tlg0085.tlg006 [Perseus Greek]
+  tlg0085.tlg007 [Perseus Greek]
+
+============================================================
+PATTERN: edition → section → l
+COUNT: 12 works
+------------------------------------------------------------
+  stoa0045.stoa004 [Perseus Latin]
+  stoa0045.stoa013 [Perseus Latin]
+  stoa0045.stoa017 [Perseus Latin]
+  stoa0045.stoa018 [Perseus Latin]
+  stoa0045.stoa019 [Perseus Latin]
+  stoa0045.stoa020 [Perseus Latin]
+  stoa0045.stoa025 [Perseus Latin]
+  stoa0045.stoa027 [Perseus Latin]
+  stoa0238.stoa005 [Perseus Latin]
+  stoa0238.stoa009 [Perseus Latin]
+  tlg0643.tlg001 [First1K]
+  tlg0643.tlg002 [First1K]
+
+============================================================
+PATTERN: translation → episode → sp
+COUNT: 11 works
+------------------------------------------------------------
+  tlg0011.tlg001 [Perseus Greek]
+  tlg0011.tlg002 [Perseus Greek]
+  tlg0011.tlg003 [Perseus Greek]
+  tlg0011.tlg004 [Perseus Greek]
+  tlg0011.tlg005 [Perseus Greek]
+  tlg0011.tlg006 [Perseus Greek]
+  tlg0011.tlg007 [Perseus Greek]
+  tlg0085.tlg003 [Perseus Greek]
+  tlg0085.tlg004 [Perseus Greek]
+  tlg0085.tlg006 [Perseus Greek]
+  tlg0085.tlg007 [Perseus Greek]
+
+============================================================
+PATTERN: edition → act → scene → sp
+COUNT: 11 works
+------------------------------------------------------------
+  phi0119.phi001 [Perseus Latin]
+  phi0119.phi004 [Perseus Latin]
+  phi0119.phi007 [Perseus Latin]
+  phi0119.phi008 [Perseus Latin]
+  phi0119.phi009 [Perseus Latin]
+  phi0119.phi011 [Perseus Latin]
+  phi0119.phi012 [Perseus Latin]
+  phi0119.phi013 [Perseus Latin]
+  phi0119.phi014 [Perseus Latin]
+  phi0119.phi016 [Perseus Latin]
+  phi0119.phi018 [Perseus Latin]
+
+============================================================
+PATTERN: edition → epistle → p
+COUNT: 11 works
+------------------------------------------------------------
+  tlg0037.tlg001 [First1K]
+  tlg0044.tlg001 [First1K]
+  tlg0045.tlg001 [First1K]
+  tlg0046.tlg001 [First1K]
+  tlg0055.tlg001 [First1K]
+  tlg0086.tlg011 [First1K]
+  tlg0629.tlg001 [First1K]
+  tlg0632.tlg002 [First1K]
+  tlg1681.tlg001 [First1K]
+  tlg1705.tlg001 [First1K]
+  tlg1803.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → Prologue → l
+COUNT: 10 works
+------------------------------------------------------------
+  tlg0019.tlg001 [Perseus Greek]
+  tlg0019.tlg002 [Perseus Greek]
+  tlg0019.tlg003 [Perseus Greek]
+  tlg0019.tlg004 [Perseus Greek]
+  tlg0019.tlg005 [Perseus Greek]
+  tlg0019.tlg006 [Perseus Greek]
+  tlg0019.tlg007 [Perseus Greek]
+  tlg0019.tlg008 [Perseus Greek]
+  tlg0019.tlg010 [Perseus Greek]
+  tlg0019.tlg011 [Perseus Greek]
+
+============================================================
+PATTERN: edition → Letter → p
+COUNT: 9 works
+------------------------------------------------------------
+  tlg0010.tlg022 [Perseus Greek]
+  tlg0010.tlg023 [Perseus Greek]
+  tlg0010.tlg024 [Perseus Greek]
+  tlg0010.tlg025 [Perseus Greek]
+  tlg0010.tlg026 [Perseus Greek]
+  tlg0010.tlg027 [Perseus Greek]
+  tlg0010.tlg028 [Perseus Greek]
+  tlg0010.tlg029 [Perseus Greek]
+  tlg0010.tlg030 [Perseus Greek]
+
+============================================================
+PATTERN: edition → chapter → paragraph → p
+COUNT: 9 works
+------------------------------------------------------------
+  ggm0001.ggm001 [First1K]
+  tlg2027.tlg001 [First1K]
+  tlg2042.tlg048 [First1K]
+  tlg2042.tlg058 [First1K]
+  tlg2042.tlg075 [First1K]
+  tlg2042.tlg076 [First1K]
+  tlg2178.tlg001 [First1K]
+  tlg2586.tlg002 [First1K]
+  tlg2806.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → epistle → section → p
+COUNT: 9 works
+------------------------------------------------------------
+  tlg0026.tlg004 [First1K]
+  tlg0041.tlg001 [First1K]
+  tlg0048.tlg001 [First1K]
+  tlg0053.tlg001 [First1K]
+  tlg0623.tlg001 [First1K]
+  tlg0636.tlg001 [First1K]
+  tlg0637.tlg001 [First1K]
+  tlg1325.tlg001 [First1K]
+  tlg1367.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → sentence → p
+COUNT: 8 works
+------------------------------------------------------------
+  tlg0541.tlg042 [First1K]
+  tlg0557.tlg004 [Perseus Greek]
+  tlg0557.tlg005 [Perseus Greek]
+  tlg0575.tlg001 [First1K]
+  tlg0575.tlg002 [First1K]
+  tlg2022.tlg060 [First1K]
+  tlg2972.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → book → section → sp
+COUNT: 8 works
+------------------------------------------------------------
+  tlg0062.tlg066 [Perseus Greek]
+  tlg0062.tlg067 [Perseus Greek]
+  tlg0062.tlg068 [Perseus Greek]
+  tlg0062.tlg069 [Perseus Greek]
+
+============================================================
+PATTERN: translation → Letter → p
+COUNT: 8 works
+------------------------------------------------------------
+  tlg0010.tlg022 [Perseus Greek]
+  tlg0010.tlg024 [Perseus Greek]
+  tlg0010.tlg025 [Perseus Greek]
+  tlg0010.tlg026 [Perseus Greek]
+  tlg0010.tlg027 [Perseus Greek]
+  tlg0010.tlg028 [Perseus Greek]
+  tlg0010.tlg029 [Perseus Greek]
+  tlg0010.tlg030 [Perseus Greek]
+
+============================================================
+PATTERN: translation → poem → l
+COUNT: 8 works
+------------------------------------------------------------
+  phi0472.phi001 [Perseus Latin]
+  phi0660.phi003 [Perseus Latin]
+  tlg0033.tlg001 [Perseus Greek]
+  tlg0033.tlg002 [Perseus Greek]
+  tlg0033.tlg003 [Perseus Greek]
+  tlg0033.tlg004 [Perseus Greek]
+  tlg0199.tlg001 [Perseus Greek]
+  tlg0199.tlg002 [Perseus Greek]
+
+============================================================
+PATTERN: edition → act → sp
+COUNT: 8 works
+------------------------------------------------------------
+  phi0119.phi002 [Perseus Latin]
+  phi0119.phi003 [Perseus Latin]
+  phi0119.phi005 [Perseus Latin]
+  phi0119.phi006 [Perseus Latin]
+  phi0119.phi010 [Perseus Latin]
+  phi0119.phi015 [Perseus Latin]
+  phi0119.phi017 [Perseus Latin]
+  phi0119.phi019 [Perseus Latin]
+
+============================================================
+PATTERN: edition → chapter → fragment
+COUNT: 7 works
+------------------------------------------------------------
+  tlg0551.tlg002 [Perseus Greek]
+  tlg0551.tlg003 [Perseus Greek]
+  tlg0551.tlg004 [Perseus Greek]
+  tlg0551.tlg005 [Perseus Greek]
+  tlg0551.tlg006 [Perseus Greek]
+  tlg0551.tlg010 [Perseus Greek]
+  tlg0551.tlg011 [Perseus Greek]
+
+============================================================
+PATTERN: translation → chapter → fragment
+COUNT: 7 works
+------------------------------------------------------------
+  tlg0551.tlg002 [Perseus Greek]
+  tlg0551.tlg003 [Perseus Greek]
+  tlg0551.tlg004 [Perseus Greek]
+  tlg0551.tlg005 [Perseus Greek]
+  tlg0551.tlg006 [Perseus Greek]
+  tlg0551.tlg010 [Perseus Greek]
+  tlg0551.tlg011 [Perseus Greek]
+
+============================================================
+PATTERN: translation → book → section → sp
+COUNT: 7 works
+------------------------------------------------------------
+  tlg0062.tlg066 [Perseus Greek]
+  tlg0062.tlg067 [Perseus Greek]
+  tlg0062.tlg068 [Perseus Greek]
+  tlg0062.tlg069 [Perseus Greek]
+
+============================================================
+PATTERN: edition → act → l
+COUNT: 7 works
+------------------------------------------------------------
+  phi0119.phi020 [Perseus Latin]
+  phi0134.phi001 [Perseus Latin]
+  phi0134.phi002 [Perseus Latin]
+  phi0134.phi003 [Perseus Latin]
+  phi0134.phi004 [Perseus Latin]
+  phi0134.phi005 [Perseus Latin]
+  phi0134.phi006 [Perseus Latin]
+
+============================================================
+PATTERN: edition → section → paragraph → p
+COUNT: 7 works
+------------------------------------------------------------
+  tlg0075.tlg001 [First1K]
+  tlg0077.tlg001 [First1K]
+  tlg0087.tlg022 [First1K]
+  tlg0529.tlg002 [First1K]
+  tlg0592.tlg002 [First1K]
+  tlg1131.tlg001 [First1K]
+  tlg4072.tlg002 [First1K]
+
+============================================================
+PATTERN: translation → book → section → subsection → p
+COUNT: 6 works
+------------------------------------------------------------
+  tlg0086.tlg009 [Perseus Greek]
+  tlg0086.tlg010 [Perseus Greek]
+  tlg0086.tlg025 [Perseus Greek]
+  tlg0086.tlg029 [Perseus Greek]
+  tlg0627.tlg006 [Perseus Greek]
+
+============================================================
+PATTERN: translation → book → card → l
+COUNT: 6 works
+------------------------------------------------------------
+  phi0550.phi001 [Perseus Latin]
+  phi0690.phi002 [Perseus Latin]
+  phi0690.phi003 [Perseus Latin]
+  phi0959.phi004 [Perseus Latin]
+  phi0959.phi006 [Perseus Latin]
+
+============================================================
+PATTERN: edition → letter → p
+COUNT: 5 works
+------------------------------------------------------------
+  stoa0045.stoa011 [Perseus Latin]
+  tlg0545.tlg003 [Perseus Greek]
+  tlg2018.tlg008 [First1K]
+  tlg2040.tlg004 [Perseus Greek]
+  tlg2200.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → book → p
+COUNT: 5 works
+------------------------------------------------------------
+  phi0474.phi053 [Perseus Latin]
+  phi0474.phi055 [Perseus Latin]
+  phi1254.phi001 [Perseus Latin]
+  tlg0008.tlg001 [Perseus Greek]
+  tlg4024.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → poem → p
+COUNT: 5 works
+------------------------------------------------------------
+  stoa0045.stoa009 [Perseus Latin]
+  stoa0045.stoa012 [Perseus Latin]
+  tlg5034.tlg001b [First1K]
+  tlg5034.tlg001c [First1K]
+  tlg5034.tlg001d [First1K]
+
+============================================================
+PATTERN: edition → fragment → q
+COUNT: 5 works
+------------------------------------------------------------
+  tlg2042.tlg006 [First1K]
+  tlg2042.tlg010 [First1K]
+  tlg2042.tlg011 [First1K]
+  tlg2042.tlg014 [First1K]
+  tlg2042.tlg015 [First1K]
+
+============================================================
+PATTERN: edition → chapter → verse → l
+COUNT: 5 works
+------------------------------------------------------------
+  tlg0527.tlg029 [First1K]
+  tlg0527.tlg031 [First1K]
+  tlg0527.tlg032 [First1K]
+  tlg0527.tlg033 [First1K]
+  tlg0527.tlg035 [First1K]
+
+============================================================
+PATTERN: edition → centuria → section → p
+COUNT: 5 works
+------------------------------------------------------------
+  tlg0007.tlg146 [First1K]
+  tlg0097.tlg001 [First1K]
+  tlg0098.tlg001 [First1K]
+  tlg9006.tlg001 [First1K]
+  tlg9007.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → letter → section → p
+COUNT: 4 works
+------------------------------------------------------------
+  stoa0162.stoa004 [Perseus Latin]
+  tlg0014.tlg063 [Perseus Greek]
+  tlg0059.tlg036 [Perseus Greek]
+  tlg0628.tlg003 [First1K]
+
+============================================================
+PATTERN: translation → book → card → p
+COUNT: 4 works
+------------------------------------------------------------
+  tlg0012.tlg001 [Perseus Greek]
+  tlg0012.tlg002 [Perseus Greek]
+
+============================================================
+PATTERN: edition → speech → section → p
+COUNT: 4 works
+------------------------------------------------------------
+  phi0474.phi011 [Perseus Latin]
+  phi0474.phi013 [Perseus Latin]
+  phi0474.phi035 [Perseus Latin]
+  tlg0612.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → epigram → l
+COUNT: 4 works
+------------------------------------------------------------
+  tlg7000.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: letter → p
+COUNT: 4 works
+------------------------------------------------------------
+  phi0474.phi056 [Perseus Latin]
+  phi0474.phi057 [Perseus Latin]
+  phi0474.phi059 [Perseus Latin]
+  phi0478.phi003 [Perseus Latin]
+
+============================================================
+PATTERN: edition → fragment → section → p
+COUNT: 4 works
+------------------------------------------------------------
+  tlg0093.tlg010x09 [First1K]
+  tlg0610.tlg001 [First1K]
+  tlg2042.tlg084 [First1K]
+  tlg2178.tlg004 [First1K]
+
+============================================================
+PATTERN: edition → epigram → l
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0012.tlg003 [Perseus Greek]
+  tlg0533.tlg003 [Perseus Greek]
+  tlg0533.tlg004 [Perseus Greek]
+
+============================================================
+PATTERN: edition → poem → sp
+COUNT: 3 works
+------------------------------------------------------------
+  phi0690.phi001 [Perseus Latin]
+  tlg0005.tlg001 [Perseus Greek]
+  tlg0036.tlg003 [Perseus Greek]
+
+============================================================
+PATTERN: edition → tetralogy → section → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0028.tlg002 [Perseus Greek]
+  tlg0028.tlg003 [Perseus Greek]
+  tlg0028.tlg004 [Perseus Greek]
+
+============================================================
+PATTERN: translation → tetralogy → section → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0028.tlg002 [Perseus Greek]
+  tlg0028.tlg003 [Perseus Greek]
+  tlg0028.tlg004 [Perseus Greek]
+
+============================================================
+PATTERN: translation → part → section → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0027.tlg001 [Perseus Greek]
+  tlg0027.tlg002 [Perseus Greek]
+  tlg0027.tlg004 [Perseus Greek]
+
+============================================================
+PATTERN: translation → introduction → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0003.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → letter → section → p
+COUNT: 3 works
+------------------------------------------------------------
+  phi0474.phi057 [Perseus Latin]
+  phi1017.phi015 [Perseus Latin]
+  phi1318.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → Book → letter → section → p
+COUNT: 3 works
+------------------------------------------------------------
+  phi0474.phi056 [Perseus Latin]
+  phi0474.phi058 [Perseus Latin]
+  phi0474.phi059 [Perseus Latin]
+
+============================================================
+PATTERN: edition → hypothesis → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0085.tlg002 [First1K]
+  tlg0085.tlg005 [First1K]
+  tlg0085.tlg007 [First1K]
+
+============================================================
+PATTERN: edition → section → lg
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0068.tlg001 [First1K]
+  tlg0069.tlg001 [First1K]
+  tlg0616.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → book → fragment → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg1595.tlg370 [First1K]
+  tlg2042.tlg017 [First1K]
+  tlg2135.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → chapter → ab
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0031.tlg002 [First1K]
+  tlg1205.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → fragment → l
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0006.tlg020 [First1K]
+  tlg1486.tlg002 [First1K]
+  tlg1801.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → book → paragraph → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0087.tlg008 [First1K]
+  tlg0087.tlg033 [First1K]
+  tlg3118.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → page → p
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0732.tlg005 [First1K]
+  tlg0732.tlgX01 [First1K]
+  tlg2023.tlg004 [First1K]
+
+============================================================
+PATTERN: edition → book → chapter → quote
+COUNT: 3 works
+------------------------------------------------------------
+  tlg0057.tlg087 [First1K]
+  tlg0057.tlg092 [First1K]
+  tlg0057.tlg099 [First1K]
+
+============================================================
+PATTERN: translation → letter → section → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0014.tlg063 [Perseus Greek]
+  tlg0059.tlg036 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → section → subsection → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0086.tlg029 [Perseus Greek]
+  tlg0627.tlg006 [Perseus Greek]
+
+============================================================
+PATTERN: translation → oath → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0627.tlg013 [Perseus Greek]
+
+============================================================
+PATTERN: edition → episode → lyric → sp
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0085.tlg001 [First1K]
+  tlg0085.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → section → subsection → p
+COUNT: 2 works
+------------------------------------------------------------
+  stoa0045.stoa016 [Perseus Latin]
+  tlg0086.tlg003 [Perseus Greek]
+
+============================================================
+PATTERN: edition → chapter → subchapter → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0086.tlg034 [Perseus Greek]
+
+============================================================
+PATTERN: translation → Prologue → l
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0019.tlg003 [Perseus Greek]
+  tlg0019.tlg006 [Perseus Greek]
+
+============================================================
+PATTERN: edition → letter → entry → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg1389.tlg001 [Perseus Greek]
+  tlg1416.tlg007 [First1K]
+
+============================================================
+PATTERN: section → p
+COUNT: 2 works
+------------------------------------------------------------
+  phi0972.phi001f [Perseus Latin]
+
+============================================================
+PATTERN: edition → section → ab
+COUNT: 2 works
+------------------------------------------------------------
+  phi0972.phi001 [Perseus Latin]
+  tlg0070.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → preface → l
+COUNT: 2 works
+------------------------------------------------------------
+  stoa0238.stoa002 [Perseus Latin]
+  stoa0238.stoa006 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → chapter → paragraph → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg1272.tlg001 [First1K]
+  tlg1764.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → book → section → paragraph → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0592.tlg004 [First1K]
+  tlg4003.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → chapter
+COUNT: 2 works
+------------------------------------------------------------
+  tlg2200.tlg00543 [First1K]
+  tlg2200.tlg00544 [First1K]
+
+============================================================
+PATTERN: edition → section → line → part → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg5023.tlg015 [First1K]
+  tlg5023.tlg016 [First1K]
+
+============================================================
+PATTERN: edition → part → section → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0594.tlg002 [First1K]
+  tlg1805.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → poem → section → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0533.tlg007 [First1K]
+  tlg0533.tlg009 [First1K]
+
+============================================================
+PATTERN: edition → homilia → section → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg2042.tlg009 [First1K]
+  tlg2042.tlg021 [First1K]
+
+============================================================
+PATTERN: index → paragraph → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0527.tlg048 [First1K]
+
+============================================================
+PATTERN: edition → line → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0007.tlg147 [First1K]
+  tlg5019.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → book → part → chapter → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0086.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → part → chapter → section → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0086.tlg039 [First1K]
+  tlg0086.tlg047 [First1K]
+
+============================================================
+PATTERN: edition → epistle → chapter → section → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg1443.tlg001 [First1K]
+  tlg1443.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → fragment → chapter → p
+COUNT: 2 works
+------------------------------------------------------------
+  tlg0093.tlg003 [First1K]
+  tlg0093.tlg004 [First1K]
+
+============================================================
+PATTERN: translation → exordium → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0014.tlg062 [Perseus Greek]
+
+============================================================
+PATTERN: edition → exordium → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0014.tlg062 [Perseus Greek]
+
+============================================================
+PATTERN: translation → textpart → l
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0013.tlg003 [Perseus Greek]
+
+============================================================
+PATTERN: edition → textpart → l
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0013.tlg003 [Perseus Greek]
+
+============================================================
+PATTERN: translation → book → type → number → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1799.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → type → number → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1799.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: translation → section → aphorism → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0627.tlg012 [Perseus Greek]
+
+============================================================
+PATTERN: edition → section → aphorism → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0627.tlg012 [Perseus Greek]
+
+============================================================
+PATTERN: edition → oath → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0627.tlg013 [Perseus Greek]
+
+============================================================
+PATTERN: translation → episode → lyric → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0085.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: translation → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0085.tlg005 [Perseus Greek]
+
+============================================================
+PATTERN: edition → episode → anapests → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0085.tlg002 [Perseus Greek]
+
+============================================================
+PATTERN: translation → episode → anapests → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0085.tlg002 [Perseus Greek]
+
+============================================================
+PATTERN: edition → Book → l
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0012.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: translation → epigram → l
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0012.tlg003 [Perseus Greek]
+
+============================================================
+PATTERN: edition → letter → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2003.tlg013 [Perseus Greek]
+
+============================================================
+PATTERN: translation → section → sentence → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0557.tlg003a [Perseus Greek]
+
+============================================================
+PATTERN: translation → book → sentence → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0557.tlg003a [Perseus Greek]
+
+============================================================
+PATTERN: translation → preface → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0551.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: translation → textpart → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0551.tlg012 [Perseus Greek]
+
+============================================================
+PATTERN: translation → chapter → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0551.tlg013 [Perseus Greek]
+
+============================================================
+PATTERN: edition → work → ab
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4036.tlg023 [Perseus Greek]
+
+============================================================
+PATTERN: translation → textpart → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0007.tlg136 [Perseus Greek]
+
+============================================================
+PATTERN: translation → book → bekker_page → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0086.tlg035 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → bekker_page → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0086.tlg035 [Perseus Greek]
+
+============================================================
+PATTERN: translation → chapter → subchapter → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0086.tlg034 [Perseus Greek]
+
+============================================================
+PATTERN: translation → letter → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0010.tlg023 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → chapter → l
+COUNT: 1 works
+------------------------------------------------------------
+  tlg7000.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → Cast_List → l
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0019.tlg009 [Perseus Greek]
+
+============================================================
+PATTERN: edition → book → chapter → section → subsection → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0284.tlg056 [Perseus Greek]
+
+============================================================
+PATTERN: translation → Book → chapter → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0016.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: translation → epistle → chapter → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1443.tlg001 [Perseus Greek]
+
+============================================================
+PATTERN: edition → page → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0638.tlg004 [Perseus Greek]
+
+============================================================
+PATTERN: edition → work → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0638.tlg005 [Perseus Greek]
+
+============================================================
+PATTERN: edition → part → index → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0914.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → poem → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0893.phi004 [Perseus Latin]
+
+============================================================
+PATTERN: translation → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0893.phi006 [Perseus Latin]
+
+============================================================
+PATTERN: translation → book → poem → lg
+COUNT: 1 works
+------------------------------------------------------------
+  phi0893.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → opener → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0478.phi003 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → topic → chapter → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi1242.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: translation → intro → scene → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0134.phi002 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → fragment
+COUNT: 1 works
+------------------------------------------------------------
+  phi1014.phi004 [Perseus Latin]
+
+============================================================
+PATTERN: commentary → book
+COUNT: 1 works
+------------------------------------------------------------
+  phi0917.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: translation → book → line → l
+COUNT: 1 works
+------------------------------------------------------------
+  phi0917.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → section → quote
+COUNT: 1 works
+------------------------------------------------------------
+  stoa0058.stoa001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → section → l
+COUNT: 1 works
+------------------------------------------------------------
+  stoa0238.stoa007 [Perseus Latin]
+
+============================================================
+PATTERN: book → book → l
+COUNT: 1 works
+------------------------------------------------------------
+  phi0690.phi003 [Perseus Latin]
+
+============================================================
+PATTERN: translation → poem → sp
+COUNT: 1 works
+------------------------------------------------------------
+  phi0690.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → fragments → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi027 [Perseus Latin]
+
+============================================================
+PATTERN: translation → speech → textpart → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi011 [Perseus Latin]
+
+============================================================
+PATTERN: edition → actio → book → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi005 [Perseus Latin]
+
+============================================================
+PATTERN: translation → actio → book → commentary → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi005 [Perseus Latin]
+
+============================================================
+PATTERN: div → letter → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi058 [Perseus Latin]
+
+============================================================
+PATTERN: edition → speech → argument → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi035 [Perseus Latin]
+
+============================================================
+PATTERN: translation → speech → commentary → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0474.phi013 [Perseus Latin]
+
+============================================================
+PATTERN: edition → Lyrics → poem → l
+COUNT: 1 works
+------------------------------------------------------------
+  phi0472.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: translation → textpart → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0472.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: chapter → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi1351.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → section → praeface → p
+COUNT: 1 works
+------------------------------------------------------------
+  stoa0045.stoa003 [Perseus Latin]
+
+============================================================
+PATTERN: edition → secton → p
+COUNT: 1 works
+------------------------------------------------------------
+  stoa0045.stoa015 [Perseus Latin]
+
+============================================================
+PATTERN: edition → book → poem → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi1020.phi002 [Perseus Latin]
+
+============================================================
+PATTERN: edition → prologue → l
+COUNT: 1 works
+------------------------------------------------------------
+  phi0969.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi1017.phi011 [Perseus Latin]
+
+============================================================
+PATTERN: translation → poem → card → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0959.phi002 [Perseus Latin]
+
+============================================================
+PATTERN: translation → card → l
+COUNT: 1 works
+------------------------------------------------------------
+  phi0959.phi005 [Perseus Latin]
+
+============================================================
+PATTERN: translation → poem → card → l
+COUNT: 1 works
+------------------------------------------------------------
+  phi0959.phi003 [Perseus Latin]
+
+============================================================
+PATTERN: translation → book → poem → p
+COUNT: 1 works
+------------------------------------------------------------
+  phi0959.phi001 [Perseus Latin]
+
+============================================================
+PATTERN: edition → section
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4024.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → book → aphorism → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0627.tlg012 [First1K]
+
+============================================================
+PATTERN: edition → castlist → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0085.tlg006 [First1K]
+
+============================================================
+PATTERN: edition → book → section → lg
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1595.tlg221 [First1K]
+
+============================================================
+PATTERN: edition → section → fragment → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1134.tlg001 [First1K]
+
+============================================================
+PATTERN: commentary → index → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0643.tlg001 [First1K]
+
+============================================================
+PATTERN: explicatio → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0643.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → index → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0643.tlg001 [First1K]
+
+============================================================
+PATTERN: commentary → sigla → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0643.tlg001 [First1K]
+
+============================================================
+PATTERN: preface → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0643.opp001 [First1K]
+
+============================================================
+PATTERN: epimetrum → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0643.opp002 [First1K]
+
+============================================================
+PATTERN: edition → book → line → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1194.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → chapter → verse → comment → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4102.tlg011 [First1K]
+
+============================================================
+PATTERN: edition → work → line → part → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg5023.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → excerpt → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1286.tlg020 [First1K]
+
+============================================================
+PATTERN: edition → part → chapter → verse → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2042.tlg078 [First1K]
+
+============================================================
+PATTERN: edition → epistle → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2042.tlg045 [First1K]
+
+============================================================
+PATTERN: edition → homilia → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2042.tlg016 [First1K]
+
+============================================================
+PATTERN: edition → psalm → verse → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2042.tlg044 [First1K]
+
+============================================================
+PATTERN: edition → chapter → lines → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2042.tlg086 [First1K]
+
+============================================================
+PATTERN: appendix → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0527.tlg048 [First1K]
+
+============================================================
+PATTERN: notes → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0527.tlg048 [First1K]
+
+============================================================
+PATTERN: edition → chapter → lg
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0527.tlg028 [First1K]
+
+============================================================
+PATTERN: edition → fragment → page → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg1669.tlg004 [First1K]
+
+============================================================
+PATTERN: edition → haeresis → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2021.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → fabula → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0096.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → fable → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0096.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → commentary → book → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4090.tlg001 [First1K]
+
+============================================================
+PATTERN: translation → chapter → verse → ab
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0031.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → fragment → section → subsection → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0081.tlg014 [First1K]
+
+============================================================
+PATTERN: edition → folio → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4016.tlg005 [First1K]
+
+============================================================
+PATTERN: edition → part → page → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0087.tlg035 [First1K]
+
+============================================================
+PATTERN: edition → book → chapter → section → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0087.tlg011 [First1K]
+
+============================================================
+PATTERN: translation → ab
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0018.tlg003 [First1K]
+
+============================================================
+PATTERN: edition → quaestio → essay → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0732.tlg012 [First1K]
+
+============================================================
+PATTERN: edition → section → sentence → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0732.tlg011 [First1K]
+
+============================================================
+PATTERN: edition → work → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0732.tlg010 [First1K]
+
+============================================================
+PATTERN: edition → volume → epigraph → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg5026.tlg007 [First1K]
+
+============================================================
+PATTERN: edition → volume → book → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg5026.tlg001 [First1K]
+
+============================================================
+PATTERN: commentary → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg3129.ogl001 [First1K]
+
+============================================================
+PATTERN: translation → chapter → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg2001.tlg043 [First1K]
+
+============================================================
+PATTERN: edition → work → section → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg5029.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → poem → line → part → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg5034.tlg001a [First1K]
+
+============================================================
+PATTERN: edition → chapter → sentence → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0541.tlg042 [First1K]
+
+============================================================
+PATTERN: edition → section → book → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4003.tlg003 [First1K]
+
+============================================================
+PATTERN: edition → book → index
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4003.tlg002 [First1K]
+
+============================================================
+PATTERN: edition → ab
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0067.tlg001 [First1K]
+
+============================================================
+PATTERN: commentary → chapter → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg4034.tlg006 [First1K]
+
+============================================================
+PATTERN: edition → fragment → paragraph → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0066.tlg001 [First1K]
+
+============================================================
+PATTERN: edition → work → chapter → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0057.tlg086 [First1K]
+

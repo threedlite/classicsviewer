@@ -1112,21 +1112,24 @@ def main():
             work_title = row['Work'].strip()
 
             # Look up work_id from database
+            # Use TRIM() and REPLACE() to handle whitespace/newlines in database titles
             cur.execute("""
                 SELECT w.id, w.title, w.title_english, a.name
                 FROM works w
                 JOIN authors a ON w.author_id = a.id
-                WHERE a.name = ? AND w.title = ?
+                WHERE TRIM(REPLACE(REPLACE(a.name, char(10), ''), char(13), '')) = ?
+                  AND TRIM(REPLACE(REPLACE(w.title, char(10), ''), char(13), '')) = ?
             """, (author_name, work_title))
             result = cur.fetchone()
 
             if not result:
-                # Try case-insensitive match
+                # Try case-insensitive match with TRIM and newline removal
                 cur.execute("""
                     SELECT w.id, w.title, w.title_english, a.name
                     FROM works w
                     JOIN authors a ON w.author_id = a.id
-                    WHERE LOWER(a.name) = LOWER(?) AND LOWER(w.title) = LOWER(?)
+                    WHERE LOWER(TRIM(REPLACE(REPLACE(a.name, char(10), ''), char(13), ''))) = LOWER(?)
+                      AND LOWER(TRIM(REPLACE(REPLACE(w.title, char(10), ''), char(13), ''))) = LOWER(?)
                 """, (author_name, work_title))
                 result = cur.fetchone()
 
@@ -1136,17 +1139,17 @@ def main():
                     SELECT w.id, w.title, w.title_english, a.name
                     FROM works w
                     JOIN authors a ON w.author_id = a.id
-                    WHERE a.name = ? AND w.title_english = ?
+                    WHERE TRIM(a.name) = ? AND TRIM(w.title_english) = ?
                 """, (author_name, work_title))
                 result = cur.fetchone()
 
             if not result:
-                # Try case-insensitive match on title_english
+                # Try case-insensitive match on title_english with TRIM
                 cur.execute("""
                     SELECT w.id, w.title, w.title_english, a.name
                     FROM works w
                     JOIN authors a ON w.author_id = a.id
-                    WHERE LOWER(a.name) = LOWER(?) AND LOWER(w.title_english) = LOWER(?)
+                    WHERE LOWER(TRIM(a.name)) = LOWER(?) AND LOWER(TRIM(w.title_english)) = LOWER(?)
                 """, (author_name, work_title))
                 result = cur.fetchone()
 
