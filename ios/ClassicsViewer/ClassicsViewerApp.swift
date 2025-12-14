@@ -8,7 +8,11 @@ struct ClassicsViewerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if appState.isExtracting {
+            if !appState.isAgeVerified {
+                // Age verification must pass before accessing the app
+                AgeVerificationView()
+                    .environmentObject(appState)
+            } else if appState.isExtracting {
                 DatabaseExtractionView()
                     .environmentObject(appState)
             } else if appState.isDatabaseReady && appState.databaseManagersInitialized && appState.selectedLanguage != nil {
@@ -74,6 +78,7 @@ struct ClassicsViewerApp: App {
 
 @MainActor
 class AppState: ObservableObject {
+    @Published var isAgeVerified = false
     @Published var isDatabaseReady = false
     @Published var isExtracting = false
     @Published var extractionProgress: Double = 0.0
