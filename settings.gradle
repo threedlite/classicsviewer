@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ClassicsViewer"
 include ':app'
+include ':full_database_pack'

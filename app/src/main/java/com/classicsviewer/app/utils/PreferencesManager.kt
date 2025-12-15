@@ -21,6 +21,7 @@ object PreferencesManager {
     private const val KEY_HAS_RUN_AUTO_DETECT_LANGUAGES = "has_run_auto_detect_languages"
     private const val KEY_HAS_FIXED_LANGUAGE_ORDER = "has_fixed_language_order"
     private const val KEY_WRAP_INTERLINEAR = "wrap_interlinear"
+    private const val KEY_USE_FULL_DATABASE = "use_full_database"
 
     private val gson = Gson()
     
@@ -81,7 +82,16 @@ object PreferencesManager {
     fun setWrapInterlinear(context: Context, wrap: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_WRAP_INTERLINEAR, wrap).apply()
     }
-    
+
+    // Full database preference (on-demand downloaded via Play Asset Delivery)
+    fun getUseFullDatabase(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_USE_FULL_DATABASE, false)
+    }
+
+    fun setUseFullDatabase(context: Context, useFullDb: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_USE_FULL_DATABASE, useFullDb).apply()
+    }
+
     // Navigation state persistence
     fun saveNavigationState(context: Context, activityName: String, extras: Map<String, String>) {
         val prefs = getPrefs(context).edit()

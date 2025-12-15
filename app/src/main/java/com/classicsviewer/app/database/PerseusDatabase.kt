@@ -55,16 +55,18 @@ abstract class PerseusDatabase : RoomDatabase() {
                     // Check for external database first
                     val externalDbUri = PreferencesManager.getExternalDatabaseUri(context)
                     
+                    // Database priority: External > Main (sample or full, same file)
                     val instance = if (externalDbUri != null) {
+                        // Priority 1: External database (user-imported)
                         android.util.Log.d("PerseusDatabase", "Attempting to use external database: $externalDbUri")
-                        
+
                         // External database should already be copied during selection
                         val externalDbFile = File(context.getDatabasePath("dummy").parent, "external_perseus_texts.db")
-                        
+
                         if (externalDbFile.exists() && externalDbFile.length() > 1000) {
                             // Open the pre-copied external database
                             android.util.Log.d("PerseusDatabase", "Using pre-copied external database: ${externalDbFile.absolutePath}, size: ${externalDbFile.length() / (1024 * 1024)}MB")
-                            
+
                             Room.databaseBuilder(
                                 context.applicationContext,
                                 PerseusDatabase::class.java,
@@ -76,16 +78,17 @@ abstract class PerseusDatabase : RoomDatabase() {
                             // External database not found or too small - fall back
                             android.util.Log.e("PerseusDatabase", "External database not found or invalid. File exists: ${externalDbFile.exists()}, size: ${externalDbFile.length()}")
                             android.os.Handler(android.os.Looper.getMainLooper()).post {
-                                Toast.makeText(context, "External database not found. Using bundled database.", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, "External database not found. Using main database.", Toast.LENGTH_LONG).show()
                             }
                             // Clear the invalid URI
                             PreferencesManager.clearExternalDatabaseUri(context)
-                            // Fall back to bundled database
+                            // Fall back to main database (sample or full - same filename)
                             createBundledDatabase(context)
                         }
                     } else {
-                        // Use bundled database
-                        android.util.Log.d("PerseusDatabase", "Using bundled database")
+                        // Use main database (perseus_texts.db - could be sample or full)
+                        val isFullDb = PreferencesManager.getUseFullDatabase(context)
+                        android.util.Log.d("PerseusDatabase", "Using main database (type: ${if (isFullDb) "full" else "sample"})")
                         createBundledDatabase(context)
                     }
                     
@@ -141,7 +144,7 @@ abstract class PerseusDatabase : RoomDatabase() {
         private fun createBundledDatabase(context: Context): PerseusDatabase {
             // Check if database needs to be extracted from OBB
             checkAndExtractFromObb(context)
-            
+
             return Room.databaseBuilder(
                 context.applicationContext,
                 PerseusDatabase::class.java,
@@ -150,7 +153,7 @@ abstract class PerseusDatabase : RoomDatabase() {
             .fallbackToDestructiveMigration()
             .build()
         }
-        
+
         fun destroyInstance() {
             INSTANCE?.close()
             INSTANCE = null

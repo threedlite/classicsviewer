@@ -1,0 +1,10 @@
+plugins {
+    id 'com.android.asset-pack'
+}
+
+assetPack {
+    packName = "full_database_pack"
+    dynamicDelivery {
+        deliveryType = "on-demand"
+    }
+}

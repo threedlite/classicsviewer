@@ -7,9 +7,13 @@ plugins {
 android {
     namespace 'com.classicsviewer.app'
     compileSdk 36
-    
-    // Asset packs removed - including database directly in APK
-    
+
+    // On-demand asset pack for full database download
+    // The AAB will be ~1.4GB total, but Google Play handles this:
+    // - Base APK (~170MB) downloads on install
+    // - Asset pack (~1.3GB) downloads only when user requests it
+    assetPacks = [":full_database_pack"]
+
     // Load keystore properties if available
     def keystorePropertiesFile = file("keystore.properties")
     def keystoreProperties = new Properties()
@@ -32,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 69
-        versionName "0.8.69"
+        versionCode 78
+        versionName "0.8.78"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -111,9 +115,9 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-core:2.19.1'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.1'
     
-    // Play Asset Delivery
-    implementation 'com.google.android.play:asset-delivery:2.2.2'
-    implementation 'com.google.android.play:asset-delivery-ktx:2.2.2'
+    // Play Asset Delivery (for on-demand full database download)
+    implementation 'com.google.android.play:asset-delivery:2.3.0'
+    implementation 'com.google.android.play:asset-delivery-ktx:2.3.0'
     
     // WorkManager for background tasks
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
@@ -243,24 +247,61 @@ task checkAabSize {
     doLast {
         def aabFile = file("$buildDir/outputs/bundle/release/app-release.aab")
         if (aabFile.exists()) {
-            def sizeInMB = aabFile.length() / 1024 / 1024
-            println "AAB size: ${sizeInMB}MB"
-            
-            if (sizeInMB > 200) {
+            def totalSizeInMB = aabFile.length() / 1024 / 1024
+            println "Total AAB size: ${String.format('%.1f', totalSizeInMB)}MB"
+
+            // Calculate base module size by reading ZIP entries
+            def baseModuleSize = 0L
+            def assetPackSizes = [:]
+
+            new java.util.zip.ZipFile(aabFile).withCloseable { zip ->
+                zip.entries().each { entry ->
+                    if (entry.name.startsWith("base/")) {
+                        baseModuleSize += entry.compressedSize
+                    } else {
+                        // Track asset pack sizes
+                        def packName = entry.name.split("/")[0]
+                        if (!packName.equals("BundleConfig.pb") && !packName.equals("BUNDLE-METADATA")) {
+                            assetPackSizes[packName] = (assetPackSizes[packName] ?: 0L) + entry.compressedSize
+                        }
+                    }
+                }
+            }
+
+            def baseModuleMB = baseModuleSize / 1024 / 1024
+            println "Base module size: ${String.format('%.1f', baseModuleMB)}MB"
+
+            // Check if on-demand asset packs are configured
+            def hasAssetPacks = !android.assetPacks.isEmpty()
+
+            if (hasAssetPacks) {
+                assetPackSizes.each { packName, size ->
+                    if (packName != "base") {
+                        def sizeMB = size / 1024 / 1024
+                        println "Asset pack '${packName}': ${String.format('%.1f', sizeMB)}MB"
+                    }
+                }
+            }
+
+            // Always check base module is under 200MB
+            if (baseModuleMB > 200) {
                 throw new GradleException("""
-                    ERROR: Release AAB exceeds Google Play's 200MB limit!
-                    
-                    Current AAB size: ${sizeInMB}MB
+                    ERROR: Base module exceeds Google Play's 200MB limit!
+
+                    Base module size: ${String.format('%.1f', baseModuleMB)}MB
                     Maximum allowed: 200MB
-                    
+
                     The database is too large for the base module.
                     Consider:
                     1. Reducing the number of authors in SAMPLE_AUTHORS.md
-                    2. Using Play Asset Delivery (requires perseus_database module)
-                    3. Implementing dynamic feature modules
+                    2. Using Play Asset Delivery for large assets
                 """)
             } else {
-                println "✓ AAB size is within Google Play limits (${sizeInMB}MB < 200MB)"
+                println "✓ Base module is within Google Play limits (${String.format('%.1f', baseModuleMB)}MB < 200MB)"
+            }
+
+            if (hasAssetPacks) {
+                println "✓ AAB structure is valid for Play Asset Delivery"
             }
         }
     }

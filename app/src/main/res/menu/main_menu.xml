@@ -23,7 +23,12 @@
         android:id="@+id/action_reset_database"
         android:title="Reset to Bundled Database"
         app:showAsAction="never" />
-    
+
+    <item
+        android:id="@+id/action_download_full_database"
+        android:title="Download Full Database"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_manage_audio"
         android:title="Manage Audio"

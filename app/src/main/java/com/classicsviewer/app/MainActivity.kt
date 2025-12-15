@@ -36,6 +36,7 @@ import android.os.Looper
 import java.util.zip.ZipInputStream
 import java.io.BufferedInputStream
 import com.classicsviewer.app.models.CustomLanguageConfig
+import com.classicsviewer.app.data.AssetPackDatabaseHelper
 
 class MainActivity : AppCompatActivity() {
     
@@ -342,6 +343,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, ManageLanguagesActivity::class.java))
                 true
             }
+            R.id.action_download_full_database -> {
+                showDownloadFullDatabaseConfirmation()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -413,6 +418,82 @@ class MainActivity : AppCompatActivity() {
         // For now, we'll just do nothing to prevent accidental exits
     }
     
+    private fun showDownloadFullDatabaseConfirmation() {
+        val downloadManager = com.classicsviewer.app.data.FullDatabaseDownloadManager(this)
+
+        // Check if already downloaded and extracted
+        if (downloadManager.isFullDatabaseActive()) {
+            // Already have it - go directly to management screen
+            startActivity(Intent(this, FullDatabaseDownloadActivity::class.java))
+            return
+        }
+
+        // Check if downloaded but not extracted
+        if (downloadManager.isFullDatabaseDownloaded()) {
+            startActivity(Intent(this, FullDatabaseDownloadActivity::class.java))
+            return
+        }
+
+        // Not downloaded yet - show confirmation dialog
+        val availableGB = downloadManager.getAvailableSpaceGB()
+        val hasEnoughSpace = downloadManager.hasEnoughFreeSpace()
+
+        // Determine current database type for display
+        val currentDbType = when {
+            downloadManager.isExternalDatabaseActive() -> "External (user-imported)"
+            downloadManager.isFullDatabaseActive() -> "Full"
+            else -> "Sample (bundled)"
+        }
+
+        // Warn if external database will be replaced
+        val externalWarning = if (downloadManager.isExternalDatabaseActive()) {
+            "\n\nNote: Your external database will be replaced."
+        } else ""
+
+        val message = if (hasEnoughSpace) {
+            """
+            The full database contains all Greek and Latin authors from Perseus Digital Library.
+
+            Requirements:
+            - 25GB free storage space
+            - You have ${availableGB}GB available
+            - WiFi recommended for download
+
+            Current database: $currentDbType
+            Full database: ~300MB download, ~1.4GB extracted$externalWarning
+
+            Continue with download?
+            """.trimIndent()
+        } else {
+            """
+            Insufficient storage space!
+
+            Required: 25GB free space
+            Available: ${availableGB}GB
+
+            Please free up storage space before downloading the full database.
+            """.trimIndent()
+        }
+
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Download Full Database")
+            .setMessage(message)
+            .setPositiveButton(if (hasEnoughSpace) "Download" else "OK") { _, _ ->
+                if (hasEnoughSpace) {
+                    startActivity(Intent(this, FullDatabaseDownloadActivity::class.java))
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+
+        dialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+        dialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            resources.getColor(android.R.color.holo_blue_light, null)
+        )
+    }
+
     private fun selectExternalDatabase() {
         val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
             .setTitle("Select External Database")
@@ -627,37 +708,73 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetToBundledDatabase() {
-        // Clear the external database preference
-        PreferencesManager.clearExternalDatabaseUri(this)
-        
-        // Close all resources
-        PerseusDatabase.destroyInstance()
-        
-        // Delete the external database copy
-        val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
-        if (externalDbFile.exists()) {
-            externalDbFile.delete()
+        // Show progress dialog
+        val progressDialog = ProgressDialog(this).apply {
+            setMessage("Restoring bundled database...")
+            setCancelable(false)
+            show()
         }
-        
-        // Show a quick toast and restart
-        Toast.makeText(this, "Resetting to bundled database...", Toast.LENGTH_SHORT).show()
-        
-        // Restart the app
-        val intent = packageManager.getLaunchIntentForPackage(packageName)
-        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-        
-        // Exclude from recents and finish
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            finishAndRemoveTask()
-        } else {
-            finish()
+
+        lifecycleScope.launch {
+            try {
+                // Clear preferences
+                PreferencesManager.clearExternalDatabaseUri(this@MainActivity)
+                PreferencesManager.setUseFullDatabase(this@MainActivity, false)
+
+                // Close database
+                PerseusDatabase.destroyInstance()
+
+                // Delete external database copy
+                val externalDbFile = File(getDatabasePath("dummy").parent, "external_perseus_texts.db")
+                if (externalDbFile.exists()) {
+                    externalDbFile.delete()
+                }
+
+                // Delete main database and related files
+                val mainDbFile = getDatabasePath("perseus_texts.db")
+                if (mainDbFile.exists()) {
+                    mainDbFile.delete()
+                }
+                File(mainDbFile.path + "-wal").delete()
+                File(mainDbFile.path + "-shm").delete()
+                File(mainDbFile.path + "-journal").delete()
+
+                // Re-extract sample database from APK assets
+                val assetPackHelper = AssetPackDatabaseHelper(this@MainActivity)
+                val success = assetPackHelper.copyDatabaseFromAssetPack { progress ->
+                    runOnUiThread {
+                        val percent = (progress * 100).toInt()
+                        progressDialog.setMessage("Restoring bundled database... $percent%")
+                    }
+                }
+
+                withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
+
+                    if (success) {
+                        Toast.makeText(this@MainActivity, "Database restored! Restarting...", Toast.LENGTH_SHORT).show()
+
+                        // Restart the app
+                        val intent = packageManager.getLaunchIntentForPackage(packageName)
+                        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
+
+                        finishAndRemoveTask()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            System.exit(0)
+                        }, 100)
+                    } else {
+                        Toast.makeText(this@MainActivity, "Failed to restore database", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
+                    Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
         }
-        
-        // Delay to ensure cleanup, then exit
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            System.exit(0)
-        }, 100)
     }
 }
 
