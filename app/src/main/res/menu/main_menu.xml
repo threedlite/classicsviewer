@@ -30,6 +30,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_download_full_audio"
+        android:title="Download Iliad Full Audio"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_manage_audio"
         android:title="Manage Audio"
         app:showAsAction="never" />

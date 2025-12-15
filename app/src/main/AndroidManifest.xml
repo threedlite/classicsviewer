@@ -48,6 +48,7 @@
         <activity android:name=".ui.UserDictionaryImportActivity" />
         <activity android:name=".ManageLanguagesActivity" />
         <activity android:name=".FullDatabaseDownloadActivity" />
+        <activity android:name=".AudioDownloadActivity" />
 
         <service android:name=".audio.AudioPlaybackService"
             android:exported="false" />

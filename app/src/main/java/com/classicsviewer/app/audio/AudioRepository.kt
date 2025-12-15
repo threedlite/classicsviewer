@@ -84,12 +84,17 @@ class AudioRepository(private val context: Context) {
     
     fun getPackageDirectory(packageId: Long, packageName: String): File {
         val audioDir = File(context.filesDir, AUDIO_DIR)
-        
+
         // Special handling for bundled package
         if (packageId == -1L) {
             return File(audioDir, "default_bundled_audio")
         }
-        
+
+        // Special handling for full audio package (downloaded via Play Asset Delivery)
+        if (packageId == -2L) {
+            return File(audioDir, "full_iliad_audio")
+        }
+
         val safeName = packageName.replace(Regex("[^a-zA-Z0-9_-]"), "_")
         return File(audioDir, "package_${packageId}_$safeName")
     }

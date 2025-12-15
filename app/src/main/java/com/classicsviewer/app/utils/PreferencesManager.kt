@@ -22,6 +22,7 @@ object PreferencesManager {
     private const val KEY_HAS_FIXED_LANGUAGE_ORDER = "has_fixed_language_order"
     private const val KEY_WRAP_INTERLINEAR = "wrap_interlinear"
     private const val KEY_USE_FULL_DATABASE = "use_full_database"
+    private const val KEY_FULL_AUDIO_INSTALLED = "full_audio_installed"
 
     private val gson = Gson()
     
@@ -90,6 +91,15 @@ object PreferencesManager {
 
     fun setUseFullDatabase(context: Context, useFullDb: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_USE_FULL_DATABASE, useFullDb).apply()
+    }
+
+    // Full audio preference (on-demand downloaded via Play Asset Delivery)
+    fun getFullAudioInstalled(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_FULL_AUDIO_INSTALLED, false)
+    }
+
+    fun setFullAudioInstalled(context: Context, installed: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_FULL_AUDIO_INSTALLED, installed).apply()
     }
 
     // Navigation state persistence

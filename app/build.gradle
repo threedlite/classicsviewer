@@ -12,7 +12,7 @@ android {
     // The AAB will be ~1.4GB total, but Google Play handles this:
     // - Base APK (~170MB) downloads on install
     // - Asset pack (~1.3GB) downloads only when user requests it
-    assetPacks = [":full_database_pack"]
+    assetPacks = [":full_database_pack", ":audio_pack"]
 
     // Load keystore properties if available
     def keystorePropertiesFile = file("keystore.properties")
@@ -36,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 78
-        versionName "0.8.78"
+        versionCode 81
+        versionName "0.8.81"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         

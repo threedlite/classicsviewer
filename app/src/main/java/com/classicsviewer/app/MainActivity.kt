@@ -347,6 +347,11 @@ class MainActivity : AppCompatActivity() {
                 showDownloadFullDatabaseConfirmation()
                 true
             }
+            R.id.action_download_full_audio -> {
+                val intent = Intent(this, AudioDownloadActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

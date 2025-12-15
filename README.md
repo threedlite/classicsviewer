@@ -4,19 +4,13 @@ If you have trouble cloning this repo set GIT_LFS_SKIP_SMUDGE=1
 
 An Android app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required.
 
-NOTE: If you just want all the Perseus authors (90+), copy data-prep/perseus_texts_full.db.zip (700MB+) to phone, e.g. in Downloads folder, then in the app select "Select external database" and select that file. It is not necessary to unzip it. A built perseus_texts_full.db.zip is also available at:  
-https://www.patreon.com/posts/classics-viewer-141298606
-Patreon links added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
-
-NEW: Audio file homer_iliad_chamberlain_audio.zip for entire Iliad prosody-aware line by line (menu option: Manage Audio):
-https://www.patreon.com/posts/iliad-audio-for-141299909   (free)
+NOTE - NEW: There is now a download option within the menu to optionally retrieve the large full db from Google Play Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
-NEW (beta): Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
 
-NEW: Akkadian and Sumerian added to full db. Extended db has, in addition, some Sanskrit, Persian, Arabic, and Hebrew.  Some dictionary content added, mainly for Sanskrit.  A classical Arabic treebank licensed CC-BY-SA without NC would have allowed more, ideally in the manner of Oliver Hellwig's Digital Corpus of Sanskrit.
+Patreon links below added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
 
-NEW: Word wrap option for interlinear translations. 270 Sanskrit works from DCS with rough generated interlinear translations added to extended db. Sanskrit also available as a separate db. 
+Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
 
 
   SAMPLE DATABASE:
@@ -45,10 +39,6 @@ NEW: Word wrap option for interlinear translations. 270 Sanskrit works from DCS 
 
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
  
-NEW: (Beta) AI-generated word-by-word aligned translations with roughly 80-90% coverage have been added for Iliad and Odyssey in full the db, and all the Greek works in the extended db. This should help bridge the gap with the prose translations that are aligned by line range only, or else are missing. 
-
-
-
 
 ## Features
 
