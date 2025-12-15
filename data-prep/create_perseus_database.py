@@ -7535,14 +7535,22 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_n
             print(f"\nCompressing full database to {zip_path}...")
             with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
                 zf.write(db_filename, "perseus_texts.db")
-            
+
             # Get file sizes
             original_size = os.path.getsize(db_filename) / (1024 * 1024)
             compressed_size = os.path.getsize(zip_path) / (1024 * 1024)
-            
+
             print(f"Database compressed: {zip_path}")
             print(f"Original size: {original_size:.1f}MB")
             print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
+
+            # Copy full database to Play Asset Delivery asset pack folder
+            full_db_asset_dir = "../full_database_pack/src/main/assets"
+            os.makedirs(full_db_asset_dir, exist_ok=True)
+            asset_pack_zip_path = os.path.join(full_db_asset_dir, "perseus_texts_full.db.zip")
+            print(f"\nCopying full database to asset pack: {asset_pack_zip_path}...")
+            shutil.copy(zip_path, asset_pack_zip_path)
+            print(f"Full database copied to asset pack ({compressed_size:.1f}MB)")
         
         return True
     else:
