@@ -8,6 +8,7 @@ NOTE - NEW: There is now a download option within the menu to optionally retriev
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
 
+
 Patreon links below added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
 
 Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
