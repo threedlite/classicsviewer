@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var hasStartedCheck = false
-    
+
     var body: some View {
         Group {
             if !hasStartedCheck {
@@ -32,6 +32,7 @@ struct ContentView: View {
                     // Force app to restart by resetting state
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         appState.isDatabaseReady = false
+                        appState.databaseManagersInitialized = false
                         appState.selectedLanguage = nil
                         appState.needsRestart = false
                         // Database check will be handled by app lifecycle
@@ -48,12 +49,38 @@ struct ContentView: View {
                         .padding()
                     Spacer()
                 }
+                .task {
+                    await appState.checkAndExtractDatabase()
+                }
+            } else if !appState.databaseManagersInitialized {
+                VStack {
+                    Spacer()
+                    ProgressView()
+                        .scaleEffect(2)
+                    Text("Initializing database...")
+                        .padding()
+                    Spacer()
+                }
+                .task {
+                    await initializeDatabaseManagers()
+                }
             } else if appState.selectedLanguage == nil {
                 LanguageSelectionView()
             } else {
                 MainNavigationView()
             }
         }
+    }
+
+    private func initializeDatabaseManagers() async {
+        do {
+            try await DatabaseManagerAsync.shared.initialize()
+            try await UserDatabaseManagerAsync.shared.initialize()
+            try await DefaultAudioExtractor.shared.ensureDefaultAudioExtracted()
+        } catch {
+            print("Failed to initialize database managers: \(error)")
+        }
+        appState.databaseManagersInitialized = true
     }
 }
 

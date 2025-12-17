@@ -27,8 +27,22 @@ targets:
           - "**/.git"
           - "**/.build"
     resources:
-      - ClassicsViewer/Resources
+      # Main bundled resources (excluding OnDemand)
+      - path: ClassicsViewer/Resources
+        excludes:
+          - "OnDemand/**"
       - ClassicsViewer/LaunchScreen.storyboard
+      # On-Demand Resources - each file with its tag
+      - path: ClassicsViewer/Resources/OnDemand/homer_iliad_chamberlain_audio.zip
+        resourceTags: [audio_full]
+        buildPhase: resources
+      - path: ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip
+        resourceTags: [database_full]
+        buildPhase: resources
+    # Resource tag configuration - tags in neither list are "download on demand"
+    attributes:
+      OnDemandResourcesInitialInstallTags: []
+      OnDemandResourcesPrefetchOrder: []
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.classicsviewer.app
@@ -37,6 +51,9 @@ targets:
         SWIFT_VERSION: 5.9
         TARGETED_DEVICE_FAMILY: 1,2
         ENABLE_BITCODE: NO
+        # On-Demand Resources configuration
+        ENABLE_ON_DEMAND_RESOURCES: YES
+        EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE: NO
     dependencies:
       - package: SQLite
         product: SQLite

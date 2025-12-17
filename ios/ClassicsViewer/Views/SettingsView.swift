@@ -62,6 +62,27 @@ struct SettingsView: View {
                     Toggle("Wrap Interlinear Text", isOn: $wrapInterlinear)
                 }
 
+                // Downloads Section (On-Demand Resources)
+                Section(header: Text("Downloads")) {
+                    NavigationLink(destination: FullDatabaseDownloadView()) {
+                        HStack {
+                            Image(systemName: "cylinder.split.1x2")
+                            Text("Full Database")
+                            Spacer()
+                            DatabaseStatusBadge()
+                        }
+                    }
+
+                    NavigationLink(destination: AudioDownloadView()) {
+                        HStack {
+                            Image(systemName: "waveform")
+                            Text("Full Iliad Audio")
+                            Spacer()
+                            AudioStatusBadge()
+                        }
+                    }
+                }
+
                 // Languages Section
                 Section(header: Text("Languages")) {
                     NavigationLink(destination: ManageLanguagesView()) {
@@ -148,7 +169,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("0.8.71")
+                        Text("0.8.82")
                             .foregroundColor(.secondary)
                     }
 
@@ -407,6 +428,58 @@ struct FeatureRow: View {
             
             Text(text)
                 .font(.body)
+        }
+    }
+}
+
+// MARK: - Status Badges for Downloads Section
+
+struct DatabaseStatusBadge: View {
+    @StateObject private var manager = DatabaseAssetDownloadManager.shared
+
+    var body: some View {
+        Group {
+            switch manager.status {
+            case .active:
+                Text("Active")
+                    .font(.caption)
+                    .foregroundColor(.green)
+            case .installed:
+                Text("Ready")
+                    .font(.caption)
+                    .foregroundColor(.blue)
+            case .downloading:
+                ProgressView()
+                    .scaleEffect(0.7)
+            default:
+                EmptyView()
+            }
+        }
+        .task {
+            await manager.checkStatus()
+        }
+    }
+}
+
+struct AudioStatusBadge: View {
+    @StateObject private var manager = AudioAssetDownloadManager.shared
+
+    var body: some View {
+        Group {
+            switch manager.status {
+            case .installed:
+                Text("Installed")
+                    .font(.caption)
+                    .foregroundColor(.green)
+            case .downloading:
+                ProgressView()
+                    .scaleEffect(0.7)
+            default:
+                EmptyView()
+            }
+        }
+        .task {
+            await manager.checkStatus()
         }
     }
 }

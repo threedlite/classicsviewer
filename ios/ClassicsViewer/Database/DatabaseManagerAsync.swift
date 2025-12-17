@@ -37,7 +37,19 @@ enum DatabaseError: LocalizedError {
 actor DatabaseManagerAsync {
     static let shared = DatabaseManagerAsync()
 
-    private let databaseName = "perseus_texts.db"
+    /// Database filename depends on which database is active
+    /// - Sample: perseus_texts.db (bundled)
+    /// - Full: perseus_texts_full.db (downloaded via ODR)
+    /// - External: perseus_texts.db (user-imported, replaces sample)
+    private var databaseName: String {
+        // Check if full database is enabled
+        if UserDefaults.standard.useFullDatabase {
+            return "perseus_texts_full.db"
+        }
+        // Default to sample/external database
+        return "perseus_texts.db"
+    }
+
     private var db: OpaquePointer?
     private var state: ConnectionState = .uninitialized
 

@@ -126,22 +126,49 @@ class AppState: ObservableObject {
     
     @MainActor
     func checkAndExtractDatabase() async {
-        NSLog("DEBUG: checkAndExtractDatabase() called")
+        NSLog("DEBUG: checkAndExtractDatabase() START")
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let dbPath = (documentsPath as NSString).appendingPathComponent("perseus_texts.db")
 
-        NSLog("DEBUG: Checking for database at: \(dbPath)")
+        // Check which database should be used based on user preference
+        let useFullDatabase = UserDefaults.standard.useFullDatabase
+        NSLog("DEBUG: useFullDatabase preference = \(useFullDatabase)")
+
+        let databaseName = useFullDatabase ? "perseus_texts_full.db" : "perseus_texts.db"
+        let dbPath = (documentsPath as NSString).appendingPathComponent(databaseName)
+
+        NSLog("DEBUG: Target database: \(databaseName)")
+        NSLog("DEBUG: Full path: \(dbPath)")
+
+        // Also check what files exist
+        let sampleExists = FileManager.default.fileExists(atPath: (documentsPath as NSString).appendingPathComponent("perseus_texts.db"))
+        let fullExists = FileManager.default.fileExists(atPath: (documentsPath as NSString).appendingPathComponent("perseus_texts_full.db"))
+        NSLog("DEBUG: Sample DB exists: \(sampleExists), Full DB exists: \(fullExists)")
 
         if FileManager.default.fileExists(atPath: dbPath) {
-            print("DEBUG: Database exists, ready to use")
+            NSLog("DEBUG: Target database exists, marking ready")
             isDatabaseReady = true
+        } else if useFullDatabase {
+            // Full database was activated but file doesn't exist - revert to sample
+            NSLog("DEBUG: Full database file missing, reverting to sample database")
+            UserDefaults.standard.useFullDatabase = false
+            let sampleDbPath = (documentsPath as NSString).appendingPathComponent("perseus_texts.db")
+            if FileManager.default.fileExists(atPath: sampleDbPath) {
+                NSLog("DEBUG: Sample database exists after revert, ready to use")
+                isDatabaseReady = true
+            } else {
+                NSLog("DEBUG: No sample database either, need to extract bundled database")
+                isExtracting = true
+                extractionProgress = 0.0
+                await extractDatabaseAsync()
+            }
         } else {
-            print("DEBUG: No database found, need to extract bundled database")
+            NSLog("DEBUG: No database found at \(dbPath), need to extract bundled database")
             isExtracting = true
             extractionProgress = 0.0
             await extractDatabaseAsync()
         }
 
+        NSLog("DEBUG: checkAndExtractDatabase() END - isDatabaseReady=\(isDatabaseReady), isExtracting=\(isExtracting)")
         // Audio extraction moved to after database managers are initialized
     }
     
