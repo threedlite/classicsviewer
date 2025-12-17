@@ -24,7 +24,7 @@ class AudioDownloadManager(private val context: Context) {
         private const val TAG = "AudioDownloadManager"
         const val ASSET_PACK_NAME = "audio_pack"
         const val AUDIO_ZIP_NAME = "homer_iliad_chamberlain_audio.zip"
-        const val REQUIRED_SPACE_BYTES = 2L * 1024 * 1024 * 1024 // 2GB for extraction
+        const val REQUIRED_SPACE_BYTES = 4L * 1024 * 1024 * 1024 // 4GB for extraction
         private const val FULL_AUDIO_PACKAGE_ID = -2L // Special ID for full audio (distinct from bundled -1)
         private const val FULL_AUDIO_PACKAGE_NAME = "Homer - Iliad (Chamberlain) [Full]"
         private const val AUDIO_DIR = "audio"
