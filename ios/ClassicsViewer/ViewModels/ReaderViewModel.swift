@@ -114,8 +114,23 @@ class ReaderViewModel: ObservableObject {
     private func loadAvailableTranslators() async {
         do {
             // Database lifecycle managed by async architecture
-            availableTranslators = try await translationDAO.getAvailableTranslators(bookId: book.id)
-            print("DEBUG: Found \(availableTranslators.count) translator(s): \(availableTranslators)")
+            var translators = try await translationDAO.getAvailableTranslators(bookId: book.id)
+            print("DEBUG: Found \(translators.count) translator(s): \(translators)")
+
+            // Reorder translators based on user preference for interlinear position
+            let showInterlinearFirst = UserDefaults.standard.bool(forKey: "showInterlinearFirst")
+            if let interlinearIndex = translators.firstIndex(where: { $0.localizedCaseInsensitiveContains("Interlinear") }),
+               translators.count > 1 {
+                let interlinear = translators.remove(at: interlinearIndex)
+                if showInterlinearFirst {
+                    translators.insert(interlinear, at: 0)
+                } else {
+                    translators.append(interlinear)
+                }
+                print("DEBUG: Reordered translators (interlinear first: \(showInterlinearFirst)): \(translators)")
+            }
+
+            availableTranslators = translators
         } catch {
             print("ERROR: Failed to load available translators: \(error)")
         }

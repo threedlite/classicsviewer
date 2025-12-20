@@ -304,6 +304,21 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             
             // Get available translators
             availableTranslators = repository.getAvailableTranslators(bookId)
+
+            // Reorder translators based on user preference for interlinear position
+            val interlinearFirst = PreferencesManager.getInterlinearFirst(this@TextViewerPagerActivity)
+            val interlinearTranslator = availableTranslators.find { it.contains("Interlinear", ignoreCase = true) }
+            if (interlinearTranslator != null && availableTranslators.size > 1) {
+                val reordered = availableTranslators.toMutableList()
+                reordered.remove(interlinearTranslator)
+                if (interlinearFirst) {
+                    reordered.add(0, interlinearTranslator)
+                } else {
+                    reordered.add(interlinearTranslator)
+                }
+                availableTranslators = reordered
+            }
+
             android.util.Log.d("TextViewerPager", "Loading translations for bookId: $bookId")
             android.util.Log.d("TextViewerPager", "Available translators for $bookId: ${availableTranslators.joinToString()}")
             android.util.Log.d("TextViewerPager", "Number of translators: ${availableTranslators.size}")

@@ -94,8 +94,16 @@ class SettingsActivity : BaseActivity() {
         
         // Apply initial font
         updatePreviewFont(useSinaiticusFont)
+
+        // Setup interlinear first switch
+        val interlinearFirst = PreferencesManager.getInterlinearFirst(this)
+        binding.interlinearFirstSwitch.isChecked = interlinearFirst
+
+        binding.interlinearFirstSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferencesManager.setInterlinearFirst(this, isChecked)
+        }
     }
-    
+
     private fun updatePreviewColors(inverted: Boolean) {
         if (inverted) {
             // Black on white

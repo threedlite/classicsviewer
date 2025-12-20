@@ -8,6 +8,7 @@ struct SettingsView: View {
     @AppStorage("fontSize") private var fontSize: Double = 20
     @AppStorage("colorScheme") private var colorScheme: ColorScheme = .system
     @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
+    @AppStorage("showInterlinearFirst") private var showInterlinearFirst: Bool = false
 
     @State private var showingDatabaseImporter = false
     @State private var showingImportAlert = false
@@ -60,6 +61,9 @@ struct SettingsView: View {
 
                     // Wrap Interlinear Text
                     Toggle("Wrap Interlinear Text", isOn: $wrapInterlinear)
+
+                    // Show Interlinear First
+                    Toggle("Show Interlinear First", isOn: $showInterlinearFirst)
                 }
 
                 // Downloads Section (On-Demand Resources)
@@ -169,7 +173,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("0.8.82")
+                        Text("0.8.83")
                             .foregroundColor(.secondary)
                     }
 

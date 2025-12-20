@@ -21,6 +21,7 @@ object PreferencesManager {
     private const val KEY_HAS_RUN_AUTO_DETECT_LANGUAGES = "has_run_auto_detect_languages"
     private const val KEY_HAS_FIXED_LANGUAGE_ORDER = "has_fixed_language_order"
     private const val KEY_WRAP_INTERLINEAR = "wrap_interlinear"
+    private const val KEY_INTERLINEAR_FIRST = "interlinear_first"
     private const val KEY_USE_FULL_DATABASE = "use_full_database"
     private const val KEY_FULL_AUDIO_INSTALLED = "full_audio_installed"
 
@@ -82,6 +83,15 @@ object PreferencesManager {
 
     fun setWrapInterlinear(context: Context, wrap: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_WRAP_INTERLINEAR, wrap).apply()
+    }
+
+    // Interlinear position preference (first vs last in translation list)
+    fun getInterlinearFirst(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_INTERLINEAR_FIRST, false)
+    }
+
+    fun setInterlinearFirst(context: Context, first: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_INTERLINEAR_FIRST, first).apply()
     }
 
     // Full database preference (on-demand downloaded via Play Asset Delivery)
