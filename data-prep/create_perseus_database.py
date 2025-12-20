@@ -63,6 +63,79 @@ def parse_xml_with_entity_resolver(xml_path):
         else:
             raise e
 
+# ============= XML TAG MATCHING HELPERS =============
+# These functions properly match XML tags with namespaces.
+# Using tag.endswith('p') is WRONG because it matches <sp> as well as <p>.
+# Using tag.endswith('}p') is CORRECT because the closing brace ensures exact match.
+
+def is_tag(tag, local_name):
+    """Check if an XML tag matches a specific local name, handling namespaces.
+
+    Args:
+        tag: The full tag string (e.g., '{http://www.tei-c.org/ns/1.0}p' or 'p')
+        local_name: The local name to match (e.g., 'p', 'div', 'l')
+
+    Returns:
+        True if the tag matches the local name exactly.
+    """
+    if tag == local_name:
+        return True
+    if tag.endswith('}' + local_name):
+        return True
+    return False
+
+def is_p_tag(tag):
+    """Check if tag is exactly <p>, not <sp> or other tags ending in 'p'."""
+    return is_tag(tag, 'p')
+
+def is_l_tag(tag):
+    """Check if tag is exactly <l>, not <label>, <del>, <cell>, etc."""
+    return is_tag(tag, 'l')
+
+def is_div_tag(tag):
+    """Check if tag is exactly <div>."""
+    return is_tag(tag, 'div')
+
+def is_lg_tag(tag):
+    """Check if tag is exactly <lg> (line group)."""
+    return is_tag(tag, 'lg')
+
+def is_speaker_tag(tag):
+    """Check if tag is exactly <speaker>."""
+    return is_tag(tag, 'speaker')
+
+def is_milestone_tag(tag):
+    """Check if tag is exactly <milestone>."""
+    return is_tag(tag, 'milestone')
+
+def is_note_tag(tag):
+    """Check if tag is exactly <note>."""
+    return is_tag(tag, 'note')
+
+def is_respStmt_tag(tag):
+    """Check if tag is exactly <respStmt>."""
+    return is_tag(tag, 'respStmt')
+
+def is_name_tag(tag):
+    """Check if tag is exactly <name>, not <forename>, <surname>, <placeName>, etc."""
+    return is_tag(tag, 'name')
+
+def is_author_tag(tag):
+    """Check if tag is exactly <author>, not <docAuthor>."""
+    return is_tag(tag, 'author')
+
+def is_body_tag(tag):
+    """Check if tag is exactly <body>."""
+    return is_tag(tag, 'body')
+
+def is_hi_tag(tag):
+    """Check if tag is exactly <hi>."""
+    return is_tag(tag, 'hi')
+
+def is_line_tag(tag):
+    """Check if tag is exactly <line>."""
+    return is_tag(tag, 'line')
+
 # ============= NESTED DIV DETECTION FOR DUPLICATION FIX =============
 
 def has_nested_textpart_divs(elem, processable_subtypes=None):
@@ -91,7 +164,7 @@ def has_nested_textpart_divs(elem, processable_subtypes=None):
         return False
 
     for child in elem:  # Direct children only, NOT iter()
-        if child.tag.endswith('div'):
+        if is_div_tag(child.tag):
             child_subtype = child.get('subtype', '').lower()
 
             # Only return True if child has a subtype that will be processed separately
@@ -121,11 +194,11 @@ def get_paragraphs_for_div(elem, processable_subtypes=None):
     if has_nested_textpart_divs(elem, processable_subtypes):
         # Has nested divs that will be processed separately
         # Only process direct <p> children to avoid duplication
-        return [p for p in elem if p.tag.endswith('p')]
+        return [p for p in elem if is_p_tag(p.tag)]
     else:
         # Leaf textpart OR nested divs won't be processed separately
         # Process all descendant paragraphs using iter()
-        return [p for p in elem.iter() if p.tag.endswith('p')]
+        return [p for p in elem.iter() if is_p_tag(p.tag)]
 
 
 # ============= FIRST1K PARSER FIX =============
@@ -2439,9 +2512,9 @@ def get_element_hierarchy_type(elem):
     
     for child in elem:
         # Check for content elements: paragraphs, lines, or line groups
-        if child.tag.endswith('p') or child.tag.endswith('l') or child.tag.endswith('lg'):
+        if is_p_tag(child.tag) or is_l_tag(child.tag) or is_lg_tag(child.tag):
             has_content = True
-        elif (child.tag.endswith('div') and 
+        elif (is_div_tag(child.tag) and 
               child.get('type') == 'textpart' and 
               child.get('subtype') in ['section', 'chapter', 'poem', 'epigram']):
             has_structural_divs = True
@@ -2465,7 +2538,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     # First check if this is a dramatic text with speaker tags
     has_speakers = False
     for elem in book_elem.iter():
-        if elem.tag.endswith('speaker'):
+        if is_speaker_tag(elem.tag):
             has_speakers = True
             break
     
@@ -2477,7 +2550,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # Check if any lines have alphanumeric numbering
         has_alphanumeric = False
         for elem in book_elem.iter():
-            if elem.tag.endswith('l'):
+            if is_l_tag(elem.tag):
                 line_n = elem.get('n', '')
                 if line_n and not line_n.isdigit():
                     has_alphanumeric = True
@@ -2488,11 +2561,11 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             print(f"          Detected alphanumeric line numbers - preserving individual segments")
             for elem in book_elem.iter():
                 # Track current speaker
-                if elem.tag.endswith('speaker'):
+                if is_speaker_tag(elem.tag):
                     current_speaker = elem.text.strip() if elem.text else None
                 
                 # Create a segment for each line
-                elif elem.tag.endswith('l') and current_speaker:
+                elif is_l_tag(elem.tag) and current_speaker:
                     line_n = elem.get('n', '')
                     line_num = parse_line_number(line_n)
                     if line_num is not None:
@@ -2510,7 +2583,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             current_lines = []
             for elem in book_elem.iter():
                 # Track current speaker
-                if elem.tag.endswith('speaker'):
+                if is_speaker_tag(elem.tag):
                     # Save previous speaker's lines if any
                     if current_speaker and current_lines:
                         # Consolidate lines for this speaker
@@ -2529,7 +2602,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                     current_speaker = elem.text.strip() if elem.text else None
                 
                 # Collect lines for current speaker
-                elif elem.tag.endswith('l') and current_speaker:
+                elif is_l_tag(elem.tag) and current_speaker:
                     line_n = elem.get('n', '')
                     line_num = parse_line_number(line_n)
                     if line_num is not None:
@@ -2562,7 +2635,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     editor_milestone_only = True
     
     for elem in book_elem.iter():
-        if elem.tag.endswith('milestone'):
+        if is_milestone_tag(elem.tag):
             unit = elem.get('unit', '')
             resp = elem.get('resp', '').lower()
             
@@ -2606,7 +2679,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         is_aristotle = author_id == 'tlg0086'
         
         for child in book_elem.iter():
-            if child.tag.endswith('milestone'):
+            if is_milestone_tag(child.tag):
                 # Check both unit and resp attributes for Bekker/Stephanus
                 unit = child.get('unit', '')
                 resp = child.get('resp', '').lower()
@@ -2647,7 +2720,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         
         for para in book_elem.iter():
             # Track milestones that appear before paragraphs
-            if para.tag.endswith('milestone'):
+            if is_milestone_tag(para.tag):
                 unit = para.get('unit', '')
                 resp = para.get('resp', '').lower()
                 n = para.get('n', '')
@@ -2679,12 +2752,12 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                             if num_match:
                                 current_milestone = int(num_match.group(1))
             
-            if para.tag.endswith('p'):
+            if is_p_tag(para.tag):
                 para_count += 1
                 # Check for milestones in this paragraph
                 milestones_in_para = []
                 for child in para.iter():
-                    if child.tag.endswith('milestone'):
+                    if is_milestone_tag(child.tag):
                         unit = child.get('unit', '')
                         resp = child.get('resp', '').lower()
                         n = child.get('n', '')
@@ -2810,7 +2883,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         section_count = 0
         
         for elem in book_elem.iter():
-            if elem.tag.endswith('div') and elem.get('type') == 'textpart':
+            if is_div_tag(elem.tag) and elem.get('type') == 'textpart':
                 subtype = elem.get('subtype', '')
                 if subtype == 'chapter':
                     has_chapters = True
@@ -2839,7 +2912,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             
             # Check if this is a structural div (but not the book_elem itself)
             if (elem != book_elem and
-                elem.tag.endswith('div') and 
+                is_div_tag(elem.tag) and 
                 elem.get('type') == 'textpart' and 
                 elem.get('subtype') in ['section', 'chapter', 'poem', 'epigram']):
                 
@@ -2848,7 +2921,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                 if hierarchy_type == 'container':
                     # This div contains other structural divs - recurse into children only
                     for child in elem:
-                        if (child.tag.endswith('div') and 
+                        if (is_div_tag(child.tag) and 
                             child.get('type') == 'textpart'):
                             process_div_hierarchy(child, depth + 1)
                 
@@ -2887,7 +2960,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         if not sections_found:
             para_num = 1
             for para in book_elem.iter():
-                if para.tag.endswith('p'):
+                if is_p_tag(para.tag):
                     para_text = get_text_content(para).strip()
                     text_hash = hash(para_text)
                     
@@ -2907,7 +2980,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # First check if there are poem subdivisions (like in Horace)
         poem_divs = []
         for div in book_elem.iter():
-            if (div.tag.endswith('div') and 
+            if (is_div_tag(div.tag) and 
                 div.get('type') == 'textpart' and 
                 div.get('subtype') in ['poem', 'epigram']):
                 poem_divs.append(div)
@@ -2921,7 +2994,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                 if hierarchy_type == 'content':
                     # This poem div has direct content
                     for elem in poem_div.iter():
-                        if elem.tag.endswith('l'):
+                        if is_l_tag(elem.tag):
                             line_text = get_text_content(elem).strip()
                             text_hash = hash(line_text)
                             
@@ -2937,7 +3010,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         else:
             # No poem subdivisions, extract lines directly
             for elem in book_elem.iter():
-                if elem.tag.endswith('l'):
+                if is_l_tag(elem.tag):
                     n = elem.get('n', '')
                     line_num = parse_line_number(n)
                     if line_num is not None:
@@ -3395,7 +3468,7 @@ def process_prose_translation(root, book_id, cursor, translator):
     
     # Find all sections
     for elem in root.iter():
-        if (elem.tag.endswith('div') and 
+        if (is_div_tag(elem.tag) and 
             elem.get('type') == 'textpart' and 
             elem.get('subtype') == 'section'):
             
@@ -3408,7 +3481,7 @@ def process_prose_translation(root, book_id, cursor, translator):
             # Extract all text from this section, filtering out editorial notes
             section_text = ""
             for p in elem.iter():
-                if p.tag.endswith('p'):
+                if is_p_tag(p.tag):
                     text = get_text_content(p)
                     if text:
                         section_text += text + " "
@@ -3468,13 +3541,13 @@ def process_translations(work_dir, work_id, cursor):
             # 2. If not found, check respStmt
             if not translator:
                 for resp in root.iter():
-                    if resp.tag.endswith('respStmt'):
+                    if is_respStmt_tag(resp.tag):
                         # Look for resp with "translator" or "trans" in it
                         resp_text = ''.join(resp.itertext()).lower()
                         if 'translat' in resp_text:
                             # Find the name element
                             for name in resp.iter():
-                                if name.tag.endswith('name') and name.text:
+                                if is_name_tag(name.tag) and name.text:
                                     translator = name.text.strip()
                                     # Filter out non-translator names
                                     if not any(skip in translator.lower() for skip in ['lisa cerrato', 'william merrill', 'elli mylonas', 'david smith']):
@@ -3485,7 +3558,7 @@ def process_translations(work_dir, work_id, cursor):
             # 3. Check author elements with translator role
             if not translator:
                 for elem in root.iter():
-                    if elem.tag.endswith('author'):
+                    if is_author_tag(elem.tag):
                         role = elem.get('role', '')
                         if 'trans' in role.lower():
                             translator = elem.text
@@ -3516,7 +3589,7 @@ def process_translations(work_dir, work_id, cursor):
                 # Find all chapter divs and process each separately
                 chapters_processed = 0
                 for chapter_div in root.iter():
-                    if not (chapter_div.tag.endswith('div') and 
+                    if not (is_div_tag(chapter_div.tag) and 
                             chapter_div.get('type') == 'textpart' and 
                             chapter_div.get('subtype') == 'chapter'):
                         continue
@@ -3540,7 +3613,7 @@ def process_translations(work_dir, work_id, cursor):
             # First check if there are book divisions (epic poetry)
             has_books = False
             for div in root.iter():
-                if (div.tag.endswith('div') and 
+                if (is_div_tag(div.tag) and 
                     div.get('type') == 'textpart' and 
                     div.get('subtype', '').lower() == 'book'):
                     has_books = True
@@ -3553,8 +3626,8 @@ def process_translations(work_dir, work_id, cursor):
                 print(f"      → Has book divisions, treating as epic poetry")
             else:
                 # Count actual elements to determine if it's primarily prose or poetry
-                p_count = sum(1 for elem in root.iter() if elem.tag.endswith('p'))
-                l_count = sum(1 for elem in root.iter() if elem.tag.endswith('l'))
+                p_count = sum(1 for elem in root.iter() if is_p_tag(elem.tag))
+                l_count = sum(1 for elem in root.iter() if is_l_tag(elem.tag))
                 # If there are many more paragraphs than lines, it's prose (even if it has some verse quotations)
                 is_prose = p_count > 0 and p_count > (l_count * 2)
                 
@@ -3569,7 +3642,7 @@ def process_translations(work_dir, work_id, cursor):
                 # Find the main translation div
                 trans_div = None
                 for div in root.iter():
-                    if div.tag.endswith('div') and div.get('type') == 'translation':
+                    if is_div_tag(div.tag) and div.get('type') == 'translation':
                         trans_div = div
                         break
                 
@@ -3578,7 +3651,7 @@ def process_translations(work_dir, work_id, cursor):
                 else:
                     # If no translation div, process the whole body
                     for body in root.iter():
-                        if body.tag.endswith('body'):
+                        if is_body_tag(body.tag):
                             extract_translation_segments(body, book_id, cursor, translator)
                             break
             elif is_drama:
@@ -3588,7 +3661,7 @@ def process_translations(work_dir, work_id, cursor):
                 # Find the main translation div
                 trans_div = None
                 for div in root.iter():
-                    if div.tag.endswith('div') and div.get('type') == 'translation':
+                    if is_div_tag(div.tag) and div.get('type') == 'translation':
                         trans_div = div
                         break
                 
@@ -3597,7 +3670,7 @@ def process_translations(work_dir, work_id, cursor):
                 else:
                     # If no translation div, process the whole body
                     for body in root.iter():
-                        if body.tag.endswith('body'):
+                        if is_body_tag(body.tag):
                             extract_translation_segments(body, book_id, cursor, translator)
                             break
             else:
@@ -3607,7 +3680,7 @@ def process_translations(work_dir, work_id, cursor):
                 # First check if there's a translation wrapper div
                 translation_div = None
                 for div in root.iter():
-                    if div.tag.endswith('div') and div.get('type') == 'translation':
+                    if is_div_tag(div.tag) and div.get('type') == 'translation':
                         translation_div = div
                         break
                 
@@ -3616,13 +3689,13 @@ def process_translations(work_dir, work_id, cursor):
                 
                 book_counter = 0
                 # First check if there are any book-level divs
-                has_books = any(div.tag.endswith('div') and 
+                has_books = any(is_div_tag(div.tag) and 
                                div.get('type') == 'textpart' and 
                                div.get('subtype', '').lower() == 'book'
                                for div in search_root.iter())
                 
                 for book_div in search_root.iter():
-                    if (book_div.tag.endswith('div') and 
+                    if (is_div_tag(book_div.tag) and 
                         book_div.get('type') == 'textpart' and 
                         book_div.get('subtype', '').lower() in ['book', 'poem']):
                         
@@ -3658,7 +3731,7 @@ def process_translations(work_dir, work_id, cursor):
                         # Look for poem/epigram divs within the translation
                         poem_divs = []
                         for div in translation_div:
-                            if (div.tag.endswith('div') and 
+                            if (is_div_tag(div.tag) and 
                                 div.get('type') == 'textpart' and 
                                 div.get('subtype') in ['poem', 'epigram']):
                                 poem_divs.append(div)
@@ -3687,7 +3760,7 @@ def process_translations(work_dir, work_id, cursor):
                             extract_translation_segments(translation_div, book_id, cursor, translator)
                         else:
                             for body in root.iter():
-                                if body.tag.endswith('body'):
+                                if is_body_tag(body.tag):
                                     extract_translation_segments(body, book_id, cursor, translator)
                                     break
 
@@ -3728,7 +3801,7 @@ def _extract_text_with_bold(element):
     # Process children
     for child in element:
         # Check if this is a <hi rend="bold"> element
-        if child.tag.endswith('hi') and child.get('rend') == 'bold':
+        if is_hi_tag(child.tag) and child.get('rend') == 'bold':
             # Preserve as <hi rend="bold"> tag (Android code expects this format)
             result.append('<hi rend="bold">')
             if child.text:
@@ -3840,7 +3913,7 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
             # Find all books in the translation
             segments_imported = 0
             for book_div in root.iter():
-                if not (book_div.tag.endswith('div') and
+                if not (is_div_tag(book_div.tag) and
                        book_div.get('type') == 'textpart' and
                        book_div.get('subtype') == 'Book'):
                     continue
@@ -3854,7 +3927,7 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
 
                 # Extract all line elements
                 for line_elem in book_div.iter():
-                    if not line_elem.tag.endswith('l'):
+                    if not is_l_tag(line_elem.tag):
                         continue
 
                     line_n = line_elem.get('n', '')
@@ -3912,7 +3985,7 @@ def process_prose_with_books(root, work_id, cursor, language):
     # Process each book
     for book_div in root.iter():
         # Track milestones for Plato and Aristotle (global level)
-        if (is_plato or is_aristotle) and book_div.tag.endswith('milestone'):
+        if (is_plato or is_aristotle) and is_milestone_tag(book_div.tag):
             resp = book_div.get('resp', '')
             n = book_div.get('n', '')
             unit = book_div.get('unit', '')
@@ -3930,7 +4003,7 @@ def process_prose_with_books(root, work_id, cursor, language):
             elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                 current_milestone = n
 
-        if not (book_div.tag.endswith('div') and 
+        if not (is_div_tag(book_div.tag) and 
                 book_div.get('type') == 'textpart' and 
                 book_div.get('subtype', '').lower() == 'book'):
             continue
@@ -3950,7 +4023,7 @@ def process_prose_with_books(root, work_id, cursor, language):
         # Process sections within this book
         for elem in book_div.iter():
             # Track milestones within book
-            if (is_plato or is_aristotle) and elem.tag.endswith('milestone'):
+            if (is_plato or is_aristotle) and is_milestone_tag(elem.tag):
                 resp = elem.get('resp', '')
                 n = elem.get('n', '')
                 unit = elem.get('unit', '')
@@ -3968,7 +4041,7 @@ def process_prose_with_books(root, work_id, cursor, language):
                 elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                     current_milestone = n
 
-            if (elem.tag.endswith('div') and
+            if (is_div_tag(elem.tag) and
                 elem.get('type') == 'textpart' and
                 elem.get('subtype') in ['section', 'chapter', 'bekker_page']):
 
@@ -4072,7 +4145,7 @@ def process_prose_text(root, work_id, cursor, language):
     # First check if this prose work has book divisions (like Herodotus)
     has_books = False
     for div in root.iter():
-        if (div.tag.endswith('div') and 
+        if (is_div_tag(div.tag) and 
             div.get('type') == 'textpart' and 
             div.get('subtype', '').lower() == 'book'):
             has_books = True
@@ -4091,7 +4164,7 @@ def process_prose_text(root, work_id, cursor, language):
     # Find all sections (divs with type="textpart" and subtype="section" or "chapter")
     for elem in root.iter():
         # Track milestones for Plato and Aristotle
-        if (is_plato or is_aristotle) and elem.tag.endswith('milestone'):
+        if (is_plato or is_aristotle) and is_milestone_tag(elem.tag):
             resp = elem.get('resp', '')
             n = elem.get('n', '')
             unit = elem.get('unit', '')
@@ -4114,7 +4187,7 @@ def process_prose_text(root, work_id, cursor, language):
             elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                 current_milestone = n
 
-        if (elem.tag.endswith('div') and
+        if (is_div_tag(elem.tag) and
             elem.get('type') == 'textpart' and
             elem.get('subtype') in ['section', 'chapter']):
 
@@ -4168,10 +4241,10 @@ def process_prose_text(root, work_id, cursor, language):
                 # Extract text but exclude notes and milestones
                 text_parts = []
                 for text_elem in elem.iter():
-                    if (text_elem.tag.endswith('p') or  # Include paragraph text
-                        (text_elem.tag.endswith('div') and text_elem == elem)):  # Include direct div text
-                        if not (text_elem.tag.endswith('note') or
-                                text_elem.tag.endswith('milestone')):
+                    if (is_p_tag(text_elem.tag) or  # Include paragraph text
+                        (is_div_tag(text_elem.tag) and text_elem == elem)):  # Include direct div text
+                        if not (is_note_tag(text_elem.tag) or
+                                is_milestone_tag(text_elem.tag)):
                             elem_text = text_elem.text or ''
                             if elem_text.strip():
                                 text_parts.append(elem_text.strip())
@@ -4248,7 +4321,7 @@ def process_new_testament_text(root, work_id, cursor, language):
     
     # Find all chapter divs
     for chapter_div in root.iter():
-        if not (chapter_div.tag.endswith('div') and 
+        if not (is_div_tag(chapter_div.tag) and 
                 chapter_div.get('type') == 'textpart' and 
                 chapter_div.get('subtype') == 'chapter'):
             continue
@@ -4263,7 +4336,7 @@ def process_new_testament_text(root, work_id, cursor, language):
         # Extract verses from this chapter
         verses = []
         for verse_div in chapter_div.iter():
-            if not (verse_div.tag.endswith('div') and 
+            if not (is_div_tag(verse_div.tag) and 
                     verse_div.get('type') == 'textpart' and 
                     verse_div.get('subtype') == 'verse'):
                 continue
@@ -4351,7 +4424,7 @@ def extract_milestone_line_ranges(cursor, work_id):
     # Process the XML in document order
     for elem in root.iter():
         # Track Stephanus/Bekker milestones
-        if elem.tag.endswith('milestone'):
+        if is_milestone_tag(elem.tag):
             resp = elem.get('resp', '')
             n = elem.get('n', '')
             unit = elem.get('unit', '')
@@ -4380,11 +4453,11 @@ def extract_milestone_line_ranges(cursor, work_id):
                 current_milestone = n
 
         # Track actual text content
-        if elem.tag.endswith('p'):
+        if is_p_tag(elem.tag):
             # First check for milestones INSIDE this paragraph
             para_milestones = []
             for child in elem.iter():
-                if child.tag.endswith('milestone'):
+                if is_milestone_tag(child.tag):
                     child_resp = child.get('resp', '').lower()
                     child_n = child.get('n', '')
                     child_unit = child.get('unit', '')
@@ -4652,9 +4725,9 @@ def process_text_file(xml_path, work_id, cursor, language):
         
         # Check if this is prose by looking for paragraphs
         # Count actual elements to determine if it's primarily prose or poetry
-        p_count = sum(1 for elem in root.iter() if elem.tag.endswith('p'))
-        l_count = sum(1 for elem in root.iter() if elem.tag.endswith('l'))
-        section_count = sum(1 for elem in root.iter() if elem.tag.endswith('div') and 
+        p_count = sum(1 for elem in root.iter() if is_p_tag(elem.tag))
+        l_count = sum(1 for elem in root.iter() if is_l_tag(elem.tag))
+        section_count = sum(1 for elem in root.iter() if is_div_tag(elem.tag) and 
                            elem.get('type') == 'textpart' and 
                            elem.get('subtype') in ['section', 'chapter'])
         
@@ -4679,10 +4752,10 @@ def process_text_file(xml_path, work_id, cursor, language):
             # Extract ALL lines with their original line numbers and speakers
             for elem in root.iter():
                 # Track current speaker
-                if elem.tag.endswith('speaker'):
+                if is_speaker_tag(elem.tag):
                     current_speaker = elem.text
                     
-                if elem.tag.endswith('l'):
+                if is_l_tag(elem.tag):
                     line_n = elem.get('n')
                     line_num = parse_line_number(line_n)
                     if line_num is not None:
@@ -4735,7 +4808,7 @@ def process_text_file(xml_path, work_id, cursor, language):
         
         # Look for divs with type="textpart" and appropriate subtype
         for div in root.iter():
-            if not div.tag.endswith('div'):
+            if not is_div_tag(div.tag):
                 continue
             
             div_type = div.get('type', '')
@@ -4757,7 +4830,7 @@ def process_text_file(xml_path, work_id, cursor, language):
                 # Check if this book contains poem subdivisions (for Latin poetry)
                 poem_divs = []
                 for subdiv in div.iter():
-                    if (subdiv.tag.endswith('div') and 
+                    if (is_div_tag(subdiv.tag) and 
                         subdiv.get('type') == 'textpart' and 
                         subdiv.get('subtype') in ['poem', 'epigram']):
                         poem_divs.append(subdiv)
@@ -4769,7 +4842,7 @@ def process_text_file(xml_path, work_id, cursor, language):
                     
                     for poem_div in poem_divs:
                         for elem in poem_div.iter():
-                            if elem.tag.endswith('l') or elem.tag.endswith('line'):
+                            if is_l_tag(elem.tag) or is_line_tag(elem.tag):
                                 line_n = elem.get('n')
                                 line_num = parse_line_number(line_n)
                                 if line_num is not None:
@@ -4786,7 +4859,7 @@ def process_text_file(xml_path, work_id, cursor, language):
                 else:
                     # Standard line numbering for non-poetry or Greek texts
                     for elem in div.iter():
-                        if elem.tag.endswith('l') or elem.tag.endswith('line'):
+                        if is_l_tag(elem.tag) or is_line_tag(elem.tag):
                             # Use the 'n' attribute if available
                             line_n = elem.get('n')
                             line_num = parse_line_number(line_n)
@@ -4836,7 +4909,7 @@ def process_text_file(xml_path, work_id, cursor, language):
             # First check if there are poem divs at the top level
             poem_divs = []
             for div in root.iter():
-                if (div.tag.endswith('div') and 
+                if (is_div_tag(div.tag) and 
                     div.get('type') == 'textpart' and 
                     div.get('subtype') in ['poem', 'epigram']):
                     poem_divs.append(div)
@@ -4850,7 +4923,7 @@ def process_text_file(xml_path, work_id, cursor, language):
                     
                     lines = []
                     for elem in poem_div.iter():
-                        if elem.tag.endswith('l'):
+                        if is_l_tag(elem.tag):
                             line_n = elem.get('n')
                             line_num = parse_line_number(line_n)
                             if line_num is not None:
@@ -4904,7 +4977,7 @@ def process_text_file(xml_path, work_id, cursor, language):
                 lines = []
                 
                 for elem in root.iter():
-                    if elem.tag.endswith('l') or elem.tag.endswith('line'):
+                    if is_l_tag(elem.tag) or is_line_tag(elem.tag):
                         # Use the 'n' attribute if available, otherwise skip this line
                         line_n = elem.get('n')
                         line_num = parse_line_number(line_n)
