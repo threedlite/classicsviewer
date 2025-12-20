@@ -73,6 +73,7 @@ nohup [COMMAND] > output.log 2>&1 &
 - ❌ **NEVER assume a database is complete just because the file size looks right!** The script may be performing final critical steps like index creation, integrity checks, or compression.
 - ❌ **WAIT FOR THE ZIP FILE TO BE CREATED!** The build process ends with compressing the database to perseus_texts.db.zip. You MUST see "Compressing database to" followed by successful ZIP creation before the build is complete. The ZIP step is critical and can take 1-2 minutes.
 - ❌ **NEVER use warnings for critical failures** - If a required component fails to load, FAIL THE BUILD with a clear error, don't print a warning and continue.
+- ❌ **NEVER assume build is stopped unless `ps aux | grep create_perseus_database` shows it is not running.**
 
 **REMEMBER**: Background execution (`nohup ... &`) bypasses the timeout limitation!
 
