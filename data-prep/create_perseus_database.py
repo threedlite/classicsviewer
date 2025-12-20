@@ -3501,7 +3501,50 @@ def process_prose_translation(root, book_id, cursor, translator):
         """, (book_id, section['number'], section['number'], seq_num,
               section['text'], translator, None))
 
-def process_translations(work_dir, work_id, cursor):
+def extract_altbook_mapping(greek_file_path):
+    """
+    Extract altbook milestone mapping from a Greek XML file.
+
+    Returns a dict mapping altbook numbers to book numbers, e.g.:
+    {'1': '5', '2': '6', '3': '7'} means altbook 1 = Greek book 5
+
+    This is used when translations follow a different ordering than the Greek text.
+    """
+    if not greek_file_path or not greek_file_path.exists():
+        return {}
+
+    try:
+        tree = ET.parse(greek_file_path)
+        root = tree.getroot()
+
+        altbook_to_book = {}
+
+        for div in root.iter():
+            if not is_div_tag(div.tag):
+                continue
+            if div.get('type') != 'textpart':
+                continue
+            if div.get('subtype', '').lower() != 'book':
+                continue
+
+            book_n = div.get('n')
+            if not book_n:
+                continue
+
+            # Look for altbook milestone within this book div
+            for child in div:
+                if is_milestone_tag(child.tag) and child.get('unit') == 'altbook':
+                    altbook_n = child.get('n')
+                    if altbook_n:
+                        altbook_to_book[altbook_n] = book_n
+                    break  # Only need first altbook milestone in each book
+
+        return altbook_to_book
+    except Exception as e:
+        print(f"      Warning: Could not extract altbook mapping: {e}")
+        return {}
+
+def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
     """Process English translations for a work"""
     # Find English translation files
     translation_files = list(work_dir.glob("*eng*.xml"))
@@ -3695,24 +3738,42 @@ def process_translations(work_dir, work_id, cursor):
                                for div in search_root.iter())
                 
                 for book_div in search_root.iter():
-                    if (is_div_tag(book_div.tag) and 
-                        book_div.get('type') == 'textpart' and 
+                    if (is_div_tag(book_div.tag) and
+                        book_div.get('type') == 'textpart' and
                         book_div.get('subtype', '').lower() in ['book', 'poem']):
-                        
+
                         # Skip poems if we have books (poems are within books)
                         if has_books and book_div.get('subtype', '').lower() == 'poem':
                             continue
-                            
+
                         books_found = True
                         book_counter += 1
                         book_num = book_div.get('n', '1')
+
+                        # Check if this translation div has its own altbook milestone
+                        # If so, it's already aligned with the Greek ordering
+                        trans_has_altbook = False
+                        for child in book_div:
+                            if is_milestone_tag(child.tag) and child.get('unit') == 'altbook':
+                                trans_has_altbook = True
+                                break
+
+                        # Apply altbook mapping if:
+                        # 1. We have an altbook_mapping from the Greek
+                        # 2. This translation doesn't have its own altbook milestones
+                        # 3. The translation's book number exists as an altbook key
+                        greek_book_num = book_num
+                        if altbook_mapping and not trans_has_altbook and book_num in altbook_mapping:
+                            greek_book_num = altbook_mapping[book_num]
+                            print(f"        → Remapping translation book {book_num} to Greek book {greek_book_num} via altbook")
+
                         try:
-                            book_id = f"{work_id}.{int(book_num):03d}"
+                            book_id = f"{work_id}.{int(greek_book_num):03d}"
                         except ValueError:
                             # If book number is not numeric, use sequential numbering
                             book_id = f"{work_id}.{book_counter:03d}"
-                            print(f"        → Non-numeric book '{book_num}', using book {book_counter}")
-                        
+                            print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
+
                         # Extract translation segments with milestones
                         count = extract_translation_segments(book_div, book_id, cursor, translator)
                         if count == 0 and translation_div is None:
@@ -5326,25 +5387,25 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             continue
         
         # Check if we have a suitable text file for this language
+        # Prefer grc3 over grc2 when both exist (grc3 often has better structure/ordering)
         text_file = None
+        grc_files = []
+        lat_files = []
 
         for f in text_files:
-            # For First1K, look for any grc/lat files
-            if is_first1k:
-                if 'grc' in f.name and language == 'greek':
-                    text_file = f
-                    break
-                elif 'lat' in f.name and language == 'latin':
-                    text_file = f
-                    break
-            # For Perseus, look for any grc/lat files
-            else:
-                if 'grc' in f.name and language == 'greek':
-                    text_file = f
-                    break
-                elif 'lat' in f.name and language == 'latin':
-                    text_file = f
-                    break
+            if 'grc' in f.name and language == 'greek':
+                grc_files.append(f)
+            elif 'lat' in f.name and language == 'latin':
+                lat_files.append(f)
+
+        if language == 'greek' and grc_files:
+            # Sort to prefer grc3 over grc2 (higher number = newer edition)
+            grc_files.sort(key=lambda x: x.name, reverse=True)
+            text_file = grc_files[0]
+        elif language == 'latin' and lat_files:
+            # Sort to prefer lat2 over lat1 etc.
+            lat_files.sort(key=lambda x: x.name, reverse=True)
+            text_file = lat_files[0]
 
         if not text_file:
             # Check if we only have translation files (eng, etc.)
@@ -5441,8 +5502,13 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
 
                 print(f"      Stored {len(milestone_ranges)} milestone ranges")
 
+        # Extract altbook mapping from Greek file (for works with reordered translations)
+        altbook_mapping = extract_altbook_mapping(text_file)
+        if altbook_mapping:
+            print(f"      Found altbook mapping: {len(altbook_mapping)} entries")
+
         # Process translations for this work
-        process_translations(work_dir, db_work_id, cursor)
+        process_translations(work_dir, db_work_id, cursor, altbook_mapping)
     
     # If no works were processed, remove the author
     if works_processed == 0:
