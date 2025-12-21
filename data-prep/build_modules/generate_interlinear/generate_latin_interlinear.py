@@ -39,7 +39,7 @@ class LatinInterlinearGenerator:
         self.total_db_time = 0.0
 
     def __enter__(self):
-        self.conn = sqlite3.connect(self.db_path)
+        self.conn = sqlite3.connect(f"file:{self.db_path}?mode=ro", uri=True)
         self.conn.row_factory = sqlite3.Row
         return self
 
@@ -90,7 +90,7 @@ class LatinInterlinearGenerator:
         """Extract a simple English gloss from a DictionaryEntry."""
         return extract_gloss(entry)
 
-    @lru_cache(maxsize=30000)
+    @lru_cache(maxsize=36000)
     def _cached_lookup_word(self, word: str) -> tuple:
         """
         Cache word lookups - returns (gloss, lemma, morph) tuple.
@@ -401,7 +401,7 @@ def _generate_latin_work(work_id: str, output_dir: Path):
         raise FileNotFoundError(f"Database not found at {DB_PATH}")
 
     # Get all books for this work
-    conn = sqlite3.connect(str(DB_PATH))
+    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
     cursor = conn.cursor()
     book_pattern = f"{work_id}.%"
     cursor.execute("SELECT DISTINCT book_id FROM text_lines WHERE book_id LIKE ? ORDER BY book_id", (book_pattern,))
@@ -455,7 +455,7 @@ def _generate_latin_work(work_id: str, output_dir: Path):
                 percent_complete = (idx - 1) / len(book_ids) * 100
 
                 # Get line range for this book
-                conn = sqlite3.connect(str(DB_PATH))
+                conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
                 cursor = conn.cursor()
                 cursor.execute("SELECT MIN(line_number), MAX(line_number) FROM text_lines WHERE book_id = ?", (book_id,))
                 start_line, end_line = cursor.fetchone()

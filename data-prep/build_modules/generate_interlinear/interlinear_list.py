@@ -73,7 +73,7 @@ def lookup_work_id(db_path: str, author: str, work_title: str) -> Optional[str]:
     Returns:
         work_id (e.g., 'tlg0012.tlg001') or None if not found
     """
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
     cursor = conn.cursor()
 
     # Try exact match on title first (trim whitespace in comparison)
@@ -296,7 +296,7 @@ def generate_interlinear_parallel(
 
     # Get work sizes (number of lines) and sort by size descending
     # This ensures largest works are distributed evenly across workers
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
     cursor = conn.cursor()
 
     work_sizes = []

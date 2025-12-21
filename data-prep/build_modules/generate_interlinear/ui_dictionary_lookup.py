@@ -31,7 +31,7 @@ class PerseusRepository:
 
     def __init__(self, db_path: str, debug: bool = False):
         self.db_path = db_path
-        self.conn = sqlite3.connect(db_path)
+        self.conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
         self.conn.row_factory = sqlite3.Row
         self.debug = debug
         self.prefix_cache = {}  # Cache for prefix assimilation rules

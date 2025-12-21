@@ -41,6 +41,15 @@ except ImportError:
 # Database path - will be set when called from build script
 DB_PATH = None
 
+# Module-level cache for word lookups - persists across InterlinearGenerator instances
+# Uses OrderedDict for proper LRU behavior - evicts oldest when full
+from collections import OrderedDict
+
+_word_lookup_cache = OrderedDict()  # {(db_path, word): (gloss, lemma, morph)}
+_lookup_stats = {'count': 0, 'db_time': 0.0, 'hits': 0}
+
+CACHE_SIZE = 50000  # Maximum cache entries
+
 
 class InterlinearGenerator:
     def __init__(self, db_path: str):
@@ -53,7 +62,7 @@ class InterlinearGenerator:
         self.total_db_time = 0.0
 
     def __enter__(self):
-        self.conn = sqlite3.connect(self.db_path)
+        self.conn = sqlite3.connect(f"file:{self.db_path}?mode=ro", uri=True)
         self.conn.row_factory = sqlite3.Row
         return self
 
@@ -801,14 +810,32 @@ class InterlinearGenerator:
             return "???"
         return text if text else "???"
 
-    @lru_cache(maxsize=30000)
     def _cached_lookup_word(self, word: str) -> tuple:
         """
         Cache word lookups - returns (gloss, lemma, morph) tuple.
 
-        LRU cache means common words like καί, δέ, τε, ἐν, etc.
-        are only looked up once and then retrieved from cache instantly.
+        Uses module-level cache that persists across works within a worker.
+        Common words like καί, δέ, τε, ἐν, etc. are only looked up once
+        and then retrieved from cache instantly across ALL works.
         """
+        global _word_lookup_cache, _lookup_stats
+
+        # Check module-level cache first
+        cache_key = (self.db_path, word)
+        if cache_key in _word_lookup_cache:
+            _lookup_stats['count'] += 1
+            _lookup_stats['hits'] += 1
+            # Move to end for LRU behavior
+            _word_lookup_cache.move_to_end(cache_key)
+            # Log cache stats every 1000 lookups
+            if _lookup_stats['count'] % 1000 == 0:
+                cache_size = len(_word_lookup_cache)
+                hit_rate = (_lookup_stats['hits'] / _lookup_stats['count']) * 100
+                misses = _lookup_stats['count'] - _lookup_stats['hits']
+                avg_db_time = (_lookup_stats['db_time'] / misses) * 1000 if misses > 0 else 0
+                print(f"  [PERF] Cache: {hit_rate:.1f}% hit rate, {cache_size}/{CACHE_SIZE} entries, avg DB time: {avg_db_time:.2f}ms")
+            return _word_lookup_cache[cache_key]
+
         # CRITICAL: Try original word first (for proper names), then lowercase fallback
         # Some words may be capitalized in dictionary (proper names like Ἀχιλλεύς)
         # But most words are stored lowercase (λυθῆναι not Λυθῆναι)
@@ -822,15 +849,16 @@ class InterlinearGenerator:
 
         db_time = time.time() - start_time
 
-        self.lookup_count += 1
-        self.total_db_time += db_time
+        _lookup_stats['count'] += 1
+        _lookup_stats['db_time'] += db_time
 
         # Log cache stats every 1000 lookups
-        if self.lookup_count % 1000 == 0:
-            cache_info = self._cached_lookup_word.cache_info()
-            hit_rate = cache_info.hits / (cache_info.hits + cache_info.misses) * 100 if (cache_info.hits + cache_info.misses) > 0 else 0
-            avg_db_time = (self.total_db_time / self.lookup_count) * 1000  # Convert to ms
-            print(f"  [PERF] Cache: {hit_rate:.1f}% hit rate, {cache_info.currsize}/30000 entries, avg DB time: {avg_db_time:.2f}ms")
+        if _lookup_stats['count'] % 1000 == 0:
+            cache_size = len(_word_lookup_cache)
+            hit_rate = (_lookup_stats['hits'] / _lookup_stats['count']) * 100
+            misses = _lookup_stats['count'] - _lookup_stats['hits']
+            avg_db_time = (_lookup_stats['db_time'] / misses) * 1000 if misses > 0 else 0
+            print(f"  [PERF] Cache: {hit_rate:.1f}% hit rate, {cache_size}/{CACHE_SIZE} entries, avg DB time: {avg_db_time:.2f}ms")
 
         # Process entries to extract gloss, lemma, morph
         gloss = None
@@ -944,7 +972,15 @@ class InterlinearGenerator:
         if not gloss or gloss == "???":
             gloss = "???"
 
-        return (gloss, lemma, morph)
+        result = (gloss, lemma, morph)
+
+        # Store in module-level cache with LRU eviction
+        _word_lookup_cache[cache_key] = result
+        if len(_word_lookup_cache) > CACHE_SIZE:
+            # Remove oldest entry (first item in OrderedDict)
+            _word_lookup_cache.popitem(last=False)
+
+        return result
 
     def lookup_word(self, word: str, book_id: str, line_number: int, position: int) -> Dict:
         """
@@ -1203,7 +1239,7 @@ def _generate_work(work_id: str, output_dir: Path):
         raise FileNotFoundError(f"Database not found at {DB_PATH}")
 
     # Get all books for this work
-    conn = sqlite3.connect(str(DB_PATH))
+    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
     cursor = conn.cursor()
     book_pattern = f"{work_id}.%"
     cursor.execute("SELECT DISTINCT book_id FROM text_lines WHERE book_id LIKE ? ORDER BY book_id", (book_pattern,))
@@ -1262,7 +1298,7 @@ def _generate_work(work_id: str, output_dir: Path):
                 # print(f"\n[{idx}/{len(book_ids)} - {percent_complete:.1f}% complete] Processing Book {book_num}...")
 
                 # Get line range for this book
-                conn = sqlite3.connect(str(DB_PATH))
+                conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
                 cursor = conn.cursor()
                 cursor.execute("SELECT MIN(line_number), MAX(line_number) FROM text_lines WHERE book_id = ?", (book_id,))
                 start_line, end_line = cursor.fetchone()
