@@ -334,27 +334,33 @@ def generate_interlinear_parallel(
         for args in work_args:
             results.append(process_work_worker(args))
     else:
-        # Parallel processing with pre-assigned chunks (true round-robin)
+        # Parallel processing with pre-assigned chunks (greedy load balancing)
         print(f"Running in PARALLEL mode ({num_workers} workers)")
-        print("Using PRE-ASSIGNED CHUNKS: largest works distributed round-robin")
+        print("Using GREEDY LOAD BALANCING: each work assigned to least-loaded worker")
         print()
 
-        # Distribute works round-robin to workers
+        # Distribute works using greedy "least loaded" algorithm (LPT)
+        # This balances total lines per worker, not just work count
         worker_chunks = [[] for _ in range(num_workers)]
-        for i, (work_index, author, work_title, work_id, _, _) in enumerate(work_args):
-            worker_id = i % num_workers
-            worker_chunks[worker_id].append((work_index, author, work_title, work_id))
+        worker_loads = [0] * num_workers  # Track total lines per worker
 
-        # Show worker assignments
-        print("Worker assignments:")
+        for work_index, author, work_title, work_id, _, _ in work_args:
+            # Find worker with minimum load
+            min_worker = worker_loads.index(min(worker_loads))
+            worker_chunks[min_worker].append((work_index, author, work_title, work_id))
+            # Update load with this work's line count
+            worker_loads[min_worker] += work_sizes[work_index][4]
+
+        # Show worker assignments with total load
+        print("Worker assignments (load-balanced):")
         for worker_id in range(num_workers):
             chunk_size = len(worker_chunks[worker_id])
+            total_load = worker_loads[worker_id]
             if chunk_size > 0:
                 first_work = worker_chunks[worker_id][0]
                 work_idx, author, title, work_id = first_work
                 line_count = work_sizes[work_idx][4]
-                book_count = work_sizes[work_idx][3]
-                print(f"  Worker {worker_id}: {chunk_size} works, first = {work_id} - {title} ({line_count:,} lines, {book_count} books)")
+                print(f"  Worker {worker_id}: {chunk_size} works, {total_load:,} total lines, first = {work_id} ({line_count:,} lines)")
         print()
 
         # Create a lookup dict for work sizes by lines (must be before worker_args uses it)

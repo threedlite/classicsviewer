@@ -1177,10 +1177,11 @@ def _write_book_to_xml(f, book_num: int, book_results: List[Dict]):
 
             # CRITICAL: Escape XML special characters to prevent malformed XML
             # Greek texts often contain <word> for editorial additions which break XML parsing
-            greek = html.escape(greek)
-            gloss = html.escape(gloss)
-            lemma = html.escape(lemma)
-            morph = html.escape(morph)
+            # Use quote=False to avoid escaping apostrophes (&#x27;) which are valid in XML text content
+            greek = html.escape(greek, quote=False)
+            gloss = html.escape(gloss, quote=False)
+            lemma = html.escape(lemma, quote=False)
+            morph = html.escape(morph, quote=False)
 
             lemma_morph = f'{lemma} {morph}' if morph else lemma
             table = f'| {greek} |\n| **{gloss}** |\n| {lemma_morph} |'

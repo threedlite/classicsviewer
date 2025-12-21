@@ -343,10 +343,11 @@ def _write_book_to_xml(f, book_num: int, book_results: List[Dict]):
 
             # CRITICAL: Escape XML special characters to prevent malformed XML
             # Latin texts may contain <word> for editorial additions which break XML parsing
-            latin = html.escape(latin)
-            gloss = html.escape(gloss)
-            lemma = html.escape(lemma)
-            morph = html.escape(morph)
+            # Use quote=False to avoid escaping apostrophes (&#x27;) which are valid in XML text content
+            latin = html.escape(latin, quote=False)
+            gloss = html.escape(gloss, quote=False)
+            lemma = html.escape(lemma, quote=False)
+            morph = html.escape(morph, quote=False)
 
             lemma_morph = f'{lemma} {morph}' if morph else lemma
             table = f'| {latin} |\n| **{gloss}** |\n| {lemma_morph} |'
