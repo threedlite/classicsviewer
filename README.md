@@ -7,6 +7,7 @@ An Android app for reading ancient Greek and Latin texts offline. Browse works f
 NOTE - NEW: There is now a download option within the menu to optionally retrieve the large full db from Google Play Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
+NEW: Parsing fixes Dec. 21, 2025. Uninstall and reinstall to get data update.
 
 
 NOTE: Patreon page will be disabled Dec. 30, 2025 pending Patreon site support for new age verification requirements.
