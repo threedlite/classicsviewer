@@ -36,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 84
-        versionName "0.8.84"
+        versionCode 85
+        versionName "0.8.85"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -302,6 +302,21 @@ task checkAabSize {
 
             if (hasAssetPacks) {
                 println "✓ AAB structure is valid for Play Asset Delivery"
+            }
+
+            // Check total AAB size is under 4GB (Google Play limit)
+            def aabSizeGB = aabFile.length() / 1024 / 1024 / 1024
+            if (aabSizeGB > 4) {
+                throw new GradleException("""
+                    ERROR: AAB exceeds Google Play's 4GB limit!
+
+                    AAB size: ${String.format('%.2f', aabSizeGB)}GB
+                    Maximum allowed: 4GB
+
+                    Consider reducing asset pack sizes.
+                """)
+            } else {
+                println "✓ AAB size is within Google Play limits (${String.format('%.2f', aabSizeGB)}GB < 4GB)"
             }
         }
     }

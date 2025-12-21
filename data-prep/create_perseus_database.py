@@ -7609,6 +7609,14 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_n
             print(f"Database compressed: {zip_path}")
             print(f"Original size: {original_size:.1f}MB")
             print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
+
+            # Copy iOS database to iOS assets folder
+            ios_asset_dir = "../ios/ClassicsViewer/Resources"
+            os.makedirs(ios_asset_dir, exist_ok=True)
+            ios_zip_path = os.path.join(ios_asset_dir, "perseus_texts.db.zip")
+            print(f"\nCopying iOS database to: {ios_zip_path}...")
+            shutil.copy(zip_path, ios_zip_path)
+            print(f"iOS database copied ({compressed_size:.1f}MB)")
             return
 
         # For debug builds
@@ -7683,14 +7691,24 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_n
             print(f"Original size: {original_size:.1f}MB")
             print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
 
-            # Copy full database to Play Asset Delivery asset pack folder
-            full_db_asset_dir = "../full_database_pack/src/main/assets"
-            os.makedirs(full_db_asset_dir, exist_ok=True)
-            asset_pack_zip_path = os.path.join(full_db_asset_dir, "perseus_texts_full.db.zip")
-            print(f"\nCopying full database to asset pack: {asset_pack_zip_path}...")
-            shutil.copy(zip_path, asset_pack_zip_path)
-            print(f"Full database copied to asset pack ({compressed_size:.1f}MB)")
-        
+            # Only copy to asset packs for the actual full database, not extended
+            if db_filename == "perseus_texts_full.db":
+                # Copy full database to Play Asset Delivery asset pack folder
+                full_db_asset_dir = "../full_database_pack/src/main/assets"
+                os.makedirs(full_db_asset_dir, exist_ok=True)
+                asset_pack_zip_path = os.path.join(full_db_asset_dir, "perseus_texts_full.db.zip")
+                print(f"\nCopying full database to asset pack: {asset_pack_zip_path}...")
+                shutil.copy(zip_path, asset_pack_zip_path)
+                print(f"Full database copied to asset pack ({compressed_size:.1f}MB)")
+
+                # Copy full database to iOS on-demand assets folder
+                ios_ondemand_dir = "../ios/ClassicsViewer/Resources/OnDemand"
+                os.makedirs(ios_ondemand_dir, exist_ok=True)
+                ios_full_zip_path = os.path.join(ios_ondemand_dir, "perseus_texts_full.db.zip")
+                print(f"\nCopying full database to iOS: {ios_full_zip_path}...")
+                shutil.copy(zip_path, ios_full_zip_path)
+                print(f"iOS full database copied ({compressed_size:.1f}MB)")
+
         return True
     else:
         print(f"\nWarning: Database file {db_filename} not found")
