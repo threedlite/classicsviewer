@@ -213,10 +213,10 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
     Worker function that processes a chunk of works assigned to one worker.
 
     Args:
-        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_unique_words, start_time, completed_tracker)
+        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_effective_cost, start_time, completed_tracker)
               where work_list is [(work_index, author, work_title, work_id), ...]
-              work_size_lookup maps work_id -> (total_words, unique_words)
-              completed_tracker is a shared dict to track completed works: work_id -> (total_words, unique_words)
+              work_size_lookup maps work_id -> (total_words, unique_words, effective_cost)
+              completed_tracker is a shared dict to track completed works: work_id -> (total_words, unique_words, effective_cost)
 
     Returns:
         List of (work_index, author, work_title, success, error_message) for all works processed
@@ -224,7 +224,7 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
     import sys
     import time
 
-    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_unique_words, start_time, completed_tracker = args
+    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_effective_cost, start_time, completed_tracker = args
     results = []
 
     print(f"\n{'='*80}")
@@ -241,26 +241,26 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
         success = result[3]
         status = "✓" if success else "✗"
 
-        # Track words for this work: (total_words, unique_words)
-        work_counts = work_size_lookup.get(work_id, (0, 0))
+        # Track words for this work: (total_words, unique_words, effective_cost)
+        work_counts = work_size_lookup.get(work_id, (0, 0, 0))
 
         # Mark this work as completed in shared tracker
         completed_tracker[work_id] = work_counts
 
         # Calculate global progress from shared tracker
-        # Use unique words for progress since they determine actual processing time
+        # Use effective cost (unique + 100*elided) for progress since elided words are ~100x slower
         global_words_completed = sum(v[0] for v in completed_tracker.values())
-        global_unique_completed = sum(v[1] for v in completed_tracker.values())
+        global_cost_completed = sum(v[2] for v in completed_tracker.values())
 
         elapsed = time.time() - start_time
-        # Progress based on unique words (more accurate for ETA)
-        progress_pct = (global_unique_completed / total_unique_words * 100) if total_unique_words > 0 else 0
+        # Progress based on effective cost (accounts for slow elided word processing)
+        progress_pct = (global_cost_completed / total_effective_cost * 100) if total_effective_cost > 0 else 0
 
-        # Calculate ETA based on unique word processing rate
-        if global_unique_completed > 0 and progress_pct < 100:
-            rate = global_unique_completed / elapsed  # unique words per second
-            remaining_unique = total_unique_words - global_unique_completed
-            eta_seconds = remaining_unique / rate
+        # Calculate ETA based on effective cost processing rate
+        if global_cost_completed > 0 and progress_pct < 100:
+            rate = global_cost_completed / elapsed  # effective cost units per second
+            remaining_cost = total_effective_cost - global_cost_completed
+            eta_seconds = remaining_cost / rate
             eta_str = f"ETA: {eta_seconds/60:.1f}m"
         else:
             eta_str = ""
@@ -331,53 +331,69 @@ def generate_interlinear_parallel(
     """)
     book_counts = {row[0]: row[1] for row in cursor.fetchall()}
 
-    # Batch query for word counts (total and unique) - single efficient query
+    # Batch query for word counts (total, unique, and elided) - single efficient query
+    # Elided words (ending in apostrophe) trigger expensive LIKE queries (~1s each vs 0.04ms for exact match)
     print("Querying word counts (this may take a few seconds for large databases)...")
     query_start = time.time()
+    # Apostrophe variants used in Greek texts:
+    apos_curly = "%\u2019"   # ' RIGHT SINGLE QUOTATION MARK (U+2019)
+    apos_straight = "%\u0027"  # ' APOSTROPHE (U+0027)
+    apos_modifier = "%\u02BC"  # ʼ MODIFIER LETTER APOSTROPHE (U+02BC)
     cursor.execute("""
-        SELECT b.work_id, COUNT(*) as total_words, COUNT(DISTINCT w.word) as unique_words
+        SELECT b.work_id,
+               COUNT(*) as total_words,
+               COUNT(DISTINCT w.word) as unique_words,
+               COUNT(DISTINCT CASE WHEN w.word LIKE ? OR w.word LIKE ? OR w.word LIKE ? THEN w.word END) as elided_words
         FROM perseus.words w
         INNER JOIN perseus.books b ON w.book_id = b.id
         INNER JOIN temp_work_ids t ON b.work_id = t.work_id
         GROUP BY b.work_id
-    """)
-    word_counts = {row[0]: (row[1], row[2]) for row in cursor.fetchall()}
+    """, (apos_curly, apos_straight, apos_modifier))
+    word_counts = {row[0]: (row[1], row[2], row[3] or 0) for row in cursor.fetchall()}
     print(f"  Word count query completed in {time.time() - query_start:.1f}s")
 
     conn.close()
 
     # Build work_sizes list from batch query results
+    # Elided words are ~100x more expensive than normal words (LIKE query vs exact match)
+    ELIDED_WORD_COST_MULTIPLIER = 100
     work_sizes = []
     for work_id in work_ids:
         author, work_title = work_info[work_id]
         book_count = book_counts.get(work_id, 0)
-        word_count, unique_word_count = word_counts.get(work_id, (0, 0))
-        work_sizes.append((author, work_title, work_id, book_count, word_count, unique_word_count))
+        word_count, unique_word_count, elided_word_count = word_counts.get(work_id, (0, 0, 0))
+        # Effective cost = unique words + (elided words * 100) since LIKE queries are ~100x slower
+        effective_cost = unique_word_count + (elided_word_count * ELIDED_WORD_COST_MULTIPLIER)
+        work_sizes.append((author, work_title, work_id, book_count, word_count, unique_word_count, elided_word_count, effective_cost))
 
-    # Sort by unique_word_count descending (largest works first)
-    # Unique words determine cache misses and actual processing time
-    work_sizes.sort(key=lambda x: x[5], reverse=True)
+    # Sort by effective_cost descending (most expensive works first)
+    # This accounts for both unique words and expensive elided word LIKE queries
+    work_sizes.sort(key=lambda x: x[7], reverse=True)
 
     # Calculate totals for progress tracking
-    # Use unique words for ETA since cache misses determine processing time
+    # Use effective cost (unique + 100*elided) for ETA since elided words are much slower
     total_words = sum(size[4] for size in work_sizes)
     total_unique_words = sum(size[5] for size in work_sizes)
+    total_elided_words = sum(size[6] for size in work_sizes)
+    total_effective_cost = sum(size[7] for size in work_sizes)
     total_books = sum(size[3] for size in work_sizes)
 
     print(f"\nWork size distribution:")
     print(f"  Total words: {total_words:,}")
     print(f"  Total unique words: {total_unique_words:,} ({total_unique_words/total_words*100:.1f}% of total)")
+    print(f"  Total elided words: {total_elided_words:,} ({total_elided_words/total_unique_words*100:.1f}% of unique)")
+    print(f"  Total effective cost: {total_effective_cost:,} (unique + 100×elided)")
     print(f"  Total books: {total_books:,}")
-    print(f"  Largest work: {work_sizes[0][4]:,} words, {work_sizes[0][5]:,} unique, {work_sizes[0][3]} books ({work_sizes[0][1]} - {work_sizes[0][2]})")
+    print(f"  Most expensive work: {work_sizes[0][5]:,} unique, {work_sizes[0][6]:,} elided, cost={work_sizes[0][7]:,} ({work_sizes[0][1]})")
     if len(work_sizes) > 1:
-        print(f"  Second largest: {work_sizes[1][4]:,} words, {work_sizes[1][5]:,} unique, {work_sizes[1][3]} books ({work_sizes[1][1]} - {work_sizes[1][2]})")
-    print(f"  Smallest work: {work_sizes[-1][4]:,} words, {work_sizes[-1][5]:,} unique, {work_sizes[-1][3]} books ({work_sizes[-1][1]})")
-    print(f"  Sorted works by unique word count (largest first) for load balancing\n")
+        print(f"  Second most expensive: {work_sizes[1][5]:,} unique, {work_sizes[1][6]:,} elided, cost={work_sizes[1][7]:,} ({work_sizes[1][1]})")
+    print(f"  Least expensive work: {work_sizes[-1][5]:,} unique, {work_sizes[-1][6]:,} elided, cost={work_sizes[-1][7]:,} ({work_sizes[-1][1]})")
+    print(f"  Sorted works by effective cost (largest first) for load balancing\n")
 
     # Prepare work batches with indices for ordering
     work_args = [
         (i, author, work_title, work_id, db_path, output_dir)
-        for i, (author, work_title, work_id, _, _, _) in enumerate(work_sizes)
+        for i, (author, work_title, work_id, _, _, _, _, _) in enumerate(work_sizes)
     ]
 
     start_time = time.time()
@@ -396,40 +412,42 @@ def generate_interlinear_parallel(
         print()
 
         # Distribute works using greedy "least loaded" algorithm (LPT)
-        # This balances unique words per worker (determines processing time)
+        # This balances effective cost per worker (unique + 100×elided, since LIKE queries are ~100x slower)
         worker_chunks = [[] for _ in range(num_workers)]
-        worker_loads = [0] * num_workers  # Track unique words per worker
+        worker_loads = [0] * num_workers  # Track effective cost per worker
 
         for work_index, author, work_title, work_id, _, _ in work_args:
             # Find worker with minimum load
             min_worker = worker_loads.index(min(worker_loads))
             worker_chunks[min_worker].append((work_index, author, work_title, work_id))
-            # Update load with this work's unique word count (determines processing time)
-            worker_loads[min_worker] += work_sizes[work_index][5]
+            # Update load with this work's effective cost (unique + 100×elided)
+            worker_loads[min_worker] += work_sizes[work_index][7]
 
         # Show worker assignments with total load
-        print("Worker assignments (load-balanced by unique words):")
+        print("Worker assignments (load-balanced by effective cost = unique + 100×elided):")
         for worker_id in range(num_workers):
             chunk_size = len(worker_chunks[worker_id])
             total_load = worker_loads[worker_id]
             if chunk_size > 0:
                 first_work = worker_chunks[worker_id][0]
                 work_idx, author, title, work_id = first_work
-                unique_count = work_sizes[work_idx][5]
-                print(f"  Worker {worker_id}: {chunk_size} works, {total_load:,} unique words, first = {work_id} ({unique_count:,} unique)")
+                effective_cost = work_sizes[work_idx][7]
+                elided_count = work_sizes[work_idx][6]
+                print(f"  Worker {worker_id}: {chunk_size} works, cost={total_load:,}, first = {work_id} (cost={effective_cost:,}, {elided_count} elided)")
         print()
 
         # Create lookup dicts for work sizes (must be before worker_args uses it)
-        # work_size_lookup: work_id -> (total_words, unique_words)
-        work_size_lookup = {work_sizes[i][2]: (work_sizes[i][4], work_sizes[i][5]) for i in range(len(work_sizes))}
+        # work_size_lookup: work_id -> (total_words, unique_words, effective_cost)
+        work_size_lookup = {work_sizes[i][2]: (work_sizes[i][4], work_sizes[i][5], work_sizes[i][7]) for i in range(len(work_sizes))}
 
         # Create a shared dict to track completed works across all workers
         manager = mp.Manager()
-        completed_tracker = manager.dict()  # work_id -> (total_words, unique_words)
+        completed_tracker = manager.dict()  # work_id -> (total_words, unique_words, effective_cost)
 
         # Create worker arguments with additional context for ETA calculation
+        # Use total_effective_cost for progress tracking since it accounts for elided word overhead
         worker_args = [
-            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_words, total_unique_words, start_time, completed_tracker)
+            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_words, total_effective_cost, start_time, completed_tracker)
             for worker_id in range(num_workers)
             if len(worker_chunks[worker_id]) > 0
         ]
