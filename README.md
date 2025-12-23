@@ -9,7 +9,7 @@ Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecom
 NEW: Parsing fixes Dec. 21, 2025. Uninstall and reinstall to get data update.
 
 
-NOTE: Patreon page will be disabled Dec. 30, 2025 pending Patreon site support for new age verification requirements.
+NOTE: Patreon page may be disabled at some point while pending Patreon site support for new age verification requirements.
 
 Patreon links below added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
 
