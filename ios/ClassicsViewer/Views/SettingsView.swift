@@ -178,6 +178,21 @@ struct SettingsView: View {
                     }
                 }
 
+                // Help Section
+                Section(header: Text("Help")) {
+                    Text("On the text view, tap the view label at the bottom (e.g. 'Greek') to switch to a translation (if available), tap a word to view the dictionary, or tap a line number to add a bookmark note.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+
+                    Text("Chamberlain's audio narration of Homer's Iliad is available for download via the menu. Use the play button to listen while reading.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+
+                    Text("For interlinear translations - Tap any Greek word to view its full dictionary entry with alternate meanings. Note: Interlinear data is automatically generated and may contain errors.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
+
                 // About Section
                 Section(header: Text("About")) {
                     HStack {

@@ -321,7 +321,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A sample of Chamberlain's audio playback is available for the opening of Homer's Iliad. Use the play button to listen to narration while reading. Additional audio packages can be imported via Menu → Manage Audio."
+            android:text="Chamberlain's audio narration of Homer's Iliad is available for download via Menu → Download Full Iliad Audio. Use the play button to listen while reading."
             android:textSize="14sp"
             android:lineSpacingMultiplier="1.3"
             android:paddingStart="16dp"
