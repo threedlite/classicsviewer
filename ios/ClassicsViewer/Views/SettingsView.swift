@@ -87,6 +87,16 @@ struct SettingsView: View {
                     }
                 }
 
+                // Learning Section
+                Section(header: Text("Learning")) {
+                    NavigationLink(destination: PracticeAlphabetsView()) {
+                        HStack {
+                            Image(systemName: "character.book.closed")
+                            Text("Practice Alphabets")
+                        }
+                    }
+                }
+
                 // Languages Section
                 Section(header: Text("Languages")) {
                     NavigationLink(destination: ManageLanguagesView()) {
@@ -173,7 +183,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("0.8.85")
+                        Text("0.8.90")
                             .foregroundColor(.secondary)
                     }
 

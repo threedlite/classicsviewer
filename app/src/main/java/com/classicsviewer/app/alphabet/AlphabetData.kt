@@ -177,6 +177,7 @@ object AlphabetData {
     )
 
     val sanskrit = listOf(
+        // Vowels
         AlphabetLetter("अ", "a"),
         AlphabetLetter("आ", "ā"),
         AlphabetLetter("इ", "i"),
@@ -184,37 +185,51 @@ object AlphabetData {
         AlphabetLetter("उ", "u"),
         AlphabetLetter("ऊ", "ū"),
         AlphabetLetter("ऋ", "ṛ"),
+        AlphabetLetter("ॠ", "ṝ"),
+        AlphabetLetter("ऌ", "ḷ"),
         AlphabetLetter("ए", "e"),
         AlphabetLetter("ऐ", "ai"),
         AlphabetLetter("ओ", "o"),
         AlphabetLetter("औ", "au"),
+        // Special marks
+        AlphabetLetter("अं", "ṃ"),
+        AlphabetLetter("अः", "ḥ"),
+        // Velars
         AlphabetLetter("क", "ka"),
         AlphabetLetter("ख", "kha"),
         AlphabetLetter("ग", "ga"),
         AlphabetLetter("घ", "gha"),
+        AlphabetLetter("ङ", "ṅa"),
+        // Palatals
         AlphabetLetter("च", "ca"),
         AlphabetLetter("छ", "cha"),
         AlphabetLetter("ज", "ja"),
         AlphabetLetter("झ", "jha"),
+        AlphabetLetter("ञ", "ña"),
+        // Retroflexes
         AlphabetLetter("ट", "ṭa"),
         AlphabetLetter("ठ", "ṭha"),
         AlphabetLetter("ड", "ḍa"),
         AlphabetLetter("ढ", "ḍha"),
         AlphabetLetter("ण", "ṇa"),
+        // Dentals
         AlphabetLetter("त", "ta"),
         AlphabetLetter("थ", "tha"),
         AlphabetLetter("द", "da"),
         AlphabetLetter("ध", "dha"),
         AlphabetLetter("न", "na"),
+        // Labials
         AlphabetLetter("प", "pa"),
         AlphabetLetter("फ", "pha"),
         AlphabetLetter("ब", "ba"),
         AlphabetLetter("भ", "bha"),
         AlphabetLetter("म", "ma"),
+        // Semivowels
         AlphabetLetter("य", "ya"),
         AlphabetLetter("र", "ra"),
         AlphabetLetter("ल", "la"),
         AlphabetLetter("व", "va"),
+        // Sibilants
         AlphabetLetter("श", "śa"),
         AlphabetLetter("ष", "ṣa"),
         AlphabetLetter("स", "sa"),
@@ -237,4 +252,23 @@ object AlphabetData {
     }
 
     val availableLanguages = listOf("Greek", "Hebrew", "Arabic", "Sanskrit")
+
+    /**
+     * Returns the letter string formatted for display.
+     * Reverses strings with dashes for RTL languages (Hebrew/Arabic)
+     * so they render correctly.
+     */
+    fun displayLetter(letter: String): String {
+        if (!letter.contains("-")) return letter
+
+        // Check if contains Hebrew (U+0590-U+05FF) or Arabic (U+0600-U+06FF, U+FB50-U+FDFF, U+FE70-U+FEFF)
+        val hasRtl = letter.any { c ->
+            c in '\u0590'..'\u05FF' ||  // Hebrew
+            c in '\u0600'..'\u06FF' ||  // Arabic
+            c in '\uFB50'..'\uFDFF' ||  // Arabic Presentation Forms-A
+            c in '\uFE70'..'\uFEFF'     // Arabic Presentation Forms-B
+        }
+
+        return if (hasRtl) letter.reversed() else letter
+    }
 }

@@ -2,14 +2,10 @@ package com.classicsviewer.app.alphabet
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
-import android.content.ClipData
-import android.content.ClipDescription
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -39,6 +35,9 @@ class AlphabetGameActivity : BaseActivity() {
     // Maps to track letter views and phonetic views
     private val letterViews = mutableMapOf<String, TextView>()
     private val phoneticViews = mutableMapOf<String, TextView>()
+
+    // Track selected letter for tap-to-match
+    private var selectedLetter: AlphabetLetter? = null
 
     // Track mastered letters for perfect streak
     private val masteredLetters = mutableSetOf<String>()
@@ -156,10 +155,11 @@ class AlphabetGameActivity : BaseActivity() {
         phoneticViews.clear()
         matchedCount = 0
         hasMistake = false
+        selectedLetter = null
 
         // Show instructions on first round
         if (isFirstRound) {
-            binding.messageText.text = "Press and drag letters to matching sounds"
+            binding.messageText.text = "Tap a letter, then tap its matching sound"
             binding.messageText.setTextColor(0xFF888888.toInt())
             isFirstRound = false
         } else {
@@ -178,25 +178,27 @@ class AlphabetGameActivity : BaseActivity() {
         currentRound.forEach { letter ->
             val letterView = LayoutInflater.from(this)
                 .inflate(R.layout.item_alphabet_letter, binding.lettersContainer, false) as TextView
-            letterView.text = letter.letter
+            letterView.text = AlphabetData.displayLetter(letter.letter)
             letterView.tag = letter.phonetic
 
-            applyLetterStyle(letterView, matched = false, inverted = inverted)
+            applyLetterStyle(letterView, matched = false, selected = false, inverted = inverted)
 
-            // Setup drag
-            letterView.setOnLongClickListener { view ->
-                if (view.tag != "matched") {
-                    val clipData = ClipData.newPlainText("phonetic", letter.phonetic)
-                    val dragShadow = View.DragShadowBuilder(view)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        view.startDragAndDrop(clipData, dragShadow, view, 0)
-                    } else {
-                        @Suppress("DEPRECATION")
-                        view.startDrag(clipData, dragShadow, view, 0)
+            // Setup tap to select
+            letterView.setOnClickListener {
+                if (letterView.tag != "matched") {
+                    // Deselect previous letter
+                    selectedLetter?.let { prev ->
+                        letterViews[prev.phonetic]?.let { prevView ->
+                            if (prevView.tag != "matched") {
+                                applyLetterStyle(prevView, matched = false, selected = false, inverted = inverted)
+                            }
+                        }
                     }
-                    view.alpha = 0.5f
+                    // Select this letter
+                    selectedLetter = letter
+                    applyLetterStyle(letterView, matched = false, selected = true, inverted = inverted)
+                    binding.messageText.text = ""
                 }
-                true
             }
 
             binding.lettersContainer.addView(letterView)
@@ -213,87 +215,61 @@ class AlphabetGameActivity : BaseActivity() {
             phoneticView.text = phonetic
             phoneticView.tag = phonetic
 
-            applyPhoneticStyle(phoneticView, matched = false, dragOver = false, inverted = inverted)
+            applyPhoneticStyle(phoneticView, matched = false, inverted = inverted)
 
-            // Setup drop target
-            phoneticView.setOnDragListener { view, event ->
-                when (event.action) {
-                    DragEvent.ACTION_DRAG_STARTED -> {
-                        event.clipDescription?.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN) == true
-                    }
-                    DragEvent.ACTION_DRAG_ENTERED -> {
-                        if (view.tag != "matched") {
-                            applyPhoneticStyle(view as TextView, matched = false, dragOver = true, inverted = inverted)
-                        }
-                        true
-                    }
-                    DragEvent.ACTION_DRAG_LOCATION -> true
-                    DragEvent.ACTION_DRAG_EXITED -> {
-                        if (view.tag != "matched") {
-                            applyPhoneticStyle(view as TextView, matched = false, dragOver = false, inverted = inverted)
-                        }
-                        true
-                    }
-                    DragEvent.ACTION_DROP -> {
-                        if (view.tag == "matched") {
-                            return@setOnDragListener false
-                        }
+            // Setup tap to match
+            phoneticView.setOnClickListener {
+                if (phoneticView.tag == "matched") return@setOnClickListener
 
-                        val item = event.clipData.getItemAt(0)
-                        val draggedPhonetic = item.text.toString()
-                        val targetPhonetic = phoneticView.tag.toString()
+                val selected = selectedLetter
+                if (selected == null) {
+                    binding.messageText.text = "Select a letter first"
+                    binding.messageText.setTextColor(0xFFFF9800.toInt()) // Orange
+                    return@setOnClickListener
+                }
 
-                        val draggedView = event.localState as View
-                        draggedView.alpha = 1.0f
+                if (selected.phonetic == phonetic) {
+                    // Correct match!
+                    applyLetterStyle(letterViews[selected.phonetic]!!, matched = true, selected = false, inverted = inverted)
+                    letterViews[selected.phonetic]?.tag = "matched"
 
-                        if (draggedPhonetic == targetPhonetic) {
-                            // Match!
-                            applyLetterStyle(letterViews[draggedPhonetic]!!, matched = true, inverted = inverted)
-                            letterViews[draggedPhonetic]?.tag = "matched"
+                    applyPhoneticStyle(phoneticView, matched = true, inverted = inverted)
+                    phoneticView.tag = "matched"
 
-                            applyPhoneticStyle(view as TextView, matched = true, dragOver = false, inverted = inverted)
-                            view.tag = "matched"
+                    selectedLetter = null
+                    matchedCount++
 
-                            matchedCount++
+                    if (matchedCount == currentRound.size) {
+                        // Round complete
+                        val earnedPoints = if (hasMistake) 1 else 10
+                        points += earnedPoints
+                        updatePointsDisplay()
 
-                            if (matchedCount == currentRound.size) {
-                                // Round complete
-                                val earnedPoints = if (hasMistake) 1 else 10
-                                points += earnedPoints
-                                updatePointsDisplay()
+                        val msg = if (hasMistake) "Correct! +1 point." else "Perfect! +10 points!"
+                        binding.messageText.text = "$msg Next round in 3 seconds..."
+                        binding.messageText.setTextColor(0xFF4CAF50.toInt())
 
-                                val msg = if (hasMistake) "Correct! +1 point." else "Perfect! +10 points!"
-                                binding.messageText.text = "$msg Next round in 3 seconds..."
-                                binding.messageText.setTextColor(0xFF4CAF50.toInt())
-
-                                // Track mastery for perfect rounds
-                                if (!hasMistake) {
-                                    playPerfectGlow()
-                                    // Add letters to mastered set
-                                    currentRound.forEach { letter ->
-                                        masteredLetters.add(letter.letter)
-                                    }
-                                    // Check if all letters mastered
-                                    checkForMastery()
-                                } else {
-                                    // Mistake breaks the streak
-                                    perfectStreak = false
-                                }
-
-                                handler.postDelayed({ startRound() }, 3000)
+                        // Track mastery for perfect rounds
+                        if (!hasMistake) {
+                            playPerfectGlow()
+                            // Add letters to mastered set
+                            currentRound.forEach { letter ->
+                                masteredLetters.add(letter.letter)
                             }
+                            // Check if all letters mastered
+                            checkForMastery()
                         } else {
-                            // Wrong match
-                            hasMistake = true
+                            // Mistake breaks the streak
+                            perfectStreak = false
                         }
-                        true
+
+                        handler.postDelayed({ startRound() }, 3000)
                     }
-                    DragEvent.ACTION_DRAG_ENDED -> {
-                        val draggedView = event.localState as? View
-                        draggedView?.alpha = 1.0f
-                        true
-                    }
-                    else -> false
+                } else {
+                    // Wrong match
+                    hasMistake = true
+                    binding.messageText.text = "Try again!"
+                    binding.messageText.setTextColor(0xFFF44336.toInt()) // Red
                 }
             }
 
@@ -317,38 +293,30 @@ class AlphabetGameActivity : BaseActivity() {
         return result
     }
 
-    private fun applyLetterStyle(view: TextView, matched: Boolean, inverted: Boolean) {
-        if (matched) {
-            view.setBackgroundResource(R.drawable.letter_matched_background)
-            view.setTextColor(0xFFFFFFFF.toInt())
-        } else {
-            view.setBackgroundResource(R.drawable.letter_background)
-            if (inverted) {
-                view.setTextColor(0xFF000000.toInt())
-            } else {
-                view.setTextColor(0xFF000000.toInt())
-            }
-        }
-    }
-
-    private fun applyPhoneticStyle(view: TextView, matched: Boolean, dragOver: Boolean, inverted: Boolean) {
+    private fun applyLetterStyle(view: TextView, matched: Boolean, selected: Boolean, inverted: Boolean) {
         when {
             matched -> {
                 view.setBackgroundResource(R.drawable.letter_matched_background)
                 view.setTextColor(0xFFFFFFFF.toInt())
             }
-            dragOver -> {
-                view.setBackgroundResource(R.drawable.phonetic_target_dragover)
+            selected -> {
+                view.setBackgroundResource(R.drawable.letter_selected_background)
                 view.setTextColor(0xFF000000.toInt())
             }
             else -> {
-                view.setBackgroundResource(R.drawable.phonetic_target_background)
-                if (inverted) {
-                    view.setTextColor(0xFF000000.toInt())
-                } else {
-                    view.setTextColor(0xFF000000.toInt())
-                }
+                view.setBackgroundResource(R.drawable.letter_background)
+                view.setTextColor(0xFF000000.toInt())
             }
+        }
+    }
+
+    private fun applyPhoneticStyle(view: TextView, matched: Boolean, inverted: Boolean) {
+        if (matched) {
+            view.setBackgroundResource(R.drawable.letter_matched_background)
+            view.setTextColor(0xFFFFFFFF.toInt())
+        } else {
+            view.setBackgroundResource(R.drawable.phonetic_target_background)
+            view.setTextColor(0xFF000000.toInt())
         }
     }
 
