@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/phoneticText"
+    android:layout_width="wrap_content"
+    android:layout_height="57dp"
+    android:minWidth="80dp"
+    android:gravity="center"
+    android:textSize="22sp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_margin="3dp"
+    android:background="@drawable/phonetic_target_background"
+    android:textColor="#000000" />

@@ -37,6 +37,7 @@ import java.util.zip.ZipInputStream
 import java.io.BufferedInputStream
 import com.classicsviewer.app.models.CustomLanguageConfig
 import com.classicsviewer.app.data.AssetPackDatabaseHelper
+import com.classicsviewer.app.alphabet.AlphabetGameActivity
 
 class MainActivity : AppCompatActivity() {
     
@@ -350,6 +351,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_download_full_audio -> {
                 val intent = Intent(this, AudioDownloadActivity::class.java)
                 startActivity(intent)
+                true
+            }
+            R.id.action_practice_alphabets -> {
+                startActivity(Intent(this, AlphabetGameActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

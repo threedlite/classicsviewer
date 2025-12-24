@@ -49,4 +49,9 @@
         android:title="Manage Languages"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_practice_alphabets"
+        android:title="Practice Alphabets"
+        app:showAsAction="never" />
+
 </menu>

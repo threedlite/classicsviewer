@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/letterText"
+    android:layout_width="wrap_content"
+    android:layout_height="57dp"
+    android:minWidth="56dp"
+    android:gravity="center"
+    android:textSize="37sp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_margin="3dp"
+    android:background="@drawable/letter_background"
+    android:textColor="#000000"
+    android:elevation="4dp" />
