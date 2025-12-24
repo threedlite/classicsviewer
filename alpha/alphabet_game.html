@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Learning Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .controls select {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .game-area {
+            display: flex;
+            justify-content: space-around;
+            gap: 50px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+        .letters-column, .phonetics-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        .column-title {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .letter-item {
+            font-size: 48px;
+            padding: 15px 25px;
+            background: #e8e8e8;
+            border-radius: 8px;
+            cursor: grab;
+            user-select: none;
+            transition: all 0.2s;
+            min-width: 80px;
+            text-align: center;
+        }
+        .letter-item:hover {
+            background: #d0d0d0;
+        }
+        .letter-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+        .letter-item.matched {
+            background: #4caf50;
+            color: white;
+            cursor: default;
+        }
+        .phonetic-item {
+            font-size: 24px;
+            padding: 20px 30px;
+            background: #fff;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            min-width: 120px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .phonetic-item.drag-over {
+            border-color: #2196f3;
+            background: #e3f2fd;
+        }
+        .phonetic-item.matched {
+            background: #4caf50;
+            color: white;
+            border: 2px solid #4caf50;
+        }
+        .message {
+            text-align: center;
+            font-size: 20px;
+            color: #4caf50;
+            margin-top: 20px;
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="controls">
+            <label>
+                Language:
+                <select id="language">
+                    <option value="greek">Greek</option>
+                    <option value="hebrew">Hebrew</option>
+                    <option value="arabic">Arabic</option>
+                    <option value="sanskrit">Sanskrit</option>
+                </select>
+            </label>
+            <label>
+                Letters:
+                <select id="count">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </label>
+        </div>
+        <div class="score">Points: <span id="points">0</span></div>
+    </div>
+
+    <div class="game-area">
+        <div class="letters-column">
+            <div class="column-title">Letters</div>
+            <div id="letters"></div>
+        </div>
+        <div class="phonetics-column">
+            <div class="column-title">Phonetic Values</div>
+            <div id="phonetics"></div>
+        </div>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <script>
+        const alphabetData = {
+            greek: [
+                {letter: "Α", phonetic: "a"}, {letter: "α", phonetic: "a"},
+                {letter: "Β", phonetic: "b"}, {letter: "β", phonetic: "b"},
+                {letter: "Γ", phonetic: "g"}, {letter: "γ", phonetic: "g"},
+                {letter: "Δ", phonetic: "d"}, {letter: "δ", phonetic: "d"},
+                {letter: "Ε", phonetic: "e"}, {letter: "ε", phonetic: "e"},
+                {letter: "Ζ", phonetic: "z"}, {letter: "ζ", phonetic: "z"},
+                {letter: "Η", phonetic: "ē"}, {letter: "η", phonetic: "ē"},
+                {letter: "Θ", phonetic: "th"}, {letter: "θ", phonetic: "th"},
+                {letter: "Ι", phonetic: "i"}, {letter: "ι", phonetic: "i"},
+                {letter: "Κ", phonetic: "k"}, {letter: "κ", phonetic: "k"},
+                {letter: "Λ", phonetic: "l"}, {letter: "λ", phonetic: "l"},
+                {letter: "Μ", phonetic: "m"}, {letter: "μ", phonetic: "m"},
+                {letter: "Ν", phonetic: "n"}, {letter: "ν", phonetic: "n"},
+                {letter: "Ξ", phonetic: "x"}, {letter: "ξ", phonetic: "x"},
+                {letter: "Ο", phonetic: "o"}, {letter: "ο", phonetic: "o"},
+                {letter: "Π", phonetic: "p"}, {letter: "π", phonetic: "p"},
+                {letter: "Ρ", phonetic: "r"}, {letter: "ρ", phonetic: "r"},
+                {letter: "Σ", phonetic: "s"}, {letter: "σ", phonetic: "s"},
+                {letter: "Τ", phonetic: "t"}, {letter: "τ", phonetic: "t"},
+                {letter: "Υ", phonetic: "y/u"}, {letter: "υ", phonetic: "y/u"},
+                {letter: "Φ", phonetic: "ph"}, {letter: "φ", phonetic: "ph"},
+                {letter: "Χ", phonetic: "ch"}, {letter: "χ", phonetic: "ch"},
+                {letter: "Ψ", phonetic: "ps"}, {letter: "ψ", phonetic: "ps"},
+                {letter: "Ω", phonetic: "ō"}, {letter: "ω", phonetic: "ō"}
+            ],
+            hebrew: [
+                {letter: "א", phonetic: "ʾ (aleph)"}, {letter: "ב", phonetic: "b/v"},
+                {letter: "ג", phonetic: "g"}, {letter: "ד", phonetic: "d"},
+                {letter: "ה", phonetic: "h"}, {letter: "ו", phonetic: "v/w"},
+                {letter: "ז", phonetic: "z"}, {letter: "ח", phonetic: "ḥ"},
+                {letter: "ט", phonetic: "ṭ"}, {letter: "י", phonetic: "y"},
+                {letter: "כ", phonetic: "k/kh"}, {letter: "ל", phonetic: "l"},
+                {letter: "מ", phonetic: "m"}, {letter: "נ", phonetic: "n"},
+                {letter: "ס", phonetic: "s"}, {letter: "ע", phonetic: "ʿ (ayin)"},
+                {letter: "פ", phonetic: "p/f"}, {letter: "צ", phonetic: "ts"},
+                {letter: "ק", phonetic: "q"}, {letter: "ר", phonetic: "r"},
+                {letter: "ש", phonetic: "sh/s"}, {letter: "ת", phonetic: "t"}
+            ],
+            arabic: [
+                {letter: "ا", phonetic: "ā (alif)"}, {letter: "ب", phonetic: "b"},
+                {letter: "ت", phonetic: "t"}, {letter: "ث", phonetic: "th"},
+                {letter: "ج", phonetic: "j"}, {letter: "ح", phonetic: "ḥ"},
+                {letter: "خ", phonetic: "kh"}, {letter: "د", phonetic: "d"},
+                {letter: "ذ", phonetic: "dh"}, {letter: "ر", phonetic: "r"},
+                {letter: "ز", phonetic: "z"}, {letter: "س", phonetic: "s"},
+                {letter: "ش", phonetic: "sh"}, {letter: "ص", phonetic: "ṣ"},
+                {letter: "ض", phonetic: "ḍ"}, {letter: "ط", phonetic: "ṭ"},
+                {letter: "ظ", phonetic: "ẓ"}, {letter: "ع", phonetic: "ʿ"},
+                {letter: "غ", phonetic: "gh"}, {letter: "ف", phonetic: "f"},
+                {letter: "ق", phonetic: "q"}, {letter: "ك", phonetic: "k"},
+                {letter: "ل", phonetic: "l"}, {letter: "م", phonetic: "m"},
+                {letter: "ن", phonetic: "n"}, {letter: "ه", phonetic: "h"},
+                {letter: "و", phonetic: "w"}, {letter: "ي", phonetic: "y"},
+                {letter: "ء", phonetic: "ʾ (hamza)"}
+            ],
+            sanskrit: [
+                {letter: "अ", phonetic: "a"}, {letter: "आ", phonetic: "ā"},
+                {letter: "इ", phonetic: "i"}, {letter: "ई", phonetic: "ī"},
+                {letter: "उ", phonetic: "u"}, {letter: "ऊ", phonetic: "ū"},
+                {letter: "ऋ", phonetic: "ṛ"}, {letter: "ए", phonetic: "e"},
+                {letter: "ऐ", phonetic: "ai"}, {letter: "ओ", phonetic: "o"},
+                {letter: "औ", phonetic: "au"}, {letter: "क", phonetic: "ka"},
+                {letter: "ख", phonetic: "kha"}, {letter: "ग", phonetic: "ga"},
+                {letter: "घ", phonetic: "gha"}, {letter: "च", phonetic: "ca"},
+                {letter: "छ", phonetic: "cha"}, {letter: "ज", phonetic: "ja"},
+                {letter: "झ", phonetic: "jha"}, {letter: "ट", phonetic: "ṭa"},
+                {letter: "ठ", phonetic: "ṭha"}, {letter: "ड", phonetic: "ḍa"},
+                {letter: "ढ", phonetic: "ḍha"}, {letter: "ण", phonetic: "ṇa"},
+                {letter: "त", phonetic: "ta"}, {letter: "थ", phonetic: "tha"},
+                {letter: "द", phonetic: "da"}, {letter: "ध", phonetic: "dha"},
+                {letter: "न", phonetic: "na"}, {letter: "प", phonetic: "pa"},
+                {letter: "फ", phonetic: "pha"}, {letter: "ब", phonetic: "ba"},
+                {letter: "भ", phonetic: "bha"}, {letter: "म", phonetic: "ma"},
+                {letter: "य", phonetic: "ya"}, {letter: "र", phonetic: "ra"},
+                {letter: "ल", phonetic: "la"}, {letter: "व", phonetic: "va"},
+                {letter: "श", phonetic: "śa"}, {letter: "ष", phonetic: "ṣa"},
+                {letter: "स", phonetic: "sa"}, {letter: "ह", phonetic: "ha"}
+            ]
+        };
+
+        let points = 0;
+        let currentRound = [];
+        let matchedCount = 0;
+        let draggedElement = null;
+        let hasMistake = false;
+
+        const languageSelect = document.getElementById('language');
+        const countSelect = document.getElementById('count');
+        const lettersContainer = document.getElementById('letters');
+        const phoneticsContainer = document.getElementById('phonetics');
+        const pointsDisplay = document.getElementById('points');
+        const messageDisplay = document.getElementById('message');
+
+        function shuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function getUniqueRandomItems(array, count) {
+            const shuffled = shuffle(array);
+            const result = [];
+            const usedPhonetics = new Set();
+
+            for (const item of shuffled) {
+                if (!usedPhonetics.has(item.phonetic)) {
+                    result.push(item);
+                    usedPhonetics.add(item.phonetic);
+                    if (result.length >= count) break;
+                }
+            }
+            return result;
+        }
+
+        function startRound() {
+            const language = languageSelect.value;
+            const count = parseInt(countSelect.value);
+            const data = alphabetData[language];
+
+            currentRound = getUniqueRandomItems(data, count);
+            matchedCount = 0;
+            hasMistake = false;
+            messageDisplay.textContent = '';
+
+            lettersContainer.innerHTML = '';
+            phoneticsContainer.innerHTML = '';
+
+            // Create letter items
+            currentRound.forEach((item, index) => {
+                const letterDiv = document.createElement('div');
+                letterDiv.className = 'letter-item';
+                letterDiv.textContent = item.letter;
+                letterDiv.draggable = true;
+                letterDiv.dataset.index = index;
+                letterDiv.dataset.phonetic = item.phonetic;
+
+                letterDiv.addEventListener('dragstart', handleDragStart);
+                letterDiv.addEventListener('dragend', handleDragEnd);
+
+                lettersContainer.appendChild(letterDiv);
+            });
+
+            // Create phonetic items in random order
+            const shuffledPhonetics = shuffle(currentRound.map((item, index) => ({
+                phonetic: item.phonetic,
+                index: index
+            })));
+
+            shuffledPhonetics.forEach(item => {
+                const phoneticDiv = document.createElement('div');
+                phoneticDiv.className = 'phonetic-item';
+                phoneticDiv.textContent = item.phonetic;
+                phoneticDiv.dataset.phonetic = item.phonetic;
+
+                phoneticDiv.addEventListener('dragover', handleDragOver);
+                phoneticDiv.addEventListener('dragleave', handleDragLeave);
+                phoneticDiv.addEventListener('drop', handleDrop);
+
+                phoneticsContainer.appendChild(phoneticDiv);
+            });
+        }
+
+        function handleDragStart(e) {
+            if (this.classList.contains('matched')) {
+                e.preventDefault();
+                return;
+            }
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            draggedElement = null;
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            if (!this.classList.contains('matched')) {
+                this.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (!draggedElement || this.classList.contains('matched')) return;
+
+            const letterPhonetic = draggedElement.dataset.phonetic;
+            const targetPhonetic = this.dataset.phonetic;
+
+            if (letterPhonetic === targetPhonetic) {
+                draggedElement.classList.add('matched');
+                this.classList.add('matched');
+                matchedCount++;
+
+                if (matchedCount === currentRound.length) {
+                    const earnedPoints = hasMistake ? 1 : 10;
+                    points += earnedPoints;
+                    pointsDisplay.textContent = points;
+                    const msg = hasMistake ? 'Correct! +1 point.' : 'Perfect! +10 points!';
+                    messageDisplay.textContent = msg + ' Next round in 3 seconds...';
+                    setTimeout(startRound, 3000);
+                }
+            } else {
+                hasMistake = true;
+            }
+        }
+
+        languageSelect.addEventListener('change', () => {
+            points = 0;
+            pointsDisplay.textContent = points;
+            startRound();
+        });
+
+        countSelect.addEventListener('change', startRound);
+
+        // Start the game
+        startRound();
+    </script>
+</body>
+</html>

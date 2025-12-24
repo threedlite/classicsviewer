@@ -1,0 +1,16 @@
+Create a CSV with the following columns: languageid, letter, phonetic_value.
+
+The languageid will be one of: greek, hebrew, arabic, sanskrit.
+
+Each row contains one letter form. For scripts with positional variants (Arabic),
+use the actual Unicode positional glyphs. For scripts with final-only variants
+(Greek sigma, Hebrew sofit letters), include both standard and final forms.
+
+Dash notation indicates where the rest of the word would appear visually:
+- x    = isolated (standalone letter)
+- -x   = initial (rest of word is to the right of the dash)
+- -x-  = medial (letters on both sides)
+- x-   = final (rest of word is to the left of the dash)
+
+For RTL scripts (Hebrew, Arabic), the rest of the word is visually to the RIGHT
+of a final letter and to the LEFT of an initial letter.
