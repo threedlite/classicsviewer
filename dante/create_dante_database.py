@@ -40,7 +40,7 @@ CANTICLES = [
 
 
 def create_database(db_path):
-    """Create the database schema"""
+    """Create the database schema (matches Sanskrit/Greek/Latin schema exactly)"""
     print(f"Creating database: {db_path}")
 
     if os.path.exists(db_path):
@@ -49,7 +49,7 @@ def create_database(db_path):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Create tables (same schema as Greek/Latin)
+    # Create tables (same schema as Sanskrit/Greek/Latin)
     print("Creating tables...")
 
     cursor.execute('''
@@ -129,17 +129,6 @@ def create_database(db_path):
     ''')
 
     cursor.execute('''
-        CREATE TABLE translation_lookup (
-            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            book_id TEXT NOT NULL,
-            line_number INTEGER NOT NULL,
-            segment_id INTEGER NOT NULL,
-            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
-            FOREIGN KEY (segment_id) REFERENCES translation_segments(id) ON DELETE CASCADE
-        )
-    ''')
-
-    cursor.execute('''
         CREATE TABLE milestone_line_ranges (
             work_id TEXT,
             milestone TEXT,
@@ -148,6 +137,90 @@ def create_database(db_path):
             PRIMARY KEY (work_id, milestone)
         )
     ''')
+
+    cursor.execute('''
+        CREATE TABLE dictionary_entries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            headword TEXT NOT NULL,
+            headword_normalized_ultra TEXT,
+            language TEXT NOT NULL,
+            entry_xml TEXT,
+            entry_html TEXT,
+            entry_plain TEXT,
+            source TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE lemma_map (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            word_form TEXT NOT NULL,
+            word_form_normalized_ultra TEXT,
+            lemma TEXT NOT NULL,
+            confidence REAL NOT NULL DEFAULT 1.0,
+            source TEXT,
+            morph_info TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE normalization_patterns (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            language TEXT NOT NULL,
+            pattern TEXT NOT NULL,
+            replacement TEXT NOT NULL,
+            description TEXT,
+            priority INTEGER NOT NULL
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE prefix_assimilation_rules (
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            language TEXT NOT NULL,
+            base_prefix TEXT NOT NULL,
+            assimilated_form TEXT NOT NULL,
+            meaning TEXT,
+            phonological_rule TEXT,
+            priority INTEGER NOT NULL,
+            examples TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE translation_lookup (
+            book_id TEXT NOT NULL,
+            line_number INTEGER NOT NULL,
+            segment_id INTEGER NOT NULL,
+            PRIMARY KEY (book_id, line_number, segment_id),
+            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+            FOREIGN KEY (segment_id) REFERENCES translation_segments(id) ON DELETE CASCADE
+        )
+    ''')
+
+    # Create indexes (same as Sanskrit)
+    print("Creating indexes...")
+    cursor.execute('CREATE INDEX idx_authors_language ON authors(language)')
+    cursor.execute('CREATE INDEX idx_works_author ON works(author_id)')
+    cursor.execute('CREATE INDEX idx_books_work ON books(work_id)')
+    cursor.execute('CREATE INDEX idx_text_lines_book ON text_lines(book_id)')
+    cursor.execute('CREATE INDEX idx_text_lines_sequence ON text_lines(book_id, sequence_number)')
+    cursor.execute('CREATE INDEX idx_words_word ON words(word)')
+    cursor.execute('CREATE INDEX idx_words_book_line_seq ON words(book_id, line_number, sequence_number)')
+    cursor.execute('CREATE INDEX idx_translation_segments_book ON translation_segments(book_id)')
+    cursor.execute('CREATE INDEX idx_translation_segments_lines ON translation_segments(book_id, start_line)')
+    cursor.execute('CREATE INDEX idx_dictionary_headword ON dictionary_entries(headword, language)')
+    cursor.execute('CREATE INDEX idx_dictionary_headword_ultra ON dictionary_entries(headword_normalized_ultra, language)')
+    cursor.execute('CREATE INDEX idx_lemma_map_word ON lemma_map(word_form)')
+    cursor.execute('CREATE INDEX idx_lemma_map_word_ultra ON lemma_map(word_form_normalized_ultra)')
+    cursor.execute('CREATE INDEX idx_lemma_map_lemma ON lemma_map(lemma)')
+    cursor.execute('CREATE INDEX idx_normalization_language ON normalization_patterns(language, priority)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_language ON prefix_assimilation_rules(language)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_base ON prefix_assimilation_rules(base_prefix)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_form ON prefix_assimilation_rules(assimilated_form)')
+    cursor.execute('CREATE INDEX idx_prefix_assimilation_lang_priority ON prefix_assimilation_rules(language, priority)')
+    cursor.execute('CREATE INDEX index_translation_lookup_book_id_line_number ON translation_lookup(book_id, line_number)')
+    cursor.execute('CREATE INDEX index_translation_lookup_segment_id ON translation_lookup(segment_id)')
 
     conn.commit()
     return conn
@@ -445,30 +518,9 @@ def populate_database(conn, italian_cantos, english_cantos):
                     INSERT INTO translation_segments (book_id, start_line, end_line, sequence_number, translation_text, translator)
                     VALUES (?, ?, ?, ?, ?, ?)
                 ''', (book_id, line_num, line_num, line_num, english_line, 'Longfellow'))
-
-                segment_id = cursor.lastrowid
-
-                # Insert translation lookup
-                cursor.execute('''
-                    INSERT INTO translation_lookup (book_id, line_number, segment_id)
-                    VALUES (?, ?, ?)
-                ''', (book_id, line_num, segment_id))
-
                 total_translations += 1
 
             print(f"  {canticle_name} Canto {canto_roman}: {line_count} IT lines, {len(english_lines)} EN lines")
-
-    conn.commit()
-
-    # Create indexes
-    print("Creating indexes...")
-    cursor.execute('CREATE INDEX idx_text_lines_book ON text_lines(book_id)')
-    cursor.execute('CREATE INDEX idx_text_lines_line ON text_lines(book_id, line_number)')
-    cursor.execute('CREATE INDEX idx_words_book ON words(book_id)')
-    cursor.execute('CREATE INDEX idx_words_word ON words(word)')
-    cursor.execute('CREATE INDEX idx_translation_segments_book ON translation_segments(book_id)')
-    cursor.execute('CREATE INDEX idx_translation_lookup_book ON translation_lookup(book_id)')
-    cursor.execute('CREATE INDEX idx_translation_lookup_line ON translation_lookup(book_id, line_number)')
 
     conn.commit()
 
