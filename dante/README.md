@@ -54,10 +54,10 @@ No manual downloads required.
 | Works | 1 |
 | Cantos (Books) | 100 |
 | Italian Lines | 14,233 |
-| English Translations | 14,243 |
+| English Translations | 14,233 |
 | Words | 101,601 |
-| Database Size | 14.88 MB |
-| Compressed Size | 3.30 MB |
+| Database Size | 15.13 MB |
+| Compressed Size | 3.57 MB |
 
 ## File Structure
 
@@ -78,10 +78,9 @@ dante/
 ### Line Alignment
 The Italian and English texts are aligned line-by-line. Longfellow's translation preserves Dante's tercet structure (terza rima), so each Italian line corresponds to one English line.
 
-A few cantos have minor line count differences (1-8 lines) due to formatting variations in the source texts:
-- Inferno XXXIV: 139 IT / 140 EN
-- Purgatorio XXVI: 148 IT / 156 EN (includes Italian quotes from Dante's original)
-- Purgatorio XXXIII: 145 IT / 146 EN
+The parser automatically filters out:
+- Canticle headers (INFERNO, PURGATORIO, PARADISO) from English text
+- Footnotes (e.g., Longfellow's English translation of Arnaut Daniel's Occitan speech in Purgatorio XXVI)
 
 ### No Dictionary (Future Addition)
 Unlike Greek/Latin/Sanskrit, there is currently no Italian dictionary included.

@@ -301,7 +301,7 @@ def parse_italian_text(filepath):
                     end_pos = len(text)
 
                 canto_text = text[start_pos:end_pos].strip()
-                lines = extract_verse_lines(canto_text)
+                lines = extract_verse_lines(canto_text, is_english=False)
                 cantos[canticle_id][canto_num] = lines
                 print(f"  {canticle_name} Canto {canto_roman}: {len(lines)} lines")
 
@@ -367,16 +367,18 @@ def parse_english_text(filepath):
                     end_pos = len(text)
 
                 canto_text = text[start_pos:end_pos].strip()
-                lines = extract_verse_lines(canto_text)
+                lines = extract_verse_lines(canto_text, is_english=True)
                 cantos[canticle_id][canto_num] = lines
                 print(f"  {canticle_name} Canto {canto_roman}: {len(lines)} lines")
 
     return cantos
 
 
-def extract_verse_lines(text):
+def extract_verse_lines(text, is_english=False):
     """Extract verse lines from canto text, removing blank lines and headers"""
     lines = []
+    in_footnote = False
+
     for line in text.split('\n'):
         # Strip whitespace
         line = line.strip()
@@ -392,6 +394,21 @@ def extract_verse_lines(text):
         # Skip lines that are just roman numerals (section headers in English)
         if re.match(r'^[IVXLC]+\.?\s*$', line):
             continue
+
+        # For English text, apply additional filters
+        if is_english:
+            # Skip canticle headers (INFERNO, PURGATORIO, PARADISO)
+            if re.match(r'^(INFERNO|PURGATORIO|PARADISO)\s*$', line, re.IGNORECASE):
+                continue
+
+            # Detect start of footnote (line starting with * followed by text)
+            if re.match(r'^\*\s+\S', line):
+                in_footnote = True
+                continue
+
+            # Skip lines that are part of footnote (after footnote marker detected)
+            if in_footnote:
+                continue
 
         lines.append(line)
 
@@ -443,20 +460,29 @@ def populate_database(conn, italian_cantos, english_cantos):
         VALUES (?, ?, ?, ?, ?)
     ''', ('dante', 'Dante Alighieri', 'Dante', 'italian', 1))
 
-    # Insert work (Divine Comedy as single work)
-    print("Inserting work...")
-    cursor.execute('''
-        INSERT INTO works (id, author_id, title, title_alt, title_english, type, description)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    ''', (
-        'divina_commedia',
-        'dante',
-        'La Divina Commedia',
-        'Divina Commedia',
-        'The Divine Comedy',
-        'poem',
-        'Epic poem written 1308-1321, describing journey through Hell, Purgatory, and Paradise'
-    ))
+    # Insert works (one per canticle)
+    print("Inserting works...")
+    canticle_info = {
+        'inferno': ('Inferno', 'Hell - the first part of the journey'),
+        'purgatorio': ('Purgatorio', 'Purgatory - the second part of the journey'),
+        'paradiso': ('Paradiso', 'Paradise - the third part of the journey'),
+    }
+
+    for canticle_id, canticle_name, num_cantos in CANTICLES:
+        work_id = f"divina_commedia_{canticle_id}"
+        title_en, description = canticle_info[canticle_id]
+        cursor.execute('''
+            INSERT INTO works (id, author_id, title, title_alt, title_english, type, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            work_id,
+            'dante',
+            f'La Divina Commedia - {canticle_name}',
+            canticle_name,
+            f'The Divine Comedy - {title_en}',
+            'poem',
+            description
+        ))
 
     # Statistics
     total_lines = 0
@@ -465,13 +491,13 @@ def populate_database(conn, italian_cantos, english_cantos):
 
     # Insert books (each canto is a "book")
     print("Inserting cantos...")
-    book_number = 0
 
     for canticle_id, canticle_name, num_cantos in CANTICLES:
+        work_id = f"divina_commedia_{canticle_id}"
+
         for canto_num in range(1, num_cantos + 1):
-            book_number += 1
             canto_roman = int_to_roman(canto_num)
-            book_id = f"divina_commedia.{canticle_id}.{canto_num}"
+            book_id = f"{work_id}.{canto_num}"
 
             italian_lines = italian_cantos.get(canticle_id, {}).get(canto_num, [])
             english_lines = english_cantos.get(canticle_id, {}).get(canto_num, [])
@@ -484,9 +510,9 @@ def populate_database(conn, italian_cantos, english_cantos):
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (
                 book_id,
-                'divina_commedia',
-                book_number,
-                f"{canticle_name} Canto {canto_roman}",
+                work_id,
+                canto_num,
+                f"Canto {canto_roman}",
                 1,
                 line_count,
                 line_count
@@ -524,11 +550,12 @@ def populate_database(conn, italian_cantos, english_cantos):
 
     conn.commit()
 
+    total_cantos = sum(num_cantos for _, _, num_cantos in CANTICLES)
     return {
         'lines': total_lines,
         'words': total_words,
         'translations': total_translations,
-        'cantos': book_number
+        'cantos': total_cantos
     }
 
 

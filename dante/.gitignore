@@ -1,0 +1,13 @@
+# Virtual environment
+venv/
+__pycache__/
+
+# Generated database files
+*.db
+*.db.zip
+
+# Source data (downloaded from Project Gutenberg)
+data-sources/*.txt
+
+# Build logs
+*.log
