@@ -164,9 +164,9 @@ struct LanguageSelectionView: View {
         case "coptic":
             return 0xFF5A9B8A     // Egyptian teal
         case "syriac":
-            return 0xFFA8727B     // Dusty rose
-        case "italian":
             return 0xFF9B7B5A     // Florentine brown
+        case "italian":
+            return 0xFFA8727B     // Dusty rose
         default:
             return 0xFF808080     // Grey for unknown languages
         }
