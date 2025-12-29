@@ -55,7 +55,8 @@ struct LanguageSelectionView: View {
             // Preferred order for auto-detected languages (matching Android exactly)
             let preferredOrder = [
                 "greek", "latin", "sumerian", "akkadian",
-                "sanskrit", "persian", "hebrew", "arabic"
+                "sanskrit", "persian", "hebrew", "arabic",
+                "coptic", "syriac", "italian"
             ]
 
             // One-time migration: fix any existing ordering issues (matches Android)

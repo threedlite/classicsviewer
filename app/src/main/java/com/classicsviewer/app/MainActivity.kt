@@ -136,7 +136,10 @@ class MainActivity : AppCompatActivity() {
                     "sanskrit",
                     "persian",
                     "hebrew",
-                    "arabic"
+                    "arabic",
+                    "coptic",
+                    "syriac",
+                    "italian"
                 )
 
                 // One-time migration: fix any existing ordering issues
