@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
             "sumerian" -> 0xFF5A73AA.toInt()  // Desaturated blue
             "akkadian" -> 0xFFAF9B7D.toInt()  // Desaturated tan
             "coptic" -> 0xFF5A9B8A.toInt()    // Egyptian teal
-            "syriac" -> 0xFF8A6B8A.toInt()    // Byzantine purple
+            "syriac" -> 0xFFA8727B.toInt()    // Dusty rose
             "italian" -> 0xFF9B7B5A.toInt()   // Florentine brown
             else -> 0xFF808080.toInt()        // Grey for unknown languages
         }
