@@ -80,7 +80,7 @@ struct SettingsView: View {
                     NavigationLink(destination: ExtendedDatabaseDownloadView()) {
                         HStack {
                             Image(systemName: "cylinder.split.1x2.fill")
-                            Text("Extended Database")
+                            Text("Extended Database (Beta)")
                             Spacer()
                             ExtendedDatabaseStatusBadge()
                         }

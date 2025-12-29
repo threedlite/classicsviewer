@@ -304,7 +304,7 @@ def parse_tei_file(filepath):
         edition_div = root.find('.//tei:body', TEI_NS)
 
     if edition_div is not None:
-        # Find chapters
+        # Try NT-style: chapters with verses
         for chapter_div in edition_div.findall('.//tei:div[@subtype="chapter"]', TEI_NS):
             chapter_num = chapter_div.get('n', '1')
             verses = []
@@ -327,15 +327,49 @@ def parse_tei_file(filepath):
                         'text': verse_text.strip()
                     })
 
+            # If no verses, try to get <p> tags directly within chapter
+            if not verses:
+                line_num = 0
+                for p in chapter_div.findall('.//tei:p', TEI_NS):
+                    text = get_text_content(p).strip()
+                    if text and len(text) > 10:  # Skip short metadata lines
+                        line_num += 1
+                        verses.append({
+                            'verse_num': str(line_num),
+                            'text': text
+                        })
+
             if verses:
                 chapters.append({
                     'chapter_num': chapter_num,
                     'verses': verses
                 })
 
-        # If no chapters found, try to get text directly
+        # If no chapters found, try book-style (John of Ephesus)
         if not chapters:
-            # Try sections
+            for book_div in edition_div.findall('.//tei:div[@subtype="book"]', TEI_NS):
+                book_num = book_div.get('n', '1')
+                verses = []
+                line_num = 0
+
+                # Get paragraphs within book
+                for p in book_div.findall('.//tei:p', TEI_NS):
+                    text = get_text_content(p).strip()
+                    if text and len(text) > 10:  # Skip short metadata
+                        line_num += 1
+                        verses.append({
+                            'verse_num': str(line_num),
+                            'text': text
+                        })
+
+                if verses:
+                    chapters.append({
+                        'chapter_num': book_num,
+                        'verses': verses
+                    })
+
+        # If still no content, try sections
+        if not chapters:
             for section_div in edition_div.findall('.//tei:div[@subtype="section"]', TEI_NS):
                 section_num = section_div.get('n', '1')
                 text = get_text_content(section_div).strip()
@@ -377,7 +411,8 @@ def tokenize_syriac(text):
     return cleaned
 
 
-# Book name mappings for Syriac NT
+# Book name mappings for Syriac NT - maps work folder codes to English names
+# Path structure: pta9999/pta063/... where pta063 is the work code
 SYRIAC_NT_BOOKS = {
     'pta063': ('matthew', 'Matthew', 'Gospel of Matthew'),
     'pta064': ('mark', 'Mark', 'Gospel of Mark'),
@@ -448,12 +483,15 @@ def populate_database(conn, syriac_files):
         filename = os.path.basename(filepath)
         path_parts = filepath.split(os.sep)
 
-        # Check if it's a NT book
-        pta_code = None
+        # Check if it's a NT book - look for work-level pta code (last pta folder in path)
+        # Path structure: .../pta9999/pta063/... where pta063 is the work code
+        pta_codes = []
         for part in path_parts:
-            if part.startswith('pta') and part[3:].isdigit():
-                pta_code = part
-                break
+            if part.startswith('pta') and len(part) > 3 and part[3:].isdigit():
+                pta_codes.append(part)
+
+        # Use the last pta code (work level), not the first (author level)
+        pta_code = pta_codes[-1] if pta_codes else None
 
         if pta_code and pta_code in SYRIAC_NT_BOOKS:
             # Syriac New Testament book
@@ -465,7 +503,7 @@ def populate_database(conn, syriac_files):
                 cursor.execute('''
                     INSERT OR IGNORE INTO authors (id, name, name_alt, language, has_translations)
                     VALUES (?, ?, ?, ?, ?)
-                ''', (author_id, author_name, 'Peshitta NT', 'Syriac', 0))
+                ''', (author_id, author_name, 'Peshitta NT', 'syriac', 0))
                 authors_inserted.add(author_id)
                 stats['authors'] += 1
 
@@ -479,7 +517,7 @@ def populate_database(conn, syriac_files):
                 cursor.execute('''
                     INSERT OR IGNORE INTO authors (id, name, name_alt, language, has_translations)
                     VALUES (?, ?, ?, ?, ?)
-                ''', (author_id, author_name, None, 'Syriac', 0))
+                ''', (author_id, author_name, None, 'syriac', 0))
                 authors_inserted.add(author_id)
                 stats['authors'] += 1
 
