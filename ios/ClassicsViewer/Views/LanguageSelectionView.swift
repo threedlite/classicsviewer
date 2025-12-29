@@ -160,6 +160,12 @@ struct LanguageSelectionView: View {
             return 0xFF5A73AA     // Desaturated blue
         case "akkadian":
             return 0xFFAF9B7D     // Desaturated tan
+        case "coptic":
+            return 0xFF5A9B8A     // Egyptian teal
+        case "syriac":
+            return 0xFF8A6B8A     // Byzantine purple
+        case "italian":
+            return 0xFF9B7B5A     // Florentine brown
         default:
             return 0xFF808080     // Grey for unknown languages
         }
