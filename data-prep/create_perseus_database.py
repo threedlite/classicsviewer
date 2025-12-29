@@ -7518,6 +7518,7 @@ def merge_external_databases(db_filename, mode='sample'):
             ('sanskrit/sanskrit_texts.db', 'Sanskrit'),
             ('cuneiform/sumerian_texts.db', 'Sumerian'),
             ('cuneiform/akkadian_texts.db', 'Akkadian'),
+            ('dante/dante_texts.db', 'Italian'),
         ]
     }
 
