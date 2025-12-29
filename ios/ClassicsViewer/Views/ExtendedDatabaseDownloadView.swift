@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// View for downloading and managing the full database asset pack
-struct FullDatabaseDownloadView: View {
-    @StateObject private var manager = DatabaseAssetDownloadManager.shared
+/// View for downloading and managing the extended database asset pack
+struct ExtendedDatabaseDownloadView: View {
+    @StateObject private var manager = ExtendedDatabaseDownloadManager.shared
     @Environment(\.dismiss) private var dismiss
     @AppStorage("colorScheme") private var colorScheme: String = "System"
 
@@ -10,7 +10,7 @@ struct FullDatabaseDownloadView: View {
     @State private var showRevertAlert = false
     @State private var showDeleteAlert = false
 
-    private let assetInfo = AssetPackInfo.databaseFull
+    private let assetInfo = AssetPackInfo.databaseExtended
 
     var body: some View {
         NavigationView {
@@ -26,7 +26,7 @@ struct FullDatabaseDownloadView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Full Database")
+            .navigationTitle("Extended Database")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -51,17 +51,17 @@ struct FullDatabaseDownloadView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This will switch back to the sample database. The full database will remain downloaded.")
+                Text("This will switch back to the sample database. The extended database will remain downloaded.")
             }
-            .alert("Delete Full Database?", isPresented: $showDeleteAlert) {
+            .alert("Delete Extended Database?", isPresented: $showDeleteAlert) {
                 Button("Delete", role: .destructive) {
                     Task {
-                        await manager.removeFullDatabase()
+                        await manager.removeExtendedDatabase()
                     }
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This will permanently delete the downloaded full database and free up storage space.")
+                Text("This will permanently delete the downloaded extended database and free up storage space.")
             }
         }
         .task {
@@ -81,12 +81,12 @@ struct FullDatabaseDownloadView: View {
                     .foregroundColor(databaseColor)
                 Text(manager.currentDatabaseType.displayName)
                 Spacer()
-                if manager.currentDatabaseType == .full {
+                if manager.currentDatabaseType == .extended {
                     Text("Active")
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(Color.green.opacity(0.2))
+                        .background(Color.purple.opacity(0.2))
                         .cornerRadius(4)
                 }
             }
@@ -128,6 +128,19 @@ struct FullDatabaseDownloadView: View {
 
     private var downloadSection: some View {
         VStack(spacing: 16) {
+            // Description
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Extended Database")
+                    .font(.headline)
+                Text("Includes Perseus + First1KGreek + PTA (~2,600 works). This is the most comprehensive collection of Greek and Latin texts available.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(Color.purple.opacity(0.1))
+            .cornerRadius(8)
+
             // Size info
             VStack(spacing: 8) {
                 InfoRow(label: "Download Size", value: StorageManager.formatBytes(assetInfo.compressedSize))
@@ -143,15 +156,16 @@ struct FullDatabaseDownloadView: View {
                     .foregroundColor(.red)
             }
 
-            Label("WiFi recommended for large download", systemImage: "wifi")
+            Label("WiFi recommended for large download (~3.5 GB)", systemImage: "wifi")
                 .font(.caption)
                 .foregroundColor(.secondary)
 
             Button(action: { Task { await manager.startDownload() } }) {
-                Label("Download Full Database", systemImage: "arrow.down.circle.fill")
+                Label("Download Extended Database", systemImage: "arrow.down.circle.fill")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
+            .tint(.purple)
             .disabled(!StorageManager.hasEnoughSpace(for: assetInfo))
         }
     }
@@ -165,6 +179,7 @@ struct FullDatabaseDownloadView: View {
             } currentValueLabel: {
                 Text("\(Int(manager.downloadProgress * 100))%")
             }
+            .tint(.purple)
 
             Text("This may take several minutes")
                 .font(.caption)
@@ -183,14 +198,15 @@ struct FullDatabaseDownloadView: View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.largeTitle)
-                .foregroundColor(.green)
+                .foregroundColor(.purple)
 
             Text("Download Complete")
                 .font(.headline)
 
-            Text("Extract the database to prepare it for use.")
+            Text("Extract the database to prepare it for use. This requires ~17 GB of free space.")
                 .font(.caption)
                 .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
 
             Button(action: {
                 Task {
@@ -201,6 +217,7 @@ struct FullDatabaseDownloadView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
+            .tint(.purple)
         }
     }
 
@@ -213,6 +230,7 @@ struct FullDatabaseDownloadView: View {
             } currentValueLabel: {
                 Text("\(Int(manager.extractionProgress * 100))%")
             }
+            .tint(.purple)
 
             Text("This may take several minutes")
                 .font(.caption)
@@ -226,29 +244,30 @@ struct FullDatabaseDownloadView: View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 50))
-                .foregroundColor(.green)
+                .foregroundColor(.purple)
 
-            Text("Full Database Ready")
+            Text("Extended Database Ready")
                 .font(.headline)
 
-            Text("Switch to the full database to access all authors and works.")
+            Text("Switch to the extended database to access ~2,600 works from Perseus, First1KGreek, and PTA.")
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
 
             Button(action: {
                 Task {
-                    try? await manager.activateFullDatabase()
+                    try? await manager.activateExtendedDatabase()
                     showRestartAlert = true
                 }
             }) {
-                Label("Activate Full Database", systemImage: "arrow.right.circle.fill")
+                Label("Activate Extended Database", systemImage: "arrow.right.circle.fill")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
+            .tint(.purple)
 
             Button(role: .destructive, action: { showDeleteAlert = true }) {
-                Label("Delete Full Database", systemImage: "trash")
+                Label("Delete Extended Database", systemImage: "trash")
             }
             .buttonStyle(.bordered)
         }
@@ -260,12 +279,12 @@ struct FullDatabaseDownloadView: View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 60))
-                .foregroundColor(.green)
+                .foregroundColor(.purple)
 
-            Text("Full Database Active")
+            Text("Extended Database Active")
                 .font(.headline)
 
-            Text("You have access to all 100+ Greek and Latin authors.")
+            Text("You have access to ~2,600 works from Perseus, First1KGreek, and PTA.")
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -300,6 +319,7 @@ struct FullDatabaseDownloadView: View {
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
+            .tint(.purple)
         }
     }
 
@@ -330,14 +350,12 @@ struct FullDatabaseDownloadView: View {
     }
 
     private func restartApp() {
-        // Use the app restarter utility
         restartApplication()
     }
 }
 
 // MARK: - Preview
-// Note: FeatureRow is defined in SettingsView.swift
 
 #Preview {
-    FullDatabaseDownloadView()
+    ExtendedDatabaseDownloadView()
 }

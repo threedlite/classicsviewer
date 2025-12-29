@@ -14,7 +14,7 @@ struct AlphabetLetter: Identifiable, Equatable {
 }
 
 struct AlphabetData {
-    static let availableLanguages = ["Greek", "Hebrew", "Arabic", "Sanskrit"]
+    static let availableLanguages = ["Greek", "Hebrew", "Arabic", "Sanskrit", "Coptic", "Syriac"]
 
     static let greek: [AlphabetLetter] = [
         // Uppercase and lowercase pairs
@@ -245,6 +245,77 @@ struct AlphabetData {
         AlphabetLetter("ह", "ha")
     ]
 
+    // Coptic alphabet - Greek-derived + Demotic-derived letters
+    // Main block U+2C80-U+2CFF, Demotic letters from Greek block U+03E2-U+03EF
+    static let coptic: [AlphabetLetter] = [
+        // Greek-derived letters (uppercase and lowercase)
+        AlphabetLetter("Ⲁ", "a"), AlphabetLetter("ⲁ", "a"),           // alfa
+        AlphabetLetter("Ⲃ", "v/b"), AlphabetLetter("ⲃ", "v/b"),       // vida
+        AlphabetLetter("Ⲅ", "g"), AlphabetLetter("ⲅ", "g"),           // gamma
+        AlphabetLetter("Ⲇ", "d"), AlphabetLetter("ⲇ", "d"),           // dalda
+        AlphabetLetter("Ⲉ", "e"), AlphabetLetter("ⲉ", "e"),           // eie
+        AlphabetLetter("Ⲍ", "z"), AlphabetLetter("ⲍ", "z"),           // zata
+        AlphabetLetter("Ⲏ", "ē"), AlphabetLetter("ⲏ", "ē"),           // hate
+        AlphabetLetter("Ⲑ", "th"), AlphabetLetter("ⲑ", "th"),         // thethe
+        AlphabetLetter("Ⲓ", "i"), AlphabetLetter("ⲓ", "i"),           // iauda
+        AlphabetLetter("Ⲕ", "k"), AlphabetLetter("ⲕ", "k"),           // kapa
+        AlphabetLetter("Ⲗ", "l"), AlphabetLetter("ⲗ", "l"),           // laula
+        AlphabetLetter("Ⲙ", "m"), AlphabetLetter("ⲙ", "m"),           // mi
+        AlphabetLetter("Ⲛ", "n"), AlphabetLetter("ⲛ", "n"),           // ni
+        AlphabetLetter("Ⲝ", "ks"), AlphabetLetter("ⲝ", "ks"),         // ksi
+        AlphabetLetter("Ⲟ", "o"), AlphabetLetter("ⲟ", "o"),           // o
+        AlphabetLetter("Ⲡ", "p"), AlphabetLetter("ⲡ", "p"),           // pi
+        AlphabetLetter("Ⲣ", "r"), AlphabetLetter("ⲣ", "r"),           // ro
+        AlphabetLetter("Ⲥ", "s"), AlphabetLetter("ⲥ", "s"),           // sima
+        AlphabetLetter("Ⲧ", "t"), AlphabetLetter("ⲧ", "t"),           // tau
+        AlphabetLetter("Ⲩ", "u/w"), AlphabetLetter("ⲩ", "u/w"),       // ua
+        AlphabetLetter("Ⲫ", "ph"), AlphabetLetter("ⲫ", "ph"),         // fi
+        AlphabetLetter("Ⲭ", "kh"), AlphabetLetter("ⲭ", "kh"),         // khi
+        AlphabetLetter("Ⲯ", "ps"), AlphabetLetter("ⲯ", "ps"),         // psi
+        AlphabetLetter("Ⲱ", "ō"), AlphabetLetter("ⲱ", "ō"),           // oou
+        // Demotic-derived letters (from Greek block, commonly used in Coptic)
+        AlphabetLetter("Ϣ", "sh"), AlphabetLetter("ϣ", "sh"),         // shai
+        AlphabetLetter("Ϥ", "f"), AlphabetLetter("ϥ", "f"),           // fai
+        AlphabetLetter("Ϩ", "h"), AlphabetLetter("ϩ", "h"),           // hori
+        AlphabetLetter("Ϫ", "j"), AlphabetLetter("ϫ", "j"),           // janja
+        AlphabetLetter("Ϭ", "ch"), AlphabetLetter("ϭ", "ch"),         // chima
+        AlphabetLetter("Ϯ", "ti"), AlphabetLetter("ϯ", "ti")          // ti
+    ]
+
+    // Syriac alphabet (22 consonants) - Estrangela script
+    // Based on Unicode block U+0700-U+074F
+    static let syriac: [AlphabetLetter] = [
+        AlphabetLetter("ܐ", "ʾ (alaph)"),      // U+0710 - glottal stop
+        AlphabetLetter("ܒ", "b"),              // U+0712
+        AlphabetLetter("ܓ", "g"),              // U+0713
+        AlphabetLetter("ܕ", "d"),              // U+0715
+        AlphabetLetter("ܗ", "h"),              // U+0717
+        AlphabetLetter("ܘ", "w"),              // U+0718
+        AlphabetLetter("ܙ", "z"),              // U+0719
+        AlphabetLetter("ܚ", "ḥ"),              // U+071A - pharyngeal
+        AlphabetLetter("ܛ", "ṭ"),              // U+071B - emphatic t
+        AlphabetLetter("ܝ", "y"),              // U+071D
+        AlphabetLetter("ܟ", "k"),              // U+071F
+        AlphabetLetter("ܠ", "l"),              // U+0720
+        AlphabetLetter("ܡ", "m"),              // U+0721
+        AlphabetLetter("ܢ", "n"),              // U+0722
+        AlphabetLetter("ܣ", "s"),              // U+0723 - semkath
+        AlphabetLetter("ܥ", "ʿ (ayin)"),       // U+0725 - pharyngeal
+        AlphabetLetter("ܦ", "p"),              // U+0726
+        AlphabetLetter("ܨ", "ṣ"),              // U+0728 - emphatic s
+        AlphabetLetter("ܩ", "q"),              // U+0729
+        AlphabetLetter("ܪ", "r"),              // U+072A
+        AlphabetLetter("ܫ", "sh"),             // U+072B
+        AlphabetLetter("ܬ", "t"),              // U+072C
+        // Spirantized forms (bgdkpt → v, gh, dh, kh, f, th)
+        AlphabetLetter("ܒ݂", "v", isCombinedForm: true),   // beth with rukkakha
+        AlphabetLetter("ܓ݂", "gh", isCombinedForm: true),  // gamal with rukkakha
+        AlphabetLetter("ܕ݂", "dh", isCombinedForm: true),  // dalath with rukkakha
+        AlphabetLetter("ܟ݂", "kh", isCombinedForm: true),  // kaph with rukkakha
+        AlphabetLetter("ܦ݂", "f", isCombinedForm: true),   // pe with rukkakha
+        AlphabetLetter("ܬ݂", "th", isCombinedForm: true)   // taw with rukkakha
+    ]
+
     static func getAlphabet(for language: String, includeCombinedForms: Bool = false) -> [AlphabetLetter] {
         let alphabet: [AlphabetLetter]
         switch language.lowercased() {
@@ -252,6 +323,8 @@ struct AlphabetData {
         case "hebrew": alphabet = hebrew
         case "arabic": alphabet = arabic
         case "sanskrit": alphabet = sanskrit
+        case "coptic": alphabet = coptic
+        case "syriac": alphabet = syriac
         default: alphabet = greek
         }
 
@@ -278,15 +351,16 @@ struct AlphabetData {
     }
 
     /// Returns the letter string formatted for display.
-    /// Reverses strings with dashes for RTL languages (Hebrew/Arabic)
+    /// Reverses strings with dashes for RTL languages (Hebrew/Arabic/Syriac)
     /// so they render correctly.
     static func displayLetter(_ letter: String) -> String {
         guard letter.contains("-") else { return letter }
 
-        // Check if contains Hebrew (U+0590-U+05FF) or Arabic (U+0600-U+06FF, U+FB50-U+FDFF, U+FE70-U+FEFF)
+        // Check if contains Hebrew (U+0590-U+05FF), Arabic (U+0600-U+06FF, U+FB50-U+FDFF, U+FE70-U+FEFF), or Syriac (U+0700-U+074F)
         let hasRtl = letter.unicodeScalars.contains { scalar in
             (scalar.value >= 0x0590 && scalar.value <= 0x05FF) ||  // Hebrew
             (scalar.value >= 0x0600 && scalar.value <= 0x06FF) ||  // Arabic
+            (scalar.value >= 0x0700 && scalar.value <= 0x074F) ||  // Syriac
             (scalar.value >= 0xFB50 && scalar.value <= 0xFDFF) ||  // Arabic Presentation Forms-A
             (scalar.value >= 0xFE70 && scalar.value <= 0xFEFF)     // Arabic Presentation Forms-B
         }

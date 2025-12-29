@@ -406,6 +406,103 @@ In Proceedings of the 12th Language Resources and Evaluation Conference (LREC),
 Marseille, France, 2020.
 
 
+ITALIAN TEXTS (DANTE)
+=====================
+
+La Divina Commedia - Dante Alighieri
+--------------------------------------
+Source: Project Gutenberg
+License: Public Domain
+
+Italian Text: Project Gutenberg ebook #1000
+https://www.gutenberg.org/ebooks/1000
+
+English Translation (Longfellow): Project Gutenberg ebook #1004
+https://www.gutenberg.org/ebooks/1004
+
+The Divine Comedy is Dante Alighieri's masterwork, written between 1308-1321.
+It describes the poet's journey through Hell, Purgatory, and Paradise.
+Henry Wadsworth Longfellow's 1867 translation preserves Dante's tercet structure.
+
+
+PATRISTIC TEXT ARCHIVE (PTA)
+============================
+
+Source: Patristic Text Archive (Patristisches Textarchiv)
+Publisher: Berlin-Brandenburg Academy of Sciences and Humanities (BBAW)
+
+Repositories:
+https://github.com/PatristicTextArchive/pta_data
+https://github.com/PatristicTextArchive/pta_metadata
+
+The Patristic Text Archive provides critical digital editions of Greek and Latin
+patristic texts from late antiquity. The collection includes Church Fathers,
+biblical texts (Septuagint/LXX, New Testament), and related works.
+
+Licenses (as specified in individual texts):
+- Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+  https://creativecommons.org/licenses/by-sa/4.0/
+- Creative Commons Attribution-NonCommercial-ShareAlike 3.0 (CC BY-NC-SA 3.0)
+  https://creativecommons.org/licenses/by-nc-sa/3.0/
+- Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)
+  https://creativecommons.org/licenses/by-nc/4.0/
+- Creative Commons Attribution 4.0 (CC BY 4.0)
+  https://creativecommons.org/licenses/by/4.0/
+
+Citation:
+Patristic Text Archive. Berlin-Brandenburg Academy of Sciences and Humanities.
+https://pta.bbaw.de/
+
+
+SYRIAC TEXTS
+============
+
+Digital Syriac Corpus
+----------------------
+Source: The Digital Syriac Corpus
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Repository: https://github.com/srophe/syriac-corpus
+Website: https://syriaccorpus.org/
+
+The Digital Syriac Corpus is a joint project of the University of Oxford and
+Brigham Young University, in collaboration with Vanderbilt University and the
+Initiative for Digital Humanities, Media, and Culture at Texas A&M University.
+
+All documents are released under CC BY 4.0. The Syriac base texts are in the
+public domain. TEI/XML encoded documents are available on GitHub.
+
+The corpus provides digitized editions of Syriac texts, making them accessible
+to scholars and Syriac heritage communities worldwide.
+
+
+COPTIC TEXTS
+============
+
+Coptic Scriptorium
+-------------------
+Source: Coptic Scriptorium
+Repository: https://github.com/CopticScriptorium/corpora
+
+Licenses (as specified in individual documents):
+- Creative Commons Attribution 3.0 (CC BY 3.0)
+  https://creativecommons.org/licenses/by/3.0/
+- Creative Commons Attribution 4.0 (CC BY 4.0)
+  https://creativecommons.org/licenses/by/4.0/
+- Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0) - Canons of Apa Johannes
+  https://creativecommons.org/licenses/by-sa/3.0/
+- Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0) - Sahidic Old Testament
+  https://creativecommons.org/licenses/by-sa/4.0/
+
+Note: The Sahidica New Testament has a specific license detailed at the project
+website. Individual files contain licensing information in their headers.
+
+The Coptic Scriptorium project provides digital editions of Coptic texts with
+linguistic annotations, enabling research and study of Coptic language and
+literature.
+
+
 SANSKRIT RESOURCES
 ==================
 

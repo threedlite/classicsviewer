@@ -2,11 +2,11 @@ import Foundation
 import Combine
 import os.log
 
-/// Manages the full database asset pack download and switching
-/// Matches Android's FullDatabaseDownloadManager behavior
+/// Manages the extended database asset pack download and switching
+/// Matches DatabaseAssetDownloadManager behavior but for extended database
 @MainActor
-class DatabaseAssetDownloadManager: ObservableObject {
-    static let shared = DatabaseAssetDownloadManager()
+class ExtendedDatabaseDownloadManager: ObservableObject {
+    static let shared = ExtendedDatabaseDownloadManager()
 
     // MARK: - Published State
 
@@ -18,14 +18,13 @@ class DatabaseAssetDownloadManager: ObservableObject {
 
     // MARK: - Constants
 
-    private let assetInfo = AssetPackInfo.databaseFull
-    private let databaseZipName = "perseus_texts_full.db.zip"
-    private let fullDatabaseFileName = "perseus_texts_full.db"
-    private let sampleDatabaseFileName = "perseus_texts.db"
+    private let assetInfo = AssetPackInfo.databaseExtended
+    private let databaseZipName = "perseus_texts_extended.db.zip"
+    private let extendedDatabaseFileName = "perseus_texts_extended.db"
 
     // MARK: - Private Properties
 
-    private let logger = Logger(subsystem: "com.classicsviewer.app", category: "DatabaseAssetDownloadManager")
+    private let logger = Logger(subsystem: "com.classicsviewer.app", category: "ExtendedDatabaseDownloadManager")
 
     private init() {}
 
@@ -36,20 +35,20 @@ class DatabaseAssetDownloadManager: ObservableObject {
         // Determine current database type
         currentDatabaseType = determineCurrentDatabaseType()
 
-        // Check if full database is already extracted and active
-        if currentDatabaseType == .full {
+        // Check if extended database is already extracted and active
+        if currentDatabaseType == .extended {
             status = .active
             return
         }
 
-        // Check if full database file exists (extracted but not active)
-        if fullDatabaseExists() {
+        // Check if extended database file exists (extracted but not active)
+        if extendedDatabaseExists() {
             status = .installed
             return
         }
 
         // Check if ODR download is available
-        let isDownloaded = await ODRManager.shared.isDownloaded(tag: .databaseFull)
+        let isDownloaded = await ODRManager.shared.isDownloaded(tag: .databaseExtended)
         if isDownloaded {
             status = .downloaded
         } else {
@@ -95,17 +94,17 @@ class DatabaseAssetDownloadManager: ObservableObject {
         errorMessage = nil
 
         do {
-            try await ODRManager.shared.download(tag: .databaseFull) { [weak self] progress in
+            try await ODRManager.shared.download(tag: .databaseExtended) { [weak self] progress in
                 Task { @MainActor in
                     self?.downloadProgress = progress
                 }
             }
             status = .downloaded
-            logger.info("Database download completed")
+            logger.info("Extended database download completed")
         } catch {
             errorMessage = error.localizedDescription
             status = .failed
-            logger.error("Database download failed: \(error.localizedDescription)")
+            logger.error("Extended database download failed: \(error.localizedDescription)")
         }
     }
 
@@ -118,17 +117,17 @@ class DatabaseAssetDownloadManager: ObservableObject {
         errorMessage = nil
 
         // Get ZIP path from ODR
-        guard let zipURL = await ODRManager.shared.assetPath(tag: .databaseFull, filename: databaseZipName) else {
+        guard let zipURL = await ODRManager.shared.assetPath(tag: .databaseExtended, filename: databaseZipName) else {
             throw DatabaseAssetError.zipNotFound
         }
 
-        logger.info("Extracting database from: \(zipURL.path)")
+        logger.info("Extracting extended database from: \(zipURL.path)")
 
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let targetPath = documentsPath.appendingPathComponent(fullDatabaseFileName)
+        let targetPath = documentsPath.appendingPathComponent(extendedDatabaseFileName)
 
         do {
-            // Remove existing full database if it exists
+            // Remove existing extended database if it exists
             if FileManager.default.fileExists(atPath: targetPath.path) {
                 try FileManager.default.removeItem(at: targetPath)
             }
@@ -142,48 +141,51 @@ class DatabaseAssetDownloadManager: ObservableObject {
             }
 
             // Mark as installed
-            UserDefaults.standard.fullDatabaseInstalled = true
+            UserDefaults.standard.extendedDatabaseInstalled = true
 
             status = .installed
-            logger.info("Full database extracted successfully")
+            logger.info("Extended database extracted successfully")
 
         } catch {
             errorMessage = error.localizedDescription
             status = .failed
-            logger.error("Database extraction failed: \(error.localizedDescription)")
+            logger.error("Extended database extraction failed: \(error.localizedDescription)")
             throw error
         }
     }
 
     // MARK: - Activation
 
-    /// Switch to full database (requires app restart)
-    func activateFullDatabase() async throws {
-        guard fullDatabaseExists() else {
+    /// Switch to extended database (requires app restart)
+    func activateExtendedDatabase() async throws {
+        guard extendedDatabaseExists() else {
             throw DatabaseAssetError.databaseNotFound
         }
 
         // Clear any external database setting
         UserDefaults.standard.externalDatabaseName = nil
 
-        // Set preference to use full database
-        UserDefaults.standard.useFullDatabase = true
+        // Clear full database preference
+        UserDefaults.standard.useFullDatabase = false
+
+        // Set preference to use extended database
+        UserDefaults.standard.useExtendedDatabase = true
 
         // Update status
-        currentDatabaseType = .full
+        currentDatabaseType = .extended
         status = .active
 
-        logger.info("Full database activated - restart required")
+        logger.info("Extended database activated - restart required")
     }
 
     /// Switch back to sample database
     func revertToSampleDatabase() async throws {
-        // Clear full database preference
-        UserDefaults.standard.useFullDatabase = false
+        // Clear extended database preference
+        UserDefaults.standard.useExtendedDatabase = false
 
         // Update status
         currentDatabaseType = .sample
-        status = .installed  // Full DB still installed, just not active
+        status = .installed  // Extended DB still installed, just not active
 
         logger.info("Reverted to sample database - restart required")
     }
@@ -193,47 +195,54 @@ class DatabaseAssetDownloadManager: ObservableObject {
     /// Cancel ongoing download
     func cancelDownload() {
         Task {
-            await ODRManager.shared.cancelDownload(tag: .databaseFull)
+            await ODRManager.shared.cancelDownload(tag: .databaseExtended)
         }
         status = .notDownloaded
         downloadProgress = 0
     }
 
-    /// Remove full database files
-    func removeFullDatabase() async {
+    /// Remove extended database files
+    func removeExtendedDatabase() async {
         do {
             let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let fullDbPath = documentsPath.appendingPathComponent(fullDatabaseFileName)
+            let extendedDbPath = documentsPath.appendingPathComponent(extendedDatabaseFileName)
 
             // Delete the database file
-            if FileManager.default.fileExists(atPath: fullDbPath.path) {
-                try FileManager.default.removeItem(at: fullDbPath)
+            if FileManager.default.fileExists(atPath: extendedDbPath.path) {
+                try FileManager.default.removeItem(at: extendedDbPath)
             }
 
             // Clear preferences
-            UserDefaults.standard.fullDatabaseInstalled = false
-            UserDefaults.standard.useFullDatabase = false
+            UserDefaults.standard.extendedDatabaseInstalled = false
+            UserDefaults.standard.useExtendedDatabase = false
 
             // Release ODR resources
-            await ODRManager.shared.releaseResources(tag: .databaseFull)
+            await ODRManager.shared.releaseResources(tag: .databaseExtended)
 
             // Update status
             currentDatabaseType = .sample
             status = .notDownloaded
 
-            logger.info("Full database removed successfully")
+            logger.info("Extended database removed successfully")
         } catch {
             errorMessage = error.localizedDescription
-            logger.error("Failed to remove database: \(error.localizedDescription)")
+            logger.error("Failed to remove extended database: \(error.localizedDescription)")
         }
     }
 
     // MARK: - Helpers
 
+    /// Check if extended database file exists
+    func extendedDatabaseExists() -> Bool {
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let extendedDbPath = documentsPath.appendingPathComponent(extendedDatabaseFileName)
+        return FileManager.default.fileExists(atPath: extendedDbPath.path)
+    }
+
     /// Check if full database file exists
     func fullDatabaseExists() -> Bool {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fullDbPath = documentsPath.appendingPathComponent(fullDatabaseFileName)
+        let fullDbPath = documentsPath.appendingPathComponent("perseus_texts_full.db")
         return FileManager.default.fileExists(atPath: fullDbPath.path)
     }
 
@@ -244,22 +253,10 @@ class DatabaseAssetDownloadManager: ObservableObject {
         return FileManager.default.fileExists(atPath: externalDbPath.path)
     }
 
-    /// Check if extended database file exists
-    func extendedDatabaseExists() -> Bool {
+    /// Get path to extended database file
+    func extendedDatabasePath() -> URL {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let extendedDbPath = documentsPath.appendingPathComponent("perseus_texts_extended.db")
-        return FileManager.default.fileExists(atPath: extendedDbPath.path)
-    }
-
-    /// Check if full database is available (downloaded or installed)
-    func isFullDatabaseAvailable() -> Bool {
-        return fullDatabaseExists() || UserDefaults.standard.fullDatabaseInstalled
-    }
-
-    /// Get path to full database file
-    func fullDatabasePath() -> URL {
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documentsPath.appendingPathComponent(fullDatabaseFileName)
+        return documentsPath.appendingPathComponent(extendedDatabaseFileName)
     }
 
     // MARK: - Private Methods
@@ -269,8 +266,8 @@ class DatabaseAssetDownloadManager: ObservableObject {
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 do {
                     // ZIPHandler extracts to destination directory
-                    // The ZIP contains perseus_texts.db, we need to rename to perseus_texts_full.db
-                    let tempDir = destinationURL.appendingPathComponent("temp_extract")
+                    // The ZIP contains perseus_texts.db, we need to rename to perseus_texts_extended.db
+                    let tempDir = destinationURL.appendingPathComponent("temp_extract_extended")
 
                     try? FileManager.default.removeItem(at: tempDir)
                     try FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true)
@@ -283,7 +280,7 @@ class DatabaseAssetDownloadManager: ObservableObject {
 
                     // Find the extracted database file and rename it
                     let extractedDb = tempDir.appendingPathComponent("perseus_texts.db")
-                    let targetDb = destinationURL.appendingPathComponent("perseus_texts_full.db")
+                    let targetDb = destinationURL.appendingPathComponent("perseus_texts_extended.db")
 
                     if FileManager.default.fileExists(atPath: extractedDb.path) {
                         // Remove existing target if exists
@@ -304,28 +301,6 @@ class DatabaseAssetDownloadManager: ObservableObject {
                     continuation.resume(throwing: error)
                 }
             }
-        }
-    }
-}
-
-// MARK: - Errors
-
-enum DatabaseAssetError: LocalizedError {
-    case zipNotFound
-    case extractionFailed
-    case databaseNotFound
-    case insufficientStorage
-
-    var errorDescription: String? {
-        switch self {
-        case .zipNotFound:
-            return "Database ZIP file not found. Please try downloading again."
-        case .extractionFailed:
-            return "Failed to extract database file."
-        case .databaseNotFound:
-            return "Full database file not found."
-        case .insufficientStorage:
-            return "Not enough storage space available."
         }
     }
 }

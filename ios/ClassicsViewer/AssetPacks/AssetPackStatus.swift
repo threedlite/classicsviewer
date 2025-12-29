@@ -30,6 +30,16 @@ struct AssetPackInfo {
         extractedSize: 7_000_000_000,       // ~7GB uncompressed
         requiredFreeSpace: 25_000_000_000   // 25GB (matches Android REQUIRED_SPACE_BYTES)
     )
+
+    /// Extended database with Perseus + First1KGreek + PTA
+    static let databaseExtended = AssetPackInfo(
+        tag: .databaseExtended,
+        displayName: "Extended Database",
+        description: "Perseus + First1KGreek + PTA (~2,600 works)",
+        compressedSize: 3_500_000_000,      // ~3.5GB compressed ZIP
+        extractedSize: 17_300_000_000,      // ~17.3GB uncompressed
+        requiredFreeSpace: 55_000_000_000   // 55GB for safe extraction
+    )
 }
 
 // MARK: - Download Status Enum
@@ -72,14 +82,16 @@ enum AssetDownloadStatus: Equatable {
 
 /// Type of database currently in use
 enum DatabaseType: String, CaseIterable {
-    case sample = "sample"      // Bundled sample database
-    case full = "full"          // Downloaded full database
-    case external = "external"  // User-imported database
+    case sample = "sample"        // Bundled sample database
+    case full = "full"            // Downloaded full database
+    case extended = "extended"    // Downloaded extended database (Perseus + First1K + PTA)
+    case external = "external"    // User-imported database
 
     var displayName: String {
         switch self {
         case .sample: return "Sample Database"
         case .full: return "Full Database"
+        case .extended: return "Extended Database"
         case .external: return "External Database"
         }
     }
@@ -90,6 +102,8 @@ enum DatabaseType: String, CaseIterable {
             return "Includes selected Greek and Latin authors"
         case .full:
             return "All 100+ Greek and Latin authors from Perseus"
+        case .extended:
+            return "Perseus + First1KGreek + PTA (~2,600 works)"
         case .external:
             return "User-imported custom database"
         }
@@ -99,6 +113,7 @@ enum DatabaseType: String, CaseIterable {
         switch self {
         case .sample: return "cylinder"
         case .full: return "cylinder.split.1x2.fill"
+        case .extended: return "cylinder.split.1x2.fill"
         case .external: return "doc.badge.arrow.up"
         }
     }
@@ -111,6 +126,8 @@ enum AssetPackKeys {
     // Database keys
     static let useFullDatabase = "use_full_database"
     static let fullDatabaseInstalled = "full_database_installed"
+    static let useExtendedDatabase = "use_extended_database"
+    static let extendedDatabaseInstalled = "extended_database_installed"
     static let externalDatabaseName = "externalDatabaseName"
 
     // Audio keys
@@ -130,6 +147,18 @@ extension UserDefaults {
     var fullDatabaseInstalled: Bool {
         get { bool(forKey: AssetPackKeys.fullDatabaseInstalled) }
         set { set(newValue, forKey: AssetPackKeys.fullDatabaseInstalled) }
+    }
+
+    /// Whether the extended database is currently enabled
+    var useExtendedDatabase: Bool {
+        get { bool(forKey: AssetPackKeys.useExtendedDatabase) }
+        set { set(newValue, forKey: AssetPackKeys.useExtendedDatabase) }
+    }
+
+    /// Whether the extended database has been downloaded and extracted
+    var extendedDatabaseInstalled: Bool {
+        get { bool(forKey: AssetPackKeys.extendedDatabaseInstalled) }
+        set { set(newValue, forKey: AssetPackKeys.extendedDatabaseInstalled) }
     }
 
     /// Whether the full audio pack has been downloaded and extracted

@@ -4273,3 +4273,330 @@ COUNT: 1 works
 ------------------------------------------------------------
   tlg0057.tlg086 - Galen: In Hippocratis vel Polybi Opus de Salubri Victus Ratione Privatorum Commentarius [First1K]
 
+
+============================================================
+PATTERN: edition → chapter → verse → p
+COUNT: 85 works
+NOTE: PTA Bible texts (Septuagint/LXX and New Testament) with special chapter/verse structure.
+      These texts use nested textpart divs: chapter contains verses, each verse contains a <p> tag.
+      Handled by process_pta_bible_text() function.
+------------------------------------------------------------
+  pta9999.pta001_PTA - Septuaginta: Genesis [PTA Bible]
+  pta9999.pta002_PTA - Septuaginta: Exodus [PTA Bible]
+  pta9999.pta003_PTA - Septuaginta: Leviticus [PTA Bible]
+  pta9999.pta004_PTA - Septuaginta: Numeri [PTA Bible]
+  pta9999.pta005_PTA - Septuaginta: Deuteronomium [PTA Bible]
+  pta9999.pta006_PTA - Septuaginta: Josue [PTA Bible]
+  pta9999.pta007_PTA - Septuaginta: Judices [PTA Bible]
+  pta9999.pta008_PTA - Septuaginta: Ruth [PTA Bible]
+  pta9999.pta009_PTA - Septuaginta: Regnorum I [PTA Bible]
+  pta9999.pta010_PTA - Septuaginta: Regnorum II [PTA Bible]
+  pta9999.pta011_PTA - Septuaginta: Regnorum III [PTA Bible]
+  pta9999.pta012_PTA - Septuaginta: Regnorum IV [PTA Bible]
+  pta9999.pta013_PTA - Septuaginta: Paralipomenon I [PTA Bible]
+  pta9999.pta014_PTA - Septuaginta: Paralipomenon II [PTA Bible]
+  pta9999.pta015_PTA - Septuaginta: Prayer of Manasseh B [PTA Bible]
+  pta9999.pta016_PTA - Septuaginta: Esdrae I [PTA Bible]
+  pta9999.pta017_PTA - Septuaginta: Esdrae II [PTA Bible]
+  pta9999.pta018_PTA - Septuaginta: Esdras 3 [PTA Bible]
+  pta9999.pta019_PTA - Septuaginta: Esdras 4 [PTA Bible]
+  pta9999.pta020_PTA - Septuaginta: Esther [PTA Bible]
+  pta9999.pta021_PTA - Septuaginta: Judith [PTA Bible]
+  pta9999.pta022_PTA - Septuaginta: Tobias [PTA Bible]
+  pta9999.pta023_PTA - Septuaginta: Machabaeorum I [PTA Bible]
+  pta9999.pta024_PTA - Septuaginta: Machabaeorum II [PTA Bible]
+  pta9999.pta025_PTA - Septuaginta: Machabaeorum III [PTA Bible]
+  pta9999.pta026_PTA - Septuaginta: Machabaeorum IV [PTA Bible]
+  pta9999.pta031_PTA - Septuaginta: Psalmi [PTA Bible]
+  pta9999.pta032_PTA - Septuaginta: Odae [PTA Bible]
+  pta9999.pta033_PTA - Septuaginta: Proverbia [PTA Bible]
+  pta9999.pta034_PTA - Septuaginta: Ecclesiastes [PTA Bible]
+  pta9999.pta035_PTA - Septuaginta: Canticum [PTA Bible]
+  pta9999.pta036_PTA - Septuaginta: Job [PTA Bible]
+  pta9999.pta037_PTA - Septuaginta: Sapientia Salomonis [PTA Bible]
+  pta9999.pta038_PTA - Septuaginta: Siracides [PTA Bible]
+  pta9999.pta039_PTA - Septuaginta: Psalmi Salomonis [PTA Bible]
+  pta9999.pta040_PTA - Septuaginta: Osee [PTA Bible]
+  pta9999.pta041_PTA - Septuaginta: Amos [PTA Bible]
+  pta9999.pta042_PTA - Septuaginta: Michaeas [PTA Bible]
+  pta9999.pta043_PTA - Septuaginta: Joel [PTA Bible]
+  pta9999.pta044_PTA - Septuaginta: Abdias [PTA Bible]
+  pta9999.pta045_PTA - Septuaginta: Jonas [PTA Bible]
+  pta9999.pta046_PTA - Septuaginta: Nahum [PTA Bible]
+  pta9999.pta047_PTA - Septuaginta: Habacuc [PTA Bible]
+  pta9999.pta048_PTA - Septuaginta: Sophonias [PTA Bible]
+  pta9999.pta049_PTA - Septuaginta: Aggaeus [PTA Bible]
+  pta9999.pta050_PTA - Septuaginta: Zacharias [PTA Bible]
+  pta9999.pta051_PTA - Septuaginta: Malachias [PTA Bible]
+  pta9999.pta052_PTA - Septuaginta: Isaias [PTA Bible]
+  pta9999.pta053_PTA - Septuaginta: Jeremias [PTA Bible]
+  pta9999.pta054_PTA - Septuaginta: Baruch [PTA Bible]
+  pta9999.pta055_PTA - Septuaginta: Threni seu Lamentationes [PTA Bible]
+  pta9999.pta056_PTA - Septuaginta: Epistula Jeremiae [PTA Bible]
+  pta9999.pta057_PTA - Septuaginta: Letter of Baruch A [PTA Bible]
+  pta9999.pta058_PTA - Septuaginta: Apocalypse of Baruch [PTA Bible]
+  pta9999.pta059_PTA - Septuaginta: Ezechiel [PTA Bible]
+  pta9999.pta060_PTA - Septuaginta: Susanna [PTA Bible]
+  pta9999.pta061_PTA - Septuaginta: Daniel [PTA Bible]
+  pta9999.pta062_PTA - Septuaginta: Bel et Draco [PTA Bible]
+  pta9999.pta063_PTA - Septuaginta: Evangelium secundum Matthaeum [PTA Bible]
+  pta9999.pta064_PTA - Septuaginta: Evangelium secundum Marcum [PTA Bible]
+  pta9999.pta065_PTA - Septuaginta: Evangelium secundum Lucam [PTA Bible]
+  pta9999.pta066_PTA - Septuaginta: Evangelium secundum Ioannem [PTA Bible]
+  pta9999.pta067_PTA - Septuaginta: Acta apostolorum [PTA Bible]
+  pta9999.pta068_PTA - Septuaginta: Epistula Pauli ad Romanos [PTA Bible]
+  pta9999.pta069_PTA - Septuaginta: Epistula Pauli ad Corinthios I [PTA Bible]
+  pta9999.pta070_PTA - Septuaginta: Epistula Pauli ad Corinthios II [PTA Bible]
+  pta9999.pta071_PTA - Septuaginta: Epistula Pauli ad Galatas [PTA Bible]
+  pta9999.pta072_PTA - Septuaginta: Epistula Pauli ad Ephesios [PTA Bible]
+  pta9999.pta073_PTA - Septuaginta: Epistula Pauli ad Philippenses [PTA Bible]
+  pta9999.pta074_PTA - Septuaginta: Epistula Pauli ad Colossenses [PTA Bible]
+  pta9999.pta075_PTA - Septuaginta: Epistula Pauli ad Thessalonicenses I [PTA Bible]
+  pta9999.pta076_PTA - Septuaginta: Epistula Pauli ad Thessalonicenses II [PTA Bible]
+  pta9999.pta077_PTA - Septuaginta: Epistula Pauli ad Timotheum I [PTA Bible]
+  pta9999.pta078_PTA - Septuaginta: Epistula Pauli ad Timotheum II [PTA Bible]
+  pta9999.pta079_PTA - Septuaginta: Epistula Pauli ad Titum [PTA Bible]
+  pta9999.pta080_PTA - Septuaginta: Epistula Pauli ad Philemonem [PTA Bible]
+  pta9999.pta081_PTA - Septuaginta: Epistula Pauli ad Hebraeos [PTA Bible]
+  pta9999.pta082_PTA - Septuaginta: Epistula Iacobi [PTA Bible]
+  pta9999.pta083_PTA - Septuaginta: Epistula Petri I [PTA Bible]
+  pta9999.pta084_PTA - Septuaginta: Epistula Petri II [PTA Bible]
+  pta9999.pta085_PTA - Septuaginta: Epistula Ioannis I [PTA Bible]
+  pta9999.pta086_PTA - Septuaginta: Epistula Ioannis II [PTA Bible]
+  pta9999.pta087_PTA - Septuaginta: Epistula Ioannis III [PTA Bible]
+  pta9999.pta088_PTA - Septuaginta: Epistula Iuda [PTA Bible]
+  pta9999.pta089_PTA - Septuaginta: Apocalypsis Ioannis [PTA Bible]
+
+============================================================
+PATTERN: edition → section → p
+COUNT: 64 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0001.pta056_PTA - Severian of Gabala: In Temptationem Domini Nostri Iesu Christi [PTA]
+  pta0001.pta051_PTA - Severian of Gabala: Encomium in sanctos martyres [PTA]
+  pta0001.pta034_PTA - Severian of Gabala: De centurione et contra Manichaeos et Apolinaristas [PTA]
+  pta0001.pta033_PTA - Severian of Gabala: Homilia de quinque aetatibus mundi [PTA]
+  pta0001.pta005_PTA - Severian of Gabala: De Christo pastore et ove [PTA]
+  pta0001.pta002_PTA - Severian of Gabala: De paenitentia et compunctione [PTA]
+  pta0001.pta050_PTA - Severian of Gabala: De caeco nato [PTA]
+  pta0001.pta003_PTA - Severian of Gabala: In ascensionem domini nostri Iesu Christi et in principium Actorum [PTA]
+  pta0001.pta004_PTA - Severian of Gabala: De spiritu sancto [PTA]
+  pta0001.pta032_PTA - Severian of Gabala: Homilia de lotione pedum [PTA]
+  pta0001.pta017_PTA - Severian of Gabala: In illud: Quomodo scit litteras [PTA]
+  pta0001.pta010_PTA - Severian of Gabala: Quomodo animam acceperit Adamus [PTA]
+  pta0001.pta026_PTA - Severian of Gabala: In illud: in principium erat verbum [PTA]
+  pta0001.pta019_PTA - Severian of Gabala: In dictum apostoli: Non quod volo facio [PTA]
+  pta0001.pta021_PTA - Severian of Gabala: In proditionem servatoris [PTA]
+  pta0001.pta044_PTA - Severian of Gabala: In Genesim sermo 1 [PTA]
+  pta0001.pta043_PTA - Severian of Gabala: Homilia de Noe et de arca [PTA]
+  pta0001.pta020_PTA - Severian of Gabala: In incarnationem domini [PTA]
+  pta0001.pta027_PTA - Severian of Gabala: In sanctam pentecosten [PTA]
+  pta0001.pta018_PTA - Severian of Gabala: In Chananaeam et Pharaonem [PTA]
+  pta0001.pta011_PTA - Severian of Gabala: De serpente homilia [PTA]
+  pta0001.pta016_PTA - Severian of Gabala: In filium prodigum [PTA]
+  pta0001.pta029_PTA - Severian of Gabala: In pretiosam et vivificam crucem [PTA]
+  pta0001.pta030_PTA - Severian of Gabala: Homilia de pace [PTA]
+  pta0001.pta008_PTA - Severian of Gabala: Homilia de legislatore [PTA]
+  pta0001.pta037_PTA - Severian of Gabala: In Iudaeos et Graecos [PTA]
+  pta0001.pta001_PTA - Severian of Gabala: De fide et lege naturae [PTA]
+  pta0001.pta006_PTA - Severian of Gabala: In psalmum 96 [PTA]
+  pta0001.pta052_PTA - Severian of Gabala: In postremum iudicium [PTA]
+  pta0001.pta055_PTA - Severian of Gabala: Oratio de exaltatione Crucis [PTA]
+  pta0001.pta038_PTA - Severian of Gabala: In illud: Secundum imaginem et similitudinem [PTA]
+  pta0001.pta007_PTA - Severian of Gabala: In psalmum 95 [PTA]
+  pta0001.pta009_PTA - Severian of Gabala: In illud: In qua potestate haec facis [PTA]
+  pta0001.pta036_PTA - Severian of Gabala: In Noe et filios eius, de cherubim et in propthetam Oseam [PTA]
+  pta0001.pta031_PTA - Severian of Gabala: In illud: Pater, transeat a me calix iste [PTA]
+  pta0001.pta054_PTA - Severian of Gabala: De cruce et latrone [PTA]
+  pta0001.pta053_PTA - Severian of Gabala: In accensionem domini [PTA]
+  pta0001.pta049_PTA - Severian of Gabala: De tribus pueris sermo [PTA]
+  pta0001.pta040_PTA - Severian of Gabala: De caeco et Zacchaeo [PTA]
+  pta0001.pta013_PTA - Severian of Gabala: In Genesim sermo 2 [PTA]
+  pta0001.pta014_PTA - Severian of Gabala: In illud: Pone manum tuam [PTA]
+  pta0001.pta022_PTA - Severian of Gabala: De fide [PTA]
+  pta0001.pta025_PTA - Severian of Gabala: De sigillis sermo [PTA]
+  pta0001.pta041_PTA - Severian of Gabala: In illud: Quando ipsi subiciet omnia [PTA]
+  pta0001.pta024_PTA - Severian of Gabala: De sacrificiis Caini [PTA]
+  pta0001.pta023_PTA - Severian of Gabala: Contra Iudaeos in serpentem aeneum [PTA]
+  pta0001.pta015_PTA - Severian of Gabala: In meretricem et pharisaeum [PTA]
+  pta0001.pta012_PTA - Severian of Gabala: Oratio in dedicationem pretiosae et uiuificae crucis [PTA]
+  pta0013.pta003_PTA - Amphilochius of Iconium: Epistula synodalis [PTA]
+  pta0022.pta002_PTA - Athanasius of Alexandria: De incarnatione [PTA]
+  pta0022.pta011_PTA - Athanasius of Alexandria: Epistula ad Ioannem et Antiochum [PTA]
+  pta0022.pta001_PTA - Athanasius of Alexandria: Contra gentes [PTA]
+  pta0022.pta012_PTA - Athanasius of Alexandria: Epistula ad Palladium [PTA]
+  pta0039.pta001_PTA - Anonymus (Pseudo-John Chrysostom): Homilia de dominica die [PTA]
+  pta0040.pta001_PTA - Anonymus (Pseudo-John Chrysostom / Pseudo-Basil of Caesarea): Homilia de sancta dominica [PTA]
+  pta0100.pta005_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 5: Referate eines [PTA]
+  pta0100.pta003_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 3: Regest eines Rundbriefes einer Synode in Bithynien [PTA]
+  pta0100.pta004_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 4: Brief des Eusebius von Nikomedien an Paulinus von Tyrus [PTA]
+  pta0100.pta010_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 10: Fragmente eines Briefes des Eusebius von Caesarea an Euphration von Balaneae [PTA]
+  pta0100.pta008_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 8: Regeste eines Briefes [PTA]
+  pta0100.pta001_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 1: Theologische Erklärung alexandrinischer Kleriker an Alexander von Alexandrien [PTA]
+  pta0100.pta006_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 6: Fragment eines Briefes des Presbyters Georgius an Alexander von Alexandrien [PTA]
+  pta0100.pta007_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 7: Fragment eines Briefes des Presbyters Georgius an die »Arianer« in Alexandrien [PTA]
+  pta0100.pta009_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 9: Fragment eines Briefes des Eusebius von Caesarea an Alexander von Alexandrien [PTA]
+
+============================================================
+PATTERN: edition → chapter → p
+COUNT: 14 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0001.pta058_PTA - Severian of Gabala: In cosmogoniam homilia 2 [PTA]
+  pta0001.pta060_PTA - Severian of Gabala: In cosmogoniam homilia 4 [PTA]
+  pta0001.pta061_PTA - Severian of Gabala: In cosmogoniam homilia 5 [PTA]
+  pta0001.pta059_PTA - Severian of Gabala: In cosmogoniam homilia 3 [PTA]
+  pta0001.pta057_PTA - Severian of Gabala: In cosmogoniam homilia 1 [PTA]
+  pta0001.pta028_PTA - Severian of Gabala: In theophaniam [PTA]
+  pta0001.pta045_PTA - Severian of Gabala: In Iob sermo 1 [PTA]
+  pta0001.pta062_PTA - Severian of Gabala: In cosmogoniam homilia 6 [PTA]
+  pta0001.pta047_PTA - Severian of Gabala: In Iob sermo 3 [PTA]
+  pta0001.pta046_PTA - Severian of Gabala: In Iob sermo 2 [PTA]
+  pta0001.pta048_PTA - Severian of Gabala: In Iob sermo 4 [PTA]
+  pta0007.pta007_PTA - Origen: Exhortatio ad martyrium [PTA]
+  pta0029.pta002_PTA - Ps.-Athanasius of Alexandria: De sabbatis et circumcisione [PTA]
+  pta0099.pta074_PTA - Catenae: Catena in epistulam ad Colossenses [PTA]
+
+============================================================
+PATTERN: edition → chapter → section → p
+COUNT: 11 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0001.pta042_PTA - Severian of Gabala: In illud: Genimina viperarum [PTA]
+  pta0007.pta008_PTA - Origen: De oratione [PTA]
+  pta0022.pta003_PTA - Athanasius of Alexandria: De decretis Nicaenae [PTA]
+  pta0022.pta004_PTA - Athanasius of Alexandria: De sententia Dionysii [PTA]
+  pta0022.pta017_PTA - Athanasius of Alexandria: Petitiones Arianorum [PTA]
+  pta0022.pta010_PTA - Athanasius of Alexandria: Apologia ad Constantium [PTA]
+  pta0022.pta016_PTA - Athanasius of Alexandria: Epistula ad Jovianum [PTA]
+  pta0022.pta013_PTA - Athanasius of Alexandria: Epistula ad Dracontium [PTA]
+  pta0022.pta014_PTA - Athanasius of Alexandria: Epistula ad Afros [PTA]
+  pta0022.pta015_PTA - Athanasius of Alexandria: Tomus ad Antiochenos [PTA]
+  pta0041.pta001_PTA - Anonymus (Author of Vita Cononis): Vita sancti Cononis Bidanae [PTA]
+
+============================================================
+PATTERN: edition → book → chapter → p
+COUNT: 4 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0004.pta003_PTA - Theodoret of Cyrrhus: Historia ecclesiastica [PTA]
+  pta0005.pta001_PTA - Cyrill of Alexandria: De adoratione et cultu in spiritu et [PTA]
+  pta0036.pta001_PTA - Anonymus of Cyzicus: Historia ecclesiastica [PTA]
+  pta0037.pta001_PTA - Hippolytus of Rome: Commentarii in Danielem [PTA]
+
+============================================================
+PATTERN: edition → book → chapter → section → p
+COUNT: 3 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0003.pta007_PTA - Eusebius of Caesarea: Contra Marcellum [PTA]
+  pta0003.pta009_PTA - Eusebius of Caesarea: De ecclesiastica theologia [PTA]
+  pta0012.pta001_PTA - Sozomen: Historia ecclesiastica [PTA]
+
+============================================================
+PATTERN: edition → book → commentary → fragment → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0001.pta072_PTA - Severian of Gabala: Fragmenta in epistulas Pauli [PTA]
+
+============================================================
+PATTERN: edition → homily → section → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0002.pta161_PTA - pta0002: In epistulam ad Colossenses homiliae 1-12 [PTA]
+
+============================================================
+PATTERN: edition → book → section → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0003.pta017_PTA - Eusebius of Caesarea: Commentarius in Isaiam [PTA]
+
+============================================================
+PATTERN: edition → part → book → chapter → section → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0005.pta002_PTA - Cyrill of Alexandria: Glaphyra in Pentateuchum [PTA]
+
+============================================================
+PATTERN: edition → commentary → section → section → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0006.pta001_PTA - Hesychius of Jerusalem: Commentarius magnus in Psalmos [PTA]
+
+============================================================
+PATTERN: edition → fragment → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0023.pta001_PTA - Marcellus of Ancyra: Fragmenta [PTA]
+
+============================================================
+PATTERN: edition → book → chapter → section → subsection → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0038.pta001_PTA - Hermas: Pastor [PTA]
+
+============================================================
+PATTERN: edition → subdok → section → p
+COUNT: 1 works
+NOTE: PTA (Patristic Text Archive) works
+------------------------------------------------------------
+  pta0100.pta002_PTA - Dokumente zur Geschichte des arianischen Streites (Athanasius Werke III): Dok. 2: Briefe des Alexander von Alexandrien [PTA]
+
+============================================================
+PATTERN: edition → chapter → verse → ab
+COUNT: 26 works
+NOTE: PTA Bible texts (New Testament) using <ab> tags for verse content.
+      Handled by process_pta_bible_text() via get_text_content().
+------------------------------------------------------------
+  pta9999.pta063_PTA - Septuaginta: Evangelium secundum Matthaeum [PTA Bible]
+  pta9999.pta064_PTA - Septuaginta: Evangelium secundum Marcum [PTA Bible]
+  pta9999.pta065_PTA - Septuaginta: Evangelium secundum Lucam [PTA Bible]
+  pta9999.pta066_PTA - Septuaginta: Evangelium secundum Ioannem [PTA Bible]
+  pta9999.pta067_PTA - Septuaginta: Acta apostolorum [PTA Bible]
+  pta9999.pta068_PTA - Septuaginta: Epistula Pauli ad Romanos [PTA Bible]
+  pta9999.pta069_PTA - Septuaginta: Epistula Pauli ad Corinthios I [PTA Bible]
+  pta9999.pta070_PTA - Septuaginta: Epistula Pauli ad Corinthios II [PTA Bible]
+  pta9999.pta071_PTA - Septuaginta: Epistula Pauli ad Galatas [PTA Bible]
+  pta9999.pta072_PTA - Septuaginta: Epistula Pauli ad Ephesios [PTA Bible]
+  pta9999.pta073_PTA - Septuaginta: Epistula Pauli ad Philippenses [PTA Bible]
+  pta9999.pta074_PTA - Septuaginta: Epistula Pauli ad Colossenses [PTA Bible]
+  pta9999.pta075_PTA - Septuaginta: Epistula Pauli ad Thessalonicenses I [PTA Bible]
+  pta9999.pta076_PTA - Septuaginta: Epistula Pauli ad Thessalonicenses II [PTA Bible]
+  pta9999.pta077_PTA - Septuaginta: Epistula Pauli ad Timotheum I [PTA Bible]
+  pta9999.pta078_PTA - Septuaginta: Epistula Pauli ad Timotheum II [PTA Bible]
+  pta9999.pta079_PTA - Septuaginta: Epistula Pauli ad Titum [PTA Bible]
+  pta9999.pta080_PTA - Septuaginta: Epistula Pauli ad Philemonem [PTA Bible]
+  pta9999.pta081_PTA - Septuaginta: Epistula Pauli ad Hebraeos [PTA Bible]
+  pta9999.pta082_PTA - Septuaginta: Epistula Iacobi [PTA Bible]
+  pta9999.pta083_PTA - Septuaginta: Epistula Petri I [PTA Bible]
+  pta9999.pta084_PTA - Septuaginta: Epistula Petri II [PTA Bible]
+  pta9999.pta085_PTA - Septuaginta: Epistula Ioannis I [PTA Bible]
+  pta9999.pta086_PTA - Septuaginta: Epistula Ioannis II [PTA Bible]
+  pta9999.pta087_PTA - Septuaginta: Epistula Ioannis III [PTA Bible]
+  pta9999.pta089_PTA - Septuaginta: Apocalypsis Ioannis [PTA Bible]
+
+============================================================
+PATTERN: edition → verse → p
+COUNT: 4 works
+NOTE: PTA Bible texts without chapter divisions (short books).
+      Handled by process_pta_bible_text() as single-chapter works.
+------------------------------------------------------------
+  pta9999.pta044_PTA - Septuaginta: Abdias [PTA Bible]
+  pta9999.pta056_PTA - Septuaginta: Epistula Jeremiae [PTA Bible]
+  pta9999.pta060_PTA - Septuaginta: Susanna [PTA Bible]
+  pta9999.pta062_PTA - Septuaginta: Bel et Draco [PTA Bible]
+
+============================================================
+PATTERN: edition → verse → ab
+COUNT: 1 works
+NOTE: PTA Bible texts without chapter divisions (short books).
+      Handled by process_pta_bible_text() as single-chapter works.
+------------------------------------------------------------
+  pta9999.pta088_PTA - Septuaginta: Epistula Iuda [PTA Bible]

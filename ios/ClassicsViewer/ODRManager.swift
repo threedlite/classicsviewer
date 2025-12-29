@@ -11,6 +11,7 @@ actor ODRManager {
     enum AssetTag: String, CaseIterable {
         case audioFull = "audio_full"
         case databaseFull = "database_full"
+        case databaseExtended = "database_extended"
     }
 
     // MARK: - Download Status
@@ -149,6 +150,8 @@ actor ODRManager {
             return AssetPackInfo.audioFull.compressedSize
         case .databaseFull:
             return AssetPackInfo.databaseFull.compressedSize
+        case .databaseExtended:
+            return AssetPackInfo.databaseExtended.compressedSize
         }
     }
 

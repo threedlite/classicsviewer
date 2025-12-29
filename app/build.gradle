@@ -36,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 90
-        versionName "0.8.90"
+        versionCode 100
+        versionName "0.8.100"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         

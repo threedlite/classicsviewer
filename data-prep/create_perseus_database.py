@@ -1537,18 +1537,32 @@ def process_first1k_work(work_dir, work_id, cursor, language):
     """
     print(f"    Using First1K parser for {work_id}")
 
-    # Find Greek and English files
-    greek_file = None
+    # Find source text and English files based on language
+    source_file = None
     english_files = []
 
     for xml_file in work_dir.glob("*.xml"):
-        if "grc" in xml_file.name and not xml_file.name.startswith('__'):
-            greek_file = xml_file
-        elif "eng" in xml_file.name and not xml_file.name.startswith('__'):
+        if xml_file.name.startswith('__'):
+            continue
+        if language == 'greek' and "grc" in xml_file.name:
+            source_file = xml_file
+        elif language == 'latin' and "lat" in xml_file.name:
+            source_file = xml_file
+        elif "eng" in xml_file.name:
             english_files.append(xml_file)
 
-    if not greek_file:
-        print(f"    No Greek file found for First1K work {work_id}")
+    if not source_file:
+        print(f"    No {language.capitalize()} file found for First1K work {work_id}")
+        return
+
+    # For backwards compatibility, keep greek_file variable name
+    greek_file = source_file
+
+    # Check if this is a PTA Bible text (pta9999) - these have chapter/verse structure
+    # similar to New Testament and need special handling
+    if work_id.startswith('pta9999.'):
+        print(f"    Detected PTA Bible text, using chapter/verse parser")
+        process_pta_bible_text(source_file, work_id, cursor, language)
         return
 
     # STEP 1: Analyze the work to determine the best splitting method
@@ -4374,6 +4388,200 @@ def process_prose_text(root, work_id, cursor, language):
         
         print(f"      Complete Text: {len(all_lines)} lines")
 
+def process_pta_bible_text(xml_path, work_id, cursor, language):
+    """Process PTA Bible text (pta9999.*) with chapters as separate books and verses as lines.
+
+    These texts have the structure:
+    <div type="edition">
+        <div type="textpart" subtype="chapter" n="1">
+            <div type="textpart" subtype="verse" n="1">
+                <p>verse text...</p>
+            </div>
+            ...
+        </div>
+        ...
+    </div>
+    """
+    print(f"    Processing PTA Bible text: {work_id}")
+
+    try:
+        tree, _ = parse_xml_with_entity_resolver(xml_path)
+        root = tree.getroot()
+    except Exception as e:
+        print(f"    ERROR parsing PTA Bible XML: {e}")
+        return
+
+    books_processed = 0
+    total_verses = 0
+
+    # Find all chapter divs
+    for chapter_div in root.iter():
+        if not (is_div_tag(chapter_div.tag) and
+                chapter_div.get('type') == 'textpart' and
+                chapter_div.get('subtype') == 'chapter'):
+            continue
+
+        chapter_n = chapter_div.get('n', '')
+        if not chapter_n or not chapter_n.isdigit():
+            continue
+
+        chapter_num = int(chapter_n)
+        book_id = f"{work_id}.{chapter_num:03d}"
+
+        # Extract verses from this chapter
+        verses = []
+        for verse_div in chapter_div.iter():
+            if not (is_div_tag(verse_div.tag) and
+                    verse_div.get('type') == 'textpart' and
+                    verse_div.get('subtype') == 'verse'):
+                continue
+
+            verse_n = verse_div.get('n', '')
+            verse_num = parse_line_number(verse_n)
+            if verse_num is None:
+                continue
+
+            # Get text from <p> elements within the verse
+            text_parts = []
+            for p_elem in verse_div.iter():
+                if is_p_tag(p_elem.tag):
+                    # Get all text content from this paragraph
+                    p_text = get_text_content(p_elem)
+                    if p_text:
+                        text_parts.append(p_text.strip())
+
+            # If no <p> tags, try getting text content directly
+            if not text_parts:
+                text = get_text_content(verse_div)
+                if text:
+                    text_parts.append(text.strip())
+
+            text = ' '.join(text_parts)
+
+            if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                verses.append({
+                    'number': verse_num,
+                    'text': text,
+                    'xml': ET.tostring(verse_div, encoding='unicode')
+                })
+
+        if verses:
+            # Sort verses by number to ensure correct order
+            verses.sort(key=lambda x: x['number'])
+
+            # Insert book (chapter for Bible)
+            cursor.execute("""
+                INSERT OR IGNORE INTO books
+                (id, work_id, book_number, label, start_line, end_line, line_count)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (book_id, work_id, chapter_num, f"Chapter {chapter_num}",
+                  verses[0]['number'], verses[-1]['number'], len(verses)))
+
+            # Insert lines (verses) with sequence numbers
+            for seq_num, verse in enumerate(verses, 1):
+                cursor.execute("""
+                    INSERT INTO text_lines
+                    (book_id, line_number, sequence_number, line_text, line_xml)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (book_id, verse['number'], seq_num, verse['text'], verse.get('xml', '')))
+
+                # Insert words into words table
+                words = verse['text'].split()
+                for word_pos, word in enumerate(words, 1):
+                    if word.strip():
+                        cursor.execute("""
+                            INSERT INTO words
+                            (word, book_id, line_number, sequence_number, word_position)
+                            VALUES (?, ?, ?, ?, ?)
+                        """, (word, book_id, verse['number'], seq_num, word_pos))
+
+            books_processed += 1
+            total_verses += len(verses)
+            print(f"      Chapter {chapter_num}: {len(verses)} verses")
+
+    if books_processed == 0:
+        # No chapters found - check for verse-only structure (short books like Obadiah, Jude)
+        print(f"      No chapters found, checking for verse-only structure...")
+
+        # Find edition div
+        edition = None
+        for elem in root.iter():
+            if is_div_tag(elem.tag) and elem.get('type') == 'edition':
+                edition = elem
+                break
+
+        if edition is not None:
+            verses = []
+            for verse_div in edition.iter():
+                if not (is_div_tag(verse_div.tag) and
+                        verse_div.get('type') == 'textpart' and
+                        verse_div.get('subtype') == 'verse'):
+                    continue
+
+                verse_n = verse_div.get('n', '')
+                verse_num = parse_line_number(verse_n)
+                if verse_num is None:
+                    continue
+
+                # Get text from elements within the verse
+                text_parts = []
+                for child in verse_div.iter():
+                    if is_p_tag(child.tag) or child.tag == 'ab' or ('}' in child.tag and child.tag.split('}')[1] in ['p', 'ab']):
+                        child_text = get_text_content(child)
+                        if child_text:
+                            text_parts.append(child_text.strip())
+
+                if not text_parts:
+                    text = get_text_content(verse_div)
+                    if text:
+                        text_parts.append(text.strip())
+
+                text = ' '.join(text_parts)
+
+                if text:
+                    verses.append({
+                        'number': verse_num,
+                        'text': text,
+                        'xml': ET.tostring(verse_div, encoding='unicode')
+                    })
+
+            if verses:
+                # Treat as single chapter (book number 1)
+                verses.sort(key=lambda x: x['number'])
+                book_id = f"{work_id}.001"
+
+                cursor.execute("""
+                    INSERT OR IGNORE INTO books
+                    (id, work_id, book_number, label, start_line, end_line, line_count)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (book_id, work_id, 1, "Complete Text",
+                      verses[0]['number'], verses[-1]['number'], len(verses)))
+
+                for seq_num, verse in enumerate(verses, 1):
+                    cursor.execute("""
+                        INSERT INTO text_lines
+                        (book_id, line_number, sequence_number, line_text, line_xml)
+                        VALUES (?, ?, ?, ?, ?)
+                    """, (book_id, verse['number'], seq_num, verse['text'], verse.get('xml', '')))
+
+                    words = verse['text'].split()
+                    for word_pos, word in enumerate(words, 1):
+                        if word.strip():
+                            cursor.execute("""
+                                INSERT INTO words
+                                (word, book_id, line_number, sequence_number, word_position)
+                                VALUES (?, ?, ?, ?, ?)
+                            """, (word, book_id, verse['number'], seq_num, word_pos))
+
+                books_processed = 1
+                total_verses = len(verses)
+                print(f"      Verse-only book: {len(verses)} verses")
+
+        if books_processed == 0:
+            print(f"      WARNING: No content found in PTA Bible text {work_id}")
+    else:
+        print(f"      Total: {books_processed} chapters, {total_verses} verses")
+
 def process_new_testament_text(root, work_id, cursor, language):
     """Process New Testament text with chapters as separate books and verses as lines"""
     print(f"    Processing New Testament text: {work_id}")
@@ -5291,7 +5499,7 @@ def process_euclid_translation(root, work_id, cursor, translator):
 
     print(f"      ✅ Euclid's translation: Processed {len(books)} books")
 
-def process_perseus_author(author_dir, language, cursor, sample_works=None, work_filter=None, is_first1k=False):
+def process_perseus_author(author_dir, language, cursor, sample_works=None, work_filter=None, is_first1k=False, is_pta=False):
     """Process all works for a single author
 
     Args:
@@ -5301,6 +5509,7 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         sample_works: Optional dict mapping author names to sets of work titles for filtering
         work_filter: Optional set of work directory names to process (for First1K non-duplicates)
         is_first1k: Whether this is First1K data (affects file pattern matching)
+        is_pta: Whether this is PTA data (Patristic Text Archive)
     """
     author_id = author_dir.name
     
@@ -5445,12 +5654,23 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                 print(f"  Skipping work: {title_english} ({work_id}) - not in sample list")
                 continue
         
-        # Add _OGL suffix to First1K work IDs for internal database storage
-        db_work_id = f"{work_id}_OGL" if is_first1k else work_id
+        # Add suffix for external collections (First1K uses _OGL, PTA uses _PTA)
+        if is_first1k:
+            db_work_id = f"{work_id}_OGL"
+            source_tag = "(OGL)"
+        elif is_pta:
+            db_work_id = f"{work_id}_PTA"
+            source_tag = "(PTA)"
+        else:
+            db_work_id = work_id
+            source_tag = ""
 
         print(f"  Processing work: {title_english} ({db_work_id})")
 
         # Insert work (only if we have suitable text files)
+        title_display = f"{title_english} {source_tag}".strip() if source_tag else title_english
+        description = f"{title_english} by {author_name} {source_tag}".strip() if source_tag else f"{title_english} by {author_name}"
+
         cursor.execute("""
             INSERT OR IGNORE INTO works
             (id, author_id, title, title_alt, title_english, type, urn, description)
@@ -5460,10 +5680,10 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             author_id,
             work_info.get('title_greek') or work_info.get('title_latin') or title_english,
             work_info.get('title_latin'),
-            f"{title_english} (OGL)" if is_first1k else title_english,
+            title_display,
             work_info.get('type', 'text'),
             work_info.get('urn', f"urn:cts:{language}Lit:{db_work_id}"),
-            f"{title_english} by {author_name} (OGL)" if is_first1k else f"{title_english} by {author_name}"
+            description
         ))
         
         works_processed += 1
@@ -5471,10 +5691,10 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
 
         # Parse the text
         try:
-            if is_first1k:
-                # Use First1K parser for proper section-based parsing
-                # Work ID already has _OGL suffix from above
-                print(f"    📖 PROCESSING: {text_file.name} with First1K parser")
+            if is_first1k or is_pta:
+                # Use First1K/PTA parser for proper section-based parsing (TEI format)
+                parser_name = "PTA" if is_pta else "First1K"
+                print(f"    📖 PROCESSING: {text_file.name} with {parser_name} parser")
                 process_first1k_work(work_dir, db_work_id, cursor, language)
             else:
                 # Use existing Perseus parser
@@ -5765,6 +5985,119 @@ def analyze_first1k_overlap(data_sources_path):
 
     return first1k_works
 
+def analyze_pta_collection(data_sources_path):
+    """Analyze PTA (Patristic Text Archive) collection
+
+    Filters out works with by-nc license (non-commercial restriction).
+
+    Returns:
+        dict: Eligible PTA works with metadata (excluding by-nc licensed works)
+    """
+    print("Analyzing PTA (Patristic Text Archive) collection...")
+
+    pta_works = {}
+    pta_dir = data_sources_path / "pta_data" / "data"
+
+    if not pta_dir.exists():
+        print(f"Warning: PTA directory not found at {pta_dir}")
+        return {}
+
+    excluded_by_nc = 0
+
+    for author_dir in pta_dir.iterdir():
+        if not author_dir.is_dir() or not author_dir.name.startswith("pta"):
+            continue
+
+        author_id = author_dir.name
+
+        # Try to get author name from __cts__.xml
+        author_name = author_id
+        cts_file = author_dir / "__cts__.xml"
+        if cts_file.exists():
+            try:
+                tree = ET.parse(cts_file)
+                root = tree.getroot()
+                ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
+                groupname_elem = root.find('.//ti:groupname', ns)
+                if groupname_elem is not None and groupname_elem.text:
+                    author_name = groupname_elem.text.strip()
+            except Exception:
+                pass
+
+        for work_dir in author_dir.iterdir():
+            if not work_dir.is_dir() or not work_dir.name.startswith("pta"):
+                continue
+
+            work_id = f"{author_id}.{work_dir.name}"
+
+            # Check for Greek or Latin text files
+            has_greek = False
+            has_latin = False
+            has_translation = False
+            text_file = None
+
+            for xml_file in work_dir.glob("*.xml"):
+                if xml_file.name == "__cts__.xml":
+                    continue
+
+                # Check license - exclude by-nc works
+                try:
+                    with open(xml_file, 'r', encoding='utf-8') as f:
+                        # Read first 3000 chars to find license in header
+                        header = f.read(3000)
+                        if 'by-nc' in header:
+                            excluded_by_nc += 1
+                            continue  # Skip this file
+                except Exception:
+                    continue
+
+                if 'grc' in xml_file.name:
+                    has_greek = True
+                    text_file = xml_file
+                elif 'lat' in xml_file.name and '-lat' in xml_file.name:
+                    # Check for Latin text files (e.g., pta-lat1.xml)
+                    has_latin = True
+                    if not text_file:
+                        text_file = xml_file
+                if 'eng' in xml_file.name:
+                    has_translation = True
+
+            if has_greek or has_latin:
+                language = 'greek' if has_greek else 'latin'
+                pta_works[work_id] = {
+                    'author_id': author_id,
+                    'author_name': author_name,
+                    'work_dir': work_dir.name,
+                    'has_translation': has_translation,
+                    'path': str(work_dir),
+                    'language': language
+                }
+
+    print(f"\nPTA works found: {len(pta_works)}")
+    print(f"PTA works excluded (by-nc license): {excluded_by_nc}")
+
+    # Count by language
+    greek_count = sum(1 for w in pta_works.values() if w['language'] == 'greek')
+    latin_count = sum(1 for w in pta_works.values() if w['language'] == 'latin')
+    print(f"  Greek works: {greek_count}")
+    print(f"  Latin works: {latin_count}")
+
+    # Count unique authors
+    unique_authors = set(w['author_id'] for w in pta_works.values())
+    print(f"  Unique authors: {len(unique_authors)}")
+
+    # Count works with translations
+    with_translations = sum(1 for w in pta_works.values() if w['has_translation'])
+    print(f"  Works with translations: {with_translations}")
+
+    # Show some examples
+    print("\nSample PTA works:")
+    for i, (work_id, info) in enumerate(list(pta_works.items())[:5]):
+        trans = "with translation" if info['has_translation'] else f"{info['language']} only"
+        print(f"  {work_id}: {info['author_name']} - {trans}")
+
+    return pta_works
+
 def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode='full'):
     """Generate detailed quality report
 
@@ -5969,8 +6302,11 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode
 
         # Determine source based on work ID pattern
         # First1K works have "_OGL" or "_OpenGreekAndLatin" in their IDs
+        # PTA works have "_PTA" in their IDs
         if "_OGL" in work_id or "_OpenGreekAndLatin" in work_id:
             source = "First1KGreek"
+        elif "_PTA" in work_id:
+            source = "PTA"
         else:
             source = "Perseus"
 
@@ -6536,6 +6872,73 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
                     print(f"\nWarning: First1K author {author_info['name']} ({author_id}) directory not found")
 
             print(f"\nCompleted processing {processed_first1k} First1K authors")
+
+    # Process PTA (Patristic Text Archive) texts if in extended mode
+    if mode == 'extended':
+        print("\n=== PROCESSING PTA (PATRISTIC TEXT ARCHIVE) WORKS ===")
+
+        pta_dir = data_sources / "pta_data" / "data"
+
+        if not pta_dir.exists():
+            print(f"Warning: PTA directory not found at {pta_dir}")
+        else:
+            # Analyze PTA collection (filters out by-nc licensed works)
+            print("Analyzing PTA collection...")
+            pta_works = analyze_pta_collection(data_sources)
+
+            if pta_works:
+                print(f"Processing {len(pta_works)} PTA works...")
+
+                # Group by author AND language to handle authors with mixed languages
+                pta_author_langs = {}
+                for work_id, info in pta_works.items():
+                    author_id = info['author_id']
+                    language = info['language']
+                    key = (author_id, language)
+                    if key not in pta_author_langs:
+                        pta_author_langs[key] = {
+                            'name': info['author_name'],
+                            'works': [],
+                            'language': language
+                        }
+                    pta_author_langs[key]['works'].append((work_id, info))
+
+                print(f"Found {len(pta_author_langs)} unique PTA author-language combinations to process")
+
+                # Process each PTA author-language combination
+                processed_pta = 0
+                for (author_id, language), author_info in sorted(pta_author_langs.items()):
+                    author_path = pta_dir / author_id
+                    if author_path.exists():
+                        processed_pta += 1
+                        print(f"\n[PTA {processed_pta}/{len(pta_author_langs)}] Processing {author_info['name']} ({author_id}) - {len(author_info['works'])} {language} works")
+
+                        # Filter to only eligible works for this language
+                        work_filter = set(info['work_dir'] for work_id, info in author_info['works'])
+
+                        try:
+                            process_perseus_author(author_path, language, cursor,
+                                                sample_works=None,
+                                                work_filter=work_filter,
+                                                is_pta=True)
+
+                            # Commit periodically
+                            if processed_pta % 5 == 0:
+                                conn.commit()
+                                print(f"  Progress saved ({processed_pta}/{len(pta_author_langs)} PTA author-language combos)")
+                        except SystemExit as e:
+                            print(f"\nBUILD ABORTED: {e}")
+                            raise
+                        except Exception as e:
+                            print(f"  ERROR processing {author_id} ({language}): {e}")
+                            import traceback
+                            traceback.print_exc()
+                    else:
+                        print(f"\nWarning: PTA author {author_info['name']} ({author_id}) directory not found")
+
+                print(f"\nCompleted processing {processed_pta} PTA authors")
+            else:
+                print("No eligible PTA works found (all may be by-nc licensed)")
 
     # Process dictionary data
     print("\n=== PROCESSING DICTIONARY DATA ===")
@@ -7259,8 +7662,12 @@ def import_lexicons_for_languages(db_filename, languages, lexicon_paths):
             return 'hebrew'
         elif 0x0600 <= c <= 0x06FF:  # Arabic
             return 'arabic'
+        elif 0x0700 <= c <= 0x074F:  # Syriac
+            return 'syriac'
         elif 0x0900 <= c <= 0x097F:  # Devanagari (Sanskrit)
             return 'sanskrit'
+        elif 0x2C80 <= c <= 0x2CFF:  # Coptic
+            return 'coptic'
         return None
 
     # Apply normalization to entries
@@ -7491,7 +7898,7 @@ def merge_external_databases(db_filename, mode='sample'):
     Merge rules by build mode:
     - sample: (none)
     - full: Sumerian + Akkadian
-    - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian
+    - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian + Syriac + Coptic
 
     Args:
         db_filename: Name of the target database file
@@ -7519,6 +7926,8 @@ def merge_external_databases(db_filename, mode='sample'):
             ('cuneiform/sumerian_texts.db', 'Sumerian'),
             ('cuneiform/akkadian_texts.db', 'Akkadian'),
             ('dante/dante_texts.db', 'Italian'),
+            ('syriac/syriac_texts.db', 'Syriac'),
+            ('coptic/coptic_texts.db', 'Coptic'),
         ]
     }
 
@@ -7768,7 +8177,7 @@ if __name__ == "__main__":
             print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
-            print("  extended: Full Perseus + non-duplicate First1KGreek works")
+            print("  extended: Full Perseus + First1KGreek + PTA (Patristic Text Archive)")
             print("  first1ktest: First1KGreek texts only (skips Perseus and dictionaries)")
             print("  both: Build both sample and full databases")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
@@ -7981,7 +8390,7 @@ if __name__ == "__main__":
         # Build extended database
         if build_mode == "extended":
             print("\n" + "="*60)
-            print("BUILDING EXTENDED DATABASE (Perseus + First1KGreek)")
+            print("BUILDING EXTENDED DATABASE (Perseus + First1KGreek + PTA)")
             print("="*60)
             start_time = time.time()
             create_database(mode='extended')

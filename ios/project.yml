@@ -2,7 +2,7 @@ name: ClassicsViewer
 options:
   bundleIdPrefix: com.classicsviewer
   deploymentTarget:
-    iOS: 16.1
+    iOS: 18.0
   createIntermediateGroups: true
   
 packages:
@@ -17,7 +17,7 @@ targets:
   ClassicsViewer:
     type: application
     platform: iOS
-    deploymentTarget: 16.1
+    deploymentTarget: 18.0
     sources:
       - path: ClassicsViewer
         excludes:
@@ -38,6 +38,9 @@ targets:
         buildPhase: resources
       - path: ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip
         resourceTags: [database_full]
+        buildPhase: resources
+      - path: ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip
+        resourceTags: [database_extended]
         buildPhase: resources
     # Resource tag configuration - tags in neither list are "download on demand"
     attributes:

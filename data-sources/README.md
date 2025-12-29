@@ -36,5 +36,7 @@ wget http://oracc.museum.upenn.edu/json/rinap.zip  # RINAP Akkadian Glossary (~2
 #The Harrington Trees, available under a CC BY-SA 4.0 license.
 
 
-
-
+git clone https://github.com/PatristicTextArchive/pta_data.git
+git clone https://github.com/PatristicTextArchive/pta_metadata.git
+git clone https://github.com/srophe/syriaca-data.git
+git clone https://github.com/CopticScriptorium/corpora.git

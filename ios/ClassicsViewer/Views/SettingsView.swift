@@ -77,6 +77,15 @@ struct SettingsView: View {
                         }
                     }
 
+                    NavigationLink(destination: ExtendedDatabaseDownloadView()) {
+                        HStack {
+                            Image(systemName: "cylinder.split.1x2.fill")
+                            Text("Extended Database")
+                            Spacer()
+                            ExtendedDatabaseStatusBadge()
+                        }
+                    }
+
                     NavigationLink(destination: AudioDownloadView()) {
                         HStack {
                             Image(systemName: "waveform")
@@ -198,7 +207,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("0.8.90")
+                        Text("0.8.100")
                             .foregroundColor(.secondary)
                     }
 
@@ -500,6 +509,33 @@ struct AudioStatusBadge: View {
                 Text("Installed")
                     .font(.caption)
                     .foregroundColor(.green)
+            case .downloading:
+                ProgressView()
+                    .scaleEffect(0.7)
+            default:
+                EmptyView()
+            }
+        }
+        .task {
+            await manager.checkStatus()
+        }
+    }
+}
+
+struct ExtendedDatabaseStatusBadge: View {
+    @StateObject private var manager = ExtendedDatabaseDownloadManager.shared
+
+    var body: some View {
+        Group {
+            switch manager.status {
+            case .active:
+                Text("Active")
+                    .font(.caption)
+                    .foregroundColor(.purple)
+            case .installed:
+                Text("Ready")
+                    .font(.caption)
+                    .foregroundColor(.blue)
             case .downloading:
                 ProgressView()
                     .scaleEffect(0.7)
