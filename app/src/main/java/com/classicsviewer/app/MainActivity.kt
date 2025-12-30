@@ -139,7 +139,10 @@ class MainActivity : AppCompatActivity() {
                     "arabic",
                     "coptic",
                     "syriac",
-                    "italian"
+                    "italian",
+                    "pali",
+                    "norse",
+                    "old_english"
                 )
 
                 // One-time migration: fix any existing ordering issues
@@ -237,6 +240,9 @@ class MainActivity : AppCompatActivity() {
             "coptic" -> 0xFF5A9B8A.toInt()    // Egyptian teal
             "syriac" -> 0xFF9B7B5A.toInt()    // Florentine brown
             "italian" -> 0xFFA8727B.toInt()   // Dusty rose
+            "pali" -> 0xFF7EABC9.toInt()      // Light blue
+            "norse" -> 0xFF5A5A5A.toInt()     // Dark grey
+            "old_english" -> 0xFFB8860B.toInt() // Dark gold
             else -> 0xFF808080.toInt()        // Grey for unknown languages
         }
     }

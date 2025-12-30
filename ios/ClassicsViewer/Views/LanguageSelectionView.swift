@@ -56,7 +56,7 @@ struct LanguageSelectionView: View {
             let preferredOrder = [
                 "greek", "latin", "sumerian", "akkadian",
                 "sanskrit", "persian", "hebrew", "arabic",
-                "coptic", "syriac", "italian"
+                "coptic", "syriac", "italian", "pali", "norse", "old_english"
             ]
 
             // One-time migration: fix any existing ordering issues (matches Android)
@@ -167,6 +167,12 @@ struct LanguageSelectionView: View {
             return 0xFF9B7B5A     // Florentine brown
         case "italian":
             return 0xFFA8727B     // Dusty rose
+        case "pali":
+            return 0xFF7EABC9     // Light blue
+        case "norse":
+            return 0xFF5A5A5A     // Dark grey
+        case "old_english":
+            return 0xFFB8860B     // Dark gold
         default:
             return 0xFF808080     // Grey for unknown languages
         }

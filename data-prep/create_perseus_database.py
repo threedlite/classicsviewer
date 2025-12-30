@@ -7937,6 +7937,7 @@ def merge_external_databases(db_filename, mode='sample'):
             ('coptic/coptic_texts.db', 'coptic'),
             ('pali/pali_texts.db', 'pali'),
             ('norse/norse_texts.db', 'norse'),
+            ('old_english/old_english_texts.db', 'old_english'),
         ]
     }
 

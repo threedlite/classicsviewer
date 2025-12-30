@@ -503,6 +503,130 @@ linguistic annotations, enabling research and study of Coptic language and
 literature.
 
 
+PALI TEXTS
+==========
+
+SuttaCentral - Pali Canon
+--------------------------
+Source: SuttaCentral
+License: Public Domain (CC0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Repository: https://github.com/suttacentral/bilara-data
+Website: https://suttacentral.net/
+
+SuttaCentral provides the Pali Canon (Tipitaka) with aligned English translations.
+The texts include the three main collections (pitakas) of Buddhist scriptures:
+- Vinaya Pitaka (monastic rules)
+- Sutta Pitaka (discourses)
+- Abhidhamma Pitaka (philosophical analysis)
+
+The bilara-data repository provides segment-aligned Pali texts with English
+translations, enabling precise parallel reading of original Pali and modern
+English renderings.
+
+Translations by: Bhikkhu Sujato, Bhikkhu Brahmali, and other contributors
+Data Format: JSON with segment IDs for precise text alignment
+
+The CC0 license places these texts in the public domain, allowing unrestricted
+use, modification, and redistribution.
+
+
+OLD NORSE TEXTS
+===============
+
+CLTK Old Norse Texts
+---------------------
+Source: Classical Language Toolkit (CLTK)
+License: Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0) + Public Domain
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Repository: https://github.com/cltk/non_texts
+Website: https://cltk.org/
+
+The CLTK Old Norse corpus includes:
+- Poetic Edda (Sæmundar-Edda): Voluspa, Havamal, Lokasenna, Grimnismal, etc.
+- Prose Edda (Snorra-Edda): Snorri Sturluson's masterwork
+- Major Sagas: Grettis saga, Volsunga saga, Hrolf Kraki, etc.
+- Þættir: Short tales (Norna-Gest, etc.)
+
+Attribution: Classical Language Toolkit (cltk.org)
+
+
+Zoega's Old Icelandic Dictionary
+---------------------------------
+Source: "A Concise Dictionary of Old Icelandic" by Geir Zoëga (1910)
+License: Public Domain (original) + MIT (JSON conversion)
+
+Repository: https://github.com/stscoundrel/old-icelandic-zoega
+
+The standard reference dictionary for Old Norse/Old Icelandic, providing
+29,951 dictionary entries. This dictionary was famously used by J.R.R. Tolkien
+and C.S. Lewis in their studies of Old Norse literature.
+
+Original Publication: Clarendon Press, Oxford, 1910
+Digital JSON Conversion: github.com/stscoundrel
+
+
+IcePaHC Treebank - Old Icelandic Morphology
+--------------------------------------------
+Source: Icelandic Parsed Historical Corpus (IcePaHC)
+License: Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Repository: https://github.com/UniversalDependencies/UD_Icelandic-IcePaHC
+
+The IcePaHC treebank provides morphological annotations for Old Icelandic texts,
+including form-to-lemma mappings with grammatical features (case, number,
+gender, definiteness). This enables accurate dictionary lookup for inflected
+Old Norse word forms.
+
+65,793+ form-to-lemma mappings with morphological features
+Examples: menn → maður (Nom Plural), konungs → konungur (Gen Sing)
+
+
+OLD ENGLISH (ANGLO-SAXON) TEXTS
+================================
+
+Beowulf - Old English Epic Poem
+--------------------------------
+Source: Project Gutenberg ebook #9700
+License: Public Domain
+https://www.gutenberg.org/ebooks/9700
+
+Beowulf is the greatest surviving Old English poem, composed between 700-1000 CE.
+The only manuscript (Cotton MS Vitellius A.XV) nearly perished in a fire in 1731.
+The poem tells of the Geatish hero Beowulf who defeats the monster Grendel,
+Grendel's mother, and later a dragon.
+
+The Project Gutenberg text provides the original Old English with section divisions.
+This text is in the public domain in the United States.
+
+
+Bosworth-Toller Anglo-Saxon Dictionary
+---------------------------------------
+Source: Germanic Lexicon Project
+License: Public Domain (copyright expired)
+
+Original Work:
+- Main Volume (1898): Joseph Bosworth & T. Northcote Toller
+- Supplement (1921): T. Northcote Toller
+- Publisher: Clarendon Press, Oxford
+
+Digital Edition: Germanic Lexicon Project by Sean Crist
+Website: https://bosworthtoller.com/
+Data Source: https://github.com/madeleineth/btc_anglo_saxon
+
+The Bosworth-Toller Anglo-Saxon Dictionary is the standard reference dictionary
+for Old English, containing approximately 42,000 entries. The main volume and
+1921 supplement are in the public domain due to expired copyright.
+
+Note: Alistair Campbell's 1972 addenda are NOT public domain and are excluded.
+
+The dictionary provides comprehensive coverage of Old English vocabulary,
+including special characters: þ (thorn), ð (eth), æ (ash), ƿ (wynn).
+
+
 SANSKRIT RESOURCES
 ==================
 

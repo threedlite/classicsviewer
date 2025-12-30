@@ -19,6 +19,7 @@ import os
 import re
 import zipfile
 import subprocess
+import urllib.request
 from pathlib import Path
 
 # Configuration
@@ -39,6 +40,31 @@ TREEBANK_REPO = "https://github.com/UniversalDependencies/UD_Icelandic-IcePaHC.g
 
 # Treebank path
 TREEBANK_DIR = os.path.join(DATA_DIR, "icepahc")
+
+# Translation URLs (Project Gutenberg - Public Domain)
+TRANSLATIONS = {
+    'Völsunga_saga': {
+        'url': 'https://www.gutenberg.org/cache/epub/1152/pg1152.txt',
+        'path': os.path.join(DATA_DIR, 'volsunga_translation.txt'),
+        'translator': 'William Morris & Eiríkr Magnússon (1888)',
+    },
+    'Grettis_Saga': {
+        'url': 'https://www.gutenberg.org/cache/epub/347/pg347.txt',
+        'path': os.path.join(DATA_DIR, 'grettis_translation.txt'),
+        'translator': 'G.H. Hight (1914)',
+    },
+    'Snorra-Edda': {
+        'url': 'https://www.gutenberg.org/cache/epub/18947/pg18947.txt',
+        'path': os.path.join(DATA_DIR, 'prose_edda_translation.txt'),
+        'translator': 'Rasmus B. Anderson (1879)',
+    },
+    # Poetic Edda uses a different structure - poems are separate
+    'Sæmundar-Edda': {
+        'url': 'https://www.gutenberg.org/cache/epub/14726/pg14726.txt',
+        'path': os.path.join(DATA_DIR, 'poetic_edda_translation.txt'),
+        'translator': 'Benjamin Thorpe (1866)',
+    },
+}
 
 # Works to include (directory name, display title, English title, type)
 WORKS = [
@@ -301,6 +327,25 @@ def clone_repositories():
     print(f"  Texts ready at: {TEXTS_DIR}")
     print(f"  Dictionary ready at: {DICT_DIR}")
     print(f"  Treebank ready at: {TREEBANK_DIR}")
+
+
+def download_translations():
+    """Download English translations from Project Gutenberg"""
+    print("\nDownloading English translations...")
+
+    for work_name, trans_info in TRANSLATIONS.items():
+        trans_path = trans_info['path']
+        trans_url = trans_info['url']
+
+        if os.path.exists(trans_path):
+            print(f"  {work_name} translation already downloaded")
+        else:
+            print(f"  Downloading {work_name} translation...")
+            try:
+                urllib.request.urlretrieve(trans_url, trans_path)
+                print(f"    Saved to: {trans_path}")
+            except Exception as e:
+                print(f"    Error downloading {work_name}: {e}")
 
 
 def normalize_norse(word):
@@ -736,6 +781,433 @@ def populate_normalization_patterns(conn):
     return count
 
 
+def parse_volsunga_translation(filepath):
+    """Parse Völsunga saga translation into chapters.
+
+    The Morris/Magnusson translation has chapters with Roman numeral headings.
+    Returns list of (chapter_num, chapter_text) tuples.
+    """
+    print(f"  Parsing Völsunga saga translation...")
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    chapters = []
+    current_chapter = None
+    current_lines = []
+
+    in_text = False
+
+    # Chapter pattern: "CHAPTER I." or "CHAPTER XLII." with title following
+    chapter_pattern = re.compile(r'^CHAPTER\s+([IVXLC]+)\.?\s', re.IGNORECASE)
+
+    lines = content.split('\n')
+
+    for line in lines:
+        line_stripped = line.strip()
+
+        # Detect end of text - appendix or project gutenberg footer
+        # Note: ENDNOTES appears multiple times as footnote sections, so we don't use it
+        if in_text and re.match(r'^(APPENDIX|END OF THE PROJECT|\*\*\*\s*END OF)', line_stripped, re.IGNORECASE):
+            if current_chapter is not None and current_lines:
+                chapters.append((current_chapter, '\n'.join(current_lines)))
+            break
+
+        # Check for chapter heading - this also starts the text
+        chapter_match = chapter_pattern.match(line_stripped)
+        if chapter_match:
+            # Save previous chapter
+            if current_chapter is not None and current_lines:
+                chapters.append((current_chapter, '\n'.join(current_lines)))
+                current_lines = []
+
+            in_text = True
+            # Convert Roman numeral to number
+            roman = chapter_match.group(1).upper()
+            current_chapter = roman_to_int(roman)
+            continue
+
+        # Collect text
+        if in_text and current_chapter is not None and line_stripped:
+            current_lines.append(line_stripped)
+
+    # Add final chapter
+    if current_chapter is not None and current_lines:
+        chapters.append((current_chapter, '\n'.join(current_lines)))
+
+    print(f"    Found {len(chapters)} chapters")
+    return chapters
+
+
+def parse_grettis_translation(filepath):
+    """Parse Grettir's Saga translation into chapters.
+
+    The Hight translation has "CHAPTER I" etc. format.
+    Returns list of (chapter_num, chapter_text) tuples.
+    """
+    print(f"  Parsing Grettir's Saga translation...")
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    chapters = []
+    current_chapter = None
+    current_lines = []
+
+    in_text = False
+
+    # Chapter pattern: "CHAPTER I" or "CHAPTER XCIII"
+    chapter_pattern = re.compile(r'^CHAPTER\s+([IVXLC]+)\b', re.IGNORECASE)
+
+    lines = content.split('\n')
+
+    for line in lines:
+        line_stripped = line.strip()
+
+        # Detect start of main text
+        if 'CHAPTER I' in line.upper() and not in_text:
+            in_text = True
+
+        # Detect end of text - Project Gutenberg footer
+        # Note: ENDNOTES appears multiple times as footnote sections, so we don't use it
+        if in_text and re.match(r'^(\*\*\*\s*END OF|END OF THE PROJECT)', line_stripped, re.IGNORECASE):
+            if current_chapter is not None and current_lines:
+                chapters.append((current_chapter, '\n'.join(current_lines)))
+            break
+
+        if not in_text:
+            continue
+
+        # Check for chapter heading
+        chapter_match = chapter_pattern.match(line_stripped)
+        if chapter_match:
+            # Save previous chapter
+            if current_chapter is not None and current_lines:
+                chapters.append((current_chapter, '\n'.join(current_lines)))
+                current_lines = []
+
+            # Convert Roman numeral to number
+            roman = chapter_match.group(1).upper()
+            current_chapter = roman_to_int(roman)
+            continue
+
+        # Collect text (skip chapter titles in ALL CAPS)
+        if current_chapter is not None and line_stripped:
+            # Skip ALL CAPS title lines
+            if not re.match(r'^[A-Z\s\-\.\']+$', line_stripped):
+                current_lines.append(line_stripped)
+
+    # Add final chapter
+    if current_chapter is not None and current_lines:
+        chapters.append((current_chapter, '\n'.join(current_lines)))
+
+    print(f"    Found {len(chapters)} chapters")
+    return chapters
+
+
+def roman_to_int(roman):
+    """Convert Roman numeral to integer"""
+    values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    result = 0
+    prev = 0
+    for char in reversed(roman.upper()):
+        curr = values.get(char, 0)
+        if curr < prev:
+            result -= curr
+        else:
+            result += curr
+        prev = curr
+    return result
+
+
+# Map Old Norse poem name -> search pattern in English translation
+# More specific patterns must come before less specific ones (e.g., "GROENLAND LAY OF ATLI" before "LAY OF ATLI")
+POETIC_EDDA_MAP = {
+    "Völuspá": "VÖLUSPÂ",
+    "Hávamál": "HIGH ONE'S",
+    "Vafþrúðnismál": "VAFTHRUDNIR",
+    "Grímnismál": "GRIMNIR",
+    "Baldrs draumar": "BALDR'S DREAMS",
+    "Hymiskviða": "HYMIR",
+    "Þrymskviða": "THRYM",
+    "Alvíssmál": "ALVIS",
+    "Hárbarðsljóð": "HARBARD",
+    "Skírnismál": "SKIRNIR",
+    "Rígsþula": "LAY OF RIG",
+    "Lokasenna": "LOKI'S ALTERCATION",
+    "Hyndluljóð": "HYNDLA",
+    "Völundarkviða": "LAY OF VOLUND",
+    "Fáfnismál": "LAY OF FAFNIR",
+    "Sigrdrífumál": "SIGRDRIFA",
+    "Guðrúnarkviða": "LAY OF GUDRUN",
+    "Helreið Brynhildar": "BRYNHILD'S HEL",
+    "Dráp Niflunga": "NIFLUNGS",
+    "Oddrúnarkviða": "ODDRUN'S",
+    "Atlamál in grænlenzku": "GROENLAND LAY OF ATLI",  # Must be before "LAY OF ATLI"
+    "Atlakviða": "LAY OF ATLI",
+    "Guðrúnarhvöt": "GUDRUN'S INCITEMENT",
+    "Hamðismál": "LAY OF HAMDIR",
+}
+
+
+def parse_poetic_edda_translation(filepath):
+    """Parse Poetic Edda translation into individual poems.
+
+    Scans for poem title patterns and extracts text between them.
+    Returns dict of {old_norse_name: translation_text}.
+    """
+    print(f"  Parsing Poetic Edda translation...")
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    poems = {}
+    current_poem = None
+    current_lines = []
+    in_text = False
+
+    lines = content.split('\n')
+
+    for line in lines:
+        line_stripped = line.strip()
+        line_upper = line_stripped.upper()
+
+        # Detect end of text
+        if in_text and re.match(r'^(\*\*\*\s*END OF|END OF THE PROJECT)', line_stripped, re.IGNORECASE):
+            if current_poem and current_lines:
+                poems[current_poem] = '\n'.join(current_lines)
+            break
+
+        # Check if line contains a poem title pattern
+        matched_poem = None
+        for norse_name, pattern in POETIC_EDDA_MAP.items():
+            if pattern in line_upper:
+                matched_poem = norse_name
+                in_text = True
+                break
+
+        if matched_poem:
+            # Save previous poem
+            if current_poem and current_lines:
+                if current_poem not in poems:
+                    poems[current_poem] = '\n'.join(current_lines)
+                current_lines = []
+            current_poem = matched_poem
+            continue
+
+        # Collect text
+        if in_text and current_poem and line_stripped:
+            current_lines.append(line_stripped)
+
+    # Add final poem
+    if current_poem and current_lines:
+        if current_poem not in poems:
+            poems[current_poem] = '\n'.join(current_lines)
+
+    print(f"    Found {len(poems)} poems")
+    return poems
+
+
+def parse_prose_edda_translation(filepath):
+    """Parse Prose Edda translation into sections.
+
+    The Anderson translation has sections: Gylfaginning, Skaldskaparmal, etc.
+    Returns dict of {section_name: translation_text}.
+    """
+    print(f"  Parsing Prose Edda translation...")
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    sections = {}
+    current_section = None
+    current_lines = []
+
+    in_text = False
+
+    lines = content.split('\n')
+
+    for line in lines:
+        line_stripped = line.strip()
+
+        # Detect end of text
+        if in_text and re.match(r'^(\*\*\*\s*END OF|END OF THE PROJECT)', line_stripped, re.IGNORECASE):
+            if current_section and current_lines:
+                sections[current_section] = '\n'.join(current_lines)
+            break
+
+        # Detect major section headings
+        if 'GYLFAGINNING' in line_stripped.upper() and not in_text:
+            in_text = True
+            if current_section and current_lines:
+                sections[current_section] = '\n'.join(current_lines)
+                current_lines = []
+            current_section = 'Gylfaginning'
+            continue
+
+        if in_text and 'SKALDSKAPARMAL' in line_stripped.upper():
+            if current_section and current_lines:
+                sections[current_section] = '\n'.join(current_lines)
+                current_lines = []
+            current_section = 'skaaldskaparmaal'  # Match the filename
+            continue
+
+        if in_text and 'HATTATAL' in line_stripped.upper():
+            if current_section and current_lines:
+                sections[current_section] = '\n'.join(current_lines)
+                current_lines = []
+            current_section = 'haattatal'  # Match the filename (with typo)
+            continue
+
+        # Collect text
+        if in_text and current_section and line_stripped:
+            current_lines.append(line_stripped)
+
+    # Add final section
+    if current_section and current_lines:
+        sections[current_section] = '\n'.join(current_lines)
+
+    print(f"    Found {len(sections)} sections")
+    return sections
+
+
+def populate_translations(conn):
+    """Populate English translations for Norse texts that have them."""
+    cursor = conn.cursor()
+
+    print("Populating translations...")
+
+    total_segments = 0
+    total_lookups = 0
+    works_with_trans = []
+
+    # Process each work that has translations
+    for work_dir_name, trans_info in TRANSLATIONS.items():
+        trans_path = trans_info['path']
+        translator = trans_info['translator']
+
+        if not os.path.exists(trans_path):
+            print(f"  Warning: Translation not found for {work_dir_name}")
+            continue
+
+        # Get the work_id from the database
+        work_id = f"norse_{work_dir_name.lower().replace(' ', '_')}"
+
+        # Check if work exists
+        cursor.execute("SELECT id FROM works WHERE id = ?", (work_id,))
+        if not cursor.fetchone():
+            print(f"  Warning: Work not found in database: {work_id}")
+            continue
+
+        # Get books (chapters) for this work
+        cursor.execute("""
+            SELECT id, book_number, line_count
+            FROM books
+            WHERE work_id = ?
+            ORDER BY book_number
+        """, (work_id,))
+        books = cursor.fetchall()
+
+        if not books:
+            print(f"  Warning: No chapters found for {work_id}")
+            continue
+
+        # Parse translation based on work type
+        if work_dir_name == 'Völsunga_saga':
+            trans_chapters = parse_volsunga_translation(trans_path)
+            # Create a mapping of chapter number -> translation text
+            trans_map = {ch_num: text for ch_num, text in trans_chapters}
+            match_by = 'number'
+        elif work_dir_name == 'Grettis_Saga':
+            trans_chapters = parse_grettis_translation(trans_path)
+            # Create a mapping of chapter number -> translation text
+            trans_map = {ch_num: text for ch_num, text in trans_chapters}
+            match_by = 'number'
+        elif work_dir_name == 'Sæmundar-Edda':
+            trans_map = parse_poetic_edda_translation(trans_path)
+            match_by = 'label'  # Match by poem name (book label)
+        elif work_dir_name == 'Snorra-Edda':
+            trans_map = parse_prose_edda_translation(trans_path)
+            match_by = 'label'  # Match by section name (book label)
+        else:
+            print(f"  Warning: Unknown work type: {work_dir_name}")
+            continue
+
+        if not trans_map:
+            print(f"  Warning: No chapters/poems parsed from {work_dir_name} translation")
+            continue
+
+        work_segments = 0
+        work_lookups = 0
+
+        # Get books with label for matching
+        cursor.execute("""
+            SELECT id, book_number, line_count, label
+            FROM books
+            WHERE work_id = ?
+            ORDER BY book_number
+        """, (work_id,))
+        books_with_label = cursor.fetchall()
+
+        # Match translation chapters to book chapters
+        for book_id, book_num, line_count, label in books_with_label:
+            trans_text = None
+
+            if match_by == 'number':
+                if book_num in trans_map:
+                    trans_text = trans_map[book_num]
+            else:
+                # Match by label (poem/section name)
+                # Try exact match first
+                if label in trans_map:
+                    trans_text = trans_map[label]
+                else:
+                    # Try case-insensitive match and partial match
+                    label_lower = label.lower()
+                    for key, text in trans_map.items():
+                        if key.lower() == label_lower:
+                            trans_text = text
+                            break
+                        # For Prose Edda, label is like "Gylfaginning", key might be lowercase
+                        if key.lower() in label_lower or label_lower in key.lower():
+                            trans_text = text
+                            break
+
+            if trans_text and line_count:
+                # Insert translation segment
+                cursor.execute('''
+                    INSERT INTO translation_segments
+                    (book_id, start_line, end_line, sequence_number, translation_text, translator)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (book_id, 1, line_count, 1, trans_text, translator))
+
+                segment_id = cursor.lastrowid
+                work_segments += 1
+
+                # Create translation_lookup entries
+                for line_num in range(1, line_count + 1):
+                    cursor.execute('''
+                        INSERT INTO translation_lookup (book_id, line_number, segment_id)
+                        VALUES (?, ?, ?)
+                    ''', (book_id, line_num, segment_id))
+                    work_lookups += 1
+
+        if work_segments > 0:
+            works_with_trans.append(work_dir_name)
+            total_segments += work_segments
+            total_lookups += work_lookups
+            print(f"  {work_dir_name}: {work_segments} chapters with translations")
+
+    # Update has_translations for the author if any translations were added
+    if works_with_trans:
+        cursor.execute("UPDATE authors SET has_translations = 1 WHERE id = 'norse_traditional'")
+
+    conn.commit()
+
+    print(f"  Total: {total_segments} translation segments, {total_lookups} lookup entries")
+    return total_segments
+
+
 def compress_database(db_path, zip_path):
     """Compress database to ZIP"""
     print(f"Compressing database to {zip_path}...")
@@ -761,6 +1233,9 @@ def main():
     print("\n--- Fetching Source Data ---")
     clone_repositories()
 
+    # Download translations
+    download_translations()
+
     # Create database
     print("\n--- Creating Database ---")
     conn = create_database(DB_PATH)
@@ -768,6 +1243,10 @@ def main():
     # Populate texts
     print("\n--- Populating Texts ---")
     text_stats = populate_texts(conn)
+
+    # Populate translations
+    print("\n--- Populating Translations ---")
+    trans_count = populate_translations(conn)
 
     # Populate dictionary
     print("\n--- Populating Dictionary ---")
@@ -795,6 +1274,7 @@ def main():
     print(f"Chapters: {text_stats['chapters']}")
     print(f"Lines: {text_stats['lines']}")
     print(f"Words: {text_stats['words']}")
+    print(f"Translation segments: {trans_count}")
     print(f"Dictionary entries: {dict_count}")
     print(f"Morphology mappings: {morph_count}")
     print(f"Normalization patterns: {pattern_count}")
