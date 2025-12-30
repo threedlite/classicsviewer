@@ -1,0 +1,12 @@
+# Generated files
+pali_texts.db
+pali_texts.db.zip
+
+# Data sources (cloned repos)
+data-sources/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/

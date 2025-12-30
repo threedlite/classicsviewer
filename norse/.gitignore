@@ -1,0 +1,12 @@
+# Generated files
+norse_texts.db
+norse_texts.db.zip
+
+# Data sources (cloned repos)
+data-sources/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/

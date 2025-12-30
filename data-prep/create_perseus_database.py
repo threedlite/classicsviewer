@@ -7895,10 +7895,14 @@ def merge_external_databases(db_filename, mode='sample'):
     """
     Merge external language databases into the main Perseus database.
 
+    The base database already contains Greek and Latin from Perseus.
+    Extended mode also includes First1KGreek and PTA (Patristic Text Archive).
+
     Merge rules by build mode:
     - sample: (none)
-    - full: Sumerian + Akkadian
-    - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian + Syriac + Coptic
+    - full: Sumerian + Akkadian + Italian + Syriac + Coptic
+    - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian +
+                Italian + Syriac + Coptic + Pali + Norse
 
     Args:
         db_filename: Name of the target database file
@@ -7931,6 +7935,8 @@ def merge_external_databases(db_filename, mode='sample'):
             ('dante/dante_texts.db', 'italian'),
             ('syriac/syriac_texts.db', 'syriac'),
             ('coptic/coptic_texts.db', 'coptic'),
+            ('pali/pali_texts.db', 'pali'),
+            ('norse/norse_texts.db', 'norse'),
         ]
     }
 
@@ -8180,7 +8186,7 @@ if __name__ == "__main__":
             print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
-            print("  extended: Full Perseus + First1KGreek + PTA (Patristic Text Archive)")
+            print("  extended: Full Perseus + First1KGreek + PTA + Pali + Norse")
             print("  first1ktest: First1KGreek texts only (skips Perseus and dictionaries)")
             print("  both: Build both sample and full databases")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
@@ -8393,7 +8399,7 @@ if __name__ == "__main__":
         # Build extended database
         if build_mode == "extended":
             print("\n" + "="*60)
-            print("BUILDING EXTENDED DATABASE (Perseus + First1KGreek + PTA)")
+            print("BUILDING EXTENDED DATABASE (Perseus + First1KGreek + PTA + Pali + Norse)")
             print("="*60)
             start_time = time.time()
             create_database(mode='extended')
