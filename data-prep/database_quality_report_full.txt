@@ -1,16 +1,16 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2025-12-21T06:47:10.791985
+Generated: 2025-12-30T08:34:05.108357
 Mode: full
 
-Total Authors: 133
-Total Works: 1014
-Total Books: 2604
-Total Lines: 988,199
-Translation Segments: 3,472,691
-Build Time: 8.4 minutes
-Database Size: 7113.7MB → 1305.2MB compressed (18.3%)
-Dictionary Entries: 118,952
-Lemma Mappings: 3,005,964
+Total Authors: 135
+Total Works: 1018
+Total Books: 2743
+Total Lines: 1,005,671
+Translation Segments: 3,709,274
+Build Time: 8.6 minutes
+Database Size: 7612.9MB → 1379.4MB compressed (18.1%)
+Dictionary Entries: 197,616
+Lemma Mappings: 3,106,604
 
 === STATISTICS BY LANGUAGE ===
 
@@ -31,6 +31,18 @@ akkadian:
   Works: 1
   Lines: 204
   Words: 672
+
+italian:
+  Authors: 1
+  Works: 3
+  Lines: 14,233
+  Words: 101,601
+
+old_english:
+  Authors: 1
+  Works: 1
+  Lines: 3,239
+  Words: 19,355
 
 sumerian:
   Authors: 1
@@ -166,6 +178,87 @@ Andocides / On the Mysteries - 571 lines, max_char=583 [Perseus]
 Andocides / On the Mysteries translations: Interlinear (Beta, AI-generated from app dictionary) 571 segments [Excellent (100% coverage)], Kenneth John Maidment 165 segments [Excellent-Section (100% coverage)]
 Andocides / On the Peace with Sparta - 166 lines, max_char=465 [Perseus]
 Andocides / On the Peace with Sparta translations: Interlinear (Beta, AI-generated from app dictionary) 166 segments [Excellent (100% coverage)], Kenneth John Maidment 41 segments [Excellent-Section (100% coverage)]
+
+[Anonymous]
+Anonymous / Beowulf - 3,239 lines total, 39 books, max_lines/book=417, max_char=68 [Perseus]
+Anonymous / Beowulf / I. The Life and Death of Scyld - 52 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / II. THE HALL HEOROT. - 62 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / III. GRENDEL'S VISITS. - 74 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / IV. HYGELAC'S THANE. - 69 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / V. THE ERRAND. - 62 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / VI. BEÓWULF'S SPEECH. - 51 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / VII. HROTHGAR'S WELCOME. - 85 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / VIII. HROTHGAR TELLS OF GRENDEL. - 43 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / IX. HUNFERTH OBJECTS TO BEÓWULF. - 60 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / X. BEÓWULF'S CONTEST WITH BRECA.--THE FEAST. - 104 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XI. THE WATCH FOR GRENDEL. - 48 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XII. GRENDEL'S RAID. - 81 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XIII. BEÓWULF TEARS OFF GRENDEL'S ARM. - 46 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XIV. THE JOY AT HEOROT. - 88 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XV. HROTHGAR'S GRATULATION. - 66 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XVI. THE BANQUET AND THE GIFTS. - 59 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XVII. SONG OF HROTHGAR'S POET--THE LAY OF HNAEF AND HENGEST. - 75 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XVIII. THE GLEEMAN'S TALE IS ENDED. - 67 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XIX. BEÓWULF'S JEWELLED COLLAR. THE HEROES REST. - 59 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XX. GRENDEL'S MOTHER ATTACKS THE RING-DANES. - 70 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXI. SORROW AT HEOROT: ÆSCHERE'S DEATH. - 62 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXII. BEÓWULF SEEKS THE MONSTER IN THE HAUNTS OF THE NIXIES. - 90 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXIII. THE BATTLE WITH THE WATER-DRAKE. - 84 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXIV. BEÓWULF SLAYS THE SPRITE. - 94 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXV. HROTHGAR'S GRATITUDE: HE DISCOURSES. - 94 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXVI. THE DISCOURSE IS ENDED.--BEÓWULF PREPARES TO LEAVE. - 72 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXVII. THE PARTING WORDS. - 71 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXVIII. BEÓWULF RETURNS TO GEATLAND.--THE QUEENS HYGD AND THRYTHO. - 75 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXIX. HIS ARRIVAL. HYGELAC'S RECEPTION. - 69 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXX. BEÓWULF'S STORY OF THE SLAYINGS. - 112 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXI. HE GIVES PRESENTS TO HYGELAC. HYGELAC REWARDS HIM. HYGELAC'S DEATH. - 79 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXII. THE FIRE-DRAKE. THE HOARD. - 90 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXIII. BEOWULF RESOLVES TO KILL THE FIRE-DRAKE. - 79 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXIV. RETROSPECT OF BEÓWULF.--STRIFE BETWEEN SWEONAS AND GEATAS. - 69 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXV. MEMORIES OF PAST TIME.--THE FEUD WITH THE FIRE-DRAKE. - 142 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXVI. WIGLAF HELPS BEÓWULF IN THE FEUD. - 92 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXVII. BEÓWULF WOUNDED TO DEATH. - 58 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXVIII. THE JEWEL-HOARD. THE PASSING OF BEOWULF. - 69 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
+Anonymous / Beowulf / XXXIX. THE COWARD-THANES. - 417 lines
+Anonymous / Beowulf translations: J. Lesslie Hall (1892) 1 segments [Excellent-Section (100% coverage)]
 
 [Antiphon]
 Antiphon / On the Choreutes - 147 lines, max_char=631 [Perseus]
@@ -1501,6 +1594,211 @@ Curtius Rufus, Quintus / Historiarum Alexandri Magni / Book 9 - 505 lines
 Curtius Rufus, Quintus / Historiarum Alexandri Magni translations: Interlinear (Beta, AI-generated from app dictionary) 505 segments [Excellent (100% coverage)]
 Curtius Rufus, Quintus / Historiarum Alexandri Magni / Book 10 - 450 lines
 Curtius Rufus, Quintus / Historiarum Alexandri Magni translations: Interlinear (Beta, AI-generated from app dictionary) 450 segments [Excellent (100% coverage)]
+
+[Dante Alighieri]
+Dante Alighieri / The Divine Comedy - Inferno - 4,720 lines total, 34 books, max_lines/book=157, max_char=49 [Perseus]
+Dante Alighieri / The Divine Comedy - Inferno / Canto I - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto II - 142 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto III - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto IV - 151 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto V - 142 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto VI - 115 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 115 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto VII - 130 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 130 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto VIII - 130 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 130 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto IX - 133 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 133 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto X - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XI - 115 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 115 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XII - 139 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XIII - 151 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XIV - 142 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XV - 124 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 124 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XVI - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XVII - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XVIII - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XIX - 133 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 133 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XX - 130 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 130 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXI - 139 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXII - 151 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXIII - 148 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXIV - 151 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXV - 151 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXVI - 142 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXVII - 136 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXVIII - 142 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXIX - 139 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXX - 148 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXXI - 145 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXXII - 139 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXXIII - 157 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 157 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Inferno / Canto XXXIV - 139 lines
+Dante Alighieri / The Divine Comedy - Inferno translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso - 4,758 lines total, 33 books, max_lines/book=154, max_char=49 [Perseus]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto I - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto II - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto III - 130 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 130 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto IV - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto V - 139 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto VI - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto VII - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto VIII - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto IX - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto X - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XI - 139 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XII - 145 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XIII - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XIV - 139 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XV - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XVI - 154 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XVII - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XVIII - 136 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XIX - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XX - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXI - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXII - 154 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXIII - 139 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXIV - 154 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXV - 139 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXVI - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXVII - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXVIII - 139 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXIX - 145 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXX - 148 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXXI - 142 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXXII - 151 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Paradiso / Canto XXXIII - 145 lines
+Dante Alighieri / The Divine Comedy - Paradiso translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio - 4,755 lines total, 33 books, max_lines/book=160, max_char=53 [Perseus]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto I - 136 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto II - 133 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 133 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto III - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto IV - 139 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto V - 136 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto VI - 151 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto VII - 136 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto VIII - 139 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto IX - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto X - 139 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XI - 142 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XII - 136 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XIII - 154 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XIV - 151 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XV - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XVI - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XVII - 139 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XVIII - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XIX - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XX - 151 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 151 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXI - 136 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 136 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXII - 154 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXIII - 133 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 133 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXIV - 154 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXV - 139 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 139 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXVI - 148 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXVII - 142 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 142 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXVIII - 148 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 148 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXIX - 154 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 154 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXX - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXXI - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXXII - 160 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 160 segments [Excellent (100% coverage)]
+Dante Alighieri / The Divine Comedy - Purgatorio / Canto XXXIII - 145 lines
+Dante Alighieri / The Divine Comedy - Purgatorio translations: Longfellow 145 segments [Excellent (100% coverage)]
 
 [Demades]
 Demades / On the Twelve Years - 129 lines, max_char=376 [Perseus]

@@ -31,13 +31,13 @@ struct AssetPackInfo {
         requiredFreeSpace: 25_000_000_000   // 25GB (matches Android REQUIRED_SPACE_BYTES)
     )
 
-    /// Extended database with Perseus + First1KGreek + PTA
+    /// Extended database with all languages and sources
     static let databaseExtended = AssetPackInfo(
         tag: .databaseExtended,
         displayName: "Extended Database",
-        description: "Perseus + First1KGreek + PTA (~2,600 works)",
-        compressedSize: 3_500_000_000,      // ~3.5GB compressed ZIP
-        extractedSize: 17_300_000_000,      // ~17.3GB uncompressed
+        description: "All 14 languages, 778 authors, 2,723 works",
+        compressedSize: 3_612_000_000,      // ~3.6GB compressed ZIP
+        extractedSize: 18_028_000_000,      // ~18GB uncompressed
         requiredFreeSpace: 55_000_000_000   // 55GB for safe extraction
     )
 }
@@ -103,7 +103,7 @@ enum DatabaseType: String, CaseIterable {
         case .full:
             return "All 100+ Greek and Latin authors from Perseus"
         case .extended:
-            return "Perseus + First1KGreek + PTA (~2,600 works)"
+            return "All 14 languages, 778 authors, 2,723 works"
         case .external:
             return "User-imported custom database"
         }

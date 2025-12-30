@@ -14,9 +14,11 @@ python3 create_norse_database.py
 The script automatically:
 1. Clones CLTK Old Norse texts from GitHub
 2. Clones Zoega's Old Icelandic Dictionary from GitHub
-3. Parses all sagas and Eddas
-4. Creates SQLite database with dictionary
-5. Compresses to `norse_texts.db.zip`
+3. Clones IcePaHC Treebank for morphology from GitHub
+4. Downloads English translations from Project Gutenberg
+5. Parses all sagas and Eddas
+6. Creates SQLite database with dictionary and morphology
+7. Compresses to `norse_texts.db.zip`
 
 ## Language Notes
 
@@ -30,36 +32,23 @@ All resources are compatible and share the same lexicon.
 
 ## Contents
 
-### Texts
-
-| Source | License | Content |
-|--------|---------|---------|
-| [CLTK Old Norse texts](https://github.com/cltk/non_texts) | CC BY-SA 3.0 + public domain | Eddas, 30+ sagas |
-
-**Included works:**
-- **Poetic Edda** (Sæmundar-Edda): Voluspa, Havamal, Lokasenna, Grimnismal, etc.
-- **Prose Edda** (Snorra-Edda): Snorri Sturluson's masterwork
-- **Major Sagas**: Grettis saga, Volsunga saga, Hrolf Kraki, Ragnar Lothbrok, etc.
-- **Þættir**: Short tales (Norna-Gest, etc.)
+### Texts (25 works)
+- **Poetic Edda** (Sæmundar-Edda): 25 poems, 1083 stanzas
+- **Prose Edda**:
+  - Prologus: 5 chapters
+  - Gylfaginning: 54 chapters
+  - Skáldskaparmál: 89 chapters
+  - Háttatal: 102 chapters
+- **Sagas**: Grettis saga (93 ch), Völsunga saga (42 ch), Hrólfs saga kraka, Örvar-Odds saga, etc.
+- **Þættir**: Norna-Gests þáttr, Þorsteins þáttr, etc.
 
 ### Dictionary
+- **29,951 entries** from Zoega's Old Icelandic Dictionary (1910)
+- **237 glossary entries** from Thorpe's Poetic Edda (proper nouns, mythological terms)
 
-| Source | License | Entries |
-|--------|---------|---------|
-| [Zoega's Old Icelandic Dictionary](https://github.com/stscoundrel/old-icelandic-zoega) | Public domain (1910) + MIT | 29,951 |
-
-"A Concise Dictionary of Old Icelandic" by Geir Zoëga (1910) - the standard reference dictionary, loved by Tolkien and Lewis.
-
-### Morphology (Treebank)
-
-| Source | License | Mappings |
-|--------|---------|----------|
-| [IcePaHC Treebank](https://github.com/UniversalDependencies/UD_Icelandic-IcePaHC) | CC BY-SA 4.0 | 65,793 |
-
-Form→lemma mappings with morphological features (case, number, gender, definiteness). Examples:
-- `menn` → `maður` (Nom Plural)
-- `konungs` → `konungur` (Gen Sing)
-- `konungana` → `konungur` (Acc Plural Definite)
+### Morphology
+- **66,134 form→lemma mappings** from IcePaHC Treebank
+- Examples: `menn` → `maður`, `konungs` → `konungur`
 
 ## File Structure
 
@@ -78,23 +67,52 @@ norse/
 
 ## Data Sources
 
-### Texts
-- **Repository**: https://github.com/cltk/non_texts
-- **License**: CC BY-SA 3.0 (Perseus texts) + Public Domain (Heimskringla texts)
-- **Format**: Plain text files organized by work/chapter
+All sources are downloaded automatically by the build script.
+
+### Old Norse Texts
+| Source | Repository | License |
+|--------|------------|---------|
+| CLTK Old Norse | https://github.com/cltk/non_texts | CC BY-SA 3.0 + Public Domain |
 
 ### Dictionary
-- **Repository**: https://github.com/stscoundrel/old-icelandic-zoega
-- **Original**: "A Concise Dictionary of Old Icelandic" (1910)
-- **License**: Public Domain (original) + MIT (JSON conversion)
-- **Format**: JSON with `{word, definitions}` structure
+| Source | Repository | License |
+|--------|------------|---------|
+| Zoega's Old Icelandic Dictionary (1910) | https://github.com/stscoundrel/old-icelandic-zoega | Public Domain + MIT |
 
-## No Translations
+### Morphology
+| Source | Repository | License |
+|--------|------------|---------|
+| IcePaHC Treebank | https://github.com/UniversalDependencies/UD_Icelandic-IcePaHC | CC BY-SA 4.0 |
 
-Unlike Greek/Latin/Pali, the Old Norse texts do not include aligned English translations. The texts are in original Old Norse only.
+### English Translations (Project Gutenberg)
 
-Potential future addition:
-- Some sagas have public domain English translations that could be aligned
+| Work | Translator | Year | Gutenberg ID | Coverage |
+|------|------------|------|--------------|----------|
+| Poetic Edda + Prose Edda (Gylfaginning, Prologus) | Benjamin Thorpe | 1866 | [14726](https://www.gutenberg.org/ebooks/14726) | 1042/1083 stanzas, 59/59 chapters |
+| Völsunga saga | Eiríkr Magnússon & William Morris | 1888 | [1152](https://www.gutenberg.org/ebooks/1152) | 42/42 chapters |
+| Grettis saga | George Ainslie Hight | 1914 | [347](https://www.gutenberg.org/ebooks/347) | 93/93 chapters |
+
+**Not translated**: Skáldskaparmál and Háttatal are available in Old Norse only.
+
+## Technical Notes
+
+### Display Constraints
+- **MAX_LINE_SIZE**: 2000 characters - lines longer than this won't render in the app
+- Long prose paragraphs are automatically split at sentence boundaries
+- All chapters use sequential 1-based line numbers for consistent display
+
+### Speaker Detection
+The Poetic Edda includes speaker tags (e.g., "Völundr kvað:", "Níðuðr kvað:") which are parsed and stored separately. Speakers appear in both Old Norse and English translations for dialogue poems like Alvíssmál and Völundarkviða.
+
+### Prose Edda Structure
+Chapter counts verified against [voluspa.org](https://www.voluspa.org/proseedda.htm):
+- Prologus: 5 chapters
+- Gylfaginning: 54 chapters
+- Skáldskaparmál: 89 chapters
+- Háttatal: 102 chapters
+
+### Verse Citations
+Gylfaginning and other Prose Edda sections contain embedded verse numbers (e.g., "8. Ór Élivágum...") that reference quotes from the Poetic Edda. These are preserved in the text for scholarly reference.
 
 ## License
 
@@ -105,10 +123,12 @@ Commercial use is permitted with attribution.
 
 ### Attribution
 ```
-Old Norse texts: Classical Language Toolkit (cltk.org)
-Dictionary: "A Concise Dictionary of Old Icelandic" by Geir Zoëga (1910)
+Old Norse texts: Classical Language Toolkit (github.com/cltk/non_texts) - CC BY-SA 3.0 + Public Domain
+Dictionary: "A Concise Dictionary of Old Icelandic" by Geir Zoëga (1910) - Public Domain + MIT
+Morphology: IcePaHC Treebank (github.com/UniversalDependencies/UD_Icelandic-IcePaHC) - CC BY-SA 4.0
+Translations: Project Gutenberg (gutenberg.org) - Public Domain
 ```
 
 ---
 
-**Last Updated**: December 2025
+**Last Updated**: December 30, 2025

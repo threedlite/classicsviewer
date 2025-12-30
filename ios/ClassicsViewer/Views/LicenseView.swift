@@ -525,12 +525,33 @@ Repository: https://github.com/cltk/non_texts
 Website: https://cltk.org/
 
 The CLTK Old Norse corpus includes:
-- Poetic Edda (Sæmundar-Edda): Voluspa, Havamal, Lokasenna, Grimnismal, etc.
-- Prose Edda (Snorra-Edda): Snorri Sturluson's masterwork
-- Major Sagas: Grettis saga, Volsunga saga, Hrolf Kraki, etc.
-- Þættir: Short tales (Norna-Gest, etc.)
+- Poetic Edda (Sæmundar-Edda): 25 poems, 1083 stanzas
+- Prose Edda (Snorra-Edda): Prologus (5 ch), Gylfaginning (54 ch),
+  Skáldskaparmál (89 ch), Háttatal (102 ch)
+- Major Sagas: Grettis saga (93 ch), Völsunga saga (42 ch), Hrólfs saga kraka, etc.
+- Þættir: Short tales (Norna-Gests þáttr, Þorsteins þáttr, etc.)
 
 Attribution: Classical Language Toolkit (cltk.org)
+
+
+English Translations (Project Gutenberg)
+-----------------------------------------
+License: Public Domain
+Source: Project Gutenberg (https://www.gutenberg.org/)
+
+Poetic Edda + Prose Edda (Gylfaginning, Prologus)
+- Translator: Benjamin Thorpe (1866)
+- Gutenberg ID: 14726 (https://www.gutenberg.org/ebooks/14726)
+
+Völsunga saga
+- Translators: Eiríkr Magnússon & William Morris (1888)
+- Gutenberg ID: 1152 (https://www.gutenberg.org/ebooks/1152)
+
+Grettis saga
+- Translator: George Ainslie Hight (1914)
+- Gutenberg ID: 347 (https://www.gutenberg.org/ebooks/347)
+
+Note: Skáldskaparmál and Háttatal are available in Old Norse only.
 
 
 Zoega's Old Icelandic Dictionary
@@ -541,8 +562,8 @@ License: Public Domain (original) + MIT (JSON conversion)
 Repository: https://github.com/stscoundrel/old-icelandic-zoega
 
 The standard reference dictionary for Old Norse/Old Icelandic, providing
-29,951 dictionary entries. This dictionary was famously used by J.R.R. Tolkien
-and C.S. Lewis in their studies of Old Norse literature.
+29,951 dictionary entries plus 237 glossary entries from Thorpe's Poetic Edda
+translation (proper nouns and mythological terms).
 
 Original Publication: Clarendon Press, Oxford, 1910
 Digital JSON Conversion: github.com/stscoundrel
@@ -561,7 +582,7 @@ including form-to-lemma mappings with grammatical features (case, number,
 gender, definiteness). This enables accurate dictionary lookup for inflected
 Old Norse word forms.
 
-65,793+ form-to-lemma mappings with morphological features
+66,134 form-to-lemma mappings with morphological features
 Examples: menn → maður (Nom Plural), konungs → konungur (Gen Sing)
 
 

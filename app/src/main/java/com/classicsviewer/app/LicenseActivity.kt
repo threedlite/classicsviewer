@@ -545,12 +545,29 @@ Repository: https://github.com/cltk/non_texts
 Website: https://cltk.org/
 
 The CLTK Old Norse corpus includes:
-- Poetic Edda (Sæmundar-Edda): Voluspa, Havamal, Lokasenna, Grimnismal, etc.
-- Prose Edda (Snorra-Edda): Snorri Sturluson's masterwork
+- Poetic Edda (Sæmundar-Edda): 25 poems, 1083 stanzas
+- Prose Edda (Snorra-Edda): Prologus (5), Gylfaginning (54), Skáldskaparmál (89), Háttatal (102)
 - Major Sagas: Grettis saga, Volsunga saga, Hrolf Kraki, etc.
 - Þættir: Short tales (Norna-Gest, etc.)
 
 Attribution: Classical Language Toolkit (cltk.org)
+
+
+Old Norse English Translations (Project Gutenberg)
+---------------------------------------------------
+License: Public Domain
+
+Poetic Edda + Prose Edda (Gylfaginning, Prologus)
+Translator: Benjamin Thorpe (1866)
+Source: https://www.gutenberg.org/ebooks/14726
+
+Völsunga saga
+Translators: Eiríkr Magnússon & William Morris (1888)
+Source: https://www.gutenberg.org/ebooks/1152
+
+Grettis saga
+Translator: George Ainslie Hight (1914)
+Source: https://www.gutenberg.org/ebooks/347
 
 
 Zoega's Old Icelandic Dictionary
@@ -561,8 +578,9 @@ License: Public Domain (original) + MIT (JSON conversion)
 Repository: https://github.com/stscoundrel/old-icelandic-zoega
 
 The standard reference dictionary for Old Norse/Old Icelandic, providing
-29,951 dictionary entries. This dictionary was famously used by J.R.R. Tolkien
-and C.S. Lewis in their studies of Old Norse literature.
+29,951 dictionary entries plus 237 glossary entries from Thorpe's Poetic Edda.
+This dictionary was famously used by J.R.R. Tolkien and C.S. Lewis in their
+studies of Old Norse literature.
 
 Original Publication: Clarendon Press, Oxford, 1910
 Digital JSON Conversion: github.com/stscoundrel
@@ -581,7 +599,7 @@ including form-to-lemma mappings with grammatical features (case, number,
 gender, definiteness). This enables accurate dictionary lookup for inflected
 Old Norse word forms.
 
-65,793+ form-to-lemma mappings with morphological features
+66,134 form-to-lemma mappings with morphological features
 Examples: menn → maður (Nom Plural), konungs → konungur (Gen Sing)
 
 

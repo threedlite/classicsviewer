@@ -26,7 +26,7 @@ class BookAdapter(
         val book = books[position]
         val fontSize = PreferencesManager.getFontSize(holder.itemView.context)
         holder.binding.itemText.textSize = fontSize
-        holder.binding.itemText.text = "${book.number} (${book.lineCount} lines)"
+        holder.binding.itemText.text = "${book.title} (${book.lineCount} lines)"
         
         // Apply color inversion
         if (invertColors) {

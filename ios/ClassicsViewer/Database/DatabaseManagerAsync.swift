@@ -40,8 +40,13 @@ actor DatabaseManagerAsync {
     /// Database filename depends on which database is active
     /// - Sample: perseus_texts.db (bundled)
     /// - Full: perseus_texts_full.db (downloaded via ODR)
+    /// - Extended: perseus_texts_extended.db (downloaded via ODR)
     /// - External: perseus_texts.db (user-imported, replaces sample)
     private var databaseName: String {
+        // Check if extended database is enabled (highest priority)
+        if UserDefaults.standard.useExtendedDatabase {
+            return "perseus_texts_extended.db"
+        }
         // Check if full database is enabled
         if UserDefaults.standard.useFullDatabase {
             return "perseus_texts_full.db"

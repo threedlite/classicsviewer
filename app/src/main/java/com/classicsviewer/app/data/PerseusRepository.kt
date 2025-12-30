@@ -227,7 +227,8 @@ class PerseusRepository(private val context: Context) : DataRepository {
                 id = entity.id,
                 number = entity.bookNumber.toString(),
                 workId = entity.workId,
-                lineCount = entity.lineCount ?: 0
+                lineCount = entity.lineCount ?: 0,
+                label = entity.label
             )
         }
     }

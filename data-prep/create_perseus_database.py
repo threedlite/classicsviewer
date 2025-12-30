@@ -7900,7 +7900,7 @@ def merge_external_databases(db_filename, mode='sample'):
 
     Merge rules by build mode:
     - sample: (none)
-    - full: Sumerian + Akkadian + Italian + Syriac + Coptic
+    - full: Sumerian + Akkadian + Italian + Old English
     - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian +
                 Italian + Syriac + Coptic + Pali + Norse
 
@@ -7922,8 +7922,7 @@ def merge_external_databases(db_filename, mode='sample'):
             ('cuneiform/sumerian_texts.db', 'Sumerian'),
             ('cuneiform/akkadian_texts.db', 'Akkadian'),
             ('dante/dante_texts.db', 'italian'),
-            ('syriac/syriac_texts.db', 'syriac'),
-            ('coptic/coptic_texts.db', 'coptic'),
+            ('old_english/old_english_texts.db', 'old_english'),
         ],
         'extended': [
             ('arabic/arabic_texts.db', 'Arabic'),
@@ -8111,9 +8110,9 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_n
             print(f"Original size: {original_size:.1f}MB")
             print(f"Compressed size: {compressed_size:.1f}MB ({compressed_size/original_size*100:.1f}%)")
 
-            # Only copy to asset packs for the actual full database, not extended
+            # Copy to asset packs based on database type
             if db_filename == "perseus_texts_full.db":
-                # Copy full database to Play Asset Delivery asset pack folder
+                # Copy full database to Play Asset Delivery asset pack folder (Android)
                 full_db_asset_dir = "../full_database_pack/src/main/assets"
                 os.makedirs(full_db_asset_dir, exist_ok=True)
                 asset_pack_zip_path = os.path.join(full_db_asset_dir, "perseus_texts_full.db.zip")
@@ -8128,6 +8127,15 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_n
                 print(f"\nCopying full database to iOS: {ios_full_zip_path}...")
                 shutil.copy(zip_path, ios_full_zip_path)
                 print(f"iOS full database copied ({compressed_size:.1f}MB)")
+
+            elif db_filename == "perseus_texts_extended.db":
+                # Copy extended database to iOS only (too large for Android asset pack)
+                ios_ondemand_dir = "../ios/ClassicsViewer/Resources/OnDemand"
+                os.makedirs(ios_ondemand_dir, exist_ok=True)
+                ios_extended_zip_path = os.path.join(ios_ondemand_dir, "perseus_texts_extended.db.zip")
+                print(f"\nCopying extended database to iOS: {ios_extended_zip_path}...")
+                shutil.copy(zip_path, ios_extended_zip_path)
+                print(f"iOS extended database copied ({compressed_size:.1f}MB)")
 
         return True
     else:

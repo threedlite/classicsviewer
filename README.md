@@ -37,11 +37,14 @@ Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLati
   - Hebrew: 39 authors, 39 works
   - Italian: 1 author, 3 works
   - Latin: 40 authors, 230 works
+  - Norse: 1 author, 22 works
+  - Old English: 1 author, 1 work
+  - Pali: 1 author, 5 works
   - Persian: 1 author, 1 work
   - Sanskrit: 270 authors, 270 works
   - Sumerian: 1 author, 11 works
   - Syriac: 4 authors, 39 works
-  - Total: 775 authors, 2,695 works
+  - Total: 778 authors, 2,723 works
 
 
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
