@@ -7,7 +7,7 @@ NOTE - NEW: There is now a download option within the menu to optionally retriev
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
 
 NEW: Parsing fixes Dec. 21, 2025. Uninstall and reinstall to get data update.
-NEW: Added Aplhabet practice option for learning alphabets.
+NEW: Added Alphabet practice option for learning alphabets.
 
 
 NOTE: Patreon page may be disabled at some point while pending Patreon site support for new age verification requirements.
@@ -25,9 +25,11 @@ Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLati
   FULL DATABASE:
   - Akkadian: 1 author, 1 work
   - Greek: 91 authors, 772 works
+  - Italian: 1 author, 3 works
   - Latin: 40 authors, 230 works
+  - Old English: 1 author, 1 work
   - Sumerian: 1 author, 11 works
-  - Total: 133 authors, 1,014 works
+  - Total: 135 authors, 1,018 works
 
   EXTENDED DATABASE:
   - Akkadian: 1 author, 1 work
