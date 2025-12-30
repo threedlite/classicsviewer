@@ -459,7 +459,7 @@ def get_text_files(work_dir):
     """Get all text files for a work, handling different directory structures"""
     text_files = []
 
-    # Check for chapter_*.txt files
+    # Check for chapter_*.txt files at root level
     chapter_files = sorted(
         [f for f in os.listdir(work_dir) if f.startswith('chapter_') and f.endswith('.txt')],
         key=lambda x: int(re.search(r'chapter_(\d+)', x).group(1)) if re.search(r'chapter_(\d+)', x) else 0
@@ -470,32 +470,48 @@ def get_text_files(work_dir):
             text_files.append((os.path.join(work_dir, f), f.replace('.txt', '').replace('_', ' ').title()))
         return text_files
 
-    # Check for subdirectories with txt_files/complete.txt (like Edda poems)
+    # Check for subdirectories with txt_files/complete.txt (like Poetic Edda poems)
     for item in sorted(os.listdir(work_dir)):
         item_path = os.path.join(work_dir, item)
         if os.path.isdir(item_path):
-            # Check for txt_files/complete.txt
             complete_path = os.path.join(item_path, 'txt_files', 'complete.txt')
             if os.path.exists(complete_path):
                 text_files.append((complete_path, item))
-            else:
-                # Check for any .txt file in subdirectory
-                for f in os.listdir(item_path):
-                    if f.endswith('.txt'):
-                        text_files.append((os.path.join(item_path, f), item))
-                        break
 
-    # Check for direct .txt files
-    if not text_files:
-        for f in sorted(os.listdir(work_dir)):
-            if f.endswith('.txt'):
-                text_files.append((os.path.join(work_dir, f), f.replace('.txt', '')))
+    if text_files:
+        return text_files
+
+    # Check for top-level .txt files (like Snorra-Edda's gylfaginning.txt, etc.)
+    # These are comprehensive files that should be preferred over subdirectory chapter files
+    # Also include .txtl files (typo in CLTK repo for haattatal.txtl)
+    top_level_txt = sorted([f for f in os.listdir(work_dir) if f.endswith('.txt') or f.endswith('.txtl')])
+    if top_level_txt:
+        for f in top_level_txt:
+            # Handle both .txt and .txtl extensions
+            label = f.replace('.txtl', '').replace('.txt', '').replace('_', ' ').title()
+            text_files.append((os.path.join(work_dir, f), label))
+        return text_files
+
+    # Fallback: check subdirectories for chapter_*.txt files
+    for item in sorted(os.listdir(work_dir)):
+        item_path = os.path.join(work_dir, item)
+        if os.path.isdir(item_path):
+            subdir_chapters = sorted(
+                [f for f in os.listdir(item_path) if f.startswith('chapter_') and f.endswith('.txt')],
+                key=lambda x: int(re.search(r'chapter_(\d+)', x).group(1)) if re.search(r'chapter_(\d+)', x) else 0
+            )
+            for f in subdir_chapters:
+                text_files.append((os.path.join(item_path, f), f"{item} - {f.replace('.txt', '').replace('_', ' ').title()}"))
 
     return text_files
 
 
 def parse_text_file(filepath):
-    """Parse a text file into lines"""
+    """Parse a text file into lines.
+
+    Handles files with no line terminators (common in CLTK saga texts)
+    by splitting long prose into sentences.
+    """
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -504,7 +520,18 @@ def parse_text_file(filepath):
     for line in content.split('\n'):
         line = line.strip()
         if line and not line.startswith('#'):
-            lines.append(line)
+            # If line is very long (no proper line breaks in source),
+            # split into sentences for readability
+            if len(line) > 500:
+                # Split on sentence-ending punctuation followed by space
+                # Preserves the punctuation with the sentence
+                sentences = re.split(r'(?<=[.!?])\s+', line)
+                for sentence in sentences:
+                    sentence = sentence.strip()
+                    if sentence:
+                        lines.append(sentence)
+            else:
+                lines.append(line)
 
     return lines
 
