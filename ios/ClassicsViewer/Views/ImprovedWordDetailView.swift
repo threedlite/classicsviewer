@@ -538,7 +538,9 @@ struct WordOccurrenceRow: View {
 
     private func buildHighlightedAttributedString() -> AttributedString {
         var result = AttributedString()
-        let words = occurrence.lineText.split(separator: " ", omittingEmptySubsequences: false).map(String.init)
+        // Split on one or more whitespace characters (like Android's \\s+ regex)
+        // This ensures word positions match the database which counts actual words, not empty strings
+        let words = occurrence.lineText.split(whereSeparator: { $0.isWhitespace }).map(String.init)
 
         for (index, word) in words.enumerated() {
             let wordPosition = index + 1  // Word positions are 1-based in database

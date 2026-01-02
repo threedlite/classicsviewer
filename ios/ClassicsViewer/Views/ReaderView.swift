@@ -25,6 +25,8 @@ struct ReaderView: View {
     @State private var findResults: [FindResult] = []
     @State private var currentFindIndex: Int = -1
     @State private var isSearching = false
+    @State private var firstVisibleLineNumber: Int = 1  // Track scroll position for alignment (Greek view)
+    @State private var firstVisibleTranslationLine: Int = 1  // Track scroll position for alignment (Translation view)
     @EnvironmentObject var searchContext: SearchNavigationContext
     @Environment(\.colorScheme) private var colorScheme
 
@@ -95,21 +97,35 @@ struct ReaderView: View {
                     Image(systemName: "magnifyingglass")
                 }
 
-                // Check definitions button
+                // Align view button (next to search)
                 Button(action: {
-                    if checkingDefinitions {
-                        // If already checking, cancel the operation
-                        definitionCheckCancelled = true
-                        wordsWithoutDefinitions.removeAll()
-                        wordsWithMorphologyOnly.removeAll()
-                        checkingDefinitions = false
-                    } else {
-                        // Start checking definitions
-                        showingCheckDefinitions = true
-                    }
+                    alignCurrentView()
                 }) {
-                    Image(systemName: checkingDefinitions ? "at.circle.fill" : "at.circle")
-                        .foregroundColor(checkingDefinitions ? .blue : nil)
+                    Image(systemName: "scope")
+                }
+                .disabled(viewModel.currentViewIndex == 0 && viewModel.availableTranslators.isEmpty)
+
+                // More options menu
+                Menu {
+                    Button(action: {
+                        if checkingDefinitions {
+                            // If already checking, cancel the operation
+                            definitionCheckCancelled = true
+                            wordsWithoutDefinitions.removeAll()
+                            wordsWithMorphologyOnly.removeAll()
+                            checkingDefinitions = false
+                        } else {
+                            // Start checking definitions
+                            showingCheckDefinitions = true
+                        }
+                    }) {
+                        Label(
+                            checkingDefinitions ? "Cancel Check" : "Check Definitions",
+                            systemImage: checkingDefinitions ? "xmark.circle" : "character.book.closed"
+                        )
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
             }
         }
@@ -255,50 +271,146 @@ struct ReaderView: View {
     
     private var contentView: some View {
         ScrollViewReader { proxy in
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    if viewModel.currentViewIndex == 0 {
-                        greekTextView
-                    } else {
-                        translationView
-                    }
-                }
-                .padding()
-                .onAppear {
-                    // Scroll to target line if specified
-                    if let targetLine = viewModel.targetLineNumber {
-                        // Find the relative position within the current page
-                        let startLine = (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1
-                        let relativeLineIndex = targetLine - startLine
-
-                        if relativeLineIndex >= 0 && relativeLineIndex < viewModel.lines.count {
-                            let targetLineId = viewModel.lines[relativeLineIndex].id
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    proxy.scrollTo(targetLineId, anchor: .center)
+            GeometryReader { outerGeometry in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        if viewModel.currentViewIndex == 0 {
+                            // Greek/Latin text view with visibility tracking
+                            VStack(alignment: .leading, spacing: viewModel.lineSpacing) {
+                                ForEach(Array(viewModel.lines.enumerated()), id: \.element.id) { index, line in
+                                    LineTextView(
+                                        line: line,
+                                        book: viewModel.book,
+                                        author: viewModel.author,
+                                        fontSize: viewModel.fontSize,
+                                        isGreek: viewModel.author.language == "greek",
+                                        showSpeaker: shouldShowSpeaker(at: index),
+                                        hasBookmark: viewModel.hasBookmark(for: line.lineNumber),
+                                        hasAudio: viewModel.hasAudioForLine(line.lineNumber),
+                                        isPlayingAudio: audioPlayer.isPlaying && audioPlayer.currentLineNumber == line.lineNumber,
+                                        wordsWithoutDefinitions: wordsWithoutDefinitions,
+                                        wordsWithMorphologyOnly: wordsWithMorphologyOnly,
+                                        highlightedWords: searchContext.highlightedWords,
+                                        isHighlightedLine: isHighlightedLine(line) || isFindHighlightedLine(line),
+                                        onWordTapped: { word in
+                                            selectedWord = word
+                                        },
+                                        onLineNumberTapped: {
+                                            selectedLineForNote = line
+                                        },
+                                        onBookmarkTapped: {
+                                            selectedLineForNote = line
+                                        },
+                                        onAudioTapped: {
+                                            handleAudioTap(for: line)
+                                        }
+                                    )
+                                    .id("line-\(line.lineNumber)")  // Add ID for scrolling
+                                    .background(
+                                        GeometryReader { lineGeometry in
+                                            Color.clear.preference(
+                                                key: VisibleLinePreferenceKey.self,
+                                                value: isLineVisible(lineGeometry: lineGeometry, outerGeometry: outerGeometry) ? line.lineNumber : nil
+                                            )
+                                        }
+                                    )
                                 }
                             }
-                        }
-                    }
-                }
-                .onChange(of: viewModel.lines) {
-                    // Also scroll when lines are updated (e.g., page changes)
-                    if let targetLine = viewModel.targetLineNumber {
-                        let startLine = (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1
-                        let relativeLineIndex = targetLine - startLine
-
-                        if relativeLineIndex >= 0 && relativeLineIndex < viewModel.lines.count {
-                            let targetLineId = viewModel.lines[relativeLineIndex].id
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    proxy.scrollTo(targetLineId, anchor: .center)
+                            .onPreferenceChange(VisibleLinePreferenceKey.self) { visibleLine in
+                                if let lineNum = visibleLine {
+                                    firstVisibleLineNumber = lineNum
                                 }
                             }
-                            // Clear the target after scrolling to it once
-                            viewModel.targetLineNumber = nil
+                        } else {
+                            // Translation view with IDs for scrolling and visibility tracking
+                            translationViewWithVisibilityTracking(outerGeometry: outerGeometry)
                         }
                     }
+                    .padding()
+                    .onAppear {
+                        scrollToTargetIfNeeded(proxy: proxy)
+                    }
+                    .onChange(of: viewModel.currentViewIndex) {
+                        // Scroll when view changes (e.g., switching from Greek to Interlinear)
+                        scrollToTargetIfNeeded(proxy: proxy)
+                    }
+                    .onChange(of: viewModel.lines) {
+                        scrollToTargetIfNeeded(proxy: proxy)
+                    }
                 }
+            }
+        }
+    }
+
+    private func scrollToTargetIfNeeded(proxy: ScrollViewProxy) {
+        guard let targetLine = viewModel.targetLineNumber else { return }
+
+        // Initialize firstVisibleLineNumber based on current page
+        let startLine = (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1
+        if firstVisibleLineNumber < startLine {
+            firstVisibleLineNumber = startLine
+        }
+
+        // Initialize firstVisibleTranslationLine if not set
+        if firstVisibleTranslationLine < startLine {
+            firstVisibleTranslationLine = startLine
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if viewModel.currentViewIndex == 0 {
+                // Greek/Latin view - scroll to line
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    proxy.scrollTo("line-\(targetLine)", anchor: .top)
+                }
+            } else {
+                // Translation view - find segment containing target line and scroll to it
+                let translations = viewModel.getCurrentTranslations()
+                if let segment = translations.first(where: { $0.startLine <= targetLine && ($0.endLine ?? $0.startLine) >= targetLine }) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        proxy.scrollTo("segment-\(segment.startLine)", anchor: .top)
+                    }
+                    // Update tracked visible translation line
+                    firstVisibleTranslationLine = segment.startLine
+                } else if let segment = translations.min(by: { abs($0.startLine - targetLine) < abs($1.startLine - targetLine) }) {
+                    // Find closest segment
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        proxy.scrollTo("segment-\(segment.startLine)", anchor: .top)
+                    }
+                    // Update tracked visible translation line
+                    firstVisibleTranslationLine = segment.startLine
+                }
+            }
+            // Clear the target after scrolling
+            viewModel.targetLineNumber = nil
+        }
+    }
+
+    private func isLineVisible(lineGeometry: GeometryProxy, outerGeometry: GeometryProxy) -> Bool {
+        let lineFrame = lineGeometry.frame(in: .global)
+        let containerFrame = outerGeometry.frame(in: .global)
+        // Check if line is in the top third of the visible area
+        return lineFrame.minY >= containerFrame.minY && lineFrame.minY <= containerFrame.minY + containerFrame.height / 3
+    }
+
+    private func handleAudioTap(for line: TextLine) {
+        Task {
+            let audioWorkId = if viewModel.book.workId.contains("tlg0012.tlg001") {
+                "homer_iliad"
+            } else {
+                viewModel.book.workId.replacingOccurrences(of: ".001", with: "")
+                    .replacingOccurrences(of: ".002", with: "")
+                    .replacingOccurrences(of: ".003", with: "")
+            }
+            let bookNumber = String(viewModel.book.bookNumber)
+
+            if audioPlayer.isPlaying && audioPlayer.currentLineNumber == line.lineNumber {
+                audioPlayer.stop()
+            } else {
+                await audioPlayer.playAudioForLine(
+                    workId: audioWorkId,
+                    bookId: bookNumber,
+                    lineNumber: line.lineNumber
+                )
             }
         }
     }
@@ -444,6 +556,147 @@ struct ReaderView: View {
                     .padding(.vertical, 40)
             }
         }
+    }
+
+    // Translation view with IDs for scroll alignment and visibility tracking
+    @ViewBuilder
+    private func translationViewWithVisibilityTracking(outerGeometry: GeometryProxy) -> some View {
+        let translations = viewModel.getCurrentTranslations()
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(Array(translations.enumerated()), id: \.element.id) { index, segment in
+                VStack(alignment: .leading, spacing: 8) {
+                    // Show speaker if present and different from previous
+                    if shouldShowTranslationSpeaker(at: index),
+                       let speaker = segment.speaker, !speaker.isEmpty {
+                        Text(speaker.uppercased())
+                            .font(.system(size: viewModel.fontSize * 1.5, weight: .bold))
+                            .foregroundColor(speakerColor)
+                            .padding(.bottom, 4)
+                    }
+
+                    Text("Lines \(segment.startLine)-\(segment.endLine ?? segment.startLine)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    // Check for interlinear format (contains Markdown tables with pipe syntax)
+                    // Only process as interlinear if translator is "Interlinear" to avoid processing other translations
+                    if segment.translationText.contains("| ") && segment.translator?.contains("Interlinear") == true {
+                        // This is interlinear format with Markdown tables
+                        InterlinearTextView(
+                            text: segment.translationText,
+                            fontSize: viewModel.fontSize,
+                            onWordTapped: { greekWord in
+                                // Create a Word object for dictionary lookup
+                                // Use line number from the segment
+                                let word = Word(
+                                    id: 0,
+                                    word: greekWord,
+                                    bookId: viewModel.book.id,
+                                    lineNumber: segment.startLine,
+                                    sequenceNumber: 0,
+                                    wordPosition: 0
+                                )
+                                selectedWord = word
+                            }
+                        )
+                    } else {
+                        // Regular translation text
+                        Text(segment.translationText)
+                            .font(.system(size: viewModel.fontSize))
+                            .lineSpacing(4)
+                    }
+                }
+                .id("segment-\(segment.startLine)")  // Add ID for scroll alignment
+                .background(
+                    GeometryReader { segmentGeometry in
+                        Color.clear.preference(
+                            key: VisibleTranslationLinePreferenceKey.self,
+                            value: isSegmentVisible(segmentGeometry: segmentGeometry, outerGeometry: outerGeometry) ? segment.startLine : nil
+                        )
+                    }
+                )
+            }
+
+            if translations.isEmpty {
+                Text("No translation available for this section")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .italic()
+                    .padding(.vertical, 40)
+            }
+        }
+        .onPreferenceChange(VisibleTranslationLinePreferenceKey.self) { visibleLine in
+            if let lineNum = visibleLine {
+                firstVisibleTranslationLine = lineNum
+            }
+        }
+    }
+
+    // Translation view with IDs for scroll alignment (legacy, kept for compatibility)
+    private var translationViewWithIds: some View {
+        let translations = viewModel.getCurrentTranslations()
+        return VStack(alignment: .leading, spacing: 20) {
+            ForEach(Array(translations.enumerated()), id: \.element.id) { index, segment in
+                VStack(alignment: .leading, spacing: 8) {
+                    // Show speaker if present and different from previous
+                    if shouldShowTranslationSpeaker(at: index),
+                       let speaker = segment.speaker, !speaker.isEmpty {
+                        Text(speaker.uppercased())
+                            .font(.system(size: viewModel.fontSize * 1.5, weight: .bold))
+                            .foregroundColor(speakerColor)
+                            .padding(.bottom, 4)
+                    }
+
+                    Text("Lines \(segment.startLine)-\(segment.endLine ?? segment.startLine)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    // Check for interlinear format (contains Markdown tables with pipe syntax)
+                    // Only process as interlinear if translator is "Interlinear" to avoid processing other translations
+                    if segment.translationText.contains("| ") && segment.translator?.contains("Interlinear") == true {
+                        // This is interlinear format with Markdown tables
+                        InterlinearTextView(
+                            text: segment.translationText,
+                            fontSize: viewModel.fontSize,
+                            onWordTapped: { greekWord in
+                                // Create a Word object for dictionary lookup
+                                // Use line number from the segment
+                                let word = Word(
+                                    id: 0,
+                                    word: greekWord,
+                                    bookId: viewModel.book.id,
+                                    lineNumber: segment.startLine,
+                                    sequenceNumber: 0,
+                                    wordPosition: 0
+                                )
+                                selectedWord = word
+                            }
+                        )
+                    } else {
+                        // Regular translation text
+                        Text(segment.translationText)
+                            .font(.system(size: viewModel.fontSize))
+                            .lineSpacing(4)
+                    }
+                }
+                .id("segment-\(segment.startLine)")  // Add ID for scroll alignment
+            }
+
+            if translations.isEmpty {
+                Text("No translation available for this section")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .italic()
+                    .padding(.vertical, 40)
+            }
+        }
+    }
+
+    private func isSegmentVisible(segmentGeometry: GeometryProxy, outerGeometry: GeometryProxy) -> Bool {
+        let segmentFrame = segmentGeometry.frame(in: .global)
+        let containerFrame = outerGeometry.frame(in: .global)
+        // Check if segment is in the top third of the visible area
+        return segmentFrame.minY >= containerFrame.minY && segmentFrame.minY <= containerFrame.minY + containerFrame.height / 3
     }
 
     private func shouldShowTranslationSpeaker(at index: Int) -> Bool {
@@ -596,6 +849,37 @@ extension ReaderView {
             viewModel.targetLineNumber = lineNumber
         }
     }
+
+    private func hasInterlinearTranslation() -> Bool {
+        return viewModel.availableTranslators.contains { $0.localizedCaseInsensitiveContains("Interlinear") }
+    }
+
+    private func alignCurrentView() {
+        if viewModel.currentViewIndex == 0 {
+            // On Original text page - switch to first translation
+            // (translators are already ordered based on showInterlinearFirst preference)
+            // Use the tracked first visible line number from Greek view
+            let currentVisibleLine = firstVisibleLineNumber
+
+            if !viewModel.availableTranslators.isEmpty {
+                // Set target line before switching
+                viewModel.targetLineNumber = currentVisibleLine
+                // Switch to first translation (viewIndex 1)
+                viewModel.currentViewIndex = 1
+                let translatorName = viewModel.availableTranslators.first ?? "Unknown"
+                print("Aligned to \(translatorName) at line \(currentVisibleLine)")
+            }
+        } else {
+            // On a translation page - switch to Original and scroll to same line
+            // Use the tracked visible translation segment line number
+            let visibleLine = firstVisibleTranslationLine
+
+            viewModel.targetLineNumber = visibleLine
+            viewModel.currentViewIndex = 0
+            print("Aligned to Original at line \(visibleLine)")
+        }
+    }
+
     private func checkDefinitionsForCurrentPage() async {
         // Only works on Greek/Latin text view, not translation
         guard viewModel.currentViewIndex == 0 else {
@@ -1575,6 +1859,30 @@ struct TappableTextView_Duplicate: UIViewRepresentable {
     }
 }
 */
+
+// MARK: - Preference Key for Visible Line Tracking
+
+struct VisibleLinePreferenceKey: PreferenceKey {
+    static var defaultValue: Int? = nil
+
+    static func reduce(value: inout Int?, nextValue: () -> Int?) {
+        // Keep the first (topmost) visible line
+        if value == nil {
+            value = nextValue()
+        }
+    }
+}
+
+struct VisibleTranslationLinePreferenceKey: PreferenceKey {
+    static var defaultValue: Int? = nil
+
+    static func reduce(value: inout Int?, nextValue: () -> Int?) {
+        // Keep the first (topmost) visible translation segment line
+        if value == nil {
+            value = nextValue()
+        }
+    }
+}
 
 struct ReaderView_Previews: PreviewProvider {
     static var previews: some View {

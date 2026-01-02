@@ -306,25 +306,41 @@ class TextPageFragment : Fragment() {
     }
     
     private fun scrollToTargetLine() {
-        // Find the position of the target line in the list
-        val targetPosition = if (targetSequenceNumber > 0) {
-            // If we have both line and sequence, find exact match
-            lines?.indexOfFirst { line ->
-                line.lineNumber == targetLineNumber && line.sequenceNumber == targetSequenceNumber
-            } ?: -1
-        } else {
-            // If we only have line number, find first match
-            lines?.indexOfFirst { line ->
-                line.lineNumber == targetLineNumber
-            } ?: -1
+        // Check what type of adapter we have to determine how to find the target position
+        val adapter = binding.textRecyclerView.adapter
+
+        val targetPosition = when (adapter) {
+            is TranslationAdapter -> {
+                // For translation pages, find the segment that contains the target line
+                val items = adapter.items
+                val exactMatch = items.indexOfFirst { segment ->
+                    segment.startLine <= targetLineNumber && (segment.endLine ?: segment.startLine) >= targetLineNumber
+                }
+                exactMatch.takeIf { it >= 0 }
+                    ?: items.indexOfFirst { segment -> segment.startLine >= targetLineNumber } // Find nearest if no exact match
+            }
+            else -> {
+                // For Greek/Latin pages, find the line in the list
+                if (targetSequenceNumber > 0) {
+                    // If we have both line and sequence, find exact match
+                    lines?.indexOfFirst { line ->
+                        line.lineNumber == targetLineNumber && line.sequenceNumber == targetSequenceNumber
+                    } ?: -1
+                } else {
+                    // If we only have line number, find first match
+                    lines?.indexOfFirst { line ->
+                        line.lineNumber == targetLineNumber
+                    } ?: -1
+                }
+            }
         }
-        
-        if (targetPosition >= 0) {
+
+        if (targetPosition != null && targetPosition >= 0) {
             // Post to ensure RecyclerView has finished laying out
             binding.textRecyclerView.post {
                 // Scroll to position with the item at the top of the view
                 (binding.textRecyclerView.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(targetPosition, 0)
-                
+
                 // Clear the target after scrolling (to avoid re-scrolling on configuration changes)
                 targetLineNumber = -1
                 targetSequenceNumber = -1

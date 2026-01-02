@@ -20,26 +20,23 @@ struct InterlinearTextView: View {
     }
 
     var body: some View {
-        if wrapInterlinear {
-            // For wrapping, we need to be very conservative about size
-            // Parse tables and check count
-            let tables = parseMarkdownTables(text)
-            let validTables = tables.filter { $0.count == 3 }
+        let tables = parseMarkdownTables(text)
+        let validTables = tables.filter { $0.count == 3 }
 
+        if wrapInterlinear {
+            // Wrap mode: cells wrap to next line, but text within cells does NOT wrap
             if validTables.count <= 100 {
-                // Small enough for wrapping
+                // Use custom wrapping layout
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 100, maximum: 150), spacing: 8)], alignment: .leading, spacing: 8) {
-                        ForEach(Array(validTables.enumerated()), id: \.offset) { index, rows in
-                            createWordTable(rows: rows)
-                        }
+                    WrappingHStack(items: validTables, spacing: 8) { rows in
+                        createWordTable(rows: rows, forWrapping: true)
                     }
                     .padding(.horizontal)
                 }
             } else {
                 // Too large - fall back to horizontal with message
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("⚠️ \(validTables.count) words - too large for wrapping. Using horizontal scroll.")
+                    Text("\(validTables.count) words - too large for wrapping. Using horizontal scroll.")
                         .font(.caption)
                         .foregroundColor(.orange)
                         .padding(.horizontal)
@@ -50,8 +47,6 @@ struct InterlinearTextView: View {
             }
         } else {
             // Horizontal scroll mode
-            let tables = parseMarkdownTables(text)
-            let validTables = tables.filter { $0.count == 3 }
             horizontalScrollView(validTables: validTables)
         }
     }
@@ -62,7 +57,7 @@ struct InterlinearTextView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(alignment: .top, spacing: 16) {
                 ForEach(Array(validTables.enumerated()), id: \.offset) { index, rows in
-                    createWordTable(rows: rows)
+                    createWordTable(rows: rows, forWrapping: false)
                 }
             }
             .padding(.horizontal)
@@ -114,45 +109,118 @@ struct InterlinearTextView: View {
     /// rows[0] = Greek word
     /// rows[1] = English gloss (bold)
     /// rows[2] = lemma + morphology
+    /// forWrapping: when true, cell sizes to content for FlowLayout wrapping
     @ViewBuilder
-    private func createWordTable(rows: [String]) -> some View {
+    private func createWordTable(rows: [String], forWrapping: Bool) -> some View {
         let isLight = colorScheme == .light
+        let cellBackground = isLight ? Color.white : Color.black
+        let borderBackground = isLight ? Color(hex: "#EEEEEE") : Color(hex: "#222222")
 
-        VStack(spacing: 0) {
+        VStack(alignment: .center, spacing: 0) {
             // Row 0: Greek word - slightly larger
             Text(rows[0])
                 .font(.system(size: fontSize * 1.1))
                 .foregroundColor(isLight ? .black : .white)
+                .lineLimit(1)  // Never wrap text within cell
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
-                .background(isLight ? .white : .black)
+                .background(cellBackground)
 
             // Row 1: English gloss - bold
             Text(rows[1])
                 .font(.system(size: fontSize * 0.9, weight: .bold))
                 .foregroundColor(isLight ? .black : .white)
+                .lineLimit(1)  // Never wrap text within cell
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
-                .background(isLight ? .white : .black)
+                .background(cellBackground)
 
             // Row 2: Morphology - italic, smaller
             Text(rows[2])
                 .font(.system(size: fontSize * 0.8))
                 .italic()
                 .foregroundColor(isLight ? Color(hex: "#666666") : Color(hex: "#999999"))
+                .lineLimit(1)  // Never wrap text within cell
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
-                .background(isLight ? .white : .black)
+                .background(cellBackground)
         }
-        .background(isLight ? Color(hex: "#EEEEEE") : Color(hex: "#222222"))
+        .fixedSize(horizontal: true, vertical: false)  // Width fits content, height flexible
+        .background(borderBackground)
         .cornerRadius(4)
-        .padding(4)
         .onTapGesture {
             // Tap on the word table to look up the Greek word (rows[0])
             onWordTapped?(rows[0])
+        }
+    }
+}
+
+// MARK: - WrappingHStack
+/// A container that wraps items to the next line when they don't fit
+/// Similar to Android's FlexboxLayout with wrap
+struct WrappingHStack<Item, ItemView: View>: View {
+    let items: [Item]
+    let spacing: CGFloat
+    let content: (Item) -> ItemView
+
+    @State private var totalHeight: CGFloat = .zero
+
+    init(items: [Item], spacing: CGFloat = 8, @ViewBuilder content: @escaping (Item) -> ItemView) {
+        self.items = items
+        self.spacing = spacing
+        self.content = content
+    }
+
+    var body: some View {
+        GeometryReader { geometry in
+            self.generateContent(in: geometry)
+        }
+        .frame(height: totalHeight)
+    }
+
+    private func generateContent(in geometry: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+
+        return ZStack(alignment: .topLeading) {
+            ForEach(Array(items.enumerated()), id: \.offset) { index, item in
+                content(item)
+                    .padding(.trailing, spacing)
+                    .padding(.bottom, spacing)
+                    .alignmentGuide(.leading) { dimension in
+                        if abs(width - dimension.width) > geometry.size.width {
+                            width = 0
+                            height -= dimension.height + spacing
+                        }
+                        let result = width
+                        if index == items.count - 1 {
+                            width = 0  // Reset for next layout pass
+                        } else {
+                            width -= dimension.width
+                        }
+                        return result
+                    }
+                    .alignmentGuide(.top) { dimension in
+                        let result = height
+                        if index == items.count - 1 {
+                            height = 0  // Reset for next layout pass
+                        }
+                        return result
+                    }
+            }
+        }
+        .background(viewHeightReader($totalHeight))
+    }
+
+    private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+        GeometryReader { geometry -> Color in
+            DispatchQueue.main.async {
+                binding.wrappedValue = geometry.size.height
+            }
+            return Color.clear
         }
     }
 }

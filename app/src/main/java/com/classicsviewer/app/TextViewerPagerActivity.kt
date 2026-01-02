@@ -765,6 +765,10 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                 )
                 true
             }
+            R.id.action_align_view -> {
+                alignCurrentView()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -784,6 +788,55 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
         // Restore page position
         binding.textViewPager.post {
             binding.textViewPager.setCurrentItem(currentItem, false)
+        }
+    }
+
+    private fun alignCurrentView() {
+        val currentItem = binding.textViewPager.currentItem
+
+        // Get the current visible line from the current fragment
+        // FragmentStateAdapter uses "f" + itemId as tag, calculate the correct tag
+        val adapter = binding.textViewPager.adapter as? TextPagerAdapter
+        val itemId = adapter?.getItemId(currentItem) ?: currentItem.toLong()
+        val fragmentTag = "f$itemId"
+        val currentFragment = supportFragmentManager.findFragmentByTag(fragmentTag) as? TextPageFragment
+        val currentVisibleLine = currentFragment?.getFirstVisibleLine() ?: greekLines.firstOrNull()?.lineNumber ?: 1
+
+        if (currentItem == 0) {
+            // On Greek page - switch to first translation
+            // (translators are already ordered based on interlinearFirst preference)
+            if (availableTranslators.isNotEmpty()) {
+                // Save the target line for the first translation
+                val translator = availableTranslators[0]
+                lastViewedLineByTranslator[translator] = currentVisibleLine
+
+                // Recreate adapter to pick up new target line (same approach as going back to Greek)
+                val adapter = binding.textViewPager.adapter
+                binding.textViewPager.adapter = null
+                binding.textViewPager.adapter = adapter
+
+                // Switch to first translation (index 1 in ViewPager)
+                binding.textViewPager.post {
+                    binding.textViewPager.setCurrentItem(1, true)
+                    Snackbar.make(binding.root, "Aligned to $translator at line $currentVisibleLine", Snackbar.LENGTH_SHORT).show()
+                }
+            } else {
+                Snackbar.make(binding.root, "No translation available", Snackbar.LENGTH_SHORT).show()
+            }
+        } else {
+            // On a translation page - switch to Original and scroll to same line
+            targetLineNumber = currentVisibleLine
+            targetSequenceNumber = -1
+
+            // Recreate adapter to pick up new target line
+            val adapter = binding.textViewPager.adapter
+            binding.textViewPager.adapter = null
+            binding.textViewPager.adapter = adapter
+
+            binding.textViewPager.post {
+                binding.textViewPager.setCurrentItem(0, true)
+                Snackbar.make(binding.root, "Aligned to Original at line $currentVisibleLine", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -13,12 +13,17 @@
         android:title="View Bookmarks"
         android:icon="@drawable/ic_bookmarks"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_align_view"
+        android:title="Align with Translation"
+        android:icon="@android:drawable/ic_menu_mylocation"
+        app:showAsAction="always" />
     
     <item
         android:id="@+id/action_check_definitions"
         android:title="Check Definitions"
-        android:icon="@drawable/ic_wrench"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
     
     <item
         android:id="@+id/action_continuous_playback"

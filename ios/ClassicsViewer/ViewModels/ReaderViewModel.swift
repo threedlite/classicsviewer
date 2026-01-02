@@ -58,6 +58,17 @@ class ReaderViewModel: ObservableObject {
             await checkForTranslations()
             await loadAvailableTranslators()
             await loadAvailableAudio()
+
+            // If we have a target line number (e.g., from bookmark navigation),
+            // calculate and navigate to the correct page before loading
+            if let targetLine = targetLineNumber, targetLine > 0 {
+                let targetPage = (targetLine - 1) / linesPerPage.rawValue + 1
+                if targetPage != currentPage && targetPage <= totalPages {
+                    currentPage = targetPage
+                    print("DEBUG: Set page to \(targetPage) for target line \(targetLine)")
+                }
+            }
+
             await loadCurrentPage()
         }
     }
