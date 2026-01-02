@@ -8,6 +8,7 @@ Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecom
 
 NEW: Parsing fixes Dec. 21, 2025. Uninstall and reinstall to get data update.
 NEW: Added Alphabet practice option for learning alphabets.
+NEW: Align button on text view takes you to same place in first transalation and vice versa. The settings option to put interlinear translation first will work with as well.
 
 
 NOTE: Patreon page may be disabled at some point while pending Patreon site support for new age verification requirements.
