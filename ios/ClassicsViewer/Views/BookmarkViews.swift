@@ -532,7 +532,9 @@ struct CSVDocument: FileDocument {
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = content.data(using: .utf8) ?? Data()
+        // Add UTF-8 BOM for proper encoding detection in browsers/Excel
+        var data = Data([0xEF, 0xBB, 0xBF])
+        data.append(content.data(using: .utf8) ?? Data())
         return FileWrapper(regularFileWithContents: data)
     }
 }

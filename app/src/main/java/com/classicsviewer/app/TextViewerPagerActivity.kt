@@ -36,8 +36,21 @@ import kotlinx.coroutines.launch
 import com.classicsviewer.app.database.entities.BookmarkEntity
 import android.content.ComponentName
 import android.content.ServiceConnection
+import android.net.Uri
 import android.os.IBinder
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import com.classicsviewer.app.audio.AudioPlaybackService
+import com.classicsviewer.app.export.ContentType
+import com.classicsviewer.app.export.ExportFormat
+import com.classicsviewer.app.export.ExportRequest
+import com.classicsviewer.app.export.TextExporter
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbacks {
     
@@ -81,7 +94,16 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     private var searchResults: List<TextSearchResult> = emptyList()
     private var currentSearchIndex: Int = -1
     private var lastSearchQuery: String = ""
-    
+
+    // Export state
+    private var pendingExportRequest: ExportRequest? = null
+
+    private val exportFileLauncher = registerForActivityResult(
+        ActivityResultContracts.CreateDocument("*/*")
+    ) { uri ->
+        uri?.let { performExport(it) }
+    }
+
     private val audioServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             val binder = service as? AudioPlaybackService.LocalBinder
@@ -769,6 +791,10 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                 alignCurrentView()
                 true
             }
+            R.id.action_export -> {
+                showExportDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -923,6 +949,183 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                 "This feature only works on text pages",
                 com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
             ).show()
+        }
+    }
+
+    private fun showExportDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_export, null)
+        val formatGroup = dialogView.findViewById<RadioGroup>(R.id.formatGroup)
+        val rangeGroup = dialogView.findViewById<RadioGroup>(R.id.rangeGroup)
+        val customRangeContainer = dialogView.findViewById<LinearLayout>(R.id.customRangeContainer)
+        val startLineInput = dialogView.findViewById<TextInputEditText>(R.id.startLineInput)
+        val endLineInput = dialogView.findViewById<TextInputEditText>(R.id.endLineInput)
+        val entireBookRadio = dialogView.findViewById<RadioButton>(R.id.rangeEntireBook)
+        val exportInfo = dialogView.findViewById<TextView>(R.id.exportInfo)
+
+        // Update "Entire Book" label with actual line count
+        entireBookRadio.text = "Entire Book (lines 1-$totalLines)"
+
+        // Pre-fill custom range with current page
+        startLineInput.setText(currentStartLine.toString())
+        endLineInput.setText(currentEndLine.toString())
+
+        // Determine what content we're exporting
+        val currentItem = binding.textViewPager.currentItem
+        val contentType = if (currentItem == 0) ContentType.SOURCE else ContentType.TRANSLATION
+        val translator = if (currentItem > 0 && currentItem - 1 < availableTranslators.size) {
+            availableTranslators[currentItem - 1]
+        } else null
+
+        // Update export info text
+        val contentDesc = when {
+            currentItem == 0 -> "${language.replaceFirstChar { it.uppercase() }} Text"
+            translator != null -> "Translation by $translator"
+            else -> "Translation"
+        }
+        exportInfo.text = "Exporting: $contentDesc"
+
+        // Show/hide custom range inputs
+        rangeGroup.setOnCheckedChangeListener { _, checkedId ->
+            customRangeContainer.visibility = if (checkedId == R.id.rangeCustom) View.VISIBLE else View.GONE
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Export")
+            .setView(dialogView)
+            .setPositiveButton("Export") { _, _ ->
+                val format = when (formatGroup.checkedRadioButtonId) {
+                    R.id.formatPdf -> ExportFormat.PDF
+                    R.id.formatTxt -> ExportFormat.TXT
+                    R.id.formatCsv -> ExportFormat.CSV
+                    else -> ExportFormat.PDF
+                }
+
+                val (startLine, endLine) = if (rangeGroup.checkedRadioButtonId == R.id.rangeEntireBook) {
+                    1 to totalLines
+                } else {
+                    val start = startLineInput.text.toString().toIntOrNull() ?: 1
+                    val end = endLineInput.text.toString().toIntOrNull() ?: totalLines
+                    start.coerceIn(1, totalLines) to end.coerceIn(1, totalLines)
+                }
+
+                launchExport(format, contentType, startLine, endLine, translator)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun launchExport(
+        format: ExportFormat,
+        contentType: ContentType,
+        startLine: Int,
+        endLine: Int,
+        translator: String?
+    ) {
+        // Build filename with content indicator
+        val extension = when (format) {
+            ExportFormat.PDF -> "pdf"
+            ExportFormat.TXT -> "txt"
+            ExportFormat.CSV -> "csv"
+        }
+        val sanitizedTitle = workTitle.replace(Regex("[^a-zA-Z0-9]"), "_")
+        val bookLabelSafe = bookLabel?.replace(Regex("[^a-zA-Z0-9]"), "_") ?: "Book"
+
+        // Add content type indicator
+        val contentIndicator = when (contentType) {
+            ContentType.SOURCE -> language.replaceFirstChar { it.uppercase() }
+            ContentType.TRANSLATION -> {
+                if (translator?.contains("Interlinear") == true) "Interlinear"
+                else translator?.replace(Regex("[^a-zA-Z0-9]"), "_") ?: "Translation"
+            }
+        }
+        val filename = "${sanitizedTitle}_${bookLabelSafe}_${startLine}-${endLine}_${contentIndicator}.$extension"
+
+        // Store export params for result handler
+        pendingExportRequest = ExportRequest(
+            format = format,
+            contentType = contentType,
+            authorName = authorName,
+            workTitle = workTitle,
+            bookLabel = bookLabel ?: "Book",
+            workId = workId,
+            startLine = startLine,
+            endLine = endLine,
+            translator = translator,
+            language = language
+        )
+
+        // Launch file picker
+        exportFileLauncher.launch(filename)
+    }
+
+    private fun performExport(uri: Uri) {
+        val request = pendingExportRequest ?: return
+        pendingExportRequest = null
+
+        lifecycleScope.launch {
+            try {
+                // Show progress
+                val progressDialog = MaterialAlertDialogBuilder(this@TextViewerPagerActivity)
+                    .setMessage("Exporting...")
+                    .setCancelable(false)
+                    .create()
+                progressDialog.show()
+
+                withContext(Dispatchers.IO) {
+                    // Fetch data based on content type
+                    val lines: List<TextLine>? = if (request.contentType == ContentType.SOURCE) {
+                        repository.getTextLines(workId, bookId, request.startLine, request.endLine)
+                    } else null
+
+                    val translations: List<TranslationSegment>? = if (request.contentType == ContentType.TRANSLATION && request.translator != null) {
+                        repository.getTranslationSegmentsByTranslator(
+                            bookId, request.translator, request.startLine, request.endLine
+                        )
+                    } else null
+
+                    // Write to file
+                    contentResolver.openOutputStream(uri)?.use { outputStream ->
+                        val exporter = TextExporter(this@TextViewerPagerActivity)
+                        when (request.format) {
+                            ExportFormat.PDF -> exporter.exportToPdf(
+                                outputStream, request, lines, translations
+                            )
+                            ExportFormat.TXT -> exporter.exportToTxt(
+                                outputStream, request, lines, translations
+                            )
+                            ExportFormat.CSV -> exporter.exportToCsv(
+                                outputStream, request, lines, translations
+                            )
+                        }
+                    }
+                }
+
+                progressDialog.dismiss()
+
+                // Show success with open action
+                val mimeType = when (request.format) {
+                    ExportFormat.PDF -> "application/pdf"
+                    ExportFormat.TXT -> "text/plain"
+                    ExportFormat.CSV -> "text/csv"
+                }
+                Snackbar.make(binding.root, "Export complete", Snackbar.LENGTH_LONG)
+                    .setAction("Open") {
+                        try {
+                            val openIntent = Intent(Intent.ACTION_VIEW).apply {
+                                setDataAndType(uri, mimeType)
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            startActivity(Intent.createChooser(openIntent, "Open with"))
+                        } catch (e: Exception) {
+                            Snackbar.make(binding.root, "No app found to open file", Snackbar.LENGTH_SHORT).show()
+                        }
+                    }
+                    .show()
+
+            } catch (e: Exception) {
+                android.util.Log.e("Export", "Export failed", e)
+                Snackbar.make(binding.root, "Export failed: ${e.message}", Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 

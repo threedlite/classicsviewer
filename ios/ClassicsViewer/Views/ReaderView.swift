@@ -1,5 +1,6 @@
 import SwiftUI
 import AVFoundation
+import UniformTypeIdentifiers
 
 struct ReaderView: View {
     @StateObject private var viewModel: ReaderViewModel
@@ -27,6 +28,14 @@ struct ReaderView: View {
     @State private var isSearching = false
     @State private var firstVisibleLineNumber: Int = 1  // Track scroll position for alignment (Greek view)
     @State private var firstVisibleTranslationLine: Int = 1  // Track scroll position for alignment (Translation view)
+    @State private var showingExportOptions = false
+    @State private var showingTxtExporter = false
+    @State private var showingCsvExporter = false
+    @State private var showingPdfExporter = false
+    @State private var txtDocument: TxtDocument?
+    @State private var csvDocument: CSVDocument?
+    @State private var pdfDocument: PdfDocument?
+    @State private var exportFilename = ""
     @EnvironmentObject var searchContext: SearchNavigationContext
     @Environment(\.colorScheme) private var colorScheme
 
@@ -107,6 +116,12 @@ struct ReaderView: View {
 
                 // More options menu
                 Menu {
+                    Button(action: {
+                        showingExportOptions = true
+                    }) {
+                        Label("Export", systemImage: "square.and.arrow.up")
+                    }
+
                     Button(action: {
                         if checkingDefinitions {
                             // If already checking, cancel the operation
@@ -219,6 +234,30 @@ struct ReaderView: View {
             )
             .presentationDetents([.height(280)])
         }
+        .sheet(isPresented: $showingExportOptions) {
+            ExportOptionsView(
+                authorName: viewModel.author.name,
+                workTitle: viewModel.work?.title ?? "Unknown",
+                bookLabel: viewModel.book.label ?? "Book \(viewModel.book.bookNumber)",
+                totalLines: viewModel.totalLines,
+                currentStartLine: (viewModel.currentPage - 1) * viewModel.linesPerPage.rawValue + 1,
+                currentEndLine: min(viewModel.currentPage * viewModel.linesPerPage.rawValue, viewModel.totalLines),
+                contentType: currentExportContentType,
+                translator: currentTranslator,
+                language: viewModel.author.language,
+                onExport: performExport
+            )
+        }
+        .modifier(FileExporterModifier(
+            showingTxtExporter: $showingTxtExporter,
+            showingCsvExporter: $showingCsvExporter,
+            showingPdfExporter: $showingPdfExporter,
+            txtDocument: txtDocument,
+            csvDocument: csvDocument,
+            pdfDocument: pdfDocument,
+            exportFilename: exportFilename,
+            onResult: handleExportResult
+        ))
         .alert("Check Definitions", isPresented: $showingCheckDefinitions) {
             Button("Cancel", role: .cancel) { }
             Button("Yes") {
@@ -877,6 +916,138 @@ extension ReaderView {
             viewModel.targetLineNumber = visibleLine
             viewModel.currentViewIndex = 0
             print("Aligned to Original at line \(visibleLine)")
+        }
+    }
+
+    // MARK: - Export Methods
+
+    private var currentExportContentType: ExportContentType {
+        if viewModel.currentViewIndex == 0 {
+            return .source
+        } else {
+            return .translation
+        }
+    }
+
+    private var currentTranslator: String? {
+        guard viewModel.currentViewIndex > 0 else { return nil }
+        let translatorIndex = viewModel.currentViewIndex - 1
+        return translatorIndex < viewModel.availableTranslators.count
+            ? viewModel.availableTranslators[translatorIndex]
+            : nil
+    }
+
+    private func performExport(format: ExportFormat, startLine: Int, endLine: Int) {
+        Task {
+            let request = ExportRequest(
+                format: format,
+                contentType: currentExportContentType,
+                authorName: viewModel.author.name,
+                workTitle: viewModel.work?.title ?? "Unknown",
+                bookLabel: viewModel.book.label ?? "Book \(viewModel.book.bookNumber)",
+                workId: viewModel.book.workId,
+                startLine: startLine,
+                endLine: endLine,
+                translator: currentTranslator,
+                language: viewModel.author.language
+            )
+
+            // Fetch data based on content type
+            let lines: [TextLine]?
+            let translations: [TranslationSegment]?
+
+            switch request.contentType {
+            case .source:
+                lines = try? await viewModel.getLines(startLine: startLine, endLine: endLine)
+                translations = nil
+
+            case .translation:
+                lines = nil
+                if let translator = request.translator {
+                    translations = try? await viewModel.getTranslations(
+                        translator: translator,
+                        startLine: startLine,
+                        endLine: endLine
+                    )
+                } else {
+                    translations = nil
+                }
+            }
+
+            // Generate filename with content type disambiguator
+            let sanitizedTitle = request.workTitle.replacingOccurrences(of: "[^a-zA-Z0-9]", with: "_", options: .regularExpression)
+            let sanitizedBookLabel = request.bookLabel.replacingOccurrences(of: "[^a-zA-Z0-9]", with: "_", options: .regularExpression)
+
+            // Add content type indicator
+            let contentIndicator: String
+            switch request.contentType {
+            case .source:
+                contentIndicator = request.language.capitalized
+            case .translation:
+                if let translator = request.translator {
+                    // Shorten "Interlinear" and sanitize translator name
+                    let shortName = translator.contains("Interlinear") ? "Interlinear" : translator
+                    contentIndicator = shortName.replacingOccurrences(of: "[^a-zA-Z0-9]", with: "_", options: .regularExpression)
+                } else {
+                    contentIndicator = "Translation"
+                }
+            }
+
+            let ext: String
+            switch format {
+            case .txt: ext = "txt"
+            case .csv: ext = "csv"
+            case .pdf: ext = "pdf"
+            }
+            exportFilename = "\(sanitizedTitle)_\(sanitizedBookLabel)_\(startLine)-\(endLine)_\(contentIndicator).\(ext)"
+
+            // Small delay to let the export options sheet dismiss first
+            try? await Task.sleep(nanoseconds: 300_000_000)
+
+            await MainActor.run {
+                switch format {
+                case .txt:
+                    let content = TextExporter.generateTxtContent(
+                        request: request,
+                        lines: lines,
+                        translations: translations
+                    )
+                    txtDocument = TxtDocument(content: content)
+                    showingTxtExporter = true
+
+                case .csv:
+                    let content = TextExporter.generateCsvContent(
+                        request: request,
+                        lines: lines,
+                        translations: translations
+                    )
+                    csvDocument = CSVDocument(content: content)
+                    showingCsvExporter = true
+
+                case .pdf:
+                    if let data = TextExporter.generatePdf(
+                        request: request,
+                        lines: lines,
+                        translations: translations
+                    ) {
+                        pdfDocument = PdfDocument(data: data)
+                        showingPdfExporter = true
+                    }
+                }
+            }
+        }
+    }
+
+    private func handleExportResult(_ result: Result<URL, Error>) {
+        switch result {
+        case .success(let url):
+            print("Exported to: \(url)")
+        case .failure(let error):
+            if case CocoaError.userCancelled = error as NSError {
+                // User cancelled, don't log
+                return
+            }
+            print("Export failed: \(error.localizedDescription)")
         }
     }
 
@@ -1881,6 +2052,56 @@ struct VisibleTranslationLinePreferenceKey: PreferenceKey {
         if value == nil {
             value = nextValue()
         }
+    }
+}
+
+// MARK: - File Exporter Modifier
+
+struct FileExporterModifier: ViewModifier {
+    @Binding var showingTxtExporter: Bool
+    @Binding var showingCsvExporter: Bool
+    @Binding var showingPdfExporter: Bool
+    let txtDocument: TxtDocument?
+    let csvDocument: CSVDocument?
+    let pdfDocument: PdfDocument?
+    let exportFilename: String
+    let onResult: (Result<URL, Error>) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .background(
+                Color.clear
+                    .fileExporter(
+                        isPresented: $showingTxtExporter,
+                        document: txtDocument,
+                        contentType: .plainText,
+                        defaultFilename: exportFilename
+                    ) { result in
+                        onResult(result)
+                    }
+            )
+            .background(
+                Color.clear
+                    .fileExporter(
+                        isPresented: $showingCsvExporter,
+                        document: csvDocument,
+                        contentType: .commaSeparatedText,
+                        defaultFilename: exportFilename
+                    ) { result in
+                        onResult(result)
+                    }
+            )
+            .background(
+                Color.clear
+                    .fileExporter(
+                        isPresented: $showingPdfExporter,
+                        document: pdfDocument,
+                        contentType: .pdf,
+                        defaultFilename: exportFilename
+                    ) { result in
+                        onResult(result)
+                    }
+            )
     }
 }
 

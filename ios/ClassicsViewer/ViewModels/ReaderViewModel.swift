@@ -28,7 +28,7 @@ class ReaderViewModel: ObservableObject {
     private let workDAO = WorkDAO()
     private let bookmarkDAO = BookmarkDAO()
     private let audioDAO = AudioPackageDAO()
-    private var totalLines = 0
+    @Published private(set) var totalLines = 0
     private var bookmarkedLines: Set<Int> = []
     private var loadPageTask: Task<Void, Never>?
     
@@ -433,5 +433,20 @@ class ReaderViewModel: ObservableObject {
     
     func hasAudioForLine(_ lineNumber: Int) -> Bool {
         return linesWithAudio.contains(lineNumber)
+    }
+
+    // MARK: - Export Data Access
+
+    func getLines(startLine: Int, endLine: Int) async throws -> [TextLine] {
+        return try await lineDAO.getLines(bookId: book.id, startLine: startLine, endLine: endLine)
+    }
+
+    func getTranslations(translator: String, startLine: Int, endLine: Int) async throws -> [TranslationSegment] {
+        return try await translationDAO.getTranslationsByTranslator(
+            bookId: book.id,
+            translator: translator,
+            startLine: startLine,
+            endLine: endLine
+        )
     }
 }
