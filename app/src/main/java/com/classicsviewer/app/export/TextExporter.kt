@@ -33,6 +33,8 @@ class TextExporter(private val context: Context) {
         lines: List<TextLine>? = null,
         translations: List<TranslationSegment>? = null
     ) {
+        // Write UTF-8 BOM for proper encoding detection
+        outputStream.write(byteArrayOf(0xEF.toByte(), 0xBB.toByte(), 0xBF.toByte()))
         outputStream.bufferedWriter(Charsets.UTF_8).use { writer ->
             // Write header
             writer.appendLine("${request.authorName} - ${request.workTitle}")
@@ -78,6 +80,8 @@ class TextExporter(private val context: Context) {
         lines: List<TextLine>? = null,
         translations: List<TranslationSegment>? = null
     ) {
+        // Write UTF-8 BOM for proper encoding detection (especially Excel)
+        outputStream.write(byteArrayOf(0xEF.toByte(), 0xBB.toByte(), 0xBF.toByte()))
         outputStream.bufferedWriter(Charsets.UTF_8).use { writer ->
             // CSV header
             writer.appendLine("line_number,text")
