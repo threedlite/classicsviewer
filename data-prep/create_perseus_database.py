@@ -136,6 +136,72 @@ def is_line_tag(tag):
     """Check if tag is exactly <line>."""
     return is_tag(tag, 'line')
 
+def is_head_tag(tag):
+    """Check if tag is exactly <head>."""
+    return is_tag(tag, 'head')
+
+def is_label_tag(tag):
+    """Check if tag is exactly <label>."""
+    return is_tag(tag, 'label')
+
+def is_stage_tag(tag):
+    """Check if tag is exactly <stage>."""
+    return is_tag(tag, 'stage')
+
+def is_salute_tag(tag):
+    """Check if tag is exactly <salute>."""
+    return is_tag(tag, 'salute')
+
+def is_dateline_tag(tag):
+    """Check if tag is exactly <dateline>."""
+    return is_tag(tag, 'dateline')
+
+def has_rend_salute(elem):
+    """Check if element has rend='salute' attribute (used in Latin letters)."""
+    return elem.get('rend') == 'salute'
+
+def has_rend_dateline(elem):
+    """Check if element has rend='dateline' attribute (used in Latin letters)."""
+    return elem.get('rend') == 'dateline'
+
+def has_rend_opener(elem):
+    """Check if element has rend='opener' attribute (used in Latin letters)."""
+    return elem.get('rend') == 'opener'
+
+def extract_opener_info(div_elem):
+    """
+    Extract salute and dateline from a <label rend="opener"> child of a div.
+    Used for Latin letters where opener info is at the letter level, not inside paragraphs.
+    Returns (salute, dateline) tuple, either or both may be None.
+    """
+    salute = None
+    dateline = None
+
+    # Look for direct <label rend="opener"> children
+    for child in div_elem:
+        if is_label_tag(child.tag) and has_rend_opener(child):
+            # Found opener label, extract salute/dateline from inside
+            for elem in child.iter():
+                if has_rend_salute(elem):
+                    text = get_text_content_simple(elem).strip()
+                    if text:
+                        salute = text
+                elif has_rend_dateline(elem):
+                    text = get_text_content_simple(elem).strip()
+                    if text:
+                        dateline = text
+            break  # Only process first opener
+
+    return salute, dateline
+
+def is_opener_tag(tag):
+    """Check if tag is exactly <opener>."""
+    return is_tag(tag, 'opener')
+
+def is_sp_tag(tag):
+    """Check if tag is exactly <sp> (speech wrapper)."""
+    return is_tag(tag, 'sp')
+
 # ============= NESTED DIV DETECTION FOR DUPLICATION FIX =============
 
 def has_nested_textpart_divs(elem, processable_subtypes=None):
@@ -199,6 +265,259 @@ def get_paragraphs_for_div(elem, processable_subtypes=None):
         # Leaf textpart OR nested divs won't be processed separately
         # Process all descendant paragraphs using iter()
         return [p for p in elem.iter() if is_p_tag(p.tag)]
+
+
+# ============= LINE PREFIX EXTRACTION (speaker/head/label/stage/salute) =============
+
+class LineAnnotationContext:
+    """
+    Tracks context for extracting line prefix annotations (speaker, head, label, stage, salute).
+
+    This handles:
+    - <speaker> - Dramatic speaker names (already working, enhanced here)
+    - <head> - Section/poem titles (applied to first line of containing div)
+    - <label> - Prose dialogue speakers (like "SOCRATES:")
+    - <stage> - Stage directions (wrapped in brackets)
+    - <salute>/<dateline> - Letter addressees and locations
+    """
+
+    def __init__(self):
+        self.current_speaker = None       # Current <speaker> content
+        self.pending_head = None          # <head> to apply to next line
+        self.pending_stage = None         # <stage> to apply to next line
+        self.pending_label = None         # <label> to apply to next line
+        self.pending_salute = None        # <salute> to apply to next line
+        self.pending_dateline = None      # <dateline> to apply to next line
+        self.last_div_id = None           # Track which div we're in for head application
+        self.lines_since_div_start = 0    # Count lines since div started (for head)
+
+    def update_from_element(self, elem, parent_map=None):
+        """
+        Update context based on an XML element.
+        Call this for each element encountered during iteration.
+
+        Returns True if this element is a content element (line/paragraph),
+        False if it's a metadata element that just updates context.
+        """
+        tag = elem.tag
+
+        # Update context for various annotation types
+        if is_speaker_tag(tag):
+            text = elem.text.strip() if elem.text else None
+            if text:
+                self.current_speaker = text
+            return False
+
+        if is_head_tag(tag):
+            text = get_text_content_simple(elem).strip()
+            if text:
+                self.pending_head = text
+            return False
+
+        if is_stage_tag(tag):
+            text = get_text_content_simple(elem).strip()
+            if text:
+                # Stage directions wrapped in brackets
+                self.pending_stage = f"[{text}]"
+            return False
+
+        if is_label_tag(tag):
+            text = get_text_content_simple(elem).strip()
+            if text:
+                self.pending_label = text
+            return False
+
+        if is_salute_tag(tag):
+            text = get_text_content_simple(elem).strip()
+            if text:
+                self.pending_salute = text
+            return False
+
+        if is_dateline_tag(tag):
+            text = get_text_content_simple(elem).strip()
+            if text:
+                self.pending_dateline = text
+            return False
+
+        if is_opener_tag(tag):
+            # Process children of opener to get salute/dateline
+            for child in elem:
+                self.update_from_element(child, parent_map)
+            return False
+
+        if is_div_tag(tag):
+            # Track div changes to reset head application
+            div_id = id(elem)
+            if div_id != self.last_div_id:
+                self.last_div_id = div_id
+                self.lines_since_div_start = 0
+                # Look for head in this div (direct child only)
+                for child in elem:
+                    if is_head_tag(child.tag):
+                        text = get_text_content_simple(child).strip()
+                        if text:
+                            self.pending_head = text
+                        break  # Only use first head
+            return False
+
+        # Check if this is a content element
+        return is_l_tag(tag) or is_line_tag(tag) or is_p_tag(tag)
+
+    def get_prefix_for_line(self, consume=True):
+        """
+        Get the prefix annotation string for the current line.
+        Combines multiple annotations with " — " separator.
+
+        Args:
+            consume: If True, clears pending annotations after returning.
+                    Set to False if you're just peeking.
+
+        Returns:
+            Combined prefix string, or None if no annotations.
+        """
+        parts = []
+
+        # Order: head, stage, salute+dateline, label, speaker
+        if self.pending_head:
+            parts.append(self.pending_head)
+
+        if self.pending_stage:
+            parts.append(self.pending_stage)
+
+        if self.pending_salute:
+            if self.pending_dateline:
+                parts.append(f"{self.pending_salute} — {self.pending_dateline}")
+            else:
+                parts.append(self.pending_salute)
+        elif self.pending_dateline:
+            parts.append(self.pending_dateline)
+
+        if self.pending_label:
+            parts.append(self.pending_label)
+
+        if self.current_speaker and self.current_speaker not in parts:
+            parts.append(self.current_speaker)
+
+        if consume:
+            # Clear one-time annotations (but keep speaker)
+            self.pending_head = None
+            self.pending_stage = None
+            self.pending_salute = None
+            self.pending_dateline = None
+            self.pending_label = None
+            self.lines_since_div_start += 1
+
+        if parts:
+            return ' — '.join(parts)
+        return None
+
+    def reset_for_new_section(self):
+        """Reset context for a new section/div."""
+        self.pending_head = None
+        self.pending_stage = None
+        self.pending_label = None
+        self.pending_salute = None
+        self.pending_dateline = None
+        self.lines_since_div_start = 0
+        # Note: speaker persists until changed
+
+
+def get_text_content_simple(elem):
+    """
+    Get text content of an element, simpler version for annotation extraction.
+    Just returns the text content without notes or special handling.
+    """
+    result = []
+    if elem.text:
+        result.append(elem.text)
+    for child in elem:
+        if not is_note_tag(child.tag):
+            if child.text:
+                result.append(child.text)
+            if child.tail:
+                result.append(child.tail)
+    return ' '.join(result)
+
+
+def build_parent_map(root):
+    """Build a map from child elements to their parents for navigation."""
+    parent_map = {}
+    for parent in root.iter():
+        for child in parent:
+            parent_map[child] = parent
+    return parent_map
+
+
+def extract_annotations_for_dramatic_text(root):
+    """
+    Pre-process a dramatic text to build a map of line numbers to their annotations.
+    This handles speaker, head, stage, and label tags.
+
+    Returns:
+        Dict mapping line number to prefix annotation string.
+    """
+    annotations = {}
+    ctx = LineAnnotationContext()
+
+    for elem in root.iter():
+        # First update context
+        is_content = ctx.update_from_element(elem)
+
+        if is_l_tag(elem.tag):
+            line_n = elem.get('n', '')
+            line_num = parse_line_number(line_n) if line_n else None
+            if line_num is not None:
+                prefix = ctx.get_prefix_for_line()
+                if prefix:
+                    annotations[line_num] = prefix
+
+    return annotations
+
+
+def extract_annotations_for_verse_text(root):
+    """
+    Pre-process a verse text to build a map of line indices to their annotations.
+    Handles head, label, and stage tags (no dramatic speaker).
+
+    Returns:
+        Dict mapping (div_n, line_index_in_div) tuple to prefix annotation string.
+    """
+    annotations = {}
+    ctx = LineAnnotationContext()
+    current_div_n = None
+    line_index_in_div = 0
+
+    for elem in root.iter():
+        # Check for div changes
+        if is_div_tag(elem.tag):
+            div_type = elem.get('type', '')
+            div_subtype = elem.get('subtype', '')
+            div_n = elem.get('n', '')
+
+            if div_type == 'textpart':
+                current_div_n = div_n
+                line_index_in_div = 0
+                ctx.reset_for_new_section()
+
+                # Check for head in this div
+                for child in elem:
+                    if is_head_tag(child.tag):
+                        text = get_text_content_simple(child).strip()
+                        if text:
+                            ctx.pending_head = text
+                        break
+                continue
+
+        # Update context for annotation elements
+        ctx.update_from_element(elem)
+
+        if is_l_tag(elem.tag) or is_line_tag(elem.tag):
+            prefix = ctx.get_prefix_for_line()
+            if prefix and current_div_n is not None:
+                annotations[(current_div_n, line_index_in_div)] = prefix
+            line_index_in_div += 1
+
+    return annotations
 
 
 # ============= FIRST1K PARSER FIX =============
@@ -4094,9 +4413,29 @@ def process_prose_with_books(root, work_id, cursor, language):
         
         all_lines = []
         line_num = 0
-        
+        # Note: We extract label/salute/dateline from INSIDE each paragraph, not globally,
+        # to avoid misalignment issues where the previous paragraph's label gets applied
+        # to the next paragraph.
+
+        # Track letter-level opener info (for Latin letters like Cicero's)
+        # This is extracted from <label rend="opener"> at the letter div level
+        letter_opener_salute = None
+        letter_opener_dateline = None
+        letter_opener_applied = False  # Track if we've applied the opener to the first paragraph
+
         # Process sections within this book
         for elem in book_div.iter():
+            # Check for letter divs and extract opener info
+            if (is_div_tag(elem.tag) and
+                elem.get('type') == 'textpart' and
+                elem.get('subtype') == 'letter'):
+                # Extract opener info from the letter div
+                opener_salute, opener_dateline = extract_opener_info(elem)
+                if opener_salute or opener_dateline:
+                    letter_opener_salute = opener_salute
+                    letter_opener_dateline = opener_dateline
+                    letter_opener_applied = False  # Reset for new letter
+
             # Track milestones within book
             if (is_plato or is_aristotle) and is_milestone_tag(elem.tag):
                 resp = elem.get('resp', '')
@@ -4126,6 +4465,34 @@ def process_prose_with_books(root, work_id, cursor, language):
                 # Use get_paragraphs_for_div() to prevent duplication when divs are nested
                 # Pass processable subtypes so we only skip when nested divs will be processed
                 for p in get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page']):
+                    # Extract label/salute/dateline from INSIDE this paragraph
+                    # This ensures we apply the correct annotation to each paragraph
+                    para_label = None
+                    para_salute = None
+                    para_dateline = None
+                    for child in p.iter():
+                        if is_label_tag(child.tag):
+                            label_text = get_text_content_simple(child).strip()
+                            if label_text:
+                                para_label = label_text
+                        elif is_salute_tag(child.tag) or has_rend_salute(child):
+                            salute_text = get_text_content_simple(child).strip()
+                            if salute_text:
+                                para_salute = salute_text
+                        elif is_dateline_tag(child.tag) or has_rend_dateline(child):
+                            dateline_text = get_text_content_simple(child).strip()
+                            if dateline_text:
+                                para_dateline = dateline_text
+
+                    # Apply letter-level opener info if available and not yet applied
+                    # This handles Latin letters where salute/dateline are in <label rend="opener">
+                    if not letter_opener_applied and (letter_opener_salute or letter_opener_dateline):
+                        if not para_salute and letter_opener_salute:
+                            para_salute = letter_opener_salute
+                        if not para_dateline and letter_opener_dateline:
+                            para_dateline = letter_opener_dateline
+                        letter_opener_applied = True  # Only apply to first paragraph of each letter
+
                     # Use get_text_content to properly filter editorial notes
                     # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
                     bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
@@ -4147,16 +4514,36 @@ def process_prose_with_books(root, work_id, cursor, language):
                                 sentences = re.split(r'[.!?]\s+', text)
 
                         # Process each sentence as a line
+                        first_sentence = True
                         for sentence in sentences:
                             sentence = sentence.strip()
                             if sentence:
                                 line_num += 1
+
+                                # Build speaker annotation for first sentence of paragraph
+                                annotation = None
+                                if first_sentence:
+                                    parts = []
+                                    if para_salute:
+                                        if para_dateline:
+                                            parts.append(f"{para_salute} — {para_dateline}")
+                                        else:
+                                            parts.append(para_salute)
+                                    elif para_dateline:
+                                        parts.append(para_dateline)
+                                    if para_label:
+                                        parts.append(para_label)
+                                    if parts:
+                                        annotation = ' — '.join(parts)
+                                    first_sentence = False
+
                                 all_lines.append({
                                     'number': line_num,
                                     'text': sentence,
                                     'section': section_n,
                                     'xml': '',
-                                    'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
+                                    'milestone': None if (is_plato or is_aristotle) else None,  # Milestones now inline
+                                    'speaker': annotation
                                 })
         
         if all_lines:
@@ -4182,24 +4569,24 @@ def process_prose_with_books(root, work_id, cursor, language):
                         text = f"[{line['milestone']}] {text}"
                 
                 cursor.execute("""
-                    INSERT INTO text_lines 
+                    INSERT INTO text_lines
                     (book_id, line_number, sequence_number, line_text, line_xml, speaker)
                     VALUES (?, ?, ?, ?, ?, ?)
-                """, (book_id, line['number'], seq_num, text, line['xml'], None))
-                
+                """, (book_id, line['number'], seq_num, text, line['xml'], line.get('speaker')))
+
                 # Insert words into words table
                 words = line['text'].split()
                 for word_pos, word in enumerate(words, 1):
                     # Only insert if word is not empty
                     if word.strip():
                         cursor.execute("""
-                            INSERT INTO words 
+                            INSERT INTO words
                             (word, book_id, line_number, sequence_number, word_position)
                             VALUES (?, ?, ?, ?, ?)
                         """, (word, book_id, line['number'], seq_num, word_pos))
-            
+
             print(f"      Book {book_num}: {len(all_lines)} lines")
-    
+
     if books_processed == 0:
         print(f"      Warning: No books found for {work_id}")
 
@@ -4235,9 +4622,29 @@ def process_prose_text(root, work_id, cursor, language):
     book_id = f"{work_id}.001"
     all_lines = []
     line_num = 0
-    
+    # Note: We extract label/salute/dateline from INSIDE each paragraph, not globally,
+    # to avoid misalignment issues where the previous paragraph's label gets applied
+    # to the next paragraph.
+
+    # Track letter-level opener info (for Latin letters like Cicero's)
+    # This is extracted from <label rend="opener"> at the letter div level
+    letter_opener_salute = None
+    letter_opener_dateline = None
+    letter_opener_applied = False  # Track if we've applied the opener to the first paragraph
+
     # Find all sections (divs with type="textpart" and subtype="section" or "chapter")
     for elem in root.iter():
+        # Check for letter divs and extract opener info
+        if (is_div_tag(elem.tag) and
+            elem.get('type') == 'textpart' and
+            elem.get('subtype') == 'letter'):
+            # Extract opener info from the letter div
+            opener_salute, opener_dateline = extract_opener_info(elem)
+            if opener_salute or opener_dateline:
+                letter_opener_salute = opener_salute
+                letter_opener_dateline = opener_dateline
+                letter_opener_applied = False  # Reset for new letter
+
         # Track milestones for Plato and Aristotle
         if (is_plato or is_aristotle) and is_milestone_tag(elem.tag):
             resp = elem.get('resp', '')
@@ -4274,6 +4681,34 @@ def process_prose_text(root, work_id, cursor, language):
             paragraphs_to_process = get_paragraphs_for_div(elem, ['section', 'chapter'])
             paragraphs_found = len(paragraphs_to_process) > 0
             for p in paragraphs_to_process:
+                # Extract label/salute/dateline from INSIDE this paragraph
+                # This ensures we apply the correct annotation to each paragraph
+                para_label = None
+                para_salute = None
+                para_dateline = None
+                for child in p.iter():
+                    if is_label_tag(child.tag):
+                        label_text = get_text_content_simple(child).strip()
+                        if label_text:
+                            para_label = label_text
+                    elif is_salute_tag(child.tag) or has_rend_salute(child):
+                        salute_text = get_text_content_simple(child).strip()
+                        if salute_text:
+                            para_salute = salute_text
+                    elif is_dateline_tag(child.tag) or has_rend_dateline(child):
+                        dateline_text = get_text_content_simple(child).strip()
+                        if dateline_text:
+                            para_dateline = dateline_text
+
+                # Apply letter-level opener info if available and not yet applied
+                # This handles Latin letters where salute/dateline are in <label rend="opener">
+                if not letter_opener_applied and (letter_opener_salute or letter_opener_dateline):
+                    if not para_salute and letter_opener_salute:
+                        para_salute = letter_opener_salute
+                    if not para_dateline and letter_opener_dateline:
+                        para_dateline = letter_opener_dateline
+                    letter_opener_applied = True  # Only apply to first paragraph of each letter
+
                 # Use get_text_content to properly filter editorial notes
                 # For Plato/Aristotle, also preserve milestones for Stephanus/Bekker refs
                 bekker_page_state = [current_bekker_page] if (is_plato or is_aristotle) else None
@@ -4296,6 +4731,7 @@ def process_prose_text(root, work_id, cursor, language):
                             sentences = re.split(r'[.!?]\s+', text)
 
                     # Process each sentence as a line
+                    first_sentence = True
                     for sentence in sentences:
                         sentence = sentence.strip()
                         if sentence:
@@ -4303,16 +4739,62 @@ def process_prose_text(root, work_id, cursor, language):
                             # Add milestone reference for Plato/Aristotle
                             if (is_plato or is_aristotle) and current_milestone:
                                 line_to_milestone[line_num] = current_milestone
+
+                            # Build speaker annotation for first sentence of paragraph
+                            annotation = None
+                            if first_sentence:
+                                parts = []
+                                if para_salute:
+                                    if para_dateline:
+                                        parts.append(f"{para_salute} — {para_dateline}")
+                                    else:
+                                        parts.append(para_salute)
+                                elif para_dateline:
+                                    parts.append(para_dateline)
+                                if para_label:
+                                    parts.append(para_label)
+                                if parts:
+                                    annotation = ' — '.join(parts)
+                                first_sentence = False
+
                             all_lines.append({
                                 'number': line_num,
                                 'text': sentence,
                                 'section': section_n,
                                 'xml': '',
-                                'milestone': None if (is_plato or is_aristotle) else None  # Milestones now inline
+                                'milestone': None if (is_plato or is_aristotle) else None,  # Milestones now inline
+                                'speaker': annotation
                             })
 
             # If no paragraphs found, treat the entire section text as prose
             if not paragraphs_found:
+                # Extract label/salute/dateline from this section div
+                section_label = None
+                section_salute = None
+                section_dateline = None
+                for child in elem.iter():
+                    if is_label_tag(child.tag):
+                        label_text = get_text_content_simple(child).strip()
+                        if label_text:
+                            section_label = label_text
+                    elif is_salute_tag(child.tag) or has_rend_salute(child):
+                        salute_text = get_text_content_simple(child).strip()
+                        if salute_text:
+                            section_salute = salute_text
+                    elif is_dateline_tag(child.tag) or has_rend_dateline(child):
+                        dateline_text = get_text_content_simple(child).strip()
+                        if dateline_text:
+                            section_dateline = dateline_text
+
+                # Apply letter-level opener info if available and not yet applied
+                # This handles Latin letters where salute/dateline are in <label rend="opener">
+                if not letter_opener_applied and (letter_opener_salute or letter_opener_dateline):
+                    if not section_salute and letter_opener_salute:
+                        section_salute = letter_opener_salute
+                    if not section_dateline and letter_opener_dateline:
+                        section_dateline = letter_opener_dateline
+                    letter_opener_applied = True  # Only apply to first section of each letter
+
                 # Extract text but exclude notes and milestones
                 text_parts = []
                 for text_elem in elem.iter():
@@ -4336,6 +4818,7 @@ def process_prose_text(root, work_id, cursor, language):
                     else:
                         sentences = re.split(r'[.!?]\s+', text)
 
+                    first_sentence = True
                     for sentence in sentences:
                         sentence = sentence.strip()
                         if sentence:
@@ -4343,12 +4826,31 @@ def process_prose_text(root, work_id, cursor, language):
                             # Add milestone reference for Plato/Aristotle
                             if (is_plato or is_aristotle) and current_milestone:
                                 line_to_milestone[line_num] = current_milestone
+
+                            # Build speaker annotation for first sentence
+                            annotation = None
+                            if first_sentence:
+                                parts = []
+                                if section_salute:
+                                    if section_dateline:
+                                        parts.append(f"{section_salute} — {section_dateline}")
+                                    else:
+                                        parts.append(section_salute)
+                                elif section_dateline:
+                                    parts.append(section_dateline)
+                                if section_label:
+                                    parts.append(section_label)
+                                if parts:
+                                    annotation = ' — '.join(parts)
+                                first_sentence = False
+
                             all_lines.append({
                                 'number': line_num,
                                 'text': sentence,
                                 'section': section_n,
                                 'xml': '',
-                                'milestone': current_milestone if (is_plato or is_aristotle) else None
+                                'milestone': current_milestone if (is_plato or is_aristotle) else None,
+                                'speaker': annotation
                             })
     
     if all_lines:
@@ -4370,22 +4872,22 @@ def process_prose_text(root, work_id, cursor, language):
                     text = f"[{line['milestone']}] {text}"
             
             cursor.execute("""
-                INSERT OR IGNORE INTO text_lines 
+                INSERT OR IGNORE INTO text_lines
                 (book_id, line_number, sequence_number, line_text, line_xml, speaker)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (book_id, line['number'], seq_num, text, line['xml'], None))
-            
+            """, (book_id, line['number'], seq_num, text, line['xml'], line.get('speaker')))
+
             # Insert words into words table
             words = line['text'].split()
             for word_pos, word in enumerate(words, 1):
                 # Only insert if word is not empty
                 if word.strip():
                     cursor.execute("""
-                        INSERT INTO words 
+                        INSERT INTO words
                         (word, book_id, line_number, sequence_number, word_position)
                         VALUES (?, ?, ?, ?, ?)
                     """, (word, book_id, line['number'], seq_num, word_pos))
-        
+
         print(f"      Complete Text: {len(all_lines)} lines")
 
 def process_pta_bible_text(xml_path, work_id, cursor, language):
@@ -5016,14 +5518,14 @@ def process_text_file(xml_path, work_id, cursor, language):
             # For dramatic texts, treat the entire play as one book
             book_id = f"{work_id}.001"
             lines = []
-            current_speaker = None
-            
-            # Extract ALL lines with their original line numbers and speakers
+            ctx = LineAnnotationContext()
+
+            # Extract ALL lines with their original line numbers and annotations
+            # (speaker, head, stage, label, salute, dateline)
             for elem in root.iter():
-                # Track current speaker
-                if is_speaker_tag(elem.tag):
-                    current_speaker = elem.text
-                    
+                # Update annotation context for metadata elements
+                ctx.update_from_element(elem)
+
                 if is_l_tag(elem.tag):
                     line_n = elem.get('n')
                     line_num = parse_line_number(line_n)
@@ -5031,11 +5533,13 @@ def process_text_file(xml_path, work_id, cursor, language):
                         text = get_text_content(elem).strip()
 
                         if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern', 'This pointer']):
+                            # Get combined annotation prefix (speaker + head + stage + etc.)
+                            annotation = ctx.get_prefix_for_line()
                             lines.append({
                                 'number': line_num,
                                 'text': text,
                                 'xml': ET.tostring(elem, encoding='unicode'),
-                                'speaker': current_speaker
+                                'speaker': annotation
                             })
             
             # Sort by line number to ensure correct order
@@ -5108,9 +5612,22 @@ def process_text_file(xml_path, work_id, cursor, language):
                     # Sequential line numbering for poetry collections (both Latin and Greek)
                     print(f"      Applying sequential line numbering for {len(poem_divs)} poems in Book {book_num}")
                     sequential_line_num = 1
-                    
+                    ctx = LineAnnotationContext()
+
                     for poem_div in poem_divs:
+                        # Reset context and check for head in this poem div
+                        ctx.reset_for_new_section()
+                        for child in poem_div:
+                            if is_head_tag(child.tag):
+                                text = get_text_content_simple(child).strip()
+                                if text:
+                                    ctx.pending_head = text
+                                break  # Only use first head
+
                         for elem in poem_div.iter():
+                            # Update annotation context
+                            ctx.update_from_element(elem)
+
                             if is_l_tag(elem.tag) or is_line_tag(elem.tag):
                                 line_n = elem.get('n')
                                 line_num = parse_line_number(line_n)
@@ -5118,16 +5635,32 @@ def process_text_file(xml_path, work_id, cursor, language):
                                     text = get_text_content(elem).strip()
 
                                     if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                        annotation = ctx.get_prefix_for_line()
                                         lines.append({
                                             'number': sequential_line_num,
                                             'text': text,
                                             'xml': ET.tostring(elem, encoding='unicode'),
-                                            'original_line_n': line_n  # Preserve original for debugging (as string)
+                                            'original_line_n': line_n,  # Preserve original for debugging (as string)
+                                            'speaker': annotation
                                         })
                                         sequential_line_num += 1
                 else:
                     # Standard line numbering for non-poetry or Greek texts
+                    # Also extract head/label/stage annotations
+                    ctx = LineAnnotationContext()
+
+                    # Check for head at div level first
+                    for child in div:
+                        if is_head_tag(child.tag):
+                            text = get_text_content_simple(child).strip()
+                            if text:
+                                ctx.pending_head = text
+                            break
+
                     for elem in div.iter():
+                        # Update annotation context
+                        ctx.update_from_element(elem)
+
                         if is_l_tag(elem.tag) or is_line_tag(elem.tag):
                             # Use the 'n' attribute if available
                             line_n = elem.get('n')
@@ -5136,28 +5669,30 @@ def process_text_file(xml_path, work_id, cursor, language):
                                 text = get_text_content(elem).strip()
 
                                 if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                    annotation = ctx.get_prefix_for_line()
                                     lines.append({
                                         'number': line_num,
                                         'text': text,
-                                        'xml': ET.tostring(elem, encoding='unicode')
+                                        'xml': ET.tostring(elem, encoding='unicode'),
+                                        'speaker': annotation
                                     })
-                
+
                 if lines:
                     # Insert book
                     cursor.execute("""
-                        INSERT OR IGNORE INTO books 
+                        INSERT OR IGNORE INTO books
                         (id, work_id, book_number, label, start_line, end_line, line_count)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """, (book_id, work_id, book_num, f"Book {book_num}", 
+                    """, (book_id, work_id, book_num, f"Book {book_num}",
                           1, len(lines), len(lines)))
-                    
+
                     # Insert lines with sequence numbers
                     for seq_num, line in enumerate(lines, 1):
                         cursor.execute("""
-                            INSERT OR IGNORE INTO text_lines 
+                            INSERT OR IGNORE INTO text_lines
                             (book_id, line_number, sequence_number, line_text, line_xml, speaker)
                             VALUES (?, ?, ?, ?, ?, ?)
-                        """, (book_id, line['number'], seq_num, line['text'], line['xml'], None))
+                        """, (book_id, line['number'], seq_num, line['text'], line['xml'], line.get('speaker')))
                         
                         # Insert words into words table
                         words = line['text'].split()
@@ -5189,44 +5724,58 @@ def process_text_file(xml_path, work_id, cursor, language):
                 for poem_idx, poem_div in enumerate(poem_divs, 1):
                     poem_n = poem_div.get('n', str(poem_idx))
                     book_id = f"{work_id}.{int(poem_n):03d}" if poem_n.isdigit() else f"{work_id}.{poem_idx:03d}"
-                    
+
                     lines = []
+                    ctx = LineAnnotationContext()
+
+                    # Check for head in this poem div
+                    for child in poem_div:
+                        if is_head_tag(child.tag):
+                            text = get_text_content_simple(child).strip()
+                            if text:
+                                ctx.pending_head = text
+                            break
+
                     for elem in poem_div.iter():
+                        ctx.update_from_element(elem)
+
                         if is_l_tag(elem.tag):
                             line_n = elem.get('n')
                             line_num = parse_line_number(line_n)
                             if line_num is not None:
                                 text = get_text_content(elem).strip()
                                 if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                    annotation = ctx.get_prefix_for_line()
                                     lines.append({
                                         'number': line_num,
                                         'text': text,
-                                        'xml': ET.tostring(elem, encoding='unicode')
+                                        'xml': ET.tostring(elem, encoding='unicode'),
+                                        'speaker': annotation
                                     })
 
                     if lines:
                         # Sort lines by their number
                         lines.sort(key=lambda x: x['number'])
-                        
+
                         # Get actual line range
                         min_line = min(line['number'] for line in lines)
                         max_line = max(line['number'] for line in lines)
-                        
+
                         # Insert book for this poem
                         cursor.execute("""
-                            INSERT OR IGNORE INTO books 
+                            INSERT OR IGNORE INTO books
                             (id, work_id, book_number, label, start_line, end_line, line_count)
                             VALUES (?, ?, ?, ?, ?, ?, ?)
-                        """, (book_id, work_id, int(poem_n) if poem_n.isdigit() else poem_idx, 
+                        """, (book_id, work_id, int(poem_n) if poem_n.isdigit() else poem_idx,
                               f"Ode {poem_n}", min_line, max_line, len(lines)))
-                        
+
                         # Insert lines
                         for seq_num, line in enumerate(lines, 1):
                             cursor.execute("""
-                                INSERT OR IGNORE INTO text_lines 
+                                INSERT OR IGNORE INTO text_lines
                                 (book_id, line_number, sequence_number, line_text, line_xml, speaker)
                                 VALUES (?, ?, ?, ?, ?, ?)
-                            """, (book_id, line['number'], seq_num, line['text'], line['xml'], None))
+                            """, (book_id, line['number'], seq_num, line['text'], line['xml'], line.get('speaker')))
                             
                             # Insert words
                             words = line['text'].split()
@@ -5244,8 +5793,11 @@ def process_text_file(xml_path, work_id, cursor, language):
                 # No poems either, treat as single book
                 book_id = f"{work_id}.001"
                 lines = []
-                
+                ctx = LineAnnotationContext()
+
                 for elem in root.iter():
+                    ctx.update_from_element(elem)
+
                     if is_l_tag(elem.tag) or is_line_tag(elem.tag):
                         # Use the 'n' attribute if available, otherwise skip this line
                         line_n = elem.get('n')
@@ -5254,25 +5806,27 @@ def process_text_file(xml_path, work_id, cursor, language):
                             text = get_text_content(elem).strip()
 
                             if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                annotation = ctx.get_prefix_for_line()
                                 lines.append({
                                     'number': line_num,
                                     'text': text,
-                                    'xml': ET.tostring(elem, encoding='unicode')
+                                    'xml': ET.tostring(elem, encoding='unicode'),
+                                    'speaker': annotation
                                 })
-                
+
                 if lines:
                     cursor.execute("""
-                        INSERT OR IGNORE INTO books 
+                        INSERT OR IGNORE INTO books
                         (id, work_id, book_number, label, start_line, end_line, line_count)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
                     """, (book_id, work_id, 1, "Book 1", 1, len(lines), len(lines)))
-                    
+
                     for seq_num, line in enumerate(lines, 1):
                         cursor.execute("""
-                            INSERT OR IGNORE INTO text_lines 
+                            INSERT OR IGNORE INTO text_lines
                             (book_id, line_number, sequence_number, line_text, line_xml, speaker)
                             VALUES (?, ?, ?, ?, ?, ?)
-                        """, (book_id, line['number'], seq_num, line['text'], line['xml'], None))
+                        """, (book_id, line['number'], seq_num, line['text'], line['xml'], line.get('speaker')))
                         
                         # Insert words into words table
                         words = line['text'].split()
