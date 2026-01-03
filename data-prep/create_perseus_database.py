@@ -1839,9 +1839,9 @@ def extract_text_from_first1k_element(elem):
         if child.tail:
             text_parts.append(child.tail)
 
-    # Get tail text of the main element
-    if elem.tail:
-        text_parts.append(elem.tail)
+    # NOTE: We do NOT add elem.tail here - that's handled by the parent's loop
+    # which adds child.tail after processing each child. Adding it here would
+    # cause double-counting of tail text.
 
     # Join and clean up
     text = ''.join(text_parts)
