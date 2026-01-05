@@ -1800,10 +1800,15 @@ def parse_first1k_translation(xml_path):
 
     return translations
 
-def extract_text_from_first1k_element(elem):
+def extract_text_from_first1k_element(elem, include_tail=True):
     """
     Extract all text from an element, including tail text.
     Preserves line breaks from <lb/> tags.
+
+    Args:
+        elem: The XML element to extract text from
+        include_tail: Whether to include this element's tail text. Set to False
+                      for recursive calls since the parent handles tail text.
     """
     # Skip editorial elements entirely
     excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
@@ -1831,7 +1836,8 @@ def extract_text_from_first1k_element(elem):
         # Skip excluded tags content but still get tail
         elif child_tag not in excluded_tags:
             # Get all text from this child element (recursive)
-            child_text = extract_text_from_first1k_element(child)
+            # Pass include_tail=False since WE will handle child.tail below
+            child_text = extract_text_from_first1k_element(child, include_tail=False)
             if child_text:
                 text_parts.append(child_text)
 
@@ -1839,9 +1845,10 @@ def extract_text_from_first1k_element(elem):
         if child.tail:
             text_parts.append(child.tail)
 
-    # NOTE: We do NOT add elem.tail here - that's handled by the parent's loop
-    # which adds child.tail after processing each child. Adding it here would
-    # cause double-counting of tail text.
+    # Get tail text of the main element (only for top-level calls)
+    # For recursive calls, the parent handles our tail text
+    if include_tail and elem.tail:
+        text_parts.append(elem.tail)
 
     # Join and clean up
     text = ''.join(text_parts)
