@@ -4153,7 +4153,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                     # Get the total line count and letter count for this book
                     # to estimate line ranges for each letter
                     cursor.execute("""
-                        SELECT COUNT(*) FROM texts WHERE book_id = ?
+                        SELECT COUNT(*) FROM text_lines WHERE book_id = ?
                     """, (book_id,))
                     result = cursor.fetchone()
                     total_lines = result[0] if result else 0
@@ -4166,7 +4166,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                                 continue
                             cursor.execute("""
                                 INSERT INTO translation_segments
-                                (book_id, start_line, end_line, text, translator, speaker)
+                                (book_id, start_line, end_line, translation_text, translator, speaker)
                                 VALUES (?, ?, ?, ?, ?, ?)
                             """, (book_id, letter_num, letter_num, letter_text, translator, None))
                             total_segments += 1
@@ -4188,7 +4188,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
 
                             cursor.execute("""
                                 INSERT INTO translation_segments
-                                (book_id, start_line, end_line, text, translator, speaker)
+                                (book_id, start_line, end_line, translation_text, translator, speaker)
                                 VALUES (?, ?, ?, ?, ?, ?)
                             """, (book_id, start_line, end_line, letter_text, translator, None))
                             total_segments += 1
