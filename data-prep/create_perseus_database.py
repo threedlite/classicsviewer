@@ -198,6 +198,10 @@ def is_opener_tag(tag):
     """Check if tag is exactly <opener>."""
     return is_tag(tag, 'opener')
 
+def is_pb_tag(tag):
+    """Check if tag is exactly <pb> (page break)."""
+    return is_tag(tag, 'pb')
+
 def is_sp_tag(tag):
     """Check if tag is exactly <sp> (speech wrapper)."""
     return is_tag(tag, 'sp')
@@ -288,6 +292,8 @@ class LineAnnotationContext:
         self.pending_label = None         # <label> to apply to next line
         self.pending_salute = None        # <salute> to apply to next line
         self.pending_dateline = None      # <dateline> to apply to next line
+        self.pending_poem = None          # <div subtype="poem"> number to apply to first line
+        self.pending_pb = None            # <pb> page break to apply to next line
         self.last_div_id = None           # Track which div we're in for head application
         self.lines_since_div_start = 0    # Count lines since div started (for head)
 
@@ -345,6 +351,13 @@ class LineAnnotationContext:
                 self.update_from_element(child, parent_map)
             return False
 
+        if is_pb_tag(tag):
+            # Page break - extract page number and format as [p.XXX]
+            page_n = elem.get('n', '')
+            if page_n:
+                self.pending_pb = f"[{page_n}]"
+            return False
+
         if is_div_tag(tag):
             # Track div changes to reset head application
             div_id = id(elem)
@@ -358,6 +371,13 @@ class LineAnnotationContext:
                         if text:
                             self.pending_head = text
                         break  # Only use first head
+
+                # Check for poem subtype (e.g., Horace's Odes)
+                subtype = elem.get('subtype', '')
+                if subtype == 'poem':
+                    poem_n = elem.get('n', '')
+                    if poem_n:
+                        self.pending_poem = f"Poem {poem_n}"
             return False
 
         # Check if this is a content element
@@ -377,7 +397,13 @@ class LineAnnotationContext:
         """
         parts = []
 
-        # Order: head, stage, salute+dateline, label, speaker
+        # Order: pb, poem, head, stage, salute+dateline, label, speaker
+        if self.pending_pb:
+            parts.append(self.pending_pb)
+
+        if self.pending_poem:
+            parts.append(self.pending_poem)
+
         if self.pending_head:
             parts.append(self.pending_head)
 
@@ -400,6 +426,8 @@ class LineAnnotationContext:
 
         if consume:
             # Clear one-time annotations (but keep speaker)
+            self.pending_pb = None
+            self.pending_poem = None
             self.pending_head = None
             self.pending_stage = None
             self.pending_salute = None
@@ -413,6 +441,8 @@ class LineAnnotationContext:
 
     def reset_for_new_section(self):
         """Reset context for a new section/div."""
+        self.pending_pb = None
+        self.pending_poem = None
         self.pending_head = None
         self.pending_stage = None
         self.pending_label = None
@@ -2886,24 +2916,41 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # Process dramatic text with speakers
         print(f"          Processing dramatic text with speakers")
         current_speaker = None
-        
+        current_head = None  # Track head tags for letter salutations
+
         # Check if any lines have alphanumeric numbering
         has_alphanumeric = False
+        has_l_tags = False
+        has_p_tags = False
         for elem in book_elem.iter():
             if is_l_tag(elem.tag):
+                has_l_tags = True
                 line_n = elem.get('n', '')
                 if line_n and not line_n.isdigit():
                     has_alphanumeric = True
                     break
-        
+            elif is_p_tag(elem.tag):
+                has_p_tags = True
+
+        # For prose dialogues (only p tags, no l tags), use sequential numbering
+        is_prose_dialogue = has_p_tags and not has_l_tags
+        if is_prose_dialogue:
+            print(f"          Detected prose dialogue (p tags only) - using sequential numbering")
+
         if has_alphanumeric:
             # Don't consolidate - create individual segments to preserve order and text
             print(f"          Detected alphanumeric line numbers - preserving individual segments")
             for elem in book_elem.iter():
+                # Track head tags for letter salutations
+                if is_head_tag(elem.tag):
+                    head_text = get_text_content(elem).strip()
+                    if head_text:
+                        current_head = head_text
+
                 # Track current speaker
-                if is_speaker_tag(elem.tag):
+                elif is_speaker_tag(elem.tag):
                     current_speaker = elem.text.strip() if elem.text else None
-                
+
                 # Create a segment for each line
                 elif is_l_tag(elem.tag) and current_speaker:
                     line_n = elem.get('n', '')
@@ -2911,6 +2958,10 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                     if line_num is not None:
                         line_text = get_text_content(elem).strip()
                         if line_text:
+                            # Prepend head if present
+                            if current_head:
+                                line_text = f"{current_head} — {line_text}"
+                                current_head = None  # Only use once
                             segments.append({
                                 'start_line': line_num,
                                 'end_line': line_num,
@@ -2920,10 +2971,19 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                             })
         else:
             # Original consolidation logic for texts without alphanumeric numbering
+            # Also handles prose dialogues with p tags
             current_lines = []
+            sequential_line_num = 1  # For prose dialogues without line numbers
+
             for elem in book_elem.iter():
+                # Track head tags for letter salutations
+                if is_head_tag(elem.tag):
+                    head_text = get_text_content(elem).strip()
+                    if head_text:
+                        current_head = head_text
+
                 # Track current speaker
-                if is_speaker_tag(elem.tag):
+                elif is_speaker_tag(elem.tag):
                     # Save previous speaker's lines if any
                     if current_speaker and current_lines:
                         # Consolidate lines for this speaker
@@ -2938,21 +2998,31 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                             'speaker': current_speaker
                         })
                         current_lines = []
-                    
+
                     current_speaker = elem.text.strip() if elem.text else None
-                
-                # Collect lines for current speaker
-                elif is_l_tag(elem.tag) and current_speaker:
+
+                # Collect lines for current speaker - handle both l tags and p tags
+                elif (is_l_tag(elem.tag) or is_p_tag(elem.tag)) and current_speaker:
                     line_n = elem.get('n', '')
                     line_num = parse_line_number(line_n)
+
+                    # For p tags without line numbers, use sequential numbering
+                    if line_num is None and is_p_tag(elem.tag):
+                        line_num = sequential_line_num
+                        sequential_line_num += 1
+
                     if line_num is not None:
                         line_text = get_text_content(elem).strip()
                         if line_text:
+                            # Prepend head if present
+                            if current_head:
+                                line_text = f"{current_head} — {line_text}"
+                                current_head = None  # Only use once
                             current_lines.append({
                                 'line': line_num,
                                 'text': line_text
                             })
-            
+
             # Don't forget the last speaker's lines
             if current_speaker and current_lines:
                 start_line = current_lines[0]['line']
@@ -2965,7 +3035,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                     'translator': translator,
                     'speaker': current_speaker
                 })
-        
+
         print(f"          Extracted {len(segments)} segments with speakers")
         
     # Check if there are any milestones at all
@@ -3057,8 +3127,17 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # Track current line numbers for Bekker/Stephanus
         current_bekker_line = None
         current_stephanus_line = None
-        
+        # Track head tags for letter salutations
+        current_head = None
+
         for para in book_elem.iter():
+            # Track head tags for letter salutations
+            if is_head_tag(para.tag):
+                head_text = get_text_content(para).strip()
+                if head_text:
+                    current_head = head_text
+                continue
+
             # Track milestones that appear before paragraphs
             if is_milestone_tag(para.tag):
                 unit = para.get('unit', '')
@@ -3152,7 +3231,12 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                 
                 # Get paragraph text - preserve milestones for Bekker/Stephanus texts
                 para_text = get_text_content(para, preserve_milestones=(is_bekker or is_stephanus)).strip()
-                
+
+                # Prepend head if present (e.g., letter salutation)
+                if current_head and para_text:
+                    para_text = f"{current_head} — {para_text}"
+                    current_head = None  # Only use once per letter/section
+
                 # For Bekker/Stephanus texts, use the tracked section+line reference
                 if not milestones_in_para:
                     if is_bekker and current_bekker_section:
@@ -3245,37 +3329,55 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             print(f"          Detected hierarchical structure: {section_count} sections with max number {max_section_num}")
         
         cumulative_segment_num = 0  # Track cumulative position for hierarchical texts
-        
+        pending_head = None  # Track head tags for letter salutations
+
         # Use a recursive function to process only the deepest content-containing divs
-        def process_div_hierarchy(elem, depth=0):
-            nonlocal sections_found, cumulative_segment_num
-            
+        def process_div_hierarchy(elem, depth=0, inherited_head=None):
+            nonlocal sections_found, cumulative_segment_num, pending_head
+
+            # Check for head tags at this level (for letter salutations)
+            current_head = inherited_head
+            for child in elem:
+                if is_head_tag(child.tag):
+                    head_text = get_text_content(child).strip()
+                    if head_text:
+                        current_head = head_text
+                    break  # Only use first head
+
             # Check if this is a structural div (but not the book_elem itself)
             if (elem != book_elem and
-                is_div_tag(elem.tag) and 
-                elem.get('type') == 'textpart' and 
-                elem.get('subtype') in ['section', 'chapter', 'poem', 'epigram']):
-                
+                is_div_tag(elem.tag) and
+                elem.get('type') == 'textpart' and
+                elem.get('subtype') in ['section', 'chapter', 'poem', 'epigram', 'letter']):
+
                 hierarchy_type = get_element_hierarchy_type(elem)
-                
+
                 if hierarchy_type == 'container':
                     # This div contains other structural divs - recurse into children only
+                    # Pass the head from this level (e.g., letter) to children (e.g., sections)
+                    first_child = True
                     for child in elem:
-                        if (is_div_tag(child.tag) and 
+                        if (is_div_tag(child.tag) and
                             child.get('type') == 'textpart'):
-                            process_div_hierarchy(child, depth + 1)
-                
+                            # Only pass head to first child
+                            process_div_hierarchy(child, depth + 1, current_head if first_child else None)
+                            first_child = False
+
                 elif hierarchy_type == 'content':
                     # This is a leaf div with actual content - extract it
                     sections_found = True
                     section_n = elem.get('n', '')
                     section_text = get_text_content(elem).strip()
-                    
+
+                    # Prepend head if present (e.g., letter salutation)
+                    if current_head and section_text:
+                        section_text = f"{current_head} — {section_text}"
+
                     # Check for duplicate before adding
                     text_hash = hash(section_text)
                     if section_text and text_hash not in processed_text_hashes:
                         processed_text_hashes.add(text_hash)
-                        
+
                         # CRITICAL FIX: For hierarchical texts, use cumulative numbering
                         if is_hierarchical:
                             cumulative_segment_num += 1
@@ -3284,7 +3386,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                             section_num = int(section_n)
                         else:
                             section_num = len(segments) + 1
-                        
+
                         segments.append({
                             'start_line': section_num,
                             'end_line': section_num,
@@ -3292,6 +3394,11 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                             'translator': translator,
                             'is_hierarchical': is_hierarchical  # Mark for redistribution
                         })
+            else:
+                # Not a structural div - recurse into children
+                for child in elem:
+                    if is_div_tag(child.tag):
+                        process_div_hierarchy(child, depth + 1, current_head)
         
         # Start processing from the book element
         process_div_hierarchy(book_elem)
@@ -3299,11 +3406,25 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # If no sections found, extract paragraphs directly (but avoid duplicates)
         if not sections_found:
             para_num = 1
+            current_head = None  # Track head tags for letter salutations
             for para in book_elem.iter():
+                # Track head tags for letter salutations
+                if is_head_tag(para.tag):
+                    head_text = get_text_content(para).strip()
+                    if head_text:
+                        current_head = head_text
+                    continue
+
                 if is_p_tag(para.tag):
                     para_text = get_text_content(para).strip()
+
+                    # Prepend head if present (e.g., letter salutation)
+                    if current_head and para_text:
+                        para_text = f"{current_head} — {para_text}"
+                        current_head = None  # Only use once per letter/section
+
                     text_hash = hash(para_text)
-                    
+
                     if para_text and text_hash not in processed_text_hashes:
                         processed_text_hashes.add(text_hash)
                         segments.append({
@@ -3962,6 +4083,120 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 translation_success_count += 1
                 continue  # Skip to next translation file
 
+            # Check if this is Cicero's letters (Shuckburgh translation uses chronological order)
+            # The English translation mixes letters from different collections chronologically
+            # We need to parse the n="text=X:book=Y:letter=Z" format to map correctly
+            cicero_letter_works = {
+                'phi0474.phi056': 'F',      # Letters to Friends (Familiares)
+                'phi0474.phi057': 'A',      # Letters to Atticus
+                'phi0474.phi058': 'Q FR',   # Letters to Quintus
+                'phi0474.phi059': 'B',      # Letters to Brutus
+            }
+
+            if work_id in cicero_letter_works:
+                text_code = cicero_letter_works[work_id]
+                print(f"      → Processing Cicero letters translation (filtering for text={text_code})")
+
+                # Find all letter divs with the n="text=...:book=...:letter=..." format
+                letters_by_book = {}  # {book_num: [(letter_num, div_element), ...]}
+
+                for div in root.iter():
+                    if not is_div_tag(div.tag):
+                        continue
+                    n_attr = div.get('n', '')
+                    # Match format like "text=A:book=1:letter=5" or "text=Q FR:book=1:letter=1"
+                    if not n_attr.startswith('text='):
+                        continue
+
+                    # Parse the n attribute
+                    # Format: text=X:book=Y:letter=Z
+                    parts = n_attr.split(':')
+                    if len(parts) < 3:
+                        continue
+
+                    # Extract text, book, letter
+                    text_part = parts[0].replace('text=', '')
+                    book_part = None
+                    letter_part = None
+                    for part in parts[1:]:
+                        if part.startswith('book='):
+                            book_part = part.replace('book=', '')
+                        elif part.startswith('letter='):
+                            letter_part = part.replace('letter=', '')
+
+                    if not book_part or not letter_part:
+                        continue
+
+                    # Only process letters matching this work's text code
+                    if text_part != text_code:
+                        continue
+
+                    try:
+                        book_num = int(book_part)
+                        letter_num = int(letter_part)
+                    except ValueError:
+                        continue
+
+                    if book_num not in letters_by_book:
+                        letters_by_book[book_num] = []
+                    letters_by_book[book_num].append((letter_num, div))
+
+                # Process each book's letters
+                total_segments = 0
+                for book_num in sorted(letters_by_book.keys()):
+                    book_id = f"{work_id}.{book_num:03d}"
+                    letters = letters_by_book[book_num]
+
+                    # Sort letters by letter number within the book
+                    letters.sort(key=lambda x: x[0])
+
+                    # Get the total line count and letter count for this book
+                    # to estimate line ranges for each letter
+                    cursor.execute("""
+                        SELECT COUNT(*) FROM texts WHERE book_id = ?
+                    """, (book_id,))
+                    result = cursor.fetchone()
+                    total_lines = result[0] if result else 0
+
+                    if total_lines == 0:
+                        # Book not yet in database, use letter number as fallback
+                        for letter_num, letter_div in letters:
+                            letter_text = get_text_content(letter_div).strip()
+                            if not letter_text:
+                                continue
+                            cursor.execute("""
+                                INSERT INTO translation_segments
+                                (book_id, start_line, end_line, text, translator, speaker)
+                                VALUES (?, ?, ?, ?, ?, ?)
+                            """, (book_id, letter_num, letter_num, letter_text, translator, None))
+                            total_segments += 1
+                    else:
+                        # Calculate approximate line ranges for each letter
+                        max_letter = max(ln for ln, _ in letters)
+                        lines_per_letter = total_lines / max_letter if max_letter > 0 else total_lines
+
+                        for letter_num, letter_div in letters:
+                            letter_text = get_text_content(letter_div).strip()
+                            if not letter_text:
+                                continue
+
+                            # Estimate line range for this letter
+                            start_line = int((letter_num - 1) * lines_per_letter) + 1
+                            end_line = int(letter_num * lines_per_letter)
+                            # Ensure end_line doesn't exceed total
+                            end_line = min(end_line, total_lines)
+
+                            cursor.execute("""
+                                INSERT INTO translation_segments
+                                (book_id, start_line, end_line, text, translator, speaker)
+                                VALUES (?, ?, ?, ?, ?, ?)
+                            """, (book_id, start_line, end_line, letter_text, translator, None))
+                            total_segments += 1
+
+                print(f"      → Extracted {total_segments} letter segments from {len(letters_by_book)} books")
+                translation_success_count += 1
+                continue  # Skip to next translation file
+
             # Check if this is a New Testament text (needs special chapter handling)
             is_new_testament = work_id.startswith('tlg0031')
             
@@ -4438,6 +4673,17 @@ def process_prose_with_books(root, work_id, cursor, language):
                 elem.get('subtype') == 'letter'):
                 # Extract opener info from the letter div
                 opener_salute, opener_dateline = extract_opener_info(elem)
+
+                # Also check for <head> tags (used in Seneca's and Pliny's letters)
+                # Seneca uses <head type="salutatio">, Pliny uses plain <head>
+                if not opener_salute:
+                    for child in elem:
+                        if is_head_tag(child.tag):
+                            head_text = get_text_content_simple(child).strip()
+                            if head_text:
+                                opener_salute = head_text
+                            break
+
                 if opener_salute or opener_dateline:
                     letter_opener_salute = opener_salute
                     letter_opener_dateline = opener_dateline
@@ -4518,7 +4764,9 @@ def process_prose_with_books(root, work_id, cursor, language):
                             if is_plato or is_aristotle:
                                 sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
                             else:
-                                sentences = re.split(r'[.!?]\s+', text)
+                                # Don't split after short abbreviations (1-3 chars starting with capital)
+                                # Handles Roman praenomina like M., L., Cn., Sp., Sex., Ser., etc.
+                                sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
 
                         # Process each sentence as a line
                         first_sentence = True
@@ -4647,6 +4895,17 @@ def process_prose_text(root, work_id, cursor, language):
             elem.get('subtype') == 'letter'):
             # Extract opener info from the letter div
             opener_salute, opener_dateline = extract_opener_info(elem)
+
+            # Also check for <head> tags (used in Seneca's and Pliny's letters)
+            # Seneca uses <head type="salutatio">, Pliny uses plain <head>
+            if not opener_salute:
+                for child in elem:
+                    if is_head_tag(child.tag):
+                        head_text = get_text_content_simple(child).strip()
+                        if head_text:
+                            opener_salute = head_text
+                        break
+
             if opener_salute or opener_dateline:
                 letter_opener_salute = opener_salute
                 letter_opener_dateline = opener_dateline
@@ -4688,11 +4947,29 @@ def process_prose_text(root, work_id, cursor, language):
             paragraphs_to_process = get_paragraphs_for_div(elem, ['section', 'chapter'])
             paragraphs_found = len(paragraphs_to_process) > 0
             for p in paragraphs_to_process:
-                # Extract label/salute/dateline from INSIDE this paragraph
+                # Extract label/salute/dateline/speaker from INSIDE this paragraph
                 # This ensures we apply the correct annotation to each paragraph
                 para_label = None
                 para_salute = None
                 para_dateline = None
+                para_speaker = None
+
+                # Check if paragraph is inside an <sp> element with a <speaker>
+                # by looking at the parent (need to build parent map for this)
+                for sp in elem.iter():
+                    if is_sp_tag(sp.tag):
+                        # Check if this <sp> contains our paragraph
+                        for sp_child in sp:
+                            if sp_child == p or (is_p_tag(sp_child.tag) and sp_child == p):
+                                # Found the sp containing our paragraph, look for speaker
+                                for sibling in sp:
+                                    if is_speaker_tag(sibling.tag):
+                                        speaker_text = sibling.text.strip() if sibling.text else None
+                                        if speaker_text:
+                                            para_speaker = speaker_text
+                                        break
+                                break
+
                 for child in p.iter():
                     if is_label_tag(child.tag):
                         label_text = get_text_content_simple(child).strip()
@@ -4735,7 +5012,9 @@ def process_prose_text(root, work_id, cursor, language):
                         if is_plato or is_aristotle:
                             sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
                         else:
-                            sentences = re.split(r'[.!?]\s+', text)
+                            # Don't split after short abbreviations (1-3 chars starting with capital)
+                            # Handles Roman praenomina like M., L., Cn., Sp., Sex., Ser., etc.
+                            sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
 
                     # Process each sentence as a line
                     first_sentence = True
@@ -4760,6 +5039,8 @@ def process_prose_text(root, work_id, cursor, language):
                                     parts.append(para_dateline)
                                 if para_label:
                                     parts.append(para_label)
+                                if para_speaker:
+                                    parts.append(para_speaker)
                                 if parts:
                                     annotation = ' — '.join(parts)
                                 first_sentence = False
@@ -4775,10 +5056,11 @@ def process_prose_text(root, work_id, cursor, language):
 
             # If no paragraphs found, treat the entire section text as prose
             if not paragraphs_found:
-                # Extract label/salute/dateline from this section div
+                # Extract label/salute/dateline/speaker from this section div
                 section_label = None
                 section_salute = None
                 section_dateline = None
+                section_speaker = None
                 for child in elem.iter():
                     if is_label_tag(child.tag):
                         label_text = get_text_content_simple(child).strip()
@@ -4792,6 +5074,10 @@ def process_prose_text(root, work_id, cursor, language):
                         dateline_text = get_text_content_simple(child).strip()
                         if dateline_text:
                             section_dateline = dateline_text
+                    elif is_speaker_tag(child.tag):
+                        speaker_text = child.text.strip() if child.text else None
+                        if speaker_text:
+                            section_speaker = speaker_text
 
                 # Apply letter-level opener info if available and not yet applied
                 # This handles Latin letters where salute/dateline are in <label rend="opener">
@@ -4823,7 +5109,8 @@ def process_prose_text(root, work_id, cursor, language):
                     if language == 'greek':
                         sentences = re.split(r'[.!?·;]\s+', text)
                     else:
-                        sentences = re.split(r'[.!?]\s+', text)
+                        # Don't split after short abbreviations (1-3 chars starting with capital)
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
 
                     first_sentence = True
                     for sentence in sentences:
@@ -4847,6 +5134,8 @@ def process_prose_text(root, work_id, cursor, language):
                                     parts.append(section_dateline)
                                 if section_label:
                                     parts.append(section_label)
+                                if section_speaker:
+                                    parts.append(section_speaker)
                                 if parts:
                                     annotation = ' — '.join(parts)
                                 first_sentence = False

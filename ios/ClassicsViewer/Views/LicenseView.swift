@@ -20,6 +20,8 @@ PERSEUS DIGITAL LIBRARY TEXTS
 
 The texts in this application are from the Perseus Digital Library.
 
+Perseus Greek and Latin data last pulled: January 5, 2026
+
 License: Creative Commons Attribution-ShareAlike 3.0 United States License
 http://creativecommons.org/licenses/by-sa/3.0/us/
 
