@@ -4090,7 +4090,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 'phi0474.phi056': 'F',      # Letters to Friends (Familiares)
                 'phi0474.phi057': 'A',      # Letters to Atticus
                 'phi0474.phi058': 'Q FR',   # Letters to Quintus
-                'phi0474.phi059': 'B',      # Letters to Brutus
+                'phi0474.phi059': 'BRUT.',  # Letters to Brutus
             }
 
             if work_id in cicero_letter_works:
@@ -4133,7 +4133,10 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
 
                     try:
                         book_num = int(book_part)
-                        letter_num = int(letter_part)
+                        # Handle complex letter formats like "2.3-6" or "3.1-3"
+                        # Extract main letter number (first number before dot or hyphen)
+                        letter_main = letter_part.split('.')[0].split('-')[0]
+                        letter_num = int(letter_main)
                     except ValueError:
                         continue
 
@@ -4150,41 +4153,82 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                     # Sort letters by letter number within the book
                     letters.sort(key=lambda x: x[0])
 
-                    # Get the total line count and letter count for this book
-                    # to estimate line ranges for each letter
+                    # Get actual letter boundaries from speaker headers in the database
+                    # Speaker headers mark the start of each letter (e.g., "CICERO ATTICO salutem...")
                     cursor.execute("""
-                        SELECT COUNT(*) FROM text_lines WHERE book_id = ?
+                        SELECT line_number FROM text_lines
+                        WHERE book_id = ? AND speaker IS NOT NULL AND speaker != ''
+                        ORDER BY line_number
+                    """, (book_id,))
+                    letter_start_lines = [row[0] for row in cursor.fetchall()]
+
+                    # Get total lines for this book
+                    cursor.execute("""
+                        SELECT MAX(line_number) FROM text_lines WHERE book_id = ?
                     """, (book_id,))
                     result = cursor.fetchone()
                     total_lines = result[0] if result else 0
 
-                    if total_lines == 0:
-                        # Book not yet in database, use letter number as fallback
-                        for letter_num, letter_div in letters:
-                            letter_text = get_text_content(letter_div).strip()
-                            if not letter_text:
-                                continue
-                            cursor.execute("""
-                                INSERT INTO translation_segments
-                                (book_id, start_line, end_line, translation_text, translator, speaker)
-                                VALUES (?, ?, ?, ?, ?, ?)
-                            """, (book_id, letter_num, letter_num, letter_text, translator, None))
-                            total_segments += 1
+                    # Build letter boundaries map: letter_num -> (start_line, end_line)
+                    # Letter N starts at letter_start_lines[N-1] and ends at letter_start_lines[N]-1
+                    letter_boundaries = {}
+                    if letter_start_lines:
+                        for i, start_line in enumerate(letter_start_lines):
+                            letter_num = i + 1  # 1-indexed
+                            if i + 1 < len(letter_start_lines):
+                                end_line = letter_start_lines[i + 1] - 1
+                            else:
+                                end_line = total_lines if total_lines else start_line
+                            letter_boundaries[letter_num] = (start_line, end_line)
+
+                    if not letter_boundaries:
+                        # Fallback to proportional estimation if no speaker headers found
+                        if total_lines == 0:
+                            for letter_num, letter_div in letters:
+                                letter_text = get_text_content(letter_div).strip()
+                                if not letter_text:
+                                    continue
+                                cursor.execute("""
+                                    INSERT INTO translation_segments
+                                    (book_id, start_line, end_line, translation_text, translator, speaker)
+                                    VALUES (?, ?, ?, ?, ?, ?)
+                                """, (book_id, letter_num, letter_num, letter_text, translator, None))
+                                total_segments += 1
+                        else:
+                            max_letter = max(ln for ln, _ in letters)
+                            lines_per_letter = total_lines / max_letter if max_letter > 0 else total_lines
+                            for letter_num, letter_div in letters:
+                                letter_text = get_text_content(letter_div).strip()
+                                if not letter_text:
+                                    continue
+                                start_line = int((letter_num - 1) * lines_per_letter) + 1
+                                end_line = min(int(letter_num * lines_per_letter), total_lines)
+                                cursor.execute("""
+                                    INSERT INTO translation_segments
+                                    (book_id, start_line, end_line, translation_text, translator, speaker)
+                                    VALUES (?, ?, ?, ?, ?, ?)
+                                """, (book_id, start_line, end_line, letter_text, translator, None))
+                                total_segments += 1
                     else:
-                        # Calculate approximate line ranges for each letter
-                        max_letter = max(ln for ln, _ in letters)
-                        lines_per_letter = total_lines / max_letter if max_letter > 0 else total_lines
-
+                        # Use actual letter boundaries from speaker headers
                         for letter_num, letter_div in letters:
                             letter_text = get_text_content(letter_div).strip()
                             if not letter_text:
                                 continue
 
-                            # Estimate line range for this letter
-                            start_line = int((letter_num - 1) * lines_per_letter) + 1
-                            end_line = int(letter_num * lines_per_letter)
-                            # Ensure end_line doesn't exceed total
-                            end_line = min(end_line, total_lines)
+                            # Use actual boundaries if available, otherwise fallback
+                            if letter_num in letter_boundaries:
+                                start_line, end_line = letter_boundaries[letter_num]
+                            else:
+                                # Letter number exceeds detected letters - use proportional fallback
+                                max_letter = max(letter_boundaries.keys())
+                                if letter_num <= max_letter:
+                                    # Letter within range but missing - skip
+                                    continue
+                                # Beyond known letters - estimate
+                                lines_per_letter = total_lines / letter_num if letter_num > 0 else total_lines
+                                start_line = int((letter_num - 1) * lines_per_letter) + 1
+                                end_line = min(int(letter_num * lines_per_letter), total_lines)
 
                             cursor.execute("""
                                 INSERT INTO translation_segments
