@@ -96,6 +96,27 @@ def is_div_tag(tag):
     """Check if tag is exactly <div>."""
     return is_tag(tag, 'div')
 
+def is_old_tei_div_tag(tag):
+    """Check if tag is an old TEI numbered div (div1, div2, div3, etc.)."""
+    tag_name = tag.split('}')[-1] if '}' in tag else tag
+    if tag_name.startswith('div') and len(tag_name) > 3:
+        suffix = tag_name[3:]
+        return suffix.isdigit()
+    return False
+
+def get_old_tei_div_level(tag):
+    """Get the nesting level from an old TEI div tag (div1 -> 1, div2 -> 2, etc.)."""
+    tag_name = tag.split('}')[-1] if '}' in tag else tag
+    if tag_name.startswith('div') and len(tag_name) > 3:
+        suffix = tag_name[3:]
+        if suffix.isdigit():
+            return int(suffix)
+    return 0
+
+def is_any_div_tag(tag):
+    """Check if tag is any div element (div, div1, div2, etc.)."""
+    return is_div_tag(tag) or is_old_tei_div_tag(tag)
+
 def is_lg_tag(tag):
     """Check if tag is exactly <lg> (line group)."""
     return is_tag(tag, 'lg')
@@ -383,10 +404,27 @@ class LineAnnotationContext:
         # Check if this is a content element
         return is_l_tag(tag) or is_line_tag(tag) or is_p_tag(tag)
 
+    def get_pb_for_line(self, consume=True):
+        """
+        Get the page break prefix for the current line.
+        Page breaks are added to line text, not speaker field.
+
+        Args:
+            consume: If True, clears pending_pb after returning.
+
+        Returns:
+            Page break string like "[p.123]", or None if no page break.
+        """
+        pb = self.pending_pb
+        if consume:
+            self.pending_pb = None
+        return pb
+
     def get_prefix_for_line(self, consume=True):
         """
         Get the prefix annotation string for the current line.
         Combines multiple annotations with " — " separator.
+        Note: Page breaks (pb) are NOT included here - use get_pb_for_line() instead.
 
         Args:
             consume: If True, clears pending annotations after returning.
@@ -397,9 +435,8 @@ class LineAnnotationContext:
         """
         parts = []
 
-        # Order: pb, poem, head, stage, salute+dateline, label, speaker
-        if self.pending_pb:
-            parts.append(self.pending_pb)
+        # Order: poem, head, stage, salute+dateline, label, speaker
+        # Note: pb is handled separately via get_pb_for_line()
 
         if self.pending_poem:
             parts.append(self.pending_poem)
@@ -426,7 +463,7 @@ class LineAnnotationContext:
 
         if consume:
             # Clear one-time annotations (but keep speaker)
-            self.pending_pb = None
+            # Note: pending_pb is cleared by get_pb_for_line(), not here
             self.pending_poem = None
             self.pending_head = None
             self.pending_stage = None
@@ -2906,11 +2943,21 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     print(f"        → Extracting from {elem_tag} for {book_id} (translator: {translator})")
     
     # First check if this is a dramatic text with speaker tags
+    # Also check for prose dialogues with <label> tags inside <p> elements (e.g., Lucian translations)
     has_speakers = False
+    has_label_in_p = False
     for elem in book_elem.iter():
         if is_speaker_tag(elem.tag):
             has_speakers = True
             break
+        # Check for <label> tags inside <p> elements (prose dialogue format)
+        if is_p_tag(elem.tag):
+            for child in elem:
+                if is_label_tag(child.tag):
+                    has_label_in_p = True
+                    break
+            if has_label_in_p:
+                break
     
     if has_speakers:
         # Process dramatic text with speakers
@@ -3037,7 +3084,73 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                 })
 
         print(f"          Extracted {len(segments)} segments with speakers")
-        
+
+    elif has_label_in_p:
+        # Process prose dialogues with <label> tags inside <p> elements (e.g., Lucian translations)
+        # Format: <p><label>Speaker</label> dialogue text...</p>
+        print(f"          Processing prose dialogue with <label> tags in <p> elements")
+
+        sequential_line_num = 1
+        current_speaker = None
+        current_lines = []
+
+        for elem in book_elem.iter():
+            if is_p_tag(elem.tag):
+                # Check for label tag as first child
+                speaker_from_label = None
+                for child in elem:
+                    if is_label_tag(child.tag):
+                        speaker_from_label = get_text_content_simple(child).strip()
+                        break  # Only use first label as speaker
+
+                # Get text content (excluding the label text which is already extracted)
+                para_text = get_text_content(elem).strip()
+                # Remove speaker name from start of text if it got included
+                if speaker_from_label and para_text.startswith(speaker_from_label):
+                    para_text = para_text[len(speaker_from_label):].strip()
+
+                if para_text:
+                    # If we have a new speaker and accumulated lines, save previous speaker's content
+                    if speaker_from_label and speaker_from_label != current_speaker and current_speaker and current_lines:
+                        start_line = current_lines[0]['line']
+                        end_line = current_lines[-1]['line']
+                        text = ' '.join(line['text'] for line in current_lines)
+                        segments.append({
+                            'start_line': start_line,
+                            'end_line': end_line,
+                            'text': text,
+                            'translator': translator,
+                            'speaker': current_speaker
+                        })
+                        current_lines = []
+
+                    # Update current speaker if we found one
+                    if speaker_from_label:
+                        current_speaker = speaker_from_label
+
+                    # Add this paragraph to current speaker's lines
+                    line_num = sequential_line_num
+                    sequential_line_num += 1
+                    current_lines.append({
+                        'line': line_num,
+                        'text': para_text
+                    })
+
+        # Don't forget the last speaker's content
+        if current_speaker and current_lines:
+            start_line = current_lines[0]['line']
+            end_line = current_lines[-1]['line']
+            text = ' '.join(line['text'] for line in current_lines)
+            segments.append({
+                'start_line': start_line,
+                'end_line': end_line,
+                'text': text,
+                'translator': translator,
+                'speaker': current_speaker
+            })
+
+        print(f"          Extracted {len(segments)} segments with <label> speakers")
+
     # Check if there are any milestones at all
     # But exclude single editor milestones which are just editorial markers in Plutarch
     milestones_found = False
@@ -3387,13 +3500,18 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                         else:
                             section_num = len(segments) + 1
 
-                        segments.append({
+                        segment = {
                             'start_line': section_num,
                             'end_line': section_num,
                             'text': section_text,
                             'translator': translator,
                             'is_hierarchical': is_hierarchical  # Mark for redistribution
-                        })
+                        }
+                        # Add poem/epigram label to speaker field
+                        elem_subtype = elem.get('subtype', '')
+                        if elem_subtype in ['poem', 'epigram'] and section_n:
+                            segment['speaker'] = f"Poem {section_n}"
+                        segments.append(segment)
             else:
                 # Not a structural div - recurse into children
                 for child in elem:
@@ -3451,22 +3569,30 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             line_num = 1
             for poem_div in poem_divs:
                 hierarchy_type = get_element_hierarchy_type(poem_div)
-                
+                poem_n = poem_div.get('n', '')
+                poem_label = f"Poem {poem_n}" if poem_n else None
+                first_line_of_poem = True  # Track first line to add poem label
+
                 if hierarchy_type == 'content':
                     # This poem div has direct content
                     for elem in poem_div.iter():
                         if is_l_tag(elem.tag):
                             line_text = get_text_content(elem).strip()
                             text_hash = hash(line_text)
-                            
+
                             if line_text and text_hash not in processed_text_hashes:
                                 processed_text_hashes.add(text_hash)
-                                segments.append({
+                                segment = {
                                     'start_line': line_num,
                                     'end_line': line_num,
                                     'text': line_text,
                                     'translator': translator
-                                })
+                                }
+                                # Add poem label to first line of each poem
+                                if first_line_of_poem and poem_label:
+                                    segment['speaker'] = poem_label
+                                    first_line_of_poem = False
+                                segments.append(segment)
                                 line_num += 1
         else:
             # No poem subdivisions, extract lines directly
@@ -4647,21 +4773,26 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
     conn.close()
     print("✓ Interlinear translations imported")
 
-def process_prose_with_books(root, work_id, cursor, language):
-    """Process prose texts that have book divisions (like Herodotus)"""
+def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False):
+    """Process prose texts that have book divisions (like Herodotus)
+
+    Args:
+        uses_old_tei: If True, look for old TEI format (div1 type="book")
+                      instead of EpiDoc format (div type="textpart" subtype="book")
+    """
     import re
-    
+
     # Check if this is Plato or Aristotle for milestone tracking
     author_id = work_id.split('.')[0]
     is_plato = author_id == 'tlg0059'
     is_aristotle = author_id == 'tlg0086'
-    
+
     # Track current milestone for Stephanus/Bekker numbering
     current_milestone = None
     current_bekker_page = None  # Track Bekker page separately
-    
+
     books_processed = 0
-    
+
     # Process each book
     for book_div in root.iter():
         # Track milestones for Plato and Aristotle (global level)
@@ -4669,7 +4800,7 @@ def process_prose_with_books(root, work_id, cursor, language):
             resp = book_div.get('resp', '')
             n = book_div.get('n', '')
             unit = book_div.get('unit', '')
-            
+
             if resp == 'Bekker' and n:
                 if unit == 'page':
                     current_bekker_page = n
@@ -4683,9 +4814,20 @@ def process_prose_with_books(root, work_id, cursor, language):
             elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                 current_milestone = n
 
-        if not (is_div_tag(book_div.tag) and 
-                book_div.get('type') == 'textpart' and 
-                book_div.get('subtype', '').lower() == 'book'):
+        # Check for book div in appropriate format
+        is_book_div = False
+        if uses_old_tei:
+            # Old TEI format: <div1 type="book">
+            is_book_div = (is_old_tei_div_tag(book_div.tag) and
+                          get_old_tei_div_level(book_div.tag) == 1 and
+                          book_div.get('type', '').lower() == 'book')
+        else:
+            # EpiDoc format: <div type="textpart" subtype="book">
+            is_book_div = (is_div_tag(book_div.tag) and
+                          book_div.get('type') == 'textpart' and
+                          book_div.get('subtype', '').lower() == 'book')
+
+        if not is_book_div:
             continue
             
         book_n = book_div.get('n', str(books_processed + 1))
@@ -4752,21 +4894,45 @@ def process_prose_with_books(root, work_id, cursor, language):
                 elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                     current_milestone = n
 
-            if (is_div_tag(elem.tag) and
-                elem.get('type') == 'textpart' and
-                elem.get('subtype') in ['section', 'chapter', 'bekker_page']):
+            # Check for section div in appropriate format
+            is_section_div = False
+            if uses_old_tei:
+                # Old TEI format: <div2 type="chapter"> or <div2 type="section">
+                is_section_div = (is_old_tei_div_tag(elem.tag) and
+                                 get_old_tei_div_level(elem.tag) == 2 and
+                                 elem.get('type', '').lower() in ['section', 'chapter'])
+            else:
+                # EpiDoc format: <div type="textpart" subtype="section/chapter">
+                is_section_div = (is_div_tag(elem.tag) and
+                                 elem.get('type') == 'textpart' and
+                                 elem.get('subtype') in ['section', 'chapter', 'bekker_page'])
 
+            if is_section_div:
                 section_n = elem.get('n', str(line_num + 1))
+
+                # Build a mapping from paragraph elements to their speakers
+                # This uses sequential iteration like translation processing does
+                paragraphs_for_section = get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page'])
+                para_to_speaker = {}
+                current_sp_speaker = None
+                for child_elem in elem.iter():
+                    if is_speaker_tag(child_elem.tag):
+                        speaker_text = child_elem.text.strip() if child_elem.text else None
+                        if speaker_text:
+                            current_sp_speaker = speaker_text
+                    elif is_p_tag(child_elem.tag) and current_sp_speaker:
+                        para_to_speaker[id(child_elem)] = current_sp_speaker
 
                 # Extract paragraphs from this section
                 # Use get_paragraphs_for_div() to prevent duplication when divs are nested
                 # Pass processable subtypes so we only skip when nested divs will be processed
-                for p in get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page']):
-                    # Extract label/salute/dateline from INSIDE this paragraph
+                for p in paragraphs_for_section:
+                    # Extract label/salute/dateline/speaker from INSIDE this paragraph
                     # This ensures we apply the correct annotation to each paragraph
                     para_label = None
                     para_salute = None
                     para_dateline = None
+                    para_speaker = para_to_speaker.get(id(p))
                     for child in p.iter():
                         if is_label_tag(child.tag):
                             label_text = get_text_content_simple(child).strip()
@@ -4832,6 +4998,8 @@ def process_prose_with_books(root, work_id, cursor, language):
                                         parts.append(para_dateline)
                                     if para_label:
                                         parts.append(para_label)
+                                    if para_speaker:
+                                        parts.append(para_speaker)
                                     if parts:
                                         annotation = ' — '.join(parts)
                                     first_sentence = False
@@ -4844,11 +5012,39 @@ def process_prose_with_books(root, work_id, cursor, language):
                                     'milestone': None if (is_plato or is_aristotle) else None,  # Milestones now inline
                                     'speaker': annotation
                                 })
-        
+
+        # Fallback for old TEI without div2 sections (e.g., Tacitus Annales uses milestones)
+        # If no lines were extracted from section divs, try extracting paragraphs directly from book div
+        if not all_lines and uses_old_tei:
+            # Extract paragraphs directly from the div1 book element
+            paragraphs = [p for p in book_div.iter() if is_p_tag(p.tag)]
+            for p in paragraphs:
+                text = get_text_content(p)
+                if text:
+                    # Split long paragraphs into sentences
+                    if language == 'greek':
+                        sentences = re.split(r'[.!?·;]\s+', text)
+                    else:
+                        # Don't split after short abbreviations
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+
+                    for sentence in sentences:
+                        sentence = sentence.strip()
+                        if sentence:
+                            line_num += 1
+                            all_lines.append({
+                                'number': line_num,
+                                'text': sentence,
+                                'section': str(line_num),
+                                'xml': '',
+                                'milestone': None,
+                                'speaker': None
+                            })
+
         if all_lines:
             # Insert book with actual line count
             cursor.execute("""
-                INSERT OR REPLACE INTO books 
+                INSERT OR REPLACE INTO books
                 (id, work_id, book_number, label, start_line, end_line, line_count)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (book_id, work_id, book_num, f"Book {book_num}", 1, len(all_lines), len(all_lines)))
@@ -4904,17 +5100,31 @@ def process_prose_text(root, work_id, cursor, language):
     line_to_milestone = {}  # Map line numbers to their milestones
     
     # First check if this prose work has book divisions (like Herodotus)
+    # Check both EpiDoc format (<div type="textpart" subtype="book">) and
+    # old TEI format (<div1 type="book">)
+    # IMPORTANT: Only consider it book-based if the FIRST textpart div is a book,
+    # not just if any book div exists (some files have spurious book markers mid-text)
     has_books = False
+    uses_old_tei = False
     for div in root.iter():
-        if (is_div_tag(div.tag) and 
-            div.get('type') == 'textpart' and 
-            div.get('subtype', '').lower() == 'book'):
-            has_books = True
+        # EpiDoc format - check first textpart div
+        if (is_div_tag(div.tag) and div.get('type') == 'textpart'):
+            subtype = div.get('subtype', '').lower()
+            if subtype == 'book':
+                has_books = True
+            # If first textpart is chapter/section, this is NOT a book-based work
             break
-    
+        # Old TEI format (div1 type="book")
+        if (is_old_tei_div_tag(div.tag) and get_old_tei_div_level(div.tag) == 1):
+            if div.get('type', '').lower() == 'book':
+                has_books = True
+                uses_old_tei = True
+            # If first div1 is chapter/section, this is NOT a book-based work
+            break
+
     # If it has books, process it with book divisions
     if has_books:
-        process_prose_with_books(root, work_id, cursor, language)
+        process_prose_with_books(root, work_id, cursor, language, uses_old_tei=uses_old_tei)
         return
     
     # Otherwise treat the entire work as one book
@@ -4990,6 +5200,26 @@ def process_prose_text(root, work_id, cursor, language):
             # Pass processable subtypes so we only skip when nested divs will be processed
             paragraphs_to_process = get_paragraphs_for_div(elem, ['section', 'chapter'])
             paragraphs_found = len(paragraphs_to_process) > 0
+
+            # Build a mapping from paragraph elements to their speakers
+            # This uses sequential iteration like translation processing does
+            # Track current speaker as we iterate through elements
+            para_to_speaker = {}
+            current_sp_speaker = None
+            for child_elem in elem.iter():
+                if is_speaker_tag(child_elem.tag):
+                    # Capture speaker text
+                    speaker_text = child_elem.text.strip() if child_elem.text else None
+                    if speaker_text:
+                        current_sp_speaker = speaker_text
+                elif is_p_tag(child_elem.tag) and current_sp_speaker:
+                    # Map this paragraph to its speaker
+                    para_to_speaker[id(child_elem)] = current_sp_speaker
+                elif is_sp_tag(child_elem.tag):
+                    # Reset speaker when we exit an <sp> block
+                    # Actually, for sequential processing, we keep the speaker until a new one appears
+                    pass
+
             for p in paragraphs_to_process:
                 # Extract label/salute/dateline/speaker from INSIDE this paragraph
                 # This ensures we apply the correct annotation to each paragraph
@@ -4998,21 +5228,8 @@ def process_prose_text(root, work_id, cursor, language):
                 para_dateline = None
                 para_speaker = None
 
-                # Check if paragraph is inside an <sp> element with a <speaker>
-                # by looking at the parent (need to build parent map for this)
-                for sp in elem.iter():
-                    if is_sp_tag(sp.tag):
-                        # Check if this <sp> contains our paragraph
-                        for sp_child in sp:
-                            if sp_child == p or (is_p_tag(sp_child.tag) and sp_child == p):
-                                # Found the sp containing our paragraph, look for speaker
-                                for sibling in sp:
-                                    if is_speaker_tag(sibling.tag):
-                                        speaker_text = sibling.text.strip() if sibling.text else None
-                                        if speaker_text:
-                                            para_speaker = speaker_text
-                                        break
-                                break
+                # Look up speaker from the pre-built mapping
+                para_speaker = para_to_speaker.get(id(p))
 
                 for child in p.iter():
                     if is_label_tag(child.tag):
@@ -5838,17 +6055,30 @@ def process_text_file(xml_path, work_id, cursor, language):
         # Count actual elements to determine if it's primarily prose or poetry
         p_count = sum(1 for elem in root.iter() if is_p_tag(elem.tag))
         l_count = sum(1 for elem in root.iter() if is_l_tag(elem.tag))
-        section_count = sum(1 for elem in root.iter() if is_div_tag(elem.tag) and 
-                           elem.get('type') == 'textpart' and 
-                           elem.get('subtype') in ['section', 'chapter'])
-        
+        # Count sections in both EpiDoc format AND old TEI format
+        section_count = sum(1 for elem in root.iter() if
+                           (is_div_tag(elem.tag) and
+                            elem.get('type') == 'textpart' and
+                            elem.get('subtype') in ['section', 'chapter']) or
+                           (is_old_tei_div_tag(elem.tag) and
+                            get_old_tei_div_level(elem.tag) == 2 and
+                            elem.get('type', '').lower() in ['section', 'chapter']))
+
+        # Check for old TEI books (div1 type="book") as a strong prose indicator
+        has_old_tei_books = any(is_old_tei_div_tag(elem.tag) and
+                                get_old_tei_div_level(elem.tag) == 1 and
+                                elem.get('type', '').lower() == 'book'
+                                for elem in root.iter())
+
         # Prose detection logic:
         # 1. Known prose authors should always be treated as prose
         # 2. Works with many paragraphs relative to lines are prose
         # 3. Works with sections/chapters and paragraphs are likely prose
-        is_prose = (is_prose_author or 
+        # 4. Works with old TEI book structure (div1 type="book") are prose
+        is_prose = (is_prose_author or
                    (p_count > 0 and p_count > (l_count * 2)) or
-                   (section_count > 0 and p_count > 0 and p_count >= section_count))
+                   (section_count > 0 and p_count > 0 and p_count >= section_count) or
+                   (has_old_tei_books and p_count > 0))
         
         if is_prose:
             # For prose texts, process sections as the main unit
@@ -5873,6 +6103,10 @@ def process_text_file(xml_path, work_id, cursor, language):
                         text = get_text_content(elem).strip()
 
                         if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern', 'This pointer']):
+                            # Get page break prefix (goes in text, not speaker)
+                            pb = ctx.get_pb_for_line()
+                            if pb:
+                                text = f"{pb} {text}"
                             # Get combined annotation prefix (speaker + head + stage + etc.)
                             annotation = ctx.get_prefix_for_line()
                             lines.append({
@@ -5975,6 +6209,10 @@ def process_text_file(xml_path, work_id, cursor, language):
                                     text = get_text_content(elem).strip()
 
                                     if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                        # Get page break prefix (goes in text, not speaker)
+                                        pb = ctx.get_pb_for_line()
+                                        if pb:
+                                            text = f"{pb} {text}"
                                         annotation = ctx.get_prefix_for_line()
                                         lines.append({
                                             'number': sequential_line_num,
@@ -6009,6 +6247,10 @@ def process_text_file(xml_path, work_id, cursor, language):
                                 text = get_text_content(elem).strip()
 
                                 if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                    # Get page break prefix (goes in text, not speaker)
+                                    pb = ctx.get_pb_for_line()
+                                    if pb:
+                                        text = f"{pb} {text}"
                                     annotation = ctx.get_prefix_for_line()
                                     lines.append({
                                         'number': line_num,
@@ -6085,6 +6327,10 @@ def process_text_file(xml_path, work_id, cursor, language):
                             if line_num is not None:
                                 text = get_text_content(elem).strip()
                                 if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                    # Get page break prefix (goes in text, not speaker)
+                                    pb = ctx.get_pb_for_line()
+                                    if pb:
+                                        text = f"{pb} {text}"
                                     annotation = ctx.get_prefix_for_line()
                                     lines.append({
                                         'number': line_num,
@@ -6146,6 +6392,10 @@ def process_text_file(xml_path, work_id, cursor, language):
                             text = get_text_content(elem).strip()
 
                             if text and not any(skip in text for skip in ['Gregory Crane', 'pointer pattern']):
+                                # Get page break prefix (goes in text, not speaker)
+                                pb = ctx.get_pb_for_line()
+                                if pb:
+                                    text = f"{pb} {text}"
                                 annotation = ctx.get_prefix_for_line()
                                 lines.append({
                                     'number': line_num,
