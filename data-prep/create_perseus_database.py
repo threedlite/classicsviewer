@@ -726,7 +726,7 @@ def analyze_first1k_work_splitting(xml_path):
                 if div.get('n') == 'preface':
                     continue
                 if div.get('type') in ['section', 'chapter', 'textpart', 'book'] or \
-                   div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis']:
+                   div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis', 'fragment']:
                     text = extract_text_from_first1k_element(div)
                     if text:
                         # Only include Greek text for analysis
@@ -1410,7 +1410,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 if div.get('n') == 'preface':
                     continue
                 if div.get('type') in ['section', 'chapter', 'textpart', 'book'] or \
-                   div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis']:
+                   div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis', 'fragment']:
                     n = div.get('n', str(section_num))
                     text = extract_text_from_first1k_element(div)
                     if text.strip():
@@ -1715,7 +1715,7 @@ def parse_first1k_greek(xml_path):
                 n = div.get('n', '')
 
                 # Look for various subtypes
-                if subtype in ['chapter', 'section', 'episode', 'hypothesis'] and n:
+                if subtype in ['chapter', 'section', 'episode', 'hypothesis', 'fragment'] and n:
                     found_sections = True
                     section_num = n
 
@@ -1746,7 +1746,7 @@ def parse_first1k_greek(xml_path):
                         # Try paragraphs first
                         # Use get_paragraphs_for_div() to prevent duplication when divs are nested
                         # Pass processable subtypes so we only skip when nested divs will be processed
-                        for p in get_paragraphs_for_div(div, ['chapter', 'section', 'episode', 'hypothesis']):
+                        for p in get_paragraphs_for_div(div, ['chapter', 'section', 'episode', 'hypothesis', 'fragment']):
                             p_text = extract_text_from_first1k_element(p)
                             if p_text.strip():
                                 text_parts.append(p_text.strip())
@@ -1824,8 +1824,10 @@ def extract_text_from_element_simple(elem):
 def parse_first1k_translation(xml_path):
     """
     Parse First1K English translation by sections.
+    Returns (translations_list, translator_name)
     """
     translations = []
+    translator = None
 
     try:
         tree, _ = parse_xml_with_entity_resolver(xml_path)
@@ -1836,12 +1838,59 @@ def parse_first1k_translation(xml_path):
             if '}' in elem.tag:
                 elem.tag = elem.tag.split('}')[1]
 
+        # Extract translator name from header
+        # 1. Editor with role="translator"
+        for elem in root.iter():
+            if 'editor' in elem.tag.lower() and elem.get('role') == 'translator':
+                translator = elem.text
+                if translator:
+                    translator = translator.strip()
+                    break
+
+        # 2. If not found, check respStmt for translator
+        if not translator:
+            for resp in root.iter():
+                if 'respstmt' in resp.tag.lower():
+                    resp_text = ''.join(resp.itertext()).lower()
+                    if 'translat' in resp_text:
+                        for name in resp.iter():
+                            if 'name' in name.tag.lower() and name.text:
+                                translator = name.text.strip()
+                                break
+                    if translator:
+                        break
+
+        # 3. Check sourceDesc for translator in biblStruct
+        if not translator:
+            for bibl in root.iter():
+                if 'biblstruct' in bibl.tag.lower():
+                    for elem in bibl.iter():
+                        if 'editor' in elem.tag.lower():
+                            role = elem.get('role', '')
+                            if 'translat' in role.lower():
+                                # Check for nested name element or direct text
+                                name_elem = elem.find('.//name')
+                                if name_elem is not None and name_elem.text:
+                                    translator = name_elem.text.strip()
+                                elif elem.text:
+                                    translator = elem.text.strip()
+                                if translator:
+                                    break
+                    if translator:
+                        break
+
+        if translator:
+            print(f"      Translator: {translator}")
+        else:
+            translator = "Unknown"
+            print(f"      ⚠️  Translator not found in First1K file, using 'Unknown'")
+
         # Find all div elements with section numbers
         for div in root.iter('div'):
             subtype = div.get('subtype', '')
             n = div.get('n', '')
 
-            if subtype in ['chapter', 'section'] and n:
+            if subtype in ['chapter', 'section', 'fragment'] and n:
                 section_num = n
 
                 # Extract all text from this div
@@ -1863,9 +1912,9 @@ def parse_first1k_translation(xml_path):
                     })
     except Exception as e:
         print(f"    Error parsing First1K translation: {e}")
-        return []
+        return [], None
 
-    return translations
+    return translations, translator
 
 def extract_text_from_first1k_element(elem, include_tail=True):
     """
@@ -2063,7 +2112,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
     # If sections have 'type' field with values like 'chapter', 'section', 'episode',
     # treat each section as a separate book for better alignment
     has_chapter_structure = any(
-        section.get('type') in ['chapter', 'section', 'episode', 'hypothesis']
+        section.get('type') in ['chapter', 'section', 'episode', 'hypothesis', 'fragment']
         for section in sections if section.get('type')
     )
 
@@ -2163,7 +2212,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
 
     # Process translations if available
     for trans_file in english_files:
-        translations = parse_first1k_translation(trans_file)
+        translations, translator = parse_first1k_translation(trans_file)
         if translations:
             print(f"    Found {len(translations)} translation sections")
 
@@ -2242,7 +2291,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                                 INSERT INTO translation_segments
                                 (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                                 VALUES (?, ?, ?, ?, ?, ?, ?)
-                            """, (book_id, 1, line_count, 1, trans['text'], None, None))
+                            """, (book_id, 1, line_count, 1, trans['text'], translator, None))
                         else:
                             # Save for position-based mapping
                             unmapped_trans.append(trans)
@@ -2275,7 +2324,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                                     INSERT INTO translation_segments
                                     (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                                     VALUES (?, ?, ?, ?, ?, ?, ?)
-                                """, (book_id, 1, line_count, 1, trans['text'], None, None))
+                                """, (book_id, 1, line_count, 1, trans['text'], translator, None))
                             else:
                                 # More translations than Greek chapters - should not happen but preserve data
                                 print(f"        WARNING: Extra translation beyond Greek chapters - preserving in last book")
@@ -2288,7 +2337,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                                         INSERT INTO translation_segments
                                         (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                                         VALUES (?, ?, ?, ?, ?, ?, ?)
-                                    """, (last_book, 1, line_count, i+1, trans['text'], None, None))
+                                    """, (last_book, 1, line_count, i+1, trans['text'], translator, None))
                 else:
                     # No section numbers - use pure position mapping
                     print("        Using position-based mapping for all translations")
@@ -2302,7 +2351,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                                 INSERT INTO translation_segments
                                 (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                                 VALUES (?, ?, ?, ?, ?, ?, ?)
-                            """, (book_id, 1, line_count, 1, trans['text'], None, None))
+                            """, (book_id, 1, line_count, 1, trans['text'], translator, None))
                         else:
                             # More translations than Greek chapters
                             print(f"        WARNING: Extra translation {i+1} beyond Greek chapters")
@@ -2316,7 +2365,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                                     INSERT INTO translation_segments
                                     (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                                     VALUES (?, ?, ?, ?, ?, ?, ?)
-                                """, (last_book, 1, line_count, i+1, trans['text'], None, None))
+                                """, (last_book, 1, line_count, i+1, trans['text'], translator, None))
             else:
                 # Original behavior for single-book structure
                 for i, trans in enumerate(translations, 1):
@@ -2326,7 +2375,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                         INSERT INTO translation_segments
                         (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """, (book_id, trans_section_num, trans_section_num, trans_section_num, trans['text'], None, None))
+                    """, (book_id, trans_section_num, trans_section_num, trans_section_num, trans['text'], translator, None))
 
             print(f"    Added ALL {len(translations)} translations (never skip data!)")
 # ============= END FIRST1K PARSER FIX =============
@@ -2921,9 +2970,9 @@ def get_element_hierarchy_type(elem):
         # Check for content elements: paragraphs, lines, or line groups
         if is_p_tag(child.tag) or is_l_tag(child.tag) or is_lg_tag(child.tag):
             has_content = True
-        elif (is_div_tag(child.tag) and 
-              child.get('type') == 'textpart' and 
-              child.get('subtype') in ['section', 'chapter', 'poem', 'epigram']):
+        elif (is_div_tag(child.tag) and
+              child.get('type') == 'textpart' and
+              child.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'fragment']):
             has_structural_divs = True
     
     if has_structural_divs:
@@ -2951,13 +3000,24 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             has_speakers = True
             break
         # Check for <label> tags inside <p> elements (prose dialogue format)
+        # Must distinguish from section headings like <p><label>The Laws</label></p>
+        # True dialogue format: <p><label>Speaker</label> dialogue text continues here...</p>
         if is_p_tag(elem.tag):
+            label_found = False
+            label_text_len = 0
             for child in elem:
                 if is_label_tag(child.tag):
+                    label_found = True
+                    label_text_len = len(get_text_content(child).strip())
+                    break
+            if label_found:
+                # Get total text content of the paragraph
+                para_text = get_text_content(elem).strip()
+                # If paragraph has substantial text beyond just the label, it's a dialogue
+                # Section headings have only the label text, dialogues have more
+                if len(para_text) > label_text_len + 10:  # At least 10 chars of dialogue text
                     has_label_in_p = True
                     break
-            if has_label_in_p:
-                break
     
     if has_speakers:
         # Process dramatic text with speakers
@@ -3461,7 +3521,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             if (elem != book_elem and
                 is_div_tag(elem.tag) and
                 elem.get('type') == 'textpart' and
-                elem.get('subtype') in ['section', 'chapter', 'poem', 'epigram', 'letter']):
+                elem.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'fragment']):
 
                 hierarchy_type = get_element_hierarchy_type(elem)
 
@@ -3478,40 +3538,48 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
 
                 elif hierarchy_type == 'content':
                     # This is a leaf div with actual content - extract it
-                    sections_found = True
-                    section_n = elem.get('n', '')
-                    section_text = get_text_content(elem).strip()
+                    # BUT: For poem/epigram divs with <l> tags, skip extraction here
+                    # and let the line-by-line extraction code handle them later
+                    elem_subtype = elem.get('subtype', '')
+                    has_line_tags = any(is_l_tag(child.tag) for child in elem.iter())
 
-                    # Prepend head if present (e.g., letter salutation)
-                    if current_head and section_text:
-                        section_text = f"{current_head} — {section_text}"
+                    if elem_subtype in ['poem', 'epigram'] and has_line_tags:
+                        # Skip - let line extraction handle this poem
+                        pass
+                    else:
+                        sections_found = True
+                        section_n = elem.get('n', '')
+                        section_text = get_text_content(elem).strip()
 
-                    # Check for duplicate before adding
-                    text_hash = hash(section_text)
-                    if section_text and text_hash not in processed_text_hashes:
-                        processed_text_hashes.add(text_hash)
+                        # Prepend head if present (e.g., letter salutation)
+                        if current_head and section_text:
+                            section_text = f"{current_head} — {section_text}"
 
-                        # CRITICAL FIX: For hierarchical texts, use cumulative numbering
-                        if is_hierarchical:
-                            cumulative_segment_num += 1
-                            section_num = cumulative_segment_num
-                        elif section_n.isdigit():
-                            section_num = int(section_n)
-                        else:
-                            section_num = len(segments) + 1
+                        # Check for duplicate before adding
+                        text_hash = hash(section_text)
+                        if section_text and text_hash not in processed_text_hashes:
+                            processed_text_hashes.add(text_hash)
 
-                        segment = {
-                            'start_line': section_num,
-                            'end_line': section_num,
-                            'text': section_text,
-                            'translator': translator,
-                            'is_hierarchical': is_hierarchical  # Mark for redistribution
-                        }
-                        # Add poem/epigram label to speaker field
-                        elem_subtype = elem.get('subtype', '')
-                        if elem_subtype in ['poem', 'epigram'] and section_n:
-                            segment['speaker'] = f"Poem {section_n}"
-                        segments.append(segment)
+                            # CRITICAL FIX: For hierarchical texts, use cumulative numbering
+                            if is_hierarchical:
+                                cumulative_segment_num += 1
+                                section_num = cumulative_segment_num
+                            elif section_n.isdigit():
+                                section_num = int(section_n)
+                            else:
+                                section_num = len(segments) + 1
+
+                            segment = {
+                                'start_line': section_num,
+                                'end_line': section_num,
+                                'text': section_text,
+                                'translator': translator,
+                                'is_hierarchical': is_hierarchical  # Mark for redistribution
+                            }
+                            # Add poem/epigram label to speaker field
+                            if elem_subtype in ['poem', 'epigram'] and section_n:
+                                segment['speaker'] = f"Poem {section_n}"
+                            segments.append(segment)
             else:
                 # Not a structural div - recurse into children
                 for child in elem:
@@ -4900,19 +4968,19 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                 # Old TEI format: <div2 type="chapter"> or <div2 type="section">
                 is_section_div = (is_old_tei_div_tag(elem.tag) and
                                  get_old_tei_div_level(elem.tag) == 2 and
-                                 elem.get('type', '').lower() in ['section', 'chapter'])
+                                 elem.get('type', '').lower() in ['section', 'chapter', 'fragment'])
             else:
                 # EpiDoc format: <div type="textpart" subtype="section/chapter">
                 is_section_div = (is_div_tag(elem.tag) and
                                  elem.get('type') == 'textpart' and
-                                 elem.get('subtype') in ['section', 'chapter', 'bekker_page'])
+                                 elem.get('subtype') in ['section', 'chapter', 'bekker_page', 'fragment'])
 
             if is_section_div:
                 section_n = elem.get('n', str(line_num + 1))
 
                 # Build a mapping from paragraph elements to their speakers
                 # This uses sequential iteration like translation processing does
-                paragraphs_for_section = get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page'])
+                paragraphs_for_section = get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page', 'fragment'])
                 para_to_speaker = {}
                 current_sp_speaker = None
                 for child_elem in elem.iter():
@@ -5104,6 +5172,8 @@ def process_prose_text(root, work_id, cursor, language):
     # old TEI format (<div1 type="book">)
     # IMPORTANT: Only consider it book-based if the FIRST textpart div is a book,
     # not just if any book div exists (some files have spurious book markers mid-text)
+    # EXCEPTION: If the first textpart is a "part" (like Livy's "Ab urbe condita"),
+    # continue checking for books inside the part.
     has_books = False
     uses_old_tei = False
     for div in root.iter():
@@ -5112,6 +5182,17 @@ def process_prose_text(root, work_id, cursor, language):
             subtype = div.get('subtype', '').lower()
             if subtype == 'book':
                 has_books = True
+                break
+            # If first textpart is "part", continue checking children for books
+            if subtype == 'part':
+                # Look for book divs inside this part
+                for child in div.iter():
+                    if (is_div_tag(child.tag) and
+                        child.get('type') == 'textpart' and
+                        child.get('subtype', '').lower() == 'book'):
+                        has_books = True
+                        break
+                break  # Stop after checking the first part
             # If first textpart is chapter/section, this is NOT a book-based work
             break
         # Old TEI format (div1 type="book")
@@ -5189,16 +5270,25 @@ def process_prose_text(root, work_id, cursor, language):
             elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                 current_milestone = n
 
-        if (is_div_tag(elem.tag) and
-            elem.get('type') == 'textpart' and
-            elem.get('subtype') in ['section', 'chapter']):
+        # Handle EpiDoc format sections
+        is_section_div = (is_div_tag(elem.tag) and
+                         elem.get('type') == 'textpart' and
+                         elem.get('subtype') in ['section', 'chapter', 'fragment'])
+
+        # Also handle old TEI format sections (div2 type="section" or "chapter")
+        if not is_section_div and is_old_tei_div_tag(elem.tag):
+            if (get_old_tei_div_level(elem.tag) == 2 and
+                elem.get('type', '').lower() in ['section', 'chapter', 'fragment']):
+                is_section_div = True
+
+        if is_section_div:
 
             section_n = elem.get('n', str(line_num + 1))
 
             # First try to extract paragraphs from this section
             # Use get_paragraphs_for_div() to prevent duplication when divs are nested
             # Pass processable subtypes so we only skip when nested divs will be processed
-            paragraphs_to_process = get_paragraphs_for_div(elem, ['section', 'chapter'])
+            paragraphs_to_process = get_paragraphs_for_div(elem, ['section', 'chapter', 'fragment'])
             paragraphs_found = len(paragraphs_to_process) > 0
 
             # Build a mapping from paragraph elements to their speakers
@@ -5409,7 +5499,40 @@ def process_prose_text(root, work_id, cursor, language):
                                 'milestone': current_milestone if (is_plato or is_aristotle) else None,
                                 'speaker': annotation
                             })
-    
+
+    # Fallback: Handle <seg type="section"> elements inside paragraphs
+    # Some Latin texts (e.g., Cicero's Commentariolum Petitionis) use this structure
+    if not all_lines:
+        seg_sections = [elem for elem in root.iter()
+                       if elem.tag.endswith('}seg') or elem.tag == 'seg']
+        seg_sections = [s for s in seg_sections if s.get('type') == 'section' and s.get('n')]
+
+        if seg_sections:
+            print(f"      Using <seg type='section'> fallback: {len(seg_sections)} segments found")
+            for seg in seg_sections:
+                section_n = seg.get('n', str(line_num + 1))
+                text = get_text_content(seg, preserve_milestones=False)
+
+                if text:
+                    # Split into sentences
+                    if language == 'greek':
+                        sentences = re.split(r'[.!?·;]\s+', text)
+                    else:
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+
+                    for sentence in sentences:
+                        sentence = sentence.strip()
+                        if sentence:
+                            line_num += 1
+                            all_lines.append({
+                                'number': line_num,
+                                'text': sentence,
+                                'section': section_n,
+                                'xml': '',
+                                'milestone': None,
+                                'speaker': None
+                            })
+
     if all_lines:
         # Insert book with actual line count
         cursor.execute("""
@@ -6059,10 +6182,10 @@ def process_text_file(xml_path, work_id, cursor, language):
         section_count = sum(1 for elem in root.iter() if
                            (is_div_tag(elem.tag) and
                             elem.get('type') == 'textpart' and
-                            elem.get('subtype') in ['section', 'chapter']) or
+                            elem.get('subtype') in ['section', 'chapter', 'fragment']) or
                            (is_old_tei_div_tag(elem.tag) and
                             get_old_tei_div_level(elem.tag) == 2 and
-                            elem.get('type', '').lower() in ['section', 'chapter']))
+                            elem.get('type', '').lower() in ['section', 'chapter', 'fragment']))
 
         # Check for old TEI books (div1 type="book") as a strong prose indicator
         has_old_tei_books = any(is_old_tei_div_tag(elem.tag) and
