@@ -10,6 +10,27 @@ Important:
 Only build the apk with the sample db, not the full db, it is too large.
  
 
+**CRITICAL: ALWAYS CHECK FOR RUNNING PROCESSES BEFORE STARTING BUILDS**:
+
+⚠️ **MANDATORY BEFORE ANY BUILD**: You MUST check for existing long-running processes before starting ANY database build, interlinear generation, or other long-running task!
+
+```bash
+# ALWAYS run this FIRST before starting any build:
+ps aux | grep -E "python|interlinear|create_perseus" | grep -v grep
+```
+
+**WHY THIS IS CRITICAL**:
+- Interlinear generation takes **12+ hours** for Greek works
+- Database builds take **24+ minutes** for extended mode
+- Starting a new build can **KILL or CORRUPT** an existing long-running process
+- There is NO way to recover a killed 12-hour build - it must be restarted from scratch
+
+**MANDATORY WORKFLOW**:
+1. **FIRST**: Run `ps aux | grep -E "python|interlinear" | grep -v grep`
+2. **IF processes are running**: DO NOT start a new build. Ask the user first.
+3. **IF no processes running**: Safe to proceed with new build
+4. **NEVER assume** a previous build is "done" based on log files - ALWAYS check running processes
+
 **CRITICAL: RUNNING LONG BUILDS IN CLAUDE - USE BACKGROUND EXECUTION**:
 
 ⚠️ **ATTENTION CLAUDE**: You have a 2-minute execution timeout. Commands that take longer must be run in the background!
@@ -61,11 +82,13 @@ nohup [COMMAND] > output.log 2>&1 &
   ```
 
 **KEY POINTS**:
+- ✅ **ALWAYS check `ps aux | grep -E "python|interlinear" | grep -v grep` BEFORE starting any build**
 - ✅ You CAN run any command using `nohup ... &` to run in background
 - ✅ Use `tail -f` to monitor progress (can timeout safely)
 - ✅ Check completion by looking for output files or success messages
 - ✅ Be sure you know what subdirectory you are in before executing commands (e.g. data-prep, wikitionary-processing)
 - ✅ The database build process run by create_perseus_database.py aims to be all-inclusive and repeatable, able to rebuild the database from scratch in one go.
+- ❌ **NEVER start a new build without checking for running processes first!** Interlinear generation takes 12+ hours and cannot be recovered if killed.
 - ❌ NEVER run commands that take >90 seconds in foreground.  This includes create_perseus_database.py.
 - ❌ Do not add logic that will fail the data build pipeline silently - the build should fail for anything missing or other issues.
 - ❌ **NEVER kill a running database build process and then deploy the incomplete database!** Always let builds complete fully or restart them properly.
@@ -74,6 +97,7 @@ nohup [COMMAND] > output.log 2>&1 &
 - ❌ **WAIT FOR THE ZIP FILE TO BE CREATED!** The build process ends with compressing the database to perseus_texts.db.zip. You MUST see "Compressing database to" followed by successful ZIP creation before the build is complete. The ZIP step is critical and can take 1-2 minutes.
 - ❌ **NEVER use warnings for critical failures** - If a required component fails to load, FAIL THE BUILD with a clear error, don't print a warning and continue.
 - ❌ **NEVER assume build is stopped unless `ps aux | grep create_perseus_database` shows it is not running.**
+- ❌ **NEVER trust log files alone** - A log showing "complete" may be from an OLD run. Always verify with `ps aux` that no process is currently running.
 
 **REMEMBER**: Background execution (`nohup ... &`) bypasses the timeout limitation!
 

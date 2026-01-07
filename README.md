@@ -85,6 +85,15 @@ NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
    ```
    This creates a sample database with selected authors. Takes about 3-4 minutes.
 
+   **Build times:**
+   | Component | Duration | Details |
+   |-----------|----------|---------|
+   | Sample database | ~3-4 min | 12 authors, 265 works |
+   | Full database | ~8-10 min | 135 authors, 1,018 works |
+   | Extended database | ~24 min | 778 authors, 2,723 works |
+   | Greek interlinear | ~11 hours | 2,049 works, 54.8M words, 8 workers |
+   | Latin interlinear | ~15 sec | 230 works |
+
 3. **Deploy to your Android device**
    ```bash
    ./deploy_simple.sh
