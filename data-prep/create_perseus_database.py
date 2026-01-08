@@ -4809,24 +4809,94 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 is_drama = author_id in ['tlg0085', 'tlg0011', 'tlg0006', 'tlg0019']
             
             if is_prose:
-                # For prose, use extract_translation_segments which handles both milestones and sections
-                book_id = f"{work_id}.001"
-                
-                # Find the main translation div
-                trans_div = None
-                for div in root.iter():
-                    if is_div_tag(div.tag) and div.get('type') == 'translation':
-                        trans_div = div
-                        break
-                
-                if trans_div is not None:
-                    extract_translation_segments(trans_div, book_id, cursor, translator)
+                # Check if this work uses chapter-based book IDs (Latin prose with chapter milestones)
+                cursor.execute("""
+                    SELECT id FROM books WHERE work_id = ?
+                    ORDER BY id LIMIT 1
+                """, (work_id,))
+                sample_book = cursor.fetchone()
+                uses_chapter_books = False
+                if sample_book:
+                    parts = sample_book[0].split('.')
+                    uses_chapter_books = len(parts) == 4
+
+                if uses_chapter_books:
+                    # Process translation chapters to match Latin chapter structure
+                    print(f"      → Detected chapter-based prose, matching translation chapters")
+
+                    chapters_processed = 0
+                    for book_div in root.iter():
+                        # Check for old TEI format: <div1 type="book"> containing <div2 type="chapter">
+                        # Use is_old_tei_div_tag since translation uses div1/div2
+                        if not (is_div_tag(book_div.tag) or is_old_tei_div_tag(book_div.tag)):
+                            continue
+                        div_type = book_div.get('type', '').lower()
+                        if div_type != 'book':
+                            continue
+
+                        book_n = book_div.get('n', '')
+                        if not book_n:
+                            continue
+                        try:
+                            book_num = int(book_n)
+                        except ValueError:
+                            continue
+
+                        # Find chapter divs within this book (div2 in old TEI)
+                        for chapter_div in book_div:
+                            if not (is_div_tag(chapter_div.tag) or is_old_tei_div_tag(chapter_div.tag)):
+                                continue
+                            chapter_type = chapter_div.get('type', '').lower()
+                            if chapter_type != 'chapter':
+                                continue
+
+                            chapter_n = chapter_div.get('n', '')
+                            if not chapter_n:
+                                continue
+                            try:
+                                chapter_num = int(chapter_n)
+                            except ValueError:
+                                continue
+
+                            # Construct chapter book ID matching the Latin structure
+                            chapter_book_id = f"{work_id}.{book_num:03d}.{chapter_num:03d}"
+
+                            # Check if this book exists
+                            cursor.execute("SELECT id FROM books WHERE id = ?", (chapter_book_id,))
+                            if not cursor.fetchone():
+                                continue
+
+                            # Extract translation text for this chapter
+                            chapter_text = get_text_content(chapter_div).strip()
+                            if chapter_text:
+                                cursor.execute("""
+                                    INSERT INTO translation_segments
+                                    (book_id, start_line, end_line, translation_text, translator, speaker)
+                                    VALUES (?, ?, ?, ?, ?, ?)
+                                """, (chapter_book_id, 1, 999, chapter_text, translator, None))
+                                chapters_processed += 1
+
+                    if chapters_processed > 0:
+                        print(f"        → Extracted {chapters_processed} chapter translations")
                 else:
-                    # If no translation div, process the whole body
-                    for body in root.iter():
-                        if is_body_tag(body.tag):
-                            extract_translation_segments(body, book_id, cursor, translator)
+                    # Standard prose handling - single book
+                    book_id = f"{work_id}.001"
+
+                    # Find the main translation div
+                    trans_div = None
+                    for div in root.iter():
+                        if is_div_tag(div.tag) and div.get('type') == 'translation':
+                            trans_div = div
                             break
+
+                    if trans_div is not None:
+                        extract_translation_segments(trans_div, book_id, cursor, translator)
+                    else:
+                        # If no translation div, process the whole body
+                        for body in root.iter():
+                            if is_body_tag(body.tag):
+                                extract_translation_segments(body, book_id, cursor, translator)
+                                break
             elif is_drama:
                 # For dramas, process the entire translation as one book
                 book_id = f"{work_id}.001"
@@ -4849,65 +4919,143 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
             else:
                 # Regular processing for texts with book divisions
                 books_found = False
-                
+
                 # First check if there's a translation wrapper div
                 translation_div = None
                 for div in root.iter():
                     if is_div_tag(div.tag) and div.get('type') == 'translation':
                         translation_div = div
                         break
-                
+
                 # Search for books in the appropriate container
                 search_root = translation_div if translation_div is not None else root
-                
-                book_counter = 0
-                # First check if there are any book-level divs
-                has_books = any(is_div_tag(div.tag) and 
-                               div.get('type') == 'textpart' and 
-                               div.get('subtype', '').lower() == 'book'
-                               for div in search_root.iter())
-                
-                for book_div in search_root.iter():
-                    if (is_div_tag(book_div.tag) and
-                        book_div.get('type') == 'textpart' and
-                        book_div.get('subtype', '').lower() in ['book', 'poem', 'textpart']):
 
-                        # Skip poems if we have books (poems are within books)
-                        if has_books and book_div.get('subtype', '').lower() == 'poem':
+                # Check if this work uses chapter-based book IDs
+                # (Latin prose with <milestone unit="chapter"> creates book IDs like work.book.chapter)
+                # Count dots in book IDs - chapter-based have one more segment
+                cursor.execute("""
+                    SELECT id FROM books WHERE work_id = ?
+                    ORDER BY id LIMIT 1
+                """, (work_id,))
+                sample_book = cursor.fetchone()
+                uses_chapter_books = False
+                if sample_book:
+                    # Chapter-based IDs have format: work_id.book.chapter (e.g., phi1351.phi005.001.001)
+                    # Normal IDs have format: work_id.book (e.g., phi1351.phi005.001)
+                    # work_id has 2 parts (phi1351.phi005), so chapter-based has 4 parts total
+                    parts = sample_book[0].split('.')
+                    uses_chapter_books = len(parts) == 4
+
+                if uses_chapter_books:
+                    # This work uses chapter-based books - process translation chapters
+                    print(f"      → Detected chapter-based book structure, matching translation chapters")
+
+                    # Find all book and chapter divs in translation
+                    chapters_processed = 0
+                    for book_div in search_root.iter():
+                        # Check for old TEI format: <div1 type="book"> containing <div2 type="chapter">
+                        if not is_div_tag(book_div.tag):
+                            continue
+                        div_type = book_div.get('type', '').lower()
+                        if div_type != 'book':
                             continue
 
-                        books_found = True
-                        book_counter += 1
-                        book_num = book_div.get('n', '1')
-
-                        # Check if this translation div has its own altbook milestone
-                        # If so, it's already aligned with the Greek ordering
-                        trans_has_altbook = False
-                        for child in book_div:
-                            if is_milestone_tag(child.tag) and child.get('unit') == 'altbook':
-                                trans_has_altbook = True
-                                break
-
-                        # Apply altbook mapping if:
-                        # 1. We have an altbook_mapping from the Greek
-                        # 2. This translation doesn't have its own altbook milestones
-                        # 3. The translation's book number exists as an altbook key
-                        greek_book_num = book_num
-                        if altbook_mapping and not trans_has_altbook and book_num in altbook_mapping:
-                            greek_book_num = altbook_mapping[book_num]
-                            print(f"        → Remapping translation book {book_num} to Greek book {greek_book_num} via altbook")
-
+                        book_n = book_div.get('n', '')
+                        if not book_n:
+                            continue
                         try:
-                            book_id = f"{work_id}.{int(greek_book_num):03d}"
+                            book_num = int(book_n)
                         except ValueError:
-                            # If book number is not numeric, use sequential numbering
-                            book_id = f"{work_id}.{book_counter:03d}"
-                            print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
+                            continue
 
-                        # Extract translation segments with milestones
-                        count = extract_translation_segments(book_div, book_id, cursor, translator)
-                        if count == 0 and translation_div is None:
-                            print(f"        Warning: No segments extracted for {book_id}")
+                        # Find chapter divs within this book (div2 in old TEI)
+                        for chapter_div in book_div:
+                            if not is_div_tag(chapter_div.tag):
+                                continue
+                            chapter_type = chapter_div.get('type', '').lower()
+                            if chapter_type != 'chapter':
+                                continue
+
+                            chapter_n = chapter_div.get('n', '')
+                            if not chapter_n:
+                                continue
+                            try:
+                                chapter_num = int(chapter_n)
+                            except ValueError:
+                                continue
+
+                            # Construct chapter book ID matching the Latin structure
+                            chapter_book_id = f"{work_id}.{book_num:03d}.{chapter_num:03d}"
+
+                            # Check if this book exists
+                            cursor.execute("SELECT id FROM books WHERE id = ?", (chapter_book_id,))
+                            if not cursor.fetchone():
+                                continue
+
+                            # Extract translation text for this chapter
+                            chapter_text = get_text_content(chapter_div).strip()
+                            if chapter_text:
+                                cursor.execute("""
+                                    INSERT INTO translation_segments
+                                    (book_id, start_line, end_line, translation_text, translator, speaker)
+                                    VALUES (?, ?, ?, ?, ?, ?)
+                                """, (chapter_book_id, 1, 999, chapter_text, translator, None))
+                                chapters_processed += 1
+
+                    if chapters_processed > 0:
+                        print(f"        → Extracted {chapters_processed} chapter translations")
+                        books_found = True
+
+                # Only do normal book processing if we haven't already processed chapters
+                if not books_found:
+                    book_counter = 0
+                    # First check if there are any book-level divs
+                    has_books = any(is_div_tag(div.tag) and
+                                   div.get('type') == 'textpart' and
+                                   div.get('subtype', '').lower() == 'book'
+                                   for div in search_root.iter())
+
+                    for book_div in search_root.iter():
+                        if (is_div_tag(book_div.tag) and
+                            book_div.get('type') == 'textpart' and
+                            book_div.get('subtype', '').lower() in ['book', 'poem', 'textpart']):
+
+                            # Skip poems if we have books (poems are within books)
+                            if has_books and book_div.get('subtype', '').lower() == 'poem':
+                                continue
+
+                            books_found = True
+                            book_counter += 1
+                            book_num = book_div.get('n', '1')
+
+                            # Check if this translation div has its own altbook milestone
+                            # If so, it's already aligned with the Greek ordering
+                            trans_has_altbook = False
+                            for child in book_div:
+                                if is_milestone_tag(child.tag) and child.get('unit') == 'altbook':
+                                    trans_has_altbook = True
+                                    break
+
+                            # Apply altbook mapping if:
+                            # 1. We have an altbook_mapping from the Greek
+                            # 2. This translation doesn't have its own altbook milestones
+                            # 3. The translation's book number exists as an altbook key
+                            greek_book_num = book_num
+                            if altbook_mapping and not trans_has_altbook and book_num in altbook_mapping:
+                                greek_book_num = altbook_mapping[book_num]
+                                print(f"        → Remapping translation book {book_num} to Greek book {greek_book_num} via altbook")
+
+                            try:
+                                book_id = f"{work_id}.{int(greek_book_num):03d}"
+                            except ValueError:
+                                # If book number is not numeric, use sequential numbering
+                                book_id = f"{work_id}.{book_counter:03d}"
+                                print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
+
+                            # Extract translation segments with milestones
+                            count = extract_translation_segments(book_div, book_id, cursor, translator)
+                            if count == 0 and translation_div is None:
+                                print(f"        Warning: No segments extracted for {book_id}")
                 
                 # If no books found, check if this work has individual poems/epigrams as books
                 if not books_found:
@@ -5401,30 +5549,117 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
         # Fallback for old TEI without div2 sections (e.g., Tacitus Annales uses milestones)
         # If no lines were extracted from section divs, try extracting paragraphs directly from book div
         if not all_lines and uses_old_tei:
-            # Extract paragraphs directly from the div1 book element
-            paragraphs = [p for p in book_div.iter() if is_p_tag(p.tag)]
-            for p in paragraphs:
-                text = get_text_content(p)
-                if text:
-                    # Split long paragraphs into sentences
-                    if language == 'greek':
-                        sentences = re.split(r'[.!?·;]\s+', text)
-                    else:
-                        # Don't split after short abbreviations
-                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+            # Check for chapter milestones - if present, use chapter-based structure for alignment
+            chapter_milestones = [m for m in book_div.iter()
+                                  if is_milestone_tag(m.tag) and m.get('unit') == 'chapter']
 
+            if chapter_milestones:
+                # Use chapter-based structure for better translation alignment
+                # Group text by chapter milestones
+                print(f"      Using chapter milestone alignment ({len(chapter_milestones)} chapters)")
+
+                chapters = {}  # chapter_num -> list of text segments
+                current_chapter = None
+
+                # Iterate through all elements to group by chapter
+                for elem in book_div.iter():
+                    if is_milestone_tag(elem.tag) and elem.get('unit') == 'chapter':
+                        chapter_n = elem.get('n', '')
+                        if chapter_n and chapter_n.isdigit():
+                            current_chapter = int(chapter_n)
+                            if current_chapter not in chapters:
+                                chapters[current_chapter] = []
+                    elif is_p_tag(elem.tag) and current_chapter is not None:
+                        text = get_text_content(elem)
+                        if text:
+                            chapters[current_chapter].append(text)
+
+                # Create a separate book entry for each chapter
+                for chapter_num in sorted(chapters.keys()):
+                    chapter_texts = chapters[chapter_num]
+                    if not chapter_texts:
+                        continue
+
+                    # Create chapter book ID: work.book.chapter (e.g., phi1351.phi005.001.001)
+                    chapter_book_id = f"{work_id}.{book_num:03d}.{chapter_num:03d}"
+                    chapter_label = f"Book {book_num} Chapter {chapter_num}"
+
+                    # Combine all text for this chapter
+                    chapter_text = ' '.join(chapter_texts)
+
+                    # Split into sentences/lines
+                    if language == 'greek':
+                        sentences = re.split(r'[.!?·;]\s+', chapter_text)
+                    else:
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', chapter_text)
+
+                    chapter_lines = []
                     for sentence in sentences:
                         sentence = sentence.strip()
                         if sentence:
-                            line_num += 1
-                            all_lines.append({
-                                'number': line_num,
-                                'text': sentence,
-                                'section': str(line_num),
-                                'xml': '',
-                                'milestone': None,
-                                'speaker': None
-                            })
+                            chapter_lines.append(sentence)
+
+                    if chapter_lines:
+                        # Insert chapter as a book
+                        # Use composite book_number: book*1000 + chapter for proper sorting
+                        composite_book_num = book_num * 1000 + chapter_num
+                        cursor.execute("""
+                            INSERT OR REPLACE INTO books
+                            (id, work_id, book_number, label, start_line, end_line, line_count)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """, (chapter_book_id, work_id, composite_book_num, chapter_label,
+                              1, len(chapter_lines), len(chapter_lines)))
+
+                        # Clear and insert lines
+                        cursor.execute("DELETE FROM text_lines WHERE book_id = ?", (chapter_book_id,))
+                        cursor.execute("DELETE FROM words WHERE book_id = ?", (chapter_book_id,))
+
+                        for line_num, line_text in enumerate(chapter_lines, 1):
+                            cursor.execute("""
+                                INSERT INTO text_lines
+                                (book_id, line_number, sequence_number, line_text, line_xml, speaker)
+                                VALUES (?, ?, ?, ?, ?, ?)
+                            """, (chapter_book_id, line_num, line_num, line_text, '', None))
+
+                            # Insert words
+                            words = line_text.split()
+                            for word_pos, word in enumerate(words, 1):
+                                if word.strip():
+                                    cursor.execute("""
+                                        INSERT INTO words
+                                        (word, book_id, line_number, sequence_number, word_position)
+                                        VALUES (?, ?, ?, ?, ?)
+                                    """, (word, chapter_book_id, line_num, line_num, word_pos))
+
+                        print(f"        Chapter {chapter_num}: {len(chapter_lines)} lines")
+
+                # Mark that we processed chapters (don't also create book-level entry)
+                all_lines = None  # Signal to skip normal book insertion
+            else:
+                # No chapter milestones - use paragraph-based extraction
+                paragraphs = [p for p in book_div.iter() if is_p_tag(p.tag)]
+                for p in paragraphs:
+                    text = get_text_content(p)
+                    if text:
+                        # Split long paragraphs into sentences
+                        if language == 'greek':
+                            sentences = re.split(r'[.!?·;]\s+', text)
+                        else:
+                            # Don't split after short abbreviations
+                            sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+
+                        for sentence in sentences:
+                            sentence = sentence.strip()
+                            if sentence:
+                                line_num += 1
+                                all_lines.append({
+                                    'number': line_num,
+                                    'text': sentence,
+                                    'section': str(line_num),
+                                    'xml': '',
+                                    'milestone': None,
+                                    'speaker': None
+                                })
 
         if all_lines:
             # Insert book with actual line count
