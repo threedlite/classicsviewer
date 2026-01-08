@@ -1,0 +1,796 @@
+=== PERSEUS TEXTS DATABASE QUALITY REPORT ===
+Generated: 2026-01-08T07:15:07.316705
+Mode: sample
+
+Total Authors: 11
+Total Works: 41
+Total Books: 358
+Total Lines: 60,385
+Translation Segments: 89,748
+Build Time: 3.2 minutes
+Database Size: 347.1MB → 81.9MB compressed (23.6%)
+Dictionary Entries: 61,070
+Lemma Mappings: 821,416
+
+=== STATISTICS BY LANGUAGE ===
+
+greek:
+  Authors: 10
+  Works: 40
+  Lines: 50,488
+  Words: 704,940
+
+latin:
+  Authors: 1
+  Works: 1
+  Lines: 9,897
+  Words: 63,685
+
+=== DETAILED BREAKDOWN ===
+
+[Aristotle]
+Aristotle / Nicomachean Ethics - 3,659 lines total, 10 books, max_lines/book=439, max_char=742 [Perseus]
+Aristotle / Nicomachean Ethics / Book 1 - 353 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 158 segments [Limited-Section (12% coverage)], Interlinear (Beta, AI-generated from app dictionary) 353 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics / Book 2 - 233 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited (15% coverage)], Interlinear (Beta, AI-generated from app dictionary) 233 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics / Book 3 - 429 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 174 segments [Limited-Section (12% coverage)], Interlinear (Beta, AI-generated from app dictionary) 429 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics / Book 4 - 426 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 173 segments [Limited-Section (11% coverage)], Interlinear (Beta, AI-generated from app dictionary) 426 segments [Limited (11% coverage)]
+Aristotle / Nicomachean Ethics / Book 5 - 397 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 151 segments [Limited-Section (12% coverage)], Interlinear (Beta, AI-generated from app dictionary) 397 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics / Book 6 - 272 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (15% coverage)], Interlinear (Beta, AI-generated from app dictionary) 272 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics / Book 7 - 365 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 123 segments [Limited (15% coverage)], Interlinear (Beta, AI-generated from app dictionary) 365 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics / Book 8 - 439 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 104 segments [Limited-Section (12% coverage)], Interlinear (Beta, AI-generated from app dictionary) 439 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics / Book 9 - 348 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 99 segments [Limited-Section (16% coverage)], Interlinear (Beta, AI-generated from app dictionary) 348 segments [Limited (16% coverage)]
+Aristotle / Nicomachean Ethics / Book 10 - 397 lines
+Aristotle / Nicomachean Ethics translations: Harris Rackham 115 segments [Limited-Section (14% coverage)], Interlinear (Beta, AI-generated from app dictionary) 397 segments [Limited (14% coverage)]
+Aristotle / Poetics - 621 lines, max_char=345 [Perseus]
+Aristotle / Poetics translations: Interlinear (Beta, AI-generated from app dictionary) 609 segments [Fair (54% coverage)], William Hamilton Fyfe 382 segments [Fair (54% coverage)]
+
+[Epictetus]
+Epictetus / The Enchiridion - 711 lines, max_char=417 [Perseus]
+Epictetus / The Enchiridion translations: George Long 53 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 711 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 53 segments [Excellent-Section (100% coverage)]
+
+[Euclid]
+Euclid / The Thirteen Books of Euclid's Elements - 607 lines total, 13 books, max_lines/book=130, max_char=8,035 [Perseus]
+Euclid / The Thirteen Books of Euclid's Elements / Book 1 - 84 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 84 segments [Excellent (100% coverage)], Thomas Little Heath 81 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 2 - 15 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Thomas Little Heath 16 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 3 - 48 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 48 segments [Excellent (100% coverage)], Thomas Little Heath 48 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 4 - 23 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Thomas Little Heath 23 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 5 - 43 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 43 segments [Excellent (100% coverage)], Thomas Little Heath 43 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 6 - 38 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Thomas Little Heath 37 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 7 - 61 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 61 segments [Excellent (100% coverage)], Thomas Little Heath 61 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 8 - 27 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 27 segments [Excellent (100% coverage)], Thomas Little Heath 27 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 9 - 36 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 36 segments [Excellent (100% coverage)], Thomas Little Heath 36 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 10 - 130 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 130 segments [Excellent (100% coverage)], Thomas Little Heath 131 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 11 - 67 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 67 segments [Excellent (100% coverage)], Thomas Little Heath 67 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 12 - 17 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Thomas Little Heath 18 segments [Excellent (100% coverage)]
+Euclid / The Thirteen Books of Euclid's Elements / Book 13 - 18 lines
+Euclid / The Thirteen Books of Euclid's Elements translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Thomas Little Heath 18 segments [Excellent (100% coverage)]
+
+[Hesiod]
+Hesiod / Theogony - 1,042 lines, max_char=53 [Perseus]
+Hesiod / Theogony translations: Hugh G. Evelyn-White 216 segments [Excellent-Section (98% coverage)], Interlinear (Beta, AI-generated from app dictionary) 1042 segments [Excellent (98% coverage)]
+Hesiod / Works and Days - 831 lines, max_char=54 [Perseus]
+Hesiod / Works and Days translations: Hugh G. Evelyn-White 179 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 831 segments [Excellent (100% coverage)]
+
+[Homer]
+Homer / Iliad - 15,687 lines total, 24 books, max_lines/book=909, max_char=56 [Perseus]
+Homer / Iliad / Book 1 - 611 lines
+Homer / Iliad translations: Augustus Taber Murray 17 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 611 segments [Excellent (100% coverage)], Samuel Butler 123 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 2 - 877 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 877 segments [Excellent (100% coverage)], Samuel Butler 176 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 3 - 461 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 461 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 4 - 544 lines
+Homer / Iliad translations: Augustus Taber Murray 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 544 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 5 - 909 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 909 segments [Excellent (100% coverage)], Samuel Butler 75 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 6 - 529 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 529 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 7 - 482 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 482 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 8 - 565 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 565 segments [Excellent (100% coverage)], Samuel Butler 50 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 9 - 709 lines
+Homer / Iliad translations: Augustus Taber Murray 17 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 709 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 10 - 579 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 579 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 11 - 847 lines
+Homer / Iliad translations: Augustus Taber Murray 21 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 847 segments [Excellent (100% coverage)], Samuel Butler 67 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 12 - 471 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 471 segments [Excellent (100% coverage)], Samuel Butler 27 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 13 - 837 lines
+Homer / Iliad translations: Augustus Taber Murray 25 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 837 segments [Excellent (100% coverage)], Samuel Butler 66 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 14 - 521 lines
+Homer / Iliad translations: Augustus Taber Murray 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 521 segments [Excellent (100% coverage)], Samuel Butler 44 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 15 - 746 lines
+Homer / Iliad translations: Augustus Taber Murray 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 746 segments [Excellent (100% coverage)], Samuel Butler 59 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 16 - 867 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 867 segments [Excellent (100% coverage)], Samuel Butler 62 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 17 - 761 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)], Samuel Butler 58 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 18 - 617 lines
+Homer / Iliad translations: Augustus Taber Murray 19 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 617 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 19 - 424 lines
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 424 segments [Excellent (100% coverage)], Samuel Butler 30 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 20 - 503 lines
+Homer / Iliad translations: Augustus Taber Murray 16 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 503 segments [Excellent (100% coverage)], Samuel Butler 36 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 21 - 611 lines
+Homer / Iliad translations: Augustus Taber Murray 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 611 segments [Excellent (100% coverage)], Samuel Butler 49 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 22 - 515 lines
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 515 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 23 - 897 lines
+Homer / Iliad translations: Augustus Taber Murray 25 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 897 segments [Excellent (100% coverage)], Samuel Butler 75 segments [Excellent-Section (100% coverage)]
+Homer / Iliad / Book 24 - 804 lines
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 804 segments [Excellent (100% coverage)], Samuel Butler 66 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey - 12,107 lines total, 24 books, max_lines/book=847, max_char=57 [Perseus]
+Homer / Odyssey / Book 1 - 444 lines
+Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 444 segments [Excellent (100% coverage)], Samuel Butler 32 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 2 - 434 lines
+Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 434 segments [Excellent (100% coverage)], Samuel Butler 35 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 3 - 497 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 497 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 4 - 847 lines
+Homer / Odyssey translations: Augustus Taber Murray 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 847 segments [Excellent (100% coverage)], Samuel Butler 81 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 5 - 493 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 493 segments [Excellent (100% coverage)], Samuel Butler 37 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 6 - 331 lines
+Homer / Odyssey translations: Augustus Taber Murray 8 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 331 segments [Excellent (100% coverage)], Samuel Butler 26 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 7 - 347 lines
+Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 347 segments [Excellent (100% coverage)], Samuel Butler 29 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 8 - 586 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 586 segments [Excellent (100% coverage)], Samuel Butler 50 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 9 - 566 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 566 segments [Excellent (100% coverage)], Samuel Butler 44 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 10 - 573 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 573 segments [Excellent (100% coverage)], Samuel Butler 49 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 11 - 640 lines
+Homer / Odyssey translations: Augustus Taber Murray 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 640 segments [Excellent (100% coverage)], Samuel Butler 54 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 12 - 453 lines
+Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 453 segments [Excellent (100% coverage)], Samuel Butler 39 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 13 - 440 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 440 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 14 - 533 lines
+Homer / Odyssey translations: Augustus Taber Murray 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 533 segments [Excellent (100% coverage)], Samuel Butler 35 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 15 - 557 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 557 segments [Excellent (100% coverage)], Samuel Butler 48 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 16 - 480 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 480 segments [Excellent (100% coverage)], Samuel Butler 45 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 17 - 606 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 606 segments [Excellent (100% coverage)], Samuel Butler 63 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 18 - 428 lines
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 428 segments [Excellent (100% coverage)], Samuel Butler 41 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 19 - 604 lines
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 604 segments [Excellent (100% coverage)], Samuel Butler 39 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 20 - 394 lines
+Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 394 segments [Excellent (100% coverage)], Samuel Butler 36 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 21 - 434 lines
+Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 434 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 22 - 501 lines
+Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 501 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 23 - 371 lines
+Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 371 segments [Excellent (100% coverage)], Samuel Butler 29 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey / Book 24 - 548 lines
+Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 548 segments [Excellent (100% coverage)], Samuel Butler 45 segments [Excellent-Section (100% coverage)]
+
+[New Testament]
+New Testament / 1 Corinthians - 437 lines total, 16 books, max_lines/book=58, max_char=198 [Perseus]
+New Testament / 1 Corinthians / Chapter 1 - 31 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 2 - 16 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 16 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 16 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 3 - 23 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 23 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 4 - 21 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 5 - 13 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 6 - 20 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 7 - 40 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 8 - 13 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 9 - 27 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 27 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 27 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 10 - 33 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 33 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 11 - 34 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 34 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 34 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 12 - 31 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 13 - 13 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 14 - 40 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 15 - 58 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 58 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 58 segments [Excellent (100% coverage)]
+New Testament / 1 Corinthians / Chapter 16 - 24 lines
+New Testament / 1 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / 1 John - 105 lines total, 5 books, max_lines/book=29, max_char=227 [Perseus]
+New Testament / 1 John / Chapter 1 - 10 lines
+New Testament / 1 John translations: Interlinear (Beta, AI-generated from app dictionary) 10 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 10 segments [Excellent (100% coverage)]
+New Testament / 1 John / Chapter 2 - 29 lines
+New Testament / 1 John translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / 1 John / Chapter 3 - 24 lines
+New Testament / 1 John translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / 1 John / Chapter 4 - 21 lines
+New Testament / 1 John translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 1 John / Chapter 5 - 21 lines
+New Testament / 1 John translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 1 Peter - 105 lines total, 5 books, max_lines/book=25, max_char=193 [Perseus]
+New Testament / 1 Peter / Chapter 1 - 25 lines
+New Testament / 1 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / 1 Peter / Chapter 2 - 25 lines
+New Testament / 1 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / 1 Peter / Chapter 3 - 22 lines
+New Testament / 1 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 22 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 22 segments [Excellent (100% coverage)]
+New Testament / 1 Peter / Chapter 4 - 19 lines
+New Testament / 1 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 19 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 19 segments [Excellent (100% coverage)]
+New Testament / 1 Peter / Chapter 5 - 14 lines
+New Testament / 1 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 14 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / 1 Thessalonians - 89 lines total, 5 books, max_lines/book=28, max_char=212 [Perseus]
+New Testament / 1 Thessalonians / Chapter 1 - 10 lines
+New Testament / 1 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 10 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 10 segments [Excellent (100% coverage)]
+New Testament / 1 Thessalonians / Chapter 2 - 20 lines
+New Testament / 1 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / 1 Thessalonians / Chapter 3 - 13 lines
+New Testament / 1 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / 1 Thessalonians / Chapter 4 - 18 lines
+New Testament / 1 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 1 Thessalonians / Chapter 5 - 28 lines
+New Testament / 1 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / 1 Timothy - 113 lines total, 6 books, max_lines/book=25, max_char=177 [Perseus]
+New Testament / 1 Timothy / Chapter 1 - 20 lines
+New Testament / 1 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / 1 Timothy / Chapter 2 - 15 lines
+New Testament / 1 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
+New Testament / 1 Timothy / Chapter 3 - 16 lines
+New Testament / 1 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 16 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 16 segments [Excellent (100% coverage)]
+New Testament / 1 Timothy / Chapter 4 - 16 lines
+New Testament / 1 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 16 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 16 segments [Excellent (100% coverage)]
+New Testament / 1 Timothy / Chapter 5 - 25 lines
+New Testament / 1 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / 1 Timothy / Chapter 6 - 21 lines
+New Testament / 1 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians - 256 lines total, 13 books, max_lines/book=33, max_char=221 [Perseus]
+New Testament / 2 Corinthians / Chapter 1 - 24 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 2 - 17 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 3 - 18 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 4 - 18 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 5 - 21 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 6 - 18 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 7 - 16 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 16 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 16 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 8 - 24 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 9 - 15 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 10 - 18 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 11 - 33 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 33 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 12 - 21 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 2 Corinthians / Chapter 13 - 13 lines
+New Testament / 2 Corinthians translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / 2 John - 13 lines, max_char=138 [Perseus]
+New Testament / 2 John translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / 2 Peter - 61 lines total, 3 books, max_lines/book=22, max_char=204 [Perseus]
+New Testament / 2 Peter / Chapter 1 - 21 lines
+New Testament / 2 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / 2 Peter / Chapter 2 - 22 lines
+New Testament / 2 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 22 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 22 segments [Excellent (100% coverage)]
+New Testament / 2 Peter / Chapter 3 - 18 lines
+New Testament / 2 Peter translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Thessalonians - 47 lines total, 3 books, max_lines/book=18, max_char=176 [Perseus]
+New Testament / 2 Thessalonians / Chapter 1 - 12 lines
+New Testament / 2 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 12 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 12 segments [Excellent (100% coverage)]
+New Testament / 2 Thessalonians / Chapter 2 - 17 lines
+New Testament / 2 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / 2 Thessalonians / Chapter 3 - 18 lines
+New Testament / 2 Thessalonians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Timothy - 83 lines total, 4 books, max_lines/book=26, max_char=180 [Perseus]
+New Testament / 2 Timothy / Chapter 1 - 18 lines
+New Testament / 2 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / 2 Timothy / Chapter 2 - 26 lines
+New Testament / 2 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / 2 Timothy / Chapter 3 - 17 lines
+New Testament / 2 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / 2 Timothy / Chapter 4 - 22 lines
+New Testament / 2 Timothy translations: Interlinear (Beta, AI-generated from app dictionary) 22 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 22 segments [Excellent (100% coverage)]
+New Testament / 3 John - 15 lines, max_char=207 [Perseus]
+New Testament / 3 John translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / Acts - 1,003 lines total, 28 books, max_lines/book=60, max_char=260 [Perseus]
+New Testament / Acts / Chapter 1 - 26 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 2 - 47 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 47 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 47 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 3 - 26 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 4 - 37 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 37 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 37 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 5 - 42 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 42 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 42 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 6 - 15 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 7 - 60 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 60 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 60 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 8 - 39 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 39 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 39 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 9 - 43 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 43 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 43 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 10 - 48 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 48 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 48 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 11 - 30 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 30 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 12 - 25 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 13 - 52 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 52 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 52 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 14 - 28 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 15 - 40 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 16 - 40 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 17 - 34 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 34 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 34 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 18 - 28 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 19 - 41 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 41 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 41 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 20 - 38 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 38 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 21 - 40 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 22 - 30 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 30 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 23 - 35 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 35 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 35 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 24 - 26 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 25 - 27 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 27 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 27 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 26 - 32 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 32 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 32 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 27 - 44 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 44 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 44 segments [Excellent (100% coverage)]
+New Testament / Acts / Chapter 28 - 30 lines
+New Testament / Acts translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / Colossians - 95 lines total, 4 books, max_lines/book=29, max_char=202 [Perseus]
+New Testament / Colossians / Chapter 1 - 29 lines
+New Testament / Colossians translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / Colossians / Chapter 2 - 23 lines
+New Testament / Colossians translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 23 segments [Excellent (100% coverage)]
+New Testament / Colossians / Chapter 3 - 25 lines
+New Testament / Colossians translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Colossians / Chapter 4 - 18 lines
+New Testament / Colossians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / Ephesians - 155 lines total, 6 books, max_lines/book=33, max_char=193 [Perseus]
+New Testament / Ephesians / Chapter 1 - 23 lines
+New Testament / Ephesians translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 23 segments [Excellent (100% coverage)]
+New Testament / Ephesians / Chapter 2 - 22 lines
+New Testament / Ephesians translations: Interlinear (Beta, AI-generated from app dictionary) 22 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 22 segments [Excellent (100% coverage)]
+New Testament / Ephesians / Chapter 3 - 21 lines
+New Testament / Ephesians translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Ephesians / Chapter 4 - 32 lines
+New Testament / Ephesians translations: Interlinear (Beta, AI-generated from app dictionary) 32 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 32 segments [Excellent (100% coverage)]
+New Testament / Ephesians / Chapter 5 - 33 lines
+New Testament / Ephesians translations: Interlinear (Beta, AI-generated from app dictionary) 33 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / Ephesians / Chapter 6 - 24 lines
+New Testament / Ephesians translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / Galatians - 149 lines total, 6 books, max_lines/book=31, max_char=235 [Perseus]
+New Testament / Galatians / Chapter 1 - 24 lines
+New Testament / Galatians translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / Galatians / Chapter 2 - 21 lines
+New Testament / Galatians translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Galatians / Chapter 3 - 29 lines
+New Testament / Galatians translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / Galatians / Chapter 4 - 31 lines
+New Testament / Galatians translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / Galatians / Chapter 5 - 26 lines
+New Testament / Galatians translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / Galatians / Chapter 6 - 18 lines
+New Testament / Galatians translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / Hebrews - 303 lines total, 13 books, max_lines/book=40, max_char=226 [Perseus]
+New Testament / Hebrews / Chapter 1 - 14 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 14 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 2 - 18 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 3 - 19 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 19 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 19 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 4 - 16 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 16 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 16 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 5 - 14 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 14 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 6 - 20 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 7 - 28 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 8 - 13 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 9 - 28 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 10 - 39 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 39 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 39 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 11 - 40 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 12 - 29 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / Hebrews / Chapter 13 - 25 lines
+New Testament / Hebrews translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / James - 108 lines total, 5 books, max_lines/book=27, max_char=191 [Perseus]
+New Testament / James / Chapter 1 - 27 lines
+New Testament / James translations: Interlinear (Beta, AI-generated from app dictionary) 27 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 27 segments [Excellent (100% coverage)]
+New Testament / James / Chapter 2 - 26 lines
+New Testament / James translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / James / Chapter 3 - 18 lines
+New Testament / James translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / James / Chapter 4 - 17 lines
+New Testament / James translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / James / Chapter 5 - 20 lines
+New Testament / James translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / John - 878 lines total, 21 books, max_lines/book=71, max_char=272 [Perseus]
+New Testament / John / Chapter 1 - 51 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 51 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 51 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 2 - 25 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 3 - 36 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 36 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 36 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 4 - 54 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 54 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 54 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 5 - 46 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 46 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 47 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 6 - 71 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 71 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 71 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 7 - 53 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 53 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 53 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 8 - 59 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 59 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 59 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 9 - 41 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 41 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 41 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 10 - 42 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 42 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 42 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 11 - 57 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 57 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 57 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 12 - 50 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 50 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 50 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 13 - 38 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 38 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 14 - 31 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 15 - 27 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 27 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 27 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 16 - 33 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 33 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 17 - 26 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 18 - 40 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 40 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 40 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 19 - 42 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 42 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 42 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 20 - 31 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / John / Chapter 21 - 25 lines
+New Testament / John translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Jude - 25 lines, max_char=204 [Perseus]
+New Testament / Jude translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Luke - 1,149 lines total, 24 books, max_lines/book=80, max_char=270 [Perseus]
+New Testament / Luke / Chapter 1 - 80 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 80 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 80 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 2 - 52 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 52 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 52 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 3 - 38 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 38 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 4 - 44 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 44 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 44 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 5 - 39 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 39 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 39 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 6 - 49 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 49 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 49 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 7 - 50 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 50 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 50 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 8 - 56 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 56 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 56 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 9 - 62 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 62 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 62 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 10 - 42 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 42 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 42 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 11 - 54 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 54 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 54 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 12 - 59 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 59 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 59 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 13 - 35 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 35 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 35 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 14 - 35 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 35 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 35 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 15 - 32 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 32 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 32 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 16 - 31 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 17 - 36 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 36 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 36 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 18 - 43 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 43 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 43 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 19 - 48 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 48 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 48 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 20 - 47 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 47 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 47 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 21 - 38 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 38 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 22 - 71 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 71 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 71 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 23 - 55 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 55 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 56 segments [Excellent (100% coverage)]
+New Testament / Luke / Chapter 24 - 53 lines
+New Testament / Luke translations: Interlinear (Beta, AI-generated from app dictionary) 53 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 53 segments [Excellent (100% coverage)]
+New Testament / Mark - 674 lines total, 16 books, max_lines/book=72, max_char=229 [Perseus]
+New Testament / Mark / Chapter 1 - 45 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 45 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 45 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 2 - 28 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 3 - 35 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 35 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 35 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 4 - 41 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 41 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 41 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 5 - 43 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 43 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 43 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 6 - 56 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 56 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 56 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 7 - 36 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 36 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 37 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 8 - 38 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 38 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 9 - 48 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 48 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 48 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 10 - 52 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 52 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 52 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 11 - 32 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 32 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 12 - 44 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 44 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 44 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 13 - 37 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 37 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 37 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 14 - 72 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 72 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 72 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 15 - 46 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 46 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 47 segments [Excellent (100% coverage)]
+New Testament / Mark / Chapter 16 - 21 lines
+New Testament / Mark translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (95% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (95% coverage)]
+New Testament / Matthew - 1,068 lines total, 28 books, max_lines/book=75, max_char=236 [Perseus]
+New Testament / Matthew / Chapter 1 - 25 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 2 - 23 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 23 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 3 - 17 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 4 - 25 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 5 - 48 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 48 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 48 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 6 - 34 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 34 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 34 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 7 - 29 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 8 - 34 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 34 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 34 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 9 - 38 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 38 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 10 - 42 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 42 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 42 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 11 - 30 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 30 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 12 - 50 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 50 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 50 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 13 - 58 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 58 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 58 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 14 - 36 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 36 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 36 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 15 - 39 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 39 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 39 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 16 - 28 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 28 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 28 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 17 - 26 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 27 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 18 - 34 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 34 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 35 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 19 - 30 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 30 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 20 - 34 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 34 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 34 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 21 - 46 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 46 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 46 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 22 - 46 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 46 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 46 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 23 - 38 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 38 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 39 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 24 - 51 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 51 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 51 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 25 - 46 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 46 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 45 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 26 - 75 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 75 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 75 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 27 - 66 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 66 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 66 segments [Excellent (100% coverage)]
+New Testament / Matthew / Chapter 28 - 20 lines
+New Testament / Matthew translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / Philemon - 25 lines, max_char=112 [Perseus]
+New Testament / Philemon translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Philippians - 104 lines total, 4 books, max_lines/book=30, max_char=210 [Perseus]
+New Testament / Philippians / Chapter 1 - 30 lines
+New Testament / Philippians translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 30 segments [Excellent (100% coverage)]
+New Testament / Philippians / Chapter 2 - 30 lines
+New Testament / Philippians translations: Interlinear (Beta, AI-generated from app dictionary) 30 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 30 segments [Excellent (100% coverage)]
+New Testament / Philippians / Chapter 3 - 21 lines
+New Testament / Philippians translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Philippians / Chapter 4 - 23 lines
+New Testament / Philippians translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 23 segments [Excellent (100% coverage)]
+New Testament / Revelation - 405 lines total, 22 books, max_lines/book=29, max_char=334 [Perseus]
+New Testament / Revelation / Chapter 1 - 20 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 2 - 29 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 3 - 22 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 22 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 4 - 11 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 11 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 11 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 5 - 14 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 14 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 6 - 17 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 7 - 17 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 17 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 8 - 13 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 13 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 13 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 9 - 21 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 10 - 11 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 11 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 11 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 11 - 19 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 19 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 19 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 12 - 18 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 17 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 13 - 18 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 14 - 20 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 20 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 20 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 15 - 8 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 8 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 8 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 16 - 21 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 17 - 18 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 18 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 18 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 18 - 24 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 24 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 19 - 21 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 20 - 15 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 21 - 27 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 27 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 27 segments [Excellent (100% coverage)]
+New Testament / Revelation / Chapter 22 - 21 lines
+New Testament / Revelation translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Romans - 432 lines total, 16 books, max_lines/book=39, max_char=262 [Perseus]
+New Testament / Romans / Chapter 1 - 32 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 32 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 32 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 2 - 29 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 29 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 29 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 3 - 31 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 31 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 31 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 4 - 25 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 5 - 21 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 6 - 23 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 23 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 7 - 25 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 25 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 25 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 8 - 39 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 39 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 39 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 9 - 33 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 33 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 10 - 21 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 11 - 36 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 36 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 36 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 12 - 21 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 21 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 21 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 13 - 14 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 14 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 14 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 14 - 23 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 23 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 26 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 15 - 33 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 33 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 33 segments [Excellent (100% coverage)]
+New Testament / Romans / Chapter 16 - 26 lines
+New Testament / Romans translations: Interlinear (Beta, AI-generated from app dictionary) 26 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 24 segments [Excellent (100% coverage)]
+New Testament / Titus - 46 lines total, 3 books, max_lines/book=16, max_char=166 [Perseus]
+New Testament / Titus / Chapter 1 - 16 lines
+New Testament / Titus translations: Interlinear (Beta, AI-generated from app dictionary) 16 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 16 segments [Excellent (100% coverage)]
+New Testament / Titus / Chapter 2 - 15 lines
+New Testament / Titus translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
+New Testament / Titus / Chapter 3 - 15 lines
+New Testament / Titus translations: Interlinear (Beta, AI-generated from app dictionary) 15 segments [Excellent (100% coverage)], Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
+
+[P. Vergilius Maro (Virgil)]
+P. Vergilius Maro (Virgil) / Aeneid - 9,897 lines total, 12 books, max_lines/book=952, max_char=60 [Perseus]
+P. Vergilius Maro (Virgil) / Aeneid / Book 1 - 756 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 756 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 2 - 804 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 804 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 3 - 718 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 718 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 4 - 705 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 705 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 5 - 871 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 871 segments [Excellent (100% coverage)], Theodore C. Williams 1136 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 6 - 901 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 901 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 7 - 817 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 817 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 8 - 731 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 731 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 9 - 818 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 818 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 10 - 909 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 909 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 11 - 915 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 915 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 952 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 952 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
+
+[Plato]
+Plato / Ion - 471 lines, max_char=533 [Perseus]
+Plato / Ion translations: Interlinear (Beta, AI-generated from app dictionary) 471 segments [Good (80% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (80% coverage)]
+Plato / Phaedo - 1,367 lines, max_char=1,398 [Perseus]
+Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (24% coverage)], Interlinear (Beta, AI-generated from app dictionary) 1367 segments [Limited (24% coverage)]
+
+[Plutarch]
+Plutarch / Alexander - 1,150 lines, max_char=981 [Perseus]
+Plutarch / Alexander translations: Bernadotte Perrin 377 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 1150 segments [Excellent (100% coverage)]
+
+[Pseudo-Plutarch]
+Pseudo-Plutarch / Concerning music - 445 lines, max_char=473 [Perseus]
+Pseudo-Plutarch / Concerning music translations: Interlinear (Beta, AI-generated from app dictionary) 445 segments [Excellent (100% coverage)], John Philips 15 segments [Excellent-Section (100% coverage)]
+
+[Xenophon]
+Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=641 [Perseus]
+Xenophon / Anabasis / Book 1 - 613 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 613 segments [Excellent (100% coverage)], Unknown 205 segments [Excellent-Section (100% coverage)]
+Xenophon / Anabasis / Book 2 - 459 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 459 segments [Excellent (100% coverage)], Unknown 173 segments [Excellent-Section (100% coverage)]
+Xenophon / Anabasis / Book 3 - 430 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 430 segments [Excellent (100% coverage)], Unknown 173 segments [Excellent-Section (100% coverage)]
+Xenophon / Anabasis / Book 4 - 563 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 563 segments [Excellent (100% coverage)], Unknown 230 segments [Excellent-Section (100% coverage)]
+Xenophon / Anabasis / Book 5 - 549 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 549 segments [Excellent (100% coverage)], Unknown 219 segments [Excellent-Section (100% coverage)]
+Xenophon / Anabasis / Book 6 - 488 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 488 segments [Excellent (100% coverage)], Unknown 175 segments [Excellent-Section (100% coverage)]
+Xenophon / Anabasis / Book 7 - 745 lines
+Xenophon / Anabasis translations: Interlinear (Beta, AI-generated from app dictionary) 745 segments [Excellent (100% coverage)], Unknown 294 segments [Excellent-Section (100% coverage)]

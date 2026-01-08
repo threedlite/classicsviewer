@@ -68,19 +68,22 @@ class WorkDAO: WorkDAOProtocol {
         var worksWithStatus: [(work: Work, hasTranslations: Bool)] = []
         
         for work in works {
-            // Query to check if any book of this work has translations
+            // Query to check if any book of this work has non-interlinear translations
             let query = """
-                SELECT COUNT(*) 
-                FROM translation_segments ts
-                INNER JOIN books b ON ts.book_id = b.id
-                WHERE b.work_id = ?
-                LIMIT 1
+                SELECT EXISTS(
+                    SELECT 1 FROM translation_segments ts
+                    INNER JOIN books b ON ts.book_id = b.id
+                    WHERE b.work_id = ?
+                    AND ts.translation_text IS NOT NULL
+                    AND LENGTH(TRIM(ts.translation_text)) > 10
+                    AND (ts.translator IS NULL OR ts.translator NOT LIKE '%Interlinear%')
+                )
             """
-            
+
             let hasTranslations = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [work.id]) { statement in
-                Int(sqlite3_column_int(statement, 0)) > 0
+                sqlite3_column_int(statement, 0) == 1
             }.first ?? false
-            
+
             worksWithStatus.append((work: work, hasTranslations: hasTranslations))
         }
         

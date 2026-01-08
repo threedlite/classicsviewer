@@ -5,7 +5,8 @@ data class Book(
     val number: String,
     val workId: String,
     val lineCount: Int,
-    val label: String? = null
+    val label: String? = null,
+    val hasTranslation: Boolean = false
 ) {
     val title: String
         get() = label ?: "Book $number"

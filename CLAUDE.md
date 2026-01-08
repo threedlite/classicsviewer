@@ -487,6 +487,35 @@ python3 create_perseus_database.py full
 python3 create_perseus_database.py extended
 ```
 
+### Testing Fixes for Individual Works
+
+To test a fix for a specific work without rebuilding the entire database:
+
+1. Create a custom CSV file with just the work(s) you want to test:
+```bash
+# Create test CSV (must have Author,Work header)
+echo "Author,Work" > TEST_AUTHORS.csv
+echo "Anonymus,Some Work Title" >> TEST_AUTHORS.csv
+```
+
+2. Build using the custom CSV with a custom output name:
+```bash
+cd data-prep
+python3 create_perseus_database.py sample TEST_AUTHORS.csv test
+# Creates: perseus_texts_test.db, database_quality_report_test.txt
+```
+
+3. Validate the fix:
+```bash
+# Check for duplicate lines
+sqlite3 perseus_texts_test.db "SELECT COUNT(*) FROM (SELECT book_id, line_number FROM text_lines GROUP BY book_id, line_number HAVING COUNT(*) > 1);"
+
+# Check line counts per book
+sqlite3 perseus_texts_test.db "SELECT b.id, COUNT(tl.id) as lines FROM books b JOIN text_lines tl ON tl.book_id = b.id GROUP BY b.id;"
+```
+
+This approach is faster than rebuilding sample/full/extended and isolates the test to just the problematic work(s).
+
 ### Deployment Scripts
 
 **IMPORTANT**: After any database schema changes, rebuild the database first:

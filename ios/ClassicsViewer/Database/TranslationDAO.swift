@@ -6,6 +6,7 @@ protocol TranslationDAOProtocol {
     func getTranslationsByTranslator(bookId: String, translator: String, startLine: Int, endLine: Int) async throws -> [TranslationSegment]
     func getAvailableTranslators(bookId: String) async throws -> [String]
     func hasTranslations(bookId: String) async throws -> Bool
+    func hasNonInterlinearTranslationsForBook(bookId: String) async throws -> Bool
 }
 
 class TranslationDAO: TranslationDAOProtocol {
@@ -13,18 +14,36 @@ class TranslationDAO: TranslationDAOProtocol {
     
     func hasTranslations(bookId: String) async throws -> Bool {
         let query = "SELECT COUNT(*) FROM translation_segments WHERE book_id = ? LIMIT 1"
-        
+
         let results = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [bookId]) { statement in
             let count = sqlite3_column_int(statement, 0)
             print("DEBUG TranslationDAO: Book \(bookId) has \(count) translations")
             return count > 0
         }
-        
+
         let hasTranslations = results.first ?? false
         print("DEBUG TranslationDAO: Returning hasTranslations = \(hasTranslations) for book \(bookId)")
         return hasTranslations
     }
-    
+
+    func hasNonInterlinearTranslationsForBook(bookId: String) async throws -> Bool {
+        let query = """
+            SELECT EXISTS(
+                SELECT 1 FROM translation_segments ts
+                WHERE ts.book_id = ?
+                AND ts.translation_text IS NOT NULL
+                AND LENGTH(TRIM(ts.translation_text)) > 10
+                AND (ts.translator IS NULL OR ts.translator NOT LIKE '%Interlinear%')
+            )
+        """
+
+        let results = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [bookId]) { statement in
+            return sqlite3_column_int(statement, 0) == 1
+        }
+
+        return results.first ?? false
+    }
+
     func getTranslations(bookId: String, startLine: Int, endLine: Int) async throws -> [TranslationSegment] {
         // Get available translators first
         let translators = try await getAvailableTranslators(bookId: bookId)

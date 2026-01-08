@@ -223,12 +223,14 @@ class PerseusRepository(private val context: Context) : DataRepository {
     
     override suspend fun getBooks(workId: String): List<Book> = withContext(Dispatchers.IO) {
         bookDao.getByWork(workId).map { entity ->
+            val hasTranslation = translationSegmentDao.hasTranslationsForBook(entity.id)
             Book(
                 id = entity.id,
                 number = entity.bookNumber.toString(),
                 workId = entity.workId,
                 lineCount = entity.lineCount ?: 0,
-                label = entity.label
+                label = entity.label,
+                hasTranslation = hasTranslation
             )
         }
     }

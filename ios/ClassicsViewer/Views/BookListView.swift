@@ -27,9 +27,9 @@ struct BookListView: View {
     }
     
     private var bookList: some View {
-        List(viewModel.books) { book in
-            NavigationLink(destination: ReaderView(book: book, author: author)) {
-                BookRow(book: book)
+        List(viewModel.booksWithTranslations, id: \.book.id) { item in
+            NavigationLink(destination: ReaderView(book: item.book, author: author)) {
+                BookRow(book: item.book, hasTranslation: item.hasTranslation)
             }
         }
         .listStyle(InsetGroupedListStyle())
@@ -38,13 +38,15 @@ struct BookListView: View {
 
 struct BookRow: View {
     let book: Book
-    
+    let hasTranslation: Bool
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(book.title)
                 .font(.headline)
+                .fontWeight(hasTranslation ? .bold : .regular)
                 .lineLimit(2)
-            
+
             HStack {
                 Label("\(book.lineCountValue) lines", systemImage: "text.alignleft")
                     .font(.caption)

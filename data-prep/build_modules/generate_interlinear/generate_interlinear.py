@@ -1030,7 +1030,17 @@ class InterlinearGenerator:
             # Lookup each word
             words = []
             for pos, token in enumerate(tokens, 1):
-                word_data = self.lookup_word(token, book_id, line_num, pos)
+                # Skip numeric tokens - leave definition and morph blank
+                if token.isdigit() or (token.replace('.', '').replace(',', '').isdigit()):
+                    word_data = {
+                        'greek': token,
+                        'position': pos,
+                        'gloss': '',
+                        'lemma': '',
+                        'morph': ''
+                    }
+                else:
+                    word_data = self.lookup_word(token, book_id, line_num, pos)
                 words.append(word_data)
 
             # Create word-by-word gloss

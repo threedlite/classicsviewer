@@ -66,12 +66,24 @@ interface TranslationSegmentDao {
     
     @Query("""
         SELECT EXISTS(
-            SELECT 1 FROM translation_segments ts 
-            JOIN books b ON ts.book_id = b.id 
+            SELECT 1 FROM translation_segments ts
+            JOIN books b ON ts.book_id = b.id
             WHERE b.work_id = :workId
-            AND ts.translation_text IS NOT NULL 
+            AND ts.translation_text IS NOT NULL
             AND LENGTH(TRIM(ts.translation_text)) > 10
+            AND (ts.translator IS NULL OR ts.translator NOT LIKE '%Interlinear%')
         )
     """)
     suspend fun hasTranslationsForWork(workId: String): Boolean
+
+    @Query("""
+        SELECT EXISTS(
+            SELECT 1 FROM translation_segments ts
+            WHERE ts.book_id = :bookId
+            AND ts.translation_text IS NOT NULL
+            AND LENGTH(TRIM(ts.translation_text)) > 10
+            AND (ts.translator IS NULL OR ts.translator NOT LIKE '%Interlinear%')
+        )
+    """)
+    suspend fun hasTranslationsForBook(bookId: String): Boolean
 }

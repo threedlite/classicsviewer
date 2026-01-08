@@ -3,18 +3,19 @@ import SwiftUI
 
 @MainActor
 class BookListViewModel: ObservableObject {
-    @Published var books: [Book] = []
+    @Published var booksWithTranslations: [(book: Book, hasTranslation: Bool)] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
-    
+
     private let bookDAO = BookDAO()
-    
+    private let translationDAO = TranslationDAO()
+
     func loadBooks(for workId: String) {
         Task {
             await loadBooksAsync(for: workId)
         }
     }
-    
+
     private func loadBooksAsync(for workId: String) async {
         isLoading = true
         errorMessage = nil
@@ -30,15 +31,28 @@ class BookListViewModel: ObservableObject {
                 print("DEBUG: WARNING - Work NOT found in works table!")
             }
 
-            books = try await bookDAO.getBooksForWork(workId: workId)
+            let books = try await bookDAO.getBooksForWork(workId: workId)
             print("DEBUG: Loaded \(books.count) books")
-            
+
+            // Check translation status for each book
+            var booksWithStatus: [(book: Book, hasTranslation: Bool)] = []
+            for book in books {
+                let hasTranslation = try await translationDAO.hasNonInterlinearTranslationsForBook(bookId: book.id)
+                booksWithStatus.append((book: book, hasTranslation: hasTranslation))
+            }
+            booksWithTranslations = booksWithStatus
+
         } catch {
             errorMessage = error.localizedDescription
             print("ERROR: Failed to load books: \(error)")
         }
-        
+
         isLoading = false
+    }
+
+    // For backward compatibility
+    var books: [Book] {
+        booksWithTranslations.map { $0.book }
     }
 }
 

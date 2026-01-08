@@ -27,7 +27,14 @@ class BookAdapter(
         val fontSize = PreferencesManager.getFontSize(holder.itemView.context)
         holder.binding.itemText.textSize = fontSize
         holder.binding.itemText.text = "${book.title} (${book.lineCount} lines)"
-        
+
+        // Bold for books with non-interlinear translations
+        if (book.hasTranslation) {
+            holder.binding.itemText.setTypeface(null, android.graphics.Typeface.BOLD)
+        } else {
+            holder.binding.itemText.setTypeface(null, android.graphics.Typeface.NORMAL)
+        }
+
         // Apply color inversion
         if (invertColors) {
             // Black on white
@@ -36,7 +43,7 @@ class BookAdapter(
             // White on black (default)
             holder.binding.itemText.setTextColor(0xFFFFFFFF.toInt())
         }
-        
+
         holder.binding.root.setOnClickListener { onBookClick(book) }
     }
     

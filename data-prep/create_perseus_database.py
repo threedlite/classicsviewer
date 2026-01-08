@@ -26,6 +26,10 @@ from build_modules.normalization_utils import normalize_greek, normalize_greek_u
 # Interlinear generation removed - always use pregenerated files from data-sources/classicsviewer_interlinear/
 # from build_modules.generate_interlinear.generate_interlinear import generate_interlinear_translations
 
+# Global dictionary to track XML patterns during build
+# Pattern -> list of (work_id, author_name, work_title, corpus) tuples
+XML_PATTERNS_BY_WORK: Dict[str, List[Tuple[str, str, str, str]]] = {}
+
 
 class EntityResolver:
     """XML entity resolver that converts undefined entities to escaped text"""
@@ -226,6 +230,126 @@ def is_pb_tag(tag):
 def is_sp_tag(tag):
     """Check if tag is exactly <sp> (speech wrapper)."""
     return is_tag(tag, 'sp')
+
+# ============= XML PATTERN EXTRACTION FOR DOCUMENTATION =============
+
+def extract_xml_pattern(xml_path):
+    """
+    Extract the structural pattern from an XML file.
+    Returns a string like "edition → section → p" representing the div hierarchy.
+    """
+    try:
+        tree, _ = parse_xml_with_entity_resolver(xml_path)
+        root = tree.getroot()
+
+        # Remove namespace for easier parsing
+        for elem in root.iter():
+            if '}' in elem.tag:
+                elem.tag = elem.tag.split('}')[1]
+
+        # Find the body element
+        body = root.find('.//body')
+        if body is None:
+            return 'NO_BODY'
+
+        # Track hierarchy paths found
+        hierarchy_paths = []
+
+        def explore_element(elem, path=[]):
+            """Recursively explore element structure"""
+            tag = elem.tag
+
+            # Track div elements with their types
+            if tag == 'div' or tag.startswith('div'):
+                div_type = elem.get('type', elem.get('subtype', 'NO_TYPE'))
+                new_path = path + [div_type]
+
+                # Look for text containers directly within this div
+                for child in elem:
+                    child_tag = child.tag
+                    if child_tag in ['p', 'l', 'ab', 'lg', 'sp', 'said', 'q', 'quote']:
+                        full_path = new_path + [child_tag]
+                        hierarchy_paths.append(full_path)
+                    # Recurse into nested divs
+                    elif child_tag == 'div' or child_tag.startswith('div'):
+                        explore_element(child, new_path)
+
+            # Also track non-div containers at top level
+            elif tag in ['p', 'l', 'ab', 'lg', 'sp', 'said', 'q', 'quote']:
+                if not path:  # Direct child of body
+                    hierarchy_paths.append([tag])
+
+        # Start exploration from body
+        for child in body:
+            explore_element(child)
+
+        # Create a canonical hierarchy pattern
+        if hierarchy_paths:
+            # Use the most common/longest path as representative
+            representative = max(hierarchy_paths, key=len)
+            hierarchy_str = ' → '.join(representative)
+            return hierarchy_str
+        else:
+            return 'NO_STRUCTURE'
+
+    except Exception as e:
+        return f'ERROR: {str(e)[:50]}'
+
+
+def register_xml_pattern(work_id, author_name, work_title, corpus, pattern):
+    """Register a work's XML pattern in the global tracking dictionary."""
+    global XML_PATTERNS_BY_WORK
+    if pattern not in XML_PATTERNS_BY_WORK:
+        XML_PATTERNS_BY_WORK[pattern] = []
+    XML_PATTERNS_BY_WORK[pattern].append((work_id, author_name, work_title, corpus))
+
+
+def write_xml_patterns_file(output_path=None):
+    """
+    Write the XML patterns to a file, grouped by pattern.
+    Format matches the existing XML_PATTERNS_BY_WORK.txt format.
+    """
+    global XML_PATTERNS_BY_WORK
+
+    if output_path is None:
+        output_path = Path(__file__).parent.parent / "XML_PATTERNS_BY_WORK.txt"
+
+    lines = []
+    lines.append("XML STRUCTURAL PATTERNS - WORKS BY PATTERN")
+    lines.append("=" * 60)
+    lines.append("")
+
+    total_patterns = len(XML_PATTERNS_BY_WORK)
+    total_works = sum(len(works) for works in XML_PATTERNS_BY_WORK.values())
+
+    lines.append(f"Total unique patterns: {total_patterns}")
+    lines.append(f"Total works analyzed: {total_works}")
+    lines.append("")
+
+    # Sort patterns by count (descending)
+    sorted_patterns = sorted(XML_PATTERNS_BY_WORK.items(), key=lambda x: len(x[1]), reverse=True)
+
+    for pattern, works in sorted_patterns:
+        lines.append("=" * 60)
+        lines.append(f"PATTERN: {pattern}")
+        lines.append(f"COUNT: {len(works)} works")
+        lines.append("-" * 60)
+
+        # Sort works by work_id for consistent output
+        sorted_works = sorted(works, key=lambda x: x[0])
+        for work_id, author_name, work_title, corpus in sorted_works:
+            lines.append(f"  {work_id} - {author_name}: {work_title} [{corpus}]")
+
+        lines.append("")
+
+    # Write to file
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines))
+
+    print(f"✓ XML patterns written to: {output_path}")
+    print(f"  Total patterns: {total_patterns}")
+    print(f"  Total works: {total_works}")
+
 
 # ============= NESTED DIV DETECTION FOR DUPLICATION FIX =============
 
@@ -718,20 +842,41 @@ def analyze_first1k_work_splitting(xml_path):
                 }
 
         # Method 3a: Check for <div> with specific types
+        # Only extract from LEAF nodes to avoid duplication in hierarchical structures
         div_segments = []
+
+        # Define which subtypes/types indicate structural divs
+        structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
+        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph'}
+
+        def is_structural_div(div_elem):
+            """Check if a div is a structural element we care about."""
+            return (div_elem.get('type') in structural_types or
+                    div_elem.get('subtype') in structural_subtypes)
+
+        def is_leaf_div(div_elem):
+            """Check if a div has no structural child divs (is a leaf node)."""
+            for child in div_elem:
+                if child.tag == 'div' and is_structural_div(child):
+                    return False
+            return True
+
         # Only iterate over <div> tags in the body, not in metadata
         if body is not None:
             for div in body.iter('div'):
                 # Skip preface sections
                 if div.get('n') == 'preface':
                     continue
-                if div.get('type') in ['section', 'chapter', 'textpart', 'book'] or \
-                   div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis', 'fragment']:
-                    text = extract_text_from_first1k_element(div)
-                    if text:
-                        # Only include Greek text for analysis
-                        if is_greek_text(text):
-                            div_segments.append(text)
+                # Only process structural divs that are leaf nodes
+                if not is_structural_div(div):
+                    continue
+                if not is_leaf_div(div):
+                    continue
+                text = extract_text_from_first1k_element(div)
+                if text:
+                    # Only include Greek text for analysis
+                    if is_greek_text(text):
+                        div_segments.append(text)
 
         if div_segments:
             # For div_sections, we need to consider that long chapters will be split
@@ -1402,65 +1547,120 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                     })
 
         elif selected_method == 'div_sections':
-            # Use div structural elements
+            # Use div structural elements - only extract from LEAF nodes to avoid duplication
+            # in hierarchical structures like book → chapter → section
             section_num = 1
+
+            # Define which subtypes/types indicate structural divs
+            structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
+            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph'}
+
+            def is_structural_div(div_elem):
+                """Check if a div is a structural element we care about."""
+                return (div_elem.get('type') in structural_types or
+                        div_elem.get('subtype') in structural_subtypes)
+
+            def is_leaf_div(div_elem):
+                """Check if a div has no structural child divs (is a leaf node)."""
+                for child in div_elem:
+                    if child.tag == 'div' and is_structural_div(child):
+                        return False
+                return True
+
+            def get_parent_hierarchy(div_elem, body_elem):
+                """Find the FULL hierarchical path of parent structure for a div element.
+
+                Returns a tuple of parent numbers in order from outermost to innermost.
+                For structure volume(n=1) → book(n=2) → section, this returns ('1', '2').
+                This ensures unique book IDs across nested structures where the same
+                book number might appear in different volumes.
+                """
+                # Collect all structural parent levels
+                hierarchy = []
+                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'work', 'homily', 'fragment')
+
+                for parent in body_elem.iter('div'):
+                    # Skip if parent IS the element itself (don't include self in hierarchy)
+                    if parent is div_elem:
+                        continue
+                    subtype = parent.get('subtype', '')
+                    if subtype in structural_subtypes:
+                        # Check if div_elem is a descendant of this parent
+                        for desc in parent.iter('div'):
+                            if desc is div_elem:
+                                # Track each level in the hierarchy
+                                hierarchy.append((subtype, parent.get('n', '1')))
+                                break
+
+                return hierarchy
+
             # Only iterate within body, not metadata
             for div in body.iter('div'):
                 # Skip preface sections which often contain Latin
                 if div.get('n') == 'preface':
                     continue
-                if div.get('type') in ['section', 'chapter', 'textpart', 'book'] or \
-                   div.get('subtype') in ['section', 'chapter', 'episode', 'hypothesis', 'fragment']:
-                    n = div.get('n', str(section_num))
-                    text = extract_text_from_first1k_element(div)
-                    if text.strip():
-                        # Don't collapse newlines - preserve them for proper line splitting
-                        # Just clean up excessive spaces within lines
-                        lines = text.split('\n')
-                        cleaned_lines = [re.sub(r'\s+', ' ', line).strip() for line in lines]
-                        text = '\n'.join(line for line in cleaned_lines if line)
 
-                        # Check if this text is too long for a single line
-                        if len(text) > MAX_ALLOWED_LINE_LENGTH:
-                            # Split long chapters into sentence-based lines
-                            # This creates a pseudo-line structure within the chapter
-                            # Split on sentence endings but keep the punctuation
-                            sentences = re.split(r'(?<=[.!?;])\s+(?=[Α-Ωα-ωA-Za-z])', text)
+                # Only process structural divs that are leaf nodes
+                if not is_structural_div(div):
+                    continue
+                if not is_leaf_div(div):
+                    continue
 
-                            # Further split any remaining long sentences
-                            split_lines = []
-                            for sentence in sentences:
-                                if len(sentence) <= MAX_ALLOWED_LINE_LENGTH:
-                                    split_lines.append(sentence.strip())
-                                else:
-                                    # Split on commas or other punctuation if still too long
-                                    sub_parts = re.split(r'(?<=[,·:])\s+', sentence)
-                                    current_line = ""
-                                    for part in sub_parts:
-                                        if len(current_line) + len(part) + 1 <= MAX_ALLOWED_LINE_LENGTH:
-                                            current_line = (current_line + " " + part).strip() if current_line else part
-                                        else:
-                                            if current_line:
-                                                split_lines.append(current_line)
-                                            current_line = part
-                                    if current_line:
-                                        split_lines.append(current_line)
+                n = div.get('n', str(section_num))
+                text = extract_text_from_first1k_element(div)
+                if text.strip():
+                    # Don't collapse newlines - preserve them for proper line splitting
+                    # Just clean up excessive spaces within lines
+                    lines = text.split('\n')
+                    cleaned_lines = [re.sub(r'\s+', ' ', line).strip() for line in lines]
+                    text = '\n'.join(line for line in cleaned_lines if line)
 
-                            # Store as pre-split text that will be used later
-                            sections.append({
-                                'section': n,
-                                'text': text,  # Keep original for reference
-                                'split_lines': split_lines,  # Pre-split lines
-                                'type': div.get('subtype') or div.get('type', 'section')
-                            })
-                        else:
-                            # Text is short enough to be a single line
-                            sections.append({
-                                'section': n,
-                                'text': text,
-                                'type': div.get('subtype') or div.get('type', 'section')
-                            })
-                        section_num += 1
+                    # Check if this text is too long for a single line
+                    if len(text) > MAX_ALLOWED_LINE_LENGTH:
+                        # Split long chapters into sentence-based lines
+                        # This creates a pseudo-line structure within the chapter
+                        # Split on sentence endings but keep the punctuation
+                        sentences = re.split(r'(?<=[.!?;])\s+(?=[Α-Ωα-ωA-Za-z])', text)
+
+                        # Further split any remaining long sentences
+                        split_lines = []
+                        for sentence in sentences:
+                            if len(sentence) <= MAX_ALLOWED_LINE_LENGTH:
+                                split_lines.append(sentence.strip())
+                            else:
+                                # Split on commas or other punctuation if still too long
+                                sub_parts = re.split(r'(?<=[,·:])\s+', sentence)
+                                current_line = ""
+                                for part in sub_parts:
+                                    if len(current_line) + len(part) + 1 <= MAX_ALLOWED_LINE_LENGTH:
+                                        current_line = (current_line + " " + part).strip() if current_line else part
+                                    else:
+                                        if current_line:
+                                            split_lines.append(current_line)
+                                        current_line = part
+                                if current_line:
+                                    split_lines.append(current_line)
+
+                        # Store as pre-split text that will be used later
+                        # Track full parent hierarchy for unique book ID generation
+                        parent_hierarchy = get_parent_hierarchy(div, body)
+                        sections.append({
+                            'section': n,
+                            'text': text,  # Keep original for reference
+                            'split_lines': split_lines,  # Pre-split lines
+                            'type': div.get('subtype') or div.get('type', 'section'),
+                            'parent_hierarchy': parent_hierarchy
+                        })
+                    else:
+                        # Text is short enough to be a single line
+                        parent_hierarchy = get_parent_hierarchy(div, body)
+                        sections.append({
+                            'section': n,
+                            'text': text,
+                            'type': div.get('subtype') or div.get('type', 'section'),
+                            'parent_hierarchy': parent_hierarchy
+                        })
+                    section_num += 1
 
         elif selected_method == 'milestone':
             # Split on milestone elements
@@ -1886,11 +2086,31 @@ def parse_first1k_translation(xml_path):
             print(f"      ⚠️  Translator not found in First1K file, using 'Unknown'")
 
         # Find all div elements with section numbers
+        # First pass: collect all section numbers to detect mixed numbering (Arabic + Roman)
+        all_section_nums = []
+        for div in root.iter('div'):
+            subtype = div.get('subtype', '')
+            n = div.get('n', '')
+            if subtype in ['chapter', 'section', 'fragment'] and n:
+                all_section_nums.append(n)
+
+        # Detect if we have mixed Arabic and Roman numerals
+        has_arabic = any(s.isdigit() for s in all_section_nums)
+        has_roman = any(re.match(r'^[IVXLCDM]+$', s) for s in all_section_nums)
+        skip_roman = has_arabic and has_roman  # Skip Roman if mixed with Arabic
+
+        if skip_roman:
+            print(f"      ⚠️  Mixed Arabic/Roman numeral sections detected - skipping Roman numerals (different source tradition)")
+
         for div in root.iter('div'):
             subtype = div.get('subtype', '')
             n = div.get('n', '')
 
             if subtype in ['chapter', 'section', 'fragment'] and n:
+                # Skip Roman numeral sections when mixed with Arabic (they're from different source)
+                if skip_roman and re.match(r'^[IVXLCDM]+$', n):
+                    continue
+
                 section_num = n
 
                 # Extract all text from this div
@@ -2120,10 +2340,77 @@ def process_first1k_work(work_dir, work_id, cursor, language):
         # Treat each section as a separate book
         print(f"    Treating {len(sections)} chapters as separate books for better alignment")
 
-        for sect_num, section in enumerate(sections, 1):
-            # Create book ID using the section number
-            book_id = f"{work_id}.{sect_num:03d}"
-            section_label = f"Chapter {sect_num}"
+        for sect_idx, section in enumerate(sections, 1):
+            # Use the actual section number from the XML, not sequential numbering
+            # This preserves original chapter numbers (e.g., 18, 19, 20 instead of 1, 2, 3)
+            actual_section_num = section.get('section')
+            parent_hierarchy = section.get('parent_hierarchy', [])
+
+            if actual_section_num and str(actual_section_num).isdigit():
+                sect_num = int(actual_section_num)
+            else:
+                # Fallback to sequential numbering if section number is missing or non-numeric
+                sect_num = sect_idx
+
+            # Create book ID using FULL hierarchy to avoid collisions
+            # when the same book number appears in different volumes
+            # e.g., Volume 1 Book 2 Section 3 → "001_002_003"
+            # e.g., Volume 2 Book 2 Section 3 → "002_002_003"
+
+            # Get the type of this leaf node (chapter, section, fragment, etc.)
+            section_type = section.get('type', 'section')
+
+            if parent_hierarchy:
+                # Build hierarchy prefix from all levels
+                # Each level is (subtype, n) e.g., [('volume', '1'), ('book', '2')]
+                hierarchy_parts = []
+                for subtype, n_val in parent_hierarchy:
+                    # Handle non-numeric values (like 'praef', '2a')
+                    if str(n_val).isdigit():
+                        hierarchy_parts.append(f"{int(n_val):03d}")
+                    else:
+                        # For non-numeric values, extract numeric part if any (e.g., '2a' → 2)
+                        # Otherwise use a hash of the string for uniqueness
+                        import re
+                        numeric_match = re.search(r'\d+', str(n_val))
+                        if numeric_match:
+                            hierarchy_parts.append(f"{int(numeric_match.group()):03d}")
+                        else:
+                            # Pure alphabetic like 'praef' - use hash mod 1000
+                            # to get consistent unique number
+                            hash_val = abs(hash(n_val)) % 1000
+                            hierarchy_parts.append(f"{hash_val:03d}")
+
+                if len(hierarchy_parts) >= 2:
+                    # Multiple levels: volume_book_section format
+                    hierarchy_prefix = '_'.join(hierarchy_parts)
+                    book_id = f"{work_id}.{hierarchy_prefix}_{sect_num:03d}"
+                    # Create readable label from hierarchy
+                    labels = [f"{subtype.title()} {n_val}" for subtype, n_val in parent_hierarchy]
+                    # Only add "Section N" suffix if the leaf is actually a section/subsection
+                    if section_type in ('section', 'subsection'):
+                        section_label = f"{' '.join(labels)} Section {sect_num}"
+                    else:
+                        # Leaf is chapter/fragment/etc - use its type (e.g., "Book 1 Chapter 5")
+                        section_label = f"{' '.join(labels)} {section_type.title()} {sect_num}"
+                elif len(hierarchy_parts) == 1:
+                    # Single parent level: book_section format
+                    book_id = f"{work_id}.{hierarchy_parts[0]}_{sect_num:03d}"
+                    subtype, n_val = parent_hierarchy[0]
+                    # Only add "Section N" suffix if the leaf is actually a section/subsection
+                    if section_type in ('section', 'subsection'):
+                        section_label = f"{subtype.title()} {n_val} Section {sect_num}"
+                    else:
+                        # Leaf is chapter/fragment/etc - use its type
+                        section_label = f"{subtype.title()} {n_val} {section_type.title()} {sect_num}"
+                else:
+                    # No valid hierarchy parts (all non-numeric)
+                    book_id = f"{work_id}.{sect_num:03d}"
+                    section_label = f"{section_type.title()} {sect_num}"
+            else:
+                # Flat structure: use the actual type of the leaf node
+                book_id = f"{work_id}.{sect_num:03d}"
+                section_label = f"{section_type.title()} {sect_num}"
 
             # Check if we have pre-split lines from div_sections processing
             if 'split_lines' in section:
@@ -4466,20 +4753,29 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 continue  # Skip other processing for NT texts
             
             # Check if this is prose or drama
-            # First check if there are book divisions (epic poetry)
+            # First check if there are book/poem/textpart divisions (collections)
             has_books = False
+            has_poems = False
             for div in root.iter():
-                if (is_div_tag(div.tag) and 
-                    div.get('type') == 'textpart' and 
-                    div.get('subtype', '').lower() == 'book'):
-                    has_books = True
-                    break
-            
-            # If it has books, it's epic poetry (Homer, Virgil, etc) - use regular processing
+                if (is_div_tag(div.tag) and
+                    div.get('type') == 'textpart'):
+                    subtype = div.get('subtype', '').lower()
+                    if subtype == 'book':
+                        has_books = True
+                        break
+                    elif subtype in ['poem', 'textpart'] and div.get('n', '').strip():
+                        # Has numbered poem/textpart divs - likely a collection
+                        has_poems = True
+
+            # If it has books or poems, use structured processing
             if has_books:
                 is_prose = False
                 is_drama = False
                 print(f"      → Has book divisions, treating as epic poetry")
+            elif has_poems:
+                is_prose = False
+                is_drama = False
+                print(f"      → Has poem/textpart divisions, treating as poetry collection")
             else:
                 # Count actual elements to determine if it's primarily prose or poetry
                 p_count = sum(1 for elem in root.iter() if is_p_tag(elem.tag))
@@ -4553,7 +4849,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 for book_div in search_root.iter():
                     if (is_div_tag(book_div.tag) and
                         book_div.get('type') == 'textpart' and
-                        book_div.get('subtype', '').lower() in ['book', 'poem']):
+                        book_div.get('subtype', '').lower() in ['book', 'poem', 'textpart']):
 
                         # Skip poems if we have books (poems are within books)
                         if has_books and book_div.get('subtype', '').lower() == 'poem':
@@ -4602,12 +4898,12 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                     
                     # If there are multiple books and we have poem/epigram divs in translation
                     if num_books > 1 and translation_div is not None:
-                        # Look for poem/epigram divs within the translation
+                        # Look for poem/epigram/textpart divs within the translation
                         poem_divs = []
                         for div in translation_div:
-                            if (is_div_tag(div.tag) and 
-                                div.get('type') == 'textpart' and 
-                                div.get('subtype') in ['poem', 'epigram']):
+                            if (is_div_tag(div.tag) and
+                                div.get('type') == 'textpart' and
+                                div.get('subtype') in ['poem', 'epigram', 'textpart']):
                                 poem_divs.append(div)
                         
                         if poem_divs:
@@ -6956,6 +7252,18 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         works_processed += 1
         print(f"    Reading {text_file.name}...")
 
+        # Extract and register XML pattern for documentation
+        xml_pattern = extract_xml_pattern(text_file)
+        if is_first1k:
+            corpus_name = "First1K"
+        elif is_pta:
+            corpus_name = "PTA"
+        elif language == 'greek':
+            corpus_name = "Perseus Greek"
+        else:
+            corpus_name = "Perseus Latin"
+        register_xml_pattern(db_work_id, author_name, title_english, corpus_name, xml_pattern)
+
         # Parse the text
         try:
             if is_first1k or is_pta:
@@ -6995,7 +7303,9 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             print(f"      Found altbook mapping: {len(altbook_mapping)} entries")
 
         # Process translations for this work
-        process_translations(work_dir, db_work_id, cursor, altbook_mapping)
+        # Skip for First1K/PTA works as their translations are already handled by process_first1k_work
+        if not is_first1k and not is_pta:
+            process_translations(work_dir, db_work_id, cursor, altbook_mapping)
     
     # If no works were processed, remove the author
     if works_processed == 0:
@@ -7029,7 +7339,7 @@ def generate_manifest(cursor):
     cursor.execute("SELECT COUNT(*) FROM translation_segments")
     manifest["statistics"]["total_translation_segments"] = cursor.fetchone()[0]
     
-    # Dictionary and lemma statistics (skip for first1ktest mode)
+    # Dictionary and lemma statistics
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='dictionary_entries'")
     if cursor.fetchone():
         cursor.execute("SELECT COUNT(*) FROM dictionary_entries")
@@ -7365,14 +7675,14 @@ def analyze_pta_collection(data_sources_path):
 
     return pta_works
 
-def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode='full'):
+def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode='full', report_name=None):
     """Generate detailed quality report
 
     Args:
         cursor: Database cursor
         build_time_minutes: Build time in minutes (optional)
         zip_info: Dict with 'size_mb' and 'original_size_mb' (optional)
-        mode: Build mode (sample, full, extended, first1ktest) for filename
+        mode: Build mode (sample, full, extended) for filename
     """
     from collections import defaultdict
     import json
@@ -7414,7 +7724,7 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode
         compression_ratio = (zip_info['size_mb'] / zip_info['original_size_mb'] * 100) if zip_info['original_size_mb'] > 0 else 0
         report_lines.append(f"Database Size: {zip_info['original_size_mb']:.1f}MB → {zip_info['size_mb']:.1f}MB compressed ({compression_ratio:.1f}%)")
 
-    # Dictionary statistics (skip for first1ktest mode)
+    # Dictionary statistics
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='dictionary_entries'")
     if cursor.fetchone():
         cursor.execute("SELECT COUNT(*) FROM dictionary_entries")
@@ -7628,20 +7938,22 @@ def generate_quality_report(cursor, build_time_minutes=None, zip_info=None, mode
                 trans_list.append(f"{trans['translator']} {trans['segments']} segments [{quality_info}]")
             report_lines.append(f"{author_name} / {work_title} translations: {', '.join(trans_list)}")
     
-    # Save as text file with mode-specific filename
-    report_filename = f'database_quality_report_{mode}.txt'
+    # Save as text file with mode-specific filename (or custom report_name if provided)
+    report_suffix = report_name if report_name else mode
+    report_filename = f'database_quality_report_{report_suffix}.txt'
     with open(report_filename, 'w', encoding='utf-8') as f:
         f.write('\n'.join(report_lines))
 
     print(f"✓ Quality report saved to {report_filename}")
 
-def generate_quality_report_final(db_filename, mode='full', build_start_time=None):
+def generate_quality_report_final(db_filename, mode='full', build_start_time=None, report_name=None):
     """Generate quality report after all external databases have been merged.
 
     Args:
         db_filename: Path to the database file
-        mode: Build mode (sample, full, extended, first1ktest)
+        mode: Build mode (sample, full, extended)
         build_start_time: Start time for build duration calculation (optional)
+        report_name: Custom report filename suffix (optional, defaults to mode)
     """
     import sqlite3
     import os
@@ -7668,7 +7980,7 @@ def generate_quality_report_final(db_filename, mode='full', build_start_time=Non
         }
 
     # Generate the quality report
-    generate_quality_report(cursor, build_time_minutes, zip_info, mode)
+    generate_quality_report(cursor, build_time_minutes, zip_info, mode, report_name)
 
     # Close connection
     conn.close()
@@ -7707,9 +8019,8 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
 
     Args:
         mode: 'full' for all authors, 'sample' for limited set from SAMPLE_AUTHORS.csv,
-              'extended' for full Perseus + non-duplicate First1KGreek works,
+              'extended' for full Perseus + non-duplicate First1KGreek works
         custom_csv_path: Optional path to custom CSV file (only used with mode='sample')
-              'first1ktest' for First1KGreek texts only (skips Perseus and dictionaries)
         output_name: Optional custom output name suffix (e.g., 'ios' -> perseus_texts_ios.db)
     """
     import time
@@ -7726,8 +8037,6 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
         db_filename = "perseus_texts_extended.db"
     elif mode == 'full':
         db_filename = "perseus_texts_full.db"
-    elif mode == 'first1ktest':
-        db_filename = "first1k_test.db"
     else:
         db_filename = "perseus_texts_sample.db"
     db_path = script_dir / db_filename
@@ -7944,141 +8253,140 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
     
     # word_forms indexes removed - not needed
     
-    # Process specific authors we want (skip for first1ktest mode)
-    if mode != 'first1ktest':
-        print("\n=== PROCESSING GREEK AUTHORS ===")
-    
-        # Discover all Greek authors dynamically
-        greek_authors = {}
-        print("Discovering Greek authors...")
-    
-        for author_dir in sorted(greek_dir.iterdir()):
-            if author_dir.is_dir() and author_dir.name.startswith("tlg"):
-                cts_file = author_dir / "__cts__.xml"
-                author_name = f"Author {author_dir.name}"
+    # Process specific authors we want
+    print("\n=== PROCESSING GREEK AUTHORS ===")
 
-                if cts_file.exists():
-                    try:
-                        tree = ET.parse(cts_file)
-                        root = tree.getroot()
+    # Discover all Greek authors dynamically
+    greek_authors = {}
+    print("Discovering Greek authors...")
 
-                        # Find groupname element
-                        ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
-                        groupname_elem = root.find('.//ti:groupname', ns)
+    for author_dir in sorted(greek_dir.iterdir()):
+        if author_dir.is_dir() and author_dir.name.startswith("tlg"):
+            cts_file = author_dir / "__cts__.xml"
+            author_name = f"Author {author_dir.name}"
 
-                        if groupname_elem is not None and groupname_elem.text:
-                            author_name = groupname_elem.text.strip()
-                    except Exception as e:
-                        print(f"  Warning: Failed to parse {cts_file}: {e}")
-
-                greek_authors[author_dir.name] = author_name
-    
-        print(f"\nDiscovered {len(greek_authors)} Greek authors")
-
-        # Filter authors based on mode
-        if mode == 'sample' and sample_authors:
-            # Filter to only include authors in the sample list
-            filtered_authors = {}
-            for author_id, author_name in greek_authors.items():
-                # Check if author name matches any in sample list (exact match)
-                if author_name in sample_authors:
-                    filtered_authors[author_id] = author_name
-                    print(f"  Including sample author: {author_name} ({author_id})")
-
-            # Special handling for New Testament which might not be discovered as a single author
-            if 'New Testament' in sample_authors and not any('Testament' in name for name in filtered_authors.values()):
-                # Look for New Testament works (might be under various IDs)
-                for author_id, author_name in greek_authors.items():
-                    if 'testament' in author_name.lower() or 'bible' in author_name.lower():
-                        filtered_authors[author_id] = author_name
-                        print(f"  Including New Testament author: {author_name} ({author_id})")
-
-            greek_authors = filtered_authors
-            print(f"\nFiltered to {len(greek_authors)} Greek authors for sample database")
-    
-    
-        # Process each Greek author with progress tracking
-        total_authors = len(greek_authors)
-        processed = 0
-        failed_authors = []
-    
-        for author_id, author_name in sorted(greek_authors.items()):
-            processed += 1
-            author_path = greek_dir / author_id
-            if author_path.exists():
-                print(f"\n[{processed}/{total_authors}] Processing {author_name} ({author_id})")
+            if cts_file.exists():
                 try:
-                    process_perseus_author(author_path, "greek", cursor, sample_works if mode == 'sample' else None)
-                    # Commit periodically
-                    if processed % 5 == 0:
-                        conn.commit()
-                        print(f"  Progress saved ({processed}/{total_authors} authors)")
+                    tree = ET.parse(cts_file)
+                    root = tree.getroot()
+
+                    # Find groupname element
+                    ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
+                    groupname_elem = root.find('.//ti:groupname', ns)
+
+                    if groupname_elem is not None and groupname_elem.text:
+                        author_name = groupname_elem.text.strip()
                 except Exception as e:
-                    print(f"  ERROR: {e}")
-                    failed_authors.append((author_id, author_name, str(e)))
-            else:
-                print(f"\n[{processed}/{total_authors}] Warning: {author_name} ({author_id}) not found")
-                failed_authors.append((author_id, author_name, "Directory not found"))
-    
-        # Report failures
-        if failed_authors:
-            print(f"\n=== FAILED AUTHORS ({len(failed_authors)}) ===")
-            for auth_id, name, error in failed_authors:
-                print(f"  {name} ({auth_id}): {error}")
-    
-        print("\n=== PROCESSING LATIN AUTHORS ===")
-    
-        # Discover all Latin authors dynamically
-        latin_authors = {}
-        print("Discovering Latin authors...")
-    
-        for author_dir in sorted(latin_dir.iterdir()):
-            if author_dir.is_dir() and author_dir.name.startswith("phi"):
-                cts_file = author_dir / "__cts__.xml"
-                author_name = f"Author {author_dir.name}"
+                    print(f"  Warning: Failed to parse {cts_file}: {e}")
 
-                if cts_file.exists():
-                    try:
-                        tree = ET.parse(cts_file)
-                        root = tree.getroot()
+            greek_authors[author_dir.name] = author_name
 
-                        # Find groupname element
-                        ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
-                        groupname_elem = root.find('.//ti:groupname', ns)
+    print(f"\nDiscovered {len(greek_authors)} Greek authors")
 
-                        if groupname_elem is not None and groupname_elem.text:
-                            author_name = groupname_elem.text.strip()
-                    except Exception as e:
-                        print(f"  Warning: Failed to parse {cts_file}: {e}")
+    # Filter authors based on mode
+    if mode == 'sample' and sample_authors:
+        # Filter to only include authors in the sample list
+        filtered_authors = {}
+        for author_id, author_name in greek_authors.items():
+            # Check if author name matches any in sample list (exact match)
+            if author_name in sample_authors:
+                filtered_authors[author_id] = author_name
+                print(f"  Including sample author: {author_name} ({author_id})")
 
-                latin_authors[author_dir.name] = author_name
-    
-        print(f"\nDiscovered {len(latin_authors)} Latin authors")
-
-        # Filter authors based on mode
-        if mode == 'sample' and sample_authors:
-            # Filter to only include authors in the sample list
-            filtered_authors = {}
-            for author_id, author_name in latin_authors.items():
-                # Check if author name matches any in sample list (exact match)
-                if author_name in sample_authors:
+        # Special handling for New Testament which might not be discovered as a single author
+        if 'New Testament' in sample_authors and not any('Testament' in name for name in filtered_authors.values()):
+            # Look for New Testament works (might be under various IDs)
+            for author_id, author_name in greek_authors.items():
+                if 'testament' in author_name.lower() or 'bible' in author_name.lower():
                     filtered_authors[author_id] = author_name
-                    print(f"  Including sample author: {author_name} ({author_id})")
+                    print(f"  Including New Testament author: {author_name} ({author_id})")
 
-            latin_authors = filtered_authors
-            print(f"\nFiltered to {len(latin_authors)} Latin authors for sample database")
-    
-        # Process each Latin author
+        greek_authors = filtered_authors
+        print(f"\nFiltered to {len(greek_authors)} Greek authors for sample database")
+
+
+    # Process each Greek author with progress tracking
+    total_authors = len(greek_authors)
+    processed = 0
+    failed_authors = []
+
+    for author_id, author_name in sorted(greek_authors.items()):
+        processed += 1
+        author_path = greek_dir / author_id
+        if author_path.exists():
+            print(f"\n[{processed}/{total_authors}] Processing {author_name} ({author_id})")
+            try:
+                process_perseus_author(author_path, "greek", cursor, sample_works if mode == 'sample' else None)
+                # Commit periodically
+                if processed % 5 == 0:
+                    conn.commit()
+                    print(f"  Progress saved ({processed}/{total_authors} authors)")
+            except Exception as e:
+                print(f"  ERROR: {e}")
+                failed_authors.append((author_id, author_name, str(e)))
+        else:
+            print(f"\n[{processed}/{total_authors}] Warning: {author_name} ({author_id}) not found")
+            failed_authors.append((author_id, author_name, "Directory not found"))
+
+    # Report failures
+    if failed_authors:
+        print(f"\n=== FAILED AUTHORS ({len(failed_authors)}) ===")
+        for auth_id, name, error in failed_authors:
+            print(f"  {name} ({auth_id}): {error}")
+
+    print("\n=== PROCESSING LATIN AUTHORS ===")
+
+    # Discover all Latin authors dynamically
+    latin_authors = {}
+    print("Discovering Latin authors...")
+
+    for author_dir in sorted(latin_dir.iterdir()):
+        if author_dir.is_dir() and author_dir.name.startswith("phi"):
+            cts_file = author_dir / "__cts__.xml"
+            author_name = f"Author {author_dir.name}"
+
+            if cts_file.exists():
+                try:
+                    tree = ET.parse(cts_file)
+                    root = tree.getroot()
+
+                    # Find groupname element
+                    ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
+                    groupname_elem = root.find('.//ti:groupname', ns)
+
+                    if groupname_elem is not None and groupname_elem.text:
+                        author_name = groupname_elem.text.strip()
+                except Exception as e:
+                    print(f"  Warning: Failed to parse {cts_file}: {e}")
+
+            latin_authors[author_dir.name] = author_name
+
+    print(f"\nDiscovered {len(latin_authors)} Latin authors")
+
+    # Filter authors based on mode
+    if mode == 'sample' and sample_authors:
+        # Filter to only include authors in the sample list
+        filtered_authors = {}
         for author_id, author_name in latin_authors.items():
-            author_path = latin_dir / author_id
-            if author_path.exists():
-                print(f"\nProcessing {author_name} ({author_id})")
-                process_perseus_author(author_path, "latin", cursor, sample_works if mode == 'sample' else None)
-            else:
-                print(f"\nWarning: {author_name} ({author_id}) not found")
+            # Check if author name matches any in sample list (exact match)
+            if author_name in sample_authors:
+                filtered_authors[author_id] = author_name
+                print(f"  Including sample author: {author_name} ({author_id})")
 
-    # Process First1KGreek texts if in extended or first1ktest mode
-    if mode in ['extended', 'first1ktest']:
+        latin_authors = filtered_authors
+        print(f"\nFiltered to {len(latin_authors)} Latin authors for sample database")
+
+    # Process each Latin author
+    for author_id, author_name in latin_authors.items():
+        author_path = latin_dir / author_id
+        if author_path.exists():
+            print(f"\nProcessing {author_name} ({author_id})")
+            process_perseus_author(author_path, "latin", cursor, sample_works if mode == 'sample' else None)
+        else:
+            print(f"\nWarning: {author_name} ({author_id}) not found")
+
+    # Process First1KGreek texts if in extended mode
+    if mode == 'extended':
         print("\n=== PROCESSING FIRST1KGREEK WORKS ===")
 
         first1k_dir = data_sources / "First1KGreek" / "data"
@@ -8209,32 +8517,27 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
 
     # Process dictionary data
     print("\n=== PROCESSING DICTIONARY DATA ===")
-    if mode == 'first1ktest':
-        # For first1ktest mode, only create tables without populating them
-        print("Creating empty dictionary tables for first1ktest mode...")
-        load_combined_dictionaries(cursor, build_mode='first1ktest')
-    else:
-        # Import combined dictionary data (Cunliffe, LSJ, Wiktionary)
-        # Pass build mode to control morphology inclusion
-        load_combined_dictionaries(cursor, build_mode=mode)
+    # Import combined dictionary data (Cunliffe, LSJ, Wiktionary)
+    # Pass build mode to control morphology inclusion
+    load_combined_dictionaries(cursor, build_mode=mode)
 
-        # Insert build metadata (timestamp and mode)
-        insert_build_metadata(cursor, mode=mode)
+    # Insert build metadata (timestamp and mode)
+    insert_build_metadata(cursor, mode=mode)
 
-        # Skip the old LSJ loading code
+    # Skip the old LSJ loading code
 
-        # Skip old Wiktionary and lemmatization code - now handled by load_combined_dictionaries
-        # extract_wiktionary_mappings()
-        # load_wiktionary_mappings(cursor)
-        # generate_comprehensive_lemmatization(cursor)
+    # Skip old Wiktionary and lemmatization code - now handled by load_combined_dictionaries
+    # extract_wiktionary_mappings()
+    # load_wiktionary_mappings(cursor)
+    # generate_comprehensive_lemmatization(cursor)
 
-        # Skip optimize_lemma_map - references old schema with word_normalized column
-        # optimize_lemma_map(cursor)
+    # Skip optimize_lemma_map - references old schema with word_normalized column
+    # optimize_lemma_map(cursor)
 
-        # Skip transitive lemma resolution - uses old schema
-        # print("\n=== RESOLVING TRANSITIVE LEMMA MAPPINGS ===")
-        # resolve_transitive_lemmas(cursor)
-    
+    # Skip transitive lemma resolution - uses old schema
+    # print("\n=== RESOLVING TRANSITIVE LEMMA MAPPINGS ===")
+    # resolve_transitive_lemmas(cursor)
+
     # Commit
     conn.commit()
     
@@ -8258,7 +8561,7 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
     cursor.execute("SELECT COUNT(*) FROM translation_segments")
     print(f"Translation segments: {cursor.fetchone()[0]}")
     
-    # Dictionary statistics (skip for first1ktest mode)
+    # Dictionary statistics
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='dictionary_entries'")
     if cursor.fetchone():
         cursor.execute("SELECT COUNT(*) FROM dictionary_entries")
@@ -8317,20 +8620,22 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
     # NOTE: Quality report generation moved to after external database merges
     # See calls to generate_quality_report_final() in main() function
     
-    # Print translation coverage
+    # Print translation coverage (excluding interlinear)
     cursor.execute("""
         SELECT COUNT(DISTINCT w.id) as total_works,
-               COUNT(DISTINCT CASE WHEN ts.id IS NOT NULL THEN w.id END) as works_with_trans
+               COUNT(DISTINCT CASE WHEN ts.id IS NOT NULL
+                   AND (ts.translator IS NULL OR ts.translator NOT LIKE '%Interlinear%')
+                   THEN w.id END) as works_with_trans
         FROM works w
         LEFT JOIN books b ON w.id = b.work_id
         LEFT JOIN translation_segments ts ON b.id = ts.book_id
     """)
     total_works, works_with_trans = cursor.fetchone()
     coverage = (works_with_trans / total_works * 100) if total_works > 0 else 0
-    print(f"\n=== TRANSLATION COVERAGE ===")
+    print(f"\n=== TRANSLATION COVERAGE (excluding interlinear) ===")
     print(f"Works with translations: {works_with_trans}/{total_works} ({coverage:.1f}%)")
     
-    # Update has_translations flag for authors
+    # Update has_translations flag for authors (excluding interlinear translations)
     print("\nUpdating has_translations flag for authors...")
     cursor.execute("""
         UPDATE authors
@@ -8341,8 +8646,9 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
             JOIN works w ON a.id = w.author_id
             JOIN books b ON w.id = b.work_id
             JOIN translation_segments ts ON b.id = ts.book_id
-            WHERE ts.translation_text IS NOT NULL 
+            WHERE ts.translation_text IS NOT NULL
             AND LENGTH(TRIM(ts.translation_text)) > 10
+            AND (ts.translator IS NULL OR ts.translator NOT LIKE '%Interlinear%')
         )
     """)
     conn.commit()
@@ -9422,7 +9728,7 @@ if __name__ == "__main__":
 
     try:
         # Parse command-line arguments
-        build_mode = "both"
+        build_mode = "sample"
         custom_csv_path = None
         skip_oga = False
         interlineate = False
@@ -9457,14 +9763,12 @@ if __name__ == "__main__":
         if len(args) > 2:
             output_name = args[2]  # e.g., "ios" -> perseus_texts_ios.db
 
-        if build_mode not in ["sample", "full", "extended", "first1ktest", "both"]:
+        if build_mode not in ["sample", "full", "extended"]:
             print(f"Invalid build mode: {build_mode}")
-            print("Usage: python create_perseus_database.py [sample|full|extended|first1ktest|both] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
+            print("Usage: python create_perseus_database.py [sample|full|extended] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
             print("  extended: Full Perseus + First1KGreek + PTA + Pali + Norse")
-            print("  first1ktest: First1KGreek texts only (skips Perseus and dictionaries)")
-            print("  both: Build both sample and full databases")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
             print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
             print("\nOptional output_name: Custom output database name suffix (only for sample mode)")
@@ -9501,7 +9805,7 @@ if __name__ == "__main__":
         overall_start = time.time()
 
         # Build sample database
-        if build_mode in ["sample", "both"]:
+        if build_mode == "sample":
             # Determine database filename
             if output_name:
                 sample_db_filename = f"perseus_texts_{output_name}.db"
@@ -9596,10 +9900,16 @@ if __name__ == "__main__":
             print("\n" + "="*60)
             print("GENERATING QUALITY REPORT")
             print("="*60)
-            generate_quality_report_final(sample_db_filename, mode='sample', build_start_time=start_time)
+            generate_quality_report_final(sample_db_filename, mode='sample', build_start_time=start_time, report_name=output_name)
+
+            # Write XML patterns file
+            print("\n" + "="*60)
+            print("WRITING XML PATTERNS FILE")
+            print("="*60)
+            write_xml_patterns_file()
 
         # Build full database
-        if build_mode in ["full", "both"]:
+        if build_mode == "full":
             print("\n" + "="*60)
             print("BUILDING FULL DATABASE")
             print("="*60)
@@ -9671,6 +9981,12 @@ if __name__ == "__main__":
             print("GENERATING QUALITY REPORT")
             print("="*60)
             generate_quality_report_final("perseus_texts_full.db", mode='full', build_start_time=start_time)
+
+            # Write XML patterns file
+            print("\n" + "="*60)
+            print("WRITING XML PATTERNS FILE")
+            print("="*60)
+            write_xml_patterns_file()
 
         # Build extended database
         if build_mode == "extended":
@@ -9746,23 +10062,11 @@ if __name__ == "__main__":
             print("="*60)
             generate_quality_report_final("perseus_texts_extended.db", mode='extended', build_start_time=start_time)
 
-        # Build first1ktest database
-        if build_mode == "first1ktest":
+            # Write XML patterns file
             print("\n" + "="*60)
-            print("BUILDING FIRST1K TEST DATABASE (First1KGreek only)")
+            print("WRITING XML PATTERNS FILE")
             print("="*60)
-            start_time = time.time()
-            create_database(mode='first1ktest')
-            print(f"\nFirst1K test database build time: {(time.time() - start_time)/60:.1f} minutes")
-
-            # Compress first1k test database (keep in data-prep directory)
-            compress_and_copy_database("first1k_test.db", is_sample=False)
-
-            # Generate quality report after compression
-            print("\n" + "="*60)
-            print("GENERATING QUALITY REPORT")
-            print("="*60)
-            generate_quality_report_final("first1k_test.db", mode='first1ktest', build_start_time=start_time)
+            write_xml_patterns_file()
 
         print(f"\nTotal build time: {(time.time() - overall_start)/60:.1f} minutes")
     finally:
