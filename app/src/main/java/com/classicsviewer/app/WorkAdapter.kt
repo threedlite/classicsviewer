@@ -29,10 +29,11 @@ class WorkAdapter(
         holder.binding.itemText.text = work.title
         
         // Bold text for works with translations
+        // Use null for typeface to ensure proper reset when views are recycled
         if (work.hasTranslation) {
-            holder.binding.itemText.setTypeface(holder.binding.itemText.typeface, android.graphics.Typeface.BOLD)
+            holder.binding.itemText.setTypeface(null, android.graphics.Typeface.BOLD)
         } else {
-            holder.binding.itemText.setTypeface(holder.binding.itemText.typeface, android.graphics.Typeface.NORMAL)
+            holder.binding.itemText.setTypeface(null, android.graphics.Typeface.NORMAL)
         }
         
         // Apply color inversion

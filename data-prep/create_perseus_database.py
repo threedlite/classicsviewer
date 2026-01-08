@@ -1191,7 +1191,7 @@ def split_body_on_tag(elem, tag_name):
     text_parts = []
     current_text = []
 
-    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title', 'rdg'}
 
     def process_element(el):
         tag = el.tag.split('}')[-1] if '}' in el.tag else el.tag
@@ -1990,7 +1990,7 @@ def extract_text_from_element_simple(elem):
     Used for extracting text from <l> elements.
     """
     # Skip editorial elements entirely
-    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title', 'rdg'}
 
     tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
     if tag_name in excluded_tags:
@@ -2147,7 +2147,7 @@ def extract_text_from_first1k_element(elem, include_tail=True):
                       for recursive calls since the parent handles tail text.
     """
     # Skip editorial elements entirely
-    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title', 'rdg'}
 
     tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
     if tag_name in excluded_tags:
@@ -2363,23 +2363,33 @@ def process_first1k_work(work_dir, work_id, cursor, language):
             if parent_hierarchy:
                 # Build hierarchy prefix from all levels
                 # Each level is (subtype, n) e.g., [('volume', '1'), ('book', '2')]
-                hierarchy_parts = []
+                hierarchy_parts = []  # For book_id (uniqueness)
+                hierarchy_nums = []   # For book_number (sorting)
                 for subtype, n_val in parent_hierarchy:
-                    # Handle non-numeric values (like 'praef', '2a')
-                    if str(n_val).isdigit():
-                        hierarchy_parts.append(f"{int(n_val):03d}")
+                    # Handle non-numeric values (like 'praef', '2a', 'A', 'B')
+                    import re
+                    n_str = str(n_val)
+                    if n_str.isdigit():
+                        hierarchy_parts.append(f"{int(n_str):03d}")
+                        hierarchy_nums.append(int(n_str))
                     else:
                         # For non-numeric values, extract numeric part if any (e.g., '2a' → 2)
-                        # Otherwise use a hash of the string for uniqueness
-                        import re
-                        numeric_match = re.search(r'\d+', str(n_val))
+                        # Or convert single letters to ordinal (A=1, B=2, etc.)
+                        numeric_match = re.search(r'\d+', n_str)
                         if numeric_match:
                             hierarchy_parts.append(f"{int(numeric_match.group()):03d}")
+                            hierarchy_nums.append(int(numeric_match.group()))
+                        elif len(n_str) == 1 and n_str.upper() in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
+                            # Single letter like 'A', 'B' - convert to ordinal
+                            ordinal = ord(n_str.upper()) - ord('A') + 1
+                            hierarchy_parts.append(f"{ordinal:03d}")
+                            hierarchy_nums.append(ordinal)
                         else:
                             # Pure alphabetic like 'praef' - use hash mod 1000
                             # to get consistent unique number
                             hash_val = abs(hash(n_val)) % 1000
                             hierarchy_parts.append(f"{hash_val:03d}")
+                            hierarchy_nums.append(hash_val)
 
                 if len(hierarchy_parts) >= 2:
                     # Multiple levels: volume_book_section format
@@ -2407,10 +2417,21 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                     # No valid hierarchy parts (all non-numeric)
                     book_id = f"{work_id}.{sect_num:03d}"
                     section_label = f"{section_type.title()} {sect_num}"
+                    hierarchy_nums = []
             else:
                 # Flat structure: use the actual type of the leaf node
                 book_id = f"{work_id}.{sect_num:03d}"
                 section_label = f"{section_type.title()} {sect_num}"
+                hierarchy_nums = []
+
+            # Compute composite book_number for proper sorting
+            # Each hierarchy level gets 1000x multiplier to ensure proper ordering
+            # e.g., Book A Section 3 = 1*1000 + 3 = 1003, Book B Section 3 = 2*1000 + 3 = 2003
+            composite_book_num = sect_num
+            multiplier = 1000
+            for h_num in reversed(hierarchy_nums):
+                composite_book_num += h_num * multiplier
+                multiplier *= 1000
 
             # Check if we have pre-split lines from div_sections processing
             if 'split_lines' in section:
@@ -2447,7 +2468,7 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                 INSERT OR IGNORE INTO books
                 (id, work_id, book_number, label, start_line, end_line, line_count)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (book_id, work_id, sect_num, section_label, 1, line_count, line_count))
+            """, (book_id, work_id, composite_book_num, section_label, 1, line_count, line_count))
 
             # Insert all lines for this chapter
             speaker = section.get('speaker', None)
@@ -3135,7 +3156,7 @@ def get_text_content(elem, preserve_milestones=False, bekker_page_state=None):
         bekker_page_state = [None]
 
     # Skip editorial elements entirely
-    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title'}
+    excluded_tags = {'note', 'foreign', 'ref', 'bibl', 'editorialDecl', 'teiHeader', 'gloss', 'title', 'rdg'}
     tag_name = elem.tag.split('}')[-1] if '}' in elem.tag else elem.tag
 
     if tag_name in excluded_tags:
