@@ -289,8 +289,8 @@ cd build_modules/generate_interlinear
 ```
 
 ### Interlinear Build Times (8 workers):
-- **Greek (1,855 works, 3.05M lines)**: ~12.9 hours
-- **Latin (230 works)**: ~15 seconds
+- **Greek (2,049 works, 34.9M words)**: ~11.1 hours (39,838 seconds)
+- **Latin (230 works, 372K lines)**: ~14 seconds
 
 Output location: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
 

@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-01-08T09:34:03.405315
+Generated: 2026-01-08T23:31:45.456126
 Mode: full
 
 Total Authors: 135
 Total Works: 1018
-Total Books: 2765
+Total Books: 3468
 Total Lines: 998,470
-Translation Segments: 2,859,957
-Build Time: 8.0 minutes
-Database Size: 5856.3MB → 1152.9MB compressed (19.7%)
+Translation Segments: 2,848,636
+Build Time: 8.1 minutes
+Database Size: 5842.8MB → 1151.3MB compressed (19.7%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,106,604
 
@@ -5616,31 +5616,1437 @@ Tacitus, Cornelius / Agricola (abridged) - 694 lines, max_char=614 [Perseus]
 Tacitus, Cornelius / Agricola (abridged) translations: Alfred John Church 58 segments [Excellent-Section (100% coverage)], Arthur Murphy 37 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 694 segments [Excellent (100% coverage)]
 Tacitus, Cornelius / Germany and its Tribes - 683 lines, max_char=445 [Perseus]
 Tacitus, Cornelius / Germany and its Tribes translations: Alfred John Church 51 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 683 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals - 3,996 lines total, 12 books, max_lines/book=504, max_char=763 [Perseus]
-Tacitus, Cornelius / The Annals / Book 1 - 504 lines
-Tacitus, Cornelius / The Annals translations: Alfred John Church 946 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 504 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 2 - 480 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 480 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 3 - 444 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 444 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 4 - 443 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 443 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 5 - 22 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 22 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 6 - 294 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 294 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 11 - 211 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 211 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 12 - 340 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 340 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 13 - 326 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 326 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 14 - 380 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 380 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 15 - 380 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 380 segments [Excellent (100% coverage)]
-Tacitus, Cornelius / The Annals / Book 16 - 172 lines
-Tacitus, Cornelius / The Annals translations: Interlinear (Beta, AI-generated from app dictionary) 172 segments [Excellent (100% coverage)]
+Tacitus, Cornelius / The Annals - 3,996 lines total, 715 books, max_lines/book=19, max_char=763 [Perseus]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 1 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 2 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 3 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 4 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 5 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 6 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 7 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 8 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 9 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 10 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 11 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 12 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 13 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 14 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 15 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 16 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 17 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 18 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 19 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 20 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 21 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 22 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 23 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 24 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 25 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 26 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 27 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 28 - 13 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 29 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 30 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 31 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 32 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 33 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 34 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 35 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 36 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 37 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 38 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 39 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 40 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 41 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 42 - 11 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 43 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 44 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 45 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 46 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 47 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 48 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 49 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 50 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 51 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 52 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 53 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 54 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 55 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 56 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 57 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 58 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 59 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 60 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 61 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 62 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 63 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 64 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 65 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 66 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 67 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 68 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 69 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 70 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 71 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 72 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 73 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 74 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 75 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 76 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 77 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 78 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 79 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 80 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 1 Chapter 81 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 1 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 2 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 3 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 4 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 5 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 6 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 7 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 8 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 9 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 10 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 11 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 12 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 13 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 14 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 15 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 16 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 17 - 12 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 18 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 19 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 20 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 21 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 22 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 23 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 24 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 25 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 26 - 11 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 27 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 28 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 29 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 30 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 31 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 32 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 33 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 34 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 35 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 36 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 37 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 38 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 39 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 40 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 41 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 42 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 43 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 44 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 45 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 46 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 47 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 48 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 49 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 50 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 51 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 52 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 53 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 54 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 55 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 56 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 57 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 58 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 59 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 60 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 61 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 62 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 63 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 64 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 65 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 66 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 67 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 68 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 69 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 70 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 71 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 72 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 73 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 74 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 75 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 76 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 77 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 78 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 79 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 80 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 81 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 82 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 83 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 84 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 85 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 86 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 87 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 2 Chapter 88 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 1 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 2 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 3 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 4 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 5 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 6 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 7 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 8 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 9 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 10 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 11 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 12 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 13 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 14 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 15 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 16 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 17 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 18 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 19 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 20 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 21 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 22 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 23 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 24 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 25 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 26 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 27 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 28 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 29 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 30 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 31 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 32 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 33 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 34 - 19 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 35 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 36 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 37 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 38 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 39 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 40 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 41 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 42 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 43 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 44 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 45 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 46 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 47 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 48 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 49 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 50 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 51 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 52 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 53 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 54 - 14 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 55 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 56 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 57 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 58 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 59 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 60 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 61 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 62 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 63 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 64 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 65 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 66 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 67 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 68 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 69 - 13 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 70 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 71 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 72 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 73 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 74 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 75 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 3 Chapter 76 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 1 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 2 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 3 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 4 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 5 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 6 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 7 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 8 - 11 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 9 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 10 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 11 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 12 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 13 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 14 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 15 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 16 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 17 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 18 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 19 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 20 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 21 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 22 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 23 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 24 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 25 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 26 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 27 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 28 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 29 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 30 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 31 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 32 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 33 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 34 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 35 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 36 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 37 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 38 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 39 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 40 - 12 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 41 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 42 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 43 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 44 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 45 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 46 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 47 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 48 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 49 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 50 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 51 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 52 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 53 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 54 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 55 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 56 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 57 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 58 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 59 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 60 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 61 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 62 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 63 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 64 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 65 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 66 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 67 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 68 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 69 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 70 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 71 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 72 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 73 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 74 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 4 Chapter 75 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 5 Chapter 1 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 5 Chapter 2 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 5 Chapter 3 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 5 Chapter 4 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 5 Chapter 5 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 1 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 2 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 3 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 4 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 5 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 6 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 7 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 8 - 14 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 9 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 10 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 11 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 12 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 13 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 14 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 15 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 16 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 17 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 18 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 19 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 20 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 21 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 22 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 23 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 24 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 25 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 26 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 27 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 28 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 29 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 30 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 31 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 32 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 33 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 34 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 35 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 36 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 37 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 38 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 39 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 40 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 41 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 42 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 43 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 44 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 45 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 46 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 47 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 48 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 49 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 50 - 13 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 6 Chapter 51 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 1 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 2 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 3 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 4 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 5 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 6 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 7 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 8 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 9 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 10 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 11 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 12 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 13 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 14 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 15 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 16 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 17 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 18 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 19 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 20 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 21 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 22 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 23 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 24 - 14 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 25 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 26 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 27 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 28 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 29 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 30 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 31 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 32 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 33 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 34 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 35 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 36 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 37 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 11 Chapter 38 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 1 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 2 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 3 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 4 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 5 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 6 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 7 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 8 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 9 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 10 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 11 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 12 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 13 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 14 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 15 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 16 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 17 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 18 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 19 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 20 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 21 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 22 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 23 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 24 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 25 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 26 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 27 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 28 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 29 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 30 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 31 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 32 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 33 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 34 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 35 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 36 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 37 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 38 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 39 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 40 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 41 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 42 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 43 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 44 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 45 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 46 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 47 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 48 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 49 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 50 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 51 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 52 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 53 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 54 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 55 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 56 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 57 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 58 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 59 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 60 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 61 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 62 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 63 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 64 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 65 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 66 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 67 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 68 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 12 Chapter 69 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 1 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 2 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 3 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 4 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 5 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 6 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 7 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 8 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 9 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 10 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 11 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 12 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 13 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 14 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 15 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 16 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 17 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 18 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 19 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 20 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 21 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 22 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 23 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 24 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 25 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 26 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 27 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 28 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 29 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 30 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 31 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 32 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 33 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 34 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 35 - 11 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 36 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 37 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 38 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 39 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 40 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 41 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 42 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 43 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 44 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 45 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 46 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 47 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 48 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 49 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 50 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 51 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 52 - 1 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 53 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 54 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 55 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 56 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 57 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 13 Chapter 58 - 1 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 1 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 2 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 3 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 4 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 5 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 6 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 7 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 8 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 9 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 10 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 11 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 12 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 13 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 14 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 15 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 16 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 17 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 18 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 19 - 1 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 20 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 21 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 22 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 23 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 24 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 25 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 26 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 27 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 28 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 29 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 30 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 31 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 32 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 33 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 34 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 35 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 36 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 37 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 38 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 39 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 40 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 41 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 42 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 43 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 44 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 45 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 46 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 47 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 48 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 49 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 50 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 51 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 52 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 53 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 54 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 55 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 56 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 57 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 58 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 59 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 60 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 61 - 13 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 62 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 63 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 64 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 14 Chapter 65 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 1 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 2 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 3 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 4 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 5 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 6 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 7 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 8 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 9 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 10 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 11 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 12 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 13 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 14 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 15 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 16 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 17 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 18 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 19 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 20 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 21 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 22 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 23 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 24 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 25 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 26 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 27 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 28 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 29 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 30 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 31 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 32 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 33 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 34 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 35 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 36 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 37 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 38 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 39 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 40 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 41 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 42 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 43 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 44 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 45 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 46 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 47 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 48 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 49 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 50 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 51 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 52 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 53 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 54 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 55 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 56 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 57 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 58 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 59 - 13 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 60 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 61 - 9 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 62 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 63 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 64 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 65 - 2 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 66 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 67 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 68 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 69 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 70 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 71 - 12 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 72 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 73 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 15 Chapter 74 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 1 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 2 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 3 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 4 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 5 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 6 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 7 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 8 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 9 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 10 - 5 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 11 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 12 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 13 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 14 - 6 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 15 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 16 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 17 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 18 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 19 - 7 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 20 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 21 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 22 - 14 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 23 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 24 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 25 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 26 - 10 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 27 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 28 - 8 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 29 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 30 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 31 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 32 - 4 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 33 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 34 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
+Tacitus, Cornelius / The Annals / Book 16 Chapter 35 - 3 lines
+Tacitus, Cornelius / The Annals translations: Alfred John Church 1 segments [Excellent-Section (100% coverage)]
 Tacitus, Cornelius / The History - 2,424 lines total, 5 books, max_lines/book=621, max_char=829 [Perseus]
 Tacitus, Cornelius / The History / Book 1 - 501 lines
 Tacitus, Cornelius / The History translations: Alfred John Church 393 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 501 segments [Excellent (100% coverage)]
