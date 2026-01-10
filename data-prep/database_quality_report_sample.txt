@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-01-08T23:37:46.052846
+Generated: 2026-01-10T05:40:01.169303
 Mode: sample
 
 Total Authors: 12
@@ -8,7 +8,7 @@ Total Books: 667
 Total Lines: 237,970
 Translation Segments: 126,039
 Build Time: 4.7 minutes
-Database Size: 670.5MB → 162.6MB compressed (24.2%)
+Database Size: 670.6MB → 162.6MB compressed (24.2%)
 Dictionary Entries: 61,070
 Lemma Mappings: 821,416
 

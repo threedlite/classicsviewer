@@ -2193,25 +2193,40 @@ def extract_text_from_first1k_element(elem, include_tail=True):
     cleaned_lines = [' '.join(line.split()) for line in lines]
     return '\n'.join(line for line in cleaned_lines if line)
 
-def process_first1k_work(work_dir, work_id, cursor, language):
+def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
     """
     Process First1K work with proper section-based parsing and consistent splitting.
+
+    Args:
+        work_dir: Path to the work directory
+        work_id: Database work ID
+        cursor: Database cursor
+        language: 'greek' or 'latin'
+        source_file: Optional pre-selected source file. If not provided, will search for one.
     """
     print(f"    Using First1K parser for {work_id}")
 
-    # Find source text and English files based on language
-    source_file = None
+    # Use passed source_file if provided, otherwise find one
     english_files = []
 
-    for xml_file in work_dir.glob("*.xml"):
-        if xml_file.name.startswith('__'):
-            continue
-        if language == 'greek' and "grc" in xml_file.name:
-            source_file = xml_file
-        elif language == 'latin' and "lat" in xml_file.name:
-            source_file = xml_file
-        elif "eng" in xml_file.name:
-            english_files.append(xml_file)
+    if source_file is None:
+        # Find source text and English files based on language
+        for xml_file in work_dir.glob("*.xml"):
+            if xml_file.name.startswith('__'):
+                continue
+            if language == 'greek' and "grc" in xml_file.name:
+                source_file = xml_file
+            elif language == 'latin' and "lat" in xml_file.name:
+                source_file = xml_file
+            elif "eng" in xml_file.name:
+                english_files.append(xml_file)
+    else:
+        # Collect English files even when source_file is provided
+        for xml_file in work_dir.glob("*.xml"):
+            if xml_file.name.startswith('__'):
+                continue
+            if "eng" in xml_file.name:
+                english_files.append(xml_file)
 
     if not source_file:
         print(f"    No {language.capitalize()} file found for First1K work {work_id}")
@@ -2385,9 +2400,11 @@ def process_first1k_work(work_dir, work_id, cursor, language):
                             hierarchy_parts.append(f"{ordinal:03d}")
                             hierarchy_nums.append(ordinal)
                         else:
-                            # Pure alphabetic like 'praef' - use hash mod 1000
-                            # to get consistent unique number
-                            hash_val = abs(hash(n_val)) % 1000
+                            # Pure alphabetic like 'praef' - use deterministic hash
+                            # IMPORTANT: Python's hash() is NOT deterministic across sessions
+                            # due to hash randomization (PYTHONHASHSEED). Use MD5 instead.
+                            import hashlib
+                            hash_val = int(hashlib.md5(n_val.encode()).hexdigest(), 16) % 1000
                             hierarchy_parts.append(f"{hash_val:03d}")
                             hierarchy_nums.append(hash_val)
 
@@ -5261,8 +5278,35 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
                 if not book_n:
                     continue
 
-                # Construct book_id with zero-padding (e.g., tlg0012.tlg001.001 for Iliad Book 1)
-                book_id = f"{work_id}.{int(book_n):03d}"
+                # Look up the actual book_id from the database by book_number
+                # This handles all hierarchical encoding schemes (2-level, 3-level, etc.)
+                book_num = int(book_n)
+                cursor.execute("SELECT id FROM books WHERE work_id = ? AND book_number = ?", (work_id, book_num))
+                result = cursor.fetchone()
+                if result:
+                    book_id = result[0]
+                else:
+                    # Fallback: try to construct book_id for simple cases
+                    if book_num >= 1000000:
+                        # 3-level hierarchy: level1 * 1000000 + level2 * 1000 + level3
+                        level1 = book_num // 1000000
+                        level2 = (book_num % 1000000) // 1000
+                        level3 = book_num % 1000
+                        book_id = f"{work_id}.{level1:03d}_{level2:03d}_{level3:03d}"
+                    elif book_num >= 1000:
+                        # 2-level hierarchy: chapter * 1000 + section
+                        chapter = book_num // 1000
+                        section = book_num % 1000
+                        book_id = f"{work_id}.{chapter:03d}_{section:03d}"
+                    else:
+                        # Simple sequential book number
+                        book_id = f"{work_id}.{book_num:03d}"
+
+                    # Verify this book_id exists
+                    cursor.execute("SELECT 1 FROM books WHERE id = ?", (book_id,))
+                    if not cursor.fetchone():
+                        # Skip this book - no matching entry in database
+                        continue
 
                 # Extract all line elements
                 for line_elem in book_div.iter():
@@ -7415,7 +7459,8 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             continue
         
         # Check if we have a suitable text file for this language
-        # Prefer grc3 over grc2 when both exist (grc3 often has better structure/ordering)
+        # Prefer higher numbered grc/lat files (newer editions), except for specific works
+        # where the older edition has standard scholarly numbering (e.g., Bekker for Aristotle)
         text_file = None
         grc_files = []
         lat_files = []
@@ -7426,9 +7471,17 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             elif 'lat' in f.name and language == 'latin':
                 lat_files.append(f)
 
+        # Works where we prefer grc1 (standard edition with descriptive book names)
+        # tlg0086.tlg001 = Aristotle's Analytica (Bekker edition has "priora"/"posteriora")
+        PREFER_GRC1_WORKS = {'tlg0086.tlg001'}
+
         if language == 'greek' and grc_files:
-            # Sort to prefer grc3 over grc2 (higher number = newer edition)
-            grc_files.sort(key=lambda x: x.name, reverse=True)
+            if work_id in PREFER_GRC1_WORKS:
+                # Prefer grc1 for standard scholarly editions
+                grc_files.sort(key=lambda x: x.name)
+            else:
+                # Default: prefer higher numbered files (newer editions)
+                grc_files.sort(key=lambda x: x.name, reverse=True)
             text_file = grc_files[0]
         elif language == 'latin' and lat_files:
             # Sort to prefer lat2 over lat1 etc.
@@ -7526,7 +7579,8 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                 # Use First1K/PTA parser for proper section-based parsing (TEI format)
                 parser_name = "PTA" if is_pta else "First1K"
                 print(f"    📖 PROCESSING: {text_file.name} with {parser_name} parser")
-                process_first1k_work(work_dir, db_work_id, cursor, language)
+                # Pass the pre-selected text_file to ensure the correct file is used
+                process_first1k_work(work_dir, db_work_id, cursor, language, source_file=text_file)
             else:
                 # Use existing Perseus parser
                 print(f"    📖 PROCESSING: {text_file.name} with Perseus parser")

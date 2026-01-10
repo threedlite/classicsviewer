@@ -1303,7 +1303,22 @@ def _generate_work(work_id: str, output_dir: Path):
 
             # Process each book ONE AT A TIME - memory efficient streaming
             for idx, book_id in enumerate(book_ids, 1):
-                book_num = int(book_id.split('.')[-1])
+                # Query book_number from database - handles hierarchical IDs with underscores
+                conn_temp = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+                cursor_temp = conn_temp.cursor()
+                cursor_temp.execute("SELECT book_number FROM books WHERE id = ?", (book_id,))
+                result = cursor_temp.fetchone()
+                conn_temp.close()
+                if result:
+                    book_num = result[0]
+                else:
+                    # Fallback for simple numeric IDs
+                    try:
+                        book_num = int(book_id.split('.')[-1])
+                    except ValueError:
+                        # Skip books with non-parseable IDs
+                        print(f"  ⚠️  Skipping book with unparseable ID: {book_id}")
+                        continue
                 percent_complete = (idx - 1) / len(book_ids) * 100
                 # Book-level progress removed - only show work-level completions
                 # print(f"\n[{idx}/{len(book_ids)} - {percent_complete:.1f}% complete] Processing Book {book_num}...")

@@ -3,7 +3,7 @@
 Always use venv to run python code.
 
 Important: 
-  Claude: Do not add, delete, or modify features not related to what is being worked on!  Investigate the impact of changes before making them. Avoid regressions. Test and verify fixes before declaring them fixed. Do not overstate effectiveness of changes without careful checking. BE PATIENT with database builds - sample takes ~5 minutes, full takes ~8 minutes, extended takes ~27 minutes. DO NOT assume builds are stuck just because they take time. The build may appear to pause at certain points (especially during translation lookup creation) but is still actively processing - check with `ps aux | grep python3` to verify it's still running. NEVER run multiple copies of create_perseus_database.py simultaneously as this will corrupt the database! If you see no new output for 30-60 seconds, that's NORMAL - the script is processing large data structures in memory. Always check db size and zip before packaging or deploying it. When you redeploy apk, clear app data, and uninstall the app first. Be sure you know what directory you are in before executing commands. Make sure you are in the right directory before running builds. Stick to facts, avoid unstubstantiated claims and opinions.
+  Claude: Do not add, delete, or modify features not related to what is being worked on!  Investigate the impact of changes before making them. Avoid regressions. Test and verify fixes before declaring them fixed. Do not overstate effectiveness of changes without careful checking. BE PATIENT with database builds - sample takes ~5 minutes, full takes ~7 minutes, extended takes ~28 minutes. DO NOT assume builds are stuck just because they take time. The build may appear to pause at certain points (especially during translation lookup creation) but is still actively processing - check with `ps aux | grep python3` to verify it's still running. NEVER run multiple copies of create_perseus_database.py simultaneously as this will corrupt the database! If you see no new output for 30-60 seconds, that's NORMAL - the script is processing large data structures in memory. Always check db size and zip before packaging or deploying it. When you redeploy apk, clear app data, and uninstall the app first. Be sure you know what directory you are in before executing commands. Make sure you are in the right directory before running builds. Stick to facts, avoid unstubstantiated claims and opinions.
   Do not add, delete, or modify the contents of the folder "data-sources" in any way!
   The data-sources folder contains the cloned git repos for the following PerseusDL projects:
   canonical-greekLit  canonical-latinLit  canonical-pdlrefwk  perseus_catalog
@@ -198,7 +198,7 @@ fun getNewTableHelper(context: Context): NewTableHelper {
 
 ### Goal: Fast-Follow Delivery
 - **Production Goal**: Use fast-follow delivery type (downloads after app install)
-- **Database Size**: Sample: 671MB/163MB, Full: 5.7GB/1.1GB, Extended: 13GB/2.7GB (uncompressed/compressed)
+- **Database Size**: Sample: 671MB/163MB, Full: 3.7GB/838MB, Extended: 13GB/2.7GB (uncompressed/compressed)
 - **Current Status**: Using install-time delivery for easier local testing
 
 ### CRITICAL: Database Size Limits and Multi-Part Strategy
@@ -256,14 +256,14 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 
 2. **`data-prep/perseus_texts_full.db`** - Full database source
    - Created by `create_perseus_database.py full`
-   - Contains all ~100 Greek and Latin authors
-   - Original uncompressed SQLite (7GB), compressed ZIP (1.3GB)
+   - Contains 135 authors (Greek and Latin)
+   - Original uncompressed SQLite (3.7GB), compressed ZIP (838MB)
    - For local debugging and future release
 
 3. **`data-prep/perseus_texts_extended.db`** - Extended database source
    - Created by `create_perseus_database.py extended`
-   - Contains Perseus + 991 non-duplicate First1KGreek works
-   - Original uncompressed SQLite (16GB), compressed ZIP (3.2GB)
+   - Contains 778 authors (Perseus + First1KGreek + other languages)
+   - Original uncompressed SQLite (13GB), compressed ZIP (2.7GB)
    - For comprehensive Greek text coverage
 
 4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
@@ -552,26 +552,25 @@ cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1
 5. **Test immediately after deployment** - schema mismatches crash on startup
 6. **TIMEOUT = CORRUPTION**: If any script times out during compression, the ZIP file is corrupted
 7. **Always verify ZIP integrity**: Use `unzip -t` before deployment
-8. **Database size check**: Extracted database should match expected size (sample: ~671MB, full: ~5.7GB, extended: ~13GB), not 4KB
+8. **Database size check**: Extracted database should match expected size (sample: ~671MB, full: ~3.7GB, extended: ~13GB), not 4KB
 9. **Never, ever, EVER, add word-specific fixes!!!!!!!!**: Always use the most general solution possible that covers all cases.
 10. Don't create ad-hoc scripts for data fixes as one-offs.  Integrate into the main db creation flow so it happens in future runs also.
 
 ### Database Build Process
-- **Sample database creation**: ~5 minutes, 671MB uncompressed, 163MB ZIP (subset of authors from SAMPLE_AUTHORS.csv)
-- **Full database creation**: ~8 minutes, 5.7GB uncompressed, 1.1GB ZIP (100 Greek authors and 95 Latin authors)
-- **Extended database creation**: ~27 minutes, 13GB uncompressed, 2.7GB ZIP (Perseus + First1K + interlinear + all lexicons)
-- **iOS database creation**: ~3 minutes, 347MB uncompressed, 82MB ZIP (sample authors with full interlinear)
+- **Sample database creation**: ~5 minutes, 671MB uncompressed, 163MB ZIP (12 authors, 667 books, 238K lines, 3.2M words)
+- **Full database creation**: ~7 minutes, 3.7GB uncompressed, 838MB ZIP (135 authors, 3,468 books, 998K lines, 14.5M words)
+- **Extended database creation**: ~28 minutes, 13GB uncompressed, 2.7GB ZIP (778 authors, 172K books, 3.1M lines, 48.7M words)
+- **iOS database creation**: ~3 minutes, 347MB uncompressed, 82MB ZIP (11 authors, 358 books, 60K lines, 769K words)
 - Creates comprehensive translation lookup table for all texts
 - **Schema validation**: Room expects exact match between SQLite and entity definitions
 
 ### Extended Mode Details
-The extended mode includes non-duplicate works from the First1KGreek collection:
-- **991 unique works** not in Perseus
-- **391 total authors** (196 more than full mode)
-- **1,849 total works** (nearly double the full mode)
-- **2.8 million text lines**, **43.69 million words**
+The extended mode includes Perseus + First1KGreek + additional languages:
+- **778 total authors** (vs 135 in full mode)
+- **172,544 total books**
+- **3.1 million text lines**, **48.7 million words**
 - **Database size**: 13GB uncompressed, 2.7GB compressed ZIP
-- **Only 7% have English translations** - primarily for Greek students
+- Includes Arabic, Hebrew, Persian, Sanskrit texts
 - Works include: Byzantine texts, patristic writings, commentaries, scholiasts
 - **Source tracking**: Database quality report shows `[Perseus]` or `[First1KGreek]` at work level
 
@@ -606,8 +605,8 @@ The extended mode includes non-duplicate works from the First1KGreek collection:
 
 **Before launching the app, verify:**
 1. `unzip -t perseus_database/src/main/assets/perseus_texts.db.zip` returns "OK"
-2. ZIP file size matches expected (sample: ~163MB, full: ~1.1GB, extended: ~2.7GB)
-3. Source database exists with expected size (sample: ~671MB, full: ~5.7GB, extended: ~13GB)
+2. ZIP file size matches expected (sample: ~163MB, full: ~838MB, extended: ~2.7GB)
+3. Source database exists with expected size (sample: ~671MB, full: ~3.7GB, extended: ~13GB)
 4. App launches without crash
 5. Database extraction completes (watch for progress dialog)
 6. Authors list shows 100+ Greek and Latin authors
@@ -623,7 +622,7 @@ The extended mode includes non-duplicate works from the First1KGreek collection:
 - **App stuck on splash**: Clear data with `adb shell pm clear com.classicsviewer.app.debug`
 
 ### Directory Structure Reference:
-- **Source databases**: `data-prep/perseus_texts_sample.db` (671MB), `perseus_texts_full.db` (5.7GB), `perseus_texts_extended.db` (13GB)
+- **Source databases**: `data-prep/perseus_texts_sample.db` (671MB), `perseus_texts_full.db` (3.7GB), `perseus_texts_extended.db` (13GB)
 - **Device database**: `/data/data/.../databases/perseus_texts.db` (size matches deployed version)
 
 
