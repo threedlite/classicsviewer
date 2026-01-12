@@ -74,6 +74,10 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     private var authorName: String = ""
     private var workTitle: String = ""
     private var bookLabel: String? = null
+
+    // Cross-book navigation state
+    private var hasNextBook: Boolean = false
+    private var hasPreviousBook: Boolean = false
     
     private var greekLines: List<TextLine> = emptyList()
     private var translationSegments: List<TranslationSegment> = emptyList()
@@ -418,12 +422,12 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
             // Hide loading spinner
             binding.progressBar.visibility = View.GONE
             binding.textViewPager.visibility = View.VISIBLE
-            
-            // Re-enable navigation buttons
-            updateNavigationButtons()
+
+            // Check for adjacent books and update navigation buttons
+            checkAdjacentBooks()
         }
     }
-    
+
     private fun navigateToPreviousPage() {
         // Scroll position is already being tracked continuously via onTranslationScrollChanged
         if (currentPageIndex > 0) {
@@ -434,28 +438,42 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                 android.util.Log.d("TextViewerPager", "Navigating to previous page. Saved position for $translator: $savedPosition")
             }
         }
-        
+
         if (currentPageIndex > 0) {
             // On translation page - navigate based on translation segments
             val translatorIndex = currentPageIndex - 1
             if (translatorIndex < availableTranslators.size) {
                 val translator = availableTranslators[translatorIndex]
-                
+
                 // Check if there are more translations before current range
                 lifecycleScope.launch {
                     val prevSegments = repository.getTranslationSegmentsByTranslator(
                         bookId, translator, maxOf(1, currentStartLine - 100), currentStartLine - 1
                     )
-                    
+
                     if (prevSegments.isNotEmpty() || currentStartLine > 1) {
                         // Navigate to previous translation page
                         navigateToNewRange(maxOf(1, currentStartLine - 100), currentStartLine - 1)
+                    } else if (hasPreviousBook) {
+                        // At start of book, go to previous book
+                        val prevBook = repository.getPreviousBook(workId, bookId)
+                        if (prevBook != null) {
+                            navigateToBook(prevBook, startFromEnd = true)
+                        }
                     }
                 }
             }
         } else if (currentStartLine > 1) {
-            // On Greek/Latin page - navigate normally
+            // On Greek/Latin page - navigate normally within book
             navigateToNewRange(maxOf(1, currentStartLine - 100), currentStartLine - 1)
+        } else if (hasPreviousBook) {
+            // At start of book on Greek/Latin page - go to previous book
+            lifecycleScope.launch {
+                val prevBook = repository.getPreviousBook(workId, bookId)
+                if (prevBook != null) {
+                    navigateToBook(prevBook, startFromEnd = true)
+                }
+            }
         }
     }
     
@@ -469,28 +487,42 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
                 android.util.Log.d("TextViewerPager", "Navigating to next page. Saved position for $translator: $savedPosition")
             }
         }
-        
+
         if (currentPageIndex > 0) {
             // On translation page - navigate based on translation segments
             val translatorIndex = currentPageIndex - 1
             if (translatorIndex < availableTranslators.size) {
                 val translator = availableTranslators[translatorIndex]
-                
+
                 // Check if there are more translations beyond current range
                 lifecycleScope.launch {
                     val nextSegments = repository.getTranslationSegmentsByTranslator(
                         bookId, translator, currentEndLine + 1, minOf(totalLines, currentEndLine + 100)
                     )
-                    
+
                     if (nextSegments.isNotEmpty() || currentEndLine < totalLines) {
                         // Navigate to next translation page
                         navigateToNewRange(currentEndLine + 1, minOf(totalLines, currentEndLine + 100))
+                    } else if (hasNextBook) {
+                        // At end of book, go to next book
+                        val nextBook = repository.getNextBook(workId, bookId)
+                        if (nextBook != null) {
+                            navigateToBook(nextBook, startFromEnd = false)
+                        }
                     }
                 }
             }
         } else if (currentEndLine < totalLines) {
-            // On Greek/Latin page - navigate normally
+            // On Greek/Latin page - navigate normally within book
             navigateToNewRange(currentEndLine + 1, minOf(totalLines, currentEndLine + 100))
+        } else if (hasNextBook) {
+            // At end of book on Greek/Latin page - go to next book
+            lifecycleScope.launch {
+                val nextBook = repository.getNextBook(workId, bookId)
+                if (nextBook != null) {
+                    navigateToBook(nextBook, startFromEnd = false)
+                }
+            }
         }
     }
     
@@ -505,8 +537,54 @@ class TextViewerPagerActivity : BaseActivity(), TextPageFragment.FragmentCallbac
     }
     
     private fun updateNavigationButtons() {
-        binding.previousButton.isEnabled = currentStartLine > 1
-        binding.nextButton.isEnabled = currentEndLine < totalLines
+        // Enable previous if not at start of book OR there's a previous book
+        binding.previousButton.isEnabled = currentStartLine > 1 || hasPreviousBook
+        // Enable next if not at end of book OR there's a next book
+        binding.nextButton.isEnabled = currentEndLine < totalLines || hasNextBook
+    }
+
+    private fun checkAdjacentBooks() {
+        lifecycleScope.launch {
+            hasNextBook = repository.getNextBook(workId, bookId) != null
+            hasPreviousBook = repository.getPreviousBook(workId, bookId) != null
+            updateNavigationButtons()
+        }
+    }
+
+    private fun navigateToBook(book: com.classicsviewer.app.models.Book, startFromEnd: Boolean = false) {
+        // Navigate to a different book in the same work
+        val newStartLine: Int
+        val newEndLine: Int
+
+        if (startFromEnd) {
+            // Coming from next book, go to end of this book
+            val pageSize = 100
+            val lastPageStart = ((book.lineCount - 1) / pageSize) * pageSize + 1
+            newStartLine = lastPageStart
+            newEndLine = book.lineCount
+        } else {
+            // Coming from previous book, go to start of this book
+            newStartLine = 1
+            newEndLine = minOf(100, book.lineCount)
+        }
+
+        // Update all book-related state
+        bookId = book.id
+        bookNumber = book.number
+        bookLabel = book.label
+        totalLines = book.lineCount
+        currentStartLine = newStartLine
+        currentEndLine = newEndLine
+
+        // Update action bar
+        val displayLabel = book.label ?: "Book ${book.number}"
+        supportActionBar?.subtitle = "$displayLabel: Lines $currentStartLine-$currentEndLine"
+
+        // Check adjacent books for new book
+        checkAdjacentBooks()
+
+        // Reload content
+        loadTexts()
     }
     
     // Implement FragmentCallbacks interface

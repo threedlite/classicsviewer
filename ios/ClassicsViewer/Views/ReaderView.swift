@@ -13,6 +13,9 @@ struct ReaderView: View {
     @State private var navigateToHesiod = false
     @State private var navigateToOccurrence = false
     @State private var occurrenceDestination: (bookId: String, lineNumber: Int)?
+    @State private var navigateToCrossBook = false
+    @State private var crossBookDestination: Book?
+    @State private var crossBookStartFromEnd = false
     @State private var showingCheckDefinitions = false
     @State private var checkingDefinitions = false
     @State private var wordsWithoutDefinitions: Set<String> = []
@@ -73,6 +76,8 @@ struct ReaderView: View {
                     currentViewLabel: viewModel.currentViewLabel,
                     hasTranslations: viewModel.hasTranslations,
                     isLoading: viewModel.isLoading,
+                    hasNextBook: viewModel.hasNextBook,
+                    hasPreviousBook: viewModel.hasPreviousBook,
                     onPreviousPage: viewModel.previousPage,
                     onNextPage: viewModel.nextPage,
                     onPageTap: { showingPagePicker = true },
@@ -195,6 +200,25 @@ struct ReaderView: View {
                     hasTranslations: 1
                 )
             )
+        }
+        .navigationDestination(isPresented: $navigateToCrossBook) {
+            if let book = crossBookDestination {
+                ReaderView(
+                    book: book,
+                    author: viewModel.author,
+                    initialPage: crossBookStartFromEnd ? nil : 1,
+                    targetLineNumber: crossBookStartFromEnd ? book.lineCount : nil
+                )
+            }
+        }
+        .onChange(of: viewModel.navigateToBook) { _, newBook in
+            if let book = newBook {
+                crossBookDestination = book
+                crossBookStartFromEnd = viewModel.navigateToBookStartFromEnd
+                navigateToCrossBook = true
+                // Reset the viewModel's navigation state
+                viewModel.navigateToBook = nil
+            }
         }
         .sheet(item: $selectedWord) { word in
             ImprovedWordDetailView(
@@ -1753,6 +1777,8 @@ struct ReaderBottomBar: View {
     let currentViewLabel: String
     let hasTranslations: Bool
     let isLoading: Bool
+    let hasNextBook: Bool
+    let hasPreviousBook: Bool
     let onPreviousPage: () -> Void
     let onNextPage: () -> Void
     let onPageTap: () -> Void
@@ -1780,7 +1806,7 @@ struct ReaderBottomBar: View {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 20, weight: .medium))
                 }
-                .disabled(currentPage <= 1 || isLoading)
+                .disabled((currentPage <= 1 && !hasPreviousBook) || isLoading)
 
                 Spacer()
 
@@ -1796,7 +1822,7 @@ struct ReaderBottomBar: View {
                     Image(systemName: "chevron.right")
                         .font(.system(size: 20, weight: .medium))
                 }
-                .disabled(currentPage >= totalPages || isLoading)
+                .disabled((currentPage >= totalPages && !hasNextBook) || isLoading)
             }
         }
         .padding(.horizontal, 20)

@@ -6,6 +6,9 @@ interface DataRepository {
     suspend fun getAuthors(language: String): List<Author>
     suspend fun getWorks(authorId: String, language: String): List<Work>
     suspend fun getBooks(workId: String): List<Book>
+    suspend fun getBook(bookId: String): Book?
+    suspend fun getNextBook(workId: String, currentBookId: String): Book?
+    suspend fun getPreviousBook(workId: String, currentBookId: String): Book?
     suspend fun getTextLines(workId: String, bookId: String, startLine: Int, endLine: Int): List<TextLine>
     suspend fun getDictionaryEntry(word: String, language: String): String?
     suspend fun getDictionaryEntryWithMorphology(word: String, language: String): DictionaryResult?

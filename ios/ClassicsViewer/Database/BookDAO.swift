@@ -6,6 +6,8 @@ protocol BookDAOProtocol {
     func getBooksByAuthor(authorId: String) async throws -> [Book]
     func getBook(bookId: String) async throws -> Book?
     func getBookDisplay(bookId: String) async throws -> BookDisplay?
+    func getNextBook(workId: String, currentBookId: String) async throws -> Book?
+    func getPreviousBook(workId: String, currentBookId: String) async throws -> Book?
 }
 
 class BookDAO: BookDAOProtocol {
@@ -103,7 +105,7 @@ class BookDAO: BookDAOProtocol {
     func getBookDisplay(bookId: String) async throws -> BookDisplay? {
         // Get book with work and author information joined
         let query = """
-            SELECT 
+            SELECT
                 b.id, b.work_id, b.book_number, b.label, b.start_line, b.end_line, b.line_count,
                 w.id, w.author_id, w.title, w.title_alt, w.title_english, w.type, w.urn, w.description,
                 a.id, a.name, a.name_alt, a.language, a.has_translations
@@ -112,14 +114,48 @@ class BookDAO: BookDAOProtocol {
             JOIN authors a ON w.author_id = a.id
             WHERE b.id = ?
         """
-        
+
         let results = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [bookId]) { [self] statement in
             bookDisplayFromStatement(statement)
         }
-        
+
         return results.first
     }
-    
+
+    func getNextBook(workId: String, currentBookId: String) async throws -> Book? {
+        let query = """
+            SELECT id, work_id, book_number, label, start_line, end_line, line_count
+            FROM books
+            WHERE work_id = ?
+            AND book_number > (SELECT book_number FROM books WHERE id = ?)
+            ORDER BY book_number ASC
+            LIMIT 1
+        """
+
+        let books = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [workId, currentBookId]) { [self] statement in
+            bookFromStatement(statement)
+        }
+
+        return books.first
+    }
+
+    func getPreviousBook(workId: String, currentBookId: String) async throws -> Book? {
+        let query = """
+            SELECT id, work_id, book_number, label, start_line, end_line, line_count
+            FROM books
+            WHERE work_id = ?
+            AND book_number < (SELECT book_number FROM books WHERE id = ?)
+            ORDER BY book_number DESC
+            LIMIT 1
+        """
+
+        let books = try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [workId, currentBookId]) { [self] statement in
+            bookFromStatement(statement)
+        }
+
+        return books.first
+    }
+
     private func bookFromStatement(_ statement: OpaquePointer) -> Book? {
         guard let idCString = sqlite3_column_text(statement, 0),
               let workIdCString = sqlite3_column_text(statement, 1) else {

@@ -19,15 +19,22 @@ class ReaderViewModel: ObservableObject {
     @Published var lineSpacing: CGFloat = 1.2
     @Published var targetLineNumber: Int?
     @Published var linesWithAudio: Set<Int> = []
-    
+
+    // Cross-book navigation state
+    @Published var hasNextBook = false
+    @Published var hasPreviousBook = false
+    @Published var navigateToBook: Book? = nil
+    @Published var navigateToBookStartFromEnd = false
+
     let book: Book
     let author: Author
-    
+
     private let lineDAO = LineDAO()
     private let translationDAO = TranslationDAO()
     private let workDAO = WorkDAO()
     private let bookmarkDAO = BookmarkDAO()
     private let audioDAO = AudioPackageDAO()
+    private let bookDAO = BookDAO()
     @Published private(set) var totalLines = 0
     private var bookmarkedLines: Set<Int> = []
     private var loadPageTask: Task<Void, Never>?
@@ -58,6 +65,7 @@ class ReaderViewModel: ObservableObject {
             await checkForTranslations()
             await loadAvailableTranslators()
             await loadAvailableAudio()
+            await checkAdjacentBooks()
 
             // If we have a target line number (e.g., from bookmark navigation),
             // calculate and navigate to the correct page before loading
@@ -70,6 +78,20 @@ class ReaderViewModel: ObservableObject {
             }
 
             await loadCurrentPage()
+        }
+    }
+
+    private func checkAdjacentBooks() async {
+        do {
+            let nextBook = try await bookDAO.getNextBook(workId: book.workId, currentBookId: book.id)
+            let prevBook = try await bookDAO.getPreviousBook(workId: book.workId, currentBookId: book.id)
+            await MainActor.run {
+                hasNextBook = nextBook != nil
+                hasPreviousBook = prevBook != nil
+            }
+            print("DEBUG: Adjacent books - hasNext: \(hasNextBook), hasPrevious: \(hasPreviousBook)")
+        } catch {
+            print("ERROR: Failed to check adjacent books: \(error)")
         }
     }
     
@@ -268,18 +290,62 @@ class ReaderViewModel: ObservableObject {
     }
     
     func nextPage() {
-        guard !isLoading && currentPage < totalPages else { return }
-        currentPage += 1
-        Task {
-            await loadCurrentPage()
+        guard !isLoading else { return }
+
+        if currentPage < totalPages {
+            // Navigate within current book
+            currentPage += 1
+            Task {
+                await loadCurrentPage()
+            }
+        } else if hasNextBook {
+            // At end of book, navigate to next book
+            Task {
+                await navigateToNextBook()
+            }
         }
     }
-    
+
     func previousPage() {
-        guard !isLoading && currentPage > 1 else { return }
-        currentPage -= 1
-        Task {
-            await loadCurrentPage()
+        guard !isLoading else { return }
+
+        if currentPage > 1 {
+            // Navigate within current book
+            currentPage -= 1
+            Task {
+                await loadCurrentPage()
+            }
+        } else if hasPreviousBook {
+            // At start of book, navigate to previous book
+            Task {
+                await navigateToPreviousBook()
+            }
+        }
+    }
+
+    private func navigateToNextBook() async {
+        do {
+            if let nextBook = try await bookDAO.getNextBook(workId: book.workId, currentBookId: book.id) {
+                await MainActor.run {
+                    navigateToBookStartFromEnd = false
+                    navigateToBook = nextBook
+                }
+            }
+        } catch {
+            print("ERROR: Failed to navigate to next book: \(error)")
+        }
+    }
+
+    private func navigateToPreviousBook() async {
+        do {
+            if let prevBook = try await bookDAO.getPreviousBook(workId: book.workId, currentBookId: book.id) {
+                await MainActor.run {
+                    navigateToBookStartFromEnd = true
+                    navigateToBook = prevBook
+                }
+            }
+        } catch {
+            print("ERROR: Failed to navigate to previous book: \(error)")
         }
     }
     

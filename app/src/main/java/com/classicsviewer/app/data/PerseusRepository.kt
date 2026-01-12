@@ -234,7 +234,49 @@ class PerseusRepository(private val context: Context) : DataRepository {
             )
         }
     }
-    
+
+    override suspend fun getBook(bookId: String): Book? = withContext(Dispatchers.IO) {
+        bookDao.getById(bookId)?.let { entity ->
+            val hasTranslation = translationSegmentDao.hasTranslationsForBook(entity.id)
+            Book(
+                id = entity.id,
+                number = entity.bookNumber.toString(),
+                workId = entity.workId,
+                lineCount = entity.lineCount ?: 0,
+                label = entity.label,
+                hasTranslation = hasTranslation
+            )
+        }
+    }
+
+    override suspend fun getNextBook(workId: String, currentBookId: String): Book? = withContext(Dispatchers.IO) {
+        bookDao.getNextBook(workId, currentBookId)?.let { entity ->
+            val hasTranslation = translationSegmentDao.hasTranslationsForBook(entity.id)
+            Book(
+                id = entity.id,
+                number = entity.bookNumber.toString(),
+                workId = entity.workId,
+                lineCount = entity.lineCount ?: 0,
+                label = entity.label,
+                hasTranslation = hasTranslation
+            )
+        }
+    }
+
+    override suspend fun getPreviousBook(workId: String, currentBookId: String): Book? = withContext(Dispatchers.IO) {
+        bookDao.getPreviousBook(workId, currentBookId)?.let { entity ->
+            val hasTranslation = translationSegmentDao.hasTranslationsForBook(entity.id)
+            Book(
+                id = entity.id,
+                number = entity.bookNumber.toString(),
+                workId = entity.workId,
+                lineCount = entity.lineCount ?: 0,
+                label = entity.label,
+                hasTranslation = hasTranslation
+            )
+        }
+    }
+
     override suspend fun getTextLines(
         workId: String,
         bookId: String,
