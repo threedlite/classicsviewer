@@ -1,0 +1,23 @@
+                                                                                                        
+  The sentence is: "αὐτός, ὦ Φαίδων, παρεγένου Σωκράτει ἐκείνῃ τῇ ἡμέρᾳ ᾗ τὸ φάρμακον ἔπιεν ἐν τῷ δεσμωτηρίῳ, ἢ  
+  ἄλλου του ἤκουσας;"                                                                                            
+                                                                                                                 
+  Translation: "Were you yourself present with Socrates on that day when he drank the poison in the prison, or   
+  did you hear from someone else?"                                                                               
+                                                                                                                 
+  The parse:                                                                                 
+                                                                                                                 
+  1. Main clause: παρεγένου (2nd person - "were you present") + Σωκράτει (dative - "with Socrates")              
+    - The verb παραγίγνομαι takes a dative for the person you're present with                                    
+  2. Relative clause: ᾗ... ἔπιεν (3rd person - "on which [day] he drank")                                        
+    - The subject of ἔπιεν is implicit - it's understood from context to be Socrates                             
+    - τὸ φάρμακον is correctly the object ("the poison")                                                         
+                                                                                                                 
+  This is standard Greek - the subject of the subordinate verb isn't explicitly stated because it's recoverable  
+  from the dative Σωκράτει in the main clause. The dependency parser correctly shows:                            
+  - Σωκράτει as iobj of παρεγένου (dative complement)                                                            
+  - φάρμακον as obj of ἔπιεν (accusative object)                                                                 
+                                                                                                                 
+  There's no explicit subject node for ἔπιεν because Greek often drops pronouns when the referent is clear from  
+  context (pro-drop). 
+

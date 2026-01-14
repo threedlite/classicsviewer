@@ -1,0 +1,24 @@
+ROOT
+└── [6] παρεγένου (VERB, root)
+    ├── [1] αὐτός (PRON, nsubj)
+    ├── [4] Φαίδων (NOUN, vocative)
+    │   ├── [2] , (PUNCT, punct)
+    │   ├── [3] ὦ (INTJ, discourse)
+    │   └── [5] , (PUNCT, punct)
+    ├── [7] Σωκράτει (NOUN, iobj)
+    ├── [10] ἡμέρᾳ (NOUN, obl)
+    │   ├── [9] τῇ (DET, det)
+    │   │   └── [8] ἐκείνῃ (ADJ, nmod) ← corrected: was under Σωκράτει
+    │   └── [14] ἔπιεν (VERB, acl)
+    │       ├── [11] ᾗ (ADV, advmod)
+    │       ├── [13] φάρμακον (NOUN, obj)
+    │       │   └── [12] τὸ (DET, det)
+    │       └── [17] δεσμωτηρίῳ (NOUN, obl)
+    │           ├── [15] ἐν (ADP, case)
+    │           └── [16] τῷ (DET, det)
+    ├── [19] ἢ (CCONJ, cc) ← corrected: was under ἔπιεν
+    │   └── [18] , (PUNCT, punct)
+    ├── [22] ἤκουσας (VERB, conj) ← corrected: was under ἔπιεν
+    │   └── [21] του (PRON, obj)
+    │       └── [20] ἄλλου (ADJ, nmod)
+    └── [23] ; (PUNCT, punct)

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320">
+<rect width="100%" height="100%" fill="#fefefe"/>
+<text x="450.0" y="25" text-anchor="middle"
+                font-family="sans-serif" font-size="11" fill="#666" font-style="italic">αὐτός, ὦ Φαίδων, παρεγένου Σωκράτει ἐκείνῃ τῇ ἡμέρᾳ ᾗ τὸ φάρμακον ἔπιεν ἐν τῷ δε...</text>
+<line x1="50" y1="70" x2="850" y2="70"
+            stroke="#333" stroke-width="2"/>
+<text x="250.0" y="62" text-anchor="middle"
+                font-family="sans-serif" font-size="14" font-weight="bold">αὐτός</text>
+<line x1="450.0" y1="45" x2="450.0" y2="85"
+                        stroke="#333" stroke-width="2"/>
+<text x="650.0" y="62" text-anchor="middle"
+                font-family="sans-serif" font-size="14" font-weight="bold">παρεγένου</text>
+<line x1="650.0" y1="70" x2="650.0" y2="95"
+                stroke="#333" stroke-width="1"/>
+<text x="650.0" y="107" text-anchor="middle"
+                font-family="sans-serif" font-size="12" fill="#666">ὦ</text>
+<line x1="670.0" y1="70" x2="710.0" y2="105"
+                stroke="#333" stroke-width="1"/>
+<text x="715.0" y="109" font-family="sans-serif"
+                font-size="12">Σωκράτει</text>
+<line x1="500.0" y1="70" x2="700" y2="115"
+                stroke="#333" stroke-width="1"/>
+<text x="700" y="127" text-anchor="middle"
+                font-family="sans-serif" font-size="12">ἡμέρᾳ</text>
+<line x1="700" y1="120" x2="650" y2="140"
+                        stroke="#333" stroke-width="1"/>
+<text x="650" y="152" text-anchor="middle"
+                        font-family="sans-serif" font-size="11" fill="#666">ἐκείνῃ</text>
+<line x1="700" y1="120" x2="700" y2="140"
+                        stroke="#333" stroke-width="1"/>
+<text x="700" y="152" text-anchor="middle"
+                        font-family="sans-serif" font-size="11" fill="#666">τῇ</text>
+<line x1="80" y1="70" x2="95" y2="110"
+                stroke="#333" stroke-width="1"/>
+<line x1="95" y1="110" x2="160" y2="110"
+                stroke="#333" stroke-width="1"/>
+<text x="83" y="90.0" font-family="sans-serif"
+                font-size="11" fill="#666">ἐν</text>
+<text x="125" y="105" text-anchor="middle" font-family="sans-serif"
+                font-size="12">δεσμωτηρίῳ</text>
+<text x="450.0" y="40" text-anchor="middle"
+                font-family="sans-serif" font-size="12" fill="#888">(Φαίδων)</text>
+<text x="60" y="145" font-family="sans-serif"
+                font-size="9" fill="#888" font-style="italic">[relative: ἡμέρᾳ]</text>
+<line x1="80" y1="150" x2="820" y2="150"
+            stroke="#666" stroke-width="1.5"/>
+<text x="265.0" y="142" text-anchor="middle"
+                font-family="sans-serif" font-size="12" font-weight="bold">ἔπιεν</text>
+<line x1="265.0" y1="150" x2="215.0" y2="175"
+                stroke="#666" stroke-width="1"/>
+<text x="215.0" y="187" text-anchor="middle"
+                font-family="sans-serif" font-size="10" fill="#666">ᾗ</text>
+<line x1="265.0" y1="150" x2="265.0" y2="180"
+                stroke="#666" stroke-width="1"/>
+<text x="265.0" y="192" text-anchor="middle"
+                font-family="sans-serif" font-size="10" fill="#666">τὸ</text>
+<line x1="265.0" y1="150" x2="315.0" y2="185"
+                stroke="#666" stroke-width="1"/>
+<text x="315.0" y="197" text-anchor="middle"
+                font-family="sans-serif" font-size="10" fill="#666">τῷ</text>
+<line x1="450.0" y1="125" x2="450.0" y2="150"
+                        stroke="#666" stroke-width="1.5"/>
+<text x="635.0" y="142" text-anchor="middle"
+                font-family="sans-serif" font-size="12" font-weight="bold">φάρμακον</text>
+<text x="60" y="205" font-family="sans-serif"
+                font-size="9" fill="#888" font-style="italic">[complement: παρεγένου]</text>
+<line x1="80" y1="210" x2="820" y2="210"
+            stroke="#666" stroke-width="1.5"/>
+<text x="265.0" y="202" text-anchor="middle"
+                font-family="sans-serif" font-size="12" font-weight="bold">ἤκουσας</text>
+<line x1="265.0" y1="210" x2="265.0" y2="235"
+                stroke="#666" stroke-width="1"/>
+<text x="265.0" y="247" text-anchor="middle"
+                font-family="sans-serif" font-size="10" fill="#666">ἄλλου</text>
+<line x1="450.0" y1="185" x2="450.0" y2="210"
+                        stroke="#666" stroke-width="1.5"/>
+<text x="635.0" y="202" text-anchor="middle"
+                font-family="sans-serif" font-size="12" font-weight="bold">του</text>
+</svg>
