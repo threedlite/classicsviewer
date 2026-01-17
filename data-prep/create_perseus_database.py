@@ -89,8 +89,8 @@ def is_tag(tag, local_name):
     return False
 
 def is_p_tag(tag):
-    """Check if tag is exactly <p>, not <sp> or other tags ending in 'p'."""
-    return is_tag(tag, 'p')
+    """Check if tag is exactly <p> or <ab> (anonymous block), not <sp> or other tags ending in 'p'."""
+    return is_tag(tag, 'p') or is_tag(tag, 'ab')
 
 def is_l_tag(tag):
     """Check if tag is exactly <l>, not <label>, <del>, <cell>, etc."""
@@ -152,6 +152,33 @@ def is_author_tag(tag):
 def is_body_tag(tag):
     """Check if tag is exactly <body>."""
     return is_tag(tag, 'body')
+
+def is_quote_tag(tag):
+    """Check if tag is exactly <quote>."""
+    return is_tag(tag, 'quote')
+
+def count_l_tags_excluding_quotes(root):
+    """Count <l> tags that are NOT inside <quote> elements.
+
+    This is needed for prose detection because works like Strabo's Geography
+    contain many quoted poetry passages inside <quote><l>...</l></quote> that
+    should not count against the prose classification.
+    """
+    # Build a set of all <l> elements that are descendants of <quote> elements
+    quoted_l_elems = set()
+    for quote_elem in root.iter():
+        if is_quote_tag(quote_elem.tag):
+            for descendant in quote_elem.iter():
+                if is_l_tag(descendant.tag):
+                    quoted_l_elems.add(descendant)
+
+    # Count all <l> elements minus those inside quotes
+    total_l_count = 0
+    for elem in root.iter():
+        if is_l_tag(elem.tag) and elem not in quoted_l_elems:
+            total_l_count += 1
+
+    return total_l_count
 
 def is_hi_tag(tag):
     """Check if tag is exactly <hi>."""
@@ -847,7 +874,7 @@ def analyze_first1k_work_splitting(xml_path):
 
         # Define which subtypes/types indicate structural divs
         structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
-        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph'}
+        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt'}
 
         def is_structural_div(div_elem):
             """Check if a div is a structural element we care about."""
@@ -1553,7 +1580,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
 
             # Define which subtypes/types indicate structural divs
             structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
-            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph'}
+            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt'}
 
             def is_structural_div(div_elem):
                 """Check if a div is a structural element we care about."""
@@ -1577,7 +1604,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 """
                 # Collect all structural parent levels
                 hierarchy = []
-                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'work', 'homily', 'fragment')
+                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'work', 'homily', 'fragment', 'excerpt')
 
                 for parent in body_elem.iter('div'):
                     # Skip if parent IS the element itself (don't include self in hierarchy)
@@ -1915,7 +1942,7 @@ def parse_first1k_greek(xml_path):
                 n = div.get('n', '')
 
                 # Look for various subtypes
-                if subtype in ['chapter', 'section', 'episode', 'hypothesis', 'fragment'] and n:
+                if subtype in ['chapter', 'section', 'episode', 'hypothesis', 'fragment', 'excerpt'] and n:
                     found_sections = True
                     section_num = n
 
@@ -2091,7 +2118,7 @@ def parse_first1k_translation(xml_path):
         for div in root.iter('div'):
             subtype = div.get('subtype', '')
             n = div.get('n', '')
-            if subtype in ['chapter', 'section', 'fragment'] and n:
+            if subtype in ['chapter', 'section', 'fragment', 'excerpt'] and n:
                 all_section_nums.append(n)
 
         # Detect if we have mixed Arabic and Roman numerals
@@ -2106,7 +2133,7 @@ def parse_first1k_translation(xml_path):
             subtype = div.get('subtype', '')
             n = div.get('n', '')
 
-            if subtype in ['chapter', 'section', 'fragment'] and n:
+            if subtype in ['chapter', 'section', 'fragment', 'excerpt'] and n:
                 # Skip Roman numeral sections when mixed with Arabic (they're from different source)
                 if skip_roman and re.match(r'^[IVXLCDM]+$', n):
                     continue
@@ -2347,7 +2374,7 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
     # If sections have 'type' field with values like 'chapter', 'section', 'episode',
     # treat each section as a separate book for better alignment
     has_chapter_structure = any(
-        section.get('type') in ['chapter', 'section', 'episode', 'hypothesis', 'fragment']
+        section.get('type') in ['chapter', 'section', 'episode', 'hypothesis', 'fragment', 'excerpt']
         for section in sections if section.get('type')
     )
 
@@ -3297,7 +3324,7 @@ def get_element_hierarchy_type(elem):
             has_content = True
         elif (is_div_tag(child.tag) and
               child.get('type') == 'textpart' and
-              child.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'fragment']):
+              child.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'fragment', 'entry', 'work', 'excerpt']):
             has_structural_divs = True
     
     if has_structural_divs:
@@ -3798,16 +3825,18 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # No milestones - look for sections/chapters using smart hierarchy detection
         sections_found = False
         
-        # Check if this is a hierarchical structure (chapters containing sections)
+        # Check if this is a hierarchical structure (chapters/excerpts containing sections)
+        # This handles cases like Hermetica Fragments where excerpt → section hierarchy
+        # causes section numbers to restart (e.g., excerpt 1 section 1, excerpt 2 section 1)
         has_chapters = False
         has_sections = False
         max_section_num = 0
         section_count = 0
-        
+
         for elem in book_elem.iter():
             if is_div_tag(elem.tag) and elem.get('type') == 'textpart':
                 subtype = elem.get('subtype', '')
-                if subtype == 'chapter':
+                if subtype in ['chapter', 'excerpt']:  # excerpt is chapter-level container
                     has_chapters = True
                 elif subtype == 'section':
                     has_sections = True
@@ -3815,16 +3844,35 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                     n = elem.get('n', '')
                     if n.isdigit():
                         max_section_num = max(max_section_num, int(n))
-        
+
         # Detect hierarchical structure: many sections but low max section number
-        # (sections restart numbering within chapters)
-        is_hierarchical = (has_chapters and has_sections and 
-                          section_count > 0 and 
-                          max_section_num > 0 and 
+        # (sections restart numbering within chapters/excerpts)
+        is_hierarchical = (has_chapters and has_sections and
+                          section_count > 0 and
+                          max_section_num > 0 and
                           section_count > max_section_num * 2)
-        
+
         if is_hierarchical:
             print(f"          Detected hierarchical structure: {section_count} sections with max number {max_section_num}")
+
+        # Detect mixed numbering: both numeric (1, 2, 3) and non-numeric (frag_1, frag_2) sections
+        # This happens in works like Hyperides where fragment and main text sections coexist
+        # Without this detection, frag_1 and numeric 1 would both get section_num=1, causing collision
+        has_numeric_n = False
+        has_non_numeric_n = False
+        for elem in book_elem.iter():
+            if is_div_tag(elem.tag) and elem.get('type') == 'textpart':
+                subtype = elem.get('subtype', '')
+                if subtype in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'fragment', 'entry', 'work', 'excerpt']:
+                    section_n = elem.get('n', '')
+                    if section_n.isdigit():
+                        has_numeric_n = True
+                    elif section_n:  # Non-empty, non-numeric
+                        has_non_numeric_n = True
+
+        has_mixed_numbering = has_numeric_n and has_non_numeric_n
+        if has_mixed_numbering:
+            print(f"          Detected mixed numbering (numeric + non-numeric sections)")
         
         cumulative_segment_num = 0  # Track cumulative position for hierarchical texts
         pending_head = None  # Track head tags for letter salutations
@@ -3846,7 +3894,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             if (elem != book_elem and
                 is_div_tag(elem.tag) and
                 elem.get('type') == 'textpart' and
-                elem.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'fragment']):
+                elem.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'fragment', 'entry', 'work', 'excerpt']):
 
                 hierarchy_type = get_element_hierarchy_type(elem)
 
@@ -3885,8 +3933,9 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                         if section_text and text_hash not in processed_text_hashes:
                             processed_text_hashes.add(text_hash)
 
-                            # CRITICAL FIX: For hierarchical texts, use cumulative numbering
-                            if is_hierarchical:
+                            # CRITICAL FIX: For hierarchical texts OR mixed numbering, use cumulative numbering
+                            # Mixed numbering = both frag_X and numeric sections exist, would otherwise collide
+                            if is_hierarchical or has_mixed_numbering:
                                 cumulative_segment_num += 1
                                 section_num = cumulative_segment_num
                             elif section_n.isdigit():
@@ -5482,14 +5531,14 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                 # EpiDoc format: <div type="textpart" subtype="section/chapter">
                 is_section_div = (is_div_tag(elem.tag) and
                                  elem.get('type') == 'textpart' and
-                                 elem.get('subtype') in ['section', 'chapter', 'bekker_page', 'fragment'])
+                                 elem.get('subtype') in ['section', 'chapter', 'bekker_page', 'fragment', 'entry', 'work', 'excerpt'])
 
             if is_section_div:
                 section_n = elem.get('n', str(line_num + 1))
 
                 # Build a mapping from paragraph elements to their speakers
                 # This uses sequential iteration like translation processing does
-                paragraphs_for_section = get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page', 'fragment'])
+                paragraphs_for_section = get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page', 'fragment', 'entry', 'work', 'excerpt'])
                 para_to_speaker = {}
                 current_sp_speaker = None
                 for child_elem in elem.iter():
@@ -5869,7 +5918,7 @@ def process_prose_text(root, work_id, cursor, language):
         # Handle EpiDoc format sections
         is_section_div = (is_div_tag(elem.tag) and
                          elem.get('type') == 'textpart' and
-                         elem.get('subtype') in ['section', 'chapter', 'fragment'])
+                         elem.get('subtype') in ['section', 'chapter', 'fragment', 'entry', 'work', 'excerpt'])
 
         # Also handle old TEI format sections (div2 type="section" or "chapter")
         if not is_section_div and is_old_tei_div_tag(elem.tag):
@@ -6773,12 +6822,14 @@ def process_text_file(xml_path, work_id, cursor, language):
         # Check if this is prose by looking for paragraphs
         # Count actual elements to determine if it's primarily prose or poetry
         p_count = sum(1 for elem in root.iter() if is_p_tag(elem.tag))
-        l_count = sum(1 for elem in root.iter() if is_l_tag(elem.tag))
+        # Exclude <l> tags inside <quote> elements from the count
+        # (quoted poetry shouldn't cause prose works like Strabo to be misclassified)
+        l_count = count_l_tags_excluding_quotes(root)
         # Count sections in both EpiDoc format AND old TEI format
         section_count = sum(1 for elem in root.iter() if
                            (is_div_tag(elem.tag) and
                             elem.get('type') == 'textpart' and
-                            elem.get('subtype') in ['section', 'chapter', 'fragment']) or
+                            elem.get('subtype') in ['section', 'chapter', 'fragment', 'entry', 'work', 'excerpt']) or
                            (is_old_tei_div_tag(elem.tag) and
                             get_old_tei_div_level(elem.tag) == 2 and
                             elem.get('type', '').lower() in ['section', 'chapter', 'fragment']))
@@ -7475,17 +7526,39 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         # tlg0086.tlg001 = Aristotle's Analytica (Bekker edition has "priora"/"posteriora")
         PREFER_GRC1_WORKS = {'tlg0086.tlg001'}
 
+        # Works where each grc file contains DIFFERENT content (volumes, not alternative editions)
+        # These need ALL grc files processed, not just one
+        # Greek Anthology: grc6-grc10 are volumes I-V containing books 1-16
+        MULTI_VOLUME_WORKS = {'tlg7000.tlg001'}
+
+        # Helper function to extract numeric suffix for proper sorting
+        def extract_grc_num(f):
+            m = re.search(r'grc(\d+)', f.name)
+            return int(m.group(1)) if m else 0
+
+        # Determine which text files to process
+        text_files_to_process = []
+
         if language == 'greek' and grc_files:
-            if work_id in PREFER_GRC1_WORKS:
+            if work_id in MULTI_VOLUME_WORKS:
+                # Multi-volume: process ALL grc files in numeric order
+                # Each file contains different content (volumes/books)
+                grc_files.sort(key=extract_grc_num)
+                text_files_to_process = grc_files
+                print(f"    Multi-volume work: processing {len(grc_files)} grc files")
+            elif work_id in PREFER_GRC1_WORKS:
                 # Prefer grc1 for standard scholarly editions
                 grc_files.sort(key=lambda x: x.name)
+                text_files_to_process = [grc_files[0]]
             else:
                 # Default: prefer higher numbered files (newer editions)
                 grc_files.sort(key=lambda x: x.name, reverse=True)
-            text_file = grc_files[0]
+                text_files_to_process = [grc_files[0]]
+            text_file = text_files_to_process[0]  # For compatibility with existing code
         elif language == 'latin' and lat_files:
             # Sort to prefer lat2 over lat1 etc.
             lat_files.sort(key=lambda x: x.name, reverse=True)
+            text_files_to_process = [lat_files[0]]
             text_file = lat_files[0]
 
         if not text_file:
@@ -7510,17 +7583,21 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                     break
             
             if matched_sample_author:
-                # Check if this specific work is in our list (exact match)
-                work_titles_to_check = [
-                    title_english,
-                    work_info.get('title_greek', '') if work_info.get('title_greek') else '',
-                    work_info.get('title_latin', '') if work_info.get('title_latin') else '',
-                ]
-                
-                for work_title in work_titles_to_check:
-                    if work_title and work_title in sample_works[matched_sample_author]:
-                        should_include = True
-                        break
+                # If the author has no specific works listed, include ALL works by that author
+                if not sample_works[matched_sample_author]:
+                    should_include = True
+                else:
+                    # Check if this specific work is in our list (exact match)
+                    work_titles_to_check = [
+                        title_english,
+                        work_info.get('title_greek', '') if work_info.get('title_greek') else '',
+                        work_info.get('title_latin', '') if work_info.get('title_latin') else '',
+                    ]
+
+                    for work_title in work_titles_to_check:
+                        if work_title and work_title in sample_works[matched_sample_author]:
+                            should_include = True
+                            break
             
             if not should_include:
                 print(f"  Skipping work: {title_english} ({work_id}) - not in sample list")
@@ -7559,39 +7636,42 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         ))
         
         works_processed += 1
-        print(f"    Reading {text_file.name}...")
 
-        # Extract and register XML pattern for documentation
-        xml_pattern = extract_xml_pattern(text_file)
-        if is_first1k:
-            corpus_name = "First1K"
-        elif is_pta:
-            corpus_name = "PTA"
-        elif language == 'greek':
-            corpus_name = "Perseus Greek"
-        else:
-            corpus_name = "Perseus Latin"
-        register_xml_pattern(db_work_id, author_name, title_english, corpus_name, xml_pattern)
+        # Process each text file (multiple for multi-volume works, single for others)
+        for text_file in text_files_to_process:
+            print(f"    Reading {text_file.name}...")
 
-        # Parse the text
-        try:
-            if is_first1k or is_pta:
-                # Use First1K/PTA parser for proper section-based parsing (TEI format)
-                parser_name = "PTA" if is_pta else "First1K"
-                print(f"    📖 PROCESSING: {text_file.name} with {parser_name} parser")
-                # Pass the pre-selected text_file to ensure the correct file is used
-                process_first1k_work(work_dir, db_work_id, cursor, language, source_file=text_file)
+            # Extract and register XML pattern for documentation
+            xml_pattern = extract_xml_pattern(text_file)
+            if is_first1k:
+                corpus_name = "First1K"
+            elif is_pta:
+                corpus_name = "PTA"
+            elif language == 'greek':
+                corpus_name = "Perseus Greek"
             else:
-                # Use existing Perseus parser
-                print(f"    📖 PROCESSING: {text_file.name} with Perseus parser")
-                process_text_file(text_file, db_work_id, cursor, language)
-            print(f"    ✅ PROCESSED: {text_file.name} successfully")
-        except Exception as e:
-            print(f"    ❌ PROCESSING FAILED: {text_file.name} - {e}")
-            print(f"    ❌ FILE SKIPPED: {text_file.name} will have zero lines in database")
-            import traceback
-            traceback.print_exc()
-        
+                corpus_name = "Perseus Latin"
+            register_xml_pattern(db_work_id, author_name, title_english, corpus_name, xml_pattern)
+
+            # Parse the text
+            try:
+                if is_first1k or is_pta:
+                    # Use First1K/PTA parser for proper section-based parsing (TEI format)
+                    parser_name = "PTA" if is_pta else "First1K"
+                    print(f"    📖 PROCESSING: {text_file.name} with {parser_name} parser")
+                    # Pass the pre-selected text_file to ensure the correct file is used
+                    process_first1k_work(work_dir, db_work_id, cursor, language, source_file=text_file)
+                else:
+                    # Use existing Perseus parser
+                    print(f"    📖 PROCESSING: {text_file.name} with Perseus parser")
+                    process_text_file(text_file, db_work_id, cursor, language)
+                print(f"    ✅ PROCESSED: {text_file.name} successfully")
+            except Exception as e:
+                print(f"    ❌ PROCESSING FAILED: {text_file.name} - {e}")
+                print(f"    ❌ FILE SKIPPED: {text_file.name} will have zero lines in database")
+                import traceback
+                traceback.print_exc()
+
         # Extract milestone line ranges AFTER text has been processed
         # (only for Plato and Aristotle)
         if author_id in ['tlg0059', 'tlg0086']:  # Plato or Aristotle
@@ -10180,13 +10260,14 @@ if __name__ == "__main__":
 
                 print(f"iOS mode: Found {len(work_ids)} works with interlinear files available (out of {len(all_work_ids)} total works)")
             else:
-                # Sample mode: Iliad, Odyssey (Greek) + Aeneid (Latin)
+                # Sample mode: Iliad, Odyssey, Epigrams (Greek) + Aeneid (Latin)
                 work_ids = [
                     'tlg0012.tlg001',  # Homer - Iliad
                     'tlg0012.tlg002',  # Homer - Odyssey
+                    'tlg0012.tlg003',  # Homer - Epigrams
                     'phi0690.phi003',  # Virgil - Aeneid
                 ]
-                print(f"Sample mode: Importing Iliad, Odyssey, and Aeneid")
+                print(f"Sample mode: Importing Iliad, Odyssey, Epigrams, and Aeneid")
 
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")

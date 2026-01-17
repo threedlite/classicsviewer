@@ -3,3 +3,8 @@ lxml>=4.9.0
 tqdm>=4.65.0
 click>=8.1.0
 colorama>=0.4.6
+
+# CLTK for Greek NLP (dependency parsing, POS tagging)
+# Note: CLTK will download Greek models (~2GB) on first use
+# To pre-download: python -c "from cltk import NLP; NLP('grc')"
+cltk>=1.3.0

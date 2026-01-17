@@ -462,12 +462,24 @@ def _generate_latin_work(work_id: str, output_dir: Path):
 
             # Process each book ONE AT A TIME - memory efficient streaming
             for idx, book_id in enumerate(book_ids, 1):
-                book_num = int(book_id.split('.')[-1])
+                # Query book_number from database - handles hierarchical IDs (e.g., 1001 for Book 1, Chapter 1)
+                conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+                cursor = conn.cursor()
+                cursor.execute("SELECT book_number FROM books WHERE id = ?", (book_id,))
+                result = cursor.fetchone()
+                if result:
+                    book_num = result[0]
+                else:
+                    # Fallback for simple numeric IDs
+                    try:
+                        book_num = int(book_id.split('.')[-1])
+                    except ValueError:
+                        print(f"  ⚠️  Skipping book with unparseable ID: {book_id}")
+                        conn.close()
+                        continue
                 percent_complete = (idx - 1) / len(book_ids) * 100
 
                 # Get line range for this book
-                conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
-                cursor = conn.cursor()
                 cursor.execute("SELECT MIN(line_number), MAX(line_number) FROM text_lines WHERE book_id = ?", (book_id,))
                 start_line, end_line = cursor.fetchone()
                 conn.close()

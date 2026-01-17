@@ -50,6 +50,7 @@
         <activity android:name=".FullDatabaseDownloadActivity" />
         <activity android:name=".AudioDownloadActivity" />
         <activity android:name=".alphabet.AlphabetGameActivity" />
+        <activity android:name=".SentenceTreeActivity" />
 
         <service android:name=".audio.AudioPlaybackService"
             android:exported="false" />

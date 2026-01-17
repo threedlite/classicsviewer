@@ -32,6 +32,8 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Run with caffeinate to prevent idle sleep
 cd "$SCRIPT_DIR"
+# Activate venv with CLTK installed
+source venv/bin/activate
 # Use python3 -u for unbuffered output so log updates in real-time
 caffeinate -i python3 -u interlinear_list.py "$WORKS_CSV" "$DATABASE_PATH" --workers "$NUM_WORKERS" > "$LOGFILE" 2>&1 &
 

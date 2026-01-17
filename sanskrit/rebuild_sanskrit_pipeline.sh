@@ -5,10 +5,34 @@ echo "======================================================================="
 echo "Sanskrit Pipeline - Complete Rebuild"
 echo "======================================================================="
 
+# Setup venv with CLTK
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VENV_DIR="$SCRIPT_DIR/venv"
+
+if [ ! -d "$VENV_DIR" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv "$VENV_DIR"
+fi
+
+echo "Activating virtual environment..."
+source "$VENV_DIR/bin/activate"
+
+# Use venv python for all commands
+PYTHON="$VENV_DIR/bin/python3"
+
+# Install/upgrade dependencies
+echo "Ensuring CLTK, Stanza, and dependencies are installed..."
+pip install --quiet --upgrade pip
+pip install --quiet cltk 'cltk[stanza]' stanza
+
+# Download Stanza Sanskrit model if not present
+echo "Ensuring Stanza Sanskrit model is downloaded..."
+$PYTHON -c "import stanza; stanza.download('sa', verbose=False)" 2>/dev/null || true
+
 # Step 1: Build Sanskrit database
 echo ""
 echo "Step 1/5: Building Sanskrit database (270 works)..."
-python3 create_sanskrit_database_interlinear.py full
+$PYTHON create_sanskrit_database_interlinear.py full
 if [ ! -f "sanskrit_texts.db" ]; then
     echo "ERROR: sanskrit_texts.db not created"
     exit 1
@@ -27,7 +51,7 @@ echo "✓ Verified: 270 works in database"
 echo ""
 echo "Step 2/5: Generating interlinear XML files (540 files)..."
 mkdir -p interlinear_output
-python3 batch_generate_interlinear.py sanskrit_texts.db \
+$PYTHON batch_generate_interlinear.py sanskrit_texts.db \
     --output interlinear_output \
     --parallel 8
 
@@ -42,7 +66,7 @@ echo "✓ Verified: 270 interlinear XML files generated"
 # Step 3: Verify book IDs match between database and XML
 echo ""
 echo "Step 3/5: Verifying database/XML consistency..."
-python3 verify_interlinear_ready.py interlinear_output
+$PYTHON verify_interlinear_ready.py interlinear_output
 if [ $? -ne 0 ]; then
     echo "ERROR: Verification failed - book IDs don't match"
     exit 1
@@ -53,7 +77,7 @@ echo "✓ Verified: All book IDs match between database and XML"
 echo ""
 echo "Step 4/5: Importing Sanskrit interlinear into database..."
 # Import Sanskrit interlinear directly into sanskrit_texts.db
-python3 import_sanskrit_interlinear.py sanskrit_texts.db interlinear_output
+$PYTHON import_sanskrit_interlinear.py sanskrit_texts.db interlinear_output
 
 # Verify Sanskrit interlinear
 SANSKRIT_WORKS=$(sqlite3 sanskrit_texts.db "SELECT COUNT(*) FROM works")

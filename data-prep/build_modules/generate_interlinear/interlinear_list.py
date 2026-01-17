@@ -33,6 +33,7 @@ Usage:
 Options:
     --workers N     Number of parallel workers (default: 4)
     --output DIR    Output directory for XML files (default: ./build_modules/generate_interlinear)
+    --no-tree       Disable CLTK sentence tree analysis (POS, deprel, head) for faster builds
 
 Input CSV format (Author,Work pairs like SAMPLE_AUTHORS_GREEK_ONLY.csv):
     Author,Work
@@ -155,12 +156,12 @@ def load_works_from_csv(csv_path: Path, db_path: str) -> List[Tuple[str, str, st
     return works
 
 
-def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int, str, str, bool, str]:
+def process_work_worker(args: Tuple[int, str, str, str, str, Path, bool]) -> Tuple[int, str, str, bool, str]:
     """
     Worker function that generates interlinear XML for ONE work.
 
     Args:
-        args: (work_index, author, work_title, work_id, db_path, output_dir)
+        args: (work_index, author, work_title, work_id, db_path, output_dir, no_tree)
 
     Returns:
         (work_index, author, work_title, success, error_message)
@@ -168,7 +169,7 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
     import sys
     from pathlib import Path
 
-    work_index, author, work_title, work_id, db_path, output_dir = args
+    work_index, author, work_title, work_id, db_path, output_dir, no_tree = args
 
     # Log work start
     print(f"\n{'='*80}")
@@ -197,7 +198,8 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
         generate_interlinear_translations(
             db_path=Path(db_path),
             output_dir=output_dir,
-            work_ids=[work_id]
+            work_ids=[work_id],
+            no_tree=no_tree
         )
 
         return (work_index, author, work_title, True, "")
@@ -208,15 +210,16 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
         return (work_index, author, work_title, False, error_msg)
 
 
-def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path, dict, int, int, int, float, dict]) -> List[Tuple[int, str, str, bool, str]]:
+def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, Path, dict, int, int, int, float, dict, bool]) -> List[Tuple[int, str, str, bool, str]]:
     """
     Worker function that processes a chunk of works assigned to one worker.
 
     Args:
-        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_effective_cost, start_time, completed_tracker)
+        args: (worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_effective_cost, start_time, completed_tracker, no_tree)
               where work_list is [(work_index, author, work_title, work_id), ...]
               work_size_lookup maps work_id -> (total_words, unique_words, effective_cost)
               completed_tracker is a shared dict to track completed works: work_id -> (total_words, unique_words, effective_cost)
+              no_tree: If True, skip CLTK sentence tree analysis
 
     Returns:
         List of (work_index, author, work_title, success, error_message) for all works processed
@@ -224,7 +227,7 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
     import sys
     import time
 
-    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_effective_cost, start_time, completed_tracker = args
+    worker_id, work_list, db_path, output_dir, work_size_lookup, total_works, total_words, total_effective_cost, start_time, completed_tracker, no_tree = args
     results = []
 
     print(f"\n{'='*80}")
@@ -234,7 +237,7 @@ def process_worker_chunk(args: Tuple[int, List[Tuple[int, str, str, str]], str, 
 
     for i, (work_index, author, work_title, work_id) in enumerate(work_list):
         # Process this work
-        result = process_work_worker((work_index, author, work_title, work_id, db_path, output_dir))
+        result = process_work_worker((work_index, author, work_title, work_id, db_path, output_dir, no_tree))
         results.append(result)
 
         # Report completion immediately with progress
@@ -281,7 +284,8 @@ def generate_interlinear_parallel(
     works: List[Tuple[str, str, str]],
     db_path: str,
     output_dir: Path,
-    num_workers: int = 4
+    num_workers: int = 4,
+    no_tree: bool = False
 ) -> Tuple[int, int]:
     """
     Generate interlinear XML files in parallel for multiple works.
@@ -291,6 +295,7 @@ def generate_interlinear_parallel(
         db_path: Path to database file
         output_dir: Output directory for XML files
         num_workers: Number of parallel workers
+        no_tree: If True, skip CLTK sentence tree analysis (faster)
 
     Returns:
         (num_success, num_failures)
@@ -302,6 +307,7 @@ def generate_interlinear_parallel(
     print(f"Database: {db_path}")
     print(f"Output directory: {output_dir}")
     print(f"Workers: {num_workers}")
+    print(f"Tree analysis: {'DISABLED' if no_tree else 'ENABLED'}")
     print(f"{'='*80}\n")
 
     # Ensure output directory exists
@@ -392,7 +398,7 @@ def generate_interlinear_parallel(
 
     # Prepare work batches with indices for ordering
     work_args = [
-        (i, author, work_title, work_id, db_path, output_dir)
+        (i, author, work_title, work_id, db_path, output_dir, no_tree)
         for i, (author, work_title, work_id, _, _, _, _, _) in enumerate(work_sizes)
     ]
 
@@ -416,7 +422,7 @@ def generate_interlinear_parallel(
         worker_chunks = [[] for _ in range(num_workers)]
         worker_loads = [0] * num_workers  # Track effective cost per worker
 
-        for work_index, author, work_title, work_id, _, _ in work_args:
+        for work_index, author, work_title, work_id, _, _, _ in work_args:
             # Find worker with minimum load
             min_worker = worker_loads.index(min(worker_loads))
             worker_chunks[min_worker].append((work_index, author, work_title, work_id))
@@ -447,7 +453,7 @@ def generate_interlinear_parallel(
         # Create worker arguments with additional context for ETA calculation
         # Use total_effective_cost for progress tracking since it accounts for elided word overhead
         worker_args = [
-            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_words, total_effective_cost, start_time, completed_tracker)
+            (worker_id, worker_chunks[worker_id], db_path, output_dir, work_size_lookup, len(works), total_words, total_effective_cost, start_time, completed_tracker, no_tree)
             for worker_id in range(num_workers)
             if len(worker_chunks[worker_id]) > 0
         ]
@@ -528,6 +534,7 @@ def main():
 
     # Parse options
     num_workers = 4
+    no_tree = False  # Default: generate tree data
     # Default output: go up to data-prep, then to data-sources/classicsviewer_interlinear
     script_dir = Path(__file__).parent.resolve()
     build_modules_dir = script_dir.parent
@@ -542,6 +549,9 @@ def main():
         elif sys.argv[i] == '--output' and i + 1 < len(sys.argv):
             output_dir = Path(sys.argv[i + 1])
             i += 2
+        elif sys.argv[i] == '--no-tree':
+            no_tree = True
+            i += 1
         else:
             print(f"Unknown option: {sys.argv[i]}")
             print(__doc__)
@@ -571,7 +581,8 @@ def main():
         works=works,
         db_path=db_path,
         output_dir=output_dir,
-        num_workers=num_workers
+        num_workers=num_workers,
+        no_tree=no_tree
     )
 
     # Exit with appropriate code

@@ -1,5 +1,45 @@
 import SwiftUI
 
+// MARK: - Tree Data from sentence-aware dependency parsing
+
+/// Tree data from sentence-aware dependency parsing.
+/// Parsed from morph field format: "lemma morph ~ POS deprel head sentPos"
+struct TreeData {
+    let pos: String      // UPOS tag (NOUN, VERB, ADJ, etc.)
+    let deprel: String   // Universal Dependencies relation (nsubj, obj, etc.)
+    let head: Int        // Sentence position of head word (0 = ROOT)
+    let sentPos: Int     // This word's position in the full sentence
+}
+
+/// Parse enhanced morph format: "lemma morph ~ POS deprel head sentPos"
+/// Returns the display part (before ~) and optional tree data (after ~)
+func parseEnhancedMorph(_ morphField: String) -> (display: String, treeData: TreeData?) {
+    guard morphField.contains(" ~ ") else {
+        return (morphField, nil)  // Backward compatible
+    }
+
+    let parts = morphField.components(separatedBy: " ~ ")
+    let displayMorph = parts[0].trimmingCharacters(in: .whitespaces)
+
+    guard parts.count >= 2 else {
+        return (displayMorph, nil)
+    }
+
+    let treeParts = parts[1].trimmingCharacters(in: .whitespaces).components(separatedBy: " ")
+    guard treeParts.count >= 3 else {
+        return (displayMorph, nil)
+    }
+
+    let treeData = TreeData(
+        pos: treeParts[0],
+        deprel: treeParts[1],
+        head: Int(treeParts[2]) ?? 0,
+        sentPos: treeParts.count > 3 ? (Int(treeParts[3]) ?? 0) : 0
+    )
+
+    return (displayMorph, treeData)
+}
+
 /// Renders interlinear translation text in Markdown table format
 /// Matches Android TranslationAdapter.kt lines 76-236
 ///
@@ -10,12 +50,23 @@ struct InterlinearTextView: View {
     let fontSize: CGFloat
     let onWordTapped: ((String) -> Void)?
 
+    // For sentence tree gathering across segments
+    let segments: [TranslationSegment]?
+    let segmentIndex: Int?
+
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
 
-    init(text: String, fontSize: CGFloat, onWordTapped: ((String) -> Void)? = nil) {
+    // State for sentence tree popup
+    @State private var showingSentenceTree = false
+    @State private var sentenceTreeText = ""
+    @State private var showingLegend = false
+
+    init(text: String, fontSize: CGFloat, segments: [TranslationSegment]? = nil, segmentIndex: Int? = nil, onWordTapped: ((String) -> Void)? = nil) {
         self.text = text
         self.fontSize = fontSize
+        self.segments = segments
+        self.segmentIndex = segmentIndex
         self.onWordTapped = onWordTapped
     }
 
@@ -23,31 +74,42 @@ struct InterlinearTextView: View {
         let tables = parseMarkdownTables(text)
         let validTables = tables.filter { $0.count == 3 }
 
-        if wrapInterlinear {
-            // Wrap mode: cells wrap to next line, but text within cells does NOT wrap
-            if validTables.count <= 100 {
-                // Use custom wrapping layout
-                ScrollView {
-                    WrappingHStack(items: validTables, spacing: 8) { rows in
-                        createWordTable(rows: rows, forWrapping: true)
+        Group {
+            if wrapInterlinear {
+                // Wrap mode: cells wrap to next line, but text within cells does NOT wrap
+                if validTables.count <= 100 {
+                    // Use custom wrapping layout
+                    ScrollView {
+                        WrappingHStack(items: validTables, spacing: 8) { rows in
+                            createWordTable(rows: rows, allWords: validTables, forWrapping: true)
+                        }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
+                } else {
+                    // Too large - fall back to horizontal with message
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("\(validTables.count) words - too large for wrapping. Using horizontal scroll.")
+                            .font(.caption)
+                            .foregroundColor(.orange)
+                            .padding(.horizontal)
+                            .padding(.bottom, 4)
+
+                        horizontalScrollView(validTables: validTables)
+                    }
                 }
             } else {
-                // Too large - fall back to horizontal with message
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("\(validTables.count) words - too large for wrapping. Using horizontal scroll.")
-                        .font(.caption)
-                        .foregroundColor(.orange)
-                        .padding(.horizontal)
-                        .padding(.bottom, 4)
-
-                    horizontalScrollView(validTables: validTables)
-                }
+                // Horizontal scroll mode
+                horizontalScrollView(validTables: validTables)
             }
-        } else {
-            // Horizontal scroll mode
-            horizontalScrollView(validTables: validTables)
+        }
+        .fullScreenCover(isPresented: $showingSentenceTree) {
+            SentenceTreeFullScreen(
+                treeText: sentenceTreeText,
+                showingLegend: $showingLegend
+            )
+        }
+        .sheet(isPresented: $showingLegend) {
+            DeprelLegendSheet()
         }
     }
 
@@ -57,7 +119,7 @@ struct InterlinearTextView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(alignment: .top, spacing: 16) {
                 ForEach(Array(validTables.enumerated()), id: \.offset) { index, rows in
-                    createWordTable(rows: rows, forWrapping: false)
+                    createWordTable(rows: rows, allWords: validTables, forWrapping: false)
                 }
             }
             .padding(.horizontal)
@@ -108,16 +170,24 @@ struct InterlinearTextView: View {
     /// Create a table view for a single word's interlinear data
     /// rows[0] = Greek word
     /// rows[1] = English gloss (bold)
-    /// rows[2] = lemma + morphology
-    /// forWrapping: when true, cell sizes to content for FlowLayout wrapping
+    /// rows[2] = lemma + morphology (may contain tree data after " ~ ")
+    ///
+    /// - Parameters:
+    ///   - rows: The three rows of word data
+    ///   - allWords: All words in this segment (for tree building)
+    ///   - forWrapping: when true, cell sizes to content for FlowLayout wrapping
     @ViewBuilder
-    private func createWordTable(rows: [String], forWrapping: Bool) -> some View {
+    private func createWordTable(rows: [String], allWords: [[String]], forWrapping: Bool) -> some View {
         let isLight = colorScheme == .light
         let cellBackground = isLight ? Color.white : Color.black
         let borderBackground = isLight ? Color(hex: "#EEEEEE") : Color(hex: "#222222")
 
+        // Parse tree data from morph field
+        let (displayMorph, treeData) = parseEnhancedMorph(rows[2])
+        let hasTreeData = treeData != nil
+
         VStack(alignment: .center, spacing: 0) {
-            // Row 0: Greek word - slightly larger
+            // Row 0: Greek word - slightly larger, tappable for dictionary
             Text(rows[0])
                 .font(.system(size: fontSize * 1.1))
                 .foregroundColor(isLight ? .black : .white)
@@ -126,6 +196,9 @@ struct InterlinearTextView: View {
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
                 .background(cellBackground)
+                .onTapGesture {
+                    onWordTapped?(rows[0])
+                }
 
             // Row 1: English gloss - bold
             Text(rows[1])
@@ -137,8 +210,8 @@ struct InterlinearTextView: View {
                 .frame(maxWidth: .infinity)
                 .background(cellBackground)
 
-            // Row 2: Morphology - italic, smaller
-            Text(rows[2])
+            // Row 2: Morphology - italic, smaller, tappable for tree if available
+            Text(displayMorph)
                 .font(.system(size: fontSize * 0.8))
                 .italic()
                 .foregroundColor(isLight ? Color(hex: "#666666") : Color(hex: "#999999"))
@@ -147,14 +220,229 @@ struct InterlinearTextView: View {
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
                 .background(cellBackground)
+                .onTapGesture {
+                    if hasTreeData, let treeData = treeData, let segIdx = segmentIndex {
+                        showSentenceTree(clickedWordSentPos: treeData.sentPos)
+                    }
+                }
         }
         .fixedSize(horizontal: true, vertical: false)  // Width fits content, height flexible
         .background(borderBackground)
         .cornerRadius(4)
-        .onTapGesture {
-            // Tap on the word table to look up the Greek word (rows[0])
-            onWordTapped?(rows[0])
+    }
+
+    // MARK: - Sentence Tree Functions
+
+    /// Show the sentence tree popup for the clicked word
+    private func showSentenceTree(clickedWordSentPos: Int) {
+        guard let segments = segments, let segIdx = segmentIndex else { return }
+
+        // Gather all words from segments that form this sentence
+        let allSentenceWords = gatherSentenceWords(segments: segments, startSegmentPos: segIdx)
+
+        // Build tree structure from all sentence words
+        sentenceTreeText = buildDependencyTree(words: allSentenceWords, highlightSentPos: clickedWordSentPos)
+        showingSentenceTree = true
+    }
+
+    /// Gather all words from segments that form a complete sentence.
+    /// Expands backward and forward from the current segment until sentence boundaries are found.
+    /// Sentence boundaries are detected by gaps in sentPos numbering (new sentence starts at 1).
+    ///
+    /// Note: Segments alternate between English translations and Interlinear, so we must
+    /// SKIP non-interlinear segments when expanding (use continue, not break).
+    private func gatherSentenceWords(segments: [TranslationSegment], startSegmentPos: Int) -> [[String]] {
+        var allWords: [[String]] = []
+        var seenSentPositions = Set<Int>()
+
+        // Helper to check if a segment is interlinear
+        func isInterlinear(_ segmentPos: Int) -> Bool {
+            guard segmentPos >= 0 && segmentPos < segments.count else { return false }
+            return segments[segmentPos].translator?.contains("Interlinear") == true
         }
+
+        // Helper to parse words from a segment and extract tree data
+        func getWordsWithTreeData(_ segmentPos: Int) -> [(rows: [String], sentPos: Int, head: Int)] {
+            guard isInterlinear(segmentPos) else { return [] }
+
+            let tables = parseMarkdownTables(segments[segmentPos].translationText)
+            var result: [(rows: [String], sentPos: Int, head: Int)] = []
+
+            for rows in tables {
+                guard rows.count >= 3 else { continue }
+                let (_, treeData) = parseEnhancedMorph(rows[2])
+                if let td = treeData, td.sentPos > 0 {
+                    result.append((rows, td.sentPos, td.head))
+                }
+            }
+            return result
+        }
+
+        // Start with current segment
+        let currentWords = getWordsWithTreeData(startSegmentPos)
+        if currentWords.isEmpty { return [] }
+
+        // Add current segment words
+        for (rows, sentPos, _) in currentWords {
+            seenSentPositions.insert(sentPos)
+            allWords.append(rows)
+        }
+
+        let currentMinPos = currentWords.map { $0.sentPos }.min() ?? 1
+        let currentMaxPos = currentWords.map { $0.sentPos }.max() ?? 1
+
+        // Expand backward to find sentence start (sentPos = 1)
+        var prevSegment = startSegmentPos - 1
+        var expectedMinPos = currentMinPos
+        while prevSegment >= 0 && expectedMinPos > 1 {
+            // CRITICAL FIX: Skip non-interlinear segments (use continue, not break)
+            if !isInterlinear(prevSegment) {
+                prevSegment -= 1
+                continue
+            }
+
+            let prevWords = getWordsWithTreeData(prevSegment)
+            if prevWords.isEmpty {
+                prevSegment -= 1
+                continue
+            }
+
+            let prevMaxPos = prevWords.map { $0.sentPos }.max() ?? 0
+            let prevMinPos = prevWords.map { $0.sentPos }.min() ?? 0
+
+            // Check for sentence boundary: if prev segment has sentPos that doesn't connect
+            if prevMaxPos < expectedMinPos - 1 || prevMinPos > expectedMinPos {
+                break
+            }
+
+            // Add words from previous segment
+            for (rows, sentPos, _) in prevWords {
+                if !seenSentPositions.contains(sentPos) {
+                    seenSentPositions.insert(sentPos)
+                    allWords.append(rows)
+                }
+            }
+            expectedMinPos = prevMinPos
+            prevSegment -= 1
+        }
+
+        // Expand forward to find sentence end
+        var nextSegment = startSegmentPos + 1
+        var expectedMaxPos = currentMaxPos
+        while nextSegment < segments.count {
+            // CRITICAL FIX: Skip non-interlinear segments (use continue, not break)
+            if !isInterlinear(nextSegment) {
+                nextSegment += 1
+                continue
+            }
+
+            let nextWords = getWordsWithTreeData(nextSegment)
+            if nextWords.isEmpty {
+                nextSegment += 1
+                continue
+            }
+
+            let nextMinPos = nextWords.map { $0.sentPos }.min() ?? 0
+            let nextMaxPos = nextWords.map { $0.sentPos }.max() ?? 0
+
+            // Check for sentence boundary: if next segment starts at 1 or has a gap
+            if nextMinPos == 1 || nextMinPos > expectedMaxPos + 1 {
+                break
+            }
+
+            // Add words from next segment
+            for (rows, sentPos, _) in nextWords {
+                if !seenSentPositions.contains(sentPos) {
+                    seenSentPositions.insert(sentPos)
+                    allWords.append(rows)
+                }
+            }
+            expectedMaxPos = nextMaxPos
+            nextSegment += 1
+        }
+
+        // Sort by sentence position
+        return allWords.sorted { word1, word2 in
+            guard word1.count >= 3, word2.count >= 3 else { return false }
+            let (_, td1) = parseEnhancedMorph(word1[2])
+            let (_, td2) = parseEnhancedMorph(word2[2])
+            return (td1?.sentPos ?? 0) < (td2?.sentPos ?? 0)
+        }
+    }
+
+    /// Build a text representation of the dependency tree from full sentence words
+    /// - Parameters:
+    ///   - words: All words in the sentence (gathered from adjacent segments)
+    ///   - highlightSentPos: The sentence position of the clicked word (to highlight)
+    private func buildDependencyTree(words: [[String]], highlightSentPos: Int) -> String {
+        // Parse tree data from each word
+        struct WordNode {
+            let greek: String
+            let gloss: String
+            let pos: String
+            let deprel: String
+            let head: Int           // Sentence position of head word (0 = ROOT)
+            let sentPos: Int        // This word's position in full sentence
+        }
+
+        var nodes: [WordNode] = []
+        for rows in words {
+            guard rows.count >= 3 else { continue }
+            let (_, treeData) = parseEnhancedMorph(rows[2])
+            if let td = treeData, td.sentPos > 0 {
+                nodes.append(WordNode(
+                    greek: rows[0],
+                    gloss: rows[1],
+                    pos: td.pos,
+                    deprel: td.deprel,
+                    head: td.head,
+                    sentPos: td.sentPos
+                ))
+            }
+        }
+
+        if nodes.isEmpty {
+            return "No tree data available for this sentence."
+        }
+
+        // Build tree text
+        var lines: [String] = []
+        lines.append(String(repeating: "=", count: 50))
+        lines.append("Dependency Tree (\(nodes.count) words)")
+        lines.append(String(repeating: "=", count: 50))
+        lines.append("ROOT")
+
+        // Recursive function to print tree nodes
+        func printNode(_ node: WordNode, prefix: String, isLast: Bool) {
+            let connector = isLast ? "└── " : "├── "
+            let highlight = node.sentPos == highlightSentPos ? " ◀" : ""
+            lines.append("\(prefix)\(connector)[\(node.sentPos)] \(node.greek)\(highlight) (\(node.pos), \(node.deprel))")
+
+            let childPrefix = prefix + (isLast ? "    " : "│   ")
+            let children = nodes.filter { $0.head == node.sentPos }
+            for (i, child) in children.enumerated() {
+                printNode(child, prefix: childPrefix, isLast: i == children.count - 1)
+            }
+        }
+
+        // Find root nodes (head == 0) and print tree starting from each
+        let roots = nodes.filter { $0.head == 0 }
+        if roots.isEmpty {
+            lines.append("└── (no root found)")
+            lines.append("")
+            lines.append("Words without tree structure:")
+            for node in nodes.sorted(by: { $0.sentPos < $1.sentPos }) {
+                let highlight = node.sentPos == highlightSentPos ? " ◀" : ""
+                lines.append("  [\(node.sentPos)] \(node.greek)\(highlight) → head \(node.head)")
+            }
+        } else {
+            for (i, root) in roots.enumerated() {
+                printNode(root, prefix: "", isLast: i == roots.count - 1)
+            }
+        }
+
+        lines.append(String(repeating: "=", count: 50))
+        return lines.joined(separator: "\n")
     }
 }
 
@@ -273,6 +561,123 @@ struct FlowLayout: Layout {
             }
 
             self.size = CGSize(width: maxWidthUsed, height: currentY + lineHeight)
+        }
+    }
+}
+
+// MARK: - Sentence Tree Full Screen
+/// Full-screen view for displaying the dependency tree structure
+/// Supports horizontal and vertical scrolling for fixed-font tree layout
+struct SentenceTreeFullScreen: View {
+    let treeText: String
+    @Binding var showingLegend: Bool
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+    @AppStorage("fontSize") private var fontSize: Double = 20
+
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            // Background
+            (colorScheme == .dark ? Color.black : Color.white)
+                .ignoresSafeArea()
+
+            // 2D scrollable tree content
+            ScrollView([.horizontal, .vertical], showsIndicators: true) {
+                Text(treeText)
+                    .font(.system(size: fontSize, design: .monospaced))
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                    .padding()
+                    .fixedSize(horizontal: true, vertical: false)
+            }
+
+            // Header with Legend link and Close button
+            HStack {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.gray)
+                }
+
+                Spacer()
+
+                Button("Legend") {
+                    showingLegend = true
+                }
+                .foregroundColor(.blue)
+                .fontWeight(.semibold)
+            }
+            .padding()
+        }
+    }
+}
+
+// MARK: - Dependency Relation Legend Sheet
+/// Sheet view explaining dependency relation labels
+struct DeprelLegendSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("fontSize") private var fontSize: Double = 20
+
+    private let legendText = """
+    Dependency Relations (deprel):
+
+    root      = root of the sentence (main verb)
+    nsubj     = nominal subject
+    obj       = direct object
+    iobj      = indirect object
+    obl       = oblique nominal (prepositional phrases)
+    nmod      = nominal modifier (genitive, predicate nom.)
+    amod      = adjectival modifier
+    advmod    = adverbial modifier
+    appos     = appositional modifier
+    conj      = conjunct (coordinated element)
+    cc        = coordinating conjunction (καί, τε, δέ)
+    det       = determiner
+    case      = case marker (preposition)
+    mark      = subordinating conjunction
+    aux       = auxiliary verb
+    advcl     = adverbial clause modifier
+    acl       = adnominal clause (relative clause)
+    xcomp     = open clausal complement
+    ccomp     = clausal complement
+    parataxis = loosely connected clause
+    vocative  = vocative (direct address)
+    discourse = discourse particle (δή, μέν, etc.)
+    punct     = punctuation
+    dep       = unspecified dependency
+
+    Parts of Speech (POS):
+
+    NOUN  = noun
+    VERB  = verb
+    ADJ   = adjective
+    ADV   = adverb
+    PRON  = pronoun
+    DET   = determiner
+    ADP   = adposition (preposition)
+    CCONJ = coordinating conjunction
+    SCONJ = subordinating conjunction
+    PART  = particle
+    NUM   = numeral
+    INTJ  = interjection
+    X     = other/unknown
+    """
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                Text(legendText)
+                    .font(.system(size: fontSize * 0.8, design: .monospaced))
+                    .padding()
+            }
+            .navigationTitle("Legend")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }

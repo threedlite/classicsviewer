@@ -200,6 +200,10 @@ struct SettingsView: View {
                     Text("For interlinear translations - Tap any Greek word to view its full dictionary entry with alternate meanings. Note: Interlinear data is automatically generated and may contain errors.")
                         .font(.footnote)
                         .foregroundColor(.secondary)
+
+                    Text("Sentence tree: Tap the morphology line (e.g. 'ψυχή acc s') to see how words relate grammatically within the sentence.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
 
                 // About Section

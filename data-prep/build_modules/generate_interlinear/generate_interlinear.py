@@ -24,19 +24,35 @@ cause workers to load OLD versions of this code even after modifications.
 import sqlite3
 import re
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 import html
 from functools import lru_cache
 import time
+import threading
+import string
+
+# CLTK for Greek NLP - sentence tree analysis
+# Will download models (~2GB) on first use
+# CRITICAL: CLTK is required - build must fail if not available
+try:
+    from cltk import NLP
+except ImportError:
+    raise ImportError(
+        "CLTK is required but not installed. "
+        "Install with: pip install cltk>=1.3.0\n"
+        "Make sure you are running from the venv: source venv/bin/activate"
+    )
 
 # Import the proper dictionary lookup from ui_dictionary_lookup (same directory)
 # CRITICAL: Must be imported as relative import to maintain correct module state
 # DO NOT add try/except fallback - if this fails, the build should fail
 try:
     from .ui_dictionary_lookup import PerseusRepository, DictionaryEntry
+    from .treebank_loader import PerseusTreebankLoader, map_pos, map_relation
 except ImportError:
     # Fallback for direct execution (testing)
     from ui_dictionary_lookup import PerseusRepository, DictionaryEntry
+    from treebank_loader import PerseusTreebankLoader, map_pos, map_relation
 
 # Database path - will be set when called from build script
 DB_PATH = None
@@ -50,16 +66,381 @@ _lookup_stats = {'count': 0, 'db_time': 0.0, 'hits': 0}
 
 CACHE_SIZE = 50000  # Maximum cache entries
 
+# Global CLTK NLP instance (lazy initialized, thread-safe singleton)
+_cltk_nlp = None
+_cltk_lock = threading.Lock()
+_cltk_initialized = False
+
+# Global treebank loader instance (lazy initialized)
+_treebank_loader = None
+_treebank_lock = threading.Lock()
+_treebank_initialized = False
+
+# Default treebank directory (relative to this file's grandparent)
+TREEBANK_DIR = Path(__file__).parent.parent.parent.parent / "data-sources" / "treebank_data"
+
+
+def get_treebank_loader():
+    """
+    Get or create the treebank loader singleton.
+    Thread-safe for use with multiprocessing workers.
+    Returns None if treebank directory doesn't exist.
+    """
+    global _treebank_loader, _treebank_initialized
+
+    if _treebank_loader is None and not _treebank_initialized:
+        with _treebank_lock:
+            if _treebank_loader is None and not _treebank_initialized:
+                if TREEBANK_DIR.exists():
+                    print(f"Loading Perseus treebank data from {TREEBANK_DIR}...")
+                    _treebank_loader = PerseusTreebankLoader(str(TREEBANK_DIR))
+                    print(f"Treebank loaded: {len(_treebank_loader.available_works)} works available")
+                else:
+                    print(f"Treebank directory not found: {TREEBANK_DIR}")
+                    print("Will use CLTK for all dependency parsing.")
+                _treebank_initialized = True
+
+    return _treebank_loader
+
+
+def get_cltk_nlp():
+    """
+    Get or create CLTK NLP instance (singleton pattern).
+    Thread-safe for use with multiprocessing workers.
+    Raises RuntimeError if CLTK models fail to load.
+    """
+    global _cltk_nlp, _cltk_initialized
+
+    if _cltk_nlp is None and not _cltk_initialized:
+        with _cltk_lock:
+            if _cltk_nlp is None and not _cltk_initialized:
+                print("Loading CLTK Greek models (may download ~2GB on first use)...")
+                _cltk_nlp = NLP(language_code='grc', suppress_banner=True)
+                print("CLTK Greek models loaded successfully")
+                _cltk_initialized = True
+
+    return _cltk_nlp
+
+
+class SentenceTreeAnalyzer:
+    """
+    Analyzes Greek sentences for dependency tree data using CLTK or Perseus Treebank.
+
+    CRITICAL: Dependency parsing requires COMPLETE SENTENCES, not individual lines.
+    Greek sentences often span multiple verse lines (e.g., Iliad lines 1-7 = one sentence).
+
+    This class accumulates lines until a sentence boundary (. or ;) is found,
+    then analyzes the complete sentence and maps tree data back to individual lines.
+
+    When Perseus treebank data is available for a work, it is used instead of CLTK
+    for more accurate human-verified annotations.
+    """
+
+    # Greek punctuation characters to skip for tree data
+    PUNCTUATION = set(string.punctuation + '·;')
+
+    # Characters that END a sentence
+    SENTENCE_END_CHARS = {'.', ';'}  # Period and Greek question mark (looks like semicolon)
+
+    # Maximum lines to accumulate before giving up on tree data
+    MAX_ACCUMULATION_LINES = 20
+
+    def __init__(self, treebank_loader: Optional[PerseusTreebankLoader] = None):
+        self.nlp = get_cltk_nlp()
+        self.treebank = treebank_loader
+        # Current work context (set before processing each book)
+        self.current_work_id = None
+        self.current_book = None
+        # Accumulator state (for CLTK path)
+        self.accumulated_lines = []  # List of (line_number, text, tokens) tuples
+        self.accumulated_text = ""
+        self.overflow_mode = False
+        # Pre-computed tree data: {line_number: {word_position: tree_data}}
+        self.tree_data_cache = {}
+        # Track if using treebank for current work
+        self._using_treebank = False
+
+    def set_work_context(self, work_id: str, book: int):
+        """Set the current work and book being processed."""
+        self.current_work_id = work_id
+        self.current_book = book
+        self._using_treebank = (
+            self.treebank is not None and
+            self.treebank.has_coverage(work_id)
+        )
+
+    def _tokenize(self, text: str) -> List[str]:
+        """Tokenize Greek text - must match InterlinearGenerator.tokenize_greek()"""
+        # Same regex as tokenize_greek in InterlinearGenerator
+        tokens = re.findall(r"[\w'᾽ʼ]+|[^\w\s]", text, re.UNICODE)
+        return tokens
+
+    def _has_sentence_end(self, text: str) -> bool:
+        """Check if text contains a sentence-ending character"""
+        for char in self.SENTENCE_END_CHARS:
+            if char in text:
+                return True
+        return False
+
+    def _get_pos(self, word) -> str:
+        """Extract POS tag from CLTK word object"""
+        if word.upos and hasattr(word.upos, 'tag'):
+            return word.upos.tag
+        elif word.upos:
+            return str(word.upos)
+        return 'X'
+
+    def _get_deprel(self, word) -> str:
+        """Extract dependency relation from CLTK word object"""
+        if hasattr(word, 'dependency_relation') and word.dependency_relation:
+            if hasattr(word.dependency_relation, 'code'):
+                return word.dependency_relation.code
+            else:
+                return str(word.dependency_relation)
+        return 'dep'
+
+    def _analyze_accumulated_sentence(self):
+        """
+        Analyze the accumulated sentence with CLTK and map tree data
+        back to individual verse lines.
+
+        The key challenge is aligning CLTK's tokenization with our tokenization.
+        CLTK may tokenize differently (especially for punctuation and elisions).
+        We use string matching to align tokens.
+
+        CRITICAL: CLTK position indices INCLUDE punctuation, but our positions SKIP
+        punctuation. We must convert head indices from CLTK positions to our
+        punctuation-free positions.
+        """
+        if not self.accumulated_lines or self.nlp is None:
+            return
+
+        try:
+            # Analyze full sentence
+            doc = self.nlp.analyze(self.accumulated_text)
+
+            # Build a lookup from CLTK word strings to their analysis data
+            # CLTK words are in sentence order, so we track position
+            cltk_word_data = []
+
+            # Map from CLTK position (1-indexed, includes punct) to non-punct position
+            cltk_to_nopunct_pos = {}
+            nopunct_pos = 0
+
+            for i, word in enumerate(doc.words):
+                pos = self._get_pos(word)
+                deprel = self._get_deprel(word)
+                head = 0
+                if hasattr(word, 'governor') and word.governor is not None:
+                    head = word.governor + 1
+
+                cltk_pos = i + 1  # 1-indexed
+
+                # Track non-punctuation position mapping
+                is_punct = pos == 'PUNCT' or self.is_punctuation(word.string)
+                if not is_punct:
+                    nopunct_pos += 1
+                    cltk_to_nopunct_pos[cltk_pos] = nopunct_pos
+
+                cltk_word_data.append({
+                    'form': word.string,
+                    'pos': pos,
+                    'deprel': deprel,
+                    'head': head,  # Raw CLTK head (will be converted later)
+                    'cltk_position': cltk_pos,
+                    'is_punct': is_punct
+                })
+
+            # Now map our tokens to CLTK words by string matching
+            # Track which CLTK words we've used to handle duplicates
+            cltk_used = [False] * len(cltk_word_data)
+
+            for line_num, line_text, tokens in self.accumulated_lines:
+                line_tree_data = {}
+                local_pos = 0
+
+                for token in tokens:
+                    if self.is_punctuation(token):
+                        continue  # Skip punctuation in position counting
+
+                    local_pos += 1
+
+                    # Find matching CLTK word (first unused match)
+                    for cltk_idx, cdata in enumerate(cltk_word_data):
+                        if cltk_used[cltk_idx]:
+                            continue
+                        # Match by string (normalize for comparison)
+                        if cdata['form'] == token or self._tokens_match(token, cdata['form']):
+                            # Convert CLTK head to non-punctuation position
+                            cltk_head = cdata['head']
+                            converted_head = cltk_to_nopunct_pos.get(cltk_head, 0)
+
+                            line_tree_data[local_pos] = {
+                                'form': cdata['form'],
+                                'pos': cdata['pos'],
+                                'deprel': cdata['deprel'],
+                                'head': converted_head,  # Converted to punct-free position
+                                'sentence_position': cltk_to_nopunct_pos.get(cdata['cltk_position'], local_pos),
+                                'local_position': local_pos
+                            }
+                            cltk_used[cltk_idx] = True
+                            break
+
+                    # If no match found, leave this token without tree data
+                    # (could happen with elisions or unusual tokenization)
+
+                # Store tree data for this line
+                if line_tree_data:
+                    self.tree_data_cache[line_num] = line_tree_data
+
+        except Exception as e:
+            # Don't crash on analysis errors - just skip tree data for this sentence
+            pass
+
+    def _tokens_match(self, our_token: str, cltk_token: str) -> bool:
+        """Check if two tokens match, handling common variations"""
+        # Direct match
+        if our_token == cltk_token:
+            return True
+        # Strip elision markers and compare
+        our_clean = our_token.rstrip("'᾽ʼ")
+        cltk_clean = cltk_token.rstrip("'᾽ʼ")
+        if our_clean == cltk_clean:
+            return True
+        # Handle lunate sigma
+        our_sigma = our_token.replace('ϲ', 'σ').replace('Ϲ', 'Σ')
+        if our_sigma == cltk_token:
+            return True
+        return False
+
+    def _reset_accumulator(self):
+        """Reset accumulator for next sentence"""
+        self.accumulated_lines = []
+        self.accumulated_text = ""
+
+    def add_line(self, line_number: int, text: str, tokens: List[str]):
+        """
+        Add a verse line to the accumulator.
+        Call this for each line BEFORE processing words.
+        Tree data will be available in tree_data_cache after sentence completes.
+        """
+        if self.nlp is None:
+            return
+
+        has_sentence_end = self._has_sentence_end(text)
+
+        # If in overflow mode, wait for sentence boundary then reset
+        if self.overflow_mode:
+            if has_sentence_end:
+                self.overflow_mode = False
+                self._reset_accumulator()
+            return
+
+        # Normal accumulation
+        self.accumulated_lines.append((line_number, text, tokens))
+        self.accumulated_text += " " + text if self.accumulated_text else text
+
+        # Check if we've exceeded the accumulation limit
+        if len(self.accumulated_lines) > self.MAX_ACCUMULATION_LINES:
+            # Drop accumulated data, enter overflow mode
+            first_line = self.accumulated_lines[0][0]
+            print(f"    WARNING: Sentence exceeds {self.MAX_ACCUMULATION_LINES} lines, "
+                  f"dropping tree data for lines {first_line}-{line_number}")
+            self._reset_accumulator()
+            self.overflow_mode = True
+            return
+
+        # Check if sentence is complete
+        if has_sentence_end:
+            self._analyze_accumulated_sentence()
+            self._reset_accumulator()
+
+    def flush(self):
+        """
+        Force analysis of any remaining accumulated lines.
+        Call at end of book/section.
+        """
+        if self.accumulated_lines and self.nlp is not None:
+            self._analyze_accumulated_sentence()
+            self._reset_accumulator()
+        self.overflow_mode = False
+
+    def get_tree_data_for_line(self, line_number: int, tokens: List[str] = None) -> Optional[Dict[int, Dict]]:
+        """
+        Get tree data for a specific line.
+
+        If Perseus treebank data is available for the current work, uses that.
+        Otherwise returns pre-computed CLTK tree data from cache.
+
+        Args:
+            line_number: The line number
+            tokens: List of tokens (required for treebank lookup)
+
+        Returns:
+            Dict mapping word position (1-based) to tree data, or None.
+        """
+        # If using treebank for this work, get data directly from treebank
+        if self._using_treebank and tokens and self.current_work_id and self.current_book:
+            return self.treebank.build_tree_data_for_line(
+                self.current_work_id,
+                self.current_book,
+                line_number,
+                tokens
+            )
+
+        # Otherwise use CLTK cache
+        return self.tree_data_cache.get(line_number)
+
+    def using_treebank(self) -> bool:
+        """Check if currently using Perseus treebank data."""
+        return self._using_treebank
+
+    def clear_cache(self):
+        """Clear the tree data cache (call between books)"""
+        self.tree_data_cache = {}
+        self._reset_accumulator()
+        self.overflow_mode = False
+
+    def is_punctuation(self, word: str) -> bool:
+        """Check if a word is punctuation (no tree data for punctuation)"""
+        return word in self.PUNCTUATION or all(c in self.PUNCTUATION for c in word)
+
+    def format_tree_data(self, tree_data: Dict, position: int, word: str) -> str:
+        """
+        Format tree data as suffix for morph field.
+        Returns empty string if no tree data or word is punctuation.
+
+        Output format: " ~ POS deprel head sentPos"
+        Example: " ~ NOUN nsubj 3 5" (word at sentence position 5, head at position 3)
+        """
+        if tree_data is None:
+            return ""
+
+        if self.is_punctuation(word):
+            return ""
+
+        if position not in tree_data:
+            return ""
+
+        td = tree_data[position]
+        sent_pos = td.get('sentence_position', position)
+        return f" ~ {td['pos']} {td['deprel']} {td['head']} {sent_pos}"
+
 
 class InterlinearGenerator:
-    def __init__(self, db_path: str):
+    def __init__(self, db_path: str, no_tree: bool = False,
+                 treebank_loader: Optional[PerseusTreebankLoader] = None):
         self.db_path = db_path
         self.conn = None
+        self.no_tree = no_tree
+        self.treebank_loader = treebank_loader
         # Use the proper dictionary lookup implementation
         self.repo = PerseusRepository(db_path)
         # Performance tracking
         self.lookup_count = 0
         self.total_db_time = 0.0
+        # Sentence tree analyzer for dependency parsing (skip if no_tree)
+        self.tree_analyzer = None if no_tree else SentenceTreeAnalyzer(treebank_loader)
 
     def __enter__(self):
         self.conn = sqlite3.connect(f"file:{self.db_path}?mode=ro", uri=True)
@@ -982,13 +1363,29 @@ class InterlinearGenerator:
 
         return result
 
-    def lookup_word(self, word: str, book_id: str, line_number: int, position: int) -> Dict:
+    def lookup_word(self, word: str, book_id: str, line_number: int, position: int,
+                    tree_data: Optional[Dict] = None) -> Dict:
         """
         Lookup word using cached dictionary lookup.
         Returns a dict with greek, position, gloss, lemma, morph
+
+        If tree_data is provided, appends sentence tree data to morph field:
+          "morph ~ POS deprel head"
+        Example: "noun sg acc masc ~ NOUN nsubj 3"
         """
         # Get cached result (gloss, lemma, morph) - instant for repeated words!
         gloss, lemma, morph = self._cached_lookup_word(word)
+
+        # Append tree data to morph if available
+        if tree_data is not None and morph:
+            tree_suffix = self.tree_analyzer.format_tree_data(tree_data, position, word)
+            if tree_suffix:
+                morph = morph + tree_suffix
+        elif tree_data is not None and not morph:
+            # Even without dictionary morph, still add tree data
+            tree_suffix = self.tree_analyzer.format_tree_data(tree_data, position, word)
+            if tree_suffix:
+                morph = tree_suffix.strip()  # Remove leading space from " ~ POS deprel head"
 
         return {
             'greek': word,
@@ -1015,9 +1412,49 @@ class InterlinearGenerator:
 
         # print(f"Found {len(greek_lines)} Greek lines")
 
-        # Step 2: Process each line
+        # Parse work_id and book number from book_id
+        # Format can be: "tlg0012.tlg001.001" or "tlg0012.tlg001_1" or "tlg0012.tlg001"
+        work_id = None
+        book_num = None
+
+        # Try format: tlg0012.tlg001.001 (work.001 = book 1)
+        import re
+        match = re.match(r'(tlg\d+\.tlg\d+)\.(\d+)', book_id)
+        if match:
+            work_id = match.group(1)
+            book_num = int(match.group(2))
+        elif '_' in book_id:
+            # Try format: tlg0012.tlg001_1
+            parts = book_id.rsplit('_', 1)
+            work_id = parts[0]
+            try:
+                book_num = int(parts[1])
+            except ValueError:
+                book_num = 1
+        else:
+            work_id = book_id
+            book_num = 1
+
+        # Step 2: Build sentence tree data (two-pass approach for sentence-aware analysis)
         t1 = time.time()
-        # print(f"Processing lines and generating glosses...")
+
+        if self.tree_analyzer:
+            self.tree_analyzer.clear_cache()  # Clear from previous book
+            self.tree_analyzer.set_work_context(work_id, book_num)
+
+            # If using Perseus treebank, skip CLTK accumulation (treebank provides data directly)
+            if not self.tree_analyzer.using_treebank():
+                # First pass: Feed all lines to tree analyzer to accumulate sentences
+                # Tree data is computed when sentence boundaries (. or ;) are reached
+                for line in greek_lines:
+                    line_num = line['line_number']
+                    text = line['text_content']
+                    tokens = self.tokenize_greek(text)
+                    self.tree_analyzer.add_line(line_num, text, tokens)
+                # Flush any remaining accumulated lines at end of book
+                self.tree_analyzer.flush()
+
+        # Second pass: Process each line with pre-computed tree data
         lines_data = []
 
         for line in greek_lines:
@@ -1027,8 +1464,13 @@ class InterlinearGenerator:
             # Tokenize
             tokens = self.tokenize_greek(text)
 
+            # Get tree data for this line (from treebank if available, else CLTK cache)
+            tree_data = self.tree_analyzer.get_tree_data_for_line(line_num, tokens) if self.tree_analyzer else None
+
             # Lookup each word
+            # Note: tree_data positions skip punctuation, so we track content_word_pos separately
             words = []
+            content_word_pos = 0  # Position counter that skips punctuation (matches tree_data keys)
             for pos, token in enumerate(tokens, 1):
                 # Skip numeric tokens - leave definition and morph blank
                 if token.isdigit() or (token.replace('.', '').replace(',', '').isdigit()):
@@ -1040,7 +1482,13 @@ class InterlinearGenerator:
                         'morph': ''
                     }
                 else:
-                    word_data = self.lookup_word(token, book_id, line_num, pos)
+                    # Track position for non-punctuation words (matches tree_data key)
+                    is_punct = self.tree_analyzer.is_punctuation(token) if self.tree_analyzer else False
+                    if not is_punct:
+                        content_word_pos += 1
+                    # Use content_word_pos for tree_data lookup (skip punctuation)
+                    word_data = self.lookup_word(token, book_id, line_num, content_word_pos if not is_punct else 0, tree_data)
+                    word_data['position'] = pos  # Keep original position for output
                 words.append(word_data)
 
             # Create word-by-word gloss
@@ -1061,7 +1509,7 @@ class InterlinearGenerator:
         return lines_data
 
 
-def generate_interlinear_translations(db_path: Path, output_dir: Path, work_ids=None):
+def generate_interlinear_translations(db_path: Path, output_dir: Path, work_ids=None, no_tree: bool = False):
     """
     Generate interlinear translations for Greek works
 
@@ -1070,6 +1518,7 @@ def generate_interlinear_translations(db_path: Path, output_dir: Path, work_ids=
         output_dir: Directory where XML files will be written
         work_ids: List of TLG work IDs to process (e.g., ['tlg0012.tlg001', 'tlg0012.tlg002']).
                   If None, defaults to Homer's Iliad and Odyssey.
+        no_tree: If True, skip CLTK sentence tree analysis (POS, deprel, head) for faster builds.
     """
     global DB_PATH
     DB_PATH = db_path
@@ -1088,7 +1537,7 @@ def generate_interlinear_translations(db_path: Path, output_dir: Path, work_ids=
         print(f"\n{'=' * 80}")
         print(f"WORK {work_idx}/{total_works} - {work_percent:.1f}% complete: {work_id}")
         print(f"{'=' * 80}")
-        _generate_work(work_id, output_dir)
+        _generate_work(work_id, output_dir, no_tree=no_tree)
         work_percent = work_idx / total_works * 100
         print(f"\nWork {work_id} done ({work_percent:.1f}% of all works)")
 
@@ -1108,7 +1557,7 @@ def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
     f.write('            <titleStmt>\n')
     f.write(f'                <title>{work_title_escaped} - Interlinear Translation</title>\n')
     f.write(f'                <author>{author_name_escaped}</author>\n')
-    f.write('                <editor role="translator">Interlinear (Beta, AI-generated from app dictionary)</editor>\n')
+    f.write('                <editor role="translator">Interlinear (Beta, generated from app dictionary and treebank)</editor>\n')
     f.write('                <sponsor>Derived from LSJ, Murray, Cunliffe, Wiktionary, Perseus</sponsor>\n')
     f.write('                <principal></principal>\n')
     f.write('                <respStmt>\n')
@@ -1123,7 +1572,7 @@ def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
     f.write('                <authority></authority>\n')
     f.write('            </publicationStmt>\n')
     f.write('            <notesStmt>\n')
-    f.write('                <note anchored="true">AI-generated word-by-word interlinear translation derived from LSJ, Cunliffe, and Wiktionary dictionaries.</note>\n')
+    f.write('                <note anchored="true">Word-by-word interlinear translation derived from LSJ, Cunliffe, Wiktionary dictionaries, and Perseus Treebank.</note>\n')
     f.write('            </notesStmt>\n')
     f.write('            <sourceDesc>\n')
     f.write('                <biblStruct>\n')
@@ -1226,7 +1675,7 @@ def _write_book_to_txt(f, book_num: int, book_results: List[Dict]):
         f.write(f"{' | '.join(glosses)}\n\n")
 
 
-def _generate_work(work_id: str, output_dir: Path):
+def _generate_work(work_id: str, output_dir: Path, no_tree: bool = False):
     """
     Generate interlinear translation for a single work using TLG ID.
 
@@ -1234,6 +1683,11 @@ def _generate_work(work_id: str, output_dir: Path):
     to minimize memory usage and ensure all files are written correctly.
 
     NO THREADS - completely single-threaded, simple, reliable.
+
+    Args:
+        work_id: TLG work ID (e.g., 'tlg0012.tlg001')
+        output_dir: Output directory for XML files
+        no_tree: If True, skip CLTK sentence tree analysis
     """
 
     print("=" * 80)
@@ -1296,7 +1750,7 @@ def _generate_work(work_id: str, output_dir: Path):
         # Open BOTH output files at the start - streaming architecture
         with open(output_file, 'w', encoding='utf-8') as txt_file, \
              open(xml_output_file, 'w', encoding='utf-8') as xml_file, \
-             InterlinearGenerator(str(DB_PATH)) as generator:
+             InterlinearGenerator(str(DB_PATH), no_tree=no_tree, treebank_loader=get_treebank_loader()) as generator:
 
             # Write XML header once at start
             _write_xml_header(xml_file, work_id, work_title, author_name)

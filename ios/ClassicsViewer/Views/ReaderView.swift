@@ -588,6 +588,8 @@ struct ReaderView: View {
                         InterlinearTextView(
                             text: segment.translationText,
                             fontSize: viewModel.fontSize,
+                            segments: translations,
+                            segmentIndex: index,
                             onWordTapped: { greekWord in
                                 // Create a Word object for dictionary lookup
                                 // Use line number from the segment
@@ -648,6 +650,8 @@ struct ReaderView: View {
                         InterlinearTextView(
                             text: segment.translationText,
                             fontSize: viewModel.fontSize,
+                            segments: translations,
+                            segmentIndex: index,
                             onWordTapped: { greekWord in
                                 // Create a Word object for dictionary lookup
                                 // Use line number from the segment
@@ -721,6 +725,8 @@ struct ReaderView: View {
                         InterlinearTextView(
                             text: segment.translationText,
                             fontSize: viewModel.fontSize,
+                            segments: translations,
+                            segmentIndex: index,
                             onWordTapped: { greekWord in
                                 // Create a Word object for dictionary lookup
                                 // Use line number from the segment

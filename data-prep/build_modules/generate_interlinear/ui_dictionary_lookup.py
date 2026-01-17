@@ -49,6 +49,27 @@ class PerseusRepository:
                 .replace("′", "ʼ")   # U+2032 PRIME → U+02BC
                 .replace("´", "ʼ"))  # U+00B4 ACUTE ACCENT → U+02BC
 
+    def normalize_lunate_sigma(self, word: str) -> str:
+        """
+        Convert lunate sigma (ϲ/Ϲ) to regular sigma (σ/ς/Σ).
+        Some ancient Greek texts use lunate sigma but dictionaries use regular sigma.
+
+        Lunate sigma: U+03F2 (ϲ lowercase), U+03F9 (Ϲ uppercase)
+        Regular sigma: U+03C3 (σ medial), U+03C2 (ς final), U+03A3 (Σ uppercase)
+        """
+        # Replace lunate sigmas with regular sigmas
+        result = word.replace('ϲ', 'σ').replace('Ϲ', 'Σ')
+
+        # Convert final σ to ς (standard Greek orthography)
+        if result.endswith('σ'):
+            result = result[:-1] + 'ς'
+
+        return result
+
+    def has_lunate_sigma(self, word: str) -> bool:
+        """Check if word contains lunate sigma characters"""
+        return 'ϲ' in word or 'Ϲ' in word
+
     def normalize_greek(self, word: str) -> str:
         """Only remove punctuation, keep all diacritics"""
         return re.sub(r'[.,;·]', '', word)
@@ -383,6 +404,12 @@ class PerseusRepository:
         if language.lower() == "greek":
             cleaned_word = self.normalize_apostrophes(cleaned_word)
 
+        # For Greek words, create lunate sigma variant if word has lunate sigma
+        # Many ancient Greek texts use lunate sigma (ϲ) but dictionaries use regular sigma (σ/ς)
+        lunate_sigma_variant = None
+        if language.lower() == "greek" and self.has_lunate_sigma(cleaned_word):
+            lunate_sigma_variant = self.normalize_lunate_sigma(cleaned_word)
+
         # For Greek words, also create acute accent variant if word has grave accents
         acute_variant = None
         if language.lower() == "greek" and self.has_grave_accent(cleaned_word):
@@ -454,6 +481,32 @@ class PerseusRepository:
                     has_non_treebank_path=True
                 ))
                 added_lemmas.add(entry['headword'])
+
+        # STEP 1c: If no direct match and word has lunate sigma, try with regular sigma
+        # Some ancient Greek texts use lunate sigma (ϲ) but dictionaries use regular sigma (σ/ς)
+        if not entries and lunate_sigma_variant and lunate_sigma_variant != cleaned_word:
+            cursor.execute("""
+                SELECT headword, entry_html, entry_plain, source
+                FROM dictionary_entries
+                WHERE headword = ? AND language = ?
+            """, (lunate_sigma_variant, normalized_language))
+
+            lunate_entries = cursor.fetchall()
+            for entry in lunate_entries:
+                definition = entry['entry_html'] or entry['entry_plain'] or ""
+                add_entry(DictionaryEntry(
+                    lemma=entry['headword'],
+                    definition=definition,
+                    is_direct_match=True,
+                    source=entry['source'],
+                    confidence=0.95,  # Slightly lower confidence for sigma variant
+                    has_non_treebank_path=True
+                ))
+                added_lemmas.add(entry['headword'])
+
+            # Also update cleaned_word for subsequent lookups if lunate variant worked
+            if lunate_entries:
+                cleaned_word = lunate_sigma_variant
 
         # STEP 2: For Greek/Latin, ALWAYS check lemma_map (even if we found direct matches)
         # This matches Kotlin behavior at line 544

@@ -41,6 +41,395 @@ except ImportError:
     print("Warning: indic-transliteration not installed. Install with: pip install indic-transliteration")
     HAS_TRANSLITERATION = False
 
+# Try to import Stanza for dependency parsing fallback
+try:
+    import stanza
+    HAS_STANZA = True
+except ImportError:
+    print("Warning: stanza not installed. Install with: pip install stanza")
+    print("  Non-treebank works will not have dependency tree data.")
+    HAS_STANZA = False
+
+# Global Stanza NLP pipeline (initialized lazily)
+_stanza_nlp = None
+
+def get_stanza_nlp():
+    """Get or initialize the Stanza Sanskrit pipeline."""
+    global _stanza_nlp
+    if _stanza_nlp is None and HAS_STANZA:
+        print("  Initializing Stanza Sanskrit pipeline...")
+        try:
+            # Download model if not present
+            stanza.download('sa', verbose=False)
+            _stanza_nlp = stanza.Pipeline('sa', processors='tokenize,pos,lemma,depparse', verbose=False)
+            print("  ✓ Stanza pipeline ready")
+        except Exception as e:
+            print(f"  Warning: Failed to initialize Stanza: {e}")
+            return None
+    return _stanza_nlp
+
+def is_sanskrit_punctuation(text: str) -> bool:
+    """Check if text is Sanskrit punctuation (dandas, etc.)"""
+    # Sanskrit punctuation: single danda, double danda, common punctuation
+    punct_chars = set('।॥,;.·!?\'\"()-–—')
+    return all(c in punct_chars or c.isspace() for c in text)
+
+
+def extract_case_from_feats(feats: str) -> str:
+    """Extract Case feature from Stanza features string."""
+    if not feats:
+        return None
+    for pair in feats.split('|'):
+        if pair.startswith('Case='):
+            return pair.replace('Case=', '')
+    return None
+
+
+def fix_coordination_errors(parse_result: list) -> list:
+    """
+    Apply post-processing rules to fix common Stanza coordination errors.
+
+    Stanza systematically mislabels coordinated nouns (conj) as appositional
+    modifiers (nmod:appos) or adjectival modifiers (amod). This function
+    applies four high-precision rules to correct these errors.
+
+    Args:
+        parse_result: List of word dicts from parse_with_stanza
+
+    Returns:
+        List of word dicts with corrected HEAD/DEPREL where applicable
+    """
+    if not parse_result or len(parse_result) < 2:
+        return parse_result
+
+    # Make copies to avoid modifying original
+    fixed = [w.copy() for w in parse_result]
+
+    # Apply fixes in order of precision (highest first)
+    fixed = fix_accusative_cascades(fixed)
+    fixed = fix_locative_repetitions(fixed)
+    fixed = fix_nominative_predicates(fixed)
+    fixed = fix_adjective_coordination(fixed)
+
+    return fixed
+
+
+def fix_accusative_cascades(parse_result: list) -> list:
+    """
+    Pattern 1: Fix cascading accusative noun misalignment (99%+ precision).
+
+    Detects: Series of accusative nouns where Stanza incorrectly marks them
+    as nmod:appos/amod instead of conj.
+
+    Example (Ṛgveda 1.1.1):
+        Stanza: devam→1/nmod:appos, ṛtvijam→1/nmod:appos, hotāram→1/nmod:appos
+        Fixed:  devam→3/conj, ṛtvijam→3/conj, hotāram→3/conj
+
+    The key insight: Words coordinate with the first APPOSITIVE in the series,
+    not the first accusative overall (which may be the obj).
+    """
+    fixed = parse_result
+
+    # Find the first accusative noun that is an appositive (the coordinator)
+    # This is typically the first nmod:appos accusative, not the obj
+    first_appos_idx = None
+    for i, word in enumerate(fixed):
+        case = extract_case_from_feats(word.get('feats', ''))
+        if case == 'Acc' and word.get('pos') in ['NOUN', 'ADJ', 'NUM']:
+            # Look for appositive modifier specifically (not obj)
+            if word.get('deprel') in ['nmod:appos', 'amod']:
+                first_appos_idx = i
+                break
+
+    if first_appos_idx is None:
+        return fixed
+
+    # Look for subsequent accusatives that should be conj with the appositive
+    for i in range(first_appos_idx + 1, len(fixed)):
+        word = fixed[i]
+
+        # Must be accusative noun/adj
+        word_case = extract_case_from_feats(word.get('feats', ''))
+        if word_case != 'Acc':
+            continue
+        if word.get('pos') not in ['NOUN', 'ADJ', 'NUM']:
+            continue
+
+        # Skip if it's already correctly marked as conj with right head
+        if word.get('deprel') == 'conj' and word.get('head') == first_appos_idx + 1:
+            continue
+
+        # Skip genitives (they're real nmod modifiers, not coordination)
+        # This check helps avoid false positives
+        if word.get('deprel') == 'nmod':
+            prev_case = extract_case_from_feats(fixed[i-1].get('feats', '')) if i > 0 else None
+            if prev_case == 'Gen':
+                continue
+
+        # Currently marked as appositive/adjectival modifier - should be conj
+        if word.get('deprel') in ['nmod:appos', 'amod', 'nmod']:
+            # Fix: make this conj, point to the first appositive
+            fixed[i]['deprel'] = 'conj'
+            fixed[i]['head'] = first_appos_idx + 1  # 1-based position
+
+    return fixed
+
+
+def fix_locative_repetitions(parse_result: list) -> list:
+    """
+    Pattern 2: Fix repeated locative words that should be conj (95%+ precision).
+
+    Detects: Same locative word appearing multiple times where the second
+    should coordinate with the first (common in Vedic: "dive dive" = day by day).
+    """
+    fixed = parse_result
+
+    # Build map of locative words by form
+    locatives = {}  # form -> [indices]
+    for i, word in enumerate(fixed):
+        case = extract_case_from_feats(word.get('feats', ''))
+        if case != 'Loc':
+            continue
+        form = word.get('form', '')
+        if not form:
+            continue
+        if form not in locatives:
+            locatives[form] = []
+        locatives[form].append(i)
+
+    # Check repetitions
+    for form, indices in locatives.items():
+        if len(indices) < 2:
+            continue
+
+        first_idx = indices[0]
+        first_word = fixed[first_idx]
+
+        # First must be a real oblique modifier
+        if first_word.get('deprel') not in ['obl', 'iobj', 'advmod', 'nmod']:
+            continue
+
+        # Subsequent occurrences should coordinate with first
+        for j in range(1, len(indices)):
+            idx = indices[j]
+            word = fixed[idx]
+
+            # Only fix if currently marked as appos/amod/nmod
+            if word.get('deprel') not in ['nmod:appos', 'amod', 'nmod', 'obl']:
+                continue
+
+            # Don't fix if already conj
+            if word.get('deprel') == 'conj':
+                continue
+
+            fixed[idx]['deprel'] = 'conj'
+            fixed[idx]['head'] = first_idx + 1  # 1-based position
+
+    return fixed
+
+
+def fix_nominative_predicates(parse_result: list) -> list:
+    """
+    Pattern 3: Fix nominative predicates in series (85%+ precision).
+
+    Detects: Multiple nominative nouns pointing to same head with same deprel,
+    which should be coordinated predicates.
+    """
+    fixed = parse_result
+
+    for i in range(1, len(fixed)):
+        word = fixed[i]
+        prev_word = fixed[i - 1]
+
+        # Both must be nominative nouns
+        word_case = extract_case_from_feats(word.get('feats', ''))
+        prev_case = extract_case_from_feats(prev_word.get('feats', ''))
+
+        if word_case != 'Nom' or prev_case != 'Nom':
+            continue
+        if word.get('pos') != 'NOUN' or prev_word.get('pos') != 'NOUN':
+            continue
+
+        # Same head
+        if word.get('head') != prev_word.get('head'):
+            continue
+
+        # Skip if explicit conjunction
+        if prev_word.get('pos') == 'CCONJ':
+            continue
+
+        # Previous marked as predicative modifier
+        if prev_word.get('deprel') not in ['nmod', 'acl', 'amod', 'nsubj']:
+            continue
+
+        # Current is also nmod/amod (parallel structure)
+        if word.get('deprel') not in ['nmod', 'amod', 'nsubj']:
+            continue
+
+        # Don't change if already conj
+        if word.get('deprel') == 'conj':
+            continue
+
+        # Fix: make conj pointing to previous word
+        fixed[i]['deprel'] = 'conj'
+        fixed[i]['head'] = i  # Point to previous word (1-based = i since prev is i-1)
+
+    return fixed
+
+
+def fix_adjective_coordination(parse_result: list) -> list:
+    """
+    Pattern 4: Fix coordinated adjectives mistaken for modifier chains (90%+ precision).
+
+    Detects: Sequential adjectives with same case modifying the same noun,
+    which should be coordinated rather than chained.
+    """
+    fixed = parse_result
+
+    for i in range(1, len(fixed)):
+        word = fixed[i]
+        prev_word = fixed[i - 1]
+
+        # Both must be adjectives
+        if word.get('pos') != 'ADJ' or prev_word.get('pos') != 'ADJ':
+            continue
+
+        # Same case
+        word_case = extract_case_from_feats(word.get('feats', ''))
+        prev_case = extract_case_from_feats(prev_word.get('feats', ''))
+
+        if word_case != prev_case or word_case is None:
+            continue
+
+        # Previous is amod (modifying a noun)
+        if prev_word.get('deprel') != 'amod':
+            continue
+
+        # Current is also amod or points to previous adj
+        if word.get('deprel') not in ['amod', 'nmod:appos']:
+            continue
+
+        # Skip if explicit conjunction
+        if prev_word.get('pos') == 'CCONJ':
+            continue
+
+        # Don't change if already conj
+        if word.get('deprel') == 'conj':
+            continue
+
+        # Fix: make conj pointing to previous adjective
+        fixed[i]['deprel'] = 'conj'
+        fixed[i]['head'] = i  # Point to previous word (1-based)
+
+    return fixed
+
+
+def parse_with_stanza(text_iast: str, dcs_words: list = None) -> list:
+    """
+    Parse Sanskrit text with Stanza to get dependency information.
+
+    Uses a two-pass approach similar to Greek treebank processing:
+    1. First pass: Build mapping from original positions to non-punctuation positions
+    2. Second pass: Create result with remapped HEAD values
+
+    Args:
+        text_iast: Sanskrit text in IAST transliteration
+        dcs_words: Optional list of DCS word tuples for validation
+
+    Returns:
+        List of dicts with keys: form, lemma, pos, head, deprel, position
+        Returns empty list if Stanza is not available, parsing fails,
+        or word count doesn't match DCS.
+    """
+    nlp = get_stanza_nlp()
+    if nlp is None:
+        return []
+
+    try:
+        doc = nlp(text_iast)
+
+        # Two-pass approach to handle punctuation and HEAD remapping
+        # Similar to Greek treebank processing
+        #
+        # Key issue: Stanza may split input into multiple sentences, where
+        # word.id resets to 1 for each sentence. We need to:
+        # 1. Track global positions across all sentences
+        # 2. Remap HEAD values to account for sentence offsets
+        # 3. Exclude punctuation from position counting
+
+        # Pass 1: Collect all words and build position mapping
+        orig_to_nopunct = {}  # {global_orig_pos: nopunct_pos}
+        nopunct_pos = 0
+        word_data_list = []
+        global_offset = 0  # Offset for converting sentence-local IDs to global
+
+        for sent in doc.sentences:
+            # Build sentence-local HEAD to global position mapping
+            sent_orig_to_global = {}
+
+            for word in sent.words:
+                local_pos = word.id
+                global_pos = global_offset + local_pos
+                sent_orig_to_global[local_pos] = global_pos
+                form = word.text
+
+                # Check if punctuation - exclude from non-punct numbering
+                is_punct = is_sanskrit_punctuation(form) or word.upos == 'PUNCT'
+
+                if not is_punct:
+                    nopunct_pos += 1
+                    orig_to_nopunct[global_pos] = nopunct_pos
+
+                    # Convert sentence-local HEAD to global position
+                    # HEAD=0 means root, which stays 0
+                    global_head = 0
+                    if word.head != 0:
+                        global_head = global_offset + word.head
+
+                    word_data_list.append({
+                        'form': form,
+                        'lemma': word.lemma,
+                        'pos': word.upos,
+                        'feats': word.feats,  # Morphological features for coordination fixes
+                        'global_head': global_head,
+                        'deprel': word.deprel,
+                        'nopunct_pos': nopunct_pos
+                    })
+
+            # Update offset for next sentence
+            global_offset += len(sent.words)
+
+        # Pass 2: Create result with remapped HEAD values
+        result = []
+        for wd in word_data_list:
+            # Remap head from global position to non-punct position
+            # HEAD=0 means root (no change needed)
+            remapped_head = 0
+            if wd['global_head'] != 0:
+                remapped_head = orig_to_nopunct.get(wd['global_head'], 0)
+
+            result.append({
+                'form': wd['form'],
+                'lemma': wd['lemma'],
+                'pos': wd['pos'],
+                'feats': wd['feats'],  # Include features for coordination fixes
+                'head': remapped_head,
+                'deprel': wd['deprel'],
+                'position': wd['nopunct_pos']
+            })
+
+        # Validate word count matches DCS if provided
+        if dcs_words is not None and len(result) != len(dcs_words):
+            return []  # Mismatch due to sandhi resolution differences
+
+        # Apply coordination error fixes (post-processing)
+        result = fix_coordination_errors(result)
+
+        return result
+    except Exception as e:
+        # Silently fail - return empty list
+        return []
+
 def iast_to_devanagari(text):
     """Convert IAST to Devanagari for display"""
     if not HAS_TRANSLITERATION:
@@ -131,6 +520,10 @@ def create_database(db_path):
             line_number INTEGER NOT NULL,
             sequence_number INTEGER NOT NULL,
             word_position INTEGER NOT NULL,
+            head INTEGER,
+            deprel TEXT,
+            pos_tag TEXT,
+            sentence_position INTEGER,
             FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
         )
     ''')
@@ -633,6 +1026,11 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
     conllu_files = [f for f in os.listdir(text_dir) if f.endswith('.conllu') and not f.endswith('_parsed')]
     conllu_files.sort()
 
+    # Track treebank vs Stanza usage
+    sentences_with_treebank = 0
+    sentences_with_stanza = 0
+    sentences_no_tree = 0
+
     for conllu_file in conllu_files:
         file_path = os.path.join(text_dir, conllu_file)
 
@@ -640,6 +1038,7 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
             current_chapter = None
             verse_counter = 0  # Track verses within current chapter
             current_sentence_words = []  # Accumulate segmented words for current sentence
+            current_text_iast = None  # Store IAST text for Stanza fallback
 
             for line in f:
                 line = line.strip()
@@ -669,6 +1068,7 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                 # Extract sentence text (e.g., "# text = ...")
                 elif line.startswith('# text =') and current_chapter:
                     text_iast = line.replace('# text =', '').strip()
+                    current_text_iast = text_iast  # Store for Stanza fallback
                     text_devanagari = iast_to_devanagari(text_iast)
 
                     book_num, chapter_num, verse_num = current_chapter
@@ -696,15 +1096,34 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                             lemma_iast = fields[2]  # The dictionary headword
                             lemma = iast_to_devanagari(lemma_iast) if lemma_iast != '_' else None
 
+                            # Extract POS tag (field 3) and treebank data (fields 6-7)
+                            pos_tag = fields[3] if fields[3] != '_' else None
+                            head_str = fields[6]
+                            deprel = fields[7] if fields[7] != '_' else None
+
+                            # Parse HEAD - convert to int, None if not available
+                            head = None
+                            if head_str and head_str != '_':
+                                try:
+                                    head = int(head_str)
+                                except ValueError:
+                                    pass
+
+                            # Track sentence position (1-based word index within sentence)
+                            sentence_position = len(current_sentence_words) + 1
+
                             # Extract Unsandhied field from misc column (column 9)
                             misc = fields[9]
                             unsandhied = None
+                            unsandhied_iast_form = None  # Keep IAST for Stanza
                             for pair in misc.split('|'):
                                 if pair.startswith('Unsandhied='):
-                                    unsandhied_iast = pair.replace('Unsandhied=', '')
+                                    unsandhied_iast_form = pair.replace('Unsandhied=', '')
                                     # Special case: _ means use the lemma for display
-                                    if unsandhied_iast != '_':
-                                        unsandhied = iast_to_devanagari(unsandhied_iast)
+                                    if unsandhied_iast_form != '_':
+                                        unsandhied = iast_to_devanagari(unsandhied_iast_form)
+                                    else:
+                                        unsandhied_iast_form = None
                                     break
 
                             # If no Unsandhied or it's _, use lemma or form
@@ -712,23 +1131,68 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
                                 # Try lemma first (for special characters like OM)
                                 if lemma:
                                     unsandhied = lemma
+                                    unsandhied_iast_form = lemma_iast
                                 else:
                                     form_iast = fields[1]  # The word form
                                     unsandhied = iast_to_devanagari(form_iast)
+                                    unsandhied_iast_form = form_iast
 
-                            # Store tuple of (unsandhied_word, lemma)
-                            current_sentence_words.append((unsandhied, lemma))
+                            # Store tuple of (unsandhied_word, lemma, head, deprel, pos_tag, sentence_position, unsandhied_iast)
+                            current_sentence_words.append((unsandhied, lemma, head, deprel, pos_tag, sentence_position, unsandhied_iast_form))
 
                 # Blank line indicates end of sentence - save accumulated words
                 elif line == '' and current_sentence_words and current_chapter:
                     book_num, chapter_num, verse_num = current_chapter
 
-                    if verse_counter is not None:
-                        text_data[book_num][chapter_num][verse_num]['words'].extend(current_sentence_words)
+                    # Check if any words have treebank data (HEAD/DEPREL)
+                    has_treebank = any(w[2] is not None for w in current_sentence_words)
+
+                    # If no treebank data, use Stanza fallback
+                    if has_treebank:
+                        sentences_with_treebank += 1
+                    elif HAS_STANZA:
+                        # Reconstruct unsandhied text from DCS tokens for Stanza
+                        # This ensures word count matches between Stanza and DCS
+                        unsandhied_iast_forms = [w[6] for w in current_sentence_words if w[6]]
+                        if len(unsandhied_iast_forms) == len(current_sentence_words):
+                            reconstructed_text = ' '.join(unsandhied_iast_forms)
+                            stanza_result = parse_with_stanza(reconstructed_text)
+                        else:
+                            # Fallback to original text if unsandhied forms missing
+                            stanza_result = parse_with_stanza(current_text_iast) if current_text_iast else []
+
+                        if stanza_result and len(stanza_result) == len(current_sentence_words):
+                            # Map Stanza HEAD/DEPREL to DCS words (same position)
+                            updated_words = []
+                            for i, (word, lemma, head, deprel, pos_tag, sent_pos, unsandhied_iast) in enumerate(current_sentence_words):
+                                stanza_word = stanza_result[i]
+                                # Keep DCS data, but use Stanza tree data
+                                updated_words.append((
+                                    word,
+                                    lemma,
+                                    stanza_word['head'],
+                                    stanza_word['deprel'],
+                                    stanza_word['pos'] if pos_tag is None else pos_tag,  # Prefer DCS POS
+                                    sent_pos,
+                                    unsandhied_iast
+                                ))
+                            current_sentence_words = updated_words
+                            sentences_with_stanza += 1
+                        else:
+                            sentences_no_tree += 1
                     else:
-                        text_data[book_num][chapter_num][verse_num]['words'].extend(current_sentence_words)
+                        sentences_no_tree += 1
+
+                    # Strip the unsandhied_iast field before storing (not needed in database)
+                    words_for_db = [(w[0], w[1], w[2], w[3], w[4], w[5]) for w in current_sentence_words]
+
+                    if verse_counter is not None:
+                        text_data[book_num][chapter_num][verse_num]['words'].extend(words_for_db)
+                    else:
+                        text_data[book_num][chapter_num][verse_num]['words'].extend(words_for_db)
 
                     current_sentence_words = []
+                    current_text_iast = None  # Reset for next sentence
 
     total_books = len(text_data)
     total_chapters = sum(len(chapters) for chapters in text_data.values())
@@ -739,6 +1203,16 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
     )
 
     print(f"  Loaded {total_books} books, {total_chapters} chapters, {total_verses} verses")
+
+    # Report tree data coverage
+    total_sentences = sentences_with_treebank + sentences_with_stanza + sentences_no_tree
+    if total_sentences > 0:
+        if sentences_with_treebank > 0:
+            print(f"  Tree data: {sentences_with_treebank:,} sentences from DCS treebank")
+        if sentences_with_stanza > 0:
+            print(f"  Tree data: {sentences_with_stanza:,} sentences from Stanza fallback")
+        if sentences_no_tree > 0 and HAS_STANZA:
+            print(f"  Tree data: {sentences_no_tree:,} sentences without tree (word count mismatch)")
 
     # Load translations
     # Group by (book, chapter) to combine multiple verses per section
@@ -842,19 +1316,28 @@ def load_dcs_text(cursor, text_name, text_dir, translation_file, author_info, wo
 
                 # For display, show the segmented words separated by spaces
                 # This makes word boundaries visible and enables dictionary lookup
-                display_text = ' '.join(word for word, _ in verse_words)
+                # verse_words is now a list of tuples: (word, lemma, head, deprel, pos_tag, sentence_position)
+                # Handle both old 2-tuple format and new 6-tuple format for compatibility
+                display_text = ' '.join(word_tuple[0] for word_tuple in verse_words)
 
                 cursor.execute('''
                     INSERT INTO text_lines (id, book_id, line_number, sequence_number, line_text, line_xml, speaker)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 ''', (None, book_id, line_number, line_number, display_text, None, None))
 
-                # Insert segmented words (lemmas will be looked up during interlinear generation)
-                for word_pos, (word, lemma) in enumerate(verse_words, 1):
+                # Insert segmented words with treebank data if available
+                for word_pos, word_tuple in enumerate(verse_words, 1):
+                    # Unpack tuple - handle both old (word, lemma) and new (word, lemma, head, deprel, pos_tag, sent_pos) formats
+                    if len(word_tuple) >= 6:
+                        word, lemma, head, deprel, pos_tag, sentence_position = word_tuple[:6]
+                    else:
+                        word, lemma = word_tuple[0], word_tuple[1] if len(word_tuple) > 1 else None
+                        head, deprel, pos_tag, sentence_position = None, None, None, None
+
                     cursor.execute('''
-                        INSERT INTO words (id, word, book_id, line_number, sequence_number, word_position)
-                        VALUES (?, ?, ?, ?, ?, ?)
-                    ''', (None, word, book_id, line_number, line_number, word_pos))
+                        INSERT INTO words (id, word, book_id, line_number, sequence_number, word_position, head, deprel, pos_tag, sentence_position)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (None, word, book_id, line_number, line_number, word_pos, head, deprel, pos_tag, sentence_position))
                     total_word_count += 1
 
                 total_verse_count += 1

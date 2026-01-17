@@ -14,10 +14,12 @@ Text format: Line N. word1 | word2 | word3
 
 XML format:  <l n="N">| word1 |
              | **gloss1** |
-             | lemma1 |  | word2 |
+             | lemma1 ~ POS deprel head sent_pos |  | word2 |
              | **gloss2** |
-             | lemma2 | ...
+             | lemma2 ~ POS deprel head sent_pos | ...
              </l>
+
+Treebank data (HEAD, DEPREL) is included for works in the Vedic Treebank subset.
 """
 
 import sqlite3
@@ -30,6 +32,14 @@ from dataclasses import dataclass
 from functools import lru_cache
 from sanskrit_dictionary_lookup import SanskritRepository, extract_gloss
 
+# Try to import treebank loader (optional dependency)
+try:
+    from sanskrit_treebank_loader import SanskritTreebankLoader, TREEBANK_WORKS
+    TREEBANK_AVAILABLE = True
+except ImportError:
+    TREEBANK_AVAILABLE = False
+    TREEBANK_WORKS = set()
+
 
 @dataclass
 class WordData:
@@ -38,6 +48,10 @@ class WordData:
     word_position: int
     lemma: Optional[str] = None
     pos_tag: Optional[str] = None
+    # Treebank fields (Vedic Treebank subset only)
+    head: Optional[int] = None          # Head word position (0=root)
+    deprel: Optional[str] = None        # Dependency relation
+    sentence_position: Optional[int] = None  # Position within sentence
 
 
 def sanitize_xml_text(text: str) -> str:
@@ -72,19 +86,71 @@ class SanskritInterlinearGenerator:
 
     Uses database word segmentation and DCS dictionary lookups.
     Generates both plain text and TEI XML formats.
+    Includes treebank data (HEAD, DEPREL) for Vedic Treebank works.
     """
 
-    def __init__(self, db_path: str):
+    # Mapping from database work_id patterns to DCS work names
+    # (database IDs use lowercase ASCII, DCS uses proper Sanskrit with diacritics)
+    WORK_ID_TO_DCS = {
+        'aitareyopanisad': 'Aitareyopaniṣad',
+        'aitareyopanishad': 'Aitareyopaniṣad',
+        'chandogyopanisad': 'Chāndogyopaniṣad',
+        'chandogyopanishad': 'Chāndogyopaniṣad',
+        'mundakopanisad': 'Muṇḍakopaniṣad',
+        'mundakopanishad': 'Muṇḍakopaniṣad',
+        'svetasvataropanisad': 'Śvetāśvataropaniṣad',
+        'svetasvataropanishad': 'Śvetāśvataropaniṣad',
+        'rgveda': 'Ṛgveda',
+        'rigveda': 'Ṛgveda',
+        'atharvaveda': 'Atharvaveda (Śaunaka)',
+        'manusmrti': 'Manusmṛti',
+        'manusmriti': 'Manusmṛti',
+        'gautamadharmasutra': 'Gautamadharmasūtra',
+        'hiranyakesigrhyasutra': 'Hiraṇyakeśigṛhyasūtra',
+        'khadiragrhyasutra': 'Khādiragṛhyasūtra',
+        'vaitanasutra': 'Vaitānasūtra',
+        'varahagrhyasutra': 'Vārāhagṛhyasūtra',
+        'apastambagrhyasutra': 'Āpastambagṛhyasūtra',
+        'asvalayanasrautasutra': 'Āśvālāyanaśrautasūtra',
+        'sankhayanaranyaka': 'Śāṅkhāyanāraṇyaka',
+        'nyayabindu': 'Nyāyabindu',
+    }
+
+    def __init__(self, db_path: str, conllu_dir: str = None):
         """
-        Initialize generator with database connection.
+        Initialize generator with database connection and optional treebank.
 
         Args:
             db_path: Path to Sanskrit texts database
+            conllu_dir: Path to DCS CoNLL-U files directory (optional)
         """
         self.db_path = db_path
         self.conn = sqlite3.connect(db_path)
         self.conn.row_factory = sqlite3.Row
         self.repo = SanskritRepository(db_path)
+
+        # Initialize treebank loader if available and path provided
+        self.treebank = None
+        self.treebank_work_cache = {}  # Cache for work_id -> DCS work name mapping
+
+        if TREEBANK_AVAILABLE and conllu_dir:
+            try:
+                self.treebank = SanskritTreebankLoader(conllu_dir)
+                if self.treebank.available_works:
+                    print(f"  Treebank loaded: {len(self.treebank.available_works)} works with tree data")
+            except Exception as e:
+                print(f"  Warning: Could not load treebank: {e}")
+                self.treebank = None
+        elif TREEBANK_AVAILABLE and not conllu_dir:
+            # Try default path
+            default_path = Path(__file__).parent.parent / "data-sources" / "sanskrit" / "dcs" / "data" / "conllu" / "files"
+            if default_path.exists():
+                try:
+                    self.treebank = SanskritTreebankLoader(str(default_path))
+                    if self.treebank.available_works:
+                        print(f"  Treebank loaded: {len(self.treebank.available_works)} works with tree data")
+                except Exception as e:
+                    print(f"  Warning: Could not load treebank: {e}")
 
         # Statistics
         self.stats = {
@@ -93,7 +159,32 @@ class SanskritInterlinearGenerator:
             'words_found': 0,
             'words_missing': 0,
             'cache_hits': 0,
+            'treebank_words': 0,
         }
+
+    def _get_dcs_work_name(self, work_id: str) -> Optional[str]:
+        """
+        Map database work_id to DCS work name.
+
+        Args:
+            work_id: Database work identifier (e.g., "aitareyopanisad")
+
+        Returns:
+            DCS work name with proper diacritics, or None if not mapped
+        """
+        if work_id in self.treebank_work_cache:
+            return self.treebank_work_cache[work_id]
+
+        # Try direct mapping
+        work_lower = work_id.lower().replace('-', '').replace('_', '')
+        dcs_name = self.WORK_ID_TO_DCS.get(work_lower)
+
+        if dcs_name and self.treebank and self.treebank.has_coverage(dcs_name):
+            self.treebank_work_cache[work_id] = dcs_name
+            return dcs_name
+
+        self.treebank_work_cache[work_id] = None
+        return None
 
     def get_work_info(self, work_id: str) -> Dict:
         """Get work metadata from database."""
@@ -129,18 +220,18 @@ class SanskritInterlinearGenerator:
 
     def get_line_words(self, book_id: str, line_number: int) -> List[WordData]:
         """
-        Get segmented words for a specific line.
+        Get segmented words for a specific line, including treebank data if stored in database.
 
         Args:
-            book_id: Work identifier
+            book_id: Book identifier (e.g., "aitareyopanisad.1")
             line_number: Line number
 
         Returns:
-            List of WordData objects with word forms
+            List of WordData objects with word forms and tree data
         """
         cursor = self.conn.cursor()
         cursor.execute("""
-            SELECT word, word_position
+            SELECT word, word_position, head, deprel, pos_tag, sentence_position
             FROM words
             WHERE book_id = ? AND line_number = ?
             ORDER BY word_position
@@ -152,14 +243,82 @@ class SanskritInterlinearGenerator:
             # Look up lemma via morphology (database or CSV, handled by SanskritRepository)
             lemma = self.repo.get_lemma_for_word(word)
 
+            # Get treebank data from database (may be NULL for non-Vedic works)
+            head = row['head']
+            deprel = row['deprel']
+            pos_tag = row['pos_tag']
+            sentence_position = row['sentence_position']
+
             words.append(WordData(
                 word=word,
                 word_position=row['word_position'],
-                lemma=lemma,  # Lemma from morphology lookup
-                pos_tag=None
+                lemma=lemma,
+                pos_tag=pos_tag,
+                head=head,
+                deprel=deprel,
+                sentence_position=sentence_position
             ))
 
+            # Track treebank statistics
+            if head is not None or deprel is not None:
+                self.stats['treebank_words'] += 1
+
         return words
+
+    def _enhance_with_treebank(self, words: List[WordData], dcs_work: str,
+                                chapter_id: str, sentence_id: str):
+        """
+        Enhance word list with treebank data by matching words.
+
+        Uses IAST transliteration matching between database words and treebank.
+        Modifies words list in-place.
+
+        Args:
+            words: List of WordData to enhance
+            dcs_work: DCS work name (e.g., "Ṛgveda")
+            chapter_id: DCS chapter ID
+            sentence_id: DCS sentence ID
+        """
+        try:
+            from indic_transliteration import sanscript
+        except ImportError:
+            return  # Can't match without transliteration
+
+        tb_words = self.treebank.get_sentence(dcs_work, chapter_id, sentence_id)
+        if not tb_words:
+            return
+
+        # Build mapping of IAST forms to treebank data
+        tb_by_form = {}
+        for tb_word in tb_words:
+            form_lower = tb_word.form.lower()
+            if form_lower not in tb_by_form:
+                tb_by_form[form_lower] = []
+            tb_by_form[form_lower].append(tb_word)
+
+        # Match database words to treebank words
+        tb_used = set()
+        for word_data in words:
+            # Convert Devanagari to IAST for matching
+            try:
+                word_iast = sanscript.transliterate(
+                    word_data.word, sanscript.DEVANAGARI, sanscript.IAST
+                ).lower()
+            except:
+                continue
+
+            # Find matching treebank word
+            if word_iast in tb_by_form:
+                for tb_word in tb_by_form[word_iast]:
+                    tb_key = (tb_word.sentence_id, tb_word.sentence_position)
+                    if tb_key not in tb_used:
+                        word_data.pos_tag = tb_word.upos
+                        word_data.head = tb_word.head
+                        word_data.deprel = tb_word.deprel
+                        word_data.sentence_position = tb_word.sentence_position
+                        tb_used.add(tb_key)
+                        self.stats['treebank_words'] += 1
+                        break
 
     @lru_cache(maxsize=50000)
     def _cached_dictionary_lookup(self, word: str, lemma: str) -> tuple:
@@ -366,10 +525,13 @@ class SanskritInterlinearGenerator:
         Generate XML for a complete line in Greek format:
         <l n="1">| word1 |
         | **gloss1** |
-        | lemma1 |  | word2 |
+        | lemma1 ~ POS deprel head sent_pos |  | word2 |
         | **gloss2** |
-        | lemma2 | ...
+        | lemma2 ~ POS deprel head sent_pos | ...
         </l>
+
+        For works with treebank data, includes: ~ POS deprel head sent_pos
+        For works without treebank, just: | lemma |
 
         Args:
             book_id: Book identifier
@@ -393,16 +555,27 @@ class SanskritInterlinearGenerator:
             gloss_clean = sanitize_xml_text(gloss)
             lemma_clean = sanitize_xml_text(word_data.lemma) if word_data.lemma else "?"
 
+            # Build lemma line with optional tree data
+            # Format: | lemma ~ POS deprel head sent_pos |
+            if word_data.deprel is not None and word_data.head is not None:
+                pos = word_data.pos_tag or "X"
+                deprel = word_data.deprel
+                head = word_data.head
+                sent_pos = word_data.sentence_position or 0
+                lemma_line = f"| {lemma_clean} ~ {pos} {deprel} {head} {sent_pos} |"
+            else:
+                lemma_line = f"| {lemma_clean} |"
+
             # First word: no leading separator
             if i == 0:
                 xml_parts.append(f"| {word_clean} |")
                 xml_parts.append(f"| **{gloss_clean}** |")
-                xml_parts.append(f"| {lemma_clean} |")
+                xml_parts.append(lemma_line)
             else:
                 # Subsequent words: append separator to previous lemma line, then add word on same line
                 xml_parts[-1] += f"  | {word_clean} |"
                 xml_parts.append(f"| **{gloss_clean}** |")
-                xml_parts.append(f"| {lemma_clean} |")
+                xml_parts.append(lemma_line)
 
         # Format matching Greek: <l n="X">first_part
         # middle_parts
@@ -554,14 +727,24 @@ class SanskritInterlinearGenerator:
         total_words = self.stats['words_total']
         found = self.stats['words_found']
         missing = self.stats['words_missing']
+        treebank_words = self.stats['treebank_words']
 
         print("\n" + "=" * 70)
         print("Interlinear Generation Statistics")
         print("=" * 70)
         print(f"Lines processed: {self.stats['lines_processed']:,}")
         print(f"Total words: {total_words:,}")
-        print(f"  Found in dictionary: {found:,} ({100*found/total_words:.1f}%)")
-        print(f"  Missing: {missing:,} ({100*missing/total_words:.1f}%)")
+        if total_words > 0:
+            print(f"  Found in dictionary: {found:,} ({100*found/total_words:.1f}%)")
+            print(f"  Missing: {missing:,} ({100*missing/total_words:.1f}%)")
+            if treebank_words > 0:
+                print(f"  With treebank data: {treebank_words:,} ({100*treebank_words/total_words:.1f}%)")
+
+        # Treebank status
+        if self.treebank:
+            print(f"Treebank: {len(self.treebank.available_works)} works available")
+        else:
+            print("Treebank: Not loaded")
 
         # Get LRU cache info
         cache_info = self._cached_dictionary_lookup.cache_info()
