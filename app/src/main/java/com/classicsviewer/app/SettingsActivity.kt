@@ -102,6 +102,14 @@ class SettingsActivity : BaseActivity() {
         binding.interlinearFirstSwitch.setOnCheckedChangeListener { _, isChecked ->
             PreferencesManager.setInterlinearFirst(this, isChecked)
         }
+
+        // Setup dependency tree switch (experimental)
+        val enableDependencyTree = PreferencesManager.getEnableDependencyTree(this)
+        binding.enableDependencyTreeSwitch.isChecked = enableDependencyTree
+
+        binding.enableDependencyTreeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferencesManager.setEnableDependencyTree(this, isChecked)
+        }
     }
 
     private fun updatePreviewColors(inverted: Boolean) {

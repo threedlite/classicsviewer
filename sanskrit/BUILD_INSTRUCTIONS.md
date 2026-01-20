@@ -3,17 +3,27 @@
 ## Quick Start
 
 ```bash
+cd sanskrit
+
 # Single command - builds complete database automatically!
-python3 create_sanskrit_database_interlinear.py full
+./run_build.sh
+
+# Or manually with venv Python (required for multiprocessing):
+nohup ./venv/bin/python3 create_sanskrit_database_interlinear.py > build_sanskrit.log 2>&1 &
+tail -f build_sanskrit.log
 ```
 
-**Output**: `sanskrit_texts.db.zip` (371MB) with:
+**Output**: `sanskrit_texts.db.zip` (~554MB) with:
 - 270 Sanskrit works with texts
 - 179,806 dictionary entries
 - 4,705,160 lemma mappings
-- 203,713 interlinear translations (one per line)
+- 203,713 interlinear translations with **Stanza NLP morph data** (case/number/gender, POS, dependencies)
 
-**Build time**: ~15-20 minutes (fully automated, no manual intervention)
+**Build time**: ~95 minutes (fully automated, no manual intervention)
+- DCS loading phase: ~75 minutes (8 parallel workers)
+- Interlinear generation with Stanza NLP: ~20 minutes
+
+**CRITICAL**: Always use `./run_build.sh` or `./venv/bin/python3` directly. Do NOT use `source venv/bin/activate` because multiprocessing workers spawn with system Python, not the activated venv. The build uses `fork` start method so workers inherit loaded Stanza models.
 
 **Note**: Uses pre-built lexicon ZIP (`dcs_sanskrit_lexicon.zip`, 35 MB) that's already in the repo. You don't need to regenerate the lexicon unless you're updating DCS data or improving coverage.
 
@@ -27,7 +37,7 @@ python3 create_sanskrit_database_interlinear.py full
 
 The `create_sanskrit_database_interlinear.py` script is a **complete automated pipeline**:
 
-1. ✅ **Creates database** with 270 Sanskrit texts (5 min)
+1. ✅ **Creates database** with 270 Sanskrit texts (~75 min with 8 workers)
    - Bhagavad Gita from Wikisource JSON
    - Rig Veda from DCS pada format
    - 268 works from DCS CoNLL-U files
@@ -37,21 +47,26 @@ The `create_sanskrit_database_interlinear.py` script is a **complete automated p
    - 4,705,160 word form → lemma mappings
    - 6 normalization patterns for text matching
 
-3. ✅ **Generates interlinear XML** for all 270 works (5 min)
+3. ✅ **Generates interlinear XML with Stanza NLP** for all 270 works (~20 min)
    - Creates TEI XML files with word-by-word glosses
+   - Uses **Stanza NLP** to add morphological data:
+     - Case/number/gender (e.g., "acc s m" = accusative singular masculine)
+     - POS tags (NOUN, VERB, ADJ, etc.)
+     - Dependency relations (nsubj, obj, compound:coord, etc.)
    - Outputs to `interlinear_output/` directory
-   - Uses parallel processing (8 workers)
+   - Uses parallel processing (8 workers) with `fork` start method
+   - Pre-loads Stanza models before spawning workers
 
 4. ✅ **Imports interlinear** into database (2 min)
-   - Parses XML files to extract translations
+   - Parses XML files to extract translations with morph data
    - Creates 203,713 interlinear segments (one per line)
    - Builds translation lookup table for efficient retrieval
 
 5. ✅ **Compresses to ZIP** (1 min)
-   - Creates `sanskrit_texts.db.zip` (371 MB)
+   - Creates `sanskrit_texts.db.zip` (~554 MB)
    - Ready for standalone use or merging into extended database
 
-**No manual steps required!**
+**No manual steps required! NEVER run intermediate scripts manually.**
 
 ## Important Notes
 
@@ -218,16 +233,25 @@ This will:
 
 ## Stats
 
-**Full Database**: 268 works, ~738K verses, ~5.6M words, 138MB compressed
-**Build time**: ~20min total (first time)
-  - DCS extraction: 5-10min (run once, then reuse)
-  - Lexicon ZIP: 10sec
-  - Database: 5min
-  - Interlinear: 90sec (with 8 parallel workers)
+**Full Database**: 270 works, 203K verses, 13.4M words, ~554MB compressed
+**Build time**: ~95 minutes total (fully automated)
+  - DCS loading phase: ~75 minutes (8 parallel workers)
+  - Interlinear generation with Stanza NLP: ~20 minutes
+  - Import and compression: ~2 minutes
 
 **Interlinear Coverage**:
-- Baseline (without sandhi): ~61% words found
-- With sandhi-enhanced morphology: **85-90% words found**
+- Dictionary coverage: **95.9%** words found
+- Morph data (case/number/gender): Available for all words processed by Stanza
+- POS tags and dependencies: Added by Stanza NLP
+
+**Morph Data Format**:
+```
+| lemma [case number gender] ~ POS deprel head sentPos |
+```
+Example: `| पूर्व voc s m ~ ADJ conj 1 3 |`
+- `voc s m` = vocative singular masculine
+- `ADJ` = adjective POS tag
+- `conj 1 3` = conjunction relation, head word 1, sentence position 3
 
 **Data Sources**:
 - DCS CoNLL-U corpus: 15,733 files, 5.5M words, 268 works
@@ -275,29 +299,40 @@ After building the database, interlinear translations are generated in two stage
 
 ### Stage 1: Generate Interlinear XML Files (batch_generate_interlinear.py)
 
+**This is called automatically by `create_sanskrit_database_interlinear.py` - NEVER run manually!**
+
 ```bash
+# Called internally by the main build script:
 python3 batch_generate_interlinear.py sanskrit_texts.db \
-  --output ../data-sources/classicsviewer_interlinear \
+  --output interlinear_output \
   --parallel 8
 ```
 
 **What it does**:
-1. Reads all 270 works from `sanskrit_texts.db`
-2. For each work, calls `generate_sanskrit_interlinear.py` to create:
+1. Pre-loads **Stanza Sanskrit NLP models** before spawning workers
+2. Uses `fork` multiprocessing start method so workers inherit loaded models
+3. For each work, calls `generate_sanskrit_interlinear.py` to create:
    - `.interlinear.txt` - Plain text word-by-word glosses
-   - `.dcs-eng99.xml` - TEI XML format with glosses embedded
-3. Uses `sanskrit_dictionary_lookup.py` to find word definitions
-4. Looks up words in `dcs_sanskrit_morphology.csv` (4.7M entries with sandhi support)
-5. Writes 540 files (2 per work) to `../data-sources/classicsviewer_interlinear/`
+   - `.dcs-eng99.xml` - TEI XML format with glosses and **morph data**
+4. Uses `sanskrit_dictionary_lookup.py` to find word definitions
+5. Uses **Stanza NLP** (`stanza.Pipeline('sa')`) to add:
+   - Case/number/gender (e.g., "nom s m")
+   - POS tags (NOUN, VERB, ADJ, PART, etc.)
+   - Dependency relations (nsubj, obj, compound:coord, etc.)
+6. Writes 540 files (2 per work) to `interlinear_output/`
 
 **Key components**:
-- `batch_generate_interlinear.py` - Parallel orchestrator script
-- `generate_sanskrit_interlinear.py` - Per-work XML/text generator
+- `batch_generate_interlinear.py` - Parallel orchestrator with Stanza pre-loading
+- `generate_sanskrit_interlinear.py` - Per-work XML/text generator with Stanza integration
 - `sanskrit_dictionary_lookup.py` - Dictionary lookup with sandhi splitting
-- `dcs_sanskrit_morphology.csv` - Morphology database (word → lemma → gloss)
-- `dcs_sanskrit_dictionary.csv` - Dictionary entries (lemma → definition)
+- **Stanza NLP** - Sanskrit language models for morphological analysis
 
-**Performance**: ~90 seconds with 8 parallel workers for all 270 works
+**Critical Implementation Details**:
+- Uses `mp.set_start_method('fork')` so workers inherit loaded Stanza models
+- Pre-loads Stanza before `mp.Pool()` creation
+- Without this fix, workers spawn with system Python and can't access Stanza
+
+**Performance**: ~20 minutes with 8 parallel workers for all 270 works (slower due to Stanza NLP processing)
 
 ### Stage 2: Import Interlinear into Extended Database (create_perseus_database.py)
 

@@ -50,6 +50,7 @@ echo "✓ Verified: 270 works in database"
 # Step 2: Generate interlinear XML files
 echo ""
 echo "Step 2/5: Generating interlinear XML files (540 files)..."
+rm -rf interlinear_output
 mkdir -p interlinear_output
 $PYTHON batch_generate_interlinear.py sanskrit_texts.db \
     --output interlinear_output \

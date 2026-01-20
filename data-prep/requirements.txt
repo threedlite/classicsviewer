@@ -8,3 +8,7 @@ colorama>=0.4.6
 # Note: CLTK will download Greek models (~2GB) on first use
 # To pre-download: python -c "from cltk import NLP; NLP('grc')"
 cltk>=1.3.0
+
+# Sanskrit transliteration (IAST to Devanagari)
+# Required for Sanskrit database creation - all Sanskrit text must be in Devanagari
+indic-transliteration>=2.3.0

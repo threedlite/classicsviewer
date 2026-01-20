@@ -1,106 +1,95 @@
 # Sanskrit for ClassicsViewer
 
 **Status**: ✅ Production Ready
-**Texts**: 7 major texts (14,672 verses total)
-**Lexicon Coverage**: 88.0% on classical Sanskrit
+**Texts**: 270 works from DCS corpus (203K verses, 13.4M words)
+**Lexicon Coverage**: 95.9% dictionary lookup success
+**Build Time**: ~95 minutes (fully automated)
 **License**: CC BY 4.0, CC BY-SA 4.0, Public Domain (all commercial-use compatible)
 
 ## Overview
 
 This implementation provides complete Sanskrit support for ClassicsViewer with:
-1. **Sanskrit Texts Database** - 7 major texts with English translations
-   - Bhagavad Gita (700 verses)
-   - Rig Veda (10,551 verses)
-   - Atharvaveda (518 verses)
-   - Yajur Veda (2,516 verses)
-   - Aitareya Upanishad (13 verses)
-   - Chandogya Upanishad (151 verses)
-   - Svetasvatara Upanishad (223 verses)
-2. **DCS Lexicon** - Dictionary and morphology for word lookups
+1. **Sanskrit Texts Database** - 270 works with interlinear translations
+   - Bhagavad Gita (18 chapters, Wikisource with Arnold/Besant translations)
+   - Rig Veda (10 maṇḍalas, Griffith translation)
+   - 268 DCS works (Mahabharata, Ramayana, Upanishads, Vedas, philosophical texts, etc.)
+2. **DCS Lexicon** - 179,806 dictionary entries, 4.7M morphology forms
+3. **Stanza NLP Morph Data** - Case/number/gender, POS tags, dependency relations
 
 ---
 
-## Part 1: Sanskrit Texts Database
+## Quick Start
 
-### Quick Start
+**See [BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md) for complete details.**
 
 ```bash
-# Setup
 cd sanskrit
-source venv/bin/activate
-pip install -r requirements.txt
 
-# Create complete database (one command)
-python3 create_sanskrit_database.py
+# Single command - builds everything automatically!
+./run_build.sh
 
-# Output: sanskrit_texts.db.zip (6.69 MB)
+# Output: sanskrit_texts.db.zip (~554MB)
 ```
 
-### What You Get
+**CRITICAL**: Always use `./run_build.sh` or `./venv/bin/python3` directly. Do NOT use `source venv/bin/activate` because multiprocessing workers spawn with system Python, not the activated venv.
 
-**7 Major Texts:**
-- **Bhagavad Gita**: 700 verses, 2 English translations (Arnold + Besant)
-- **Rig Veda**: 10,551 verses, Griffith translation
-- **Atharvaveda**: 518 verses, Whitney translation
-- **Yajur Veda (Vājasaneyisaṃhitā)**: 2,516 verses, Griffith translation
-- **Aitareya Upanishad**: 13 verses, Olivelle translation
-- **Chandogya Upanishad**: 151 verses, Olivelle translation
-- **Svetasvatara Upanishad**: 223 verses, Olivelle translation
+---
 
-**Combined Statistics:**
-- **14,672 total verses**
-- **270,059 words** (53,540 unique)
-- **11,227 translations**
-- **7 authors, 7 works, 79 books**
-- **Database**: 25.95 MB uncompressed, 6.69 MB compressed
+## What You Get
+
+**270 Works Including:**
+- **Bhagavad Gita**: 18 chapters, 700 verses, 2 English translations (Arnold + Besant)
+- **Rig Veda**: 10 maṇḍalas, 10,551 verses, Griffith translation
+- **Mahabharata**: 1,995 chapters, Sanskrit text (no English)
+- **Ramayana**: 606 chapters, Sanskrit text (no English)
+- **268 DCS works**: Upanishads, Vedas, epics, philosophical texts, and more
+
+**Database Statistics:**
+- **270 works** (203,713 verses/lines)
+- **13.4 million words** (569K unique)
+- **179,806 dictionary entries**
+- **4.7 million morphology forms**
+- **203,713 interlinear segments** with Stanza NLP morph data
+- **Database**: ~2.2GB uncompressed, ~554MB compressed
+
+**Morph Data (via Stanza NLP):**
+- Case/number/gender (e.g., "acc s m" = accusative singular masculine)
+- POS tags (NOUN, VERB, ADJ, PART, etc.)
+- Dependency relations (nsubj, obj, compound:coord, etc.)
 
 ### Implementation Details
 
-The main script `create_sanskrit_database.py` uses:
+The main script `create_sanskrit_database_interlinear.py` (called via `run_build.sh`) uses:
 1. **Direct JSON loading** for Bhagavad Gita (from Wikisource)
 2. **DCS pada-and-analysis.dat** for Rig Veda (special TSV format)
-3. **Generic DCS CoNLL-U parser** for 5 other texts (Atharvaveda, Yajur Veda, 3 Upanishads)
+3. **Parallel DCS CoNLL-U parser** for 268 other texts (8 workers)
+4. **Stanza NLP** for morphological analysis during interlinear generation
 
-The CoNLL-U parser automatically handles:
-- 2-part citations (chapter only): Svetasvatara, Yajur Veda
-- 3-part citations (book.chapter.verse): Aitareya, Chandogya, Atharvaveda
-- Sequential verse numbering within chapters
-- IAST to Devanagari conversion
+The build pipeline automatically handles:
+- Parallel processing with 8 workers for DCS text loading (~75 min)
+- IAST to Devanagari conversion for all text
+- Pre-built lexicon import from `dcs_sanskrit_lexicon.zip`
+- Interlinear generation with Stanza NLP (~20 min)
+- Import of interlinear segments into database
+- Compression to final ZIP file
 
 ---
 
-## Part 2: DCS Sanskrit Lexicon
+## DCS Sanskrit Lexicon
 
-### Quick Start
+The lexicon is pre-built and included in the repository as `dcs_sanskrit_lexicon.zip` (35 MB).
 
-```bash
-# Complete lexicon workflow (4 minutes total)
-python3 extract_dcs_lexicon.py    # Extract + enhance (4 min)
-python3 create_dcs_lexicon.py     # Package ZIP (5 sec)
-python3 test_dcs_coverage.py      # Test coverage (2 sec)
-
-# Output: dcs_sanskrit_lexicon.zip (34.5 MB)
-```
-
-### What You Get
-
+**Contents:**
 - **179,806** dictionary lemmas with definitions
 - **4.7 million** morphology forms (word → lemma mappings)
 - **3,699** sandhi-split compound forms (automatic enhancement)
-- **88.0% coverage** on classical Sanskrit texts
-- **Ready for app import** - one ZIP file
+- **95.9% coverage** on Sanskrit texts
 
-### Coverage Results
-
-| Category | Words | Percentage |
-|----------|-------|------------|
-| **Total BG vocabulary** | 4,055 | 100% |
-| Found in dictionary | 658 | 16.2% |
-| Found in morphology | 3,197 | 78.8% |
-| **Total found** | **3,569** | **88.0%** |
-| Missing | 486 | 12.0% |
-
-**Improvement from sandhi splitting**: 40% → 88% (+48 percentage points)
+**Regeneration** (only if needed):
+```bash
+python3 extract_dcs_lexicon.py    # Extract from DCS corpus (~5 min)
+python3 create_dcs_lexicon.py     # Package ZIP (~10 sec)
+```
 
 ---
 
@@ -113,16 +102,8 @@ python3 test_dcs_coverage.py      # Test coverage (2 sec)
 3. **Bhagavad Gita English (Besant)** - Public Domain (1922)
 4. **Rig Veda Sanskrit** - DCS pada-and-analysis.dat (CC BY 4.0, Oliver Hellwig)
 5. **Rig Veda English (Griffith)** - Public Domain (1896)
-6. **Atharvaveda Sanskrit** - DCS CoNLL-U files (CC BY 4.0)
-7. **Atharvaveda English (Whitney)** - Public Domain (1905)
-8. **Yajur Veda Sanskrit** - DCS CoNLL-U files (CC BY 4.0)
-9. **Yajur Veda English (Griffith)** - Public Domain (1899)
-10. **Aitareya Upanishad Sanskrit** - DCS CoNLL-U files (CC BY 4.0)
-11. **Aitareya Upanishad English (Olivelle)** - Used with permission
-12. **Chandogya Upanishad Sanskrit** - DCS CoNLL-U files (CC BY 4.0)
-13. **Chandogya Upanishad English (Olivelle)** - Used with permission
-14. **Svetasvatara Upanishad Sanskrit** - DCS CoNLL-U files (CC BY 4.0)
-15. **Svetasvatara Upanishad English (Olivelle)** - Used with permission
+6. **268 DCS Works** - All CoNLL-U files from DCS corpus (CC BY 4.0)
+   - Includes Mahabharata, Ramayana, Upanishads, Vedas, philosophical texts
 
 ### Lexicon
 
@@ -132,45 +113,28 @@ python3 test_dcs_coverage.py      # Test coverage (2 sec)
 - **License**: Creative Commons Attribution 4.0 International
 - **Corpus**: 5.5 million words from 268 classical texts
 
+### NLP Models
+
+**Stanza Sanskrit Models** by Stanford NLP Group
+- Used for morphological analysis (case, number, gender, POS, dependencies)
+- Pre-loaded before multiprocessing to share across workers
+
 ---
 
-## Available Texts in DCS
+## Available Texts
 
-The DCS corpus contains **268 Sanskrit texts**. However, **only 16 texts have English translations** in the DCS repository.
+All **270 works** from the DCS corpus are included:
+- **Bhagavad Gita** (700 verses) - With Arnold + Besant translations
+- **Rig Veda** (10,551 verses) - With Griffith translation
+- **Mahabharata** (~738K verses) - Sanskrit only (interlinear glosses)
+- **Ramayana** (~24K verses) - Sanskrit only (interlinear glosses)
+- **Upanishads** - Multiple (some with translations)
+- **Vedas** - Atharvaveda, Yajur Veda, etc.
+- **Philosophical texts** - Yogasutra, Nyayasutra, etc.
+- **Poetry** - Meghaduta, Kumarasambhava, etc.
+- And 250+ more works
 
-### Texts with DCS Translations
-
-**Currently Implemented (7 texts):**
-- ✅ **Bhagavad Gita** (700 verses) - Arnold + Besant translations
-- ✅ **Rig Veda** (10,551 verses) - Griffith translation
-- ✅ **Atharvaveda** (Śaunaka) (518 verses) - Whitney translation
-- ✅ **Vājasaneyisaṃhitā** (Yajur Veda) (2,516 verses) - Griffith translation
-- ✅ **Aitareyopaniṣad** (13 verses) - Olivelle translation
-- ✅ **Chāndogyopaniṣad** (151 verses) - Olivelle translation
-- ✅ **Śvetāśvataropaniṣad** (223 verses) - Olivelle translation
-
-**Available to Implement** (9 more texts):
-- **Śatapathabrāhmaṇa** - Eggeling translation (very large)
-- **Harṣacarita** - Cowell translation
-- 5 Gṛhyasūtras (ritual manuals) - Oldenberg translations
-- Gautamadharmasūtra - Olivelle translation
-- Ṛgvidhāna - Gonda translation
-
-See `DCS_TRANSLATIONS_AVAILABLE.md` and `EXPANSION_PLAN.md` for complete details.
-
-### Texts WITHOUT DCS Translations (Would Need External Sources)
-
-These major texts are in DCS but lack English translations in the repository:
-- **Mahābhārata** (1,995 files) - Would need external translation
-- **Rāmāyaṇa** (606 files) - Would need external translation
-- **Yogasūtra** (4 files) - Would need external translation
-- **Hitopadeśa** (5 files) - Would need external translation
-- **Meghadūta** (2 files) - Would need external translation
-- **Manusmṛti** - Would need external translation
-- **Nāṭyaśāstra** - Would need external translation
-- 250+ other texts
-
-See `DCS_TEXTS_CATALOG.md` for all 268 available texts.
+See `DCS_TEXTS_CATALOG.md` for the complete list.
 
 ---
 
@@ -202,33 +166,34 @@ Source: https://sa.wikisource.org/wiki/भगवद्गीता
 ### Sanskrit Parser: MIT License
 Used for sandhi splitting enhancement (build-time only).
 
+### Stanza NLP: Apache 2.0
+Used for morphological analysis during interlinear generation.
+
 See `LICENSE_COMPLIANCE.md` for complete details.
 
 ---
 
 ## Dependencies
 
+Install via requirements.txt:
 ```bash
-pip install indic-transliteration sanskrit_parser
-```
-
-Or use the venv:
-```bash
-python3 -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
 ```
+
+Key dependencies:
+- `indic-transliteration` - IAST ↔ Devanagari conversion
+- `stanza` - Sanskrit NLP for morphological analysis
+- `sanskrit_parser` - Optional, for sandhi splitting
 
 ---
 
 ## Documentation
 
+- **BUILD_INSTRUCTIONS.md** - **Primary build guide** (start here!)
 - **README.md** - This file (overview)
-- **WORKFLOW.md** - Step-by-step workflow
-- **EXPANSION_PLAN.md** - Recommended implementation plan for DCS-translated texts
+- **WORKFLOW.md** - Historical workflow (deprecated, see BUILD_INSTRUCTIONS.md)
 - **DCS_LEXICON_DOCUMENTATION.md** - Complete lexicon technical docs
-- **DCS_TEXTS_CATALOG.md** - All 268 available texts in DCS (marked with translation status)
-- **DCS_TRANSLATIONS_AVAILABLE.md** - Detailed analysis of 16 texts with DCS translations
+- **DCS_TEXTS_CATALOG.md** - All 268 available texts in DCS
 - **LICENSE_COMPLIANCE.md** - License details and attribution
 
 ---
@@ -237,32 +202,36 @@ pip install -r requirements.txt
 
 ```
 sanskrit/
-├── create_sanskrit_database.py     # Main script (BG + RV)
-├── create_sanskrit_texts.py        # Bhagavad Gita only
-├── create_rigveda_texts.py         # Rig Veda only
-├── extract_dcs_lexicon.py          # Extract DCS lexicon
-├── create_dcs_lexicon.py           # Package lexicon ZIP
-├── test_dcs_coverage.py            # Test lexicon coverage
+├── run_build.sh                           # Main build script - RUN THIS!
+├── create_sanskrit_database_interlinear.py # Complete automated pipeline
+├── batch_generate_interlinear.py          # Parallel interlinear generation
+├── generate_sanskrit_interlinear.py       # Per-work interlinear generator
+├── sanskrit_dictionary_lookup.py          # Dictionary lookup with sandhi
+├── extract_dcs_lexicon.py                 # Extract DCS lexicon (one-time)
+├── create_dcs_lexicon.py                  # Package lexicon ZIP (one-time)
+├── dcs_sanskrit_lexicon.zip               # Pre-built lexicon (35 MB)
 ├── normalization_rules_sanskrit.csv
 ├── requirements.txt
-├── venv/                           # Python virtual environment
-├── data-sources/                   # Downloaded source data
+├── venv/                                  # Python virtual environment
+├── data-sources/                          # Downloaded source data
 │   ├── bhagavad_gita_sanskrit.json
 │   ├── bhagavad_gita_english.json
 │   ├── bhagavad_gita_besant.json
 │   └── SOURCES.md
-└── outputs/
-    ├── sanskrit_texts.db           # Combined texts database
-    ├── sanskrit_texts.db.zip       # Compressed (4.67 MB)
-    ├── dcs_sanskrit_lexicon.zip    # Lexicon (34.5 MB)
-    └── dcs_extraction_stats.json
+├── interlinear_output/                    # Generated interlinear files
+│   ├── *.interlinear.txt                  # Plain text glosses
+│   ├── *.dcs-eng99.xml                    # TEI XML with morph data
+│   └── generation_report.txt              # Build statistics
+├── sanskrit_texts.db                      # Output database (~2.2 GB)
+└── sanskrit_texts.db.zip                  # Compressed output (~554 MB)
 ```
 
 ---
 
-**Last Updated**: October 6, 2025
-**Version**: 3.0 (7 Major Texts + DCS Lexicon)
-**Texts**: Bhagavad Gita, 3 Vedas (Rig/Atharva/Yajur), 3 Upanishads
-**Lexicon Coverage**: 88.0%
-**Total Verses**: 14,672
-**Database Size**: 25.95 MB (6.69 MB compressed)
+**Last Updated**: January 2026
+**Version**: 4.0 (Full DCS Corpus + Stanza NLP)
+**Texts**: 270 works (Bhagavad Gita, Rig Veda, Mahabharata, Ramayana, 266 more)
+**Interlinear Coverage**: 95.9%
+**Total Verses**: 203,713
+**Total Words**: 13.4 million
+**Database Size**: ~2.2 GB (~554 MB compressed)

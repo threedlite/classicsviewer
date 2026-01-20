@@ -2,8 +2,27 @@
 
 Always use venv to run python code.
 
-Important: 
+Important:
   Claude: Do not add, delete, or modify features not related to what is being worked on!  Investigate the impact of changes before making them. Avoid regressions. Test and verify fixes before declaring them fixed. Do not overstate effectiveness of changes without careful checking. BE PATIENT with database builds - sample takes ~5 minutes, full takes ~7 minutes, extended takes ~28 minutes. DO NOT assume builds are stuck just because they take time. The build may appear to pause at certain points (especially during translation lookup creation) but is still actively processing - check with `ps aux | grep python3` to verify it's still running. NEVER run multiple copies of create_perseus_database.py simultaneously as this will corrupt the database! If you see no new output for 30-60 seconds, that's NORMAL - the script is processing large data structures in memory. Always check db size and zip before packaging or deploying it. When you redeploy apk, clear app data, and uninstall the app first. Be sure you know what directory you are in before executing commands. Make sure you are in the right directory before running builds. Stick to facts, avoid unstubstantiated claims and opinions.
+
+**CRITICAL: NEVER USE MANUAL FIXES OR MANUAL BUILD STEPS**:
+- ❌ **NEVER use sed, awk, or any command to patch data files** - fix the code that generates them
+- ❌ **NEVER manually edit generated XML, database, or output files** - fix the source code
+- ❌ **NEVER apply one-off fixes** - all fixes must be in the build scripts so they are repeatable
+- ❌ **NEVER run intermediate build scripts manually** (e.g., running import scripts separately) - fix the main build script and re-run the full pipeline
+- ❌ **NEVER manually zip databases** - the build scripts must handle compression
+- ❌ **NEVER run SQL commands to fix data** - fix the code that generates the data
+- ✅ **ALWAYS fix the root cause in the code** - so every future build works correctly
+- ✅ **Everything must be documented and repeatable** - if you have to do it manually, the process is broken
+- ✅ **The ONLY manual step allowed is pushing the final ZIP to the device** - everything else must be scripted
+- ✅ **If a build produces incorrect output, fix the build script and re-run the ENTIRE build from scratch**
+
+**Build Pipeline Philosophy**:
+- Each database (Greek, Sanskrit, etc.) has ONE main build script that does EVERYTHING
+- The build script must: create database → generate interlinear → import interlinear → compress to ZIP
+- If ANY step fails or produces wrong output, fix the build script, then re-run the FULL build
+- NEVER try to "fix" intermediate outputs - this creates unreproducible states
+- Other developers must be able to clone the repo and run `./run_build.sh` to get identical results
   Do not add, delete, or modify the contents of the folder "data-sources" in any way!
   The data-sources folder contains the cloned git repos for the following PerseusDL projects:
   canonical-greekLit  canonical-latinLit  canonical-pdlrefwk  perseus_catalog
@@ -289,10 +308,13 @@ cd build_modules/generate_interlinear
 ```
 
 ### Interlinear Build Times (8 workers):
-- **Greek (2,049 works, 34.9M words)**: ~11.1 hours (39,838 seconds)
-- **Latin (230 works, 372K lines)**: ~14 seconds
+- **Greek (2,214 works, 34.9M words)**: ~15 hours (898 minutes)
+- **Latin (230 works, 228 XML files)**: ~17 seconds
+- **Sanskrit (270 works, 203K lines, 13.4M words)**: ~90 seconds
 
-Output location: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
+Output locations:
+- Greek/Latin: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
+- Sanskrit: `/Users/user1/git/classicsviewer/sanskrit/interlinear_output`
 
 ### Stopping Interlinear Generation:
 **IMPORTANT**: Always use specific PIDs to stop processes, NOT `pkill`
@@ -309,6 +331,108 @@ ps aux | grep python | grep -v grep
 ```
 
 **Why**: `pkill` doesn't reliably catch all multiprocessing worker processes. Always identify PIDs first, then kill them explicitly.
+
+## Sanskrit Database Requirements
+
+**CRITICAL**: All Sanskrit text must ALWAYS be displayed in Devanagari script, never in IAST transliteration.
+
+### Prerequisites
+```bash
+# Install Sanskrit dependencies before database creation
+source venv/bin/activate
+pip install -r sanskrit/requirements.txt
+# Or individually: pip install indic-transliteration stanza
+```
+
+### Script Conversion
+- DCS CoNLL-U files contain Sanskrit in IAST format (e.g., "agnim", "īḍe")
+- The `create_sanskrit_database_interlinear.py` script converts all text to Devanagari
+- Conversion happens in worker processes during parallel DCS parsing
+- Dictionary entries and lemma_map are in Devanagari for proper lookup matching
+
+### Verification
+After building Sanskrit database, verify text is in Devanagari:
+```bash
+sqlite3 sanskrit_texts.db "SELECT word FROM words LIMIT 5;"
+# Should show: अग्निम्, ईळे, पुरोहितम्, यज्ञस्य, देवम्
+# NOT: agnim, īḍe, purohitam, yajñasya, devam
+```
+
+### Rebuilding Sanskrit Database
+
+**CRITICAL - SCHEMA MUST MATCH SAMPLE DB**: The Sanskrit database schema MUST exactly match `perseus_texts_sample.db`. You must always match the sample DB schema - never add, remove, or modify columns.
+
+**CRITICAL**: Always use `./run_build.sh` or `./venv/bin/python3` directly. Do NOT rely on `source venv/bin/activate` because multiprocessing worker processes spawn with system Python, not the activated venv Python. This causes `ModuleNotFoundError: No module named 'indic_transliteration'` and results in IAST text instead of Devanagari.
+
+**The build script does EVERYTHING automatically**:
+1. Creates database with works, text, dictionary, morphology
+2. Generates interlinear XML files with Stanza NLP morph data (batch_generate_interlinear.py)
+3. Imports interlinear into database (import_sanskrit_interlinear.py)
+4. Compresses database to ZIP
+
+**NEVER run these steps manually** - if the build output is wrong, fix the build scripts and re-run `./run_build.sh` from scratch.
+
+```bash
+cd sanskrit
+
+# Preferred: Use the run script (handles venv automatically)
+./run_build.sh
+
+# Alternative: Use venv python directly
+nohup ./venv/bin/python3 create_sanskrit_database_interlinear.py > build_sanskrit.log 2>&1 &
+
+# Monitor progress
+tail -f build_sanskrit.log
+
+# After build completes, push to device (ONLY manual step allowed):
+adb push sanskrit_texts.db.zip /sdcard/Download/
+```
+
+### Sanskrit Database Build Stats (8 workers):
+- **Build time**: ~95 minutes (includes Stanza NLP interlinear generation)
+- **Works**: 270 (Bhagavad Gita, Rig Veda, Mahabharata, DCS corpus)
+- **Content**: 203K verses, 13.4M words
+- **Interlinear**: 203K segments with morph data (case/number/gender, POS, dependencies)
+- **Database size**: 2.7GB uncompressed, 554MB compressed
+- **Lexicon**: 180K dictionary entries, 4.7M morphology forms
+
+### Sanskrit Interlinear Format
+
+The interlinear data uses two different delimiters to distinguish data sources:
+- **`~*`** - Treebank data (from DCS CoNLL-U files) - displayed in **bold** in UI
+- **`~`** - Stanza NLP data (machine-generated) - displayed in *italic* in UI
+
+**Format**: `| word | **gloss** | lemma morph ~* POS deprel head sentPos |` (treebank)
+**Format**: `| word | **gloss** | lemma morph ~ POS deprel head sentPos |` (stanza)
+
+**Morphological Feature Priority** (highest to lowest):
+1. **Treebank** - Original DCS annotations (most accurate)
+2. **Dictionary** - Lookup from morphology table (4.7M entries)
+3. **Stanza** - Machine-generated features (fallback)
+
+The `generate_sanskrit_interlinear.py` script automatically:
+- Uses treebank feats when available (74 works have full treebank data)
+- Falls back to dictionary lookup for missing feats
+- Uses Stanza NLP as final fallback
+- Sets `is_treebank` flag to control UI styling
+
+### DCS Treebank Data Quality Issues
+
+The DCS (Digital Corpus of Sanskrit) CoNLL-U treebank data contains some structural issues:
+
+1. **Bidirectional cycles**: Some word pairs point to each other as heads
+   - Example: sentPos=3 → head=6, AND sentPos=6 → head=3
+   - Found in ~5% of sentence groups in Rig Veda
+
+2. **Duplicate sentPos values**: Multiple words claim the same sentence position
+   - Common in complex verses with coordination structures
+
+**UI Handling**: Both Android (`TranslationAdapter.kt`) and iOS (`InterlinearTextView.swift`) have cycle detection in the `printNode` function:
+- Tracks visited nodes to prevent infinite recursion
+- Maximum depth limit of 100
+- Displays `[cycle detected at X]` when cycles are encountered
+
+This is a data quality issue in the source DCS treebank, not a parsing bug. The cycle detection ensures the app never crashes regardless of malformed tree data.
 
 ## Translation Alignment System
 

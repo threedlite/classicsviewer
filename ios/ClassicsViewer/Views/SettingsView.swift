@@ -9,6 +9,7 @@ struct SettingsView: View {
     @AppStorage("colorScheme") private var colorScheme: ColorScheme = .system
     @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
     @AppStorage("showInterlinearFirst") private var showInterlinearFirst: Bool = false
+    @AppStorage("enableDependencyTree") private var enableDependencyTree: Bool = false
 
     @State private var showingDatabaseImporter = false
     @State private var showingImportAlert = false
@@ -64,6 +65,9 @@ struct SettingsView: View {
 
                     // Show Interlinear First
                     Toggle("Show Interlinear First", isOn: $showInterlinearFirst)
+
+                    // Enable Sentence Tree (Experimental)
+                    Toggle("Enable sentence tree [Experimental]", isOn: $enableDependencyTree)
                 }
 
                 // Downloads Section (On-Demand Resources)

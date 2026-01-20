@@ -24,6 +24,7 @@ object PreferencesManager {
     private const val KEY_INTERLINEAR_FIRST = "interlinear_first"
     private const val KEY_USE_FULL_DATABASE = "use_full_database"
     private const val KEY_FULL_AUDIO_INSTALLED = "full_audio_installed"
+    private const val KEY_ENABLE_DEPENDENCY_TREE = "enable_dependency_tree"
 
     private val gson = Gson()
     
@@ -110,6 +111,15 @@ object PreferencesManager {
 
     fun setFullAudioInstalled(context: Context, installed: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_FULL_AUDIO_INSTALLED, installed).apply()
+    }
+
+    // Dependency tree display preference (experimental)
+    fun getEnableDependencyTree(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_ENABLE_DEPENDENCY_TREE, false)
+    }
+
+    fun setEnableDependencyTree(context: Context, enable: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_ENABLE_DEPENDENCY_TREE, enable).apply()
     }
 
     // Navigation state persistence

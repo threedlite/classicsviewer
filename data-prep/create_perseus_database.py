@@ -6944,12 +6944,13 @@ def process_text_file(xml_path, work_id, cursor, language):
                 # Extract lines from this book
                 lines = []
                 
-                # Check if this book contains poem subdivisions (for Latin poetry)
+                # Check if this book contains poem subdivisions (for Latin poetry and Greek Anthology)
+                # Greek Anthology uses 'chapter' in Books 1-6 (grc6) and 'epigram' in Books 7-16 (grc7-10)
                 poem_divs = []
                 for subdiv in div.iter():
-                    if (is_div_tag(subdiv.tag) and 
-                        subdiv.get('type') == 'textpart' and 
-                        subdiv.get('subtype') in ['poem', 'epigram']):
+                    if (is_div_tag(subdiv.tag) and
+                        subdiv.get('type') == 'textpart' and
+                        subdiv.get('subtype') in ['poem', 'epigram', 'chapter']):
                         poem_divs.append(subdiv)
                 
                 if poem_divs:
@@ -6958,9 +6959,37 @@ def process_text_file(xml_path, work_id, cursor, language):
                     sequential_line_num = 1
                     ctx = LineAnnotationContext()
 
+                    # Greek Anthology (tlg7000) specific: track epigram number for first line
+                    is_greek_anthology = work_id.startswith('tlg7000')
+
                     for poem_div in poem_divs:
                         # Reset context and check for head in this poem div
                         ctx.reset_for_new_section()
+
+                        # Greek Anthology: capture epigram number and author for first line
+                        epigram_info = None
+                        if is_greek_anthology:
+                            epigram_n = poem_div.get('n', '')
+                            epigram_author = None
+                            # Extract author from <docAuthor> tag
+                            for child in poem_div:
+                                if child.tag.endswith('}docAuthor') or child.tag == 'docAuthor':
+                                    # Get author name from <foreign> or direct text
+                                    for foreign in child.iter():
+                                        if foreign.tag.endswith('}foreign') or foreign.tag == 'foreign':
+                                            epigram_author = foreign.text.strip() if foreign.text else None
+                                            break
+                                    if not epigram_author:
+                                        epigram_author = get_text_content_simple(child).strip()
+                                    break
+                            if epigram_n:
+                                if epigram_author:
+                                    epigram_info = f"{book_num}.{epigram_n} ({epigram_author})"
+                                else:
+                                    epigram_info = f"{book_num}.{epigram_n}"
+
+                        first_line_of_epigram = True
+
                         for child in poem_div:
                             if is_head_tag(child.tag):
                                 text = get_text_content_simple(child).strip()
@@ -6984,6 +7013,15 @@ def process_text_file(xml_path, work_id, cursor, language):
                                         if pb:
                                             text = f"{pb} {text}"
                                         annotation = ctx.get_prefix_for_line()
+
+                                        # Greek Anthology: prepend epigram info to first line of each epigram
+                                        if first_line_of_epigram and epigram_info:
+                                            if annotation:
+                                                annotation = f"{epigram_info} — {annotation}"
+                                            else:
+                                                annotation = epigram_info
+                                            first_line_of_epigram = False
+
                                         lines.append({
                                             'number': sequential_line_num,
                                             'text': text,

@@ -10,6 +10,7 @@ import android.widget.ScrollView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.classicsviewer.app.databinding.ItemTranslationSegmentBinding
 import com.classicsviewer.app.fragments.TranslationDisplayItem
@@ -18,25 +19,40 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * Tree data from sentence-aware dependency parsing.
- * Parsed from morph field format: "lemma morph ~ POS deprel head sentPos"
+ * Parsed from morph field format: "lemma morph ~* POS deprel head sentPos" (treebank)
+ * or: "lemma morph ~ POS deprel head sentPos" (Stanza-derived)
  */
 private data class TreeData(
     val pos: String,      // UPOS tag (NOUN, VERB, ADJ, etc.)
     val deprel: String,   // Universal Dependencies relation (nsubj, obj, etc.)
     val head: Int,        // Sentence position of head word (0 = ROOT)
-    val sentPos: Int      // This word's position in the full sentence
+    val sentPos: Int,     // This word's position in the full sentence
+    val isTreebank: Boolean  // True if from original treebank data, false if Stanza-derived
 )
 
 /**
- * Parse enhanced morph format: "lemma morph ~ POS deprel head sentPos"
- * Returns the display part (before ~) and optional tree data (after ~)
+ * Parse enhanced morph format:
+ * - Treebank: "lemma morph ~* POS deprel head sentPos"
+ * - Stanza:   "lemma morph ~ POS deprel head sentPos"
+ * Returns the display part (before delimiter) and optional tree data (after delimiter)
  */
 private fun parseEnhancedMorph(morphField: String): Pair<String, TreeData?> {
-    if (!morphField.contains(" ~ ")) {
-        return Pair(morphField, null)  // Backward compatible
+    // Check for treebank delimiter (~*) first, then Stanza delimiter (~)
+    val isTreebank: Boolean
+    val parts: List<String>
+
+    when {
+        morphField.contains(" ~* ") -> {
+            isTreebank = true
+            parts = morphField.split(" ~* ")
+        }
+        morphField.contains(" ~ ") -> {
+            isTreebank = false
+            parts = morphField.split(" ~ ")
+        }
+        else -> return Pair(morphField, null)  // No delimiter found
     }
 
-    val parts = morphField.split(" ~ ")
     val displayMorph = parts[0].trim()
 
     if (parts.size < 2) {
@@ -52,7 +68,8 @@ private fun parseEnhancedMorph(morphField: String): Pair<String, TreeData?> {
         pos = treeParts[0],
         deprel = treeParts[1],
         head = treeParts[2].toIntOrNull() ?: 0,
-        sentPos = treeParts.getOrNull(3)?.toIntOrNull() ?: 0
+        sentPos = treeParts.getOrNull(3)?.toIntOrNull() ?: 0,
+        isTreebank = isTreebank
     )
 
     return Pair(displayMorph, treeData)
@@ -63,7 +80,16 @@ class TranslationAdapter(
     private val invertColors: Boolean = false,
     private val onWordClick: ((String) -> Unit)? = null
 ) : RecyclerView.Adapter<TranslationAdapter.ViewHolder>() {
-    
+
+    companion object {
+        // Safety limit to prevent crashes from excessively large sentences (e.g., Sanskrit texts)
+        private const val MAX_SENTENCE_WORDS = 2000
+        // Maximum words to display in tree view before showing warning (prevents ANR)
+        private const val MAX_TREE_DISPLAY_WORDS = 300
+        // Maximum words to render in interlinear view (prevents crash on very long lines)
+        private const val MAX_INTERLINEAR_WORDS = 200
+    }
+
     // Maintain private reference for internal use
     private val segments: List<TranslationDisplayItem> = items
     
@@ -130,7 +156,15 @@ class TranslationAdapter(
             val wrapEnabled = PreferencesManager.getWrapInterlinear(holder.itemView.context)
 
             // Parse Markdown tables once for both modes
-            val tables = parseMarkdownTables(segment.text)
+            val allTables = parseMarkdownTables(segment.text)
+            // Limit display to MAX_SENTENCE_WORDS to prevent crash on very long lines
+            val tables = if (allTables.size > MAX_SENTENCE_WORDS) {
+                allTables.take(MAX_SENTENCE_WORDS)
+            } else {
+                allTables
+            }
+            // Track if line is too large for tree display (prevents ANR on click)
+            val treeDisabledForLine = allTables.size > MAX_INTERLINEAR_WORDS
 
             if (wrapEnabled) {
                 // Use wrapping container
@@ -140,7 +174,7 @@ class TranslationAdapter(
 
                 // Create views for each word, passing all words for tree building
                 tables.forEachIndexed { idx, rows ->
-                    val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context, tables, idx, position)
+                    val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context, tables, idx, position, treeDisabledForLine)
                     holder.binding.interlinearWrapContainer.addView(table)
                 }
             } else {
@@ -151,7 +185,7 @@ class TranslationAdapter(
 
                 // Create views for each word, passing all words for tree building
                 tables.forEachIndexed { idx, rows ->
-                    val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context, tables, idx, position)
+                    val table = createWordTable(rows, fontSize, invertColors, holder.itemView.context, tables, idx, position, treeDisabledForLine)
                     holder.binding.interlinearContainer.addView(table)
                 }
             }
@@ -231,6 +265,7 @@ class TranslationAdapter(
      * @param allWordsInLine All words in the line (for tree building)
      * @param wordIndex Index of this word in the line (0-based)
      * @param segmentPosition Position of this segment in the adapter (for finding adjacent segments)
+     * @param treeDisabled If true, tree click handler is disabled (for very long lines that would crash)
      */
     private fun createWordTable(
         rows: List<String>,
@@ -239,7 +274,8 @@ class TranslationAdapter(
         context: android.content.Context,
         allWordsInLine: List<List<String>>? = null,
         wordIndex: Int = 0,
-        segmentPosition: Int = 0
+        segmentPosition: Int = 0,
+        treeDisabled: Boolean = false
     ): TableLayout {
         return TableLayout(context).apply {
             layoutParams = ViewGroup.MarginLayoutParams(
@@ -291,11 +327,21 @@ class TranslationAdapter(
                             setTypeface(null, Typeface.BOLD)
                         }
                         2 -> {
-                            // Morphology - italic, clickable if tree data exists
-                            setTypeface(null, Typeface.ITALIC)
-
+                            // Morphology - style depends on data source:
+                            // Bold for treebank data (~*), italic for Stanza-derived data (~)
+                            // Skip tree for very long lines (treeDisabled) to prevent ANR/crash
                             val (_, treeData) = parseEnhancedMorph(text)
-                            if (treeData != null && allWordsInLine != null) {
+
+                            if (treeData?.isTreebank == true) {
+                                // Treebank data: bold
+                                setTypeface(null, Typeface.BOLD)
+                            } else {
+                                // Stanza-derived data or no tree: italic
+                                setTypeface(null, Typeface.ITALIC)
+                            }
+
+                            val dependencyTreeEnabled = PreferencesManager.getEnableDependencyTree(context)
+                            if (treeData != null && allWordsInLine != null && dependencyTreeEnabled && !treeDisabled) {
                                 isClickable = true
                                 isFocusable = true
                                 setOnClickListener {
@@ -350,6 +396,16 @@ class TranslationAdapter(
         // Gather all words from segments that form this sentence
         val allSentenceWords = gatherSentenceWords(segmentPosition)
 
+        // Guard check: prevent ANR on very large sentences (e.g., Atharvaveda prose sections)
+        if (allSentenceWords.size > MAX_TREE_DISPLAY_WORDS) {
+            Toast.makeText(
+                context,
+                "Tree too large to display (${allSentenceWords.size} words)",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
         // Build tree structure from all sentence words
         val treeText = buildDependencyTree(allSentenceWords, clickedWordSentPos)
 
@@ -403,8 +459,19 @@ class TranslationAdapter(
 
         // Add current segment words
         currentWords.forEach { (rows, sentPos, _) ->
+            if (allWords.size >= MAX_SENTENCE_WORDS) return@forEach
             seenSentPositions.add(sentPos)
             allWords.add(rows)
+        }
+
+        // Safety check: if we hit the limit, return immediately without expanding
+        if (allWords.size >= MAX_SENTENCE_WORDS) {
+            return allWords.sortedBy { rows ->
+                if (rows.size >= 3) {
+                    val (_, treeData) = parseEnhancedMorph(rows[2])
+                    treeData?.sentPos ?: 0
+                } else 0
+            }
         }
 
         val currentMinPos = currentWords.minOfOrNull { it.second } ?: 1
@@ -413,7 +480,7 @@ class TranslationAdapter(
         // Expand backward to find sentence start (sentPos = 1)
         var prevSegment = startSegmentPos - 1
         var expectedMinPos = currentMinPos
-        while (prevSegment >= 0 && expectedMinPos > 1) {
+        while (prevSegment >= 0 && expectedMinPos > 1 && allWords.size < MAX_SENTENCE_WORDS) {
             // Skip non-interlinear segments
             if (!isInterlinear(prevSegment)) {
                 prevSegment--
@@ -434,8 +501,9 @@ class TranslationAdapter(
                 break
             }
 
-            // Add words from previous segment
+            // Add words from previous segment (with safety limit)
             prevWords.forEach { (rows, sentPos, _) ->
+                if (allWords.size >= MAX_SENTENCE_WORDS) return@forEach
                 if (!seenSentPositions.contains(sentPos)) {
                     seenSentPositions.add(sentPos)
                     allWords.add(rows)
@@ -448,7 +516,7 @@ class TranslationAdapter(
         // Expand forward to find sentence end
         var nextSegment = startSegmentPos + 1
         var expectedMaxPos = currentMaxPos
-        while (nextSegment < segments.size) {
+        while (nextSegment < segments.size && allWords.size < MAX_SENTENCE_WORDS) {
             // Skip non-interlinear segments
             if (!isInterlinear(nextSegment)) {
                 nextSegment++
@@ -469,8 +537,9 @@ class TranslationAdapter(
                 break
             }
 
-            // Add words from next segment
+            // Add words from next segment (with safety limit)
             nextWords.forEach { (rows, sentPos, _) ->
+                if (allWords.size >= MAX_SENTENCE_WORDS) return@forEach
                 if (!seenSentPositions.contains(sentPos)) {
                     seenSentPositions.add(sentPos)
                     allWords.add(rows)
@@ -608,20 +677,33 @@ class TranslationAdapter(
         // Build tree text
         val sb = StringBuilder()
         sb.appendLine("=".repeat(50))
-        sb.appendLine("Dependency Tree (${nodes.size} words)")
+        sb.appendLine("Sentence Tree (${nodes.size} words)")
         sb.appendLine("=".repeat(50))
         sb.appendLine("ROOT")
 
-        // Recursive function to print tree nodes
-        fun printNode(node: WordNode, prefix: String, isLast: Boolean) {
+        // Track visited nodes to prevent infinite recursion from cycles in data
+        val visited = mutableSetOf<Int>()
+
+        // Recursive function to print tree nodes with cycle protection
+        fun printNode(node: WordNode, prefix: String, isLast: Boolean, depth: Int) {
+            // Prevent infinite recursion: max depth and cycle detection
+            if (depth > 100 || node.sentPos in visited) {
+                if (node.sentPos in visited) {
+                    sb.appendLine("$prefix${if (isLast) "└── " else "├── "}[cycle detected at ${node.sentPos}]")
+                }
+                return
+            }
+            visited.add(node.sentPos)
+
             val connector = if (isLast) "└── " else "├── "
             val highlight = if (node.sentPos == highlightSentPos) " ◀" else ""
             sb.appendLine("$prefix$connector[${node.sentPos}] ${node.greek}$highlight (${node.pos}, ${node.deprel})")
 
             val childPrefix = prefix + if (isLast) "    " else "│   "
-            val children = nodes.filter { it.head == node.sentPos }
+            // Filter out self-references and already visited nodes
+            val children = nodes.filter { it.head == node.sentPos && it.sentPos != node.sentPos && it.sentPos !in visited }
             children.forEachIndexed { i, child ->
-                printNode(child, childPrefix, i == children.lastIndex)
+                printNode(child, childPrefix, i == children.lastIndex, depth + 1)
             }
         }
 
@@ -637,7 +719,7 @@ class TranslationAdapter(
             }
         } else {
             roots.forEachIndexed { i, root ->
-                printNode(root, "", i == roots.lastIndex)
+                printNode(root, "", i == roots.lastIndex, 0)
             }
         }
 

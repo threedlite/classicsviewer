@@ -36,28 +36,6 @@ class TreebankWord:
     unsandhied: str     # Unsandhied form if available
 
 
-# Works known to have treebank annotations (Vedic Treebank subset)
-# Discovered by scanning for non-empty HEAD/DEPREL fields
-TREEBANK_WORKS = {
-    'Aitareyopaniṣad',
-    'Atharvaveda (Śaunaka)',
-    'Chāndogyopaniṣad',
-    'Gautamadharmasūtra',
-    'Hiraṇyakeśigṛhyasūtra',
-    'Khādiragṛhyasūtra',
-    'Manusmṛti',
-    'Muṇḍakopaniṣad',
-    'Nyāyabindu',
-    'Vaitānasūtra',
-    'Vārāhagṛhyasūtra',
-    'Āpastambagṛhyasūtra',
-    'Āśvālāyanaśrautasūtra',
-    'Śvetāśvataropaniṣad',
-    'Śāṅkhāyanāraṇyaka',
-    'Ṛgveda',
-}
-
-
 def parse_misc_field(misc: str) -> Dict[str, str]:
     """Parse CoNLL-U MISC field into key-value pairs."""
     if not misc or misc == '_':
@@ -113,9 +91,8 @@ class SanskritTreebankLoader:
 
             work_name = work_dir.name
 
-            # Only process works known to have treebank data
-            if work_name not in TREEBANK_WORKS:
-                continue
+            # Process all works - tree data is determined by HEAD/DEPREL fields in files
+            # (removed TREEBANK_WORKS filter which limited to only 16 Vedic works)
 
             self.index[work_name] = {}
             self.chapter_map[work_name] = {}

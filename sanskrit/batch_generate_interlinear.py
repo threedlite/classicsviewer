@@ -42,6 +42,14 @@ import argparse
 import multiprocessing as mp
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
+
+# CRITICAL: Use 'fork' start method so worker processes inherit loaded modules (Stanza)
+# Without this, workers spawn with fresh Python and can't find Stanza
+try:
+    mp.set_start_method('fork')
+except RuntimeError:
+    pass  # Already set
+
 from generate_sanskrit_interlinear import SanskritInterlinearGenerator
 
 
@@ -222,6 +230,16 @@ def batch_generate(db_path: str, output_dir: Path, num_workers: int = 1):
     print("  - TEI XML file (with translations if available)\n")
 
     start_time = time.time()
+
+    # Pre-load Stanza before spawning workers (fork will inherit it)
+    if num_workers > 1:
+        print("Pre-loading Stanza Sanskrit models for workers...")
+        from generate_sanskrit_interlinear import get_stanza_nlp
+        nlp = get_stanza_nlp()
+        if nlp:
+            print("  ✓ Stanza loaded, workers will inherit via fork\n")
+        else:
+            print("  ⚠ Stanza not available, workers will run without morph data\n")
 
     # Process works
     if num_workers > 1:

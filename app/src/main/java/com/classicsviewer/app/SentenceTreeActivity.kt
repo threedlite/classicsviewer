@@ -25,6 +25,7 @@ class SentenceTreeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_sentence_tree)
 
         // Get data from intent
@@ -49,6 +50,15 @@ class SentenceTreeActivity : AppCompatActivity() {
             treeTextView.setTextColor(0xFFFFFFFF.toInt())
             treeTextView.setBackgroundColor(0xFF000000.toInt())
             window.decorView.setBackgroundColor(0xFF000000.toInt())
+        }
+
+        // Set up close button
+        val closeButton = findViewById<TextView>(R.id.closeButton)
+        if (invertColors) {
+            closeButton.setTextColor(0xFF666666.toInt())
+        }
+        closeButton.setOnClickListener {
+            finish()
         }
 
         // Set up legend link
