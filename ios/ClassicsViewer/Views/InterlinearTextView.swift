@@ -69,6 +69,7 @@ struct InterlinearTextView: View {
     let text: String
     let fontSize: CGFloat
     let onWordTapped: ((String) -> Void)?
+    let onMorphTapped: ((_ segments: [TranslationSegment], _ segmentIndex: Int, _ sentPos: Int) -> Void)?
 
     // For sentence tree gathering across segments
     let segments: [TranslationSegment]?
@@ -78,26 +79,23 @@ struct InterlinearTextView: View {
     @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
     @AppStorage("enableDependencyTree") private var enableDependencyTree: Bool = false
 
-    // State for sentence tree popup
-    @State private var showingSentenceTree = false
-    @State private var sentenceTreeText = ""
-    @State private var showingLegend = false
 
     // Safety limit to prevent crashes from excessively large sentences (e.g., Sanskrit texts)
     private let maxSentenceWords = 2000
     // Maximum words before disabling tree display (prevents crash on very long lines)
     private let maxInterlinearWords = 200
 
-    init(text: String, fontSize: CGFloat, segments: [TranslationSegment]? = nil, segmentIndex: Int? = nil, onWordTapped: ((String) -> Void)? = nil) {
+    init(text: String, fontSize: CGFloat, segments: [TranslationSegment]? = nil, segmentIndex: Int? = nil, onWordTapped: ((String) -> Void)? = nil, onMorphTapped: ((_ segments: [TranslationSegment], _ segmentIndex: Int, _ sentPos: Int) -> Void)? = nil) {
         self.text = text
         self.fontSize = fontSize
         self.segments = segments
         self.segmentIndex = segmentIndex
         self.onWordTapped = onWordTapped
+        self.onMorphTapped = onMorphTapped
     }
 
     var body: some View {
-        let tables = parseMarkdownTables(text)
+        let tables = Self.parseMarkdownTables(text)
         let allValidTables = tables.filter { $0.count == 3 }
         // Limit display to maxSentenceWords to prevent crash on very long lines
         let validTables = allValidTables.count > maxSentenceWords
@@ -134,15 +132,6 @@ struct InterlinearTextView: View {
                 horizontalScrollView(validTables: validTables, treeDisabled: treeDisabledForLine)
             }
         }
-        .fullScreenCover(isPresented: $showingSentenceTree) {
-            SentenceTreeFullScreen(
-                treeText: sentenceTreeText,
-                showingLegend: $showingLegend
-            )
-        }
-        .sheet(isPresented: $showingLegend) {
-            DeprelLegendSheet()
-        }
     }
 
     /// Horizontal scroll view for interlinear text
@@ -161,7 +150,7 @@ struct InterlinearTextView: View {
     /// Parse Markdown table structure
     /// Expected format: | greek |\n| **gloss** |\n| lemma morph |  (separated by double space for next word)
     /// Only supports tables and bold (**text**) - no other Markdown syntax
-    private func parseMarkdownTables(_ markdown: String) -> [[String]] {
+    static func parseMarkdownTables(_ markdown: String) -> [[String]] {
         var tables: [[String]] = []
 
         // Split by double space to get individual word tables
@@ -245,19 +234,18 @@ struct InterlinearTextView: View {
 
             // Row 2: Morphology - style depends on data source:
             // Bold for treebank data (~*), italic for Stanza-derived data (~)
-            // Skip tree for very long lines (treeDisabled) to prevent crash
             Text(displayMorph)
                 .font(.system(size: fontSize * 0.8, weight: treeData?.isTreebank == true ? .bold : .regular))
                 .italic(treeData?.isTreebank != true)
                 .foregroundColor(isLight ? Color(hex: "#666666") : Color(hex: "#999999"))
-                .lineLimit(1)  // Never wrap text within cell
+                .lineLimit(1)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
                 .background(cellBackground)
                 .onTapGesture {
-                    if enableDependencyTree, hasTreeData, !treeDisabled, let treeData = treeData, let segIdx = segmentIndex {
-                        showSentenceTree(clickedWordSentPos: treeData.sentPos)
+                    if enableDependencyTree, let td = treeData, let segs = segments, let segIdx = segmentIndex, !treeDisabled {
+                        onMorphTapped?(segs, segIdx, td.sentPos)
                     }
                 }
         }
@@ -266,19 +254,7 @@ struct InterlinearTextView: View {
         .cornerRadius(4)
     }
 
-    // MARK: - Sentence Tree Functions
-
-    /// Show the sentence tree popup for the clicked word
-    private func showSentenceTree(clickedWordSentPos: Int) {
-        guard let segments = segments, let segIdx = segmentIndex else { return }
-
-        // Gather all words from segments that form this sentence
-        let allSentenceWords = gatherSentenceWords(segments: segments, startSegmentPos: segIdx)
-
-        // Build tree structure from all sentence words
-        sentenceTreeText = buildDependencyTree(words: allSentenceWords, highlightSentPos: clickedWordSentPos)
-        showingSentenceTree = true
-    }
+    // MARK: - Sentence Tree Functions (static for calling from parent view)
 
     /// Gather all words from segments that form a complete sentence.
     /// Expands backward and forward from the current segment until sentence boundaries are found.
@@ -286,7 +262,7 @@ struct InterlinearTextView: View {
     ///
     /// Note: Segments alternate between English translations and Interlinear, so we must
     /// SKIP non-interlinear segments when expanding (use continue, not break).
-    private func gatherSentenceWords(segments: [TranslationSegment], startSegmentPos: Int) -> [[String]] {
+    static func gatherSentenceWords(segments: [TranslationSegment], startSegmentPos: Int, maxWords: Int = 2000) -> [[String]] {
         var allWords: [[String]] = []
         var seenSentPositions = Set<Int>()
 
@@ -300,7 +276,7 @@ struct InterlinearTextView: View {
         func getWordsWithTreeData(_ segmentPos: Int) -> [(rows: [String], sentPos: Int, head: Int)] {
             guard isInterlinear(segmentPos) else { return [] }
 
-            let tables = parseMarkdownTables(segments[segmentPos].translationText)
+            let tables = InterlinearTextView.parseMarkdownTables(segments[segmentPos].translationText)
             var result: [(rows: [String], sentPos: Int, head: Int)] = []
 
             for rows in tables {
@@ -319,13 +295,13 @@ struct InterlinearTextView: View {
 
         // Add current segment words
         for (rows, sentPos, _) in currentWords {
-            if allWords.count >= maxSentenceWords { break }
+            if allWords.count >= maxWords { break }
             seenSentPositions.insert(sentPos)
             allWords.append(rows)
         }
 
         // Safety check: if we hit the limit, return immediately without expanding
-        if allWords.count >= maxSentenceWords {
+        if allWords.count >= maxWords {
             return allWords.sorted { word1, word2 in
                 guard word1.count >= 3, word2.count >= 3 else { return false }
                 let (_, td1) = parseEnhancedMorph(word1[2])
@@ -340,7 +316,7 @@ struct InterlinearTextView: View {
         // Expand backward to find sentence start (sentPos = 1)
         var prevSegment = startSegmentPos - 1
         var expectedMinPos = currentMinPos
-        while prevSegment >= 0 && expectedMinPos > 1 && allWords.count < maxSentenceWords {
+        while prevSegment >= 0 && expectedMinPos > 1 && allWords.count < maxWords {
             // CRITICAL FIX: Skip non-interlinear segments (use continue, not break)
             if !isInterlinear(prevSegment) {
                 prevSegment -= 1
@@ -363,7 +339,7 @@ struct InterlinearTextView: View {
 
             // Add words from previous segment (with safety limit)
             for (rows, sentPos, _) in prevWords {
-                if allWords.count >= maxSentenceWords { break }
+                if allWords.count >= maxWords { break }
                 if !seenSentPositions.contains(sentPos) {
                     seenSentPositions.insert(sentPos)
                     allWords.append(rows)
@@ -376,7 +352,7 @@ struct InterlinearTextView: View {
         // Expand forward to find sentence end
         var nextSegment = startSegmentPos + 1
         var expectedMaxPos = currentMaxPos
-        while nextSegment < segments.count && allWords.count < maxSentenceWords {
+        while nextSegment < segments.count && allWords.count < maxWords {
             // CRITICAL FIX: Skip non-interlinear segments (use continue, not break)
             if !isInterlinear(nextSegment) {
                 nextSegment += 1
@@ -399,7 +375,7 @@ struct InterlinearTextView: View {
 
             // Add words from next segment (with safety limit)
             for (rows, sentPos, _) in nextWords {
-                if allWords.count >= maxSentenceWords { break }
+                if allWords.count >= maxWords { break }
                 if !seenSentPositions.contains(sentPos) {
                     seenSentPositions.insert(sentPos)
                     allWords.append(rows)
@@ -422,7 +398,7 @@ struct InterlinearTextView: View {
     /// - Parameters:
     ///   - words: All words in the sentence (gathered from adjacent segments)
     ///   - highlightSentPos: The sentence position of the clicked word (to highlight)
-    private func buildDependencyTree(words: [[String]], highlightSentPos: Int) -> String {
+    static func buildDependencyTree(words: [[String]], highlightSentPos: Int) -> String {
         // Parse tree data from each word, including sentence ID
         struct WordNode {
             let greek: String
@@ -651,46 +627,52 @@ struct FlowLayout: Layout {
 /// Supports horizontal and vertical scrolling for fixed-font tree layout
 struct SentenceTreeFullScreen: View {
     let treeText: String
-    @Binding var showingLegend: Bool
+    @State private var showingLegend: Bool = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
     @AppStorage("fontSize") private var fontSize: Double = 20
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header with Close button and Legend link
-            HStack {
-                Button(action: { dismiss() }) {
-                    HStack(spacing: 4) {
-                        Image(systemName: "xmark")
-                            .font(.body.weight(.semibold))
-                        Text("Close")
-                            .fontWeight(.semibold)
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                // Header with Close button and Legend link
+                HStack {
+                    Button(action: { dismiss() }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "xmark")
+                                .font(.body.weight(.semibold))
+                            Text("Close")
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundColor(.gray)
                     }
-                    .foregroundColor(.gray)
+
+                    Spacer()
+
+                    Button("Legend") {
+                        showingLegend = true
+                    }
+                    .foregroundColor(.blue)
+                    .fontWeight(.semibold)
                 }
+                .padding()
+                .background(colorScheme == .dark ? Color.black : Color.white)
 
-                Spacer()
-
-                Button("Legend") {
-                    showingLegend = true
+                // 2D scrollable tree content
+                ScrollView([.horizontal, .vertical], showsIndicators: true) {
+                    Text(treeText)
+                        .font(.system(size: fontSize, design: .monospaced))
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .padding()
+                        .fixedSize()  // Allow content to size naturally for scrolling
                 }
-                .foregroundColor(.blue)
-                .fontWeight(.semibold)
-            }
-            .padding()
-            .background(colorScheme == .dark ? Color.black : Color.white)
-
-            // 2D scrollable tree content
-            ScrollView([.horizontal, .vertical], showsIndicators: true) {
-                Text(treeText)
-                    .font(.system(size: fontSize, design: .monospaced))
-                    .foregroundColor(colorScheme == .dark ? .white : .black)
-                    .padding()
-                    .fixedSize(horizontal: true, vertical: false)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .background(colorScheme == .dark ? Color.black : Color.white)
+        .sheet(isPresented: $showingLegend) {
+            DeprelLegendSheet()
+        }
     }
 }
 

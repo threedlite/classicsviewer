@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-01-17T14:46:38.768989
+Generated: 2026-01-19T16:47:49.715114
 Mode: full
 
 Total Authors: 135
@@ -8,7 +8,7 @@ Total Books: 3502
 Total Lines: 1,036,241
 Translation Segments: 1,265,039
 Build Time: 7.3 minutes
-Database Size: 4125.4MB → 903.8MB compressed (21.9%)
+Database Size: 4123.1MB → 903.5MB compressed (21.9%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,106,604
 
@@ -18,7 +18,7 @@ greek:
   Authors: 91
   Works: 772
   Lines: 643,739
-  Words: 10,055,593
+  Words: 10,055,458
 
 latin:
   Authors: 40
@@ -2290,17 +2290,17 @@ Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from
 [Greek Anthology]
 Greek Anthology / Greek Anthology - 21,065 lines total, 16 books, max_lines/book=4,167, max_char=98 [Perseus]
 Greek Anthology / Greek Anthology / Book 1 - 499 lines
-Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 499 segments [Limited (15% coverage)]
+Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 499 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 2 - 416 lines
 Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 416 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 3 - 83 lines
-Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 83 segments [Limited (7% coverage)]
+Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 83 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 4 - 215 lines
-Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 215 segments [Fair (62% coverage)]
+Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 215 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 5 - 1,746 lines
-Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 1746 segments [Limited (1% coverage)]
+Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 1746 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 6 - 2,005 lines
-Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 2005 segments [Limited (1% coverage)]
+Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 2005 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 7 - 3,852 lines
 Greek Anthology / Greek Anthology translations: Interlinear (Beta, generated from app dictionary and treebank) 3852 segments [Excellent (100% coverage)]
 Greek Anthology / Greek Anthology / Book 8 - 1,049 lines

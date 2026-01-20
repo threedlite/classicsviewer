@@ -2,6 +2,12 @@ import SwiftUI
 import AVFoundation
 import UniformTypeIdentifiers
 
+/// Wrapper for sentence tree content to use with item-based sheet binding
+struct SentenceTreeContent: Identifiable {
+    let id = UUID()
+    let treeText: String
+}
+
 struct ReaderView: View {
     @StateObject private var viewModel: ReaderViewModel
     @StateObject private var audioPlayer = AudioPlayer.shared
@@ -39,6 +45,9 @@ struct ReaderView: View {
     @State private var csvDocument: CSVDocument?
     @State private var pdfDocument: PdfDocument?
     @State private var exportFilename = ""
+    // Sentence tree state (moved from InterlinearTextView to avoid multiple sheet instances)
+    // Using optional item binding so data and presentation are atomic
+    @State private var sentenceTreeContent: SentenceTreeContent? = nil
     @EnvironmentObject var searchContext: SearchNavigationContext
     @Environment(\.colorScheme) private var colorScheme
 
@@ -271,6 +280,9 @@ struct ReaderView: View {
                 language: viewModel.author.language,
                 onExport: performExport
             )
+        }
+        .fullScreenCover(item: $sentenceTreeContent) { content in
+            SentenceTreeFullScreen(treeText: content.treeText)
         }
         .modifier(FileExporterModifier(
             showingTxtExporter: $showingTxtExporter,
@@ -602,6 +614,11 @@ struct ReaderView: View {
                                     wordPosition: 0
                                 )
                                 selectedWord = word
+                            },
+                            onMorphTapped: { segs, segIdx, sentPos in
+                                let words = InterlinearTextView.gatherSentenceWords(segments: segs, startSegmentPos: segIdx)
+                                let treeText = InterlinearTextView.buildDependencyTree(words: words, highlightSentPos: sentPos)
+                                sentenceTreeContent = SentenceTreeContent(treeText: treeText)
                             }
                         )
                     } else {
@@ -664,6 +681,11 @@ struct ReaderView: View {
                                     wordPosition: 0
                                 )
                                 selectedWord = word
+                            },
+                            onMorphTapped: { segs, segIdx, sentPos in
+                                let words = InterlinearTextView.gatherSentenceWords(segments: segs, startSegmentPos: segIdx)
+                                let treeText = InterlinearTextView.buildDependencyTree(words: words, highlightSentPos: sentPos)
+                                sentenceTreeContent = SentenceTreeContent(treeText: treeText)
                             }
                         )
                     } else {
@@ -739,6 +761,11 @@ struct ReaderView: View {
                                     wordPosition: 0
                                 )
                                 selectedWord = word
+                            },
+                            onMorphTapped: { segs, segIdx, sentPos in
+                                let words = InterlinearTextView.gatherSentenceWords(segments: segs, startSegmentPos: segIdx)
+                                let treeText = InterlinearTextView.buildDependencyTree(words: words, highlightSentPos: sentPos)
+                                sentenceTreeContent = SentenceTreeContent(treeText: treeText)
                             }
                         )
                     } else {
