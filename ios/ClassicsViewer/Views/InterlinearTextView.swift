@@ -4,19 +4,20 @@ import SwiftUI
 
 /// Tree data from sentence-aware dependency parsing.
 /// Parsed from morph field format:
-/// - Treebank: "lemma morph ~* POS deprel head sentPos"
-/// - Stanza:   "lemma morph ~ POS deprel head sentPos"
+/// - Treebank: "lemma morph ~* POS deprel head sentPos sentId"
+/// - Stanza:   "lemma morph ~ POS deprel head sentPos sentId"
 struct TreeData {
-    let pos: String      // UPOS tag (NOUN, VERB, ADJ, etc.)
-    let deprel: String   // Universal Dependencies relation (nsubj, obj, etc.)
-    let head: Int        // Sentence position of head word (0 = ROOT)
-    let sentPos: Int     // This word's position in the full sentence
-    let isTreebank: Bool // True if from original treebank data, false if Stanza-derived
+    let pos: String       // UPOS tag (NOUN, VERB, ADJ, etc.)
+    let deprel: String    // Universal Dependencies relation (nsubj, obj, etc.)
+    let head: Int         // Sentence position of head word (0 = ROOT)
+    let sentPos: Int      // This word's position in the full sentence
+    let sentId: String?   // Sentence identifier for disambiguating multiple sentences per line
+    let isTreebank: Bool  // True if from original treebank data, false if Stanza-derived
 }
 
 /// Parse enhanced morph format:
-/// - Treebank: "lemma morph ~* POS deprel head sentPos"
-/// - Stanza:   "lemma morph ~ POS deprel head sentPos"
+/// - Treebank: "lemma morph ~* POS deprel head sentPos sentId"
+/// - Stanza:   "lemma morph ~ POS deprel head sentPos sentId"
 /// Returns the display part (before delimiter) and optional tree data (after delimiter)
 func parseEnhancedMorph(_ morphField: String) -> (display: String, treeData: TreeData?) {
     // Check for treebank delimiter (~*) first, then Stanza delimiter (~)
@@ -44,11 +45,15 @@ func parseEnhancedMorph(_ morphField: String) -> (display: String, treeData: Tre
         return (displayMorph, nil)
     }
 
+    // Parse sentId (5th element, index 4) - may be "_" for missing or a sentence identifier
+    let sentId: String? = treeParts.count > 4 ? (treeParts[4] == "_" ? nil : treeParts[4]) : nil
+
     let treeData = TreeData(
         pos: treeParts[0],
         deprel: treeParts[1],
         head: Int(treeParts[2]) ?? 0,
         sentPos: treeParts.count > 3 ? (Int(treeParts[3]) ?? 0) : 0,
+        sentId: sentId,
         isTreebank: isTreebank
     )
 
@@ -418,7 +423,7 @@ struct InterlinearTextView: View {
     ///   - words: All words in the sentence (gathered from adjacent segments)
     ///   - highlightSentPos: The sentence position of the clicked word (to highlight)
     private func buildDependencyTree(words: [[String]], highlightSentPos: Int) -> String {
-        // Parse tree data from each word
+        // Parse tree data from each word, including sentence ID
         struct WordNode {
             let greek: String
             let gloss: String
@@ -426,32 +431,52 @@ struct InterlinearTextView: View {
             let deprel: String
             let head: Int           // Sentence position of head word (0 = ROOT)
             let sentPos: Int        // This word's position in full sentence
+            let sentId: String?     // Sentence identifier for disambiguating multiple sentences per line
         }
 
-        var nodes: [WordNode] = []
+        var allNodes: [WordNode] = []
+        var clickedSentId: String? = nil  // Track which sentence the clicked word belongs to
+
         for rows in words {
             guard rows.count >= 3 else { continue }
             let (_, treeData) = parseEnhancedMorph(rows[2])
             if let td = treeData, td.sentPos > 0 {
-                nodes.append(WordNode(
+                let node = WordNode(
                     greek: rows[0],
                     gloss: rows[1],
                     pos: td.pos,
                     deprel: td.deprel,
                     head: td.head,
-                    sentPos: td.sentPos
-                ))
+                    sentPos: td.sentPos,
+                    sentId: td.sentId
+                )
+                allNodes.append(node)
+                // Track which sentence contains the highlighted word
+                if td.sentPos == highlightSentPos {
+                    clickedSentId = td.sentId
+                }
             }
         }
 
-        if nodes.isEmpty {
+        if allNodes.isEmpty {
             return "No tree data available for this sentence."
+        }
+
+        // Filter to only nodes from the same sentence as the clicked word
+        // If sentence IDs are available, group by them; otherwise use all nodes
+        let nodes: [WordNode]
+        if let sentId = clickedSentId {
+            nodes = allNodes.filter { $0.sentId == sentId }
+        } else {
+            // Fallback: if no sentence ID on clicked word, use all nodes
+            nodes = allNodes
         }
 
         // Build tree text
         var lines: [String] = []
         lines.append(String(repeating: "=", count: 50))
-        lines.append("Sentence Tree (\(nodes.count) words)")
+        let sentIdLabel = clickedSentId.map { " (Sentence: \($0))" } ?? ""
+        lines.append("Sentence Tree (\(nodes.count) words)\(sentIdLabel)")
         lines.append(String(repeating: "=", count: 50))
         lines.append("ROOT")
 

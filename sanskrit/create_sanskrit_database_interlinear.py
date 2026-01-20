@@ -2197,10 +2197,78 @@ def import_sanskrit_lexicon(conn):
     conn.commit()
 
 
+def load_works_csv(csv_path):
+    """
+    Load works to include from a CSV file.
+
+    CSV format:
+        Source,Work
+        Wikisource,Bhagavad Gita
+        DCS-Pada,Rig Veda
+        DCS,Aitareyopaniṣad
+
+    Returns:
+        dict with keys:
+            - include_bg: bool (include Bhagavad Gita from Wikisource)
+            - include_rv: bool (include Rig Veda from DCS pada format)
+            - dcs_works: set of DCS work names to include (empty = all)
+    """
+    result = {
+        'include_bg': False,
+        'include_rv': False,
+        'dcs_works': set(),
+        'include_all_dcs': False
+    }
+
+    if not os.path.exists(csv_path):
+        print(f"Warning: CSV file not found: {csv_path}")
+        return result
+
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            source = row.get('Source', '').strip()
+            work = row.get('Work', '').strip()
+
+            if source == 'Wikisource' and work == 'Bhagavad Gita':
+                result['include_bg'] = True
+            elif source == 'DCS-Pada' and work == 'Rig Veda':
+                result['include_rv'] = True
+            elif source == 'DCS':
+                if work == '*':
+                    result['include_all_dcs'] = True
+                else:
+                    result['dcs_works'].add(work)
+
+    return result
+
+
 def main():
+    # Parse command line arguments
+    build_mode = 'full'  # Default to full
+    if len(sys.argv) > 1:
+        build_mode = sys.argv[1].lower()
+
+    if build_mode not in ['test', 'sample', 'full']:
+        print(f"Invalid build mode: {build_mode}")
+        print("Usage: python3 create_sanskrit_database_interlinear.py [test|sample|full]")
+        print("  test:   BG + RV only (quick test)")
+        print("  sample: BG + RV + selected DCS works with translations")
+        print("  full:   All 268 DCS works")
+        return 1
+
+    # Load works CSV for all modes
+    csv_map = {
+        'test': 'SANSKRIT_TEST.csv',
+        'sample': 'SANSKRIT_SAMPLE.csv',
+        'full': 'SANSKRIT_FULL.csv'
+    }
+    csv_path = csv_map[build_mode]
+    works_config = load_works_csv(csv_path)
+
     print("=" * 70)
-    print("Sanskrit Texts Database Creation")
-    print("All 268 DCS works")
+    print(f"Sanskrit Texts Database Creation ({build_mode.upper()} mode)")
+    print(f"Using CSV: {csv_path}")
     print("=" * 70)
 
     if not HAS_TRANSLITERATION:
@@ -2214,15 +2282,19 @@ def main():
     # Track all statistics
     all_stats = []
 
-    # Load Bhagavad Gita (in both modes - uses Wikisource, not DCS)
-    # Use unique IDs to avoid collision with potential DCS version
-    bg_verses, bg_words, bg_translations = load_bhagavad_gita(cursor)
-    all_stats.append(('Bhagavad Gita (Wikisource, with translations)', bg_verses, bg_words, bg_translations))
+    # Load Bhagavad Gita (uses Wikisource, not DCS)
+    if works_config and works_config['include_bg']:
+        bg_verses, bg_words, bg_translations = load_bhagavad_gita(cursor)
+        all_stats.append(('Bhagavad Gita (Wikisource, with translations)', bg_verses, bg_words, bg_translations))
+    else:
+        print("\nSkipping Bhagavad Gita (not in CSV)")
 
-    # Load Rig Veda (in both modes - uses DCS pada format, not conllu)
-    # Use unique IDs to avoid collision with DCS CoNLL-U version
-    rv_verses, rv_words, rv_translations = load_rigveda(cursor)
-    all_stats.append(('Rig Veda (pada format, complete with Griffith translation)', rv_verses, rv_words, rv_translations))
+    # Load Rig Veda (uses DCS pada format, not conllu)
+    if works_config and works_config['include_rv']:
+        rv_verses, rv_words, rv_translations = load_rigveda(cursor)
+        all_stats.append(('Rig Veda (pada format, complete with Griffith translation)', rv_verses, rv_words, rv_translations))
+    else:
+        print("\nSkipping Rig Veda (not in CSV)")
 
     # Mapping of DCS work names to translation files
     # Based on DCS translations directory
@@ -2238,13 +2310,34 @@ def main():
         'Vājasaneyīsaṃhitā': ('../data-sources/sanskrit/translations/VS-Griffith.txt', 'Griffith'),
     }
 
-    # Load all DCS works
-    print("\n" + "=" * 70)
-    print("Loading all DCS works...")
-    print("=" * 70)
+    # Load DCS works based on CSV configuration
+    dcs_works_to_process = []
 
-    dcs_works = discover_dcs_works()
-    print(f"\nDiscovered {len(dcs_works)} DCS works")
+    # Check if we should include any DCS works
+    include_dcs = works_config and (works_config['include_all_dcs'] or works_config['dcs_works'])
+
+    if not include_dcs:
+        print("\n" + "=" * 70)
+        print("Skipping DCS works (not specified in CSV)")
+        print("=" * 70)
+    else:
+        print("\n" + "=" * 70)
+        print("Loading DCS works...")
+        print("=" * 70)
+
+        dcs_works = discover_dcs_works()
+        print(f"\nDiscovered {len(dcs_works)} DCS works")
+
+        # Filter works based on CSV
+        if works_config['include_all_dcs']:
+            # Include all DCS works (DCS,* in CSV)
+            dcs_works_to_process = dcs_works
+            print(f"Including all {len(dcs_works_to_process)} DCS works (CSV has DCS,*)")
+        elif works_config['dcs_works']:
+            # Include only specific works from CSV
+            allowed_works = works_config['dcs_works']
+            dcs_works_to_process = [w for w in dcs_works if w['text_name'] in allowed_works or w['work_id'] in allowed_works]
+            print(f"Filtering to {len(dcs_works_to_process)} works from CSV")
 
     # Number of parallel workers (configurable)
     num_workers = 8
@@ -2253,7 +2346,7 @@ def main():
     work_list = []
     work_sizes = []  # For load balancing
 
-    for idx, work_meta in enumerate(dcs_works, 1):
+    for idx, work_meta in enumerate(dcs_works_to_process, 1):
         text_name = work_meta['text_name']
         text_dir = work_meta['text_dir']
         work_id = work_meta['work_id']
@@ -2275,89 +2368,93 @@ def main():
         work_list.append((idx, work_meta, (translation_file, translator_name)))
         work_sizes.append((idx, work_id, conllu_count))
 
-    # Sort by size descending for better load balancing
-    work_sizes.sort(key=lambda x: x[2], reverse=True)
-    work_order = {ws[0]: i for i, ws in enumerate(work_sizes)}  # Map work_index to sorted position
-
-    # Distribute works using greedy "least loaded" algorithm
-    worker_chunks = [[] for _ in range(num_workers)]
-    worker_loads = [0] * num_workers
-
-    for sorted_idx, (work_index, work_id, conllu_count) in enumerate(work_sizes):
-        # Find worker with minimum load
-        min_worker = worker_loads.index(min(worker_loads))
-        # Get the corresponding work data
-        work_data = work_list[work_index - 1]  # work_index is 1-based
-        worker_chunks[min_worker].append(work_data)
-        worker_loads[min_worker] += max(conllu_count, 1)
-
-    # Show worker assignments
-    print(f"\nRunning in PARALLEL mode ({num_workers} workers)")
-    print("Using GREEDY LOAD BALANCING:")
-    for worker_id in range(num_workers):
-        chunk_size = len(worker_chunks[worker_id])
-        total_load = worker_loads[worker_id]
-        if chunk_size > 0:
-            first_work = worker_chunks[worker_id][0]
-            print(f"  Worker {worker_id}: {chunk_size} works, load={total_load} files")
-    print()
-
-    # Create shared manager for tracking progress
-    manager = mp.Manager()
-    completed_tracker = manager.dict()
-
-    start_time = time.time()
-    total_works = len(dcs_works)
-
-    # Create worker arguments
-    worker_args = [
-        (worker_id, worker_chunks[worker_id], total_works, start_time, completed_tracker)
-        for worker_id in range(num_workers)
-        if len(worker_chunks[worker_id]) > 0
-    ]
-
-    # Process in parallel
+    # Process DCS works only if there are any
     all_parsed_results = []
 
-    print("Workers are processing... Progress will be logged by workers.\n")
-    sys.stdout.flush()
+    if work_list:
+        # Sort by size descending for better load balancing
+        work_sizes.sort(key=lambda x: x[2], reverse=True)
+        work_order = {ws[0]: i for i, ws in enumerate(work_sizes)}  # Map work_index to sorted position
 
-    with mp.Pool(num_workers) as pool:
-        async_results = []
-        for worker_arg in worker_args:
-            async_result = pool.apply_async(process_worker_chunk, args=(worker_arg,))
-            async_results.append(async_result)
+        # Distribute works using greedy "least loaded" algorithm
+        worker_chunks = [[] for _ in range(num_workers)]
+        worker_loads = [0] * num_workers
 
-        # Wait for all workers to complete
-        for async_result in async_results:
-            async_result.wait()
+        for sorted_idx, (work_index, work_id, conllu_count) in enumerate(work_sizes):
+            # Find worker with minimum load
+            min_worker = worker_loads.index(min(worker_loads))
+            # Get the corresponding work data
+            work_data = work_list[work_index - 1]  # work_index is 1-based
+            worker_chunks[min_worker].append(work_data)
+            worker_loads[min_worker] += max(conllu_count, 1)
 
-        # Collect results
-        for async_result in async_results:
-            worker_results = async_result.get()
-            all_parsed_results.extend(worker_results)
+        # Show worker assignments
+        print(f"\nRunning in PARALLEL mode ({num_workers} workers)")
+        print("Using GREEDY LOAD BALANCING:")
+        for worker_id in range(num_workers):
+            chunk_size = len(worker_chunks[worker_id])
+            total_load = worker_loads[worker_id]
+            if chunk_size > 0:
+                first_work = worker_chunks[worker_id][0]
+                print(f"  Worker {worker_id}: {chunk_size} works, load={total_load} files")
+        print()
 
-    elapsed = time.time() - start_time
-    print(f"\n\nAll workers completed in {elapsed:.1f} seconds!")
-    print(f"Parsed {len(all_parsed_results)} works")
+        # Create shared manager for tracking progress
+        manager = mp.Manager()
+        completed_tracker = manager.dict()
 
-    # Now write all parsed data to database (single-threaded)
-    print("\n" + "=" * 70)
-    print("Writing parsed data to database...")
-    print("=" * 70)
+        start_time = time.time()
+        total_works = len(dcs_works_to_process)
 
-    for i, parsed_data in enumerate(all_parsed_results, 1):
-        text_name = parsed_data['work_meta']['text_name']
-        stats = parsed_data['stats']
-        print(f"  [{i}/{len(all_parsed_results)}] Writing {text_name}...")
+        # Create worker arguments
+        worker_args = [
+            (worker_id, worker_chunks[worker_id], total_works, start_time, completed_tracker)
+            for worker_id in range(num_workers)
+            if len(worker_chunks[worker_id]) > 0
+        ]
 
-        try:
-            verses, words, translations = write_parsed_work_to_db(cursor, parsed_data, translation_map)
-            all_stats.append((text_name, verses, words, translations))
-            conn.commit()  # Commit after each work
-        except Exception as e:
-            print(f"    ✗ Error writing {text_name}: {e}")
-            continue
+        # Process in parallel
+        print("Workers are processing... Progress will be logged by workers.\n")
+        sys.stdout.flush()
+
+        with mp.Pool(num_workers) as pool:
+            async_results = []
+            for worker_arg in worker_args:
+                async_result = pool.apply_async(process_worker_chunk, args=(worker_arg,))
+                async_results.append(async_result)
+
+            # Wait for all workers to complete
+            for async_result in async_results:
+                async_result.wait()
+
+            # Collect results
+            for async_result in async_results:
+                worker_results = async_result.get()
+                all_parsed_results.extend(worker_results)
+
+        elapsed = time.time() - start_time
+        print(f"\n\nAll workers completed in {elapsed:.1f} seconds!")
+        print(f"Parsed {len(all_parsed_results)} works")
+
+        # Now write all parsed data to database (single-threaded)
+        print("\n" + "=" * 70)
+        print("Writing parsed data to database...")
+        print("=" * 70)
+
+        for i, parsed_data in enumerate(all_parsed_results, 1):
+            text_name = parsed_data['work_meta']['text_name']
+            stats = parsed_data['stats']
+            print(f"  [{i}/{len(all_parsed_results)}] Writing {text_name}...")
+
+            try:
+                verses, words, translations = write_parsed_work_to_db(cursor, parsed_data, translation_map)
+                all_stats.append((text_name, verses, words, translations))
+                conn.commit()  # Commit after each work
+            except Exception as e:
+                print(f"    ✗ Error writing {text_name}: {e}")
+                continue
+    else:
+        print("\nNo DCS works to process")
 
     # Check if any texts loaded
     total_verses_loaded = sum(stat[1] for stat in all_stats)

@@ -19,21 +19,22 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * Tree data from sentence-aware dependency parsing.
- * Parsed from morph field format: "lemma morph ~* POS deprel head sentPos" (treebank)
- * or: "lemma morph ~ POS deprel head sentPos" (Stanza-derived)
+ * Parsed from morph field format: "lemma morph ~* POS deprel head sentPos sentId" (treebank)
+ * or: "lemma morph ~ POS deprel head sentPos sentId" (Stanza-derived)
  */
 private data class TreeData(
     val pos: String,      // UPOS tag (NOUN, VERB, ADJ, etc.)
     val deprel: String,   // Universal Dependencies relation (nsubj, obj, etc.)
     val head: Int,        // Sentence position of head word (0 = ROOT)
     val sentPos: Int,     // This word's position in the full sentence
+    val sentId: String?,  // Sentence identifier for disambiguating multiple sentences per line
     val isTreebank: Boolean  // True if from original treebank data, false if Stanza-derived
 )
 
 /**
  * Parse enhanced morph format:
- * - Treebank: "lemma morph ~* POS deprel head sentPos"
- * - Stanza:   "lemma morph ~ POS deprel head sentPos"
+ * - Treebank: "lemma morph ~* POS deprel head sentPos sentId"
+ * - Stanza:   "lemma morph ~ POS deprel head sentPos sentId"
  * Returns the display part (before delimiter) and optional tree data (after delimiter)
  */
 private fun parseEnhancedMorph(morphField: String): Pair<String, TreeData?> {
@@ -64,11 +65,15 @@ private fun parseEnhancedMorph(morphField: String): Pair<String, TreeData?> {
         return Pair(displayMorph, null)
     }
 
+    // Parse sentId (5th element, index 4) - may be "_" for missing or a sentence identifier
+    val sentId = treeParts.getOrNull(4)?.let { if (it == "_") null else it }
+
     val treeData = TreeData(
         pos = treeParts[0],
         deprel = treeParts[1],
         head = treeParts[2].toIntOrNull() ?: 0,
         sentPos = treeParts.getOrNull(3)?.toIntOrNull() ?: 0,
+        sentId = sentId,
         isTreebank = isTreebank
     )
 
@@ -643,41 +648,61 @@ class TranslationAdapter(
      * @param highlightSentPos The sentence position of the clicked word (to highlight)
      */
     private fun buildDependencyTree(words: List<List<String>>, highlightSentPos: Int): String {
-        // Parse tree data from each word
+        // Parse tree data from each word, including sentence ID
         data class WordNode(
             val greek: String,
             val gloss: String,
             val pos: String,
             val deprel: String,
             val head: Int,           // Sentence position of head word (0 = ROOT)
-            val sentPos: Int         // This word's position in full sentence
+            val sentPos: Int,        // This word's position in full sentence
+            val sentId: String?      // Sentence identifier for disambiguating multiple sentences per line
         )
 
-        val nodes = mutableListOf<WordNode>()
+        val allNodes = mutableListOf<WordNode>()
+        var clickedSentId: String? = null  // Track which sentence the clicked word belongs to
+
         words.forEach { rows ->
             if (rows.size >= 3) {
                 val (_, treeData) = parseEnhancedMorph(rows[2])
                 if (treeData != null && treeData.sentPos > 0) {
-                    nodes.add(WordNode(
+                    val node = WordNode(
                         greek = rows[0],
                         gloss = rows[1],
                         pos = treeData.pos,
                         deprel = treeData.deprel,
                         head = treeData.head,
-                        sentPos = treeData.sentPos
-                    ))
+                        sentPos = treeData.sentPos,
+                        sentId = treeData.sentId
+                    )
+                    allNodes.add(node)
+                    // Track which sentence contains the highlighted word
+                    if (treeData.sentPos == highlightSentPos) {
+                        clickedSentId = treeData.sentId
+                    }
                 }
             }
         }
 
-        if (nodes.isEmpty()) {
+        if (allNodes.isEmpty()) {
             return "No tree data available for this sentence."
+        }
+
+        // Filter to only nodes from the same sentence as the clicked word
+        // If sentence IDs are available, group by them; otherwise use all nodes
+        val nodes = if (clickedSentId != null) {
+            allNodes.filter { it.sentId == clickedSentId }
+        } else {
+            // Fallback: if no sentence ID on clicked word, try to find a group
+            // that contains the clicked word based on sentPos matching
+            allNodes
         }
 
         // Build tree text
         val sb = StringBuilder()
         sb.appendLine("=".repeat(50))
-        sb.appendLine("Sentence Tree (${nodes.size} words)")
+        val sentIdLabel = clickedSentId?.let { " (Sentence: $it)" } ?: ""
+        sb.appendLine("Sentence Tree (${nodes.size} words)$sentIdLabel")
         sb.appendLine("=".repeat(50))
         sb.appendLine("ROOT")
 

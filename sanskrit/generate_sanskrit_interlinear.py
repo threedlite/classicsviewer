@@ -14,14 +14,18 @@ Text format: Line N. word1 | word2 | word3
 
 XML format:  <l n="N">| word1 |
              | **gloss1** |
-             | lemma1 morph1 ~ POS deprel head sent_pos |  | word2 |
+             | lemma1 morph1 ~* POS deprel head sent_pos sent_id |  | word2 |
              | **gloss2** |
-             | lemma2 morph2 ~ POS deprel head sent_pos | ...
+             | lemma2 morph2 ~* POS deprel head sent_pos sent_id | ...
              </l>
 
 Treebank data (HEAD, DEPREL) and morphological features (case, number, gender, etc.)
 are included for works in the Vedic Treebank subset. Morph format: "acc s m" for
 "Case=Acc|Number=Sing|Gender=Masc".
+
+The sent_id field disambiguates multiple sentences per verse line. Each verse may
+contain multiple sentences (e.g., "Verse1.Sentence1", "Verse1.Sentence2"), and the
+UI uses this to group words correctly when building dependency trees.
 """
 
 import sqlite3
@@ -95,6 +99,7 @@ class WordData:
     head: Optional[int] = None          # Head word position (0=root)
     deprel: Optional[str] = None        # Dependency relation
     sentence_position: Optional[int] = None  # Position within sentence
+    sentence_id: Optional[str] = None   # Sentence identifier (for disambiguating multiple sentences per line)
     feats: Optional[str] = None         # Morphological features (e.g., "Case=Acc|Number=Sing")
     is_treebank: bool = False           # True if tree data from DCS treebank, False if from Stanza
 
@@ -509,6 +514,7 @@ class SanskritInterlinearGenerator:
                         word_data.head = tb_word.head
                         word_data.deprel = tb_word.deprel
                         word_data.sentence_position = tb_word.sentence_position
+                        word_data.sentence_id = tb_word.sentence_id  # Store sentence ID for tree disambiguation
                         word_data.feats = tb_word.feats if tb_word.feats and tb_word.feats != '_' else None
                         word_data.is_treebank = True  # Mark as treebank data
                         tb_used.add(tb_key)
@@ -571,6 +577,7 @@ class SanskritInterlinearGenerator:
                         word_data.head = tb_word.head
                         word_data.deprel = tb_word.deprel
                         word_data.sentence_position = tb_word.sentence_position
+                        word_data.sentence_id = tb_word.sentence_id  # Store sentence ID for tree disambiguation
                         tb_used.add(tb_key)
                         self.stats['treebank_words'] += 1
                         break
@@ -600,10 +607,13 @@ class SanskritInterlinearGenerator:
                 return
 
             # For each sentence in the line
-            for sent in doc.sentences:
+            for sent_idx, sent in enumerate(doc.sentences):
                 stanza_words = sent.words
                 if not stanza_words:
                     continue
+
+                # Generate sentence ID for Stanza-derived sentences (S0, S1, S2, etc.)
+                stanza_sent_id = f"S{sent_idx}"
 
                 # Build mapping by text match
                 stanza_by_text = {}
@@ -628,6 +638,7 @@ class SanskritInterlinearGenerator:
                                 word_data.head = sw.head
                                 word_data.deprel = sw.deprel
                                 word_data.sentence_position = sw.id
+                                word_data.sentence_id = stanza_sent_id  # Store sentence ID for tree disambiguation
                                 # Look up feats from morphology table first (takes precedence)
                                 morph_feats = self._lookup_morph_feats(word_data.word)
                                 if morph_feats:
@@ -640,9 +651,96 @@ class SanskritInterlinearGenerator:
                                 self.stats['stanza_words'] += 1
                                 break
 
+                # Re-number positions to be consecutive (fix gaps from skipped tokens)
+                # This ensures all head pointers are valid
+                self._renumber_sentence_positions(words, stanza_sent_id, stanza_words)
+
         except Exception as e:
             # Don't crash on Stanza errors - just skip tree data for this line
             pass
+
+    def _renumber_sentence_positions(self, words: List[WordData], sent_id: str, stanza_words):
+        """
+        Re-number sentence positions to be consecutive and fix head pointers.
+
+        Stanza assigns IDs to ALL tokens including punctuation. When we skip
+        some tokens, positions have gaps and head pointers may be invalid.
+        This function re-numbers positions to be consecutive (1, 2, 3, ...)
+        and adjusts head pointers by following the tree up to find valid ancestors.
+
+        Args:
+            words: List of WordData objects for this line
+            sent_id: Sentence ID to filter by (only renumber words in this sentence)
+            stanza_words: Original Stanza word list (to follow head chains)
+        """
+        # Collect words in this sentence that have positions
+        sent_words = [(i, w) for i, w in enumerate(words)
+                      if w.sentence_id == sent_id and w.sentence_position is not None]
+
+        if not sent_words:
+            return
+
+        # Sort by original position
+        sent_words.sort(key=lambda x: x[1].sentence_position)
+
+        # Create mapping from old position to new position
+        old_to_new = {}
+        for new_pos, (word_idx, word_data) in enumerate(sent_words, start=1):
+            old_pos = word_data.sentence_position
+            old_to_new[old_pos] = new_pos
+
+        # Build Stanza head map for traversing up the tree
+        stanza_head_map = {}
+        for sw in stanza_words:
+            stanza_head_map[sw.id] = sw.head
+
+        # Update positions and heads
+        for word_idx, word_data in sent_words:
+            old_pos = word_data.sentence_position
+            old_head = word_data.head
+
+            # Update position to new consecutive value
+            word_data.sentence_position = old_to_new[old_pos]
+
+            # Update head to new position (0 stays 0 for root)
+            if old_head is not None and old_head != 0:
+                if old_head in old_to_new:
+                    word_data.head = old_to_new[old_head]
+                else:
+                    # Head pointed to a skipped token - follow tree up to find valid ancestor
+                    new_head = self._find_valid_ancestor(old_head, old_to_new, stanza_head_map)
+                    word_data.head = new_head
+
+    def _find_valid_ancestor(self, start_head: int, old_to_new: dict, stanza_head_map: dict) -> int:
+        """
+        Follow the tree up from a skipped node to find a valid ancestor.
+
+        Args:
+            start_head: The original head position (which was skipped)
+            old_to_new: Mapping from old positions to new positions
+            stanza_head_map: Mapping from Stanza word id to its head
+
+        Returns:
+            New position of valid ancestor, or 0 if we reach root
+        """
+        current = start_head
+        visited = set()
+
+        while current != 0 and current not in visited:
+            visited.add(current)
+
+            # If this position exists in our output, use it
+            if current in old_to_new:
+                return old_to_new[current]
+
+            # Otherwise, follow the tree up
+            if current in stanza_head_map:
+                current = stanza_head_map[current]
+            else:
+                # Can't find head, go to root
+                return 0
+
+        return 0  # Reached root
 
     def _lookup_morph_feats(self, word: str) -> Optional[str]:
         """
@@ -1079,23 +1177,24 @@ class SanskritInterlinearGenerator:
             lemma_clean = sanitize_xml_text(word_data.lemma) if word_data.lemma else "?"
 
             # Build lemma line with optional morph and tree data
-            # Format: | lemma morph ~* POS deprel head sent_pos | (treebank)
-            #         | lemma morph ~ POS deprel head sent_pos |  (stanza)
-            # Example: | agni acc s m ~* NOUN obj 2 1 |
+            # Format: | lemma morph ~* POS deprel head sent_pos sent_id | (treebank)
+            #         | lemma morph ~ POS deprel head sent_pos sent_id |  (stanza)
+            # Example: | agni acc s m ~* NOUN obj 2 1 Verse1.Sentence1 |
             if word_data.deprel is not None and word_data.head is not None:
                 pos = sanitize_xml_text(word_data.pos_tag) if word_data.pos_tag else "X"
                 deprel = sanitize_xml_text(word_data.deprel)
                 head = word_data.head
                 sent_pos = word_data.sentence_position or 0
+                sent_id = word_data.sentence_id or "_"  # Use _ for missing sentence ID
                 # Use ~* for treebank data, ~ for Stanza-generated data
                 delimiter = "~*" if word_data.is_treebank else "~"
 
                 # Include morphological features if available
                 morph_display = format_feats(word_data.feats) if word_data.feats else ""
                 if morph_display:
-                    lemma_line = f"| {lemma_clean} {morph_display} {delimiter} {pos} {deprel} {head} {sent_pos} |"
+                    lemma_line = f"| {lemma_clean} {morph_display} {delimiter} {pos} {deprel} {head} {sent_pos} {sent_id} |"
                 else:
-                    lemma_line = f"| {lemma_clean} {delimiter} {pos} {deprel} {head} {sent_pos} |"
+                    lemma_line = f"| {lemma_clean} {delimiter} {pos} {deprel} {head} {sent_pos} {sent_id} |"
             else:
                 lemma_line = f"| {lemma_clean} |"
 
