@@ -308,7 +308,7 @@ cd build_modules/generate_interlinear
 ```
 
 ### Interlinear Build Times (8 workers):
-- **Greek (2,214 works, 34.9M words)**: ~15 hours (898 minutes)
+- **Greek (2,049 works, 35.0M words)**: ~13 hours (783 minutes)
 - **Latin (230 works, 228 XML files)**: ~17 seconds
 - **Sanskrit (270 works, 203K lines, 13.4M words)**: ~90 seconds
 
@@ -372,14 +372,36 @@ sqlite3 sanskrit_texts.db "SELECT word FROM words LIMIT 5;"
 
 **NEVER run these steps manually** - if the build output is wrong, fix the build scripts and re-run `./run_build.sh` from scratch.
 
+### CSV-Driven Build Modes
+
+The Sanskrit build uses CSV files to control which works are included (like Greek uses SAMPLE_AUTHORS.csv):
+
+| Mode | CSV File | Contents | Build Time |
+|------|----------|----------|------------|
+| `test` | SANSKRIT_TEST.csv | BG + RV only | ~5 min |
+| `sample` | SANSKRIT_SAMPLE.csv | BG + RV + selected DCS | ~20 min |
+| `full` | SANSKRIT_FULL.csv | BG + RV + all 268 DCS works | ~3 hours |
+
+CSV format:
+```csv
+Source,Work
+Wikisource,Bhagavad Gita
+DCS-Pada,Rig Veda
+DCS,*                    # Wildcard for all DCS works
+DCS,Aitareyopaniṣad      # Or specific work names
+```
+
 ```bash
 cd sanskrit
 
 # Preferred: Use the run script (handles venv automatically)
-./run_build.sh
+./run_build.sh           # Default: full mode
+./run_build.sh test      # Quick test build
+./run_build.sh sample    # Medium build
+./run_build.sh full      # Full 268 works
 
 # Alternative: Use venv python directly
-nohup ./venv/bin/python3 create_sanskrit_database_interlinear.py > build_sanskrit.log 2>&1 &
+nohup ./venv/bin/python3 create_sanskrit_database_interlinear.py full > build_sanskrit.log 2>&1 &
 
 # Monitor progress
 tail -f build_sanskrit.log
@@ -389,8 +411,16 @@ adb push sanskrit_texts.db.zip /sdcard/Download/
 ```
 
 ### Sanskrit Database Build Stats (8 workers):
-- **Build time**: ~95 minutes (includes Stanza NLP interlinear generation)
-- **Works**: 270 (Bhagavad Gita, Rig Veda, Mahabharata, DCS corpus)
+
+**Test mode** (BG + RV):
+- **Build time**: ~5 minutes
+- **Works**: 2 (Bhagavad Gita, Rig Veda)
+- **Content**: 11K verses, 171K words
+- **Database size**: ~200MB compressed
+
+**Full mode** (all 268 DCS works):
+- **Build time**: ~3 hours (includes DCS treebank processing + Stanza NLP)
+- **Works**: 270 (Bhagavad Gita, Rig Veda, all DCS corpus)
 - **Content**: 203K verses, 13.4M words
 - **Interlinear**: 203K segments with morph data (case/number/gender, POS, dependencies)
 - **Database size**: 2.7GB uncompressed, 554MB compressed
@@ -402,8 +432,13 @@ The interlinear data uses two different delimiters to distinguish data sources:
 - **`~*`** - Treebank data (from DCS CoNLL-U files) - displayed in **bold** in UI
 - **`~`** - Stanza NLP data (machine-generated) - displayed in *italic* in UI
 
-**Format**: `| word | **gloss** | lemma morph ~* POS deprel head sentPos |` (treebank)
-**Format**: `| word | **gloss** | lemma morph ~ POS deprel head sentPos |` (stanza)
+**Format**: `| word | **gloss** | lemma morph ~* POS deprel head sentPos sentId |` (treebank)
+**Format**: `| word | **gloss** | lemma morph ~ POS deprel head sentPos sentId |` (stanza)
+
+The `sentId` field disambiguates multiple sentences per verse line:
+- DCS treebank: Uses source sentence IDs (e.g., `555447_1`, `555447_2`)
+- Stanza NLP: Uses generated IDs (e.g., `S0`, `S1`, `S2`)
+- UI filters tree view to show only words from the clicked word's sentence
 
 **Morphological Feature Priority** (highest to lowest):
 1. **Treebank** - Original DCS annotations (most accurate)
@@ -420,19 +455,29 @@ The `generate_sanskrit_interlinear.py` script automatically:
 
 The DCS (Digital Corpus of Sanskrit) CoNLL-U treebank data contains some structural issues:
 
-1. **Bidirectional cycles**: Some word pairs point to each other as heads
+1. **Multiple sentences per verse line**: A single verse line may contain multiple independent sentences
+   - Each sentence has its own dependency tree with positions starting at 1
+   - Without sentence IDs, words from different sentences appear to form invalid trees
+   - **Fixed**: The `sentId` field now disambiguates sentences (e.g., `555447_1`, `555447_2`)
+
+2. **Position gaps from skipped tokens**: Stanza assigns positions to ALL tokens including punctuation
+   - When punctuation is skipped, positions have gaps (1, 2, 4, 5 instead of 1, 2, 3, 4)
+   - Head pointers may reference skipped positions, breaking tree structure
+   - **Fixed**: `_renumber_sentence_positions()` renumbers consecutively and `_find_valid_ancestor()` follows tree up to find valid heads
+
+3. **Bidirectional cycles**: Some word pairs point to each other as heads
    - Example: sentPos=3 → head=6, AND sentPos=6 → head=3
    - Found in ~5% of sentence groups in Rig Veda
 
-2. **Duplicate sentPos values**: Multiple words claim the same sentence position
+4. **Duplicate sentPos values**: Multiple words claim the same sentence position
    - Common in complex verses with coordination structures
 
-**UI Handling**: Both Android (`TranslationAdapter.kt`) and iOS (`InterlinearTextView.swift`) have cycle detection in the `printNode` function:
-- Tracks visited nodes to prevent infinite recursion
-- Maximum depth limit of 100
+**UI Handling**: Both Android (`TranslationAdapter.kt`) and iOS (`InterlinearTextView.swift`) have:
+- Sentence ID filtering - tree view shows only words from clicked word's sentence
+- Cycle detection in `printNode` - tracks visited nodes, max depth 100
 - Displays `[cycle detected at X]` when cycles are encountered
 
-This is a data quality issue in the source DCS treebank, not a parsing bug. The cycle detection ensures the app never crashes regardless of malformed tree data.
+The cycle detection ensures the app never crashes regardless of malformed tree data.
 
 ## Translation Alignment System
 

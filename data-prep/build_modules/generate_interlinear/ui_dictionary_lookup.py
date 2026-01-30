@@ -46,6 +46,7 @@ class PerseusRepository:
                 .replace("'", "ʼ")   # U+0027 APOSTROPHE → U+02BC
                 .replace("\u2019", "ʼ")   # U+2019 RIGHT SINGLE QUOTATION MARK → U+02BC
                 .replace("᾿", "ʼ")   # U+1FBF GREEK PSILI → U+02BC
+                .replace("᾽", "ʼ")   # U+1FBD GREEK KORONIS → U+02BC
                 .replace("′", "ʼ")   # U+2032 PRIME → U+02BC
                 .replace("´", "ʼ"))  # U+00B4 ACUTE ACCENT → U+02BC
 
@@ -798,6 +799,7 @@ class PerseusRepository:
                 SELECT lemma, morph_info, confidence, source
                 FROM lemma_map
                 WHERE word_form_normalized_ultra = ?
+                ORDER BY confidence DESC
                 LIMIT 5
             """, (ultra_normalized,))
 

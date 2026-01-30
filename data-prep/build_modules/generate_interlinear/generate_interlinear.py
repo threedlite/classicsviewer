@@ -1277,9 +1277,14 @@ class InterlinearGenerator:
             if row:
                 preferred_morph = row[0]
             # PREFER LSJ/Cunliffe over Wiktionary for better quality
-            # First, try LSJ and Cunliffe entries
+            # First, try LSJ and Cunliffe entries (skip very low confidence)
             for entry in entries:
                 if entry.source in ['lsj', 'cunliffe']:
+                    # Skip entries with very low confidence - these are noise from
+                    # rare treebank mappings (e.g., κε → μύζω at 0.004) that should
+                    # not outrank higher-confidence entries from other lemmas
+                    if entry.confidence is not None and entry.confidence < 0.1:
+                        continue
                     extracted_gloss = self.extract_gloss_from_entry(entry)
                     is_citation_only = bool(re.search(r'[Α-Ω][α-ω]?\d+', extracted_gloss))
 

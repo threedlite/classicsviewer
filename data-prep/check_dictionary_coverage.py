@@ -94,6 +94,7 @@ class DictionaryCoverageChecker:
                 .replace("'", "ʼ")  # U+0027 → U+02BC
                 .replace("'", "ʼ")  # U+2019 → U+02BC
                 .replace("᾿", "ʼ")  # U+1FBF → U+02BC
+                .replace("᾽", "ʼ")  # U+1FBD GREEK KORONIS → U+02BC
                 .replace("′", "ʼ")  # U+2032 → U+02BC
                 .replace("´", "ʼ"))  # U+00B4 → U+02BC
 

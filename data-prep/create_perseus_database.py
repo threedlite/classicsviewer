@@ -1604,7 +1604,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 """
                 # Collect all structural parent levels
                 hierarchy = []
-                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'work', 'homily', 'fragment', 'excerpt')
+                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'epistle', 'work', 'homily', 'fragment', 'excerpt')
 
                 for parent in body_elem.iter('div'):
                     # Skip if parent IS the element itself (don't include self in hierarchy)
@@ -3863,7 +3863,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         for elem in book_elem.iter():
             if is_div_tag(elem.tag) and elem.get('type') == 'textpart':
                 subtype = elem.get('subtype', '')
-                if subtype in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'fragment', 'entry', 'work', 'excerpt']:
+                if subtype in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'epistle', 'fragment', 'entry', 'work', 'excerpt']:
                     section_n = elem.get('n', '')
                     if section_n.isdigit():
                         has_numeric_n = True
@@ -3894,7 +3894,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             if (elem != book_elem and
                 is_div_tag(elem.tag) and
                 elem.get('type') == 'textpart' and
-                elem.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'fragment', 'entry', 'work', 'excerpt']):
+                elem.get('subtype') in ['section', 'chapter', 'verse', 'poem', 'epigram', 'letter', 'epistle', 'fragment', 'entry', 'work', 'excerpt']):
 
                 hierarchy_type = get_element_hierarchy_type(elem)
 
@@ -9715,7 +9715,7 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
         min_frequency: Minimum times a mapping must appear to be included (default: 3)
     """
     import zipfile
-    from collections import Counter
+    from collections import Counter, defaultdict
 
     print(f"\n{'='*60}")
     print(f"INSERTING OGA LEMMAS")
@@ -9827,6 +9827,31 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
     print(f"  After filtering:  {len(filtered_lemmas):,} pairs")
     print(f"  Removed:          {len(lemma_counts) - len(filtered_lemmas):,} low-frequency pairs")
 
+    # OGA per-form majority vote: when the same word form maps to multiple lemmas
+    # in the OGA corpus, only keep the mapping with the highest frequency count.
+    # E.g., if σωφρονιζει → παιδεύω (22 times) and σωφρονιζει → σωφρονίζω (5 times),
+    # only keep the one with more votes. See SOPHRON_LEMMA_ANALYSIS.md.
+    print(f"\nChecking OGA per-form majority vote...")
+
+    # Group by word form, find the top lemma for each
+    form_lemma_counts = defaultdict(Counter)
+    for (word_normalized, lemma), count in filtered_lemmas.items():
+        form_lemma_counts[word_normalized][lemma] += count
+
+    # Suppress entries whose lemma is not the top vote for that word form
+    oga_majority_suppressed = set()
+    multi_lemma_forms = 0
+    for word_normalized, votes in form_lemma_counts.items():
+        if len(votes) > 1:
+            multi_lemma_forms += 1
+            top_lemma, top_count = votes.most_common(1)[0]
+            for lemma, count in votes.items():
+                if lemma != top_lemma and count < top_count:
+                    oga_majority_suppressed.add((word_normalized, lemma))
+
+    print(f"  Word forms with multiple lemma candidates: {multi_lemma_forms:,}")
+    print(f"  Entries to suppress (minority vote): {len(oga_majority_suppressed):,}")
+
     # Insert into database
     print(f"\nInserting OGA lemmas into {db_filename}...")
     conn = sqlite3.connect(db_filename)
@@ -9852,6 +9877,8 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
 
     inserted_count = 0
     skipped_bad_mappings = 0
+    skipped_conflicts = 0
+    skipped_majority_vote = 0
     for (word_normalized, lemma), frequency in filtered_lemmas.items():
         # Skip obviously bad mappings: particles → articles or articles → particles
         if (word_normalized in PARTICLES and lemma in ARTICLES) or \
@@ -9859,10 +9886,31 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
             skipped_bad_mappings += 1
             continue
 
+        # Skip entries identified as internally inconsistent minority mappings
+        if (word_normalized, lemma) in oga_majority_suppressed:
+            skipped_majority_vote += 1
+            continue
+
         # INSERT OR IGNORE: only inserts if word_form doesn't already exist
         # This ensures Wiktionary/existing morphology always takes precedence
         # Compute ultra-normalized form for efficient lookups
         word_ultra = normalize_greek_ultra(word_normalized)
+
+        # Skip if a non-OGA source already maps this ultra-normalized form to a
+        # different lemma. This prevents bad OGA entries from surfacing via the
+        # ultra-normalized fallback path (Step 2.7) when no exact-match entry exists.
+        # See SOPHRON_LEMMA_ANALYSIS.md for details on this class of error.
+        cursor.execute("""
+            SELECT 1 FROM lemma_map
+            WHERE word_form_normalized_ultra = ?
+            AND source <> 'oga'
+            AND lemma <> ?
+            LIMIT 1
+        """, (word_ultra, lemma))
+        if cursor.fetchone():
+            skipped_conflicts += 1
+            continue
+
         cursor.execute("""
             INSERT OR IGNORE INTO lemma_map
             (word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info)
@@ -9887,8 +9935,10 @@ def insert_oga_lemmas(db_filename, min_frequency=3):
     print(f"  Before: {before_count:,} entries")
     print(f"  After:  {after_count:,} entries")
     print(f"  Added:  {after_count - before_count:,} new OGA entries")
-    print(f"  Skipped: {len(filtered_lemmas) - (after_count - before_count):,} duplicates (Wiktionary took precedence)")
+    print(f"  Skipped: {len(filtered_lemmas) - (after_count - before_count) - skipped_bad_mappings - skipped_conflicts - skipped_majority_vote:,} duplicates (Wiktionary took precedence)")
     print(f"  Filtered out: {skipped_bad_mappings:,} bad particle↔article mappings")
+    print(f"  Filtered out: {skipped_majority_vote:,} internally inconsistent minority-vote mappings")
+    print(f"  Filtered out: {skipped_conflicts:,} ultra-normalized conflicts with higher-confidence sources")
     print(f"  Total OGA entries in database: {oga_count:,}")
 
 

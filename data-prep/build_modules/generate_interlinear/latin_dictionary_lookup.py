@@ -43,6 +43,8 @@ class LatinRepository:
                 .replace("'", "'")   # U+0027 APOSTROPHE (no change)
                 .replace("\u2019", "'")   # U+2019 RIGHT SINGLE QUOTATION MARK → U+0027
                 .replace("ʼ", "'")   # U+02BC MODIFIER LETTER APOSTROPHE → U+0027
+                .replace("᾿", "'")   # U+1FBF GREEK PSILI → U+0027
+                .replace("᾽", "'")   # U+1FBD GREEK KORONIS → U+0027
                 .replace("′", "'")   # U+2032 PRIME → U+0027
                 .replace("´", "'"))  # U+00B4 ACUTE ACCENT → U+0027
 
