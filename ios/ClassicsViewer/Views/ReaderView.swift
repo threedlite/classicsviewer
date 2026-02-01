@@ -873,7 +873,7 @@ struct LineTextView: View {
                     Button(action: onAudioTapped) {
                         Image(systemName: isPlayingAudio ? "stop.fill" : "play.fill")
                             .font(.system(size: 12))
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     }
                 } else {
                     Color.clear

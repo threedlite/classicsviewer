@@ -5,73 +5,90 @@ struct ClassicsViewerApp: App {
     @StateObject private var appState = AppState()
     @StateObject private var databaseService = DatabaseService()
     @StateObject private var searchContext = SearchNavigationContext()
+    @AppStorage("colorScheme") private var appColorScheme: String = "System"
+
+    /// Map the app's color scheme setting to SwiftUI's ColorScheme.
+    /// "Inverted" maps to .light (white bg, black text) matching Android behavior.
+    private var resolvedColorScheme: SwiftUI.ColorScheme? {
+        switch appColorScheme {
+        case "Light", "Inverted":
+            return .light
+        case "Dark":
+            return .dark
+        default:
+            return nil
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
-            if !appState.isAgeVerified {
-                // Age verification must pass before accessing the app
-                AgeVerificationView()
-                    .environmentObject(appState)
-            } else if appState.isExtracting {
-                DatabaseExtractionView()
-                    .environmentObject(appState)
-            } else if appState.isDatabaseReady && appState.databaseManagersInitialized && appState.selectedLanguage != nil {
-                MainNavigationView()
-                    .environmentObject(appState)
-                    .environmentObject(searchContext)
-            } else if appState.isDatabaseReady && appState.databaseManagersInitialized {
-                LanguageSelectionView()
-                    .environmentObject(appState)
-                    .environmentObject(searchContext)
-            } else {
-                LoadingView(message: appState.initializationStatus)
-                    .task {
-                        // First check if database exists and extract if needed
-                        appState.initializationStatus = "Checking database..."
-                        print("DEBUG: Starting checkAndExtractDatabase")
-                        await appState.checkAndExtractDatabase()
-                        print("DEBUG: checkAndExtractDatabase completed, isDatabaseReady: \(appState.isDatabaseReady)")
+            Group {
+                if !appState.isAgeVerified {
+                    // Age verification must pass before accessing the app
+                    AgeVerificationView()
+                        .environmentObject(appState)
+                } else if appState.isExtracting {
+                    DatabaseExtractionView()
+                        .environmentObject(appState)
+                } else if appState.isDatabaseReady && appState.databaseManagersInitialized && appState.selectedLanguage != nil {
+                    MainNavigationView()
+                        .environmentObject(appState)
+                        .environmentObject(searchContext)
+                } else if appState.isDatabaseReady && appState.databaseManagersInitialized {
+                    LanguageSelectionView()
+                        .environmentObject(appState)
+                        .environmentObject(searchContext)
+                } else {
+                    LoadingView(message: appState.initializationStatus)
+                        .task {
+                            // First check if database exists and extract if needed
+                            appState.initializationStatus = "Checking database..."
+                            print("DEBUG: Starting checkAndExtractDatabase")
+                            await appState.checkAndExtractDatabase()
+                            print("DEBUG: checkAndExtractDatabase completed, isDatabaseReady: \(appState.isDatabaseReady)")
 
-                        // Then initialize the database service
-                        if appState.isDatabaseReady {
-                            do {
-                                // Initialize the async database managers
-                                appState.initializationStatus = "Initializing main database..."
-                                print("DEBUG: About to initialize DatabaseManagerAsync")
-                                try await DatabaseManagerAsync.shared.initialize()
-                                print("Database manager initialized successfully")
-
-                                // Initialize user database manager
-                                appState.initializationStatus = "Initializing user database..."
-                                NSLog("DEBUG: About to initialize UserDatabaseManagerAsync")
-                                try await UserDatabaseManagerAsync.shared.initialize()
-                                NSLog("DEBUG: UserDatabaseManagerAsync initialized successfully")
-                                print("User database manager initialized successfully")
-
-                                // Now extract default audio after user database is ready
-                                appState.initializationStatus = "Checking for bundled audio..."
-                                NSLog("DEBUG: Database managers ready, checking for bundled audio")
+                            // Then initialize the database service
+                            if appState.isDatabaseReady {
                                 do {
-                                    NSLog("DEBUG: About to call DefaultAudioExtractor.ensureDefaultAudioExtracted()")
-                                    try await DefaultAudioExtractor.shared.ensureDefaultAudioExtracted()
-                                    NSLog("DEBUG: DefaultAudioExtractor.ensureDefaultAudioExtracted() completed")
-                                } catch {
-                                    NSLog("ERROR: Failed to extract default audio: \(error)")
-                                    NSLog("ERROR: Error details: \(String(describing: error))")
-                                    // Continue anyway - audio is optional
-                                }
+                                    // Initialize the async database managers
+                                    appState.initializationStatus = "Initializing main database..."
+                                    print("DEBUG: About to initialize DatabaseManagerAsync")
+                                    try await DatabaseManagerAsync.shared.initialize()
+                                    print("Database manager initialized successfully")
 
-                                // Mark managers as initialized
-                                appState.initializationStatus = "Ready!"
-                                appState.databaseManagersInitialized = true
-                            } catch {
-                                print("Failed to initialize database managers: \(error)")
-                                // Still mark as initialized to allow app to continue
-                                appState.databaseManagersInitialized = true
+                                    // Initialize user database manager
+                                    appState.initializationStatus = "Initializing user database..."
+                                    NSLog("DEBUG: About to initialize UserDatabaseManagerAsync")
+                                    try await UserDatabaseManagerAsync.shared.initialize()
+                                    NSLog("DEBUG: UserDatabaseManagerAsync initialized successfully")
+                                    print("User database manager initialized successfully")
+
+                                    // Now extract default audio after user database is ready
+                                    appState.initializationStatus = "Checking for bundled audio..."
+                                    NSLog("DEBUG: Database managers ready, checking for bundled audio")
+                                    do {
+                                        NSLog("DEBUG: About to call DefaultAudioExtractor.ensureDefaultAudioExtracted()")
+                                        try await DefaultAudioExtractor.shared.ensureDefaultAudioExtracted()
+                                        NSLog("DEBUG: DefaultAudioExtractor.ensureDefaultAudioExtracted() completed")
+                                    } catch {
+                                        NSLog("ERROR: Failed to extract default audio: \(error)")
+                                        NSLog("ERROR: Error details: \(String(describing: error))")
+                                        // Continue anyway - audio is optional
+                                    }
+
+                                    // Mark managers as initialized
+                                    appState.initializationStatus = "Ready!"
+                                    appState.databaseManagersInitialized = true
+                                } catch {
+                                    print("Failed to initialize database managers: \(error)")
+                                    // Still mark as initialized to allow app to continue
+                                    appState.databaseManagersInitialized = true
+                                }
                             }
                         }
-                    }
+                }
             }
+            .preferredColorScheme(resolvedColorScheme)
         }
     }
 }
