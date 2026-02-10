@@ -5471,6 +5471,23 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
         # to avoid misalignment issues where the previous paragraph's label gets applied
         # to the next paragraph.
 
+        # Detect 3-level book > chapter > section structure for traditional numbering
+        # (e.g., Diodorus Siculus, Thucydides, Herodotus - cited as Book.Chapter.Section)
+        # Skip for Plato/Aristotle which use milestone-based numbering (Stephanus/Bekker)
+        has_chapter_section = False
+        if not is_plato and not is_aristotle:
+            for child in book_div:
+                if (is_div_tag(child.tag) and child.get('type') == 'textpart'
+                        and child.get('subtype') == 'chapter'):
+                    for grandchild in child:
+                        if (is_div_tag(grandchild.tag) and grandchild.get('type') == 'textpart'
+                                and grandchild.get('subtype') == 'section'):
+                            has_chapter_section = True
+                            break
+                    break
+        current_chapter_n = None
+        first_para_in_section = False
+
         # Track letter-level opener info (for Latin letters like Cicero's)
         # This is extracted from <label rend="opener"> at the letter div level
         letter_opener_salute = None
@@ -5520,6 +5537,11 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                 elif is_plato and unit == 'section' and n and re.match(r'\d+[a-z]$', n):
                     current_milestone = n
 
+            # Track chapter number for book>chapter>section numbering
+            if (has_chapter_section and is_div_tag(elem.tag) and
+                    elem.get('type') == 'textpart' and elem.get('subtype') == 'chapter'):
+                current_chapter_n = elem.get('n', '')
+
             # Check for section div in appropriate format
             is_section_div = False
             if uses_old_tei:
@@ -5535,6 +5557,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
 
             if is_section_div:
                 section_n = elem.get('n', str(line_num + 1))
+                first_para_in_section = True
 
                 # Build a mapping from paragraph elements to their speakers
                 # This uses sequential iteration like translation processing does
@@ -5589,16 +5612,27 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                     if bekker_page_state:
                         current_bekker_page = bekker_page_state[0]
                     if text:
+                        # Embed [chapter.section] marker on first paragraph of each section
+                        if has_chapter_section and first_para_in_section and current_chapter_n:
+                            text = f"[{current_chapter_n}.{section_n}] {text}"
+                            first_para_in_section = False
+
                         # Split long paragraphs into sentences
                         if language == 'greek':
                             # For Plato/Aristotle, preserve milestone markers when splitting
                             if is_plato or is_aristotle:
                                 sentences = re.split(r'(?<=[.!?·;])\s+(?!\[)', text)
+                            elif has_chapter_section:
+                                # Same Greek split but avoid splitting before [chapter.section] markers
+                                sentences = re.split(r'[.!?·;]\s+(?!\[)', text)
                             else:
                                 sentences = re.split(r'[.!?·;]\s+', text)
                         else:
                             if is_plato or is_aristotle:
                                 sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
+                            elif has_chapter_section:
+                                # Same Latin split but avoid splitting before [chapter.section] markers
+                                sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+(?!\[)', text)
                             else:
                                 # Don't split after short abbreviations (1-3 chars starting with capital)
                                 # Handles Roman praenomina like M., L., Cn., Sp., Sex., Ser., etc.
