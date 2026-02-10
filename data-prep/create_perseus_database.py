@@ -7567,7 +7567,8 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         # Works where each grc file contains DIFFERENT content (volumes, not alternative editions)
         # These need ALL grc files processed, not just one
         # Greek Anthology: grc6-grc10 are volumes I-V containing books 1-16
-        MULTI_VOLUME_WORKS = {'tlg7000.tlg001'}
+        # Diodorus Siculus: grc4=Books 11-17, grc5=Books 1-5, grc6=Books 18-20
+        MULTI_VOLUME_WORKS = {'tlg7000.tlg001', 'tlg0060.tlg001'}
 
         # Helper function to extract numeric suffix for proper sorting
         def extract_grc_num(f):
