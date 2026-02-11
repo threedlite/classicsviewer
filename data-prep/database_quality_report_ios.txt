@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-01-30T05:07:20.943098
+Generated: 2026-02-11T06:54:56.342254
 Mode: sample
 
 Total Authors: 11
@@ -8,7 +8,7 @@ Total Books: 358
 Total Lines: 60,385
 Translation Segments: 89,748
 Build Time: 3.2 minutes
-Database Size: 354.5MB → 82.7MB compressed (23.3%)
+Database Size: 354.7MB → 82.8MB compressed (23.3%)
 Dictionary Entries: 61,070
 Lemma Mappings: 765,526
 
@@ -18,7 +18,7 @@ greek:
   Authors: 10
   Works: 40
   Lines: 50,488
-  Words: 704,940
+  Words: 706,409
 
 latin:
   Authors: 1
@@ -779,7 +779,7 @@ Pseudo-Plutarch / Concerning music - 445 lines, max_char=473 [Perseus]
 Pseudo-Plutarch / Concerning music translations: Interlinear (Beta, generated from app dictionary and treebank) 445 segments [Excellent (100% coverage)], John Philips 15 segments [Excellent-Section (100% coverage)]
 
 [Xenophon]
-Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=641 [Perseus]
+Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=647 [Perseus]
 Xenophon / Anabasis / Book 1 - 613 lines
 Xenophon / Anabasis translations: Interlinear (Beta, generated from app dictionary and treebank) 613 segments [Excellent (100% coverage)], Unknown 205 segments [Excellent-Section (100% coverage)]
 Xenophon / Anabasis / Book 2 - 459 lines

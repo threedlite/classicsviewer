@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-01-29T22:05:12.366736
+Generated: 2026-02-11T06:45:55.347249
 Mode: full
 
 Total Authors: 135
 Total Works: 1018
-Total Books: 3502
-Total Lines: 1,036,241
-Translation Segments: 1,265,039
-Build Time: 7.1 minutes
-Database Size: 4118.3MB → 901.3MB compressed (21.9%)
+Total Books: 3514
+Total Lines: 1,049,996
+Translation Segments: 1,278,858
+Build Time: 7.2 minutes
+Database Size: 4195.2MB → 917.3MB compressed (21.9%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,050,714
 
@@ -17,14 +17,14 @@ Lemma Mappings: 3,050,714
 greek:
   Authors: 91
   Works: 772
-  Lines: 643,739
-  Words: 10,055,458
+  Lines: 657,494
+  Words: 10,424,718
 
 latin:
   Authors: 40
   Works: 230
   Lines: 373,644
-  Words: 4,790,215
+  Words: 4,827,849
 
 akkadian:
   Authors: 1
@@ -53,7 +53,7 @@ sumerian:
 === DETAILED BREAKDOWN ===
 
 [Achilles Tatius]
-Achilles Tatius / Leucippe and Clitophon - 3,101 lines total, 8 books, max_lines/book=517, max_char=661 [Perseus]
+Achilles Tatius / Leucippe and Clitophon - 3,101 lines total, 8 books, max_lines/book=517, max_char=668 [Perseus]
 Achilles Tatius / Leucippe and Clitophon / Book 1 - 394 lines
 Achilles Tatius / Leucippe and Clitophon translations: Interlinear (Beta, generated from app dictionary and treebank) 394 segments [Excellent (100% coverage)]
 Achilles Tatius / Leucippe and Clitophon / Book 2 - 517 lines
@@ -277,7 +277,7 @@ Antiphon / The Third Tetralogy: Prosecution for Murder Of One Who Pleads That He
 [Apollodorus]
 Apollodorus / Epitome - 730 lines, max_char=576 [Perseus]
 Apollodorus / Epitome translations: Interlinear (Beta, generated from app dictionary and treebank) 730 segments [Excellent (100% coverage)], Unknown 1 segments [Excellent-Section (100% coverage)]
-Apollodorus / Library - 1,685 lines total, 3 books, max_lines/book=657, max_char=1,034 [Perseus]
+Apollodorus / Library - 1,685 lines total, 3 books, max_lines/book=657, max_char=1,040 [Perseus]
 Apollodorus / Library / Book 1 - 451 lines
 Apollodorus / Library translations: Interlinear (Beta, generated from app dictionary and treebank) 451 segments [Excellent (100% coverage)], Unknown 75 segments [Excellent-Section (100% coverage)]
 Apollodorus / Library / Book 2 - 577 lines
@@ -391,11 +391,11 @@ Aretaeus of Cappadocia / On the Therapeutics of Acute Diseases / Book 2 - 630 li
 Aretaeus of Cappadocia / On the Therapeutics of Acute Diseases translations: Francis Adams 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 630 segments [Excellent (100% coverage)]
 
 [Aristides, Aelius]
-Aristides, Aelius / Ars Rhetorica - 1,005 lines total, 2 books, max_lines/book=506, max_char=582 [Perseus]
+Aristides, Aelius / Ars Rhetorica - 1,004 lines total, 2 books, max_lines/book=505, max_char=582 [Perseus]
 Aristides, Aelius / Ars Rhetorica / Book 1 - 499 lines
 Aristides, Aelius / Ars Rhetorica translations: Interlinear (Beta, generated from app dictionary and treebank) 499 segments [Excellent (100% coverage)]
-Aristides, Aelius / Ars Rhetorica / Book 2 - 506 lines
-Aristides, Aelius / Ars Rhetorica translations: Interlinear (Beta, generated from app dictionary and treebank) 506 segments [Excellent (100% coverage)]
+Aristides, Aelius / Ars Rhetorica / Book 2 - 505 lines
+Aristides, Aelius / Ars Rhetorica translations: Interlinear (Beta, generated from app dictionary and treebank) 505 segments [Excellent (100% coverage)]
 Aristides, Aelius / Orationes 55 - 20 lines, max_char=281 [Perseus]
 Aristides, Aelius / Orationes 55 translations: Interlinear (Beta, generated from app dictionary and treebank) 20 segments [Excellent (100% coverage)]
 
@@ -532,9 +532,9 @@ Arrian / Periplus Ponti Euxini - 626 lines, max_char=354 [Perseus]
 Arrian / Periplus Ponti Euxini translations: Interlinear (Beta, generated from app dictionary and treebank) 626 segments [Excellent (100% coverage)]
 Arrian / Tactica - 729 lines, max_char=773 [Perseus]
 Arrian / Tactica translations: Interlinear (Beta, generated from app dictionary and treebank) 728 segments [Excellent (100% coverage)]
-Arrian / tlg001 - 3,434 lines total, 7 books, max_lines/book=586, max_char=644 [Perseus]
-Arrian / tlg001 / Book 1 - 586 lines
-Arrian / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 586 segments [Excellent (100% coverage)]
+Arrian / tlg001 - 3,433 lines total, 7 books, max_lines/book=585, max_char=650 [Perseus]
+Arrian / tlg001 / Book 1 - 585 lines
+Arrian / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 585 segments [Excellent (100% coverage)]
 Arrian / tlg001 / Book 2 - 443 lines
 Arrian / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 443 segments [Excellent (100% coverage)]
 Arrian / tlg001 / Book 3 - 548 lines
@@ -949,7 +949,7 @@ Callistratus / Descriptiones - 143 lines, max_char=602 [Perseus]
 Callistratus / Descriptiones translations: Interlinear (Beta, generated from app dictionary and treebank) 143 segments [Excellent (100% coverage)]
 
 [Cassius Dio Cocceianus]
-Cassius Dio Cocceianus / Historia Romana - 10,594 lines total, 20 books, max_lines/book=689, max_char=450 [Perseus]
+Cassius Dio Cocceianus / Historia Romana - 10,594 lines total, 20 books, max_lines/book=689, max_char=457 [Perseus]
 Cassius Dio Cocceianus / Historia Romana / Book 36 - 369 lines
 Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 369 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 37 - 567 lines
@@ -1240,7 +1240,7 @@ Celsus, Aulus Cornelius / De Medicina / Book 8 - 462 lines
 Celsus, Aulus Cornelius / De Medicina translations: Interlinear (Beta, AI-generated from app dictionary) 462 segments [Excellent (100% coverage)], Walter George Spencer 25 segments [Excellent-Section (100% coverage)]
 
 [Chariton of Aphrodisias]
-Chariton of Aphrodisias / De Chaerea et Callirhoe - 2,596 lines total, 8 books, max_lines/book=414, max_char=550 [Perseus]
+Chariton of Aphrodisias / De Chaerea et Callirhoe - 2,596 lines total, 8 books, max_lines/book=414, max_char=556 [Perseus]
 Chariton of Aphrodisias / De Chaerea et Callirhoe / Book 1 - 385 lines
 Chariton of Aphrodisias / De Chaerea et Callirhoe translations: Interlinear (Beta, generated from app dictionary and treebank) 385 segments [Excellent (100% coverage)]
 Chariton of Aphrodisias / De Chaerea et Callirhoe / Book 2 - 333 lines
@@ -1518,7 +1518,7 @@ Clement of Alexandria / Protrepticus - 1,398 lines, max_char=523 [Perseus]
 Clement of Alexandria / Protrepticus translations: Interlinear (Beta, generated from app dictionary and treebank) 1398 segments [Excellent (100% coverage)]
 Clement of Alexandria / Quis Dis Salvetur - 487 lines, max_char=680 [Perseus]
 Clement of Alexandria / Quis Dis Salvetur translations: Interlinear (Beta, generated from app dictionary and treebank) 487 segments [Excellent (100% coverage)]
-Clement of Alexandria / Stromata - 9,074 lines total, 8 books, max_lines/book=1,495, max_char=730 [Perseus]
+Clement of Alexandria / Stromata - 9,071 lines total, 8 books, max_lines/book=1,495, max_char=777 [Perseus]
 Clement of Alexandria / Stromata / Book 1 - 1,495 lines
 Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 1495 segments [Excellent (100% coverage)]
 Clement of Alexandria / Stromata / Book 2 - 1,269 lines
@@ -1531,17 +1531,17 @@ Clement of Alexandria / Stromata / Book 5 - 1,339 lines
 Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 1339 segments [Excellent (100% coverage)]
 Clement of Alexandria / Stromata / Book 6 - 1,367 lines
 Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Excellent (100% coverage)]
-Clement of Alexandria / Stromata / Book 7 - 1,140 lines
-Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 1140 segments [Excellent (100% coverage)]
-Clement of Alexandria / Stromata / Book 8 - 352 lines
-Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 352 segments [Excellent (100% coverage)]
+Clement of Alexandria / Stromata / Book 7 - 1,138 lines
+Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 1138 segments [Excellent (100% coverage)]
+Clement of Alexandria / Stromata / Book 8 - 351 lines
+Clement of Alexandria / Stromata translations: Interlinear (Beta, generated from app dictionary and treebank) 351 segments [Excellent (100% coverage)]
 
 [Colluthus of Lycopolis]
 Colluthus of Lycopolis / The Rape of Helen - 394 lines, max_char=51 [Perseus]
 Colluthus of Lycopolis / The Rape of Helen translations: Interlinear (Beta, generated from app dictionary and treebank) 394 segments [Excellent (100% coverage)]
 
 [Columella, Lucius Junius Moderatus]
-Columella, Lucius Junius Moderatus / Res Rustica - 3,739 lines total, 9 books, max_lines/book=502, max_char=715 [Perseus]
+Columella, Lucius Junius Moderatus / Res Rustica - 3,739 lines total, 9 books, max_lines/book=502, max_char=722 [Perseus]
 Columella, Lucius Junius Moderatus / Res Rustica / Book 1 - 309 lines
 Columella, Lucius Junius Moderatus / Res Rustica translations: Harrison Boyd Ash 1511 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 309 segments [Excellent (100% coverage)]
 Columella, Lucius Junius Moderatus / Res Rustica / Book 2 - 451 lines
@@ -1562,7 +1562,7 @@ Columella, Lucius Junius Moderatus / Res Rustica / Book 9 - 322 lines
 Columella, Lucius Junius Moderatus / Res Rustica translations: Interlinear (Beta, AI-generated from app dictionary) 322 segments [Excellent (100% coverage)]
 
 [Curtius Rufus, Quintus]
-Curtius Rufus, Quintus / Historiarum Alexandri Magni - 4,350 lines total, 8 books, max_lines/book=753, max_char=459 [Perseus]
+Curtius Rufus, Quintus / Historiarum Alexandri Magni - 4,350 lines total, 8 books, max_lines/book=753, max_char=465 [Perseus]
 Curtius Rufus, Quintus / Historiarum Alexandri Magni / Book 3 - 390 lines
 Curtius Rufus, Quintus / Historiarum Alexandri Magni translations: Interlinear (Beta, AI-generated from app dictionary) 390 segments [Excellent (100% coverage)]
 Curtius Rufus, Quintus / Historiarum Alexandri Magni / Book 4 - 753 lines
@@ -1943,7 +1943,31 @@ Dio Chrysostom / Orationes - 9,442 lines, max_char=785 [Perseus]
 Dio Chrysostom / Orationes translations: Interlinear (Beta, generated from app dictionary and treebank) 9374 segments [Excellent (100% coverage)]
 
 [Diodorus Siculus]
-Diodorus Siculus / Historical Library - 3,515 lines total, 3 books, max_lines/book=1,344, max_char=769 [Perseus]
+Diodorus Siculus / Historical Library - 17,349 lines total, 15 books, max_lines/book=1,487, max_char=775 [Perseus]
+Diodorus Siculus / Historical Library / Book 1 - 1,257 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1257 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 2 - 840 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 840 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 3 - 989 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 989 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 4 - 1,220 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1220 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 5 - 1,037 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1037 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 11 - 1,027 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1027 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 12 - 940 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 940 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 13 - 1,487 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1487 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 14 - 1,476 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1476 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 15 - 1,091 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1091 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 16 - 1,115 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1115 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library / Book 17 - 1,355 lines
+Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1355 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 18 - 888 lines
 Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 888 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 19 - 1,344 lines
@@ -1952,27 +1976,27 @@ Diodorus Siculus / Historical Library / Book 20 - 1,283 lines
 Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1283 segments [Excellent (100% coverage)]
 
 [Diogenes Laertius]
-Diogenes Laertius / Lives of Eminent Philosophers - 9,504 lines total, 10 books, max_lines/book=1,619, max_char=592 [Perseus]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 1 - 1,077 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1077 segments [Excellent (100% coverage)], R. D. Hicks 122 segments [Excellent-Section (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 2 - 1,188 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1187 segments [Excellent (100% coverage)], R. D. Hicks 147 segments [Excellent-Section (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 3 - 828 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 828 segments [Excellent (100% coverage)], R. D. Hicks 109 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers - 9,481 lines total, 10 books, max_lines/book=1,617, max_char=600 [Perseus]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 1 - 1,076 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1076 segments [Excellent (100% coverage)], R. D. Hicks 122 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 2 - 1,187 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1186 segments [Excellent (100% coverage)], R. D. Hicks 147 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 3 - 827 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 827 segments [Excellent (100% coverage)], R. D. Hicks 109 segments [Excellent-Section (100% coverage)]
 Diogenes Laertius / Lives of Eminent Philosophers / Book 4 - 587 lines
 Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 587 segments [Excellent (100% coverage)], R. D. Hicks 67 segments [Excellent-Section (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 5 - 1,038 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1038 segments [Excellent (100% coverage)], R. D. Hicks 94 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 5 - 1,032 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1032 segments [Excellent (100% coverage)], R. D. Hicks 94 segments [Excellent-Section (100% coverage)]
 Diogenes Laertius / Lives of Eminent Philosophers / Book 6 - 828 lines
 Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 828 segments [Excellent (100% coverage)], R. D. Hicks 105 segments [Excellent-Section (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 7 - 1,619 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1619 segments [Excellent (100% coverage)], R. D. Hicks 204 segments [Excellent (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 8 - 618 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 618 segments [Excellent (100% coverage)], R. D. Hicks 93 segments [Excellent-Section (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 9 - 906 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 906 segments [Excellent (100% coverage)], R. D. Hicks 116 segments [Excellent-Section (100% coverage)]
-Diogenes Laertius / Lives of Eminent Philosophers / Book 10 - 815 lines
-Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 815 segments [Excellent (100% coverage)], R. D. Hicks 154 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 7 - 1,617 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 1617 segments [Excellent (100% coverage)], R. D. Hicks 204 segments [Excellent (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 8 - 616 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 616 segments [Excellent (100% coverage)], R. D. Hicks 93 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 9 - 905 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 905 segments [Excellent (100% coverage)], R. D. Hicks 116 segments [Excellent-Section (100% coverage)]
+Diogenes Laertius / Lives of Eminent Philosophers / Book 10 - 806 lines
+Diogenes Laertius / Lives of Eminent Philosophers translations: Interlinear (Beta, generated from app dictionary and treebank) 806 segments [Excellent (100% coverage)], R. D. Hicks 154 segments [Excellent-Section (100% coverage)]
 
 [Dionysius of Halicarnassus]
 Dionysius of Halicarnassus / Ad Ammaeum - 156 lines, max_char=676 [Perseus]
@@ -2001,7 +2025,7 @@ Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Bet
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 11 - 747 lines
 Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 747 segments [Excellent (100% coverage)]
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 12 - 162 lines
-Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 161 segments [Excellent (100% coverage)]
+Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Excellent (100% coverage)]
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 13 - 79 lines
 Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 79 segments [Excellent (100% coverage)]
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 14 - 88 lines
@@ -2011,7 +2035,7 @@ Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Bet
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 16 - 53 lines
 Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 53 segments [Excellent (100% coverage)]
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 19 - 183 lines
-Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 182 segments [Excellent (100% coverage)]
+Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 183 segments [Excellent (100% coverage)]
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 20 - 169 lines
 Dionysius of Halicarnassus / Antiquitates Romanae translations: Interlinear (Beta, generated from app dictionary and treebank) 169 segments [Excellent (100% coverage)]
 Dionysius of Halicarnassus / Antiquitates Romanae / Book 1718 - 42 lines
@@ -2057,15 +2081,15 @@ Epic of Gilgamesh (Langdon 1917) / Epic of Gilgamesh translations: Stephen Langd
 [Epictetus]
 Epictetus / Fragments - 162 lines, max_char=335 [Perseus]
 Epictetus / Fragments translations: Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Excellent (100% coverage)]
-Epictetus / The Discourses of Epictetus - 7,417 lines total, 5 books, max_lines/book=2,055, max_char=444 [Perseus]
+Epictetus / The Discourses of Epictetus - 7,418 lines total, 5 books, max_lines/book=2,056, max_char=452 [Perseus]
 Epictetus / The Discourses of Epictetus / Book 0 - 9 lines
 Epictetus / The Discourses of Epictetus translations: George Long 1 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 9 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 1 segments [Excellent (100% coverage)]
 Epictetus / The Discourses of Epictetus / Book 1 - 1,817 lines
 Epictetus / The Discourses of Epictetus translations: George Long 30 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1811 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 30 segments [Excellent-Section (100% coverage)]
 Epictetus / The Discourses of Epictetus / Book 2 - 1,898 lines
 Epictetus / The Discourses of Epictetus translations: George Long 26 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1897 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 1 segments [Excellent-Section (100% coverage)]
-Epictetus / The Discourses of Epictetus / Book 3 - 2,055 lines
-Epictetus / The Discourses of Epictetus translations: George Long 26 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2053 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 26 segments [Excellent-Section (100% coverage)]
+Epictetus / The Discourses of Epictetus / Book 3 - 2,056 lines
+Epictetus / The Discourses of Epictetus translations: George Long 26 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2054 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 26 segments [Excellent-Section (100% coverage)]
 Epictetus / The Discourses of Epictetus / Book 4 - 1,638 lines
 Epictetus / The Discourses of Epictetus translations: George Long 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1636 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 13 segments [Excellent-Section (100% coverage)]
 Epictetus / The Enchiridion - 711 lines, max_char=417 [Perseus]
@@ -2245,9 +2269,9 @@ Galen / On the Natural Faculties / Book 3 - 408 lines
 Galen / On the Natural Faculties translations: Arthur John Brock 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 408 segments [Excellent (100% coverage)]
 
 [Gellius, Aulus]
-Gellius, Aulus / Attic Nights - 5,099 lines total, 20 books, max_lines/book=445, max_char=855 [Perseus]
-Gellius, Aulus / Attic Nights / Book 1 - 412 lines
-Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 412 segments [Excellent (100% coverage)], John C. Rolfe 33 segments [Excellent-Section (100% coverage)]
+Gellius, Aulus / Attic Nights - 5,100 lines total, 20 books, max_lines/book=445, max_char=862 [Perseus]
+Gellius, Aulus / Attic Nights / Book 1 - 413 lines
+Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 413 segments [Excellent (100% coverage)], John C. Rolfe 33 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 2 - 445 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 445 segments [Excellent (100% coverage)], John C. Rolfe 30 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 3 - 255 lines
@@ -2257,7 +2281,7 @@ Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from
 Gellius, Aulus / Attic Nights / Book 5 - 281 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 281 segments [Excellent (100% coverage)], John C. Rolfe 21 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 6 - 307 lines
-Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 306 segments [Excellent (100% coverage)], John C. Rolfe 22 segments [Excellent-Section (100% coverage)]
+Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 307 segments [Excellent (100% coverage)], John C. Rolfe 22 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 7 - 190 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 190 segments [Excellent (100% coverage)], John C. Rolfe 16 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 8 - 18 lines
@@ -2265,7 +2289,7 @@ Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from
 Gellius, Aulus / Attic Nights / Book 9 - 235 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 235 segments [Excellent (100% coverage)], John C. Rolfe 16 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 10 - 344 lines
-Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 333 segments [Excellent (100% coverage)], John C. Rolfe 29 segments [Excellent-Section (100% coverage)]
+Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 344 segments [Excellent (100% coverage)], John C. Rolfe 29 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 11 - 199 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 199 segments [Excellent (100% coverage)], John C. Rolfe 18 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 12 - 215 lines
@@ -2283,7 +2307,7 @@ Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from
 Gellius, Aulus / Attic Nights / Book 18 - 187 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 187 segments [Excellent (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 19 - 202 lines
-Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 201 segments [Excellent (100% coverage)]
+Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 202 segments [Excellent (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 20 - 197 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 197 segments [Excellent (100% coverage)]
 
@@ -2327,7 +2351,7 @@ Harpocration / Lexicon in decem oratores Atticos - 3,305 lines, max_char=458 [Pe
 Harpocration / Lexicon in decem oratores Atticos translations: Interlinear (Beta, generated from app dictionary and treebank) 3305 segments [Excellent (100% coverage)]
 
 [Herodotus]
-Herodotus / Histories - 10,229 lines total, 9 books, max_lines/book=1,577, max_char=676 [Perseus]
+Herodotus / Histories - 10,229 lines total, 9 books, max_lines/book=1,577, max_char=684 [Perseus]
 Herodotus / Histories / Book 1 - 1,577 lines
 Herodotus / Histories translations: A. D. Godley 711 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1577 segments [Excellent (100% coverage)]
 Herodotus / Histories / Book 2 - 1,320 lines
@@ -2799,7 +2823,7 @@ Julius Caesar / Civil War / Book 2 - 299 lines
 Julius Caesar / Civil War translations: Interlinear (Beta, AI-generated from app dictionary) 299 segments [Excellent (100% coverage)]
 Julius Caesar / Civil War / Book 3 - 603 lines
 Julius Caesar / Civil War translations: Interlinear (Beta, AI-generated from app dictionary) 600 segments [Excellent (100% coverage)]
-Julius Caesar / Gallic War - 2,475 lines total, 8 books, max_lines/book=610, max_char=743 [Perseus]
+Julius Caesar / Gallic War - 2,475 lines total, 8 books, max_lines/book=610, max_char=750 [Perseus]
 Julius Caesar / Gallic War / Book 1 - 369 lines
 Julius Caesar / Gallic War translations: Interlinear (Beta, AI-generated from app dictionary) 369 segments [Excellent (100% coverage)], W. A. McDevitte 54 segments [Excellent-Section (100% coverage)]
 Julius Caesar / Gallic War / Book 2 - 184 lines
@@ -2835,7 +2859,7 @@ Longinus / On the Sublime - 858 lines, max_char=1,475 [Perseus]
 Longinus / On the Sublime translations: Interlinear (Beta, generated from app dictionary and treebank) 858 segments [Excellent (100% coverage)]
 
 [Longus]
-Longus / Daphnis and Chloe - 1,337 lines total, 4 books, max_lines/book=355, max_char=394 [Perseus]
+Longus / Daphnis and Chloe - 1,337 lines total, 4 books, max_lines/book=355, max_char=401 [Perseus]
 Longus / Daphnis and Chloe / Book 1 - 314 lines
 Longus / Daphnis and Chloe translations: Interlinear (Beta, generated from app dictionary and treebank) 314 segments [Excellent (100% coverage)]
 Longus / Daphnis and Chloe / Book 2 - 355 lines
@@ -3278,7 +3302,7 @@ Lysias / On the Scrutiny of Evandros - 68 lines, max_char=380 [Perseus]
 Lysias / On the Scrutiny of Evandros translations: Interlinear (Beta, generated from app dictionary and treebank) 68 segments [Excellent (100% coverage)], W.R.M. Lamb 24 segments [Excellent-Section (100% coverage)]
 
 [Marcus Aurelius]
-Marcus Aurelius / Ad Se Ipsum - 2,130 lines total, 12 books, max_lines/book=239, max_char=550 [Perseus]
+Marcus Aurelius / Ad Se Ipsum - 2,130 lines total, 12 books, max_lines/book=239, max_char=556 [Perseus]
 Marcus Aurelius / Ad Se Ipsum / Book 1 - 119 lines
 Marcus Aurelius / Ad Se Ipsum translations: Interlinear (Beta, generated from app dictionary and treebank) 119 segments [Excellent (100% coverage)]
 Marcus Aurelius / Ad Se Ipsum / Book 2 - 103 lines
@@ -4271,7 +4295,7 @@ Parthenius of Nicaea / Narrationes Amatoriae translations: Interlinear (Beta, ge
 [Pausanias]
 Pausanias / 
          Description of Greece
-       - 11,656 lines total, 10 books, max_lines/book=1,508, max_char=598 [Perseus]
+       - 11,656 lines total, 10 books, max_lines/book=1,508, max_char=605 [Perseus]
 Pausanias / 
          Description of Greece
        / Book 1 - 1,397 lines
@@ -4771,7 +4795,7 @@ Plutarch / Against Running in Debt, or Taking up Money Upon Usury - 121 lines, m
 Plutarch / Against Running in Debt, or Taking up Money Upon Usury translations: Harold North Fowler 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 121 segments [Excellent (100% coverage)], R. Smith 8 segments [Excellent-Section (100% coverage)]
 Plutarch / Agesilaus - 691 lines, max_char=724 [Perseus]
 Plutarch / Agesilaus translations: Bernadotte Perrin 201 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 691 segments [Excellent (100% coverage)]
-Plutarch / Agis and Cleomenes - 445 lines total, 2 books, max_lines/book=300, max_char=677 [Perseus]
+Plutarch / Agis and Cleomenes - 445 lines total, 2 books, max_lines/book=300, max_char=683 [Perseus]
 Plutarch / Agis and Cleomenes / Book 1 - 145 lines
 Plutarch / Agis and Cleomenes translations: Bernadotte Perrin 82 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 145 segments [Excellent (100% coverage)]
 Plutarch / Agis and Cleomenes / Book 2 - 300 lines
@@ -5041,7 +5065,7 @@ Plutarch / Themistocles - 591 lines, max_char=680 [Perseus]
 Plutarch / Themistocles translations: Bernadotte Perrin 136 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 591 segments [Excellent (100% coverage)]
 Plutarch / Theseus - 672 lines, max_char=570 [Perseus]
 Plutarch / Theseus translations: Bernadotte Perrin 132 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 672 segments [Excellent (100% coverage)]
-Plutarch / Tiberius and Caius Gracchus - 335 lines total, 2 books, max_lines/book=178, max_char=510 [Perseus]
+Plutarch / Tiberius and Caius Gracchus - 335 lines total, 2 books, max_lines/book=178, max_char=517 [Perseus]
 Plutarch / Tiberius and Caius Gracchus / Book 1 - 178 lines
 Plutarch / Tiberius and Caius Gracchus translations: Bernadotte Perrin 97 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 178 segments [Excellent (100% coverage)]
 Plutarch / Tiberius and Caius Gracchus / Book 2 - 157 lines
@@ -5070,53 +5094,53 @@ Plutarch / Why the Oracles Cease to Give Answers - 579 lines, max_char=612 [Pers
 Plutarch / Why the Oracles Cease to Give Answers translations: Frank Cole Babbitt 53 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 579 segments [Excellent (100% coverage)], Robert Midgley 52 segments [Excellent-Section (100% coverage)]
 
 [Polybius]
-Polybius / The Histories - 15,333 lines total, 38 books, max_lines/book=1,484, max_char=565 [Perseus]
+Polybius / The Histories - 15,281 lines total, 38 books, max_lines/book=1,482, max_char=572 [Perseus]
 Polybius / The Histories / Book 1 - 1,152 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 88 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1152 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 2 - 881 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 71 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 881 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 3 - 1,484 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 118 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1484 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 4 - 1,067 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 86 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1067 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 3 - 1,482 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 118 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1482 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 4 - 1,068 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 86 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1068 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 5 - 1,338 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 111 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1338 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 6 - 772 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 57 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 749 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 7 - 201 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 191 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 8 - 477 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 39 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 459 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 6 - 746 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 57 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 746 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 7 - 190 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 187 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 8 - 455 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 39 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 451 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 9 - 507 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 45 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 506 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 10 - 622 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 49 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 616 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 11 - 417 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 36 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 400 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 11 - 418 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 36 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 402 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 12 - 538 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 48 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 523 segments [Excellent (100% coverage)]
+Polybius / The Histories translations: Evelyn S. Shuckburgh 48 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 524 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 13 - 120 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 108 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 14 - 167 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 165 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 15 - 489 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 39 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 478 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 16 - 450 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 40 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 432 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 18 - 663 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 55 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 650 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 15 - 490 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 39 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 479 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 16 - 451 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 40 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 433 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 18 - 667 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 55 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 654 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 19 - 2 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 5 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 20 - 136 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 128 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 21 - 617 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 47 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 582 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 21 - 619 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 47 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 585 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 22 - 248 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 21 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 242 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 23 - 217 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 203 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 24 - 153 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 148 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 23 - 218 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 204 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 24 - 152 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 147 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 25 - 54 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 6 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 53 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 26 - 22 lines
@@ -5125,8 +5149,8 @@ Polybius / The Histories / Book 27 - 191 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 177 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 28 - 226 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 212 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 29 - 250 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 27 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 230 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 29 - 251 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 27 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 231 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 30 - 345 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 24 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 327 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 31 - 349 lines
@@ -5135,16 +5159,16 @@ Polybius / The Histories / Book 32 - 148 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 28 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 138 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 33 - 142 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 19 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 132 segments [Excellent (100% coverage)]
-Polybius / The Histories / Book 34 - 282 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 247 segments [Excellent (100% coverage)]
+Polybius / The Histories / Book 34 - 280 lines
+Polybius / The Histories translations: Evelyn S. Shuckburgh 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 245 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 35 - 61 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 6 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 58 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 36 - 192 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 8 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 175 segments [Excellent (100% coverage)]
+Polybius / The Histories translations: Evelyn S. Shuckburgh 8 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 176 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 37 - 2 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 10 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 38 - 274 lines
-Polybius / The Histories translations: Evelyn S. Shuckburgh 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 265 segments [Excellent (100% coverage)]
+Polybius / The Histories translations: Evelyn S. Shuckburgh 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 266 segments [Excellent (100% coverage)]
 Polybius / The Histories / Book 39 - 77 lines
 Polybius / The Histories translations: Evelyn S. Shuckburgh 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 70 segments [Excellent (100% coverage)]
 
@@ -5153,7 +5177,7 @@ Proclus / Chrestomathy - 77 lines, max_char=147 [Perseus]
 Proclus / Chrestomathy translations: Interlinear (Beta, generated from app dictionary and treebank) 77 segments [Excellent (100% coverage)]
 
 [Procopius]
-Procopius / De Bellis - 10,559 lines total, 8 books, max_lines/book=1,629, max_char=977 [Perseus]
+Procopius / De Bellis - 10,559 lines total, 8 books, max_lines/book=1,629, max_char=983 [Perseus]
 Procopius / De Bellis / Book 1 - 1,224 lines
 Procopius / De Bellis translations: Interlinear (Beta, generated from app dictionary and treebank) 1224 segments [Excellent (100% coverage)]
 Procopius / De Bellis / Book 2 - 1,374 lines
@@ -5200,7 +5224,7 @@ Pseudo-Plutarch / Of Those Sentiments Concerning Nature with which Philosophers 
 Pseudo-Plutarch / Of Those Sentiments Concerning Nature with which Philosophers were Delighted translations: Interlinear (Beta, generated from app dictionary and treebank) 196 segments [Excellent (100% coverage)], John Dowell 30 segments [Excellent-Section (100% coverage)]
 
 [Quintilian]
-Quintilian / Institutio Oratoria - 8,874 lines total, 12 books, max_lines/book=1,019, max_char=570 [Perseus]
+Quintilian / Institutio Oratoria - 8,874 lines total, 12 books, max_lines/book=1,019, max_char=577 [Perseus]
 Quintilian / Institutio Oratoria / Book 1 - 817 lines
 Quintilian / Institutio Oratoria translations: Harold Edgeworth Butler 410 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 817 segments [Excellent (100% coverage)]
 Quintilian / Institutio Oratoria / Book 2 - 664 lines
@@ -5330,7 +5354,7 @@ Scriptores Historiae Augustae / Verus - 73 lines, max_char=872 [Perseus]
 Scriptores Historiae Augustae / Verus translations: Interlinear (Beta, AI-generated from app dictionary) 73 segments [Excellent (100% coverage)]
 
 [Seneca the Elder]
-Seneca the Elder / Controversiae - 5,013 lines total, 5 books, max_lines/book=1,153, max_char=607 [Perseus]
+Seneca the Elder / Controversiae - 5,013 lines total, 5 books, max_lines/book=1,153, max_char=614 [Perseus]
 Seneca the Elder / Controversiae / Book 1 - 1,141 lines
 Seneca the Elder / Controversiae translations: Interlinear (Beta, AI-generated from app dictionary) 1141 segments [Excellent (100% coverage)]
 Seneca the Elder / Controversiae / Book 2 - 1,045 lines
@@ -5370,7 +5394,7 @@ Seneca, Lucius Annaeus / Agamemnon - 1,058 lines, max_char=51 [Perseus]
 Seneca, Lucius Annaeus / Agamemnon translations: Interlinear (Beta, AI-generated from app dictionary) 1058 segments [Excellent (96% coverage)]
 Seneca, Lucius Annaeus / Apocolocyntosis - 196 lines, max_char=529 [Perseus]
 Seneca, Lucius Annaeus / Apocolocyntosis translations: Interlinear (Beta, AI-generated from app dictionary) 196 segments [Excellent (100% coverage)], William Henry Denham Rouse 21 segments [Excellent-Section (100% coverage)]
-Seneca, Lucius Annaeus / De Beneficiis - 2,512 lines total, 7 books, max_lines/book=435, max_char=717 [Perseus]
+Seneca, Lucius Annaeus / De Beneficiis - 2,512 lines total, 7 books, max_lines/book=435, max_char=723 [Perseus]
 Seneca, Lucius Annaeus / De Beneficiis / Book 1 - 217 lines
 Seneca, Lucius Annaeus / De Beneficiis translations: Interlinear (Beta, AI-generated from app dictionary) 217 segments [Excellent (100% coverage)]
 Seneca, Lucius Annaeus / De Beneficiis / Book 2 - 360 lines
@@ -5385,7 +5409,7 @@ Seneca, Lucius Annaeus / De Beneficiis / Book 6 - 427 lines
 Seneca, Lucius Annaeus / De Beneficiis translations: Interlinear (Beta, AI-generated from app dictionary) 426 segments [Excellent (100% coverage)]
 Seneca, Lucius Annaeus / De Beneficiis / Book 7 - 335 lines
 Seneca, Lucius Annaeus / De Beneficiis translations: Interlinear (Beta, AI-generated from app dictionary) 334 segments [Excellent (100% coverage)]
-Seneca, Lucius Annaeus / De Clementia - 382 lines total, 2 books, max_lines/book=295, max_char=599 [Perseus]
+Seneca, Lucius Annaeus / De Clementia - 382 lines total, 2 books, max_lines/book=295, max_char=605 [Perseus]
 Seneca, Lucius Annaeus / De Clementia / Book 1 - 295 lines
 Seneca, Lucius Annaeus / De Clementia translations: Interlinear (Beta, AI-generated from app dictionary) 294 segments [Excellent (100% coverage)]
 Seneca, Lucius Annaeus / De Clementia / Book 2 - 87 lines
@@ -5624,7 +5648,7 @@ Stephen Langdon (Sumerian Texts) / PSALM TO ENLIL CONTAINING A LONG INTERCESSION
 Stephen Langdon (Sumerian Texts) / PSALM TO ENLIL CONTAINING A LONG INTERCESSION BY THE MOTHER GODDESS translations: Stephen Langdon (1919) 38 segments [Excellent (100% coverage)]
 
 [Strabo]
-Strabo / Geography - 14,545 lines total, 17 books, max_lines/book=1,018, max_char=721 [Perseus]
+Strabo / Geography - 14,545 lines total, 17 books, max_lines/book=1,018, max_char=727 [Perseus]
 Strabo / Geography / Book 1 - 1,001 lines
 Strabo / Geography translations: Hans Claude Hamilton 117 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1001 segments [Excellent (100% coverage)]
 Strabo / Geography / Book 2 - 998 lines
@@ -7267,7 +7291,7 @@ Theophrastus / Characters - 796 lines, max_char=524 [Perseus]
 Theophrastus / Characters translations: Interlinear (Beta, generated from app dictionary and treebank) 796 segments [Excellent (100% coverage)]
 
 [Thucydides]
-Thucydides / History of the Peloponnesian War - 6,118 lines total, 8 books, max_lines/book=963, max_char=1,054 [Perseus]
+Thucydides / History of the Peloponnesian War - 6,117 lines total, 8 books, max_lines/book=963, max_char=1,061 [Perseus]
 Thucydides / History of the Peloponnesian War / Book 1 - 963 lines
 Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 576 segments [Excellent (100% coverage)], Henry Dale 576 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 963 segments [Excellent (100% coverage)], Richard Crawley 528 segments [Excellent (100% coverage)], Thomas Hobbes 578 segments [Excellent (100% coverage)]
 Thucydides / History of the Peloponnesian War / Book 2 - 800 lines
@@ -7282,8 +7306,8 @@ Thucydides / History of the Peloponnesian War / Book 6 - 698 lines
 Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 391 segments [Excellent (100% coverage)], Henry Dale 391 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 698 segments [Excellent (100% coverage)], Richard Crawley 391 segments [Excellent (100% coverage)], Thomas Hobbes 391 segments [Excellent (100% coverage)]
 Thucydides / History of the Peloponnesian War / Book 7 - 631 lines
 Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 363 segments [Excellent (100% coverage)], Henry Dale 363 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 631 segments [Excellent (100% coverage)], Richard Crawley 363 segments [Excellent (100% coverage)], Thomas Hobbes 363 segments [Excellent (100% coverage)]
-Thucydides / History of the Peloponnesian War / Book 8 - 692 lines
-Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 398 segments [Excellent (100% coverage)], Henry Dale 398 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 692 segments [Excellent (100% coverage)], Richard Crawley 398 segments [Excellent (100% coverage)], Thomas Hobbes 398 segments [Excellent (100% coverage)]
+Thucydides / History of the Peloponnesian War / Book 8 - 691 lines
+Thucydides / History of the Peloponnesian War translations: Charles Foster Smith 398 segments [Excellent (100% coverage)], Henry Dale 398 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 691 segments [Excellent (100% coverage)], Richard Crawley 398 segments [Excellent (100% coverage)], Thomas Hobbes 398 segments [Excellent (100% coverage)]
 
 [Tibullus]
 Tibullus / Elegiae - 1,929 lines total, 3 books, max_lines/book=811, max_char=54 [Perseus]
@@ -7308,7 +7332,7 @@ Tibullus / Six Poems / Ode 6 - 6 lines
 Tibullus / Six Poems translations: Anne Mahoney 6 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 6 segments [Excellent (100% coverage)]
 
 [Titus Livius (Livy)]
-Titus Livius (Livy) / The History of Rome - 27,454 lines total, 35 books, max_lines/book=1,215, max_char=507 [Perseus]
+Titus Livius (Livy) / The History of Rome - 27,453 lines total, 35 books, max_lines/book=1,215, max_char=515 [Perseus]
 Titus Livius (Livy) / The History of Rome / Book 1 - 904 lines
 Titus Livius (Livy) / The History of Rome translations: Interlinear (Beta, AI-generated from app dictionary) 904 segments [Excellent (100% coverage)], Rev. Canon Roberts 562 segments [Excellent (100% coverage)]
 Titus Livius (Livy) / The History of Rome / Book 2 - 1,077 lines
@@ -7325,8 +7349,8 @@ Titus Livius (Livy) / The History of Rome / Book 7 - 691 lines
 Titus Livius (Livy) / The History of Rome translations: Interlinear (Beta, AI-generated from app dictionary) 691 segments [Excellent (100% coverage)], Rev. Canon Roberts 492 segments [Excellent (100% coverage)]
 Titus Livius (Livy) / The History of Rome / Book 8 - 718 lines
 Titus Livius (Livy) / The History of Rome translations: Interlinear (Beta, AI-generated from app dictionary) 718 segments [Excellent (100% coverage)], Rev. Canon Roberts 506 segments [Excellent (100% coverage)]
-Titus Livius (Livy) / The History of Rome / Book 9 - 891 lines
-Titus Livius (Livy) / The History of Rome translations: Interlinear (Beta, AI-generated from app dictionary) 891 segments [Excellent (100% coverage)], Rev. Canon Roberts 660 segments [Excellent (100% coverage)]
+Titus Livius (Livy) / The History of Rome / Book 9 - 890 lines
+Titus Livius (Livy) / The History of Rome translations: Interlinear (Beta, AI-generated from app dictionary) 890 segments [Excellent (100% coverage)], Rev. Canon Roberts 660 segments [Excellent (100% coverage)]
 Titus Livius (Livy) / The History of Rome / Book 10 - 868 lines
 Titus Livius (Livy) / The History of Rome translations: Interlinear (Beta, AI-generated from app dictionary) 866 segments [Excellent (100% coverage)], Rev. Canon Roberts 635 segments [Excellent (100% coverage)]
 Titus Livius (Livy) / The History of Rome / Book 21 - 786 lines
@@ -7404,7 +7428,7 @@ Valerius Flaccus, Gaius / Argonautica / Book 8 - 469 lines
 Valerius Flaccus, Gaius / Argonautica translations: Interlinear (Beta, AI-generated from app dictionary) 469 segments [Excellent (100% coverage)]
 
 [Valerius Maximus]
-Valerius Maximus / Facta et Dicta Memorabilia - 3,187 lines total, 9 books, max_lines/book=395, max_char=931 [Perseus]
+Valerius Maximus / Facta et Dicta Memorabilia - 3,187 lines total, 9 books, max_lines/book=395, max_char=939 [Perseus]
 Valerius Maximus / Facta et Dicta Memorabilia / Book 1 - 301 lines
 Valerius Maximus / Facta et Dicta Memorabilia translations: Interlinear (Beta, AI-generated from app dictionary) 301 segments [Excellent (100% coverage)]
 Valerius Maximus / Facta et Dicta Memorabilia / Book 2 - 350 lines
@@ -7465,7 +7489,7 @@ Xenophon /  Hellenica / Book 7 - 563 lines
 Xenophon /  Hellenica translations: Interlinear (Beta, generated from app dictionary and treebank) 563 segments [Excellent (100% coverage)], Unknown 148 segments [Excellent-Section (100% coverage)]
 Xenophon / Agesilaus - 641 lines, max_char=807 [Perseus]
 Xenophon / Agesilaus translations: Interlinear (Beta, generated from app dictionary and treebank) 641 segments [Excellent (100% coverage)], Unknown 137 segments [Excellent-Section (100% coverage)]
-Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=641 [Perseus]
+Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=647 [Perseus]
 Xenophon / Anabasis / Book 1 - 613 lines
 Xenophon / Anabasis translations: Interlinear (Beta, generated from app dictionary and treebank) 613 segments [Excellent (100% coverage)], Unknown 205 segments [Excellent-Section (100% coverage)]
 Xenophon / Anabasis / Book 2 - 459 lines
@@ -7484,15 +7508,15 @@ Xenophon / Apology - 117 lines, max_char=312 [Perseus]
 Xenophon / Apology translations: Interlinear (Beta, generated from app dictionary and treebank) 117 segments [Excellent (100% coverage)], Unknown 34 segments [Excellent-Section (100% coverage)]
 Xenophon / Constitution of the Lacedaimonians - 464 lines, max_char=572 [Perseus]
 Xenophon / Constitution of the Lacedaimonians translations: Interlinear (Beta, generated from app dictionary and treebank) 464 segments [Excellent (100% coverage)], Unknown 119 segments [Excellent-Section (100% coverage)]
-Xenophon / Cyropaedia - 4,988 lines total, 8 books, max_lines/book=896, max_char=724 [Perseus]
+Xenophon / Cyropaedia - 4,989 lines total, 8 books, max_lines/book=896, max_char=731 [Perseus]
 Xenophon / Cyropaedia / Book 1 - 679 lines
 Xenophon / Cyropaedia translations: Interlinear (Beta, generated from app dictionary and treebank) 679 segments [Excellent (100% coverage)], Unknown 128 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 2 - 487 lines
 Xenophon / Cyropaedia translations: Interlinear (Beta, generated from app dictionary and treebank) 487 segments [Excellent (100% coverage)], Unknown 118 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 3 - 536 lines
 Xenophon / Cyropaedia translations: Interlinear (Beta, generated from app dictionary and treebank) 536 segments [Excellent (100% coverage)], Unknown 144 segments [Excellent-Section (100% coverage)]
-Xenophon / Cyropaedia / Book 4 - 577 lines
-Xenophon / Cyropaedia translations: Interlinear (Beta, generated from app dictionary and treebank) 577 segments [Excellent (100% coverage)], Unknown 177 segments [Excellent-Section (100% coverage)]
+Xenophon / Cyropaedia / Book 4 - 578 lines
+Xenophon / Cyropaedia translations: Interlinear (Beta, generated from app dictionary and treebank) 578 segments [Excellent (100% coverage)], Unknown 177 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 5 - 711 lines
 Xenophon / Cyropaedia translations: Interlinear (Beta, generated from app dictionary and treebank) 711 segments [Excellent (100% coverage)], Unknown 225 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 6 - 493 lines
@@ -7505,7 +7529,7 @@ Xenophon / Economics - 1,878 lines, max_char=604 [Perseus]
 Xenophon / Economics translations: Interlinear (Beta, generated from app dictionary and treebank) 1878 segments [Excellent (100% coverage)], Unknown 397 segments [Excellent-Section (100% coverage)]
 Xenophon / Hiero - 587 lines, max_char=601 [Perseus]
 Xenophon / Hiero translations: Interlinear (Beta, generated from app dictionary and treebank) 587 segments [Excellent (100% coverage)], Unknown 153 segments [Excellent-Section (100% coverage)]
-Xenophon / Memorabilia - 2,234 lines total, 4 books, max_lines/book=684, max_char=710 [Perseus]
+Xenophon / Memorabilia - 2,234 lines total, 4 books, max_lines/book=684, max_char=717 [Perseus]
 Xenophon / Memorabilia / Book 1 - 414 lines
 Xenophon / Memorabilia translations: Interlinear (Beta, generated from app dictionary and treebank) 414 segments [Excellent (100% coverage)], Unknown 144 segments [Excellent-Section (100% coverage)]
 Xenophon / Memorabilia / Book 2 - 525 lines
@@ -7526,7 +7550,7 @@ Xenophon / Ways and Means - 346 lines, max_char=595 [Perseus]
 Xenophon / Ways and Means translations: Interlinear (Beta, generated from app dictionary and treebank) 346 segments [Excellent (100% coverage)], Unknown 97 segments [Excellent-Section (100% coverage)]
 
 [Xenophon of Ephesus]
-Xenophon of Ephesus / Ephesiaca - 1,062 lines total, 5 books, max_lines/book=293, max_char=416 [Perseus]
+Xenophon of Ephesus / Ephesiaca - 1,062 lines total, 5 books, max_lines/book=293, max_char=423 [Perseus]
 Xenophon of Ephesus / Ephesiaca / Book 1 - 269 lines
 Xenophon of Ephesus / Ephesiaca translations: Interlinear (Beta, generated from app dictionary and treebank) 269 segments [Excellent (100% coverage)]
 Xenophon of Ephesus / Ephesiaca / Book 2 - 210 lines

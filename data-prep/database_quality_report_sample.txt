@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-01-29T21:57:27.515304
+Generated: 2026-02-11T06:50:57.216628
 Mode: sample
 
 Total Authors: 12
 Total Works: 265
 Total Books: 667
-Total Lines: 237,970
+Total Lines: 237,971
 Translation Segments: 126,148
 Build Time: 4.7 minutes
-Database Size: 667.2MB → 161.1MB compressed (24.1%)
+Database Size: 667.6MB → 161.2MB compressed (24.1%)
 Dictionary Entries: 61,070
 Lemma Mappings: 765,526
 
@@ -17,8 +17,8 @@ Lemma Mappings: 765,526
 greek:
   Authors: 10
   Works: 259
-  Lines: 219,432
-  Words: 3,090,328
+  Lines: 219,433
+  Words: 3,095,381
 
 latin:
   Authors: 2
@@ -1070,7 +1070,7 @@ Plutarch / Against Running in Debt, or Taking up Money Upon Usury - 121 lines, m
 Plutarch / Against Running in Debt, or Taking up Money Upon Usury translations: Harold North Fowler 9 segments [Excellent-Section (100% coverage)], R. Smith 8 segments [Excellent-Section (100% coverage)]
 Plutarch / Agesilaus - 691 lines, max_char=724 [Perseus]
 Plutarch / Agesilaus translations: Bernadotte Perrin 201 segments [Excellent-Section (100% coverage)]
-Plutarch / Agis and Cleomenes - 445 lines total, 2 books, max_lines/book=300, max_char=677 [Perseus]
+Plutarch / Agis and Cleomenes - 445 lines total, 2 books, max_lines/book=300, max_char=683 [Perseus]
 Plutarch / Agis and Cleomenes / Book 1 - 145 lines
 Plutarch / Agis and Cleomenes translations: Bernadotte Perrin 82 segments [Excellent (100% coverage)]
 Plutarch / Agis and Cleomenes / Book 2 - 300 lines
@@ -1313,7 +1313,7 @@ Plutarch / Themistocles - 591 lines, max_char=680 [Perseus]
 Plutarch / Themistocles translations: Bernadotte Perrin 136 segments [Excellent-Section (100% coverage)]
 Plutarch / Theseus - 672 lines, max_char=570 [Perseus]
 Plutarch / Theseus translations: Bernadotte Perrin 132 segments [Excellent-Section (100% coverage)]
-Plutarch / Tiberius and Caius Gracchus - 335 lines total, 2 books, max_lines/book=178, max_char=510 [Perseus]
+Plutarch / Tiberius and Caius Gracchus - 335 lines total, 2 books, max_lines/book=178, max_char=517 [Perseus]
 Plutarch / Tiberius and Caius Gracchus / Book 1 - 178 lines
 Plutarch / Tiberius and Caius Gracchus translations: Bernadotte Perrin 97 segments [Excellent (100% coverage)]
 Plutarch / Tiberius and Caius Gracchus / Book 2 - 157 lines
@@ -1377,7 +1377,7 @@ Xenophon /  Hellenica / Book 7 - 563 lines
 Xenophon /  Hellenica translations: Unknown 148 segments [Excellent-Section (100% coverage)]
 Xenophon / Agesilaus - 641 lines, max_char=807 [Perseus]
 Xenophon / Agesilaus translations: Unknown 137 segments [Excellent-Section (100% coverage)]
-Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=641 [Perseus]
+Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=647 [Perseus]
 Xenophon / Anabasis / Book 1 - 613 lines
 Xenophon / Anabasis translations: Unknown 205 segments [Excellent-Section (100% coverage)]
 Xenophon / Anabasis / Book 2 - 459 lines
@@ -1396,14 +1396,14 @@ Xenophon / Apology - 117 lines, max_char=312 [Perseus]
 Xenophon / Apology translations: Unknown 34 segments [Excellent-Section (100% coverage)]
 Xenophon / Constitution of the Lacedaimonians - 464 lines, max_char=572 [Perseus]
 Xenophon / Constitution of the Lacedaimonians translations: Unknown 119 segments [Excellent-Section (100% coverage)]
-Xenophon / Cyropaedia - 4,988 lines total, 8 books, max_lines/book=896, max_char=724 [Perseus]
+Xenophon / Cyropaedia - 4,989 lines total, 8 books, max_lines/book=896, max_char=731 [Perseus]
 Xenophon / Cyropaedia / Book 1 - 679 lines
 Xenophon / Cyropaedia translations: Unknown 128 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 2 - 487 lines
 Xenophon / Cyropaedia translations: Unknown 118 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 3 - 536 lines
 Xenophon / Cyropaedia translations: Unknown 144 segments [Excellent-Section (100% coverage)]
-Xenophon / Cyropaedia / Book 4 - 577 lines
+Xenophon / Cyropaedia / Book 4 - 578 lines
 Xenophon / Cyropaedia translations: Unknown 177 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 5 - 711 lines
 Xenophon / Cyropaedia translations: Unknown 225 segments [Excellent-Section (100% coverage)]
@@ -1417,7 +1417,7 @@ Xenophon / Economics - 1,878 lines, max_char=604 [Perseus]
 Xenophon / Economics translations: Unknown 397 segments [Excellent-Section (100% coverage)]
 Xenophon / Hiero - 587 lines, max_char=601 [Perseus]
 Xenophon / Hiero translations: Unknown 153 segments [Excellent-Section (100% coverage)]
-Xenophon / Memorabilia - 2,234 lines total, 4 books, max_lines/book=684, max_char=710 [Perseus]
+Xenophon / Memorabilia - 2,234 lines total, 4 books, max_lines/book=684, max_char=717 [Perseus]
 Xenophon / Memorabilia / Book 1 - 414 lines
 Xenophon / Memorabilia translations: Unknown 144 segments [Excellent-Section (100% coverage)]
 Xenophon / Memorabilia / Book 2 - 525 lines
