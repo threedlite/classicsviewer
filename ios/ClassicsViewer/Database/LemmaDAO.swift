@@ -52,7 +52,7 @@ class LemmaDAO: LemmaDAOProtocol {
     
     func getAllLemmaMaps(wordForm: String) async throws -> [LemmaMap] {
         let query = """
-            SELECT word_form, word_normalized, lemma, confidence, source, morph_info
+            SELECT word_form, word_form_normalized_ultra, lemma, confidence, source, morph_info
             FROM lemma_map
             WHERE word_form = ?
             ORDER BY confidence DESC
@@ -65,7 +65,7 @@ class LemmaDAO: LemmaDAOProtocol {
 
     func getDictionaryEntry(headword: String, language: String) async throws -> DictionaryEntry? {
         let query = """
-            SELECT id, headword, headword_normalized, language, entry_xml, entry_html, entry_plain, source
+            SELECT id, headword, headword_normalized_ultra, language, entry_xml, entry_html, entry_plain, source
             FROM dictionary_entries
             WHERE headword = ? AND language = ?
             LIMIT 1

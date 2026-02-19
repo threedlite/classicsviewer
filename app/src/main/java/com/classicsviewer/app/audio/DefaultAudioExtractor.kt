@@ -332,6 +332,15 @@ class DefaultAudioExtractor(private val context: Context) {
 
                 if (entryName.endsWith(".mp4") || entryName.endsWith(".mp3")) {
                     val audioFile = File(packageDir, entryName)
+
+                    // Validate resolved path stays within package directory (prevent zip slip)
+                    if (!audioFile.canonicalPath.startsWith(packageDir.canonicalPath + File.separator)) {
+                        Log.e(TAG, "Zip entry path traversal blocked: $entryName")
+                        zipInput.closeEntry()
+                        entry = zipInput.nextEntry
+                        continue
+                    }
+
                     audioFile.parentFile?.mkdirs()
 
                     audioFile.outputStream().use { output ->

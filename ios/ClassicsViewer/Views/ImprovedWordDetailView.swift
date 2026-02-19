@@ -575,7 +575,9 @@ struct SafeDictionaryWebView: UIViewRepresentable {
         configuration.userContentController = WKUserContentController()
         
         // Enable JavaScript console logging for debugging
+        #if DEBUG
         configuration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+        #endif
         
         // Add message handler for Greek word taps
         configuration.userContentController.add(context.coordinator, name: "greekWordHandler")
@@ -713,8 +715,13 @@ struct SafeDictionaryWebView: UIViewRepresentable {
         </script>
         """
         
-        // Process HTML to wrap Greek words in clickable spans
-        let processedHTML = wrapGreekWordsInHTML(htmlContent)
+        // Strip all HTML tags from database content (like Android DictionaryTextFormatter)
+        // This prevents script injection from malicious database content
+        let plainText = stripHTMLTags(htmlContent)
+
+        // Process plain text to wrap Greek words in clickable spans
+        // and English words in bold (matching Android behavior)
+        let processedHTML = wrapWordsInHTML(plainText)
         
         // Wrap HTML with proper styling and JavaScript
         let styledHTML = """
@@ -766,35 +773,84 @@ struct SafeDictionaryWebView: UIViewRepresentable {
         webView.loadHTMLString(styledHTML, baseURL: nil)
     }
     
-    private func wrapGreekWordsInHTML(_ html: String) -> String {
-        // Regular expression to match Greek words
-        let greekPattern = "[\\u0370-\\u03FF\\u1F00-\\u1FFF]+"
-        
-        do {
-            let regex = try NSRegularExpression(pattern: greekPattern, options: [])
-            let nsString = html as NSString
-            let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
-            
-            var result = html
-            var offset = 0
-            
-            for match in matches {
-                let matchRange = match.range
-                let word = nsString.substring(with: matchRange)
-                let replacement = "<span class='greek-word' data-word='\(word)' onclick='window.webkit.messageHandlers.greekWordHandler.postMessage(\"\(word)\"); event.stopPropagation(); return false;'>\(word)</span>"
-                
-                let adjustedRange = NSRange(location: matchRange.location + offset, length: matchRange.length)
-                if let range = Range(adjustedRange, in: result) {
-                    result.replaceSubrange(range, with: replacement)
-                    offset += replacement.count - word.count
-                }
-            }
-            
-            return result
-        } catch {
-            // If regex fails, return original HTML
-            return html
+    /// Strip all HTML tags from database content, preserving line breaks.
+    /// Matches Android DictionaryTextFormatter.formatHtmlDictionaryText (lines 119-132)
+    private func stripHTMLTags(_ html: String) -> String {
+        var text = html
+        // Preserve line breaks from HTML structure
+        text = text.replacingOccurrences(of: "<br>", with: "\n", options: .caseInsensitive)
+        text = text.replacingOccurrences(of: "<br/>", with: "\n", options: .caseInsensitive)
+        text = text.replacingOccurrences(of: "<br />", with: "\n", options: .caseInsensitive)
+        text = text.replacingOccurrences(of: "</p>", with: "\n\n", options: .caseInsensitive)
+        // Remove all remaining HTML tags
+        text = text.replacingOccurrences(of: "<[^>]*>", with: "", options: .regularExpression)
+        // Decode HTML entities
+        text = text.replacingOccurrences(of: "&amp;", with: "&")
+        text = text.replacingOccurrences(of: "&lt;", with: "<")
+        text = text.replacingOccurrences(of: "&gt;", with: ">")
+        text = text.replacingOccurrences(of: "&quot;", with: "\"")
+        text = text.replacingOccurrences(of: "&#39;", with: "'")
+        text = text.replacingOccurrences(of: "&nbsp;", with: " ")
+        return text
+    }
+
+    /// Wrap Greek words in clickable spans and English words in bold.
+    /// Matches Android DictionaryTextFormatter.formatDictionaryText behavior:
+    /// - Greek words → clickable (blue, tappable)
+    /// - English words (2+ chars) → bold
+    private func wrapWordsInHTML(_ text: String) -> String {
+        // Pattern matching Greek or English word runs
+        let tokenPattern = "([\\u0370-\\u03FF\\u1F00-\\u1FFF]+)|([a-zA-Z]{2,})"
+
+        guard let regex = try? NSRegularExpression(pattern: tokenPattern, options: []) else {
+            // Escape for safe HTML embedding and convert newlines
+            return text.replacingOccurrences(of: "&", with: "&amp;")
+                       .replacingOccurrences(of: "<", with: "&lt;")
+                       .replacingOccurrences(of: ">", with: "&gt;")
+                       .replacingOccurrences(of: "\n", with: "<br>")
         }
+
+        let nsText = text as NSString
+        var result = ""
+        var lastEnd = 0
+
+        let matches = regex.matches(in: text, options: [], range: NSRange(location: 0, length: nsText.length))
+        for match in matches {
+            // Append any text between the last match and this one (escaped)
+            if match.range.location > lastEnd {
+                let gap = nsText.substring(with: NSRange(location: lastEnd, length: match.range.location - lastEnd))
+                result += escapeHTML(gap)
+            }
+
+            let word = nsText.substring(with: match.range)
+
+            if match.range(at: 1).location != NSNotFound {
+                // Greek word → clickable span
+                let escapedWord = escapeHTML(word)
+                result += "<span class='greek-word'>\(escapedWord)</span>"
+            } else {
+                // English word → bold
+                result += "<b>\(escapeHTML(word))</b>"
+            }
+
+            lastEnd = match.range.location + match.range.length
+        }
+
+        // Append any trailing text
+        if lastEnd < nsText.length {
+            let tail = nsText.substring(from: lastEnd)
+            result += escapeHTML(tail)
+        }
+
+        return result
+    }
+
+    private func escapeHTML(_ text: String) -> String {
+        return text.replacingOccurrences(of: "&", with: "&amp;")
+                   .replacingOccurrences(of: "<", with: "&lt;")
+                   .replacingOccurrences(of: ">", with: "&gt;")
+                   .replacingOccurrences(of: "\"", with: "&quot;")
+                   .replacingOccurrences(of: "\n", with: "<br>")
     }
     
     func makeCoordinator() -> Coordinator {

@@ -154,8 +154,17 @@ class AudioImportWorker(
                             
                             if (!currentEntry.isDirectory && currentEntry.name.endsWith(".mp4")) {
                                 val file = File(packageDir, currentEntry.name)
+
+                                // Validate resolved path stays within package directory (prevent zip slip)
+                                if (!file.canonicalPath.startsWith(packageDir.canonicalPath + File.separator)) {
+                                    Log.e(TAG, "Zip entry path traversal blocked: ${currentEntry.name}")
+                                    zis.closeEntry()
+                                    zipEntry = zis.nextEntry
+                                    continue
+                                }
+
                                 file.parentFile?.mkdirs()
-                                
+
                                 try {
                                     FileOutputStream(file).use { fos ->
                                         zis.copyTo(fos)

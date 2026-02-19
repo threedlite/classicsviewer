@@ -83,16 +83,16 @@ class TranslationDAO: TranslationDAOProtocol {
                     AND tl.line_number BETWEEN ? AND ?
                 )
             )
-            ORDER BY ts.start_line
+            ORDER BY ts.start_line, ts.sequence_number
         """
-        
+
         let results = try await DatabaseManagerAsync.shared.executeQuery(
             query,
             parameters: [bookId, endLine, startLine, bookId, startLine, endLine]
         ) { statement in
             self.translationFromStatement(statement)
         }
-        
+
         // Debug logging for translation alignment
         if results.isEmpty {
             print("DEBUG TranslationDAO: No translations found for \(bookId) lines \(startLine)-\(endLine)")
@@ -129,9 +129,9 @@ class TranslationDAO: TranslationDAOProtocol {
                     AND tl.line_number BETWEEN ? AND ?
                 )
             )
-            ORDER BY ts.start_line
+            ORDER BY ts.start_line, ts.sequence_number
         """
-        
+
         return try await DatabaseManagerAsync.shared.executeQuery(
             query,
             parameters: [bookId, translator, endLine, startLine, bookId, startLine, endLine]

@@ -12,17 +12,14 @@ class WorkDAO: WorkDAOProtocol {
     // Use async database manager
     
     func getWorksByAuthor(authorId: String) async throws -> [Work] {
-        // Direct query without parameter binding to test
         let query = """
             SELECT id, author_id, title, title_alt, title_english, type, urn, description
             FROM works
-            WHERE author_id = '\(authorId)'
+            WHERE author_id = ?
             ORDER BY id
         """
-        
-        // print("DEBUG WorkDAO: Executing query: \(query)")
-        
-        return try await DatabaseManagerAsync.shared.executeQuery(query) { statement in
+
+        return try await DatabaseManagerAsync.shared.executeQuery(query, parameters: [authorId]) { statement in
             self.workFromStatement(statement)
         }
     }

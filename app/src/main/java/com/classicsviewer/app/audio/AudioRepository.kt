@@ -117,7 +117,14 @@ class AudioRepository(private val context: Context) {
             
             val packageDir = getPackageDirectory(activePackageId, activePackage.packageName)
             val audioFile = File(packageDir, mapping.filePath)
-            
+
+            // Validate resolved path stays within the package directory (prevent traversal)
+            if (!audioFile.canonicalPath.startsWith(packageDir.canonicalPath + File.separator) &&
+                audioFile.canonicalPath != packageDir.canonicalPath) {
+                Log.e(TAG, "Audio file path traversal blocked: ${mapping.filePath}")
+                return null
+            }
+
             if (audioFile.exists()) {
                 audioFile
             } else {
