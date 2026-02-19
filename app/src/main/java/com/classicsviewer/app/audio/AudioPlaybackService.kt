@@ -6,11 +6,10 @@ import android.net.Uri
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSource
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.PlaybackException
+import androidx.media3.exoplayer.ExoPlayer
 import java.io.File
 
 class AudioPlaybackService : Service() {
@@ -88,7 +87,7 @@ class AudioPlaybackService : Service() {
                         }
                     }
                     
-                    override fun onPlayerError(error: com.google.android.exoplayer2.PlaybackException) {
+                    override fun onPlayerError(error: PlaybackException) {
                         Log.e(TAG, "Playback error: ${error.message}")
                         playbackListener?.onPlaybackError(error.message ?: "Unknown error")
                     }
