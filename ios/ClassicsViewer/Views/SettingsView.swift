@@ -208,6 +208,10 @@ struct SettingsView: View {
                     Text("Sentence tree: Tap the morphology line (e.g. 'ψυχή acc s') to see how words relate grammatically within the sentence.")
                         .font(.footnote)
                         .foregroundColor(.secondary)
+
+                    Text("It is recommended to limit screen time, increase font size for comfortable viewing, and/or use a larger tablet device.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
 
                 // About Section
