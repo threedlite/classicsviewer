@@ -97,6 +97,33 @@ NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
 2. Make sure the database exists: `app/src/debug/assets/perseus_texts.db.zip`
 3. Click "Run" to build and deploy
 
+### iOS
+
+#### Prerequisites
+- Xcode 16.4 or later
+- macOS 15.6 or later
+- iOS 16.1+ deployment target
+
+#### Building the App
+
+1. **Navigate to iOS directory**
+   ```bash
+   cd ios
+   ```
+
+2. **Build and deploy to simulator**
+   Open `ClassicsViewer.xcodeproj` in Xcode and press Cmd+R.
+
+3. **Database**: A sample database is bundled in `ClassicsViewer/Resources/perseus_texts.db.zip`. The app extracts it automatically on first launch (~5-10 seconds).
+
+#### Physical Device Testing
+1. Connect iPhone/iPad via USB
+2. Open `ClassicsViewer.xcodeproj` in Xcode
+3. Select your device and set a valid development team
+4. Build and run (Cmd+R)
+
+See `ios/iOS_README.md` and `ios/BUILD_INSTRUCTIONS.md` for full details.
+
 ## Using the App
 
 1. **Select a language** - Choose Greek or Latin
