@@ -4578,6 +4578,15 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
     # Find English translation files
     translation_files = list(work_dir.glob("*eng*.xml"))
 
+    # Also check the aligned/ directory for manually aligned translations
+    # These are translations created outside Perseus (e.g., via cross-lingual alignment)
+    aligned_dir = Path(__file__).parent.parent / "aligned"
+    if aligned_dir.exists():
+        aligned_files = list(aligned_dir.glob(f"{work_id}.*eng*.xml"))
+        if aligned_files:
+            print(f"      Found {len(aligned_files)} aligned translation(s) in aligned/")
+            translation_files.extend(aligned_files)
+
     # Note: Interlinear translations are now generated and imported after the main build
     # via generate_interlinear_translations() and import_interlinear_translations()
 
