@@ -42,6 +42,23 @@ Tufts University
 http://www.perseus.tufts.edu/
 
 
+TRANSLATIONS
+============
+
+Diodorus Siculus - G. Booth (1700)
+-----------------------------------
+Title: The Historical Library of Diodorus the Sicilian
+Translator: G. Booth
+Published: London, 1700
+Source: Oxford Text Archive (OTA A36034)
+https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/A36034
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+English translation aligned to the Perseus Greek section structure by the
+Diodorus Alignment Project using cross-lingual embedding similarity and
+named-entity anchoring.
+
+
 DICTIONARIES
 ============
 
