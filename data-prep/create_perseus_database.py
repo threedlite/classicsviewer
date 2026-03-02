@@ -21,6 +21,7 @@ import sys
 import os
 import fcntl
 import atexit
+import bisect
 from build_modules.load_combined_dictionaries import load_combined_dictionaries
 from build_modules.normalization_utils import normalize_greek, normalize_greek_ultra
 # Interlinear generation removed - always use pregenerated files from data-sources/classicsviewer_interlinear/
@@ -3643,7 +3644,51 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         elif is_stephanus:
             print(f"          Detected Stephanus pagination (first reference: {first_milestone_num})")
             print(f"          DEBUG: is_stephanus={is_stephanus}, author_id={author_id}")
-        
+
+        # Detect chapter.section milestones (e.g., n="1.1", n="arg.0")
+        # These appear in aligned translations like Diodorus Siculus
+        is_chapter_section_milestones = False
+        chapter_section_to_line = {}
+        sorted_milestone_lines = []
+
+        if not is_bekker and not is_stephanus:
+            # Scan milestones for X.Y or arg.X patterns
+            cs_pattern = re.compile(r'^(\w+)\.(\w+)$')  # matches "1.1", "arg.0", etc.
+            cs_milestone_count = 0
+            cs_milestone_values = []
+            for child in book_elem.iter():
+                if is_milestone_tag(child.tag):
+                    unit = child.get('unit', '')
+                    n = child.get('n', '')
+                    if unit == 'section' and n and cs_pattern.match(n):
+                        cs_milestone_count += 1
+                        cs_milestone_values.append(n)
+                        if cs_milestone_count > 3:
+                            break  # Enough to confirm pattern
+
+            if cs_milestone_count >= 3:
+                # Query text_lines for lines with [X.Y] prefixes in this book_id
+                cursor.execute("""
+                    SELECT line_number, line_text FROM text_lines
+                    WHERE book_id = ? AND line_text LIKE '[%'
+                    ORDER BY line_number
+                """, (book_id,))
+
+                bracket_pattern = re.compile(r'^\[([^\]]+)\]')
+                for row in cursor.fetchall():
+                    line_num, line_text = row
+                    m = bracket_pattern.match(line_text)
+                    if m:
+                        prefix = m.group(1)  # e.g., "1.1", "arg.0"
+                        chapter_section_to_line[prefix] = line_num
+
+                if chapter_section_to_line:
+                    is_chapter_section_milestones = True
+                    sorted_milestone_lines = sorted(set(chapter_section_to_line.values()))
+                    print(f"          Detected chapter.section milestones: {len(chapter_section_to_line)} mapped (e.g., {cs_milestone_values[:3]})")
+                else:
+                    print(f"          Found {cs_milestone_count} chapter.section milestones but no matching [X.Y] prefixes in text_lines")
+
         # For Stephanus/Bekker texts, we need to track milestones that precede paragraphs
         current_milestone = None
         # Track current Bekker/Stephanus section for combining with line numbers
@@ -3679,7 +3724,10 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                         current_stephanus_section = n
                         # Reset line number when new section starts
                         current_stephanus_line = None
-                
+                    elif is_chapter_section_milestones and n in chapter_section_to_line:
+                        # Chapter.section milestone (e.g., "1.1", "arg.0") - resolve to line number
+                        current_milestone = chapter_section_to_line[n]
+
                 # Track Bekker/Stephanus line numbers that appear between paragraphs
                 elif unit == 'line' and resp == 'bekker' and n:
                     current_bekker_line = n
@@ -3738,6 +3786,9 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                                 # Skip section milestones that we're tracking separately
                                 elif unit == 'section' and (is_bekker or is_stephanus):
                                     pass  # Already handled above
+                                elif is_chapter_section_milestones and unit == 'section' and n in chapter_section_to_line:
+                                    # Resolve chapter.section milestone to actual line number
+                                    milestones_in_para.append(chapter_section_to_line[n])
                                 else:
                                     # Try to extract numeric part for sorting
                                     try:
@@ -3803,7 +3854,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                         # Ensure we have numeric values for line numbers
                         start_val = milestones_in_para[0]
                         end_val = milestones_in_para[-1] if len(milestones_in_para) > 1 else milestones_in_para[0]
-                        
+
                         # Convert to int if they're not already
                         if isinstance(start_val, str):
                             # Try to extract number from string
@@ -3812,7 +3863,21 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                         if isinstance(end_val, str):
                             match = re.match(r'(\d+)', end_val)
                             end_val = int(match.group(1)) if match else start_val
-                            
+
+                        # For chapter.section milestones, compute end_line as
+                        # (next section start - 1) so the paragraph covers the
+                        # full line range of its last section
+                        if is_chapter_section_milestones and sorted_milestone_lines and isinstance(end_val, int):
+                            idx = bisect.bisect_right(sorted_milestone_lines, end_val)
+                            if idx < len(sorted_milestone_lines):
+                                end_val = sorted_milestone_lines[idx] - 1
+                            else:
+                                # Last section - extend to end of book
+                                cursor.execute("SELECT MAX(line_number) FROM text_lines WHERE book_id = ?", (book_id,))
+                                max_line = cursor.fetchone()
+                                if max_line and max_line[0]:
+                                    end_val = max_line[0]
+
                         segments.append({
                             'start_line': start_val,
                             'end_line': end_val,
