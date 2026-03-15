@@ -80,6 +80,38 @@ private fun parseEnhancedMorph(morphField: String): Pair<String, TreeData?> {
     return Pair(displayMorph, treeData)
 }
 
+/**
+ * Extract grammatical case from the morph field for case-based color coding.
+ * Returns "nom", "acc", "dat", "gen", "voc", or null for non-case words.
+ */
+private fun extractCase(morphField: String): String? {
+    val (displayMorph, _) = parseEnhancedMorph(morphField)
+    val lower = displayMorph.lowercase()
+    return when {
+        lower.contains("nom") -> "nom"
+        lower.contains("acc") -> "acc"
+        lower.contains("dat") -> "dat"
+        lower.contains("gen") -> "gen"
+        lower.contains("voc") -> "voc"
+        else -> null
+    }
+}
+
+/**
+ * Get pastel background color for a grammatical case.
+ * Very light tints in both dark and inverted modes for subtle visual distinction.
+ */
+private fun getCaseBackgroundColor(case: String?, invertColors: Boolean): Int {
+    return when (case) {
+        "nom" -> if (invertColors) 0xFFEBF1FF.toInt() else 0xFF0D1520.toInt()
+        "acc" -> if (invertColors) 0xFFFFEBEB.toInt() else 0xFF1F0D0D.toInt()
+        "dat" -> if (invertColors) 0xFFFFF8CC.toInt() else 0xFF2B2B0D.toInt()
+        "gen" -> if (invertColors) 0xFFEBFFEB.toInt() else 0xFF0D1F0D.toInt()
+        "voc" -> if (invertColors) 0xFFF3EBFF.toInt() else 0xFF170D1F.toInt()
+        else  -> if (invertColors) 0xFFFFFFFF.toInt() else 0xFF222222.toInt()
+    }
+}
+
 class TranslationAdapter(
     val items: List<TranslationDisplayItem>,
     private val invertColors: Boolean = false,
@@ -290,6 +322,9 @@ class TranslationAdapter(
                 marginEnd = 16 // Space between word tables
             }
 
+            // Extract case from morph row for background color coding
+            val wordCase = if (rows.size >= 3) extractCase(rows[2]) else null
+
             // Add each row
             rows.forEachIndexed { index, text ->
                 val row = TableRow(context).apply {
@@ -356,34 +391,29 @@ class TranslationAdapter(
                         }
                     }
 
-                    // Apply colors
+                    // Apply colors - cell backgrounds transparent so case color shows through
                     if (invertColors) {
                         setTextColor(when (index) {
                             0 -> 0xFF000000.toInt()  // Greek - black
                             1 -> 0xFF000000.toInt()  // Gloss - black
                             else -> 0xFF666666.toInt()  // Morph - gray
                         })
-                        setBackgroundColor(0xFFFFFFFF.toInt())
                     } else {
                         setTextColor(when (index) {
                             0 -> 0xFFFFFFFF.toInt()  // Greek - white
                             1 -> 0xFFFFFFFF.toInt()  // Gloss - white
                             else -> 0xFF999999.toInt()  // Morph - light gray
                         })
-                        setBackgroundColor(0xFF000000.toInt())
                     }
+                    setBackgroundColor(android.graphics.Color.TRANSPARENT)
                 }
 
                 row.addView(cell)
                 addView(row)
             }
 
-            // Add border around table
-            if (invertColors) {
-                setBackgroundColor(0xFFEEEEEE.toInt())
-            } else {
-                setBackgroundColor(0xFF222222.toInt())
-            }
+            // Set table background based on grammatical case
+            setBackgroundColor(getCaseBackgroundColor(wordCase, invertColors))
             setPadding(4, 4, 4, 4)
         }
     }

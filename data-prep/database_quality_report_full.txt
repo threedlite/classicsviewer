@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-02-11T06:45:55.347249
+Generated: 2026-03-15T13:45:29.956759
 Mode: full
 
 Total Authors: 135
 Total Works: 1018
 Total Books: 3514
 Total Lines: 1,049,996
-Translation Segments: 1,278,858
+Translation Segments: 1,282,462
 Build Time: 7.2 minutes
-Database Size: 4195.2MB → 917.3MB compressed (21.9%)
+Database Size: 4234.8MB → 920.4MB compressed (21.7%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,050,714
 
@@ -1945,35 +1945,35 @@ Dio Chrysostom / Orationes translations: Interlinear (Beta, generated from app d
 [Diodorus Siculus]
 Diodorus Siculus / Historical Library - 17,349 lines total, 15 books, max_lines/book=1,487, max_char=775 [Perseus]
 Diodorus Siculus / Historical Library / Book 1 - 1,257 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1257 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 216 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1257 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 2 - 840 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 840 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 163 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 840 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 3 - 989 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 989 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 231 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 989 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 4 - 1,220 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1220 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 271 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1220 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 5 - 1,037 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1037 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 272 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1037 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 11 - 1,027 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1027 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 266 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1027 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 12 - 940 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 940 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 130 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 940 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 13 - 1,487 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1487 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 180 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1487 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 14 - 1,476 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1476 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 212 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1476 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 15 - 1,091 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1091 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 163 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1091 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 16 - 1,115 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1115 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 268 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1115 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 17 - 1,355 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1355 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 269 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1355 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 18 - 888 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 888 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 131 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 888 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 19 - 1,344 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1344 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 276 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1344 segments [Excellent (100% coverage)]
 Diodorus Siculus / Historical Library / Book 20 - 1,283 lines
-Diodorus Siculus / Historical Library translations: Interlinear (Beta, generated from app dictionary and treebank) 1283 segments [Excellent (100% coverage)]
+Diodorus Siculus / Historical Library translations: G. Booth 168 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1283 segments [Excellent (100% coverage)]
 
 [Diogenes Laertius]
 Diogenes Laertius / Lives of Eminent Philosophers - 9,481 lines total, 10 books, max_lines/book=1,617, max_char=600 [Perseus]
@@ -5526,9 +5526,9 @@ Sophocles / Tracking Satyrs translations: Anne Mahoney 120 segments [Excellent-S
 [Statius, P. Papinius (Publius Papinius)]
 Statius, P. Papinius (Publius Papinius) / Achilleis - 1,125 lines total, 2 books, max_lines/book=958, max_char=66 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Achilleis / Book 1 - 958 lines
-Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 958 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 958 segments [Excellent (100% coverage)], J.H. Mozley 42 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Achilleis / Book 2 - 167 lines
-Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 167 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 167 segments [Excellent (100% coverage)], J.H. Mozley 4 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Silvae - 3,898 lines total, 5 books, max_lines/book=846, max_char=674 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Silvae / Book 1 - 792 lines
 Statius, P. Papinius (Publius Papinius) / Silvae translations: Interlinear (Beta, AI-generated from app dictionary) 792 segments [Excellent (100% coverage)]
@@ -5542,29 +5542,29 @@ Statius, P. Papinius (Publius Papinius) / Silvae / Book 5 - 846 lines
 Statius, P. Papinius (Publius Papinius) / Silvae translations: Interlinear (Beta, AI-generated from app dictionary) 846 segments [Excellent (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais - 9,741 lines total, 12 books, max_lines/book=947, max_char=68 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 1 - 720 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 720 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 720 segments [Excellent (100% coverage)], J.H. Mozley 22 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 2 - 743 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 743 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 743 segments [Excellent (100% coverage)], J.H. Mozley 26 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 3 - 721 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 721 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 721 segments [Excellent (100% coverage)], J.H. Mozley 22 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 4 - 842 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 842 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 842 segments [Excellent (100% coverage)], J.H. Mozley 32 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 5 - 753 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 753 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 753 segments [Excellent (100% coverage)], J.H. Mozley 26 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 6 - 947 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 947 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 947 segments [Excellent (100% coverage)], J.H. Mozley 41 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 7 - 823 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 823 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 823 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 8 - 766 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 766 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 766 segments [Excellent (100% coverage)], J.H. Mozley 28 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 9 - 907 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 907 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 907 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 10 - 939 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 939 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 939 segments [Excellent (100% coverage)], J.H. Mozley 35 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 11 - 761 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 12 - 819 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 819 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 819 segments [Excellent (100% coverage)], J.H. Mozley 29 segments [Excellent-Section (100% coverage)]
 
 [Stephen Langdon (Sumerian Texts)]
 Stephen Langdon (Sumerian Texts) / A LITURGY TO ENLIL, SERIES _E-LUM GUD-SUN_ (ZIMMERN KL - 254 lines total, 9 books, max_lines/book=43, max_char=70 [Perseus]

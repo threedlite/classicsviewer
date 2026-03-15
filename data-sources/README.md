@@ -40,3 +40,6 @@ git clone https://github.com/PatristicTextArchive/pta_data.git
 git clone https://github.com/PatristicTextArchive/pta_metadata.git
 git clone https://github.com/srophe/syriaca-data.git
 git clone https://github.com/CopticScriptorium/corpora.git
+
+git clone https://github.com/alekkeersmaekers/glaux
+

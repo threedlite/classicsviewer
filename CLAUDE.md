@@ -308,7 +308,7 @@ cd build_modules/generate_interlinear
 ```
 
 ### Interlinear Build Times (8 workers):
-- **Greek (2,049 works, 35.0M words)**: ~13 hours (783 minutes)
+- **Greek (2,049 works, 35.0M words)**: ~5 hours (compound word decomposition disabled; was ~13 hours with it enabled)
 - **Latin (230 works, 228 XML files)**: ~17 seconds
 - **Sanskrit (270 works, 203K lines, 13.4M words)**: ~90 seconds
 

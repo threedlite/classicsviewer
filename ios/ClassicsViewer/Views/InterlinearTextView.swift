@@ -60,6 +60,32 @@ func parseEnhancedMorph(_ morphField: String) -> (display: String, treeData: Tre
     return (displayMorph, treeData)
 }
 
+/// Extract grammatical case from the morph field for case-based color coding.
+/// Returns "nom", "acc", "dat", "gen", "voc", or nil for non-case words.
+func extractCase(_ morphField: String) -> String? {
+    let (displayMorph, _) = parseEnhancedMorph(morphField)
+    let lower = displayMorph.lowercased()
+    if lower.contains("nom") { return "nom" }
+    if lower.contains("acc") { return "acc" }
+    if lower.contains("dat") { return "dat" }
+    if lower.contains("gen") { return "gen" }
+    if lower.contains("voc") { return "voc" }
+    return nil
+}
+
+/// Get pastel background color for a grammatical case.
+/// Very light tints for subtle visual distinction.
+func getCaseBackgroundColor(_ grammaticalCase: String?, isLight: Bool) -> Color {
+    switch grammaticalCase {
+    case "nom": return Color(hex: isLight ? "#EBF1FF" : "#0D1520")
+    case "acc": return Color(hex: isLight ? "#FFEBEB" : "#1F0D0D")
+    case "dat": return Color(hex: isLight ? "#FFF8CC" : "#2B2B0D")
+    case "gen": return Color(hex: isLight ? "#EBFFEB" : "#0D1F0D")
+    case "voc": return Color(hex: isLight ? "#F3EBFF" : "#170D1F")
+    default:    return Color(hex: isLight ? "#EEEEEE" : "#222222")
+    }
+}
+
 /// Renders interlinear translation text in Markdown table format
 /// Matches Android TranslationAdapter.kt lines 76-236
 ///
@@ -201,11 +227,11 @@ struct InterlinearTextView: View {
     @ViewBuilder
     private func createWordTable(rows: [String], allWords: [[String]], forWrapping: Bool, treeDisabled: Bool = false) -> some View {
         let isLight = colorScheme == .light
-        let cellBackground = isLight ? Color.white : Color.black
-        let borderBackground = isLight ? Color(hex: "#EEEEEE") : Color(hex: "#222222")
 
-        // Parse tree data from morph field
+        // Parse tree data and case from morph field
         let (displayMorph, treeData) = parseEnhancedMorph(rows[2])
+        let wordCase = extractCase(rows[2])
+        let borderBackground = getCaseBackgroundColor(wordCase, isLight: isLight)
         let hasTreeData = treeData != nil
 
         VStack(alignment: .center, spacing: 0) {
@@ -217,7 +243,6 @@ struct InterlinearTextView: View {
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
-                .background(cellBackground)
                 .onTapGesture {
                     onWordTapped?(rows[0])
                 }
@@ -230,7 +255,6 @@ struct InterlinearTextView: View {
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
-                .background(cellBackground)
 
             // Row 2: Morphology - style depends on data source:
             // Bold for treebank data (~*), italic for Stanza-derived data (~)
@@ -242,7 +266,6 @@ struct InterlinearTextView: View {
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity)
-                .background(cellBackground)
                 .onTapGesture {
                     if enableDependencyTree, let td = treeData, let segs = segments, let segIdx = segmentIndex, !treeDisabled {
                         onMorphTapped?(segs, segIdx, td.sentPos)

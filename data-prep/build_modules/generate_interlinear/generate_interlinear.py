@@ -49,10 +49,12 @@ except ImportError:
 try:
     from .ui_dictionary_lookup import PerseusRepository, DictionaryEntry
     from .treebank_loader import PerseusTreebankLoader, map_pos, map_relation
+    from .glaux_loader import GlauxLoader
 except ImportError:
     # Fallback for direct execution (testing)
     from ui_dictionary_lookup import PerseusRepository, DictionaryEntry
     from treebank_loader import PerseusTreebankLoader, map_pos, map_relation
+    from glaux_loader import GlauxLoader
 
 # Database path - will be set when called from build script
 DB_PATH = None
@@ -79,6 +81,14 @@ _treebank_initialized = False
 # Default treebank directory (relative to this file's grandparent)
 TREEBANK_DIR = Path(__file__).parent.parent.parent.parent / "data-sources" / "treebank_data"
 
+# Global GLAUx loader instance (lazy initialized)
+_glaux_loader = None
+_glaux_lock = threading.Lock()
+_glaux_initialized = False
+
+# Default GLAUx directory
+GLAUX_DIR = Path(__file__).parent.parent.parent.parent / "data-sources" / "glaux"
+
 
 def get_treebank_loader():
     """
@@ -101,6 +111,28 @@ def get_treebank_loader():
                 _treebank_initialized = True
 
     return _treebank_loader
+
+
+def get_glaux_loader():
+    """
+    Get or create the GLAUx loader singleton.
+    Thread-safe for use with multiprocessing workers.
+    Returns None if GLAUx directory doesn't exist.
+    """
+    global _glaux_loader, _glaux_initialized
+
+    if _glaux_loader is None and not _glaux_initialized:
+        with _glaux_lock:
+            if _glaux_loader is None and not _glaux_initialized:
+                if GLAUX_DIR.exists():
+                    print(f"Loading GLAUx treebank data from {GLAUX_DIR}...")
+                    _glaux_loader = GlauxLoader(str(GLAUX_DIR))
+                    print(f"GLAUx loaded: {len(_glaux_loader.available_works)} works available")
+                else:
+                    print(f"GLAUx directory not found: {GLAUX_DIR}")
+                _glaux_initialized = True
+
+    return _glaux_loader
 
 
 def get_cltk_nlp():
@@ -145,9 +177,11 @@ class SentenceTreeAnalyzer:
     # Maximum lines to accumulate before giving up on tree data
     MAX_ACCUMULATION_LINES = 20
 
-    def __init__(self, treebank_loader: Optional[PerseusTreebankLoader] = None):
+    def __init__(self, treebank_loader: Optional[PerseusTreebankLoader] = None,
+                 glaux_loader: Optional['GlauxLoader'] = None):
         self.nlp = get_cltk_nlp()
         self.treebank = treebank_loader
+        self.glaux = glaux_loader
         # Current work context (set before processing each book)
         self.current_work_id = None
         self.current_book = None
@@ -157,8 +191,9 @@ class SentenceTreeAnalyzer:
         self.overflow_mode = False
         # Pre-computed tree data: {line_number: {word_position: tree_data}}
         self.tree_data_cache = {}
-        # Track if using treebank for current work
+        # Track if using treebank/glaux for current work
         self._using_treebank = False
+        self._using_glaux = False
 
     def set_work_context(self, work_id: str, book: int):
         """Set the current work and book being processed."""
@@ -168,6 +203,14 @@ class SentenceTreeAnalyzer:
             self.treebank is not None and
             self.treebank.has_coverage(work_id)
         )
+        # GLAUx is tier 2: used alongside treebank (fills gaps) or standalone
+        self._using_glaux = (
+            self.glaux is not None and
+            self.glaux.has_coverage(work_id)
+        )
+        # Reset prose cursor when starting a new book
+        if self._using_glaux and not self._using_treebank and self.glaux.is_prose(work_id):
+            self.glaux.reset_prose_cursor(work_id, book)
 
     def _tokenize(self, text: str) -> List[str]:
         """Tokenize Greek text - must match InterlinearGenerator.tokenize_greek()"""
@@ -379,21 +422,46 @@ class SentenceTreeAnalyzer:
         Returns:
             Dict mapping word position (1-based) to tree data, or None.
         """
-        # If using treebank for this work, get data directly from treebank
+        result = None
+
+        # Tier 1: Perseus treebank (human-annotated, gets ~* in output)
         if self._using_treebank and tokens and self.current_work_id and self.current_book:
-            return self.treebank.build_tree_data_for_line(
+            result = self.treebank.build_tree_data_for_line(
                 self.current_work_id,
                 self.current_book,
                 line_number,
                 tokens
             )
+            if result:
+                for td in result.values():
+                    td['_source'] = 'treebank'
+
+        # Tier 2: GLAUx fills gaps (or provides all data if no treebank)
+        if self._using_glaux and tokens and self.current_work_id and self.current_book:
+            glaux_result = self.glaux.build_tree_data_for_line(
+                self.current_work_id,
+                self.current_book,
+                line_number,
+                tokens
+            )
+            if glaux_result:
+                if result is None:
+                    result = glaux_result
+                else:
+                    # Fill in positions that treebank didn't cover
+                    for pos, td in glaux_result.items():
+                        if pos not in result:
+                            result[pos] = td
+
+        if result:
+            return result
 
         # Otherwise use CLTK cache
         return self.tree_data_cache.get(line_number)
 
     def using_treebank(self) -> bool:
-        """Check if currently using Perseus treebank data."""
-        return self._using_treebank
+        """Check if currently using Perseus treebank or GLAUx data."""
+        return self._using_treebank or self._using_glaux
 
     def clear_cache(self):
         """Clear the tree data cache (call between books)"""
@@ -410,8 +478,8 @@ class SentenceTreeAnalyzer:
         Format tree data as suffix for morph field.
         Returns empty string if no tree data or word is punctuation.
 
-        Output format: " ~ POS deprel head sentPos"
-        Example: " ~ NOUN nsubj 3 5" (word at sentence position 5, head at position 3)
+        Output format: " ~ POS deprel head sentPos" (GLAUx/CLTK, italic in UI)
+                    or " ~* POS deprel head sentPos" (Perseus treebank, bold in UI)
         """
         if tree_data is None:
             return ""
@@ -424,23 +492,26 @@ class SentenceTreeAnalyzer:
 
         td = tree_data[position]
         sent_pos = td.get('sentence_position', position)
-        return f" ~ {td['pos']} {td['deprel']} {td['head']} {sent_pos}"
+        delimiter = '~*' if td.get('_source') == 'treebank' else '~'
+        return f" {delimiter} {td['pos']} {td['deprel']} {td['head']} {sent_pos}"
 
 
 class InterlinearGenerator:
     def __init__(self, db_path: str, no_tree: bool = False,
-                 treebank_loader: Optional[PerseusTreebankLoader] = None):
+                 treebank_loader: Optional[PerseusTreebankLoader] = None,
+                 glaux_loader: Optional['GlauxLoader'] = None):
         self.db_path = db_path
         self.conn = None
         self.no_tree = no_tree
         self.treebank_loader = treebank_loader
+        self.glaux_loader = glaux_loader
         # Use the proper dictionary lookup implementation
         self.repo = PerseusRepository(db_path)
         # Performance tracking
         self.lookup_count = 0
         self.total_db_time = 0.0
         # Sentence tree analyzer for dependency parsing (skip if no_tree)
-        self.tree_analyzer = None if no_tree else SentenceTreeAnalyzer(treebank_loader)
+        self.tree_analyzer = None if no_tree else SentenceTreeAnalyzer(treebank_loader, glaux_loader)
 
     def __enter__(self):
         self.conn = sqlite3.connect(f"file:{self.db_path}?mode=ro", uri=True)
@@ -1382,15 +1453,26 @@ class InterlinearGenerator:
         gloss, lemma, morph = self._cached_lookup_word(word)
 
         # Append tree data to morph if available
-        if tree_data is not None and morph:
+        if tree_data is not None:
             tree_suffix = self.tree_analyzer.format_tree_data(tree_data, position, word)
             if tree_suffix:
-                morph = morph + tree_suffix
-        elif tree_data is not None and not morph:
-            # Even without dictionary morph, still add tree data
-            tree_suffix = self.tree_analyzer.format_tree_data(tree_data, position, word)
-            if tree_suffix:
-                morph = tree_suffix.strip()  # Remove leading space from " ~ POS deprel head"
+                # Treebank/GLAUx morph overrides dictionary morph when available
+                tb_morph = tree_data.get(position, {}).get('treebank_morph', '')
+                if tb_morph:
+                    morph = tb_morph + tree_suffix
+                elif morph:
+                    morph = morph + tree_suffix
+                else:
+                    morph = tree_suffix.strip()
+                # Treebank/GLAUx lemma overrides dictionary lemma when available
+                tb_lemma = tree_data.get(position, {}).get('treebank_lemma', '')
+                if tb_lemma:
+                    lemma = tb_lemma
+                    # Re-lookup gloss using treebank lemma if dictionary had a different lemma
+                    # e.g., θεῶν: dictionary finds θεά (goddess) but treebank says θεός (god)
+                    tb_gloss, _, _ = self._cached_lookup_word(tb_lemma)
+                    if tb_gloss and tb_gloss != "???":
+                        gloss = tb_gloss
 
         return {
             'greek': word,
@@ -1755,7 +1837,7 @@ def _generate_work(work_id: str, output_dir: Path, no_tree: bool = False):
         # Open BOTH output files at the start - streaming architecture
         with open(output_file, 'w', encoding='utf-8') as txt_file, \
              open(xml_output_file, 'w', encoding='utf-8') as xml_file, \
-             InterlinearGenerator(str(DB_PATH), no_tree=no_tree, treebank_loader=get_treebank_loader()) as generator:
+             InterlinearGenerator(str(DB_PATH), no_tree=no_tree, treebank_loader=get_treebank_loader(), glaux_loader=get_glaux_loader()) as generator:
 
             # Write XML header once at start
             _write_xml_header(xml_file, work_id, work_title, author_name)

@@ -750,10 +750,11 @@ class PerseusRepository:
                     if related_entries:
                         added_lemmas.add(lemma)
 
-        # STEP 2.6: Try compound word decomposition for Greek/Latin if still no results
-        # Matches PerseusRepository.kt lines 903-916
-        # Only run if not called recursively (skip_compound_decomposition parameter)
-        if not skip_compound_decomposition and not entries and normalized_language in ("greek", "latin") and len(cleaned_word) >= 6:
+        # STEP 2.6: Compound word decomposition - DISABLED for interlinear generation
+        # Compound analysis produces "Compound word analysis" glosses instead of real definitions.
+        # Ultra-normalized search (STEP 2.7) handles these cases better by matching dictionary
+        # headwords with diacritic differences (e.g., προιάπτω → προϊάπτω).
+        if False and not skip_compound_decomposition and not entries and normalized_language in ("greek", "latin") and len(cleaned_word) >= 6:
             compound_parts = self.decompose_compound_word(cleaned_word, normalized_language)
             if compound_parts:
                 base_prefix, prefix_meaning, stem, stem_lemma = compound_parts

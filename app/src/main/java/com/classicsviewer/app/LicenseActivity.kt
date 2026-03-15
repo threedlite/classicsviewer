@@ -139,6 +139,33 @@ Giuseppe G. A. Celano. Opera Graeca Adnotata: Building a 34M+ Token Multilayer C
 https://github.com/OperaGraecaAdnotata/OGA
 
 
+GLAUx CORPUS - GREEK MORPHOLOGICAL DATA
+========================================
+
+Source: GLAUx (Greek Language Automated) Corpus
+Author: Alek Keersmaekers, KU Leuven
+License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Repository: https://github.com/alekkeersmaekers/glaux
+Website: https://glaux.be/
+
+GLAUx is a large corpus of Ancient Greek (20M tokens, 8th century BC to
+4th century AD) automatically annotated for morphology (97.2% accuracy),
+lemmatization (98.8% accuracy), and syntactic dependencies (~80% accuracy).
+The annotations follow the Ancient Greek Dependency Treebanks guidelines.
+
+Morphological annotations from GLAUx are used to provide grammatical case
+information for the interlinear display feature, including case-based
+color coding of word boxes.
+
+Citation:
+Keersmaekers, Alek (2021). "The GLAUx corpus: methodological issues in
+designing a long-term, diverse, multi-layered corpus of Ancient Greek."
+In Proceedings of the 1st International Workshop on Computational
+Approaches to Historical Language Change 2021 (LChange'21).
+
+
 WIKTIONARY MORPHOLOGICAL DATA
 =============================
 
