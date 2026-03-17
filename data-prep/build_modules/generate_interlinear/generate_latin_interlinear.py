@@ -198,8 +198,9 @@ class LatinInterlinearGenerator:
             # Lookup each word
             words = []
             for pos, token in enumerate(tokens, 1):
-                # Skip numeric tokens - leave definition and morph blank
-                if token.isdigit() or (token.replace('.', '').replace(',', '').isdigit()):
+                # Skip non-Latin tokens (numbers, milestone references)
+                # Any token without Latin letter characters is a reference marker, not a word to gloss
+                if not re.search(r'[a-zA-ZāēīōūĀĒĪŌŪ]', token):
                     word_data = {
                         'latin': token,
                         'position': pos,

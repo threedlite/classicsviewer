@@ -30,6 +30,7 @@ from functools import lru_cache
 import time
 import threading
 import string
+import unicodedata
 
 # CLTK for Greek NLP - sentence tree analysis
 # Will download models (~2GB) on first use
@@ -65,6 +66,8 @@ from collections import OrderedDict
 
 _word_lookup_cache = OrderedDict()  # {(db_path, word): (gloss, lemma, morph)}
 _lookup_stats = {'count': 0, 'db_time': 0.0, 'hits': 0}
+_prefix_strip_cache = {}  # {lemma: (gloss, resolved_lemma) or None}
+_in_prefix_strip = set()  # Guard against recursion
 
 CACHE_SIZE = 50000  # Maximum cache entries
 
@@ -169,7 +172,7 @@ class SentenceTreeAnalyzer:
     """
 
     # Greek punctuation characters to skip for tree data
-    PUNCTUATION = set(string.punctuation + '·;')
+    PUNCTUATION = set(string.punctuation + '·;\u0387')
 
     # Characters that END a sentence
     SENTENCE_END_CHARS = {'.', ';'}  # Period and Greek question mark (looks like semicolon)
@@ -445,13 +448,23 @@ class SentenceTreeAnalyzer:
                 tokens
             )
             if glaux_result:
+                # Filter out Glaux placeholder entries (lemma="G", postag="z--------")
+                # These are unannotated words that would pollute real data
+                glaux_result = {
+                    pos: td for pos, td in glaux_result.items()
+                    if td.get('treebank_lemma', '') not in ('', 'G')
+                    or td.get('treebank_postag', '') != 'z--------'
+                }
                 if result is None:
-                    result = glaux_result
+                    result = glaux_result if glaux_result else None
                 else:
-                    # Fill in positions that treebank didn't cover
                     for pos, td in glaux_result.items():
                         if pos not in result:
+                            # Fill in positions that treebank didn't cover
                             result[pos] = td
+                        elif 'treebank_lemma' in td:
+                            # Store Glaux lemma as fallback for Perseus-covered positions
+                            result[pos]['glaux_lemma'] = td['treebank_lemma']
 
         if result:
             return result
@@ -470,8 +483,17 @@ class SentenceTreeAnalyzer:
         self.overflow_mode = False
 
     def is_punctuation(self, word: str) -> bool:
-        """Check if a word is punctuation (no tree data for punctuation)"""
-        return word in self.PUNCTUATION or all(c in self.PUNCTUATION for c in word)
+        """Check if a word is punctuation or a non-Greek reference marker (no tree data for these)"""
+        if word in self.PUNCTUATION or all(c in self.PUNCTUATION for c in word):
+            return True
+        # ASCII-only alphanumeric tokens are reference markers (Bekker 1214a1, Stephanus 2a, etc.)
+        if word.isascii() and word.isalnum():
+            return True
+        # Speaker labels: all caps Greek (ΣΩ, ΕΥΘ, ΦΑΙΔ, etc.)
+        stripped = word.rstrip('.')
+        if stripped and all(c.isupper() or c == '.' for c in stripped):
+            return True
+        return False
 
     def format_tree_data(self, tree_data: Dict, position: int, word: str) -> str:
         """
@@ -552,7 +574,7 @@ class InterlinearGenerator:
     def tokenize_greek(self, text: str) -> List[str]:
         """Simple Greek tokenization - split on whitespace and remove punctuation"""
         # Remove common punctuation but keep Greek text
-        text = re.sub(r'[,;·.?!—\[\]():]', ' ', text)
+        text = re.sub(r'[,;·\u0387.?!—\[\]():]', ' ', text)
         tokens = text.split()
         return [t.strip() for t in tokens if t.strip()]
 
@@ -1348,22 +1370,38 @@ class InterlinearGenerator:
             if row:
                 preferred_morph = row[0]
             # PREFER LSJ/Cunliffe over Wiktionary for better quality
-            # First, try LSJ and Cunliffe entries (skip very low confidence)
-            for entry in entries:
-                if entry.source in ['lsj', 'cunliffe']:
-                    # Skip entries with very low confidence - these are noise from
-                    # rare treebank mappings (e.g., κε → μύζω at 0.004) that should
-                    # not outrank higher-confidence entries from other lemmas
-                    if entry.confidence is not None and entry.confidence < 0.1:
-                        continue
-                    extracted_gloss = self.extract_gloss_from_entry(entry)
-                    is_citation_only = bool(re.search(r'[Α-Ω][α-ω]?\d+', extracted_gloss))
+            # First, try direct-match LSJ/Cunliffe entries, then indirect matches
+            # Among candidates, prefer highest confidence to pick the right lemma
+            # (e.g., ῥʼ: ἄρα "consequence" at 0.71 vs ἆρα "question" at 0.23)
+            for prefer_direct in (True, False):
+                if gloss:
+                    break
+                best_candidate = None
+                best_confidence = -1
+                for entry in entries:
+                    if entry.source in ['lsj', 'cunliffe']:
+                        if prefer_direct and not entry.is_direct_match:
+                            continue
+                        if not prefer_direct and entry.is_direct_match:
+                            continue
+                        if entry.confidence is not None and entry.confidence < 0.1:
+                            continue
+                        extracted_gloss = self.extract_gloss_from_entry(entry)
+                        is_citation_only = bool(re.search(r'[Α-Ω][α-ω]?\d+', extracted_gloss))
+                        is_stub = bool(re.fullmatch(r'[IVXLCDM]+\.', extracted_gloss.strip()))
 
-                    if extracted_gloss and extracted_gloss != "???" and not is_citation_only and len(extracted_gloss) > 2:
-                        lemma = entry.lemma
-                        morph = entry.morph_info
-                        gloss = extracted_gloss
-                        break
+                        if extracted_gloss and extracted_gloss != "???" and not is_citation_only and not is_stub and len(extracted_gloss) > 2:
+                            # Skip entries with corrupted/garbled lemma headwords
+                            # (e.g., τ̣̣̣̣ω contains combining dots from OCR errors)
+                            if any(unicodedata.category(c) == 'Mn' and unicodedata.name(c, '').startswith('COMBINING DOT')
+                                   for c in entry.lemma):
+                                continue
+                            conf = entry.confidence if entry.confidence is not None else 0.0
+                            if conf > best_confidence:
+                                best_candidate = (entry.lemma, entry.morph_info, extracted_gloss)
+                                best_confidence = conf
+                if best_candidate:
+                    lemma, morph, gloss = best_candidate
 
             # If no good LSJ/Cunliffe entry, try Wiktionary (skip low-quality ones)
             if not gloss:
@@ -1425,6 +1463,14 @@ class InterlinearGenerator:
             if not morph:
                 morph = preferred_morph
 
+        # Try prefix stripping / voice variants as last resort
+        if (not gloss or gloss == "???") and word not in _in_prefix_strip:
+            prefix_result = self._prefix_strip_lookup(word)
+            if prefix_result:
+                gloss, resolved_lemma = prefix_result
+                if not lemma:
+                    lemma = resolved_lemma
+
         # Fallback if no gloss found
         if not gloss or gloss == "???":
             gloss = "???"
@@ -1438,6 +1484,68 @@ class InterlinearGenerator:
             _word_lookup_cache.popitem(last=False)
 
         return result
+
+    def _prefix_strip_lookup(self, lemma: str) -> Optional[Tuple[str, str]]:
+        """
+        Try stripping known Greek prefixes from a lemma and looking up the base.
+        Also tries voice variants (-ομαι ↔ -ω) and dehyphenation.
+        Returns (gloss, resolved_lemma) if found, None otherwise.
+        """
+        global _prefix_strip_cache, _in_prefix_strip
+        if lemma in _prefix_strip_cache:
+            return _prefix_strip_cache[lemma]
+
+        _in_prefix_strip.add(lemma)
+        try:
+            return self._do_prefix_strip(lemma)
+        finally:
+            _in_prefix_strip.discard(lemma)
+
+    def _do_prefix_strip(self, lemma: str) -> Optional[Tuple[str, str]]:
+        """Inner implementation of prefix strip lookup."""
+        def _found(gloss, resolved):
+            _prefix_strip_cache[lemma] = (gloss, resolved)
+            return (gloss, resolved)
+
+        # Remove hyphens (some treebank lemmas use σύν-εἶδον notation)
+        clean_lemma = lemma.replace('-', '')
+        if clean_lemma != lemma:
+            g, _, _ = self._cached_lookup_word(clean_lemma)
+            if g and g != "???":
+                return _found(g, clean_lemma)
+
+        # Try voice variant: -ομαι → -ω and -ω → -ομαι
+        if clean_lemma.endswith('ομαι'):
+            active = clean_lemma[:-4] + 'ω'
+            g, _, _ = self._cached_lookup_word(active)
+            if g and g != "???":
+                return _found(g, active)
+        elif clean_lemma.endswith('ω'):
+            middle = clean_lemma[:-1] + 'ομαι'
+            g, _, _ = self._cached_lookup_word(middle)
+            if g and g != "???":
+                return _found(g, middle)
+
+        # Strip known prefixes using assimilation rules and look up the base
+        def strip_diacritics(s):
+            return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+
+        prefix_rules = self.repo.get_prefix_assimilation_rules("greek")
+        lemma_stripped = strip_diacritics(clean_lemma.lower())
+
+        for base_prefix, meaning, assimilated_forms in prefix_rules:
+            for form in assimilated_forms:
+                if lemma_stripped.startswith(form):
+                    stem = clean_lemma[len(form):]
+                    if len(stem) < 2:
+                        continue
+                    # Try the stem directly
+                    g, _, _ = self._cached_lookup_word(stem)
+                    if g and g != "???":
+                        return _found(g, clean_lemma)
+
+        _prefix_strip_cache[lemma] = None
+        return None
 
     def lookup_word(self, word: str, book_id: str, line_number: int, position: int,
                     tree_data: Optional[Dict] = None) -> Dict:
@@ -1467,12 +1575,28 @@ class InterlinearGenerator:
                 # Treebank/GLAUx lemma overrides dictionary lemma when available
                 tb_lemma = tree_data.get(position, {}).get('treebank_lemma', '')
                 if tb_lemma:
+                    dict_lemma = lemma  # Save dictionary's lemma before overriding
                     lemma = tb_lemma
-                    # Re-lookup gloss using treebank lemma if dictionary had a different lemma
-                    # e.g., θεῶν: dictionary finds θεά (goddess) but treebank says θεός (god)
-                    tb_gloss, _, _ = self._cached_lookup_word(tb_lemma)
-                    if tb_gloss and tb_gloss != "???":
-                        gloss = tb_gloss
+                    if not gloss or gloss == "???":
+                        # Dictionary had no answer — use treebank lemma
+                        tb_gloss, _, _ = self._cached_lookup_word(tb_lemma)
+                        if tb_gloss and tb_gloss != "???":
+                            gloss = tb_gloss
+                        else:
+                            # Perseus lemma didn't match dictionary; try Glaux lemma
+                            glaux_lemma = tree_data.get(position, {}).get('glaux_lemma', '')
+                            if glaux_lemma and glaux_lemma != tb_lemma:
+                                glaux_gloss, _, _ = self._cached_lookup_word(glaux_lemma)
+                                if glaux_gloss and glaux_gloss != "???":
+                                    gloss = glaux_gloss
+                                    lemma = glaux_lemma
+                    elif tb_lemma != dict_lemma:
+                        # Treebank says different lemma than dictionary picked.
+                        # Treebank is context-aware and more authoritative.
+                        # Use treebank lemma's gloss.
+                        tb_gloss, _, _ = self._cached_lookup_word(tb_lemma)
+                        if tb_gloss and tb_gloss != "???":
+                            gloss = tb_gloss
 
         return {
             'greek': word,
@@ -1559,8 +1683,11 @@ class InterlinearGenerator:
             words = []
             content_word_pos = 0  # Position counter that skips punctuation (matches tree_data keys)
             for pos, token in enumerate(tokens, 1):
-                # Skip numeric tokens - leave definition and morph blank
-                if token.isdigit() or (token.replace('.', '').replace(',', '').isdigit()):
+                # Skip non-content tokens: milestone references (1214a1, 2a) and
+                # speaker labels (ΣΩ, ΕΥΘ, ΦΑΙΔ) - not words to gloss
+                _stripped = token.rstrip('.')
+                if (token.isascii() and token.isalnum()) or \
+                   (_stripped and all(c.isupper() or c == '.' for c in _stripped)):
                     word_data = {
                         'greek': token,
                         'position': pos,

@@ -25,6 +25,7 @@ object PreferencesManager {
     private const val KEY_USE_FULL_DATABASE = "use_full_database"
     private const val KEY_FULL_AUDIO_INSTALLED = "full_audio_installed"
     private const val KEY_ENABLE_DEPENDENCY_TREE = "enable_dependency_tree"
+    private const val KEY_CASE_COLORING = "case_coloring"
 
     private val gson = Gson()
     
@@ -120,6 +121,15 @@ object PreferencesManager {
 
     fun setEnableDependencyTree(context: Context, enable: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_ENABLE_DEPENDENCY_TREE, enable).apply()
+    }
+
+    // Case coloring preference (color-coded grammatical cases in interlinear)
+    fun getCaseColoring(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_CASE_COLORING, true)
+    }
+
+    fun setCaseColoring(context: Context, enable: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_CASE_COLORING, enable).apply()
     }
 
     // Navigation state persistence

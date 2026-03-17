@@ -343,6 +343,17 @@ class PerseusTreebankLoader:
             except ValueError:
                 return (None, None)
 
+        # Flat citation: just a line number with no book (e.g., "444")
+        # Common in drama (Aeschylus, Sophocles) and speeches (Lysias)
+        # Treat as book=1
+        if len(ref_parts) == 1:
+            try:
+                line_str = ref_parts[0].split('-')[0].strip()
+                if line_str:
+                    return (1, int(line_str))
+            except ValueError:
+                pass
+
         return (None, None)
 
     def has_coverage(self, work_id: str) -> bool:
@@ -415,7 +426,7 @@ class PerseusTreebankLoader:
 
         position = 0
         for token in tokens:
-            # Skip punctuation
+            # Skip punctuation and non-Greek reference markers
             if self._is_punctuation(token):
                 continue
 
@@ -445,10 +456,19 @@ class PerseusTreebankLoader:
         return tree_data
 
     def _is_punctuation(self, token: str) -> bool:
-        """Check if token is punctuation."""
+        """Check if token is punctuation or a non-Greek reference marker."""
         import string
         punct = set(string.punctuation + '·;')
-        return token in punct or all(c in punct for c in token)
+        if token in punct or all(c in punct for c in token):
+            return True
+        # ASCII-only alphanumeric tokens are reference markers (Bekker 1214a1, Stephanus 2a, etc.)
+        if token.isascii() and token.isalnum():
+            return True
+        # Speaker labels: all caps Greek (ΣΩ, ΕΥΘ, ΦΑΙΔ, etc.)
+        stripped = token.rstrip('.')
+        if stripped and all(c.isupper() or c == '.' for c in stripped):
+            return True
+        return False
 
     def _tokens_match(self, token1: str, token2: str) -> bool:
         """Check if two tokens match (handling elisions, accent variants)."""

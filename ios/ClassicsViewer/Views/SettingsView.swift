@@ -10,6 +10,7 @@ struct SettingsView: View {
     @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
     @AppStorage("showInterlinearFirst") private var showInterlinearFirst: Bool = false
     @AppStorage("enableDependencyTree") private var enableDependencyTree: Bool = false
+    @AppStorage("caseColoring") private var caseColoring: Bool = true
 
     @State private var showingDatabaseImporter = false
     @State private var showingImportAlert = false
@@ -68,6 +69,9 @@ struct SettingsView: View {
 
                     // Enable Sentence Tree (Experimental)
                     Toggle("Enable sentence tree [Experimental]", isOn: $enableDependencyTree)
+
+                    // Case Coloring
+                    Toggle("Case coloring in interlinear", isOn: $caseColoring)
                 }
 
                 // Downloads Section (On-Demand Resources)

@@ -405,6 +405,11 @@ class GlauxLoader:
         self._prose_cursors[(normalized, book)] = 0
 
     def _normalize_work_id(self, work_id: str) -> str:
+        # Don't strip _OGL suffix — Glaux line numbers are aligned to the
+        # Perseus edition, not the First1KGreek (OGL) edition. Applying
+        # Glaux data to OGL texts would misalign glosses to wrong words.
+        if '_OGL' in work_id:
+            return work_id  # won't match any Glaux key, so coverage = False
         match = re.match(r'(tlg\d+\.tlg\d+)', work_id)
         return match.group(1) if match else work_id
 

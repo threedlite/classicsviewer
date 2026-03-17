@@ -1,14 +1,84 @@
 XML STRUCTURAL PATTERNS - WORKS BY PATTERN
 ============================================================
 
-Total unique patterns: 5
-Total works analyzed: 41
+Total unique patterns: 9
+Total works analyzed: 265
 
 ============================================================
 PATTERN: edition → textpart → textpart → p
-COUNT: 31 works
+COUNT: 113 works
 ------------------------------------------------------------
+  tlg0007.tlg001 - Plutarch: Theseus [Perseus Greek]
+  tlg0007.tlg002 - Plutarch: Romulus [Perseus Greek]
+  tlg0007.tlg003 - Plutarch: Comparison of Theseus and Romulus [Perseus Greek]
+  tlg0007.tlg004 - Plutarch: Lycurgus [Perseus Greek]
+  tlg0007.tlg005 - Plutarch: Numa [Perseus Greek]
+  tlg0007.tlg006 - Plutarch: Comparison of Lycurgus and Numa [Perseus Greek]
+  tlg0007.tlg007 - Plutarch: Solon [Perseus Greek]
+  tlg0007.tlg008 - Plutarch: Publicola [Perseus Greek]
+  tlg0007.tlg009 - Plutarch: Comparison of Solon and Publicola [Perseus Greek]
+  tlg0007.tlg010 - Plutarch: Themistocles [Perseus Greek]
+  tlg0007.tlg011 - Plutarch: Camillus [Perseus Greek]
+  tlg0007.tlg012 - Plutarch: Pericles [Perseus Greek]
+  tlg0007.tlg013 - Plutarch: Fabius Maximus [Perseus Greek]
+  tlg0007.tlg014 - Plutarch: Comparison of Pericles and Fabius Maximus [Perseus Greek]
+  tlg0007.tlg015 - Plutarch: Alcibiades [Perseus Greek]
+  tlg0007.tlg016 - Plutarch: Caius Marcius Coriolanus [Perseus Greek]
+  tlg0007.tlg017 - Plutarch: Comparison of Alcibiades and Coriolanus [Perseus Greek]
+  tlg0007.tlg018 - Plutarch: Timoleon [Perseus Greek]
+  tlg0007.tlg019 - Plutarch: Aemilius Paulus [Perseus Greek]
+  tlg0007.tlg020 - Plutarch: Comparison of Timoleon and Aemilius [Perseus Greek]
+  tlg0007.tlg021 - Plutarch: Pelopidas [Perseus Greek]
+  tlg0007.tlg022 - Plutarch: Marcellus [Perseus Greek]
+  tlg0007.tlg023 - Plutarch: Comparison of Pelopidas and Marcellus [Perseus Greek]
+  tlg0007.tlg024 - Plutarch: Aristides [Perseus Greek]
+  tlg0007.tlg025 - Plutarch: Marcus Cato [Perseus Greek]
+  tlg0007.tlg026 - Plutarch: Comparison of Aristides and Marcus Cato [Perseus Greek]
+  tlg0007.tlg027 - Plutarch: Philopoemen [Perseus Greek]
+  tlg0007.tlg028 - Plutarch: Titus Flamininus [Perseus Greek]
+  tlg0007.tlg029 - Plutarch: Comparison of Philopoemen and Titus [Perseus Greek]
+  tlg0007.tlg030 - Plutarch: Pyrrhus [Perseus Greek]
+  tlg0007.tlg031 - Plutarch: Caius Marius [Perseus Greek]
+  tlg0007.tlg032 - Plutarch: Lysander [Perseus Greek]
+  tlg0007.tlg033 - Plutarch: Sulla [Perseus Greek]
+  tlg0007.tlg034 - Plutarch: Comparison of Lysander and Sulla [Perseus Greek]
+  tlg0007.tlg035 - Plutarch: Cimon [Perseus Greek]
+  tlg0007.tlg036 - Plutarch: Lucullus [Perseus Greek]
+  tlg0007.tlg037 - Plutarch: Comparison of Lucullus and Cimon [Perseus Greek]
+  tlg0007.tlg038 - Plutarch: Nicias [Perseus Greek]
+  tlg0007.tlg039 - Plutarch: Crassus [Perseus Greek]
+  tlg0007.tlg040 - Plutarch: Comparison of Nicias and Crassus [Perseus Greek]
+  tlg0007.tlg041 - Plutarch: Eumenes [Perseus Greek]
+  tlg0007.tlg042 - Plutarch: Sertorius [Perseus Greek]
+  tlg0007.tlg043 - Plutarch: Comparison of Sertorius and Eumenes [Perseus Greek]
+  tlg0007.tlg044 - Plutarch: Agesilaus [Perseus Greek]
+  tlg0007.tlg045 - Plutarch: Pompey [Perseus Greek]
+  tlg0007.tlg046 - Plutarch: Comparison of Agesilaus and Pompey [Perseus Greek]
   tlg0007.tlg047 - Plutarch: Alexander [Perseus Greek]
+  tlg0007.tlg048 - Plutarch: Caesar [Perseus Greek]
+  tlg0007.tlg049 - Plutarch: Phocion [Perseus Greek]
+  tlg0007.tlg050 - Plutarch: Cato the Younger [Perseus Greek]
+  tlg0007.tlg053 - Plutarch: Comparison of Agis and Cleomenes and the Gracchi [Perseus Greek]
+  tlg0007.tlg054 - Plutarch: Demosthenes [Perseus Greek]
+  tlg0007.tlg055 - Plutarch: Cicero [Perseus Greek]
+  tlg0007.tlg056 - Plutarch: Comparison of Demosthenes and Cicero [Perseus Greek]
+  tlg0007.tlg057 - Plutarch: Demetrius [Perseus Greek]
+  tlg0007.tlg058 - Plutarch: Antony [Perseus Greek]
+  tlg0007.tlg059 - Plutarch: Comparison of Demetrius and Antony [Perseus Greek]
+  tlg0007.tlg060 - Plutarch: Dion [Perseus Greek]
+  tlg0007.tlg061 - Plutarch: Brutus [Perseus Greek]
+  tlg0007.tlg062 - Plutarch: Comparison of Dion and Brutus [Perseus Greek]
+  tlg0007.tlg063 - Plutarch: Aratus [Perseus Greek]
+  tlg0007.tlg064 - Plutarch: Artaxerxes [Perseus Greek]
+  tlg0007.tlg065 - Plutarch: Galba [Perseus Greek]
+  tlg0007.tlg066 - Plutarch: Otho [Perseus Greek]
+  tlg0007.tlg081 - Plutarch: The apophthegms or remarkable sayings of kings and great
+            commanders. [Perseus Greek]
+  tlg0007.tlg082 - Plutarch: Laconic Apophthegms; or Remarkable Sayings of the Spartans. [Perseus Greek]
+  tlg0007.tlg082b - Plutarch: Sayings of Spartan Women [Perseus Greek]
+  tlg0007.tlg087 - Plutarch: Concerning the fortune or virtue of Alexander the Great. [Perseus Greek]
+  tlg0007.tlg121 - Plutarch: Lives of the Ten Orators [Perseus Greek]
+  tlg0007.tlg133 - Plutarch: Plutarch's Platonic questions [Perseus Greek]
   tlg0031.tlg001 - New Testament: Matthew [Perseus Greek]
   tlg0031.tlg002 - New Testament: Mark [Perseus Greek]
   tlg0031.tlg003 - New Testament: Luke [Perseus Greek]
@@ -36,36 +106,212 @@ COUNT: 31 works
   tlg0031.tlg025 - New Testament: 3 John [Perseus Greek]
   tlg0031.tlg026 - New Testament: Jude [Perseus Greek]
   tlg0031.tlg027 - New Testament: Revelation [Perseus Greek]
+  tlg0032.tlg003 - Xenophon: Economics [Perseus Greek]
+  tlg0032.tlg008 - Xenophon: Hiero [Perseus Greek]
+  tlg0032.tlg009 - Xenophon: Agesilaus [Perseus Greek]
+  tlg0032.tlg010 - Xenophon: Constitution of the Lacedaimonians [Perseus Greek]
+  tlg0032.tlg011 - Xenophon: Ways and Means [Perseus Greek]
+  tlg0032.tlg012 - Xenophon: On the Cavalry Commander [Perseus Greek]
+  tlg0032.tlg013 - Xenophon: On the Cavalry Commander [Perseus Greek]
+  tlg0032.tlg014 - Xenophon: On Hunting [Perseus Greek]
+  tlg0059.tlg030 - Plato: Republic [Perseus Greek]
+  tlg0059.tlg034 - Plato: Laws [Perseus Greek]
+  tlg0059.tlg036 - Plato: Letters [Perseus Greek]
+  tlg0086.tlg009 - Aristotle: Eudemian Ethics [Perseus Greek]
   tlg0086.tlg010 - Aristotle: Nicomachean Ethics [Perseus Greek]
+  tlg0086.tlg025 - Aristotle: Metaphysics [Perseus Greek]
   tlg0086.tlg034 - Aristotle: Poetics [Perseus Greek]
-  tlg0557.tlg002 - Epictetus: The Enchiridion [Perseus Greek]
-
-============================================================
-PATTERN: edition → textpart → l
-COUNT: 3 works
-------------------------------------------------------------
-  phi0690.phi003 - P. Vergilius Maro (Virgil): Aeneid [Perseus Latin]
-  tlg0012.tlg001 - Homer: Iliad [Perseus Greek]
-  tlg0012.tlg002 - Homer: Odyssey [Perseus Greek]
+  tlg0086.tlg035 - Aristotle: Politics [Perseus Greek]
 
 ============================================================
 PATTERN: edition → textpart → p
-COUNT: 3 works
+COUNT: 98 works
 ------------------------------------------------------------
+  tlg0007.tlg067 - Plutarch: A Discourse Touching the Training of Children [Perseus Greek]
+  tlg0007.tlg068 - Plutarch: How a Young Man Ought to Hear Poems [Perseus Greek]
+  tlg0007.tlg069 - Plutarch: Of Hearing [Perseus Greek]
+  tlg0007.tlg070 - Plutarch: How to Know a Flatterer from a Friend [Perseus Greek]
+  tlg0007.tlg071 - Plutarch: How a Man May Be Sensible of His Progress in Virtue. [Perseus Greek]
+  tlg0007.tlg072 - Plutarch: How a man may receive advantage and profit from his
+            enemies. [Perseus Greek]
+  tlg0007.tlg073 - Plutarch: Of Large Acquaintance: or, an Essay to Prove the Folly of Seeking Many Friends [Perseus Greek]
+  tlg0007.tlg074 - Plutarch: Of Fortune [Perseus Greek]
+  tlg0007.tlg075 - Plutarch: Of Virtue and Vice [Perseus Greek]
+  tlg0007.tlg076 - Plutarch: Consolation to Apollonius [Perseus Greek]
+  tlg0007.tlg077 - Plutarch: Plutarch's Rules for the Preservation of Health [Perseus Greek]
+  tlg0007.tlg079 - Plutarch: The Banquet of the Seven Wise Men [Perseus Greek]
+  tlg0007.tlg080 - Plutarch: Of Superstition, or Indiscreet Devotion [Perseus Greek]
+  tlg0007.tlg082a - Plutarch: The Ancient Customs of the Spartans [Perseus Greek]
+  tlg0007.tlg083 - Plutarch: Concerning the Virtues of Women [Perseus Greek]
+  tlg0007.tlg084a - Plutarch: Roman Questions [Perseus Greek]
+  tlg0007.tlg084b - Plutarch: Greek Questions [Perseus Greek]
+  tlg0007.tlg085 - Plutarch: Parallels, or a comparison between the Greek and Roman  Histories. [Perseus Greek]
+  tlg0007.tlg086 - Plutarch: Concerning the fortune of the Romans [Perseus Greek]
+  tlg0007.tlg088 - Plutarch: Whether the Athenians Were More Renowned For Their Warlike Achievements or For Their Learning [Perseus Greek]
+  tlg0007.tlg089 - Plutarch: Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt. [Perseus Greek]
+  tlg0007.tlg090 - Plutarch: De E apud Delphos [Perseus Greek]
+  tlg0007.tlg091 - Plutarch: Wherefore the Pythian Priestess now Ceases to Deliver her Oracles in Verse [Perseus Greek]
+  tlg0007.tlg092 - Plutarch: Why the Oracles Cease to Give Answers [Perseus Greek]
+  tlg0007.tlg093 - Plutarch: That Virtue May Be Taught [Perseus Greek]
+  tlg0007.tlg094 - Plutarch: Of Moral Virtue [Perseus Greek]
+  tlg0007.tlg095 - Plutarch: Concerning the cure of anger: a dialogue [Perseus Greek]
+  tlg0007.tlg096 - Plutarch: Of the Tranquillity of the Mind. [Perseus Greek]
+  tlg0007.tlg097 - Plutarch: Of Brotherly Love [Perseus Greek]
+  tlg0007.tlg098 - Plutarch: Of Natural Affection Towards One's Offspring [Perseus Greek]
+  tlg0007.tlg099 - Plutarch: Whether vice is sufficient to render a man unhappy [Perseus Greek]
+  tlg0007.tlg100 - Plutarch: Whether the Passions of the Soul or Diseases of the Body Are Worse [Perseus Greek]
+  tlg0007.tlg101 - Plutarch: Of Garrulity, or Talkativeness [Perseus Greek]
+  tlg0007.tlg102 - Plutarch: Of Curiosity, or an Over-Busy Inquisitiveness into Things Impertinent. [Perseus Greek]
+  tlg0007.tlg103 - Plutarch: Of the Love of Wealth [Perseus Greek]
+  tlg0007.tlg104 - Plutarch: Of Bashfulness [Perseus Greek]
+  tlg0007.tlg105 - Plutarch: Of Envy and Hatred [Perseus Greek]
+  tlg0007.tlg106 - Plutarch: How a Man May Inoffensively Praise Himself Without Being Liable to Envy [Perseus Greek]
+  tlg0007.tlg107 - Plutarch: Concerning Such Whom God is Slow to Punish [Perseus Greek]
+  tlg0007.tlg108 - Plutarch: Of Fate. [Perseus Greek]
+  tlg0007.tlg109 - Plutarch: A Discourse Concerning Socrates's Daemon [Perseus Greek]
+  tlg0007.tlg110 - Plutarch: Of Banishment, or Flying One's Country. [Perseus Greek]
+  tlg0007.tlg111 - Plutarch: Plutarch's Consolatory Letter to His Wife [Perseus Greek]
+  tlg0007.tlg115 - Plutarch: That a Philosopher Ought Chiefly to Converse with Great Men [Perseus Greek]
+  tlg0007.tlg116 - Plutarch: A discourse to an unlearned prince [Perseus Greek]
+  tlg0007.tlg117 - Plutarch: Whether an Aged Man Ought to Meddle in State Affairs. [Perseus Greek]
+  tlg0007.tlg118 - Plutarch: Political Precepts [Perseus Greek]
+  tlg0007.tlg119 - Plutarch: Of the Three Sorts of Government, Monarchy, Democracy, and Oligarchy. [Perseus Greek]
+  tlg0007.tlg120 - Plutarch: Against Running in Debt, or Taking up Money Upon Usury [Perseus Greek]
+  tlg0007.tlg122 - Plutarch: An Abstract of a Comparison Betwixt Aristophanes and Menander [Perseus Greek]
+  tlg0007.tlg123 - Plutarch: Of Herodotus's Malice. [Perseus Greek]
+  tlg0007.tlg125 - Plutarch: Plutarch's Natural Questions [Perseus Greek]
+  tlg0007.tlg126 - Plutarch: Of the Face Appearing Within the Orb Of the Moon [Perseus Greek]
+  tlg0007.tlg127 - Plutarch: On the Principle of Cold  [Perseus Greek]
+  tlg0007.tlg128 - Plutarch: Whether water or fire be most useful. [Perseus Greek]
+  tlg0007.tlg129 - Plutarch: Which are the most crafty, water-animals or those creatures that breed upon the land? [Perseus Greek]
+  tlg0007.tlg130 - Plutarch: That brute beasts make use of reason [Perseus Greek]
+  tlg0007.tlg131 - Plutarch: Of eating of flesh: Tract I. [Perseus Greek]
+  tlg0007.tlg132 - Plutarch: Of eating of flesh: Tract II. [Perseus Greek]
+  tlg0007.tlg134 - Plutarch: Concerning the procreation of the soul as discoursed in Timaeus [Perseus Greek]
+  tlg0007.tlg136 - Plutarch: The contradictions of the Stoics [Perseus Greek]
+  tlg0007.tlg137 - Plutarch: A breviate of a discourse, showing that the Stoics speak greater improbabilities than the poets. [Perseus Greek]
+  tlg0007.tlg138 - Plutarch: Of common conceptions, against the Stoics. [Perseus Greek]
+  tlg0007.tlg139 - Plutarch: That it is Not Possible to Live Pleasurably According to the Doctrine of Epicurus [Perseus Greek]
+  tlg0007.tlg140 - Plutarch: Against Colotes, the Disciple and Favorite of Epicurus. [Perseus Greek]
+  tlg0007.tlg141 - Plutarch: Whether 'Twere Rightly Said, Live Concealed. [Perseus Greek]
+  tlg0032.tlg005 - Xenophon: Apology [Perseus Greek]
+  tlg0059.tlg001 - Plato: Euthyphro [Perseus Greek]
+  tlg0059.tlg002 - Plato: Apology [Perseus Greek]
+  tlg0059.tlg003 - Plato: Crito [Perseus Greek]
   tlg0059.tlg004 - Plato: Phaedo [Perseus Greek]
+  tlg0059.tlg005 - Plato: Cratylus [Perseus Greek]
+  tlg0059.tlg006 - Plato: Theaetetus [Perseus Greek]
+  tlg0059.tlg007 - Plato: Sophist [Perseus Greek]
+  tlg0059.tlg008 - Plato: Statesman [Perseus Greek]
+  tlg0059.tlg009 - Plato: Parmenides [Perseus Greek]
+  tlg0059.tlg010 - Plato: Philebus [Perseus Greek]
+  tlg0059.tlg012 - Plato: Phaedrus [Perseus Greek]
+  tlg0059.tlg013 - Plato: Alcibiades 1 [Perseus Greek]
+  tlg0059.tlg014 - Plato: Alcibiades 2 [Perseus Greek]
+  tlg0059.tlg015 - Plato: Hipparchus [Perseus Greek]
+  tlg0059.tlg017 - Plato: Theages [Perseus Greek]
+  tlg0059.tlg018 - Plato: Charmides [Perseus Greek]
+  tlg0059.tlg019 - Plato: Laches [Perseus Greek]
+  tlg0059.tlg020 - Plato: Lysis [Perseus Greek]
+  tlg0059.tlg021 - Plato: Euthydemus [Perseus Greek]
+  tlg0059.tlg022 - Plato: Protagoras [Perseus Greek]
+  tlg0059.tlg023 - Plato: Gorgias [Perseus Greek]
+  tlg0059.tlg024 - Plato: Meno [Perseus Greek]
+  tlg0059.tlg025 - Plato: Greater Hippias [Perseus Greek]
+  tlg0059.tlg026 - Plato: Lesser Hippias [Perseus Greek]
   tlg0059.tlg027 - Plato: Ion [Perseus Greek]
-  tlg0094.tlg002 - Pseudo-Plutarch: Concerning music [Perseus Greek]
+  tlg0059.tlg028 - Plato: Menexenus [Perseus Greek]
+  tlg0059.tlg029 - Plato: Cleitophon [Perseus Greek]
+  tlg0059.tlg031 - Plato: Timaeus [Perseus Greek]
+  tlg0059.tlg032 - Plato: Critias [Perseus Greek]
+  tlg0059.tlg033 - Plato: Minos [Perseus Greek]
+  tlg0059.tlg035 - Plato: Epinomis [Perseus Greek]
 
 ============================================================
-PATTERN: edition → l
-COUNT: 2 works
+PATTERN: edition → textpart → textpart → sp
+COUNT: 33 works
 ------------------------------------------------------------
-  tlg0020.tlg001 - Hesiod: Theogony [Perseus Greek]
-  tlg0020.tlg002 - Hesiod: Works and Days [Perseus Greek]
+  tlg0006.tlg001 - Euripides: The Cyclops [Perseus Greek]
+  tlg0006.tlg002 - Euripides: Alcestis [Perseus Greek]
+  tlg0006.tlg003 - Euripides: Medea [Perseus Greek]
+  tlg0006.tlg004 - Euripides: Heracleidae [Perseus Greek]
+  tlg0006.tlg005 - Euripides: Hippolytus [Perseus Greek]
+  tlg0006.tlg006 - Euripides: Andromache [Perseus Greek]
+  tlg0006.tlg007 - Euripides: Hecuba [Perseus Greek]
+  tlg0006.tlg008 - Euripides: The Suppliants [Perseus Greek]
+  tlg0006.tlg009 - Euripides: Heracles Mad [Perseus Greek]
+  tlg0006.tlg010 - Euripides: Ion [Perseus Greek]
+  tlg0006.tlg011 - Euripides: The Trojan Women [Perseus Greek]
+  tlg0006.tlg012 - Euripides: Electra [Perseus Greek]
+  tlg0006.tlg013 - Euripides: Iphigenia Among the Tauri [Perseus Greek]
+  tlg0006.tlg014 - Euripides: Helen [Perseus Greek]
+  tlg0006.tlg015 - Euripides: The Phoenician Maidens [Perseus Greek]
+  tlg0006.tlg016 - Euripides: Orestes [Perseus Greek]
+  tlg0006.tlg017 - Euripides: The Bacchae [Perseus Greek]
+  tlg0006.tlg018 - Euripides: Iphigenia at Aulis [Perseus Greek]
+  tlg0006.tlg019 - Euripides: Rhesus [Perseus Greek]
+  tlg0011.tlg001 - Sophocles: Trachiniae [Perseus Greek]
+  tlg0011.tlg002 - Sophocles: Antigone [Perseus Greek]
+  tlg0011.tlg003 - Sophocles: Ajax [Perseus Greek]
+  tlg0011.tlg004 - Sophocles: Oedipus Tyrannus [Perseus Greek]
+  tlg0011.tlg005 - Sophocles: Electra [Perseus Greek]
+  tlg0011.tlg006 - Sophocles: Philoctetes [Perseus Greek]
+  tlg0011.tlg007 - Sophocles: Oedipus at Colonus [Perseus Greek]
+  tlg0085.tlg001 - Aeschylus: Suppliant Maidens [Perseus Greek]
+  tlg0085.tlg002 - Aeschylus: Persians [Perseus Greek]
+  tlg0085.tlg003 - Aeschylus: Prometheus Bound [Perseus Greek]
+  tlg0085.tlg004 - Aeschylus: Seven Against Thebes [Perseus Greek]
+  tlg0085.tlg005 - Aeschylus: Agamemnon [Perseus Greek]
+  tlg0085.tlg006 - Aeschylus: Libation Bearers [Perseus Greek]
+  tlg0085.tlg007 - Aeschylus: Eumenides [Perseus Greek]
 
 ============================================================
 PATTERN: edition → textpart → textpart → textpart → p
+COUNT: 8 works
+------------------------------------------------------------
+  tlg0007.tlg051 - Plutarch: Agis and Cleomenes [Perseus Greek]
+  tlg0007.tlg052 - Plutarch: Tiberius and Caius Gracchus [Perseus Greek]
+  tlg0032.tlg001 - Xenophon:  Hellenica [Perseus Greek]
+  tlg0032.tlg002 - Xenophon: Memorabilia [Perseus Greek]
+  tlg0032.tlg006 - Xenophon: Anabasis [Perseus Greek]
+  tlg0032.tlg007 - Xenophon: Cyropaedia [Perseus Greek]
+  tlg0086.tlg029 - Aristotle: Economics [Perseus Greek]
+  tlg0086.tlg038 - Aristotle: The "Art" of Rhetoric [Perseus Greek]
+
+============================================================
+PATTERN: edition → textpart → l
+COUNT: 5 works
+------------------------------------------------------------
+  phi0690.phi002 - P. Vergilius Maro (Virgil): Georgics [Perseus Latin]
+  phi0690.phi003 - P. Vergilius Maro (Virgil): Aeneid [Perseus Latin]
+  tlg0012.tlg001 - Homer: Iliad [Perseus Greek]
+  tlg0012.tlg002 - Homer: Odyssey [Perseus Greek]
+  tlg0012.tlg003 - Homer: Epigrams [Perseus Greek]
+
+============================================================
+PATTERN: edition → l
+COUNT: 4 works
+------------------------------------------------------------
+  phi0893.phi006 - Horace: The Art of Poetry: To the Pisos [Perseus Latin]
+  tlg0020.tlg001 - Hesiod: Theogony [Perseus Greek]
+  tlg0020.tlg002 - Hesiod: Works and Days [Perseus Greek]
+  tlg0020.tlg003 - Hesiod: Shield of Heracles [Perseus Greek]
+
+============================================================
+PATTERN: edition → textpart → textpart → l
 COUNT: 2 works
 ------------------------------------------------------------
-  tlg0032.tlg006 - Xenophon: Anabasis [Perseus Greek]
-  tlg1799.tlg001 - Euclid: The Thirteen Books of Euclid's Elements [Perseus Greek]
+  phi0893.phi001 - Horace: Odes [Perseus Latin]
+  phi0893.phi004 - Horace: Satires [Perseus Latin]
+
+============================================================
+PATTERN: edition → sp
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0011.tlg008 - Sophocles: Tracking Satyrs [Perseus Greek]
+
+============================================================
+PATTERN: edition → textpart → sp
+COUNT: 1 works
+------------------------------------------------------------
+  phi0690.phi001 - P. Vergilius Maro (Virgil): Eclogues [Perseus Latin]

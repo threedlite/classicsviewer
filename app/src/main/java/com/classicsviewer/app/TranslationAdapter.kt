@@ -412,8 +412,9 @@ class TranslationAdapter(
                 addView(row)
             }
 
-            // Set table background based on grammatical case
-            setBackgroundColor(getCaseBackgroundColor(wordCase, invertColors))
+            // Set table background based on grammatical case (if case coloring enabled)
+            val caseColoringEnabled = PreferencesManager.getCaseColoring(context)
+            setBackgroundColor(if (caseColoringEnabled) getCaseBackgroundColor(wordCase, invertColors) else getCaseBackgroundColor(null, invertColors))
             setPadding(4, 4, 4, 4)
         }
     }

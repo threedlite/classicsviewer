@@ -110,6 +110,14 @@ class SettingsActivity : BaseActivity() {
         binding.enableDependencyTreeSwitch.setOnCheckedChangeListener { _, isChecked ->
             PreferencesManager.setEnableDependencyTree(this, isChecked)
         }
+
+        // Setup case coloring switch
+        val caseColoring = PreferencesManager.getCaseColoring(this)
+        binding.caseColoringSwitch.isChecked = caseColoring
+
+        binding.caseColoringSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferencesManager.setCaseColoring(this, isChecked)
+        }
     }
 
     private fun updatePreviewColors(inverted: Boolean) {

@@ -104,6 +104,7 @@ struct InterlinearTextView: View {
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("wrapInterlinear") private var wrapInterlinear: Bool = false
     @AppStorage("enableDependencyTree") private var enableDependencyTree: Bool = false
+    @AppStorage("caseColoring") private var caseColoring: Bool = true
 
 
     // Safety limit to prevent crashes from excessively large sentences (e.g., Sanskrit texts)
@@ -231,7 +232,7 @@ struct InterlinearTextView: View {
         // Parse tree data and case from morph field
         let (displayMorph, treeData) = parseEnhancedMorph(rows[2])
         let wordCase = extractCase(rows[2])
-        let borderBackground = getCaseBackgroundColor(wordCase, isLight: isLight)
+        let borderBackground = getCaseBackgroundColor(caseColoring ? wordCase : nil, isLight: isLight)
         let hasTreeData = treeData != nil
 
         VStack(alignment: .center, spacing: 0) {
