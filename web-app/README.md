@@ -19,6 +19,22 @@ A local web application for viewing classical Greek and Latin texts from the Per
   - **Reading position persistence**: Automatically saves and restores your last reading position (author, work, book, page) when you reload the page
   - **Interlinear translations**: Word-by-word glosses with clickable Greek/Latin words for instant dictionary lookup
 
+## Updating After a Database Rebuild
+
+The web app reads directly from the SQLite database file — no rebuild of the app is needed. After rebuilding the extended database:
+
+1. Ensure the updated database exists:
+   ```bash
+   ls -la ../data-prep/perseus_texts_extended.db
+   ```
+2. Restart the container:
+   ```bash
+   cd web-app
+   ./start.sh
+   ```
+
+The app will immediately serve the updated content.
+
 ## Prerequisites
 
 - Docker and Docker Compose installed

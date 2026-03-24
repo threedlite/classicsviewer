@@ -42,6 +42,30 @@ The ZIM file contains:
 - Responsive HTML with CSS styling optimized for offline reading
 - Multi-script support (Greek, Latin, Sanskrit, Arabic, Hebrew, Persian, Akkadian, Sumerian)
 
+## Updating After a Database Rebuild
+
+Unlike the web app, ZIM files are static archives and must be rebuilt when the database changes. After rebuilding the extended database:
+
+1. Rebuild the extended ZIM (~60-90 minutes):
+   ```bash
+   cd kiwix
+   ./build_extended_clean.sh
+   ```
+
+2. Or rebuild individual language ZIMs:
+   ```bash
+   cd kiwix
+   ./build_by_language.sh all    # all languages
+   ./build_by_language.sh greek  # or: latin, sanskrit, arabic, hebrew, persian, akkadian, sumerian
+   ```
+
+3. Verify the output:
+   ```bash
+   ls -lh classicsviewer_extended.zim
+   ```
+
+4. Redeploy the updated ZIM file to Kiwix readers (copy to device or serve with `kiwix-serve`).
+
 ## Requirements
 
 - Python 3.8+
