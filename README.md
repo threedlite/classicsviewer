@@ -5,7 +5,8 @@ An Android and iOS app for reading ancient Greek and Latin texts offline. Browse
 
 NOTE - NEW: There is now a download option within the menu to optionally retrieve the large full db from Google Play Store and Apple App Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
-
+ 
+NEW: 34 additional aligned translations, Marcus Aurelius Meditations, Xenophon Anabasis, Achilles Tatius
 NEW: Improved Greek interlinear March 17, 2026.
 NEW: Added Alphabet practice option for learning alphabets.
 NEW: Align button on text view takes you to same place in first transalation and vice versa. The settings option to put interlinear translation first will work with as well.   Export function saves current source or translation to file.

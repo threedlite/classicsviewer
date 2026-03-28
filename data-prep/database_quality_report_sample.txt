@@ -1,12 +1,12 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-03-17T03:41:44.386823
+Generated: 2026-03-28T11:01:40.955883
 Mode: sample
 
 Total Authors: 12
 Total Works: 265
 Total Books: 667
 Total Lines: 237,971
-Translation Segments: 126,148
+Translation Segments: 126,149
 Build Time: 4.7 minutes
 Database Size: 667.9MB → 161.1MB compressed (24.1%)
 Dictionary Entries: 61,070
@@ -1224,7 +1224,7 @@ Plutarch / Of Hearing translations: Frank Cole Babbitt 19 segments [Excellent-Se
 Plutarch / Of Herodotus's Malice. - 354 lines, max_char=794 [Perseus]
 Plutarch / Of Herodotus's Malice. translations: A. G. 43 segments [Excellent-Section (100% coverage)]
 Plutarch / Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt. - 708 lines, max_char=919 [Perseus]
-Plutarch / Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt. translations: Frank Cole Babbitt 81 segments [Excellent-Section (100% coverage)], William Baxter 6 segments [Excellent-Section (100% coverage)]
+Plutarch / Of Isis and Osiris, or of the Ancient Religion and Philosophy of Egypt. translations: Frank Cole Babbitt 81 segments [Excellent-Section (100% coverage)], William Baxter 7 segments [Excellent-Section (100% coverage)]
 Plutarch / Of Large Acquaintance: or, an Essay to Prove the Folly of Seeking Many Friends - 62 lines, max_char=848 [Perseus]
 Plutarch / Of Large Acquaintance: or, an Essay to Prove the Folly of Seeking Many Friends translations: Frank Cole Babbitt 10 segments [Excellent-Section (100% coverage)], William W. Goodwin 9 segments [Excellent-Section (100% coverage)]
 Plutarch / Of Moral Virtue - 231 lines, max_char=958 [Perseus]
