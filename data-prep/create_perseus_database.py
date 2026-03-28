@@ -4694,7 +4694,9 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
     # These are translations created outside Perseus (e.g., via cross-lingual alignment)
     aligned_dir = Path(__file__).parent.parent / "aligned"
     if aligned_dir.exists():
-        aligned_files = list(aligned_dir.glob(f"{work_id}.*eng*.xml"))
+        # Strip _OGL/_PTA suffix for aligned file lookup since aligned files use base work IDs
+        aligned_work_id = work_id.replace('_OGL', '').replace('_PTA', '')
+        aligned_files = list(aligned_dir.glob(f"{aligned_work_id}.*eng*.xml"))
         if aligned_files:
             print(f"      Found {len(aligned_files)} aligned translation(s) in aligned/")
             translation_files.extend(aligned_files)
@@ -7895,8 +7897,19 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             print(f"      Found altbook mapping: {len(altbook_mapping)} entries")
 
         # Process translations for this work
-        # Skip for First1K/PTA works as their translations are already handled by process_first1k_work
-        if not is_first1k and not is_pta:
+        # For First1K/PTA works, only process aligned/ translations (work_dir translations
+        # are already handled by process_first1k_work)
+        if is_first1k or is_pta:
+            aligned_dir = Path(__file__).parent.parent / "aligned"
+            if aligned_dir.exists():
+                aligned_work_id = db_work_id.replace('_OGL', '').replace('_PTA', '')
+                aligned_files = list(aligned_dir.glob(f"{aligned_work_id}.*eng*.xml"))
+                if aligned_files:
+                    print(f"      Found {len(aligned_files)} aligned translation(s) for First1K/PTA work")
+                    # Use a temp empty dir so process_translations only picks up aligned files
+                    with tempfile.TemporaryDirectory() as tmpdir:
+                        process_translations(Path(tmpdir), db_work_id, cursor, altbook_mapping)
+        else:
             process_translations(work_dir, db_work_id, cursor, altbook_mapping)
     
     # If no works were processed, remove the author
