@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CTS catalog entry for Theocritus Epigrams English translation -->
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:tlg0005.tlg002.perseus-eng80" workUrn="urn:cts:greekLit:tlg0005.tlg002" xml:lang="eng">
+  <ti:label xml:lang="eng">J. Banks (1878)</ti:label>
+  <ti:description xml:lang="eng">J. Banks translation of Theocritus, Epigrams. Public domain.</ti:description>
+</ti:translation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CTS catalog entry for Heliodorus Aethiopica English translation -->
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:tlg0658.tlg001.perseus-eng80" workUrn="urn:cts:greekLit:tlg0658.tlg001" xml:lang="eng">
+  <ti:label xml:lang="eng">Rowland Smith (1901)</ti:label>
+  <ti:description xml:lang="eng">Rowland Smith translation of Heliodorus, Aethiopica. Public domain.</ti:description>
+</ti:translation>

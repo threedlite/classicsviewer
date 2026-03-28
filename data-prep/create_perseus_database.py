@@ -3335,7 +3335,7 @@ def get_element_hierarchy_type(elem):
     else:
         return 'empty'      # No relevant content
 
-def extract_translation_segments(book_elem, book_id, cursor, translator):
+def extract_translation_segments(book_elem, book_id, cursor, translator, is_aligned=False):
     """Extract translation segments based on milestone markers"""
     segments = []
     processed_text_hashes = set()  # Track extracted content to avoid duplicates within this book
@@ -3596,6 +3596,9 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
     
     print(f"          Milestones found: {milestones_found} (total: {milestone_count}, editor_only: {editor_milestone_only})")
     
+    # Initialize milestone type flags (used after segment extraction)
+    is_chapter_section_milestones = False
+
     # If we already have segments from speaker processing, skip other methods
     if segments:
         pass  # Already have segments from speaker processing
@@ -3603,7 +3606,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
         # Handle milestones inside paragraphs (common in Perseus translations)
         para_count = 0
         current_line = 1  # Initialize current_line for sequential numbering
-        
+
         # First, check if this uses Bekker or Stephanus numbering
         is_bekker = False
         is_stephanus = False
@@ -3645,15 +3648,31 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
             print(f"          Detected Stephanus pagination (first reference: {first_milestone_num})")
             print(f"          DEBUG: is_stephanus={is_stephanus}, author_id={author_id}")
 
-        # Detect chapter.section milestones (e.g., n="1.1", n="arg.0")
+        # Detect chapter.section milestones (e.g., n="1.1", n="arg.0", n="1.1.1")
         # These appear in aligned translations like Diodorus Siculus
+        # Some aligned translations use book.chapter.section format (3-part like "1.1.1")
+        # while Greek text bracket prefixes are chapter.section (2-part like "1.1").
+        # We handle both by trying the full value first, then stripping the book prefix.
         is_chapter_section_milestones = False
         chapter_section_to_line = {}
         sorted_milestone_lines = []
 
+        def resolve_cs_milestone(n_val):
+            """Look up a milestone value in chapter_section_to_line.
+            For 3+ part values (e.g., '1.1.1'), also tries stripping the
+            leading book prefix (e.g., '1.1') since Greek text brackets
+            store chapter.section only."""
+            if n_val in chapter_section_to_line:
+                return chapter_section_to_line[n_val]
+            # For 3+ part milestones, strip leading book number
+            parts = n_val.split('.', 1)
+            if len(parts) == 2 and parts[1] in chapter_section_to_line:
+                return chapter_section_to_line[parts[1]]
+            return None
+
         if not is_bekker and not is_stephanus:
-            # Scan milestones for X.Y or arg.X patterns
-            cs_pattern = re.compile(r'^(\w+)\.(\w+)$')  # matches "1.1", "arg.0", etc.
+            # Scan milestones for dotted patterns with 2+ parts (X.Y, X.Y.Z, etc.)
+            cs_pattern = re.compile(r'^\w+(?:\.\w+)+$')  # matches "1.1", "arg.0", "1.1.1", "1.arg.0", etc.
             cs_milestone_count = 0
             cs_milestone_values = []
             for child in book_elem.iter():
@@ -3724,9 +3743,19 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                         current_stephanus_section = n
                         # Reset line number when new section starts
                         current_stephanus_line = None
-                    elif is_chapter_section_milestones and n in chapter_section_to_line:
-                        # Chapter.section milestone (e.g., "1.1", "arg.0") - resolve to line number
-                        current_milestone = chapter_section_to_line[n]
+                    elif is_chapter_section_milestones:
+                        # Chapter.section milestone (e.g., "1.1", "arg.0", "1.1.1") - resolve to line number
+                        resolved = resolve_cs_milestone(n)
+                        if resolved is not None:
+                            current_milestone = resolved
+                    else:
+                        # Plain section number (e.g., "1", "2") - use as milestone directly
+                        try:
+                            current_milestone = int(n)
+                        except ValueError:
+                            num_match = re.match(r'(\d+)', n)
+                            if num_match:
+                                current_milestone = int(num_match.group(1))
 
                 # Track Bekker/Stephanus line numbers that appear between paragraphs
                 elif unit == 'line' and resp == 'bekker' and n:
@@ -3786,9 +3815,11 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                                 # Skip section milestones that we're tracking separately
                                 elif unit == 'section' and (is_bekker or is_stephanus):
                                     pass  # Already handled above
-                                elif is_chapter_section_milestones and unit == 'section' and n in chapter_section_to_line:
+                                elif is_chapter_section_milestones and unit == 'section':
                                     # Resolve chapter.section milestone to actual line number
-                                    milestones_in_para.append(chapter_section_to_line[n])
+                                    resolved = resolve_cs_milestone(n)
+                                    if resolved is not None:
+                                        milestones_in_para.append(resolved)
                                 else:
                                     # Try to extract numeric part for sorting
                                     try:
@@ -4120,6 +4151,22 @@ def extract_translation_segments(book_elem, book_id, cursor, translator):
                                 'translator': translator
                             })
     
+    # Detect non-sequential milestone values (e.g., Perry numbers for Aesop fables:
+    # 337, 394, 276, 103...) and renumber them sequentially so proportional mapping works.
+    # Only applied to aligned/ translations to avoid touching existing Perseus translations.
+    if is_aligned and segments and not is_chapter_section_milestones:
+        start_lines = [seg['start_line'] for seg in segments if isinstance(seg['start_line'], int)]
+        if len(start_lines) >= 10:
+            # Count how often start_line decreases from one segment to the next
+            decreases = sum(1 for i in range(1, len(start_lines)) if start_lines[i] <= start_lines[i-1])
+            if decreases > len(start_lines) * 3 / 4:
+                # Milestones are non-sequential (likely reference numbers, not alignment markers)
+                # Renumber sequentially so proportional section-to-line mapping works correctly
+                print(f"          Non-sequential milestones detected ({decreases}/{len(start_lines)} decreases), renumbering sequentially")
+                for i, seg in enumerate(segments, 1):
+                    seg['start_line'] = i
+                    seg['end_line'] = i
+
     # Fix overlapping segments before insertion
     # Check if we have problematic overlapping (multiple segments with same range)
     if segments:
@@ -4662,8 +4709,16 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
     translation_failure_count = 0
     entity_resolver_used_count = 0
 
+    # Track which files are from the aligned/ directory
+    aligned_dir = Path(__file__).parent.parent / "aligned"
+    aligned_dir_resolved = aligned_dir.resolve() if aligned_dir.exists() else None
+
     # Process ALL translation files, not just the first one
     for trans_file in translation_files:
+        # Check if this file is from the aligned/ directory
+        is_aligned_file = (aligned_dir_resolved is not None and
+                          str(trans_file.resolve()).startswith(str(aligned_dir_resolved)))
+
         print(f"      Processing translation: {trans_file.name}")
 
         try:
@@ -4906,7 +4961,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                     book_id = f"{work_id}.{chapter_num:03d}"
                     
                     # Extract translation segments for this chapter
-                    extract_translation_segments(chapter_div, book_id, cursor, translator)
+                    extract_translation_segments(chapter_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                     chapters_processed += 1
                 
                 if chapters_processed == 0:
@@ -5030,12 +5085,12 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                             break
 
                     if trans_div is not None:
-                        extract_translation_segments(trans_div, book_id, cursor, translator)
+                        extract_translation_segments(trans_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                     else:
                         # If no translation div, process the whole body
                         for body in root.iter():
                             if is_body_tag(body.tag):
-                                extract_translation_segments(body, book_id, cursor, translator)
+                                extract_translation_segments(body, book_id, cursor, translator, is_aligned=is_aligned_file)
                                 break
             elif is_drama:
                 # For dramas, process the entire translation as one book
@@ -5049,12 +5104,12 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                         break
                 
                 if trans_div is not None:
-                    extract_translation_segments(trans_div, book_id, cursor, translator)
+                    extract_translation_segments(trans_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                 else:
                     # If no translation div, process the whole body
                     for body in root.iter():
                         if is_body_tag(body.tag):
-                            extract_translation_segments(body, book_id, cursor, translator)
+                            extract_translation_segments(body, book_id, cursor, translator, is_aligned=is_aligned_file)
                             break
             else:
                 # Regular processing for texts with book divisions
@@ -5193,7 +5248,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                                 print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
 
                             # Extract translation segments with milestones
-                            count = extract_translation_segments(book_div, book_id, cursor, translator)
+                            count = extract_translation_segments(book_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                             if count == 0 and translation_div is None:
                                 print(f"        Warning: No segments extracted for {book_id}")
                 
@@ -5225,22 +5280,22 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                                     # Check if this book exists
                                     cursor.execute("SELECT id FROM books WHERE id = ?", (book_id,))
                                     if cursor.fetchone():
-                                        count = extract_translation_segments(poem_div, book_id, cursor, translator)
+                                        count = extract_translation_segments(poem_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                                         if count > 0:
                                             print(f"          → {count} segments for poem/epigram {poem_n}")
                         else:
                             # Fallback to single book
                             book_id = f"{work_id}.001"
-                            extract_translation_segments(translation_div, book_id, cursor, translator)
+                            extract_translation_segments(translation_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                     else:
                         # Single book or no translation div
                         book_id = f"{work_id}.001"
                         if translation_div is not None:
-                            extract_translation_segments(translation_div, book_id, cursor, translator)
+                            extract_translation_segments(translation_div, book_id, cursor, translator, is_aligned=is_aligned_file)
                         else:
                             for body in root.iter():
                                 if is_body_tag(body.tag):
-                                    extract_translation_segments(body, book_id, cursor, translator)
+                                    extract_translation_segments(body, book_id, cursor, translator, is_aligned=is_aligned_file)
                                     break
 
             print(f"      ✅ TRANSLATION SUCCESS: {trans_file.name} processed successfully")

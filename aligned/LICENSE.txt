@@ -1,0 +1,166 @@
+# Licenses
+
+## Code
+All code MIT licensed.
+
+## Data Source Licenses
+
+This project uses only sources that are Public Domain / CC0 or CC-BY-SA 4.0
+(or compatible). We do not use CC-BY-NC or any non-commercial-only licensed
+material.
+
+Last updated: 2026-03-21
+
+
+### Greek Texts
+
+#### Perseus Digital Library — canonical-greekLit
+- Path: data-sources/perseus/canonical-greekLit/
+- Source: https://github.com/PerseusDL/canonical-greekLit
+- License: CC BY-SA 4.0
+- Contents: TEI XML editions of ancient Greek texts (100 authors)
+- Authors used: Diodorus Siculus (tlg0060), Marcus Aurelius (tlg0562),
+  Thucydides (tlg0003), Plutarch (tlg0007), Homer (tlg0012),
+  Herodotus (tlg0016), Plato (tlg0059), Aeschylus (tlg0085),
+  Aristotle (tlg0086), and others
+
+#### First Thousand Years of Greek (First1KGreek)
+- Path: data-sources/greek_corpus/First1KGreek/
+- Source: https://github.com/OpenGreekAndLatin/First1KGreek
+- License: CC BY-SA 4.0
+- Contents: TEI XML editions of Greek texts from the first millennium
+- Used for: embedding model training (monolingual Greek corpus)
+
+
+### Latin Texts
+
+#### Perseus Digital Library — canonical-latinLit
+- Path: data-sources/perseus/canonical-latinLit/
+- Source: https://github.com/PerseusDL/canonical-latinLit
+- License: CC BY-SA 4.0
+- Contents: TEI XML editions of Latin texts
+- Authors used: Statius (phi1020)
+
+
+### English Translations
+
+#### G. Booth — The Historical Library of Diodorus the Sicilian (1700)
+- Path: data-sources/booth/A36034.xml
+- Source: Oxford Text Archive (OTA), record A36034
+  https://ota.bodleian.ox.ac.uk/repository/xmlui/handle/20.500.12024/A36034
+- Original source: EEBO-TCP (Early English Books Online Text Creation Partnership)
+- License: CC0 1.0 Universal (Public Domain Dedication)
+- Contents: TEI XML of Booth's 1700 English translation of Diodorus Siculus
+
+#### J.H. Mozley — Statius, Thebaid & Achilleid (1928)
+- Path: data-sources/statius_mozley/
+- Source: Wikisource (transcribed by Wikisource contributors)
+- Translation copyright: Public domain in US (published 1928, PD since 2024
+  under the 95-year rule)
+- Transcription license: CC BY-SA 4.0 (Wikisource)
+- Contents: HTML pages of Mozley's Loeb Classical Library translation
+
+#### Thomas Taylor — Iamblichus' Life of Pythagoras (1818)
+- Path: data-sources/gutenberg/iamblichus/life_pythagoras_63300.txt
+- Source: Project Gutenberg, ebook #63300
+  https://www.gutenberg.org/ebooks/63300
+- Translator: Thomas Taylor (1758–1835)
+- License: Public domain in the US (published 1818)
+- Contents: Plain text of Taylor's translation of De Vita Pythagorica
+
+#### Thomas Taylor — Iamblichus on the Mysteries (1821)
+- Path: data-sources/gutenberg/iamblichus/de_mysteriis_72815.txt
+- Source: Project Gutenberg, ebook #72815
+  https://www.gutenberg.org/ebooks/72815
+- Translator: Thomas Taylor (1758–1835)
+- License: Public domain in the US (published 1821)
+- Contents: Plain text of Taylor's translation of De Mysteriis
+
+#### W. Rhys Roberts — Dionysius of Halicarnassus On Literary Composition (1910)
+- Path: data-sources/gutenberg/dionysius/de_compositione_50212.txt
+- Source: Project Gutenberg, ebook #50212
+  https://www.gutenberg.org/ebooks/50212
+- Editor/Translator: W. Rhys Roberts (1858–1929)
+- License: Public domain in the US (published 1910)
+- Contents: Bilingual Greek+English edition of De Compositione Verborum
+
+#### George Fyler Townsend — Three Hundred Aesop's Fables (1867)
+- Path: data-sources/gutenberg/aesop/townsend_21.txt
+- Source: Project Gutenberg, ebook #21
+  https://www.gutenberg.org/ebooks/21
+- Translator: George Fyler Townsend (1814–1900)
+- License: Public domain in the US (published 1867)
+- Contents: Plain text of Townsend's English translation of Aesop's Fables
+
+#### George Long — Thoughts of Marcus Aurelius Antoninus (1862)
+- Path: data-sources/gutenberg/marcus_aurelius/meditations_long_15877.txt
+- Source: Project Gutenberg, ebook #15877
+  https://www.gutenberg.org/ebooks/15877
+- Translator: George Long (1800–1879)
+- License: Public domain in the US (published 1862)
+- Contents: Plain text of Long's English translation of the Meditations
+- Note: Project Gutenberg License applies to the digital edition;
+  the underlying translation is public domain
+
+#### George W. Chrystal — Meditations of Marcus Aurelius (based on 1742 Foulis)
+- Path: data-sources/gutenberg/marcus_aurelius/meditations_chrystal_55317.txt
+- Source: Project Gutenberg, ebook #55317
+  https://www.gutenberg.org/ebooks/55317
+- Translator: George W. Chrystal (1880–1944), based on 1742 Foulis translation
+- License: Public domain in the US
+- Contents: Plain text of Chrystal's English translation of the Meditations
+- Note: Alternative translation; Long (#15877) is the primary target
+
+
+### Derived / Intermediate Data
+
+#### Latin monolingual corpus
+- Path: data-sources/latin_corpus/
+- Derived from: Perseus canonical-latinLit (CC BY-SA 4.0)
+
+#### Latin parallel pairs
+- Path: data-sources/latin_parallel/
+- Derived from: Perseus canonical-latinLit (CC BY-SA 4.0)
+
+#### Greek parallel pairs
+- Path: data-sources/parallel/
+- Derived from: Perseus canonical-greekLit (CC BY-SA 4.0)
+
+
+## Alignment Outputs
+
+This project's alignment outputs are licensed under CC BY-SA 4.0,
+consistent with the ShareAlike requirement of the Perseus and Wikisource sources.
+
+
+#### F.C. Legge — Philosophumena of Hippolytus (1921)
+- Path: data-sources/gutenberg/hippolytus/
+- Source: Project Gutenberg, ebooks #65478, #67116
+  https://www.gutenberg.org/ebooks/65478
+- Translator: F.C. Legge (Francis Legge)
+- License: Public domain in the US (published 1921)
+- Contents: Plain text of Legge's translation of the Refutatio, 2 volumes
+
+#### Kenneth Sylvan Guthrie — Plotinos: Complete Works (1918)
+- Path: data-sources/gutenberg/plotinus/
+- Source: Project Gutenberg, ebooks #42930-42933
+  https://www.gutenberg.org/ebooks/42930
+- Translator: Kenneth Sylvan Guthrie (1871-1940)
+- License: Public domain in the US (published 1918)
+- Contents: Plain text of Guthrie's translation of the Enneads, 4 volumes
+
+#### H.B. Dewing — Procopius History of the Wars (1914)
+- Path: data-sources/gutenberg/procopius/wars_*.txt
+- Source: Project Gutenberg, ebooks #16764, #16765, #20298
+  https://www.gutenberg.org/ebooks/16764
+- Translator: H.B. Dewing (Henry Bronson Dewing, 1882-1956)
+- License: Public domain in the US (published 1914, Loeb Classical Library)
+- Contents: Plain text of Dewing's translation of Wars Books I-VI
+
+#### Anonymous — The Secret History of Procopius (1896)
+- Path: data-sources/gutenberg/procopius/secret_history_12916.txt
+- Source: Project Gutenberg, ebook #12916
+  https://www.gutenberg.org/ebooks/12916
+- Translator: Anonymous (Athenian Society, 1896)
+- License: Public domain in the US (published 1896)
+- Contents: Plain text translation of Procopius Secret History (Anecdota)

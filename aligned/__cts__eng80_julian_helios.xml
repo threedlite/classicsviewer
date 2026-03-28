@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CTS catalog entry for Julian Hymn to King Helios English translation -->
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:tlg2003.tlg011.perseus-eng80" workUrn="urn:cts:greekLit:tlg2003.tlg011" xml:lang="eng">
+  <ti:label xml:lang="eng">C. W. King (1888)</ti:label>
+  <ti:description xml:lang="eng">C. W. King translation of Julian, Hymn to King Helios. Public domain.</ti:description>
+</ti:translation>

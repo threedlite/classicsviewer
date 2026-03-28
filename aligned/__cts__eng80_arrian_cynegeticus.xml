@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CTS catalog entry for Arrian Cynegeticus English translation -->
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:tlg0074.tlg003.perseus-eng80" workUrn="urn:cts:greekLit:tlg0074.tlg003" xml:lang="eng">
+  <ti:label xml:lang="eng">William Dansey (1831)</ti:label>
+  <ti:description xml:lang="eng">William Dansey translation of Arrian, Cynegeticus. Public domain.</ti:description>
+</ti:translation>

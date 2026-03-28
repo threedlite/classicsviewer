@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CTS catalog entry for Iamblichus De Vita Pythagorica / De Mysteriis English translation -->
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:tlg2023.tlg001.perseus-eng80" workUrn="urn:cts:greekLit:tlg2023.tlg001" xml:lang="eng">
+  <ti:label xml:lang="eng">Thomas Taylor (1818)</ti:label>
+  <ti:description xml:lang="eng">Thomas Taylor translation of Iamblichus, De Vita Pythagorica / De Mysteriis. Public domain.</ti:description>
+</ti:translation>
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:tlg2023.tlg006.perseus-eng80" workUrn="urn:cts:greekLit:tlg2023.tlg006" xml:lang="eng">
+  <ti:label xml:lang="eng">Thomas Taylor (1818)</ti:label>
+  <ti:description xml:lang="eng">Thomas Taylor translation of Iamblichus, De Vita Pythagorica / De Mysteriis. Public domain.</ti:description>
+</ti:translation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CTS catalog entry for Statius Thebaid / Achilleid English translation -->
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:phi1020.phi001.perseus-eng80" workUrn="urn:cts:greekLit:phi1020.phi001" xml:lang="eng">
+  <ti:label xml:lang="eng">J.H. Mozley (1928)</ti:label>
+  <ti:description xml:lang="eng">J.H. Mozley translation of Statius, Thebaid / Achilleid. Public domain.</ti:description>
+</ti:translation>
+<ti:translation xmlns:ti="http://chs.harvard.edu/xmlns/cts" urn="urn:cts:greekLit:phi1020.phi003.perseus-eng80" workUrn="urn:cts:greekLit:phi1020.phi003" xml:lang="eng">
+  <ti:label xml:lang="eng">J.H. Mozley (1928)</ti:label>
+  <ti:description xml:lang="eng">J.H. Mozley translation of Statius, Thebaid / Achilleid. Public domain.</ti:description>
+</ti:translation>
