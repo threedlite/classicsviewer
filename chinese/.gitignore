@@ -1,0 +1,8 @@
+chinese_texts.db
+chinese_texts.db.zip
+data-sources/
+__pycache__/
+*.pyc
+venv/
+.venv/
+build.log

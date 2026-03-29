@@ -289,8 +289,14 @@ def extract_xml_pattern(xml_path):
 
             # Track div elements with their types
             if tag == 'div' or tag.startswith('div'):
-                div_type = elem.get('type', elem.get('subtype', 'NO_TYPE'))
-                new_path = path + [div_type]
+                div_type = elem.get('type', 'NO_TYPE')
+                div_subtype = elem.get('subtype', '')
+                # Show subtype in parentheses when it differs from generic 'textpart'
+                if div_subtype and div_subtype != div_type:
+                    div_label = f"{div_type}({div_subtype})"
+                else:
+                    div_label = div_type
+                new_path = path + [div_label]
 
                 # Look for text containers directly within this div
                 for child in elem:
@@ -875,7 +881,7 @@ def analyze_first1k_work_splitting(xml_path):
 
         # Define which subtypes/types indicate structural divs
         structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
-        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt'}
+        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt', 'fable', 'fabula', 'centuria', 'homilia', 'choral', 'lyric', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees'}
 
         def is_structural_div(div_elem):
             """Check if a div is a structural element we care about."""
@@ -1581,7 +1587,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
 
             # Define which subtypes/types indicate structural divs
             structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
-            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt'}
+            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt', 'fable', 'fabula', 'centuria', 'homilia', 'choral', 'lyric', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees'}
 
             def is_structural_div(div_elem):
                 """Check if a div is a structural element we care about."""
@@ -1605,7 +1611,19 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 """
                 # Collect all structural parent levels
                 hierarchy = []
-                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'epistle', 'work', 'homily', 'fragment', 'excerpt')
+                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'epistle', 'work', 'homily', 'homilia', 'fragment', 'excerpt', 'fable', 'fabula', 'centuria', 'choral', 'lyric', 'episode')
+
+                # Build a map of sequential indices for parent divs without n attributes
+                # so that multiple choral/episode sections get unique identifiers
+                parent_seq_indices = {}  # element id -> sequential index among siblings of same subtype
+                prev_subtype_counts = {}  # subtype -> count seen so far
+                for d in body_elem.iter('div'):
+                    subtype = d.get('subtype', '')
+                    if subtype in structural_subtypes and d.get('n') is None:
+                        if subtype not in prev_subtype_counts:
+                            prev_subtype_counts[subtype] = 0
+                        prev_subtype_counts[subtype] += 1
+                        parent_seq_indices[id(d)] = str(prev_subtype_counts[subtype])
 
                 for parent in body_elem.iter('div'):
                     # Skip if parent IS the element itself (don't include self in hierarchy)
@@ -1616,8 +1634,9 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                         # Check if div_elem is a descendant of this parent
                         for desc in parent.iter('div'):
                             if desc is div_elem:
-                                # Track each level in the hierarchy
-                                hierarchy.append((subtype, parent.get('n', '1')))
+                                # Use actual n attribute, or sequential index for divs without n
+                                n_val = parent.get('n') or parent_seq_indices.get(id(parent), '1')
+                                hierarchy.append((subtype, n_val))
                                 break
 
                 return hierarchy
@@ -2375,9 +2394,81 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
     # If sections have 'type' field with values like 'chapter', 'section', 'episode',
     # treat each section as a separate book for better alignment
     has_chapter_structure = any(
-        section.get('type') in ['chapter', 'section', 'episode', 'hypothesis', 'fragment', 'excerpt']
+        section.get('type') in ['chapter', 'section', 'episode', 'hypothesis', 'fragment', 'excerpt', 'fable', 'fabula', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees', 'page']
         for section in sections if section.get('type')
     )
+
+    # Check if hierarchical sections should be merged under their parent.
+    # Only merge when sections are SHORT (avg < 100 lines) AND were newly split
+    # by added structural subtypes (centuria, homilia, choral, lyric, fable, fabula).
+    # This avoids changing book structure for works that already had valid interlinear.
+    NEWLY_ADDED_PARENT_SUBTYPES = {'centuria', 'homilia', 'choral', 'lyric', 'fable', 'fabula'}
+    MIN_AVG_LINES_FOR_SEPARATE_BOOKS = 100
+    if has_chapter_structure and len(sections) > 1:
+        # Only consider merging if sections have hierarchy from newly added subtypes
+        sections_with_new_hierarchy = [s for s in sections if s.get('parent_hierarchy') and
+            any(st in NEWLY_ADDED_PARENT_SUBTYPES for st, _ in s.get('parent_hierarchy', []))]
+        if sections_with_new_hierarchy:
+            # Calculate average text length (as proxy for line count)
+            avg_text_len = sum(len(s.get('text', '')) for s in sections_with_new_hierarchy) / len(sections_with_new_hierarchy)
+            # Rough estimate: average line is ~60 chars
+            est_avg_lines = avg_text_len / 60
+
+            if est_avg_lines < MIN_AVG_LINES_FOR_SEPARATE_BOOKS:
+                # Merge sections under their newly-added parent - parent becomes the book
+                print(f"    Sections avg ~{est_avg_lines:.1f} lines (<{MIN_AVG_LINES_FOR_SEPARATE_BOOKS}), grouping under parent containers")
+                from collections import OrderedDict
+                parent_groups = OrderedDict()  # parent_key -> list of sections
+
+                for section in sections:
+                    ph = section.get('parent_hierarchy', [])
+                    # Only merge sections whose parent is a newly added subtype
+                    has_new_parent = ph and any(st in NEWLY_ADDED_PARENT_SUBTYPES for st, _ in ph)
+                    if has_new_parent:
+                        parent_key = tuple((st, n) for st, n in ph)
+                    else:
+                        # Keep as individual section (use unique key)
+                        parent_key = (('_individual', f"{id(section)}"),)
+                    if parent_key not in parent_groups:
+                        parent_groups[parent_key] = []
+                    parent_groups[parent_key].append(section)
+
+                # Replace sections with merged parent-level sections
+                merged_sections = []
+                for parent_key, children in parent_groups.items():
+                    # Embed section numbers in text if not already present
+                    # so readers can see where scholarly section breaks are
+                    combined_parts = []
+                    for child in children:
+                        child_text = child.get('text', '')
+                        child_n = child.get('section', '')
+                        # Only add section prefix if text doesn't already have [X] numbering
+                        if child_n and not child_text.startswith('['):
+                            combined_parts.append(f'[{child_n}] {child_text}')
+                        else:
+                            combined_parts.append(child_text)
+                    combined_text = '\n'.join(combined_parts)
+
+                    # Use parent info for the merged section
+                    if isinstance(parent_key[0], tuple):
+                        parent_subtype, parent_n = parent_key[-1]
+                        grandparent = list(parent_key[:-1]) if len(parent_key) > 1 else []
+                        merged_sections.append({
+                            'section': parent_n,
+                            'text': combined_text,
+                            'type': parent_subtype,
+                            'parent_hierarchy': [(st, n) for st, n in grandparent]
+                        })
+                    else:
+                        merged_sections.append({
+                            'section': children[0].get('section', '1'),
+                            'text': combined_text,
+                            'type': children[0].get('type', 'section'),
+                            'parent_hierarchy': []
+                        })
+
+                sections = merged_sections
+                print(f"    Merged into {len(sections)} parent-level books")
 
     if has_chapter_structure and len(sections) > 1:
         # Treat each section as a separate book
@@ -2392,8 +2483,14 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
             if actual_section_num and str(actual_section_num).isdigit():
                 sect_num = int(actual_section_num)
             else:
-                # Fallback to sequential numbering if section number is missing or non-numeric
-                sect_num = sect_idx
+                # Fallback for non-numeric section numbers (e.g., "pref", "praef", "a")
+                # Use a deterministic hash to avoid colliding with real numeric sections
+                import hashlib
+                if actual_section_num:
+                    hash_val = int(hashlib.md5(str(actual_section_num).encode()).hexdigest(), 16) % 900 + 900
+                else:
+                    hash_val = 900 + sect_idx
+                sect_num = hash_val
 
             # Create book ID using FULL hierarchy to avoid collisions
             # when the same book number appears in different volumes
@@ -3702,9 +3799,17 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                         chapter_section_to_line[prefix] = line_num
 
                 if chapter_section_to_line:
-                    is_chapter_section_milestones = True
-                    sorted_milestone_lines = sorted(set(chapter_section_to_line.values()))
-                    print(f"          Detected chapter.section milestones: {len(chapter_section_to_line)} mapped (e.g., {cs_milestone_values[:3]})")
+                    # Verify translation milestones actually resolve against text_line prefixes
+                    # If none resolve, the reference systems are incompatible (e.g., translation
+                    # uses line refs like "1.16" but text uses page refs like "v.2.p.506")
+                    resolvable = sum(1 for v in cs_milestone_values if resolve_cs_milestone(v) is not None)
+                    if resolvable > 0:
+                        is_chapter_section_milestones = True
+                        sorted_milestone_lines = sorted(set(chapter_section_to_line.values()))
+                        print(f"          Detected chapter.section milestones: {len(chapter_section_to_line)} mapped (e.g., {cs_milestone_values[:3]})")
+                    else:
+                        print(f"          Chapter.section prefixes found in text ({len(chapter_section_to_line)}) but translation milestones don't match (e.g., {cs_milestone_values[:3]} vs text prefixes like {list(chapter_section_to_line.keys())[:3]})")
+                        chapter_section_to_line = {}
                 else:
                     print(f"          Found {cs_milestone_count} chapter.section milestones but no matching [X.Y] prefixes in text_lines")
 
@@ -3749,13 +3854,23 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                         if resolved is not None:
                             current_milestone = resolved
                     else:
-                        # Plain section number (e.g., "1", "2") - use as milestone directly
+                        # Plain section number (e.g., "1", "2") or book.line (e.g., "1.16")
                         try:
                             current_milestone = int(n)
                         except ValueError:
-                            num_match = re.match(r'(\d+)', n)
-                            if num_match:
-                                current_milestone = int(num_match.group(1))
+                            # For dotted values like "1.16" (book.line), use last number as line
+                            if '.' in n:
+                                last_part = n.rsplit('.', 1)[-1]
+                                try:
+                                    current_milestone = int(last_part)
+                                except ValueError:
+                                    num_match = re.match(r'(\d+)', n)
+                                    if num_match:
+                                        current_milestone = int(num_match.group(1))
+                            else:
+                                num_match = re.match(r'(\d+)', n)
+                                if num_match:
+                                    current_milestone = int(num_match.group(1))
 
                 # Track Bekker/Stephanus line numbers that appear between paragraphs
                 elif unit == 'line' and resp == 'bekker' and n:
@@ -3827,14 +3942,26 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                                         line_num = int(n)
                                         milestones_in_para.append(line_num)
                                     except ValueError:
-                                        # For non-pure numbers, try to extract leading digits
-                                        num_match = re.match(r'(\d+)', n)
-                                        if num_match:
-                                            line_num = int(num_match.group(1))
-                                            milestones_in_para.append(line_num)
+                                        # For dotted values like "1.16" (book.line), use last number
+                                        if '.' in n:
+                                            last_part = n.rsplit('.', 1)[-1]
+                                            try:
+                                                milestones_in_para.append(int(last_part))
+                                            except ValueError:
+                                                num_match = re.match(r'(\d+)', n)
+                                                if num_match:
+                                                    milestones_in_para.append(int(num_match.group(1)))
+                                                else:
+                                                    milestones_in_para.append(n)
                                         else:
-                                            # Keep original if no number found
-                                            milestones_in_para.append(n)
+                                            # For non-pure numbers, try to extract leading digits
+                                            num_match = re.match(r'(\d+)', n)
+                                            if num_match:
+                                                line_num = int(num_match.group(1))
+                                                milestones_in_para.append(line_num)
+                                            else:
+                                                # Keep original if no number found
+                                                milestones_in_para.append(n)
                 
                 # Get paragraph text - preserve milestones for Bekker/Stephanus texts
                 para_text = get_text_content(para, preserve_milestones=(is_bekker or is_stephanus)).strip()
@@ -5245,9 +5372,57 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                             try:
                                 book_id = f"{work_id}.{int(greek_book_num):03d}"
                             except ValueError:
-                                # If book number is not numeric, use sequential numbering
-                                book_id = f"{work_id}.{book_counter:03d}"
-                                print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
+                                # Non-numeric book number (e.g., "fables")
+                                # Check if the work uses hierarchical book IDs (fable/chapter_section structure)
+                                cursor.execute("""
+                                    SELECT id, line_count FROM books
+                                    WHERE work_id = ? AND id LIKE '%\\_%' ESCAPE '\\'
+                                    ORDER BY book_number
+                                """, (work_id,))
+                                hierarchical_books = cursor.fetchall()
+
+                                if hierarchical_books:
+                                    # Work has hierarchical books - distribute translation paragraphs
+                                    # across them sequentially (one translation per top-level group)
+                                    # Get unique top-level groups (e.g., fable numbers) and their first book
+                                    fable_first_books = {}  # fable_prefix -> (book_id, line_count)
+                                    for hb_id, hb_lc in hierarchical_books:
+                                        # Extract the parent prefix: "work.NNN_MMM" -> "NNN"
+                                        suffix = hb_id[len(work_id)+1:]  # e.g., "001_001"
+                                        parent_prefix = suffix.split('_')[0]  # e.g., "001"
+                                        if parent_prefix not in fable_first_books:
+                                            fable_first_books[parent_prefix] = (hb_id, hb_lc)
+
+                                    # Get ordered list of first-section books
+                                    ordered_fable_books = [fable_first_books[k] for k in sorted(fable_first_books.keys())]
+
+                                    # Extract all <p> elements from the translation book div
+                                    trans_paragraphs = []
+                                    for elem in book_div.iter():
+                                        if is_p_tag(elem.tag):
+                                            text = get_text_content(elem).strip()
+                                            if text:
+                                                trans_paragraphs.append(text)
+
+                                    # Map sequentially: para 0 → fable 1, para 1 → fable 2, etc.
+                                    mapped_count = 0
+                                    for i, (fable_book_id, fable_line_count) in enumerate(ordered_fable_books):
+                                        if i < len(trans_paragraphs):
+                                            lc = fable_line_count if fable_line_count else 1
+                                            cursor.execute("""
+                                                INSERT INTO translation_segments
+                                                (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
+                                                VALUES (?, ?, ?, ?, ?, ?, ?)
+                                            """, (fable_book_id, 1, lc, 1, trans_paragraphs[i], translator, None))
+                                            mapped_count += 1
+
+                                    print(f"        → Distributed {mapped_count} translations across {len(ordered_fable_books)} hierarchical books (from '{greek_book_num}' div)")
+                                    books_found = True
+                                    continue  # Skip extract_translation_segments for this book div
+                                else:
+                                    # Fallback: use sequential numbering
+                                    book_id = f"{work_id}.{book_counter:03d}"
+                                    print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
 
                             # Extract translation segments with milestones
                             count = extract_translation_segments(book_div, book_id, cursor, translator, is_aligned=is_aligned_file)
@@ -5448,6 +5623,16 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
 
             # Find all books in the translation
             segments_imported = 0
+
+            # Pre-build a map from sequential position to book_id for this work
+            # This handles cases where interlinear files use flat numbering (1, 2, 3...)
+            # but the database has hierarchical book_numbers (1001, 2001, ...)
+            cursor.execute("SELECT id, book_number FROM books WHERE work_id = ? ORDER BY book_number", (work_id,))
+            all_books = cursor.fetchall()
+            book_by_number = {bnum: bid for bid, bnum in all_books}
+            # Sequential position map: position 1 = first book, 2 = second, etc.
+            book_by_position = {i+1: bid for i, (bid, _) in enumerate(all_books)}
+
             for book_div in root.iter():
                 if not (is_div_tag(book_div.tag) and
                        book_div.get('type') == 'textpart' and
@@ -5461,10 +5646,14 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
                 # Look up the actual book_id from the database by book_number
                 # This handles all hierarchical encoding schemes (2-level, 3-level, etc.)
                 book_num = int(book_n)
-                cursor.execute("SELECT id FROM books WHERE work_id = ? AND book_number = ?", (work_id, book_num))
-                result = cursor.fetchone()
-                if result:
-                    book_id = result[0]
+                book_id = None
+
+                if book_num in book_by_number:
+                    # Direct match by book_number
+                    book_id = book_by_number[book_num]
+                elif book_num in book_by_position:
+                    # Fallback: match by sequential position (for works where book structure changed)
+                    book_id = book_by_position[book_num]
                 else:
                     # Fallback: try to construct book_id for simple cases
                     if book_num >= 1000000:
@@ -10130,7 +10319,7 @@ def merge_external_databases(db_filename, mode='sample'):
     - sample: (none)
     - full: Sumerian + Akkadian + Italian + Old English
     - extended: Arabic + Hebrew + Persian + Sanskrit + Sumerian + Akkadian +
-                Italian + Syriac + Coptic + Pali + Norse
+                Italian + Syriac + Coptic + Pali + Norse + Chinese
 
     Args:
         db_filename: Name of the target database file
@@ -10164,6 +10353,7 @@ def merge_external_databases(db_filename, mode='sample'):
             ('coptic/coptic_texts.db', 'coptic'),
             ('pali/pali_texts.db', 'pali'),
             ('norse/norse_texts.db', 'norse'),
+            ('chinese/chinese_texts.db', 'chinese'),
             ('old_english/old_english_texts.db', 'old_english'),
         ]
     }
@@ -10423,7 +10613,7 @@ if __name__ == "__main__":
             print("Usage: python create_perseus_database.py [sample|full|extended] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
             print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
-            print("  extended: Full Perseus + First1KGreek + PTA + Pali + Norse")
+            print("  extended: Full Perseus + First1KGreek + PTA + Pali + Norse + Chinese")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
             print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
             print("\nOptional output_name: Custom output database name suffix (only for sample mode)")
@@ -10647,7 +10837,7 @@ if __name__ == "__main__":
         # Build extended database
         if build_mode == "extended":
             print("\n" + "="*60)
-            print("BUILDING EXTENDED DATABASE (Perseus + First1KGreek + PTA + Pali + Norse)")
+            print("BUILDING EXTENDED DATABASE (Perseus + First1KGreek + PTA + Pali + Norse + Chinese)")
             print("="*60)
             start_time = time.time()
             create_database(mode='extended')

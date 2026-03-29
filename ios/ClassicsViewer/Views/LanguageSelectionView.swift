@@ -171,6 +171,8 @@ struct LanguageSelectionView: View {
             return 0xFF7EABC9     // Light blue
         case "norse":
             return 0xFF5A5A5A     // Dark grey
+        case "chinese":
+            return 0xFFFECD21     // Chinese gold
         case "old_english":
             return 0xFFB78700     // Gold
         default:

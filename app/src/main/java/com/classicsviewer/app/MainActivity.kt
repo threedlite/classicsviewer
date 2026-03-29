@@ -242,6 +242,7 @@ class MainActivity : AppCompatActivity() {
             "italian" -> 0xFFA8727B.toInt()   // Dusty rose
             "pali" -> 0xFF7EABC9.toInt()      // Light blue
             "norse" -> 0xFF5A5A5A.toInt()     // Dark grey
+            "chinese" -> 0xFFFECD21.toInt()  // Chinese gold
             "old_english" -> 0xFFB78700.toInt() // Gold
             else -> 0xFF808080.toInt()        // Grey for unknown languages
         }
