@@ -679,6 +679,57 @@ Old Norse word forms.
 Examples: menn → maður (Nom Plural), konungs → konungur (Gen Sing)
 
 
+CLASSICAL CHINESE TEXTS
+========================
+
+Zhuangzi (莊子) - Chinese Wikisource
+--------------------------------------
+Source: Chinese Wikisource (zh.wikisource.org)
+License: Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+https://zh.wikisource.org/wiki/莊子
+
+The Zhuangzi is a foundational Daoist philosophical text attributed to Zhuangzi
+(c. 369–286 BCE), containing 33 chapters in three sections: Inner Chapters (內篇,
+1-7), Outer Chapters (外篇, 8-22), and Miscellaneous Chapters (雜篇, 23-33).
+Text sourced from Chinese Wikisource in Traditional Chinese characters.
+
+
+Zhuangzi English Translation - Herbert Giles (1889)
+-----------------------------------------------------
+Source: English Wikisource (en.wikisource.org)
+License: Public Domain (published 1889)
+https://en.wikisource.org/wiki/Chuang_Tzŭ_(Giles)
+
+"Chuang Tzŭ: Mystic, Moralist, and Social Reformer" by Herbert A. Giles.
+Complete English translation of all 33 chapters. First published 1889 by
+Bernard Quaritch, London. Transcribed on English Wikisource at validation
+Level 4 (highest quality) from the 508-page DjVu scan of the first edition.
+
+
+Dao De Jing (道德經) - Chinese Wikisource, Wang Bi Edition
+-----------------------------------------------------------
+Source: Chinese Wikisource (zh.wikisource.org)
+License: Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)
+https://zh.wikisource.org/wiki/道德經_(王弼本)
+
+The Dao De Jing (Tao Te Ching) is the foundational text of Daoism, attributed
+to Laozi (c. 6th–4th century BCE). 81 chapters in two parts: Dao Jing (道經,
+1-37) and De Jing (德經, 38-81). The Wang Bi (王弼, 226–249 CE) edition is the
+standard received text used in most scholarly work. Commentary is excluded;
+only the source text is included.
+
+
+Dao De Jing English Translation - James Legge (1891)
+------------------------------------------------------
+Source: English Wikisource (en.wikisource.org)
+License: Public Domain (published 1891)
+https://en.wikisource.org/wiki/Tâo_Teh_King
+
+"Tâo Teh King" by James Legge, from Sacred Books of the East, Volume 39
+(Oxford: Clarendon Press, 1891). Complete English translation of all 81
+chapters.
+
+
 OLD ENGLISH (ANGLO-SAXON) TEXTS
 ================================
 
