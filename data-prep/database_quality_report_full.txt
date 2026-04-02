@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-04-01T19:40:19.311644
+Generated: 2026-04-02T05:50:37.368354
 Mode: full
 
 Total Authors: 135
@@ -7,8 +7,8 @@ Total Works: 1018
 Total Books: 3514
 Total Lines: 1,049,996
 Translation Segments: 1,295,175
-Build Time: 7.3 minutes
-Database Size: 4268.1MB → 928.8MB compressed (21.8%)
+Build Time: 7.4 minutes
+Database Size: 4268.2MB → 928.8MB compressed (21.8%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,050,714
 
@@ -4522,119 +4522,119 @@ Pindar / Pythian Odes translations: Diane Arnson Svarlien 9 segments [Excellent-
 
 [Plato]
 Plato / Alcibiades 1 - 2,122 lines, max_char=563 [Perseus]
-Plato / Alcibiades 1 translations: Interlinear (Beta, generated from app dictionary and treebank) 2122 segments [Excellent (97% coverage)], Walter Rangeley Maitland Lamb 901 segments [Excellent-Section (97% coverage)]
+Plato / Alcibiades 1 translations: Interlinear (Beta, generated from app dictionary and treebank) 2122 segments [Excellent (98% coverage)], Walter Rangeley Maitland Lamb 901 segments [Excellent-Section (98% coverage)]
 Plato / Alcibiades 2 - 506 lines, max_char=468 [Perseus]
-Plato / Alcibiades 2 translations: Interlinear (Beta, generated from app dictionary and treebank) 503 segments [Good (92% coverage)], Walter Rangeley Maitland Lamb 185 segments [Good-Section (92% coverage)]
+Plato / Alcibiades 2 translations: Interlinear (Beta, generated from app dictionary and treebank) 503 segments [Good (93% coverage)], Walter Rangeley Maitland Lamb 185 segments [Good-Section (93% coverage)]
 Plato / Apology - 420 lines, max_char=784 [Perseus]
-Plato / Apology translations: Harold North Fowler 26 segments [Limited-Section (19% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 420 segments [Limited (19% coverage)]
+Plato / Apology translations: Harold North Fowler 26 segments [Limited-Section (21% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 420 segments [Limited (21% coverage)]
 Plato / Charmides - 627 lines, max_char=492 [Perseus]
 Plato / Charmides translations: Interlinear (Beta, generated from app dictionary and treebank) 627 segments [Limited (21% coverage)], Walter Rangeley Maitland Lamb 24 segments [Limited-Section (21% coverage)]
 Plato / Cleitophon - 79 lines, max_char=408 [Perseus]
-Plato / Cleitophon translations: Interlinear (Beta, generated from app dictionary and treebank) 79 segments [Limited (41% coverage)], Robert Gregg Bury 7 segments [Limited-Section (41% coverage)]
+Plato / Cleitophon translations: Interlinear (Beta, generated from app dictionary and treebank) 79 segments [Limited (30% coverage)], Robert Gregg Bury 7 segments [Limited-Section (30% coverage)]
 Plato / Cratylus - 2,229 lines, max_char=631 [Perseus]
-Plato / Cratylus translations: Harold North Fowler 771 segments [Good-Section (89% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2229 segments [Good (89% coverage)]
+Plato / Cratylus translations: Harold North Fowler 771 segments [Good-Section (94% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2229 segments [Good (94% coverage)]
 Plato / Critias - 183 lines, max_char=690 [Perseus]
-Plato / Critias translations: Interlinear (Beta, generated from app dictionary and treebank) 183 segments [Limited (39% coverage)], Robert Gregg Bury 20 segments [Limited-Section (39% coverage)]
+Plato / Critias translations: Interlinear (Beta, generated from app dictionary and treebank) 183 segments [Limited (33% coverage)], Robert Gregg Bury 20 segments [Limited-Section (33% coverage)]
 Plato / Crito - 366 lines, max_char=719 [Perseus]
-Plato / Crito translations: Harold North Fowler 102 segments [Good-Section (81% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 366 segments [Good (81% coverage)]
+Plato / Crito translations: Harold North Fowler 102 segments [Good-Section (83% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 366 segments [Good (83% coverage)]
 Plato / Epinomis - 300 lines, max_char=769 [Perseus]
-Plato / Epinomis translations: Interlinear (Beta, generated from app dictionary and treebank) 300 segments [Limited (45% coverage)], Walter Rangeley Maitland Lamb 46 segments [Limited-Section (45% coverage)]
+Plato / Epinomis translations: Interlinear (Beta, generated from app dictionary and treebank) 300 segments [Limited (41% coverage)], Walter Rangeley Maitland Lamb 46 segments [Limited-Section (41% coverage)]
 Plato / Euthydemus - 877 lines, max_char=728 [Perseus]
-Plato / Euthydemus translations: Interlinear (Beta, generated from app dictionary and treebank) 877 segments [Limited (42% coverage)], Walter Rangeley Maitland Lamb 95 segments [Limited-Section (42% coverage)]
+Plato / Euthydemus translations: Interlinear (Beta, generated from app dictionary and treebank) 877 segments [Limited (40% coverage)], Walter Rangeley Maitland Lamb 95 segments [Limited-Section (40% coverage)]
 Plato / Euthyphro - 655 lines, max_char=470 [Perseus]
-Plato / Euthyphro translations: Harold North Fowler 233 segments [Excellent-Section (96% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 655 segments [Excellent (96% coverage)]
+Plato / Euthyphro translations: Harold North Fowler 233 segments [Excellent-Section (99% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 655 segments [Excellent (99% coverage)]
 Plato / Gorgias - 3,170 lines, max_char=926 [Perseus]
-Plato / Gorgias translations: Interlinear (Beta, generated from app dictionary and treebank) 3170 segments [Good (90% coverage)], Walter Rangeley Maitland Lamb 1107 segments [Good-Section (90% coverage)]
+Plato / Gorgias translations: Interlinear (Beta, generated from app dictionary and treebank) 3170 segments [Good (91% coverage)], Walter Rangeley Maitland Lamb 1107 segments [Good-Section (91% coverage)]
 Plato / Greater Hippias - 1,075 lines, max_char=430 [Perseus]
-Plato / Greater Hippias translations: Harold North Fowler 356 segments [Good-Section (93% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1075 segments [Good (93% coverage)]
+Plato / Greater Hippias translations: Harold North Fowler 356 segments [Excellent-Section (96% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1075 segments [Excellent (96% coverage)]
 Plato / Hipparchus - 382 lines, max_char=757 [Perseus]
 Plato / Hipparchus translations: Interlinear (Beta, generated from app dictionary and treebank) 382 segments [Excellent (98% coverage)], Walter Rangeley Maitland Lamb 162 segments [Excellent-Section (98% coverage)]
 Plato / Ion - 471 lines, max_char=540 [Perseus]
-Plato / Ion translations: Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Good (91% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (91% coverage)]
+Plato / Ion translations: Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Good (93% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (93% coverage)]
 Plato / Laches - 802 lines, max_char=625 [Perseus]
-Plato / Laches translations: Interlinear (Beta, generated from app dictionary and treebank) 802 segments [Good (88% coverage)], Walter Rangeley Maitland Lamb 265 segments [Good-Section (88% coverage)]
+Plato / Laches translations: Interlinear (Beta, generated from app dictionary and treebank) 802 segments [Good (89% coverage)], Walter Rangeley Maitland Lamb 265 segments [Good-Section (89% coverage)]
 Plato / Laws - 6,840 lines total, 12 books, max_lines/book=825, max_char=1,213 [Perseus]
 Plato / Laws / Book 1 - 750 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 750 segments [Good (90% coverage)], Robert Gregg Bury 256 segments [Good-Section (90% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 750 segments [Good (92% coverage)], Robert Gregg Bury 256 segments [Good-Section (92% coverage)]
 Plato / Laws / Book 2 - 638 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 638 segments [Good (92% coverage)], Robert Gregg Bury 230 segments [Good-Section (92% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 638 segments [Excellent (95% coverage)], Robert Gregg Bury 230 segments [Excellent-Section (95% coverage)]
 Plato / Laws / Book 3 - 781 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 781 segments [Good (90% coverage)], Robert Gregg Bury 293 segments [Good-Section (90% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 781 segments [Good (93% coverage)], Robert Gregg Bury 293 segments [Good-Section (93% coverage)]
 Plato / Laws / Book 4 - 523 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 523 segments [Good (88% coverage)], Robert Gregg Bury 171 segments [Good-Section (88% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 523 segments [Good (90% coverage)], Robert Gregg Bury 171 segments [Good-Section (90% coverage)]
 Plato / Laws / Book 5 - 272 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (32% coverage)], Robert Gregg Bury 23 segments [Limited-Section (32% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (25% coverage)], Robert Gregg Bury 23 segments [Limited-Section (25% coverage)]
 Plato / Laws / Book 6 - 565 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 565 segments [Fair (61% coverage)], Robert Gregg Bury 126 segments [Fair-Section (61% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 565 segments [Fair (60% coverage)], Robert Gregg Bury 126 segments [Fair-Section (60% coverage)]
 Plato / Laws / Book 7 - 825 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 825 segments [Good (81% coverage)], Robert Gregg Bury 253 segments [Good-Section (81% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 825 segments [Good (85% coverage)], Robert Gregg Bury 253 segments [Good-Section (85% coverage)]
 Plato / Laws / Book 8 - 385 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 385 segments [Fair (67% coverage)], Robert Gregg Bury 97 segments [Fair-Section (67% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 385 segments [Fair (69% coverage)], Robert Gregg Bury 97 segments [Fair-Section (69% coverage)]
 Plato / Laws / Book 9 - 510 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 510 segments [Fair (60% coverage)], Robert Gregg Bury 116 segments [Fair-Section (60% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 510 segments [Fair (59% coverage)], Robert Gregg Bury 116 segments [Fair-Section (59% coverage)]
 Plato / Laws / Book 10 - 752 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 752 segments [Good (89% coverage)], Robert Gregg Bury 262 segments [Good-Section (89% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 752 segments [Good (92% coverage)], Robert Gregg Bury 262 segments [Good-Section (92% coverage)]
 Plato / Laws / Book 11 - 342 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 342 segments [Limited (43% coverage)], Robert Gregg Bury 50 segments [Limited-Section (43% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 342 segments [Limited (41% coverage)], Robert Gregg Bury 50 segments [Limited-Section (41% coverage)]
 Plato / Laws / Book 12 - 497 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 497 segments [Fair (66% coverage)], Robert Gregg Bury 130 segments [Fair-Section (66% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 497 segments [Fair (67% coverage)], Robert Gregg Bury 130 segments [Fair-Section (67% coverage)]
 Plato / Lesser Hippias - 602 lines, max_char=1,024 [Perseus]
-Plato / Lesser Hippias translations: Harold North Fowler 231 segments [Good-Section (92% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 602 segments [Good (92% coverage)]
+Plato / Lesser Hippias translations: Harold North Fowler 231 segments [Good-Section (94% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 602 segments [Good (94% coverage)]
 Plato / Letters - 686 lines, max_char=651 [Perseus]
 Plato / Letters translations: Interlinear (Beta, generated from app dictionary and treebank) 686 segments [Limited (24% coverage)], R. G. Bury 65 segments [Limited-Section (24% coverage)]
 Plato / Lovers - 212 lines, max_char=462 [Perseus]
-Plato / Lovers translations: Interlinear (Beta, generated from app dictionary and treebank) 212 segments [Excellent (95% coverage)], Walter Rangeley Maitland Lamb 126 segments [Excellent (95% coverage)]
+Plato / Lovers translations: Interlinear (Beta, generated from app dictionary and treebank) 212 segments [Excellent (97% coverage)], Walter Rangeley Maitland Lamb 126 segments [Excellent (97% coverage)]
 Plato / Lysis - 359 lines, max_char=771 [Perseus]
-Plato / Lysis translations: Interlinear (Beta, generated from app dictionary and treebank) 359 segments [Limited (23% coverage)], Walter Rangeley Maitland Lamb 21 segments [Limited-Section (23% coverage)]
+Plato / Lysis translations: Interlinear (Beta, generated from app dictionary and treebank) 359 segments [Limited (26% coverage)], Walter Rangeley Maitland Lamb 21 segments [Limited-Section (26% coverage)]
 Plato / Menexenus - 271 lines, max_char=757 [Perseus]
-Plato / Menexenus translations: Interlinear (Beta, generated from app dictionary and treebank) 271 segments [Limited (49% coverage)], Robert Gregg Bury 46 segments [Limited-Section (49% coverage)]
+Plato / Menexenus translations: Interlinear (Beta, generated from app dictionary and treebank) 271 segments [Limited (46% coverage)], Robert Gregg Bury 46 segments [Limited-Section (46% coverage)]
 Plato / Meno - 1,483 lines, max_char=499 [Perseus]
-Plato / Meno translations: Interlinear (Beta, generated from app dictionary and treebank) 1483 segments [Excellent (96% coverage)], Walter Rangeley Maitland Lamb 569 segments [Excellent-Section (96% coverage)]
+Plato / Meno translations: Interlinear (Beta, generated from app dictionary and treebank) 1483 segments [Excellent (98% coverage)], Walter Rangeley Maitland Lamb 569 segments [Excellent-Section (98% coverage)]
 Plato / Minos - 488 lines, max_char=344 [Perseus]
-Plato / Minos translations: Interlinear (Beta, generated from app dictionary and treebank) 488 segments [Good (92% coverage)], Walter Rangeley Maitland Lamb 192 segments [Good-Section (92% coverage)]
+Plato / Minos translations: Interlinear (Beta, generated from app dictionary and treebank) 488 segments [Good (94% coverage)], Walter Rangeley Maitland Lamb 192 segments [Good-Section (94% coverage)]
 Plato / Parmenides - 1,369 lines, max_char=1,715 [Perseus]
-Plato / Parmenides translations: Harold North Fowler 41 segments [Limited-Section (18% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1369 segments [Limited (18% coverage)]
+Plato / Parmenides translations: Harold North Fowler 41 segments [Limited-Section (21% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1369 segments [Limited (21% coverage)]
 Plato / Phaedo - 1,367 lines, max_char=1,404 [Perseus]
-Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Limited (28% coverage)]
+Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Limited (27% coverage)]
 Plato / Phaedrus - 1,392 lines, max_char=609 [Perseus]
-Plato / Phaedrus translations: Harold North Fowler 400 segments [Fair-Section (80% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1391 segments [Fair (80% coverage)]
+Plato / Phaedrus translations: Harold North Fowler 400 segments [Good-Section (82% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1391 segments [Good (82% coverage)]
 Plato / Philebus - 2,672 lines, max_char=669 [Perseus]
 Plato / Philebus translations: Harold North Fowler 1144 segments [Excellent-Section (98% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2672 segments [Excellent (98% coverage)]
 Plato / Protagoras - 914 lines, max_char=918 [Perseus]
-Plato / Protagoras translations: Interlinear (Beta, generated from app dictionary and treebank) 914 segments [Limited (28% coverage)], Walter Rangeley Maitland Lamb 74 segments [Limited-Section (28% coverage)]
+Plato / Protagoras translations: Interlinear (Beta, generated from app dictionary and treebank) 914 segments [Limited (26% coverage)], Walter Rangeley Maitland Lamb 74 segments [Limited-Section (26% coverage)]
 Plato / Republic - 5,995 lines total, 10 books, max_lines/book=793, max_char=1,445 [Perseus]
 Plato / Republic / Book 1 - 793 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 793 segments [Limited (21% coverage)], Paul Shorey 28 segments [Limited-Section (21% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 793 segments [Limited (19% coverage)], Paul Shorey 28 segments [Limited-Section (19% coverage)]
 Plato / Republic / Book 2 - 558 lines
 Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 558 segments [Limited (21% coverage)], Paul Shorey 27 segments [Limited-Section (21% coverage)]
 Plato / Republic / Book 3 - 619 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 619 segments [Limited (21% coverage)], Paul Shorey 32 segments [Limited-Section (21% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 619 segments [Limited (20% coverage)], Paul Shorey 32 segments [Limited-Section (20% coverage)]
 Plato / Republic / Book 4 - 600 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 600 segments [Limited (20% coverage)], Paul Shorey 27 segments [Limited-Section (20% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 600 segments [Limited (16% coverage)], Paul Shorey 27 segments [Limited-Section (16% coverage)]
 Plato / Republic / Book 5 - 776 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 776 segments [Limited (19% coverage)], Paul Shorey 32 segments [Limited-Section (19% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 776 segments [Limited (23% coverage)], Paul Shorey 32 segments [Limited-Section (23% coverage)]
 Plato / Republic / Book 6 - 540 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 540 segments [Limited (16% coverage)], Paul Shorey 28 segments [Limited-Section (16% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 540 segments [Limited (20% coverage)], Paul Shorey 28 segments [Limited-Section (20% coverage)]
 Plato / Republic / Book 7 - 537 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 537 segments [Limited (17% coverage)], Paul Shorey 28 segments [Limited-Section (17% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 537 segments [Limited (23% coverage)], Paul Shorey 28 segments [Limited-Section (23% coverage)]
 Plato / Republic / Book 8 - 541 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 541 segments [Limited (22% coverage)], Paul Shorey 27 segments [Limited-Section (22% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 541 segments [Limited (20% coverage)], Paul Shorey 27 segments [Limited-Section (20% coverage)]
 Plato / Republic / Book 9 - 492 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 492 segments [Limited (14% coverage)], Paul Shorey 22 segments [Limited-Section (14% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 492 segments [Limited (21% coverage)], Paul Shorey 22 segments [Limited-Section (21% coverage)]
 Plato / Republic / Book 10 - 539 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 539 segments [Limited (21% coverage)], Paul Shorey 27 segments [Limited-Section (21% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 539 segments [Limited (20% coverage)], Paul Shorey 27 segments [Limited-Section (20% coverage)]
 Plato / Sophist - 2,703 lines, max_char=681 [Perseus]
-Plato / Sophist translations: Harold North Fowler 1178 segments [Excellent-Section (99% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2703 segments [Excellent (99% coverage)]
+Plato / Sophist translations: Harold North Fowler 1178 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2703 segments [Excellent (100% coverage)]
 Plato / Statesman - 2,613 lines, max_char=712 [Perseus]
-Plato / Statesman translations: Harold North Fowler 898 segments [Excellent-Section (97% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2613 segments [Excellent (97% coverage)]
+Plato / Statesman translations: Harold North Fowler 898 segments [Excellent-Section (98% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2613 segments [Excellent (98% coverage)]
 Plato / Symposium - 975 lines, max_char=1,121 [Perseus]
-Plato / Symposium translations: Interlinear (Beta, generated from app dictionary and treebank) 975 segments [Limited (23% coverage)], Walter Rangeley Maitland Lamb 56 segments [Limited-Section (23% coverage)]
+Plato / Symposium translations: Interlinear (Beta, generated from app dictionary and treebank) 975 segments [Limited (24% coverage)], Walter Rangeley Maitland Lamb 56 segments [Limited-Section (24% coverage)]
 Plato / Theaetetus - 2,831 lines, max_char=576 [Perseus]
-Plato / Theaetetus translations: Harold North Fowler 1028 segments [Good-Section (94% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2831 segments [Good (94% coverage)]
+Plato / Theaetetus translations: Harold North Fowler 1028 segments [Excellent-Section (96% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2831 segments [Excellent (96% coverage)]
 Plato / Theages - 436 lines, max_char=578 [Perseus]
-Plato / Theages translations: Interlinear (Beta, generated from app dictionary and treebank) 436 segments [Good (88% coverage)], Walter Rangeley Maitland Lamb 139 segments [Good-Section (88% coverage)]
+Plato / Theages translations: Interlinear (Beta, generated from app dictionary and treebank) 436 segments [Good (87% coverage)], Walter Rangeley Maitland Lamb 139 segments [Good-Section (87% coverage)]
 Plato / Timaeus - 985 lines, max_char=1,340 [Perseus]
-Plato / Timaeus translations: Interlinear (Beta, generated from app dictionary and treebank) 985 segments [Limited (35% coverage)], Robert Gregg Bury 113 segments [Limited-Section (35% coverage)]
+Plato / Timaeus translations: Interlinear (Beta, generated from app dictionary and treebank) 985 segments [Limited (29% coverage)], Robert Gregg Bury 113 segments [Limited-Section (29% coverage)]
 
 [Plautus, Titus Maccius]
 Plautus, Titus Maccius / Amphitryon, or Jupiter in Disguise - 1,409 lines, max_char=80 [Perseus]
