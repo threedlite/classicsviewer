@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-03-28T11:01:40.955883
+Generated: 2026-03-30T18:54:23.674734
 Mode: sample
 
 Total Authors: 12
@@ -8,7 +8,7 @@ Total Books: 667
 Total Lines: 237,971
 Translation Segments: 126,149
 Build Time: 4.7 minutes
-Database Size: 667.9MB → 161.1MB compressed (24.1%)
+Database Size: 669.3MB → 161.5MB compressed (24.1%)
 Dictionary Entries: 61,070
 Lemma Mappings: 765,526
 
@@ -112,7 +112,7 @@ Aristotle / Nicomachean Ethics translations: Harris Rackham 99 segments [Limited
 Aristotle / Nicomachean Ethics / Book 10 - 397 lines
 Aristotle / Nicomachean Ethics translations: Harris Rackham 115 segments [Limited-Section (14% coverage)]
 Aristotle / Poetics - 621 lines, max_char=345 [Perseus]
-Aristotle / Poetics translations: William Hamilton Fyfe 382 segments [Fair (54% coverage)]
+Aristotle / Poetics translations: William Hamilton Fyfe 382 segments [Limited (8% coverage)]
 Aristotle / Politics - 3,255 lines total, 8 books, max_lines/book=553, max_char=867 [Perseus]
 Aristotle / Politics / Book 1 - 334 lines
 Aristotle / Politics translations: Harris Rackham 43 segments [Limited-Section (3% coverage)]
@@ -943,37 +943,37 @@ P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 726 segments [
 
 [Plato]
 Plato / Alcibiades 1 - 2,122 lines, max_char=556 [Perseus]
-Plato / Alcibiades 1 translations: Walter Rangeley Maitland Lamb 901 segments [Good-Section (89% coverage)]
+Plato / Alcibiades 1 translations: Walter Rangeley Maitland Lamb 901 segments [Good-Section (90% coverage)]
 Plato / Alcibiades 2 - 506 lines, max_char=461 [Perseus]
-Plato / Alcibiades 2 translations: Walter Rangeley Maitland Lamb 185 segments [Good-Section (82% coverage)]
+Plato / Alcibiades 2 translations: Walter Rangeley Maitland Lamb 185 segments [Good-Section (92% coverage)]
 Plato / Apology - 420 lines, max_char=778 [Perseus]
-Plato / Apology translations: Harold North Fowler 26 segments [Limited-Section (26% coverage)]
+Plato / Apology translations: Harold North Fowler 26 segments [Good-Section (89% coverage)]
 Plato / Charmides - 627 lines, max_char=485 [Perseus]
-Plato / Charmides translations: Walter Rangeley Maitland Lamb 24 segments [Limited-Section (23% coverage)]
+Plato / Charmides translations: Walter Rangeley Maitland Lamb 24 segments [Fair-Section (65% coverage)]
 Plato / Cleitophon - 79 lines, max_char=401 [Perseus]
-Plato / Cleitophon translations: Robert Gregg Bury 7 segments [Limited-Section (33% coverage)]
+Plato / Cleitophon translations: Robert Gregg Bury 7 segments [Good-Section (82% coverage)]
 Plato / Cratylus - 2,229 lines, max_char=624 [Perseus]
 Plato / Cratylus translations: Harold North Fowler 771 segments [Fair-Section (75% coverage)]
 Plato / Critias - 183 lines, max_char=683 [Perseus]
-Plato / Critias translations: Robert Gregg Bury 20 segments [Limited-Section (34% coverage)]
+Plato / Critias translations: Robert Gregg Bury 20 segments [Good-Section (91% coverage)]
 Plato / Crito - 366 lines, max_char=713 [Perseus]
 Plato / Crito translations: Harold North Fowler 102 segments [Fair-Section (63% coverage)]
 Plato / Epinomis - 300 lines, max_char=762 [Perseus]
-Plato / Epinomis translations: Walter Rangeley Maitland Lamb 46 segments [Limited-Section (37% coverage)]
+Plato / Epinomis translations: Walter Rangeley Maitland Lamb 46 segments [Good-Section (82% coverage)]
 Plato / Euthydemus - 877 lines, max_char=721 [Perseus]
-Plato / Euthydemus translations: Walter Rangeley Maitland Lamb 95 segments [Limited-Section (35% coverage)]
+Plato / Euthydemus translations: Walter Rangeley Maitland Lamb 95 segments [Fair-Section (76% coverage)]
 Plato / Euthyphro - 655 lines, max_char=465 [Perseus]
 Plato / Euthyphro translations: Harold North Fowler 233 segments [Good-Section (87% coverage)]
 Plato / Gorgias - 3,170 lines, max_char=919 [Perseus]
 Plato / Gorgias translations: Walter Rangeley Maitland Lamb 1107 segments [Fair-Section (68% coverage)]
 Plato / Greater Hippias - 1,075 lines, max_char=423 [Perseus]
-Plato / Greater Hippias translations: Harold North Fowler 356 segments [Good-Section (88% coverage)]
+Plato / Greater Hippias translations: Harold North Fowler 356 segments [Excellent-Section (97% coverage)]
 Plato / Hipparchus - 382 lines, max_char=750 [Perseus]
-Plato / Hipparchus translations: Walter Rangeley Maitland Lamb 162 segments [Good-Section (87% coverage)]
+Plato / Hipparchus translations: Walter Rangeley Maitland Lamb 162 segments [Good-Section (88% coverage)]
 Plato / Ion - 471 lines, max_char=533 [Perseus]
-Plato / Ion translations: William Rangeley Maitland Lamb 174 segments [Good-Section (80% coverage)]
+Plato / Ion translations: William Rangeley Maitland Lamb 174 segments [Good-Section (93% coverage)]
 Plato / Laches - 802 lines, max_char=618 [Perseus]
-Plato / Laches translations: Walter Rangeley Maitland Lamb 265 segments [Fair-Section (77% coverage)]
+Plato / Laches translations: Walter Rangeley Maitland Lamb 265 segments [Good-Section (89% coverage)]
 Plato / Laws - 6,840 lines total, 12 books, max_lines/book=825, max_char=1,206 [Perseus]
 Plato / Laws / Book 1 - 750 lines
 Plato / Laws translations: Robert Gregg Bury 256 segments [Limited-Section (7% coverage)]
@@ -1000,27 +1000,27 @@ Plato / Laws translations: Robert Gregg Bury 50 segments [Excellent-Section (100
 Plato / Laws / Book 12 - 497 lines
 Plato / Laws translations: Robert Gregg Bury 130 segments [Excellent-Section (100% coverage)]
 Plato / Lesser Hippias - 602 lines, max_char=1,017 [Perseus]
-Plato / Lesser Hippias translations: Harold North Fowler 231 segments [Fair-Section (79% coverage)]
+Plato / Lesser Hippias translations: Harold North Fowler 231 segments [Good-Section (90% coverage)]
 Plato / Letters - 686 lines, max_char=644 [Perseus]
 Plato / Letters translations: R. G. Bury 65 segments [Limited-Section (28% coverage)]
 Plato / Lysis - 359 lines, max_char=764 [Perseus]
 Plato / Lysis translations: Walter Rangeley Maitland Lamb 21 segments [Limited-Section (23% coverage)]
 Plato / Menexenus - 271 lines, max_char=750 [Perseus]
-Plato / Menexenus translations: Robert Gregg Bury 46 segments [Limited-Section (38% coverage)]
+Plato / Menexenus translations: Robert Gregg Bury 46 segments [Good-Section (92% coverage)]
 Plato / Meno - 1,483 lines, max_char=493 [Perseus]
-Plato / Meno translations: Walter Rangeley Maitland Lamb 569 segments [Good-Section (93% coverage)]
+Plato / Meno translations: Walter Rangeley Maitland Lamb 569 segments [Excellent-Section (97% coverage)]
 Plato / Minos - 488 lines, max_char=337 [Perseus]
-Plato / Minos translations: Walter Rangeley Maitland Lamb 192 segments [Good-Section (82% coverage)]
+Plato / Minos translations: Walter Rangeley Maitland Lamb 192 segments [Good-Section (81% coverage)]
 Plato / Parmenides - 1,369 lines, max_char=1,708 [Perseus]
-Plato / Parmenides translations: Harold North Fowler 41 segments [Limited-Section (23% coverage)]
+Plato / Parmenides translations: Harold North Fowler 41 segments [Fair-Section (79% coverage)]
 Plato / Phaedo - 1,367 lines, max_char=1,398 [Perseus]
-Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (24% coverage)]
+Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (35% coverage)]
 Plato / Phaedrus - 1,392 lines, max_char=602 [Perseus]
 Plato / Phaedrus translations: Harold North Fowler 400 segments [Fair-Section (60% coverage)]
 Plato / Philebus - 2,672 lines, max_char=663 [Perseus]
 Plato / Philebus translations: Harold North Fowler 1144 segments [Good-Section (87% coverage)]
 Plato / Protagoras - 914 lines, max_char=911 [Perseus]
-Plato / Protagoras translations: Walter Rangeley Maitland Lamb 74 segments [Limited-Section (26% coverage)]
+Plato / Protagoras translations: Walter Rangeley Maitland Lamb 74 segments [Fair-Section (80% coverage)]
 Plato / Republic - 5,995 lines total, 10 books, max_lines/book=793, max_char=1,438 [Perseus]
 Plato / Republic / Book 1 - 793 lines
 Plato / Republic translations: Paul Shorey 28 segments [Limited-Section (7% coverage)]
@@ -1043,15 +1043,15 @@ Plato / Republic translations: Paul Shorey 22 segments [Excellent-Section (100% 
 Plato / Republic / Book 10 - 539 lines
 Plato / Republic translations: Paul Shorey 27 segments [Excellent-Section (100% coverage)]
 Plato / Sophist - 2,703 lines, max_char=674 [Perseus]
-Plato / Sophist translations: Harold North Fowler 1178 segments [Excellent-Section (97% coverage)]
+Plato / Sophist translations: Harold North Fowler 1178 segments [Excellent-Section (98% coverage)]
 Plato / Statesman - 2,613 lines, max_char=705 [Perseus]
 Plato / Statesman translations: Harold North Fowler 898 segments [Good-Section (83% coverage)]
 Plato / Theaetetus - 2,831 lines, max_char=569 [Perseus]
 Plato / Theaetetus translations: Harold North Fowler 1028 segments [Good-Section (82% coverage)]
 Plato / Theages - 436 lines, max_char=571 [Perseus]
-Plato / Theages translations: Walter Rangeley Maitland Lamb 139 segments [Fair-Section (77% coverage)]
+Plato / Theages translations: Walter Rangeley Maitland Lamb 139 segments [Excellent-Section (95% coverage)]
 Plato / Timaeus - 985 lines, max_char=1,334 [Perseus]
-Plato / Timaeus translations: Robert Gregg Bury 113 segments [Limited-Section (32% coverage)]
+Plato / Timaeus translations: Robert Gregg Bury 113 segments [Good-Section (86% coverage)]
 
 [Plutarch]
 Plutarch / A Discourse Concerning Socrates's Daemon - 537 lines, max_char=650 [Perseus]

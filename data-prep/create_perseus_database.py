@@ -3839,7 +3839,7 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                 n = para.get('n', '')
                 
                 # Track Bekker/Stephanus sections that appear between paragraphs
-                if unit == 'section' and n:
+                if unit in ('section', 'page') and n:
                     if is_bekker and re.match(r'\d+[a-z]$', n):
                         current_bekker_section = n
                         # Reset line number when new section starts
@@ -3898,27 +3898,38 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                         resp = child.get('resp', '').lower()
                         n = child.get('n', '')
                         
-                        # Handle Bekker section milestones (e.g., "1214a")
-                        if unit == 'section' and n and is_bekker and re.match(r'\d+[a-z]$', n):
+                        # Handle Bekker page/section milestones (e.g., "1214a")
+                        # Some translations use unit="section", others use unit="page"
+                        if unit in ('section', 'page') and n and is_bekker and re.match(r'\d+[a-z]$', n):
                             current_bekker_section = n
-                            # Don't add to milestones yet - wait for line numbers
-                        
+                            # Don't add section-only refs to milestones_in_para for Bekker
+                            # because line milestones will create combined refs (e.g., "1094a1")
+                            # and section-only refs like "1094a" won't match milestone_line_ranges
+
                         # Handle Stephanus section milestones (e.g., "327a")
-                        elif unit == 'section' and n and is_stephanus and re.match(r'\d+[a-z]$', n):
+                        elif unit in ('section', 'page') and n and is_stephanus and re.match(r'\d+[a-z]$', n):
                             current_stephanus_section = n
-                            # Don't add to milestones yet - wait for line numbers
+                            # Add to milestones_in_para so multi-section paragraphs
+                            # get mapped to the full range (first section → last section)
+                            # Stephanus doesn't use line sub-milestones like Bekker
+                            milestones_in_para.append(n)
                         
                         # Combine Bekker line numbers with current section
                         elif unit == 'line' and resp == 'bekker' and n and current_bekker_section:
                             # Create full Bekker reference (e.g., "1214a5")
                             full_bekker_ref = f"{current_bekker_section}{n}"
                             milestones_in_para.append(full_bekker_ref)
-                        
+                            # Also update current_bekker_line so subsequent paragraphs
+                            # without milestones get the correct combined reference
+                            current_bekker_line = n
+
                         # Combine Stephanus line numbers with current section
                         elif unit == 'line' and resp == 'stephanus' and n and current_stephanus_section:
                             # Create full Stephanus reference (e.g., "327a5")
                             full_stephanus_ref = f"{current_stephanus_section}{n}"
                             milestones_in_para.append(full_stephanus_ref)
+                            # Also update current_stephanus_line for subsequent paragraphs
+                            current_stephanus_line = n
                         
                         # Handle other milestone types
                         elif unit in ['line', 'card', 'section', 'chapter', 'para', 'page'] or resp in ['bekker', 'stephanus']:
@@ -3927,8 +3938,8 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                                 if resp in ['bekker', 'stephanus'] and re.match(r'\d+[a-z]\d*$', n):
                                     # Keep the full reference (e.g., "327a" or "1447a25")
                                     milestones_in_para.append(n)
-                                # Skip section milestones that we're tracking separately
-                                elif unit == 'section' and (is_bekker or is_stephanus):
+                                # Skip section/page milestones that we're tracking separately
+                                elif unit in ('section', 'page') and (is_bekker or is_stephanus):
                                     pass  # Already handled above
                                 elif is_chapter_section_milestones and unit == 'section':
                                     # Resolve chapter.section milestone to actual line number
@@ -4571,26 +4582,30 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
             segments_needing_position = [s for s in segments if s.get('needs_positioning')]
             if segments_needing_position and (is_bekker or is_stephanus):
                 print(f"        🔧 Positioning {len(segments_needing_position)} segments without milestone refs")
-                
-                # Get positioned segments as anchors
-                positioned = [(i, s) for i, s in enumerate(segments) if not s.get('needs_positioning') and s.get('start_line')]
-                
+
+                # Get positioned segments as anchors (distributed by first pass or matched by second pass)
+                positioned = [(i, s) for i, s in enumerate(segments)
+                              if not s.get('needs_positioning') and (s.get('distributed') or s.get('start_line', 0) != s.get('_orig_start_line', -1))]
+                # Fallback: any segment with a non-sequential start_line is positioned
+                if not positioned:
+                    positioned = [(i, s) for i, s in enumerate(segments) if not s.get('needs_positioning') and s.get('start_line')]
+
                 if positioned:
                     # Distribute unpositioned segments between positioned ones
                     for seg in segments_needing_position:
                         seg_idx = segments.index(seg)
-                        
+
                         # Find surrounding positioned segments
                         before = [(i, s) for i, s in positioned if i < seg_idx]
                         after = [(i, s) for i, s in positioned if i > seg_idx]
-                        
+
                         if before and after:
                             # Place between two positioned segments
                             before_seg = before[-1][1]
                             after_seg = after[0][1]
                             gap_start = before_seg['end_line'] + 1
                             gap_end = after_seg['start_line'] - 1
-                            
+
                             # Count segments in this gap
                             gap_segments = [s for s in segments[before[-1][0]+1:after[0][0]] if s.get('needs_positioning')]
                             if gap_segments and gap_end > gap_start:
@@ -4613,12 +4628,13 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                                 seg['start_line'] = int(1 + idx * lines_per_seg)
                                 seg['end_line'] = int(1 + (idx + 1) * lines_per_seg - 1)
                 else:
-                    # No positioned segments, fall back to redistribution
+                    # No positioned segments at all, fall back to redistribution
                     needs_redistribution = True
-            else:
-                # Fallback to redistribution if no milestone ranges found
+            elif not (is_bekker or is_stephanus):
+                # Non-Bekker/Stephanus text that somehow got here - redistribute
                 needs_redistribution = True
                 print(f"        ⚠️ No milestone ranges found, using redistribution")
+            # else: all segments were positioned by milestone matching - no redistribution needed
         # Check if segments are from hierarchical text (chapters with restarting sections)
         elif any(seg.get('is_hierarchical', False) for seg in segments):
             needs_redistribution = True
@@ -5101,6 +5117,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
             # First check if there are book/poem/textpart divisions (collections)
             has_books = False
             has_poems = False
+            aligned_sections_handled = False
             for div in root.iter():
                 if (is_div_tag(div.tag) and
                     div.get('type') == 'textpart'):
@@ -5339,6 +5356,90 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                                    div.get('subtype', '').lower() == 'book'
                                    for div in search_root.iter())
 
+                    # Detect aligned translation mismatch: translation has many "book" divs
+                    # but Greek text has only 1 book. The translation "books" are really
+                    # sections (e.g., Aristotle Constitution of the Athenians has 69 sections
+                    # labeled as books). Use section milestone ranges for exact alignment.
+                    aligned_sections_handled = False
+                    if has_books and is_aligned_file:
+                        trans_book_divs = [div for div in search_root.iter()
+                                          if is_div_tag(div.tag) and
+                                          div.get('type') == 'textpart' and
+                                          div.get('subtype', '').lower() == 'book']
+                        num_trans_books = len(trans_book_divs)
+                        cursor.execute("""
+                            SELECT COUNT(*) FROM books WHERE work_id = ? AND line_count > 0
+                        """, (work_id,))
+                        num_greek_books = cursor.fetchone()[0]
+                        if num_greek_books == 1 and num_trans_books > num_greek_books:
+                            single_book_id = f"{work_id}.001"
+                            cursor.execute("SELECT line_count FROM books WHERE id = ?", (single_book_id,))
+                            row = cursor.fetchone()
+                            total_lines = row[0] if row else 0
+
+                            if total_lines:
+                                # Load section milestone ranges for exact boundary alignment
+                                cursor.execute("""
+                                    SELECT milestone, start_line, end_line
+                                    FROM milestone_line_ranges
+                                    WHERE work_id = ?
+                                    ORDER BY start_line
+                                """, (work_id,))
+                                section_ranges = {m: (s, e) for m, s, e in cursor.fetchall()}
+
+                                total_segs = 0
+                                for div_idx, div in enumerate(trans_book_divs):
+                                    div_n = div.get('n', '')
+
+                                    # Determine line range for this section
+                                    if div_n in section_ranges:
+                                        start_line, end_line = section_ranges[div_n]
+                                    else:
+                                        # Fallback: proportional distribution using sequential position
+                                        lines_per = total_lines / num_trans_books
+                                        start_line = int(div_idx * lines_per) + 1
+                                        end_line = int((div_idx + 1) * lines_per)
+                                        if div_idx == num_trans_books - 1:
+                                            end_line = total_lines
+
+                                    # Extract all text segments from this div, preserving
+                                    # paragraph granularity
+                                    paragraphs = []
+                                    for elem in div.iter():
+                                        if is_p_tag(elem.tag):
+                                            text = get_text_content(elem).strip()
+                                            if text:
+                                                paragraphs.append(text)
+
+                                    if not paragraphs:
+                                        # Fallback: get all text from div
+                                        text = get_text_content(div).strip()
+                                        if text:
+                                            paragraphs = [text]
+
+                                    # Distribute paragraphs across this section's line range
+                                    num_paras = len(paragraphs)
+                                    section_lines = end_line - start_line + 1
+                                    for j, para_text in enumerate(paragraphs):
+                                        p_start = start_line + int(j * section_lines / num_paras)
+                                        p_end = start_line + int((j + 1) * section_lines / num_paras) - 1
+                                        if j == num_paras - 1:
+                                            p_end = end_line
+                                        cursor.execute("""
+                                            INSERT INTO translation_segments
+                                            (book_id, start_line, end_line, sequence_number,
+                                             translation_text, translator, speaker)
+                                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                                        """, (single_book_id, p_start, p_end,
+                                              total_segs + 1, para_text, translator, None))
+                                        total_segs += 1
+
+                                if total_segs:
+                                    used_exact = sum(1 for d in trans_book_divs if d.get('n', '') in section_ranges)
+                                    print(f"        → Aligned {total_segs} segments from {num_trans_books} sections into {single_book_id} ({used_exact} exact, {num_trans_books - used_exact} proportional)")
+                                    books_found = True
+                                    aligned_sections_handled = True
+
                     for book_div in search_root.iter():
                         if (is_div_tag(book_div.tag) and
                             book_div.get('type') == 'textpart' and
@@ -5346,6 +5447,10 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
 
                             # Skip poems if we have books (poems are within books)
                             if has_books and book_div.get('subtype', '').lower() == 'poem':
+                                continue
+
+                            # Skip if aligned sections were already handled above
+                            if aligned_sections_handled:
                                 continue
 
                             books_found = True
@@ -5738,6 +5843,10 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
     current_bekker_page = None  # Track Bekker page separately
 
     books_processed = 0
+    # Collect milestone-to-line mappings from XML tags for Plato/Aristotle
+    # These will be used to populate milestone_line_ranges after all books are processed
+    milestone_line_map = {}  # milestone_ref -> list of (work_level_pos)
+    cumulative_line_count = 0  # Track cumulative lines across books for work-level positions
 
     # Process each book
     for book_div in root.iter():
@@ -5965,6 +6074,13 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                             if sentence:
                                 line_num += 1
 
+                                # Update current_milestone from embedded [ref] markers in sentence
+                                # These markers come from XML milestone tags processed by get_text_content
+                                if is_plato or is_aristotle:
+                                    embedded_refs = re.findall(r'\[(\d+[a-z]\d*)\]', sentence)
+                                    if embedded_refs:
+                                        current_milestone = embedded_refs[-1]  # Use last ref in sentence
+
                                 # Build speaker annotation for first sentence of paragraph
                                 annotation = None
                                 if first_sentence:
@@ -5989,7 +6105,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                                     'text': sentence,
                                     'section': section_n,
                                     'xml': '',
-                                    'milestone': None if (is_plato or is_aristotle) else None,  # Milestones now inline
+                                    'milestone': current_milestone if (is_plato or is_aristotle) else None,
                                     'speaker': annotation
                                 })
 
@@ -6147,7 +6263,42 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                             VALUES (?, ?, ?, ?, ?)
                         """, (word, book_id, line['number'], seq_num, word_pos))
 
+            # Record milestone-to-line mappings from XML tags for Plato/Aristotle
+            if (is_plato or is_aristotle):
+                for line in all_lines:
+                    if line.get('milestone'):
+                        work_level_pos = cumulative_line_count + line['number']
+                        if line['milestone'] not in milestone_line_map:
+                            milestone_line_map[line['milestone']] = work_level_pos
+                cumulative_line_count += len(all_lines)
+
             print(f"      Book {book_num}: {len(all_lines)} lines")
+
+    # Store milestone_line_ranges directly from XML tag data
+    if (is_plato or is_aristotle) and milestone_line_map:
+        # Sort milestones by their work-level position
+        sorted_ms = sorted(milestone_line_map.items(), key=lambda x: x[1])
+        total_work_lines = cumulative_line_count
+
+        # Build ranges: each milestone extends to just before the next one
+        milestone_ranges = {}
+        for i, (ms_ref, start_pos) in enumerate(sorted_ms):
+            if i + 1 < len(sorted_ms):
+                end_pos = sorted_ms[i + 1][1] - 1
+            else:
+                end_pos = total_work_lines
+            end_pos = max(end_pos, start_pos)
+            milestone_ranges[ms_ref] = (start_pos, end_pos)
+
+        # Store in milestone_line_ranges table
+        for ms_ref, (start, end) in milestone_ranges.items():
+            cursor.execute("""
+                INSERT OR REPLACE INTO milestone_line_ranges
+                (work_id, milestone, start_line, end_line)
+                VALUES (?, ?, ?, ?)
+            """, (work_id, ms_ref, start, end))
+
+        print(f"      Stored {len(milestone_ranges)} milestone ranges from XML tags")
 
     if books_processed == 0:
         print(f"      Warning: No books found for {work_id}")
@@ -6372,6 +6523,12 @@ def process_prose_text(root, work_id, cursor, language):
                         sentence = sentence.strip()
                         if sentence:
                             line_num += 1
+
+                            # Update current_milestone from embedded [ref] markers
+                            if is_plato or is_aristotle:
+                                embedded_refs = re.findall(r'\[(\d+[a-z]\d*)\]', sentence)
+                                if embedded_refs:
+                                    current_milestone = embedded_refs[-1]
                             # Add milestone reference for Plato/Aristotle
                             if (is_plato or is_aristotle) and current_milestone:
                                 line_to_milestone[line_num] = current_milestone
@@ -6400,7 +6557,7 @@ def process_prose_text(root, work_id, cursor, language):
                                 'text': sentence,
                                 'section': section_n,
                                 'xml': '',
-                                'milestone': None if (is_plato or is_aristotle) else None,  # Milestones now inline
+                                'milestone': current_milestone if (is_plato or is_aristotle) else None,
                                 'speaker': annotation
                             })
 
@@ -6568,6 +6725,54 @@ def process_prose_text(root, work_id, cursor, language):
                     """, (word, book_id, line['number'], seq_num, word_pos))
 
         print(f"      Complete Text: {len(all_lines)} lines")
+
+        # Store milestone_line_ranges from XML tags for single-book Plato/Aristotle works
+        if (is_plato or is_aristotle):
+            milestone_first_line = {}
+            for line in all_lines:
+                ms = line.get('milestone')
+                if ms and ms not in milestone_first_line:
+                    milestone_first_line[ms] = line['number']
+            if milestone_first_line:
+                sorted_ms = sorted(milestone_first_line.items(), key=lambda x: x[1])
+                for i, (ms_ref, start_pos) in enumerate(sorted_ms):
+                    if i + 1 < len(sorted_ms):
+                        end_pos = sorted_ms[i + 1][1] - 1
+                    else:
+                        end_pos = len(all_lines)
+                    end_pos = max(end_pos, start_pos)
+                    cursor.execute("""
+                        INSERT OR REPLACE INTO milestone_line_ranges
+                        (work_id, milestone, start_line, end_line)
+                        VALUES (?, ?, ?, ?)
+                    """, (work_id, ms_ref, start_pos, end_pos))
+                print(f"      Stored {len(milestone_first_line)} milestone ranges from XML tags")
+
+        # Store section-to-line mappings so translation alignment can use exact boundaries.
+        # Only store when sections are unique (non-repeating) - hierarchical works like
+        # Theophrastus Characters have repeating section numbers within chapters, which
+        # would produce incorrect ranges.
+        section_ranges = {}
+        sections_are_unique = True
+        for line in all_lines:
+            sec = line.get('section')
+            if sec:
+                if sec not in section_ranges:
+                    section_ranges[sec] = [line['number'], line['number']]
+                else:
+                    # Check if this section was already closed (non-contiguous = repeating)
+                    if section_ranges[sec][1] < line['number'] - 1:
+                        sections_are_unique = False
+                        break
+                    section_ranges[sec][1] = line['number']
+        if section_ranges and sections_are_unique:
+            for sec, (start, end) in section_ranges.items():
+                cursor.execute("""
+                    INSERT OR REPLACE INTO milestone_line_ranges
+                    (work_id, milestone, start_line, end_line)
+                    VALUES (?, ?, ?, ?)
+                """, (work_id, sec, start, end))
+            print(f"    Created {len(section_ranges)} section milestone ranges")
 
 def process_pta_bible_text(xml_path, work_id, cursor, language):
     """Process PTA Bible text (pta9999.*) with chapters as separate books and verses as lines.
@@ -6843,159 +7048,61 @@ def process_new_testament_text(root, work_id, cursor, language):
         print(f"      WARNING: No chapters found in NT text {work_id}")
 
 def extract_milestone_line_ranges(cursor, work_id):
-    """Extract milestone line ranges AFTER text has been processed into lines"""
-    
-    # Find the Greek text XML file
-    xml_path = None
-    data_dir = Path("../data-sources")
-    
-    # Find the Greek text file
-    for pattern in [f"canonical-greekLit/data/*/{work_id.split('.')[1]}/{work_id}.perseus-grc*.xml"]:
-        files = list(data_dir.glob(pattern))
-        if files:
-            xml_path = files[0]
-            break
-    
-    if not xml_path or not xml_path.exists():
-        return {}
-    
-    # Parse XML to build a map of text content to milestones
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
-    
-    # First, extract all text content with milestone markers
-    content_with_milestones = []
-    current_milestone = None
-    current_bekker_page = None  # Track Bekker page separately
-    
-    # Check if this is Aristotle (Bekker) or Plato (Stephanus)
-    is_aristotle = work_id.startswith('tlg0086')
-    
-    # Process the XML in document order
-    for elem in root.iter():
-        # Track Stephanus/Bekker milestones
-        if is_milestone_tag(elem.tag):
-            resp = elem.get('resp', '')
-            n = elem.get('n', '')
-            unit = elem.get('unit', '')
-            
-            # Handle case variations for resp attribute
-            # Also check 'ed' attribute for Bekker (used in Politics)
-            resp_lower = resp.lower()
-            ed = elem.get('ed', '').lower()
-            
-            if (resp_lower == 'bekker' or ed == 'bekker') and n:
-                # Handle both 'page' and 'section' units for Bekker references
-                if unit in ['page', 'section'] and re.match(r'\d+[a-z]$', n):
-                    # Bekker page/section milestone (e.g., 1447a, 1214a)
-                    current_bekker_page = n
-                elif unit == 'line' and current_bekker_page:
-                    # Bekker line milestone - combine with page
-                    current_milestone = f"{current_bekker_page}{n}"
-                elif unit == 'line':
-                    # Line without page - use as is
-                    current_milestone = n
-            elif resp_lower == 'stephanus' and n:
-                # Stephanus uses complete references (e.g., 57a)
-                current_milestone = n
-            # Also capture Stephanus-pattern sections even without resp attribute
-            elif unit == 'section' and n and re.match(r'\d+[a-z]$', n):
-                current_milestone = n
+    """Extract milestone line ranges from the already-processed text_lines in the database.
 
-        # Track actual text content
-        if is_p_tag(elem.tag):
-            # First check for milestones INSIDE this paragraph
-            para_milestones = []
-            for child in elem.iter():
-                if is_milestone_tag(child.tag):
-                    child_resp = child.get('resp', '').lower()
-                    child_n = child.get('n', '')
-                    child_unit = child.get('unit', '')
-                    
-                    child_ed = child.get('ed', '').lower()
-                    
-                    if (child_resp == 'bekker' or child_ed == 'bekker') and child_n:
-                        if child_unit in ['page', 'section'] and re.match(r'\d+[a-z]$', child_n):
-                            current_bekker_page = child_n
-                        elif child_unit == 'line' and current_bekker_page:
-                            # Combine page + line for full Bekker ref (e.g., 1214a5)
-                            para_milestone = f"{current_bekker_page}{child_n}"
-                            para_milestones.append(para_milestone)
-                    elif child_resp == 'stephanus' and child_n:
-                        para_milestones.append(child_n)
-                    # Also capture Stephanus-pattern sections even without resp attribute
-                    # Handles inconsistent Perseus XML where some milestones lack resp="Stephanus"
-                    elif child_unit == 'section' and child_n and re.match(r'\d+[a-z]$', child_n):
-                        para_milestones.append(child_n)
+    The Greek text lines have Bekker/Stephanus markers already embedded as [ref] tags
+    (e.g., [1098a1], [327a]) by process_prose_with_books via get_text_content(preserve_milestones=True).
+    We extract positions directly from these markers for exact alignment.
+    """
 
-            # Get all text from this paragraph, filtering out editorial notes
-            text = get_text_content(elem)
-            if text and not text.startswith('Gregory'):
-                
-                # Use paragraph-specific milestones if found, otherwise use current milestone
-                if para_milestones:
-                    for milestone in para_milestones:
-                        content_with_milestones.append((milestone, text))
-                elif current_milestone:
-                    content_with_milestones.append((current_milestone, text))
-    
-    if not content_with_milestones:
-        return {}
-    
-    # Now get the processed lines from the database
+    # Bekker refs: [1094a1], [1094a5], [1094a10], etc. (page+column+line)
+    # Stephanus refs: [327a], [57b], etc. (page+section letter)
+    # Both patterns: digits followed by a lowercase letter, optionally followed by more digits
+    ref_pattern = re.compile(r'\[(\d+[a-z]\d*)\]')
+
+    # Get all text lines with their work-level positions, ordered by book then line
     cursor.execute("""
-        SELECT tl.line_number, tl.line_text
+        SELECT tl.line_text, b.book_number, tl.line_number
         FROM text_lines tl
         JOIN books b ON tl.book_id = b.id
         WHERE b.work_id = ?
-        ORDER BY tl.line_number
+        ORDER BY b.book_number, tl.line_number
     """, (work_id,))
-    
-    lines = cursor.fetchall()
-    if not lines:
+
+    rows = cursor.fetchall()
+    if not rows:
         return {}
-    
-    # Build milestone ranges using proportional distribution
-    # Since milestones appear in document order, we can map them proportionally
+
+    # Scan text lines for embedded milestone references and record their work-level position
+    # milestone -> first work-level position where it appears
+    milestone_first_pos = {}
+    for i, (line_text, book_num, line_num) in enumerate(rows):
+        work_pos = i + 1  # 1-based cumulative position
+        for m in ref_pattern.finditer(line_text):
+            ref = m.group(1)
+            if ref not in milestone_first_pos:
+                milestone_first_pos[ref] = work_pos
+
+    if not milestone_first_pos:
+        print(f"    No embedded milestone markers found in text_lines for {work_id}")
+        return {}
+
+    # Sort milestones by their work-level position
+    sorted_milestones = sorted(milestone_first_pos.items(), key=lambda x: x[1])
+    total_lines = len(rows)
+
+    # Build ranges: each milestone's range extends from its position to just before the next
     milestone_ranges = {}
-    
-    # Get unique milestones in order (removing duplicates from multiple paragraphs)
-    seen_milestones = set()
-    unique_milestones = []
-    for milestone, _ in content_with_milestones:
-        if milestone not in seen_milestones:
-            unique_milestones.append(milestone)
-            seen_milestones.add(milestone)
-    
-    if unique_milestones and lines:
-        # For Aristotle/Plato texts with many milestones, distribute them proportionally
-        total_lines = len(lines)
-        first_line = lines[0][0]
-        last_line = lines[-1][0]
-        
-        # Calculate lines per milestone
-        lines_per_milestone = total_lines / len(unique_milestones)
-        
-        for i, milestone in enumerate(unique_milestones):
-            # Calculate the line range for this milestone
-            start_idx = int(i * lines_per_milestone)
-            end_idx = int((i + 1) * lines_per_milestone)
-            
-            # Ensure we stay within bounds
-            start_idx = min(start_idx, total_lines - 1)
-            end_idx = min(end_idx, total_lines - 1)
-            
-            # Get actual line numbers from the database lines
-            start_line = lines[start_idx][0] if start_idx < len(lines) else first_line
-            end_line = lines[end_idx][0] if end_idx < len(lines) else last_line
-            
-            # Ensure end is after start
-            if end_line <= start_line:
-                end_line = start_line + max(1, int(lines_per_milestone))
-            
-            milestone_ranges[milestone] = (start_line, end_line)
-        
-        print(f"    Created {len(milestone_ranges)} milestone ranges from {len(unique_milestones)} unique milestones")
+    for i, (milestone, start_pos) in enumerate(sorted_milestones):
+        if i + 1 < len(sorted_milestones):
+            end_pos = sorted_milestones[i + 1][1] - 1
+        else:
+            end_pos = total_lines
+        # Ensure valid range
+        end_pos = max(end_pos, start_pos)
+        milestone_ranges[milestone] = (start_pos, end_pos)
+
+    print(f"    Created {len(milestone_ranges)} milestone ranges from text_lines markers")
     
     # For Stephanus/Bekker texts, ensure we have complete coverage
     # Fill in any gaps with interpolated ranges
@@ -8065,20 +8172,25 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                 import traceback
                 traceback.print_exc()
 
-        # Extract milestone line ranges AFTER text has been processed
-        # (only for Plato and Aristotle)
+        # Check if milestone_line_ranges were already populated by process_prose_with_books
+        # (which stores them directly from XML tags for exact alignment)
+        # Only run extract_milestone_line_ranges as fallback if none were stored
         if author_id in ['tlg0059', 'tlg0086']:  # Plato or Aristotle
-            milestone_ranges = extract_milestone_line_ranges(cursor, db_work_id)
-            if milestone_ranges:
-                # Store the ranges
-                for milestone, (start, end) in milestone_ranges.items():
-                    cursor.execute("""
-                        INSERT OR REPLACE INTO milestone_line_ranges
-                        (work_id, milestone, start_line, end_line)
-                        VALUES (?, ?, ?, ?)
-                    """, (db_work_id, milestone, start, end))
-
-                print(f"      Stored {len(milestone_ranges)} milestone ranges")
+            cursor.execute("SELECT COUNT(*) FROM milestone_line_ranges WHERE work_id = ?", (db_work_id,))
+            existing_count = cursor.fetchone()[0]
+            if existing_count == 0:
+                # Fallback: extract from embedded text markers
+                milestone_ranges = extract_milestone_line_ranges(cursor, db_work_id)
+                if milestone_ranges:
+                    for milestone, (start, end) in milestone_ranges.items():
+                        cursor.execute("""
+                            INSERT OR REPLACE INTO milestone_line_ranges
+                            (work_id, milestone, start_line, end_line)
+                            VALUES (?, ?, ?, ?)
+                        """, (db_work_id, milestone, start, end))
+                    print(f"      Stored {len(milestone_ranges)} milestone ranges (fallback)")
+            else:
+                print(f"      {existing_count} milestone ranges already stored from XML tags")
 
         # Extract altbook mapping from Greek file (for works with reordered translations)
         altbook_mapping = extract_altbook_mapping(text_file)
@@ -9545,73 +9657,105 @@ def create_philosophical_reference_mappings(cursor, book_id, segments, min_line,
     
     mappings_created = 0
     
+    # Compute book offset for converting work-level milestone positions to book-level
+    # milestone_line_ranges stores work-level cumulative positions
+    book_offset = 0
+    work_id_from_book = book_id.rsplit('.', 1)[0] if '.' in book_id else book_id
+    if '.' in book_id and not book_id.endswith('.001'):
+        cursor.execute("""
+            SELECT SUM(line_count) FROM (
+                SELECT COUNT(*) as line_count
+                FROM text_lines tl
+                JOIN books b ON tl.book_id = b.id
+                WHERE b.work_id = ? AND b.id < ?
+                GROUP BY b.id
+            )
+        """, (work_id_from_book, book_id))
+        result = cursor.fetchone()
+        if result and result[0]:
+            book_offset = result[0]
+
+    # Get total lines in this book for bounds checking
+    cursor.execute("SELECT COUNT(*) FROM text_lines WHERE book_id = ?", (book_id,))
+    total_book_lines = cursor.fetchone()[0] or 0
+    book_start_in_work = book_offset + 1
+    book_end_in_work = book_offset + total_book_lines
+
     # Map segments with references to their corresponding Greek lines
     for seg_id, ref, seg_start, seg_end in segment_refs:
-        # Strip line number suffix for milestone lookup (1104a5 -> 1104a)
-        ref_base = re.match(r'(\d+[a-z]?)', ref).group(1) if re.match(r'(\d+[a-z]?)', ref) else ref
-        
         target_lines = []
-        
-        # Direct milestone match
-        if ref_base in milestones:
-            mile_start, mile_end = milestones[ref_base]
-            # Use the full range of the milestone
-            target_lines = list(range(max(mile_start, min_line), min(mile_end + 1, max_line + 1)))
+
+        # Try full ref first (e.g., "1214a1"), then base ref (e.g., "1214a")
+        ref_base = re.match(r'(\d+[a-z]?)', ref).group(1) if re.match(r'(\d+[a-z]?)', ref) else ref
+
+        # Direct milestone match - try full ref first, then base
+        found_range = None
+        if ref in milestones:
+            found_range = milestones[ref]
+        elif ref_base in milestones:
+            found_range = milestones[ref_base]
+        else:
+            # Try prefix match: find milestones starting with ref_base
+            for m_key, m_range in milestones.items():
+                if m_key.startswith(ref_base):
+                    found_range = m_range
+                    break
+
+        if found_range:
+            mile_start, mile_end = found_range
+            # Convert work-level positions to book-level
+            if mile_start >= book_start_in_work and mile_start <= book_end_in_work:
+                book_start = mile_start - book_offset
+                book_end = min(mile_end - book_offset, total_book_lines)
+                target_lines = list(range(max(book_start, min_line), min(book_end + 1, max_line + 1)))
+            elif mile_start < book_start_in_work:
+                # Milestone from earlier book - use start of this book
+                target_lines = list(range(min_line, min(min_line + 5, max_line + 1)))
+            else:
+                # Milestone from later book - use end of this book
+                target_lines = list(range(max(max_line - 4, min_line), max_line + 1))
         else:
             # Interpolate between milestones
             ref_num = int(re.match(r'(\d+)', ref).group(1)) if re.match(r'(\d+)', ref) else 0
             ref_letter = re.match(r'\d+([a-z])?', ref).group(1) or ''
-            
-            # Find surrounding milestones
-            prev_milestone = None
+
+            # Find surrounding milestones (using numeric sort)
             prev_lines = None
-            next_milestone = None
             next_lines = None
-            
-            for milestone, (start, end) in sorted(milestones.items()):
+
+            def milestone_sort_key(m):
+                mm = re.match(r'(\d+)([a-z])?(\d*)', m)
+                if not mm:
+                    return (0, '', 0)
+                return (int(mm.group(1)), mm.group(2) or '', int(mm.group(3)) if mm.group(3) else 0)
+
+            for milestone in sorted(milestones.keys(), key=milestone_sort_key):
                 mile_match = re.match(r'(\d+)([a-z])?', milestone)
                 if not mile_match:
                     continue
                 mile_num = int(mile_match.group(1))
                 mile_letter = mile_match.group(2) or ''
-                
+
                 if mile_num < ref_num or (mile_num == ref_num and mile_letter < ref_letter):
-                    prev_milestone = milestone
-                    prev_lines = (start, end)
+                    prev_lines = milestones[milestone]
                 elif mile_num > ref_num or (mile_num == ref_num and mile_letter > ref_letter):
-                    if next_milestone is None:
-                        next_milestone = milestone
-                        next_lines = (start, end)
+                    next_lines = milestones[milestone]
                     break
-            
-            # Calculate interpolated position
+
+            # Calculate interpolated position (work-level, then convert to book-level)
+            target_line_work = None
             if prev_lines and next_lines:
-                # Interpolate between milestones
-                prev_match = re.match(r'(\d+)([a-z])?', prev_milestone)
-                next_match = re.match(r'(\d+)([a-z])?', next_milestone)
-                if prev_match and next_match:
-                    prev_num = int(prev_match.group(1))
-                    next_num = int(next_match.group(1))
-                    
-                    if prev_num == next_num:
-                        # Same number, different letters - use middle of range
-                        target_line = (prev_lines[1] + next_lines[0]) // 2
-                    else:
-                        # Different numbers - interpolate
-                        proportion = (ref_num - prev_num) / (next_num - prev_num) if next_num > prev_num else 0.5
-                        target_line = int(prev_lines[1] + proportion * (next_lines[0] - prev_lines[1]))
-                    
-                    # Map to a range around the target
-                    target_lines = list(range(max(target_line - 5, min_line), 
-                                             min(target_line + 6, max_line + 1)))
+                target_line_work = (prev_lines[1] + next_lines[0]) // 2
             elif prev_lines:
-                # After last milestone
-                target_lines = list(range(max(prev_lines[1] - 5, min_line),
-                                         min(prev_lines[1] + 1, max_line + 1)))
+                target_line_work = prev_lines[1]
             elif next_lines:
-                # Before first milestone
-                target_lines = list(range(max(next_lines[0], min_line),
-                                         min(next_lines[0] + 6, max_line + 1)))
+                target_line_work = next_lines[0]
+
+            if target_line_work is not None:
+                # Convert to book-level
+                target_line = target_line_work - book_offset
+                target_lines = list(range(max(target_line - 5, min_line),
+                                         min(target_line + 6, max_line + 1)))
         
         # Create mappings for this segment
         for line_num in target_lines:

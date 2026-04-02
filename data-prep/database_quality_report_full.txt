@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-03-28T10:53:59.150246
+Generated: 2026-04-01T19:40:19.311644
 Mode: full
 
 Total Authors: 135
 Total Works: 1018
 Total Books: 3514
 Total Lines: 1,049,996
-Translation Segments: 1,294,770
+Translation Segments: 1,295,175
 Build Time: 7.3 minutes
-Database Size: 4254.6MB → 926.5MB compressed (21.8%)
+Database Size: 4268.1MB → 928.8MB compressed (21.8%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,050,714
 
@@ -425,107 +425,107 @@ Aristophanes / Wealth translations: Interlinear (Beta, generated from app dictio
 
 [Aristotle]
 Aristotle / Constitution of the Athenians - 850 lines, max_char=608 [Perseus]
-Aristotle / Constitution of the Athenians translations: Interlinear (Beta, generated from app dictionary and treebank) 849 segments [Excellent (100% coverage)], Sir Frederic G. Kenyon 1 segments [Excellent-Section (100% coverage)]
-Aristotle / Economics - 356 lines total, 2 books, max_lines/book=248, max_char=554 [Perseus]
+Aristotle / Constitution of the Athenians translations: Interlinear (Beta, generated from app dictionary and treebank) 849 segments [Excellent (100% coverage)], Sir Frederic G. Kenyon 69 segments [Excellent-Section (100% coverage)]
+Aristotle / Economics - 356 lines total, 2 books, max_lines/book=248, max_char=563 [Perseus]
 Aristotle / Economics / Book 1 - 108 lines
-Aristotle / Economics translations: George Cyril Armstrong 30 segments [Limited-Section (31% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 108 segments [Limited (31% coverage)]
+Aristotle / Economics translations: George Cyril Armstrong 30 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 108 segments [Excellent (100% coverage)]
 Aristotle / Economics / Book 2 - 248 lines
-Aristotle / Economics translations: George Cyril Armstrong 88 segments [Limited-Section (40% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 248 segments [Limited (40% coverage)]
-Aristotle / Eudemian Ethics - 1,564 lines total, 5 books, max_lines/book=567, max_char=897 [Perseus]
+Aristotle / Economics translations: George Cyril Armstrong 88 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 248 segments [Excellent (100% coverage)]
+Aristotle / Eudemian Ethics - 1,564 lines total, 5 books, max_lines/book=567, max_char=906 [Perseus]
 Aristotle / Eudemian Ethics / Book 1 - 159 lines
-Aristotle / Eudemian Ethics translations: Harris Rackham 77 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 159 segments [Limited (28% coverage)]
+Aristotle / Eudemian Ethics translations: Harris Rackham 77 segments [Limited-Section (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 159 segments [Limited (27% coverage)]
 Aristotle / Eudemian Ethics / Book 2 - 411 lines
 Aristotle / Eudemian Ethics translations: Harris Rackham 161 segments [Limited-Section (25% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 411 segments [Limited (25% coverage)]
 Aristotle / Eudemian Ethics / Book 3 - 265 lines
-Aristotle / Eudemian Ethics translations: Harris Rackham 110 segments [Limited-Section (29% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 265 segments [Limited (29% coverage)]
+Aristotle / Eudemian Ethics translations: Harris Rackham 110 segments [Limited-Section (22% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 265 segments [Limited (22% coverage)]
 Aristotle / Eudemian Ethics / Book 7 - 567 lines
-Aristotle / Eudemian Ethics translations: Harris Rackham 212 segments [Limited-Section (38% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 567 segments [Limited (38% coverage)]
+Aristotle / Eudemian Ethics translations: Harris Rackham 212 segments [Limited-Section (21% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 567 segments [Limited (21% coverage)]
 Aristotle / Eudemian Ethics / Book 8 - 162 lines
-Aristotle / Eudemian Ethics translations: Harris Rackham 51 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Excellent (100% coverage)]
-Aristotle / Metaphysics - 3,844 lines total, 14 books, max_lines/book=489, max_char=975 [Perseus]
+Aristotle / Eudemian Ethics translations: Harris Rackham 51 segments [Limited-Section (20% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Limited (20% coverage)]
+Aristotle / Metaphysics - 3,844 lines total, 14 books, max_lines/book=489, max_char=985 [Perseus]
 Aristotle / Metaphysics / Book 1 - 311 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 171 segments [Limited (2% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 311 segments [Limited (2% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 171 segments [Limited (32% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 311 segments [Limited (32% coverage)]
 Aristotle / Metaphysics / Book 2 - 68 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 27 segments [Limited-Section (9% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 68 segments [Limited (9% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 27 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 68 segments [Limited (28% coverage)]
 Aristotle / Metaphysics / Book 3 - 226 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 133 segments [Limited (7% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 226 segments [Limited (7% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 133 segments [Limited (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 226 segments [Limited (28% coverage)]
 Aristotle / Metaphysics / Book 4 - 330 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 162 segments [Limited-Section (11% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 330 segments [Limited (11% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 162 segments [Limited (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 330 segments [Limited (24% coverage)]
 Aristotle / Metaphysics / Book 5 - 413 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 193 segments [Limited-Section (11% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 413 segments [Limited (11% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 193 segments [Limited-Section (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 413 segments [Limited (27% coverage)]
 Aristotle / Metaphysics / Book 6 - 85 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 34 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 85 segments [Excellent (100% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 34 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 85 segments [Limited (28% coverage)]
 Aristotle / Metaphysics / Book 7 - 489 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 206 segments [Limited-Section (10% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 489 segments [Limited (10% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 206 segments [Limited-Section (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 489 segments [Limited (24% coverage)]
 Aristotle / Metaphysics / Book 8 - 156 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 62 segments [Limited-Section (3% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 156 segments [Limited (3% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 62 segments [Limited-Section (23% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 156 segments [Limited (23% coverage)]
 Aristotle / Metaphysics / Book 9 - 231 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 108 segments [Limited-Section (14% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 231 segments [Limited (14% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 108 segments [Limited-Section (30% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 231 segments [Limited (30% coverage)]
 Aristotle / Metaphysics / Book 10 - 267 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 114 segments [Limited-Section (13% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 267 segments [Limited (13% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 114 segments [Limited-Section (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 267 segments [Limited (24% coverage)]
 Aristotle / Metaphysics / Book 11 - 374 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 165 segments [Limited-Section (14% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 374 segments [Limited (14% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 165 segments [Limited-Section (23% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 374 segments [Limited (23% coverage)]
 Aristotle / Metaphysics / Book 12 - 305 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 113 segments [Limited-Section (14% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 305 segments [Limited (14% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 113 segments [Limited-Section (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 305 segments [Limited (24% coverage)]
 Aristotle / Metaphysics / Book 13 - 390 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 188 segments [Limited-Section (22% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 390 segments [Limited (22% coverage)]
+Aristotle / Metaphysics translations: Hugh Tredennick 188 segments [Limited-Section (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 390 segments [Limited (24% coverage)]
 Aristotle / Metaphysics / Book 14 - 199 lines
-Aristotle / Metaphysics translations: Hugh Tredennick 104 segments [Limited (3% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 199 segments [Limited (3% coverage)]
-Aristotle / Nicomachean Ethics - 3,659 lines total, 10 books, max_lines/book=439, max_char=742 [Perseus]
+Aristotle / Metaphysics translations: Hugh Tredennick 104 segments [Limited (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 199 segments [Limited (27% coverage)]
+Aristotle / Nicomachean Ethics - 3,659 lines total, 10 books, max_lines/book=439, max_char=751 [Perseus]
 Aristotle / Nicomachean Ethics / Book 1 - 353 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 158 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 353 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 158 segments [Limited-Section (29% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 353 segments [Limited (29% coverage)]
 Aristotle / Nicomachean Ethics / Book 2 - 233 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited (15% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 233 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (25% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 233 segments [Limited (25% coverage)]
 Aristotle / Nicomachean Ethics / Book 3 - 429 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 174 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 429 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 174 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 429 segments [Limited (26% coverage)]
 Aristotle / Nicomachean Ethics / Book 4 - 426 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 173 segments [Limited-Section (11% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 426 segments [Limited (11% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 173 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 426 segments [Limited (28% coverage)]
 Aristotle / Nicomachean Ethics / Book 5 - 397 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 151 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 151 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (28% coverage)]
 Aristotle / Nicomachean Ethics / Book 6 - 272 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (15% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (25% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (25% coverage)]
 Aristotle / Nicomachean Ethics / Book 7 - 365 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 123 segments [Limited (15% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 365 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 123 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 365 segments [Limited (26% coverage)]
 Aristotle / Nicomachean Ethics / Book 8 - 439 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 104 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 439 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 104 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 439 segments [Limited (26% coverage)]
 Aristotle / Nicomachean Ethics / Book 9 - 348 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 99 segments [Limited-Section (16% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 348 segments [Limited (16% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 99 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 348 segments [Limited (28% coverage)]
 Aristotle / Nicomachean Ethics / Book 10 - 397 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 115 segments [Limited-Section (14% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (14% coverage)]
-Aristotle / On Virtues and Vices - 75 lines, max_char=299 [Perseus]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 115 segments [Limited-Section (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (27% coverage)]
+Aristotle / On Virtues and Vices - 75 lines, max_char=309 [Perseus]
 Aristotle / On Virtues and Vices translations: Interlinear (Beta, generated from app dictionary and treebank) 75 segments [Excellent (100% coverage)]
-Aristotle / Poetics - 621 lines, max_char=345 [Perseus]
-Aristotle / Poetics translations: Interlinear (Beta, generated from app dictionary and treebank) 609 segments [Fair (54% coverage)], William Hamilton Fyfe 382 segments [Fair (54% coverage)]
+Aristotle / Poetics - 621 lines, max_char=355 [Perseus]
+Aristotle / Poetics translations: Interlinear (Beta, generated from app dictionary and treebank) 609 segments [Limited (24% coverage)], William Hamilton Fyfe 382 segments [Limited (24% coverage)]
 Aristotle / Politics - 3,255 lines total, 8 books, max_lines/book=553, max_char=867 [Perseus]
 Aristotle / Politics / Book 1 - 334 lines
-Aristotle / Politics translations: Harris Rackham 43 segments [Limited-Section (3% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 334 segments [Limited (3% coverage)]
+Aristotle / Politics translations: Harris Rackham 43 segments [Limited-Section (5% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 334 segments [Limited (5% coverage)]
 Aristotle / Politics / Book 2 - 553 lines
-Aristotle / Politics translations: Harris Rackham 67 segments [Limited-Section (2% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 553 segments [Limited (2% coverage)]
+Aristotle / Politics translations: Harris Rackham 67 segments [Limited-Section (1% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 553 segments [Limited (1% coverage)]
 Aristotle / Politics / Book 3 - 533 lines
-Aristotle / Politics translations: Harris Rackham 63 segments [Limited-Section (2% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 533 segments [Limited (2% coverage)]
+Aristotle / Politics translations: Harris Rackham 63 segments [Limited-Section (3% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 533 segments [Limited (3% coverage)]
 Aristotle / Politics / Book 4 - 420 lines
-Aristotle / Politics translations: Harris Rackham 57 segments [Limited-Section (5% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 420 segments [Limited (5% coverage)]
+Aristotle / Politics translations: Harris Rackham 57 segments [Limited-Section (10% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 420 segments [Limited (10% coverage)]
 Aristotle / Politics / Book 5 - 498 lines
-Aristotle / Politics translations: Harris Rackham 66 segments [Limited-Section (2% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 498 segments [Limited (2% coverage)]
+Aristotle / Politics translations: Harris Rackham 66 segments [Limited-Section (3% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 498 segments [Limited (3% coverage)]
 Aristotle / Politics / Book 6 - 204 lines
-Aristotle / Politics translations: Harris Rackham 29 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 204 segments [Excellent (100% coverage)]
+Aristotle / Politics translations: Harris Rackham 29 segments [Limited-Section (3% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 204 segments [Limited (3% coverage)]
 Aristotle / Politics / Book 7 - 520 lines
-Aristotle / Politics translations: Harris Rackham 64 segments [Limited-Section (2% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 520 segments [Limited (2% coverage)]
+Aristotle / Politics translations: Harris Rackham 64 segments [Limited-Section (1% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 520 segments [Limited (1% coverage)]
 Aristotle / Politics / Book 8 - 193 lines
 Aristotle / Politics translations: Harris Rackham 22 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 193 segments [Excellent (100% coverage)]
-Aristotle / The "Art" of Rhetoric - 2,698 lines total, 3 books, max_lines/book=1,009, max_char=767 [Perseus]
+Aristotle / The "Art" of Rhetoric - 2,698 lines total, 3 books, max_lines/book=1,009, max_char=777 [Perseus]
 Aristotle / The "Art" of Rhetoric / Book 1 - 965 lines
-Aristotle / The "Art" of Rhetoric translations: Interlinear (Beta, generated from app dictionary and treebank) 964 segments [Limited (34% coverage)], John Henry Freese 350 segments [Limited-Section (34% coverage)]
+Aristotle / The "Art" of Rhetoric translations: Interlinear (Beta, generated from app dictionary and treebank) 964 segments [Limited (23% coverage)], John Henry Freese 350 segments [Limited-Section (23% coverage)]
 Aristotle / The "Art" of Rhetoric / Book 2 - 1,009 lines
-Aristotle / The "Art" of Rhetoric translations: Interlinear (Beta, generated from app dictionary and treebank) 1009 segments [Limited (35% coverage)], John Henry Freese 382 segments [Limited-Section (35% coverage)]
+Aristotle / The "Art" of Rhetoric translations: Interlinear (Beta, generated from app dictionary and treebank) 1009 segments [Limited (28% coverage)], John Henry Freese 382 segments [Limited-Section (28% coverage)]
 Aristotle / The "Art" of Rhetoric / Book 3 - 724 lines
-Aristotle / The "Art" of Rhetoric translations: Interlinear (Beta, generated from app dictionary and treebank) 724 segments [Limited (8% coverage)], John Henry Freese 181 segments [Limited (8% coverage)]
+Aristotle / The "Art" of Rhetoric translations: Interlinear (Beta, generated from app dictionary and treebank) 724 segments [Limited (22% coverage)], John Henry Freese 181 segments [Limited-Section (22% coverage)]
 
 [Arrian]
 Arrian / Acies Contra Alanos - 76 lines, max_char=279 [Perseus]
 Arrian / Acies Contra Alanos translations: Interlinear (Beta, generated from app dictionary and treebank) 76 segments [Excellent (100% coverage)]
 Arrian / Cynegeticus - 717 lines, max_char=455 [Perseus]
-Arrian / Cynegeticus translations: Interlinear (Beta, generated from app dictionary and treebank) 717 segments [Excellent (100% coverage)], William Dansey 1 segments [Excellent-Section (100% coverage)]
+Arrian / Cynegeticus translations: Interlinear (Beta, generated from app dictionary and treebank) 717 segments [Excellent (100% coverage)], William Dansey 35 segments [Excellent-Section (100% coverage)]
 Arrian / Indica - 1,494 lines, max_char=655 [Perseus]
 Arrian / Indica translations: Interlinear (Beta, generated from app dictionary and treebank) 1494 segments [Excellent (100% coverage)]
 Arrian / Periplus Ponti Euxini - 626 lines, max_char=354 [Perseus]
@@ -641,9 +641,9 @@ Basil, Saint, Bishop of Caesarea / De legendis gentilium libris translations: In
 
 [Bion of Phlossa]
 Bion of Phlossa / Epitaphius Adonis - 98 lines, max_char=53 [Perseus]
-Bion of Phlossa / Epitaphius Adonis translations: Interlinear (Beta, generated from app dictionary and treebank) 98 segments [Excellent (100% coverage)], J. Banks 2 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Epitaphius Adonis translations: Interlinear (Beta, generated from app dictionary and treebank) 98 segments [Excellent (100% coverage)], J. Banks 8 segments [Excellent-Section (100% coverage)]
 Bion of Phlossa / Epithalamium Achillis et Deidameiae - 32 lines, max_char=50 [Perseus]
-Bion of Phlossa / Epithalamium Achillis et Deidameiae translations: Interlinear (Beta, generated from app dictionary and treebank) 32 segments [Excellent (100% coverage)], J. Banks 2 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Epithalamium Achillis et Deidameiae translations: Interlinear (Beta, generated from app dictionary and treebank) 32 segments [Excellent (100% coverage)], J. Banks 8 segments [Excellent-Section (100% coverage)]
 Bion of Phlossa / Fragmenta - 116 lines total, 16 books, max_lines/book=18, max_char=52 [Perseus]
 Bion of Phlossa / Fragmenta / Ode 3 - 18 lines
 Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 18 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
@@ -3361,22 +3361,22 @@ Martial / Epigrammata translations: Interlinear (Beta, AI-generated from app dic
 
 [Moschus]
 Moschus / Epitaphius Bios - 126 lines, max_char=55 [Perseus]
-Moschus / Epitaphius Bios translations: Interlinear (Beta, generated from app dictionary and treebank) 126 segments [Excellent (100% coverage)], J. Banks 5 segments [Excellent-Section (100% coverage)]
+Moschus / Epitaphius Bios translations: Interlinear (Beta, generated from app dictionary and treebank) 126 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent-Section (100% coverage)]
 Moschus / Eros Drapeta - 29 lines, max_char=53 [Perseus]
-Moschus / Eros Drapeta translations: Interlinear (Beta, generated from app dictionary and treebank) 29 segments [Excellent (100% coverage)], J. Banks 5 segments [Excellent-Section (100% coverage)]
+Moschus / Eros Drapeta translations: Interlinear (Beta, generated from app dictionary and treebank) 29 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent (100% coverage)]
 Moschus / Europa - 166 lines, max_char=50 [Perseus]
-Moschus / Europa translations: Interlinear (Beta, generated from app dictionary and treebank) 166 segments [Excellent (100% coverage)], J. Banks 5 segments [Excellent-Section (100% coverage)]
+Moschus / Europa translations: Interlinear (Beta, generated from app dictionary and treebank) 166 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent-Section (100% coverage)]
 Moschus / Fragmenta - 35 lines total, 4 books, max_lines/book=13, max_char=49 [Perseus]
 Moschus / Fragmenta / Ode 4 - 13 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)], J. Banks 3 segments [Excellent-Section (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)], J. Banks 3 segments [Excellent-Offset (100% coverage)]
 Moschus / Fragmenta / Ode 5 - 8 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 13 segments [Excellent (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 13 segments [Excellent-Section (100% coverage)]
 Moschus / Fragmenta / Ode 6 - 8 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 4 segments [Excellent (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 4 segments [Excellent-Offset (100% coverage)]
 Moschus / Fragmenta / Ode 7 - 6 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)], J. Banks 3 segments [Excellent-Offset (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)], J. Banks 3 segments [Excellent (100% coverage)]
 Moschus / Megara - 125 lines, max_char=51 [Perseus]
-Moschus / Megara translations: Interlinear (Beta, generated from app dictionary and treebank) 125 segments [Excellent (100% coverage)], J. Banks 5 segments [Excellent-Section (100% coverage)]
+Moschus / Megara translations: Interlinear (Beta, generated from app dictionary and treebank) 125 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent-Section (100% coverage)]
 
 [Nepos, Cornelius]
 Nepos, Cornelius / Agesilaus - 65 lines, max_char=401 [Perseus]
@@ -4521,120 +4521,120 @@ Pindar / Pythian Odes / Ode 12 - 32 lines
 Pindar / Pythian Odes translations: Diane Arnson Svarlien 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 32 segments [Excellent (100% coverage)]
 
 [Plato]
-Plato / Alcibiades 1 - 2,122 lines, max_char=556 [Perseus]
-Plato / Alcibiades 1 translations: Interlinear (Beta, generated from app dictionary and treebank) 2122 segments [Good (89% coverage)], Walter Rangeley Maitland Lamb 901 segments [Good-Section (89% coverage)]
-Plato / Alcibiades 2 - 506 lines, max_char=461 [Perseus]
-Plato / Alcibiades 2 translations: Interlinear (Beta, generated from app dictionary and treebank) 503 segments [Good (82% coverage)], Walter Rangeley Maitland Lamb 185 segments [Good-Section (82% coverage)]
-Plato / Apology - 420 lines, max_char=778 [Perseus]
-Plato / Apology translations: Harold North Fowler 26 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 420 segments [Limited (26% coverage)]
-Plato / Charmides - 627 lines, max_char=485 [Perseus]
-Plato / Charmides translations: Interlinear (Beta, generated from app dictionary and treebank) 627 segments [Limited (23% coverage)], Walter Rangeley Maitland Lamb 24 segments [Limited-Section (23% coverage)]
-Plato / Cleitophon - 79 lines, max_char=401 [Perseus]
-Plato / Cleitophon translations: Interlinear (Beta, generated from app dictionary and treebank) 79 segments [Limited (33% coverage)], Robert Gregg Bury 7 segments [Limited-Section (33% coverage)]
-Plato / Cratylus - 2,229 lines, max_char=624 [Perseus]
-Plato / Cratylus translations: Harold North Fowler 771 segments [Fair-Section (75% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2229 segments [Fair (75% coverage)]
-Plato / Critias - 183 lines, max_char=683 [Perseus]
-Plato / Critias translations: Interlinear (Beta, generated from app dictionary and treebank) 183 segments [Limited (34% coverage)], Robert Gregg Bury 20 segments [Limited-Section (34% coverage)]
-Plato / Crito - 366 lines, max_char=713 [Perseus]
-Plato / Crito translations: Harold North Fowler 102 segments [Fair-Section (63% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 366 segments [Fair (63% coverage)]
-Plato / Epinomis - 300 lines, max_char=762 [Perseus]
-Plato / Epinomis translations: Interlinear (Beta, generated from app dictionary and treebank) 300 segments [Limited (37% coverage)], Walter Rangeley Maitland Lamb 46 segments [Limited-Section (37% coverage)]
-Plato / Euthydemus - 877 lines, max_char=721 [Perseus]
-Plato / Euthydemus translations: Interlinear (Beta, generated from app dictionary and treebank) 877 segments [Limited (35% coverage)], Walter Rangeley Maitland Lamb 95 segments [Limited-Section (35% coverage)]
-Plato / Euthyphro - 655 lines, max_char=465 [Perseus]
-Plato / Euthyphro translations: Harold North Fowler 233 segments [Good-Section (87% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 655 segments [Good (87% coverage)]
-Plato / Gorgias - 3,170 lines, max_char=919 [Perseus]
-Plato / Gorgias translations: Interlinear (Beta, generated from app dictionary and treebank) 3170 segments [Fair (68% coverage)], Walter Rangeley Maitland Lamb 1107 segments [Fair-Section (68% coverage)]
-Plato / Greater Hippias - 1,075 lines, max_char=423 [Perseus]
-Plato / Greater Hippias translations: Harold North Fowler 356 segments [Good-Section (88% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1075 segments [Good (88% coverage)]
-Plato / Hipparchus - 382 lines, max_char=750 [Perseus]
-Plato / Hipparchus translations: Interlinear (Beta, generated from app dictionary and treebank) 382 segments [Good (87% coverage)], Walter Rangeley Maitland Lamb 162 segments [Good-Section (87% coverage)]
-Plato / Ion - 471 lines, max_char=533 [Perseus]
-Plato / Ion translations: Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Good (80% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (80% coverage)]
-Plato / Laches - 802 lines, max_char=618 [Perseus]
-Plato / Laches translations: Interlinear (Beta, generated from app dictionary and treebank) 802 segments [Fair (77% coverage)], Walter Rangeley Maitland Lamb 265 segments [Fair-Section (77% coverage)]
-Plato / Laws - 6,840 lines total, 12 books, max_lines/book=825, max_char=1,206 [Perseus]
+Plato / Alcibiades 1 - 2,122 lines, max_char=563 [Perseus]
+Plato / Alcibiades 1 translations: Interlinear (Beta, generated from app dictionary and treebank) 2122 segments [Excellent (97% coverage)], Walter Rangeley Maitland Lamb 901 segments [Excellent-Section (97% coverage)]
+Plato / Alcibiades 2 - 506 lines, max_char=468 [Perseus]
+Plato / Alcibiades 2 translations: Interlinear (Beta, generated from app dictionary and treebank) 503 segments [Good (92% coverage)], Walter Rangeley Maitland Lamb 185 segments [Good-Section (92% coverage)]
+Plato / Apology - 420 lines, max_char=784 [Perseus]
+Plato / Apology translations: Harold North Fowler 26 segments [Limited-Section (19% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 420 segments [Limited (19% coverage)]
+Plato / Charmides - 627 lines, max_char=492 [Perseus]
+Plato / Charmides translations: Interlinear (Beta, generated from app dictionary and treebank) 627 segments [Limited (21% coverage)], Walter Rangeley Maitland Lamb 24 segments [Limited-Section (21% coverage)]
+Plato / Cleitophon - 79 lines, max_char=408 [Perseus]
+Plato / Cleitophon translations: Interlinear (Beta, generated from app dictionary and treebank) 79 segments [Limited (41% coverage)], Robert Gregg Bury 7 segments [Limited-Section (41% coverage)]
+Plato / Cratylus - 2,229 lines, max_char=631 [Perseus]
+Plato / Cratylus translations: Harold North Fowler 771 segments [Good-Section (89% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2229 segments [Good (89% coverage)]
+Plato / Critias - 183 lines, max_char=690 [Perseus]
+Plato / Critias translations: Interlinear (Beta, generated from app dictionary and treebank) 183 segments [Limited (39% coverage)], Robert Gregg Bury 20 segments [Limited-Section (39% coverage)]
+Plato / Crito - 366 lines, max_char=719 [Perseus]
+Plato / Crito translations: Harold North Fowler 102 segments [Good-Section (81% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 366 segments [Good (81% coverage)]
+Plato / Epinomis - 300 lines, max_char=769 [Perseus]
+Plato / Epinomis translations: Interlinear (Beta, generated from app dictionary and treebank) 300 segments [Limited (45% coverage)], Walter Rangeley Maitland Lamb 46 segments [Limited-Section (45% coverage)]
+Plato / Euthydemus - 877 lines, max_char=728 [Perseus]
+Plato / Euthydemus translations: Interlinear (Beta, generated from app dictionary and treebank) 877 segments [Limited (42% coverage)], Walter Rangeley Maitland Lamb 95 segments [Limited-Section (42% coverage)]
+Plato / Euthyphro - 655 lines, max_char=470 [Perseus]
+Plato / Euthyphro translations: Harold North Fowler 233 segments [Excellent-Section (96% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 655 segments [Excellent (96% coverage)]
+Plato / Gorgias - 3,170 lines, max_char=926 [Perseus]
+Plato / Gorgias translations: Interlinear (Beta, generated from app dictionary and treebank) 3170 segments [Good (90% coverage)], Walter Rangeley Maitland Lamb 1107 segments [Good-Section (90% coverage)]
+Plato / Greater Hippias - 1,075 lines, max_char=430 [Perseus]
+Plato / Greater Hippias translations: Harold North Fowler 356 segments [Good-Section (93% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1075 segments [Good (93% coverage)]
+Plato / Hipparchus - 382 lines, max_char=757 [Perseus]
+Plato / Hipparchus translations: Interlinear (Beta, generated from app dictionary and treebank) 382 segments [Excellent (98% coverage)], Walter Rangeley Maitland Lamb 162 segments [Excellent-Section (98% coverage)]
+Plato / Ion - 471 lines, max_char=540 [Perseus]
+Plato / Ion translations: Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Good (91% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (91% coverage)]
+Plato / Laches - 802 lines, max_char=625 [Perseus]
+Plato / Laches translations: Interlinear (Beta, generated from app dictionary and treebank) 802 segments [Good (88% coverage)], Walter Rangeley Maitland Lamb 265 segments [Good-Section (88% coverage)]
+Plato / Laws - 6,840 lines total, 12 books, max_lines/book=825, max_char=1,213 [Perseus]
 Plato / Laws / Book 1 - 750 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 750 segments [Limited (7% coverage)], Robert Gregg Bury 256 segments [Limited-Section (7% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 750 segments [Good (90% coverage)], Robert Gregg Bury 256 segments [Good-Section (90% coverage)]
 Plato / Laws / Book 2 - 638 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 638 segments [Limited (7% coverage)], Robert Gregg Bury 230 segments [Limited-Section (7% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 638 segments [Good (92% coverage)], Robert Gregg Bury 230 segments [Good-Section (92% coverage)]
 Plato / Laws / Book 3 - 781 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 781 segments [Limited (7% coverage)], Robert Gregg Bury 293 segments [Limited-Section (7% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 781 segments [Good (90% coverage)], Robert Gregg Bury 293 segments [Good-Section (90% coverage)]
 Plato / Laws / Book 4 - 523 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 523 segments [Limited (8% coverage)], Robert Gregg Bury 171 segments [Limited-Section (8% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 523 segments [Good (88% coverage)], Robert Gregg Bury 171 segments [Good-Section (88% coverage)]
 Plato / Laws / Book 5 - 272 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (15% coverage)], Robert Gregg Bury 23 segments [Limited-Section (15% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (32% coverage)], Robert Gregg Bury 23 segments [Limited-Section (32% coverage)]
 Plato / Laws / Book 6 - 565 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 565 segments [Limited (12% coverage)], Robert Gregg Bury 126 segments [Limited-Section (12% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 565 segments [Fair (61% coverage)], Robert Gregg Bury 126 segments [Fair-Section (61% coverage)]
 Plato / Laws / Book 7 - 825 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 825 segments [Limited (9% coverage)], Robert Gregg Bury 253 segments [Limited-Section (9% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 825 segments [Good (81% coverage)], Robert Gregg Bury 253 segments [Good-Section (81% coverage)]
 Plato / Laws / Book 8 - 385 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 385 segments [Limited (12% coverage)], Robert Gregg Bury 97 segments [Limited-Section (12% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 385 segments [Fair (67% coverage)], Robert Gregg Bury 97 segments [Fair-Section (67% coverage)]
 Plato / Laws / Book 9 - 510 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 510 segments [Limited (14% coverage)], Robert Gregg Bury 116 segments [Limited-Section (14% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 510 segments [Fair (60% coverage)], Robert Gregg Bury 116 segments [Fair-Section (60% coverage)]
 Plato / Laws / Book 10 - 752 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 752 segments [Limited (9% coverage)], Robert Gregg Bury 262 segments [Limited-Section (9% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 752 segments [Good (89% coverage)], Robert Gregg Bury 262 segments [Good-Section (89% coverage)]
 Plato / Laws / Book 11 - 342 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 342 segments [Excellent (100% coverage)], Robert Gregg Bury 50 segments [Excellent-Section (100% coverage)]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 342 segments [Limited (43% coverage)], Robert Gregg Bury 50 segments [Limited-Section (43% coverage)]
 Plato / Laws / Book 12 - 497 lines
-Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 497 segments [Excellent (100% coverage)], Robert Gregg Bury 130 segments [Excellent-Section (100% coverage)]
-Plato / Lesser Hippias - 602 lines, max_char=1,017 [Perseus]
-Plato / Lesser Hippias translations: Harold North Fowler 231 segments [Fair-Section (79% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 602 segments [Fair (79% coverage)]
-Plato / Letters - 686 lines, max_char=644 [Perseus]
-Plato / Letters translations: Interlinear (Beta, generated from app dictionary and treebank) 686 segments [Limited (28% coverage)], R. G. Bury 65 segments [Limited-Section (28% coverage)]
-Plato / Lovers - 212 lines, max_char=455 [Perseus]
-Plato / Lovers translations: Interlinear (Beta, generated from app dictionary and treebank) 212 segments [Good (92% coverage)], Walter Rangeley Maitland Lamb 126 segments [Good (92% coverage)]
-Plato / Lysis - 359 lines, max_char=764 [Perseus]
+Plato / Laws translations: Interlinear (Beta, generated from app dictionary and treebank) 497 segments [Fair (66% coverage)], Robert Gregg Bury 130 segments [Fair-Section (66% coverage)]
+Plato / Lesser Hippias - 602 lines, max_char=1,024 [Perseus]
+Plato / Lesser Hippias translations: Harold North Fowler 231 segments [Good-Section (92% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 602 segments [Good (92% coverage)]
+Plato / Letters - 686 lines, max_char=651 [Perseus]
+Plato / Letters translations: Interlinear (Beta, generated from app dictionary and treebank) 686 segments [Limited (24% coverage)], R. G. Bury 65 segments [Limited-Section (24% coverage)]
+Plato / Lovers - 212 lines, max_char=462 [Perseus]
+Plato / Lovers translations: Interlinear (Beta, generated from app dictionary and treebank) 212 segments [Excellent (95% coverage)], Walter Rangeley Maitland Lamb 126 segments [Excellent (95% coverage)]
+Plato / Lysis - 359 lines, max_char=771 [Perseus]
 Plato / Lysis translations: Interlinear (Beta, generated from app dictionary and treebank) 359 segments [Limited (23% coverage)], Walter Rangeley Maitland Lamb 21 segments [Limited-Section (23% coverage)]
-Plato / Menexenus - 271 lines, max_char=750 [Perseus]
-Plato / Menexenus translations: Interlinear (Beta, generated from app dictionary and treebank) 271 segments [Limited (38% coverage)], Robert Gregg Bury 46 segments [Limited-Section (38% coverage)]
-Plato / Meno - 1,483 lines, max_char=493 [Perseus]
-Plato / Meno translations: Interlinear (Beta, generated from app dictionary and treebank) 1483 segments [Good (93% coverage)], Walter Rangeley Maitland Lamb 569 segments [Good-Section (93% coverage)]
-Plato / Minos - 488 lines, max_char=337 [Perseus]
-Plato / Minos translations: Interlinear (Beta, generated from app dictionary and treebank) 488 segments [Good (82% coverage)], Walter Rangeley Maitland Lamb 192 segments [Good-Section (82% coverage)]
-Plato / Parmenides - 1,369 lines, max_char=1,708 [Perseus]
-Plato / Parmenides translations: Harold North Fowler 41 segments [Limited-Section (23% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1369 segments [Limited (23% coverage)]
-Plato / Phaedo - 1,367 lines, max_char=1,398 [Perseus]
-Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Limited (24% coverage)]
-Plato / Phaedrus - 1,392 lines, max_char=602 [Perseus]
-Plato / Phaedrus translations: Harold North Fowler 400 segments [Fair-Section (60% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1391 segments [Fair (60% coverage)]
-Plato / Philebus - 2,672 lines, max_char=663 [Perseus]
-Plato / Philebus translations: Harold North Fowler 1144 segments [Good-Section (87% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2672 segments [Good (87% coverage)]
-Plato / Protagoras - 914 lines, max_char=911 [Perseus]
-Plato / Protagoras translations: Interlinear (Beta, generated from app dictionary and treebank) 914 segments [Limited (26% coverage)], Walter Rangeley Maitland Lamb 74 segments [Limited-Section (26% coverage)]
-Plato / Republic - 5,995 lines total, 10 books, max_lines/book=793, max_char=1,438 [Perseus]
+Plato / Menexenus - 271 lines, max_char=757 [Perseus]
+Plato / Menexenus translations: Interlinear (Beta, generated from app dictionary and treebank) 271 segments [Limited (49% coverage)], Robert Gregg Bury 46 segments [Limited-Section (49% coverage)]
+Plato / Meno - 1,483 lines, max_char=499 [Perseus]
+Plato / Meno translations: Interlinear (Beta, generated from app dictionary and treebank) 1483 segments [Excellent (96% coverage)], Walter Rangeley Maitland Lamb 569 segments [Excellent-Section (96% coverage)]
+Plato / Minos - 488 lines, max_char=344 [Perseus]
+Plato / Minos translations: Interlinear (Beta, generated from app dictionary and treebank) 488 segments [Good (92% coverage)], Walter Rangeley Maitland Lamb 192 segments [Good-Section (92% coverage)]
+Plato / Parmenides - 1,369 lines, max_char=1,715 [Perseus]
+Plato / Parmenides translations: Harold North Fowler 41 segments [Limited-Section (18% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1369 segments [Limited (18% coverage)]
+Plato / Phaedo - 1,367 lines, max_char=1,404 [Perseus]
+Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Limited (28% coverage)]
+Plato / Phaedrus - 1,392 lines, max_char=609 [Perseus]
+Plato / Phaedrus translations: Harold North Fowler 400 segments [Fair-Section (80% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1391 segments [Fair (80% coverage)]
+Plato / Philebus - 2,672 lines, max_char=669 [Perseus]
+Plato / Philebus translations: Harold North Fowler 1144 segments [Excellent-Section (98% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2672 segments [Excellent (98% coverage)]
+Plato / Protagoras - 914 lines, max_char=918 [Perseus]
+Plato / Protagoras translations: Interlinear (Beta, generated from app dictionary and treebank) 914 segments [Limited (28% coverage)], Walter Rangeley Maitland Lamb 74 segments [Limited-Section (28% coverage)]
+Plato / Republic - 5,995 lines total, 10 books, max_lines/book=793, max_char=1,445 [Perseus]
 Plato / Republic / Book 1 - 793 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 793 segments [Limited (7% coverage)], Paul Shorey 28 segments [Limited-Section (7% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 793 segments [Limited (21% coverage)], Paul Shorey 28 segments [Limited-Section (21% coverage)]
 Plato / Republic / Book 2 - 558 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 558 segments [Limited (10% coverage)], Paul Shorey 27 segments [Limited-Section (10% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 558 segments [Limited (21% coverage)], Paul Shorey 27 segments [Limited-Section (21% coverage)]
 Plato / Republic / Book 3 - 619 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 619 segments [Limited (11% coverage)], Paul Shorey 32 segments [Limited-Section (11% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 619 segments [Limited (21% coverage)], Paul Shorey 32 segments [Limited-Section (21% coverage)]
 Plato / Republic / Book 4 - 600 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 600 segments [Limited (9% coverage)], Paul Shorey 27 segments [Limited-Section (9% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 600 segments [Limited (20% coverage)], Paul Shorey 27 segments [Limited-Section (20% coverage)]
 Plato / Republic / Book 5 - 776 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 776 segments [Limited (8% coverage)], Paul Shorey 32 segments [Limited-Section (8% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 776 segments [Limited (19% coverage)], Paul Shorey 32 segments [Limited-Section (19% coverage)]
 Plato / Republic / Book 6 - 540 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 540 segments [Limited (11% coverage)], Paul Shorey 28 segments [Limited-Section (11% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 540 segments [Limited (16% coverage)], Paul Shorey 28 segments [Limited-Section (16% coverage)]
 Plato / Republic / Book 7 - 537 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 537 segments [Limited (10% coverage)], Paul Shorey 28 segments [Limited-Section (10% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 537 segments [Limited (17% coverage)], Paul Shorey 28 segments [Limited-Section (17% coverage)]
 Plato / Republic / Book 8 - 541 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 541 segments [Limited (10% coverage)], Paul Shorey 27 segments [Limited-Section (10% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 541 segments [Limited (22% coverage)], Paul Shorey 27 segments [Limited-Section (22% coverage)]
 Plato / Republic / Book 9 - 492 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 492 segments [Excellent (100% coverage)], Paul Shorey 22 segments [Excellent-Section (100% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 492 segments [Limited (14% coverage)], Paul Shorey 22 segments [Limited-Section (14% coverage)]
 Plato / Republic / Book 10 - 539 lines
-Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 539 segments [Excellent (100% coverage)], Paul Shorey 27 segments [Excellent-Section (100% coverage)]
-Plato / Sophist - 2,703 lines, max_char=674 [Perseus]
-Plato / Sophist translations: Harold North Fowler 1178 segments [Excellent-Section (97% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2703 segments [Excellent (97% coverage)]
-Plato / Statesman - 2,613 lines, max_char=705 [Perseus]
-Plato / Statesman translations: Harold North Fowler 898 segments [Good-Section (83% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2613 segments [Good (83% coverage)]
-Plato / Symposium - 975 lines, max_char=1,114 [Perseus]
-Plato / Symposium translations: Interlinear (Beta, generated from app dictionary and treebank) 975 segments [Limited (22% coverage)], Walter Rangeley Maitland Lamb 56 segments [Limited-Section (22% coverage)]
-Plato / Theaetetus - 2,831 lines, max_char=569 [Perseus]
-Plato / Theaetetus translations: Harold North Fowler 1028 segments [Good-Section (82% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2831 segments [Good (82% coverage)]
-Plato / Theages - 436 lines, max_char=571 [Perseus]
-Plato / Theages translations: Interlinear (Beta, generated from app dictionary and treebank) 436 segments [Fair (77% coverage)], Walter Rangeley Maitland Lamb 139 segments [Fair-Section (77% coverage)]
-Plato / Timaeus - 985 lines, max_char=1,334 [Perseus]
-Plato / Timaeus translations: Interlinear (Beta, generated from app dictionary and treebank) 985 segments [Limited (32% coverage)], Robert Gregg Bury 113 segments [Limited-Section (32% coverage)]
+Plato / Republic translations: Interlinear (Beta, generated from app dictionary and treebank) 539 segments [Limited (21% coverage)], Paul Shorey 27 segments [Limited-Section (21% coverage)]
+Plato / Sophist - 2,703 lines, max_char=681 [Perseus]
+Plato / Sophist translations: Harold North Fowler 1178 segments [Excellent-Section (99% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2703 segments [Excellent (99% coverage)]
+Plato / Statesman - 2,613 lines, max_char=712 [Perseus]
+Plato / Statesman translations: Harold North Fowler 898 segments [Excellent-Section (97% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2613 segments [Excellent (97% coverage)]
+Plato / Symposium - 975 lines, max_char=1,121 [Perseus]
+Plato / Symposium translations: Interlinear (Beta, generated from app dictionary and treebank) 975 segments [Limited (23% coverage)], Walter Rangeley Maitland Lamb 56 segments [Limited-Section (23% coverage)]
+Plato / Theaetetus - 2,831 lines, max_char=576 [Perseus]
+Plato / Theaetetus translations: Harold North Fowler 1028 segments [Good-Section (94% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2831 segments [Good (94% coverage)]
+Plato / Theages - 436 lines, max_char=578 [Perseus]
+Plato / Theages translations: Interlinear (Beta, generated from app dictionary and treebank) 436 segments [Good (88% coverage)], Walter Rangeley Maitland Lamb 139 segments [Good-Section (88% coverage)]
+Plato / Timaeus - 985 lines, max_char=1,340 [Perseus]
+Plato / Timaeus translations: Interlinear (Beta, generated from app dictionary and treebank) 985 segments [Limited (35% coverage)], Robert Gregg Bury 113 segments [Limited-Section (35% coverage)]
 
 [Plautus, Titus Maccius]
 Plautus, Titus Maccius / Amphitryon, or Jupiter in Disguise - 1,409 lines, max_char=80 [Perseus]
@@ -5195,7 +5195,7 @@ Procopius / De Bellis translations: Interlinear (Beta, generated from app dictio
 Procopius / De Bellis / Book 8 - 1,564 lines
 Procopius / De Bellis translations: Interlinear (Beta, generated from app dictionary and treebank) 1563 segments [Excellent (100% coverage)]
 Procopius / Historia Arcana - 2,299 lines, max_char=1,077 [Perseus]
-Procopius / Historia Arcana translations: Anonymous 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2299 segments [Excellent (100% coverage)]
+Procopius / Historia Arcana translations: Anonymous 227 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2299 segments [Excellent (100% coverage)]
 
 [Propertius, Sextus]
 Propertius, Sextus / Elegiae - 4,004 lines total, 4 books, max_lines/book=1,359, max_char=53 [Perseus]
@@ -5526,9 +5526,9 @@ Sophocles / Tracking Satyrs translations: Anne Mahoney 120 segments [Excellent-S
 [Statius, P. Papinius (Publius Papinius)]
 Statius, P. Papinius (Publius Papinius) / Achilleis - 1,125 lines total, 2 books, max_lines/book=958, max_char=66 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Achilleis / Book 1 - 958 lines
-Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 958 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 958 segments [Excellent (100% coverage)], J.H. Mozley 42 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Achilleis / Book 2 - 167 lines
-Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 167 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 167 segments [Excellent (100% coverage)], J.H. Mozley 4 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Silvae - 3,898 lines total, 5 books, max_lines/book=846, max_char=674 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Silvae / Book 1 - 792 lines
 Statius, P. Papinius (Publius Papinius) / Silvae translations: Interlinear (Beta, AI-generated from app dictionary) 792 segments [Excellent (100% coverage)]
@@ -5542,29 +5542,29 @@ Statius, P. Papinius (Publius Papinius) / Silvae / Book 5 - 846 lines
 Statius, P. Papinius (Publius Papinius) / Silvae translations: Interlinear (Beta, AI-generated from app dictionary) 846 segments [Excellent (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais - 9,741 lines total, 12 books, max_lines/book=947, max_char=68 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 1 - 720 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 720 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 720 segments [Excellent (100% coverage)], J.H. Mozley 23 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 2 - 743 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 743 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 743 segments [Excellent (100% coverage)], J.H. Mozley 26 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 3 - 721 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 721 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 721 segments [Excellent (100% coverage)], J.H. Mozley 22 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 4 - 842 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 842 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 842 segments [Excellent (100% coverage)], J.H. Mozley 32 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 5 - 753 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 753 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 753 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 6 - 947 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 947 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 947 segments [Excellent (100% coverage)], J.H. Mozley 41 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 7 - 823 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 823 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 823 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 8 - 766 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 766 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 766 segments [Excellent (100% coverage)], J.H. Mozley 28 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 9 - 907 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 907 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 907 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 10 - 939 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 939 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 939 segments [Excellent (100% coverage)], J.H. Mozley 35 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 11 - 761 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 12 - 819 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 819 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 819 segments [Excellent (100% coverage)], J.H. Mozley 29 segments [Excellent-Section (100% coverage)]
 
 [Stephen Langdon (Sumerian Texts)]
 Stephen Langdon (Sumerian Texts) / A LITURGY TO ENLIL, SERIES _E-LUM GUD-SUN_ (ZIMMERN KL - 254 lines total, 9 books, max_lines/book=43, max_char=70 [Perseus]
@@ -7177,59 +7177,59 @@ Terence / Phormio translations: Henry Thomas Riley 991 segments [Fair (68% cover
 [Theocritus]
 Theocritus / tlg001 - 2,715 lines total, 30 books, max_lines/book=281, max_char=58 [Perseus]
 Theocritus / tlg001 / Ode 1 - 151 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 151 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 151 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 2 - 165 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 165 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 165 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 3 - 54 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 54 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 54 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 4 - 63 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 63 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 63 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 5 - 150 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 150 segments [Excellent (99% coverage)], J. Banks 1 segments [Excellent-Section (99% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 150 segments [Excellent (99% coverage)], J. Banks 1 segments [Excellent-Offset (99% coverage)]
 Theocritus / tlg001 / Ode 6 - 46 lines
 Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 46 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Theocritus / tlg001 / Ode 7 - 157 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 157 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 157 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 8 - 93 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 93 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 93 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 9 - 36 lines
 Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 36 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Theocritus / tlg001 / Ode 10 - 59 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 59 segments [Excellent (98% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 59 segments [Excellent (98% coverage)], J. Banks 1 segments [Excellent-Offset (98% coverage)]
 Theocritus / tlg001 / Ode 11 - 81 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 81 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 81 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 12 - 37 lines
 Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 37 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Theocritus / tlg001 / Ode 13 - 75 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 75 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 75 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 14 - 74 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 74 segments [Good (95% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 74 segments [Good (95% coverage)], J. Banks 1 segments [Good-Offset (95% coverage)]
 Theocritus / tlg001 / Ode 15 - 162 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Good (92% coverage)], J. Banks 1 segments [Good-Section (92% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Good (92% coverage)], J. Banks 1 segments [Good-Offset (92% coverage)]
 Theocritus / tlg001 / Ode 16 - 109 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 109 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 109 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 17 - 137 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 137 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 137 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 18 - 58 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 58 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 58 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 19 - 8 lines
 Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Theocritus / tlg001 / Ode 20 - 45 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 45 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 45 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 21 - 68 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 68 segments [Excellent (99% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 68 segments [Excellent (99% coverage)], J. Banks 1 segments [Excellent-Offset (99% coverage)]
 Theocritus / tlg001 / Ode 22 - 224 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 224 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 224 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 23 - 63 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 63 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 63 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 24 - 140 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 140 segments [Excellent (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 140 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 25 - 281 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 281 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 281 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Theocritus / tlg001 / Ode 26 - 38 lines
 Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 38 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Theocritus / tlg001 / Ode 27 - 44 lines
-Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 44 segments [Excellent (98% coverage)]
+Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 44 segments [Excellent (98% coverage)], J. Banks 1 segments [Excellent-Offset (98% coverage)]
 Theocritus / tlg001 / Ode 28 - 25 lines
 Theocritus / tlg001 translations: Interlinear (Beta, generated from app dictionary and treebank) 25 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Theocritus / tlg001 / Ode 29 - 40 lines
@@ -7288,7 +7288,7 @@ Theocritus / tlg002 translations: Interlinear (Beta, generated from app dictiona
 
 [Theophrastus]
 Theophrastus / Characters - 796 lines, max_char=524 [Perseus]
-Theophrastus / Characters translations: Charles E. Bennett & William A. Hammond 1 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 796 segments [Excellent (100% coverage)]
+Theophrastus / Characters translations: Charles E. Bennett & William A. Hammond 31 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 796 segments [Excellent (100% coverage)]
 
 [Thucydides]
 Thucydides / History of the Peloponnesian War - 6,117 lines total, 8 books, max_lines/book=963, max_char=1,061 [Perseus]
