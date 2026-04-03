@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="978" viewBox="0 0 1220 978">
+<rect width="1220" height="978" fill="#f5f5f5"/>
+<style>
+  text { font-family: "SF Mono", "Menlo", "Monaco", monospace; }
+  .title { font-size: 16px; font-weight: bold; }
+  .subtitle { font-size: 11px; fill: #888; }
+  .label { font-size: 11px; fill: #333; }
+  .stats { font-size: 10px; fill: #666; }
+  .warn { font-size: 9px; fill: #c9493b; }
+  .total { font-size: 12px; font-weight: bold; fill: #333; }
+  .legend-text { font-size: 10px; fill: #555; }
+</style>
+<text x="20" y="38" class="title">Alignment Quality Map — Arrian — Cynegeticus</text>
+<rect x="20" y="50" width="12" height="12" fill="#2d8a4e" rx="2"/>
+<text x="36" y="60" class="legend-text">High (≥0.5)</text>
+<rect x="160" y="50" width="12" height="12" fill="#e8b83d" rx="2"/>
+<text x="176" y="60" class="legend-text">Medium (0.2–0.5)</text>
+<rect x="300" y="50" width="12" height="12" fill="#c9493b" rx="2"/>
+<text x="316" y="60" class="legend-text">Low (&lt;0.2)</text>
+<text x="20" y="92" class="label">Book 0</text>
+<text x="988" y="92" class="stats">n=1  avg=0.000  H=0%  M=0%  L=100%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s0-0"><title>0.0 (0.00)</title><rect x="180" y="80" width="4" height="15" fill="#c9493b"/></a>
+<text x="20" y="114" class="label">Book 1</text>
+<text x="988" y="114" class="stats">n=5  avg=0.437  H=40%  M=20%  L=40%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s1-1"><title>1.1 (0.50)</title><rect x="180" y="102" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s1-2"><title>1.2 (0.42)</title><rect x="184" y="102" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s1-3"><title>1.3 (0.16)</title><rect x="188" y="102" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s1-4"><title>1.4 (0.13)</title><rect x="192" y="102" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s1-5"><title>1.5 (0.98)</title><rect x="196" y="102" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="136" class="label">Book 2</text>
+<text x="988" y="136" class="stats">n=5  avg=0.588  H=40%  M=60%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s2-1"><title>2.1 (0.96)</title><rect x="180" y="124" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s2-2"><title>2.2 (0.47)</title><rect x="184" y="124" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s2-3"><title>2.3 (0.50)</title><rect x="188" y="124" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s2-4"><title>2.4 (0.50)</title><rect x="192" y="124" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s2-5"><title>2.5 (0.52)</title><rect x="196" y="124" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="158" class="label">Book 3</text>
+<text x="988" y="158" class="stats">n=7  avg=0.584  H=86%  M=14%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-1"><title>3.1 (0.74)</title><rect x="180" y="146" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-2"><title>3.2 (0.37)</title><rect x="184" y="146" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-3"><title>3.3 (0.67)</title><rect x="188" y="146" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-4"><title>3.4 (0.53)</title><rect x="192" y="146" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-5"><title>3.5 (0.61)</title><rect x="196" y="146" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-6"><title>3.6 (0.52)</title><rect x="200" y="146" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s3-7"><title>3.7 (0.64)</title><rect x="204" y="146" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="180" class="label">Book 4</text>
+<text x="988" y="180" class="stats">n=5  avg=0.662  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s4-1"><title>4.1 (0.70)</title><rect x="180" y="168" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s4-2"><title>4.2 (0.68)</title><rect x="184" y="168" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s4-3"><title>4.3 (0.63)</title><rect x="188" y="168" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s4-4"><title>4.4 (0.55)</title><rect x="192" y="168" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s4-5"><title>4.5 (0.76)</title><rect x="196" y="168" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="202" class="label">Book 5</text>
+<text x="988" y="202" class="stats">n=11  avg=0.692  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-1"><title>5.1 (0.70)</title><rect x="180" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-2"><title>5.2 (0.73)</title><rect x="184" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-3"><title>5.3 (0.79)</title><rect x="188" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-4"><title>5.4 (0.51)</title><rect x="192" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-5"><title>5.5 (0.76)</title><rect x="196" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-6"><title>5.6 (0.78)</title><rect x="200" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-7"><title>5.7 (0.71)</title><rect x="204" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-8"><title>5.8 (0.68)</title><rect x="208" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-9"><title>5.9 (0.51)</title><rect x="212" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-10"><title>5.10 (0.65)</title><rect x="216" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s5-11"><title>5.11 (0.78)</title><rect x="220" y="190" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="224" class="label">Book 6</text>
+<text x="988" y="224" class="stats">n=3  avg=0.676  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s6-1"><title>6.1 (0.86)</title><rect x="180" y="212" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s6-2"><title>6.2 (0.61)</title><rect x="184" y="212" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s6-3"><title>6.3 (0.55)</title><rect x="188" y="212" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="246" class="label">Book 7</text>
+<text x="988" y="246" class="stats">n=7  avg=0.592  H=71%  M=29%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-1"><title>7.1 (0.85)</title><rect x="180" y="234" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-2"><title>7.2 (0.68)</title><rect x="184" y="234" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-3"><title>7.3 (0.58)</title><rect x="188" y="234" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-4"><title>7.4 (0.37)</title><rect x="192" y="234" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-5"><title>7.5 (0.48)</title><rect x="196" y="234" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-6"><title>7.6 (0.54)</title><rect x="200" y="234" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s7-7"><title>7.7 (0.66)</title><rect x="204" y="234" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="268" class="label">Book 8</text>
+<text x="988" y="268" class="stats">n=4  avg=0.899  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s8-1"><title>8.1 (0.62)</title><rect x="180" y="256" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s8-2"><title>8.2 (0.99)</title><rect x="184" y="256" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s8-3"><title>8.3 (0.99)</title><rect x="188" y="256" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s8-4"><title>8.4 (1.00)</title><rect x="192" y="256" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="290" class="label">Book 9</text>
+<text x="988" y="290" class="stats">n=3  avg=0.514  H=33%  M=67%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s9-1"><title>9.1 (0.75)</title><rect x="180" y="278" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s9-2"><title>9.2 (0.45)</title><rect x="184" y="278" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s9-3"><title>9.3 (0.35)</title><rect x="188" y="278" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="312" class="label">Book 10</text>
+<text x="988" y="312" class="stats">n=4  avg=0.767  H=75%  M=25%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s10-1"><title>10.1 (0.99)</title><rect x="180" y="300" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s10-2"><title>10.2 (0.70)</title><rect x="184" y="300" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s10-3"><title>10.3 (0.96)</title><rect x="188" y="300" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s10-4"><title>10.4 (0.41)</title><rect x="192" y="300" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="334" class="label">Book 11</text>
+<text x="988" y="334" class="stats">n=2  avg=0.511  H=50%  M=50%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s11-1"><title>11.1 (0.63)</title><rect x="180" y="322" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s11-2"><title>11.2 (0.39)</title><rect x="184" y="322" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="356" class="label">Book 12</text>
+<text x="988" y="356" class="stats">n=5  avg=0.446  H=20%  M=80%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s12-1"><title>12.1 (0.68)</title><rect x="180" y="344" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s12-2"><title>12.2 (0.33)</title><rect x="184" y="344" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s12-3"><title>12.3 (0.44)</title><rect x="188" y="344" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s12-4"><title>12.4 (0.42)</title><rect x="192" y="344" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s12-5"><title>12.5 (0.36)</title><rect x="196" y="344" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="378" class="label">Book 13</text>
+<text x="988" y="378" class="stats">n=3  avg=0.857  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s13-1"><title>13.1 (0.82)</title><rect x="180" y="366" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s13-2"><title>13.2 (0.82)</title><rect x="184" y="366" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s13-3"><title>13.3 (0.94)</title><rect x="188" y="366" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="400" class="label">Book 14</text>
+<text x="988" y="400" class="stats">n=6  avg=0.638  H=67%  M=33%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s14-1"><title>14.1 (0.79)</title><rect x="180" y="388" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s14-2"><title>14.2 (0.59)</title><rect x="184" y="388" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s14-3"><title>14.3 (0.45)</title><rect x="188" y="388" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s14-4"><title>14.4 (0.44)</title><rect x="192" y="388" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s14-5"><title>14.5 (0.83)</title><rect x="196" y="388" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s14-6"><title>14.6 (0.72)</title><rect x="200" y="388" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="422" class="label">Book 15</text>
+<text x="988" y="422" class="stats">n=2  avg=0.721  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s15-1"><title>15.1 (0.80)</title><rect x="180" y="410" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s15-2"><title>15.2 (0.64)</title><rect x="184" y="410" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="444" class="label">Book 16</text>
+<text x="988" y="444" class="stats">n=8  avg=0.706  H=88%  M=12%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-1"><title>16.1 (0.88)</title><rect x="180" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-2"><title>16.2 (0.69)</title><rect x="184" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-3"><title>16.3 (0.85)</title><rect x="188" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-4"><title>16.4 (0.53)</title><rect x="192" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-5"><title>16.5 (0.74)</title><rect x="196" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-6"><title>16.6 (0.70)</title><rect x="200" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-7"><title>16.7 (0.90)</title><rect x="204" y="432" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s16-8"><title>16.8 (0.35)</title><rect x="208" y="432" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="466" class="label">Book 17</text>
+<text x="988" y="466" class="stats">n=4  avg=0.617  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s17-1"><title>17.1 (0.67)</title><rect x="180" y="454" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s17-2"><title>17.2 (0.54)</title><rect x="184" y="454" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s17-3"><title>17.3 (0.58)</title><rect x="188" y="454" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s17-4"><title>17.4 (0.67)</title><rect x="192" y="454" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="488" class="label">Book 18</text>
+<text x="988" y="488" class="stats">n=2  avg=0.651  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s18-1"><title>18.1 (0.74)</title><rect x="180" y="476" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s18-2"><title>18.2 (0.56)</title><rect x="184" y="476" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="510" class="label">Book 19</text>
+<text x="988" y="510" class="stats">n=2  avg=0.682  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s19-1"><title>19.1 (0.69)</title><rect x="180" y="498" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s19-2"><title>19.2 (0.68)</title><rect x="184" y="498" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="532" class="label">Book 20</text>
+<text x="988" y="532" class="stats">n=4  avg=0.535  H=75%  M=25%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s20-1"><title>20.1 (0.51)</title><rect x="180" y="520" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s20-2"><title>20.2 (0.45)</title><rect x="184" y="520" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s20-3"><title>20.3 (0.55)</title><rect x="188" y="520" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s20-4"><title>20.4 (0.63)</title><rect x="192" y="520" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="554" class="label">Book 21</text>
+<text x="988" y="554" class="stats">n=3  avg=0.578  H=67%  M=33%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s21-1"><title>21.1 (0.82)</title><rect x="180" y="542" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s21-2"><title>21.2 (0.60)</title><rect x="184" y="542" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s21-3"><title>21.3 (0.32)</title><rect x="188" y="542" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="576" class="label">Book 22</text>
+<text x="988" y="576" class="stats">n=2  avg=0.499  H=50%  M=50%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s22-1"><title>22.1 (0.59)</title><rect x="180" y="564" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s22-2"><title>22.2 (0.41)</title><rect x="184" y="564" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="598" class="label">Book 23</text>
+<text x="988" y="598" class="stats">n=4  avg=0.575  H=50%  M=50%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s23-1"><title>23.1 (0.72)</title><rect x="180" y="586" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s23-2"><title>23.2 (0.99)</title><rect x="184" y="586" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s23-3"><title>23.3 (0.29)</title><rect x="188" y="586" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s23-4"><title>23.4 (0.30)</title><rect x="192" y="586" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="620" class="label">Book 24</text>
+<text x="988" y="620" class="stats">n=5  avg=0.829  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s24-1"><title>24.1 (0.98)</title><rect x="180" y="608" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s24-2"><title>24.2 (1.00)</title><rect x="184" y="608" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s24-3"><title>24.3 (0.63)</title><rect x="188" y="608" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s24-4"><title>24.4 (0.74)</title><rect x="192" y="608" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s24-5"><title>24.5 (0.79)</title><rect x="196" y="608" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="642" class="label">Book 25</text>
+<text x="988" y="642" class="stats">n=9  avg=0.576  H=67%  M=22%  L=11%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-1"><title>25.1 (0.73)</title><rect x="180" y="630" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-2"><title>25.2 (0.58)</title><rect x="184" y="630" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-3"><title>25.3 (0.90)</title><rect x="188" y="630" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-4"><title>25.4 (0.77)</title><rect x="192" y="630" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-5"><title>25.5 (0.50)</title><rect x="196" y="630" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-6"><title>25.6 (0.44)</title><rect x="200" y="630" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-7"><title>25.7 (0.31)</title><rect x="204" y="630" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-8"><title>25.8 (0.16)</title><rect x="208" y="630" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s25-9"><title>25.9 (0.78)</title><rect x="212" y="630" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="664" class="label">Book 26</text>
+<text x="988" y="664" class="stats">n=4  avg=0.626  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s26-1"><title>26.1 (0.68)</title><rect x="180" y="652" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s26-2"><title>26.2 (0.62)</title><rect x="184" y="652" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s26-3"><title>26.3 (0.57)</title><rect x="188" y="652" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s26-4"><title>26.4 (0.63)</title><rect x="192" y="652" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="686" class="label">Book 27</text>
+<text x="988" y="686" class="stats">n=2  avg=0.538  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s27-1"><title>27.1 (0.54)</title><rect x="180" y="674" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s27-2"><title>27.2 (0.54)</title><rect x="184" y="674" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="708" class="label">Book 28</text>
+<text x="988" y="708" class="stats">n=3  avg=0.611  H=67%  M=33%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s28-1"><title>28.1 (0.71)</title><rect x="180" y="696" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s28-2"><title>28.2 (0.38)</title><rect x="184" y="696" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s28-3"><title>28.3 (0.75)</title><rect x="188" y="696" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="730" class="label">Book 29</text>
+<text x="988" y="730" class="stats">n=1  avg=1.000  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s29-1"><title>29.1 (1.00)</title><rect x="180" y="718" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="752" class="label">Book 30</text>
+<text x="988" y="752" class="stats">n=2  avg=0.745  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s30-1"><title>30.1 (0.83)</title><rect x="180" y="740" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s30-2"><title>30.2 (0.66)</title><rect x="184" y="740" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="774" class="label">Book 31</text>
+<text x="988" y="774" class="stats">n=5  avg=0.784  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s31-1"><title>31.1 (0.74)</title><rect x="180" y="762" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s31-2"><title>31.2 (0.64)</title><rect x="184" y="762" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s31-3"><title>31.3 (0.69)</title><rect x="188" y="762" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s31-4"><title>31.4 (0.85)</title><rect x="192" y="762" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s31-5"><title>31.5 (1.00)</title><rect x="196" y="762" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="796" class="label">Book 32</text>
+<text x="988" y="796" class="stats">n=2  avg=0.506  H=50%  M=50%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s32-1"><title>32.1 (0.63)</title><rect x="180" y="784" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s32-2"><title>32.2 (0.38)</title><rect x="184" y="784" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="818" class="label">Book 33</text>
+<text x="988" y="818" class="stats">n=1  avg=0.769  H=100%  M=0%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s33-1"><title>33.1 (0.77)</title><rect x="180" y="806" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="840" class="label">Book 34</text>
+<text x="988" y="840" class="stats">n=3  avg=0.394  H=67%  M=0%  L=33%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s34-1"><title>34.1 (0.50)</title><rect x="180" y="828" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s34-2"><title>34.2 (0.17)</title><rect x="184" y="828" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s34-3"><title>34.3 (0.51)</title><rect x="188" y="828" width="4" height="15" fill="#2d8a4e"/></a>
+<text x="20" y="862" class="label">Book 35</text>
+<text x="988" y="862" class="stats">n=4  avg=0.593  H=75%  M=25%  L=0%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s35-1"><title>35.1 (0.50)</title><rect x="180" y="850" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s35-2"><title>35.2 (0.62)</title><rect x="184" y="850" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s35-3"><title>35.3 (1.00)</title><rect x="188" y="850" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s35-4"><title>35.4 (0.26)</title><rect x="192" y="850" width="4" height="15" fill="#e8b83d"/></a>
+<text x="20" y="884" class="label">Book 36</text>
+<text x="988" y="884" class="stats">n=4  avg=0.000  H=0%  M=0%  L=100%</text>
+<a href="tlg0074.tlg003.perseus-eng80.html#s36-1"><title>36.1 (0.00)</title><rect x="180" y="872" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s36-2"><title>36.2 (0.00)</title><rect x="184" y="872" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s36-3"><title>36.3 (0.00)</title><rect x="188" y="872" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0074.tlg003.perseus-eng80.html#s36-4"><title>36.4 (0.00)</title><rect x="192" y="872" width="4" height="15" fill="#c9493b"/></a>
+<text x="180" y="899" class="warn">⚠ 36.1 → 36.4  (4 sections, avg=0.000)</text>
+<line x1="20" y1="913" x2="1200" y2="913" stroke="#ccc" stroke-width="1"/>
+<text x="20" y="933" class="total">TOTAL: 147 sections   avg=0.612   High=75%   Med=19%   Low=6%</text>
+<rect x="20" y="940" width="882.9931972789117" height="10" fill="#2d8a4e" rx="2"/>
+<rect x="902.9931972789117" y="940" width="224.76190476190476" height="10" fill="#e8b83d"/>
+<rect x="1127.7551020408164" y="940" width="72.24489795918367" height="10" fill="#c9493b" rx="2"/>
+</svg>

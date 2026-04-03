@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-04-02T05:50:37.368354
+Generated: 2026-04-03T05:53:07.599697
 Mode: full
 
 Total Authors: 135
 Total Works: 1018
 Total Books: 3514
 Total Lines: 1,049,996
-Translation Segments: 1,295,175
-Build Time: 7.4 minutes
-Database Size: 4268.2MB → 928.8MB compressed (21.8%)
+Translation Segments: 1,294,929
+Build Time: 7.3 minutes
+Database Size: 4268.7MB → 928.7MB compressed (21.8%)
 Dictionary Entries: 197,616
 Lemma Mappings: 3,050,714
 
@@ -288,7 +288,7 @@ Apollodorus / Library translations: Interlinear (Beta, generated from app dictio
 [Apollonius Rhodius]
 Apollonius Rhodius / Argonautica - 5,834 lines total, 4 books, max_lines/book=1,779, max_char=55 [Perseus]
 Apollonius Rhodius / Argonautica / Book 1 - 1,362 lines
-Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 166 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1362 segments [Excellent (100% coverage)]
+Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 112 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1362 segments [Excellent (100% coverage)]
 Apollonius Rhodius / Argonautica / Book 2 - 1,287 lines
 Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 69 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1287 segments [Excellent (100% coverage)]
 Apollonius Rhodius / Argonautica / Book 3 - 1,406 lines
@@ -534,7 +534,7 @@ Arrian / Tactica - 729 lines, max_char=773 [Perseus]
 Arrian / Tactica translations: Interlinear (Beta, generated from app dictionary and treebank) 728 segments [Excellent (100% coverage)]
 Arrian / tlg001 - 3,433 lines total, 7 books, max_lines/book=585, max_char=650 [Perseus]
 Arrian / tlg001 / Book 1 - 585 lines
-Arrian / tlg001 translations: E. J. Chinnock 29 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 585 segments [Excellent (100% coverage)]
+Arrian / tlg001 translations: E. J. Chinnock 30 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 585 segments [Excellent (100% coverage)]
 Arrian / tlg001 / Book 2 - 443 lines
 Arrian / tlg001 translations: E. J. Chinnock 27 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 443 segments [Excellent (100% coverage)]
 Arrian / tlg001 / Book 3 - 548 lines
@@ -641,18 +641,18 @@ Basil, Saint, Bishop of Caesarea / De legendis gentilium libris translations: In
 
 [Bion of Phlossa]
 Bion of Phlossa / Epitaphius Adonis - 98 lines, max_char=53 [Perseus]
-Bion of Phlossa / Epitaphius Adonis translations: Interlinear (Beta, generated from app dictionary and treebank) 98 segments [Excellent (100% coverage)], J. Banks 8 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Epitaphius Adonis translations: Interlinear (Beta, generated from app dictionary and treebank) 98 segments [Excellent (100% coverage)], J. Banks 2 segments [Excellent-Section (100% coverage)]
 Bion of Phlossa / Epithalamium Achillis et Deidameiae - 32 lines, max_char=50 [Perseus]
-Bion of Phlossa / Epithalamium Achillis et Deidameiae translations: Interlinear (Beta, generated from app dictionary and treebank) 32 segments [Excellent (100% coverage)], J. Banks 8 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Epithalamium Achillis et Deidameiae translations: Interlinear (Beta, generated from app dictionary and treebank) 32 segments [Excellent (100% coverage)]
 Bion of Phlossa / Fragmenta - 116 lines total, 16 books, max_lines/book=18, max_char=52 [Perseus]
 Bion of Phlossa / Fragmenta / Ode 3 - 18 lines
 Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 18 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Bion of Phlossa / Fragmenta / Ode 4 - 16 lines
-Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 16 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 16 segments [Excellent (100% coverage)]
 Bion of Phlossa / Fragmenta / Ode 5 - 13 lines
-Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)]
 Bion of Phlossa / Fragmenta / Ode 6 - 11 lines
-Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 11 segments [Excellent (100% coverage)], J. Banks 2 segments [Excellent-Section (100% coverage)]
+Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 11 segments [Excellent (100% coverage)]
 Bion of Phlossa / Fragmenta / Ode 7 - 15 lines
 Bion of Phlossa / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 15 segments [Excellent (100% coverage)]
 Bion of Phlossa / Fragmenta / Ode 8 - 7 lines
@@ -2861,7 +2861,7 @@ Longinus / On the Sublime translations: Interlinear (Beta, generated from app di
 [Longus]
 Longus / Daphnis and Chloe - 1,337 lines total, 4 books, max_lines/book=355, max_char=401 [Perseus]
 Longus / Daphnis and Chloe / Book 1 - 314 lines
-Longus / Daphnis and Chloe translations: Interlinear (Beta, generated from app dictionary and treebank) 314 segments [Excellent (100% coverage)], Rowland Smith 49 segments [Excellent-Section (100% coverage)]
+Longus / Daphnis and Chloe translations: Interlinear (Beta, generated from app dictionary and treebank) 314 segments [Excellent (100% coverage)], Rowland Smith 48 segments [Excellent-Section (100% coverage)]
 Longus / Daphnis and Chloe / Book 2 - 355 lines
 Longus / Daphnis and Chloe translations: Interlinear (Beta, generated from app dictionary and treebank) 355 segments [Excellent (100% coverage)], Rowland Smith 49 segments [Excellent-Section (100% coverage)]
 Longus / Daphnis and Chloe / Book 3 - 315 lines
@@ -3361,22 +3361,22 @@ Martial / Epigrammata translations: Interlinear (Beta, AI-generated from app dic
 
 [Moschus]
 Moschus / Epitaphius Bios - 126 lines, max_char=55 [Perseus]
-Moschus / Epitaphius Bios translations: Interlinear (Beta, generated from app dictionary and treebank) 126 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent-Section (100% coverage)]
+Moschus / Epitaphius Bios translations: Interlinear (Beta, generated from app dictionary and treebank) 126 segments [Excellent (100% coverage)]
 Moschus / Eros Drapeta - 29 lines, max_char=53 [Perseus]
-Moschus / Eros Drapeta translations: Interlinear (Beta, generated from app dictionary and treebank) 29 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent (100% coverage)]
+Moschus / Eros Drapeta translations: Interlinear (Beta, generated from app dictionary and treebank) 29 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Offset (100% coverage)]
 Moschus / Europa - 166 lines, max_char=50 [Perseus]
-Moschus / Europa translations: Interlinear (Beta, generated from app dictionary and treebank) 166 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent-Section (100% coverage)]
+Moschus / Europa translations: Interlinear (Beta, generated from app dictionary and treebank) 166 segments [Excellent (100% coverage)]
 Moschus / Fragmenta - 35 lines total, 4 books, max_lines/book=13, max_char=49 [Perseus]
 Moschus / Fragmenta / Ode 4 - 13 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)], J. Banks 3 segments [Excellent-Offset (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)]
 Moschus / Fragmenta / Ode 5 - 8 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 13 segments [Excellent-Section (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 1 segments [Excellent-Section (100% coverage)]
 Moschus / Fragmenta / Ode 6 - 8 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)], J. Banks 4 segments [Excellent-Offset (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)]
 Moschus / Fragmenta / Ode 7 - 6 lines
-Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)], J. Banks 3 segments [Excellent (100% coverage)]
+Moschus / Fragmenta translations: Interlinear (Beta, generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)]
 Moschus / Megara - 125 lines, max_char=51 [Perseus]
-Moschus / Megara translations: Interlinear (Beta, generated from app dictionary and treebank) 125 segments [Excellent (100% coverage)], J. Banks 36 segments [Excellent-Section (100% coverage)]
+Moschus / Megara translations: Interlinear (Beta, generated from app dictionary and treebank) 125 segments [Excellent (100% coverage)]
 
 [Nepos, Cornelius]
 Nepos, Cornelius / Agesilaus - 65 lines, max_char=401 [Perseus]

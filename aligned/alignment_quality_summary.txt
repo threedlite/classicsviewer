@@ -1,0 +1,41 @@
+-------------------------------------------------------------------------------------------------------------------
+  ALIGNMENT QUALITY SUMMARY
+-------------------------------------------------------------------------------------------------------------------
+Work                         Author                  Gr    En   Avg    H%    L%   Emb   Lex   Ent   Len   Spk  Shrd
+-------------------------------------------------------------------------------------------------------------------
+dionysius_ant                Dionysius of Halicar  4256  4251 0.986  99.6   0.4  1.00 0.168  0.25  0.99     -     1
+marcus                       Marcus Aurelius        577   488 0.905 100.0   0.0  0.92 0.156  0.07  0.96     -     0
+theocritus_epigrams          Theocritus              25    24 0.854 100.0   0.0  1.00 0.108  0.24  0.81     -     0
+heliodorus                   Heliodorus             274   274 0.852 100.0   0.0  0.99 0.068  0.16  0.82     -     0
+dionysius                    Dionysius of Halicar    26    29 0.818 100.0   0.0  1.00 0.165  0.38  0.86     -     0
+julian_mother                Julian                  20     9 0.798 100.0   0.0  0.62 0.199     -  0.94     -     0
+arrian_anabasis              Arrian                1406   206 0.759 100.0   0.0  0.64 0.204  0.34  0.96     -     0
+aristotle_const_athens       Aristotle              299    69 0.742  90.3   0.3  0.67 0.169  0.33  0.95     -     0
+theocritus_idylls            Theocritus             301    30 0.652  79.1  15.6  0.53 0.192  0.41  0.83     -    36
+apollonius                   Apollonius Rhodius     603   346 0.620  72.4  14.1  0.49 0.142  0.35  0.79     -     7
+moschus                      Moschus                 55    10 0.616  65.5  10.9  0.53 0.127  0.20  0.84     -     7
+arrian_cynegeticus           Arrian                 147    35 0.612  74.8   6.1  0.63 0.142  0.05  0.89     -     0
+diodorus                     Diodorus Siculus      8129  3135 0.590  63.9  16.6  0.50 0.134  0.43  0.79     -   392
+julian_helios                Julian                  44    32 0.569  71.1  24.4  0.84 0.087  0.04  0.53     -     0
+plotinus                     Plotinus               654   559 0.544  54.3  39.6  0.59 0.101  0.03  0.59     -     0
+theophrastus                 Theophrastus           332    31 0.515  52.7   9.0  0.58 0.127  0.07  0.81     -     0
+longus                       Longus                 538   213 0.515  88.6  11.2  0.34 0.049  0.02  0.48     -     0
+hippolytus                   Hippolytus            1419   544 0.486  83.6  16.1  0.31 0.055  0.04  0.44     -     2
+aesop                        Aesop                  523   311 0.450  64.0  21.7  0.50 0.064  0.01  0.80     -   135
+procopius_secret             Procopius             1019   227 0.449  44.1  26.3  0.47 0.107  0.18  0.76     -   145
+bion                         Bion of Phlossa         34     8 0.430  41.2  32.4  0.39 0.102     -  0.60     -     7
+iamblichus                   Iamblichus             461    59 0.427  44.2  32.0  0.39 0.150  0.11  0.60     -    47
+achilles_tatius              Achilles Tatius       1035   586 0.404  72.3  27.7  0.25 0.043  0.06  0.38     -     0
+alciphron                    Alciphron              128   122 0.364  44.1  53.6  0.41 0.021  0.04  0.46     -     0
+statius                      Statius                924   390 0.358  22.0  21.8  0.44 0.000     -  0.74     -    19
+procopius_wars               Procopius             7240   712 0.278  28.1  60.6  0.26 0.080  0.19  0.67     -  1951
+aristophanes_ecclesiazusae   Aristophanes           136    59 0.221  15.5  64.8 -0.01 0.030  0.03  0.70     -    68
+aristophanes_wasps           Aristophanes           172   375 0.167  16.3  77.7  0.19 0.013  0.06  0.19  0.77     8
+aristophanes_frogs           Aristophanes           169    87 0.160   9.8  71.5  0.04 0.026  0.03  0.60     -    85
+aristophanes_peace           Aristophanes           149    52 0.124   5.5  81.6 -0.02 0.019  0.03  0.65     -    92
+aristophanes_acharnians      Aristophanes           137   461 0.057   5.2  91.2  0.15 0.014  0.05  0.09     -     2
+aristophanes_knights         Aristophanes           155   532 0.057   4.8  91.3  0.16 0.013  0.05  0.09     -     0
+aristophanes_lysistrata      Aristophanes           145   535 0.051   5.2  93.4  0.13 0.013  0.04  0.07     -     0
+aristophanes_thesmophoriazusae Aristophanes           133   489 0.048   5.1  92.7  0.12 0.013  0.03  0.07     -     7
+aristophanes_plutus          Aristophanes           140   589 0.037   3.4  94.1  0.13 0.012  0.01  0.06     -     0
+-------------------------------------------------------------------------------------------------------------------

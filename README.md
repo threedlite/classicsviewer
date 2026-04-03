@@ -19,36 +19,37 @@ Patreon links below added for production hosting purposes. All db files are free
 Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
 
 
-  SAMPLE DATABASE:
+  SAMPLE DATABASE (673MB, 162MB compressed):
   - Greek: 10 authors, 259 works
   - Latin: 2 authors, 6 works
-  - Total: 12 authors, 265 works
+  - Total: 12 authors, 265 works, 238K lines, 3.2M words
 
-  FULL DATABASE:
+  FULL DATABASE (4.2GB, 929MB compressed):
   - Akkadian: 1 author, 1 work
   - Greek: 91 authors, 772 works
   - Italian: 1 author, 3 works
   - Latin: 40 authors, 230 works
   - Old English: 1 author, 1 work
   - Sumerian: 1 author, 11 works
-  - Total: 135 authors, 1,018 works
+  - Total: 135 authors, 953 works, 1.0M lines, 15.4M words
 
-  EXTENDED DATABASE:
+  EXTENDED DATABASE (13GB, 2.8GB compressed):
   - Akkadian: 1 author, 1 work
   - Arabic: 1 author, 1 work
+  - Chinese: 2 authors, 2 works
   - Coptic: 29 authors, 51 works
   - Greek: 388 authors, 2,049 works
   - Hebrew: 39 authors, 39 works
   - Italian: 1 author, 3 works
   - Latin: 40 authors, 230 works
-  - Norse: 1 author, 22 works
+  - Norse: 1 author, 25 works
   - Old English: 1 author, 1 work
   - Pali: 1 author, 5 works
   - Persian: 1 author, 1 work
   - Sanskrit: 270 authors, 270 works
   - Sumerian: 1 author, 11 works
   - Syriac: 4 authors, 39 works
-  - Total: 778 authors, 2,723 works
+  - Total: 780 authors, 2,663 works, 3.1M lines, 49.7M words
 
 
 NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv

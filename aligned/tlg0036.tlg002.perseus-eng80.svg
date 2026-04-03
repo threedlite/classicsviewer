@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="186" viewBox="0 0 1220 186">
+<rect width="1220" height="186" fill="#f5f5f5"/>
+<style>
+  text { font-family: "SF Mono", "Menlo", "Monaco", monospace; }
+  .title { font-size: 16px; font-weight: bold; }
+  .subtitle { font-size: 11px; fill: #888; }
+  .label { font-size: 11px; fill: #333; }
+  .stats { font-size: 10px; fill: #666; }
+  .warn { font-size: 9px; fill: #c9493b; }
+  .total { font-size: 12px; font-weight: bold; fill: #333; }
+  .legend-text { font-size: 10px; fill: #555; }
+</style>
+<text x="20" y="38" class="title">Alignment Quality Map — Bion of Phlossa — Epitaphius Adonis</text>
+<rect x="20" y="50" width="12" height="12" fill="#2d8a4e" rx="2"/>
+<text x="36" y="60" class="legend-text">High (≥0.5)</text>
+<rect x="160" y="50" width="12" height="12" fill="#e8b83d" rx="2"/>
+<text x="176" y="60" class="legend-text">Medium (0.2–0.5)</text>
+<rect x="300" y="50" width="12" height="12" fill="#c9493b" rx="2"/>
+<text x="316" y="60" class="legend-text">Low (&lt;0.2)</text>
+<text x="20" y="92" class="label">Book </text>
+<text x="988" y="92" class="stats">n=34  avg=0.430  H=41%  M=26%  L=32%</text>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-1"><title>1.1 (0.50)</title><rect x="180" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-13"><title>1.13 (0.00)</title><rect x="184" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-23"><title>1.23 (0.01)</title><rect x="188" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-31"><title>1.31 (0.00)</title><rect x="192" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-39"><title>1.39 (0.00)</title><rect x="196" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-54"><title>1.54 (0.00)</title><rect x="200" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-64"><title>1.64 (0.00)</title><rect x="204" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-72"><title>1.72 (0.00)</title><rect x="208" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-80"><title>1.80 (0.91)</title><rect x="212" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s1-91"><title>1.91 (0.90)</title><rect x="216" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s2-1"><title>2.1 (0.09)</title><rect x="220" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s2-10"><title>2.10 (0.33)</title><rect x="224" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s2-18"><title>2.18 (0.95)</title><rect x="228" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s2-27"><title>2.27 (0.39)</title><rect x="232" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-3-1"><title>3.3.1 (0.16)</title><rect x="236" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-3-9"><title>3.3.9 (0.31)</title><rect x="240" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-4-1"><title>3.4.1 (0.44)</title><rect x="244" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-4-12"><title>3.4.12 (0.56)</title><rect x="248" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-5-1"><title>3.5.1 (0.90)</title><rect x="252" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-5-9"><title>3.5.9 (0.74)</title><rect x="256" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-6-1"><title>3.6.1 (0.95)</title><rect x="260" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-7-1"><title>3.7.1 (0.45)</title><rect x="264" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-7-9"><title>3.7.9 (0.71)</title><rect x="268" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-8-1"><title>3.8.1 (0.86)</title><rect x="272" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-9-1"><title>3.9.1 (0.82)</title><rect x="276" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-10-1"><title>3.10.1 (0.34)</title><rect x="280" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-11-1"><title>3.11.1 (0.19)</title><rect x="284" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-12-1"><title>3.12.1 (0.64)</title><rect x="288" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-13-1"><title>3.13.1 (0.15)</title><rect x="292" y="80" width="4" height="15" fill="#c9493b"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-14-1"><title>3.14.1 (0.65)</title><rect x="296" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-15-1"><title>3.15.1 (0.31)</title><rect x="300" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-16-1"><title>3.16.1 (0.66)</title><rect x="304" y="80" width="4" height="15" fill="#2d8a4e"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-17-1"><title>3.17.1 (0.48)</title><rect x="308" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<a href="tlg0036.tlg002.perseus-eng80.html#s3-18-1"><title>3.18.1 (0.21)</title><rect x="312" y="80" width="4" height="15" fill="#e8b83d"/></a>
+<text x="180" y="107" class="warn">⚠ 1.13 → 1.72  (7 sections, avg=0.002)</text>
+<line x1="20" y1="121" x2="1200" y2="121" stroke="#ccc" stroke-width="1"/>
+<text x="20" y="141" class="total">TOTAL: 34 sections   avg=0.430   High=41%   Med=26%   Low=32%</text>
+<rect x="20" y="148" width="485.88235294117646" height="10" fill="#2d8a4e" rx="2"/>
+<rect x="505.88235294117646" y="148" width="312.3529411764706" height="10" fill="#e8b83d"/>
+<rect x="818.2352941176471" y="148" width="381.764705882353" height="10" fill="#c9493b" rx="2"/>
+</svg>

@@ -270,19 +270,21 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 ### Multiple Database Files:
 1. **`data-prep/perseus_texts_sample.db`** - Sample database source
    - Created by `create_perseus_database.py sample`
-   - Contains only authors from SAMPLE_AUTHORS.md
+   - Contains only authors from SAMPLE_AUTHORS.csv
+   - 12 authors, 265 works, 667 books, 238K lines, 3.2M words, 126K translation segments
+   - Original uncompressed SQLite (673MB), compressed ZIP (162MB)
    - Smaller size for initial Play Store release
 
 2. **`data-prep/perseus_texts_full.db`** - Full database source
    - Created by `create_perseus_database.py full`
-   - Contains 135 authors (Greek and Latin)
-   - Original uncompressed SQLite (3.7GB), compressed ZIP (838MB)
+   - 135 authors (Greek and Latin), 953 works, 3,514 books, 1.0M lines, 15.4M words, 1.3M translation segments
+   - Original uncompressed SQLite (4.2GB), compressed ZIP (929MB)
    - For local debugging and future release
 
 3. **`data-prep/perseus_texts_extended.db`** - Extended database source
    - Created by `create_perseus_database.py extended`
-   - Contains 778 authors (Perseus + First1KGreek + other languages)
-   - Original uncompressed SQLite (13GB), compressed ZIP (2.7GB)
+   - 780 authors (Perseus + First1KGreek + other languages), 2,663 works, 173K books, 3.1M lines, 49.7M words, 3.3M translation segments
+   - Original uncompressed SQLite (13GB), compressed ZIP (2.8GB)
    - For comprehensive Greek text coverage
 
 4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
@@ -721,15 +723,16 @@ cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1
 5. **Test immediately after deployment** - schema mismatches crash on startup
 6. **TIMEOUT = CORRUPTION**: If any script times out during compression, the ZIP file is corrupted
 7. **Always verify ZIP integrity**: Use `unzip -t` before deployment
-8. **Database size check**: Extracted database should match expected size (sample: ~671MB, full: ~3.7GB, extended: ~13GB), not 4KB
+8. **Database size check**: Extracted database should match expected size (sample: ~673MB, full: ~4.2GB, extended: ~13GB), not 4KB
 9. **Never, ever, EVER, add word-specific fixes!!!!!!!!**: Always use the most general solution possible that covers all cases.
 10. Don't create ad-hoc scripts for data fixes as one-offs.  Integrate into the main db creation flow so it happens in future runs also.
 
 ### Database Build Process
-- **Sample database creation**: ~5 minutes, 671MB uncompressed, 163MB ZIP (12 authors, 667 books, 238K lines, 3.2M words)
-- **Full database creation**: ~7 minutes, 3.7GB uncompressed, 838MB ZIP (135 authors, 3,468 books, 998K lines, 14.5M words)
-- **Extended database creation**: ~28 minutes, 13GB uncompressed, 2.7GB ZIP (778 authors, 172K books, 3.1M lines, 48.7M words)
+- **Sample database creation**: ~5 minutes, 673MB uncompressed, 162MB ZIP (12 authors, 265 works, 667 books, 238K lines, 3.2M words)
+- **Full database creation**: ~7 minutes, 4.2GB uncompressed, 929MB ZIP (135 authors, 953 works, 3,514 books, 1.0M lines, 15.4M words)
+- **Extended database creation**: ~35 minutes, 13GB uncompressed, 2.8GB ZIP (780 authors, 2,663 works, 173K books, 3.1M lines, 49.7M words)
 - **iOS database creation**: ~3 minutes, 347MB uncompressed, 82MB ZIP (11 authors, 358 books, 60K lines, 769K words)
+  - Command: `cd data-prep && python3 create_perseus_database.py sample IOS_SAMPLE_AUTHORS.csv ios`
 - Creates comprehensive translation lookup table for all texts
 - **Schema validation**: Room expects exact match between SQLite and entity definitions
 
@@ -774,8 +777,8 @@ The extended mode includes Perseus + First1KGreek + additional languages:
 
 **Before launching the app, verify:**
 1. `unzip -t perseus_database/src/main/assets/perseus_texts.db.zip` returns "OK"
-2. ZIP file size matches expected (sample: ~163MB, full: ~838MB, extended: ~2.7GB)
-3. Source database exists with expected size (sample: ~671MB, full: ~3.7GB, extended: ~13GB)
+2. ZIP file size matches expected (sample: ~162MB, full: ~929MB, extended: ~2.8GB)
+3. Source database exists with expected size (sample: ~673MB, full: ~4.2GB, extended: ~13GB)
 4. App launches without crash
 5. Database extraction completes (watch for progress dialog)
 6. Authors list shows 100+ Greek and Latin authors
