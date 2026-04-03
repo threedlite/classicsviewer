@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-03-15T14:46:37.826076
+Generated: 2026-04-03T06:23:57.411374
 Mode: sample
 
 Total Authors: 11
@@ -7,8 +7,8 @@ Total Works: 41
 Total Books: 358
 Total Lines: 60,385
 Translation Segments: 89,748
-Build Time: 3.3 minutes
-Database Size: 350.0MB → 81.5MB compressed (23.3%)
+Build Time: 3.2 minutes
+Database Size: 349.9MB → 81.5MB compressed (23.3%)
 Dictionary Entries: 61,070
 Lemma Mappings: 765,526
 
@@ -29,29 +29,29 @@ latin:
 === DETAILED BREAKDOWN ===
 
 [Aristotle]
-Aristotle / Nicomachean Ethics - 3,659 lines total, 10 books, max_lines/book=439, max_char=742 [Perseus]
+Aristotle / Nicomachean Ethics - 3,659 lines total, 10 books, max_lines/book=439, max_char=751 [Perseus]
 Aristotle / Nicomachean Ethics / Book 1 - 353 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 158 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 353 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 158 segments [Limited-Section (29% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 353 segments [Limited (29% coverage)]
 Aristotle / Nicomachean Ethics / Book 2 - 233 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited (15% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 233 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (25% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 233 segments [Limited (25% coverage)]
 Aristotle / Nicomachean Ethics / Book 3 - 429 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 174 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 429 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 174 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 429 segments [Limited (26% coverage)]
 Aristotle / Nicomachean Ethics / Book 4 - 426 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 173 segments [Limited-Section (11% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 426 segments [Limited (11% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 173 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 426 segments [Limited (28% coverage)]
 Aristotle / Nicomachean Ethics / Book 5 - 397 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 151 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 151 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (28% coverage)]
 Aristotle / Nicomachean Ethics / Book 6 - 272 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (15% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 103 segments [Limited-Section (25% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Limited (25% coverage)]
 Aristotle / Nicomachean Ethics / Book 7 - 365 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 123 segments [Limited (15% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 365 segments [Limited (15% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 123 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 365 segments [Limited (26% coverage)]
 Aristotle / Nicomachean Ethics / Book 8 - 439 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 104 segments [Limited-Section (12% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 439 segments [Limited (12% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 104 segments [Limited-Section (26% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 439 segments [Limited (26% coverage)]
 Aristotle / Nicomachean Ethics / Book 9 - 348 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 99 segments [Limited-Section (16% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 348 segments [Limited (16% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 99 segments [Limited-Section (28% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 348 segments [Limited (28% coverage)]
 Aristotle / Nicomachean Ethics / Book 10 - 397 lines
-Aristotle / Nicomachean Ethics translations: Harris Rackham 115 segments [Limited-Section (14% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (14% coverage)]
-Aristotle / Poetics - 621 lines, max_char=345 [Perseus]
-Aristotle / Poetics translations: Interlinear (Beta, generated from app dictionary and treebank) 609 segments [Fair (54% coverage)], William Hamilton Fyfe 382 segments [Fair (54% coverage)]
+Aristotle / Nicomachean Ethics translations: Harris Rackham 115 segments [Limited-Section (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 397 segments [Limited (27% coverage)]
+Aristotle / Poetics - 621 lines, max_char=355 [Perseus]
+Aristotle / Poetics translations: Interlinear (Beta, generated from app dictionary and treebank) 609 segments [Limited (24% coverage)], William Hamilton Fyfe 382 segments [Limited (24% coverage)]
 
 [Epictetus]
 Epictetus / The Enchiridion - 711 lines, max_char=417 [Perseus]
@@ -765,10 +765,10 @@ P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 952 lines
 P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 952 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
 
 [Plato]
-Plato / Ion - 471 lines, max_char=533 [Perseus]
-Plato / Ion translations: Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Good (80% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (80% coverage)]
-Plato / Phaedo - 1,367 lines, max_char=1,398 [Perseus]
-Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (24% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Limited (24% coverage)]
+Plato / Ion - 471 lines, max_char=540 [Perseus]
+Plato / Ion translations: Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Good (93% coverage)], William Rangeley Maitland Lamb 174 segments [Good-Section (93% coverage)]
+Plato / Phaedo - 1,367 lines, max_char=1,404 [Perseus]
+Plato / Phaedo translations: Harold North Fowler 93 segments [Limited-Section (27% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1367 segments [Limited (27% coverage)]
 
 [Plutarch]
 Plutarch / Alexander - 1,150 lines, max_char=981 [Perseus]
