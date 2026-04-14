@@ -32,10 +32,15 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Run with caffeinate to prevent idle sleep
 cd "$SCRIPT_DIR"
-# Activate venv with CLTK installed
-source venv/bin/activate
+# Locate project venv (data-prep/build_modules/generate_interlinear → project root)
+PROJECT_VENV_PY="$(cd "$SCRIPT_DIR/../../.." && pwd)/venv/bin/python3"
+if [ ! -x "$PROJECT_VENV_PY" ]; then
+    echo "ERROR: project venv not found at $PROJECT_VENV_PY" >&2
+    echo "Create with: python3 -m venv venv && venv/bin/pip install -r data-prep/requirements.txt" >&2
+    exit 1
+fi
 # Use python3 -u for unbuffered output so log updates in real-time
-caffeinate -i python3 -u interlinear_list.py "$WORKS_CSV" "$DATABASE_PATH" --workers "$NUM_WORKERS" > "$LOGFILE" 2>&1 &
+caffeinate -i "$PROJECT_VENV_PY" -u interlinear_list.py "$WORKS_CSV" "$DATABASE_PATH" --workers "$NUM_WORKERS" > "$LOGFILE" 2>&1 &
 
 PID=$!
 echo "Background process started with PID: $PID"

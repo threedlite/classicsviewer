@@ -93,8 +93,9 @@ class TranslationValidator:
     def _extract_segments(self, file_path: Path) -> List[str]:
         """Extract text segments from TEI XML file."""
         try:
+            parser = etree.XMLParser(no_network=True)
             with open(file_path, 'rb') as f:
-                tree = etree.parse(f)
+                tree = etree.parse(f, parser)
 
             # Look for various TEI elements that contain text
             segments = []

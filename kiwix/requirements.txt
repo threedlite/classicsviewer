@@ -23,4 +23,4 @@
 # multiprocessing-logging>=0.3.4
 
 # For creating ZIM files directly from Python (required for create_zim_optimized.py):
-libzim>=3.4.0
+libzim>=3.9.0

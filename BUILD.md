@@ -7,7 +7,7 @@ Step-by-step instructions to build and run Classics Viewer from a fresh clone.
 Before starting, ensure you have:
 
 - **Git** - for cloning repositories
-- **Python 3.8+** - for database creation
+- **Python 3.13+** - for database creation (cltk 2.x requires 3.13+)
 - **Java 17+** - required for Gradle/Android builds (JDK, not just JRE)
   - macOS: `brew install openjdk@17` or install from [Adoptium](https://adoptium.net/)
   - Verify with: `java -version`
@@ -106,143 +106,179 @@ cd data-sources
 
 # Opera Graeca Adnotata corpus - provides additional lemma mappings
 curl -L -O https://zenodo.org/records/14206061/files/opera_graeca_adnotata_v0.2.0.zip
-unzip opera_graeca_adnotata_v0.2.0.zip
+
+# ⚠ ZIP64 format (7.8 GB) — standard `unzip` WILL FAIL. Use ditto (macOS) or 7z (Linux):
+ditto -x -k opera_graeca_adnotata_v0.2.0.zip .
+# Verify: ls opera_graeca_adnotata_v0.2.0/workspace/oga.zip
 
 cd ..
 ```
 If you skip this download, add `--skip-oga` to the database build command in Step 5.
 
-**Generate missing interlinear file** (if needed):
-
-The sample build requires interlinear translations for Iliad, Odyssey, and Aeneid.
-If the Aeneid file is missing, generate it:
+**Required for Coptic dictionary** (11,284 entries — build succeeds without it but produces 0 dictionary entries):
 ```bash
-cd data-prep/build_modules/generate_interlinear
-source ../../../venv/bin/activate
-python3 generate_latin_interlinear.py ../../perseus_texts_sample.db \
-    /path/to/classicsviewer/data-sources/classicsviewer_interlinear phi0690.phi003
-cd ../../..
-```
-Note: This requires running the database build first (it will fail at interlinear import),
-then generating the file, then re-running the database build.
-
-## Step 3: Download Wiktionary Dumps (Optional)
-
-The morphological analysis uses pre-extracted Wiktionary data included in the repository.
-However, if you need to regenerate this data from scratch, download these dumps:
-
-```bash
-cd data-sources
-
-# English Wiktionary (~1.4GB compressed)
-curl -L -O https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2
-
-# Greek Wiktionary (~98MB compressed)
-curl -L -O https://dumps.wikimedia.org/elwiktionary/latest/elwiktionary-latest-pages-articles.xml.bz2
-
-cd ..
+mkdir -p coptic/data-sources
+curl -L -o coptic/data-sources/Comprehensive_Coptic_Lexicon-v1.2-2020.xml \
+  "https://raw.githubusercontent.com/KELLIA/dictionary/master/xml/Comprehensive_Coptic_Lexicon-v1.2-2020.xml"
 ```
 
-**Note**: The repository includes `data-prep/wiktionary-processing/all_greek_wiktionary_pages.json`
-which is the pre-extracted cache. You can skip this step for a basic build.
+**Sanskrit Bhagavad Gita** (download + parse, needed before Sanskrit build):
+```bash
+cd sanskrit/data-sources
+bash download_bhagavad_gita_sanskrit.sh   # 18 chapters from Sanskrit Wikisource
+bash download_bhagavad_gita_english.sh    # Arnold translation
+bash download_bhagavad_gita_besant.sh     # Besant translation
+python3 parse_bhagavad_gita_sanskrit.py
+python3 parse_bhagavad_gita_english.py
+python3 parse_bhagavad_gita_besant.py
+cd ../..
+```
+⚠ Without this, the Sanskrit build silently skips Bhagavad Gita (700 verses, 2 translations).
+
+## Step 3: Download Wiktionary Dumps
+
+The morphological analysis uses a cached extraction from Wiktionary. Use the bundled script to download the dump and rebuild the cache:
+
+```bash
+cd data-prep/wiktionary-processing
+./build_greek_pages_cache.sh --el    # Downloads en+el dumps (~1.8 GB total), extracts Greek pages cache (~5 min)
+cd ../..
+```
+
+The script is idempotent — if the dump is already downloaded, it skips to extraction. If the cache already exists, it regenerates it from the dump (useful after a Wiktionary update).
+
+**Note**: The repository may include a pre-existing `all_greek_wiktionary_pages.json` cache, but it can be stale. Re-running the script ensures you get the latest Wiktionary data (~137k Greek pages as of Apr 2026).
 
 ## Step 4: Set Up Python Environment
 
 ```bash
-# Create virtual environment
+# Create virtual environment (Python 3.13+ required)
 python3 -m venv venv
 
-# Activate it
-source venv/bin/activate  # On macOS/Linux
-# Or on Windows: venv\Scripts\activate
-
 # Install dependencies
-pip install -r data-prep/requirements.txt
+venv/bin/pip install -r data-prep/requirements.txt
 ```
 
-## Step 5: Build Language Databases (Extended Mode Only)
+⚠ **One venv for the whole project.** Scripts in `sanskrit/run_build.sh` and `data-prep/build_modules/generate_interlinear/run_interlinear_no_sleep.sh` reference `<project-root>/venv`. Do NOT use `source venv/bin/activate` for multiprocessing scripts — worker processes inherit the system Python, not the activated venv. Use `./venv/bin/python3` or the wrapper scripts instead.
 
-Skip this step if you only need the sample database. For extended mode with 778+ authors across multiple languages, build these databases first:
+## Step 5: Generate Interlinear Translations (Extended Mode Only)
+
+⚠ **This is the most time-consuming step and the most commonly skipped — but without it, ~80% of translation data is missing.** The interlinear XMLs are NOT committed to git (too large). They must be regenerated on every fresh clone.
+
+**Build order matters:** The interlinear generator reads dictionary data from the Perseus database to produce glosses. The correct sequence is:
+
+1. Build a base extended DB first (Step 7, without interlinear — it will have ~500K translations)
+2. Generate interlinear XMLs (this step — reads the base DB's dictionary)
+3. Rebuild extended DB (Step 7 again — imports the XMLs, bringing translations to ~3.3M)
+
+If the base DB doesn't exist yet, the interlinear generator will fail or produce empty glosses.
 
 ```bash
-source venv/bin/activate
+cd data-prep/build_modules/generate_interlinear
 
-# Sanskrit (~15-20 minutes, includes interlinear generation)
-cd sanskrit && python3 create_sanskrit_database_interlinear.py full && cd ..
+# Greek interlinear (~7 hours, 8 workers, ~2,049 works)
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../perseus_texts_extended.db 8
+# Monitor: tail -f generation.log
+# Check:   grep -c "Work .* done" generation.log
 
-# Hebrew (~1 minute)
-cd hebrewOT && python3 process_hebrew_complete.py && cd ..
+# Latin interlinear (~17 seconds, 230 works)
+./run_latin_interlinear_no_sleep.sh INTERLINEAR_ALL_LATIN_WITH_IDS.csv ../../perseus_texts_full.db 8
 
-# Coptic (~1 minute, requires data-sources/corpora)
+cd ../../..
+```
+
+Output: ~2,200 XML files in `data-sources/classicsviewer_interlinear/`. These are imported by the extended database build in Step 7.
+
+⚠ **Gloss quality depends on dictionary quality.** The interlinear generator uses the Wiktionary definitions from `wiktionary_definitions_complete.json`, which is regenerated during each database build. If you update the Wiktionary extraction code, rebuild the databases first, then regenerate interlinear to pick up the improved definitions.
+
+## Step 6: Build Language Databases (Extended Mode Only)
+
+Skip this step if you only need the sample database. Each module produces a standalone `.db` that gets merged into the extended database. These can all run in parallel (they are independent).
+
+```bash
+# Sanskrit (~10 hours full mode, 270 works, uses Stanza NLP)
+# ⚠ Ensure BG data exists first (see Step 2 — "Sanskrit Bhagavad Gita")
+cd sanskrit && ./run_build.sh full && cd ..
+
+# Chinese (~75 seconds, downloads from Wikisource)
+cd chinese && python3 create_chinese_database.py && cd ..
+
+# Hebrew — ⚠ TWO scripts needed:
+cd hebrewOT
+python3 process_hebrew_complete.py     # builds hebrew_texts.db (text + Strong's)
+python3 create_hebrew_lexicon.py       # builds hebrew_lexicon.zip (Strong's + BDB)
+cd ..
+# ⚠ MUST run BOTH scripts. process_hebrew_complete.py alone produces a lexicon
+#    with only Strong's entries (8,674). create_hebrew_lexicon.py adds Brown-Driver-
+#    Briggs (11,845 entries). The extended merge imports hebrew_lexicon.zip.
+
+# Coptic (~30 seconds, requires data-sources/corpora + Coptic lexicon XML)
+# ⚠ Without the lexicon XML, build succeeds but produces 0 dictionary entries.
 cd coptic && python3 create_coptic_database.py && cd ..
 
-# Syriac (~30 seconds, requires data-sources/pta_data)
+# Syriac (~10 seconds, requires data-sources/pta_data)
 cd syriac && python3 create_syriac_database.py && cd ..
 
 # Pali (~2 minutes, auto-clones bilara-data from SuttaCentral)
 cd pali && python3 create_pali_database.py && cd ..
 
-# Norse (~1 minute, auto-clones CLTK Old Norse texts)
-cd norse && python3 create_norse_database.py && cd ..
-
-# Old English (~30 seconds, auto-downloads from Project Gutenberg)
+# These are all fast (stdlib only, seconds each):
+cd norse       && python3 create_norse_database.py && cd ..
 cd old_english && python3 create_old_english_database.py && cd ..
-
-# Dante (~30 seconds, auto-downloads from Project Gutenberg)
-cd dante && python3 create_dante_database.py && cd ..
-
-# Arabic (~10 seconds)
-cd arabic && python3 create_arabic_texts.py && cd ..
-
-# Persian (~30 seconds, requires data-sources/canonical-farsiLit)
-cd persian && python3 create_persian_database.py && cd ..
-
-# Sumerian and Akkadian (~30 seconds each)
-cd cuneiform && python3 process_sumerian_complete.py && python3 process_akkadian_complete.py && cd ..
+cd dante       && python3 create_dante_database.py && cd ..
+cd arabic      && python3 create_arabic_texts.py && cd ..
+cd persian     && python3 create_persian_database.py && cd ..
+cd cuneiform   && python3 process_sumerian_complete.py && python3 process_akkadian_complete.py && cd ..
 ```
 
-Each script creates a `*_texts.db` file that will be automatically merged when you build the extended database.
+Each script creates a `*_texts.db` file that will be automatically merged when you build the extended database. Missing databases are skipped with a warning — but the data will be absent.
 
-## Step 6: Build the Sample Database
+## Step 7: Build the Perseus Databases
 
-The sample database includes 12 authors (Homer, Plato, Sophocles, etc.) and is suitable for the Play Store release.
+**NEVER run these in parallel** — they share output files and will corrupt each other.
 
 ```bash
 cd data-prep
 
-# Activate virtual environment first
-source ../venv/bin/activate
-
-# Build takes ~5 minutes
-# Add --skip-oga if you didn't download the OGA corpus in Step 2
+# Sample: 12 authors, ~8 min, 670 MB / 162 MB zip
 python3 create_perseus_database.py sample
 
-# Or with --skip-oga:
-# python3 create_perseus_database.py sample --skip-oga
+# Full: 135 authors (Greek + Latin), ~12 min, 4.2 GB / 929 MB zip
+python3 create_perseus_database.py full
+
+# Extended: 780 authors (all languages), ~70 min, 13 GB / 2.8 GB zip
+# ⚠ Merges all language DBs from Step 6 + interlinear XMLs from Step 5
+python3 create_perseus_database.py extended
 
 cd ..
 ```
 
-**Expected output**:
-- `data-prep/perseus_texts_sample.db` (~671MB)
-- `app/src/debug/assets/perseus_texts.db.zip` (~163MB)
-- `app/src/main/assets/perseus_texts.db.zip` (~163MB)
+Add `--skip-oga` if you didn't download the OGA corpus in Step 2.
 
-**Verification**:
+**Verification** (extended mode):
 ```bash
-# Check database was created
-ls -lh data-prep/perseus_texts_sample.db
-# Should show ~671MB
+# Check sizes
+ls -lh data-prep/perseus_texts_extended.db   # ~13 GB
+unzip -t data-prep/perseus_texts_extended.db.zip  # no errors
 
-# Check ZIP was created and is valid
-ls -lh app/src/debug/assets/perseus_texts.db.zip
-# Should show ~163MB
-
-unzip -t app/src/debug/assets/perseus_texts.db.zip
-# Should show "No errors detected"
+# Spot-check row counts
+sqlite3 data-prep/perseus_texts_extended.db "
+SELECT 'authors', COUNT(*) FROM authors
+UNION ALL SELECT 'works', COUNT(*) FROM works
+UNION ALL SELECT 'text_lines', COUNT(*) FROM text_lines
+UNION ALL SELECT 'translation_segments', COUNT(*) FROM translation_segments
+UNION ALL SELECT 'dictionary_entries', COUNT(*) FROM dictionary_entries
+UNION ALL SELECT 'lemma_map', COUNT(*) FROM lemma_map;"
+# Expected (Apr 2026):
+#   authors:              ~780
+#   works:                ~2,728
+#   text_lines:           ~3,158,000
+#   translation_segments: ~3,300,000  (if <500K, interlinear XMLs are missing — see Step 5)
+#   dictionary_entries:   ~625,000    (if coptic=0 or no BDB, check Step 2 + Step 6 notes)
+#   lemma_map:            ~12,760,000
 ```
 
-## Step 7: Build the APK
+## Step 8: Build the APK
 
 ### Option A: Command Line
 
@@ -265,7 +301,7 @@ ls -lh app/build/outputs/apk/debug/app-debug.apk
 3. Select **Build > Build Bundle(s) / APK(s) > Build APK(s)**
 4. APK will be at `app/build/outputs/apk/debug/app-debug.apk`
 
-## Step 8: Deploy to Device
+## Step 9: Deploy to Device
 
 Connect your Android device via USB with USB debugging enabled.
 
@@ -282,7 +318,7 @@ Or use the convenience script:
 ./deploy_simple.sh
 ```
 
-## Step 9: Verify Installation
+## Step 10: Verify Installation
 
 1. Launch the app on your device
 2. Wait for database extraction (~6-7 seconds on first launch)
@@ -366,8 +402,38 @@ adb uninstall com.classicsviewer.app.debug && adb install app/build/outputs/apk/
 adb logcat | grep -E "classicsviewer|Perseus"
 ```
 
+## Build Times (Apple Silicon, Apr 2026)
+
+| Step | Time |
+|------|------|
+| Wiktionary cache (download + extract) | ~12 min |
+| Greek interlinear (2,049 works, 8 workers) | ~7 hours |
+| Latin interlinear (230 works) | ~17 seconds |
+| Sanskrit full (270 works, 8 workers) | ~10 hours |
+| Chinese (downloads from Wikisource) | ~75 seconds |
+| All other language modules combined | ~2 minutes |
+| Sample DB | ~8 min |
+| Full DB | ~12 min |
+| Extended DB | ~70 min |
+| **Total (worst case, sequential)** | **~19 hours** |
+
+Greek interlinear and Sanskrit can run in parallel if you have CPU/RAM headroom (each uses 8 workers). All other language modules can run in parallel with everything.
+
+## Common Pitfalls
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Extended DB has <500K translation_segments | Interlinear XMLs missing (Step 5 skipped) | Run Greek + Latin interlinear generation, then rebuild extended |
+| Coptic has 0 dictionary_entries | `Comprehensive_Coptic_Lexicon-v1.2-2020.xml` missing | Download from KELLIA repo (see Step 2) |
+| Hebrew lexicon missing BDB entries (only ~8,674 instead of ~20,500) | Only ran `process_hebrew_complete.py` | Also run `create_hebrew_lexicon.py` (see Step 6) |
+| Sanskrit missing Bhagavad Gita (700 verses) | `bhagavad_gita_sanskrit.json` not generated | Run download + parse scripts (see Step 2) |
+| OGA extraction fails with "End-of-central-directory signature not found" | ZIP64 file, standard `unzip` can't handle it | Use `ditto -x -k` (macOS) or `7z x` (Linux) |
+| Syriac Philippians has 10 chapters of 1 line each | PTA work code collision (pta0001/pta073 vs pta9999/pta073) | Verify syriac build checks author-level code is pta9999 for NT books |
+| Interlinear glosses show "epi ...", leading commas, or "adjective" | Stale `wiktionary_definitions_complete.json` | Rebuild databases (Step 7) to regenerate the definitions file, then regenerate interlinear (Step 5) |
+
 ## Next Steps
 
 - See `CLAUDE.md` for detailed development guidelines
 - See `data-prep/README.md` for database creation details
-- See `data-prep/BUILD_INSTRUCTIONS.md` for morphology extraction details
+- See `data-prep/wiktionary-processing/WIKTIONARY_EXTRACTION_GUIDE.md` for morphology pipeline details
+- See `BUILD_ISSUES.md` for historical build issue log from Apr 2026

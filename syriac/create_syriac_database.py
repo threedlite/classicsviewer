@@ -483,19 +483,24 @@ def populate_database(conn, syriac_files):
         filename = os.path.basename(filepath)
         path_parts = filepath.split(os.sep)
 
-        # Check if it's a NT book - look for work-level pta code (last pta folder in path)
-        # Path structure: .../pta9999/pta063/... where pta063 is the work code
+        # Check if it's a NT book - look for work-level pta code under pta9999 (NT author)
+        # Path structure: .../pta9999/pta063/... where pta9999 is the NT author and pta063 is the work code
+        # CRITICAL: Must verify author-level code is pta9999 to avoid confusing
+        # non-NT works that share the same work code (e.g., pta0001/pta073 is Severianus,
+        # NOT the Epistle to the Philippians which is pta9999/pta073)
         pta_codes = []
         for part in path_parts:
             if part.startswith('pta') and len(part) > 3 and part[3:].isdigit():
                 pta_codes.append(part)
 
-        # Use the last pta code (work level), not the first (author level)
-        pta_code = pta_codes[-1] if pta_codes else None
+        # NT books must be under pta9999 (author) / ptaXXX (work)
+        pta_author_code = pta_codes[0] if len(pta_codes) >= 2 else None
+        pta_work_code = pta_codes[-1] if pta_codes else None
+        is_nt = pta_author_code == 'pta9999' and pta_work_code in SYRIAC_NT_BOOKS
 
-        if pta_code and pta_code in SYRIAC_NT_BOOKS:
+        if is_nt:
             # Syriac New Testament book
-            work_id_base, work_title, work_desc = SYRIAC_NT_BOOKS[pta_code]
+            work_id_base, work_title, work_desc = SYRIAC_NT_BOOKS[pta_work_code]
             author_id = 'syriac_nt'
             author_name = 'Syriac New Testament'
 

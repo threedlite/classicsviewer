@@ -85,10 +85,25 @@ def extract_all_greek_pages(dump_file, output_file):
     print(f"Output file: {output_file} ({Path(output_file).stat().st_size / 1024 / 1024:.1f} MB)")
 
 def main():
-    dump_file = '/home/user/git2/classicsviewer/data-sources/enwiktionary-latest-pages-articles.xml.bz2'
-    output_file = 'all_greek_wiktionary_pages.json'
-    
-    extract_all_greek_pages(dump_file, output_file)
+    import argparse
+    script_dir = Path(__file__).parent.resolve()
+    default_dump = script_dir.parent.parent / 'data-sources' / 'enwiktionary-latest-pages-articles.xml.bz2'
+    default_output = script_dir / 'all_greek_wiktionary_pages.json'
+
+    parser = argparse.ArgumentParser(description='Extract Greek pages from Wiktionary dump')
+    parser.add_argument('--dump', default=str(default_dump),
+                        help=f'Path to enwiktionary XML dump (.bz2). Default: {default_dump}')
+    parser.add_argument('--output', default=str(default_output),
+                        help=f'Output JSON path. Default: {default_output}')
+    args = parser.parse_args()
+
+    if not Path(args.dump).exists():
+        raise FileNotFoundError(
+            f"Wiktionary dump not found: {args.dump}\n"
+            f"Download from https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2"
+        )
+
+    extract_all_greek_pages(args.dump, args.output)
 
 if __name__ == '__main__':
     main()

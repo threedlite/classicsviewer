@@ -1,14 +1,14 @@
 # Data preparation dependencies
-lxml>=4.9.0
-tqdm>=4.65.0
-click>=8.1.0
+lxml>=6.0.3
+tqdm>=4.67.3
+click>=8.3.2
 colorama>=0.4.6
 
 # CLTK for Greek NLP (dependency parsing, POS tagging)
 # Note: CLTK will download Greek models (~2GB) on first use
-# To pre-download: python -c "from cltk import NLP; NLP('grc')"
-cltk>=1.3.0
+# To pre-download: python -c "from cltk import NLP; NLP(language_code='grc')"
+cltk>=2.5.1
 
 # Sanskrit transliteration (IAST to Devanagari)
 # Required for Sanskrit database creation - all Sanskrit text must be in Devanagari
-indic-transliteration>=2.3.0
+indic-transliteration>=2.3.82

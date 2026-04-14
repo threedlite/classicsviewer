@@ -24,7 +24,7 @@ cause workers to load OLD versions of this code even after modifications.
 import sqlite3
 import re
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 import html
 from functools import lru_cache
 import time

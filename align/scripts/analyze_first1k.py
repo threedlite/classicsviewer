@@ -53,8 +53,9 @@ class First1KAnalyzer:
 
         try:
             # Parse files
-            greek_doc = etree.parse(str(greek_file))
-            english_doc = etree.parse(str(english_file))
+            safe_parser = etree.XMLParser(no_network=True)
+            greek_doc = etree.parse(str(greek_file), safe_parser)
+            english_doc = etree.parse(str(english_file), safe_parser)
 
             # Check for alignment milestones
             greek_milestones = greek_doc.xpath('//milestone[@unit="alignment"]')

@@ -20,20 +20,33 @@ The extraction pipeline uses a two-stage approach:
 
 The extraction is handled by `combine_all_ancient_greek_morphology.py`, which runs these scripts in order:
 
-### 1. Initial Setup
+### 1. Initial Setup — Download dumps and build the Greek pages cache
+
+Use the bundled, idempotent build script. It downloads the dump(s), verifies bz2
+integrity, and runs the Greek pages extraction in one shot. Resumable via
+`curl -C -` if a download is interrupted.
 
 ```bash
-# Download Wiktionary dumps (if not already present)
-cd data-sources/
-wget https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2
-wget https://dumps.wikimedia.org/elwiktionary/latest/elwiktionary-latest-pages-articles.xml.bz2
+cd data-prep/wiktionary-processing
+./build_greek_pages_cache.sh           # English dump only (cache + inflection-of)
+./build_greek_pages_cache.sh --el      # also fetch Greek (el) dump for declension mappings
 ```
 
-### 2. One-Time Greek Page Extraction
+The script writes:
+- `data-sources/enwiktionary-latest-pages-articles.xml.bz2` (~1.5 GB)
+- `data-sources/elwiktionary-latest-pages-articles.xml.bz2` (with `--el`)
+- `data-prep/wiktionary-processing/all_greek_wiktionary_pages.json` (~46 MB)
+
+### 2. Manual extraction (alternative to step 1's script)
+
+If you already have the dump on disk and just want to rebuild the cache:
 
 ```bash
-# Extract all Greek pages from English Wiktionary (only needed once)
-python3 extract_all_greek_pages.py
+cd data-prep/wiktionary-processing
+python3 extract_all_greek_pages.py \
+    --dump ../../data-sources/enwiktionary-latest-pages-articles.xml.bz2 \
+    --output all_greek_wiktionary_pages.json
+# Both flags default to the paths above; running with no args is equivalent.
 ```
 
 **What it does:**
@@ -198,11 +211,11 @@ The extraction process generates these JSON files:
 ```
 ERROR: Required dump file .../enwiktionary-latest-pages-articles.xml.bz2 not found!
 ```
-**Solution**: Download the required dumps to the `data-sources/` directory
+**Solution**: Run `./build_greek_pages_cache.sh` (or `./build_greek_pages_cache.sh --el` if you also need the Greek dump for declension mappings).
 
 ### Greek Pages Cache Missing
 ```
 ERROR: Cache file all_greek_wiktionary_pages.json not found!
 ```
-**Solution**: Run `extract_all_greek_pages.py` to create the cache
+**Solution**: Run `./build_greek_pages_cache.sh` — it both downloads the dump and rebuilds the cache.
 

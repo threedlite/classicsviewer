@@ -16,7 +16,7 @@ class TEIReader:
 
     def __init__(self):
         # Create parser with custom entity resolver
-        self.parser = etree.XMLParser(remove_blank_text=True, recover=True)
+        self.parser = etree.XMLParser(remove_blank_text=True, recover=True, resolve_entities=False, no_network=True)
 
     def read_file(self, filepath: Path) -> etree._Element:
         """Read and parse TEI XML file"""

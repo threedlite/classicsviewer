@@ -2413,6 +2413,18 @@ def main():
             if len(worker_chunks[worker_id]) > 0
         ]
 
+        # Pre-download Stanza models before spawning workers to avoid race conditions
+        # (multiple workers downloading the same 113 MB model file simultaneously)
+        if HAS_STANZA:
+            print("Pre-loading Stanza Sanskrit models for workers...")
+            try:
+                stanza.download('sa', verbose=False)
+                _pre_nlp = stanza.Pipeline('sa', processors='tokenize,pos,lemma,depparse', verbose=False)
+                del _pre_nlp  # Release memory; workers create their own instances
+                print("  ✓ Stanza models downloaded and verified\n")
+            except Exception as e:
+                print(f"  Warning: Stanza pre-load failed: {e}\n")
+
         # Process in parallel
         print("Workers are processing... Progress will be logged by workers.\n")
         sys.stdout.flush()

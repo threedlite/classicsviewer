@@ -473,7 +473,7 @@ class LineAnnotationContext:
         self.pending_dateline = None      # <dateline> to apply to next line
         self.pending_poem = None          # <div subtype="poem"> number to apply to first line
         self.pending_pb = None            # <pb> page break to apply to next line
-        self.last_div_id = None           # Track which div we're in for head application
+        self.last_div_elem = None          # Track which div we're in for head application
         self.lines_since_div_start = 0    # Count lines since div started (for head)
 
     def update_from_element(self, elem, parent_map=None):
@@ -539,9 +539,8 @@ class LineAnnotationContext:
 
         if is_div_tag(tag):
             # Track div changes to reset head application
-            div_id = id(elem)
-            if div_id != self.last_div_id:
-                self.last_div_id = div_id
+            if elem is not self.last_div_elem:
+                self.last_div_elem = elem
                 self.lines_since_div_start = 0
                 # Look for head in this div (direct child only)
                 for child in elem:
@@ -1615,17 +1614,19 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
 
                 # Build a map of sequential indices for parent divs without n attributes
                 # so that multiple choral/episode sections get unique identifiers
-                parent_seq_indices = {}  # element id -> sequential index among siblings of same subtype
+                parent_seq_indices = {}  # element position -> sequential index among siblings of same subtype
                 prev_subtype_counts = {}  # subtype -> count seen so far
-                for d in body_elem.iter('div'):
+                div_position = {}  # element -> position index for deterministic lookup
+                for div_pos, d in enumerate(body_elem.iter('div')):
+                    div_position[div_pos] = d
                     subtype = d.get('subtype', '')
                     if subtype in structural_subtypes and d.get('n') is None:
                         if subtype not in prev_subtype_counts:
                             prev_subtype_counts[subtype] = 0
                         prev_subtype_counts[subtype] += 1
-                        parent_seq_indices[id(d)] = str(prev_subtype_counts[subtype])
+                        parent_seq_indices[div_pos] = str(prev_subtype_counts[subtype])
 
-                for parent in body_elem.iter('div'):
+                for parent_pos, parent in enumerate(body_elem.iter('div')):
                     # Skip if parent IS the element itself (don't include self in hierarchy)
                     if parent is div_elem:
                         continue
@@ -1635,7 +1636,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                         for desc in parent.iter('div'):
                             if desc is div_elem:
                                 # Use actual n attribute, or sequential index for divs without n
-                                n_val = parent.get('n') or parent_seq_indices.get(id(parent), '1')
+                                n_val = parent.get('n') or parent_seq_indices.get(parent_pos, '1')
                                 hierarchy.append((subtype, n_val))
                                 break
 
@@ -2420,15 +2421,15 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
                 from collections import OrderedDict
                 parent_groups = OrderedDict()  # parent_key -> list of sections
 
-                for section in sections:
+                for section_idx, section in enumerate(sections):
                     ph = section.get('parent_hierarchy', [])
                     # Only merge sections whose parent is a newly added subtype
                     has_new_parent = ph and any(st in NEWLY_ADDED_PARENT_SUBTYPES for st, _ in ph)
                     if has_new_parent:
                         parent_key = tuple((st, n) for st, n in ph)
                     else:
-                        # Keep as individual section (use unique key)
-                        parent_key = (('_individual', f"{id(section)}"),)
+                        # Keep as individual section (use unique deterministic key)
+                        parent_key = (('_individual', f"_{section_idx}"),)
                     if parent_key not in parent_groups:
                         parent_groups[parent_key] = []
                     parent_groups[parent_key].append(section)
@@ -5993,13 +5994,15 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                 paragraphs_for_section = get_paragraphs_for_div(elem, ['section', 'chapter', 'bekker_page', 'fragment', 'entry', 'work', 'excerpt'])
                 para_to_speaker = {}
                 current_sp_speaker = None
+                # Use set of element references for speaker mapping (deterministic within single parse)
+                speaker_elements = set()
                 for child_elem in elem.iter():
                     if is_speaker_tag(child_elem.tag):
                         speaker_text = child_elem.text.strip() if child_elem.text else None
                         if speaker_text:
                             current_sp_speaker = speaker_text
                     elif is_p_tag(child_elem.tag) and current_sp_speaker:
-                        para_to_speaker[id(child_elem)] = current_sp_speaker
+                        para_to_speaker[child_elem] = current_sp_speaker
 
                 # Extract paragraphs from this section
                 # Use get_paragraphs_for_div() to prevent duplication when divs are nested
@@ -6010,7 +6013,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                     para_label = None
                     para_salute = None
                     para_dateline = None
-                    para_speaker = para_to_speaker.get(id(p))
+                    para_speaker = para_to_speaker.get(p)
                     for child in p.iter():
                         if is_label_tag(child.tag):
                             label_text = get_text_content_simple(child).strip()
@@ -6453,8 +6456,8 @@ def process_prose_text(root, work_id, cursor, language):
                     if speaker_text:
                         current_sp_speaker = speaker_text
                 elif is_p_tag(child_elem.tag) and current_sp_speaker:
-                    # Map this paragraph to its speaker
-                    para_to_speaker[id(child_elem)] = current_sp_speaker
+                    # Map this paragraph to its speaker (use element ref as key)
+                    para_to_speaker[child_elem] = current_sp_speaker
                 elif is_sp_tag(child_elem.tag):
                     # Reset speaker when we exit an <sp> block
                     # Actually, for sequential processing, we keep the speaker until a new one appears
@@ -6469,7 +6472,7 @@ def process_prose_text(root, work_id, cursor, language):
                 para_speaker = None
 
                 # Look up speaker from the pre-built mapping
-                para_speaker = para_to_speaker.get(id(p))
+                para_speaker = para_to_speaker.get(p)
 
                 for child in p.iter():
                     if is_label_tag(child.tag):

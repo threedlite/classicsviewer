@@ -1,11 +1,11 @@
 # Core dependencies for Greek text alignment
-lxml>=5.0.0          # XML parsing and writing
-numpy>=1.26.0        # Numerical operations (Python 3.13 compatible)
-scikit-learn>=1.3.0  # ML utilities
-tqdm>=4.66.1         # Progress bars
-pyyaml>=6.0.1        # Configuration files
+lxml>=6.0.3          # XML parsing and writing
+numpy>=2.4.4         # Numerical operations (Python 3.14 compatible)
+scikit-learn>=1.8.0  # ML utilities
+tqdm>=4.67.3         # Progress bars
+pyyaml>=6.0.3        # Configuration files
 colorama>=0.4.6      # Colored terminal output
 
 # Optional: for advanced features
-# cltk==1.1.6        # Classical language toolkit (uncomment if needed)
-# nltk==3.8.1        # Natural language processing (uncomment if needed)
+# cltk>=2.5.1        # Classical language toolkit (uncomment if needed)
+# nltk>=3.8.1        # Natural language processing (uncomment if needed)

@@ -58,10 +58,8 @@ def extract_definition_from_template(template_text):
     template_name, params = result
 
     if template_name in ['inflection of', 'infl of']:
-        if len(params) >= 2:
-            lemma = params[1]
-            forms = ' '.join(params[2:]) if len(params) > 2 else ''
-            return f"inflection of {lemma} ({forms})"
+        # Cross-reference, not a definition — skip entirely
+        return None
     elif template_name == 'place':
         place_type = params[1] if len(params) > 1 else ''
         location = params[2] if len(params) > 2 else ''
@@ -71,8 +69,8 @@ def extract_definition_from_template(template_text):
         location = re.sub(r'\[\[([^\]]+)\]\]', r'\1', location)
         return f"{place_type} {location}".strip()
     elif template_name in ['lb', 'label']:
-        if len(params) > 1:
-            return ' '.join(params[1:])
+        # Dialect/register labels (Epic, Ionic, etc.) — not definitions
+        return None
 
     return None
 
@@ -100,6 +98,10 @@ def clean_wiki_markup(text):
 
     # Clean whitespace
     text = re.sub(r'\s+', ' ', text).strip()
+
+    # Clean leading/trailing punctuation artifacts from template removal
+    text = re.sub(r'^[,;:\s]+', '', text)
+    text = re.sub(r'[,;:\s]+$', '', text)
 
     return text
 
@@ -366,6 +368,9 @@ def extract_all_greek_words(cache_path, output_path):
             # Clean and combine definitions
             cleaned_defs = []
             for def_line in def_lines[:5]:
+                # Skip lines that are purely inflection-of references
+                if re.match(r'^\s*\{\{(inflection of|infl of)\b', def_line):
+                    continue
                 cleaned = clean_wiki_markup(def_line)
                 if cleaned and len(cleaned) > 2:
                     cleaned_defs.append(cleaned)
@@ -393,13 +398,9 @@ def extract_all_greek_words(cache_path, output_path):
                 stats['with_etymology'] += 1
                 continue
 
-        # Last resort: just record the POS
+        # Last resort: skip — POS-only entries ("adjective", "noun") provide no
+        # useful definition and pollute the dictionary with meaningless glosses
         if pos:
-            definitions_dict[cleaned_word] = {
-                'entry_plain': pos,
-                'part_of_speech': pos,
-                'type': 'lemma'
-            }
             stats['with_pos_only'] += 1
 
     print(f"  Processed {pages_processed:,} Ancient Greek pages")
