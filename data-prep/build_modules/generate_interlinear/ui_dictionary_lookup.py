@@ -424,8 +424,29 @@ class PerseusRepository:
         user_added_lemmas = set()  # Track lemmas with user morphology entries (matches Kotlin's userAddedLemmas)
         insertion_counter = [0]  # Track insertion order for stable sorting (matches Kotlin's behavior) - use list for mutability
 
+        # Morph abbreviations used by Cunliffe cross-reference entries
+        _morph_abbrevs = {'sing', 'pl', 'dual', 'aor', 'pres', 'impf', 'fut', 'pf', 'plupf',
+                          'act', 'mid', 'pass', 'subj', 'opt', 'imp', 'imper', 'impve', 'pple',
+                          'contr', 'neut', 'masc', 'fem', 'nom', 'acc', 'gen', 'dat', 'voc',
+                          'inf', 'ind', 'iterative', 'infin', 'comp', 'super', 'pa', 'app',
+                          'prec', 'cf', 'prob'}
+
         def add_entry(entry: DictionaryEntry):
-            """Helper to add entry with insertion order tracking"""
+            """Helper to add entry with insertion order tracking.
+            Filters out entries that are morphological cross-references rather than
+            definitions — these produce garbled glosses instead of actual meanings."""
+            if entry.definition:
+                plain = re.sub(r'<[^>]+>', '', entry.definition).strip()
+                plain_lower = plain.lower()
+                # Skip wiktionary "inflection of" entries (e.g., "epi inflection of δῐῐ̈́στημῐ (3:d aor act ind)")
+                if entry.source == 'wiktionary' and ('inflection of' in plain_lower or '{{infl of' in plain_lower):
+                    return
+                # Skip cunliffe cross-reference entries (e.g., "διαστήτην, 3 dual aor. διίστημι.")
+                # These contain only Greek text + morph abbreviations but no English definition words.
+                if entry.source == 'cunliffe' and len(plain) < 80:
+                    english_words = re.findall(r'[a-zA-Z]{3,}', plain_lower)
+                    if not any(w not in _morph_abbrevs for w in english_words):
+                        return
             entry.insertion_order = insertion_counter[0]
             insertion_counter[0] += 1
             entries.append(entry)
