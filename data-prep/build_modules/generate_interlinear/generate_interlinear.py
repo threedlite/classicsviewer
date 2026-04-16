@@ -647,6 +647,18 @@ class InterlinearGenerator:
             # Generic fallback
             result = self._extract_generic_gloss(text)
 
+        # Reject raw dictionary placeholder headers that leak through when an
+        # entry has no real definition body (LSJ "Morphological entry",
+        # Wiktionary "Form" stub entries). Downstream retry paths handle "???".
+        if result in ("Morphological entry", "Form"):
+            return "???"
+
+        # Reject Etymology-only leak-through. _extract_lsj_gloss strips this
+        # via a \Z-anchored regex, but _extract_generic_gloss only strips up
+        # to \n and lets single-line etymology entries pass through verbatim.
+        if result and result.lstrip().startswith("Etymology:"):
+            return "???"
+
         # FINAL VALIDATION: Reject obviously wrong definitions
         # These patterns indicate morphology returned wrong lemma
         if result and result != "???":
@@ -1141,8 +1153,10 @@ class InterlinearGenerator:
         # Remove "Perseus." prefix that appears in some LSJ entries
         text = re.sub(r'^Perseus\.\s*', '', text)
 
-        # Remove etymology sections
-        text = re.sub(r'^Etymology:.*?\n', '', text, flags=re.DOTALL)
+        # Remove etymology sections — match the _extract_lsj_gloss anchors so
+        # single-line entries (no trailing newline) also get stripped.
+        text = re.sub(r'^Etymology:.*?(?=\n[IVX0-9]+\.|\Z)', '', text, flags=re.DOTALL)
+        text = text.strip()
 
         # Clean up the text first
         original_text = text

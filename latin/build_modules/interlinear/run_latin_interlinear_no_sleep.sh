@@ -15,28 +15,39 @@ NUM_WORKERS="$3"
 BASENAME=$(basename "$WORKS_CSV" .csv)
 LOGFILE="latin_generation.log"
 
+# Use caffeinate only on macOS (where it exists and is needed to prevent idle sleep)
+if [[ "$(uname)" == "Darwin" ]] && command -v caffeinate >/dev/null 2>&1; then
+    CAFFEINATE=(caffeinate -i)
+else
+    CAFFEINATE=()
+fi
+
 echo "======================================================================="
-echo "Latin Interlinear Generator (with caffeinate to prevent idle sleep)"
+if [ ${#CAFFEINATE[@]} -gt 0 ]; then
+    echo "Latin Interlinear Generator (with caffeinate to prevent idle sleep)"
+else
+    echo "Latin Interlinear Generator (caffeinate not available on this platform)"
+fi
 echo "======================================================================="
 echo "Works CSV: $WORKS_CSV"
 echo "Database: $DATABASE_PATH"
 echo "Workers: $NUM_WORKERS"
 echo "Log file: $LOGFILE"
 echo ""
-echo "Starting process with caffeinate to prevent system idle sleep..."
 echo "Process will run continuously until completion."
 echo ""
 
 # Get script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Run with caffeinate to prevent idle sleep
 cd "$SCRIPT_DIR"
-caffeinate -i python3 latin_interlinear_list.py "$WORKS_CSV" "$DATABASE_PATH" --workers "$NUM_WORKERS" > "$LOGFILE" 2>&1 &
+"${CAFFEINATE[@]}" python3 latin_interlinear_list.py "$WORKS_CSV" "$DATABASE_PATH" --workers "$NUM_WORKERS" > "$LOGFILE" 2>&1 &
 
 PID=$!
 echo "Background process started with PID: $PID"
-echo "Caffeinate is preventing idle sleep for this process."
+if [ ${#CAFFEINATE[@]} -gt 0 ]; then
+    echo "Caffeinate is preventing idle sleep for this process."
+fi
 echo ""
 echo "Monitor progress with:"
 echo "  tail -f $SCRIPT_DIR/$LOGFILE"
@@ -50,3 +61,13 @@ echo ""
 echo "To kill the process:"
 echo "  kill $PID"
 echo "======================================================================="
+
+# Forward common signals to the child so Ctrl-C / kill propagates correctly
+trap 'kill -TERM "$PID" 2>/dev/null' INT TERM HUP
+
+# Block until the worker finishes so callers (e.g. chain_builds.sh) see the real exit status.
+# If you want fire-and-forget behaviour, invoke this script with a trailing & yourself.
+wait "$PID"
+RC=$?
+echo "Latin interlinear generator exited with status $RC"
+exit "$RC"

@@ -316,7 +316,7 @@ def generate_interlinear_parallel(
     # Get work sizes using efficient batch queries with temporary table
     # (IN clause has ~999 parameter limit, so we use a temp table for large lists)
     # Use in-memory db for temp table, ATTACH main db as read-only for speed
-    conn = sqlite3.connect(":memory:")
+    conn = sqlite3.connect(":memory:", uri=True)
     cursor = conn.cursor()
     cursor.execute(f"ATTACH DATABASE 'file:{db_path}?mode=ro' AS perseus")
 

@@ -27,6 +27,12 @@ from build_modules.normalization_utils import normalize_greek, normalize_greek_u
 # Interlinear generation removed - always use pregenerated files from data-sources/classicsviewer_interlinear/
 # from build_modules.generate_interlinear.generate_interlinear import generate_interlinear_translations
 
+# Latin is built by latin/create_latin_database.py as an independent module
+# (like sanskrit/). This monolith does not process Latin authors, load the
+# Latin dictionary, load Latin prefix rules, or import Latin interlinear
+# files; the finished latin/latin_texts.db is merged in at the end of the
+# build (see merge_external_databases). See GREEK_LATIN_MODULE_ANALYSIS.md.
+
 # Global dictionary to track XML patterns during build
 # Pattern -> list of (work_id, author_name, work_title, corpus) tuples
 XML_PATTERNS_BY_WORK: Dict[str, List[Tuple[str, str, str, str]]] = {}
@@ -210,21 +216,22 @@ def is_dateline_tag(tag):
     return is_tag(tag, 'dateline')
 
 def has_rend_salute(elem):
-    """Check if element has rend='salute' attribute (used in Latin letters)."""
+    """Check if element has rend='salute' attribute (epistolary greeting)."""
     return elem.get('rend') == 'salute'
 
 def has_rend_dateline(elem):
-    """Check if element has rend='dateline' attribute (used in Latin letters)."""
+    """Check if element has rend='dateline' attribute (letter dateline)."""
     return elem.get('rend') == 'dateline'
 
 def has_rend_opener(elem):
-    """Check if element has rend='opener' attribute (used in Latin letters)."""
+    """Check if element has rend='opener' attribute (letter opener block)."""
     return elem.get('rend') == 'opener'
 
 def extract_opener_info(div_elem):
     """
     Extract salute and dateline from a <label rend="opener"> child of a div.
-    Used for Latin letters where opener info is at the letter level, not inside paragraphs.
+    Used for epistolary works where opener info is at the letter level,
+    not inside paragraphs.
     Returns (salute, dateline) tuple, either or both may be None.
     """
     salute = None
@@ -922,7 +929,7 @@ def analyze_first1k_work_splitting(xml_path):
                 if len(segment) > MAX_ALLOWED_LINE_LENGTH:
                     # This segment will be split during parsing
                     # Simulate the splitting to get actual max line length
-                    sentences = re.split(r'(?<=[.!?;])\s+(?=[Α-Ωα-ωA-Za-z])', segment)
+                    sentences = re.split(r'(?<=·)\s+|(?<=[.!?;])\s+(?=[Α-Ωα-ωA-Za-z])', segment)
                     for sentence in sentences:
                         if len(sentence) <= MAX_ALLOWED_LINE_LENGTH:
                             actual_max_length = max(actual_max_length, len(sentence))
@@ -1644,7 +1651,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
 
             # Only iterate within body, not metadata
             for div in body.iter('div'):
-                # Skip preface sections which often contain Latin
+                # Skip preface sections (often in a different language than body)
                 if div.get('n') == 'preface':
                     continue
 
@@ -1668,7 +1675,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                         # Split long chapters into sentence-based lines
                         # This creates a pseudo-line structure within the chapter
                         # Split on sentence endings but keep the punctuation
-                        sentences = re.split(r'(?<=[.!?;])\s+(?=[Α-Ωα-ωA-Za-z])', text)
+                        sentences = re.split(r'(?<=·)\s+|(?<=[.!?;])\s+(?=[Α-Ωα-ωA-Za-z])', text)
 
                         # Further split any remaining long sentences
                         split_lines = []
@@ -2249,7 +2256,7 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
         work_dir: Path to the work directory
         work_id: Database work ID
         cursor: Database cursor
-        language: 'greek' or 'latin'
+        language: 'greek' (Latin is handled by latin/ module)
         source_file: Optional pre-selected source file. If not provided, will search for one.
     """
     print(f"    Using First1K parser for {work_id}")
@@ -2263,8 +2270,6 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
             if xml_file.name.startswith('__'):
                 continue
             if language == 'greek' and "grc" in xml_file.name:
-                source_file = xml_file
-            elif language == 'latin' and "lat" in xml_file.name:
                 source_file = xml_file
             elif "eng" in xml_file.name:
                 english_files.append(xml_file)
@@ -2588,10 +2593,15 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
                 if '\n' in chapter_text:
                     lines = [line.strip() for line in chapter_text.split('\n') if line.strip()]
                 else:
-                    # Otherwise split on sentence boundaries (. ! ? followed by space and capital)
+                    # Otherwise split on sentence boundaries. Two cases:
+                    #   (1) Greek ano teleia (·) is unambiguous in Greek — split
+                    #       unconditionally. Never appears in Greek abbreviations
+                    #       (verified against Galen, Herodian, Ptolemy, Philo, etc.).
+                    #   (2) For . ! ? ; we keep the conservative rule (uppercase-
+                    #       Greek lookahead) to avoid splitting on abbreviations
+                    #       like "δραχ." in Galen's pharmacology.
                     import re
-                    # Split on sentence endings but keep the punctuation
-                    sentences = re.split(r'(?<=[.!?;])\s+(?=[Α-Ω])', chapter_text)
+                    sentences = re.split(r'(?<=·)\s+|(?<=[.!?;])\s+(?=[Α-Ω])', chapter_text)
                     lines = [s.strip() for s in sentences if s.strip()]
 
                     # If no good splits, at least split very long text
@@ -5151,7 +5161,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 is_drama = author_id in ['tlg0085', 'tlg0011', 'tlg0006', 'tlg0019']
             
             if is_prose:
-                # Check if this work uses chapter-based book IDs (Latin prose with chapter milestones)
+                # Check if this work uses chapter-based book IDs (prose with chapter milestones)
                 cursor.execute("""
                     SELECT id FROM books WHERE work_id = ?
                     ORDER BY id LIMIT 1
@@ -5163,7 +5173,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                     uses_chapter_books = len(parts) == 4
 
                 if uses_chapter_books:
-                    # Process translation chapters to match Latin chapter structure
+                    # Process translation chapters to match the chapter structure
                     print(f"      → Detected chapter-based prose, matching translation chapters")
 
                     chapters_processed = 0
@@ -5200,7 +5210,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                             except ValueError:
                                 continue
 
-                            # Construct chapter book ID matching the Latin structure
+                            # Construct chapter book ID matching the source structure
                             chapter_book_id = f"{work_id}.{book_num:03d}.{chapter_num:03d}"
 
                             # Check if this book exists
@@ -5273,7 +5283,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                 search_root = translation_div if translation_div is not None else root
 
                 # Check if this work uses chapter-based book IDs
-                # (Latin prose with <milestone unit="chapter"> creates book IDs like work.book.chapter)
+                # (prose works with <milestone unit="chapter"> get book IDs like work.book.chapter)
                 # Count dots in book IDs - chapter-based have one more segment
                 cursor.execute("""
                     SELECT id FROM books WHERE work_id = ?
@@ -5326,7 +5336,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                             except ValueError:
                                 continue
 
-                            # Construct chapter book ID matching the Latin structure
+                            # Construct chapter book ID matching the source structure
                             chapter_book_id = f"{work_id}.{book_num:03d}.{chapter_num:03d}"
 
                             # Check if this book exists
@@ -5918,7 +5928,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
         current_chapter_n = None
         first_para_in_section = False
 
-        # Track letter-level opener info (for Latin letters like Cicero's)
+        # Track letter-level opener info (epistolary works)
         # This is extracted from <label rend="opener"> at the letter div level
         letter_opener_salute = None
         letter_opener_dateline = None
@@ -6029,7 +6039,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                                 para_dateline = dateline_text
 
                     # Apply letter-level opener info if available and not yet applied
-                    # This handles Latin letters where salute/dateline are in <label rend="opener">
+                    # Handles epistolary works where salute/dateline are in <label rend="opener">
                     if not letter_opener_applied and (letter_opener_salute or letter_opener_dateline):
                         if not para_salute and letter_opener_salute:
                             para_salute = letter_opener_salute
@@ -6063,12 +6073,14 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                             if is_plato or is_aristotle:
                                 sentences = re.split(r'(?<=[.!?])\s+(?!\[)', text)
                             elif has_chapter_section:
-                                # Same Latin split but avoid splitting before [chapter.section] markers
-                                sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+(?!\[)', text)
+                                # Abbreviation-aware split that avoids [chapter.section] markers
+                                sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+(?!\[)', text)
                             else:
-                                # Don't split after short abbreviations (1-3 chars starting with capital)
-                                # Handles Roman praenomina like M., L., Cn., Sp., Sex., Ser., etc.
-                                sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+                                # Don't split after short abbreviations:
+                                #  - 1-3 char capitalized: Roman praenomina (M., L., Cn., Sp., Sex., Ser.)
+                                #  - 1-2 char lowercase: date/numeral fragments (d., pl., l., c., a.) common
+                                #    in "a. d. III Kal." constructions, which otherwise produce 1-2 char stub lines.
+                                sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+', text)
 
                         # Process each sentence as a line
                         first_sentence = True
@@ -6157,7 +6169,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                     if language == 'greek':
                         sentences = re.split(r'[.!?·;]\s+', chapter_text)
                     else:
-                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', chapter_text)
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+', chapter_text)
 
                     chapter_lines = []
                     for sentence in sentences:
@@ -6212,7 +6224,7 @@ def process_prose_with_books(root, work_id, cursor, language, uses_old_tei=False
                             sentences = re.split(r'[.!?·;]\s+', text)
                         else:
                             # Don't split after short abbreviations
-                            sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+                            sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+', text)
 
                         for sentence in sentences:
                             sentence = sentence.strip()
@@ -6369,7 +6381,7 @@ def process_prose_text(root, work_id, cursor, language):
     # to avoid misalignment issues where the previous paragraph's label gets applied
     # to the next paragraph.
 
-    # Track letter-level opener info (for Latin letters like Cicero's)
+    # Track letter-level opener info (epistolary works)
     # This is extracted from <label rend="opener"> at the letter div level
     letter_opener_salute = None
     letter_opener_dateline = None
@@ -6489,7 +6501,7 @@ def process_prose_text(root, work_id, cursor, language):
                             para_dateline = dateline_text
 
                 # Apply letter-level opener info if available and not yet applied
-                # This handles Latin letters where salute/dateline are in <label rend="opener">
+                # Handles epistolary works where salute/dateline are in <label rend="opener">
                 if not letter_opener_applied and (letter_opener_salute or letter_opener_dateline):
                     if not para_salute and letter_opener_salute:
                         para_salute = letter_opener_salute
@@ -6518,7 +6530,7 @@ def process_prose_text(root, work_id, cursor, language):
                         else:
                             # Don't split after short abbreviations (1-3 chars starting with capital)
                             # Handles Roman praenomina like M., L., Cn., Sp., Sex., Ser., etc.
-                            sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+                            sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+', text)
 
                     # Process each sentence as a line
                     first_sentence = True
@@ -6564,8 +6576,15 @@ def process_prose_text(root, work_id, cursor, language):
                                 'speaker': annotation
                             })
 
-            # If no paragraphs found, treat the entire section text as prose
-            if not paragraphs_found:
+            # If no paragraphs found, treat the entire section text as prose.
+            # BUT: only if this div is actually a leaf. If it has nested
+            # textpart divs that will be processed separately (e.g., a chapter
+            # with section children), those nested divs will emit their own
+            # paragraphs — running the fallback here would emit the same text
+            # twice (once collapsed here from .iter(), once again when the
+            # nested sections are visited). See FIX_PLAN.md Issue 1.
+            if not paragraphs_found and not has_nested_textpart_divs(
+                    elem, ['section', 'chapter', 'fragment']):
                 # Extract label/salute/dateline/speaker from this section div
                 section_label = None
                 section_salute = None
@@ -6590,7 +6609,7 @@ def process_prose_text(root, work_id, cursor, language):
                             section_speaker = speaker_text
 
                 # Apply letter-level opener info if available and not yet applied
-                # This handles Latin letters where salute/dateline are in <label rend="opener">
+                # Handles epistolary works where salute/dateline are in <label rend="opener">
                 if not letter_opener_applied and (letter_opener_salute or letter_opener_dateline):
                     if not section_salute and letter_opener_salute:
                         section_salute = letter_opener_salute
@@ -6620,7 +6639,7 @@ def process_prose_text(root, work_id, cursor, language):
                         sentences = re.split(r'[.!?·;]\s+', text)
                     else:
                         # Don't split after short abbreviations (1-3 chars starting with capital)
-                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+', text)
 
                     first_sentence = True
                     for sentence in sentences:
@@ -6660,7 +6679,7 @@ def process_prose_text(root, work_id, cursor, language):
                             })
 
     # Fallback: Handle <seg type="section"> elements inside paragraphs
-    # Some Latin texts (e.g., Cicero's Commentariolum Petitionis) use this structure
+    # Some prose works use this structure (e.g., Commentariolum Petitionis)
     if not all_lines:
         seg_sections = [elem for elem in root.iter()
                        if elem.tag.endswith('}seg') or elem.tag == 'seg']
@@ -6677,7 +6696,7 @@ def process_prose_text(root, work_id, cursor, language):
                     if language == 'greek':
                         sentences = re.split(r'[.!?·;]\s+', text)
                     else:
-                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])[.!?]\s+', text)
+                        sentences = re.split(r'(?<![A-Z])(?<![A-Z][a-z])(?<![A-Z][a-z][a-z])(?<!\b[a-z])(?<!\b[a-z][a-z])(?<!\b[a-z][a-z][a-z])(?<!\s)[.!?]\s+', text)
 
                     for sentence in sentences:
                         sentence = sentence.strip()
@@ -7920,7 +7939,7 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
 
     Args:
         author_dir: Path to author directory
-        language: 'greek' or 'latin'
+        language: 'greek' (Latin is handled by latin/ module)
         cursor: Database cursor
         sample_works: Optional dict mapping author names to sets of work titles for filtering
         work_filter: Optional set of work directory names to process (for First1K non-duplicates)
@@ -7981,28 +8000,6 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         # For title_english, prefer English, then Latin, then work_num
         title_english = work_info.get('title_english') or work_info.get('title_latin') or work_num
         
-        # Common Latin to English title mappings
-        latin_to_english = {
-            'Carmina': 'Odes',
-            'Epistulae': 'Epistles',
-            'Sermones': 'Satires',
-            'Epodi': 'Epodes',
-            'De Bello Gallico': 'The Gallic War',
-            'De Bello Civili': 'The Civil War',
-            'Metamorphoses': 'Metamorphoses',
-            'Fasti': 'Fasti',
-            'Tristia': 'Tristia',
-            'Ex Ponto': 'Letters from Pontus',
-            'Heroides': 'Heroides',
-            'Amores': 'The Loves',
-            'Remedia Amoris': 'The Cure for Love',
-            'Medicamina Faciei Femineae': 'Cosmetics for Ladies'
-        }
-        
-        # If we only have a Latin title, try to map it to English
-        if not work_info.get('title_english') and title_english in latin_to_english:
-            title_english = latin_to_english[title_english]
-        
         # Find text files first - before processing anything
         text_files = list(work_dir.glob("*.xml"))
         text_files = [f for f in text_files if not f.name.startswith('__')]
@@ -8012,17 +8009,15 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
             continue
         
         # Check if we have a suitable text file for this language
-        # Prefer higher numbered grc/lat files (newer editions), except for specific works
-        # where the older edition has standard scholarly numbering (e.g., Bekker for Aristotle)
+        # Prefer higher numbered grc files (newer editions), except for specific
+        # works where the older edition has standard scholarly numbering (e.g.,
+        # Bekker for Aristotle). Latin is handled by latin/ module.
         text_file = None
         grc_files = []
-        lat_files = []
 
         for f in text_files:
             if 'grc' in f.name and language == 'greek':
                 grc_files.append(f)
-            elif 'lat' in f.name and language == 'latin':
-                lat_files.append(f)
 
         # Works where we prefer grc1 (standard edition with descriptive book names)
         # tlg0086.tlg001 = Aristotle's Analytica (Bekker edition has "priora"/"posteriora")
@@ -8058,11 +8053,6 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                 grc_files.sort(key=lambda x: x.name, reverse=True)
                 text_files_to_process = [grc_files[0]]
             text_file = text_files_to_process[0]  # For compatibility with existing code
-        elif language == 'latin' and lat_files:
-            # Sort to prefer lat2 over lat1 etc.
-            lat_files.sort(key=lambda x: x.name, reverse=True)
-            text_files_to_process = [lat_files[0]]
-            text_file = lat_files[0]
 
         if not text_file:
             # Check if we only have translation files (eng, etc.)
@@ -8150,10 +8140,8 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                 corpus_name = "First1K"
             elif is_pta:
                 corpus_name = "PTA"
-            elif language == 'greek':
-                corpus_name = "Perseus Greek"
             else:
-                corpus_name = "Perseus Latin"
+                corpus_name = "Perseus Greek"
             register_xml_pattern(db_work_id, author_name, title_english, corpus_name, xml_pattern)
 
             # Parse the text
@@ -8516,9 +8504,11 @@ def analyze_pta_collection(data_sources_path):
 
             work_id = f"{author_id}.{work_dir.name}"
 
-            # Check for Greek or Latin text files
+            # Monolith handles only Greek PTA works; Latin-only PTA works (if
+            # any ever appear) are skipped here. Latin-primary content is
+            # handled by the latin/ module. PTA Latin parallel texts for Greek
+            # works are imported as translation_segments, not primary text.
             has_greek = False
-            has_latin = False
             has_translation = False
             text_file = None
 
@@ -8540,23 +8530,17 @@ def analyze_pta_collection(data_sources_path):
                 if 'grc' in xml_file.name:
                     has_greek = True
                     text_file = xml_file
-                elif 'lat' in xml_file.name and '-lat' in xml_file.name:
-                    # Check for Latin text files (e.g., pta-lat1.xml)
-                    has_latin = True
-                    if not text_file:
-                        text_file = xml_file
                 if 'eng' in xml_file.name:
                     has_translation = True
 
-            if has_greek or has_latin:
-                language = 'greek' if has_greek else 'latin'
+            if has_greek:
                 pta_works[work_id] = {
                     'author_id': author_id,
                     'author_name': author_name,
                     'work_dir': work_dir.name,
                     'has_translation': has_translation,
                     'path': str(work_dir),
-                    'language': language
+                    'language': 'greek'
                 }
 
     print(f"\nPTA works found: {len(pta_works)}")
@@ -8564,9 +8548,7 @@ def analyze_pta_collection(data_sources_path):
 
     # Count by language
     greek_count = sum(1 for w in pta_works.values() if w['language'] == 'greek')
-    latin_count = sum(1 for w in pta_works.values() if w['language'] == 'latin')
     print(f"  Greek works: {greek_count}")
-    print(f"  Latin works: {latin_count}")
 
     # Count unique authors
     unique_authors = set(w['author_id'] for w in pta_works.values())
@@ -9243,56 +9225,7 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
         for auth_id, name, error in failed_authors:
             print(f"  {name} ({auth_id}): {error}")
 
-    print("\n=== PROCESSING LATIN AUTHORS ===")
-
-    # Discover all Latin authors dynamically
-    latin_authors = {}
-    print("Discovering Latin authors...")
-
-    for author_dir in sorted(latin_dir.iterdir()):
-        if author_dir.is_dir() and author_dir.name.startswith("phi"):
-            cts_file = author_dir / "__cts__.xml"
-            author_name = f"Author {author_dir.name}"
-
-            if cts_file.exists():
-                try:
-                    tree = ET.parse(cts_file)
-                    root = tree.getroot()
-
-                    # Find groupname element
-                    ns = {'ti': 'http://chs.harvard.edu/xmlns/cts'}
-                    groupname_elem = root.find('.//ti:groupname', ns)
-
-                    if groupname_elem is not None and groupname_elem.text:
-                        author_name = groupname_elem.text.strip()
-                except Exception as e:
-                    print(f"  Warning: Failed to parse {cts_file}: {e}")
-
-            latin_authors[author_dir.name] = author_name
-
-    print(f"\nDiscovered {len(latin_authors)} Latin authors")
-
-    # Filter authors based on mode
-    if mode == 'sample' and sample_authors:
-        # Filter to only include authors in the sample list
-        filtered_authors = {}
-        for author_id, author_name in latin_authors.items():
-            # Check if author name matches any in sample list (exact match)
-            if author_name in sample_authors:
-                filtered_authors[author_id] = author_name
-                print(f"  Including sample author: {author_name} ({author_id})")
-
-        latin_authors = filtered_authors
-        print(f"\nFiltered to {len(latin_authors)} Latin authors for sample database")
-
-    # Process each Latin author
-    for author_id, author_name in latin_authors.items():
-        author_path = latin_dir / author_id
-        if author_path.exists():
-            print(f"\nProcessing {author_name} ({author_id})")
-            process_perseus_author(author_path, "latin", cursor, sample_works if mode == 'sample' else None)
-        else:
-            print(f"\nWarning: {author_name} ({author_id}) not found")
+    print("\n=== SKIPPING LATIN AUTHORS (handled by latin/ module; merged later) ===")
 
     # Process First1KGreek texts if in extended mode
     if mode == 'extended':
@@ -9428,7 +9361,7 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
     print("\n=== PROCESSING DICTIONARY DATA ===")
     # Import combined dictionary data (Cunliffe, LSJ, Wiktionary)
     # Pass build mode to control morphology inclusion
-    load_combined_dictionaries(cursor, build_mode=mode)
+    load_combined_dictionaries(cursor, build_mode=mode, skip_latin=True)
 
     # Insert build metadata (timestamp and mode)
     insert_build_metadata(cursor, mode=mode)
@@ -10478,17 +10411,21 @@ def merge_external_databases(db_filename, mode='sample'):
     print(f"MERGING EXTERNAL DATABASES ({mode} mode)")
     print(f"{'='*60}\n")
 
-    # Define merge rules
+    # Define merge rules.
+    # Latin is always merged from latin/latin_texts.db (Latin is built by
+    # latin/create_latin_database.py). Listed first so its dict entries land
+    # before other languages' lexicon imports.
+    latin_merge = [('latin/latin_texts.db', 'Latin')]
     merge_rules = {
-        'sample': [
+        'sample': latin_merge + [
         ],
-        'full': [
+        'full': latin_merge + [
             ('cuneiform/sumerian_texts.db', 'Sumerian'),
             ('cuneiform/akkadian_texts.db', 'Akkadian'),
             ('dante/dante_texts.db', 'italian'),
             ('old_english/old_english_texts.db', 'old_english'),
         ],
-        'extended': [
+        'extended': latin_merge + [
             ('arabic/arabic_texts.db', 'Arabic'),
             ('hebrewOT/hebrew_texts.db', 'Hebrew'),
             ('persian/persian_texts.db', 'Persian'),
@@ -10759,8 +10696,8 @@ if __name__ == "__main__":
             print(f"Invalid build mode: {build_mode}")
             print("Usage: python create_perseus_database.py [sample|full|extended] [custom_csv_path] [output_name] [--skip-oga] [--interlineate] [--interlineate-folder PATH]")
             print("  sample: Limited set from SAMPLE_AUTHORS.csv")
-            print("  full: All Perseus authors (~100 Greek, ~95 Latin)")
-            print("  extended: Full Perseus + First1KGreek + PTA + Pali + Norse + Chinese")
+            print("  full: All Perseus Greek authors (~100; Latin merged from latin/)")
+            print("  extended: Full Perseus + First1KGreek + PTA + Pali + Norse + Chinese + latin/")
             print("\nOptional custom_csv_path: Path to custom CSV file (only for sample mode)")
             print("  Example: python create_perseus_database.py sample MY_CUSTOM_AUTHORS.csv")
             print("\nOptional output_name: Custom output database name suffix (only for sample mode)")
@@ -10874,10 +10811,17 @@ if __name__ == "__main__":
             # NO GENERATION - Always use pregenerated files
             print("✓ Skipping generation - using pregenerated interlinear XML files")
 
-            # Import generated interlinear translations into database
+            # Import generated interlinear translations into database.
+            # When Latin is handled by the latin/ module, its phi* interlinear
+            # segments are imported there and merged in via merge_external_databases,
+            # so skip phi* here to avoid double-import.
             print("\n" + "="*60)
             print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
             print("="*60)
+            before = len(work_ids)
+            work_ids = [w for w in work_ids if not w.startswith('phi')]
+            if before != len(work_ids):
+                print(f"  (Latin module handles phi* interlinear; skipped {before - len(work_ids)} phi* work IDs here)")
             import_interlinear_translations(sample_db_filename, work_ids=work_ids, interlinear_dir=interlinear_output_dir, mode='full')
 
             # Checkpoint WAL after importing translations
@@ -10953,9 +10897,14 @@ if __name__ == "__main__":
             print("✓ Skipping generation - using pregenerated interlinear XML files")
 
             # Import generated interlinear translations into database
+            # (skip phi* when Latin is handled by its own module — see note above).
             print("\n" + "="*60)
             print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
             print("="*60)
+            before = len(work_ids)
+            work_ids = [w for w in work_ids if not w.startswith('phi')]
+            if before != len(work_ids):
+                print(f"  (Latin module handles phi* interlinear; skipped {before - len(work_ids)} phi* work IDs here)")
             import_interlinear_translations("perseus_texts_full.db", work_ids=work_ids, interlinear_dir=interlinear_output_dir, mode='full')
 
             # Checkpoint WAL after importing translations
@@ -11033,9 +10982,14 @@ if __name__ == "__main__":
             print("✓ Skipping generation - using pregenerated interlinear XML files")
 
             # Import generated interlinear translations into database
+            # (skip phi* when Latin is handled by its own module — see note above).
             print("\n" + "="*60)
             print("IMPORTING INTERLINEAR TRANSLATIONS INTO DATABASE")
             print("="*60)
+            before = len(work_ids)
+            work_ids = [w for w in work_ids if not w.startswith('phi')]
+            if before != len(work_ids):
+                print(f"  (Latin module handles phi* interlinear; skipped {before - len(work_ids)} phi* work IDs here)")
             import_interlinear_translations("perseus_texts_extended.db", work_ids=work_ids, interlinear_dir=interlinear_output_dir, mode='extended')
 
             # Checkpoint WAL after importing translations

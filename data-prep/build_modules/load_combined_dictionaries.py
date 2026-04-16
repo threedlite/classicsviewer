@@ -10,12 +10,15 @@ import unicodedata
 from pathlib import Path
 from .normalization_utils import normalize_greek_ultra
 
-def load_combined_dictionaries(cursor, build_mode='full'):
+def load_combined_dictionaries(cursor, build_mode='full', skip_latin=False):
     """Load combined dictionary entries and lemma mappings
 
     Args:
         cursor: Database cursor
         build_mode: 'full', 'sample', or 'extended'
+        skip_latin: When True, do not load Whitaker's Latin dictionary or Latin
+            prefix assimilation rules. Used when the Latin module
+            (latin/create_latin_database.py) will merge those in separately.
     """
 
     print("\n=== LOADING COMBINED DICTIONARY DATA ===")
@@ -426,8 +429,12 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     
     print(f"✓ Imported {mappings_imported} lemma mappings")
     
-    # Load Whitaker's Latin dictionary and morphology (full and extended databases only)
-    if build_mode in ['full', 'extended']:
+    # Load Whitaker's Latin dictionary and morphology (full and extended databases only).
+    # skip_latin=True is set by the monolith after the Latin-module extraction,
+    # because Latin dict data will be merged in from latin/latin_texts.db later.
+    if skip_latin:
+        print(f"  Skipping Whitaker's Latin (Latin module will merge it in)")
+    elif build_mode in ['full', 'extended']:
         try:
             from .load_whitakers_latin import load_whitakers_latin
             print(f"  Loading Whitaker's Latin dictionary and morphology ({build_mode} database)")
@@ -476,31 +483,35 @@ def load_combined_dictionaries(cursor, build_mode='full'):
     else:
         print(f"  ⚠ Greek prefix assimilation rules not found: {greek_rules_file}")
 
-    # Import Latin prefix assimilation rules
-    latin_rules_file = assimilation_rules_dir / "latin_prefix_assimilation_rules.csv"
-    if latin_rules_file.exists():
-        latin_rules_count = 0
-        with open(latin_rules_file, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                cursor.execute('''
-                    INSERT INTO prefix_assimilation_rules
-                    (language, base_prefix, assimilated_form, meaning, phonological_rule, priority, examples)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', (
-                    row['language'],
-                    row['base_prefix'],
-                    row['assimilated_form'],
-                    row.get('meaning', ''),
-                    row.get('phonological_rule', ''),
-                    int(row['priority']),
-                    row.get('examples', '')
-                ))
-                latin_rules_count += 1
-        print(f"  ✓ Imported {latin_rules_count} Latin prefix assimilation rules")
-        rules_imported += latin_rules_count
+    # Import Latin prefix assimilation rules (skipped when the Latin module
+    # will merge its own rules in from latin/latin_texts.db).
+    if skip_latin:
+        print(f"  Skipping Latin prefix assimilation rules (Latin module will merge them)")
     else:
-        print(f"  ⚠ Latin prefix assimilation rules not found: {latin_rules_file}")
+        latin_rules_file = assimilation_rules_dir / "latin_prefix_assimilation_rules.csv"
+        if latin_rules_file.exists():
+            latin_rules_count = 0
+            with open(latin_rules_file, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    cursor.execute('''
+                        INSERT INTO prefix_assimilation_rules
+                        (language, base_prefix, assimilated_form, meaning, phonological_rule, priority, examples)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ''', (
+                        row['language'],
+                        row['base_prefix'],
+                        row['assimilated_form'],
+                        row.get('meaning', ''),
+                        row.get('phonological_rule', ''),
+                        int(row['priority']),
+                        row.get('examples', '')
+                    ))
+                    latin_rules_count += 1
+            print(f"  ✓ Imported {latin_rules_count} Latin prefix assimilation rules")
+            rules_imported += latin_rules_count
+        else:
+            print(f"  ⚠ Latin prefix assimilation rules not found: {latin_rules_file}")
 
     print(f"  Total prefix assimilation rules: {rules_imported}")
 

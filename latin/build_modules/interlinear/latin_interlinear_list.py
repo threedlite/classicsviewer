@@ -32,7 +32,7 @@ Usage:
 
 Options:
     --workers N     Number of parallel workers (default: 4)
-    --output DIR    Output directory for XML files (default: ../../../data-sources/classicsviewer_interlinear)
+    --output DIR    Output directory for XML files (default: ../../interlinear_output)
 
 Input CSV format (Author,Work,WorkID):
     Author,Work,WorkID
@@ -173,18 +173,12 @@ def process_work_worker(args: Tuple[int, str, str, str, str, Path]) -> Tuple[int
     sys.stdout.flush()  # Force flush to see output immediately
 
     try:
-        # Import the generate_latin_interlinear module
-
-        # Get the directory containing this script and its parent (build_modules)
+        # Import the generate_latin_interlinear module (co-located in the
+        # same directory in the Latin module layout).
         script_dir = Path(__file__).parent.resolve()
-        build_modules_dir = script_dir.parent
-
-        # Add build_modules to path so we can import as a package
-        if str(build_modules_dir) not in sys.path:
-            sys.path.insert(0, str(build_modules_dir))
-
-        # Import the Latin interlinear generator
-        from generate_interlinear.generate_latin_interlinear import generate_latin_interlinear_translations
+        if str(script_dir) not in sys.path:
+            sys.path.insert(0, str(script_dir))
+        from generate_latin_interlinear import generate_latin_interlinear_translations
 
         # Generate interlinear for this work
         generate_latin_interlinear_translations(
@@ -453,11 +447,11 @@ def main():
 
     # Parse options
     num_workers = 4
-    # Default output: go up to data-prep, then to data-sources/classicsviewer_interlinear
+    # Default output: latin/interlinear_output/ (Latin module is self-contained).
+    # Path: latin/build_modules/interlinear/ → latin/build_modules/ → latin/.
     script_dir = Path(__file__).parent.resolve()
-    build_modules_dir = script_dir.parent
-    data_prep_dir = build_modules_dir.parent
-    output_dir = data_prep_dir.parent / 'data-sources' / 'classicsviewer_interlinear'
+    latin_root = script_dir.parent.parent
+    output_dir = latin_root / 'interlinear_output'
 
     i = 3
     while i < len(sys.argv):
