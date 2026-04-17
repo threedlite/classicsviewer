@@ -5061,27 +5061,14 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
 
 
 def create_translation_lookup_table(conn):
-    """Create a normalized lookup table for translation alignment"""
+    """Populate the translation_lookup table (created by shared schema)."""
     cursor = conn.cursor()
-    
-    # Drop and recreate the lookup table
-    cursor.execute("DROP TABLE IF EXISTS translation_lookup")
-    cursor.execute("DROP TABLE IF EXISTS translation_lookup")
-    cursor.execute("""
-        CREATE TABLE translation_lookup (
-            book_id TEXT NOT NULL,
-            line_number INTEGER NOT NULL,
-            segment_id INTEGER NOT NULL,
-            PRIMARY KEY (book_id, line_number, segment_id),
-            FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
-            FOREIGN KEY (segment_id) REFERENCES translation_segments(id) ON DELETE CASCADE
-        )
-    """)
-    
-    # Create indexes to match Room entity definition exactly
-    cursor.execute("CREATE INDEX index_translation_lookup_book_id_line_number ON translation_lookup(book_id, line_number)")
-    cursor.execute("CREATE INDEX index_translation_lookup_segment_id ON translation_lookup(segment_id)")
-    
+
+    # Clear prior rows; the table itself is created by shared.database_schema
+    # up front, so the caller may invoke this repeatedly within one build.
+    cursor.execute("DELETE FROM translation_lookup")
+
+
     # Get all books with translations
     cursor.execute("""
         SELECT DISTINCT b.id, COUNT(DISTINCT tl.line_number), 

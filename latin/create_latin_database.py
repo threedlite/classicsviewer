@@ -60,6 +60,8 @@ DATA_SOURCES_DIR = REPO_ROOT / "data-sources"
 
 if str(SCRIPT_DIR / "build_modules") not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR / "build_modules"))
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from monolith_fn import (  # noqa: E402
     process_perseus_author,
@@ -68,144 +70,7 @@ from monolith_fn import (  # noqa: E402
     write_xml_patterns_file,
 )
 from load_whitakers_latin import load_whitakers_latin  # noqa: E402
-
-
-# ---------------------------------------------------------------------------
-# Schema creation. Copied verbatim from create_perseus_database.py so the
-# merged final database sees an identical schema to what the monolith
-# currently produces. Any drift here = Room schema crash.
-# ---------------------------------------------------------------------------
-
-SCHEMA_DDL = [
-    """CREATE TABLE authors (
-        id TEXT PRIMARY KEY NOT NULL,
-        name TEXT NOT NULL,
-        name_alt TEXT,
-        language TEXT NOT NULL,
-        has_translations INTEGER DEFAULT 0
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_authors_language ON authors(language)",
-    """CREATE TABLE works (
-        id TEXT PRIMARY KEY NOT NULL,
-        author_id TEXT NOT NULL,
-        title TEXT NOT NULL,
-        title_alt TEXT,
-        title_english TEXT,
-        type TEXT,
-        urn TEXT,
-        description TEXT,
-        FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_works_author ON works(author_id)",
-    """CREATE TABLE books (
-        id TEXT PRIMARY KEY NOT NULL,
-        work_id TEXT NOT NULL,
-        book_number INTEGER NOT NULL,
-        label TEXT,
-        start_line INTEGER,
-        end_line INTEGER,
-        line_count INTEGER,
-        FOREIGN KEY (work_id) REFERENCES works(id) ON DELETE CASCADE
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_books_work ON books(work_id)",
-    """CREATE TABLE text_lines (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        book_id TEXT NOT NULL,
-        line_number INTEGER NOT NULL,
-        sequence_number INTEGER NOT NULL,
-        line_text TEXT NOT NULL,
-        line_xml TEXT,
-        speaker TEXT,
-        FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_text_lines_book ON text_lines(book_id)",
-    "CREATE INDEX IF NOT EXISTS idx_text_lines_sequence ON text_lines(book_id, sequence_number)",
-    """CREATE TABLE translation_segments (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        book_id TEXT NOT NULL,
-        start_line INTEGER NOT NULL,
-        end_line INTEGER,
-        sequence_number INTEGER,
-        translation_text TEXT NOT NULL,
-        translator TEXT,
-        speaker TEXT,
-        FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_translation_segments_book ON translation_segments(book_id)",
-    "CREATE INDEX IF NOT EXISTS idx_translation_segments_lines ON translation_segments(book_id, start_line)",
-    """CREATE TABLE milestone_line_ranges (
-        work_id TEXT,
-        milestone TEXT,
-        start_line INTEGER,
-        end_line INTEGER,
-        PRIMARY KEY (work_id, milestone)
-    )""",
-    """CREATE TABLE words (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        word TEXT NOT NULL,
-        book_id TEXT NOT NULL,
-        line_number INTEGER NOT NULL,
-        sequence_number INTEGER NOT NULL,
-        word_position INTEGER NOT NULL,
-        FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_words_word ON words(word)",
-    "CREATE INDEX IF NOT EXISTS idx_words_book_line_seq ON words(book_id, line_number, sequence_number)",
-    """CREATE TABLE dictionary_entries (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        headword TEXT NOT NULL,
-        headword_normalized_ultra TEXT,
-        language TEXT NOT NULL,
-        entry_xml TEXT,
-        entry_html TEXT,
-        entry_plain TEXT,
-        source TEXT
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_dictionary_headword ON dictionary_entries(headword)",
-    "CREATE INDEX IF NOT EXISTS idx_dictionary_headword_ultra ON dictionary_entries(headword_normalized_ultra)",
-    """CREATE TABLE lemma_map (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        word_form TEXT NOT NULL,
-        word_form_normalized_ultra TEXT,
-        lemma TEXT NOT NULL,
-        confidence REAL,
-        source TEXT,
-        morph_info TEXT
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_lemma_map_word ON lemma_map(word_form)",
-    "CREATE INDEX IF NOT EXISTS idx_lemma_map_word_ultra ON lemma_map(word_form_normalized_ultra)",
-    "CREATE INDEX IF NOT EXISTS idx_lemma_map_lemma ON lemma_map(lemma)",
-    """CREATE TABLE prefix_assimilation_rules (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        language TEXT NOT NULL,
-        base_prefix TEXT NOT NULL,
-        assimilated_form TEXT NOT NULL,
-        meaning TEXT,
-        phonological_rule TEXT,
-        priority INTEGER DEFAULT 0,
-        examples TEXT
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_language ON prefix_assimilation_rules(language)",
-    "CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_base ON prefix_assimilation_rules(base_prefix)",
-    "CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_form ON prefix_assimilation_rules(assimilated_form)",
-    "CREATE INDEX IF NOT EXISTS idx_prefix_assimilation_lang_priority ON prefix_assimilation_rules(language, priority)",
-    """CREATE TABLE normalization_patterns (
-        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        language TEXT NOT NULL,
-        pattern TEXT NOT NULL,
-        replacement TEXT NOT NULL,
-        description TEXT,
-        priority INTEGER DEFAULT 0
-    )""",
-    "CREATE INDEX IF NOT EXISTS idx_normalization_language ON normalization_patterns(language, priority)",
-]
-
-
-def create_schema(conn: sqlite3.Connection):
-    cur = conn.cursor()
-    for ddl in SCHEMA_DDL:
-        cur.execute(ddl)
-    conn.commit()
+from shared.database_schema import create_schema  # noqa: E402
 
 
 # ---------------------------------------------------------------------------

@@ -159,7 +159,7 @@ python3 -m venv venv
 venv/bin/pip install -r data-prep/requirements.txt
 ```
 
-⚠ **One venv for the whole project.** Scripts in `sanskrit/run_build.sh` and `data-prep/build_modules/generate_interlinear/run_interlinear_no_sleep.sh` reference `<project-root>/venv`. Do NOT use `source venv/bin/activate` for multiprocessing scripts — worker processes inherit the system Python, not the activated venv. Use `./venv/bin/python3` or the wrapper scripts instead.
+⚠ **One venv for the whole project.** Scripts in `sanskrit/run_build.sh` and `greek/build_modules/generate_interlinear/run_interlinear_no_sleep.sh` reference `<project-root>/venv`. Do NOT use `source venv/bin/activate` for multiprocessing scripts — worker processes inherit the system Python, not the activated venv. Use `./venv/bin/python3` or the wrapper scripts instead.
 
 ## Step 5: Generate Interlinear Translations (Extended Mode Only)
 
@@ -174,28 +174,64 @@ venv/bin/pip install -r data-prep/requirements.txt
 If the base DB doesn't exist yet, the interlinear generator will fail or produce empty glosses.
 
 ```bash
-cd data-prep/build_modules/generate_interlinear
+cd greek/build_modules/generate_interlinear
 
 # Greek interlinear (~7 hours, 8 workers, ~2,049 works)
-./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../perseus_texts_extended.db 8
+# DB path: ../../../greek/greek_texts.db  (relative from the generator dir)
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../greek_texts.db 8
 # Monitor: tail -f generation.log
 # Check:   grep -c "Work .* done" generation.log
-
-# Latin interlinear (~17 seconds, 230 works)
-./run_latin_interlinear_no_sleep.sh INTERLINEAR_ALL_LATIN_WITH_IDS.csv ../../perseus_texts_full.db 8
 
 cd ../../..
 ```
 
-Output: ~2,200 XML files in `data-sources/classicsviewer_interlinear/`. These are imported by the extended database build in Step 7.
+Output: ~2,000 XML files in `greek/interlinear_output/` (mirroring `latin/interlinear_output/` — Greek is self-contained). These are imported by the extended database build in Step 7.
+
+**Latin interlinear is no longer generated here** — it is produced automatically by the Latin module (Step 6) and lives under `latin/interlinear_output/`.
+
+### Rebuilding after a Perseus / First1K / PTA update
+
+When the upstream Greek corpora change, run `greek/rebuild_after_update.sh` (wraps the 3-pass rhythm described below). It:
+1. Builds `greek/greek_texts.db` with whatever XMLs exist now (Pass 1).
+2. Regenerates `INTERLINEAR_ALL_GREEK_WITH_IDS.csv` from the fresh DB (new works picked up, removed works dropped).
+3. Regenerates every Greek interlinear XML (Pass 2 — ~5-7 hours, atomic writes, kill-safe).
+4. Rebuilds `greek/greek_texts.db` importing the fresh XMLs (Pass 3).
+
+The Latin module and the assembly step are independent — run them after this script finishes:
+
+```bash
+cd greek && ./rebuild_after_update.sh && cd ..
+cd latin && ./run_build.sh extended && cd ..
+cd data-prep && python3 assemble_database.py extended && cd ..
+```
 
 ⚠ **Gloss quality depends on dictionary quality.** The interlinear generator uses the Wiktionary definitions from `wiktionary_definitions_complete.json`, which is regenerated during each database build. If you update the Wiktionary extraction code, rebuild the databases first, then regenerate interlinear to pick up the improved definitions.
 
-## Step 6: Build Language Databases (Extended Mode Only)
+## Step 6: Build Language Databases
 
-Skip this step if you only need the sample database. Each module produces a standalone `.db` that gets merged into the extended database. These can all run in parallel (they are independent).
+## Release targets
+
+There are **three distinct release builds** — each with its own assembly mode, compression output, and target deployment directory. They differ in corpus breadth and which platform receives the shipped ZIP:
+
+| Mode | Corpus | Destination(s) | Purpose |
+|---|---|---|---|
+| **sample** | 12 authors (Greek + Latin curated) | `app/src/{debug,main}/assets/perseus_texts.db.zip` + `perseus_database/src/main/assets/perseus_texts.db.zip` | Small-footprint Android APK (install-time) |
+| **full** | ~138 authors (all Perseus Greek + Latin) | `full_database_pack/src/main/assets/perseus_texts_full.db.zip` + `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip` | Android Play Asset Delivery "full" pack + iOS on-demand |
+| **extended** | ~786 authors (Perseus + First1K + PTA + Sanskrit + Pali + Hebrew + Arabic + ...) | `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip` | iOS on-demand only (too large for Android) |
+
+An additional `ios` variant builds the curated iOS base-app DB (`ios/ClassicsViewer/Resources/perseus_texts.db.zip`) — see the iOS section below. It is a sample-size DB driven by `IOS_SAMPLE_AUTHORS.csv`, not a separate corpus scale.
+
+### Per-module prerequisites by release target
+
+**Latin** is required for every release. **Other language modules** (Sanskrit, Chinese, Hebrew, Persian, Pali, Norse, Coptic, Syriac, Dante/Italian, Old English, Cuneiform) are required only for `full` and `extended`. Each module produces a standalone `.db` that is merged into the Perseus database in Step 7. Module builds are independent and can run in parallel.
 
 ```bash
+# Latin — MODE MUST MATCH your release target:
+cd latin && ./run_build.sh sample   && cd ..   # for sample release
+cd latin && ./run_build.sh full     && cd ..   # for full release
+cd latin && ./run_build.sh extended && cd ..   # for extended release
+# For iOS curated, see the "iOS curated-sample build" section below — uses a custom CSV.
+
 # Sanskrit (~10 hours full mode, 270 works, uses Stanza NLP)
 # ⚠ Ensure BG data exists first (see Step 2 — "Sanskrit Bhagavad Gita")
 cd sanskrit && ./run_build.sh full && cd ..
@@ -231,29 +267,108 @@ cd persian     && python3 create_persian_database.py && cd ..
 cd cuneiform   && python3 process_sumerian_complete.py && python3 process_akkadian_complete.py && cd ..
 ```
 
-Each script creates a `*_texts.db` file that will be automatically merged when you build the extended database. Missing databases are skipped with a warning — but the data will be absent.
+Each script creates a `*_texts.db` file that is merged into the Perseus database by `assemble_database.py`. Every module listed in the mode's merge rules is **required** — assembly hard-fails if any expected module DB is missing (no silent skips, no partial ships).
 
-## Step 7: Build the Perseus Databases
+### Greek module (required for every release)
 
-**NEVER run these in parallel** — they share output files and will corrupt each other.
+Greek has its own module (`greek/run_build.sh`, mirroring `latin/run_build.sh`). It produces `greek/greek_texts.db` (or `greek/greek_texts_ios.db` for iOS) with canonical schema. **Mode must match your release target.**
 
 ```bash
-cd data-prep
-
-# Sample: 12 authors, ~8 min, 670 MB / 162 MB zip
-python3 create_perseus_database.py sample
-
-# Full: 135 authors (Greek + Latin), ~12 min, 4.2 GB / 929 MB zip
-python3 create_perseus_database.py full
-
-# Extended: 780 authors (all languages), ~70 min, 13 GB / 2.8 GB zip
-# ⚠ Merges all language DBs from Step 6 + interlinear XMLs from Step 5
-python3 create_perseus_database.py extended
-
-cd ..
+cd greek && ./run_build.sh sample   && cd ..   # for sample release (~5 min)
+cd greek && ./run_build.sh full     && cd ..   # for full release (~8 min, Perseus Greek only)
+cd greek && ./run_build.sh extended && cd ..   # for extended release (~30-40 min: Wiktionary + First1K + PTA + Greek interlinear import)
+cd greek && ./run_build.sh ios      && cd ..   # for iOS curated build (uses IOS_SAMPLE_AUTHORS.csv)
 ```
 
-Add `--skip-oga` if you didn't download the OGA corpus in Step 2.
+Greek is fully self-contained under `greek/`: processing code lives at `greek/build_modules/monolith_fn.py`, dictionary/lemma pipeline at `greek/build_modules/*.py`, Wiktionary extraction at `greek/wiktionary-processing/`, author CSVs at `greek/data/`. No dependency on `data-prep/` apart from the shared canonical schema (`shared/database_schema.py`) and the top-level `merge_database.py` tool.
+
+## Step 7: Assemble the Perseus Database
+
+`data-prep/assemble_database.py` is the single build entry point. It merges the per-language module DBs from Step 6, runs the OGA lemma pass, lexicon imports, a schema-drift check, translation_lookup rebuild, quality report, compression, and deployment copy to platform-specific destinations. The mode you pass here **must** match the mode you used for each module's build.
+
+**NEVER run builds in parallel** — they share intermediate files and will corrupt each other. The build lock enforces this; attempting a second build while one is running aborts immediately.
+
+### Sample release (small APK)
+
+```bash
+cd latin && ./run_build.sh sample && cd ..
+cd greek && ./run_build.sh sample && cd ..
+cd data-prep && python3 assemble_database.py sample && cd ..
+```
+Deploys `perseus_texts_sample.db.zip` to:
+- `app/src/debug/assets/perseus_texts.db.zip`
+- `app/src/main/assets/perseus_texts.db.zip`
+- `perseus_database/src/main/assets/perseus_texts.db.zip`
+
+Expected: 12 authors, 265 works, 667 books, ~154 MB zip, ~8 min total (including OGA).
+
+### Full release (Android Play Asset Delivery full pack + iOS on-demand)
+
+Requires Step 6 Latin in full mode. Does NOT require other non-Greek/Latin language modules (those are extended-only).
+
+```bash
+cd latin && ./run_build.sh full && cd ..
+cd greek && ./run_build.sh full && cd ..
+cd data-prep && python3 assemble_database.py full && cd ..
+```
+Deploys:
+- `full_database_pack/src/main/assets/perseus_texts_full.db.zip` (Android Play Asset Delivery)
+- `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip` (iOS on-demand)
+
+Expected: ~138 authors (Greek + Latin, no other languages), ~1,021 works, ~1M text_lines, ~930 MB zip, ~15 min total.
+
+### Extended release (iOS on-demand only — too large for Android)
+
+Requires all of Step 6 — every non-Greek/Latin language module must be pre-built (Sanskrit, Chinese, Hebrew, Persian, Arabic, Pali, Norse, Coptic, Syriac, Dante/Italian, Old English, Cuneiform Sumerian+Akkadian).
+
+```bash
+cd latin && ./run_build.sh extended && cd ..
+cd greek && ./run_build.sh extended && cd ..
+cd data-prep && python3 assemble_database.py extended && cd ..
+```
+Deploys:
+- `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip` (iOS only)
+
+Expected: ~786 authors, ~2,734 works, ~3.16M text_lines, ~2.8 GB zip, ~45-55 min including Greek extended build.
+
+### iOS curated base app (separate from extended)
+
+Builds the curated base-app DB (`IOS_SAMPLE_AUTHORS.csv`) that ships with the iOS App Store binary. Does NOT affect the Android APK or the iOS on-demand full/extended packs.
+
+```bash
+cd greek && ./run_build.sh ios && cd ..
+cd latin && /home/user/git/classicsviewer/venv/bin/python3 create_latin_database.py sample \
+    --csv ../greek/data/IOS_SAMPLE_AUTHORS.csv \
+    --output latin_texts_ios.db && cd ..
+cd data-prep && python3 assemble_database.py ios && cd ..
+```
+Deploys:
+- `ios/ClassicsViewer/Resources/perseus_texts.db.zip`
+
+Expected: 11 authors, 41 works, 358 books, ~84 MB zip, ~8 min total.
+
+### `--skip-oga` (dev only)
+
+Add `--skip-oga` to `assemble_database.py` to skip the 5-min OGA lemma pass (~268K Greek lemmas). **Do not ship a DB built with `--skip-oga`** — it is missing essential Greek dictionary data. The flag exists only so devs without the 8.6 GB OGA corpus can still get a usable test DB.
+
+### Schema drift check
+
+The assembly script refuses to compress a DB that drifts from `shared/database_schema.py` (canonical DDL extracted from the shipped `perseus_texts-2.db`). Any drift = immediate abort before deployment copies are touched.
+
+### Concurrent-build mutex
+
+Both `greek/run_build.sh` and `data-prep/assemble_database.py` now acquire a file lock at `greek/build_modules/.perseus_db_build.lock` before doing any work (same lock the monolith used). A second build invocation aborts with the holding PID printed — preventing parallel builds from corrupting each other's intermediate files. The lock is released on exit, including uncaught exceptions.
+
+### Legacy: `create_perseus_database.py` is retired
+
+The monolithic `create_perseus_database.py` has been fully retired. Its code now lives at `greek/build_modules/monolith_fn.py` — it is the Greek module's build engine, imported by both `greek/create_greek_database.py` and `data-prep/assemble_database.py` (for the post-merge helpers: OGA lemma insertion, lexicon imports, translation_lookup rebuild, quality report, compression, APK copy).
+
+Other Greek-owned state moved alongside:
+- `data-prep/build_modules/` → `greek/build_modules/`
+- `data-prep/wiktionary-processing/` → `greek/wiktionary-processing/`
+- `data-prep/SAMPLE_AUTHORS.csv`, `EXTENDED_AUTHORS.csv`, `IOS_SAMPLE_AUTHORS.csv` → `greek/data/`
+
+`data-prep/` now holds only cross-language assets: `assemble_database.py`, `verify_module_output.py`, and per-mode quality reports.
 
 **Verification** (extended mode):
 ```bash
@@ -328,19 +443,22 @@ Or use the convenience script:
 
 ## Build Modes Reference
 
-| Mode | Command | Authors | DB Size | ZIP Size | Build Time |
-|------|---------|---------|---------|----------|------------|
-| Sample | `python3 create_perseus_database.py sample --skip-oga` | 12 | 615MB | 143MB | ~2 min |
-| Sample (with OGA) | `python3 create_perseus_database.py sample` | 12 | 671MB | 163MB | ~5 min |
-| Full | `python3 create_perseus_database.py full --skip-oga` | 135 | 2.3GB | 558MB | ~4 min |
-| Full (with OGA) | `python3 create_perseus_database.py full` | 135 | 3.7GB | 838MB | ~7 min |
-| Extended | `python3 create_perseus_database.py extended --skip-oga` | 778 | 8.7GB | 2.0GB | ~22 min |
-| Extended (with OGA) | `python3 create_perseus_database.py extended` | 778 | ~10GB | ~2.5GB | ~28 min |
+| Mode | Release? | Corpus scale | DB Size | ZIP Size | Build Time (incl. OGA) | Deploys to |
+|------|----------|--------------|---------|----------|------------------------|------------|
+| **sample** | ✅ | 12 authors | ~670 MB | ~154 MB | ~8 min | `app/src/{debug,main}/assets/`, `perseus_database/src/main/assets/` |
+| **full** | ✅ | ~138 authors (Greek+Latin only) | ~4.3 GB | ~930 MB | ~15 min | `full_database_pack/src/main/assets/`, `ios/ClassicsViewer/Resources/OnDemand/` |
+| **extended** | ✅ | ~786 authors (all langs) | ~13 GB | ~2.8 GB | ~45-55 min | `ios/ClassicsViewer/Resources/OnDemand/` (iOS only — too large for Android) |
+| ios (curated) | ✅ | 11 authors (IOS_SAMPLE_AUTHORS.csv) | ~370 MB | ~84 MB | ~8 min | `ios/ClassicsViewer/Resources/` (iOS base app) |
 
-**Note**: Only use the sample database for APK builds. Full and extended databases are too large for the Play Store.
-The `--skip-oga` flag skips the 8.6GB OGA corpus download, resulting in slightly smaller database.
+All four are real release builds with distinct deployment destinations. `full` ships as Android's Play Asset Delivery "full pack" + iOS on-demand pack; `extended` ships only to iOS on-demand (too large for the Android Play Store).
 
-**Extended mode requirements**: Before building extended, first complete Step 5 to build all language databases. Then run extended mode which merges them automatically. Missing databases will be skipped.
+**`--skip-oga` is dev-only.** All release builds MUST include OGA (268,065 Greek lemma mappings). The flag exists so developers without the 8.6 GB OGA corpus can still get a usable test DB; it must not be passed for release builds.
+
+**Build prerequisites by release target**:
+- **sample**: `latin/run_build.sh sample` + `greek/run_build.sh sample`
+- **full**: `latin/run_build.sh full` + `greek/run_build.sh full` (NO other language modules)
+- **extended**: every Step 6 language module built in its extended/full mode, plus `latin/run_build.sh extended` + `greek/run_build.sh extended`, plus Greek interlinear XMLs from Step 5
+- **ios (curated)**: `greek/run_build.sh ios` + latin with iOS CSV (see Step 7 iOS section)
 
 ## Troubleshooting
 
@@ -408,7 +526,7 @@ adb logcat | grep -E "classicsviewer|Perseus"
 |------|------|
 | Wiktionary cache (download + extract) | ~12 min |
 | Greek interlinear (2,049 works, 8 workers) | ~7 hours |
-| Latin interlinear (230 works) | ~17 seconds |
+| Latin module full (`latin/run_build.sh full`, 230 works, includes interlinear) | ~2 min |
 | Sanskrit full (270 works, 8 workers) | ~10 hours |
 | Chinese (downloads from Wikisource) | ~75 seconds |
 | All other language modules combined | ~2 minutes |
@@ -423,7 +541,8 @@ Greek interlinear and Sanskrit can run in parallel if you have CPU/RAM headroom 
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| Extended DB has <500K translation_segments | Interlinear XMLs missing (Step 5 skipped) | Run Greek + Latin interlinear generation, then rebuild extended |
+| `assemble_database.py` fails with `CRITICAL: required module database missing: <name>_texts.db` | The listed module wasn't built (Step 6) for the mode you're assembling | Build the named module in the matching mode, then re-run assembly |
+| `import_interlinear_translations` aborts with `CRITICAL: interlinear XML import failed` | One or more XMLs in `greek/interlinear_output/` are truncated/corrupt (usually from an interrupted generation) | Re-run the **full** Greek interlinear generation (Step 5); no targeted fixes allowed |
 | Coptic has 0 dictionary_entries | `Comprehensive_Coptic_Lexicon-v1.2-2020.xml` missing | Download from KELLIA repo (see Step 2) |
 | Hebrew lexicon missing BDB entries (only ~8,674 instead of ~20,500) | Only ran `process_hebrew_complete.py` | Also run `create_hebrew_lexicon.py` (see Step 6) |
 | Sanskrit missing Bhagavad Gita (700 verses) | `bhagavad_gita_sanskrit.json` not generated | Run download + parse scripts (see Step 2) |

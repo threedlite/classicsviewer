@@ -1,30 +1,30 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-04-03T05:58:49.954187
+Generated: 2026-04-17T05:00:23.907612
 Mode: sample
 
 Total Authors: 12
 Total Works: 265
 Total Books: 667
-Total Lines: 237,971
-Translation Segments: 126,149
-Build Time: 4.7 minutes
-Database Size: 673.5MB → 162.4MB compressed (24.1%)
-Dictionary Entries: 61,070
-Lemma Mappings: 765,526
+Total Lines: 222,709
+Translation Segments: 126,094
+Build Time: 3.2 minutes
+Database Size: 643.7MB → 154.3MB compressed (24.0%)
+Dictionary Entries: 96,025
+Lemma Mappings: 853,110
 
 === STATISTICS BY LANGUAGE ===
 
 greek:
   Authors: 10
   Works: 259
-  Lines: 219,433
-  Words: 3,095,381
+  Lines: 204,233
+  Words: 2,683,724
 
 latin:
   Authors: 2
   Works: 6
-  Lines: 18,538
-  Words: 114,108
+  Lines: 18,476
+  Words: 113,675
 
 === DETAILED BREAKDOWN ===
 
@@ -331,10 +331,10 @@ Horace / Odes / Book 3 - 1,004 lines
 Horace / Odes translations: John Conington 6 segments [Excellent-Section (100% coverage)]
 Horace / Odes / Book 4 - 582 lines
 Horace / Odes translations: John Conington 574 segments [Excellent (100% coverage)]
-Horace / Satires - 2,113 lines total, 2 books, max_lines/book=1,083, max_char=61 [Perseus]
+Horace / Satires - 2,112 lines total, 2 books, max_lines/book=1,082, max_char=61 [Perseus]
 Horace / Satires / Book 1 - 1,030 lines
 Horace / Satires translations: Christopher Smart 207 segments [Excellent-Section (100% coverage)]
-Horace / Satires / Book 2 - 1,083 lines
+Horace / Satires / Book 2 - 1,082 lines
 Horace / Satires translations: Christopher Smart 6 segments [Excellent-Section (97% coverage)]
 Horace / The Art of Poetry: To the Pisos - 476 lines, max_char=54 [Perseus]
 Horace / The Art of Poetry: To the Pisos translations: Christopher Smart 104 segments [Excellent-Section (100% coverage)]
@@ -885,33 +885,33 @@ New Testament / Titus / Chapter 3 - 15 lines
 New Testament / Titus translations: Rainbow Missions, Inc. 15 segments [Excellent (100% coverage)]
 
 [P. Vergilius Maro (Virgil)]
-P. Vergilius Maro (Virgil) / Aeneid - 9,897 lines total, 12 books, max_lines/book=952, max_char=60 [Perseus]
-P. Vergilius Maro (Virgil) / Aeneid / Book 1 - 756 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 756 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 2 - 804 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 804 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 3 - 718 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 718 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 4 - 705 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 705 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid - 9,843 lines total, 12 books, max_lines/book=948, max_char=60 [Perseus]
+P. Vergilius Maro (Virgil) / Aeneid / Book 1 - 754 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 754 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 2 - 780 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 780 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 3 - 717 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 717 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 4 - 703 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 702 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 5 - 871 lines
 P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 871 segments [Excellent (100% coverage)], Theodore C. Williams 1136 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 6 - 901 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 901 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 7 - 817 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 817 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 8 - 731 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 731 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 9 - 818 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 818 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 10 - 909 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 909 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 11 - 915 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 915 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 952 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 952 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Eclogues - 830 lines total, 10 books, max_lines/book=111, max_char=56 [Perseus]
-P. Vergilius Maro (Virgil) / Eclogues / Ode 1 - 84 lines
+P. Vergilius Maro (Virgil) / Aeneid / Book 6 - 896 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 896 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 7 - 816 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 816 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 8 - 724 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 724 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 9 - 813 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 813 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 10 - 907 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 907 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 11 - 914 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 914 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 948 lines
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 948 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Eclogues - 828 lines total, 10 books, max_lines/book=111, max_char=56 [Perseus]
+P. Vergilius Maro (Virgil) / Eclogues / Ode 1 - 83 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 12 segments [Excellent-Section (100% coverage)]
 P. Vergilius Maro (Virgil) / Eclogues / Ode 2 - 73 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 89 segments [Excellent (100% coverage)]
@@ -919,7 +919,7 @@ P. Vergilius Maro (Virgil) / Eclogues / Ode 3 - 111 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 40 segments [Excellent-Section (100% coverage)]
 P. Vergilius Maro (Virgil) / Eclogues / Ode 4 - 63 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 79 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Eclogues / Ode 5 - 90 lines
+P. Vergilius Maro (Virgil) / Eclogues / Ode 5 - 89 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 14 segments [Excellent-Section (100% coverage)]
 P. Vergilius Maro (Virgil) / Eclogues / Ode 6 - 86 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 109 segments [Excellent (100% coverage)]
@@ -931,14 +931,14 @@ P. Vergilius Maro (Virgil) / Eclogues / Ode 9 - 67 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 12 segments [Excellent-Section (100% coverage)]
 P. Vergilius Maro (Virgil) / Eclogues / Ode 10 - 77 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 97 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Georgics - 2,188 lines total, 4 books, max_lines/book=566, max_char=60 [Perseus]
-P. Vergilius Maro (Virgil) / Georgics / Book 1 - 514 lines
+P. Vergilius Maro (Virgil) / Georgics - 2,183 lines total, 4 books, max_lines/book=566, max_char=60 [Perseus]
+P. Vergilius Maro (Virgil) / Georgics / Book 1 - 513 lines
 P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 652 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Georgics / Book 2 - 542 lines
 P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 668 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Georgics / Book 3 - 566 lines
 P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 676 segments [Excellent (100% coverage)]
-P. Vergilius Maro (Virgil) / Georgics / Book 4 - 566 lines
+P. Vergilius Maro (Virgil) / Georgics / Book 4 - 562 lines
 P. Vergilius Maro (Virgil) / Georgics translations: James Rhoades 726 segments [Excellent (100% coverage)]
 
 [Plato]
@@ -1062,84 +1062,84 @@ Plutarch / A breviate of a discourse, showing that the Stoics speak greater impr
 Plutarch / A breviate of a discourse, showing that the Stoics speak greater improbabilities than the poets. translations: William Baxter 6 segments [Excellent-Section (100% coverage)]
 Plutarch / A discourse to an unlearned prince - 68 lines, max_char=687 [Perseus]
 Plutarch / A discourse to an unlearned prince translations: John Kersey 7 segments [Excellent-Section (100% coverage)], William Clark Helmbold 8 segments [Excellent-Section (100% coverage)]
-Plutarch / Aemilius Paulus - 617 lines, max_char=701 [Perseus]
+Plutarch / Aemilius Paulus - 374 lines, max_char=393 [Perseus]
 Plutarch / Aemilius Paulus translations: Bernadotte Perrin 319 segments [Excellent (100% coverage)]
 Plutarch / Against Colotes, the Disciple and Favorite of Epicurus. - 380 lines, max_char=806 [Perseus]
 Plutarch / Against Colotes, the Disciple and Favorite of Epicurus. translations: A. G. 34 segments [Excellent-Section (100% coverage)]
 Plutarch / Against Running in Debt, or Taking up Money Upon Usury - 121 lines, max_char=455 [Perseus]
 Plutarch / Against Running in Debt, or Taking up Money Upon Usury translations: Harold North Fowler 9 segments [Excellent-Section (100% coverage)], R. Smith 8 segments [Excellent-Section (100% coverage)]
-Plutarch / Agesilaus - 691 lines, max_char=724 [Perseus]
+Plutarch / Agesilaus - 425 lines, max_char=506 [Perseus]
 Plutarch / Agesilaus translations: Bernadotte Perrin 201 segments [Excellent-Section (100% coverage)]
 Plutarch / Agis and Cleomenes - 445 lines total, 2 books, max_lines/book=300, max_char=683 [Perseus]
 Plutarch / Agis and Cleomenes / Book 1 - 145 lines
 Plutarch / Agis and Cleomenes translations: Bernadotte Perrin 82 segments [Excellent (100% coverage)]
 Plutarch / Agis and Cleomenes / Book 2 - 300 lines
 Plutarch / Agis and Cleomenes translations: Bernadotte Perrin 163 segments [Excellent (100% coverage)]
-Plutarch / Alcibiades - 808 lines, max_char=781 [Perseus]
+Plutarch / Alcibiades - 444 lines, max_char=504 [Perseus]
 Plutarch / Alcibiades translations: Bernadotte Perrin 1 segments [Excellent-Section (100% coverage)]
-Plutarch / Alexander - 1,150 lines, max_char=981 [Perseus]
-Plutarch / Alexander translations: Bernadotte Perrin 377 segments [Excellent-Section (100% coverage)]
+Plutarch / Alexander - 733 lines, max_char=550 [Perseus]
+Plutarch / Alexander translations: Bernadotte Perrin 377 segments [Excellent (100% coverage)]
 Plutarch / An Abstract of a Comparison Betwixt Aristophanes and Menander - 29 lines, max_char=326 [Perseus]
 Plutarch / An Abstract of a Comparison Betwixt Aristophanes and Menander translations: Harold North Fowler 5 segments [Excellent-Section (100% coverage)], William Baxter 4 segments [Excellent-Section (100% coverage)]
-Plutarch / Antony - 1,571 lines, max_char=621 [Perseus]
+Plutarch / Antony - 920 lines, max_char=473 [Perseus]
 Plutarch / Antony translations: Bernadotte Perrin 359 segments [Excellent-Section (100% coverage)]
-Plutarch / Aratus - 670 lines, max_char=728 [Perseus]
-Plutarch / Aratus translations: Bernadotte Perrin 232 segments [Excellent-Section (100% coverage)]
-Plutarch / Aristides - 582 lines, max_char=681 [Perseus]
+Plutarch / Aratus - 410 lines, max_char=498 [Perseus]
+Plutarch / Aratus translations: Bernadotte Perrin 232 segments [Excellent (100% coverage)]
+Plutarch / Aristides - 337 lines, max_char=544 [Perseus]
 Plutarch / Aristides translations: Bernadotte Perrin 146 segments [Excellent-Section (100% coverage)]
-Plutarch / Artaxerxes - 478 lines, max_char=584 [Perseus]
+Plutarch / Artaxerxes - 298 lines, max_char=469 [Perseus]
 Plutarch / Artaxerxes translations: Bernadotte Perrin 140 segments [Excellent-Section (100% coverage)]
-Plutarch / Brutus - 909 lines, max_char=714 [Perseus]
-Plutarch / Brutus translations: Bernadotte Perrin 400 segments [Excellent-Section (100% coverage)]
-Plutarch / Caesar - 798 lines, max_char=1,035 [Perseus]
-Plutarch / Caesar translations: Bernadotte Perrin 288 segments [Excellent-Section (100% coverage)]
-Plutarch / Caius Marcius Coriolanus - 524 lines, max_char=925 [Perseus]
-Plutarch / Caius Marcius Coriolanus translations: Bernadotte Perrin 165 segments [Excellent-Section (100% coverage)]
-Plutarch / Caius Marius - 806 lines, max_char=725 [Perseus]
+Plutarch / Brutus - 559 lines, max_char=385 [Perseus]
+Plutarch / Brutus translations: Bernadotte Perrin 400 segments [Excellent (100% coverage)]
+Plutarch / Caesar - 510 lines, max_char=541 [Perseus]
+Plutarch / Caesar translations: Bernadotte Perrin 288 segments [Excellent (100% coverage)]
+Plutarch / Caius Marcius Coriolanus - 331 lines, max_char=499 [Perseus]
+Plutarch / Caius Marcius Coriolanus translations: Bernadotte Perrin 165 segments [Excellent (100% coverage)]
+Plutarch / Caius Marius - 484 lines, max_char=504 [Perseus]
 Plutarch / Caius Marius translations: Bernadotte Perrin 234 segments [Excellent-Section (100% coverage)]
-Plutarch / Camillus - 615 lines, max_char=896 [Perseus]
-Plutarch / Camillus translations: Bernadotte Perrin 192 segments [Excellent-Section (100% coverage)]
-Plutarch / Cato the Younger - 942 lines, max_char=986 [Perseus]
-Plutarch / Cato the Younger translations: Bernadotte Perrin 318 segments [Excellent-Section (100% coverage)]
-Plutarch / Cicero - 765 lines, max_char=601 [Perseus]
+Plutarch / Camillus - 380 lines, max_char=525 [Perseus]
+Plutarch / Camillus translations: Bernadotte Perrin 192 segments [Excellent (100% coverage)]
+Plutarch / Cato the Younger - 590 lines, max_char=516 [Perseus]
+Plutarch / Cato the Younger translations: Bernadotte Perrin 318 segments [Excellent (100% coverage)]
+Plutarch / Cicero - 477 lines, max_char=499 [Perseus]
 Plutarch / Cicero translations: Bernadotte Perrin 227 segments [Excellent-Section (100% coverage)]
-Plutarch / Cimon - 440 lines, max_char=941 [Perseus]
+Plutarch / Cimon - 244 lines, max_char=489 [Perseus]
 Plutarch / Cimon translations: Bernadotte Perrin 109 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Agesilaus and Pompey - 61 lines, max_char=784 [Perseus]
-Plutarch / Comparison of Agesilaus and Pompey translations: Bernadotte Perrin 20 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Agis and Cleomenes and the Gracchi - 55 lines, max_char=638 [Perseus]
-Plutarch / Comparison of Agis and Cleomenes and the Gracchi translations: Bernadotte Perrin 19 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Alcibiades and Coriolanus - 69 lines, max_char=437 [Perseus]
-Plutarch / Comparison of Alcibiades and Coriolanus translations: Bernadotte Perrin 22 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Aristides and Marcus Cato - 85 lines, max_char=578 [Perseus]
-Plutarch / Comparison of Aristides and Marcus Cato translations: Bernadotte Perrin 26 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Demetrius and Antony - 60 lines, max_char=320 [Perseus]
+Plutarch / Comparison of Agesilaus and Pompey - 36 lines, max_char=482 [Perseus]
+Plutarch / Comparison of Agesilaus and Pompey translations: Bernadotte Perrin 20 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Agis and Cleomenes and the Gracchi - 33 lines, max_char=504 [Perseus]
+Plutarch / Comparison of Agis and Cleomenes and the Gracchi translations: Bernadotte Perrin 19 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Alcibiades and Coriolanus - 42 lines, max_char=399 [Perseus]
+Plutarch / Comparison of Alcibiades and Coriolanus translations: Bernadotte Perrin 22 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Aristides and Marcus Cato - 52 lines, max_char=455 [Perseus]
+Plutarch / Comparison of Aristides and Marcus Cato translations: Bernadotte Perrin 26 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Demetrius and Antony - 38 lines, max_char=320 [Perseus]
 Plutarch / Comparison of Demetrius and Antony translations: Bernadotte Perrin 17 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Demosthenes and Cicero - 45 lines, max_char=524 [Perseus]
-Plutarch / Comparison of Demosthenes and Cicero translations: Bernadotte Perrin 19 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Dion and Brutus - 67 lines, max_char=329 [Perseus]
-Plutarch / Comparison of Dion and Brutus translations: Bernadotte Perrin 33 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Lucullus and Cimon - 52 lines, max_char=622 [Perseus]
-Plutarch / Comparison of Lucullus and Cimon translations: Bernadotte Perrin 18 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Lycurgus and Numa - 76 lines, max_char=690 [Perseus]
-Plutarch / Comparison of Lycurgus and Numa translations: Bernadotte Perrin 26 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Lysander and Sulla - 73 lines, max_char=492 [Perseus]
-Plutarch / Comparison of Lysander and Sulla translations: Bernadotte Perrin 23 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Nicias and Crassus - 68 lines, max_char=591 [Perseus]
-Plutarch / Comparison of Nicias and Crassus translations: Bernadotte Perrin 23 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Pelopidas and Marcellus - 46 lines, max_char=584 [Perseus]
+Plutarch / Comparison of Demosthenes and Cicero - 29 lines, max_char=478 [Perseus]
+Plutarch / Comparison of Demosthenes and Cicero translations: Bernadotte Perrin 19 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Dion and Brutus - 39 lines, max_char=303 [Perseus]
+Plutarch / Comparison of Dion and Brutus translations: Bernadotte Perrin 33 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Lucullus and Cimon - 34 lines, max_char=394 [Perseus]
+Plutarch / Comparison of Lucullus and Cimon translations: Bernadotte Perrin 18 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Lycurgus and Numa - 48 lines, max_char=530 [Perseus]
+Plutarch / Comparison of Lycurgus and Numa translations: Bernadotte Perrin 26 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Lysander and Sulla - 43 lines, max_char=492 [Perseus]
+Plutarch / Comparison of Lysander and Sulla translations: Bernadotte Perrin 23 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Nicias and Crassus - 41 lines, max_char=453 [Perseus]
+Plutarch / Comparison of Nicias and Crassus translations: Bernadotte Perrin 23 segments [Excellent (100% coverage)]
+Plutarch / Comparison of Pelopidas and Marcellus - 31 lines, max_char=361 [Perseus]
 Plutarch / Comparison of Pelopidas and Marcellus translations: Bernadotte Perrin 15 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Pericles and Fabius Maximus - 52 lines, max_char=495 [Perseus]
+Plutarch / Comparison of Pericles and Fabius Maximus - 29 lines, max_char=360 [Perseus]
 Plutarch / Comparison of Pericles and Fabius Maximus translations: Bernadotte Perrin 13 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Philopoemen and Titus - 35 lines, max_char=316 [Perseus]
+Plutarch / Comparison of Philopoemen and Titus - 22 lines, max_char=316 [Perseus]
 Plutarch / Comparison of Philopoemen and Titus translations: Bernadotte Perrin 9 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Sertorius and Eumenes - 26 lines, max_char=466 [Perseus]
+Plutarch / Comparison of Sertorius and Eumenes - 15 lines, max_char=466 [Perseus]
 Plutarch / Comparison of Sertorius and Eumenes translations: Bernadotte Perrin 7 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Solon and Publicola - 66 lines, max_char=422 [Perseus]
+Plutarch / Comparison of Solon and Publicola - 36 lines, max_char=422 [Perseus]
 Plutarch / Comparison of Solon and Publicola translations: Bernadotte Perrin 16 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Theseus and Romulus - 68 lines, max_char=410 [Perseus]
+Plutarch / Comparison of Theseus and Romulus - 38 lines, max_char=410 [Perseus]
 Plutarch / Comparison of Theseus and Romulus translations: Bernadotte Perrin 18 segments [Excellent-Section (100% coverage)]
-Plutarch / Comparison of Timoleon and Aemilius - 35 lines, max_char=613 [Perseus]
+Plutarch / Comparison of Timoleon and Aemilius - 20 lines, max_char=377 [Perseus]
 Plutarch / Comparison of Timoleon and Aemilius translations: Bernadotte Perrin 17 segments [Excellent (100% coverage)]
 Plutarch / Concerning Such Whom God is Slow to Punish - 384 lines, max_char=811 [Perseus]
 Plutarch / Concerning Such Whom God is Slow to Punish translations: John Philips 33 segments [Excellent-Section (100% coverage)]
@@ -1149,28 +1149,28 @@ Plutarch / Concerning the cure of anger: a dialogue - 267 lines, max_char=792 [P
 Plutarch / Concerning the cure of anger: a dialogue translations: William Clark Helmbold 17 segments [Excellent-Section (100% coverage)], William Dillgham 16 segments [Excellent-Section (100% coverage)]
 Plutarch / Concerning the fortune of the Romans - 188 lines, max_char=802 [Perseus]
 Plutarch / Concerning the fortune of the Romans translations: Frank Cole Babbitt 14 segments [Excellent-Section (100% coverage)], John Oswald 13 segments [Excellent-Section (100% coverage)]
-Plutarch / Concerning the fortune or virtue of Alexander the Great. - 420 lines, max_char=522 [Perseus]
+Plutarch / Concerning the fortune or virtue of Alexander the Great. - 411 lines, max_char=522 [Perseus]
 Plutarch / Concerning the fortune or virtue of Alexander the Great. translations: Frank Cole Babbitt 26 segments [Excellent-Section (100% coverage)], John Phillips 25 segments [Excellent-Section (100% coverage)]
 Plutarch / Concerning the procreation of the soul as discoursed in Timaeus - 359 lines, max_char=893 [Perseus]
 Plutarch / Concerning the procreation of the soul as discoursed in Timaeus translations: John Philips 33 segments [Excellent-Section (100% coverage)]
 Plutarch / Consolation to Apollonius - 414 lines, max_char=826 [Perseus]
 Plutarch / Consolation to Apollonius translations: Frank Cole Babbitt 38 segments [Excellent-Section (100% coverage)], Matthew Morgan 37 segments [Excellent-Section (100% coverage)]
-Plutarch / Crassus - 634 lines, max_char=737 [Perseus]
+Plutarch / Crassus - 390 lines, max_char=522 [Perseus]
 Plutarch / Crassus translations: Bernadotte Perrin 193 segments [Excellent-Section (100% coverage)]
 Plutarch / De E apud Delphos - 213 lines, max_char=529 [Perseus]
 Plutarch / De E apud Delphos translations: Frank Cole Babbitt 22 segments [Excellent-Section (100% coverage)], R. Kippax 21 segments [Excellent-Section (100% coverage)]
-Plutarch / Demetrius - 882 lines, max_char=942 [Perseus]
+Plutarch / Demetrius - 552 lines, max_char=465 [Perseus]
 Plutarch / Demetrius translations: Bernadotte Perrin 240 segments [Excellent-Section (100% coverage)]
-Plutarch / Demosthenes - 400 lines, max_char=717 [Perseus]
+Plutarch / Demosthenes - 270 lines, max_char=470 [Perseus]
 Plutarch / Demosthenes translations: Bernadotte Perrin 130 segments [Excellent-Section (100% coverage)]
-Plutarch / Dion - 800 lines, max_char=815 [Perseus]
-Plutarch / Dion translations: Bernadotte Perrin 388 segments [Excellent-Section (100% coverage)]
-Plutarch / Eumenes - 281 lines, max_char=1,056 [Perseus]
-Plutarch / Eumenes translations: Bernadotte Perrin 98 segments [Excellent-Section (100% coverage)]
-Plutarch / Fabius Maximus - 407 lines, max_char=1,432 [Perseus]
-Plutarch / Fabius Maximus translations: Bernadotte Perrin 132 segments [Excellent-Section (100% coverage)]
-Plutarch / Galba - 357 lines, max_char=794 [Perseus]
-Plutarch / Galba translations: Bernadotte Perrin 122 segments [Excellent-Section (100% coverage)]
+Plutarch / Dion - 465 lines, max_char=389 [Perseus]
+Plutarch / Dion translations: Bernadotte Perrin 388 segments [Excellent (100% coverage)]
+Plutarch / Eumenes - 184 lines, max_char=486 [Perseus]
+Plutarch / Eumenes translations: Bernadotte Perrin 98 segments [Excellent (100% coverage)]
+Plutarch / Fabius Maximus - 257 lines, max_char=545 [Perseus]
+Plutarch / Fabius Maximus translations: Bernadotte Perrin 132 segments [Excellent (100% coverage)]
+Plutarch / Galba - 226 lines, max_char=491 [Perseus]
+Plutarch / Galba translations: Bernadotte Perrin 122 segments [Excellent (100% coverage)]
 Plutarch / Greek Questions - 337 lines, max_char=492 [Perseus]
 Plutarch / Greek Questions translations: Frank Cole Babbitt 60 segments [Excellent-Section (100% coverage)], Isaac Chauncy 118 segments [Excellent-Section (100% coverage)]
 Plutarch / How a Man May Be Sensible of His Progress in Virtue. - 137 lines, max_char=669 [Perseus]
@@ -1185,23 +1185,23 @@ Plutarch / How a man may receive advantage and profit from his
             enemies. translations: Frank Cole Babbitt 12 segments [Excellent-Section (100% coverage)], John Hartcliffe 11 segments [Excellent-Section (100% coverage)]
 Plutarch / How to Know a Flatterer from a Friend - 430 lines, max_char=900 [Perseus]
 Plutarch / How to Know a Flatterer from a Friend translations: Frank Cole Babbitt 38 segments [Excellent-Section (100% coverage)], George Tullie 37 segments [Excellent-Section (100% coverage)]
-Plutarch / Laconic Apophthegms; or Remarkable Sayings of the Spartans. - 798 lines, max_char=1,313 [Perseus]
+Plutarch / Laconic Apophthegms; or Remarkable Sayings of the Spartans. - 684 lines, max_char=463 [Perseus]
 Plutarch / Laconic Apophthegms; or Remarkable Sayings of the Spartans. translations: Frank Cole Babbitt 417 segments [Excellent (100% coverage)], unknown 69 segments [Excellent-Section (100% coverage)]
-Plutarch / Lives of the Ten Orators - 734 lines, max_char=614 [Perseus]
+Plutarch / Lives of the Ten Orators - 497 lines, max_char=614 [Perseus]
 Plutarch / Lives of the Ten Orators translations: Charles Barcroft 13 segments [Excellent-Section (100% coverage)], William Clark Helmbold 14 segments [Excellent-Section (100% coverage)]
-Plutarch / Lucullus - 791 lines, max_char=954 [Perseus]
-Plutarch / Lucullus translations: Bernadotte Perrin 253 segments [Excellent-Section (100% coverage)]
-Plutarch / Lycurgus - 574 lines, max_char=833 [Perseus]
+Plutarch / Lucullus - 483 lines, max_char=630 [Perseus]
+Plutarch / Lucullus translations: Bernadotte Perrin 253 segments [Excellent (100% coverage)]
+Plutarch / Lycurgus - 372 lines, max_char=631 [Perseus]
 Plutarch / Lycurgus translations: Bernadotte Perrin 153 segments [Excellent-Section (100% coverage)]
-Plutarch / Lysander - 613 lines, max_char=772 [Perseus]
+Plutarch / Lysander - 344 lines, max_char=462 [Perseus]
 Plutarch / Lysander translations: Bernadotte Perrin 155 segments [Excellent-Section (100% coverage)]
-Plutarch / Marcellus - 458 lines, max_char=817 [Perseus]
-Plutarch / Marcellus translations: Bernadotte Perrin 153 segments [Excellent-Section (100% coverage)]
-Plutarch / Marcus Cato - 458 lines, max_char=888 [Perseus]
-Plutarch / Marcus Cato translations: Bernadotte Perrin 146 segments [Excellent-Section (100% coverage)]
-Plutarch / Nicias - 690 lines, max_char=898 [Perseus]
+Plutarch / Marcellus - 281 lines, max_char=532 [Perseus]
+Plutarch / Marcellus translations: Bernadotte Perrin 153 segments [Excellent (100% coverage)]
+Plutarch / Marcus Cato - 284 lines, max_char=501 [Perseus]
+Plutarch / Marcus Cato translations: Bernadotte Perrin 146 segments [Excellent (100% coverage)]
+Plutarch / Nicias - 375 lines, max_char=527 [Perseus]
 Plutarch / Nicias translations: Bernadotte Perrin 1 segments [Excellent-Section (100% coverage)]
-Plutarch / Numa - 433 lines, max_char=957 [Perseus]
+Plutarch / Numa - 262 lines, max_char=587 [Perseus]
 Plutarch / Numa translations: Bernadotte Perrin 130 segments [Excellent-Section (100% coverage)]
 Plutarch / Of Banishment, or Flying One's Country. - 207 lines, max_char=418 [Perseus]
 Plutarch / Of Banishment, or Flying One's Country. translations: John Patrick 17 segments [Excellent-Section (100% coverage)]
@@ -1251,45 +1251,45 @@ Plutarch / Of the Tranquillity of the Mind. - 273 lines, max_char=659 [Perseus]
 Plutarch / Of the Tranquillity of the Mind. translations: Matthew Morgan 20 segments [Excellent-Section (100% coverage)], William Clark Helmbold 21 segments [Excellent-Section (100% coverage)]
 Plutarch / On the Principle of Cold  - 247 lines, max_char=522 [Perseus]
 Plutarch / On the Principle of Cold  translations: F. Fetherston 23 segments [Excellent-Section (100% coverage)], Harold Cherniss and William C. Helmbold 24 segments [Excellent-Section (100% coverage)]
-Plutarch / Otho - 266 lines, max_char=455 [Perseus]
-Plutarch / Otho translations: Bernadotte Perrin 84 segments [Excellent-Section (100% coverage)]
+Plutarch / Otho - 162 lines, max_char=455 [Perseus]
+Plutarch / Otho translations: Bernadotte Perrin 84 segments [Excellent (100% coverage)]
 Plutarch / Parallels, or a comparison between the Greek and Roman  Histories. - 405 lines, max_char=318 [Perseus]
 Plutarch / Parallels, or a comparison between the Greek and Roman  Histories. translations: Frank Cole Babbitt 43 segments [Excellent-Section (100% coverage)], John Oswald 42 segments [Excellent-Section (100% coverage)]
-Plutarch / Pelopidas - 492 lines, max_char=1,148 [Perseus]
-Plutarch / Pelopidas translations: Bernadotte Perrin 170 segments [Excellent-Section (100% coverage)]
-Plutarch / Pericles - 661 lines, max_char=1,008 [Perseus]
+Plutarch / Pelopidas - 304 lines, max_char=527 [Perseus]
+Plutarch / Pelopidas translations: Bernadotte Perrin 170 segments [Excellent (100% coverage)]
+Plutarch / Pericles - 383 lines, max_char=537 [Perseus]
 Plutarch / Pericles translations: Bernadotte Perrin 181 segments [Excellent-Section (100% coverage)]
-Plutarch / Philopoemen - 283 lines, max_char=1,098 [Perseus]
-Plutarch / Philopoemen translations: Bernadotte Perrin 112 segments [Excellent-Section (100% coverage)]
-Plutarch / Phocion - 445 lines, max_char=782 [Perseus]
+Plutarch / Philopoemen - 171 lines, max_char=513 [Perseus]
+Plutarch / Philopoemen translations: Bernadotte Perrin 112 segments [Excellent (100% coverage)]
+Plutarch / Phocion - 306 lines, max_char=489 [Perseus]
 Plutarch / Phocion translations: Bernadotte Perrin 148 segments [Excellent-Section (100% coverage)]
 Plutarch / Plutarch's Consolatory Letter to His Wife - 94 lines, max_char=412 [Perseus]
 Plutarch / Plutarch's Consolatory Letter to His Wife translations: Thomas Creech 11 segments [Excellent-Section (100% coverage)]
 Plutarch / Plutarch's Natural Questions - 263 lines, max_char=371 [Perseus]
 Plutarch / Plutarch's Natural Questions translations: R. Brown 39 segments [Excellent-Section (100% coverage)]
-Plutarch / Plutarch's Platonic questions - 331 lines, max_char=654 [Perseus]
+Plutarch / Plutarch's Platonic questions - 298 lines, max_char=654 [Perseus]
 Plutarch / Plutarch's Platonic questions translations: R. Brown 37 segments [Excellent-Section (100% coverage)]
 Plutarch / Plutarch's Rules for the Preservation of Health - 282 lines, max_char=793 [Perseus]
 Plutarch / Plutarch's Rules for the Preservation of Health translations: Frank Cole Babbitt 28 segments [Excellent-Section (100% coverage)], Matthew Poole 27 segments [Excellent-Section (100% coverage)]
 Plutarch / Political Precepts - 478 lines, max_char=954 [Perseus]
 Plutarch / Political Precepts translations: Samuel White 32 segments [Excellent-Section (100% coverage)], William Clark Helmbold 33 segments [Excellent-Section (100% coverage)]
-Plutarch / Pompey - 1,302 lines, max_char=774 [Perseus]
-Plutarch / Pompey translations: Bernadotte Perrin 392 segments [Excellent-Section (100% coverage)]
-Plutarch / Publicola - 385 lines, max_char=752 [Perseus]
+Plutarch / Pompey - 784 lines, max_char=482 [Perseus]
+Plutarch / Pompey translations: Bernadotte Perrin 392 segments [Excellent (100% coverage)]
+Plutarch / Publicola - 236 lines, max_char=520 [Perseus]
 Plutarch / Publicola translations: Bernadotte Perrin 103 segments [Excellent-Section (100% coverage)]
-Plutarch / Pyrrhus - 603 lines, max_char=861 [Perseus]
+Plutarch / Pyrrhus - 402 lines, max_char=515 [Perseus]
 Plutarch / Pyrrhus translations: Bernadotte Perrin 194 segments [Excellent-Section (100% coverage)]
 Plutarch / Roman Questions - 714 lines, max_char=470 [Perseus]
 Plutarch / Roman Questions translations: Frank Cole Babbitt 114 segments [Excellent-Section (100% coverage)], Isaac Chauncy 113 segments [Excellent-Section (100% coverage)]
-Plutarch / Romulus - 818 lines, max_char=507 [Perseus]
+Plutarch / Romulus - 440 lines, max_char=496 [Perseus]
 Plutarch / Romulus translations: Bernadotte Perrin 161 segments [Excellent-Section (100% coverage)]
-Plutarch / Sayings of Spartan Women - 79 lines, max_char=623 [Perseus]
+Plutarch / Sayings of Spartan Women - 70 lines, max_char=272 [Perseus]
 Plutarch / Sayings of Spartan Women translations: Frank Cole Babbitt 41 segments [Excellent (100% coverage)]
-Plutarch / Sertorius - 358 lines, max_char=1,203 [Perseus]
-Plutarch / Sertorius translations: Bernadotte Perrin 128 segments [Excellent-Section (100% coverage)]
-Plutarch / Solon - 671 lines, max_char=1,051 [Perseus]
+Plutarch / Sertorius - 223 lines, max_char=537 [Perseus]
+Plutarch / Sertorius translations: Bernadotte Perrin 128 segments [Excellent (100% coverage)]
+Plutarch / Solon - 379 lines, max_char=477 [Perseus]
 Plutarch / Solon translations: Bernadotte Perrin 140 segments [Excellent-Section (100% coverage)]
-Plutarch / Sulla - 679 lines, max_char=944 [Perseus]
+Plutarch / Sulla - 411 lines, max_char=507 [Perseus]
 Plutarch / Sulla translations: Bernadotte Perrin 204 segments [Excellent-Section (100% coverage)]
 Plutarch / That Virtue May Be Taught - 37 lines, max_char=337 [Perseus]
 Plutarch / That Virtue May Be Taught translations: John Patrick 3 segments [Excellent-Section (100% coverage)], William Clark Helmbold 4 segments [Excellent-Section (100% coverage)]
@@ -1304,24 +1304,24 @@ Plutarch / The Ancient Customs of the Spartans translations: Frank Cole Babbitt 
 Plutarch / The Banquet of the Seven Wise Men - 423 lines, max_char=586 [Perseus]
 Plutarch / The Banquet of the Seven Wise Men translations: Frank Cole Babbitt 22 segments [Excellent-Section (100% coverage)], Roger Davis 21 segments [Excellent-Section (100% coverage)]
 Plutarch / The apophthegms or remarkable sayings of kings and great
-            commanders. - 1,046 lines, max_char=1,222 [Perseus]
+            commanders. - 839 lines, max_char=427 [Perseus]
 Plutarch / The apophthegms or remarkable sayings of kings and great
-            commanders. translations: Edward Hinton 92 segments [Excellent-Section (100% coverage)], Frank Cole Babbitt 500 segments [Excellent-Section (100% coverage)]
+            commanders. translations: Edward Hinton 92 segments [Excellent-Section (100% coverage)], Frank Cole Babbitt 500 segments [Excellent (100% coverage)]
 Plutarch / The contradictions of the Stoics - 516 lines, max_char=693 [Perseus]
 Plutarch / The contradictions of the Stoics translations: E. Smith 1 segments [Excellent-Section (100% coverage)]
-Plutarch / Themistocles - 591 lines, max_char=680 [Perseus]
+Plutarch / Themistocles - 348 lines, max_char=551 [Perseus]
 Plutarch / Themistocles translations: Bernadotte Perrin 136 segments [Excellent-Section (100% coverage)]
-Plutarch / Theseus - 672 lines, max_char=570 [Perseus]
+Plutarch / Theseus - 365 lines, max_char=566 [Perseus]
 Plutarch / Theseus translations: Bernadotte Perrin 132 segments [Excellent-Section (100% coverage)]
 Plutarch / Tiberius and Caius Gracchus - 335 lines total, 2 books, max_lines/book=178, max_char=517 [Perseus]
 Plutarch / Tiberius and Caius Gracchus / Book 1 - 178 lines
 Plutarch / Tiberius and Caius Gracchus translations: Bernadotte Perrin 97 segments [Excellent (100% coverage)]
 Plutarch / Tiberius and Caius Gracchus / Book 2 - 157 lines
 Plutarch / Tiberius and Caius Gracchus translations: Bernadotte Perrin 79 segments [Excellent (100% coverage)]
-Plutarch / Timoleon - 529 lines, max_char=1,041 [Perseus]
+Plutarch / Timoleon - 323 lines, max_char=472 [Perseus]
 Plutarch / Timoleon translations: Bernadotte Perrin 291 segments [Excellent (100% coverage)]
-Plutarch / Titus Flamininus - 285 lines, max_char=778 [Perseus]
-Plutarch / Titus Flamininus translations: Bernadotte Perrin 108 segments [Excellent-Section (100% coverage)]
+Plutarch / Titus Flamininus - 184 lines, max_char=550 [Perseus]
+Plutarch / Titus Flamininus translations: Bernadotte Perrin 108 segments [Excellent (100% coverage)]
 Plutarch / Wherefore the Pythian Priestess now Ceases to Deliver her Oracles in Verse - 316 lines, max_char=646 [Perseus]
 Plutarch / Wherefore the Pythian Priestess now Ceases to Deliver her Oracles in Verse translations: Frank Cole Babbitt 31 segments [Excellent-Section (100% coverage)], John Philips 30 segments [Excellent-Section (100% coverage)]
 Plutarch / Whether 'Twere Rightly Said, Live Concealed. - 67 lines, max_char=503 [Perseus]
@@ -1375,7 +1375,7 @@ Xenophon /  Hellenica / Book 6 - 598 lines
 Xenophon /  Hellenica translations: Unknown 167 segments [Excellent-Section (100% coverage)]
 Xenophon /  Hellenica / Book 7 - 563 lines
 Xenophon /  Hellenica translations: Unknown 148 segments [Excellent-Section (100% coverage)]
-Xenophon / Agesilaus - 641 lines, max_char=807 [Perseus]
+Xenophon / Agesilaus - 359 lines, max_char=748 [Perseus]
 Xenophon / Agesilaus translations: Unknown 137 segments [Excellent-Section (100% coverage)]
 Xenophon / Anabasis - 3,847 lines total, 7 books, max_lines/book=745, max_char=647 [Perseus]
 Xenophon / Anabasis / Book 1 - 613 lines
@@ -1394,7 +1394,7 @@ Xenophon / Anabasis / Book 7 - 745 lines
 Xenophon / Anabasis translations: Unknown 294 segments [Excellent-Section (100% coverage)]
 Xenophon / Apology - 117 lines, max_char=312 [Perseus]
 Xenophon / Apology translations: Unknown 34 segments [Excellent-Section (100% coverage)]
-Xenophon / Constitution of the Lacedaimonians - 464 lines, max_char=572 [Perseus]
+Xenophon / Constitution of the Lacedaimonians - 280 lines, max_char=483 [Perseus]
 Xenophon / Constitution of the Lacedaimonians translations: Unknown 119 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia - 4,989 lines total, 8 books, max_lines/book=896, max_char=731 [Perseus]
 Xenophon / Cyropaedia / Book 1 - 679 lines
@@ -1413,9 +1413,9 @@ Xenophon / Cyropaedia / Book 7 - 609 lines
 Xenophon / Cyropaedia translations: Unknown 196 segments [Excellent-Section (100% coverage)]
 Xenophon / Cyropaedia / Book 8 - 896 lines
 Xenophon / Cyropaedia translations: Unknown 268 segments [Excellent-Section (100% coverage)]
-Xenophon / Economics - 1,878 lines, max_char=604 [Perseus]
+Xenophon / Economics - 993 lines, max_char=511 [Perseus]
 Xenophon / Economics translations: Unknown 397 segments [Excellent-Section (100% coverage)]
-Xenophon / Hiero - 587 lines, max_char=601 [Perseus]
+Xenophon / Hiero - 324 lines, max_char=471 [Perseus]
 Xenophon / Hiero translations: Unknown 153 segments [Excellent-Section (100% coverage)]
 Xenophon / Memorabilia - 2,234 lines total, 4 books, max_lines/book=684, max_char=717 [Perseus]
 Xenophon / Memorabilia / Book 1 - 414 lines
@@ -1426,11 +1426,11 @@ Xenophon / Memorabilia / Book 3 - 611 lines
 Xenophon / Memorabilia translations: Unknown 176 segments [Excellent-Section (100% coverage)]
 Xenophon / Memorabilia / Book 4 - 684 lines
 Xenophon / Memorabilia translations: Unknown 136 segments [Excellent-Section (100% coverage)]
-Xenophon / On Hunting - 1,045 lines, max_char=880 [Perseus]
+Xenophon / On Hunting - 607 lines, max_char=880 [Perseus]
 Xenophon / On Hunting translations: Unknown 215 segments [Excellent-Section (100% coverage)]
-Xenophon / On the Cavalry Commander - 497 lines, max_char=532 [Perseus]
+Xenophon / On the Cavalry Commander - 296 lines, max_char=445 [Perseus]
 Xenophon / On the Cavalry Commander translations: Unknown 139 segments [Excellent-Section (100% coverage)]
-Xenophon / On the Cavalry Commander - 671 lines, max_char=401 [Perseus]
+Xenophon / On the Cavalry Commander - 392 lines, max_char=375 [Perseus]
 Xenophon / On the Cavalry Commander translations: Unknown 154 segments [Excellent-Section (100% coverage)]
-Xenophon / Ways and Means - 346 lines, max_char=595 [Perseus]
+Xenophon / Ways and Means - 202 lines, max_char=585 [Perseus]
 Xenophon / Ways and Means translations: Unknown 97 segments [Excellent-Section (100% coverage)]
