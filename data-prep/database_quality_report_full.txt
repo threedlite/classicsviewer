@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-04-16T21:32:59.885465
+Generated: 2026-04-17T21:10:41.975096
 Mode: full
 
 Total Authors: 138
 Total Works: 1021
 Total Books: 3407
 Total Lines: 1,010,513
-Translation Segments: 1,238,610
-Build Time: 4.7 minutes
-Database Size: 4099.8MB → 889.3MB compressed (21.7%)
+Translation Segments: 1,255,038
+Build Time: 4.8 minutes
+Database Size: 4120.5MB → 893.0MB compressed (21.7%)
 Dictionary Entries: 232,571
 Lemma Mappings: 3,138,298
 
@@ -288,13 +288,13 @@ Apollodorus / Library translations: Interlinear (Beta, generated from app dictio
 [Apollonius Rhodius]
 Apollonius Rhodius / Argonautica - 5,834 lines total, 4 books, max_lines/book=1,779, max_char=55 [Perseus]
 Apollonius Rhodius / Argonautica / Book 1 - 1,362 lines
-Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 112 segments [Excellent-Section (100% coverage)]
+Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 112 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1362 segments [Excellent (100% coverage)]
 Apollonius Rhodius / Argonautica / Book 2 - 1,287 lines
-Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 69 segments [Excellent-Section (100% coverage)]
+Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 69 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1287 segments [Excellent (100% coverage)]
 Apollonius Rhodius / Argonautica / Book 3 - 1,406 lines
-Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 77 segments [Excellent-Section (100% coverage)]
+Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 77 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1406 segments [Excellent (100% coverage)]
 Apollonius Rhodius / Argonautica / Book 4 - 1,779 lines
-Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 88 segments [Excellent-Section (100% coverage)]
+Apollonius Rhodius / Argonautica translations: Edward P. Coleridge 88 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1779 segments [Excellent (100% coverage)]
 
 [Appianus of Alexandria]
 Appianus of Alexandria / The Roman History: Concerning Italy - 56 lines, max_char=388 [Perseus]
@@ -951,25 +951,45 @@ Callistratus / Descriptiones translations: Interlinear (Beta, generated from app
 [Cassius Dio Cocceianus]
 Cassius Dio Cocceianus / Historia Romana - 10,594 lines total, 20 books, max_lines/book=689, max_char=457 [Perseus]
 Cassius Dio Cocceianus / Historia Romana / Book 36 - 369 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 369 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 37 - 567 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 567 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 38 - 632 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 632 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 39 - 503 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 503 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 40 - 577 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 577 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 41 - 605 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 605 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 42 - 544 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 544 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 43 - 546 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 546 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 44 - 515 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 515 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 45 - 485 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 485 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 46 - 638 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 638 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 47 - 543 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 543 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 48 - 689 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 689 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 49 - 530 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 530 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 50 - 463 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 463 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 51 - 428 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 428 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 52 - 588 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 588 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 53 - 513 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 513 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 54 - 587 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 587 segments [Excellent (100% coverage)]
 Cassius Dio Cocceianus / Historia Romana / Book 55 - 272 lines
+Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, generated from app dictionary and treebank) 272 segments [Excellent (100% coverage)]
 
 [Catullus, C. Valerius]
 Catullus, C. Valerius / Odes - 2,286 lines total, 3 books, max_lines/book=847, max_char=55 [Perseus]
