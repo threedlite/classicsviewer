@@ -168,17 +168,36 @@ venv/bin/pip install -r data-prep/requirements.txt
 
 ⚠ **One venv for the whole project.** Scripts in `sanskrit/run_build.sh` and `greek/build_modules/generate_interlinear/run_interlinear_no_sleep.sh` reference `<project-root>/venv`. Do NOT use `source venv/bin/activate` for multiprocessing scripts — worker processes inherit the system Python, not the activated venv. Use `./venv/bin/python3` or the wrapper scripts instead.
 
+## CRITICAL: Build Order — Do Not Skip Ahead
+
+⚠ **Steps 2, 3, and 4 are prerequisites. ALL of them must be fully complete before starting ANY build in Steps 5, 6, or 7.**
+
+Specifically:
+- **Every** repo in Step 2 must be cloned (not just started — finished)
+- **Every** download in Step 2 must be downloaded AND extracted (OGA, Coptic lexicon, Sanskrit BG)
+- **All** Wiktionary dumps in Step 3 must be downloaded, verified, and cached
+- The Python venv in Step 4 must be set up with all dependencies installed
+
+**Why this matters**: Module builds that run without their data sources will silently produce empty or incomplete databases. These bad databases then propagate downstream — interlinear generation reads dictionary data from them and produces bad glosses, assembly merges them into the final DB, and the shipped app has missing content. There is no shortcut. If a prerequisite is still downloading, wait for it.
+
+### Extended mode end-to-end build sequence
+
+The extended build has a strict four-phase pipeline. Each phase depends on the previous one being fully complete:
+
+1. **Prerequisites** (Steps 2-4) — clone all repos, download and extract OGA, download Wiktionary dumps, set up venv
+2. **Module builds** (Step 6) — build all language module DBs (Greek, Latin, Sanskrit, etc.). OGA must be installed first.
+3. **First assembly** (Step 7) — `assemble_database.py extended` merges all module DBs, inserts OGA lemmas, builds the base extended DB (~500K translations)
+4. **Interlinear generation** (Step 5) — reads dictionary and OGA lemma data from the assembled DB to produce glosses (~7 hours). Without OGA in the DB, glosses will be incomplete.
+5. **Greek rebuild** (Step 6 Greek again) — rebuilds Greek module DB importing the new interlinear XMLs
+6. **Second assembly** (Step 7 again) — re-assembles with interlinear, bringing translations to ~3.3M
+
+**Do NOT start a later phase before the previous one is fully complete.**
+
 ## Step 5: Generate Interlinear Translations (Extended Mode Only)
 
 ⚠ **This is the most time-consuming step and the most commonly skipped — but without it, ~80% of translation data is missing.** The interlinear XMLs are NOT committed to git (too large). They must be regenerated on every fresh clone.
 
-**Build order matters:** The interlinear generator reads dictionary data from the Perseus database to produce glosses. The correct sequence is:
-
-1. Build a base extended DB first (Step 7, without interlinear — it will have ~500K translations)
-2. Generate interlinear XMLs (this step — reads the base DB's dictionary)
-3. Rebuild extended DB (Step 7 again — imports the XMLs, bringing translations to ~3.3M)
-
-If the base DB doesn't exist yet, the interlinear generator will fail or produce empty glosses.
+⚠ **Do NOT start interlinear generation until the first assembly pass (Step 7) is complete, with OGA lemmas included.** The interlinear generator reads dictionary and lemma data from the assembled database to produce glosses. If OGA was not installed before the build, the glosses will be incomplete.
 
 ```bash
 cd greek/build_modules/generate_interlinear
