@@ -35,6 +35,8 @@ cd classicsviewer
 
 ## Step 2: Clone Data Sources
 
+⚠ **IMPORTANT: ALL data sources in this step must be cloned, downloaded, and extracted BEFORE starting any builds in Steps 5-7.** Module builds will fail or produce incomplete/empty databases if their required data sources are missing. Complete this entire step first.
+
 The app requires several upstream repositories containing classical texts and dictionaries.
 
 ```bash
@@ -65,9 +67,7 @@ unzip -o cunliffe.zip.reference
 cd ..
 ```
 
-**Optional** - For extended database (778 authors, 14 languages):
-
-**Note**: Clone these repos before starting the extended build.
+**Required for extended database** (778 authors, 14 languages):
 
 ```bash
 cd data-sources
@@ -81,30 +81,37 @@ git clone https://github.com/PatristicTextArchive/pta_data.git
 cd ..
 ```
 
-The following repos are cloned but not currently processed by the database build (future support):
+**Required for language module builds** (extended mode):
 ```bash
 cd data-sources
-# Hebrew Bible and lexicon
+# Hebrew Bible and lexicon - REQUIRED for Hebrew module
 git clone https://github.com/openscriptures/morphhb.git
 git clone https://github.com/openscriptures/HebrewLexicon.git
-# Arabic texts
-git clone https://github.com/cltk/arabic_text_perseus.git
-# Persian texts
-git clone https://github.com/PerseusDL/canonical-farsiLit.git
-# Sanskrit texts (~3GB)
-git clone https://github.com/OliverHellwig/sanskrit.git
-# Syriac texts (~1.2GB)
-git clone https://github.com/srophe/syriaca-data.git
-# Coptic texts (~1.2GB)
+# Coptic texts (~1.2GB) - REQUIRED for Coptic module
 git clone https://github.com/CopticScriptorium/corpora.git
+# Sanskrit DCS corpus (~3GB) - REQUIRED for Sanskrit module (treebank + dictionary + CoNLL-U)
+git clone https://github.com/OliverHellwig/sanskrit.git
+# Persian texts - REQUIRED for Persian module (Hafez Divan)
+git clone https://github.com/PerseusDL/canonical-farsiLit.git
 cd ..
 ```
 
-**Optional** - For enhanced lemma coverage (OGA corpus, 8.6GB download):
+The following repo is cloned but not currently processed by the database build (future support):
+```bash
+cd data-sources
+# Arabic texts (Arabic module uses bundled data in arabic/data-sources/ instead)
+git clone https://github.com/cltk/arabic_text_perseus.git
+cd ..
+```
+
+**Required** - OGA corpus for Greek lemma coverage (8.6GB download):
+
+⚠ **The OGA corpus must be downloaded and extracted before building the Greek module (Step 6).** The Greek module build depends on OGA lemma data; it cannot start without it.
+
 ```bash
 cd data-sources
 
-# Opera Graeca Adnotata corpus - provides additional lemma mappings
+# Opera Graeca Adnotata corpus - provides 268K Greek lemma mappings
 curl -L -O https://zenodo.org/records/14206061/files/opera_graeca_adnotata_v0.2.0.zip
 
 # ⚠ ZIP64 format (7.8 GB) — standard `unzip` WILL FAIL. Use ditto (macOS) or 7z (Linux):
@@ -113,7 +120,7 @@ ditto -x -k opera_graeca_adnotata_v0.2.0.zip .
 
 cd ..
 ```
-If you skip this download, add `--skip-oga` to the database build command in Step 5.
+If you skip this download, add `--skip-oga` to the database assembly command in Step 7 — but the resulting DB will be missing essential Greek dictionary data and must not be shipped.
 
 **Required for Coptic dictionary** (11,284 entries — build succeeds without it but produces 0 dictionary entries):
 ```bash
@@ -455,10 +462,10 @@ All four are real release builds with distinct deployment destinations. `full` s
 **`--skip-oga` is dev-only.** All release builds MUST include OGA (268,065 Greek lemma mappings). The flag exists so developers without the 8.6 GB OGA corpus can still get a usable test DB; it must not be passed for release builds.
 
 **Build prerequisites by release target**:
-- **sample**: `latin/run_build.sh sample` + `greek/run_build.sh sample`
-- **full**: `latin/run_build.sh full` + `greek/run_build.sh full` (NO other language modules)
-- **extended**: every Step 6 language module built in its extended/full mode, plus `latin/run_build.sh extended` + `greek/run_build.sh extended`, plus Greek interlinear XMLs from Step 5
-- **ios (curated)**: `greek/run_build.sh ios` + latin with iOS CSV (see Step 7 iOS section)
+- **sample**: OGA corpus (Step 2) + `latin/run_build.sh sample` + `greek/run_build.sh sample`
+- **full**: OGA corpus (Step 2) + `latin/run_build.sh full` + `greek/run_build.sh full` (NO other language modules)
+- **extended**: OGA corpus (Step 2) + every Step 6 language module built in its extended/full mode, plus `latin/run_build.sh extended` + `greek/run_build.sh extended`, plus Greek interlinear XMLs from Step 5
+- **ios (curated)**: OGA corpus (Step 2) + `greek/run_build.sh ios` + latin with iOS CSV (see Step 7 iOS section)
 
 ## Troubleshooting
 
