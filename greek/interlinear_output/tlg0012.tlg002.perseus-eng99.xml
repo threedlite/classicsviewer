@@ -4976,7 +4976,7 @@
 | ὡς ~* CCONJ advmod 12 11 |  | ἀνόπαια |
 | **unseen** |
 | ἀνοπαῖα ~* ADV advmod 13 12 |  | διέπτατο |
-| **to spread out** |
+| **To traverse a space by flight, .** |
 | διαπέταμαι 3 s aor indc ~* VERB root 10 13 |  | τῷ |
 | **that** |
 | ὁ s dat ~* PRON obj 4 1 |  | δʼ |
@@ -24795,7 +24795,7 @@
 | Πολύδαμνα s nom ~* NOUN dep 0 10 |  | πόρεν |
 | **to furnish, offer, present, give** |
 | πόρω 3 s aor actv indc ~* VERB nmod 5 11 |  | Θῶνος |
-| **to set up** |
+| **???** |
 | Θῶν s gen ~* NOUN nmod 13 12 |  | παράκοιτις |
 | **a wife, spouse** |
 | παράκοιτις s nom ~* NOUN dep 0 13 |</l>
@@ -25651,7 +25651,7 @@
 | **the Achaians** |
 | Ἀχαιός p gen ~* ADJ nmod 7 8 |</l>
                     <l n="286">| Ἄντικλος |
-| **a twig, spray** |
+| **???** |
 | Ἄντικλος s nom ~* NOUN nsubj 16 9 |  | δὲ |
 | **but** |
 | δέ ~* PART cc 0 10 |  | σέ |
@@ -28983,7 +28983,7 @@
 | **long-oared** |
 | δολιχήρετμος p dat ~* ADJ nmod 4 6 |</l>
                     <l n="500">| Γυρῇσίν |
-| **round** |
+| **???** |
 | Γυραί p dat ~* NOUN nmod 6 1 |  | μιν |
 | **himself** |
 | μιν s acc ~* PRON obj 8 2 |  | πρῶτα |
@@ -29086,7 +29086,7 @@
                     <l n="507">| ἤλασε |
 | **to drive, drive on, set in motion** |
 | ἐλαύνω 3 s aor actv indc ~* VERB root 11 7 |  | Γυραίην |
-| **round** |
+| **???** |
 | Γυραί s acc ~* ADJ nmod 9 8 |  | πέτρην |
 | **a rock, a ledge** |
 | πέτρα s acc ~* NOUN obj 7 9 |  | ἀπὸ |
@@ -54299,7 +54299,7 @@
 | τε ~* PART cc 1 25 |  | υἱὸς |
 | **A son** |
 | υἱός s nom ~* NOUN dep 0 26 |  | Πολυνήου |
-| **the dwelling of a god, a temple** |
+| **Genit** |
 | Πολύνηος s gen ~* NOUN nmod 26 27 |  | Τεκτονίδαο |
 | **???** |
 | Τεκτονίδης s gen ~* NOUN nmod 27 28 |</l>
@@ -79463,7 +79463,7 @@
 | ἱερεῖον p acc ~* NOUN obj 7 2 |  | μὲν |
 | **on the one hand, on the other hand** |
 | μέν ~* PART discourse 7 3 |  | Περιμήδης |
-| **the genitals** |
+| **???** |
 | Περιμήδης s nom ~* NOUN nsubj 6 4 |  | Εὐρύλοχός |
 | **Eurylochus** |
 | Εὐρύλοχος s nom ~* NOUN nsubj 6 5 |  | τε |
@@ -83947,7 +83947,7 @@
 | **soft hair, down** |
 | λάχνη s dat ~* NOUN obj 16 20 |</l>
                     <l n="321">| Φαίδρην |
-| **bright, beaming** |
+| **???** |
 | Φαίδρη s acc ~* NOUN obj 7 1 |  | τε |
 | **and** |
 | τε ~* PART discourse 7 2 |  | Πρόκριν |
@@ -89739,7 +89739,7 @@
 | **Amphitrite** |
 | Ἀμφιτρίτη s gen ~* NOUN nmod 9 13 |</l>
                     <l n="61">| Πλαγκτὰς |
-| **wandering, roaming** |
+| **???** |
 | Πλαγκταί p acc ~* NOUN xcomp 8 1 |  | δή |
 | **exactness** |
 | δή ~* PART discourse 8 2 |  | τοι |
@@ -91847,7 +91847,7 @@
 | δέ ~* PART discourse 13 2 |  | ἀνστάντες |
 | **to rouse to action, stir up** |
 | ἀνίστημι p aor actv ptcp nom ~* VERB advmod 11 3 |  | Περιμήδης |
-| **the genitals** |
+| **???** |
 | Περιμήδης s nom ~* NOUN nsubj 6 4 |  | Εὐρύλοχός |
 | **Eurylochus** |
 | Εὐρύλοχος s nom ~* NOUN nsubj 6 5 |  | τε |
@@ -108511,7 +108511,7 @@
 | σύ s nom ~* PRON nsubj 15 2 |  | γέρον |
 | **an old man** |
 | γέρων s voc ~* NOUN vocative 15 3 |  | πολυπενθές |
-| **on the one side** |
+| **to set up** |
 | πολυμενθης s voc ~* ADJ nmod 3 4 |  | ἐπεί |
 | **after that, after , since, when** |
 | ἐπεί ~* CCONJ mark 15 5 |  | σέ |
@@ -158381,7 +158381,7 @@
 | πολύς p nom ~* ADJ nmod 13 9 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 0 10 |  | ἔνεσαν |
-| **to seat oneself, sit** |
+| **To seat oneself, sit down, take one's seat** |
 | ἐνέζομαι 3 p aor actv indc ~* VERB root 10 11 |  | στονόεντες |
 | **causing groans** |
 | στονόεις p nom ~* ADJ nmod 13 12 |  | ὀϊστοί |
@@ -159109,7 +159109,7 @@
 | πολύς p nom ~* ADJ nmod 5 1 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 0 2 |  | ἔνεσαν |
-| **to seat oneself, sit** |
+| **To seat oneself, sit down, take one's seat** |
 | ἐνέζομαι 3 p aor actv indc ~* VERB root 2 3 |  | στονόεντες |
 | **causing groans** |
 | στονόεις p nom ~* ADJ nmod 5 4 |  | ὀϊστοί |
@@ -177526,7 +177526,7 @@
 | τε ~* PART cc 1 8 |  | ἵκετο |
 | **to come** |
 | ἱκνέομαι 3 s aor mid indc ~* VERB obj 24 9 |  | Πλαγκτὰς |
-| **wandering, roaming** |
+| **???** |
 | Πλαγκταί p acc ~* NOUN nmod 11 10 |  | πέτρας |
 | **a rock, a ledge** |
 | πέτρα p acc ~* NOUN obj 16 11 |  | δεινήν |

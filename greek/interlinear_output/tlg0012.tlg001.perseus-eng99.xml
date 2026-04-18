@@ -18964,7 +18964,7 @@
 | ὁ s nom ~* PRON nsubj 18 9 |  | μὲν |
 | **on the one hand, on the other hand** |
 | μέν ~* PART discourse 13 10 |  | Κτεάτου |
-| **Possessions, goods, effects, property** |
+| **???** |
 | Κτέατος s gen ~* NOUN nmod 19 11 |  | ὃ |
 | **that** |
 | ὁ s nom ~* PRON nsubj 20 12 |  | δʼ |
@@ -18998,7 +18998,7 @@
 | τέταρτος p gen ~* ADJ obj 4 3 |  | ἦρχε |
 | **to be first** |
 | ἄρχω 3 s impf actv indc ~* VERB root 2 4 |  | Πολύξεινος |
-| **entertaining many guests, very hospitable** |
+| **A foreigner or stranger.** |
 | Πολύξεινος s nom ~* NOUN dep 11 5 |  | θεοειδὴς |
 | **divine of form** |
 | θεοειδής s nom ~* ADJ nmod 5 6 |</l>
@@ -37413,7 +37413,7 @@
 | **a man** |
 | ἀνήρ p gen ~* NOUN nmod 4 5 |</l>
                     <l n="520">| Πείρως |
-| **to pierce quite through, fix** |
+| **???** |
 | Πείρως s nom ~* NOUN dep 12 6 |  | Ἰμβρασίδης |
 | **???** |
 | Ἰμβρασίδης s nom ~* NOUN nmod 5 7 |  | ὃς |
@@ -52053,7 +52053,7 @@
 | Τεῦκρος s nom ~* NOUN nsubj 12 8 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 0 9 |  | Ἀρετάονα |
-| **goodness, excellence** |
+| **???** |
 | Ἀρετάων s acc ~* NOUN obj 12 10 |  | δῖον |
 | **god-like, divine** |
 | δῖος s acc ~* ADJ nmod 10 11 |</l>
@@ -55264,7 +55264,7 @@
                     <l n="244">| πεντήκοντʼ |
 | **fifty** |
 | πεντήκοντα ~* NUM nmod 6 4 |  | ἔνεσαν |
-| **to seat oneself, sit** |
+| **To seat oneself, sit down, take one's seat** |
 | ἐνέζομαι 3 p aor actv indc ~* VERB root 36 5 |  | θάλαμοι |
 | **an inner room** |
 | θάλαμος p nom ~* NOUN nsubj 5 6 |  | ξεστοῖο |
@@ -66715,7 +66715,7 @@
 | προίημι 3 s aor actv indc ~* VERB nmod 1 10 |  | Ἰησονίδης |
 | **???** |
 | Ἰησονίδης s nom ~* NOUN nmod 12 11 |  | Εὔνηος |
-| **the dwelling of a god, a temple** |
+| **Genit** |
 | Εὔνηος s nom ~* NOUN nsubj 10 12 |</l>
                     <l n="469">| τόν |
 | **that** |
@@ -72030,7 +72030,7 @@
                     <l n="333">| Μηκιστεὺς |
 | **Mecisteus, son of Talaus, brother of Adrastus a...** |
 | Μηκιστεύς s nom ~* NOUN dep 21 8 |  | Ἐχίοιο |
-| **an adder, viper** |
+| **???** |
 | Ἐχίος s gen ~* NOUN nmod 10 9 |  | πάϊς |
 | **a child** |
 | παῖς s nom ~* NOUN dep 21 10 |  | καὶ |
@@ -91289,7 +91289,7 @@
 | Τρώς p dat ~* NOUN obj 4 5 |  | Δόλων |
 | **Dolon** |
 | Δόλων s nom ~* NOUN nsubj 1 6 |  | Εὐμήδεος |
-| **the genitals** |
+| **???** |
 | Εὐμήδης s gen ~* NOUN dep 22 7 |  | υἱὸς |
 | **A son** |
 | υἱός s nom ~* NOUN nmod 6 8 |</l>
@@ -92817,7 +92817,7 @@
 | προσεῖπον 3 s aor actv indc ~* VERB root 2 4 |  | Δόλων |
 | **Dolon** |
 | Δόλων s nom ~* NOUN dep 8 5 |  | Εὐμήδεος |
-| **the genitals** |
+| **???** |
 | Εὐμήδης s gen ~* NOUN nmod 7 6 |  | υἱός |
 | **A son** |
 | υἱός s nom ~* NOUN dep 8 7 |</l>
@@ -93017,7 +93017,7 @@
 | ἔπειτα ~* ADV advmod 3 4 |  | Δόλων |
 | **Dolon** |
 | Δόλων s nom ~* NOUN dep 8 5 |  | Εὐμήδεος |
-| **the genitals** |
+| **???** |
 | Εὐμήδης s gen ~* NOUN nmod 7 6 |  | υἱός |
 | **A son** |
 | υἱός s nom ~* NOUN dep 8 7 |</l>
@@ -118071,7 +118071,7 @@
 | δέ ~* PART cc 0 2 |  | Ἀμφίμαχον |
 | **???** |
 | ̓ἀμφίμαχος s acc ~* NOUN dep 14 3 |  | Κτεάτου |
-| **Possessions, goods, effects, property** |
+| **???** |
 | Κτέατος s gen ~* NOUN nmod 5 4 |  | υἷʼ |
 | **A son** |
 | υἱός s acc ~* NOUN dep 14 5 |  | Ἀκτορίωνος |
@@ -121652,7 +121652,7 @@
                     <l n="422">| Μηκιστεὺς |
 | **Mecisteus, son of Talaus, brother of Adrastus a...** |
 | Μηκιστεύς s nom ~* NOUN dep 11 8 |  | Ἐχίοιο |
-| **an adder, viper** |
+| **???** |
 | Ἐχίος s gen ~* NOUN nmod 10 9 |  | πάϊς |
 | **a child** |
 | παῖς s nom ~* NOUN nmod 8 10 |  | καὶ |
@@ -127257,7 +127257,7 @@
 | καί ~* CCONJ discourse 27 19 |  | ἀντίθεον |
 | **equal to the gods, godlike** |
 | ἀντίθεος s acc ~* ADJ nmod 21 20 |  | Πολυφήτην |
-| **to declare, make known** |
+| **???** |
 | Πολυφήτης s acc ~* NOUN advmod 27 21 |</l>
                     <l n="792">| Πάλμύν |
 | **Palmys, a Trojan chief** |
@@ -135817,7 +135817,7 @@
 | ἐναίρω 3 s aor mid indc ~* VERB root 9 12 |  | καὶ |
 | **and** |
 | καί ~* CCONJ cc 12 13 |  | Περιφήτην |
-| **to declare, make known** |
+| **???** |
 | Περιφήτης s acc ~* NOUN obj 13 14 |</l>
                     <l n="516">| Ἀτρεΐδης |
 | **a child of Atreus, an Atreid** |
@@ -137219,7 +137219,7 @@
 | κραιπνός ~* ADV advmod 27 25 |  | μεμαυῖα |
 | **to wish eagerly, strive, yearn, desire** |
 | μέμαα s perf actv ptcp nom ~* VERB advmod 27 26 |  | διέπτατο |
-| **to spread out** |
+| **To traverse a space by flight, .** |
 | διαπέταμαι 3 s aor mid indc ~* VERB root 2 27 |  | πότνια |
 | **mistress, queen** |
 | πότνια s nom ~* ADJ nmod 29 28 |  | Ἥρη |
@@ -138620,7 +138620,7 @@
 | κραιπνός ~* ADV advmod 19 17 |  | μεμαυῖα |
 | **to wish eagerly, strive, yearn, desire** |
 | μέμαα s perf actv ptcp nom ~* VERB advmod 19 18 |  | διέπτατο |
-| **to spread out** |
+| **To traverse a space by flight, .** |
 | διαπέταμαι 3 s aor mid indc ~* VERB root 23 19 |  | ὠκέα |
 | **quick, swift, fleet** |
 | ὠκύς s nom ~* ADJ nmod 21 20 |  | Ἶρις |
@@ -141159,7 +141159,7 @@
 | αἱρέω 3 s aor actv indc ~* VERB root 12 3 |  | Πουλυδάμας |
 | **???** |
 | Πουλυδάμας s nom ~* NOUN nsubj 3 4 |  | Ἐχίον |
-| **an adder, viper** |
+| **???** |
 | Ἐχίος s acc ~* NOUN obj 16 5 |  | δὲ |
 | **but** |
 | δέ ~* PART discourse 12 6 |  | Πολίτης |
@@ -143831,7 +143831,7 @@
 | αἱρέω 3 s aor actv indc ~* VERB root 11 4 |  | Σχεδίον |
 | **Schedius, the name of two Phocians slain by Hector** |
 | Σχεδίος s acc ~* NOUN obj 4 5 |  | Περιμήδεος |
-| **the genitals** |
+| **???** |
 | Περιμήδης s gen ~* NOUN nmod 7 6 |  | υἱὸν |
 | **A son** |
 | υἱός s acc ~* NOUN nmod 5 7 |</l>
@@ -145720,7 +145720,7 @@
 | θείνω 3 s aor actv indc ~* VERB root 13 15 |  | Μυκηναῖον |
 | **Mycenaean** |
 | Μυκηναῖος s acc ~* ADJ nmod 17 16 |  | Περιφήτην |
-| **to declare, make known** |
+| **???** |
 | Περιφήτης s acc ~* NOUN dep 0 17 |</l>
                     <l n="639">| Κοπρῆος |
 | **???** |
@@ -153530,7 +153530,7 @@
 | τε ~* PART discourse 19 9 |  | Δαμαστορίδην |
 | **???** |
 | Δαμαστορίδης s acc ~* NOUN nmod 8 10 |  | Ἐχίον |
-| **an adder, viper** |
+| **???** |
 | Ἐχίος s acc ~* NOUN obj 19 11 |  | τε |
 | **and** |
 | τε ~* PART discourse 19 12 |  | Πύριν |
@@ -172736,7 +172736,7 @@
 | εὐπλόκαμος s nom ~* ADJ nmod 14 12 |  | τʼ |
 | **and** |
 | τε ~* PART discourse 16 13 |  | Ἀμάθεια |
-| **ignorance** |
+| **???** |
 | Ἀμάθεια s nom ~* NOUN nsubj 16 14 |</l>
                     <l n="49">| ἄλλαι |
 | **alius, another, one besides** |
@@ -224519,7 +224519,7 @@
 | ἥρως s dat ~* NOUN nmod 7 8 |  | Ἰησονίδης |
 | **???** |
 | Ἰησονίδης s nom ~* NOUN nmod 10 9 |  | Εὔνηος |
-| **the dwelling of a god, a temple** |
+| **Genit** |
 | Εὔνηος s nom ~* NOUN nsubj 6 10 |</l>
                     <l n="748">| καὶ |
 | **and** |
@@ -228551,7 +228551,7 @@
 | κῦδος s acc ~* NOUN obj 6 4 |  | Ἀχιλλῆϊ |
 | **Achilles** |
 | Ἀχιλλεύς s dat ~* NOUN obj 6 5 |  | προτιάπτω |
-| **to fasten, bind fast** |
+| **To fasten In mid.** |
 | προσάπτω 1 s pres actv indc ~* VERB root 0 6 |</l>
                     <l n="111">| αἰδῶ |
 | **a sense of shame, shame, modesty, self-respect** |

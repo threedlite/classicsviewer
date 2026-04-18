@@ -5855,12 +5855,15 @@ def import_interlinear_translations(db_filename, work_ids=None, interlinear_dir=
                 f"         Then rebuild greek + assembly for your release target."
             ) from e
 
-    # Regenerate translation lookup table to include new interlinear translations
+    # Regenerate translation lookup table to include new interlinear translations.
+    # Failure here leaves the lookup table out of sync with the imported segments;
+    # hard-fail so the caller knows to rebuild rather than ship a degraded DB.
     print("\n  Regenerating translation lookup table...")
     try:
         create_translation_lookup_table(conn)
-    except Exception as e:
-        print(f"  ⚠️  Warning during translation lookup table regeneration: {e}")
+    except Exception:
+        conn.close()
+        raise
 
     conn.close()
     print("✓ Interlinear translations imported")
@@ -9126,7 +9129,16 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
         first1k_dir = data_sources / "First1KGreek" / "data"
 
         if not first1k_dir.exists():
-            print(f"Warning: First1KGreek directory not found at {first1k_dir}")
+            # Per CLAUDE.md: extended requires First1K. Shipping an extended
+            # DB without ~1,080 First1K works would be a silent release-
+            # quality regression (hundreds of MB of expected content absent).
+            raise FileNotFoundError(
+                f"CRITICAL: extended mode requires First1KGreek corpus, "
+                f"but {first1k_dir} does not exist.\n"
+                f"  Fix: clone it to data-sources/ (see BUILD.md Step 2):\n"
+                f"    cd data-sources && git clone "
+                f"https://github.com/OpenGreekAndLatin/First1KGreek.git"
+            )
         else:
             # Load the non-duplicate works list
             # Get ALL First1K works, not just non-duplicates
@@ -9189,7 +9201,16 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
         pta_dir = data_sources / "pta_data" / "data"
 
         if not pta_dir.exists():
-            print(f"Warning: PTA directory not found at {pta_dir}")
+            # Per CLAUDE.md: extended requires PTA (Patristic Text Archive).
+            # Shipping without it silently drops ~190 patristic works /
+            # ~150K translation segments. Release-blocking.
+            raise FileNotFoundError(
+                f"CRITICAL: extended mode requires Patristic Text Archive, "
+                f"but {pta_dir} does not exist.\n"
+                f"  Fix: clone it to data-sources/ (see BUILD.md Step 2):\n"
+                f"    cd data-sources && git clone "
+                f"https://github.com/PatristicTextArchive/pta_data.git"
+            )
         else:
             # Analyze PTA collection (filters out by-nc licensed works)
             print("Analyzing PTA collection...")
@@ -10352,8 +10373,17 @@ def merge_external_databases(db_filename, mode='sample'):
         source_path = os.path.join('..', source_db)
 
         if not os.path.exists(source_path):
-            print(f"⚠ Warning: {source_db} not found, skipping {description}")
-            continue
+            # Per CLAUDE.md no-silent-failure policy: a module DB listed in
+            # merge_rules that isn't on disk is a build-setup error, not a
+            # soft skip. Fixing this here matches data-prep/assemble_database
+            # .py's _merge_one hard-fail — a release that silently omits a
+            # merged language would ship with absent content.
+            raise FileNotFoundError(
+                f"CRITICAL: required module database missing: {source_db}\n"
+                f"  Expected at: {os.path.abspath(source_path)}\n"
+                f"  Language:    {description}\n"
+                f"  Fix: build the missing module before invoking merge."
+            )
 
         print(f"\nMerging {description}...")
         print(f"  Source: {source_path}")
@@ -10528,8 +10558,16 @@ def compress_and_copy_database(db_filename, is_sample=False, suffix="", output_n
 
         return True
     else:
-        print(f"\nWarning: Database file {db_filename} not found")
-        return False
+        # Per CLAUDE.md no-silent-failure policy: compress_and_copy_database
+        # being called with a non-existent DB filename means the build
+        # pipeline produced nothing to ship. Returning False and allowing
+        # the caller to continue could deploy stale or empty asset bundles.
+        raise FileNotFoundError(
+            f"CRITICAL: cannot compress+deploy — DB file not found: {db_filename}\n"
+            f"  Absolute path: {os.path.abspath(db_filename)}\n"
+            f"  Fix: rebuild the module/assembly step that produces this DB "
+            f"before invoking compress_and_copy_database."
+        )
 
 
 if __name__ == "__main__":
