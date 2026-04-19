@@ -23,6 +23,7 @@ Important:
 - If ANY step fails or produces wrong output, fix the build script, then re-run the FULL build
 - NEVER try to "fix" intermediate outputs - this creates unreproducible states
 - Other developers must be able to clone the repo and run `./run_build.sh` to get identical results
+- **ALWAYS follow the build order in BUILD.md exactly** — see "Extended mode end-to-end build sequence". All prerequisites must be fully complete before any builds start. Interlinear generation requires a completed first assembly pass with OGA.
   Do not add, delete, or modify the contents of the folder "data-sources" in any way!
   The data-sources folder contains the cloned git repos for the following PerseusDL projects:
   canonical-greekLit  canonical-latinLit  canonical-pdlrefwk  perseus_catalog

@@ -7,6 +7,7 @@ Database structure matches ClassicsViewer schema exactly.
 """
 
 import sqlite3
+import sys
 import xml.etree.ElementTree as ET
 import re
 import os
@@ -273,8 +274,21 @@ class PersianDatabaseCreator:
         print(f"  Processed {line_counter - 1} lines")
         return line_counter - 1
 
+    def _check_prerequisites(self):
+        """Verify all required data sources exist before building."""
+        farsi_dir = Path(__file__).parent.parent / "data-sources" / "canonical-farsiLit"
+        if not farsi_dir.exists():
+            print(f"ERROR: canonical-farsiLit not found at {farsi_dir}")
+            print("Clone it first: cd data-sources && git clone https://github.com/PerseusDL/canonical-farsiLit.git")
+            sys.exit(1)
+        persian_file = farsi_dir / "data" / "hafez" / "divan" / "hafez.divan.perseus-far1.xml"
+        if not persian_file.exists():
+            print(f"ERROR: Hafez Divan Persian XML not found at {persian_file}")
+            sys.exit(1)
+
     def create_database(self):
         """Main method to create the Persian database."""
+        self._check_prerequisites()
         print(f"Creating Persian database: {self.db_path}")
 
         # Remove existing database

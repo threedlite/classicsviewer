@@ -2271,6 +2271,19 @@ def main():
     print(f"Using CSV: {csv_path}")
     print("=" * 70)
 
+    # Check prerequisites
+    script_dir = Path(__file__).parent
+    dcs_dir = script_dir.parent / "data-sources" / "sanskrit" / "dcs" / "data" / "conllu" / "files"
+    if not dcs_dir.exists():
+        print(f"\nERROR: DCS CoNLL-U data not found at {dcs_dir}")
+        print("Clone it first: cd data-sources && git clone https://github.com/OliverHellwig/sanskrit.git")
+        sys.exit(1)
+    bg_json = script_dir / "data-sources" / "bhagavad_gita_sanskrit.json"
+    if works_config and works_config.get('include_bg') and not bg_json.exists():
+        print(f"\nERROR: Bhagavad Gita data not found at {bg_json}")
+        print("Run download + parse scripts first: cd sanskrit/data-sources && bash download_bhagavad_gita_sanskrit.sh && python3 parse_bhagavad_gita_sanskrit.py")
+        sys.exit(1)
+
     if not HAS_TRANSLITERATION:
         print("\nWarning: indic-transliteration not installed")
         print("For full functionality: pip install indic-transliteration\n")

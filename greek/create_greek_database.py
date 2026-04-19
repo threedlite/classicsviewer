@@ -182,6 +182,10 @@ def main():
         work_ids = _select_work_ids(args.mode, src, interlinear_dir)
 
         print(f"[greek] Importing interlinear for {len(work_ids)} Greek works")
+        if args.mode == "extended" and len(work_ids) < 100:
+            print(f"[greek] ERROR: Extended mode has only {len(work_ids)} interlinear XMLs "
+                  f"(expected ~1,900+). Run Greek interlinear generation first (BUILD.md Step 5).")
+            sys.exit(1)
         monolith_fn.import_interlinear_translations(
             src_name,
             work_ids=work_ids,

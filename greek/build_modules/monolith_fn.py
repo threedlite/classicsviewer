@@ -8968,19 +8968,33 @@ def create_database(mode='full', custom_csv_path=None, output_name=None):
     db_path = script_dir / db_filename
     data_sources = _REPO_ROOT / "data-sources"
     
-    # Check paths
+    # Check prerequisites — fail hard if data sources are missing
     print("Checking data sources...")
     greek_dir = data_sources / "canonical-greekLit" / "data"
     latin_dir = data_sources / "canonical-latinLit" / "data"
-    
+
+    missing = []
     if not greek_dir.exists():
-        print(f"Error: Greek texts directory not found at {greek_dir}")
-        return
-    
+        missing.append(f"canonical-greekLit: {greek_dir}")
     if not latin_dir.exists():
-        print(f"Error: Latin texts directory not found at {latin_dir}")
-        return
-    
+        missing.append(f"canonical-latinLit: {latin_dir}")
+    if not (data_sources / "treebank_data").exists():
+        missing.append(f"treebank_data: {data_sources / 'treebank_data'}")
+    wiktionary_cache = _GREEK_ROOT / "wiktionary-processing" / "all_greek_wiktionary_pages.json"
+    if not wiktionary_cache.exists():
+        missing.append(f"Wiktionary cache: {wiktionary_cache}")
+    if mode == 'extended':
+        if not (data_sources / "First1KGreek").exists():
+            missing.append(f"First1KGreek: {data_sources / 'First1KGreek'}")
+        if not (data_sources / "pta_data").exists():
+            missing.append(f"pta_data: {data_sources / 'pta_data'}")
+    if missing:
+        print("ERROR: Required data sources are missing:")
+        for m in missing:
+            print(f"  - {m}")
+        print("\nAll data sources must be cloned before building. See BUILD.md Step 2.")
+        raise FileNotFoundError(f"Missing {len(missing)} required data source(s)")
+
     # Create new database
     print(f"\nCreating new database at {db_path}...")
     print(f"Mode: {mode.upper()}")

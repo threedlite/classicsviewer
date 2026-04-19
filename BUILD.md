@@ -187,8 +187,8 @@ The extended build has a strict four-phase pipeline. Each phase depends on the p
 1. **Prerequisites** (Steps 2-4) — clone all repos, download and extract OGA, download Wiktionary dumps, set up venv
 2. **Module builds** (Step 6) — build all language module DBs (Greek, Latin, Sanskrit, etc.). OGA must be installed first.
 3. **First assembly** (Step 7) — `assemble_database.py extended` merges all module DBs, inserts OGA lemmas, builds the base extended DB (~500K translations)
-4. **Interlinear generation** (Step 5) — reads dictionary and OGA lemma data from the assembled DB to produce Greek interlinear glosses (~7 hours). Without OGA in the DB, glosses will be incomplete.
-5. **Greek and Latin rebuild** (Step 6 again) — rebuild Greek module DB importing the new Greek interlinear XMLs; rebuild Latin module so its interlinear generator can read the assembled DB's dictionary (Latin generates interlinear as part of its own build)
+4. **Interlinear generation** (Step 5) — generates interlinear XMLs for both Greek (~7 hours, 2,048 works) and Latin (~17 seconds, 231 works). Both read dictionary and OGA lemma data from the assembled DB to produce glosses. Without OGA in the DB, glosses will be incomplete.
+5. **Greek and Latin rebuild** (Step 6 again) — rebuild Greek and Latin module DBs importing their new interlinear XMLs
 6. **Second assembly** (Step 7 again) — re-assembles with interlinear, bringing translations to ~3.3M
 
 **Do NOT start a later phase before the previous one is fully complete.**

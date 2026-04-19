@@ -704,6 +704,16 @@ def main():
     lexicon_dir = project_root / 'data-sources' / 'HebrewLexicon'
     output_dir = script_dir
 
+    # Check prerequisites
+    if not morphhb_dir.exists():
+        print(f"ERROR: morphhb not found at {morphhb_dir}")
+        print("Clone it first: cd data-sources && git clone https://github.com/openscriptures/morphhb.git")
+        sys.exit(1)
+    if not lexicon_dir.exists():
+        print(f"ERROR: HebrewLexicon not found at {lexicon_dir}")
+        print("Clone it first: cd data-sources && git clone https://github.com/openscriptures/HebrewLexicon.git")
+        sys.exit(1)
+
     # Create processor
     processor = HebrewTextProcessor(morphhb_dir, lexicon_dir, output_dir)
 

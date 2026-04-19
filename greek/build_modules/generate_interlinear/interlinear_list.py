@@ -568,6 +568,22 @@ def main():
         print(f"Error: Database not found: {db_path}")
         sys.exit(1)
 
+    # Verify the database has OGA lemmas — interlinear glosses will be
+    # incomplete without them.  The assembled DB from assemble_database.py
+    # includes OGA; a raw module DB does not.
+    import sqlite3 as _sql
+    _conn = _sql.connect(db_path)
+    _oga_count = _conn.execute(
+        "SELECT COUNT(*) FROM lemma_map WHERE source = 'oga'"
+    ).fetchone()[0]
+    _conn.close()
+    if _oga_count == 0:
+        print(f"ERROR: Database has 0 OGA lemma entries: {db_path}")
+        print("Interlinear generation requires the assembled DB (from assemble_database.py)")
+        print("with OGA lemmas. Do NOT use a raw module DB. See BUILD.md build sequence.")
+        sys.exit(1)
+    print(f"OGA lemma check: {_oga_count:,} entries ✓")
+
     # Load works from CSV and resolve to work_ids
     print(f"Loading works from {csv_path}...")
     works = load_works_from_csv(csv_path, db_path)

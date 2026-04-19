@@ -148,6 +148,10 @@ def build(mode: str, output_db: Path, csv_path: Path = None):
     latin_dir = DATA_SOURCES_DIR / "canonical-latinLit" / "data"
     if not latin_dir.exists():
         sys.exit(f"ERROR: Latin source directory not found: {latin_dir}")
+    whitakers_dir = DATA_SOURCES_DIR / "whitakers-words"
+    if not whitakers_dir.exists():
+        sys.exit(f"ERROR: whitakers-words not found: {whitakers_dir}\n"
+                 f"Clone it first: cd data-sources && git clone https://github.com/mk270/whitakers-words.git")
 
     # Author filter.
     # - `sample` uses LATIN_SAMPLE.csv (release-pinned list).
@@ -262,6 +266,9 @@ def build(mode: str, output_db: Path, csv_path: Path = None):
         ]
         print(f"  Importing {len(available)} interlinear XML(s) "
               f"(mode={mode}, from {len(candidate_ids)} candidate / {len(latin_work_ids)} total)")
+        if mode in ("full", "extended") and len(available) < 50:
+            sys.exit(f"ERROR: {mode} mode has only {len(available)} Latin interlinear XMLs "
+                     f"(expected ~200+). Run Latin interlinear generation first (BUILD.md Step 5).")
         if available:
             conn.commit()
             conn.close()

@@ -188,6 +188,19 @@ def assemble(mode: str, skip_oga: bool = False) -> None:
     print(f"ASSEMBLING {db_name} ({mode} mode)")
     print(f"{'=' * 60}\n")
 
+    # Upfront OGA check — fail immediately, not 20 minutes into the build.
+    if not skip_oga:
+        oga_corpus = SCRIPT_DIR.parent / "data-sources" / "opera_graeca_adnotata_v0.2.0" / "workspace" / "oga.zip"
+        if not oga_corpus.exists():
+            print(f"ERROR: OGA corpus not found at {oga_corpus}")
+            print("Download and extract it first (see BUILD.md Step 2):")
+            print("  cd data-sources")
+            print("  curl -L -O https://zenodo.org/records/14206061/files/opera_graeca_adnotata_v0.2.0.zip")
+            print("  ditto -x -k opera_graeca_adnotata_v0.2.0.zip .")
+            print("\nOr pass --skip-oga for dev-only builds (not for release).")
+            raise FileNotFoundError(f"Required OGA corpus not found at {oga_corpus}")
+        print(f"OGA corpus: {oga_corpus} ✓")
+
     if db_path.exists():
         print(f"Removing existing {db_path}")
         db_path.unlink()
