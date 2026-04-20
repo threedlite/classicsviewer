@@ -355,9 +355,11 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[1])
     ap.add_argument("mode", choices=["sample", "full", "extended"], nargs="?", default="full")
     ap.add_argument("--csv", type=Path, help="custom author CSV (overrides mode default)")
-    ap.add_argument("--output", type=Path, default=SCRIPT_DIR / "latin_texts.db",
-                    help="output DB path (default: latin/latin_texts.db)")
+    ap.add_argument("--output", type=Path, default=None,
+                    help="output DB path (default: latin/latin_texts_<mode>.db)")
     args = ap.parse_args()
+    if args.output is None:
+        args.output = SCRIPT_DIR / f"latin_texts_{args.mode}.db"
     build(args.mode, args.output, args.csv)
 
 

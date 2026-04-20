@@ -38,11 +38,8 @@ DATA_DIR = SCRIPT_DIR / "data"
 
 
 def _output_db_for(mode: str) -> Path:
-    """iOS mode gets its own suffixed DB so it doesn't clobber the
-    sample/full/extended build output sitting at greek/greek_texts.db."""
-    if mode == "ios":
-        return SCRIPT_DIR / "greek_texts_ios.db"
-    return SCRIPT_DIR / "greek_texts.db"
+    """Each mode gets its own output file so builds don't clobber each other."""
+    return SCRIPT_DIR / f"greek_texts_{mode}.db"
 
 # Make greek/build_modules importable so `monolith_fn` resolves.
 if str(BUILD_MODULES) not in sys.path:

@@ -63,34 +63,37 @@ from monolith_fn import (  # noqa: E402
 # lexicon imports later key off language names.
 # ---------------------------------------------------------------------------
 
-_GREEK_LATIN = [
-    ("greek/greek_texts.db", "Greek"),
-    ("latin/latin_texts.db", "Latin"),
+def _greek_latin(mode: str):
+    """Return Greek+Latin DB paths for a given mode.
+    Each mode builds to a separate file so they don't clobber each other."""
+    return [
+        (f"greek/greek_texts_{mode}.db", "Greek"),
+        (f"latin/latin_texts_{mode}.db", "Latin"),
+    ]
+
+_OTHER_FULL = [
+    ("cuneiform/sumerian_texts.db", "Sumerian"),
+    ("cuneiform/akkadian_texts.db", "Akkadian"),
+    ("dante/dante_texts.db", "italian"),
+    ("old_english/old_english_texts.db", "old_english"),
+]
+
+_OTHER_EXTENDED = _OTHER_FULL + [
+    ("arabic/arabic_texts.db", "Arabic"),
+    ("hebrewOT/hebrew_texts.db", "Hebrew"),
+    ("persian/persian_texts.db", "Persian"),
+    ("sanskrit/sanskrit_texts.db", "Sanskrit"),
+    ("syriac/syriac_texts.db", "syriac"),
+    ("coptic/coptic_texts.db", "coptic"),
+    ("pali/pali_texts.db", "pali"),
+    ("norse/norse_texts.db", "norse"),
+    ("chinese/chinese_texts.db", "chinese"),
 ]
 
 MERGE_RULES = {
-    "sample": _GREEK_LATIN,
-    "full": _GREEK_LATIN + [
-        ("cuneiform/sumerian_texts.db", "Sumerian"),
-        ("cuneiform/akkadian_texts.db", "Akkadian"),
-        ("dante/dante_texts.db", "italian"),
-        ("old_english/old_english_texts.db", "old_english"),
-    ],
-    "extended": _GREEK_LATIN + [
-        ("arabic/arabic_texts.db", "Arabic"),
-        ("hebrewOT/hebrew_texts.db", "Hebrew"),
-        ("persian/persian_texts.db", "Persian"),
-        ("sanskrit/sanskrit_texts.db", "Sanskrit"),
-        ("cuneiform/sumerian_texts.db", "Sumerian"),
-        ("cuneiform/akkadian_texts.db", "Akkadian"),
-        ("dante/dante_texts.db", "italian"),
-        ("syriac/syriac_texts.db", "syriac"),
-        ("coptic/coptic_texts.db", "coptic"),
-        ("pali/pali_texts.db", "pali"),
-        ("norse/norse_texts.db", "norse"),
-        ("chinese/chinese_texts.db", "chinese"),
-        ("old_english/old_english_texts.db", "old_english"),
-    ],
+    "sample": _greek_latin("sample"),
+    "full": _greek_latin("full") + _OTHER_FULL,
+    "extended": _greek_latin("extended") + _OTHER_EXTENDED,
 }
 
 LEXICON_PATHS = {
@@ -116,10 +119,7 @@ MODE_TO_DB_NAME = {
 # Uses iOS-specific module DBs (see greek/run_build.sh ios and the latin
 # --csv / --output flags) so it doesn't stomp on the sample/full/extended
 # canonical module DBs.
-MERGE_RULES["ios"] = [
-    ("greek/greek_texts_ios.db", "Greek"),
-    ("latin/latin_texts_ios.db", "Latin"),
-]
+MERGE_RULES["ios"] = _greek_latin("ios")
 
 
 def _checkpoint_wal(db_path: Path) -> None:
