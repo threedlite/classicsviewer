@@ -360,6 +360,16 @@ def main():
     args = ap.parse_args()
     if args.output is None:
         args.output = SCRIPT_DIR / f"latin_texts_{args.mode}.db"
+
+    # Acquire the shared Greek/Latin/assembly build lock.
+    # Latin and Greek share intermediate state and must not run in parallel.
+    from monolith_fn import acquire_lock, release_lock  # noqa: E402
+    if not acquire_lock():
+        print("ERROR: Could not acquire build lock; Greek, Latin, assembly, "
+              "or interlinear is already running. Wait for it to finish.",
+              file=sys.stderr)
+        sys.exit(1)
+
     build(args.mode, args.output, args.csv)
 
 

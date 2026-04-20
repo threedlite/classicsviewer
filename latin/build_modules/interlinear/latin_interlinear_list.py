@@ -466,6 +466,15 @@ def main():
             print(__doc__)
             sys.exit(1)
 
+    # Acquire the shared Greek/Latin/assembly build lock.
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent / "greek" / "build_modules"))
+    from monolith_fn import acquire_lock
+    if not acquire_lock():
+        print("ERROR: Could not acquire build lock; Greek, Latin, assembly, "
+              "or interlinear is already running. Wait for it to finish.",
+              file=sys.stderr)
+        sys.exit(1)
+
     # Validate inputs
     if not csv_path.exists():
         print(f"Error: CSV file not found: {csv_path}")
