@@ -466,13 +466,15 @@ def main():
             print(__doc__)
             sys.exit(1)
 
-    # Acquire the shared Greek/Latin/assembly build lock.
-    sys.path.insert(0, str(Path(__file__).parent.parent.parent / "greek" / "build_modules"))
-    from monolith_fn import acquire_lock
-    if not acquire_lock():
-        print("ERROR: Could not acquire build lock; Greek, Latin, assembly, "
-              "or interlinear is already running. Wait for it to finish.",
-              file=sys.stderr)
+    # Latin interlinear generation writes XMLs consumed by the Latin
+    # module build and by assembly — must hold the Latin module lock.
+    # Import directly from shared/ (not via greek's module) so Latin
+    # stays self-contained.
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+    from shared.build_lock import acquire_module_lock
+    if not acquire_module_lock("latin"):
+        print("ERROR: Could not acquire Latin build lock; see above for "
+              "holder PID. Aborting.", file=sys.stderr)
         sys.exit(1)
 
     # Validate inputs

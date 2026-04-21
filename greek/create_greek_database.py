@@ -133,11 +133,12 @@ def main():
     try:
         import monolith_fn  # noqa: E402
 
-        # Concurrent-build mutex (carry-over from the monolith's old
-        # __main__). Aborts immediately if another build is running.
-        if not monolith_fn.acquire_lock():
-            print("[greek] Could not acquire build lock; another instance "
-                  "is running. See above for PID. Aborting.", file=sys.stderr)
+        # Readers-writers build mutex. Greek can run alongside other
+        # modules (e.g. Latin) but not alongside assembly, and not
+        # alongside another Greek build in a different mode.
+        if not monolith_fn.acquire_module_lock("greek"):
+            print("[greek] Could not acquire build lock; see above for "
+                  "holder PID. Aborting.", file=sys.stderr)
             sys.exit(1)
 
         _install_noop_overrides(monolith_fn)
@@ -209,12 +210,12 @@ def main():
 
     finally:
         os.chdir(original_cwd)
-        # release_lock is already wired to atexit inside monolith_fn, but
-        # call it explicitly here too so the lock file is cleaned up even
-        # if Python exits via sys.exit or uncaught exception during shutdown.
+        # release_locks is already wired to atexit inside shared.build_lock,
+        # but call it explicitly here too so anything waiting on the lock
+        # can proceed even if Python exits via sys.exit or uncaught exception.
         try:
             import monolith_fn as _m  # type: ignore
-            _m.release_lock()
+            _m.release_locks()
         except Exception:
             pass
 

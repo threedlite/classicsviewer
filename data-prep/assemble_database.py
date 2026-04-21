@@ -46,8 +46,8 @@ _GREEK_BUILD_MODULES = REPO_ROOT / "greek" / "build_modules"
 if str(_GREEK_BUILD_MODULES) not in sys.path:
     sys.path.insert(0, str(_GREEK_BUILD_MODULES))
 from monolith_fn import (  # noqa: E402
-    acquire_lock,
-    release_lock,
+    acquire_assembly_lock,
+    release_locks,
     generate_quality_report_final,
     insert_oga_lemmas,
     import_lexicons_for_languages,
@@ -311,16 +311,17 @@ def main():
     )
     args = ap.parse_args()
 
-    # Concurrent-build mutex, carried over from the monolith's old __main__.
-    # Aborts immediately if another build/assembly is running.
-    if not acquire_lock():
-        print("Could not acquire build lock; another instance is running. "
-              "See above for PID. Aborting.", file=sys.stderr)
+    # Writer side of the readers-writers build mutex. Assembly reads
+    # every module DB, so it blocks until every module build finishes
+    # (and blocks any new module build from starting).
+    if not acquire_assembly_lock():
+        print("Could not acquire assembly lock; a module build is still "
+              "running. See above for holder PID. Aborting.", file=sys.stderr)
         sys.exit(1)
     try:
         assemble(args.mode, skip_oga=args.skip_oga)
     finally:
-        release_lock()
+        release_locks()
 
 
 if __name__ == "__main__":

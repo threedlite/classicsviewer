@@ -377,9 +377,11 @@ Expected: 11 authors, 41 works, 358 books, ~84 MB zip, ~8 min total.
 
 Run this when you need to produce all release artifacts at once. Assembly
 exceeds the 2-minute foreground timeout many agents impose, so each stage
-runs via `nohup`. The file lock at
-`greek/build_modules/.perseus_db_build.lock` enforces serial execution —
-do **not** parallelize.
+runs via `nohup`. The readers-writers build lock (see "Concurrent-build
+mutex" below) lets independent module builds run in parallel but keeps
+assembly from starting until they all finish. Within a single module,
+different modes (sample/full/extended/ios) must still run sequentially
+because they share intermediate state inside that module's directory.
 
 ```bash
 # Assumes Step 2-6 prerequisites are met (module DBs for sample/full/extended
@@ -421,7 +423,12 @@ The assembly script refuses to compress a DB that drifts from `shared/database_s
 
 ### Concurrent-build mutex
 
-Both `greek/run_build.sh` and `data-prep/assemble_database.py` now acquire a file lock at `greek/build_modules/.perseus_db_build.lock` before doing any work (same lock the monolith used). A second build invocation aborts with the holding PID printed — preventing parallel builds from corrupting each other's intermediate files. The lock is released on exit, including uncaught exceptions.
+The build mutex is a readers-writers scheme implemented in `shared/build_lock.py` (owned by neither the Greek nor the Latin module, so both stay self-contained). The lock files themselves are runtime state and live in the system temp directory, keyed on the absolute repo root so different clones on the same machine have independent locks.
+
+- **Per-module exclusive lock** (`classicsviewer_<repo>_module_<name>.lock`). Each module build (Greek, Latin, and any other language module) takes an exclusive lock on its own file. A second build of the same module in a different mode aborts with the holding PID printed — sample, full, extended, and ios Greek builds all contend on the same `module_greek.lock` file because they share intermediate state inside `greek/`.
+- **Assembly readers-writers lock** (`classicsviewer_<repo>_assembly.lock`). Module builds take a shared reader lock on this file (any number of modules can hold it in parallel — Greek + Latin + Sanskrit can all run simultaneously). `data-prep/assemble_database.py` takes an exclusive writer lock on the same file, which blocks until every module releases its reader lock, and blocks any new module from starting while assembly runs.
+
+Call sites: `greek/create_greek_database.py` and `latin/create_latin_database.py` call `acquire_module_lock("<name>")`; `data-prep/assemble_database.py` calls `acquire_assembly_lock()`. All three release via `release_locks()` which is also wired to `atexit`, so the lock is freed even on uncaught exceptions.
 
 ### Legacy: `create_perseus_database.py` is retired
 
@@ -471,20 +478,26 @@ ls -la app/src/debug/assets/perseus_texts.db.zip \
        ios/ClassicsViewer/Resources/perseus_texts.db.zip
 ```
 
-Expected values (Apr 2026). If a row is off by more than ~5%, something
-is wrong — most often an unbuilt module, missing interlinear XMLs, or a
-stale module DB from a different mode:
+Expected values (measured Apr 2026). If a row is off by more than ~5%,
+something is wrong — most often an unbuilt module, missing interlinear
+XMLs, or a stale module DB from a different mode. Note that
+`dictionary_entries` and `lemma_map` are driven by the merged dictionary
+corpora (not filtered by author CSV), so `sample` and `ios` land on the
+same base Greek+Latin totals; `full` adds Latin-full + a few other
+modules; `extended` adds all language lexicons.
 
-| Mode     | authors | works   | books    | text_lines | translation_segments | dict_entries | lemma_map    | DB size | ZIP size |
-|----------|---------|---------|----------|------------|----------------------|--------------|--------------|---------|----------|
-| sample   | 12      | ~265    | ~667     | ~240K      | ~375K                | ~425K        | ~3.6M        | ~670 MB | ~158 MB  |
-| full     | ~138    | ~1,021  | ~3,500   | ~1.0M      | ~1.3M                | ~600K        | ~12.2M       | ~4.3 GB | ~930 MB  |
-| extended | ~780    | ~2,728  | ~173K    | ~3.16M     | ~3.3M                | ~625K        | ~12.76M      | ~13 GB  | ~2.8 GB  |
-| ios      | 11      | ~41     | ~358     | ~60K       | ~140K                | ~425K        | ~3.6M        | ~370 MB | ~84 MB   |
+| Mode     | authors | works | books  | text_lines | translation_segments | translation_lookup | dict_entries | lemma_map | DB size  | ZIP size |
+|----------|---------|-------|--------|------------|----------------------|--------------------|--------------|-----------|----------|----------|
+| sample   | 12      | 265   | 667    | ~223K      | ~126K                | ~377K              | ~96K         | ~853K     | ~641 MB  | ~158 MB  |
+| full     | 138     | 1,021 | 3,407  | ~1.01M     | ~1.26M               | ~1.73M             | ~233K        | ~3.14M    | ~4.00 GB | ~907 MB  |
+| extended | 786     | 2,734 | 172,795| ~3.17M     | ~3.32M               | ~3.91M             | ~660K        | ~12.81M   | ~13.3 GB | ~2.80 GB |
+| ios      | 11      | 41    | 358    | ~60K       | ~89K                 | ~113K              | ~96K         | ~853K     | ~371 MB  | ~87 MB   |
 
 Red flags:
 - `translation_segments < 500K` on extended — Greek interlinear XMLs missing (see Step 5)
-- `dictionary_entries` low on extended — Coptic lexicon or Hebrew BDB missing (Step 2 + Step 6)
+- `dictionary_entries < 500K` on extended — Coptic lexicon or Hebrew BDB missing (Step 2 + Step 6)
+- `lemma_map < 10M` on extended — OGA lemma pass skipped or OGA corpus missing (do NOT ship)
+- `dictionary_entries` differs between sample and ios — one used a stale Greek/Latin module DB from a different mode
 - Deployed ZIP size/mtime doesn't match `data-prep/perseus_texts_*.db.zip` — the copy step was skipped or the destination is stale
 
 ## Step 8: Build the APK

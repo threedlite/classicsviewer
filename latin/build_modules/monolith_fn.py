@@ -5263,3 +5263,12 @@ def _latin_get_paragraphs_for_div(elem, processable_subtypes=None):
 
 get_paragraphs_for_div = _latin_get_paragraphs_for_div
 
+
+# Re-export the shared build lock so `from monolith_fn import
+# acquire_module_lock, release_locks` in create_latin_database.py works
+# without reaching into the Greek module. See shared/build_lock.py.
+from shared.build_lock import (  # noqa: E402, F401
+    acquire_module_lock,
+    release_locks,
+)
+

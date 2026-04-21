@@ -361,16 +361,18 @@ def main():
     if args.output is None:
         args.output = SCRIPT_DIR / f"latin_texts_{args.mode}.db"
 
-    # Acquire the shared Greek/Latin/assembly build lock.
-    # Latin and Greek share intermediate state and must not run in parallel.
-    from monolith_fn import acquire_lock, release_lock  # noqa: E402
-    if not acquire_lock():
-        print("ERROR: Could not acquire build lock; Greek, Latin, assembly, "
-              "or interlinear is already running. Wait for it to finish.",
-              file=sys.stderr)
+    # Readers-writers build mutex. Latin can run alongside other modules
+    # (e.g. Greek) but not alongside assembly, and not alongside another
+    # Latin build in a different mode.
+    from monolith_fn import acquire_module_lock, release_locks  # noqa: E402
+    if not acquire_module_lock("latin"):
+        print("ERROR: Could not acquire Latin build lock; see above for "
+              "holder PID. Aborting.", file=sys.stderr)
         sys.exit(1)
-
-    build(args.mode, args.output, args.csv)
+    try:
+        build(args.mode, args.output, args.csv)
+    finally:
+        release_locks()
 
 
 if __name__ == "__main__":

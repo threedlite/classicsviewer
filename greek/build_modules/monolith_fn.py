@@ -2855,92 +2855,14 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
             print(f"    Added ALL {len(translations)} translations (never skip data!)")
 # ============= END FIRST1K PARSER FIX =============
 
-# Lock file to prevent multiple instances
-LOCK_FILE = Path(__file__).parent / ".perseus_db_build.lock"
-lock_fd = None
-
-def acquire_lock():
-    """Acquire exclusive lock to prevent multiple instances using OS-level file locking"""
-    global lock_fd
-    import fcntl
-
-    try:
-        # Open (or create) the lock file and keep it open
-        fd = os.open(str(LOCK_FILE), os.O_CREAT | os.O_WRONLY, 0o644)
-
-        # Try to acquire an exclusive lock (non-blocking)
-        # This will fail immediately if another process holds the lock
-        try:
-            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except (IOError, OSError) as e:
-            # Lock is held by another process
-            os.close(fd)
-
-            # Try to read the PID from the lock file
-            try:
-                with open(LOCK_FILE, 'r') as f:
-                    old_pid = f.read().strip()
-            except:
-                old_pid = "unknown"
-
-            print(f"\n{'='*60}")
-            print(f"ERROR: Another instance is already running (PID: {old_pid})")
-            print(f"{'='*60}")
-            print("The lock file is held by another process.")
-            print("Check with: ps aux | grep create_perseus_database")
-            print("If the process is stuck, kill it and the lock will auto-release.")
-            print(f"{'='*60}\n")
-            return False
-
-        # We got the lock! Truncate the file and write our PID
-        os.ftruncate(fd, 0)
-        os.write(fd, f"{os.getpid()}\n".encode())
-        os.fsync(fd)  # Ensure PID is written to disk
-
-        # Keep the file descriptor open - this maintains the lock
-        lock_fd = fd
-        return True
-
-    except Exception as e:
-        print(f"\n{'='*60}")
-        print(f"ERROR: Could not acquire lock: {e}")
-        print(f"{'='*60}\n")
-        if fd:
-            try:
-                os.close(fd)
-            except:
-                pass
-        return False
-
-def release_lock():
-    """Release the lock file by closing the file descriptor"""
-    global lock_fd
-    import fcntl
-
-    if lock_fd is not None:
-        try:
-            # Unlock the file (though closing will also release the lock)
-            fcntl.flock(lock_fd, fcntl.LOCK_UN)
-        except:
-            pass
-
-        try:
-            # Close the file descriptor - this releases the OS lock
-            os.close(lock_fd)
-        except:
-            pass
-
-        lock_fd = None
-
-    # Remove the lock file (optional cleanup - lock is already released)
-    try:
-        if LOCK_FILE.exists():
-            os.remove(LOCK_FILE)
-    except:
-        pass
-
-# Register cleanup on exit
-atexit.register(release_lock)
+# Build lock lives in shared/ — owned by neither the Greek nor the Latin
+# module so both stay self-contained. See shared/build_lock.py for the
+# readers-writers semantics.
+from shared.build_lock import (  # noqa: E402, F401
+    acquire_module_lock,
+    acquire_assembly_lock,
+    release_locks,
+)
 
 def parse_line_number(line_n):
     """
