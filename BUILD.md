@@ -523,6 +523,48 @@ ls -lh app/build/outputs/apk/debug/app-debug.apk
 3. Select **Build > Build Bundle(s) / APK(s) > Build APK(s)**
 4. APK will be at `app/build/outputs/apk/debug/app-debug.apk`
 
+### Audio packaging (APK vs AAB)
+
+Two Chamberlain-Iliad audio zips live in `audio/` and are delivered through two different channels. **They are not interchangeable — shipping the wrong one in the wrong slot breaks the build or bloats the base APK.**
+
+| File | Size | Channel | When it ships | Contents |
+|---|---|---|---|---|
+| `audio/homer_iliad_chamberlain_audio_7.zip` | ~497 KB | Bundled in the base module (debug APK + release AAB `base/`) | Install-time, with the sample DB | Book 7 only — enough to demo the audio feature without bloating the install |
+| `audio/homer_iliad_chamberlain_audio.zip` | ~1 GB | `audio_pack/` asset pack (Play Asset Delivery, on-demand) | Only downloaded when the user opts in via in-app Audio Download | Full Iliad recitation |
+
+**Base-app audio (`_7`) — automatic.** The `copyAudioToAssets` Gradle task in `app/build.gradle` copies `audio/homer_iliad_chamberlain_audio_7.zip` into both `app/src/debug/assets/` and `app/src/main/assets/` on every build. No manual step is required; `assembleDebug` and `bundleRelease` both pick it up.
+
+**Asset-pack audio (full) — manual before `bundleRelease`.** The `audio_pack` module (on-demand delivery) expects `audio_pack/src/main/assets/homer_iliad_chamberlain_audio.zip` to exist *before* you invoke `./gradlew bundleRelease`. Copy it once per release:
+
+```bash
+cp audio/homer_iliad_chamberlain_audio.zip audio_pack/src/main/assets/
+```
+
+`bundleRelease` fails with `':app:assetPackReleasePreBundleTask'` if the pack's `src/main/assets/` is empty, and fails with `Both modules 'base' and 'audio_pack' contain asset entry ...` if the `_7` file is (wrongly) copied into the pack. Keep the two files in their own lanes: `_7` is strictly a base-module asset, the non-`_7` file is strictly an asset-pack asset.
+
+**Debug APK builds do not use asset packs** (Android asset packs are an AAB-only feature). That's why debug builds only need `_7` and never read from `audio_pack/`.
+
+### Build the release AAB
+
+```bash
+# Ensure the full audio is in the asset pack first (see above)
+cp audio/homer_iliad_chamberlain_audio.zip audio_pack/src/main/assets/
+
+# Build (~1 minute on warm daemon, ~3-4 min cold)
+./gradlew clean bundleRelease
+
+# AAB lands here:
+ls -lh app/build/outputs/bundle/release/app-release.aab
+# Expected: ~2 GB (159 MB base + 907 MB full_database_pack + ~975 MB audio_pack)
+```
+
+Verify the version bundled into the AAB matches what you expect before uploading to Play Console:
+
+```bash
+unzip -p app/build/outputs/bundle/release/app-release.aab base/manifest/AndroidManifest.xml | strings | grep -E '^[0-9]+\.[0-9]+\.[0-9]+'
+# Should echo the versionName from app/build.gradle
+```
+
 ## Step 9: Deploy to Device
 
 Connect your Android device via USB with USB debugging enabled.
