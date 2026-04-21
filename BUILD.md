@@ -363,7 +363,7 @@ Builds the curated base-app DB (`IOS_SAMPLE_AUTHORS.csv`) that ships with the iO
 
 ```bash
 cd greek && ./run_build.sh ios && cd ..
-cd latin && /home/user/git/classicsviewer/venv/bin/python3 create_latin_database.py sample \
+cd latin && ../venv/bin/python3 create_latin_database.py sample \
     --csv ../greek/data/IOS_SAMPLE_AUTHORS.csv \
     --output latin_texts_ios.db && cd ..
 cd data-prep && python3 assemble_database.py ios && cd ..
@@ -372,6 +372,44 @@ Deploys:
 - `ios/ClassicsViewer/Resources/perseus_texts.db.zip`
 
 Expected: 11 authors, 41 works, 358 books, ~84 MB zip, ~8 min total.
+
+### Build all four releases (driver)
+
+Run this when you need to produce all release artifacts at once. Assembly
+exceeds the 2-minute foreground timeout many agents impose, so each stage
+runs via `nohup`. The file lock at
+`greek/build_modules/.perseus_db_build.lock` enforces serial execution —
+do **not** parallelize.
+
+```bash
+# Assumes Step 2-6 prerequisites are met (module DBs for sample/full/extended
+# already exist, OGA extracted, venv set up, Greek interlinear XMLs present).
+
+# --- sample (~5-8 min) ---
+cd data-prep && nohup ../venv/bin/python3 assemble_database.py sample > /tmp/build_sample.log 2>&1 &
+wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_sample.log; cd ..
+
+# --- full (~6-15 min) ---
+cd data-prep && nohup ../venv/bin/python3 assemble_database.py full > /tmp/build_full.log 2>&1 &
+wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_full.log; cd ..
+
+# --- extended (~20-40 min; iOS-only deploy) ---
+cd data-prep && nohup ../venv/bin/python3 assemble_database.py extended > /tmp/build_extended.log 2>&1 &
+wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_extended.log; cd ..
+
+# --- ios curated (~10-15 min; needs greek+latin ios module DBs first) ---
+cd greek && nohup ./run_build.sh ios > /tmp/build_greek_ios.log 2>&1 & wait; cd ..
+cd latin && nohup ../venv/bin/python3 create_latin_database.py sample \
+    --csv ../greek/data/IOS_SAMPLE_AUTHORS.csv \
+    --output latin_texts_ios.db > /tmp/build_latin_ios.log 2>&1 & wait; cd ..
+cd data-prep && nohup ../venv/bin/python3 assemble_database.py ios > /tmp/build_ios.log 2>&1 &
+wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_ios.log; cd ..
+```
+
+Each log ends with `ASSEMBLY COMPLETE (<mode> mode, X.X min)` on success
+or one of the `❌` / `Traceback` / `CRITICAL` markers on failure. If a
+build fails, do **not** continue to the next mode — fix the root cause
+per `BUILD.md` Step 6 troubleshooting and re-run just that stage.
 
 ### `--skip-oga` (dev only)
 
@@ -396,28 +434,58 @@ Other Greek-owned state moved alongside:
 
 `data-prep/` now holds only cross-language assets: `assemble_database.py`, `verify_module_output.py`, and per-mode quality reports.
 
-**Verification** (extended mode):
-```bash
-# Check sizes
-ls -lh data-prep/perseus_texts_extended.db   # ~13 GB
-unzip -t data-prep/perseus_texts_extended.db.zip  # no errors
+### Verification (all modes)
 
-# Spot-check row counts
-sqlite3 data-prep/perseus_texts_extended.db "
-SELECT 'authors', COUNT(*) FROM authors
-UNION ALL SELECT 'works', COUNT(*) FROM works
-UNION ALL SELECT 'text_lines', COUNT(*) FROM text_lines
-UNION ALL SELECT 'translation_segments', COUNT(*) FROM translation_segments
-UNION ALL SELECT 'dictionary_entries', COUNT(*) FROM dictionary_entries
-UNION ALL SELECT 'lemma_map', COUNT(*) FROM lemma_map;"
-# Expected (Apr 2026):
-#   authors:              ~780
-#   works:                ~2,728
-#   text_lines:           ~3,158,000
-#   translation_segments: ~3,300,000  (if <500K, interlinear XMLs are missing — see Step 5)
-#   dictionary_entries:   ~625,000    (if coptic=0 or no BDB, check Step 2 + Step 6 notes)
-#   lemma_map:            ~12,760,000
+Run after each assembly (or after the "Build all four releases" driver).
+Mismatches mean the build is bad — do not ship.
+
+```bash
+# 1. ZIP integrity — must print "No errors detected"
+for m in sample full extended ios; do
+  echo "=== $m ==="
+  unzip -t "data-prep/perseus_texts_${m}.db.zip" | tail -1
+done
+
+# 2. Row counts
+for m in sample full extended ios; do
+  db="data-prep/perseus_texts_${m}.db"
+  [ -f "$db" ] || { echo "SKIP $m (no db)"; continue; }
+  echo "=== $m ==="
+  sqlite3 "$db" "
+    SELECT 'authors',              COUNT(*) FROM authors
+    UNION ALL SELECT 'works',              COUNT(*) FROM works
+    UNION ALL SELECT 'books',              COUNT(*) FROM books
+    UNION ALL SELECT 'text_lines',         COUNT(*) FROM text_lines
+    UNION ALL SELECT 'translation_segments', COUNT(*) FROM translation_segments
+    UNION ALL SELECT 'dictionary_entries', COUNT(*) FROM dictionary_entries
+    UNION ALL SELECT 'lemma_map',          COUNT(*) FROM lemma_map;"
+done
+
+# 3. Deployment destinations — sizes must match the source zip
+ls -la app/src/debug/assets/perseus_texts.db.zip \
+       app/src/main/assets/perseus_texts.db.zip \
+       perseus_database/src/main/assets/perseus_texts.db.zip \
+       full_database_pack/src/main/assets/perseus_texts_full.db.zip \
+       ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip \
+       ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip \
+       ios/ClassicsViewer/Resources/perseus_texts.db.zip
 ```
+
+Expected values (Apr 2026). If a row is off by more than ~5%, something
+is wrong — most often an unbuilt module, missing interlinear XMLs, or a
+stale module DB from a different mode:
+
+| Mode     | authors | works   | books    | text_lines | translation_segments | dict_entries | lemma_map    | DB size | ZIP size |
+|----------|---------|---------|----------|------------|----------------------|--------------|--------------|---------|----------|
+| sample   | 12      | ~265    | ~667     | ~240K      | ~375K                | ~425K        | ~3.6M        | ~670 MB | ~158 MB  |
+| full     | ~138    | ~1,021  | ~3,500   | ~1.0M      | ~1.3M                | ~600K        | ~12.2M       | ~4.3 GB | ~930 MB  |
+| extended | ~780    | ~2,728  | ~173K    | ~3.16M     | ~3.3M                | ~625K        | ~12.76M      | ~13 GB  | ~2.8 GB  |
+| ios      | 11      | ~41     | ~358     | ~60K       | ~140K                | ~425K        | ~3.6M        | ~370 MB | ~84 MB   |
+
+Red flags:
+- `translation_segments < 500K` on extended — Greek interlinear XMLs missing (see Step 5)
+- `dictionary_entries` low on extended — Coptic lexicon or Hebrew BDB missing (Step 2 + Step 6)
+- Deployed ZIP size/mtime doesn't match `data-prep/perseus_texts_*.db.zip` — the copy step was skipped or the destination is stale
 
 ## Step 8: Build the APK
 
