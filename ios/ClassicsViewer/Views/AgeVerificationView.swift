@@ -25,6 +25,7 @@ struct AgeVerificationView: View {
 
 // MARK: - iOS Implementation
 
+@available(iOS 26.0, *)
 struct AgeVerificationView_iOS: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.requestAgeRange) private var requestAgeRange

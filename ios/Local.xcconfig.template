@@ -1,0 +1,5 @@
+// Copy to Local.xcconfig (gitignored) and fill in your own Team ID.
+// Wire it into Xcode once:
+//   Project → Info → Configurations → expand Debug and Release,
+//   set "Based on Configuration File" = Local.xcconfig for the ClassicsViewer target.
+DEVELOPMENT_TEAM = YOUR_TEAM_ID_HERE

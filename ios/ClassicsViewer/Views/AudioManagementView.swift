@@ -485,8 +485,14 @@ private func importFromManualPath() async {
                 throw ImportError.cannotAccessFile
             }
 
-            // Extract package name from ZIP
-            let packageName = finalWorkingURL.deletingPathExtension().lastPathComponent
+            // Extract package name from ZIP, sanitized to prevent path traversal.
+            // lastPathComponent can be ".", "..", or contain slashes on some paths;
+            // a filename like "...zip" yields ".." after deletingPathExtension, which
+            // would make packagePath escape Documents/audio and wipe the user's data.
+            let rawName = finalWorkingURL.deletingPathExtension().lastPathComponent
+            let allowed = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-")
+            let sanitized = String(rawName.unicodeScalars.map { allowed.contains($0) ? Character($0) : "_" })
+            let packageName = sanitized.isEmpty ? "audio_\(Int(Date().timeIntervalSince1970))" : sanitized
             let displayName = packageName.replacingOccurrences(of: "_", with: " ")
                 .replacingOccurrences(of: "-", with: " ")
                 .capitalized

@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "ClassicsViewer",
     platforms: [
-        .iOS(.v15)
+        .iOS(.v26)
     ],
     products: [
         .library(

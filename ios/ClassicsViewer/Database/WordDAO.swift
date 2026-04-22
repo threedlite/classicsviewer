@@ -10,14 +10,9 @@ class WordDAO: WordDAOProtocol {
     // Use async database manager
 
     func searchWords(query: String, bookId: String?, normalized: Bool) async throws -> [WordOccurrence] {
-        // Note: word_normalized column doesn't exist in database
-        // For normalized search, we'll need to normalize the word column on the fly
-        // or just use exact search on the word column
-        let wordColumn = "word"
-        
         var queryString = """
             SELECT DISTINCT
-                w.\(wordColumn) as word,
+                w.word as word,
                 w.book_id,
                 bk.label,
                 COALESCE(wo.title_english, wo.title) as work_title,
@@ -31,18 +26,18 @@ class WordDAO: WordDAOProtocol {
             JOIN works wo ON bk.work_id = wo.id
             JOIN authors a ON wo.author_id = a.id
             JOIN text_lines tl ON w.book_id = tl.book_id AND w.line_number = tl.line_number
-            WHERE w.\(wordColumn) LIKE ?
+            WHERE w.word LIKE ?
         """
-        
+
         var parameters: [Any?] = ["%\(query)%"]
-        
+
         if let bookId = bookId {
             queryString += " AND w.book_id = ?"
             parameters.append(bookId)
         }
-        
+
         queryString += """
-            GROUP BY w.book_id, w.line_number, w.\(wordColumn)
+            GROUP BY w.book_id, w.line_number, w.word
             ORDER BY a.name, COALESCE(wo.title_english, wo.title), bk.book_number, w.line_number
             LIMIT 500
         """

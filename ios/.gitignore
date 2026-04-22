@@ -146,11 +146,16 @@ perseus_texts_temp.db
 *.iws
 *.ipr
 
-# Generated Xcode project files (if using swift package generate-xcodeproj)
-*.xcodeproj/
+# Xcode: track project.pbxproj and shared Package.resolved; ignore per-user state.
+# (The .xcodeproj is hand-maintained — swift package generate-xcodeproj is gone since Swift 5.7.)
+**/xcuserdata/
+*.xcuserstate
 
-# Package resolved file (can be regenerated)
-Package.resolved
+# Local signing / secrets — copy Local.xcconfig.template to Local.xcconfig and set your Team ID
+Local.xcconfig
+
+# On-demand asset-pack build artifacts (perseus_texts_full/extended .db.zip, multi-GB)
+ClassicsViewer/Resources/OnDemand/
 
 # Test coverage
 *.xcresult
