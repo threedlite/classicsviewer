@@ -157,9 +157,9 @@
 		7C500B1AA765FC985F2251FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7FAB881B2F984F9000F1003D /* Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
 		7FAB881C2F9853FC00F1003D /* perseus_texts.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts.db.zip; sourceTree = "<group>"; };
-		7FAB881E2F98550300F1003D /* homer_iliad_chamberlain_audio.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = homer_iliad_chamberlain_audio.zip; sourceTree = "<group>"; };
-		7FAB881F2F98550300F1003D /* perseus_texts_extended.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts_extended.db.zip; sourceTree = "<group>"; };
-		7FAB88202F98550300F1003D /* perseus_texts_full.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts_full.db.zip; sourceTree = "<group>"; };
+		7FAB881E2F98550300F1003D /* homer_iliad_chamberlain_audio.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = homer_iliad_chamberlain_audio.zip; path = OnDemand/homer_iliad_chamberlain_audio.zip; sourceTree = "<group>"; };
+		7FAB881F2F98550300F1003D /* perseus_texts_extended.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = perseus_texts_extended.db.zip; path = OnDemand/perseus_texts_extended.db.zip; sourceTree = "<group>"; };
+		7FAB88202F98550300F1003D /* perseus_texts_full.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = perseus_texts_full.db.zip; path = OnDemand/perseus_texts_full.db.zip; sourceTree = "<group>"; };
 		84EB9F744216E85A99269189 /* DatabaseSchemaValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSchemaValidator.swift; sourceTree = "<group>"; };
 		8A742E92F760F53753B3ECE6 /* AgeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeVerificationView.swift; sourceTree = "<group>"; };
 		96C191D735D5CDB1D9EB7AD2 /* ExternalDatabaseImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDatabaseImporter.swift; sourceTree = "<group>"; };

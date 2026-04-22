@@ -34,6 +34,7 @@ import multiprocessing as mp
 import time
 import glob
 from collections import defaultdict
+from pathlib import Path
 
 # Import indic-transliteration (required for Devanagari conversion)
 try:
