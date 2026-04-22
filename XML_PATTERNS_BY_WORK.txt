@@ -77,16 +77,16 @@ COUNT: 1 works
   tlg0032.tlg006 - Xenophon: Anabasis [Perseus Greek]
 
 ============================================================
-PATTERN: edition → textpart(book) → textpart(section) → p
-COUNT: 1 works
-------------------------------------------------------------
-  tlg0086.tlg010 - Aristotle: Nicomachean Ethics [Perseus Greek]
-
-============================================================
 PATTERN: edition → textpart(chapter) → textpart(subchapter) → p
 COUNT: 1 works
 ------------------------------------------------------------
   tlg0086.tlg034 - Aristotle: Poetics [Perseus Greek]
+
+============================================================
+PATTERN: edition → textpart(book) → textpart(section) → p
+COUNT: 1 works
+------------------------------------------------------------
+  tlg0086.tlg010 - Aristotle: Nicomachean Ethics [Perseus Greek]
 
 ============================================================
 PATTERN: edition → textpart(book) → textpart(type) → textpart(number) → p

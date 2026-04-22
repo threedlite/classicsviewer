@@ -1470,67 +1470,67 @@
 | **to have, possess** |
 | ἔχω 3 s pres actv subj ~* VERB advmod 18 24 |</l>
                     <l n="96">| ὣς |
-| **thus, as, so that, since** |
-| ὡς ~ ADV advmod 2 1 |  | εἰποῦσʼ |
-| **To gather up, pick up** |
-| λέγω s aor actv ptcp nom ~ VERB advmod 5 2 |  | ὑπὸ |
+| **like as, even as, just as** |
+| ὥς |  | εἰποῦσʼ |
+| **to speak, say** |
+| εἶπον |  | ὑπὸ |
 | **from under** |
-| ὑπό ~ ADP case 5 3 |  | ποσσὶν |
+| ὑπό |  | ποσσὶν |
 | **a foot** |
-| πούς p dat ~ NOUN obj 3 4 |  | ἐδήσατο |
+| πούς |  | ἐδήσατο |
 | **To tie or secure in its place, fasten** |
-| δέω 3 s aor mid indc ~ VERB root 0 5 |  | καλὰ |
+| δέω 3 s aor mid indc |  | καλὰ |
 | **beautiful, beauteous, fair** |
-| καλός p acc ~ ADJ nmod 7 6 |  | πέδιλα |
+| καλός |  | πέδιλα |
 | **sandals** |
-| πέδιλον p acc ~ NOUN obj 5 7 |</l>
+| πέδιλον nominative plural neuter |</l>
                     <l n="97">| ἀμβρόσια |
 | **immortal** |
-| ἀμβρόσιος p acc ~ ADJ nmod 7 8 |  | χρύσεια |
+| ἀμβρόσιος |  | χρύσεια |
 | **golden, of gold, decked** |
-| χρύσεος p acc ~ ADJ nmod 7 9 |  | τά |
+| χρύσεος n nom//acc//voc p |  | τά |
 | **that** |
-| ὁ p nom ~ PRON nsubj 12 10 |  | μιν |
+| ὁ n nom//acc p |  | μιν |
 | **himself** |
-| μιν s acc ~ PRON obj 12 11 |  | φέρον |
+| μιν irregular acc |  | φέρον |
 | **to bear** |
-| φέρω 3 p impf actv indc ~ VERB nmod 7 12 |  | ἠμὲν |
+| φέρω nom//acc//voc n s |  | ἠμὲν |
 | **as well .. , as also .** |
-| ἠμέν ~ PART discourse 16 13 |  | ἐφʼ |
+| ἠμέν |  | ἐφʼ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADP case 16 14 |  | ὑγρὴν |
+| ἐπί |  | ὑγρὴν |
 | **wet, moist, running, fluid** |
-| ὑγρός s acc ~ ADJ obj 14 15 |</l>
+| ὑγρός |</l>
                     <l n="98">| ἠδʼ |
 | **and** |
-| ἠδέ ~ X cc 12 16 |  | ἐπʼ |
+| ἠδέ |  | ἐπʼ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADP case 16 17 |  | ἀπείρονα |
+| ἐπί |  | ἀπείρονα |
 | **Boundless,** |
-| ἀπείρων s acc ~ ADJ nmod 19 18 |  | γαῖαν |
-| **the earth** |
-| γῆ s acc ~ NOUN obj 17 19 |  | ἅμα |
+| ἀπείρων m//f acc s ; n nom//acc//voc p |  | γαῖαν |
+| **a land, country** |
+| γαῖα accusative singular feminine |  | ἅμα |
 | **at once, at the same time** |
-| ἅμα ~ ADP case 12 20 |  | πνοιῇς |
-| **a blowing, blast, breeze** |
-| πνοή p dat ~ NOUN advmod 20 21 |  | ἀνέμοιο |
+| ἅμα |  | πνοιῇς |
+| **A breathing, the breath** |
+| πνοιή dat p |  | ἀνέμοιο |
 | **a squall** |
-| ἄνεμος s gen ~ NOUN nmod 21 22 |</l>
+| ἄνεμος gen s |</l>
                     <l n="99">| εἵλετο |
 | **to take** |
-| αἱρέω 3 s aor mid indc ~ VERB root 0 1 |  | δʼ |
+| αἱρέω 3 s aor mid indc |  | δʼ |
 | **but** |
-| δέ ~ X discourse 1 2 |  | ἄλκιμον |
+| δέ |  | ἄλκιμον |
 | **strong, stout** |
-| ἄλκιμος s acc ~ ADJ nmod 4 3 |  | ἔγχος |
+| ἄλκιμος n nom//acc//voc s ; m acc s |  | ἔγχος |
 | **a spear, lance** |
-| ἔγχος s acc ~ NOUN obj 1 4 |  | ἀκαχμένον |
+| ἔγχος nominative singular masculine |  | ἀκαχμένον |
 | **sharpened** |
-| ἀκαχμένος s acc ~ ADJ nmod 4 5 |  | ὀξέι |
+| ἀκαχμένος accusative singular masculine |  | ὀξέι |
 | **a point** |
-| ὀξύς s dat ~ ADJ nmod 7 6 |  | χαλκῷ |
-| **a bronze** |
-| χάλκεος s dat ~ NOUN advmod 5 7 |</l>
+| ὀξύς |  | χαλκῷ |
+| **a blacksmith.** |
+| χαλκός dat s |</l>
                     <l n="100">| βριθὺ |
 | **weighty, heavy** |
 | βριθύς s acc ~* ADJ nmod 4 8 |  | μέγα |
@@ -4000,171 +4000,171 @@
 | τε ~* PART cc 20 31 |</l>
                     <l n="259">| ἐξ |
 | **from out** |
-| ἐκ ~ ADP case 34 32 |  | Ἐφύρης |
+| ἐκ |  | Ἐφύρης |
 | **Ephyra** |
-| Ἐφύρα s gen ~ NOUN obj 32 33 |  | ἀνιόντα |
+| Ἐφύρα genitive singular feminine |  | ἀνιόντα |
 | **to go up** |
-| ἀνέρχομαι s pres actv ptcp acc ~ VERB nmod 20 34 |  | παρʼ |
+| ἄνειμι |  | παρʼ |
 | **from the side of, c. gen., beside, alongside of...** |
-| παρά ~ ADP case 34 35 |  | Ἴλου |
+| παρά |  | Ἴλου |
 | **Ilus, the name of several characters in Greek m...** |
-| Ἶλος s gen ~ NOUN obj 35 36 |  | Μερμερίδαο |
+| Ἶλος gen s |  | Μερμερίδαο |
 | **???** |
-| Μερμερίδης s gen ~ NOUN nmod 36 37 |</l>
+| ? |</l>
                     <l n="260">| ᾤχετο |
 | **to be gone, to have gone** |
-| οἴχομαι 3 s impf mid indc ~ VERB advmod 34 38 |  | γὰρ |
+| οἴχομαι 3 s impf mid indc |  | γὰρ |
 | **to introduce the reason** |
-| γάρ ~ PART discourse 38 39 |  | καὶ |
+| γάρ |  | καὶ |
 | **and** |
-| καί ~ ADV advmod 41 40 |  | κεῖσε |
-| **thither, to that place** |
-| ἐκεῖσε ~ ADV obj 38 41 |  | θοῆς |
+| καί |  | κεῖσε |
+| **Thither** |
+| κεῖσε |  | θοῆς |
 | **swift** |
-| θοός s gen ~ ADJ nmod 44 42 |  | ἐπὶ |
+| θοός f gen s |  | ἐπὶ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADP case 38 43 |  | νηὸς |
+| ἐπί |  | νηὸς |
 | **a ship** |
-| ναῦς s gen ~ NOUN advmod 43 44 |  | Ὀδυσσεὺς |
+| ναῦς |  | Ὀδυσσεὺς |
 | **Odysseus** |
-| Ὀδυσσεύς s nom ~ NOUN nsubj 38 45 |</l>
+| Ὀδυσσεύς |</l>
                     <l n="261">| φάρμακον |
 | **a drug, medicine** |
-| φάρμακον s acc ~ NOUN obj 48 46 |  | ἀνδροφόνον |
+| φάρμακον nominative singular neuter |  | ἀνδροφόνον |
 | **man-slaying** |
-| ἀνδροφόνος s acc ~ ADJ nmod 46 47 |  | διζήμενος |
+| ἀνδροφόνος accusative singular masculine |  | διζήμενος |
 | **to seek out, look** |
-| δίζημαι s pres mid ptcp nom ~ VERB advmod 38 48 |  | ὄφρα |
+| δίζημαι nominative singular masculine |  | ὄφρα |
 | **that, in order that, to the end that** |
-| ὄφρα ~ CCONJ mark 48 49 |  | οἱ |
-| **sui.** |
-| ἕ 3 s dat ~ PRON obj 51 50 |  | εἴη |
+| ὄφρα |  | οἱ |
+| **that** |
+| ὁ dat |  | εἴη |
 | **to be, exist** |
-| εἰμί 3 s pres actv opt ~ VERB advmod 49 51 |</l>
+| εἰμί 3 s pres act opt |</l>
                     <l n="262">| ἰοὺς |
 | **rust** |
-| ἰός p acc ~ NOUN obj 53 52 |  | χρίεσθαι |
+| ἰός |  | χρίεσθαι |
 | **to touch on the surface: to rub** |
-| χρίω pres mid inf ~ VERB obj 51 53 |  | χαλκήρεας |
+| χρίω |  | χαλκήρεας |
 | **fitted with brass, tipped with brass** |
-| χαλκήρης p acc ~ ADJ nmod 52 54 |  | ἀλλʼ |
+| χαλκήρης m//f acc p |  | ἀλλʼ |
 | **otherwise, but** |
-| ἀλλά ~ X discourse 13 1 |  | ὁ |
+| ἀλλά |  | ὁ |
 | **that** |
-| ὁ s nom ~ DET nsubj 6 2 |  | μὲν |
+| ὁ |  | μὲν |
 | **on the one hand, on the other hand** |
-| μέν ~ PART discourse 13 3 |  | οὔ |
+| μέν |  | οὔ |
 | **not** |
-| οὐ ~ ADV advmod 6 4 |  | οἱ |
+| οὐ |  | οἱ |
 | **sui.** |
 | ἕ s dat ~* PRON obj 51 50 |</l>
                     <l n="263">| δῶκεν |
 | **to give** |
-| δίδωμι 3 s aor actv indc ~ VERB root 13 6 |  | ἐπεί |
+| δίδωμι 3 s aor actv indc unaugmented |  | ἐπεί |
 | **after that, after , since, when** |
-| ἐπεί ~ CCONJ mark 6 7 |  | ῥα |
+| ἐπεί |  | ῥα |
 | **Expressing consequence or sequence** |
-| ἄρα ~ PART discourse 10 8 |  | θεοὺς |
+| ἄρα |  | θεοὺς |
 | **a god** |
-| θεός p acc ~ NOUN obj 10 9 |  | νεμεσίζετο |
+| θεός |  | νεμεσίζετο |
 | **to be wroth** |
-| νεμεσίζομαι 3 s impf mid indc ~ VERB advmod 7 10 |  | αἰὲν |
+| νεμεσίζομαι |  | αἰὲν |
 | **always, for ever** |
-| ἀεί ~ ADV advmod 12 11 |  | ἐόντας |
+| ἀεί |  | ἐόντας |
 | **to be, exist** |
-| εἰμί p pres actv ptcp acc ~ VERB nmod 9 12 |</l>
+| εἰμί |</l>
                     <l n="264">| ἀλλὰ |
 | **otherwise, but** |
-| ἀλλά ~ X cc 0 13 |  | πατήρ |
+| ἀλλά |  | πατήρ |
 | **a father** |
-| πατήρ s nom ~ NOUN nsubj 16 14 |  | οἱ |
-| **sui.** |
-| ἕ 3 s dat ~ PRON obj 16 15 |  | δῶκεν |
+| πατήρ |  | οἱ |
+| **that** |
+| ὁ dat |  | δῶκεν |
 | **to give** |
 | δίδωμι 3 s aor actv indc ~* VERB root 13 6 |  | ἐμός |
 | **mine** |
-| ἐμός s nom ~ ADJ nmod 14 17 |  | φιλέεσκε |
+| ἐμός |  | φιλέεσκε |
 | **to love, regard with affection** |
-| φιλέω 3 s impf actv indc ~ VERB root 0 1 |  | γὰρ |
+| φιλέω |  | γὰρ |
 | **to introduce the reason** |
-| γάρ ~ PART discourse 1 2 |  | αἰνῶς |
-| **dread, dire, grim** |
-| αἰνός ~ ADV advmod 1 3 |</l>
+| γάρ |  | αἰνῶς |
+| **To such a degree as to cause apprehension** |
+| αἰνῶς |</l>
                     <l n="265">| τοῖος |
 | **quality, such, such-like** |
-| τοῖος s nom ~ ADJ nmod 5 4 |  | ἐὼν |
+| τοῖος nominative singular masculine |  | ἐὼν |
 | **to be, exist** |
-| εἰμί s pres actv ptcp nom ~ VERB nmod 8 5 |  | μνηστῆρσιν |
+| εἰμί |  | μνηστῆρσιν |
 | **a wooer, suitor** |
-| μνηστήρ p dat ~ NOUN obj 7 6 |  | ὁμιλήσειεν |
+| μνηστήρ dat p |  | ὁμιλήσειεν |
 | **to be in company with, consort** |
-| ὁμιλέω 3 s aor actv opt ~ VERB vocative 1 7 |  | Ὀδυσσεύς |
+| ὁμιλέω |  | Ὀδυσσεύς |
 | **Odysseus** |
-| Ὀδυσσεύς s nom ~ NOUN nsubj 7 8 |</l>
+| Ὀδυσσεύς |</l>
                     <l n="266">| πάντες |
 | **all, the whole** |
-| πᾶς p nom ~ ADJ nsubj 5 1 |  | κʼ |
+| πᾶς m nom//voc p |  | κʼ |
 | **With subj.** |
-| ἄν ~ PART discourse 5 2 |  | ὠκύμοροί |
+| ἄν |  | ὠκύμοροί |
 | **quickly-dying, dying early** |
-| ὠκύμορος p nom ~ ADJ dep 7 3 |  | τε |
+| ὠκύμορος |  | τε |
 | **and** |
-| τε ~ X discourse 7 4 |  | γενοίατο |
+| τε |  | γενοίατο |
 | **to come into being** |
-| γίγνομαι 3 p aor mid opt ~ VERB root 0 5 |  | πικρόγαμοί |
+| γίγνομαι 3p aor mid opt |  | πικρόγαμοί |
 | **miserably married** |
-| πικρόγαμος p nom ~ ADJ dep 7 6 |  | τε |
+| πικρόγαμος |  | τε |
 | **and** |
-| τε ~ X cc 5 7 |</l>
+| τε |</l>
                     <l n="267">| ἀλλʼ |
 | **otherwise, but** |
-| ἀλλά ~ X discourse 9 1 |  | ἦ |
+| ἀλλά |  | ἦ |
 | **in truth, truly, verily, of a surety** |
-| ἦ 3 s impf//aor ~ PART discourse 9 2 |  | τοι |
+| ἦ 3 s impf//aor |  | τοι |
 | **let me tell you, surely, verily** |
-| τοι ~ PART discourse 2 3 |  | μὲν |
+| τοι |  | μὲν |
 | **on the one hand, on the other hand** |
-| μέν ~ PART discourse 9 4 |  | ταῦτα |
+| μέν |  | ταῦτα |
 | **this** |
-| οὗτος p nom ~ PRON nsubj 9 5 |  | θεῶν |
-| **a god** |
-| θεός p gen ~ NOUN nmod 8 6 |  | ἐν |
+| οὗτος nom//acc n p |  | θεῶν |
+| **a goddess** |
+| θεά gen p |  | ἐν |
 | **in, among.** |
-| ἐν ~ ADP case 9 7 |  | γούνασι |
+| ἐν |  | γούνασι |
 | **the knee** |
-| γόνυ p dat ~ NOUN obj 7 8 |  | κεῖται |
-| **to be laid** |
-| κεῖμαι 3 s pres mid indc ~ VERB root 0 9 |</l>
+| γόνυ dat p |  | κεῖται |
+| **to cleave** |
+| κείω 3 s pres mp indc |</l>
                     <l n="268">| ἤ |
 | **in truth, truly, verily, of a surety** |
 | ἦ ~* ADV discourse 9 2 |  | κεν |
 | **With subj.** |
-| ἄν ~ PART discourse 13 11 |  | νοστήσας |
+| ἄν |  | νοστήσας |
 | **to come** |
-| νοστέω s aor actv ptcp nom ~ VERB advmod 13 12 |  | ἀποτίσεται |
+| νοστέω aor actv part |  | ἀποτίσεται |
 | **to pay back, repay, return** |
-| ἀποτίνω 3 s fut mid indc ~ VERB dep 14 13 |  | ἦε |
-| **why? wherefore?** |
-| ἤ ~ X cc 5 14 |  | καὶ |
+| ἀποτίνω 3s fut mid indc |  | ἦε |
+| **than, as (in a comparative construction)** |
+| ἤ |  | καὶ |
 | **and** |
-| καί ~ ADV advmod 16 15 |  | οὐκί |
+| καί |  | οὐκί |
 | **not** |
-| οὐ ~ ADV dep 14 16 |</l>
+| οὐ |</l>
                     <l n="269">| οἷσιν |
 | **Who, which, with an indefinite force, 'whoever** |
-| ὅς p dat ~ PRON nmod 19 17 |  | ἐνὶ |
+| ὅς m//n dat p |  | ἐνὶ |
 | **in, among.** |
-| ἐν ~ ADP case 14 18 |  | μεγάροισι |
+| ἐν |  | μεγάροισι |
 | **a large room** |
-| μέγαρον p dat ~ NOUN advmod 18 19 |  | σὲ |
+| μέγαρον dat p |  | σὲ |
 | **pronoun: thou, you** |
-| σύ 2 s acc ~ PRON nsubj 3 1 |  | δὲ |
+| σύ |  | δὲ |
 | **but** |
-| δέ ~ X discourse 4 2 |  | φράζεσθαι |
+| δέ |  | φράζεσθαι |
 | **to point out, shew, indicate** |
-| φράζω pres mid inf ~ VERB obj 4 3 |  | ἄνωγα |
+| φράζω pres mid inf |  | ἄνωγα |
 | **to command, order** |
-| ἄνωγα 1 s perf actv indc ~ VERB root 0 4 |</l>
+| ἄνωγα |</l>
                     <l n="270">| ὅππως |
 | **in such manner as, as** |
 | ὅπως ~* CCONJ mark 4 5 |  | κε |
@@ -4976,7 +4976,7 @@
 | ὡς ~* CCONJ advmod 12 11 |  | ἀνόπαια |
 | **unseen** |
 | ἀνοπαῖα ~* ADV advmod 13 12 |  | διέπτατο |
-| **To traverse a space by flight, .** |
+| **to spread out** |
 | διαπέταμαι 3 s aor indc ~* VERB root 10 13 |  | τῷ |
 | **that** |
 | ὁ s dat ~* PRON obj 4 1 |  | δʼ |
@@ -6849,19 +6849,19 @@
 | ἄωτον s dat ~* NOUN obj 5 7 |</l>
                     <l n="444">| βούλευε |
 | **to take counsel, deliberate, concert measures** |
-| βουλεύω 3 s impf actv indc ~ VERB root 0 8 |  | φρεσὶν |
+| βουλεύω |  | φρεσὶν |
 | **the midriff** |
-| φρήν p dat ~ NOUN obj 8 9 |  | ᾗσιν |
+| φρήν |  | ᾗσιν |
 | **Who, which, with an indefinite force, 'whoever** |
-| ὅς p dat ~ PRON nmod 9 10 |  | ὁδὸν |
+| ὅς 3 s aor act sub |  | ὁδὸν |
 | **a way, path, track, road, highway** |
-| ὁδός s acc ~ NOUN obj 8 11 |  | τὴν |
+| ὁδός |  | τὴν |
 | **that** |
-| ὁ s acc ~ PRON obj 13 12 |  | πέφραδʼ |
+| ὁ |  | πέφραδʼ |
 | **to point out, shew, indicate** |
-| φράζω 3 s aor actv indc ~ VERB nmod 11 13 |  | Ἀθήνη |
+| φράζω |  | Ἀθήνη |
 | **Athena** |
-| Ἀθήνη s nom ~ NOUN nsubj 13 14 |</l>
+| Ἀθήνη |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="2">
                     <l n="1">| ἦμος |
@@ -11223,7 +11223,7 @@
 | **but not** |
 | οὐδέ |  | ἀνοήμων |
 | **without understanding** |
-| ἀνοήμων s nom ~ ADJ dep 0 10 |</l>
+| ἀνοήμων |</l>
                     <l n="279">| οὐδέ |
 | **but not** |
 | οὐδέ |  | σε |
@@ -11285,7 +11285,7 @@
 | **but not** |
 | οὐδέ |  | δίκαιοι |
 | **observant of custom and social rule, well-order...** |
-| δίκαιος p nom ~ ADJ dep 0 17 |</l>
+| δίκαιος nominative plural masculine |</l>
                     <l n="283">| οὐδέ |
 | **but not** |
 | οὐδέ |  | τι |
@@ -13647,23 +13647,23 @@
 | κόρη s dat ~* NOUN obj 25 24 |</l>
                     <l n="434">| παννυχίη |
 | **a night-festival, vigil** |
-| παννύχιος s nom ~ ADJ advmod 6 1 |  | μέν |
+| παννύχιος |  | μέν |
 | **on the one hand, on the other hand** |
-| μέν ~ PART discourse 8 2 |  | ῥʼ |
+| μέν |  | ῥʼ |
 | **Expressing consequence or sequence** |
-| ἄρα ~ PART discourse 8 3 |  | ἥ |
-| **that** |
-| ὁ s nom ~ DET nsubj 8 4 |  | γε |
+| ἄρα |  | ἥ |
+| **Who, which, with an indefinite force, 'whoever** |
+| ὅς f nom s |  | γε |
 | **the least** |
-| γε ~ ADV advmod 4 5 |  | καὶ |
+| γε |  | καὶ |
 | **and** |
-| καί ~ X cc 8 6 |  | ἠῶ |
+| καί |  | ἠῶ |
 | **the morning red, daybreak, dawn** |
-| ἠώς s acc ~ NOUN advmod 6 7 |  | πεῖρε |
+| ἠώς acc s |  | πεῖρε |
 | **to pierce quite through, fix** |
-| πείρω 3 s impf actv indc ~ VERB root 0 8 |  | κέλευθον |
+| πείρω |  | κέλευθον |
 | **a road, way, path, track** |
-| κέλευθος s acc ~ NOUN obj 8 9 |</l>
+| κέλευθος accusative singular masculine |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="3">
                     <l n="1">| Ἠέλιος |
@@ -14775,7 +14775,7 @@
 | **belonging to another people** |
 | ἀλλοδαπός p dat ~* ADJ obj 20 19 |  | φέροντες |
 | **to bear** |
-| φέρω p pres actv ptcp nom ~ VERB advmod 15 20 |</l>
+| φέρω m nom and voc p |</l>
                     <l n="75">| τὸν |
 | **that** |
 | ὁ s acc ~* PRON obj 7 1 |  | δʼ |
@@ -14953,7 +14953,7 @@
 | **Tros** |
 | Τρώς p dat ~* NOUN obj 7 6 |  | πολέμιζον |
 | **to wage war, make war, fight** |
-| πολεμίζω 3 p impf actv indc ~ VERB nmod 1 7 |</l>
+| πολεμίζω |</l>
                     <l n="87">| πευθόμεθʼ |
 | **To hear. Absol. or with object** |
 | πεύθομαι 1 p pres mp indc ~* VERB root 15 8 |  | ἧχι |
@@ -15649,8 +15649,8 @@
 | θεός s nom ~* NOUN nsubj 13 11 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 2 12 |  | ἐκέδασσεν |
-| **to scatter, disperse** |
-| σκεδάννυμι 3 s aor actv indc ~ VERB advmod 12 13 |  | Ἀχαιούς |
+| **to break asunder, break up, scatter** |
+| κεδάννυμι |  | Ἀχαιούς |
 | **the Achaians** |
 | Ἀχαιός p acc ~* ADJ obj 13 14 |</l>
                     <l n="132">| καὶ |
@@ -16162,10 +16162,10 @@
 | ἐπεί ~* CCONJ mark 9 10 |  | γίγνωσκον |
 | **to learn to know, to perceive, mark, learn** |
 | γιγνώσκω 1 s impf actv indc ~* VERB advmod 10 11 |  | ὃ |
-| **Who, which, with an indefinite force, 'whoever** |
-| ὅς s nom ~ PRON nsubj 15 12 |  | δὴ |
+| **that** |
+| ὁ |  | δὴ |
 | **exactness** |
-| δή ~ PART discourse 15 13 |  | κακὰ |
+| δή |  | κακὰ |
 | **bad** |
 | κακός p acc ~* ADJ obj 14 13 |  | μήδετο |
 | **to be minded, to intend, resolve** |
@@ -16490,7 +16490,7 @@
 | **pronoun: thou, you** |
 | σύ s acc ~* PRON obj 14 13 |  | κεύσω |
 | **to cover quite up, to cover, hide** |
-| κεύθω 1 s fut actv indc ~ VERB root 12 16 |</l>
+| κεύθω |</l>
                     <l n="188">| εὖ |
 | **well** |
 | εὖ ~* ADV advmod 5 1 |  | μὲν |
@@ -17757,7 +17757,7 @@
 | **to go** |
 | κίω s aor actv ptcp nom ~* VERB advmod 10 13 |  | εἴρυσθαι |
 | **to drag along the ground, drag, draw** |
-| ἐρύω pres mid inf ~ VERB obj 10 14 |  | ἄκοιτιν |
+| ἐρύω |  | ἄκοιτιν |
 | **a spouse, wife** |
 | ἄκοιτις s acc ~* NOUN obj 14 15 |</l>
                     <l n="269">| ἀλλʼ |
@@ -18312,69 +18312,69 @@
 | **Mycene, Mycenae** |
 | Μυκήνη s gen ~* NOUN obj 3 5 |</l>
                     <l n="306">| τῷ |
-| **that** |
-| ὁ s dat ~ DET nmod 4 1 |  | δέ |
+| **therefore, in this wise, thereupon** |
+| τῷ m//n dat s |  | δέ |
 | **but** |
-| δέ ~ X discourse 13 2 |  | οἱ |
-| **sui.** |
-| ἕ 3 s dat ~ PRON obj 6 3 |  | ὀγδοάτῳ |
+| δέ |  | οἱ |
+| **that** |
+| ὁ dat |  | ὀγδοάτῳ |
 | **the eighth** |
-| ὀγδόατος s dat ~ ADJ advmod 6 4 |  | κακὸν |
+| ὀγδόατος |  | κακὸν |
 | **bad** |
-| κακός s nom ~ ADJ advmod 8 5 |  | ἤλυθε |
+| κακός |  | ἤλυθε |
 | **to come** |
-| ἔρχομαι 3 s aor actv indc ~ VERB root 13 6 |  | δῖος |
+| ἔρχομαι 3 s aor actv indc |  | δῖος |
 | **god-like, divine** |
-| δῖος s nom ~ ADJ nmod 8 7 |  | Ὀρέστης |
+| δῖος nominative singular masculine |  | Ὀρέστης |
 | **Orestes** |
-| Ὀρέστης s nom ~ NOUN nsubj 6 8 |</l>
+| Ὀρέστης |</l>
                     <l n="307">| ἂψ |
 | **backwards, back, back again** |
-| ἄψ ~ ADV advmod 6 9 |  | ἀπʼ |
+| ἄψ |  | ἀπʼ |
 | **from, away** |
-| ἀπό ~ ADP case 6 10 |  | Ἀθηνάων |
+| ἀπό |  | Ἀθηνάων |
 | **the city of Athens** |
-| Ἀθῆναι p gen ~ NOUN obj 10 11 |  | κατὰ |
+| Ἀθῆναι |  | κατὰ |
 | **down, downwards, with gen. or acc** |
-| κατά ~ ADV advmod 14 12 |  | δʼ |
+| κατά |  | δʼ |
 | **but** |
-| δέ ~ X cc 0 13 |  | ἔκτανε |
+| δέ |  | ἔκτανε |
 | **to kill, slay** |
-| κτείνω 3 s aor actv indc ~ VERB root 13 14 |  | πατροφονῆα |
+| κτείνω 3 s aor actv indc |  | πατροφονῆα |
 | **murderer of one's father** |
-| πατροφονεύς s acc ~ NOUN obj 14 15 |</l>
+| πατροφονεύς |</l>
                     <l n="308">| Αἴγισθον |
 | **Aegisthus** |
-| Αἴγισθος s acc ~ NOUN dep 15 16 |  | δολόμητιν |
+| Αἴγισθος acc s |  | δολόμητιν |
 | **crafty of counsel, wily** |
-| δολομήτης s acc ~ ADJ nmod 16 17 |  | ὅ |
+| δολομήτης |  | ὅ |
 | **that** |
 | ὁ s nom ~* PRON nsubj 6 3 |  | οἱ |
-| **sui.** |
-| ἕ 3 s dat ~ PRON nmod 20 19 |  | πατέρα |
+| **that** |
+| ὁ dat |  | πατέρα |
 | **a father** |
-| πατήρ s acc ~ NOUN obj 22 20 |  | κλυτὸν |
+| πατήρ acc s |  | κλυτὸν |
 | **heard** |
-| κλυτός s acc ~ ADJ nmod 20 21 |  | ἔκτα |
+| κλυτός |  | ἔκτα |
 | **to kill, slay** |
-| κτείνω 3 s aor actv indc ~ VERB nmod 16 22 |</l>
+| κτείνω 3 s aor actv indc |</l>
                     <l n="309">| ἦ |
 | **in truth, truly, verily, of a surety** |
-| ἦ 3 s impf//aor ~ PART discourse 6 1 |  | τοι |
+| ἦ 3 s impf//aor |  | τοι |
 | **let me tell you, surely, verily** |
-| τοι ~ PART discourse 1 2 |  | ὁ |
+| τοι |  | ὁ |
 | **that** |
-| ὁ s nom ~ DET nsubj 6 3 |  | τὸν |
+| ὁ |  | τὸν |
 | **that** |
-| ὁ s acc ~ PRON obj 5 4 |  | κτείνας |
+| ὁ |  | κτείνας |
 | **to kill, slay** |
-| κτείνω s aor actv ptcp nom ~ VERB advmod 6 5 |  | δαίνυ |
+| κτείνω aor actv part |  | δαίνυ |
 | **to divide** |
-| δαίνυμι 3 s impf actv indc ~ VERB root 0 6 |  | τάφον |
+| δαίνυμι 2s pres actv impr ; {{lb grc Epic |  | τάφον |
 | **astonishment, amazement** |
-| τάφος s acc ~ NOUN obj 6 7 |  | Ἀργείοισιν |
+| τάφος accusative singular masculine |  | Ἀργείοισιν |
 | **the Greeks** |
-| Ἀργεῖος p dat ~ ADJ obj 6 8 |</l>
+| Ἀργεῖος dat p m//n |</l>
                     <l n="310">| μητρός |
 | **a mother** |
 | μήτηρ s gen ~* NOUN nmod 12 9 |  | τε |
@@ -20352,7 +20352,7 @@
 | **gold** |
 | χρυσός s acc ~* NOUN obj 36 35 |  | εἰργάζετο |
 | **to work, labour** |
-| ἐργάζομαι 3 s impf mid indc ~ VERB nmod 19 36 |  | ἦλθε |
+| ἐργάζομαι |  | ἦλθε |
 | **to come** |
 | ἔρχομαι 3 s aor actv indc ~* VERB root 2 1 |  | δʼ |
 | **but** |
@@ -21316,19 +21316,19 @@
 | ἵππος p nom ~* NOUN nsubj 3 5 |</l>
                     <l n="497">| δύσετό |
 | **to enter, make one's way into** |
-| δύω 3 s aor mid indc ~ VERB root 5 1 |  | τʼ |
+| δύω |  | τʼ |
 | **and** |
-| τε ~ X discourse 5 2 |  | ἠέλιος |
-| **the sun** |
-| ἥλιος s nom ~ NOUN nsubj 1 3 |  | σκιόωντό |
+| τε |  | ἠέλιος |
+| **The sun.** |
+| ἠέλιος nominative singular masculine |  | σκιόωντό |
 | **to overshadow** |
-| σκιάω 3 p impf mid indc ~ VERB root 5 4 |  | τε |
+| σκιάω |  | τε |
 | **and** |
-| τε ~ X cc 0 5 |  | πᾶσαι |
+| τε |  | πᾶσαι |
 | **all, the whole** |
-| πᾶς p nom ~ ADJ nmod 7 6 |  | ἀγυιαί |
+| πᾶς f nom//voc p |  | ἀγυιαί |
 | **a street, highway** |
-| ἀγυιά p nom ~ NOUN nsubj 4 7 |</l>
+| ἀγυιά nom//voc p |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="4">
                     <l n="1">| οἱ |
@@ -22446,68 +22446,68 @@
 | εἰσοράω s pres actv ptcp acc ~* VERB nmod 2 4 |</l>
                     <l n="76">| τοῦ |
 | **that** |
-| ὁ s gen ~ DET obj 4 1 |  | δʼ |
+| ὁ m//n gen s |  | δʼ |
 | **but** |
-| δέ ~ X discourse 7 2 |  | ἀγορεύοντος |
+| δέ |  | ἀγορεύοντος |
 | **to speak in the assembly, harangue, speak** |
-| ἀγορεύω s pres actv ptcp gen ~ VERB nmod 1 3 |  | ξύνετο |
+| ἀγορεύω |  | ξύνετο |
 | **To set together (in fight), match or pit one again** |
-| συνίημι 3 s aor mid indc ~ VERB root 7 4 |  | ξανθὸς |
+| συνίημι |  | ξανθὸς |
 | **yellow** |
-| ξανθός s nom ~ ADJ nmod 6 5 |  | Μενέλαος |
+| ξανθός |  | Μενέλαος |
 | **withstanding-men** |
-| Μενέλαος s nom ~ NOUN nsubj 7 6 |</l>
+| Μενέλαος |</l>
                     <l n="77">| καί |
 | **and** |
-| καί ~ X cc 0 7 |  | σφεας |
+| καί |  | σφεας |
 | **they** |
-| σφεῖς 3 p acc ~ PRON obj 9 8 |  | φωνήσας |
+| σφεῖς enclitic acc p |  | φωνήσας |
 | **to produce a sound** |
-| φωνέω s aor actv ptcp nom ~ VERB advmod 12 9 |  | ἔπεα |
+| φωνέω aor actv part |  | ἔπεα |
 | **a word** |
-| ἔπος p acc ~ NOUN obj 12 10 |  | πτερόεντα |
+| ἔπος nom//acc//voc p |  | πτερόεντα |
 | **feathered, winged** |
-| πτερόεις p acc ~ ADJ nmod 10 11 |  | προσηύδα |
+| πτερόεις acc s m ; nom//acc//voc p n |  | προσηύδα |
 | **To speak to, address, accost** |
-| προσαυδάω 3 s impf actv indc ~ VERB root 7 12 |</l>
+| προσαυδάω 3 s impf actv indc contracted |</l>
                     <l n="78">| τέκνα |
 | **that which is borne** |
-| τέκνον p voc ~ NOUN vocative 10 1 |  | φίλʼ |
+| τέκνον nominative plural neuter |  | φίλʼ |
 | **a friend** |
-| φίλος p voc ~ ADJ nmod 1 2 |  | ἦ |
+| φίλος |  | ἦ |
 | **in truth, truly, verily, of a surety** |
-| ἦ 3 s impf//aor ~ PART discourse 10 3 |  | τοι |
+| ἦ 3 s impf//aor |  | τοι |
 | **let me tell you, surely, verily** |
-| τοι ~ PART discourse 3 4 |  | Ζηνὶ |
+| τοι |  | Ζηνὶ |
 | **Zeus** |
-| Ζεύς s dat ~ NOUN obj 10 5 |  | βροτῶν |
+| Ζεύς |  | βροτῶν |
 | **a mortal man** |
-| βροτός p gen ~ NOUN nmod 9 6 |  | οὐκ |
-| **not** |
-| οὐ ~ ADV advmod 10 7 |  | ἄν |
+| βροτός gen p |  | οὐκ |
+| **so not, not then, surely not** |
+| οὐκ |  | ἄν |
 | **With subj.** |
-| ἄν ~ PART discourse 10 8 |  | τις |
+| ἄν |  | τις |
 | **any one, any thing, some one, some thing** |
-| τις s nom ~ PRON nsubj 10 9 |  | ἐρίζοι |
+| τις |  | ἐρίζοι |
 | **to strive, wrangle, quarrel** |
-| ἐρίζω 3 s pres actv opt ~ VERB root 0 10 |</l>
+| ἐρίζω |</l>
                     <l n="79">| ἀθάνατοι |
 | **the Immortals** |
-| ἀθάνατος p nom ~ ADJ nmod 8 1 |  | γὰρ |
+| ἀθάνατος nominative plural masculine |  | γὰρ |
 | **to introduce the reason** |
-| γάρ ~ PART discourse 8 2 |  | τοῦ |
+| γάρ |  | τοῦ |
 | **that** |
-| ὁ s gen ~ DET nmod 6 3 |  | γε |
+| ὁ m//n gen s |  | γε |
 | **the least** |
-| γε ~ ADV advmod 3 4 |  | δόμοι |
+| γε |  | δόμοι |
 | **a house** |
-| δόμος p nom ~ NOUN nsubj 6 5 |  | καὶ |
+| δόμος nominative plural masculine |  | καὶ |
 | **and** |
-| καί ~ X cc 8 6 |  | κτήματʼ |
+| καί |  | κτήματʼ |
 | **anything gotten, a piece of property, a possession** |
-| κτῆμα p nom ~ NOUN nsubj 6 7 |  | ἔασιν |
+| κτῆμα |  | ἔασιν |
 | **to be, exist** |
-| εἰμί 3 p pres actv indc ~ VERB root 0 8 |</l>
+| εἰμί 3 p pres actv indc |</l>
                     <l n="80">| ἀνδρῶν |
 | **a man** |
 | ἀνήρ p gen ~* NOUN nmod 5 1 |  | δʼ |
@@ -24795,7 +24795,7 @@
 | Πολύδαμνα s nom ~* NOUN dep 0 10 |  | πόρεν |
 | **to furnish, offer, present, give** |
 | πόρω 3 s aor actv indc ~* VERB nmod 5 11 |  | Θῶνος |
-| **???** |
+| **to set up** |
 | Θῶν s gen ~* NOUN nmod 13 12 |  | παράκοιτις |
 | **a wife, spouse** |
 | παράκοιτις s nom ~* NOUN dep 0 13 |</l>
@@ -25430,7 +25430,7 @@
 | ὀφθαλμός p dat ~* NOUN obj 6 7 |</l>
                     <l n="270">| οἷον |
 | **what a man** |
-| οἷος s nom ~ PRON nmod 11 8 |  | Ὀδυσσῆος |
+| οἷος accusative singular masculine |  | Ὀδυσσῆος |
 | **Odysseus** |
 | Ὀδυσσεύς s gen ~* NOUN nmod 13 9 |  | ταλασίφρονος |
 | **patient of mind, stout-hearted** |
@@ -25651,7 +25651,7 @@
 | **the Achaians** |
 | Ἀχαιός p gen ~* ADJ nmod 7 8 |</l>
                     <l n="286">| Ἄντικλος |
-| **???** |
+| **a twig, spray** |
 | Ἄντικλος s nom ~* NOUN nsubj 16 9 |  | δὲ |
 | **but** |
 | δέ ~* PART cc 0 10 |  | σέ |
@@ -28983,7 +28983,7 @@
 | **long-oared** |
 | δολιχήρετμος p dat ~* ADJ nmod 4 6 |</l>
                     <l n="500">| Γυρῇσίν |
-| **???** |
+| **round** |
 | Γυραί p dat ~* NOUN nmod 6 1 |  | μιν |
 | **himself** |
 | μιν s acc ~* PRON obj 8 2 |  | πρῶτα |
@@ -29086,7 +29086,7 @@
                     <l n="507">| ἤλασε |
 | **to drive, drive on, set in motion** |
 | ἐλαύνω 3 s aor actv indc ~* VERB root 11 7 |  | Γυραίην |
-| **???** |
+| **round** |
 | Γυραί s acc ~* ADJ nmod 9 8 |  | πέτρην |
 | **a rock, a ledge** |
 | πέτρα s acc ~* NOUN obj 7 9 |  | ἀπὸ |
@@ -30828,7 +30828,7 @@
 | **but** |
 | δέ ~* PART discourse 10 6 |  | ἐπὶ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADV advmod 9 7 |  | χείλεα |
+| ἐπί |  | χείλεα |
 | **a lip** |
 | χεῖλος p nom ~* NOUN nsubj 8 7 |  | κεκράανται |
 | **to accomplish, fulfil, bring to pass** |
@@ -34379,19 +34379,19 @@
 | αὐτός s dat ~* ADJ advmod 7 5 |</l>
                     <l n="847">| ἀμφίδυμοι |
 | **two-fold, double** |
-| ἀμφίδυμος p nom ~ ADJ nmod 1 6 |  | τῇ |
+| ἀμφίδυμος |  | τῇ |
 | **here, there** |
-| τῇ f dat s ~ ADV advmod 4 1 |  | τόν |
+| τῇ f dat s |  | τόν |
 | **that** |
-| ὁ s acc ~ PRON obj 4 2 |  | γε |
+| ὁ m acc s |  | γε |
 | **the least** |
-| γε ~ ADV advmod 2 3 |  | μένον |
-| **To remain where one is, to remain, stay, tarry,** |
-| μένω 3 p impf actv indc ~ VERB root 0 4 |  | λοχόωντες |
+| γε |  | μένον |
+| **might, force, strength, prowess, courage** |
+| μένος accusative singular masculine |  | λοχόωντες |
 | **to lie in wait for, to watch, waylay, entrap** |
-| λοχάω p pres actv ptcp nom ~ VERB advmod 4 5 |  | Ἀχαιοί |
+| λοχάω |  | Ἀχαιοί |
 | **the Achaians** |
-| Ἀχαιός p nom ~ ADJ nsubj 4 6 |</l>
+| Ἀχαιός nom//voc p m |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="5">
                     <l n="1">| Ἠὼς |
@@ -42124,15 +42124,15 @@
 | ταχύς p acc ~* ADJ advmod 11 12 |</l>
                     <l n="493">| δυσπονέος |
 | **toilsome** |
-| δυσπονής s gen ~ ADJ nmod 14 13 |  | καμάτοιο |
+| δυσπονής |  | καμάτοιο |
 | **toil, trouble, labour** |
-| κάματος s gen ~ NOUN obj 11 14 |  | φίλα |
+| κάματος |  | φίλα |
 | **a friend** |
-| φίλος p acc ~ ADJ nmod 16 15 |  | βλέφαρʼ |
+| φίλος n nom//acc//voc p |  | βλέφαρʼ |
 | **mostly in pl. the eyelids** |
-| βλέφαρον p acc ~ NOUN obj 17 16 |  | ἀμφικαλύψας |
+| βλέφαρον |  | ἀμφικαλύψας |
 | **to cover all round, enwrap, enfold** |
-| ἀμφικαλύπτω s aor actv ptcp nom ~ VERB advmod 8 17 |</l>
+| ἀμφικαλύπτω |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="6">
                     <l n="1">| ὣς |
@@ -47291,17 +47291,17 @@
 | μενεαίνω 3 s impf actv indc ~* VERB root 2 4 |</l>
                     <l n="331">| ἀντιθέῳ |
 | **equal to the gods, godlike** |
-| ἀντίθεος s dat ~ ADJ nmod 6 5 |  | Ὀδυσῆι |
+| ἀντίθεος m//f//n dat s |  | Ὀδυσῆι |
 | **Odysseus** |
-| Ὀδυσσεύς s dat ~ NOUN obj 4 6 |  | πάρος |
+| Ὀδυσσεύς |  | πάρος |
 | **before** |
-| πάρος ~ ADP case 4 7 |  | ἣν |
-| **his, her own** |
-| ἑός s acc ~ ADJ nmod 9 8 |  | γαῖαν |
-| **the earth** |
-| γῆ s acc ~ NOUN obj 10 9 |  | ἱκέσθαι |
+| πάρος |  | ἣν |
+| **Who, which, with an indefinite force, 'whoever** |
+| ὅς |  | γαῖαν |
+| **a land, country** |
+| γαῖα accusative singular feminine |  | ἱκέσθαι |
 | **to come** |
-| ἱκνέομαι aor mid inf ~ VERB advmod 7 10 |</l>
+| ἱκνέομαι aor mid inf |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="7">
                     <l n="1">| ὧς |
@@ -49048,7 +49048,7 @@
 | **but not** |
 | οὐδέ |  | ἀπολείπει |
 | **to leave over** |
-| ἀπολείπω 3 s pres actv indc ~ VERB root 7 8 |</l>
+| ἀπολείπω |</l>
                     <l n="118">| χείματος |
 | **winter-weather, cold, frost** |
 | χεῖμα s gen ~* NOUN advmod 10 9 |  | οὐδὲ |
@@ -49377,7 +49377,7 @@
 | **the lower air, the air** |
 | ἀήρ s acc ~* NOUN obj 11 10 |  | ἔχων |
 | **to have, possess** |
-| ἔχω s pres actv ptcp nom ~ VERB advmod 3 11 |  | ἥν |
+| ἔχω pres actv part |  | ἥν |
 | **Who, which, with an indefinite force, 'whoever** |
 | ὅς s acc ~* PRON obj 14 12 |  | οἱ |
 | **sui.** |
@@ -52582,21 +52582,21 @@
 | ὑψηλός s gen ~* ADJ nmod 6 7 |</l>
                     <l n="347">| πὰρ |
 | **from the side of, c. gen., beside, alongside of...** |
-| παρά ~ ADV advmod 13 8 |  | δὲ |
+| παρά |  | δὲ |
 | **but** |
-| δέ ~ X cc 0 9 |  | γυνὴ |
+| δέ |  | γυνὴ |
 | **a woman** |
-| γυνή s nom ~ NOUN nsubj 13 10 |  | δέσποινα |
+| γυνή |  | δέσποινα |
 | **the mistress, lady of the house** |
-| δέσποινα s nom ~ NOUN nmod 10 11 |  | λέχος |
+| δέσποινα nominative singular feminine |  | λέχος |
 | **a couch, bed** |
-| λέχος s acc ~ NOUN obj 14 12 |  | πόρσυνε |
+| λέχος nominative singular masculine |  | πόρσυνε |
 | **to offer, present** |
-| πορσύνω 3 s impf actv indc ~ VERB root 9 13 |  | καὶ |
+| πορσύνω |  | καὶ |
 | **and** |
-| καί ~ X cc 13 14 |  | εὐνήν |
+| καί |  | εὐνήν |
 | **a bed** |
-| εὐνή s acc ~ NOUN obj 14 15 |</l>
+| εὐνή acc s |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="8">
                     <l n="1">| ἦμος |
@@ -54299,7 +54299,7 @@
 | τε ~* PART cc 1 25 |  | υἱὸς |
 | **A son** |
 | υἱός s nom ~* NOUN dep 0 26 |  | Πολυνήου |
-| **Genit** |
+| **the dwelling of a god, a temple** |
 | Πολύνηος s gen ~* NOUN nmod 26 27 |  | Τεκτονίδαο |
 | **???** |
 | Τεκτονίδης s gen ~* NOUN nmod 27 28 |</l>
@@ -55280,9 +55280,9 @@
 | **but not** |
 | οὐδέ |  | κεν |
 | **With subj.** |
-| ἄν ~ PART discourse 27 22 |  | ἄλλως |
-| **alius, another, one besides** |
-| ἄλλος ~ ADV advmod 27 23 |</l>
+| ἄν |  | ἄλλως |
+| **in another way** |
+| ἄλλως |</l>
                     <l n="177">| οὐδὲ |
 | **but not** |
 | οὐδέ |  | θεὸς |
@@ -56897,8 +56897,8 @@
 | τις s nom ~* PRON nsubj 17 14 |  | οὐδὲ |
 | **but not** |
 | οὐδέ |  | ἴδοιτο |
-| **To see** |
-| ὁράω 3 s aor mid opt ~ VERB nmod 1 17 |</l>
+| **to see, perceive, behold** |
+| εἶδον 3 s aor mid opt |</l>
                     <l n="281">| οὐδὲ |
 | **but not** |
 | οὐδέ |  | θεῶν |
@@ -61218,9 +61218,9 @@
 | **but not** |
 | οὐδέ |  | ποτέ |
 | **at some time** |
-| ποτέ m voc s ~ ADV advmod 0 3 |  | σφιν |
+| ποτέ m voc s |  | σφιν |
 | **they** |
-| σφεῖς 3 p dat ~ PRON obj 0 4 |</l>
+| σφεῖς dat p |</l>
                     <l n="563">| οὔτε |
 | **and not** |
 | οὔτε |  | τι |
@@ -61588,19 +61588,19 @@
 | χερείων s nom ~* NOUN nmod 7 6 |</l>
                     <l n="586">| γίγνεται |
 | **to come into being** |
-| γίγνομαι 3 s pres mid indc ~ VERB advmod 1 7 |  | ὅς |
+| γίγνομαι 3 s pres mp ind |  | ὅς |
 | **Who, which, with an indefinite force, 'whoever** |
-| ὅς s nom ~ PRON nsubj 13 8 |  | κεν |
+| ὅς |  | κεν |
 | **With subj.** |
-| ἄν ~ PART discourse 13 9 |  | ἑταῖρος |
+| ἄν |  | ἑταῖρος |
 | **a comrade, companion, mate** |
-| ἑταῖρος s nom ~ NOUN nmod 11 10 |  | ἐὼν |
+| ἑταῖρος nominative singular masculine |  | ἐὼν |
 | **to be, exist** |
-| εἰμί s pres actv ptcp nom ~ VERB advmod 13 11 |  | πεπνυμένα |
+| εἰμί |  | πεπνυμένα |
 | **to have breath** |
-| πέπνυμαι p perf mid ptcp acc ~ VERB obj 13 12 |  | εἰδῇ |
+| πέπνυμαι f nom//acc//voc d |  | εἰδῇ |
 | **to know** |
-| οἶδα 3 s perf actv subj ~ VERB nsubj 7 13 |</l>
+| οἶδα 3 s perf act subj |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="9">
                     <l n="1">| τὸν |
@@ -62075,8 +62075,8 @@
 | **a large room** |
 | μέγαρον p dat ~* NOUN obj 6 7 |</l>
                     <l n="32">| Αἰαίη |
-| **The mythical island said to be the home of Circe.** |
-| Αἰαία s nom ~* ADJ dep 13 8 |  | δολόεσσα |
+| **???** |
+| Αἰαίη s nom ~* ADJ dep 13 8 |  | δολόεσσα |
 | **subtle, wily** |
 | δολόεις s nom ~* ADJ nmod 8 9 |  | λιλαιομένη |
 | **to long** |
@@ -66451,8 +66451,8 @@
                     <l n="320">| χλωρὸν |
 | **greenish-yellow** |
 | χλωρός s nom ~* ADJ nmod 10 8 |  | ἐλαΐνεον |
-| **Of olive-wood** |
-| ἐλαΐνεος s nom ~* ADJ nmod 10 9 |  | τὸ |
+| **???** |
+| ἐλαίνεος s nom ~* ADJ nmod 10 9 |  | τὸ |
 | **that** |
 | ὁ s acc ~* PRON obj 3 1 |  | μὲν |
 | **on the one hand, on the other hand** |
@@ -69014,8 +69014,8 @@
 | δέ ~* PART discourse 28 23 |  | οἰήιον |
 | **a rudder, helm** |
 | οἰήιον s acc ~* NOUN obj 26 24 |  | ἄκρον |
-| **at the furthest point** |
-| ἄκρος s acc ~ ADJ nmod 24 25 |  | ἱκέσθαι |
+| **the highest** |
+| ἄκρον accusative singular masculine |  | ἱκέσθαι |
 | **to come** |
 | ἱκνέομαι aor mid inf ~* VERB obj 22 26 |</l>
                     <l n="484">| ἐκλύσθη |
@@ -69558,236 +69558,236 @@
 | **but not** |
 | οὐδέ |  | τις |
 | **any one, any thing, some one, some thing** |
-| τις s nom ~ PRON nsubj 0 9 |  | ἄλλος |
+| τις |  | ἄλλος |
 | **alius, another, one besides** |
-| ἄλλος s nom ~ PRON nmod 9 10 |</l>
+| ἄλλος nominative singular masculine |</l>
                     <l n="521">| οὔτε |
 | **and not** |
 | οὔτε |  | θεῶν |
-| **a god** |
-| θεός p gen ~ NOUN nmod 16 13 |  | μακάρων |
+| **a goddess** |
+| θεά gen p |  | μακάρων |
 | **the blessed ones** |
-| μάκαρ p gen ~ ADJ nmod 13 14 |  | οὔτε |
+| μάκαρ m//f//n gen p |  | οὔτε |
 | **and not** |
 | οὔτε |  | θνητῶν |
 | **liable to death, mortal** |
-| θνητός p gen ~ ADJ nmod 18 17 |  | ἀνθρώπων |
+| θνητός m//f//n gen p |  | ἀνθρώπων |
 | **man** |
-| ἄνθρωπος p gen ~ NOUN nmod 16 18 |</l>
+| ἄνθρωπος gen p |</l>
                     <l n="522">| ὣς |
-| **thus, as, so that, since** |
-| ὡς ~ CCONJ advmod 2 1 |  | ἔφατʼ |
+| **like as, even as, just as** |
+| ὥς |  | ἔφατʼ |
 | **to declare, make known** |
-| φημί 3 s impf mid indc ~ VERB root 0 2 |  | αὐτὰρ |
-| **but, yet** |
-| ἀτάρ ~ CCONJ discourse 7 3 |  | ἐγώ |
+| φημί |  | αὐτὰρ |
+| **Adversative particle, but.** |
+| αὐτάρ |  | ἐγώ |
 | **ego** |
-| ἐγώ s nom ~ PRON nsubj 7 4 |  | μιν |
+| ἐγώ |  | μιν |
 | **himself** |
-| μιν s acc ~ PRON obj 7 5 |  | ἀμειβόμενος |
+| μιν irregular acc |  | ἀμειβόμενος |
 | **to give** |
-| ἀμείβω s pres mid ptcp nom ~ VERB advmod 7 6 |  | προσέειπον |
-| **In mid** |
-| προσλέγω 1 s aor actv indc ~ VERB dep 2 7 |</l>
+| ἀμείβω nominative singular masculine |  | προσέειπον |
+| **To speak to, address, accost** |
+| προσέειπον 1 s ind ; 3 p ind |</l>
                     <l n="523">| αἲ |
-| **whether.** |
-| εἰ ~ CCONJ discourse 9 1 |  | γὰρ |
+| **with opt. expressing a wish (2) (b)** |
+| αἴ |  | γὰρ |
 | **to introduce the reason** |
-| γάρ ~ PART discourse 9 2 |  | δὴ |
+| γάρ |  | δὴ |
 | **exactness** |
-| δή ~ PART discourse 9 3 |  | ψυχῆς |
+| δή |  | ψυχῆς |
 | **the life, spirit** |
-| ψυχή s gen ~ NOUN nmod 6 4 |  | τε |
+| ψυχή gen s |  | τε |
 | **and** |
-| τε ~ CCONJ discourse 6 5 |  | καὶ |
+| τε |  | καὶ |
 | **and** |
-| καί ~ CCONJ cc 13 6 |  | αἰῶνός |
-| **a period of existence** |
-| αἰών s gen ~ NOUN nmod 6 7 |  | σε |
-| **pronoun: thou, you** |
-| σύ s acc ~ PRON nsubj 12 8 |  | δυναίμην |
+| καί |  | αἰῶνός |
+| **One's lifetime** |
+| αἰών found via simplified form |  | σε |
+| **to some other place.** |
+| σε acc s |  | δυναίμην |
 | **to be able, capable, strong enough** |
-| δύναμαι 1 s pres mid opt ~ VERB root 0 9 |</l>
+| δύναμαι 1 s pres mp opt |</l>
                     <l n="524">| εὖνιν |
 | **a bedfellow, wife** |
-| εὖνις s acc ~ ADJ nmod 13 10 |  | ποιήσας |
+| εὖνις |  | ποιήσας |
 | **to make** |
-| ποιέω s aor actv ptcp nom ~ VERB advmod 9 11 |  | πέμψαι |
+| ποιέω aori actv part |  | πέμψαι |
 | **to send, despatch** |
-| πέμπω aor actv inf ~ VERB obj 9 12 |  | δόμον |
+| πέμπω aor act inf |  | δόμον |
 | **a house** |
-| δόμος s acc ~ NOUN obj 12 13 |  | Ἄϊδος |
+| δόμος accusative singular masculine |  | Ἄϊδος |
 | **Hades (Greek god)** |
-| ᾍδης s gen ~ NOUN obj 15 14 |  | εἴσω |
+| ᾍδης gen s |  | εἴσω |
 | **to within, into** |
-| εἴσω 2 s aor mid indc ~ ADV case 12 15 |</l>
+| εἴσω 2 s aor mid indc |</l>
                     <l n="525">| ὡς |
 | **thus, as, so that, since** |
-| ὡς ~ CCONJ mark 12 16 |  | οὐκ |
-| **not** |
-| οὐ ~ ADV advmod 20 17 |  | ὀφθαλμόν |
+| ὡς |  | οὐκ |
+| **so not, not then, surely not** |
+| οὐκ |  | ὀφθαλμόν |
 | **the eye** |
-| ὀφθαλμός s acc ~ NOUN obj 20 18 |  | γʼ |
+| ὀφθαλμός acc s |  | γʼ |
 | **the least** |
-| γε ~ PART advmod 18 19 |  | ἰήσεται |
+| γε |  | ἰήσεται |
 | **to heal, cure** |
-| ἰάομαι 3 s fut mid indc ~ VERB advmod 16 20 |  | οὐδʼ |
+| ἰάομαι |  | οὐδʼ |
 | **but not** |
 | οὐδέ |  | ἐνοσίχθων |
 | **Epithet or a name of Poseidon** |
-| ἐνοσίχθων s nom ~ NOUN nsubj 20 23 |</l>
+| ἐνοσίχθων genitive plural neuter |</l>
                     <l n="526">| ὣς |
-| **thus, as, so that, since** |
-| ὡς ~ CCONJ advmod 2 1 |  | ἐφάμην |
+| **like as, even as, just as** |
+| ὥς |  | ἐφάμην |
 | **to declare, make known** |
-| φημί 1 s impf mid indc ~ VERB root 5 2 |  | ὁ |
+| φημί 1 s impf mid indc |  | ὁ |
 | **that** |
-| ὁ s nom ~ DET nsubj 8 3 |  | δʼ |
+| ὁ |  | δʼ |
 | **but** |
-| δέ ~ CCONJ discourse 5 4 |  | ἔπειτα |
+| δέ |  | ἔπειτα |
 | **what follows** |
-| ἔπειτα ~ ADV cc 0 5 |  | Ποσειδάωνι |
-| **Poseidon** |
-| Ποσειδῶν s dat ~ NOUN obj 8 6 |  | ἄνακτι |
+| ἔπειτα |  | Ποσειδάωνι |
+| **Posideon: the sixth month of the Attic calendar...** |
+| Ποσειδεών dat s |  | ἄνακτι |
 | **a lord, master** |
-| ἄναξ s dat ~ NOUN nmod 6 7 |</l>
+| ἄναξ dat s |</l>
                     <l n="527">| εὔχετο |
 | **to pray** |
-| εὔχομαι 3 s impf mid indc ~ VERB root 5 8 |  | χεῖρʼ |
+| εὔχομαι 3 s impf actv indc unaugmented |  | χεῖρʼ |
 | **the hand** |
-| χείρ s acc ~ NOUN obj 10 9 |  | ὀρέγων |
+| χείρ |  | ὀρέγων |
 | **to reach, stretch, stretch out** |
-| ὀρέγω s pres actv ptcp nom ~ VERB advmod 8 10 |  | εἰς |
+| ὀρέγω |  | εἰς |
 | **into,** |
-| εἰς ~ ADP case 10 11 |  | οὐρανὸν |
+| εἰς |  | οὐρανὸν |
 | **heaven** |
-| οὐρανός s acc ~ NOUN obj 11 12 |  | ἀστερόεντα |
+| οὐρανός |  | ἀστερόεντα |
 | **starred, starry** |
-| ἀστερόεις s acc ~ ADJ nmod 12 13 |</l>
+| ἀστερόεις m acc s ; n nom//acc//voc p |</l>
                     <l n="528">| κλῦθι |
 | **to hear** |
-| κλύω 2 s aor actv impr ~ VERB root 0 1 |  | Ποσείδαον |
+| κλύω 2 s aor actv impr |  | Ποσείδαον |
 | **Poseidon** |
-| Ποσειδῶν s voc ~ NOUN vocative 1 2 |  | γαιήοχε |
+| Ποσειδῶν voc s |  | γαιήοχε |
 | **earth-upholding** |
-| γαιήοχος s voc ~ ADJ nmod 4 3 |  | κυανοχαῖτα |
+| γαιήοχος vocative singular masculine |  | κυανοχαῖτα |
 | **dark-haired** |
-| κυανοχαίτης s voc ~ NOUN dep 2 4 |</l>
+| κυανοχαίτης m nom//voc s |</l>
                     <l n="529">| εἰ |
 | **whether.** |
-| εἰ ~ CCONJ mark 1 5 |  | ἐτεόν |
+| εἰ |  | ἐτεόν |
 | **the truth** |
-| ἐτεός s acc ~ ADJ advmod 9 6 |  | γε |
+| ἐτεός n nom//acc//voc s ; m acc s |  | γε |
 | **the least** |
-| γε ~ PART advmod 6 7 |  | σός |
+| γε |  | σός |
 | **what concerns thee, thy interest, words, purpose** |
-| σός s nom ~ ADJ nmod 9 8 |  | εἰμι |
+| σός |  | εἰμι |
 | **to be, exist** |
-| εἰμί 1 s pres actv indc ~ VERB advmod 11 9 |  | πατὴρ |
+| εἰμί |  | πατὴρ |
 | **a father** |
-| πατήρ s nom ~ NOUN nsubj 13 10 |  | δʼ |
+| πατήρ |  | δʼ |
 | **but** |
-| δέ ~ CCONJ cc 5 11 |  | ἐμὸς |
+| δέ |  | ἐμὸς |
 | **mine** |
-| ἐμός s nom ~ ADJ nmod 10 12 |  | εὔχεαι |
+| ἐμός |  | εὔχεαι |
 | **to pray** |
-| εὔχομαι 2 s pres mid indc ~ VERB advmod 11 13 |  | εἶναι |
+| εὔχομαι 2 s pres mp indc |  | εἶναι |
 | **to be, exist** |
-| εἰμί pres actv inf ~ VERB obj 13 14 |</l>
+| εἰμί pres inf |</l>
                     <l n="530">| δὸς |
 | **to give** |
-| δίδωμι 2 s aor actv impr ~ VERB dep 1 15 |  | μὴ |
+| δίδωμι |  | μὴ |
 | **that one thinks a thing is not** |
-| μή ~ ADV advmod 20 16 |  | Ὀδυσσῆα |
+| μή |  | Ὀδυσσῆα |
 | **Odysseus** |
-| Ὀδυσσεύς s acc ~ NOUN nsubj 20 17 |  | πτολιπόρθιον |
+| Ὀδυσσεύς acc s |  | πτολιπόρθιον |
 | **Epithet of Odysseus** |
-| πτολιπόρθιος s acc ~ ADJ nmod 17 18 |  | οἴκαδʼ |
+| πτολιπόρθιος |  | οἴκαδʼ |
 | **to one's home, home, homewards** |
-| οἴκαδε ~ ADV obj 20 19 |  | ἱκέσθαι |
+| οἴκαδε |  | ἱκέσθαι |
 | **to come** |
-| ἱκνέομαι aor mid inf ~ VERB obj 15 20 |</l>
+| ἱκνέομαι aor mid inf |</l>
                     <l n="531">| υἱὸν |
 | **A son** |
-| υἱός s acc ~ NOUN dep 17 21 |  | Λαέρτεω |
+| υἱός |  | Λαέρτεω |
 | **a male given name** |
-| Λαέρτης s gen ~ NOUN nmod 21 22 |  | Ἰθάκῃ |
+| Λαέρτης gen s |  | Ἰθάκῃ |
 | **Ithaca** |
-| Ἰθάκη s dat ~ NOUN advmod 24 23 |  | ἔνι |
-| **in, among.** |
-| ἐν 3 s//p pres act ind ~ ADP case 26 24 |  | οἰκίʼ |
+| Ἰθάκη dat s |  | ἔνι |
+| **There is (are) therein (thereon)** |
+| ἔνι 3 s//p pres act ind |  | οἰκίʼ |
 | **A house or abode** |
-| οἰκίον p acc ~ NOUN obj 26 25 |  | ἔχοντα |
+| οἰκίον |  | ἔχοντα |
 | **to have, possess** |
-| ἔχω s pres actv ptcp acc ~ VERB advmod 17 26 |</l>
+| ἔχω acc s m ; nom//acc//voc p n |</l>
                     <l n="532">| ἀλλʼ |
 | **otherwise, but** |
-| ἀλλά ~ CCONJ discourse 29 1 |  | εἴ |
+| ἀλλά |  | εἴ |
 | **whether.** |
-| εἰ ~ CCONJ mark 29 2 |  | οἱ |
-| **sui.** |
-| ἕ s dat ~ PRON nmod 4 3 |  | μοῖρʼ |
+| εἰ |  | οἱ |
+| **that** |
+| ὁ dat |  | μοῖρʼ |
 | **a part, portion** |
-| μοῖρα s nom ~ NOUN nsubj 5 4 |  | ἐστὶ |
+| μοῖρα |  | ἐστὶ |
 | **to be, exist** |
-| εἰμί 3 s pres actv indc ~ VERB advmod 2 5 |  | φίλους |
+| εἰμί |  | φίλους |
 | **a friend** |
-| φίλος p acc ~ ADJ obj 8 6 |  | τʼ |
+| φίλος accusative plural masculine |  | τʼ |
 | **and** |
-| τε ~ CCONJ discourse 9 7 |  | ἰδέειν |
-| **To see** |
-| ὁράω aor actv inf ~ VERB nsubj 9 8 |  | καὶ |
+| τε |  | ἰδέειν |
+| **to see, perceive, behold** |
+| εἶδον aor actv inf |  | καὶ |
 | **and** |
-| καί ~ CCONJ cc 5 9 |  | ἱκέσθαι |
+| καί |  | ἱκέσθαι |
 | **to come** |
-| ἱκνέομαι aor mid inf ~ VERB nsubj 9 10 |</l>
+| ἱκνέομαι aor mid inf |</l>
                     <l n="533">| οἶκον |
 | **a house, abode, dwelling** |
-| οἶκος s acc ~ NOUN obj 10 11 |  | ἐυκτίμενον |
-| **Epithet** |
-| ἐϋκτίμενος s acc ~ ADJ nmod 11 12 |  | καὶ |
+| οἶκος accusative singular masculine |  | ἐυκτίμενον |
+| **well-built** |
+| ἐυκτίμενος |  | καὶ |
 | **and** |
-| καί ~ CCONJ discourse 17 13 |  | ἑὴν |
+| καί |  | ἑὴν |
 | **his, her own** |
-| ἑός s acc ~ ADJ nmod 17 14 |  | ἐς |
+| ἑός |  | ἐς |
 | **into,** |
-| εἰς ~ ADP case 10 15 |  | πατρίδα |
+| εἰς |  | πατρίδα |
 | **of one's fathers** |
-| πατρίς s acc ~ NOUN nmod 17 16 |  | γαῖαν |
-| **the earth** |
-| γῆ s acc ~ NOUN obj 15 17 |</l>
+| πατρίς acc s |  | γαῖαν |
+| **a land, country** |
+| γαῖα accusative singular feminine |</l>
                     <l n="534">| ὀψὲ |
 | **after a long time, late** |
-| ὀψέ ~ ADV advmod 20 18 |  | κακῶς |
-| **bad** |
-| κακός ~ ADV advmod 20 19 |  | ἔλθοι |
+| ὀψέ |  | κακῶς |
+| **In evil case or plight, miserably, with suffering** |
+| κακῶς |  | ἔλθοι |
 | **to come** |
-| ἔρχομαι 3 s aor actv opt ~ VERB root 29 20 |  | ὀλέσας |
+| ἔρχομαι 3 s aor actv optative |  | ὀλέσας |
 | **to destroy, make an end** |
-| ὄλλυμι s aor actv ptcp nom ~ VERB advmod 20 21 |  | ἄπο |
+| ὄλλυμι aor actv part |  | ἄπο |
 | **from, away** |
-| ἀπό ~ ADP advmod 21 22 |  | πάντας |
+| ἀπό |  | πάντας |
 | **all, the whole** |
-| πᾶς p acc ~ PRON nmod 24 23 |  | ἑταίρους |
+| πᾶς m acc p |  | ἑταίρους |
 | **a comrade, companion, mate** |
-| ἑταῖρος p acc ~ NOUN obj 21 24 |</l>
+| ἑταῖρος acc p |</l>
                     <l n="535">| νηὸς |
 | **a ship** |
-| ναῦς s gen ~ NOUN advmod 26 25 |  | ἐπʼ |
+| ναῦς |  | ἐπʼ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADP case 21 26 |  | ἀλλοτρίης |
+| ἐπί |  | ἀλλοτρίης |
 | **a forced, unnatural** |
-| ἀλλότριος s gen ~ ADJ nmod 25 27 |  | εὕροι |
+| ἀλλότριος f gen s |  | εὕροι |
 | **to find** |
-| εὑρίσκω 3 s aor actv opt ~ VERB root 29 28 |  | δʼ |
+| εὑρίσκω |  | δʼ |
 | **but** |
-| δέ ~ CCONJ cc 0 29 |  | ἐν |
+| δέ |  | ἐν |
 | **in, among.** |
-| ἐν ~ ADP case 28 30 |  | πήματα |
+| ἐν |  | πήματα |
 | **suffering, misery, calamity, woe, bane** |
-| πῆμα p acc ~ NOUN obj 30 31 |  | οἴκῳ |
+| πῆμα nom//acc//voc p |  | οἴκῳ |
 | **a house, abode, dwelling** |
-| οἶκος s dat ~ NOUN obj 28 32 |</l>
+| οἶκος dat s |</l>
                     <l n="536">| ὣς |
 | **thus, as, so that, since** |
 | ὡς ~* ADV advmod 2 1 |  | ἔφατʼ |
@@ -70240,17 +70240,17 @@
 | ἦτορ s acc ~* NOUN obj 5 6 |</l>
                     <l n="566">| ἄσμενοι |
 | **well-pleased, glad** |
-| ἄσμενος p nom ~ ADJ advmod 0 7 |  | ἐκ |
+| ἄσμενος nominative plural masculine |  | ἐκ |
 | **from out** |
-| ἐκ ~ ADP case 7 8 |  | θανάτοιο |
+| ἐκ |  | θανάτοιο |
 | **the death threatened** |
-| θάνατος s gen ~ NOUN obj 8 9 |  | φίλους |
+| θάνατος gen s |  | φίλους |
 | **a friend** |
-| φίλος p acc ~ ADJ nmod 12 10 |  | ὀλέσαντες |
+| φίλος accusative plural masculine |  | ὀλέσαντες |
 | **to destroy, make an end** |
-| ὄλλυμι p aor actv ptcp nom ~ VERB advmod 0 11 |  | ἑταίρους |
+| ὄλλυμι m nom//voc p |  | ἑταίρους |
 | **a comrade, companion, mate** |
-| ἑταῖρος p acc ~ NOUN obj 11 12 |</l>
+| ἑταῖρος acc p |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="10">
                     <l n="1">| Αἰολίην |
@@ -73186,9 +73186,9 @@
 | **but not** |
 | οὐδέ |  | ὅπῃ |
 | **In whichever direction, whithersoever** |
-| ὅπῃ ~ ADV advmod 0 11 |  | ἠώς |
+| ὅπῃ |  | ἠώς |
 | **the morning red, daybreak, dawn** |
-| ἠώς s nom ~ NOUN nsubj 0 12 |</l>
+| ἠώς |</l>
                     <l n="191">| οὐδʼ |
 | **but not** |
 | οὐδέ |  | ὅπῃ |
@@ -77340,51 +77340,51 @@
 | θεά p gen ~* NOUN nmod 7 8 |</l>
                     <l n="457">| μηκέτι |
 | **no more, no longer, no further** |
-| μηκέτι ~ ADV advmod 5 1 |  | νῦν |
+| μηκέτι |  | νῦν |
 | **the present time** |
-| νῦν ~ ADV advmod 5 2 |  | θαλερὸν |
+| νῦν |  | θαλερὸν |
 | **blooming, fresh** |
-| θαλερός s acc ~ ADJ nmod 4 3 |  | γόον |
+| θαλερός |  | γόον |
 | **weeping, wailing, groaning, howling, mourning, ...** |
-| γόος s acc ~ NOUN obj 5 4 |  | ὄρνυτε |
+| γόος accusative singular masculine |  | ὄρνυτε |
 | **to stir, stir up** |
-| ὄρνυμι 2 p pres actv impr ~ VERB root 0 5 |  | οἶδα |
+| ὄρνυμι |  | οἶδα |
 | **to know** |
-| οἶδα 1 s perf actv indc ~ VERB root 0 1 |  | καὶ |
+| οἶδα |  | καὶ |
 | **and** |
-| καί ~ ADV advmod 3 2 |  | αὐτὴ |
+| καί |  | αὐτὴ |
 | **the very one, the same** |
-| αὐτός s nom ~ PRON advmod 1 3 |</l>
+| αὐτός |</l>
                     <l n="458">| ἠμὲν |
 | **as well .. , as also .** |
-| ἠμέν ~ PART discourse 11 4 |  | ὅσʼ |
+| ἠμέν |  | ὅσʼ |
 | **quantus** |
 | ὅσος p acc ~* ADJ obj 15 12 |  | ἐν |
 | **in, among.** |
-| ἐν ~ ADP case 8 6 |  | πόντῳ |
+| ἐν |  | πόντῳ |
 | **the sea** |
-| πόντος s dat ~ NOUN advmod 6 7 |  | πάθετʼ |
+| πόντος dative singular masculine |  | πάθετʼ |
 | **to receive an impression from without, to suffer** |
-| πάσχω 2 p aor actv indc ~ VERB obj 11 8 |  | ἄλγεα |
+| πάσχω |  | ἄλγεα |
 | **pain** |
-| ἄλγος p acc ~ NOUN obj 8 9 |  | ἰχθυόεντι |
+| ἄλγος nom//acc//voc p |  | ἰχθυόεντι |
 | **full of fish, fishy** |
-| ἰχθυόεις s dat ~ ADJ nmod 7 10 |</l>
+| ἰχθυόεις |</l>
                     <l n="459">| ἠδʼ |
 | **and** |
-| ἠδέ ~ X cc 1 11 |  | ὅσʼ |
+| ἠδέ |  | ὅσʼ |
 | **quantus** |
-| ὅσος p acc ~ PRON obj 15 12 |  | ἀνάρσιοι |
+| ὅσος |  | ἀνάρσιοι |
 | **not fitting, incongruous** |
-| ἀνάρσιος p nom ~ ADJ nmod 14 13 |  | ἄνδρες |
+| ἀνάρσιος nominative plural masculine |  | ἄνδρες |
 | **a man** |
-| ἀνήρ p nom ~ NOUN nsubj 15 14 |  | ἐδηλήσαντʼ |
+| ἀνήρ nom//voc p |  | ἐδηλήσαντʼ |
 | **to hurt, do a mischief** |
-| δηλέομαι 3 p aor mid indc ~ VERB obj 11 15 |  | ἐπὶ |
+| δηλέομαι |  | ἐπὶ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADP case 15 16 |  | χέρσου |
+| ἐπί |  | χέρσου |
 | **dry land, land** |
-| χέρσος s gen ~ NOUN advmod 16 17 |</l>
+| χέρσος genitive singular masculine |</l>
                     <l n="460">| ἀλλʼ |
 | **otherwise, but** |
 | ἀλλά ~* ADV discourse 5 1 |  | ἄγετʼ |
@@ -77881,8 +77881,8 @@
 | καί ~* CCONJ cc 11 12 |  | ἐπαινῆς |
 | **dread** |
 | ἐπαινός s gen ~* ADJ nmod 14 13 |  | Περσεφονείης |
-| **Persephone, Proserpine** |
-| Περσεφόνη s gen ~* NOUN nmod 12 14 |</l>
+| **???** |
+| Περσεφόνεια s gen ~* NOUN nmod 12 14 |</l>
                     <l n="492">| ψυχῇ |
 | **the life, spirit** |
 | ψυχή s dat ~* NOUN obj 16 15 |  | χρησομένους |
@@ -77918,8 +77918,8 @@
 | νόος s acc ~* NOUN dep 0 4 |  | πόρε |
 | **to furnish, offer, present, give** |
 | πόρω 3 s aor actv indc ~* VERB root 10 5 |  | Περσεφόνεια |
-| **Persephone, Proserpine** |
-| Περσεφόνη s nom ~* NOUN nsubj 5 6 |</l>
+| **???** |
+| Περσεφόνεια s nom ~* NOUN nsubj 5 6 |</l>
                     <l n="495">| οἴῳ |
 | **alone, lone, lonely** |
 | οἶος s dat ~* ADJ dep 1 7 |  | πεπνῦσθαι |
@@ -78157,8 +78157,8 @@
 | καί ~* CCONJ discourse 19 13 |  | ἄλσεα |
 | **a glade** |
 | ἄλσος p nom ~* NOUN nsubj 36 14 |  | Περσεφονείης |
-| **Persephone, Proserpine** |
-| Περσεφόνη s gen ~* NOUN nmod 14 15 |</l>
+| **???** |
+| Περσεφόνεια s gen ~* NOUN nmod 14 15 |</l>
                     <l n="510">| μακραί |
 | **long** |
 | μακρός p nom ~* ADJ nmod 18 16 |  | τʼ |
@@ -78378,8 +78378,8 @@
 | **good** |
 | ἐσθλός p gen ~* ADJ obj 20 21 |</l>
                     <l n="524">| Τειρεσίῃ |
-| **Tiresias** |
-| Τειρεσίας s dat ~* NOUN obj 26 22 |  | δʼ |
+| **???** |
+| Τειρεσίης s dat ~* NOUN obj 26 22 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 3 23 |  | ἀπάνευθεν |
 | **afar off, far away** |
@@ -78520,8 +78520,8 @@
 | καί ~* CCONJ cc 0 23 |  | ἐπαινῇ |
 | **dread** |
 | ἐπαινός s dat ~* ADJ nmod 25 24 |  | Περσεφονείῃ |
-| **Persephone, Proserpine** |
-| Περσεφόνη s dat ~* NOUN dep 23 25 |</l>
+| **???** |
+| Περσεφόνεια s dat ~* NOUN dep 23 25 |</l>
                     <l n="535">| αὐτὸς |
 | **the very one, the same** |
 | αὐτός s nom ~* ADJ dep 10 1 |  | δὲ |
@@ -78964,8 +78964,8 @@
 | καί ~* CCONJ cc 9 10 |  | ἐπαινῆς |
 | **dread** |
 | ἐπαινός s gen ~* ADJ nmod 12 11 |  | Περσεφονείης |
-| **Persephone, Proserpine** |
-| Περσεφόνη s gen ~* NOUN nmod 10 12 |</l>
+| **???** |
+| Περσεφόνεια s gen ~* NOUN nmod 10 12 |</l>
                     <l n="565">| ψυχῇ |
 | **the life, spirit** |
 | ψυχή s dat ~* NOUN obj 14 13 |  | χρησομένους |
@@ -79103,19 +79103,19 @@
 | ἐθέλω s pres actv ptcp acc ~* VERB dep 3 5 |</l>
                     <l n="574">| ὀφθαλμοῖσιν |
 | **the eye** |
-| ὀφθαλμός p dat ~ NOUN advmod 7 6 |  | ἴδοιτʼ |
-| **To see** |
-| ὁράω 3 s aor mid opt ~ VERB root 0 7 |  | ἢ |
-| **why? wherefore?** |
-| ἤ ~ X discourse 10 8 |  | ἔνθʼ |
+| ὀφθαλμός dat p |  | ἴδοιτʼ |
+| **to see, perceive, behold** |
+| εἶδον |  | ἢ |
+| **than, as (in a comparative construction)** |
+| ἤ |  | ἔνθʼ |
 | **there** |
-| ἔνθα ~ ADV advmod 10 9 |  | ἢ |
-| **why? wherefore?** |
-| ἤ ~ X cc 12 10 |  | ἔνθα |
+| ἔνθα |  | ἢ |
+| **than, as (in a comparative construction)** |
+| ἤ |  | ἔνθα |
 | **there** |
-| ἔνθα ~ ADV advmod 10 11 |  | κιόντα |
+| ἔνθα |  | κιόντα |
 | **to go** |
-| κίω s aor actv ptcp acc ~ VERB advmod 3 12 |</l>
+| κίω m acc s ; n nom//acc//voc p |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="11">
                     <l n="1">| αὐτὰρ |
@@ -79463,7 +79463,7 @@
 | ἱερεῖον p acc ~* NOUN obj 7 2 |  | μὲν |
 | **on the one hand, on the other hand** |
 | μέν ~* PART discourse 7 3 |  | Περιμήδης |
-| **???** |
+| **the genitals** |
 | Περιμήδης s nom ~* NOUN nsubj 6 4 |  | Εὐρύλοχός |
 | **Eurylochus** |
 | Εὐρύλοχος s nom ~* NOUN nsubj 6 5 |  | τε |
@@ -79596,8 +79596,8 @@
 | **good** |
 | ἐσθλός p gen ~* ADJ obj 20 21 |</l>
                     <l n="32">| Τειρεσίῃ |
-| **Tiresias** |
-| Τειρεσίας s dat ~* NOUN obj 26 22 |  | δʼ |
+| **???** |
+| Τειρεσίης s dat ~* NOUN obj 26 22 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 3 23 |  | ἀπάνευθεν |
 | **afar off, far away** |
@@ -79809,8 +79809,8 @@
 | καί ~* CCONJ cc 0 22 |  | ἐπαινῇ |
 | **dread** |
 | ἐπαινός s dat ~* ADJ nmod 24 23 |  | Περσεφονείῃ |
-| **Persephone, Proserpine** |
-| Περσεφόνη s dat ~* NOUN dep 22 24 |</l>
+| **???** |
+| Περσεφόνεια s dat ~* NOUN dep 22 24 |</l>
                     <l n="48">| αὐτὸς |
 | **the very one, the same** |
 | αὐτός s nom ~* ADJ dep 8 1 |  | δὲ |
@@ -81191,8 +81191,8 @@
 | **to speak to, address** |
 | προσεῖπον 1 s aor actv indc ~* VERB root 3 7 |</l>
                     <l n="139">| Τειρεσίη |
-| **Tiresias** |
-| Τειρεσίας s voc ~* NOUN vocative 6 1 |  | τὰ |
+| **???** |
+| τειρεσίης s voc ~* NOUN vocative 6 1 |  | τὰ |
 | **that** |
 | ὁ p acc ~* PRON obj 6 2 |  | μὲν |
 | **on the one hand, on the other hand** |
@@ -82371,8 +82371,8 @@
 | ὅδε s acc ~* PRON nmod 4 5 |  | ἀγαυὴ |
 | **illustrious, noble** |
 | ἀγαυός s nom ~* ADJ nmod 7 6 |  | Περσεφόνεια |
-| **Persephone, Proserpine** |
-| Περσεφόνη s nom ~* NOUN nsubj 8 7 |</l>
+| **???** |
+| Περσεφόνεια s nom ~* NOUN nsubj 8 7 |</l>
                     <l n="214">| ὤτρυνʼ |
 | **to stir up, rouse, egg on, spur on, encourage** |
 | ὀτρύνω 3 s aor actv indc ~* VERB root 0 8 |  | ὄφρʼ |
@@ -82427,8 +82427,8 @@
 | τις s acc ~* PRON discourse 15 10 |  | σε |
 | **pronoun: thou, you** |
 | σύ s acc ~* PRON obj 15 11 |  | Περσεφόνεια |
-| **Persephone, Proserpine** |
-| Περσεφόνη s nom ~* NOUN dep 25 12 |  | Διὸς |
+| **???** |
+| Περσεφόνεια s nom ~* NOUN dep 25 12 |  | Διὸς |
 | **Zeus** |
 | Ζεύς s gen ~* NOUN nmod 14 13 |  | θυγάτηρ |
 | **a daughter** |
@@ -82576,8 +82576,8 @@
 | γάρ ~* PART discourse 10 11 |  | ἀγαυὴ |
 | **illustrious, noble** |
 | ἀγαυός s nom ~* ADJ nmod 13 12 |  | Περσεφόνεια |
-| **Persephone, Proserpine** |
-| Περσεφόνη s nom ~* NOUN nsubj 10 13 |</l>
+| **???** |
+| Περσεφόνεια s nom ~* NOUN nsubj 10 13 |</l>
                     <l n="227">| ὅσσαι |
 | **quantus** |
 | ὅσος p nom ~* ADJ nsubj 17 14 |  | ἀριστήων |
@@ -83947,7 +83947,7 @@
 | **soft hair, down** |
 | λάχνη s dat ~* NOUN obj 16 20 |</l>
                     <l n="321">| Φαίδρην |
-| **???** |
+| **bright, beaming** |
 | Φαίδρη s acc ~* NOUN obj 7 1 |  | τε |
 | **and** |
 | τε ~* PART discourse 7 2 |  | Πρόκριν |
@@ -84976,8 +84976,8 @@
                     <l n="386">| ἁγνὴ |
 | **full of religious awe** |
 | ἁγνός s nom ~* ADJ nmod 9 8 |  | Περσεφόνεια |
-| **Persephone, Proserpine** |
-| Περσεφόνη s nom ~* NOUN nsubj 5 9 |  | γυναικῶν |
+| **???** |
+| Περσεφόνεια s nom ~* NOUN nsubj 5 9 |  | γυναικῶν |
 | **a woman** |
 | γυνή p gen ~* NOUN nmod 3 10 |  | θηλυτεράων |
 | **the female** |
@@ -85904,7 +85904,7 @@
 | **himself** |
 | μιν s acc ~* PRON obj 7 3 |  | νύμφην |
 | **a young wife, bride** |
-| νύμφη s acc ~ NOUN advmod 3 4 |  | γε |
+| νύμφη accusative singular feminine |  | γε |
 | **the least** |
 | γε ~* PART advmod 4 5 |  | νέην |
 | **a youth** |
@@ -88743,8 +88743,8 @@
 | πέμπω 3 s aor actv opt ~* VERB nmod 6 14 |  | ἀγαυὴ |
 | **illustrious, noble** |
 | ἀγαυός s nom ~* ADJ nmod 16 15 |  | Περσεφόνεια |
-| **Persephone, Proserpine** |
-| Περσεφόνη s nom ~* NOUN nsubj 14 16 |</l>
+| **???** |
+| Περσεφόνεια s nom ~* NOUN nsubj 14 16 |</l>
                     <l n="636">| αὐτίκʼ |
 | **forthwith, straightway, at once** |
 | αὐτίκα ~* ADV advmod 6 1 |  | ἔπειτʼ |
@@ -89739,7 +89739,7 @@
 | **Amphitrite** |
 | Ἀμφιτρίτη s gen ~* NOUN nmod 9 13 |</l>
                     <l n="61">| Πλαγκτὰς |
-| **???** |
+| **wandering, roaming** |
 | Πλαγκταί p acc ~* NOUN xcomp 8 1 |  | δή |
 | **exactness** |
 | δή ~* PART discourse 8 2 |  | τοι |
@@ -89999,15 +89999,15 @@
 | **and not** |
 | οὔτε |  | ἐν |
 | **in, among.** |
-| ἐν ~ ADP case 18 15 |  | θέρει |
+| ἐν |  | θέρει |
 | **summer, summertime** |
-| θέρος s dat ~ NOUN advmod 15 16 |  | οὔτʼ |
+| θέρος dat s ; nom//acc//voc d |  | οὔτʼ |
 | **and not** |
 | οὔτε |  | ἐν |
 | **in, among.** |
-| ἐν ~ ADP case 18 19 |  | ὀπώρῃ |
+| ἐν |  | ὀπώρῃ |
 | **the part of the year between the rising of Siri...** |
-| ὀπώρα s dat ~ NOUN advmod 19 20 |</l>
+| ὀπώρα |</l>
                     <l n="77">| οὐδέ |
 | **but not** |
 | οὐδέ |  | κεν |
@@ -90022,7 +90022,7 @@
 | **but not** |
 | οὐδέ |  | ἐπιβαίη |
 | **With genit., to set foot upon, get** |
-| ἐπιβαίνω 3 s aor actv opt ~ VERB root 11 9 |</l>
+| ἐπιβαίνω |</l>
                     <l n="78">| οὐδʼ |
 | **but not** |
 | οὐδέ |  | εἴ |
@@ -90684,7 +90684,7 @@
 | **but not** |
 | οὐδέ |  | μαχητόν |
 | **to be fought** |
-| μαχητός s nom ~ ADJ nmod 17 18 |</l>
+| μαχητός |</l>
                     <l n="120">| οὐδέ |
 | **but not** |
 | οὐδέ |  | τις |
@@ -91847,7 +91847,7 @@
 | δέ ~* PART discourse 13 2 |  | ἀνστάντες |
 | **to rouse to action, stir up** |
 | ἀνίστημι p aor actv ptcp nom ~* VERB advmod 11 3 |  | Περιμήδης |
-| **???** |
+| **the genitals** |
 | Περιμήδης s nom ~* NOUN nsubj 6 4 |  | Εὐρύλοχός |
 | **Eurylochus** |
 | Εὐρύλοχος s nom ~* NOUN nsubj 6 5 |  | τε |
@@ -95483,10 +95483,10 @@
 | νυκτερίς s nom ~* NOUN nsubj 13 12 |  | οὐδέ |
 | **but not** |
 | οὐδέ |  | πῃ |
-| **in some way, somehow** |
-| πη ~ ADV advmod 4 3 |  | εἶχον |
+| **Somewhither** |
+| πῃ |  | εἶχον |
 | **to have, possess** |
-| ἔχω 1 s impf actv indc ~ VERB root 0 4 |</l>
+| ἔχω 1:s//3:p impf actv indc |</l>
                     <l n="434">| οὔτε |
 | **and not** |
 | οὔτε |  | στηρίξαι |
@@ -95783,14 +95783,14 @@
 | **to be, exist** |
 | εἰμί 3 s pres actv indc ~* VERB root 2 4 |</l>
                     <l n="453">| αὖτις |
-| **back, back again** |
-| αὖθις ~ ADV advmod 8 5 |  | ἀριζήλως |
-| **conspicuous, very distinct** |
-| ἀρίζηλος ~ ADV advmod 8 6 |  | εἰρημένα |
-| **To gather up, pick up** |
-| λέγω p perf mid ptcp acc ~ VERB obj 8 7 |  | μυθολογεύειν |
+| **In the reverse direction, backwards, back, back** |
+| αὖτις |  | ἀριζήλως |
+| **Clearly** |
+| ἀριζήλως |  | εἰρημένα |
+| **to speak** |
+| ἐρῶ f nom//acc//voc d |  | μυθολογεύειν |
 | **to tell word for word** |
-| μυθολογεύω pres actv inf ~ VERB nsubj 4 8 |</l>
+| μυθολογεύω |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="13">
                     <l n="1">| ὣς |
@@ -96945,7 +96945,7 @@
 | **perforated, with a hole in it** |
 | τρητός s gen ~* ADJ nmod 13 12 |  | λίθοιο |
 | **a stone** |
-| λίθος s gen ~ NOUN obj 11 13 |</l>
+| λίθος gen s |</l>
                     <l n="78">| εὖθʼ |
 | **when, at the time when** |
 | εὖτε ~* CCONJ mark 13 1 |  | οἱ |
@@ -104023,9 +104023,9 @@
 | **and not** |
 | οὔτε |  | ἠπείροιο |
 | **the sea** |
-| ἤπειρος s gen ~ NOUN nmod 11 8 |  | μελαίνης |
-| **black, swart** |
-| μέλας s gen ~ ADJ nmod 8 9 |</l>
+| ἤπειρος gen s |  | μελαίνης |
+| **Dark in hue, dark (not necessarily implying the** |
+| μέλᾱς f gen s |</l>
                     <l n="98">| οὔτʼ |
 | **and not** |
 | οὔτε |  | αὐτῆς |
@@ -104199,7 +104199,7 @@
 | **thus, as, so that, since** |
 | ὡς ~* ADV advmod 2 1 |  | φάθʼ |
 | **to declare, make known** |
-| φημί 3 s aor mid indc ~ VERB root 15 2 |  | ὁ |
+| φημί |  | ὁ |
 | **that** |
 | ὁ s nom ~* PRON nsubj 10 3 |  | δʼ |
 | **but** |
@@ -105790,7 +105790,7 @@
 | **a living** |
 | ζωή s acc ~* NOUN obj 4 3 |  | ἐδάσαντο |
 | **to divide among themselves** |
-| δατέομαι 3 p aor mid indc ~ VERB root 7 4 |</l>
+| δατέομαι found via simplified form: aorist middle indicative 3p plural |</l>
                     <l n="209">| παῖδες |
 | **a child** |
 | παῖς p nom ~* NOUN dep 19 5 |  | ὑπέρθυμοι |
@@ -108511,7 +108511,7 @@
 | σύ s nom ~* PRON nsubj 15 2 |  | γέρον |
 | **an old man** |
 | γέρων s voc ~* NOUN vocative 15 3 |  | πολυπενθές |
-| **to set up** |
+| **on the one side** |
 | πολυμενθης s voc ~* ADJ nmod 3 4 |  | ἐπεί |
 | **after that, after , since, when** |
 | ἐπεί ~* CCONJ mark 15 5 |  | σέ |
@@ -110816,20 +110816,20 @@
 | **white-toothed, white-tusked** |
 | ἀργιόδους p nom ~* ADJ nmod 7 8 |</l>
                     <l n="533">| πέτρῃ |
-| **a rock, a ledge** |
-| πέτρα s dat ~ NOUN advmod 10 9 |  | ὕπο |
+| **A rock or cliff on land or in or bordering upon th** |
+| πέτρη dative singular feminine |  | ὕπο |
 | **from under** |
-| ὑπό ~ ADP case 0 10 |  | γλαφυρῇ |
+| ὑπό |  | γλαφυρῇ |
 | **a deep** |
-| γλαφυρός s dat ~ ADJ nmod 9 11 |  | εὗδον |
+| γλαφυρός f dat s |  | εὗδον |
 | **to sleep, lie down to sleep** |
-| εὕδω 3 p impf actv indc ~ VERB advmod 4 12 |  | Βορέω |
+| εὕδω 1:s//3:p impf actv indc unaugmented |  | Βορέω |
 | **the North wind** |
-| Βορέας s gen ~ NOUN nmod 15 13 |  | ὑπʼ |
+| Βορέας |  | ὑπʼ |
 | **from under** |
-| ὑπό ~ ADP case 0 14 |  | ἰωγῇ |
+| ὑπό |  | ἰωγῇ |
 | **shelter** |
-| ἰωγή s dat ~ NOUN advmod 14 15 |</l>
+| ἰωγή |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="15">
                     <l n="1">| ἡ |
@@ -119426,17 +119426,17 @@
 | συβώτης s nom ~* NOUN nsubj 20 17 |</l>
                     <l n="557">| ἐσθλὸς |
 | **good** |
-| ἐσθλός s nom ~ ADJ nmod 19 18 |  | ἐὼν |
+| ἐσθλός |  | ἐὼν |
 | **to be, exist** |
-| εἰμί s pres actv ptcp nom ~ VERB nmod 0 19 |  | ἐνίαυεν |
+| εἰμί |  | ἐνίαυεν |
 | **To pass the night in a specified place** |
-| ἐνιαύω 3 s impf actv indc ~ VERB nmod 13 20 |  | ἀνάκτεσιν |
+| ἐνιαύω |  | ἀνάκτεσιν |
 | **a lord, master** |
-| ἄναξ p dat ~ NOUN obj 23 21 |  | ἤπια |
+| ἄναξ dat p |  | ἤπια |
 | **gentle, mild, kind** |
-| ἤπιος p acc ~ ADJ obj 23 22 |  | εἰδώς |
-| **to know** |
-| οἶδα s perf actv ptcp nom ~ VERB nmod 0 23 |</l>
+| ἤπιος nom//acc//voc p n |  | εἰδώς |
+| **To discern with the eye, catch sight** |
+| εἴδω perf actv part |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="16">
                     <l n="1">| τὼ |
@@ -126862,19 +126862,19 @@
 | ἵημι 3 p aor mid indc ~* VERB advmod 2 8 |</l>
                     <l n="481">| κοίτου |
 | **a place to lie on, bed** |
-| κοῖτος s gen ~ NOUN obj 11 9 |  | τε |
+| κοῖτος |  | τε |
 | **and** |
-| τε ~ X discourse 12 10 |  | μνήσαντο |
+| τε |  | μνήσαντο |
 | **To remind (a person)** |
-| μιμνῄσκω 3 p aor mid indc ~ VERB root 12 11 |  | καὶ |
+| μιμνήσκω 3:p aor mid indc unaugmented |  | καὶ |
 | **and** |
-| καί ~ X cc 0 12 |  | ὕπνου |
+| καί |  | ὕπνου |
 | **the sleep of death** |
-| ὕπνος s gen ~ NOUN nmod 14 13 |  | δῶρον |
+| ὕπνος genitive singular masculine |  | δῶρον |
 | **a gift, present** |
-| δῶρον s acc ~ NOUN obj 15 14 |  | ἕλοντο |
+| δῶρον nominative singular neuter |  | ἕλοντο |
 | **to take** |
-| αἱρέω 3 p aor mid indc ~ VERB root 12 15 |</l>
+| αἱρέω 3 p aor mid indc unaugmented |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="17">
                     <l n="1">| ἦμος |
@@ -130212,7 +130212,7 @@
 | **that** |
 | ὁ ~* DET nmod 17 16 |  | ὁμοῖον |
 | **like, resembling** |
-| ὅμοιος s acc ~ ADJ obj 0 17 |</l>
+| ὅμοιος accusative singular masculine |</l>
                     <l n="219">| πῇ |
 | **in what way? how?** |
 | πῆ ~* PRON advmod 5 1 |  | δὴ |
@@ -131368,8 +131368,8 @@
 | εἰς ~* ADP case 27 24 |  | Ἴλιον |
 | **Ilios** |
 | Ἴλιος s acc ~* NOUN obj 24 25 |  | ἱρὴν |
-| **a glorious** |
-| ἱερός s acc ~* ADJ nmod 25 26 |</l>
+| **???** |
+| ἱρός s acc ~* ADJ nmod 25 26 |</l>
                     <l n="294">| ᾤχετο |
 | **to be gone, to have gone** |
 | οἴχομαι 3 s impf mp indc ~* VERB nmod 23 27 |  | τὸν |
@@ -136232,19 +136232,19 @@
 | ἀοιδή s dat ~* NOUN obj 4 5 |</l>
                     <l n="606">| τέρποντʼ |
 | **to satisfy, delight, gladden, cheer** |
-| τέρπω 3 p impf mid indc ~ VERB root 0 6 |  | ἤδη |
+| τέρπω |  | ἤδη |
 | **by this time, before this, already** |
-| ἤδη ~ ADV advmod 4 1 |  | γὰρ |
+| ἤδη |  | γὰρ |
 | **to introduce the reason** |
-| γάρ ~ PART discourse 4 2 |  | καὶ |
+| γάρ |  | καὶ |
 | **and** |
-| καί ~ X discourse 4 3 |  | ἐπήλυθε |
+| καί |  | ἐπήλυθε |
 | **To approach, draw near, come, come up** |
-| ἐπέρχομαι 3 s aor actv indc ~ VERB root 0 4 |  | δείελον |
+| ἐπέρχομαι 3 s aor actv indc |  | δείελον |
 | **belonging to evening** |
-| δείελος s nom ~ ADJ nmod 6 5 |  | ἦμαρ |
+| δείελος |  | ἦμαρ |
 | **day** |
-| ἦμαρ s nom ~ NOUN nsubj 4 6 |</l>
+| ἦμαρ |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="18">
                     <l n="1">| ἦλθε |
@@ -136491,7 +136491,7 @@
 | **and not** |
 | οὔτε |  | ἀγορεύω |
 | **to speak in the assembly, harangue, speak** |
-| ἀγορεύω 1 s pres actv indc ~ VERB root 9 10 |</l>
+| ἀγορεύω |</l>
                     <l n="16">| οὔτε |
 | **and not** |
 | οὔτε |  | τινὰ |
@@ -142854,21 +142854,21 @@
 | θυμός s nom ~* NOUN nsubj 8 9 |</l>
                     <l n="428">| βάν |
 | **to walk, step** |
-| βαίνω 3 p aor actv indc ~ VERB root 0 10 |  | ῥʼ |
+| βαίνω 1 s// 3 p aor actv indc unaugmented |  | ῥʼ |
 | **Expressing consequence or sequence** |
-| ἄρα ~ PART discourse 10 11 |  | ἴμεναι |
-| **to come** |
-| ἔρχομαι pres actv inf ~ VERB obj 10 12 |  | κείοντες |
+| ἄρα |  | ἴμεναι |
+| **to go** |
+| εἶμι pres act inf |  | κείοντες |
 | **to cleave** |
-| κείω p pres actv ptcp nom ~ VERB advmod 10 13 |  | ἑὰ |
+| κείω |  | ἑὰ |
 | **his, her own** |
-| ἑός p acc ~ ADJ nmod 16 14 |  | πρὸς |
+| ἑός |  | πρὸς |
 | **motion** |
-| πρός ~ ADP case 10 15 |  | δώμαθʼ |
+| πρός |  | δώμαθʼ |
 | **a house** |
-| δῶμα p acc ~ NOUN obj 15 16 |  | ἕκαστος |
+| δῶμα nom//voc//acc p |  | ἕκαστος |
 | **every, every one, each, each one** |
-| ἕκαστος s nom ~ ADJ advmod 10 17 |</l>
+| ἕκαστος nominative singular masculine |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="19">
                     <l n="1">| αὐτὰρ |
@@ -152200,17 +152200,17 @@
 | ὕπνος s acc ~* NOUN obj 19 15 |</l>
                     <l n="604">| ἡδὺν |
 | **sweet** |
-| ἡδύς s acc ~ ADJ nmod 15 16 |  | ἐπὶ |
+| ἡδύς |  | ἐπὶ |
 | **on, upon with gen., dat., and acc** |
-| ἐπί ~ ADP case 19 17 |  | βλεφάροισι |
+| ἐπί |  | βλεφάροισι |
 | **mostly in pl. the eyelids** |
-| βλέφαρον p dat ~ NOUN obj 17 18 |  | βάλε |
+| βλέφαρον dat p |  | βάλε |
 | **to throw so as to hit, to hit** |
-| βάλλω 3 s aor actv indc ~ VERB advmod 13 19 |  | γλαυκῶπις |
+| βάλλω 2 s aor actv impr ; {{lb grc Epic |  | γλαυκῶπις |
 | **with gleaming eyes, brighteyed** |
-| γλαυκῶπις s nom ~ ADJ nmod 21 20 |  | Ἀθήνη |
+| γλαυκῶπις |  | Ἀθήνη |
 | **Athena** |
-| Ἀθήνη s nom ~ NOUN nsubj 19 21 |</l>
+| Ἀθήνη |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="20">
                     <l n="1">| αὐτὰρ |
@@ -158208,15 +158208,15 @@
 | ἀνήρ s nom ~* NOUN nsubj 14 16 |</l>
                     <l n="394">| θησέμεναι |
 | **to set up** |
-| τίθημι fut actv inf ~ VERB obj 12 17 |  | πρότεροι |
+| τίθημι |  | πρότεροι |
 | **prae.** |
-| πρότερος p nom ~ ADJ advmod 4 1 |  | γὰρ |
+| πρότερος nominative plural masculine |  | γὰρ |
 | **to introduce the reason** |
-| γάρ ~ PART discourse 4 2 |  | ἀεικέα |
+| γάρ |  | ἀεικέα |
 | **unseemly, shameful** |
-| ἀεικής p acc ~ ADJ obj 4 3 |  | μηχανόωντο |
+| ἀεικής m//f acc s ; n nom//acc//voc p |  | μηχανόωντο |
 | **to prepare, make ready** |
-| μηχανάομαι 3 p impf mid indc ~ VERB root 0 4 |</l>
+| μηχανάομαι 3p imperf mid indc unaugmented |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="21">
                     <l n="1">| τῇ |
@@ -158381,7 +158381,7 @@
 | πολύς p nom ~* ADJ nmod 13 9 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 0 10 |  | ἔνεσαν |
-| **To seat oneself, sit down, take one's seat** |
+| **to seat oneself, sit** |
 | ἐνέζομαι 3 p aor actv indc ~* VERB root 10 11 |  | στονόεντες |
 | **causing groans** |
 | στονόεις p nom ~* ADJ nmod 13 12 |  | ὀϊστοί |
@@ -159109,7 +159109,7 @@
 | πολύς p nom ~* ADJ nmod 5 1 |  | δʼ |
 | **but** |
 | δέ ~* PART cc 0 2 |  | ἔνεσαν |
-| **To seat oneself, sit down, take one's seat** |
+| **to seat oneself, sit** |
 | ἐνέζομαι 3 p aor actv indc ~* VERB root 2 3 |  | στονόεντες |
 | **causing groans** |
 | στονόεις p nom ~* ADJ nmod 5 4 |  | ὀϊστοί |
@@ -159822,162 +159822,162 @@
 | **and not** |
 | οὔτε |  | Πύλου |
 | **Pylos** |
-| Πύλος s gen ~ NOUN advmod 24 18 |  | ἱερῆς |
+| Πύλος genitive singular masculine |  | ἱερῆς |
 | **a glorious** |
-| ἱερός s gen ~ ADJ nmod 18 19 |  | οὔτʼ |
+| ἱερός nom//voc p |  | οὔτʼ |
 | **and not** |
 | οὔτε |  | Ἄργεος |
 | **Argos** |
-| Ἄργος s gen ~ NOUN advmod 24 22 |  | οὔτε |
+| Ἄργος gen s |  | οὔτε |
 | **and not** |
 | οὔτε |  | Μυκήνης |
 | **Mycene, Mycenae** |
-| Μυκήνη s gen ~ NOUN advmod 24 25 |</l>
+| Μυκήνη genitive singular feminine |</l>
                     <l n="109">| οὔτʼ |
 | **and not** |
 | οὔτε |  | αὐτῆς |
 | **the very one, the same** |
-| αὐτός s gen ~ PRON nmod 4 3 |  | Ἰθάκης |
+| αὐτός f gen s |  | Ἰθάκης |
 | **Ithaca** |
-| Ἰθάκη s gen ~ NOUN dep 6 4 |  | οὔτʼ |
+| Ἰθάκη gen s |  | οὔτʼ |
 | **and not** |
 | οὔτε |  | ἠπείροιο |
 | **the sea** |
-| ἤπειρος s gen ~ NOUN dep 6 7 |  | μελαίνης |
-| **black, swart** |
-| μέλας s gen ~ ADJ nmod 7 8 |</l>
+| ἤπειρος gen s |  | μελαίνης |
+| **Dark in hue, dark (not necessarily implying the** |
+| μέλᾱς f gen s |</l>
                     <l n="110">| καὶ |
 | **and** |
-| καί ~ CCONJ discourse 6 1 |  | δʼ |
+| καί |  | δʼ |
 | **but** |
-| δέ ~ CCONJ discourse 6 2 |  | αὐτοὶ |
+| δέ |  | αὐτοὶ |
 | **the very one, the same** |
-| αὐτός p nom ~ PRON advmod 6 3 |  | τόδε |
+| αὐτός |  | τόδε |
 | **this** |
-| ὅδε s acc ~ PRON obj 6 4 |  | γʼ |
+| ὅδε nom//acc s n |  | γʼ |
 | **the least** |
-| γε ~ PART advmod 4 5 |  | ἴστε |
+| γε |  | ἴστε |
 | **to know** |
-| οἶδα 2 p perf actv impr ~ VERB root 0 6 |  | τί |
+| οἶδα 2 p pres act ind//imp |  | τί |
 | **who art** |
-| τίς s acc ~ PRON advmod 3 1 |  | με |
+| τίς n nom//acc s |  | με |
 | **ego** |
-| ἐγώ s acc ~ PRON obj 3 2 |  | χρὴ |
+| ἐγώ enclitic acc |  | χρὴ |
 | **it is fated, necessary** |
-| χρή 3 s pres actv indc ~ VERB root 0 3 |  | μητέρος |
+| χρή |  | μητέρος |
 | **a mother** |
-| μήτηρ s gen ~ NOUN obj 3 4 |  | αἴνου |
+| μήτηρ gen s |  | αἴνου |
 | **a tale, story** |
-| αἶνος s gen ~ NOUN nmod 4 5 |</l>
+| αἶνος found via simplified form: genitive singular masculine |</l>
                     <l n="111">| ἀλλʼ |
 | **otherwise, but** |
-| ἀλλά ~ CCONJ discourse 7 1 |  | ἄγε |
+| ἀλλά |  | ἄγε |
 | **come! come on! well!** |
-| ἄγε vocative singular masculine ~ PART discourse 7 2 |  | μὴ |
+| ἄγε vocative singular masculine |  | μὴ |
 | **that one thinks a thing is not** |
-| μή ~ ADV advmod 5 3 |  | μύνῃσι |
+| μή |  | μύνῃσι |
 | **an excuse, pretence** |
-| μύνη p dat ~ NOUN obj 5 4 |  | παρέλκετε |
+| μύνη found via simplified form |  | παρέλκετε |
 | **To use shifts, evade the issue In mid., to draw off to oneself, gain by trickery** |
-| παρέλκω 2 p pres actv impr ~ VERB root 7 5 |  | μηδʼ |
+| παρέλκω found via simplified form |  | μηδʼ |
 | **but not** |
 | μηδέ |  | ἔτι |
 | **yet, as yet, still** |
-| ἔτι ~ ADV advmod 11 8 |  | τόξου |
+| ἔτι |  | τόξου |
 | **a bow** |
-| τόξον s gen ~ NOUN obj 11 9 |</l>
+| τόξον genitive singular neuter |</l>
                     <l n="112">| δηρὸν |
 | **long, too long** |
-| δηρός s acc ~ ADJ advmod 11 10 |  | ἀποτρωπᾶσθε |
-| **To cause to turn away.--To dissuade from a** |
-| ἀποτρωπάω 2 p pres mid impr ~ VERB root 7 11 |  | τανυστύος |
-| **a stretching, stringing** |
-| τανυστύς s gen ~ NOUN obj 11 12 |  | ὄφρα |
+| δηρός |  | ἀποτρωπᾶσθε |
+| **to turn constantly, change** |
+| ἀποτρωπᾶσθε |  | τανυστύος |
+| **???** |
+| ? |  | ὄφρα |
 | **that, in order that, to the end that** |
-| ὄφρα ~ CCONJ mark 11 13 |  | ἴδωμεν |
-| **To see** |
-| ὁράω 1 p aor actv subj ~ VERB advmod 13 14 |</l>
+| ὄφρα |  | ἴδωμεν |
+| **to see, perceive, behold** |
+| εἶδον |</l>
                     <l n="113">| καὶ |
 | **and** |
-| καί ~ CCONJ discourse 8 1 |  | δέ |
+| καί |  | δέ |
 | **but** |
-| δέ ~ CCONJ discourse 8 2 |  | κεν |
+| δέ |  | κεν |
 | **With subj.** |
-| ἄν ~ PART discourse 8 3 |  | αὐτὸς |
+| ἄν |  | αὐτὸς |
 | **the very one, the same** |
-| αὐτός s nom ~ PRON advmod 5 4 |  | ἐγὼ |
+| αὐτός |  | ἐγὼ |
 | **ego** |
-| ἐγώ s nom ~ PRON nsubj 8 5 |  | τοῦ |
+| ἐγώ |  | τοῦ |
 | **that** |
-| ὁ s gen ~ DET nmod 7 6 |  | τόξου |
+| ὁ m//n gen s |  | τόξου |
 | **a bow** |
-| τόξον s gen ~ NOUN obj 8 7 |  | πειρησαίμην |
-| **to make trial** |
-| πειράω 1 s aor mid opt ~ VERB root 0 8 |</l>
+| τόξον genitive singular neuter |  | πειρησαίμην |
+| **???** |
+| ? |</l>
                     <l n="114">| εἰ |
 | **whether.** |
-| εἰ ~ CCONJ mark 16 1 |  | δέ |
+| εἰ |  | δέ |
 | **but** |
-| δέ ~ CCONJ discourse 16 2 |  | κεν |
+| δέ |  | κεν |
 | **With subj.** |
-| ἄν ~ PART discourse 6 3 |  | ἐντανύσω |
+| ἄν |  | ἐντανύσω |
 | **To bend (a bow) into the position required** |
-| ἐντανύω 1 s aor actv subj ~ VERB advmod 6 4 |  | διοϊστεύσω |
-| **To shoot an arrow through. With genit.** |
-| διοιστεύω 1 s aor actv subj ~ VERB advmod 6 5 |  | τε |
+| ἐντανύω |  | διοϊστεύσω |
+| **???** |
+| ? |  | τε |
 | **and** |
-| τε ~ CCONJ cc 1 6 |  | σιδήρου |
+| τε |  | σιδήρου |
 | **iron** |
-| σίδηρος s gen ~ NOUN obj 5 7 |</l>
+| σίδηρος gen s |</l>
                     <l n="115">| οὔ |
 | **not** |
-| οὐ ~ ADV advmod 16 8 |  | κέ |
+| οὐ |  | κέ |
 | **With subj.** |
-| ἄν ~ PART discourse 16 9 |  | μοι |
+| ἄν |  | μοι |
 | **ego** |
-| ἐγώ s dat ~ PRON obj 16 10 |  | ἀχνυμένῳ |
+| ἐγώ enclitic dat |  | ἀχνυμένῳ |
 | **grieving, sorrowing, mourning** |
-| ἀχεύω s pres mid ptcp dat ~ VERB advmod 10 11 |  | τάδε |
+| ἀχεύω |  | τάδε |
 | **this** |
-| ὅδε p acc ~ PRON nmod 13 12 |  | δώματα |
+| ὅδε nom//acc p n |  | δώματα |
 | **a house** |
-| δῶμα p acc ~ NOUN obj 16 13 |  | πότνια |
+| δῶμα nom//acc//voc p |  | πότνια |
 | **mistress, queen** |
-| πότνια s nom ~ NOUN dep 15 14 |  | μήτηρ |
+| πότνια nominative singular feminine |  | μήτηρ |
 | **a mother** |
-| μήτηρ s nom ~ NOUN nsubj 16 15 |</l>
+| μήτηρ |</l>
                     <l n="116">| λείποι |
-| **to leave, quit** |
-| λείπω 3 s pres actv opt ~ VERB root 0 16 |  | ἅμʼ |
+| **Leave** |
+| λείπω inferred from related form: λείπων () |  | ἅμʼ |
 | **at once, at the same time** |
-| ἅμα ~ ADV case 19 17 |  | ἄλλῳ |
+| ἅμα |  | ἄλλῳ |
 | **alius, another, one besides** |
-| ἄλλος s dat ~ PRON advmod 17 18 |  | ἰοῦσʼ |
-| **to come** |
-| ἔρχομαι s pres actv ptcp nom ~ VERB advmod 16 19 |  | ὅτʼ |
+| ἄλλος dative singular masculine |  | ἰοῦσʼ |
+| **to go** |
+| εἶμι |  | ὅτʼ |
 | **when** |
-| ὅτε ~ CCONJ mark 16 20 |  | ἐγὼ |
+| ὅτε |  | ἐγὼ |
 | **ego** |
-| ἐγώ s nom ~ PRON nsubj 23 21 |  | κατόπισθε |
+| ἐγώ |  | κατόπισθε |
 | **behind, after, in the rear** |
-| κατόπισθεν ~ ADV advmod 23 22 |  | λιποίμην |
+| κατόπισθεν |  | λιποίμην |
 | **to leave, quit** |
-| λείπω 1 s aor mid opt ~ VERB advmod 20 23 |</l>
+| λείπω 1 s aor middle opt |</l>
                     <l n="117">| οἷός |
 | **what a man** |
-| οἷος s nom ~ PRON advmod 21 24 |  | τʼ |
+| οἷος |  | τʼ |
 | **and** |
-| τε ~ CCONJ dep 24 25 |  | ἤδη |
+| τε |  | ἤδη |
 | **by this time, before this, already** |
-| ἤδη ~ ADV advmod 30 26 |  | πατρὸς |
+| ἤδη |  | πατρὸς |
 | **a father** |
-| πατήρ s gen ~ NOUN nmod 28 27 |  | ἀέθλια |
+| πατήρ |  | ἀέθλια |
 | **, ,, ,** |
-| ἀέθλιον p acc ~ NOUN obj 30 28 |  | κάλʼ |
+| ἀέθλιον nominative plural neuter |  | κάλʼ |
 | **beautiful, beauteous, fair** |
-| καλός p acc ~ ADJ nmod 28 29 |  | ἀνελέσθαι |
+| καλός m voc s |  | ἀνελέσθαι |
 | **to take up, raise** |
-| ἀναιρέω aor mid inf ~ VERB advmod 24 30 |</l>
+| ἀναιρέω |</l>
                     <l n="118">| ἦ |
 | **I say** |
 | ἠμί 3 s impf actv indc ~* VERB root 11 1 |  | καὶ |
@@ -162011,10 +162011,10 @@
 | δέ ~* PART cc 0 2 |  | ἄρα |
 | **Expressing consequence or sequence** |
 | ἄρα nominative plural neuter ~* PART discourse 1 3 |  | εἶπεν |
-| **To gather up, pick up** |
-| λέγω 3 s aor actv indc ~ VERB root 9 4 |  | ἔπος |
+| **to speak, say** |
+| εἶπον 3 s aor act ind |  | ἔπος |
 | **a word** |
-| ἔπος s acc ~ NOUN obj 4 5 |  | τʼ |
+| ἔπος nominative singular masculine |  | τʼ |
 | **and** |
 | τε ~* PART discourse 8 5 |  | ἔφατʼ |
 | **to declare, make known** |
@@ -162758,8 +162758,8 @@
                     <l n="297">| ἐς |
 | **into,** |
 | εἰς ~* ADP case 13 11 |  | Λαπίθας |
-| **the Lapithae** |
-| Λαπίθης p acc ~* NOUN obj 11 12 |  | ἐλθόνθʼ |
+| **???** |
+| Λαπίθαι p acc ~* NOUN obj 11 12 |  | ἐλθόνθʼ |
 | **to come** |
 | ἔρχομαι s aor actv ptcp acc ~* VERB dep 0 13 |  | ὁ |
 | **that** |
@@ -164876,17 +164876,17 @@
 | αὐτός s gen ~* ADJ advmod 17 20 |</l>
                     <l n="434">| πὰρ |
 | **from the side of, c. gen., beside, alongside of...** |
-| παρά ~ ADP case 23 21 |  | θρόνον |
-| **a seat, chair** |
-| θρόνος s acc ~ NOUN advmod 21 22 |  | ἑστήκει |
+| παρά |  | θρόνον |
+| **flowers embroidered on cloth, patterns** |
+| θρόνον accusative singular masculine |  | ἑστήκει |
 | **to make to stand** |
-| ἵστημι 3 s plup actv indc ~ VERB root 18 23 |  | κεκορυθμένος |
+| ἵστημι 3 s plup actv indc |  | κεκορυθμένος |
 | **to furnish with a helmet** |
-| κορύσσω s perf mid ptcp nom ~ VERB advmod 23 24 |  | αἴθοπι |
+| κορύσσω nominative singular masculine |  | αἴθοπι |
 | **fiery-looking** |
-| αἶθοψ s dat ~ NOUN nmod 26 25 |  | χαλκῷ |
-| **a bronze** |
-| χάλκεος s dat ~ NOUN obj 24 26 |</l>
+| αἶθοψ m//f//n dat s |  | χαλκῷ |
+| **a blacksmith.** |
+| χαλκός dat s |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="22">
                     <l n="1">| αὐτὰρ |
@@ -167266,9 +167266,9 @@
 | **but not** |
 | οὐδέ |  | τις |
 | **any one, any thing, some one, some thing** |
-| τις s nom ~ PRON nsubj 0 10 |  | ἄλλος |
+| τις |  | ἄλλος |
 | **alius, another, one besides** |
-| ἄλλος s nom ~ PRON nmod 10 11 |</l>
+| ἄλλος nominative singular masculine |</l>
                     <l n="155">| αἴτιος |
 | **to blame, blameworthy, culpable** |
 | αἴτιος s nom ~* ADJ nmod 20 12 |  | ὃς |
@@ -168312,7 +168312,7 @@
 | **but not** |
 | οὐδέ |  | θύγατρας |
 | **a daughter** |
-| θυγάτηρ p acc ~ NOUN nsubj 0 11 |</l>
+| θυγάτηρ |</l>
                     <l n="223">| οὐδʼ |
 | **but not** |
 | οὐδέ |  | ἄλοχον |
@@ -170203,7 +170203,7 @@
 | **therefore, in this wise, thereupon** |
 | τῷ m//n dat s ~* ADV advmod 3 1 |  | μή |
 | **that one thinks a thing is not** |
-| μή ~ ADV advmod 4 2 |  | με |
+| μή |  | με |
 | **ego** |
 | ἐγώ s acc ~* PRON obj 4 2 |  | λιλαίεο |
 | **to long** |
@@ -172485,21 +172485,21 @@
 | αἱρέω 3 s impf actv indc ~* VERB root 10 5 |</l>
                     <l n="501">| κλαυθμοῦ |
 | **a weeping** |
-| κλαυθμός s gen ~ NOUN nmod 7 6 |  | καὶ |
+| κλαυθμός |  | καὶ |
 | **and** |
-| καί ~ X cc 4 7 |  | στοναχῆς |
+| καί |  | στοναχῆς |
 | **a groaning, wailing** |
-| στοναχή s gen ~ NOUN nmod 7 8 |  | γίγνωσκε |
+| στοναχή |  | γίγνωσκε |
 | **to learn to know, to perceive, mark, learn** |
-| γιγνώσκω 3 s impf actv indc ~ VERB root 10 9 |  | δʼ |
+| γιγνώσκω 2 s pres act imp |  | δʼ |
 | **but** |
-| δέ ~ X cc 0 10 |  | ἄρα |
+| δέ |  | ἄρα |
 | **Expressing consequence or sequence** |
-| ἄρα nominative plural neuter ~ PART discourse 9 11 |  | φρεσὶ |
+| ἄρα nominative plural neuter |  | φρεσὶ |
 | **the midriff** |
-| φρήν p dat ~ NOUN advmod 9 12 |  | πάσας |
+| φρήν |  | πάσας |
 | **all, the whole** |
-| πᾶς p acc ~ ADJ obj 9 13 |</l>
+| πᾶς f acc p |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="23">
                     <l n="1">| γρηῢς |
@@ -173986,7 +173986,7 @@
 | **and** |
 | τε ~* PART cc 2 8 |  | ὀνόμαζε |
 | **to name** |
-| ὀνομάζω 3 s impf actv indc ~ VERB root 8 9 |</l>
+| ὀνομάζω 2 s pres actv impr ; {{lb grc Epic |</l>
                     <l n="97">| μῆτερ |
 | **a mother** |
 | μήτηρ s voc ~* NOUN dep 0 1 |  | ἐμή |
@@ -174130,7 +174130,7 @@
 | **but not** |
 | οὐδέ |  | ἐρέεσθαι |
 | **to ask, enquire** |
-| ἔρομαι pres mid inf ~ VERB obj 0 16 |</l>
+| ἔρομαι |</l>
                     <l n="107">| οὐδʼ |
 | **but not** |
 | οὐδέ |  | εἰς |
@@ -175188,7 +175188,7 @@
 | **and not** |
 | οὔτε |  | ἀθερίζω |
 | **to slight, make light** |
-| ἀθερίζω 1 s pres actv indc ~ VERB root 15 9 |</l>
+| ἀθερίζω |</l>
                     <l n="175">| οὔτε |
 | **and not** |
 | οὔτε |  | λίην |
@@ -176889,7 +176889,7 @@
 | θείνω 3 s aor actv subj ~* VERB nmod 1 14 |</l>
                     <l n="283">| γήρα’ |
 | **old age** |
-| γῆρας s gen ~ NOUN obj 16 15 |  | ὕπο |
+| γῆρας |  | ὕπο |
 | **from under** |
 | ὑπό ~* ADP case 18 16 |  | λιπαρῷ |
 | **oily, shiny with oil** |
@@ -177526,7 +177526,7 @@
 | τε ~* PART cc 1 8 |  | ἵκετο |
 | **to come** |
 | ἱκνέομαι 3 s aor mid indc ~* VERB obj 24 9 |  | Πλαγκτὰς |
-| **???** |
+| **wandering, roaming** |
 | Πλαγκταί p acc ~* NOUN nmod 11 10 |  | πέτρας |
 | **a rock, a ledge** |
 | πέτρα p acc ~* NOUN obj 16 11 |  | δεινήν |
@@ -178230,15 +178230,15 @@
 | Ἀθήνη s nom ~* NOUN nsubj 14 10 |</l>
                     <l n="372">| νυκτὶ |
 | **the night-season** |
-| νύξ s dat ~ NOUN obj 12 11 |  | κατακρύψασα |
+| νύξ |  | κατακρύψασα |
 | **To hide, hide away, conceal** |
-| κατακρύπτω s aor actv ptcp nom ~ VERB advmod 14 12 |  | θοῶς |
-| **swift** |
-| θοός ~ ADV advmod 14 13 |  | ἐξῆγε |
+| κατακρύπτω |  | θοῶς |
+| **Quickly** |
+| θοῶς |  | ἐξῆγε |
 | **To lead, bring or conduct forth** |
-| ἐξάγω 3 s impf actv indc ~ VERB root 8 14 |  | πόληος |
+| ἐξάγω |  | πόληος |
 | **a city** |
-| πόλις s gen ~ NOUN obj 14 15 |</l>
+| πόλις gen s |</l>
                 </div>
                 <div type="textpart" subtype="Book" n="24">
                     <l n="1">| Ἑρμῆς |
@@ -185754,8 +185754,8 @@
 | δέ ~* PART cc 0 8 |  | σχεδὸν |
 | **close, near, hard by, nigh** |
 | σχεδόν ~* ADV advmod 12 9 |  | ἔσιδε |
-| **To look at or upon, see, view, behold** |
-| εἰσοράω 3 s aor actv indc ~* VERB root 8 10 |  | πάντας |
+| **???** |
+| ἐσείδω 3 s aor actv indc ~* VERB root 8 10 |  | πάντας |
 | **all, the whole** |
 | πᾶς p acc ~* ADJ nmod 7 11 |</l>
                     <l n="494">| αἶψα |
