@@ -203,6 +203,118 @@ def is_head_tag(tag):
     return is_tag(tag, 'head')
 
 
+_ROMAN_VALUES = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+
+
+def _parse_roman_numeral(s):
+    if not s:
+        return None
+    total = 0
+    prev = 0
+    for ch in reversed(s.upper()):
+        v = _ROMAN_VALUES.get(ch)
+        if v is None:
+            return None
+        if v < prev:
+            total -= v
+        else:
+            total += v
+        prev = v
+    return total if total > 0 else None
+
+
+def parse_book_number_from_head(text):
+    """Extract a book number from <head> text such as 'Book III: ...' or
+    'BOOK 4'. Returns int or None.
+
+    Used to detect Perseus translation files whose top-level book divs carry
+    an incorrect n attribute (e.g. Cicero De Officiis perseus-eng1 labels
+    Book III with n="1"). The <head> wording is the disambiguator.
+    """
+    import re
+    if not text:
+        return None
+    m = re.search(r'\bbook\s+([IVXLCDM]+|\d+)\b', text, re.IGNORECASE)
+    if not m:
+        return None
+    s = m.group(1)
+    if s.isdigit():
+        n = int(s)
+        return n if n > 0 else None
+    return _parse_roman_numeral(s)
+
+
+def _build_poem_line_map(work_id, cursor):
+    """Return {poem_n: (book_id, start_line, end_line)} for a work, derived
+    from the trailing segment of each line's xml:base URI on the cached
+    line_xml. Used to align translation files whose top-level poem divs
+    don't match the Latin's book-level grouping (Catullus: 116 flat poem
+    divs in translation, 3 named Latin books).
+
+    Returns an empty dict if no usable xml:base structure is present.
+    """
+    import re
+    rows = cursor.execute(
+        "SELECT tl.book_id, tl.line_number, tl.line_xml FROM text_lines tl "
+        "JOIN books b ON b.id = tl.book_id "
+        "WHERE b.work_id = ? AND tl.line_xml IS NOT NULL "
+        "ORDER BY tl.book_id, tl.line_number",
+        (work_id,)
+    ).fetchall()
+    base_re = re.compile(r'xml:base="[^"]*?:([^:"]+)"')
+    poem_map = {}
+    book_ns = {}  # book_id -> set of distinct trailing-segment values, to detect uniformity
+    for bid, ln, xml in rows:
+        m = base_re.search(xml or '')
+        if not m:
+            continue
+        poem_n = m.group(1)
+        book_ns.setdefault(bid, set()).add(poem_n)
+        if poem_n not in poem_map:
+            poem_map[poem_n] = [bid, ln, ln]
+        else:
+            poem_map[poem_n][2] = ln
+    # If every book has only one distinct trailing segment, xml:base encodes
+    # the book number rather than poem-level structure — not useful here.
+    if not any(len(s) > 1 for s in book_ns.values()):
+        return {}
+    return {k: tuple(v) for k, v in poem_map.items()}
+
+
+def _redistribute_segment_range(cursor, seg_range, target_start, target_end):
+    """Rewrite start_line/end_line for an inclusive id range so the segments
+    span [target_start, target_end] proportionally in id order.
+
+    Used to fix front-matter collisions where two translation divs were
+    inserted under the same book_id with overlapping line ranges. The
+    front-matter range is shifted to the actual preface lines and the main
+    book range is shifted to start after the preface.
+    """
+    if seg_range is None:
+        return
+    rows = cursor.execute(
+        "SELECT id FROM translation_segments WHERE id BETWEEN ? AND ? ORDER BY id",
+        (seg_range[0], seg_range[1])
+    ).fetchall()
+    n = len(rows)
+    if n == 0:
+        return
+    span = target_end - target_start + 1
+    if span <= 0:
+        return
+    for i, (seg_id,) in enumerate(rows):
+        new_start = target_start + (i * span) // n
+        new_end = target_start + ((i + 1) * span) // n - 1
+        if i == n - 1:
+            new_end = target_end
+        if new_end < new_start:
+            new_end = new_start
+        cursor.execute(
+            "UPDATE translation_segments SET start_line=?, end_line=? WHERE id=?",
+            (new_start, new_end, seg_id)
+        )
+
+
 def is_label_tag(tag):
     """Check if tag is exactly <label>."""
     return is_tag(tag, 'label')
@@ -2870,6 +2982,61 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                                     books_found = True
                                     aligned_sections_handled = True
 
+                    # Poem-map alignment: handle works where the translation has
+                    # many flat poem divs that don't match the Latin's book-level
+                    # grouping (e.g. Catullus: 116 poem divs in translation, 3
+                    # named Latin books "lyrics"/"long_poems"/"elegies"). The
+                    # Latin xml:base URI on each <l> element encodes its poem id,
+                    # giving us a direct poem→(book_id, line_range) mapping.
+                    poem_map_handled = False
+                    if not aligned_sections_handled:
+                        candidate_divs = [
+                            div for div in search_root.iter()
+                            if is_div_tag(div.tag)
+                            and div.get('type') == 'textpart'
+                            and (div.get('subtype') or '').lower() in ['book', 'poem', 'textpart']
+                            and not (has_books and (div.get('subtype') or '').lower() == 'poem')
+                            and div.get('n') is not None
+                        ]
+                        cursor.execute("SELECT COUNT(*) FROM books WHERE work_id=?", (work_id,))
+                        num_latin_books = cursor.fetchone()[0]
+                        if len(candidate_divs) > max(num_latin_books * 2, num_latin_books + 5):
+                            poem_map = _build_poem_line_map(work_id, cursor)
+                            matching_n = sum(1 for d in candidate_divs if d.get('n') in poem_map)
+                            # Only use the map if it covers most of the translation divs.
+                            if poem_map and matching_n >= 0.7 * len(candidate_divs):
+                                print(f"        → Using xml:base poem map: {len(candidate_divs)} translation divs vs {num_latin_books} Latin books, {matching_n}/{len(candidate_divs)} mapped")
+                                for book_div in candidate_divs:
+                                    poem_n = book_div.get('n')
+                                    if poem_n not in poem_map:
+                                        print(f"        ⚠ Poem n={poem_n!r} not in xml:base map; skipping")
+                                        continue
+                                    target_bid, target_start, target_end = poem_map[poem_n]
+                                    cursor.execute("SELECT COALESCE(MAX(id),0) FROM translation_segments")
+                                    seg_id_before = cursor.fetchone()[0]
+                                    extract_translation_segments(book_div, target_bid, cursor, translator, is_aligned=is_aligned_file)
+                                    cursor.execute("SELECT COALESCE(MAX(id),0) FROM translation_segments")
+                                    seg_id_after = cursor.fetchone()[0]
+                                    if seg_id_after > seg_id_before:
+                                        _redistribute_segment_range(cursor, (seg_id_before + 1, seg_id_after), target_start, target_end)
+                                poem_map_handled = True
+                                books_found = True
+
+                    # Track which book_ids this translator pass has populated,
+                    # along with the originating n-attribute and the inserted
+                    # segment-id range. Used to detect:
+                    #   1. Perseus mislabelings where two translation divs resolve
+                    #      to the same book_id (e.g. De Officiis perseus-eng1
+                    #      tags Book III with n="1"). Resolved via <head> remap.
+                    #   2. Front-matter collisions where a non-numeric n div
+                    #      (e.g. n="pr") takes a book_id via the counter
+                    #      fallback, and a later numeric div with a matching
+                    #      <head> ("Book I") collides on the same id. Resolved
+                    #      by redistributing the front-matter to its actual
+                    #      Latin line range, or orphaning it to .000.
+                    mapped_book_ids_in_pass = {}  # book_id -> dict(n, seg_range)
+                    front_matter_fixups = []  # post-processing queue
+
                     for book_div in search_root.iter():
                         if (is_div_tag(book_div.tag) and
                             book_div.get('type') == 'textpart' and
@@ -2881,6 +3048,19 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
 
                             # Skip if aligned sections were already handled above
                             if aligned_sections_handled:
+                                continue
+
+                            # Skip if poem-map alignment already handled this work
+                            if poem_map_handled:
+                                continue
+
+                            # Skip <div subtype="book"> with no n attribute at
+                            # all. Across the Latin corpus, this matches exactly
+                            # one div: Golding's trailing dedicatory epistle in
+                            # phi0959.phi006.perseus-eng4. Without n it defaults
+                            # to "1" and overlays Book 1's translation.
+                            if book_div.get('n') is None:
+                                print(f"        ⚠ Skipping <div subtype='book'> with no n attribute (likely translator front/back matter)")
                                 continue
 
                             books_found = True
@@ -2959,10 +3139,114 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
                                     book_id = f"{work_id}.{book_counter:03d}"
                                     print(f"        → Non-numeric book '{greek_book_num}', using book {book_counter}")
 
-                            # Extract translation segments with milestones
+                            # Detect colliding book_id within this translator pass.
+                            # Cause: a Perseus translation XML mislabels a book's
+                            # n attribute (e.g. De Officiis Book III tagged n="1").
+                            # Only divert when the <head> text gives an unambiguous
+                            # alternative book number that matches an existing,
+                            # not-yet-mapped book in the books table. Otherwise
+                            # fall through to the legacy behavior (insert under the
+                            # colliding book_id) so we don't regress legitimate
+                            # cases like non-numeric n values that fall back to
+                            # the sequential book_counter (Catullus 14a → .015,
+                            # Suetonius pr → .001, etc.).
+                            front_matter_fixup = None
+                            if book_id in mapped_book_ids_in_pass:
+                                head_book_num = None
+                                for child in book_div:
+                                    if is_head_tag(child.tag):
+                                        head_text = get_text_content(child)
+                                        head_book_num = parse_book_number_from_head(head_text)
+                                        break
+                                if head_book_num is not None:
+                                    candidate_id = f"{work_id}.{head_book_num:03d}"
+                                    if candidate_id != book_id:
+                                        cursor.execute("SELECT id FROM books WHERE id = ?", (candidate_id,))
+                                        if cursor.fetchone() and candidate_id not in mapped_book_ids_in_pass:
+                                            # De Officiis case: head names a different
+                                            # book that is unmapped. Remap to it.
+                                            print(f"        → Translation book n='{book_num}' collides with {book_id}; remapping to {candidate_id} via <head>")
+                                            book_id = candidate_id
+                                    elif candidate_id == book_id:
+                                        # Pattern A: head agrees that this *is* the book
+                                        # already taken. The previously-mapped div is
+                                        # front-matter that landed here via the counter
+                                        # fallback. Queue a redistribute/orphan fixup.
+                                        prev = mapped_book_ids_in_pass[book_id]
+                                        front_matter_fixup = {
+                                            'book_id': book_id,
+                                            'translator': translator,
+                                            'frontmatter_n': prev['n'],
+                                            'frontmatter_segments': prev['seg_range'],
+                                            'numeric_segments': None,  # filled after extract
+                                        }
+                                        print(f"        → Front-matter collision: prev div n='{prev['n']}' will be redistributed/orphaned, current n='{book_num}' (head='Book {head_book_num}') keeps {book_id}")
+
+                            # Extract translation segments with milestones, capturing
+                            # the inserted id range so post-processing can rewrite
+                            # line numbers if needed.
+                            cursor.execute("SELECT COALESCE(MAX(id),0) FROM translation_segments")
+                            seg_id_before = cursor.fetchone()[0]
                             count = extract_translation_segments(book_div, book_id, cursor, translator, is_aligned=is_aligned_file)
+                            cursor.execute("SELECT COALESCE(MAX(id),0) FROM translation_segments")
+                            seg_id_after = cursor.fetchone()[0]
                             if count == 0 and translation_div is None:
                                 print(f"        Warning: No segments extracted for {book_id}")
+
+                            seg_range = (seg_id_before + 1, seg_id_after) if seg_id_after > seg_id_before else None
+
+                            if front_matter_fixup is not None and seg_range is not None:
+                                front_matter_fixup['numeric_segments'] = seg_range
+                                front_matter_fixups.append(front_matter_fixup)
+                            elif seg_range is not None:
+                                # Track normally so a later collider can detect us.
+                                mapped_book_ids_in_pass[book_id] = {
+                                    'n': book_num,
+                                    'seg_range': seg_range,
+                                }
+                            else:
+                                # Even if no segments were inserted, mark the slot
+                                # taken so identical n values don't double-process.
+                                mapped_book_ids_in_pass.setdefault(book_id, {
+                                    'n': book_num, 'seg_range': None,
+                                })
+
+                    # Post-process front-matter collisions: redistribute the
+                    # front-matter segments to the actual Latin preface line
+                    # range (if Latin has matching [<n>.*] markers), and shift
+                    # the numeric div's segments to start after the preface.
+                    # If the Latin has no preface lines, orphan the front-matter
+                    # to <work>.000 so it doesn't overlay the book's content.
+                    for fx in front_matter_fixups:
+                        bid = fx['book_id']
+                        fm_n = fx['frontmatter_n']
+                        fm_range = fx['frontmatter_segments']
+                        num_range = fx['numeric_segments']
+                        cursor.execute("SELECT line_count FROM books WHERE id=?", (bid,))
+                        row = cursor.fetchone()
+                        total_lines = row[0] if row else None
+                        preface_end = None
+                        if fm_n and total_lines:
+                            cursor.execute(
+                                "SELECT MAX(line_number) FROM text_lines "
+                                "WHERE book_id=? AND line_text LIKE ?",
+                                (bid, f'[{fm_n}.%]%')
+                            )
+                            r = cursor.fetchone()
+                            preface_end = r[0] if r and r[0] else None
+
+                        if preface_end and total_lines and preface_end < total_lines and fm_range and num_range:
+                            _redistribute_segment_range(cursor, fm_range, 1, preface_end)
+                            _redistribute_segment_range(cursor, num_range, preface_end + 1, total_lines)
+                            print(f"        → Redistributed front-matter ('{fm_n}') to lines [1, {preface_end}] and book to [{preface_end + 1}, {total_lines}] in {bid}")
+                        elif fm_range:
+                            orphan_id = f"{bid.rsplit('.', 1)[0]}.000"
+                            cursor.execute(
+                                "UPDATE translation_segments SET book_id=? WHERE id BETWEEN ? AND ?",
+                                (orphan_id, fm_range[0], fm_range[1])
+                            )
+                            moved = cursor.rowcount
+                            print(f"        → Latin {bid} has no [{fm_n}.*] markers; orphaned {moved} front-matter segments to {orphan_id}")
                 
                 # If no books found, check if this work has individual poems/epigrams as books
                 if not books_found:
