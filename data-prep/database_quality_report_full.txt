@@ -1,14 +1,14 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-04-21T06:16:12.502361
+Generated: 2026-05-07T04:15:05.274955
 Mode: full
 
 Total Authors: 138
 Total Works: 1021
 Total Books: 3407
 Total Lines: 1,010,513
-Translation Segments: 1,255,038
-Build Time: 6.1 minutes
-Database Size: 4091.0MB → 906.7MB compressed (22.2%)
+Translation Segments: 1,254,587
+Build Time: 6.3 minutes
+Database Size: 4091.8MB → 907.0MB compressed (22.2%)
 Dictionary Entries: 232,571
 Lemma Mappings: 3,138,298
 
@@ -994,11 +994,11 @@ Cassius Dio Cocceianus / Historia Romana translations: Interlinear (Beta, genera
 [Catullus, C. Valerius]
 Catullus, C. Valerius / Odes - 2,286 lines total, 3 books, max_lines/book=847, max_char=55 [Perseus]
 Catullus, C. Valerius / Odes / Book 1 - 847 lines
-Catullus, C. Valerius / Odes translations: Interlinear (Beta, AI-generated from app dictionary) 847 segments [Excellent (100% coverage)], Leonard C. Smithers 3 segments [Excellent-Section (100% coverage)], Sir Richard Francis Burton 10 segments [Excellent-Section (100% coverage)]
+Catullus, C. Valerius / Odes translations: Interlinear (Beta, AI-generated from app dictionary) 847 segments [Excellent (100% coverage)], Leonard C. Smithers 207 segments [Excellent-Section (100% coverage)], Sir Richard Francis Burton 846 segments [Excellent (100% coverage)]
 Catullus, C. Valerius / Odes / Book 2 - 796 lines
-Catullus, C. Valerius / Odes translations: Interlinear (Beta, AI-generated from app dictionary) 796 segments [Excellent (100% coverage)], Leonard C. Smithers 3 segments [Excellent-Section (100% coverage)], Sir Richard Francis Burton 13 segments [Excellent-Section (100% coverage)]
+Catullus, C. Valerius / Odes translations: Interlinear (Beta, AI-generated from app dictionary) 796 segments [Excellent (100% coverage)], Leonard C. Smithers 159 segments [Excellent-Section (100% coverage)], Sir Richard Francis Burton 378 segments [Excellent-Section (100% coverage)]
 Catullus, C. Valerius / Odes / Book 3 - 643 lines
-Catullus, C. Valerius / Odes translations: Interlinear (Beta, AI-generated from app dictionary) 643 segments [Excellent (100% coverage)], Leonard C. Smithers 4 segments [Excellent-Section (100% coverage)], Sir Richard Francis Burton 18 segments [Excellent-Section (100% coverage)]
+Catullus, C. Valerius / Odes translations: Interlinear (Beta, AI-generated from app dictionary) 643 segments [Excellent (100% coverage)], Leonard C. Smithers 162 segments [Excellent-Section (100% coverage)], Sir Richard Francis Burton 603 segments [Excellent (100% coverage)]
 
 [Celsus, Aulus Cornelius]
 Celsus, Aulus Cornelius / De Medicina - 3,855 lines total, 8 books, max_lines/book=713, max_char=1,299 [Perseus]
@@ -1067,11 +1067,11 @@ Cicero, Marcus Tullius / De Inventione / Book 2 - 673 lines
 Cicero, Marcus Tullius / De Inventione translations: Interlinear (Beta, AI-generated from app dictionary) 673 segments [Excellent (100% coverage)]
 Cicero, Marcus Tullius / De Officiis, De officiis - 1,394 lines total, 3 books, max_lines/book=524, max_char=790 [Perseus]
 Cicero, Marcus Tullius / De Officiis, De officiis / Book 1 - 524 lines
-Cicero, Marcus Tullius / De Officiis, De officiis translations: Interlinear (Beta, AI-generated from app dictionary) 524 segments [Excellent (100% coverage)], Walter Miller 202 segments [Excellent-Section (100% coverage)]
+Cicero, Marcus Tullius / De Officiis, De officiis translations: Interlinear (Beta, AI-generated from app dictionary) 524 segments [Excellent (100% coverage)], Walter Miller 161 segments [Excellent-Section (100% coverage)]
 Cicero, Marcus Tullius / De Officiis, De officiis / Book 2 - 347 lines
-Cicero, Marcus Tullius / De Officiis, De officiis translations: Interlinear (Beta, AI-generated from app dictionary) 347 segments [Excellent (100% coverage)], Walter Miller 108 segments [Excellent-Section (100% coverage)]
+Cicero, Marcus Tullius / De Officiis, De officiis translations: Interlinear (Beta, AI-generated from app dictionary) 347 segments [Excellent (100% coverage)], Walter Miller 89 segments [Excellent-Section (100% coverage)]
 Cicero, Marcus Tullius / De Officiis, De officiis / Book 3 - 523 lines
-Cicero, Marcus Tullius / De Officiis, De officiis translations: Interlinear (Beta, AI-generated from app dictionary) 523 segments [Excellent (100% coverage)]
+Cicero, Marcus Tullius / De Officiis, De officiis translations: Interlinear (Beta, AI-generated from app dictionary) 523 segments [Excellent (100% coverage)], Walter Miller 121 segments [Excellent-Section (100% coverage)]
 Cicero, Marcus Tullius / De Optimo Genere Oratorum - 69 lines, max_char=690 [Perseus]
 Cicero, Marcus Tullius / De Optimo Genere Oratorum translations: Interlinear (Beta, AI-generated from app dictionary) 69 segments [Excellent (100% coverage)]
 Cicero, Marcus Tullius / De Republica - 834 lines total, 7 books, max_lines/book=306, max_char=1,226 [Perseus]
@@ -2051,7 +2051,7 @@ Galen / On the Natural Faculties translations: Arthur John Brock 15 segments [Ex
 [Gellius, Aulus]
 Gellius, Aulus / Attic Nights - 4,991 lines total, 20 books, max_lines/book=437, max_char=991 [Perseus]
 Gellius, Aulus / Attic Nights / Book 1 - 404 lines
-Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 404 segments [Excellent (100% coverage)], John C. Rolfe 122 segments [Excellent-Section (100% coverage)]
+Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 404 segments [Excellent (100% coverage)], John C. Rolfe 115 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 2 - 437 lines
 Gellius, Aulus / Attic Nights translations: Interlinear (Beta, AI-generated from app dictionary) 437 segments [Excellent (100% coverage)], John C. Rolfe 121 segments [Excellent-Section (100% coverage)]
 Gellius, Aulus / Attic Nights / Book 3 - 250 lines
@@ -3959,7 +3959,7 @@ Ovid / Letters from Pontus / Book 4 - 929 lines
 Ovid / Letters from Pontus translations: Interlinear (Beta, AI-generated from app dictionary) 929 segments [Excellent (100% coverage)]
 Ovid / Metamorphoses - 11,927 lines total, 15 books, max_lines/book=956, max_char=59 [Perseus]
 Ovid / Metamorphoses / Book 1 - 778 lines
-Ovid / Metamorphoses translations: Arthur Golding 1842 segments [Excellent (100% coverage)], Brookes More 1052 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 778 segments [Excellent (100% coverage)]
+Ovid / Metamorphoses translations: Arthur Golding 989 segments [Excellent (100% coverage)], Brookes More 1052 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 778 segments [Excellent (100% coverage)]
 Ovid / Metamorphoses / Book 2 - 875 lines
 Ovid / Metamorphoses translations: Arthur Golding 1096 segments [Excellent (100% coverage)], Brookes More 1270 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary) 875 segments [Excellent (100% coverage)]
 Ovid / Metamorphoses / Book 3 - 727 lines
@@ -5313,9 +5313,9 @@ Sophocles / Tracking Satyrs translations: Anne Mahoney 120 segments [Excellent-S
 [Statius, P. Papinius (Publius Papinius)]
 Statius, P. Papinius (Publius Papinius) / Achilleis - 1,125 lines total, 2 books, max_lines/book=958, max_char=66 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Achilleis / Book 1 - 958 lines
-Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 958 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 958 segments [Excellent (100% coverage)], J.H. Mozley 42 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Achilleis / Book 2 - 167 lines
-Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 167 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Achilleis translations: Interlinear (Beta, AI-generated from app dictionary) 167 segments [Excellent (100% coverage)], J.H. Mozley 4 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Silvae - 3,898 lines total, 5 books, max_lines/book=846, max_char=674 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Silvae / Book 1 - 792 lines
 Statius, P. Papinius (Publius Papinius) / Silvae translations: Interlinear (Beta, AI-generated from app dictionary) 792 segments [Excellent (100% coverage)]
@@ -5329,29 +5329,29 @@ Statius, P. Papinius (Publius Papinius) / Silvae / Book 5 - 846 lines
 Statius, P. Papinius (Publius Papinius) / Silvae translations: Interlinear (Beta, AI-generated from app dictionary) 846 segments [Excellent (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais - 9,731 lines total, 12 books, max_lines/book=939, max_char=68 [Perseus]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 1 - 720 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 720 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 720 segments [Excellent (100% coverage)], J.H. Mozley 23 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 2 - 743 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 743 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 743 segments [Excellent (100% coverage)], J.H. Mozley 26 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 3 - 721 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 721 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 721 segments [Excellent (100% coverage)], J.H. Mozley 22 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 4 - 842 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 842 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 842 segments [Excellent (100% coverage)], J.H. Mozley 32 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 5 - 753 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 753 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 753 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 6 - 938 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 938 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 938 segments [Excellent (100% coverage)], J.H. Mozley 41 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 7 - 823 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 823 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 823 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 8 - 766 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 766 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 766 segments [Excellent (100% coverage)], J.H. Mozley 28 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 9 - 906 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 906 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 906 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 10 - 939 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 939 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 939 segments [Excellent (100% coverage)], J.H. Mozley 35 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 11 - 761 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 761 segments [Excellent (100% coverage)], J.H. Mozley 27 segments [Excellent-Section (100% coverage)]
 Statius, P. Papinius (Publius Papinius) / Thebais / Book 12 - 819 lines
-Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 819 segments [Excellent (100% coverage)]
+Statius, P. Papinius (Publius Papinius) / Thebais translations: Interlinear (Beta, AI-generated from app dictionary) 819 segments [Excellent (100% coverage)], J.H. Mozley 29 segments [Excellent-Section (100% coverage)]
 
 [Stephen Langdon (Sumerian Texts)]
 Stephen Langdon (Sumerian Texts) / A LITURGY TO ENLIL, SERIES _E-LUM GUD-SUN_ (ZIMMERN KL - 254 lines total, 9 books, max_lines/book=43, max_char=70 [Perseus]
