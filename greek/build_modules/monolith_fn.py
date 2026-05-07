@@ -4788,8 +4788,8 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
         aligned_work_id = work_id.replace('_OGL', '').replace('_PTA', '')
         aligned_files = list(aligned_dir.glob(f"{aligned_work_id}.*eng*.xml"))
         if aligned_files:
-            print(f"      Found {len(aligned_files)} aligned translation(s) in aligned/")
-            translation_files.extend(aligned_files)
+            print(f"      Found {len(aligned_files)} aligned translation(s) in aligned/ — overriding Perseus translations")
+            translation_files = aligned_files
 
     # Note: Interlinear translations are now generated and imported after the main build
     # via generate_interlinear_translations() and import_interlinear_translations()

@@ -2377,14 +2377,14 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
 
     # Also check the aligned/ directory for manually aligned translations
     # These are translations created outside Perseus (e.g., via cross-lingual alignment)
-    aligned_dir = Path(__file__).parent.parent / "aligned"
+    aligned_dir = Path(__file__).parent.parent.parent / "aligned"
     if aligned_dir.exists():
         # Strip _OGL/_PTA suffix for aligned file lookup since aligned files use base work IDs
         aligned_work_id = work_id.replace('_OGL', '').replace('_PTA', '')
         aligned_files = list(aligned_dir.glob(f"{aligned_work_id}.*eng*.xml"))
         if aligned_files:
-            print(f"      Found {len(aligned_files)} aligned translation(s) in aligned/")
-            translation_files.extend(aligned_files)
+            print(f"      Found {len(aligned_files)} aligned translation(s) in aligned/ — overriding Perseus translations")
+            translation_files = aligned_files
 
     # Note: Interlinear translations are now generated and imported after the main build
     # via generate_interlinear_translations() and import_interlinear_translations()
@@ -2397,7 +2397,7 @@ def process_translations(work_dir, work_id, cursor, altbook_mapping=None):
     entity_resolver_used_count = 0
 
     # Track which files are from the aligned/ directory
-    aligned_dir = Path(__file__).parent.parent / "aligned"
+    aligned_dir = Path(__file__).parent.parent.parent / "aligned"
     aligned_dir_resolved = aligned_dir.resolve() if aligned_dir.exists() else None
 
     # Process ALL translation files, not just the first one
@@ -5326,7 +5326,7 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
         # For First1K/PTA works, only process aligned/ translations (work_dir translations
         # are already handled by process_first1k_work)
         if is_first1k or is_pta:
-            aligned_dir = Path(__file__).parent.parent / "aligned"
+            aligned_dir = Path(__file__).parent.parent.parent / "aligned"
             if aligned_dir.exists():
                 aligned_work_id = db_work_id.replace('_OGL', '').replace('_PTA', '')
                 aligned_files = list(aligned_dir.glob(f"{aligned_work_id}.*eng*.xml"))
