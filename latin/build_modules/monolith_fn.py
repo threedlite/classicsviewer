@@ -1091,6 +1091,11 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                 elif is_l_tag(elem.tag) and current_speaker:
                     line_n = elem.get('n', '')
                     line_num = parse_line_number(line_n)
+                    if line_num == 0:
+                        # start_line=0 is unreachable by the app's line-range query;
+                        # park line "0" at line 1 so its text is recovered.
+                        # sequence_number disambiguates from the existing line-1 segment.
+                        line_num = 1
                     if line_num is not None:
                         line_text = get_text_content(elem).strip()
                         if line_text:
@@ -1753,6 +1758,11 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                                 section_num = cumulative_segment_num
                             elif section_n.isdigit():
                                 section_num = int(section_n)
+                                if section_num == 0:
+                                    # start_line=0 is unreachable by the app's line-range query;
+                                    # park section "0" at line 1 so its text is recovered.
+                                    # sequence_number disambiguates from the existing section-1 segment.
+                                    section_num = 1
                             else:
                                 section_num = len(segments) + 1
 

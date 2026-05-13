@@ -367,7 +367,7 @@ def write_xml_patterns_file(output_path=None):
     global XML_PATTERNS_BY_WORK
 
     if output_path is None:
-        output_path = _REPO_ROOT / "XML_PATTERNS_BY_WORK.txt"
+        output_path = _GREEK_ROOT / "XML_PATTERNS_BY_WORK_GREEK.txt"
 
     lines = []
     lines.append("XML STRUCTURAL PATTERNS - WORKS BY PATTERN")
@@ -4121,6 +4121,11 @@ def extract_translation_segments(book_elem, book_id, cursor, translator, is_alig
                                 section_num = cumulative_segment_num
                             elif section_n.isdigit():
                                 section_num = int(section_n)
+                                if section_num == 0:
+                                    # start_line=0 is unreachable by the app's line-range query;
+                                    # park section "0" at line 1 so its text is recovered.
+                                    # sequence_number disambiguates from the existing section-1 segment.
+                                    section_num = 1
                             else:
                                 section_num = len(segments) + 1
 
