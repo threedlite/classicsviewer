@@ -816,6 +816,22 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so.
 
 
+RHETORIC REFERENCE
+==================
+
+Silva Rhetoricae ("The Forest of Rhetoric")
+-------------------------------------------
+Title: Silva Rhetoricae (rhetoric.byu.edu)
+Author: Dr. Gideon O. Burton, Brigham Young University
+
+License: Creative Commons Attribution 3.0 (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/
+
+The in-app rhetoric reference is adapted from Silva Rhetoricae. The content was
+adapted from its original HTML into a structured database for offline use. This
+license is CC BY 3.0 (attribution only) and carries no ShareAlike obligation.
+
+
 APPLICATION LICENSE
 ===================
 

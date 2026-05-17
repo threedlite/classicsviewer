@@ -18,6 +18,10 @@ the underlying content is unchanged.
 """
 
 import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from shared.venv_check import assert_libs  # noqa: E402
+assert_libs("merkle")
 import json
 import sqlite3
 import hashlib

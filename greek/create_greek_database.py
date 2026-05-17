@@ -24,6 +24,11 @@ or
     venv/bin/python3 greek/create_greek_database.py [sample|full|extended|ios]
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from shared.venv_check import assert_libs  # noqa: E402
+assert_libs("greek_build")
 import argparse
 import os
 import shutil

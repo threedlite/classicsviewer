@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc><titleStmt><title>Header content that must be excluded</title></titleStmt></fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div type="edition" xml:lang="grc">
+        <div type="textpart" subtype="book" n="1">
+          <l n="1">μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος<note>editorial note must be dropped</note></l>
+          <l n="2">οὐλομένην, ἣ μυρί᾽ Ἀχαιοῖς ἄλγε᾽ ἔθηκε,</l>
+          <l n="3">πολλὰς δ᾽ ἰφθίμους ψυχὰς <hi rend="bold">Ἄϊδι</hi> προΐαψεν</l>
+        </div>
+        <div type="textpart" subtype="book" n="2">
+          <l n="1">Ἄλλοι μέν ῥα θεοί τε καὶ ἀνέρες ἱπποκορυσταί</l>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>

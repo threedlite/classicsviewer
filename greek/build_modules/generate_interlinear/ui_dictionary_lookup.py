@@ -136,6 +136,40 @@ class PerseusRepository:
 
         return ''.join(diacritic_map.get(c, c) for c in with_regular_sigma)
 
+    def semi_normalize_greek(self, word: str) -> str:
+        """Semi-aggressive Greek normalization — folds case + final sigma,
+        but PRESERVES breathings, accents, and iota subscripts.
+
+        Used as a homograph-disambiguating tier between exact match (which
+        often fails for case/final-sigma variants) and ultra-normalization
+        (which collapses εἰμί ↔ εἶμι, ὅς ↔ ὃς, ἐν ↔ ἔν, etc.).
+
+        Bug A fix: when multiple rows share an ultra-normalized form, the
+        semi-form re-disambiguates by breathing & accent without requiring
+        a new column. Schema-free; pure Python.
+        """
+        return (unicodedata.normalize('NFC', word).lower()
+                .replace('ς', 'σ'))
+
+    def lemma_lookup_variants(self, lemma: str) -> List[str]:
+        """Return the lemma plus its bare form if it ends in a numeric
+        disambiguation suffix (an OGA / Logeion convention).
+
+        'ἔξειμι2' → ['ἔξειμι2', 'ἔξειμι']
+        'ἀίω2'    → ['ἀίω2', 'ἀίω']
+        'εἰμί'    → ['εἰμί']
+
+        Bug B fix: many OGA-source lemma_map rows use suffixed lemmas
+        (e.g., 'ἔξειμι2') that don't match dictionary_entries headwords
+        (stored as 'ἔξειμι'). Trying the bare form as a fallback bridges
+        the gap. Class-level: fires only when lemma ends in digits.
+        """
+        variants = [lemma]
+        stripped = re.sub(r'\d+$', '', lemma)
+        if stripped != lemma and stripped:
+            variants.append(stripped)
+        return variants
+
     def resolve_lemma_chain(self, lemma: str, language: str, visited: Optional[Set[str]] = None, max_depth: int = 3) -> str:
         """Follow lemma chains to find canonical form with dictionary entry"""
         if visited is None:
@@ -146,13 +180,19 @@ class PerseusRepository:
             return lemma
         visited.add(lemma)
 
-        # Check if this lemma has a meaningful dictionary entry
+        # Check if this lemma has a meaningful dictionary entry.
+        # Bug B: also try the bare form if lemma ends in a numeric suffix
+        # (OGA convention). Stops at the first variant that finds entries.
         cursor = self.conn.cursor()
-        cursor.execute("""
-            SELECT entry_plain, entry_html FROM dictionary_entries
-            WHERE headword = ? AND language = ?
-        """, (lemma, language))
-        entries = cursor.fetchall()
+        entries = []
+        for headword_variant in self.lemma_lookup_variants(lemma):
+            cursor.execute("""
+                SELECT entry_plain, entry_html FROM dictionary_entries
+                WHERE headword = ? AND language = ?
+            """, (headword_variant, language))
+            entries = cursor.fetchall()
+            if entries:
+                break
 
         has_meaningful_entry = any(
             (row['entry_plain'] and row['entry_plain'].strip() and row['entry_plain'] != "Morphological entry") or
@@ -668,14 +708,18 @@ class PerseusRepository:
                 # Then get all dictionary entries for this resolved lemma
                 # CRITICAL: Must ORDER BY id (primary key = rowid) to match Kotlin's getAllEntriesForHeadword behavior
                 # which returns entries in database insertion order (rowid/id order)
-                cursor.execute("""
-                    SELECT headword, entry_html, entry_plain, source, id
-                    FROM dictionary_entries
-                    WHERE headword = ? AND language = ?
-                    ORDER BY id
-                """, (resolved_lemma, normalized_language))
-
-                lemma_entries = cursor.fetchall()
+                # Bug B: also try bare-form fallback for OGA-suffixed lemmas.
+                lemma_entries = []
+                for headword_variant in self.lemma_lookup_variants(resolved_lemma):
+                    cursor.execute("""
+                        SELECT headword, entry_html, entry_plain, source, id
+                        FROM dictionary_entries
+                        WHERE headword = ? AND language = ?
+                        ORDER BY id
+                    """, (headword_variant, normalized_language))
+                    lemma_entries = cursor.fetchall()
+                    if lemma_entries:
+                        break
 
                 # Check if this lemma has non-treebank source in lemma_map
                 has_non_treebank = lemma in lemmas_with_non_treebank
@@ -734,14 +778,18 @@ class PerseusRepository:
                     # Get dictionary entries for this lemma
                     # CRITICAL: Must ORDER BY id (primary key = rowid) to match Kotlin's getAllEntriesForHeadword behavior
                     # which returns entries in database insertion order (rowid/id order)
-                    cursor.execute("""
-                        SELECT headword, entry_html, entry_plain, source, id
-                        FROM dictionary_entries
-                        WHERE headword = ? AND language = ?
-                        ORDER BY id
-                    """, (lemma, normalized_language))
-
-                    related_entries = cursor.fetchall()
+                    # Bug B: bare-form fallback for OGA-suffixed lemmas.
+                    related_entries = []
+                    for headword_variant in self.lemma_lookup_variants(lemma):
+                        cursor.execute("""
+                            SELECT headword, entry_html, entry_plain, source, id
+                            FROM dictionary_entries
+                            WHERE headword = ? AND language = ?
+                            ORDER BY id
+                        """, (headword_variant, normalized_language))
+                        related_entries = cursor.fetchall()
+                        if related_entries:
+                            break
                     has_non_treebank = mapping['source'] != 'perseus_treebank'
 
                     # DEBUG: Log the entries we got from ORDER BY id
@@ -816,7 +864,7 @@ class PerseusRepository:
                     has_non_treebank_path=True
                 ))
 
-            # Also try lemma mappings with ultra-normalized form
+            # Also try lemma mappings with ultra-normalized form.
             cursor.execute("""
                 SELECT lemma, morph_info, confidence, source
                 FROM lemma_map
@@ -836,15 +884,19 @@ class PerseusRepository:
                 if lemma in added_lemmas:
                     continue
 
-                # Get dictionary entries for this lemma
-                cursor.execute("""
-                    SELECT headword, entry_html, entry_plain, source, id
-                    FROM dictionary_entries
-                    WHERE headword = ? AND language = ?
-                    ORDER BY id
-                """, (lemma, normalized_language))
-
-                ultra_entries = cursor.fetchall()
+                # Get dictionary entries for this lemma.
+                # Bug B: bare-form fallback for OGA-suffixed lemmas.
+                ultra_entries = []
+                for headword_variant in self.lemma_lookup_variants(lemma):
+                    cursor.execute("""
+                        SELECT headword, entry_html, entry_plain, source, id
+                        FROM dictionary_entries
+                        WHERE headword = ? AND language = ?
+                        ORDER BY id
+                    """, (headword_variant, normalized_language))
+                    ultra_entries = cursor.fetchall()
+                    if ultra_entries:
+                        break
                 for ultra_entry in ultra_entries:
                     if self.debug:
                         print(f"DEBUG: Adding ultra-normalized lemma: {lemma} (source: {ultra_entry['source']})")

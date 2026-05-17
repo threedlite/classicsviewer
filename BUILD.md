@@ -122,6 +122,23 @@ cd ..
 ```
 If you skip this download, add `--skip-oga` to the database assembly command in Step 7 — but the resulting DB will be missing essential Greek dictionary data and must not be shipped.
 
+**Required** - GLAUx corpus for high-accuracy Greek morphology/lemma annotation:
+
+⚠ **GLAUx must be cloned before interlinear generation (Step 5).** Without it, the interlinear generator falls back to lower-accuracy heuristics for compound participles and other homograph-prone forms — Homer, Plato, Plutarch etc. get noticeably worse glosses (e.g. ἐξιόντος defaulting to εἰμί "be" instead of εἶμι "go"). With GLAUx present, the generator gets 97.2% morph and 98.8% lemma accuracy direct from the treebank for 20M tokens covering the same Perseus/First1KGreek corpora we use.
+
+```bash
+cd data-sources
+
+# GLAUx Ancient Greek treebank — 20M tokens, ~250 MB
+git clone --depth=1 https://github.com/alekkeersmaekers/glaux.git
+
+# Verify: data-sources/glaux/metadata.txt and data-sources/glaux/xml/ must exist
+ls glaux/metadata.txt glaux/xml/ | head -5
+
+cd ..
+```
+If absent, `generate_interlinear.py` prints `GLAUx directory not found` and falls back to heuristics; the build still completes, but gloss quality is degraded for compound forms.
+
 **Required for Coptic dictionary** (11,284 entries — build succeeds without it but produces 0 dictionary entries):
 ```bash
 mkdir -p coptic/data-sources
@@ -174,7 +191,7 @@ venv/bin/pip install -r data-prep/requirements.txt
 
 Specifically:
 - **Every** repo in Step 2 must be cloned (not just started — finished)
-- **Every** download in Step 2 must be downloaded AND extracted (OGA, Coptic lexicon, Sanskrit BG)
+- **Every** download in Step 2 must be downloaded AND extracted (OGA, GLAUx, Coptic lexicon, Sanskrit BG)
 - **All** Wiktionary dumps in Step 3 must be downloaded, verified, and cached
 - The Python venv in Step 4 must be set up with all dependencies installed
 

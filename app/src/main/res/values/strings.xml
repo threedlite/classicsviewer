@@ -11,4 +11,15 @@
     <string name="dictionary">Dictionary</string>
     <string name="occurrences">Occurrences</string>
     <string name="search">Search</string>
+
+    <!-- Rhetoric reference (Silva Rhetoricae) -->
+    <string name="rhetoric_title">Rhetoric</string>
+    <string name="rhetoric_heading">Rhetoric (Silva Rhetoricae)</string>
+    <string name="rhetoric_examples">Examples</string>
+    <string name="rhetoric_related_figures">Related Figures</string>
+    <string name="rhetoric_see_also">See Also</string>
+    <string name="rhetoric_load_error">Could not load the rhetoric reference.</string>
+    <string name="rhetoric_entry_unavailable">Entry unavailable.</string>
+    <string name="rhetoric_about_title">About this reference</string>
+    <string name="rhetoric_about_text">This rhetoric reference is adapted from \"Silva Rhetoricae\" (rhetoric.byu.edu) by Dr. Gideon O. Burton, Brigham Young University.\n\nLicensed under Creative Commons Attribution 3.0 (CC BY 3.0):\nhttps://creativecommons.org/licenses/by/3.0/\n\nThe content was adapted from its original HTML into a structured database for offline use in this app.</string>
 </resources>

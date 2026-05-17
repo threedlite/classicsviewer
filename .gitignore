@@ -166,3 +166,8 @@ yarn-error.log*
 *.bak
 *.backup
 
+# Text-integrity audit reports (generated on-demand, large, not source)
+data-prep/text_integrity/reports/*.md
+data-prep/text_integrity/reports/*.json
+data-prep/text_integrity/reports/*.html
+

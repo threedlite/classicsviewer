@@ -36,6 +36,8 @@ REPO_ROOT = SCRIPT_DIR.parent
 # Shared canonical schema.
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
+from shared.venv_check import assert_libs  # noqa: E402
+assert_libs("assemble")
 from shared.database_schema import create_schema, diff_against_canonical  # noqa: E402
 
 # Build utilities live in the Greek module's vendored monolith_fn.py. Assembly
@@ -156,8 +158,11 @@ def _merge_one(source_db: str, description: str, target: str) -> None:
     print(f"  Source: {source_path}")
     print(f"  Target: {target}")
 
+    # Use sys.executable to ensure the subprocess inherits the same Python
+    # interpreter (the project venv, per BUILD.md Step 4). Bare "python3" here
+    # would silently fall back to PATH lookup, bypassing venv pinning.
     result = subprocess.run(
-        ["python3", "../merge_database.py", source_path, target],
+        [sys.executable, "../merge_database.py", source_path, target],
         capture_output=True,
         text=True,
     )

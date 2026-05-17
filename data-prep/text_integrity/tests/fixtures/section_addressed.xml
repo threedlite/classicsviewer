@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader><fileDesc><titleStmt><title>x</title></titleStmt></fileDesc></teiHeader>
+  <text>
+    <body>
+      <div type="edition" xml:lang="grc">
+        <div type="textpart" subtype="book" n="1">
+          <div type="textpart" subtype="chapter" n="1">
+            <p>First chapter text with a <foreign xml:lang="la">foreign</foreign> word.</p>
+          </div>
+          <div type="textpart" subtype="chapter" n="2">
+            <p>Second chapter text. <ref target="#x">cross-ref dropped</ref> and trailing text.</p>
+          </div>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>

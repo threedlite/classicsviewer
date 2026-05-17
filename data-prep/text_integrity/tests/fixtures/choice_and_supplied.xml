@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader><fileDesc><titleStmt><title>x</title></titleStmt></fileDesc></teiHeader>
+  <text>
+    <body>
+      <div type="edition" xml:lang="la">
+        <div type="textpart" subtype="book" n="1">
+          <l n="1">Arma virumque <choice><orig>cano</orig><reg>canō</reg></choice> Troiae</l>
+          <l n="2">qui primus ab oris <supplied reason="lost">Italiam</supplied> venit</l>
+          <l n="3">litora <gap reason="lost" quantity="1" unit="word"/> Lavinia</l>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>

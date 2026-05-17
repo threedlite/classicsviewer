@@ -1,0 +1,9 @@
+# wget mirror of rhetoric.byu.edu -- regenerate with mirror.sh, not tracked
+rhetoric.byu.edu/
+
+# Tesseract tessdata_best grc model -- downloaded, not tracked
+# https://github.com/tesseract-ocr/tessdata_best/raw/main/grc.traineddata
+tessdata/
+
+# OCR scratch file
+_ocr_tmp.png

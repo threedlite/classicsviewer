@@ -36,10 +36,14 @@ Modes:
            aligned translations) without a code-level mode change.
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from shared.venv_check import assert_libs  # noqa: E402
+assert_libs("latin_build")
 import argparse
 import csv
 import sqlite3
-import sys
 import time
 import xml.etree.ElementTree as ET
 import zipfile

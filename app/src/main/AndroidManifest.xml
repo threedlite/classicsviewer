@@ -52,6 +52,10 @@
         <activity android:name=".alphabet.AlphabetGameActivity" />
         <activity android:name=".SentenceTreeActivity" />
 
+        <activity android:name=".rhetoric.RhetoricActivity" />
+        <activity android:name=".rhetoric.RhetoricEntryListActivity" />
+        <activity android:name=".rhetoric.RhetoricEntryActivity" />
+
         <service android:name=".audio.AudioPlaybackService"
             android:exported="false" />
         

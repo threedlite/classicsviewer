@@ -12,6 +12,11 @@ Example:
     python3 merge_database.py persian/persian_texts.db data-prep/perseus_texts_sample.db
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from shared.venv_check import assert_libs  # noqa: E402
+assert_libs("assemble")
 import sqlite3
 import sys
 import os

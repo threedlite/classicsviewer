@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader><fileDesc><titleStmt><title>x</title></titleStmt></fileDesc></teiHeader>
+  <text>
+    <body>
+      <div type="edition" xml:lang="grc">
+        <div type="textpart" subtype="book" n="1">
+          <l n="1">Leading text <note>EXCLUDED</note> tail of note. <hi>kept</hi> after hi.</l>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>

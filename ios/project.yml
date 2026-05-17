@@ -12,6 +12,9 @@ packages:
   SwiftCSV:
     url: https://github.com/swiftcsv/SwiftCSV.git
     from: 0.8.0
+  ZIPFoundation:
+    url: https://github.com/weichsel/ZIPFoundation.git
+    from: 0.9.0
 
 targets:
   ClassicsViewer:
@@ -62,6 +65,8 @@ targets:
         product: SQLite
       - package: SwiftCSV
         product: SwiftCSV
+      - package: ZIPFoundation
+        product: ZIPFoundation
     preBuildScripts:
       - name: "Copy Database and Audio Files"
         script: |

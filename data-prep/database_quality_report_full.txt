@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-05-07T04:15:05.274955
+Generated: 2026-05-17T05:09:02.893949
 Mode: full
 
 Total Authors: 138
@@ -7,8 +7,8 @@ Total Works: 1021
 Total Books: 3407
 Total Lines: 1,010,513
 Translation Segments: 1,254,587
-Build Time: 6.3 minutes
-Database Size: 4091.8MB → 907.0MB compressed (22.2%)
+Build Time: 6.2 minutes
+Database Size: 4128.2MB → 910.6MB compressed (22.1%)
 Dictionary Entries: 232,571
 Lemma Mappings: 3,138,298
 
@@ -1863,7 +1863,7 @@ Epictetus / Fragments - 162 lines, max_char=335 [Perseus]
 Epictetus / Fragments translations: Interlinear (Beta, generated from app dictionary and treebank) 162 segments [Excellent (100% coverage)]
 Epictetus / The Discourses of Epictetus - 7,418 lines total, 5 books, max_lines/book=2,056, max_char=452 [Perseus]
 Epictetus / The Discourses of Epictetus / Book 0 - 9 lines
-Epictetus / The Discourses of Epictetus translations: George Long 1 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 9 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 1 segments [Excellent (100% coverage)]
+Epictetus / The Discourses of Epictetus translations: George Long 1 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 9 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 1 segments [Excellent-Section (100% coverage)]
 Epictetus / The Discourses of Epictetus / Book 1 - 1,817 lines
 Epictetus / The Discourses of Epictetus translations: George Long 30 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 1811 segments [Excellent (100% coverage)], Thomas Wentworth Higginson 30 segments [Excellent-Section (100% coverage)]
 Epictetus / The Discourses of Epictetus / Book 2 - 1,898 lines

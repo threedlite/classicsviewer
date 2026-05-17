@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader><fileDesc><titleStmt><title>x</title></titleStmt></fileDesc></teiHeader>
+  <text>
+    <body>
+      <div type="edition" xml:lang="grc">
+        <div type="textpart" subtype="book" n="1">
+          <l n="1">πρῶτον <app><lem>μέν</lem><rdg wit="#A">δὲ</rdg><witDetail target="#A">marginal note</witDetail></app> τοίνυν</l>
+          <l n="2">δεύτερον δὲ <app><lem>καλόν</lem><rdg wit="#B">κακόν</rdg></app> ἐστιν</l>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		1193E21A49C6EAE08C50D734 /* LemmaMapDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D734EDF4332A418FB828AAA /* LemmaMapDAO.swift */; };
 		12BE6D338B9E3C0A87C839F8 /* GreekTextNormalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374809D43C78615363E971D0 /* GreekTextNormalization.swift */; };
 		136414ABF3E3893FD4306D1B /* ExtendedDatabaseDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9A1E1FCA575DC9024CDA5 /* ExtendedDatabaseDownloadView.swift */; };
+		166C870074D210A120E0E86A /* RhetoricDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621749C86FA8379D22045183 /* RhetoricDatabase.swift */; };
 		1AD46BB21F5EB6FB38B5B9FD /* PatternBasedNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE513C2EF71AD44322B5AA /* PatternBasedNormalizer.swift */; };
 		1F4FC035E7BD627F9C03FF4F /* BookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E10C1ED1147499B7B8965DA /* BookListViewModel.swift */; };
 		259308436EF7739BA08F1E90 /* TextNormalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F6451735171ECDAA73E63 /* TextNormalization.swift */; };
@@ -41,6 +42,7 @@
 		5429161F3A173DE0E10CFDB5 /* DatabaseExtractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D8A500B4DCDAB77F1543A6 /* DatabaseExtractionView.swift */; };
 		5A23FF7269B076C591BD4AEB /* NormalizationPatternDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F305934FD5294013366C1B0A /* NormalizationPatternDAO.swift */; };
 		5E65C86D4667511E6F336BD2 /* AuthorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002835C2C7051D7971CD1EFF /* AuthorListView.swift */; };
+		60D4B4D43DA2F3D86519158C /* homer_iliad_chamberlain_audio.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */; };
 		62F062B5AC4594D8C1AC8C90 /* SimpleWordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06D1EBBDBAB2B263A6AED95 /* SimpleWordDetailView.swift */; };
 		66D7C1FB87DDBC9592DCBA9C /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A437DD254FF072DDC14795 /* ReaderView.swift */; };
 		6851F2B6CF97911B8BA02029 /* ZIPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF09804345C531CE3E1046 /* ZIPHandler.swift */; };
@@ -50,18 +52,15 @@
 		75ABA95263C409BDF0F013F8 /* BookmarkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132234BA9EB910F105C1195 /* BookmarkViews.swift */; };
 		76D81CE2B83927CF06C0D8B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93787B6DAF29B667F93DD /* SettingsView.swift */; };
 		794BD05B9BF1DA1DA47F5613 /* AudioPackageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD165B7E0E10CA74A90ED47 /* AudioPackageDAO.swift */; };
-		7FAB881A2F984BD700F1003D /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB88192F984BD700F1003D /* ZIPFoundation */; };
-		7FAB881D2F9853FC00F1003D /* perseus_texts.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB881C2F9853FC00F1003D /* perseus_texts.db.zip */; };
-		7FAB88212F98550300F1003D /* homer_iliad_chamberlain_audio.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB881E2F98550300F1003D /* homer_iliad_chamberlain_audio.zip */; settings = {ASSET_TAGS = (audio_full, ); }; };
-		7FAB88222F98550300F1003D /* perseus_texts_extended.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB881F2F98550300F1003D /* perseus_texts_extended.db.zip */; settings = {ASSET_TAGS = (database_extended, ); }; };
-		7FAB88232F98550300F1003D /* perseus_texts_full.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB88202F98550300F1003D /* perseus_texts_full.db.zip */; settings = {ASSET_TAGS = (database_full, ); }; };
 		8C72BF2D6C9FBD00CED8131D /* WorkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE012E752CB556C2AB32622 /* WorkDAO.swift */; };
 		8F4D018502B8C80DB767FCF5 /* ManageLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C4F8B4A8E70F62CBA251F /* ManageLanguagesView.swift */; };
+		931F98BF51BDAA883E1E9C28 /* perseus_texts.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 61F4711E7801A1480E27CC18 /* perseus_texts.db.zip */; };
 		9464B928E05177481B4ED9A5 /* AudioAssetDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FAC3EC11D028F242A924A /* AudioAssetDownloadManager.swift */; };
 		95AE10B1EC8B2138D9B3A9D9 /* DictionaryDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D81BA745DA0AD75A266AEF /* DictionaryDAO.swift */; };
 		981B9B19653822D281979C19 /* PrefixAssimilationRuleDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF982CBAD22DD0078A31A46 /* PrefixAssimilationRuleDAO.swift */; };
 		98620FDC41EABBBDCB2BE25D /* BookmarkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D827E5A1FB474AE1717F34A6 /* BookmarkDAO.swift */; };
 		991343CF84FB8C3A0FC0EF98 /* ExtendedDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A6E5551D88B5BAC7BA15CC /* ExtendedDatabaseDownloadManager.swift */; };
+		99388F0772C48A571CF5EC3B /* rhetoric.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = E220003E52FFAF1B90072B4D /* rhetoric.db.zip */; };
 		9B522D2FC93BD8AF2EA9BB11 /* DatabaseAssetDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452975E604232ECEFC78D27A /* DatabaseAssetDownloadManager.swift */; };
 		9C1B9D3C343AFB7033497C89 /* ImprovedWordDetailView_fixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD566F9D2C1F2E60AB018416 /* ImprovedWordDetailView_fixed.swift */; };
 		9ED99FF828AAA77212952CA9 /* DefaultAudioExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9B80674F8AC57982FC533 /* DefaultAudioExtractor.swift */; };
@@ -87,10 +86,12 @@
 		BDC81A97715750F42DB31989 /* AudioDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D012E66205B6736F52305EA /* AudioDownloadView.swift */; };
 		BE53CA0A9702BB6578DFA17F /* OccurrenceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D24542169E1828A6C4D0B /* OccurrenceDetailView.swift */; };
 		C0A89ED6D33425770E8E8131 /* DatabaseValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41128CEB9EA9E0E95D96D4 /* DatabaseValidationViewController.swift */; };
+		C3A0D762D0343A4F40ED95FD /* RhetoricViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653E2B7519773ECDFA4837E3 /* RhetoricViews.swift */; };
 		C4455B523640520CF968035D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72244D2F6819A90C3C9B0892 /* Assets.xcassets */; };
 		C78C8F21DEE3661F4255FA41 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6136E31F2592ED165C120 /* ColorExtensions.swift */; };
 		D11EF9F4729C2D9F11E8B901 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570D3AFBCCEB7ADCEC7C665 /* LicenseView.swift */; };
 		D28A73CE7465AD09EF9C3EDD /* ODRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BE640EC87BD121CF9F6ED8 /* ODRManager.swift */; };
+		D46E5D36620E57BC9703CE2C /* perseus_texts_full.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = A3D904E8530DE7DD3B2701C1 /* perseus_texts_full.db.zip */; };
 		D561F7B13C1553E652BD76B7 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1713254AC15E6ADCB35D4 /* ErrorView.swift */; };
 		DA571B70C932CF5AFCF57BF5 /* DictionaryLookupHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B801930BD468076772C20B /* DictionaryLookupHelper.swift */; };
 		DE80CC62911D9107F61F4C79 /* DatabaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC7A6A74611040A73516CA /* DatabaseErrorView.swift */; };
@@ -98,11 +99,13 @@
 		E140AA264A38B14F6DF4F9FA /* BookmarkCSVHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871B58D72526C98AA89102F /* BookmarkCSVHandler.swift */; };
 		E249A10D9CE1A77DFC6B0640 /* LineDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5A0583CD8A67018F0C27E /* LineDAO.swift */; };
 		E58CCC4A124E036A2D050E92 /* BookDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2F05C725B45FC9A686942 /* BookDAO.swift */; };
+		E77AFFF10FF935E8E6C1B6BF /* perseus_texts_extended.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */; };
 		E86372F678CDDDCBE5FB2854 /* AudioManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FE750B72A328D3FD62742 /* AudioManagementView.swift */; };
 		F0EB61230994A25AF5A48565 /* AssetPackStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752838F15E6E9A428468EBCE /* AssetPackStatus.swift */; };
 		F246FAD151E1FFEF6FBA844B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B4D76BC0D6F1A2A380E0B /* ContentView.swift */; };
 		F4130F89321B6DFBFF7E5111 /* TranslationLookupDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B6228C6E84857FA5ADEF33 /* TranslationLookupDAO.swift */; };
 		F5346CEC8A1B6613F9D4E061 /* homer_iliad_chamberlain_audio_7.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3B15C4299AB3D812B88F2C8E /* homer_iliad_chamberlain_audio_7.zip */; };
+		FAF429D42801C595EE1EF5A5 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = C02E87EE408287044F3229FE /* ZIPFoundation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,11 +145,15 @@
 		59A437DD254FF072DDC14795 /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
 		5FB18A12112FC9248C2B88A6 /* UserDatabaseManagerAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseManagerAsync.swift; sourceTree = "<group>"; };
 		612C3933F9ED5E4EEAB95D4C /* ReaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewModel.swift; sourceTree = "<group>"; };
-		638561D43FE04A231D565206 /* ClassicsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassicsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		61F4711E7801A1480E27CC18 /* perseus_texts.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts.db.zip; sourceTree = "<group>"; };
+		621749C86FA8379D22045183 /* RhetoricDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhetoricDatabase.swift; sourceTree = "<group>"; };
+		638561D43FE04A231D565206 /* ClassicsViewer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ClassicsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		653E2B7519773ECDFA4837E3 /* RhetoricViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhetoricViews.swift; sourceTree = "<group>"; };
 		668E7F7C3AB1C4BE19A52616 /* AuthorDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDAO.swift; sourceTree = "<group>"; };
 		6853075EEC57845B47304212 /* WordDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDAO.swift; sourceTree = "<group>"; };
 		6A5199B6DECDDD6CA32762E4 /* PracticeAlphabetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeAlphabetsView.swift; sourceTree = "<group>"; };
 		6CF1C1A5242953546FACD86A /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = homer_iliad_chamberlain_audio.zip; sourceTree = "<group>"; };
 		72244D2F6819A90C3C9B0892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		746FE750B72A328D3FD62742 /* AudioManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManagementView.swift; sourceTree = "<group>"; };
 		752838F15E6E9A428468EBCE /* AssetPackStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetPackStatus.swift; sourceTree = "<group>"; };
@@ -154,14 +161,10 @@
 		76A0E9169A72D7756A655E55 /* TranslationDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationDebugView.swift; sourceTree = "<group>"; };
 		79DAE08B665DEC1BEC0EE4B8 /* ClassicsViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicsViewerApp.swift; sourceTree = "<group>"; };
 		7B72B5826023689D8EA5A1F7 /* UserDictionaryDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDictionaryDAO.swift; sourceTree = "<group>"; };
-		7C500B1AA765FC985F2251FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		7FAB881B2F984F9000F1003D /* Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
-		7FAB881C2F9853FC00F1003D /* perseus_texts.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts.db.zip; sourceTree = "<group>"; };
-		7FAB881E2F98550300F1003D /* homer_iliad_chamberlain_audio.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = homer_iliad_chamberlain_audio.zip; path = OnDemand/homer_iliad_chamberlain_audio.zip; sourceTree = "<group>"; };
-		7FAB881F2F98550300F1003D /* perseus_texts_extended.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = perseus_texts_extended.db.zip; path = OnDemand/perseus_texts_extended.db.zip; sourceTree = "<group>"; };
-		7FAB88202F98550300F1003D /* perseus_texts_full.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = perseus_texts_full.db.zip; path = OnDemand/perseus_texts_full.db.zip; sourceTree = "<group>"; };
+		7C500B1AA765FC985F2251FD /* .gitignore */ = {isa = PBXFileReference; path = .gitignore; sourceTree = "<group>"; };
 		84EB9F744216E85A99269189 /* DatabaseSchemaValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSchemaValidator.swift; sourceTree = "<group>"; };
 		8A742E92F760F53753B3ECE6 /* AgeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeVerificationView.swift; sourceTree = "<group>"; };
+		96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts_extended.db.zip; sourceTree = "<group>"; };
 		96C191D735D5CDB1D9EB7AD2 /* ExternalDatabaseImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDatabaseImporter.swift; sourceTree = "<group>"; };
 		98E6006756AA59CFFB859F26 /* DatabaseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseModels.swift; sourceTree = "<group>"; };
 		9BD165B7E0E10CA74A90ED47 /* AudioPackageDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPackageDAO.swift; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 		A09DCB4A91D0CD478A6CA724 /* DatabaseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseValidator.swift; sourceTree = "<group>"; };
 		A0DF09804345C531CE3E1046 /* ZIPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZIPHandler.swift; sourceTree = "<group>"; };
 		A181BB237F1490BF43A99BFA /* ExportOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportOptionsView.swift; sourceTree = "<group>"; };
+		A3D904E8530DE7DD3B2701C1 /* perseus_texts_full.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts_full.db.zip; sourceTree = "<group>"; };
 		A3E134B2F2A96D67078B01B4 /* SearchNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationBar.swift; sourceTree = "<group>"; };
 		A707E22810D7844EA767D464 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		AC19718D856F690FC0BB2D50 /* InterlinearTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterlinearTextView.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 		D9EA611DFBEAFE40B7B14AAA /* AlphabetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetData.swift; sourceTree = "<group>"; };
 		DA41128CEB9EA9E0E95D96D4 /* DatabaseValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseValidationViewController.swift; sourceTree = "<group>"; };
 		DC6C6DA8E0B22DF1DD2B16F5 /* DatabaseExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseExtractor.swift; sourceTree = "<group>"; };
+		E220003E52FFAF1B90072B4D /* rhetoric.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = rhetoric.db.zip; sourceTree = "<group>"; };
 		E6DAF2A6AEC4654BC45F1F97 /* TappableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableTextView.swift; sourceTree = "<group>"; };
 		E9A0EB3310AFF245D70339F3 /* ImprovedWordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImprovedWordDetailView.swift; sourceTree = "<group>"; };
 		EDB290B68048B0C58F40AD76 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -213,7 +218,7 @@
 			files = (
 				111038E8123307AC5C393BC3 /* SQLite in Frameworks */,
 				A1CD20C547B32BC5612F0E0C /* SwiftCSV in Frameworks */,
-				7FAB881A2F984BD700F1003D /* ZIPFoundation in Frameworks */,
+				FAF429D42801C595EE1EF5A5 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +267,6 @@
 			children = (
 				F0C03BF1C1A7B654F50023E6 /* ClassicsViewer */,
 				680BF1D3DA8613F03DAB0C6C /* Products */,
-				7FAB881B2F984F9000F1003D /* Local.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -310,6 +314,7 @@
 				D7A5A0583CD8A67018F0C27E /* LineDAO.swift */,
 				F305934FD5294013366C1B0A /* NormalizationPatternDAO.swift */,
 				CFF982CBAD22DD0078A31A46 /* PrefixAssimilationRuleDAO.swift */,
+				621749C86FA8379D22045183 /* RhetoricDatabase.swift */,
 				0DED362879E4F0DB980A5527 /* TranslationDAO.swift */,
 				02B6228C6E84857FA5ADEF33 /* TranslationLookupDAO.swift */,
 				5FB18A12112FC9248C2B88A6 /* UserDatabaseManagerAsync.swift */,
@@ -351,6 +356,7 @@
 				374D24542169E1828A6C4D0B /* OccurrenceDetailView.swift */,
 				6A5199B6DECDDD6CA32762E4 /* PracticeAlphabetsView.swift */,
 				59A437DD254FF072DDC14795 /* ReaderView.swift */,
+				653E2B7519773ECDFA4837E3 /* RhetoricViews.swift */,
 				A3E134B2F2A96D67078B01B4 /* SearchNavigationBar.swift */,
 				C9795AD7B22B15FB84013705 /* SearchView.swift */,
 				AFC93787B6DAF29B667F93DD /* SettingsView.swift */,
@@ -367,12 +373,11 @@
 		C82315BCBDAF2CC57AE26B75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB881E2F98550300F1003D /* homer_iliad_chamberlain_audio.zip */,
-				7FAB881F2F98550300F1003D /* perseus_texts_extended.db.zip */,
-				7FAB88202F98550300F1003D /* perseus_texts_full.db.zip */,
-				7FAB881C2F9853FC00F1003D /* perseus_texts.db.zip */,
 				7C500B1AA765FC985F2251FD /* .gitignore */,
 				3B15C4299AB3D812B88F2C8E /* homer_iliad_chamberlain_audio_7.zip */,
+				61F4711E7801A1480E27CC18 /* perseus_texts.db.zip */,
+				E220003E52FFAF1B90072B4D /* rhetoric.db.zip */,
+				F592998D00DF010C98ED58C6 /* OnDemand */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -396,6 +401,16 @@
 			path = ClassicsViewer;
 			sourceTree = "<group>";
 		};
+		F592998D00DF010C98ED58C6 /* OnDemand */ = {
+			isa = PBXGroup;
+			children = (
+				6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */,
+				96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */,
+				A3D904E8530DE7DD3B2701C1 /* perseus_texts_full.db.zip */,
+			);
+			path = OnDemand;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -416,7 +431,7 @@
 			packageProductDependencies = (
 				A7606BB793E504BB637A90C6 /* SQLite */,
 				98281986F85182AC7DE87D44 /* SwiftCSV */,
-				7FAB88192F984BD700F1003D /* ZIPFoundation */,
+				C02E87EE408287044F3229FE /* ZIPFoundation */,
 			);
 			productName = ClassicsViewer;
 			productReference = 638561D43FE04A231D565206 /* ClassicsViewer.app */;
@@ -429,14 +444,10 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				KnownAssetTags = (
-					audio_full,
-					database_extended,
-					database_full,
-				);
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					04B9FF9F56AA35BF8FDA4066 = {
+						DevelopmentTeam = "";
 						OnDemandResourcesInitialInstallTags = (
 						);
 						OnDemandResourcesPrefetchOrder = (
@@ -455,10 +466,11 @@
 			mainGroup = 69CC79FA3ACAB7A8D8165489;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite" */,
+				E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				FF4A1075A50F244B6559C8E2 /* XCRemoteSwiftPackageReference "SwiftCSV" */,
-				7FAB88182F984BD700F1003D /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				596682DFF08B4EDB039329E5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -472,13 +484,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FAB88212F98550300F1003D /* homer_iliad_chamberlain_audio.zip in Resources */,
-				7FAB88222F98550300F1003D /* perseus_texts_extended.db.zip in Resources */,
-				7FAB88232F98550300F1003D /* perseus_texts_full.db.zip in Resources */,
 				C4455B523640520CF968035D /* Assets.xcassets in Resources */,
 				39B1858FCECB840CC891C722 /* LaunchScreen.storyboard in Resources */,
+				60D4B4D43DA2F3D86519158C /* homer_iliad_chamberlain_audio.zip in Resources */,
 				F5346CEC8A1B6613F9D4E061 /* homer_iliad_chamberlain_audio_7.zip in Resources */,
-				7FAB881D2F9853FC00F1003D /* perseus_texts.db.zip in Resources */,
+				931F98BF51BDAA883E1E9C28 /* perseus_texts.db.zip in Resources */,
+				E77AFFF10FF935E8E6C1B6BF /* perseus_texts_extended.db.zip in Resources */,
+				D46E5D36620E57BC9703CE2C /* perseus_texts_full.db.zip in Resources */,
+				99388F0772C48A571CF5EC3B /* rhetoric.db.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +587,8 @@
 				981B9B19653822D281979C19 /* PrefixAssimilationRuleDAO.swift in Sources */,
 				66D7C1FB87DDBC9592DCBA9C /* ReaderView.swift in Sources */,
 				064AD62192B34C85556DEAFE /* ReaderViewModel.swift in Sources */,
+				166C870074D210A120E0E86A /* RhetoricDatabase.swift in Sources */,
+				C3A0D762D0343A4F40ED95FD /* RhetoricViews.swift in Sources */,
 				2D507E264BC29A2D3F216614 /* SearchNavigationBar.swift in Sources */,
 				0807FAB440D6A44C25D6950F /* SearchNavigationContext.swift in Sources */,
 				ABCE00C649313E511C58258C /* SearchType.swift in Sources */,
@@ -604,7 +619,6 @@
 /* Begin XCBuildConfiguration section */
 		4D4BCFB3D7F4BC6CE2E330D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FAB881B2F984F9000F1003D /* Local.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -638,7 +652,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MN9N7C8UTV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -655,7 +668,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -669,16 +682,15 @@
 		};
 		5DD1A74A0DB882ACC1AFDECE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FAB881B2F984F9000F1003D /* Local.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ClassicsViewer/ClassicsViewer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_ON_DEMAND_RESOURCES = YES;
 				INFOPLIST_FILE = ClassicsViewer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -692,16 +704,15 @@
 		};
 		CE5DC2D691C89346F2FAE5DF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FAB881B2F984F9000F1003D /* Local.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ClassicsViewer/ClassicsViewer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_ON_DEMAND_RESOURCES = YES;
 				INFOPLIST_FILE = ClassicsViewer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -715,7 +726,6 @@
 		};
 		E8FD6CD264CF71F7005E5400 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FAB881B2F984F9000F1003D /* Local.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -749,7 +759,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MN9N7C8UTV;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -760,7 +769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -795,15 +804,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7FAB88182F984BD700F1003D /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+		596682DFF08B4EDB039329E5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.20;
+				minimumVersion = 0.9.0;
 			};
 		};
-		E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite" */ = {
+		E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
 			requirement = {
@@ -822,11 +831,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7FAB88192F984BD700F1003D /* ZIPFoundation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7FAB88182F984BD700F1003D /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
-			productName = ZIPFoundation;
-		};
 		98281986F85182AC7DE87D44 /* SwiftCSV */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF4A1075A50F244B6559C8E2 /* XCRemoteSwiftPackageReference "SwiftCSV" */;
@@ -834,8 +838,13 @@
 		};
 		A7606BB793E504BB637A90C6 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite" */;
+			package = E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
+		};
+		C02E87EE408287044F3229FE /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 596682DFF08B4EDB039329E5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

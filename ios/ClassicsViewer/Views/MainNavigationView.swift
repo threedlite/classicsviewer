@@ -18,6 +18,13 @@ struct MainNavigationView: View {
             .tabItem {
                 Label("Bookmarks", systemImage: "bookmark")
             }
+
+            NavigationStack {
+                RhetoricSectionListView()
+            }
+            .tabItem {
+                Label("Rhetoric", systemImage: "text.book.closed")
+            }
         }
     }
 }

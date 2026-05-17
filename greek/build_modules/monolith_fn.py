@@ -901,7 +901,7 @@ def analyze_first1k_work_splitting(xml_path):
 
         # Define which subtypes/types indicate structural divs
         structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
-        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt', 'fable', 'fabula', 'centuria', 'homilia', 'choral', 'lyric', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees'}
+        structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt', 'fable', 'fabula', 'centuria', 'homilia', 'choral', 'lyric', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees', 'page'}
 
         def is_structural_div(div_elem):
             """Check if a div is a structural element we care about."""
@@ -1607,7 +1607,7 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
 
             # Define which subtypes/types indicate structural divs
             structural_types = {'section', 'chapter', 'textpart', 'book', 'volume', 'part', 'haeresis'}
-            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt', 'fable', 'fabula', 'centuria', 'homilia', 'choral', 'lyric', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees'}
+            structural_subtypes = {'section', 'chapter', 'episode', 'hypothesis', 'fragment', 'book', 'volume', 'part', 'haeresis', 'subsection', 'paragraph', 'entry', 'work', 'excerpt', 'fable', 'fabula', 'centuria', 'homilia', 'choral', 'lyric', 'strophe', 'antistrophe', 'ephymnion', 'anapests', 'epode', 'trochees', 'page'}
 
             def is_structural_div(div_elem):
                 """Check if a div is a structural element we care about."""
@@ -1631,7 +1631,17 @@ def parse_first1k_with_selected_method(xml_path, selected_method):
                 """
                 # Collect all structural parent levels
                 hierarchy = []
-                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis', 'commentary', 'letter', 'epistle', 'work', 'homily', 'homilia', 'fragment', 'excerpt', 'fable', 'fabula', 'centuria', 'choral', 'lyric', 'episode')
+                # Include 'section' and 'subsection' so nested section/subsection
+                # divs are recognized as parents. Without this, a nested
+                # <div subtype="section" n="1"> inside <div subtype="section" n="11">
+                # would lose its outer-section context and collide with a top-level
+                # n="1" sibling. (Bug 1 fix — only changes parent_hierarchy for works
+                # that actually have nested section/subsection structures.)
+                structural_subtypes = ('volume', 'book', 'chapter', 'part', 'haeresis',
+                                       'commentary', 'letter', 'epistle', 'work', 'homily',
+                                       'homilia', 'fragment', 'excerpt', 'fable', 'fabula',
+                                       'centuria', 'choral', 'lyric', 'episode',
+                                       'section', 'subsection', 'page')
 
                 # Build a map of sequential indices for parent divs without n attributes
                 # so that multiple choral/episode sections get unique identifiers
@@ -2494,6 +2504,62 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
         # Treat each section as a separate book
         print(f"    Treating {len(sections)} chapters as separate books for better alignment")
 
+        # === COLLISION PRE-SCAN (preserves source order, prevents text corruption) ===
+        # The MD5 % 900 fallback used below for non-numeric section n values
+        # collides for many inputs (e.g. "Ps_85" and "Ps_91" both hash to 910).
+        # When two sections compute the same book_id, today the second's text
+        # ends up appended under the first's book → corrupted/duplicated lines.
+        # Detect that case up-front; if it happens in this work, switch this
+        # work's non-numeric sections to a literal-n scheme that uses the
+        # original n value in book_id + label and document order (sect_idx) for
+        # the book_number sort key. Non-colliding works keep their current ids
+        # byte-for-byte.
+        import hashlib as _coll_hashlib
+        import re as _coll_re
+        _seen_book_ids = set()
+        use_literal_scheme = False
+
+        def _precan_compute_book_id(_section, _sect_idx):
+            _actual = _section.get('section')
+            _parent = _section.get('parent_hierarchy', [])
+            if _actual and str(_actual).isdigit():
+                _sn = int(_actual)
+            elif _actual:
+                _sn = int(_coll_hashlib.md5(str(_actual).encode()).hexdigest(), 16) % 900 + 900
+            else:
+                _sn = 900 + _sect_idx
+            _hp = []
+            for _st, _nv in _parent:
+                _ns = str(_nv)
+                if _ns.isdigit():
+                    _hp.append(f"{int(_ns):03d}")
+                else:
+                    _m = _coll_re.search(r'\d+', _ns)
+                    if _m:
+                        _hp.append(f"{int(_m.group()):03d}")
+                    elif len(_ns) == 1 and _ns.upper() in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ':
+                        _hp.append(f"{ord(_ns.upper()) - ord('A') + 1:03d}")
+                    else:
+                        _hp.append(f"{int(_coll_hashlib.md5(_nv.encode()).hexdigest(), 16) % 1000:03d}")
+            if len(_hp) >= 2:
+                return f"{work_id}.{'_'.join(_hp)}_{_sn:03d}"
+            elif len(_hp) == 1:
+                return f"{work_id}.{_hp[0]}_{_sn:03d}"
+            else:
+                return f"{work_id}.{_sn:03d}"
+
+        for _pre_idx, _pre_section in enumerate(sections, 1):
+            _pre_book_id = _precan_compute_book_id(_pre_section, _pre_idx)
+            if _pre_book_id in _seen_book_ids:
+                use_literal_scheme = True
+                break
+            _seen_book_ids.add(_pre_book_id)
+
+        if use_literal_scheme:
+            print(f"    INFO: book_id collision detected in {work_id}; "
+                  f"switching non-numeric sections to literal-n scheme "
+                  f"(preserves source order, prevents text corruption)")
+
         for sect_idx, section in enumerate(sections, 1):
             # Use the actual section number from the XML, not sequential numbering
             # This preserves original chapter numbers (e.g., 18, 19, 20 instead of 1, 2, 3)
@@ -2512,6 +2578,18 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
                     hash_val = 900 + sect_idx
                 sect_num = hash_val
 
+            # Default: today's behavior — numeric sect_num is used in book_id and label.
+            # For collision-affected works, swap the non-numeric tail for the literal
+            # n value (preserves source-order semantics and self-identifies in the UI).
+            import re
+            if use_literal_scheme and actual_section_num and not str(actual_section_num).isdigit():
+                sect_id_tail = re.sub(r'\W+', '_', str(actual_section_num))
+                label_n = str(actual_section_num)
+                sect_num = sect_idx  # document order for the sort key
+            else:
+                sect_id_tail = f"{sect_num:03d}"
+                label_n = str(sect_num)
+
             # Create book ID using FULL hierarchy to avoid collisions
             # when the same book number appears in different volumes
             # e.g., Volume 1 Book 2 Section 3 → "001_002_003"
@@ -2527,14 +2605,25 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
                 hierarchy_nums = []   # For book_number (sorting)
                 for subtype, n_val in parent_hierarchy:
                     # Handle non-numeric values (like 'praef', '2a', 'A', 'B')
-                    import re
                     n_str = str(n_val)
                     if n_str.isdigit():
                         hierarchy_parts.append(f"{int(n_str):03d}")
                         hierarchy_nums.append(int(n_str))
+                    elif use_literal_scheme:
+                        # Bug 2 fix — collision-affected works use the sanitized
+                        # literal n value in book_id (preserves multi-segment
+                        # values like "2_3ad4" / "2_5" that would otherwise
+                        # collapse under re.search(r'\d+'), and Ps_85 / Ps_91
+                        # that hash to the same value).
+                        safe_n = re.sub(r'\W+', '_', n_str)
+                        hierarchy_parts.append(safe_n)
+                        # For sort key: leading digit if present, else 0
+                        nm = re.search(r'\d+', n_str)
+                        hierarchy_nums.append(int(nm.group()) if nm else 0)
                     else:
-                        # For non-numeric values, extract numeric part if any (e.g., '2a' → 2)
-                        # Or convert single letters to ordinal (A=1, B=2, etc.)
+                        # Default scheme (non-affected works): same as before —
+                        # extract leading digit group OR ordinal-code letters
+                        # OR hash pure alphabetic.
                         numeric_match = re.search(r'\d+', n_str)
                         if numeric_match:
                             hierarchy_parts.append(f"{int(numeric_match.group()):03d}")
@@ -2556,34 +2645,34 @@ def process_first1k_work(work_dir, work_id, cursor, language, source_file=None):
                 if len(hierarchy_parts) >= 2:
                     # Multiple levels: volume_book_section format
                     hierarchy_prefix = '_'.join(hierarchy_parts)
-                    book_id = f"{work_id}.{hierarchy_prefix}_{sect_num:03d}"
+                    book_id = f"{work_id}.{hierarchy_prefix}_{sect_id_tail}"
                     # Create readable label from hierarchy
                     labels = [f"{subtype.title()} {n_val}" for subtype, n_val in parent_hierarchy]
                     # Only add "Section N" suffix if the leaf is actually a section/subsection
                     if section_type in ('section', 'subsection'):
-                        section_label = f"{' '.join(labels)} Section {sect_num}"
+                        section_label = f"{' '.join(labels)} Section {label_n}"
                     else:
                         # Leaf is chapter/fragment/etc - use its type (e.g., "Book 1 Chapter 5")
-                        section_label = f"{' '.join(labels)} {section_type.title()} {sect_num}"
+                        section_label = f"{' '.join(labels)} {section_type.title()} {label_n}"
                 elif len(hierarchy_parts) == 1:
                     # Single parent level: book_section format
-                    book_id = f"{work_id}.{hierarchy_parts[0]}_{sect_num:03d}"
+                    book_id = f"{work_id}.{hierarchy_parts[0]}_{sect_id_tail}"
                     subtype, n_val = parent_hierarchy[0]
                     # Only add "Section N" suffix if the leaf is actually a section/subsection
                     if section_type in ('section', 'subsection'):
-                        section_label = f"{subtype.title()} {n_val} Section {sect_num}"
+                        section_label = f"{subtype.title()} {n_val} Section {label_n}"
                     else:
                         # Leaf is chapter/fragment/etc - use its type
-                        section_label = f"{subtype.title()} {n_val} {section_type.title()} {sect_num}"
+                        section_label = f"{subtype.title()} {n_val} {section_type.title()} {label_n}"
                 else:
                     # No valid hierarchy parts (all non-numeric)
-                    book_id = f"{work_id}.{sect_num:03d}"
-                    section_label = f"{section_type.title()} {sect_num}"
+                    book_id = f"{work_id}.{sect_id_tail}"
+                    section_label = f"{section_type.title()} {label_n}"
                     hierarchy_nums = []
             else:
                 # Flat structure: use the actual type of the leaf node
-                book_id = f"{work_id}.{sect_num:03d}"
-                section_label = f"{section_type.title()} {sect_num}"
+                book_id = f"{work_id}.{sect_id_tail}"
+                section_label = f"{section_type.title()} {label_n}"
                 hierarchy_nums = []
 
             # Compute composite book_number for proper sorting

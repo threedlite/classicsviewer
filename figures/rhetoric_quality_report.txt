@@ -1,0 +1,783 @@
+Silva Rhetoricae -> rhetoric.db -- quality report
+=======================================================
+HTML pages scanned (content sections): 614
+Entries imported:                      426
+  with examples:   193
+  with etymology:  281
+  with Greek term: 220
+Cross-references kept:    1171
+Cross-references dropped: 580 (target not an entry)
+Pages skipped:            172
+
+Entries by section:
+  figures        350
+  canons         27
+  pedagogy       19
+  terms          7
+  changes        5
+  branches       4
+  strategies     4
+  appeals        4
+  primary-texts  3
+  sources        2
+  ability        1
+
+Greek GIFs with no greek_terms.csv row (2):
+  aetiologia: AETIOLOGIA.GIF
+  catacosmesis: catacosmesis.GIF
+
+Skipped pages (172):
+  Canons/Invention/topics_of_invention/Circumstances.htm -- no definition region
+  Canons/Invention/topics_of_invention/Deliberative Topics.htm -- duplicate id 'deliberative-topics'
+  Canons/Invention/topics_of_invention/Epideictic Topics.htm -- duplicate id 'epideictic-topics'
+  Canons/Invention/topics_of_invention/Judicial Topics.htm -- duplicate id 'judicial-topics'
+  Figures/A/antistasis.htm -- no definition region
+  Figures/A/apocarteresis.htm -- no definition region
+  Figures/A/apodixis.htm -- no definition region
+  Figures/A/apologue.htm -- no definition region
+  Figures/A/apposition.htm -- no definition region
+  Figures/A/assumptio.htm -- no definition region
+  Figures/A/~adianoeta.htm -- duplicate id 'adianoeta'
+  Figures/A/~antapodosis.htm -- no definition region
+  Figures/C/cacozelia.htm -- no definition region
+  Figures/C/chorographia.htm -- no definition region
+  Figures/C/collatio-v.htm -- no definition region
+  Figures/C/comprehensio-v.htm -- no definition region
+  Figures/C/comprobatio.htm -- no definition region
+  Figures/C/concessio.htm -- no definition region
+  Figures/C/consonance.htm -- no definition region
+  Figures/C/cutted comma.htm -- no definition region
+  Figures/D/DISTINCTIO-v.HTM -- no definition region
+  Figures/D/dialyton-v.htm -- no definition region
+  Figures/D/doubtfull.htm -- no definition region
+  Figures/E/enthymeme.htm -- no definition region
+  Figures/E/epanodos.htm -- no definition region
+  Figures/E/epanorthosis.htm -- no definition region
+  Figures/E/epergesis.htm -- no definition region
+  Figures/E/epilogus.htm -- no definition region
+  Figures/E/epimone.htm -- no definition region
+  Figures/E/epitasis.htm -- no definition region
+  Figures/E/epitrope.htm -- no definition region
+  Figures/E/epizeugma.htm -- no definition region
+  Figures/E/euche.htm -- no definition region
+  Figures/E/eulogia.htm -- no definition region
+  Figures/E/euphemismus.htm -- no definition region
+  Figures/E/eustathia.htm -- no definition region
+  Figures/E/example.htm -- no definition region
+  Figures/E/excitatio.htm -- no definition region
+  Figures/E/exclamatio.htm -- no definition region
+  Figures/E/excursus.htm -- no definition region
+  Figures/F/fictio.htm -- no definition region
+  Figures/F/~fabella.htm -- no definition region
+  Figures/Figures of Speech-Thought.htm -- no definition region
+  Figures/Figures-Divisions.htm -- no definition region
+  Figures/Figures-Groupings.htm -- no definition region
+  Figures/Figures-Overview.htm -- no definition region
+  Figures/G/geographia.htm -- no definition region
+  Figures/G/gnome.htm -- no definition region
+  Figures/Groupings/Gorgianic Figures.htm -- no definition region
+  Figures/Groupings/Grammatical Schemes.htm -- no definition region
+  Figures/Groupings/Schemes of Omission.htm -- no definition region
+  Figures/Groupings/Semantic Inversions.htm -- no definition region
+  Figures/Groupings/Tropes of Substitution.htm -- no definition region
+  Figures/Groupings/Vices.htm -- no definition region
+  Figures/Groupings/by Author/Bullinger.htm -- no definition region
+  Figures/Groupings/by Author/Sonnino.htm -- no definition region
+  Figures/Groupings/by Author/Taylor.htm -- no definition region
+  Figures/Groupings/of Balance.htm -- no definition region
+  Figures/Groupings/of Definition.htm -- no definition region
+  Figures/Groupings/of Description.htm -- no definition region
+  Figures/Groupings/of Division.htm -- no definition region
+  Figures/Groupings/of Ethos.htm -- no definition region
+  Figures/Groupings/of Excess and Superfluity.htm -- no definition region
+  Figures/Groupings/of Grammar.htm -- no definition region
+  Figures/Groupings/of Interruption.htm -- no definition region
+  Figures/Groupings/of Naming.htm -- no definition region
+  Figures/Groupings/of Obscuring.htm -- no definition region
+  Figures/Groupings/of Omission.htm -- no definition region
+  Figures/Groupings/of Opposition.htm -- no definition region
+  Figures/Groupings/of Order.htm -- no definition region
+  Figures/Groupings/of Overstatement.htm -- no definition region
+  Figures/Groupings/of Parallelism.htm -- no definition region
+  Figures/Groupings/of Pathos.htm -- no definition region
+  Figures/Groupings/of Place.htm -- no definition region
+  Figures/Groupings/of Play.htm -- no definition region
+  Figures/Groupings/of Reasoning.htm -- no definition region
+  Figures/Groupings/of Refutation.htm -- no definition region
+  Figures/Groupings/of Repetition.htm -- no definition region
+  Figures/Groupings/of Rhythm.htm -- no definition region
+  Figures/Groupings/of Sound.htm -- no definition region
+  Figures/Groupings/of Substitution.htm -- no definition region
+  Figures/Groupings/of Summary.htm -- no definition region
+  Figures/Groupings/of Time.htm -- no definition region
+  Figures/Groupings/of Wordplay.htm -- no definition region
+  Figures/Groupings/of amplification.htm -- no definition region
+  Figures/Groupings/of word order.htm -- no definition region
+  Figures/H/heterogenium-V.htm -- no definition region
+  Figures/H/homiologia.htm -- no definition region
+  Figures/H/homoeosis.htm -- no definition region
+  Figures/H/homoioteleuton.htm -- no definition region
+  Figures/H/hyberbaton.htm -- no definition region
+  Figures/H/hydrographia.htm -- no definition region
+  Figures/H/hyperbaton.htm -- no definition region
+  Figures/H/hypotyposis.htm -- no definition region
+  Figures/H/hypozeugma.htm -- no definition region
+  Figures/I/insinuatio.htm -- no definition region
+  Figures/I/insultatio.htm -- no definition region
+  Figures/I/inter se pugnantia.htm -- no definition region
+  Figures/M/martyria.htm -- no definition region
+  Figures/M/maxim.htm -- no definition region
+  Figures/M/medela.htm -- no definition region
+  Figures/M/membrum.htm -- no definition region
+  Figures/M/mesarchia.htm -- no definition region
+  Figures/M/mesodiplosis.htm -- no definition region
+  Figures/M/metaplasm.htm -- no definition region
+  Figures/M/mycterismus.htm -- no definition region
+  Figures/N/noema.htm -- no definition region
+  Figures/P/paenismus.htm -- no definition region
+  Figures/P/palilogia.htm -- no definition region
+  Figures/P/parabola.htm -- no definition region
+  Figures/P/paradiastole.htm -- no definition region
+  Figures/P/paradiegesis.htm -- no definition region
+  Figures/P/paradox.htm -- no definition region
+  Figures/P/paralipsis.htm -- no definition region
+  Figures/P/parallelism.htm -- no definition region
+  Figures/P/paramythia.htm -- no definition region
+  Figures/P/parembole.htm -- no definition region
+  Figures/P/paroemion.htm -- no definition region
+  Figures/P/paromoiosis.htm -- no definition region
+  Figures/P/paromologia.htm -- no definition region
+  Figures/P/paronomasia.htm -- no definition region
+  Figures/P/perclusio.htm -- no definition region
+  Figures/P/period.htm -- no definition region
+  Figures/P/perissologia.htm -- no definition region
+  Figures/P/peristasis.htm -- no definition region
+  Figures/P/permutatio.htm -- no definition region
+  Figures/P/personification.htm -- no definition region
+  Figures/P/prosopopoeia.htm -- no definition region
+  Figures/P/proverb.htm -- no definition region
+  Figures/P/~paraphrasis.htm -- no definition region
+  Figures/R/rhetorical questions.htm -- no definition region
+  Figures/S/schematismus.htm -- no definition region
+  Figures/S/sentence.htm -- no definition region
+  Figures/S/sententia.htm -- no definition region
+  Figures/S/sorites.htm -- no definition region
+  Figures/S/synchisis.htm -- no definition region
+  Figures/S/synchoresis.htm -- no definition region
+  Figures/S/synchysis.htm -- no definition region
+  Figures/S/~synaeceosis.htm -- no definition region
+  Figures/Scheme.htm -- no definition region
+  Figures/Schemes and Tropes.htm -- no definition region
+  Figures/Schemes.htm -- no definition region
+  Figures/T/taxis.htm -- no definition region
+  Figures/T/tricolon.htm -- no definition region
+  Figures/Trope.htm -- no definition region
+  Figures/Tropes.htm -- no definition region
+  Figures/flowers-groups.htm -- no definition region
+  Figures/flowers-options.htm -- no definition region
+  Figures/flowers.htm -- no definition region
+  Pedagogy/Progymnasmata/Chreia.htm -- duplicate id 'chreia'
+  Pedagogy/Progymnasmata/Commonplace.htm -- duplicate id 'commonplace'
+  Pedagogy/Progymnasmata/Comparison.htm -- duplicate id 'comparison'
+  Pedagogy/Progymnasmata/Encomium.htm -- duplicate id 'encomium'
+  Primary Texts/Ad Herennium-Book4.htm -- no definition region
+  Primary Texts/Ad Herennium.htm -- no definition region
+  Primary Texts/Aristotle.htm -- no definition region
+  Primary Texts/Cicero-DeOratore.htm -- no definition region
+  Primary Texts/Day.htm -- no definition region
+  Primary Texts/Demetrius.htm -- no definition region
+  Primary Texts/Fraunce.htm -- no definition region
+  Primary Texts/Melanchthon-Elementorum Rhetorices.htm -- no definition region
+  Primary Texts/Melanchthon-Intitutiones.htm -- no definition region
+  Primary Texts/Mosellanus.htm -- no definition region
+  Primary Texts/Peacham.htm -- no definition region
+  Primary Texts/Quintilian.htm -- no definition region
+  Primary Texts/Rainolde.htm -- no definition region
+  Primary Texts/Sherry.htm -- no definition region
+  Primary Texts/Spauter.htm -- no definition region
+  Primary Texts/Suarez.htm -- no definition region
+  Primary Texts/Susenbrotus.htm -- no definition region
+  Primary Texts/Vives.htm -- no definition region
+  Sources/Sources-Secondary.htm -- no definition region
+
+Dropped cross-references (580):
+  branches-of-oratory -> ../Canons/Invention/topics_of_invention/Judicial%20Topics.htm
+  branches-of-oratory -> ../Canons/Invention/topics_of_invention/Deliberative%20Topics.htm
+  partitio -> ../../Figures/T/taxis.htm
+  partitio -> ../Invention/TOPICS%20OF%20INVENTION/Division.htm
+  peroratio -> ../../Figures/Groupings/of%20Summary.htm
+  peroratio -> ../../Figures/E/epanodos.htm
+  peroratio -> ../../Figures/Groupings/of%20Pathos.htm
+  propositio -> ../../Figures/Groupings/of%20Summary.htm
+  refutatio -> ../../Figures/Groupings/of%20Refutation.htm
+  refutatio -> ../Invention/TOPICS%20OF%20INVENTION/Relationship.htm#contraries
+  refutatio -> ../../Pedagogy/Progymnasmata/Commonplace.htm
+  arrangement -> ../Figures/Groupings/of%20Order.htm
+  arrangement -> ../Figures/Groupings/of%20Parallelism.htm
+  arrangement -> ../Figures/Groupings/of%20amplification.htm
+  arrangement -> ../Figures/H/hyperbaton.htm
+  arrangement -> ../Figures/S/synchysis.htm
+  delivery -> ../Figures/M/mycterismus.htm
+  stasis -> ../../Figures/Groupings/of%20Definition.htm
+  stasis -> TOPICS%20OF%20INVENTION/Definition.htm
+  stasis -> ../../Figures/R/rhetorical%20questions.htm
+  epideictic-topics -> ../../../Pedagogy/Progymnasmata/Encomium.htm
+  epideictic-topics -> ../../../Pedagogy/Progymnasmata/Commonplace.htm
+  comparison -> ../../../Figures/Groupings/of%20amplification.htm
+  comparison -> ../../../Pedagogy/Progymnasmata/Comparison.htm
+  definition -> ../../../Figures/Groupings/of%20Definition.htm
+  definition -> ../../../Figures/Groupings/of%20amplification.htm
+  division -> ../../../Figures/Groupings/of%20Division.htm
+  division -> ../../../Figures/Groupings/of%20amplification.htm
+  division -> ../../../Figures/T/taxis.htm
+  division -> ../../../Figures/T/taxis.htm
+  division -> ../../../Figures/P/peristasis.htm
+  division -> ../../../Figures/Groupings/of%20amplification.htm
+  division -> ../../../Pedagogy/Progymnasmata/Encomium.htm
+  notation -> ../../../Figures/A/~adianoeta.htm
+  notation -> ../../../Figures/P/paronomasia.htm
+  notation -> ../../../Figures/Groupings/of%20Wordplay.htm
+  relationship -> ../../../Figures/Groupings/of%20Reasoning.htm
+  relationship -> ../../../Figures/Groupings/of%20Reasoning.htm
+  relationship -> Circumstances.htm#pastfact
+  relationship -> ../../../Figures/Groupings/of%20Reasoning.htm
+  relationship -> ../../../Pedagogy/Progymnasmata/Commonplace.htm
+  relationship -> ../../../Figures/Groupings/of%20Reasoning.htm
+  relationship -> ../../../Figures/Groupings/of%20Refutation.htm
+  relationship -> ../../../Figures/I/inter%20se%20pugnantia.htm
+  relationship -> ../../../Pedagogy/Progymnasmata/Commonplace.htm
+  testimony -> ../../../Pedagogy/Progymnasmata/Chreia.htm
+  testimony -> ../../../Pedagogy/Progymnasmata/Chreia.htm
+  testimony -> ../../../Figures/E/euche.htm
+  testimony -> ../../../Figures/E/eustathia.htm
+  testimony -> ../../../Figures/Groupings/of%20Refutation.htm
+  testimony -> Circumstances.htm#pastfact
+  topics -> Circumstances.htm
+  topics -> Circumstances.htm#possible
+  topics -> Circumstances.htm#pastfact
+  topics -> Judicial%20Topics.htm
+  topics -> Judicial%20Topics.htm#justice
+  topics -> Judicial%20Topics.htm#justice
+  topics -> Deliberative%20Topics.htm
+  topics -> Deliberative%20Topics.htm#thegood
+  topics -> Deliberative%20Topics.htm#thegood
+  topics -> Deliberative%20Topics.htm#ad-disad
+  topics -> Deliberative%20Topics.htm#ad-disad
+  topics -> Epideictic%20Topics.htm
+  topics -> Epideictic%20Topics.htm#virtue
+  topics -> Epideictic%20Topics.htm#vice
+  invention -> ../Figures/Figures%20of%20Speech-Thought.htm
+  invention -> ../Figures/Groupings/of%20amplification.htm
+  invention -> Invention/TOPICS%20OF%20INVENTION/TOPICS.HTM
+  style-virtues -> ../../Figures/Figures-Overview.htm
+  style -> ../Figures/Figures-Overview.htm
+  content-and-form -> ../Canons/Invention/TOPICS%20OF%20INVENTION/TOPICS.HTM
+  content-and-form -> ../Figures/Figures-Overview.htm
+  dialectic -> ../Figures/E/enthymeme.htm
+  encompassing-terms -> ../FOREST.HTM
+  encompassing-terms -> ../SEARCH.HTM
+  audience -> ../Figures/Groupings/of%20Reasoning.htm
+  audience -> ../Figures/Groupings/of%20Pathos.htm
+  audience -> ../Figures/E/epitrope.htm
+  audience -> ../Figures/S/synchoresis.htm
+  decorum -> ../Figures/Groupings/Vices.htm
+  decorum -> ../FOREST.HTM
+  decorum -> ../SEARCH.HTM
+  kairos -> ../Figures/Groupings/of%20Time.htm
+  kairos -> ../Figures/Groupings/of%20Place.htm
+  rhetoric -> ../FOREST.HTM
+  rhetoric -> ../SEARCH.HTM
+  abuse -> ../Trope.htm
+  accismus -> ../Groupings/of%20Refutation.htm
+  accumulatio -> ../Groupings/of%20Summary.htm
+  accumulatio -> ../../Pedagogy/Progymnasmata/Encomium.htm
+  acrostic -> ../Groupings/of%20Order.htm
+  acyrologia -> ../C/cacozelia.htm
+  acyrologia -> ../P/paronomasia.htm
+  acyrologia -> ../Groupings/Vices.htm
+  acyrologia -> ../Groupings/of%20Substitution.htm
+  acyron -> ../Groupings/Vices.htm
+  adage -> ../../Pedagogy/Progymnasmata/Chreia.htm
+  adhortatio -> ../E/euche.htm
+  adhortatio -> ../E/eustathia.htm
+  adhortatio -> ../Groupings/of%20Pathos.htm
+  adjunct -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Division.htm
+  adjunctio -> ../E/epizeugma.htm
+  adnominatio -> ../P/paronomasia.htm
+  adnominatio -> ../Groupings/of%20Repetition.htm
+  adnominatio -> ../P/paronomasia.htm
+  adynaton -> ../Groupings/of%20Pathos.htm
+  aetiologia -> ../Groupings/of%20Reasoning.htm
+  aetiologia -> ../E/enthymeme.htm
+  aganactesis -> ../Groupings/of%20Pathos.htm
+  aganactesis -> ../E/exclamatio.htm
+  allegory -> ../P/parabola.htm
+  allegory -> ../Groupings/of%20Obscuring.htm
+  alliteration -> ../P/paroemion.htm
+  alliteration -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  alliteration -> ../Groupings/of%20Sound.htm
+  alliteration -> ../P/paroemion.htm
+  ambiguous -> ../Groupings/Vices.htm
+  amphibologia -> ../Groupings/Vices.htm
+  ampliatio -> ../Groupings/of%20Time.htm
+  anacephalaeosis -> ../Groupings/of%20Summary.htm
+  anacephalaeosis -> ../E/epanodos.htm
+  anacoenosis -> ../S/synchoresis.htm
+  anacoenosis -> ../E/epitrope.htm
+  anacoenosis -> ../Groupings/of%20Ethos.htm
+  anacoenosis -> ../R/rhetorical%20questions.htm
+  anadiplosis -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  anamnesis -> ../Groupings/of%20Ethos.htm
+  anamnesis -> ../../Pedagogy/Progymnasmata/Chreia.htm
+  anaphora -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  anapodoton -> ../Groupings/of%20Grammar.htm
+  anastrophe -> ../H/hyperbaton.htm
+  anastrophe -> ../Groupings/Grammatical%20Schemes.htm
+  anastrophe -> ../Groupings/of%20Order.htm
+  anastrophe -> ../H/hyperbaton.htm
+  anemographia -> ../Groupings/of%20Description.htm
+  anesis -> ../E/epitasis.htm
+  anesis -> ../E/epitasis.htm
+  antanaclasis -> antistasis.htm
+  antanaclasis -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  antanagoge -> ../M/medela.htm
+  anthimeria -> ../Groupings/of%20Substitution.htm
+  anthimeria -> ../P/paronomasia.htm
+  anthropopatheia -> ../P/personification.htm
+  anthypophora -> ../Groupings/of%20Reasoning.htm
+  anthypophora -> ../E/enthymeme.htm
+  anthypophora -> ../Groupings/of%20Refutation.htm
+  anthypophora -> ../R/rhetorical%20questions.htm
+  anticategoria -> ../Groupings/of%20Refutation.htm
+  antimetabole -> ../P/parallelism.htm
+  antimetabole -> ../Groupings/of%20Repetition.htm
+  antimetabole -> ../Groupings/of%20Order.htm
+  antiphrasis -> ../P/paralipsis.htm
+  antiphrasis -> ../P/paralipsis.htm
+  antiprosopopoeia -> ../P/personification.htm
+  antiprosopopoeia -> ../P/prosopopoeia.htm
+  antiprosopopoeia -> ../P/prosopopoeia.htm
+  antiprosopopoeia -> ../P/personification.htm
+  antiptosis -> ../Groupings/of%20Substitution.htm
+  antiptosis -> ../Groupings/of%20Grammar.htm
+  antirrhesis -> ../Groupings/of%20Refutation.htm
+  antisagoge -> ../P/paromologia.htm
+  antisthecon -> ../M/metaplasm.htm
+  antisthecon -> ../Groupings/of%20Substitution.htm
+  antisthecon -> ../M/metaplasm.htm
+  antithesis -> ../P/paradox.htm
+  antithesis -> ../Groupings/of%20Balance.htm
+  antithesis -> ../Groupings/Gorgianic%20Figures.htm
+  antithesis -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Relationship.htm#contraries
+  antitheton -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Relationship.htm#contraries
+  antonomasia -> ../Groupings/of%20Substitution.htm
+  antonomasia -> ../Groupings/of%20Definition.htm
+  antonomasia -> ../P/paronomasia.htm
+  antonomasia -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Relationship.htm
+  apagoresis -> ../Groupings/of%20Pathos.htm
+  apagoresis -> ../Groupings/of%20Reasoning.htm
+  aphaeresis -> ../M/metaplasm.htm
+  aphaeresis -> ../Groupings/of%20Omission.htm
+  aphaeresis -> ../M/metaplasm.htm
+  apocope -> ../M/metaplasm.htm
+  apocope -> ../Groupings/of%20Omission.htm
+  apocope -> ../M/metaplasm.htm
+  apodioxis -> ../Groupings/of%20Refutation.htm
+  apophasis -> ../Groupings/of%20Reasoning.htm
+  apophasis -> ../E/enthymeme.htm
+  apophasis -> ../Groupings/of%20Refutation.htm
+  aporia -> ../R/rhetorical%20questions.htm
+  aposiopesis -> ../Groupings/of%20Pathos.htm
+  aposiopesis -> ../Groupings/of%20Interruption.htm
+  apostrophe -> ../Groupings/of%20Pathos.htm
+  apostrophe -> ../P/personification.htm
+  apostrophe -> ../E/exclamatio.htm
+  apothegm -> ../../Pedagogy/Progymnasmata/Chreia.htm
+  apothegm -> ../S/sententia.htm
+  appositio -> ../Groupings/of%20Grammar.htm
+  ara -> ../../Pedagogy/Progymnasmata/Commonplace.htm
+  ara -> ../../Pedagogy/Progymnasmata/Comparison.htm
+  ara -> ../E/exclamatio.htm
+  articulus -> ../M/membrum.htm
+  articulus -> ../M/membrum.htm
+  assonance -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  assonance -> ../Groupings/of%20Sound.htm
+  assumption -> assumptio.htm
+  asteismus -> ../P/paronomasia.htm
+  asyndeton -> ../Groupings/of%20Grammar.htm
+  asyndeton -> ../Groupings/of%20Omission.htm
+  asyndeton -> ../Groupings/of%20Rhythm.htm
+  asyndeton -> ../H/homoioteleuton.htm
+  asyndeton -> ../P/period.htm
+  auxesis -> ../Groupings/of%20Definition.htm
+  auxesis -> ../Groupings/of%20amplification.htm
+  acoloutha -> ../Groupings/of%20Substitution.htm
+  alleotheta -> ../Groupings/of%20Substitution.htm
+  anacoloutha -> ../Groupings/of%20Substitution.htm
+  anacoluthon -> ../Groupings/of%20Grammar.htm
+  anacoluthon -> ../Groupings/of%20Interruption.htm
+  barbarism -> ../C/cacozelia.htm
+  barbarism -> ../../YET/HEBRAISM.HTM
+  barbarism -> ../Groupings/Vices.htm
+  barbarism -> ../C/cacozelia.htm
+  battologia -> ../Groupings/Vices.htm
+  benedictio -> ../E/eulogia.htm
+  bomphiologia -> ../Groupings/of%20Excess%20and%20Superfluity.htm
+  brachylogia -> ../Groupings/of%20Omission.htm
+  contrarium -> ../E/enthymeme.htm
+  contrarium -> ../Groupings/of%20Opposition.htm
+  contrarium -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Relationship.htm#contraries
+  cacemphaton -> cacozelia.htm
+  cacemphaton -> ../P/paroemion.htm
+  cacemphaton -> ../Groupings/Vices.htm
+  cacosyntheton -> ../Groupings/Vices.htm
+  cacosyntheton -> ../Groupings/of%20Order.htm
+  catachresis -> ../Groupings/Vices.htm
+  catacosmesis -> ../Groupings/of%20Order.htm
+  cataphasis -> ../P/paralipsis.htm
+  cataphasis -> ../P/paralipsis.htm
+  cataplexis -> ../Groupings/of%20Pathos.htm
+  characterismus -> ../Groupings/of%20Description.htm
+  chiasmus -> ../Groupings/of%20Repetition.htm
+  chiasmus -> ../Groupings/of%20Order.htm
+  chreia -> ../../Pedagogy/Progymnasmata/Chreia.htm
+  chreia -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Testimony.htm#authorities
+  chronographia -> ../Groupings/of%20Description.htm
+  circumlocution -> ../Groupings/of%20amplification.htm
+  circumlocution -> ../Groupings/of%20Definition.htm
+  clause -> ../M/membrum.htm
+  climax -> ../Groupings/of%20amplification.htm
+  climax -> ../Groupings/of%20Parallelism.htm
+  climax -> ../Groupings/of%20Order.htm
+  coenotes -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  colon -> ../T/tricolon.htm
+  colon -> ../T/tricolon.htm
+  commonplace -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/TOPICS.HTM
+  commonplace -> ../../Pedagogy/Progymnasmata/Commonplace.htm
+  commonplace -> ../G/gnome.htm
+  commonplace -> ../M/maxim.htm
+  commonplace -> ../P/proverb.htm
+  commonplace -> ../S/sententia.htm
+  commoratio -> ../Groupings/of%20Reasoning.htm
+  commoratio -> ../Groupings/of%20amplification.htm
+  commoratio -> ../E/epimone.htm
+  commoratio -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  commoratio -> ../E/epimone.htm
+  communicatio -> ../E/epitrope.htm
+  communicatio -> ../I/inter%20se%20pugnantia.htm
+  communicatio -> ../S/synchoresis.htm
+  communicatio -> ../R/rhetorical%20questions.htm
+  conciliatio -> comprobatio.htm
+  conclusio -> ../E/enthymeme.htm
+  conduplicatio -> ../Groupings/of%20Pathos.htm
+  conduplicatio -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  congeries -> ../Groupings/of%20amplification.htm
+  congeries -> ../Groupings/of%20Pathos.htm
+  congeries -> ../Groupings/of%20Pathos.htm
+  congeries -> ../Groupings/of%20amplification.htm
+  correctio -> ../Groupings/of%20amplification.htm
+  correctio -> ../Groupings/of%20Interruption.htm
+  correctio -> ../Groupings/of%20Definition.htm
+  counterfait-in-personation -> ../P/prosopopoeia.htm
+  deesis -> ../Groupings/of%20Pathos.htm
+  deprecatio -> ../E/euche.htm
+  descriptio -> ../Groupings/of%20Description.htm
+  descriptio -> ../Groupings/of%20Pathos.htm
+  diacope -> ../Groupings/of%20Pathos.htm
+  diacope -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  dialogismus -> ../P/prosopopoeia.htm
+  dialysis -> ../Groupings/of%20Division.htm
+  dianoea -> ../R/rhetorical%20questions.htm
+  diaphora -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  diaresis -> ../Groupings/of%20Division.htm
+  diaresis -> ../M/metaplasm.htm
+  diaskeue -> ../P/peristasis.htm
+  diastole -> ../M/metaplasm.htm
+  diastole -> ../M/metaplasm.htm
+  diasyrmus -> ../Groupings/of%20Refutation.htm
+  diazeugma -> ../Groupings/of%20Division.htm
+  dicaeologia -> ../P/paromologia.htm
+  dicaeologia -> ../Groupings/of%20Refutation.htm
+  digressio -> ../E/epanodos.htm
+  digressio -> ../Groupings/of%20amplification.htm
+  distributio -> ../Groupings/of%20Division.htm
+  distributio -> ../T/taxis.htm
+  ecphonesis -> ../Groupings/of%20Pathos.htm
+  ecphrasis -> ../Groupings/of%20Description.htm
+  ecphrasis -> ../H/hypotyposis.htm
+  ecthlipsis -> ../M/metaplasm.htm
+  ecthlipsis -> ../Groupings/of%20Omission.htm
+  ecthlipsis -> ../M/metaplasm.htm
+  effictio -> ../Groupings/of%20Description.htm
+  ellipsis -> ../Groupings/of%20Omission.htm
+  enallage -> ../Groupings/of%20Substitution.htm
+  enallage -> ../Groupings/of%20Grammar.htm
+  enantiosis -> ../P/paradox.htm
+  enargia -> ../Groupings/of%20Description.htm
+  encomium -> ../../Pedagogy/Progymnasmata/Encomium.htm
+  encomium -> ../../Pedagogy/Progymnasmata/Encomium.htm
+  enigma -> ../P/paradox.htm
+  enigma -> ../N/noema.htm
+  enigma -> ../S/schematismus.htm
+  enumeratio -> ../Groupings/of%20Division.htm
+  enumeratio -> ../Groupings/of%20amplification.htm
+  epanalepsis -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  epenthesis -> ../Groupings/Vices.htm
+  epenthesis -> ../M/metaplasm.htm
+  epexegesis -> ../Groupings/of%20amplification.htm
+  epiphonema -> ../Groupings/of%20Summary.htm
+  epiphonema -> ../M/maxim.htm
+  epiphonema -> ../Groupings/of%20amplification.htm
+  epiplexis -> ../Groupings/of%20Pathos.htm
+  epiplexis -> ../R/rhetorical%20questions.htm
+  epistrophe -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  episynaloephe -> ../M/metaplasm.htm
+  episynaloephe -> ../M/metaplasm.htm
+  epizeuxis -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  erotema -> ../Groupings/of%20Refutation.htm
+  erotema -> ../R/rhetorical%20questions.htm
+  ethopoeia -> ../Groupings/of%20Description.htm
+  eutrepismus -> ../Groupings/of%20Division.htm
+  eutrepismus -> ../Groupings/of%20Order.htm
+  eutrepismus -> ../Groupings/of%20amplification.htm
+  exergasia -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  exergasia -> ../Groupings/of%20amplification.htm
+  expeditio -> ../Groupings/of%20Division.htm
+  expeditio -> ../Groupings/of%20Refutation.htm
+  expeditio -> ../Groupings/of%20Reasoning.htm
+  expeditio -> ../Groupings/of%20amplification.htm
+  exuscitatio -> ../Groupings/of%20Pathos.htm
+  exuscitatio -> ../R/rhetorical%20questions.htm
+  exuscitatio -> ../Groupings/of%20Ethos.htm
+  elenchus -> ../Groupings/of%20Refutation.htm
+  ennoia -> ../P/paralipsis.htm
+  hendiadys -> ../P/paradiastole.htm
+  hendiadys -> ../Groupings/of%20Division.htm
+  homoeoprophoron -> ../P/paroemion.htm
+  homoeoprophoron -> ../Groupings/Vices.htm
+  homoeoprophoron -> ../P/paroemion.htm
+  homoioptoton -> homoioteleuton.htm
+  homoioptoton -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  homoioptoton -> ../Groupings/of%20Parallelism.htm
+  hypallage -> ../Groupings/of%20Order.htm
+  hypallage -> ../Groupings/Vices.htm
+  hyperbole -> ../Groupings/of%20Excess%20and%20Superfluity.htm
+  hyperbole -> ../Groupings/of%20amplification.htm
+  hypozeuxis -> hypozeugma.htm
+  hypozeuxis -> ../Groupings/of%20Division.htm
+  hypozeuxis -> ../Groupings/Grammatical%20Schemes.htm
+  hysterologia -> ../Groupings/Grammatical%20Schemes.htm
+  hysterologia -> hyperbaton.htm
+  hysteron-proteron -> ../Groupings/of%20Order.htm
+  hysteron-proteron -> hyperbaton.htm
+  icon -> ../Groupings/of%20Description.htm
+  icon -> ../P/parabola.htm
+  icon -> ../../Pedagogy/Progymnasmata/Comparison.htm
+  in-utrumque-partes -> ../D/DIRIMENS%20COPULATIO-v.HTM
+  in-utrumque-partes -> ../Groupings/of%20Refutation.htm
+  in-utrumque-partes -> ../Groupings/of%20Balance.htm
+  interrogatio -> ../R/rhetorical%20questions.htm
+  irony -> ../P/paralipsis.htm
+  irony -> ../E/epitrope.htm
+  irony -> ../M/mycterismus.htm
+  isocolon -> ../T/tricolon.htm
+  isocolon -> ../Groupings/of%20Parallelism.htm
+  isocolon -> ../Groupings/of%20Repetition.htm
+  isocolon -> ../Groupings/of%20Rhythm.htm
+  isocolon -> ../Groupings/of%20Grammar.htm
+  litotes -> ../Groupings/of%20Ethos.htm
+  litotes -> ../Groupings/of%20Refutation.htm
+  macrologia -> ../Groupings/Vices.htm
+  mempsis -> ../Groupings/of%20Pathos.htm
+  merismus -> ../Groupings/of%20Division.htm
+  mesozeugma -> ../H/hypozeugma.htm
+  mesozeugma -> ../Groupings/of%20Division.htm
+  metabasis -> ../Groupings/of%20amplification.htm
+  metalepsis -> ../Groupings/of%20Substitution.htm
+  metastasis -> ../Groupings/of%20Refutation.htm
+  metathesis -> metaplasm.htm
+  metathesis -> ../H/hyperbaton.htm
+  metathesis -> ../Groupings/of%20Order.htm
+  metathesis -> metaplasm.htm
+  metathesis -> ../P/paronomasia.htm
+  ominatio -> ../Groupings/of%20Pathos.htm
+  onomatopoeia -> ../Groupings/of%20Sound.htm
+  oxymoron -> ../P/paradox.htm
+  paradigma -> parabola.htm
+  paradigma -> parabola.htm
+  paradigma -> ../H/homoeosis.htm
+  paragoge -> ../M/metaplasm.htm
+  parecbasis -> ../Groupings/of%20word%20order.htm
+  parecbasis -> paradiegesis.htm
+  paregmenon -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  parelcon -> ../Groupings/Vices.htm
+  parenthesis -> ../Groupings/of%20Interruption.htm
+  parenthesis -> ../Groupings/of%20Order.htm
+  parenthesis -> ../Groupings/of%20Definition.htm
+  paroemia -> ../G/gnome.htm
+  paroemia -> ../M/maxim.htm
+  paroemia -> proverb.htm
+  paroemia -> ../S/sententia.htm
+  paroemia -> ../../Pedagogy/Progymnasmata/Chreia.htm
+  parrhesia -> perissologia.htm
+  parrhesia -> ../Groupings/Vices.htm
+  pathopoeia -> ../Groupings/of%20Pathos.htm
+  periergia -> ../Groupings/of%20Excess%20and%20Superfluity.htm
+  periergia -> ../Groupings/Vices.htm
+  periphrasis -> ../Groupings/of%20Substitution.htm
+  periphrasis -> ../Groupings/of%20amplification.htm
+  pleonasm -> perissologia.htm
+  pleonasm -> ../Groupings/Vices.htm
+  ploce -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  polyptoton -> ../Groupings/of%20Wordplay.htm
+  polyptoton -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  polysyndeton -> period.htm
+  polysyndeton -> ../Groupings/of%20Grammar.htm
+  polysyndeton -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  pragmatographia -> ../Groupings/of%20Description.htm
+  procatalepsis -> ../Groupings/of%20Refutation.htm
+  procatalepsis -> ../Groupings/of%20amplification.htm
+  proecthesis -> ../E/enthymeme.htm
+  proecthesis -> ../Groupings/of%20Reasoning.htm
+  prolepsis -> ../Groupings/of%20Time.htm
+  prosapodosis -> ../Groupings/of%20Division.htm
+  prosapodosis -> ../Groupings/of%20Reasoning.htm
+  prosapodosis -> ../E/enthymeme.htm
+  proslepsis -> paralipsis.htm
+  proslepsis -> paralipsis.htm
+  prosonomasia -> paronomasia.htm
+  prosopographia -> ../Groupings/of%20Description.htm
+  prothesis -> ../M/metaplasm.htm
+  prozeugma -> ../H/hypozeugma.htm
+  prozeugma -> ../Groupings/of%20Division.htm
+  pysma -> ../R/rhetorical%20questions.htm
+  ratiocinatio -> rhetorical%20questions.htm
+  ratiocinatio -> ../Groupings/of%20Reasoning.htm
+  refractio -> ../A/antistasis.htm
+  sarcasmus -> ../M/mycterismus.htm
+  sermocinatio -> ../P/personification.htm
+  skotison -> ../Groupings/of%20Obscuring.htm
+  skotison -> ../Groupings/Vices.htm
+  solecism -> ../Groupings/of%20Grammar.htm
+  solecism -> ../Groupings/Vices.htm
+  soraismus -> ../C/cacozelia.htm
+  soraismus -> ../../YET/HEBRAISM.HTM
+  soraismus -> ../Groupings/Vices.htm
+  syllepsis -> ../Groupings/of%20Division.htm
+  syllogismus -> ../E/enthymeme.htm
+  syllogismus -> ../Groupings/of%20Reasoning.htm
+  syllogismus -> ../E/enthymeme.htm
+  symperasma -> ../Groupings/of%20Summary.htm
+  symperasma -> ../E/epanodos.htm
+  symploce -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  synaeresis -> ../Groupings/of%20Omission.htm
+  synaeresis -> ../M/metaplasm.htm
+  synaloepha -> ../M/metaplasm.htm
+  synaloepha -> ../Groupings/of%20Omission.htm
+  synaloepha -> ../M/metaplasm.htm
+  synathroesmus -> ../Groupings/of%20amplification.htm
+  syncope -> ../M/metaplasm.htm
+  syncope -> ../Groupings/of%20Omission.htm
+  syncope -> ../M/metaplasm.htm
+  syncrisis -> ../P/parallelism.htm
+  synonymia -> ../Groupings/of%20Pathos.htm
+  synonymia -> ../Groupings/FIGURES%20OF%20REPETITION.HTM
+  synonymia -> ../Groupings/of%20amplification.htm
+  synonymia -> ../Groupings/of%20Definition.htm
+  synzeugma -> ../Groupings/of%20Division.htm
+  systole -> ../M/metaplasm.htm
+  systole -> ../M/metaplasm.htm
+  systrophe -> ../Groupings/of%20Definition.htm
+  tapinosis -> ../Groupings/of%20Definition.htm
+  tautologia -> ../Groupings/Vices.htm
+  tmesis -> ../Groupings/of%20Division.htm
+  tmesis -> ../H/hyperbaton.htm
+  topographia -> ../Groupings/of%20Description.htm
+  topothesia -> ../Groupings/of%20Description.htm
+  transplacement -> ../A/antistasis.htm
+  zeugma -> ../P/parallelism.htm
+  zeugma -> ../Groupings/of%20Division.htm
+  zeugma -> ../Groupings/of%20Parallelism.htm
+  zeugma -> ../P/parallelism.htm
+  zeugma -> ../H/hypozeugma.htm
+  zeugma -> ../E/epizeugma.htm
+  four-changes -> ../Figures/M/metaplasm.htm
+  four-changes -> ../Figures/Groupings/Vices.htm
+  four-changes -> ../Figures/Groupings/Vices.htm
+  four-changes -> ../Figures/Tropes.htm
+  four-changes -> ../Figures/Scheme.htm
+  substitution -> ../Figures/Groupings/of%20Substitution.htm
+  subtraction -> ../Figures/Groupings/of%20Omission.htm
+  transposition -> ../Figures/Groupings/of%20Order.htm
+  transposition -> ../Figures/H/hyperbaton.htm
+  amplification -> ../Figures/Groupings/of%20amplification.htm
+  copia -> ../Figures/Groupings/of%20amplification.htm
+  declamation -> ../Canons/Invention/TOPICS%20OF%20INVENTION/Division.htm
+  description -> ../../Figures/Groupings/of%20Description.htm
+  description -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Division.htm
+  description -> Encomium.htm
+  fable -> ../../Figures/P/prosopopoeia.htm
+  impersonation -> ../../Figures/P/prosopopoeia.htm
+  impersonation -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Testimony.htm#authorities
+  impersonation -> ../../Canons/Invention/TOPICS%20OF%20INVENTION/Circumstances.htm#past
+  progymnasmata -> ../../Figures/Groupings/of%20amplification.htm
+  progymnasmata -> Chreia.htm
+  progymnasmata -> Commonplace.htm
+  progymnasmata -> Encomium.htm
+  progymnasmata -> Comparison.htm
+  proverb -> ../../Figures/P/proverb.htm
+  proverb -> ../../Figures/M/maxim.htm
+  proverb -> ../../Figures/S/sentence.htm
+  proverb -> ../../Figures/Groupings/of%20Summary.htm
+  proverb -> Chreia.htm
+  refutation -> ../../Figures/Groupings/of%20Summary.htm
+  refutation -> ../../Figures/Groupings/of%20Refutation.htm
+  thesis -> ../../Figures/Groupings/of%20Refutation.htm
+  thesis -> Commonplace.htm
+  vituperation -> Encomium.htm
+  vituperation -> Commonplace.htm
+  rhetorical-analysis -> ../Canons/Invention/TOPICS%20OF%20INVENTION/TOPICS.HTM
+  ethos -> ../Figures/Groupings/of%20Ethos.htm
+  pathos -> ../Figures/Groupings/of%20Pathos.htm
+  pathos -> ../Figures/Groupings/of%20amplification.htm
+  puttenham -> ../Figures/H/hypozeugma.htm
+  puttenham -> ../Figures/H/hyperbaton.htm
+  puttenham -> ../Figures/H/homoioteleuton.htm
+  puttenham -> ../Figures/P/paroemion.htm
+  puttenham -> ../Figures/P/period.htm
+  puttenham -> ../Figures/P/paradiastole.htm
+  puttenham -> ../Figures/M/mycterismus.htm
+  puttenham -> ../Figures/E/epimone.htm
+  puttenham -> ../Figures/P/paradox.htm
+  puttenham -> ../Figures/E/epitrope.htm
+  puttenham -> ../Figures/N/noema.htm
+  puttenham -> ../Figures/G/gnome.htm
+  puttenham -> ../Figures/S/sententia.htm
+  puttenham -> ../Figures/H/hypotyposis.htm
+  puttenham -> ../Figures/P/prosopopoeia.htm
+  puttenham -> ../Figures/H/homoeosis.htm
+  puttenham -> ../Figures/P/parabola.htm
+  timeline -> Aristotle.htm
+  timeline -> Ad%20Herennium.htm
+  timeline -> Cicero-DeOratore.htm
+  timeline -> Quintilian.htm
+  timeline -> Vives.htm
+  timeline -> Sherry.htm
+  timeline -> Suarez.htm
+  timeline -> Rainolde.htm
+  timeline -> Peacham.htm
+  timeline -> Fraunce.htm
+  timeline -> Day.htm
+  timeline -> Spauter.htm
+  sources-primary -> ../Primary%20Texts/Ad%20Herennium.htm
+  sources-primary -> ../Primary%20Texts/Aristotle.htm
+  sources-primary -> ../Primary%20Texts/Cicero-DeOratore.htm
+  sources-primary -> ../Primary%20Texts/Demetrius.htm
+  sources-primary -> ../Primary%20Texts/Mosellanus.htm
+  sources-primary -> ../Primary%20Texts/Peacham.htm
+  sources-primary -> ../Primary%20Texts/Quintilian.htm
+  sources-primary -> Sources-Secondary.htm
+  sources-primary -> Sources-Secondary.htm
+  sources-primary -> ../Primary%20Texts/Suarez.htm
+  sources-primary -> ../Primary%20Texts/Susenbrotus.htm
+  sources-primary -> ../Primary%20Texts/Vives.htm
