@@ -42,7 +42,7 @@
 		5429161F3A173DE0E10CFDB5 /* DatabaseExtractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D8A500B4DCDAB77F1543A6 /* DatabaseExtractionView.swift */; };
 		5A23FF7269B076C591BD4AEB /* NormalizationPatternDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F305934FD5294013366C1B0A /* NormalizationPatternDAO.swift */; };
 		5E65C86D4667511E6F336BD2 /* AuthorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002835C2C7051D7971CD1EFF /* AuthorListView.swift */; };
-		60D4B4D43DA2F3D86519158C /* homer_iliad_chamberlain_audio.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */; };
+		60D4B4D43DA2F3D86519158C /* homer_iliad_chamberlain_audio.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */; settings = {ASSET_TAGS = (audio_full, ); }; };
 		62F062B5AC4594D8C1AC8C90 /* SimpleWordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06D1EBBDBAB2B263A6AED95 /* SimpleWordDetailView.swift */; };
 		66D7C1FB87DDBC9592DCBA9C /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A437DD254FF072DDC14795 /* ReaderView.swift */; };
 		6851F2B6CF97911B8BA02029 /* ZIPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DF09804345C531CE3E1046 /* ZIPHandler.swift */; };
@@ -91,7 +91,7 @@
 		C78C8F21DEE3661F4255FA41 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA6136E31F2592ED165C120 /* ColorExtensions.swift */; };
 		D11EF9F4729C2D9F11E8B901 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B570D3AFBCCEB7ADCEC7C665 /* LicenseView.swift */; };
 		D28A73CE7465AD09EF9C3EDD /* ODRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BE640EC87BD121CF9F6ED8 /* ODRManager.swift */; };
-		D46E5D36620E57BC9703CE2C /* perseus_texts_full.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = A3D904E8530DE7DD3B2701C1 /* perseus_texts_full.db.zip */; };
+		D46E5D36620E57BC9703CE2C /* perseus_texts_full.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = A3D904E8530DE7DD3B2701C1 /* perseus_texts_full.db.zip */; settings = {ASSET_TAGS = (database_full, ); }; };
 		D561F7B13C1553E652BD76B7 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1713254AC15E6ADCB35D4 /* ErrorView.swift */; };
 		DA571B70C932CF5AFCF57BF5 /* DictionaryLookupHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B801930BD468076772C20B /* DictionaryLookupHelper.swift */; };
 		DE80CC62911D9107F61F4C79 /* DatabaseErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC7A6A74611040A73516CA /* DatabaseErrorView.swift */; };
@@ -99,7 +99,7 @@
 		E140AA264A38B14F6DF4F9FA /* BookmarkCSVHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C871B58D72526C98AA89102F /* BookmarkCSVHandler.swift */; };
 		E249A10D9CE1A77DFC6B0640 /* LineDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5A0583CD8A67018F0C27E /* LineDAO.swift */; };
 		E58CCC4A124E036A2D050E92 /* BookDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA2F05C725B45FC9A686942 /* BookDAO.swift */; };
-		E77AFFF10FF935E8E6C1B6BF /* perseus_texts_extended.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */; };
+		E77AFFF10FF935E8E6C1B6BF /* perseus_texts_extended.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */; settings = {ASSET_TAGS = (database_extended, ); }; };
 		E86372F678CDDDCBE5FB2854 /* AudioManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FE750B72A328D3FD62742 /* AudioManagementView.swift */; };
 		F0EB61230994A25AF5A48565 /* AssetPackStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752838F15E6E9A428468EBCE /* AssetPackStatus.swift */; };
 		F246FAD151E1FFEF6FBA844B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B4D76BC0D6F1A2A380E0B /* ContentView.swift */; };
@@ -444,6 +444,11 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				KnownAssetTags = (
+					audio_full,
+					database_extended,
+					database_full,
+				);
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					04B9FF9F56AA35BF8FDA4066 = {
