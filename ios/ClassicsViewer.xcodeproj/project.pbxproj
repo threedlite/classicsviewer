@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -147,7 +147,7 @@
 		612C3933F9ED5E4EEAB95D4C /* ReaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewModel.swift; sourceTree = "<group>"; };
 		61F4711E7801A1480E27CC18 /* perseus_texts.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts.db.zip; sourceTree = "<group>"; };
 		621749C86FA8379D22045183 /* RhetoricDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhetoricDatabase.swift; sourceTree = "<group>"; };
-		638561D43FE04A231D565206 /* ClassicsViewer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ClassicsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		638561D43FE04A231D565206 /* ClassicsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassicsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		653E2B7519773ECDFA4837E3 /* RhetoricViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhetoricViews.swift; sourceTree = "<group>"; };
 		668E7F7C3AB1C4BE19A52616 /* AuthorDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDAO.swift; sourceTree = "<group>"; };
 		6853075EEC57845B47304212 /* WordDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDAO.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		76A0E9169A72D7756A655E55 /* TranslationDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationDebugView.swift; sourceTree = "<group>"; };
 		79DAE08B665DEC1BEC0EE4B8 /* ClassicsViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicsViewerApp.swift; sourceTree = "<group>"; };
 		7B72B5826023689D8EA5A1F7 /* UserDictionaryDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDictionaryDAO.swift; sourceTree = "<group>"; };
-		7C500B1AA765FC985F2251FD /* .gitignore */ = {isa = PBXFileReference; path = .gitignore; sourceTree = "<group>"; };
+		7C500B1AA765FC985F2251FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		84EB9F744216E85A99269189 /* DatabaseSchemaValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSchemaValidator.swift; sourceTree = "<group>"; };
 		8A742E92F760F53753B3ECE6 /* AgeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeVerificationView.swift; sourceTree = "<group>"; };
 		96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts_extended.db.zip; sourceTree = "<group>"; };
@@ -447,7 +447,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					04B9FF9F56AA35BF8FDA4066 = {
-						DevelopmentTeam = "";
 						OnDemandResourcesInitialInstallTags = (
 						);
 						OnDemandResourcesPrefetchOrder = (
@@ -466,11 +465,10 @@
 			mainGroup = 69CC79FA3ACAB7A8D8165489;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite" */,
 				FF4A1075A50F244B6559C8E2 /* XCRemoteSwiftPackageReference "SwiftCSV" */,
 				596682DFF08B4EDB039329E5 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -668,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -685,12 +683,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MN9N7C8UTV;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_ON_DEMAND_RESOURCES = YES;
 				INFOPLIST_FILE = ClassicsViewer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -707,12 +705,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MN9N7C8UTV;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_ON_DEMAND_RESOURCES = YES;
 				INFOPLIST_FILE = ClassicsViewer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -769,7 +767,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -812,7 +810,7 @@
 				minimumVersion = 0.9.0;
 			};
 		};
-		E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+		E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
 			requirement = {
@@ -838,7 +836,7 @@
 		};
 		A7606BB793E504BB637A90C6 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			package = E18F8D80C024BABF97BB2356 /* XCRemoteSwiftPackageReference "SQLite" */;
 			productName = SQLite;
 		};
 		C02E87EE408287044F3229FE /* ZIPFoundation */ = {

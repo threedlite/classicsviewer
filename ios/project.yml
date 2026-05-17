@@ -2,7 +2,7 @@ name: ClassicsViewer
 options:
   bundleIdPrefix: com.classicsviewer
   deploymentTarget:
-    iOS: 18.0
+    iOS: 26.0
   createIntermediateGroups: true
   
 packages:
@@ -20,7 +20,7 @@ targets:
   ClassicsViewer:
     type: application
     platform: iOS
-    deploymentTarget: 18.0
+    deploymentTarget: 26.0
     sources:
       - path: ClassicsViewer
         excludes:

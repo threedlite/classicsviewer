@@ -112,6 +112,12 @@ struct SettingsView: View {
                             Text("Practice Alphabets")
                         }
                     }
+                    NavigationLink(destination: RhetoricSectionListView()) {
+                        HStack {
+                            Image(systemName: "text.book.closed")
+                            Text("Rhetoric")
+                        }
+                    }
                 }
 
                 // Languages Section

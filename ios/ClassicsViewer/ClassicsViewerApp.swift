@@ -95,7 +95,13 @@ struct ClassicsViewerApp: App {
 
 @MainActor
 class AppState: ObservableObject {
+    // Release builds gate on the iOS 26 DeclaredAgeRange API. That API does not
+    // function in the Simulator, so debug builds skip the gate to stay usable.
+    #if DEBUG
+    @Published var isAgeVerified = true
+    #else
     @Published var isAgeVerified = false
+    #endif
     @Published var isDatabaseReady = false
     @Published var isExtracting = false
     @Published var extractionProgress: Double = 0.0
