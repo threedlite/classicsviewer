@@ -690,6 +690,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ClassicsViewer/ClassicsViewer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;
@@ -711,6 +712,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ClassicsViewer/ClassicsViewer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_BITCODE = NO;

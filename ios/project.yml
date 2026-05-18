@@ -54,6 +54,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.classicsviewer.app
         DEVELOPMENT_TEAM: ""
         INFOPLIST_FILE: ClassicsViewer/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ClassicsViewer/ClassicsViewer.entitlements
         SWIFT_VERSION: 5.9
         TARGETED_DEVICE_FAMILY: 1,2
         ENABLE_BITCODE: NO
