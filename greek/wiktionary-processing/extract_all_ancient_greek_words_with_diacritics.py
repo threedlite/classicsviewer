@@ -265,6 +265,40 @@ def is_ancient_greek_entry(content):
     """Check if the entry contains Ancient Greek content"""
     return '==Ancient Greek==' in content
 
+def _strip_all_templates(text):
+    """Remove every {{...}} template (innermost-first, so nested templates
+    like a t={{l|en|...}} param inside {{inflection of}} are handled) and
+    reduce [[link|text]] / [[link]] wiki markup to its display text."""
+    prev = None
+    while prev != text:
+        prev = text
+        text = re.sub(r'\{\{[^{}]*\}\}', '', text)
+    text = re.sub(r'\[\[(?:[^\[\]|]*\|)?([^\[\]]*)\]\]', r'\1', text)
+    return text
+
+def _is_pure_inflection_line(line):
+    """True if a Wiktionary '#' definition line is purely an inflection-of
+    reference and carries no lemma gloss of its own.
+
+    An inflected-form line references an {{inflection of}}/{{infl of}}
+    template and is otherwise built entirely of templates — dialect/register
+    labels ({{lb}}, {{q}}), the inflection-of template itself, movable-nu and
+    other tags ({{grc-movable nu}}) — with no free-text gloss. A lemma line
+    instead carries real prose ("rage; wrath ..."). So: the line is a pure
+    inflection iff it references inflection-of AND, once every template and
+    wiki-link is stripped, no alphabetic gloss text remains.
+
+    Catches plain forms (`{{infl of|grc|μῆνῐς||acc|s}}`), epic/poetic name
+    forms with a leading label (`{{lb|grc|epi}} {{infl of|grc|Αἴᾱς||dat|p}}`),
+    movable-nu forms (`... {{infl of|...}} {{grc-movable nu}}`), and forms
+    whose inflection-of template has a nested param (`...|t={{l|en|...}}}}`).
+    """
+    if not re.search(r'\{\{\s*(inflection of|infl of)\b', line):
+        return False
+    residue = _strip_all_templates(line)
+    # Any remaining alphabetic character (Greek or Latin) is a real gloss.
+    return not re.search(r'[^\W\d_]', residue)
+
 def extract_all_greek_words(cache_path, output_path):
     """Extract all Ancient Greek words including standalone lemmas"""
     print(f"=== ENHANCED ANCIENT GREEK WORD EXTRACTION (WITH DIACRITICS) ===")
@@ -476,6 +510,20 @@ def extract_all_greek_words(cache_path, output_path):
                 }
                 stats['with_definitions'] += 1
                 continue
+
+        # A page whose '#' definition lines are present but consist ENTIRELY
+        # of inflection-of references is an inflected word form, not a lemma —
+        # do not emit it as a type:'lemma' definition entry. Downstream,
+        # combine_dictionaries_to_lemma_map.py turns every dictionary headword
+        # into a confidence-1.0 word_form==lemma self-mapping; for an inflected
+        # form that row then outranks the genuine inflected-form -> lemma rows
+        # in getLemmaForWord, collapsing the dictionary "occurrences" feature
+        # to exact-form matches only. The form stays fully resolvable via
+        # lemma_map. (Pages with NO '#' line — e.g. mythic/proper-noun entries
+        # that only carry a POS heading — are unaffected and still reach the
+        # POS fallback below.)
+        if def_lines and all(_is_pure_inflection_line(line) for line in def_lines):
+            continue
 
         # Fallback: try etymology. Match `t=` or `lit=` params inside affix/
         # compound templates. `lit=` carries the literal meaning of compounds

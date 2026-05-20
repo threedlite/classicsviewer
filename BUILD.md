@@ -220,8 +220,8 @@ The extended build has a strict four-phase pipeline. Each phase depends on the p
 cd greek/build_modules/generate_interlinear
 
 # Greek interlinear (~7 hours, 8 workers, ~2,049 works)
-# DB path: ../../../greek/greek_texts.db  (relative from the generator dir)
-./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../greek_texts.db 8
+# DB path: ../../../greek/greek_texts_extended.db  (relative from the generator dir)
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../greek_texts_extended.db 8
 # Monitor: tail -f generation.log
 # Check:   grep -c "Work .* done" generation.log
 
@@ -235,10 +235,10 @@ Output: ~2,000 XML files in `greek/interlinear_output/` (mirroring `latin/interl
 ### Rebuilding after a Perseus / First1K / PTA update
 
 When the upstream Greek corpora change, run `greek/rebuild_after_update.sh` (wraps the 3-pass rhythm described below). It:
-1. Builds `greek/greek_texts.db` with whatever XMLs exist now (Pass 1).
+1. Builds `greek/greek_texts_extended.db` with whatever XMLs exist now (Pass 1).
 2. Regenerates `INTERLINEAR_ALL_GREEK_WITH_IDS.csv` from the fresh DB (new works picked up, removed works dropped).
 3. Regenerates every Greek interlinear XML (Pass 2 — ~5-7 hours, atomic writes, kill-safe).
-4. Rebuilds `greek/greek_texts.db` importing the fresh XMLs (Pass 3).
+4. Rebuilds `greek/greek_texts_extended.db` importing the fresh XMLs (Pass 3).
 
 The Latin module and the assembly step are independent — run them after this script finishes:
 
@@ -314,7 +314,7 @@ Each script creates a `*_texts.db` file that is merged into the Perseus database
 
 ### Greek module (required for every release)
 
-Greek has its own module (`greek/run_build.sh`, mirroring `latin/run_build.sh`). It produces `greek/greek_texts.db` (or `greek/greek_texts_ios.db` for iOS) with canonical schema. **Mode must match your release target.**
+Greek has its own module (`greek/run_build.sh`, mirroring `latin/run_build.sh`). It produces a per-mode DB `greek/greek_texts_<mode>.db` (e.g. `greek_texts_sample.db`, `greek_texts_full.db`, `greek_texts_extended.db`, `greek_texts_ios.db`) with canonical schema. **Mode must match your release target.**
 
 ```bash
 cd greek && ./run_build.sh sample   && cd ..   # for sample release (~5 min)
