@@ -16,3 +16,4 @@ rootProject.name = "ClassicsViewer"
 include ':app'
 include ':full_database_pack'
 include ':audio_pack'
+include ':references_pack'

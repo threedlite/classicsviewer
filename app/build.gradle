@@ -12,7 +12,7 @@ android {
     // The AAB will be ~1.4GB total, but Google Play handles this:
     // - Base APK (~170MB) downloads on install
     // - Asset pack (~1.3GB) downloads only when user requests it
-    assetPacks = [":full_database_pack", ":audio_pack"]
+    assetPacks = [":full_database_pack", ":audio_pack", ":references_pack"]
 
     // Load keystore properties if available
     def keystorePropertiesFile = file("keystore.properties")
@@ -36,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 125
-        versionName "0.8.125"
+        versionCode 126
+        versionName "0.8.126"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -235,12 +235,59 @@ task checkAudioExists {
     }
 }
 
+// Task to copy reference PDFs + manifest into the references_pack asset pack
+// (and into app/src/debug/assets/references/ so debug APK builds can read them
+// directly, since asset packs are AAB-only).
+task copyReferencesToAssets {
+    doLast {
+        def referencesDir = file("$rootDir/references")
+        def packAssets = file("$rootDir/references_pack/src/main/assets")
+        def debugAssets = file("$projectDir/src/debug/assets/references")
+        def manifest = file("$packAssets/references_manifest.json")
+
+        if (!referencesDir.exists()) {
+            throw new GradleException("ERROR: $referencesDir does not exist")
+        }
+
+        packAssets.mkdirs()
+        debugAssets.mkdirs()
+
+        def pdfs = fileTree(referencesDir) { include '*.pdf' }.files
+        if (pdfs.isEmpty()) {
+            throw new GradleException("ERROR: no PDFs found in $referencesDir")
+        }
+
+        pdfs.each { pdf ->
+            copy { from pdf; into packAssets }
+            copy { from pdf; into debugAssets }
+        }
+
+        // Regenerate the manifest via the bundled Python script.
+        def venvPython = file("$rootDir/venv/bin/python3")
+        def python = venvPython.exists() ? venvPython.absolutePath : 'python3'
+        exec {
+            workingDir rootDir
+            commandLine python, "$rootDir/references_pack/build_manifest.py"
+        }
+
+        // Copy the freshly-generated manifest into debug assets too.
+        if (manifest.exists()) {
+            copy { from manifest; into debugAssets }
+        } else {
+            throw new GradleException("ERROR: build_manifest.py did not produce $manifest")
+        }
+
+        println "✓ References pack populated: ${pdfs.size()} PDF(s) + manifest"
+    }
+}
+
 // Make sure database and audio checks run before building
-// Also copy font and audio files before build
+// Also copy font, audio, and reference files before build
 preBuild.dependsOn checkDatabaseExists
 preBuild.dependsOn copyFontToAssets
 preBuild.dependsOn copyAudioToAssets
 preBuild.dependsOn checkAudioExists
+preBuild.dependsOn copyReferencesToAssets
 
 // Task to check AAB size after building
 task checkAabSize {

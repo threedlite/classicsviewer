@@ -102,6 +102,15 @@ struct SettingsView: View {
                             AudioStatusBadge()
                         }
                     }
+
+                    NavigationLink(destination: ReferencesDownloadView()) {
+                        HStack {
+                            Image(systemName: "books.vertical")
+                            Text("Reference Grammars")
+                            Spacer()
+                            ReferencesStatusBadge()
+                        }
+                    }
                 }
 
                 // Learning Section
@@ -116,6 +125,14 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "text.book.closed")
                             Text("Rhetoric")
+                        }
+                    }
+                    if UserDefaults.standard.referencesInstalled {
+                        NavigationLink(destination: ReferencesListView()) {
+                            HStack {
+                                Image(systemName: "books.vertical.fill")
+                                Text("References")
+                            }
                         }
                     }
                 }
@@ -558,6 +575,29 @@ struct ExtendedDatabaseStatusBadge: View {
                 Text("Ready")
                     .font(.caption)
                     .foregroundColor(.blue)
+            case .downloading:
+                ProgressView()
+                    .scaleEffect(0.7)
+            default:
+                EmptyView()
+            }
+        }
+        .task {
+            await manager.checkStatus()
+        }
+    }
+}
+
+struct ReferencesStatusBadge: View {
+    @StateObject private var manager = ReferencesAssetDownloadManager.shared
+
+    var body: some View {
+        Group {
+            switch manager.status {
+            case .installed:
+                Text("Installed")
+                    .font(.caption)
+                    .foregroundColor(.green)
             case .downloading:
                 ProgressView()
                     .scaleEffect(0.7)

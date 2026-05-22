@@ -185,16 +185,23 @@ def main():
         work_ids = _select_work_ids(args.mode, src, interlinear_dir)
 
         print(f"[greek] Importing interlinear for {len(work_ids)} Greek works")
-        if args.mode == "extended" and len(work_ids) < 100:
+        # Allow len(work_ids) == 0 as the legitimate bootstrap path: extended builds
+        # run before interlinear generation produce an empty interlinear_output/ on a
+        # from-scratch clone. Partial-but-nonzero (1..99) still aborts to catch
+        # accidentally-interrupted interlinear generation.
+        if args.mode == "extended" and 0 < len(work_ids) < 100:
             print(f"[greek] ERROR: Extended mode has only {len(work_ids)} interlinear XMLs "
-                  f"(expected ~1,900+). Run Greek interlinear generation first (BUILD.md Step 5).")
+                  f"(expected ~1,900+ or 0 for bootstrap). Run Greek interlinear generation first (BUILD.md Step 5).")
             sys.exit(1)
-        monolith_fn.import_interlinear_translations(
-            src_name,
-            work_ids=work_ids,
-            interlinear_dir=interlinear_dir,
-            mode="extended" if args.mode == "extended" else "full",
-        )
+        if work_ids:
+            monolith_fn.import_interlinear_translations(
+                src_name,
+                work_ids=work_ids,
+                interlinear_dir=interlinear_dir,
+                mode="extended" if args.mode == "extended" else "full",
+            )
+        else:
+            print(f"[greek] No interlinear XMLs available — bootstrap pass (will be re-run after interlinear generation).")
 
         # Dump the XML-pattern diagnostic file. The old monolith did this at
         # the tail of its __main__; after the split, it's the greek module's

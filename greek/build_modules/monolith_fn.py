@@ -8431,10 +8431,19 @@ def analyze_first1k_overlap(data_sources_path):
         print(f"Warning: First1KGreek directory not found at {first1k_dir}")
         return {}
 
+    # Walk every textgroup / work directory in First1KGreek rather than
+    # restricting to specific URN-namespace prefixes. The CTS convention is
+    # that metadata is in `__cts__.xml` and non-content paths are dot-files;
+    # anything else is a real textgroup/work directory. An allow-list of
+    # known prefixes (tlg/stoa/ogl) silently dropped legitimate Greek works
+    # whose URN namespace happened to use a different prefix:
+    #   - ggm0001 (Geographi Graeci Minores) — entire textgroup skipped
+    #   - tlg0591/1st1K001, tlg0593/1st1K002, tlg0610/perseus002,
+    #     tlg0643/opp003, tlg1409/opp003, ... — work dirs skipped
+    # The exclude-list below mirrors the convention used by
+    # process_perseus_author and is strictly additive in the current corpus.
     for author_dir in first1k_dir.iterdir():
-        if author_dir.is_dir() and (author_dir.name.startswith("tlg") or
-                                   author_dir.name.startswith("stoa") or
-                                   author_dir.name.startswith("ogl")):
+        if author_dir.is_dir() and not author_dir.name.startswith(("__", ".")):
             author_id = author_dir.name
 
             # Try to get author name
@@ -8452,9 +8461,7 @@ def analyze_first1k_overlap(data_sources_path):
                     pass
 
             for work_dir in author_dir.iterdir():
-                if work_dir.is_dir() and (work_dir.name.startswith("tlg") or
-                                        work_dir.name.startswith("stoa") or
-                                        work_dir.name.startswith("ogl")):
+                if work_dir.is_dir() and not work_dir.name.startswith(("__", ".")):
                     work_id = f"{author_id}.{work_dir.name}"
 
                     # Check for Greek text files

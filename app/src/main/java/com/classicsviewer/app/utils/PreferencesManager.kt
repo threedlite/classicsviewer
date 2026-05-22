@@ -26,6 +26,39 @@ object PreferencesManager {
     private const val KEY_FULL_AUDIO_INSTALLED = "full_audio_installed"
     private const val KEY_ENABLE_DEPENDENCY_TREE = "enable_dependency_tree"
     private const val KEY_CASE_COLORING = "case_coloring"
+    private const val KEY_REF_PAGE = "references.page."
+    private const val KEY_REF_ZOOM = "references.zoom."
+    private const val KEY_REF_SCROLLX = "references.scrollX."
+    private const val KEY_REF_SCROLLY = "references.scrollY."
+
+    data class ReferenceState(
+        val page: Int,
+        val zoom: Float,
+        val scrollX: Float,
+        val scrollY: Float,
+    )
+
+    fun getReferenceState(context: Context, entryId: String): ReferenceState? {
+        val prefs = getPrefs(context)
+        if (!prefs.contains(KEY_REF_PAGE + entryId)) return null
+        return ReferenceState(
+            page = prefs.getInt(KEY_REF_PAGE + entryId, 0),
+            zoom = prefs.getFloat(KEY_REF_ZOOM + entryId, 1.0f),
+            scrollX = prefs.getFloat(KEY_REF_SCROLLX + entryId, 0f),
+            scrollY = prefs.getFloat(KEY_REF_SCROLLY + entryId, 0f),
+        )
+    }
+
+    fun setReferenceState(context: Context, entryId: String, s: ReferenceState) {
+        getPrefs(context).edit()
+            .putInt(KEY_REF_PAGE + entryId, s.page)
+            .putFloat(KEY_REF_ZOOM + entryId, s.zoom)
+            .putFloat(KEY_REF_SCROLLX + entryId, s.scrollX)
+            .putFloat(KEY_REF_SCROLLY + entryId, s.scrollY)
+            .apply()
+    }
+
+    fun getLastReadPage(context: Context, entryId: String): Int? = getReferenceState(context, entryId)?.page
 
     private val gson = Gson()
     

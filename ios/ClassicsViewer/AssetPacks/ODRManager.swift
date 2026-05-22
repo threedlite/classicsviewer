@@ -12,6 +12,7 @@ actor ODRManager {
         case audioFull = "audio_full"
         case databaseFull = "database_full"
         case databaseExtended = "database_extended"
+        case references = "references"
     }
 
     // MARK: - Download Status
@@ -152,6 +153,8 @@ actor ODRManager {
             return AssetPackInfo.databaseFull.compressedSize
         case .databaseExtended:
             return AssetPackInfo.databaseExtended.compressedSize
+        case .references:
+            return AssetPackInfo.references.compressedSize
         }
     }
 

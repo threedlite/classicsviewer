@@ -164,7 +164,7 @@ cd ../..
 The morphological analysis uses a cached extraction from Wiktionary. Use the bundled script to download the dump and rebuild the cache:
 
 ```bash
-cd data-prep/wiktionary-processing
+cd greek/wiktionary-processing
 ./build_greek_pages_cache.sh --el    # Downloads en+el dumps (~1.8 GB total), extracts Greek pages cache (~5 min)
 cd ../..
 ```
@@ -214,16 +214,25 @@ The extended build has a strict four-phase pipeline. Each phase depends on the p
 
 ⚠ **This is the most time-consuming step and the most commonly skipped — but without it, ~80% of translation data is missing.** The interlinear XMLs are NOT committed to git (too large). They must be regenerated on every fresh clone.
 
-⚠ **Do NOT start interlinear generation until the first assembly pass (Step 7) is complete, with OGA lemmas included.** The interlinear generator reads dictionary and lemma data from the assembled database to produce glosses. If OGA was not installed before the build, the glosses will be incomplete.
+⚠ **Strict ordering — chicken and egg.** The interlinear generator reads OGA lemmas from the *assembled* extended DB (it aborts if it sees 0 OGA entries). The first extended assembly in turn reads `greek/greek_texts_extended.db`. So the from-scratch order is:
+1. Greek extended **pass 1** (bootstrap, empty `interlinear_output/`) → writes `greek/greek_texts_extended.db`.
+2. First extended assembly → writes `data-prep/perseus_texts_extended.db` with OGA lemmas.
+3. Interlinear generation reads the *assembled* DB and writes XMLs into `greek/interlinear_output/`.
+4. Greek extended **pass 2** rebuilds `greek/greek_texts_extended.db` importing the fresh XMLs.
+5. Second extended assembly produces the shippable DB.
+
+If OGA was not installed before the assembly, **interlinear generation will hard-abort** on startup with `Database has 0 OGA lemma entries` — the build breaks, it does not silently degrade. Install OGA (Step 2) and re-run the assembly before retrying interlinear.
 
 ```bash
 cd greek/build_modules/generate_interlinear
 
-# Greek interlinear (~7 hours, 8 workers, ~2,049 works)
-# DB path: ../../../greek/greek_texts_extended.db  (relative from the generator dir)
-./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../greek_texts_extended.db 8
+# Greek interlinear (~7 hours, 8 workers, ~2,048 works).
+# DB MUST be the assembled extended DB (not the Greek-only module DB) — the
+# generator checks for OGA lemma entries on startup and aborts if absent.
+# OGA lemmas are inserted by assemble_database.py, not by greek/run_build.sh.
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../../data-prep/perseus_texts_extended.db 8
 # Monitor: tail -f generation.log
-# Check:   grep -c "Work .* done" generation.log
+# Check:   ls ../../interlinear_output/*.perseus-eng99.xml | wc -l    (target ~2,048)
 
 cd ../../..
 ```
@@ -232,19 +241,34 @@ Output: ~2,000 XML files in `greek/interlinear_output/` (mirroring `latin/interl
 
 **Latin interlinear is no longer generated here** — it is produced automatically by the Latin module (Step 6) and lives under `latin/interlinear_output/`.
 
-### Rebuilding after a Perseus / First1K / PTA update
+### Rebuilding after a Perseus / First1K / PTA update or on a from-scratch clone
 
-When the upstream Greek corpora change, run `greek/rebuild_after_update.sh` (wraps the 3-pass rhythm described below). It:
-1. Builds `greek/greek_texts_extended.db` with whatever XMLs exist now (Pass 1).
-2. Regenerates `INTERLINEAR_ALL_GREEK_WITH_IDS.csv` from the fresh DB (new works picked up, removed works dropped).
-3. Regenerates every Greek interlinear XML (Pass 2 — ~5-7 hours, atomic writes, kill-safe).
-4. Rebuilds `greek/greek_texts_extended.db` importing the fresh XMLs (Pass 3).
-
-The Latin module and the assembly step are independent — run them after this script finishes:
+Run the 3-pass rhythm explicitly. (An older `rebuild_after_update.sh` wrapper has been removed; the underlying commands are simple enough to run directly.)
 
 ```bash
-cd greek && ./rebuild_after_update.sh && cd ..
+# Pass 1 — Greek extended bootstrap. With an empty interlinear_output/ this
+# writes greek_texts_extended.db without importing any interlinear XMLs
+# (allowed by the 0-XML bootstrap branch in create_greek_database.py; 1..99
+# XMLs still aborts to catch interrupted generation).
+cd greek && ./run_build.sh extended && cd ..
+
+# First assembly — produces data-prep/perseus_texts_extended.db with OGA
+# lemmas, which the interlinear generator requires.
+cd data-prep && python3 assemble_database.py extended && cd ..
+
+# Pass 2 — Greek interlinear XMLs (~5-7 hours, atomic writes, kill-safe).
+# Reads OGA lemmas from the assembled DB, NOT from greek_texts_extended.db.
+cd greek/build_modules/generate_interlinear
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../../data-prep/perseus_texts_extended.db 8
+cd ../../..
+
+# Pass 3 — Greek extended rebuild importing the fresh XMLs.
+cd greek && ./run_build.sh extended && cd ..
+
+# Latin extended (independent — has its own built-in interlinear, ~2 min).
 cd latin && ./run_build.sh extended && cd ..
+
+# Second assembly — full extended DB with all interlinear translations.
 cd data-prep && python3 assemble_database.py extended && cd ..
 ```
 
@@ -312,6 +336,42 @@ cd cuneiform   && python3 process_sumerian_complete.py && python3 process_akkadi
 
 Each script creates a `*_texts.db` file that is merged into the Perseus database by `assemble_database.py`. Every module listed in the mode's merge rules is **required** — assembly hard-fails if any expected module DB is missing (no silent skips, no partial ships).
 
+### References pack (optional, all releases)
+
+The References asset pack (`references_pack`) ships the two reference grammars
+in `references/` as an on-demand Play Asset Delivery pack (~75 MB compressed).
+It is iOS-mirrored as the `references` ODR tag.
+
+The pack's `src/main/assets/` directory is **build output** — the PDFs and
+generated manifest live there only after the `copyReferencesToAssets` Gradle
+task runs (it fires automatically as part of `preBuild`). The same task also
+copies the PDFs + manifest into `app/src/debug/assets/references/` so debug
+APK builds, which cannot read asset packs, can still exercise the UI.
+
+To regenerate the manifest manually (e.g., after adding a new PDF):
+
+```bash
+./venv/bin/python3 references_pack/build_manifest.py
+```
+
+When adding a new PDF to `references/`, also add a `REGISTRY` entry in
+`references_pack/build_manifest.py` with the canonical id/title/author/language.
+The build fails loudly if any PDF is missing a REGISTRY entry — no placeholder
+titles can ship.
+
+For the iOS app, the same files must be present under
+`ios/ClassicsViewer/Resources/OnDemand/References/` and tagged `references` in
+the Xcode project's ODR configuration (see `project_ios_odr_asset_tags` —
+tags drop from `project.pbxproj` on regeneration and bloat the bundle to ~5 GB
++ trigger ITMS-90558 if missed):
+
+```bash
+mkdir -p ios/ClassicsViewer/Resources/OnDemand/References
+cp references/*.pdf ios/ClassicsViewer/Resources/OnDemand/References/
+cp references_pack/src/main/assets/references_manifest.json \
+   ios/ClassicsViewer/Resources/OnDemand/References/
+```
+
 ### Greek module (required for every release)
 
 Greek has its own module (`greek/run_build.sh`, mirroring `latin/run_build.sh`). It produces a per-mode DB `greek/greek_texts_<mode>.db` (e.g. `greek_texts_sample.db`, `greek_texts_full.db`, `greek_texts_extended.db`, `greek_texts_ios.db`) with canonical schema. **Mode must match your release target.**
@@ -322,6 +382,8 @@ cd greek && ./run_build.sh full     && cd ..   # for full release (~8 min, Perse
 cd greek && ./run_build.sh extended && cd ..   # for extended release (~30-40 min: Wiktionary + First1K + PTA + Greek interlinear import)
 cd greek && ./run_build.sh ios      && cd ..   # for iOS curated build (uses IOS_SAMPLE_AUTHORS.csv)
 ```
+
+**Extended-mode interlinear bootstrap.** `create_greek_database.py` permits `greek/interlinear_output/` to be empty for the bootstrap pass that runs *before* interlinear generation (Step 5). The 0-XML case is treated as deliberate bootstrap; 1..99 XMLs aborts (catches an interrupted interlinear run); 100+ XMLs proceeds normally. Sample and full modes still hardcode a small set of Homer interlinear XMLs and will fail if those specific files are absent — run extended pass 1 + interlinear generation first, then sample/full can build.
 
 Greek is fully self-contained under `greek/`: processing code lives at `greek/build_modules/monolith_fn.py`, dictionary/lemma pipeline at `greek/build_modules/*.py`, Wiktionary extraction at `greek/wiktionary-processing/`, author CSVs at `greek/data/`. No dependency on `data-prep/` apart from the shared canonical schema (`shared/database_schema.py`) and the top-level `merge_database.py` tool.
 
@@ -561,6 +623,21 @@ cp audio/homer_iliad_chamberlain_audio.zip audio_pack/src/main/assets/
 
 **Debug APK builds do not use asset packs** (Android asset packs are an AAB-only feature). That's why debug builds only need `_7` and never read from `audio_pack/`.
 
+### References packaging (APK vs AAB)
+
+The References pack follows the same install-time-vs-on-demand split:
+
+| File / path | Channel | When it ships |
+|---|---|---|
+| `app/src/debug/assets/references/*.pdf` + manifest | Bundled in debug APK | `assembleDebug` only (~75 MB) |
+| `references_pack/src/main/assets/*.pdf` + manifest | `references_pack` asset pack (Play on-demand) | `bundleRelease`, downloaded when the user opts in |
+
+Both directories are populated by the `copyReferencesToAssets` Gradle task that
+runs automatically as part of `preBuild`. The task fails if `references/` is
+empty or `build_manifest.py` errors out. On-demand asset packs do not count
+against the 200 MB base-AAB size limit, so adding the References pack does not
+push the base size over.
+
 ### Build the release AAB
 
 ```bash
@@ -572,7 +649,7 @@ cp audio/homer_iliad_chamberlain_audio.zip audio_pack/src/main/assets/
 
 # AAB lands here:
 ls -lh app/build/outputs/bundle/release/app-release.aab
-# Expected: ~2 GB (159 MB base + 907 MB full_database_pack + ~975 MB audio_pack)
+# Expected: ~2.07 GB (159 MB base + 907 MB full_database_pack + ~975 MB audio_pack + ~75 MB references_pack)
 ```
 
 Verify the version bundled into the AAB matches what you expect before uploading to Play Console:
@@ -720,5 +797,5 @@ Greek interlinear and Sanskrit can run in parallel if you have CPU/RAM headroom 
 
 - See `CLAUDE.md` for detailed development guidelines
 - See `data-prep/README.md` for database creation details
-- See `data-prep/wiktionary-processing/WIKTIONARY_EXTRACTION_GUIDE.md` for morphology pipeline details
+- See `greek/wiktionary-processing/WIKTIONARY_EXTRACTION_GUIDE.md` for morphology pipeline details
 - See `BUILD_ISSUES.md` for historical build issue log from Apr 2026

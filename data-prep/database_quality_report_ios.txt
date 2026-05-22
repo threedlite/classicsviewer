@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-05-19T21:26:36.046316
+Generated: 2026-05-21T19:47:10.197687
 Mode: sample
 
 Total Authors: 11

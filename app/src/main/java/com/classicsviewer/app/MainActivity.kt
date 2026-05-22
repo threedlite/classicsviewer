@@ -324,7 +324,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        applyReferencesMenuVisibility(menu)
         return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        applyReferencesMenuVisibility(menu)
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    private fun applyReferencesMenuVisibility(menu: Menu) {
+        // "References" appears only when the pack is installed and the PDFs/manifest
+        // are actually accessible. "Download References" stays visible regardless,
+        // so the user can always reach the download/manage screen.
+        val referencesInstalled = com.classicsviewer.app.data.ReferencesPackManager(this).isInstalled()
+        menu.findItem(R.id.action_references)?.isVisible = referencesInstalled
+        menu.findItem(R.id.action_download_references)?.isVisible = true
     }
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -372,6 +387,14 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_rhetoric -> {
                 startActivity(Intent(this, com.classicsviewer.app.rhetoric.RhetoricActivity::class.java))
+                true
+            }
+            R.id.action_references -> {
+                startActivity(Intent(this, com.classicsviewer.app.references.ReferencesListActivity::class.java))
+                true
+            }
+            R.id.action_download_references -> {
+                startActivity(Intent(this, com.classicsviewer.app.references.ReferencesDownloadActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

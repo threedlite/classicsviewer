@@ -40,6 +40,16 @@ struct AssetPackInfo {
         extractedSize: 18_028_000_000,      // ~18GB uncompressed
         requiredFreeSpace: 55_000_000_000   // 55GB for safe extraction
     )
+
+    /// Reference grammars (Smyth Greek + Allen & Greenough Latin)
+    static let references = AssetPackInfo(
+        tag: .references,
+        displayName: "Reference Grammars",
+        description: "Smyth Greek Grammar and Allen & Greenough Latin Grammar",
+        compressedSize: 78_000_000,         // ~75-78 MB (two PDFs)
+        extractedSize: 78_000_000,          // No extraction; PDFs read directly
+        requiredFreeSpace: 200_000_000      // 200 MB headroom
+    )
 }
 
 // MARK: - Download Status Enum
@@ -132,6 +142,15 @@ enum AssetPackKeys {
 
     // Audio keys
     static let fullAudioInstalled = "full_audio_installed"
+
+    // References keys
+    static let referencesInstalled = "references_installed"
+
+    /// Per-entry reading state prefixes (matches Android PreferencesManager keys)
+    static let referencePagePrefix = "references.page."
+    static let referenceZoomPrefix = "references.zoom."
+    static let referenceScrollXPrefix = "references.scrollX."
+    static let referenceScrollYPrefix = "references.scrollY."
 }
 
 // MARK: - UserDefaults Extension
@@ -171,5 +190,52 @@ extension UserDefaults {
     var externalDatabaseName: String? {
         get { string(forKey: AssetPackKeys.externalDatabaseName) }
         set { set(newValue, forKey: AssetPackKeys.externalDatabaseName) }
+    }
+
+    /// Whether the References ODR pack has been downloaded
+    var referencesInstalled: Bool {
+        get { bool(forKey: AssetPackKeys.referencesInstalled) }
+        set { set(newValue, forKey: AssetPackKeys.referencesInstalled) }
+    }
+}
+
+// MARK: - References per-entry reading state
+
+/// Page + zoom + scroll offset for a single reference PDF.
+/// Matches Android `PreferencesManager.ReferenceState` and shares the same key prefixes.
+struct ReferenceReadingState: Equatable {
+    var page: Int
+    var zoom: CGFloat
+    var scrollX: CGFloat
+    var scrollY: CGFloat
+}
+
+extension UserDefaults {
+    /// Last-read state for a reference entry (page index, zoom, scrollX, scrollY).
+    /// Returns nil if no state has been recorded yet.
+    func referenceState(entryId: String) -> ReferenceReadingState? {
+        let pageKey = AssetPackKeys.referencePagePrefix + entryId
+        guard object(forKey: pageKey) != nil else { return nil }
+        return ReferenceReadingState(
+            page: integer(forKey: pageKey),
+            zoom: CGFloat(float(forKey: AssetPackKeys.referenceZoomPrefix + entryId)),
+            scrollX: CGFloat(float(forKey: AssetPackKeys.referenceScrollXPrefix + entryId)),
+            scrollY: CGFloat(float(forKey: AssetPackKeys.referenceScrollYPrefix + entryId))
+        )
+    }
+
+    /// Persist reading state for a reference entry.
+    func setReferenceState(entryId: String, state: ReferenceReadingState) {
+        set(state.page, forKey: AssetPackKeys.referencePagePrefix + entryId)
+        set(Float(state.zoom), forKey: AssetPackKeys.referenceZoomPrefix + entryId)
+        set(Float(state.scrollX), forKey: AssetPackKeys.referenceScrollXPrefix + entryId)
+        set(Float(state.scrollY), forKey: AssetPackKeys.referenceScrollYPrefix + entryId)
+    }
+
+    /// Convenience for the list view: last-read 0-based page index, if any.
+    func lastReadPage(entryId: String) -> Int? {
+        let key = AssetPackKeys.referencePagePrefix + entryId
+        guard object(forKey: key) != nil else { return nil }
+        return integer(forKey: key)
     }
 }

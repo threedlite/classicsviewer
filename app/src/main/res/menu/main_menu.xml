@@ -35,6 +35,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_download_references"
+        android:title="@string/references_download_menu_title"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_manage_audio"
         android:title="Manage Audio"
         app:showAsAction="never" />
@@ -57,6 +62,11 @@
     <item
         android:id="@+id/action_rhetoric"
         android:title="@string/rhetoric_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_references"
+        android:title="@string/references_menu_title"
         app:showAsAction="never" />
 
 </menu>

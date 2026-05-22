@@ -126,6 +126,7 @@ local.properties
 # Asset pack build outputs
 perseus_database/build/
 app/src/debug/assets/perseus_texts.db.zip
+app/src/debug/assets/references/
 
 # Bundletool output
 output.apks
