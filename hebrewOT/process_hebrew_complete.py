@@ -25,9 +25,18 @@ import sys
 import sqlite3
 import xml.etree.ElementTree as ET
 import csv
+import json
 import re
 from pathlib import Path
 import zipfile
+
+# Pirkei Avot (Sefaria) constants
+PIRKEI_AVOT_AUTHOR_ID = "sefaria_pirkei_avot"
+PIRKEI_AVOT_WORK_ID = f"{PIRKEI_AVOT_AUTHOR_ID}_001"
+PIRKEI_AVOT_HE_VERSION_SLUG = "he_torat_emet_357"
+PIRKEI_AVOT_EN_VERSION_SLUG = "en_kulp"
+PIRKEI_AVOT_CHAPTERS = 6
+PIRKEI_AVOT_WORD_SPLIT_RE = re.compile(r"[\s־]+")
 
 # Hebrew Bible book information
 # Structure: canonical_name: (file_abbrev, hebrew_name, num_chapters)
@@ -478,6 +487,9 @@ class HebrewTextProcessor:
             ''', (word_entry['word'], word_entry['chapter_id'], word_entry['verse_number'],
                   word_entry['sequence_number'], word_entry['word_position']))
 
+        # Insert Pirkei Avot (Sefaria) — separate ingestion path
+        self.process_pirkei_avot(cursor)
+
         conn.commit()
 
         # Get statistics
@@ -497,6 +509,115 @@ class HebrewTextProcessor:
         conn.close()
 
         return db_file
+
+    def process_pirkei_avot(self, cursor):
+        """Ingest Pirkei Avot from cached Sefaria JSON into the existing DB.
+
+        Hebrew base: Torat Emet 357 (Public Domain, vocalized).
+        English translation: Mishnah Yomit by Dr. Joshua Kulp (CC-BY).
+        Both versions have 1:1 mishnah alignment across 6 chapters (108 mishnayot).
+        """
+        pa_dir = self.morphhb_dir.parent / 'sefaria' / 'pirkei_avot'
+        if not pa_dir.exists():
+            print(f"\n  WARNING: Sefaria Pirkei Avot cache not found at {pa_dir}, skipping.")
+            print(f"  Run: data-sources/sefaria/pirkei_avot/fetch.py")
+            return
+
+        print("\n  Processing Pirkei Avot (Sefaria)...")
+
+        cursor.execute('''
+            INSERT INTO authors (id, name, name_alt, language, has_translations)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (PIRKEI_AVOT_AUTHOR_ID, "Pirkei Avot", "פרקי אבות", "hebrew", 1))
+
+        cursor.execute('''
+            INSERT INTO works (id, author_id, title, title_alt, title_english, type, urn, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            PIRKEI_AVOT_WORK_ID, PIRKEI_AVOT_AUTHOR_ID,
+            "Pirkei Avot", "פרקי אבות", "Ethics of the Fathers",
+            "mishnaic_text", "https://www.sefaria.org/Pirkei_Avot",
+            "Mishnah tractate Pirkei Avot. Hebrew: Torat Emet 357 (Public Domain). "
+            "English: Mishnah Yomit by Dr. Joshua Kulp (CC-BY). Source: Sefaria."
+        ))
+
+        mishnah_count = 0
+        word_count = 0
+        segment_count = 0
+
+        for ch in range(1, PIRKEI_AVOT_CHAPTERS + 1):
+            he_file = pa_dir / PIRKEI_AVOT_HE_VERSION_SLUG / f"chapter_{ch:02d}.json"
+            en_file = pa_dir / PIRKEI_AVOT_EN_VERSION_SLUG / f"chapter_{ch:02d}.json"
+
+            if not he_file.exists() or not en_file.exists():
+                raise RuntimeError(
+                    f"Pirkei Avot chapter {ch}: missing cache file(s). "
+                    f"Run data-sources/sefaria/pirkei_avot/fetch.py to refresh."
+                )
+
+            with he_file.open(encoding='utf-8') as f:
+                he_data = json.load(f)
+            with en_file.open(encoding='utf-8') as f:
+                en_data = json.load(f)
+
+            he_text = he_data.get('text', [])
+            en_text = en_data.get('text', [])
+
+            if len(he_text) != len(en_text):
+                raise RuntimeError(
+                    f"Pirkei Avot chapter {ch}: Hebrew has {len(he_text)} segments, "
+                    f"English has {len(en_text)} — alignment broken."
+                )
+
+            chapter_id = f"{PIRKEI_AVOT_WORK_ID}_ch{ch:02d}"
+            num_mishnayot = len(he_text)
+
+            cursor.execute('''
+                INSERT INTO books (id, work_id, book_number, label, start_line, end_line, line_count)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (chapter_id, PIRKEI_AVOT_WORK_ID, ch, f"Chapter {ch}",
+                  1, num_mishnayot, num_mishnayot))
+
+            for i, (he_seg, en_seg) in enumerate(zip(he_text, en_text), start=1):
+                self.global_sequence += 1
+                mishnah_text = (he_seg or "").strip()
+
+                cursor.execute('''
+                    INSERT INTO text_lines (book_id, line_number, sequence_number, line_text, line_xml, speaker)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (chapter_id, i, self.global_sequence, mishnah_text, None, None))
+                mishnah_count += 1
+
+                word_position = 0
+                for token in PIRKEI_AVOT_WORD_SPLIT_RE.split(mishnah_text):
+                    word = token.strip(",.;:!?\"'()[]{}")
+                    if not word:
+                        continue
+                    word_position += 1
+                    cursor.execute('''
+                        INSERT INTO words (word, book_id, line_number, sequence_number, word_position)
+                        VALUES (?, ?, ?, ?, ?)
+                    ''', (word, chapter_id, i, self.global_sequence, word_position))
+                    word_count += 1
+
+                translation_text = (en_seg or "").strip()
+                if translation_text:
+                    cursor.execute('''
+                        INSERT INTO translation_segments
+                            (book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ''', (chapter_id, i, i, self.global_sequence,
+                          translation_text, "Dr. Joshua Kulp", None))
+                    segment_id = cursor.lastrowid
+
+                    cursor.execute('''
+                        INSERT INTO translation_lookup (book_id, line_number, segment_id)
+                        VALUES (?, ?, ?)
+                    ''', (chapter_id, i, segment_id))
+                    segment_count += 1
+
+        print(f"    Pirkei Avot: 6 chapters, {mishnah_count} mishnayot, "
+              f"{word_count} words, {segment_count} translation segments")
 
     def extract_lexicon_data(self):
         """Extract lexicon data from HebrewLexicon XML files to CSVs."""
@@ -726,8 +847,36 @@ def main():
     # Write outputs
     processor.write_csv()
     db_file = processor.create_database()
-    processor.extract_lexicon_data()
-    processor.package_lexicon()
+
+    # Lexicon: delegate to create_hebrew_lexicon.py so the ZIP always carries
+    # Strong's + BDB. process_hebrew_complete.py used to ship a Strong's-only
+    # lexicon (8,674 entries) that would silently overwrite the augmented zip
+    # produced by create_hebrew_lexicon.py and drop ~11,844 BDB entries from
+    # the merged dictionary. Folding the call in here removes the foot-gun.
+    print("\nGenerating complete Hebrew lexicon (Strong's + BDB)...")
+    import create_hebrew_lexicon
+    create_hebrew_lexicon.main()
+
+    # Sanity guard: fail loudly if the lexicon came out partial. Use a real
+    # CSV reader because BDB definitions contain embedded newlines — counting
+    # `\n` bytes overestimates row count by ~2× and would mask a Strong's-only
+    # lexicon (the very regression this guard exists to catch).
+    import io
+    lexicon_zip = output_dir / 'hebrew_lexicon.zip'
+    with zipfile.ZipFile(lexicon_zip) as zf:
+        with zf.open('dictionary.csv') as df:
+            reader = csv.reader(io.TextIOWrapper(df, encoding='utf-8'))
+            next(reader, None)  # skip header
+            row_count = sum(1 for _ in reader)
+    MIN_LEXICON_ENTRIES = 15000  # Strong's alone is 8,674; complete is ~20,518
+    if row_count < MIN_LEXICON_ENTRIES:
+        raise RuntimeError(
+            f"hebrew_lexicon.zip has only {row_count} dictionary entries "
+            f"(expected >= {MIN_LEXICON_ENTRIES}, complete Strong's+BDB ≈ 20,518). "
+            f"BDB entries are likely missing — check create_hebrew_lexicon.py output."
+        )
+    print(f"  Lexicon sanity check passed: {row_count} dictionary entries")
+
     processor.compress_database(db_file)
 
     print("\n" + "="*60)

@@ -280,6 +280,32 @@ Original Work: Strong, James. The Exhaustive Concordance of the Bible. 1890.
 Digital Edition: Open Scriptures Hebrew Lexicon Project
 
 
+SEFARIA — PIRKEI AVOT
+=====================
+
+Hebrew Base Text: Torat Emet 357
+---------------------------------
+License: Public Domain
+Source: http://www.toratemetfreeware.com/index.html?downloads
+Distributed via Sefaria: https://www.sefaria.org/Pirkei_Avot
+
+Fully vocalized Hebrew text of the Mishnah tractate Pirkei Avot
+(Ethics of the Fathers), 6 chapters / 108 mishnayot.
+
+
+English Translation: Mishnah Yomit by Dr. Joshua Kulp
+------------------------------------------------------
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Translator: Dr. Joshua Kulp, Conservative Yeshiva (Jerusalem)
+Source: http://learn.conservativeyeshiva.org/mishnah/
+Distributed via Sefaria: https://www.sefaria.org/Pirkei_Avot
+
+The Mishnah Yomit translation pairs 1:1 with the Hebrew across all
+108 mishnayot, allowing direct mishnah-by-mishnah comparison.
+
+
 AUDIO RECORDINGS
 ================
 

@@ -17,6 +17,8 @@ struct PDFReaderView: View {
     @State private var showGotoPage: Bool = false
     @State private var gotoPageText: String = ""
     @State private var pdfViewRef: PDFView?
+    @State private var sliderDragging: Bool = false
+    @State private var sliderDragPage: Int = 1
 
     var body: some View {
         Group {
@@ -28,6 +30,30 @@ struct PDFReaderView: View {
                     pdfViewRef: $pdfViewRef
                 )
                 .ignoresSafeArea(edges: .bottom)
+                .overlay(alignment: .trailing) {
+                    if pageCount > 1 {
+                        VerticalPageSlider(
+                            pageCount: pageCount,
+                            currentPage: currentPageNumber,
+                            onDragStateChanged: { dragging in sliderDragging = dragging },
+                            onDragProgress: { page in sliderDragPage = page },
+                            onPageSelected: { page in jumpTo(page: page) }
+                        )
+                        .frame(width: 56)
+                        .padding(.trailing, 4)
+                    }
+                }
+                .overlay(alignment: .center) {
+                    if sliderDragging {
+                        Text("Page \(sliderDragPage) / \(pageCount)")
+                            .font(.title2.weight(.semibold))
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 12)
+                            .background(Color.black.opacity(0.75))
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                }
                 .overlay(alignment: .bottom) {
                     Text("Page \(currentPageNumber) / \(pageCount)")
                         .font(.footnote)
@@ -83,9 +109,88 @@ struct PDFReaderView: View {
 
     private func jumpToTypedPage() {
         guard let typed = Int(gotoPageText), typed >= 1, typed <= pageCount else { return }
-        guard let pdfView = pdfViewRef, let page = pdfDocument?.page(at: typed - 1) else { return }
-        pdfView.go(to: page)
-        currentPageNumber = typed
+        jumpTo(page: typed)
+    }
+
+    private func jumpTo(page: Int) {
+        guard page >= 1, page <= pageCount else { return }
+        guard let pdfView = pdfViewRef, let target = pdfDocument?.page(at: page - 1) else { return }
+        pdfView.go(to: target)
+        currentPageNumber = page
+    }
+}
+
+/// Vertical slider for rapidly navigating to any page in a PDF.
+/// Mirrors Android's `VerticalPageSlider`: drag the thumb on the right edge,
+/// `onDragProgress(page)` fires continuously while dragging (1-indexed),
+/// `onPageSelected(page)` fires once on release so the host can jump.
+private struct VerticalPageSlider: View {
+    let pageCount: Int
+    let currentPage: Int
+    let onDragStateChanged: (Bool) -> Void
+    let onDragProgress: (Int) -> Void
+    let onPageSelected: (Int) -> Void
+
+    @State private var isDragging: Bool = false
+    @State private var dragPage: Int = 1
+
+    var body: some View {
+        GeometryReader { geo in
+            let height = geo.size.height
+            let padding: CGFloat = 16
+            let usable = max(height - 2 * padding, 1)
+            let displayedPage = isDragging ? dragPage : currentPage
+            let frac: CGFloat = pageCount > 1
+                ? CGFloat(displayedPage - 1) / CGFloat(pageCount - 1)
+                : 0
+            let thumbCenterY = padding + frac * usable
+            let thumbWidth: CGFloat = isDragging ? 40 : 28
+            let thumbHeight: CGFloat = isDragging ? 36 : 24
+
+            ZStack(alignment: .top) {
+                Capsule()
+                    .fill(Color.white.opacity(0.45))
+                    .frame(width: 6, height: usable)
+                    .offset(y: padding)
+
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.black.opacity(0.8), lineWidth: 2)
+                    )
+                    .frame(width: thumbWidth, height: thumbHeight)
+                    .offset(y: thumbCenterY - thumbHeight / 2)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        if !isDragging {
+                            isDragging = true
+                            onDragStateChanged(true)
+                        }
+                        updatePage(fromY: value.location.y, usable: usable, padding: padding)
+                    }
+                    .onEnded { _ in
+                        let target = dragPage
+                        isDragging = false
+                        onDragStateChanged(false)
+                        onPageSelected(target)
+                    }
+            )
+        }
+    }
+
+    private func updatePage(fromY y: CGFloat, usable: CGFloat, padding: CGFloat) {
+        let f = max(0, min(1, (y - padding) / usable))
+        let target = Int((f * CGFloat(pageCount - 1)).rounded()) + 1
+        let clamped = max(1, min(pageCount, target))
+        if clamped != dragPage {
+            dragPage = clamped
+            onDragProgress(clamped)
+        }
     }
 }
 
@@ -104,8 +209,13 @@ private struct PDFKitWrapper: UIViewRepresentable {
         view.displayMode = .singlePageContinuous
         view.displayDirection = .vertical
         view.usePageViewController(false)
-        view.minScaleFactor = view.scaleFactorForSizeToFit
-        view.maxScaleFactor = view.scaleFactorForSizeToFit * 6
+        // Use absolute scale bounds; `scaleFactorForSizeToFit` is unreliable
+        // before the view has been laid out, so deriving min/max from it
+        // here can leave the current scale outside the [min,max] range and
+        // block pinch-to-zoom. Absolute bounds let PDFKit's built-in pinch
+        // gesture work immediately.
+        view.minScaleFactor = 0.25
+        view.maxScaleFactor = 6.0
 
         // Restore last-read page + zoom + scroll offset.
         if let saved = UserDefaults.standard.referenceState(entryId: entryId),
@@ -116,10 +226,9 @@ private struct PDFKitWrapper: UIViewRepresentable {
             }
             // Defer scroll-offset restore until layout settles.
             DispatchQueue.main.async {
-                if let docView = view.documentView {
-                    let target = CGPoint(x: saved.scrollX, y: saved.scrollY)
-                    docView.scrollRectToVisible(
-                        CGRect(origin: target, size: view.bounds.size),
+                if let scrollView = view.documentView as? UIScrollView {
+                    scrollView.setContentOffset(
+                        CGPoint(x: saved.scrollX, y: saved.scrollY),
                         animated: false
                     )
                 }
