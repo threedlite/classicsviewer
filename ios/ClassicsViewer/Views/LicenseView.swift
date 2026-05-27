@@ -858,6 +858,47 @@ adapted from its original HTML into a structured database for offline use. This
 license is CC BY 3.0 (attribution only) and carries no ShareAlike obligation.
 
 
+REFERENCE GRAMMARS
+==================
+
+These optional reference grammars are bundled as a downloadable on-demand
+asset pack. All three works are out of US copyright; the scans were made by
+academic libraries from public-domain sources and carry no continuing
+restrictions on reuse.
+
+
+Smyth - A Greek Grammar for Colleges
+-------------------------------------
+Author: Herbert Weir Smyth (1857–1937)
+License: Public Domain
+Source: Internet Archive
+https://archive.org/details/greekgrammarforc0000herb
+
+
+Allen & Greenough - New Latin Grammar
+--------------------------------------
+Authors: Joseph Henry Allen, James Bradstreet Greenough
+License: Public Domain
+Source: Internet Archive
+https://archive.org/details/allengreenoughsn00alleiala
+
+
+Whitney - A Sanskrit Grammar (1891, 2nd ed.)
+---------------------------------------------
+Author: William Dwight Whitney (1827–1894)
+Publisher: Leipzig: Breitkopf & Härtel; Boston: Ginn & Co.
+License: Public Domain
+Item: https://archive.org/details/cu31924011326513
+Source collection: Cornell University Library on Internet Archive
+https://archive.org/details/cornell
+
+The Cornell University Library collection rights statement reads:
+"There are no known copyright restrictions in the United States on the use
+of the texts." Digitization was funded by Microsoft Corporation (2008) and
+performed using a Kirtas Technologies scanner; Microsoft released all
+contractual restrictions on the digitized public-domain works in May 2008.
+
+
 APPLICATION LICENSE
 ===================
 

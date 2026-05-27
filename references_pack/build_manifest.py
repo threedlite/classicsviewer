@@ -35,23 +35,11 @@ REGISTRY = {
         "author": "Allen and Greenough",
         "language": "latin",
     },
-    "antiqvitiesAthe1Stua.pdf": {
-        "id": "antiquities_of_athens_vol1",
-        "title": "The Antiquities of Athens, Vol. I",
-        "author": "James Stuart and Nicholas Revett",
-        "language": "greek",
-    },
-    "antiqvitiesAthe2Stua.pdf": {
-        "id": "antiquities_of_athens_vol2",
-        "title": "The Antiquities of Athens, Vol. II",
-        "author": "James Stuart and Nicholas Revett",
-        "language": "greek",
-    },
-    "antiqvitiesAthe3Stua.pdf": {
-        "id": "antiquities_of_athens_vol3",
-        "title": "The Antiquities of Athens, Vol. III",
-        "author": "James Stuart and Nicholas Revett",
-        "language": "greek",
+    "whitneysanskritgrammar.pdf": {
+        "id": "whitney_sanskrit_grammar",
+        "title": "A Sanskrit Grammar",
+        "author": "William Dwight Whitney",
+        "language": "sanskrit",
     },
 }
 

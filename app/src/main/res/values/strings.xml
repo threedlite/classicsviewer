@@ -27,7 +27,7 @@
     <string name="references_menu_title">References</string>
     <string name="references_download_menu_title">Download References</string>
     <string name="references_download_title">Download References</string>
-    <string name="references_download_intro">Reference grammars (Smyth, Allen &amp; Greenough) are available as an optional ~75 MB download. They will be available offline once installed.</string>
+    <string name="references_download_intro">Reference grammars (Smyth, Allen &amp; Greenough, Whitney) are available as an optional ~100 MB download. They will be available offline once installed.</string>
     <string name="references_download_already_installed">References are already installed.</string>
     <string name="references_download_starting">Starting download…</string>
     <string name="references_download_in_progress">Downloading references…</string>

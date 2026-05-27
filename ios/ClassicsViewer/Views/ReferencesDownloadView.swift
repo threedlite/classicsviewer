@@ -12,7 +12,7 @@ struct ReferencesDownloadView: View {
             Text("Reference Grammars")
                 .font(.title2.bold())
 
-            Text("Smyth's *Greek Grammar for Colleges* and Allen & Greenough's *New Latin Grammar* are available as an optional download (about 75 MB). They are available offline once installed.")
+            Text("Smyth's *Greek Grammar for Colleges*, Allen & Greenough's *New Latin Grammar*, and Whitney's *Sanskrit Grammar* are available as an optional download (about 100 MB). They are available offline once installed.")
                 .font(.body)
 
             switch manager.status {
@@ -22,7 +22,7 @@ struct ReferencesDownloadView: View {
                 Button(action: {
                     Task { await manager.startDownload() }
                 }) {
-                    Label("Download (~75 MB)", systemImage: "arrow.down.circle")
+                    Label("Download (~100 MB)", systemImage: "arrow.down.circle")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
