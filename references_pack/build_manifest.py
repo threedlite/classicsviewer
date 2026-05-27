@@ -35,6 +35,24 @@ REGISTRY = {
         "author": "Allen and Greenough",
         "language": "latin",
     },
+    "antiqvitiesAthe1Stua.pdf": {
+        "id": "antiquities_of_athens_vol1",
+        "title": "The Antiquities of Athens, Vol. I",
+        "author": "James Stuart and Nicholas Revett",
+        "language": "greek",
+    },
+    "antiqvitiesAthe2Stua.pdf": {
+        "id": "antiquities_of_athens_vol2",
+        "title": "The Antiquities of Athens, Vol. II",
+        "author": "James Stuart and Nicholas Revett",
+        "language": "greek",
+    },
+    "antiqvitiesAthe3Stua.pdf": {
+        "id": "antiquities_of_athens_vol3",
+        "title": "The Antiquities of Athens, Vol. III",
+        "author": "James Stuart and Nicholas Revett",
+        "language": "greek",
+    },
 }
 
 
@@ -43,15 +61,13 @@ def main() -> int:
         print(f"ERROR: {REFERENCES_DIR} not found", file=sys.stderr)
         return 1
 
-    pdfs = sorted(REFERENCES_DIR.glob("*.pdf"))
-    if not pdfs:
+    pdfs_on_disk = {p.name: p for p in REFERENCES_DIR.glob("*.pdf")}
+    if not pdfs_on_disk:
         print(f"ERROR: no PDFs in {REFERENCES_DIR}", file=sys.stderr)
         return 1
 
-    entries = []
-    seen_ids = set()
-    for pdf in pdfs:
-        filename = pdf.name
+    # Catch PDFs on disk with no canonical metadata before they can ship.
+    for filename in pdfs_on_disk:
         if filename not in REGISTRY:
             print(
                 f"ERROR: {filename} has no REGISTRY entry in {Path(__file__).name}. "
@@ -59,7 +75,15 @@ def main() -> int:
                 file=sys.stderr,
             )
             return 1
-        reg = REGISTRY[filename]
+
+    # Emit in REGISTRY insertion order so display order is editor-controlled,
+    # not driven by alphabetical filename collation.
+    entries = []
+    seen_ids = set()
+    for filename, reg in REGISTRY.items():
+        pdf = pdfs_on_disk.get(filename)
+        if pdf is None:
+            continue  # registry entry without a PDF on disk yet
         if reg["id"] in seen_ids:
             print(f"ERROR: duplicate id '{reg['id']}' in REGISTRY", file=sys.stderr)
             return 1

@@ -60,6 +60,9 @@
 		7FCF5BE82FC67D860036D7E8 /* allengreenoughsn00alleiala.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF5BE52FC67D860036D7E8 /* allengreenoughsn00alleiala.pdf */; settings = {ASSET_TAGS = (references, ); }; };
 		7FCF5BE92FC67D860036D7E8 /* references_manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF5BE72FC67D860036D7E8 /* references_manifest.json */; settings = {ASSET_TAGS = (references, ); }; };
 		7FCF5BEA2FC67D860036D7E8 /* greekgrammarforc0000herb.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF5BE62FC67D860036D7E8 /* greekgrammarforc0000herb.pdf */; settings = {ASSET_TAGS = (references, ); }; };
+		7FCF5BEE2FC70A480036D7E8 /* antiqvitiesAthe3Stua.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF5BED2FC70A480036D7E8 /* antiqvitiesAthe3Stua.pdf */; settings = {ASSET_TAGS = (references, ); }; };
+		7FCF5BEF2FC70A480036D7E8 /* antiqvitiesAthe1Stua.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF5BEB2FC70A480036D7E8 /* antiqvitiesAthe1Stua.pdf */; settings = {ASSET_TAGS = (references, ); }; };
+		7FCF5BF02FC70A480036D7E8 /* antiqvitiesAthe2Stua.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7FCF5BEC2FC70A480036D7E8 /* antiqvitiesAthe2Stua.pdf */; settings = {ASSET_TAGS = (references, ); }; };
 		8C72BF2D6C9FBD00CED8131D /* WorkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE012E752CB556C2AB32622 /* WorkDAO.swift */; };
 		8F4D018502B8C80DB767FCF5 /* ManageLanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63C4F8B4A8E70F62CBA251F /* ManageLanguagesView.swift */; };
 		931F98BF51BDAA883E1E9C28 /* perseus_texts.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 61F4711E7801A1480E27CC18 /* perseus_texts.db.zip */; };
@@ -178,6 +181,9 @@
 		7FCF5BE52FC67D860036D7E8 /* allengreenoughsn00alleiala.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = allengreenoughsn00alleiala.pdf; sourceTree = "<group>"; };
 		7FCF5BE62FC67D860036D7E8 /* greekgrammarforc0000herb.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = greekgrammarforc0000herb.pdf; sourceTree = "<group>"; };
 		7FCF5BE72FC67D860036D7E8 /* references_manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = references_manifest.json; sourceTree = "<group>"; };
+		7FCF5BEB2FC70A480036D7E8 /* antiqvitiesAthe1Stua.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = antiqvitiesAthe1Stua.pdf; sourceTree = "<group>"; };
+		7FCF5BEC2FC70A480036D7E8 /* antiqvitiesAthe2Stua.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = antiqvitiesAthe2Stua.pdf; sourceTree = "<group>"; };
+		7FCF5BED2FC70A480036D7E8 /* antiqvitiesAthe3Stua.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = antiqvitiesAthe3Stua.pdf; sourceTree = "<group>"; };
 		84EB9F744216E85A99269189 /* DatabaseSchemaValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSchemaValidator.swift; sourceTree = "<group>"; };
 		8A742E92F760F53753B3ECE6 /* AgeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeVerificationView.swift; sourceTree = "<group>"; };
 		96C162FF252D864D9B250429 /* perseus_texts_extended.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = perseus_texts_extended.db.zip; sourceTree = "<group>"; };
@@ -426,6 +432,9 @@
 			isa = PBXGroup;
 			children = (
 				7FCF5BE52FC67D860036D7E8 /* allengreenoughsn00alleiala.pdf */,
+				7FCF5BEB2FC70A480036D7E8 /* antiqvitiesAthe1Stua.pdf */,
+				7FCF5BEC2FC70A480036D7E8 /* antiqvitiesAthe2Stua.pdf */,
+				7FCF5BED2FC70A480036D7E8 /* antiqvitiesAthe3Stua.pdf */,
 				7FCF5BE62FC67D860036D7E8 /* greekgrammarforc0000herb.pdf */,
 				7FCF5BE72FC67D860036D7E8 /* references_manifest.json */,
 				6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */,
@@ -522,6 +531,9 @@
 				931F98BF51BDAA883E1E9C28 /* perseus_texts.db.zip in Resources */,
 				E77AFFF10FF935E8E6C1B6BF /* perseus_texts_extended.db.zip in Resources */,
 				D46E5D36620E57BC9703CE2C /* perseus_texts_full.db.zip in Resources */,
+				7FCF5BEE2FC70A480036D7E8 /* antiqvitiesAthe3Stua.pdf in Resources */,
+				7FCF5BEF2FC70A480036D7E8 /* antiqvitiesAthe1Stua.pdf in Resources */,
+				7FCF5BF02FC70A480036D7E8 /* antiqvitiesAthe2Stua.pdf in Resources */,
 				99388F0772C48A571CF5EC3B /* rhetoric.db.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
