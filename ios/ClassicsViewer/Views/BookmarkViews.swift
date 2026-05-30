@@ -356,6 +356,20 @@ struct BookmarkDetailView: View {
                 }
                 .padding(.horizontal)
                 
+                // Topical Links (shown only when a topical pack covers this language)
+                if TopicalRegistry.isPackAvailable(bookmark.language) {
+                    NavigationLink(destination: TopicalLinksView(
+                        language: bookmark.language,
+                        bookId: bookmark.bookId,
+                        lineNumber: bookmark.lineNumber,
+                        sequenceNumber: bookmark.sequenceNumber,
+                        sourceRef: "\(bookmark.authorName), \(bookmark.workTitle)"
+                    )) {
+                        Label("Topical Links", systemImage: "camera.filters")
+                    }
+                    .padding(.horizontal)
+                }
+
                 // Metadata
                 VStack(alignment: .leading, spacing: 8) {
                     Label("Created \(bookmark.createdAt.formatted())", systemImage: "calendar")

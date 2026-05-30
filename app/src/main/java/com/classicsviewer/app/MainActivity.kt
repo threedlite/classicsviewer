@@ -397,6 +397,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, com.classicsviewer.app.references.ReferencesDownloadActivity::class.java))
                 true
             }
+            R.id.action_download_topical_links -> {
+                startActivity(Intent(this, com.classicsviewer.app.topical.TopicalDownloadActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

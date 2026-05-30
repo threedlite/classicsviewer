@@ -1,0 +1,3 @@
+# Large derived artifacts: built by topical/build_topical_links.py
+# (Greek pack ~355 MB, Latin ~55 MB). Re-buildable; not checked in.
+src/main/assets/topical_*.db.zip

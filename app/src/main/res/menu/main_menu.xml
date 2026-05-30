@@ -40,6 +40,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_download_topical_links"
+        android:title="Download Topical Links"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_manage_audio"
         android:title="Manage Audio"
         app:showAsAction="never" />

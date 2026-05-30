@@ -19,15 +19,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.classicsviewer.app.R
+import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.database.entities.BookmarkEntity
 import com.classicsviewer.app.databinding.ActivityBookmarkEditorBinding
 import com.classicsviewer.app.models.TextLine
+import com.classicsviewer.app.topical.TopicalLinksActivity
+import com.classicsviewer.app.topical.TopicalReader
 import com.classicsviewer.app.utils.PreferencesManager
 import com.classicsviewer.app.viewmodels.BookmarkViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BookmarkEditorActivity : AppCompatActivity() {
     
@@ -173,7 +178,11 @@ class BookmarkEditorActivity : AppCompatActivity() {
         binding.cancelButton.setOnClickListener {
             finish()
         }
-        
+
+        // Topical Links menu item visibility — resolves the passage's language
+        // and enables the action-bar item if a pack covers it.
+        resolveTopicalLanguage()
+
         // Focus on input and show keyboard
         binding.noteInput.requestFocus()
         binding.noteInput.postDelayed({
@@ -182,6 +191,53 @@ class BookmarkEditorActivity : AppCompatActivity() {
         }, 100)
     }
     
+    /** Cached topical language for this bookmark's passage; null until resolved
+     *  (off the main thread). Drives the action-bar item's visibility. */
+    @Volatile private var topicalLanguage: String? = null
+
+    private fun resolveTopicalLanguage() {
+        lifecycleScope.launch {
+            val lang = withContext(Dispatchers.IO) {
+                try {
+                    if (workId.isBlank() || bookId.isBlank()) {
+                        android.util.Log.d("TopicalGate", "workId or bookId blank")
+                        return@withContext null
+                    }
+                    val db = PerseusDatabase.getInstance(applicationContext)
+                    val work = db.workDao().getById(workId)
+                    if (work == null) {
+                        android.util.Log.d("TopicalGate", "work not in main DB: $workId")
+                        return@withContext null
+                    }
+                    val language = db.authorDao().getById(work.authorId)?.language
+                    if (language == null) {
+                        android.util.Log.d("TopicalGate", "author/language not found for ${work.authorId}")
+                        return@withContext null
+                    }
+                    if (!TopicalReader.isSupported(language)) {
+                        android.util.Log.d("TopicalGate", "language not supported: $language")
+                        return@withContext null
+                    }
+                    // Just confirm a pack exists for this language; defer the per-passage
+                    // row lookup to the TopicalLinksActivity itself, which shows
+                    // "No entries found." if there's no row. That decouples icon
+                    // visibility from a possibly-slow first-launch pack extraction.
+                    if (!TopicalReader.isPackInstalled(applicationContext, language)) {
+                        android.util.Log.d("TopicalGate", "pack not installed for $language")
+                        return@withContext null
+                    }
+                    android.util.Log.d("TopicalGate", "OK: showing icon for $language")
+                    language
+                } catch (e: Exception) {
+                    android.util.Log.w("TopicalGate", "resolve failed", e)
+                    null
+                }
+            }
+            topicalLanguage = lang
+            invalidateOptionsMenu()
+        }
+    }
+
     private fun saveBookmark() {
         lifecycleScope.launch {
             if (isEditMode) {
@@ -222,7 +278,15 @@ class BookmarkEditorActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_bookmark_editor, menu)
         return true
     }
-    
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        // Topical Links action-bar item is shown iff a topical pack covers this
+        // passage. `topicalLanguage` is filled in off the main thread; while it
+        // is null we hide the item.
+        menu.findItem(R.id.action_topical_links)?.isVisible = topicalLanguage != null
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -231,6 +295,16 @@ class BookmarkEditorActivity : AppCompatActivity() {
             }
             R.id.action_save -> {
                 saveBookmark()
+                true
+            }
+            R.id.action_topical_links -> {
+                val language = topicalLanguage ?: return true
+                val ref = "$authorName, $workTitle ${bookLabel}.$lineNumber"
+                startActivity(
+                    TopicalLinksActivity.newIntent(
+                        this, language, bookId, lineNumber, sequenceNumber, ref
+                    )
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import com.classicsviewer.app.R
 import com.classicsviewer.app.TextViewerPagerActivity
+import com.classicsviewer.app.database.PerseusDatabase
 import com.classicsviewer.app.database.entities.BookmarkEntity
 import com.classicsviewer.app.viewmodels.BookmarkViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -363,12 +364,29 @@ class BookmarksActivity : BaseActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val bookmarks = viewModel.getAllBookmarksForExport()
+
+                // Human-readable English work titles, looked up read-only from the
+                // loaded main DB by work_id (the stored work_title may be in the
+                // original script). Appended as a trailing column so the existing
+                // position-based importer is unaffected. Falls back to work_title.
+                val englishTitles = HashMap<String, String>()
+                try {
+                    val workDao = PerseusDatabase.getInstance(applicationContext).workDao()
+                    bookmarks.map { it.workId }.distinct().forEach { wid ->
+                        val en = workDao.getById(wid)?.titleEnglish
+                        if (!en.isNullOrBlank()) englishTitles[wid] = en
+                    }
+                } catch (e: Exception) {
+                    // leave map empty -> fall back to stored work_title per row
+                }
+
                 val csvContent = buildString {
                     // CSV Header
-                    appendLine("work_id,book_id,line_number,sequence_number,author_name,work_title,book_label,line_text,note,created_at,last_accessed")
-                    
+                    appendLine("work_id,book_id,line_number,sequence_number,author_name,work_title,book_label,line_text,note,created_at,last_accessed,work_title_english")
+
                     // CSV Data
                     bookmarks.forEach { bookmark ->
+                        val englishTitle = englishTitles[bookmark.workId] ?: bookmark.workTitle
                         append("\"${escapeCSV(bookmark.workId)}\",")
                         append("\"${escapeCSV(bookmark.bookId)}\",")
                         append("${bookmark.lineNumber},")
@@ -379,7 +397,8 @@ class BookmarksActivity : BaseActivity() {
                         append("\"${escapeCSV(bookmark.lineText)}\",")
                         append("\"${escapeCSV(bookmark.note ?: "")}\",")
                         append("${bookmark.createdAt},")
-                        appendLine("${bookmark.lastAccessed}")
+                        append("${bookmark.lastAccessed},")
+                        appendLine("\"${escapeCSV(englishTitle)}\"")
                     }
                 }
                 

@@ -1,0 +1,8 @@
+# Local copies of the diodorus embedding models — large (~1.1 GB each),
+# copied here so the topical build is insulated from changes in the diodorus
+# repo. Never checked into git; re-copy from diodorus when needed.
+models/
+
+# Build outputs (large, derived) and the embedding cache.
+dist/
+.embed_cache/

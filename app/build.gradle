@@ -12,7 +12,7 @@ android {
     // The AAB will be ~1.4GB total, but Google Play handles this:
     // - Base APK (~170MB) downloads on install
     // - Asset pack (~1.3GB) downloads only when user requests it
-    assetPacks = [":full_database_pack", ":audio_pack", ":references_pack"]
+    assetPacks = [":full_database_pack", ":audio_pack", ":references_pack", ":topical_pack"]
 
     // Load keystore properties if available
     def keystorePropertiesFile = file("keystore.properties")
@@ -36,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 128
-        versionName "0.8.128"
+        versionCode 129
+        versionName "0.8.129"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -156,6 +156,39 @@ task checkDatabaseExists {
             """)
         }
         println "✓ Database found at: ${dbFile.absolutePath} (${dbFile.length() / 1024 / 1024}MB)"
+    }
+}
+
+// Task to complain (loudly) if Topical Links assets are missing. The source of
+// truth for release builds is the topical_pack asset-pack module; debug builds
+// also need them under src/debug/assets/topical/ since asset packs are AAB-only.
+// Topical links are an optional, large add-on (the UI hides itself when absent),
+// so this warns rather than failing the build like the required main database does.
+task checkTopicalAssets {
+    doLast {
+        def names = ['topical_greek.db.zip', 'topical_latin.db.zip']
+        def packDir = file("$rootDir/topical_pack/src/main/assets")
+        def debugDir = file("$projectDir/src/debug/assets/topical")
+        def missingInPack  = names.findAll { !new File(packDir, it).exists() }
+        def missingInDebug = names.findAll { !new File(debugDir, it).exists() }
+        if (missingInPack.isEmpty() && missingInDebug.isEmpty()) {
+            names.each {
+                def f = new File(packDir, it)
+                println "✓ Topical asset found in topical_pack: $it (${f.length() / 1024 / 1024}MB)"
+            }
+        } else {
+            println ""
+            if (!missingInPack.isEmpty()) {
+                println "⚠️  WARNING: Topical assets missing from topical_pack/src/main/assets/: ${missingInPack.join(', ')}"
+            }
+            if (!missingInDebug.isEmpty()) {
+                println "⚠️  WARNING: Topical assets missing from src/debug/assets/topical/: ${missingInDebug.join(', ')}"
+            }
+            println "    The Topical Links button stays hidden until these are present."
+            println "    Build them with:  python3 topical/build_topical_links.py greek   (then latin)"
+            println "    The build script copies the zips into both locations automatically."
+            println ""
+        }
     }
 }
 
@@ -288,6 +321,7 @@ preBuild.dependsOn copyFontToAssets
 preBuild.dependsOn copyAudioToAssets
 preBuild.dependsOn checkAudioExists
 preBuild.dependsOn copyReferencesToAssets
+preBuild.dependsOn checkTopicalAssets
 
 // Task to check AAB size after building
 task checkAabSize {

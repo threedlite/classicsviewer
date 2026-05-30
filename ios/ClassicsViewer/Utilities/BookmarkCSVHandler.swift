@@ -4,10 +4,11 @@ class BookmarkCSVHandler {
     
     // MARK: - CSV Export
     
-    static func exportBookmarks(_ bookmarks: [Bookmark]) -> String {
-        // Match Android CSV format exactly
-        var csvContent = "work_id,book_id,line_number,sequence_number,author_name,work_title,book_label,line_text,note,created_at,last_accessed\n"
-        
+    static func exportBookmarks(_ bookmarks: [Bookmark], englishTitles: [String: String] = [:]) -> String {
+        // Match Android CSV format exactly. work_title_english is appended as a
+        // trailing column so the position-based importer is unaffected.
+        var csvContent = "work_id,book_id,line_number,sequence_number,author_name,work_title,book_label,line_text,note,created_at,last_accessed,work_title_english\n"
+
         for bookmark in bookmarks {
             let workId = escapeCSVField(bookmark.workId)
             let bookId = escapeCSVField(bookmark.bookId)
@@ -21,11 +22,13 @@ class BookmarkCSVHandler {
             // Use Unix timestamp in milliseconds for Android compatibility
             let createdAt = String(Int64(bookmark.createdAt.timeIntervalSince1970 * 1000))
             let lastAccessed = String(Int64(bookmark.lastAccessed.timeIntervalSince1970 * 1000))
-            
-            let row = "\(workId),\(bookId),\(lineNumber),\(sequenceNumber),\(authorName),\(workTitle),\(bookLabel),\(lineText),\(note),\(createdAt),\(lastAccessed)"
+            // Human-readable English work title (falls back to the stored title).
+            let workTitleEnglish = escapeCSVField(englishTitles[bookmark.workId] ?? bookmark.workTitle)
+
+            let row = "\(workId),\(bookId),\(lineNumber),\(sequenceNumber),\(authorName),\(workTitle),\(bookLabel),\(lineText),\(note),\(createdAt),\(lastAccessed),\(workTitleEnglish)"
             csvContent += row + "\n"
         }
-        
+
         return csvContent
     }
     
@@ -232,9 +235,19 @@ class BookmarkCSVManager {
     func exportBookmarksToFile() async throws -> URL {
         // Get all bookmarks
         let bookmarks = try await bookmarkDAO.getAllBookmarks()
-        
+
+        // Human-readable English work titles, looked up read-only from the main DB
+        // (the stored work_title may be in the original script). Falls back to it.
+        var englishTitles: [String: String] = [:]
+        let workDAO = WorkDAO()
+        for workId in Set(bookmarks.map { $0.workId }) {
+            if let en = (try? await workDAO.getWork(workId: workId))?.titleEnglish, !en.isEmpty {
+                englishTitles[workId] = en
+            }
+        }
+
         // Generate CSV content
-        let csvContent = BookmarkCSVHandler.exportBookmarks(bookmarks)
+        let csvContent = BookmarkCSVHandler.exportBookmarks(bookmarks, englishTitles: englishTitles)
         
         // Create file in documents directory
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

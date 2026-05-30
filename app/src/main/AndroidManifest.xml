@@ -56,6 +56,9 @@
         <activity android:name=".rhetoric.RhetoricEntryListActivity" />
         <activity android:name=".rhetoric.RhetoricEntryActivity" />
 
+        <activity android:name=".topical.TopicalLinksActivity" />
+        <activity android:name=".topical.TopicalDownloadActivity" />
+
         <activity android:name=".references.ReferencesListActivity" />
         <activity android:name=".references.ReferencesDownloadActivity" />
         <activity android:name=".references.PdfViewerActivity"
