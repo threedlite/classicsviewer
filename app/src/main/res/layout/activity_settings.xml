@@ -393,6 +393,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Topical Links: From a bookmark, tap the two-overlapping-circles icon to see related passages from other works. The match is built from the text surrounding the bookmarked line (roughly a ten-line window), not the line alone — so neighbours reflect the broader passage's vocabulary, themes, and named people or places. Use the dropdown to switch between Topical (shared themes), Lexical (shared content vocabulary), and Names (shared people / places)."
+            android:textSize="14sp"
+            android:lineSpacingMultiplier="1.3"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="It is recommended to limit screen time, increase font size for comfortable viewing, and/or use a larger tablet device."
             android:textSize="14sp"
             android:lineSpacingMultiplier="1.3"

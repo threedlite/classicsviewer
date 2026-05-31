@@ -35,8 +35,17 @@ struct TopicalLinksView: View {
     @State private var kindLabels: [String: String] = [:]
     @State private var selectedKind: String = "lda"
 
-    private let displayLimit = 25
-    private let candidateLimit = 80
+    // Match Android (TopicalLinksActivity). The manifest's defaults
+    // (lda_min_sim=0.50, tfidf_min_sim=0.15, ivf_nprobe=10) were calibrated
+    // for K=200; at our shipping K=1000 cosines spread lower, so the
+    // client is more permissive than the build's conservative default.
+    // See TOPICAL.md §4.1.
+    private let displayLimit = 50
+    private let candidateLimit = 200
+    private let ldaMinSimOverride: Float = 0.30
+    private let tfidfMinSimOverride: Float = 0.12
+    private let entityMinSimOverride: Float = 0.20
+    private let ivfNprobeOverride = 24
 
     var body: some View {
         VStack(spacing: 0) {
@@ -102,7 +111,7 @@ struct TopicalLinksView: View {
     }
 
     private func bootstrap() async {
-        guard let r = TopicalReader(language: language) else {
+        guard let r = await TopicalReader.make(language: language) else {
             loading = false; return
         }
         reader = r
@@ -112,7 +121,8 @@ struct TopicalLinksView: View {
         for k in kinds { lbls[k] = await r.kindUiLabel(k) }
         kindLabels = lbls
         let stickyKey = "topical_selected_kind_\(language.lowercased())"
-        let sticky = UserDefaults.standard.string(forKey: stickyKey) ?? (await r.defaultKind)
+        let defaultKind = await r.defaultKind
+        let sticky = UserDefaults.standard.string(forKey: stickyKey) ?? defaultKind
         selectedKind = kinds.contains(sticky) ? sticky : (kinds.first ?? "lda")
         await runQuery()
     }
@@ -129,18 +139,17 @@ struct TopicalLinksView: View {
         let hits: [TopicalReader.Hit]
         switch kind {
         case "lda":
-            let minSim = await r.ldaMinSim
-            hits = await r.ldaKnn(srcRowIdx: srcRow, K: candidateLimit, minSim: minSim)
+            hits = await r.ldaKnn(srcRowIdx: srcRow, K: candidateLimit,
+                                  minSim: ldaMinSimOverride,
+                                  nprobe: ivfNprobeOverride)
         case "tfidf":
             let queryTf = await r.sourceBag(rowIdx: srcRow)
-            let minSim = await r.tfidfMinSim
             hits = await r.tfidfKnn(srcRowIdx: srcRow, queryTf: queryTf,
-                                    K: candidateLimit, minSim: minSim)
+                                    K: candidateLimit, minSim: tfidfMinSimOverride)
         case "entity":
             let queryTf = await r.entitySourceBag(rowIdx: srcRow)
-            let minSim = await r.entityMinSim
             hits = await r.entityKnn(srcRowIdx: srcRow, queryTf: queryTf,
-                                     K: candidateLimit, minSim: minSim)
+                                     K: candidateLimit, minSim: entityMinSimOverride)
         default:
             hits = []
         }

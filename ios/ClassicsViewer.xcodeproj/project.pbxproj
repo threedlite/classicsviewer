@@ -52,6 +52,13 @@
 		75ABA95263C409BDF0F013F8 /* BookmarkViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4132234BA9EB910F105C1195 /* BookmarkViews.swift */; };
 		76D81CE2B83927CF06C0D8B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC93787B6DAF29B667F93DD /* SettingsView.swift */; };
 		794BD05B9BF1DA1DA47F5613 /* AudioPackageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD165B7E0E10CA74A90ED47 /* AudioPackageDAO.swift */; };
+		7F852F3C2FCC849A0019698F /* TopicalLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F852F3B2FCC849A0019698F /* TopicalLinksView.swift */; };
+		7F852F3E2FCC85110019698F /* LemmaBagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F852F3D2FCC85110019698F /* LemmaBagBuilder.swift */; };
+		7F852F412FCC8CBC0019698F /* topical_greek.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7F852F3F2FCC8CBC0019698F /* topical_greek.db.zip */; settings = {ASSET_TAGS = (topical, ); }; };
+		7F852F422FCC8CBC0019698F /* topical_latin.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7F852F402FCC8CBC0019698F /* topical_latin.db.zip */; settings = {ASSET_TAGS = (topical, ); }; };
+		7F852F442FCC8D9D0019698F /* TopicalDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F852F432FCC8D9D0019698F /* TopicalDownloadView.swift */; };
+		7F852F462FCC8DAA0019698F /* TopicalAssetDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F852F452FCC8DAA0019698F /* TopicalAssetDownloadManager.swift */; };
+		7F852F482FCC8DE00019698F /* TopicalDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F852F472FCC8DE00019698F /* TopicalDatabase.swift */; };
 		7FCF5BD62FC6799E0036D7E8 /* ReferencesAssetDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCF5BD52FC6799E0036D7E8 /* ReferencesAssetDownloadManager.swift */; };
 		7FCF5BDA2FC679EE0036D7E8 /* ReferencesDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCF5BD82FC679EE0036D7E8 /* ReferencesDownloadView.swift */; };
 		7FCF5BDB2FC679EE0036D7E8 /* ReferencesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCF5BD92FC679EE0036D7E8 /* ReferencesListView.swift */; };
@@ -171,6 +178,13 @@
 		79DAE08B665DEC1BEC0EE4B8 /* ClassicsViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicsViewerApp.swift; sourceTree = "<group>"; };
 		7B72B5826023689D8EA5A1F7 /* UserDictionaryDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDictionaryDAO.swift; sourceTree = "<group>"; };
 		7C500B1AA765FC985F2251FD /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7F852F3B2FCC849A0019698F /* TopicalLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicalLinksView.swift; sourceTree = "<group>"; };
+		7F852F3D2FCC85110019698F /* LemmaBagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemmaBagBuilder.swift; sourceTree = "<group>"; };
+		7F852F3F2FCC8CBC0019698F /* topical_greek.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = topical_greek.db.zip; sourceTree = "<group>"; };
+		7F852F402FCC8CBC0019698F /* topical_latin.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = topical_latin.db.zip; sourceTree = "<group>"; };
+		7F852F432FCC8D9D0019698F /* TopicalDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicalDownloadView.swift; sourceTree = "<group>"; };
+		7F852F452FCC8DAA0019698F /* TopicalAssetDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicalAssetDownloadManager.swift; sourceTree = "<group>"; };
+		7F852F472FCC8DE00019698F /* TopicalDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicalDatabase.swift; sourceTree = "<group>"; };
 		7FCF5BD52FC6799E0036D7E8 /* ReferencesAssetDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesAssetDownloadManager.swift; sourceTree = "<group>"; };
 		7FCF5BD72FC679EE0036D7E8 /* PDFReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFReaderView.swift; sourceTree = "<group>"; };
 		7FCF5BD82FC679EE0036D7E8 /* ReferencesDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesDownloadView.swift; sourceTree = "<group>"; };
@@ -292,6 +306,7 @@
 		6D313EE9C4AEB61D7CA27100 /* AssetPacks */ = {
 			isa = PBXGroup;
 			children = (
+				7F852F452FCC8DAA0019698F /* TopicalAssetDownloadManager.swift */,
 				7FCF5BD52FC6799E0036D7E8 /* ReferencesAssetDownloadManager.swift */,
 				752838F15E6E9A428468EBCE /* AssetPackStatus.swift */,
 				D27FAC3EC11D028F242A924A /* AudioAssetDownloadManager.swift */,
@@ -316,6 +331,8 @@
 		8945FCE608E83BF94BF96CE9 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				7F852F472FCC8DE00019698F /* TopicalDatabase.swift */,
+				7F852F3D2FCC85110019698F /* LemmaBagBuilder.swift */,
 				9BD165B7E0E10CA74A90ED47 /* AudioPackageDAO.swift */,
 				668E7F7C3AB1C4BE19A52616 /* AuthorDAO.swift */,
 				3FA2F05C725B45FC9A686942 /* BookDAO.swift */,
@@ -349,6 +366,8 @@
 		C1AD4048AF2502F8C02D49F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7F852F432FCC8D9D0019698F /* TopicalDownloadView.swift */,
+				7F852F3B2FCC849A0019698F /* TopicalLinksView.swift */,
 				7FCF5BD72FC679EE0036D7E8 /* PDFReaderView.swift */,
 				7FCF5BD82FC679EE0036D7E8 /* ReferencesDownloadView.swift */,
 				7FCF5BD92FC679EE0036D7E8 /* ReferencesListView.swift */,
@@ -427,6 +446,8 @@
 		F592998D00DF010C98ED58C6 /* OnDemand */ = {
 			isa = PBXGroup;
 			children = (
+				7F852F3F2FCC8CBC0019698F /* topical_greek.db.zip */,
+				7F852F402FCC8CBC0019698F /* topical_latin.db.zip */,
 				7FCF5BE52FC67D860036D7E8 /* allengreenoughsn00alleiala.pdf */,
 				7FCF5BE62FC67D860036D7E8 /* greekgrammarforc0000herb.pdf */,
 				7FCF5BF12FC80A480036D7E8 /* whitneysanskritgrammar.pdf */,
@@ -476,6 +497,7 @@
 					database_extended,
 					database_full,
 					references,
+					topical,
 				);
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
@@ -519,6 +541,8 @@
 				7FCF5BE82FC67D860036D7E8 /* allengreenoughsn00alleiala.pdf in Resources */,
 				7FCF5BE92FC67D860036D7E8 /* references_manifest.json in Resources */,
 				7FCF5BEA2FC67D860036D7E8 /* greekgrammarforc0000herb.pdf in Resources */,
+				7F852F412FCC8CBC0019698F /* topical_greek.db.zip in Resources */,
+				7F852F422FCC8CBC0019698F /* topical_latin.db.zip in Resources */,
 				7FCF5BF22FC80A480036D7E8 /* whitneysanskritgrammar.pdf in Resources */,
 				39B1858FCECB840CC891C722 /* LaunchScreen.storyboard in Resources */,
 				60D4B4D43DA2F3D86519158C /* homer_iliad_chamberlain_audio.zip in Resources */,
@@ -577,10 +601,13 @@
 				AA91742BF6EEA0A7E6CFC66C /* AuthorListViewModel.swift in Sources */,
 				E58CCC4A124E036A2D050E92 /* BookDAO.swift in Sources */,
 				B204B18E0148470962FBA37E /* BookListView.swift in Sources */,
+				7F852F442FCC8D9D0019698F /* TopicalDownloadView.swift in Sources */,
 				1F4FC035E7BD627F9C03FF4F /* BookListViewModel.swift in Sources */,
 				E140AA264A38B14F6DF4F9FA /* BookmarkCSVHandler.swift in Sources */,
 				98620FDC41EABBBDCB2BE25D /* BookmarkDAO.swift in Sources */,
 				75ABA95263C409BDF0F013F8 /* BookmarkViews.swift in Sources */,
+				7F852F3E2FCC85110019698F /* LemmaBagBuilder.swift in Sources */,
+				7F852F482FCC8DE00019698F /* TopicalDatabase.swift in Sources */,
 				A8F89D1FE41CD5D4FF825F5A /* ClassicsViewerApp.swift in Sources */,
 				C78C8F21DEE3661F4255FA41 /* ColorExtensions.swift in Sources */,
 				F246FAD151E1FFEF6FBA844B /* ContentView.swift in Sources */,
@@ -591,6 +618,7 @@
 				A685AAE6162BBACB186F8500 /* DatabaseExtractor.swift in Sources */,
 				46516CF60D9D6C121AEE4A9C /* DatabaseManagementView.swift in Sources */,
 				401929CD54C2C3FE93CC05D3 /* DatabaseManagerAsync.swift in Sources */,
+				7F852F3C2FCC849A0019698F /* TopicalLinksView.swift in Sources */,
 				B5021C1B6E4C88CF96814025 /* DatabaseModels.swift in Sources */,
 				281C492AF4BAF71FB9B36C30 /* DatabaseSchemaValidator.swift in Sources */,
 				B38EF1A9EAAF079BD5D46FF5 /* DatabaseService.swift in Sources */,
@@ -638,6 +666,7 @@
 				4DE795FE5DFE9D4D93D5531D /* StorageManager.swift in Sources */,
 				352624E58D6D62C1A3FC5857 /* TappableTextView.swift in Sources */,
 				70FBD8DBE5E89F5164FD0D43 /* TestWorksView.swift in Sources */,
+				7F852F462FCC8DAA0019698F /* TopicalAssetDownloadManager.swift in Sources */,
 				B22E9433B358D2E1ABB54ED6 /* TextExporter.swift in Sources */,
 				259308436EF7739BA08F1E90 /* TextNormalization.swift in Sources */,
 				B5F3C7AFCDC2FBF42E1271D7 /* TranslationDAO.swift in Sources */,

@@ -86,14 +86,14 @@ class TopicalReader private constructor(
         fun isSupported(language: String?): Boolean = stemFor(language) != null
 
         /** Fast synchronous "is the pack zip present so the icon can show?"
-         *  check. Does not trigger extraction or sha verification; the actual
-         *  reader open still has to succeed at click time. */
+         *  check. Side-effect-free: does NOT seed the debug cache (which would
+         *  copy ~500 MB of zips out of APK assets and delay icon visibility).
+         *  Extraction and sha verification still happen at click time via
+         *  [open]. */
         fun isPackInstalled(context: Context, language: String): Boolean {
             val stem = stemFor(language) ?: return false
             return try {
-                val packAssets = TopicalPackManager(context).getAssetsPath()
-                    ?: return false
-                File(packAssets, "$stem.db.zip").exists()
+                TopicalPackManager(context).hasPackZip(stem)
             } catch (e: Exception) {
                 false
             }

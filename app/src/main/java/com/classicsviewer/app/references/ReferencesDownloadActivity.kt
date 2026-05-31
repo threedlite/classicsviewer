@@ -9,6 +9,8 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.classicsviewer.app.R
 import com.classicsviewer.app.data.ReferencesPackManager
 import com.classicsviewer.app.databinding.ActivityReferencesDownloadBinding
@@ -37,6 +39,18 @@ class ReferencesDownloadActivity : AppCompatActivity() {
 
         supportActionBar?.title = getString(R.string.references_download_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        // targetSdk 36 forces edge-to-edge; add the system-bar insets on top of
+        // the layout's existing padding so the top isn't hidden under the bar.
+        val pl = binding.root.paddingLeft
+        val pt = binding.root.paddingTop
+        val pr = binding.root.paddingRight
+        val pb = binding.root.paddingBottom
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(pl + bars.left, pt + bars.top, pr + bars.right, pb + bars.bottom)
+            insets
+        }
 
         packManager = ReferencesPackManager(this)
 
@@ -67,6 +81,20 @@ class ReferencesDownloadActivity : AppCompatActivity() {
     }
 
     private fun startDownload() {
+        // Reference grammars are ~100 MB and read in place; require ~200 MB free.
+        val requiredBytes = 200L * 1024 * 1024
+        val stat = android.os.StatFs(filesDir.path)
+        if (stat.availableBytes < requiredBytes) {
+            val availMb = stat.availableBytes / (1024 * 1024)
+            AlertDialog.Builder(this)
+                .setTitle("Not enough storage")
+                .setMessage("Reference Grammars need about 200 MB free to install. " +
+                    "Only $availMb MB is available.")
+                .setPositiveButton(android.R.string.ok, null)
+                .show()
+            return
+        }
+
         isDownloading = true
         binding.btnStartDownload.isEnabled = false
         binding.downloadProgress.visibility = View.VISIBLE

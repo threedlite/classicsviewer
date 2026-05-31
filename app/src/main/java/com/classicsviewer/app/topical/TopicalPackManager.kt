@@ -43,6 +43,25 @@ class TopicalPackManager(private val context: Context) {
         return BuildConfig.DEBUG && hasDebugAssets()
     }
 
+    /** Side-effect-free check for a specific per-language pack zip. Does NOT
+     *  trigger the debug-cache copy (which moves ~500 MB of zips out of APK
+     *  assets). Used by icon-visibility gating that must return fast. */
+    fun hasPackZip(stem: String): Boolean {
+        val zipName = "$stem.db.zip"
+        // Release: Play asset pack location.
+        packAssetsPath()?.let { return File(it, zipName).exists() }
+        // Debug: check bundled APK assets directly via AssetManager (no copy).
+        if (BuildConfig.DEBUG) {
+            return try {
+                val files = context.assets.list(DEBUG_ASSET_SUBDIR) ?: return false
+                zipName in files
+            } catch (e: Exception) {
+                false
+            }
+        }
+        return false
+    }
+
     /**
      * Filesystem directory containing the per-language `topical_<lang>.db.zip`
      * files. Null if not installed. For release builds this is the pack's own

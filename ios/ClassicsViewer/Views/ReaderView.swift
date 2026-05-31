@@ -1441,6 +1441,10 @@ struct NoteEditDialog: View {
     @State private var noteText: String = ""
     @State private var existingBookmark: Bookmark?
     @StateObject private var bookmarkChecker = BookmarkChecker()
+    // Drives the Topical Links toolbar item's visibility; observing the manager
+    // makes the item appear reactively once checkStatus() confirms the on-demand
+    // pack is installed (mirrors Android's resolve-on-open gating).
+    @StateObject private var topicalManager = TopicalAssetDownloadManager.shared
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -1459,6 +1463,20 @@ struct NoteEditDialog: View {
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
+
+                    // Copy the original line into the note. Mirrors Android's
+                    // "Copy text to note" button: append on a new line if the
+                    // note already has content, otherwise replace the empty note.
+                    Button {
+                        if noteText.isEmpty {
+                            noteText = line.lineText
+                        } else {
+                            noteText = "\(noteText)\n\(line.lineText)"
+                        }
+                    } label: {
+                        Label("Copy text to note", systemImage: "doc.on.doc")
+                            .font(.subheadline)
+                    }
                 }
                 .padding(.horizontal)
                 .padding(.top)
@@ -1498,7 +1516,25 @@ struct NoteEditDialog: View {
                         dismiss()
                     }
                 }
-                
+
+                // Topical Links — shown iff the language is supported and the
+                // on-demand pack is installed. Mirrors Android's action-bar item
+                // in BookmarkEditorActivity (placed at the top).
+                if TopicalRegistry.dbBaseName(author.language) != nil,
+                   topicalManager.status == .installed {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: TopicalLinksView(
+                            language: author.language,
+                            bookId: book.id,
+                            lineNumber: line.lineNumber,
+                            sequenceNumber: line.sequenceNumber,
+                            sourceRef: "\(author.name), \(work.title)"
+                        )) {
+                            Image(systemName: "camera.filters")
+                        }
+                    }
+                }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveNote()
@@ -1510,6 +1546,9 @@ struct NoteEditDialog: View {
             Task {
                 await loadExistingNote()
             }
+        }
+        .task {
+            await topicalManager.checkStatus()
         }
     }
     

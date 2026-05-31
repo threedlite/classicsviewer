@@ -49,7 +49,10 @@ DEFAULT_OUT_DIR = REPO / "topical" / "dist"
 PACK_DEST_DIRS = [
     REPO / "topical_pack" / "src" / "main" / "assets",
     REPO / "app" / "src" / "debug" / "assets" / "topical",
-    REPO / "ios" / "ClassicsViewer" / "Resources",
+    # iOS: the topical zips are On-Demand Resources (too large for the main
+    # bundle), so they must land in the ODR-tagged OnDemand folder, not the
+    # plain Resources root.
+    REPO / "ios" / "ClassicsViewer" / "Resources" / "OnDemand",
 ]
 
 LANGUAGE_REGISTRY = {

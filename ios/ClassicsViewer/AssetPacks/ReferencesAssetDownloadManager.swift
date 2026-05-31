@@ -48,6 +48,12 @@ class ReferencesAssetDownloadManager: ObservableObject {
     // MARK: - Download
 
     func startDownload() async {
+        guard StorageManager.hasEnoughSpace(for: assetInfo) else {
+            errorMessage = "Not enough storage space. Required: \(StorageManager.formatBytes(assetInfo.requiredFreeSpace))"
+            status = .failed
+            return
+        }
+
         status = .downloading
         downloadProgress = 0
         errorMessage = nil

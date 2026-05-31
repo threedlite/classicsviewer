@@ -41,6 +41,18 @@ struct AssetPackInfo {
         requiredFreeSpace: 55_000_000_000   // 55GB for safe extraction
     )
 
+    /// Topical-links packs (Greek + Latin passage-similarity indexes).
+    /// One ODR tag covers both per-language zips; the reader fetches the
+    /// specific `topical_<lang>.db.zip` by filename.
+    static let topical = AssetPackInfo(
+        tag: .topical,
+        displayName: "Topical Links",
+        description: "Greek and Latin passage-similarity indexes",
+        compressedSize: 522_000_000,        // ~451 MB Greek + ~71 MB Latin
+        extractedSize: 905_000_000,         // ~812 MB Greek + ~93 MB Latin unpacked
+        requiredFreeSpace: 2_000_000_000    // 2 GB headroom (both zips + both unpacked)
+    )
+
     /// Reference grammars (Smyth Greek + Allen & Greenough Latin)
     static let references = AssetPackInfo(
         tag: .references,
@@ -146,6 +158,9 @@ enum AssetPackKeys {
     // References keys
     static let referencesInstalled = "references_installed"
 
+    // Topical keys
+    static let topicalInstalled = "topical_installed"
+
     /// Per-entry reading state prefixes (matches Android PreferencesManager keys)
     static let referencePagePrefix = "references.page."
     static let referenceZoomPrefix = "references.zoom."
@@ -196,6 +211,12 @@ extension UserDefaults {
     var referencesInstalled: Bool {
         get { bool(forKey: AssetPackKeys.referencesInstalled) }
         set { set(newValue, forKey: AssetPackKeys.referencesInstalled) }
+    }
+
+    /// Whether the Topical-links ODR pack has been downloaded
+    var topicalInstalled: Bool {
+        get { bool(forKey: AssetPackKeys.topicalInstalled) }
+        set { set(newValue, forKey: AssetPackKeys.topicalInstalled) }
     }
 }
 

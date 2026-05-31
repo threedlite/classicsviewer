@@ -14,6 +14,8 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 /**
  * On-demand install UI for the topical-links asset pack
@@ -47,7 +49,7 @@ class TopicalDownloadActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.title = "Topical Links"
+        supportActionBar?.title = "Topical Links (Beta)"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val pad = (24 * resources.displayMetrics.density).toInt()
@@ -60,9 +62,9 @@ class TopicalDownloadActivity : AppCompatActivity() {
         }
         statusView = TextView(this).apply {
             textSize = 16f
-            text = "Topical Links surface passages semantically related to a " +
-                "bookmarked line. The data is delivered as an optional download " +
-                "(~410 MB)."
+            text = "Beta. Finds passages elsewhere in the corpus related to a " +
+                "bookmarked line. Optional ~520 MB download; needs ~2 GB free " +
+                "to install."
         }
         progressBar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply {
             max = 100
@@ -91,6 +93,15 @@ class TopicalDownloadActivity : AppCompatActivity() {
         }
         setContentView(root)
 
+        // targetSdk 36 forces edge-to-edge, so the content draws under the
+        // status/action bar unless we inset it. Add the system-bar insets on
+        // top of the existing design padding.
+        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(pad + bars.left, pad + bars.top, pad + bars.right, pad + bars.bottom)
+            insets
+        }
+
         packManager = TopicalPackManager(this)
         if (packManager.isInstalled()) showAlreadyInstalled()
     }
@@ -102,6 +113,23 @@ class TopicalDownloadActivity : AppCompatActivity() {
     }
 
     private fun startDownload() {
+        // The pack downloads ~520 MB and extracts to ~900 MB; both coexist, so
+        // require ~2 GB free before starting. Mirrors the full/extended DB and
+        // iOS StorageManager guards.
+        val requiredBytes = 2L * 1024 * 1024 * 1024
+        val stat = android.os.StatFs(filesDir.path)
+        if (stat.availableBytes < requiredBytes) {
+            val availGb = stat.availableBytes.toDouble() / (1024 * 1024 * 1024)
+            AlertDialog.Builder(this)
+                .setTitle("Not enough storage")
+                .setMessage(String.format(
+                    "Topical Links needs about 2 GB free to install (download plus " +
+                    "extraction). Only %.1f GB is available.", availGb))
+                .setPositiveButton("OK", null)
+                .show()
+            return
+        }
+
         isDownloading = true
         startBtn.isEnabled = false
         progressBar.visibility = View.VISIBLE

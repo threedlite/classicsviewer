@@ -10,10 +10,13 @@ enum TopicalRegistry {
         }
     }
 
-    /// Cheap, synchronous check used for UI affordance visibility.
+    /// Cheap, synchronous check used for UI affordance visibility. The packs
+    /// are On-Demand Resources, so availability is the cached install flag set
+    /// by TopicalAssetDownloadManager (checkStatus/startDownload) — not a
+    /// Bundle.main lookup, since ODR resources are not in the main bundle.
     static func isPackAvailable(_ language: String) -> Bool {
-        guard let base = dbBaseName(language) else { return false }
-        return Bundle.main.url(forResource: "\(base).db", withExtension: "zip") != nil
+        guard dbBaseName(language) != nil else { return false }
+        return UserDefaults.standard.topicalInstalled
     }
 }
 
@@ -64,37 +67,45 @@ actor TopicalReader {
     private var entityBags: Data?
     private var entityInvidx: Data?
     private var entityVocab: Data?
-    private var entityVocabIdfs: [Float] = []
-    private var entityTermIndexCache: [String: Int]? = nil
 
     private var bookIdsCache: [String]?
     private var bookIdToIdxCache: [String: Int]?
     private var authorIdsCache: [String]?
     private var workIdsCache: [String]?
-    private var termIndexCache: [String: Int]?
 
-    init?(language: String) {
+    /// Async factory. Ensures the language's pack zip is extracted into
+    /// Application Support — fetching it from the Topical ODR pack on first use
+    /// — then loads the manifest. Returns nil if the language has no pack, the
+    /// ODR pack is not on-device, or the pack is malformed. Once extracted, the
+    /// unpacked files persist locally and work offline even if ODR purges the
+    /// zip. The init is async because ODR access (NSBundleResourceRequest) is.
+    static func make(language: String) async -> TopicalReader? {
         guard let base = TopicalRegistry.dbBaseName(language) else { return nil }
-        self.language = language
         let fm = FileManager.default
         let support = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         try? fm.createDirectory(at: support, withIntermediateDirectories: true)
-        self.packDir = support.appendingPathComponent("topical_unpacked_\(base)")
+        let packDir = support.appendingPathComponent("topical_unpacked_\(base)")
 
         do {
-            try Self.ensureExtracted(base: base, packDir: packDir)
+            try await ensureExtracted(base: base, packDir: packDir)
             let manifestURL = packDir.appendingPathComponent("manifest.json")
             let data = try Data(contentsOf: manifestURL)
             guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
                 return nil
             }
-            self.manifest = json
+            return TopicalReader(language: language, packDir: packDir, manifest: json)
         } catch {
             return nil
         }
     }
 
-    private static func ensureExtracted(base: String, packDir: URL) throws {
+    private init(language: String, packDir: URL, manifest: [String: Any]) {
+        self.language = language
+        self.packDir = packDir
+        self.manifest = manifest
+    }
+
+    private static func ensureExtracted(base: String, packDir: URL) async throws {
         let fm = FileManager.default
         let manifestURL = packDir.appendingPathComponent("manifest.json")
         let version = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "0"
@@ -105,7 +116,10 @@ actor TopicalReader {
         }
         try? fm.removeItem(at: packDir)
         try fm.createDirectory(at: packDir, withIntermediateDirectories: true)
-        guard let zipURL = Bundle.main.url(forResource: "\(base).db", withExtension: "zip") else {
+        // ODR resources live in the request's bundle, not Bundle.main. Fetch the
+        // on-device zip URL via the download manager (resolves only once the
+        // "topical" ODR pack is installed).
+        guard let zipURL = await TopicalAssetDownloadManager.shared.zipURL(base: base) else {
             throw TopicalError.resourceMissing
         }
         try ZIPHandler.extractAll(from: zipURL, to: packDir)
@@ -181,26 +195,24 @@ actor TopicalReader {
         return entityVocab
     }
 
-    private func ensureEntityTermIndex() {
-        if entityTermIndexCache != nil { return }
-        guard let v = loadEntityVocab() else { return }
-        guard u32(v, 0) == 0x564F4331 else { return }
+    /// Number of terms in entity_vocab.bin, or 0 if not shipped/valid.
+    private var entityVocabSize: Int {
+        guard let v = loadEntityVocab(), u32(v, 0) == 0x564F4331 else { return 0 }
+        return Int(u32(v, 8))
+    }
+
+    /// idf for a single entity-vocab term, read on demand (mirrors Android's
+    /// per-query `entityVocabEntry(idx).idf`). Returns 0 for an out-of-range
+    /// index. Replaces the old full-vocab term-index build, which decoded a
+    /// string per term into a map that was never read.
+    private func entityVocabIdf(_ idx: Int) -> Float {
+        guard let v = loadEntityVocab(), u32(v, 0) == 0x564F4331 else { return 0 }
         let n = Int(u32(v, 8))
-        let fileSize = v.count
-        let offArrStart = fileSize - (n + 1) * 4
-        var map = [String: Int](minimumCapacity: n)
-        var idfs = [Float](repeating: 0, count: n)
-        for i in 0..<n {
-            let off = Int(u32(v, offArrStart + i * 4))
-            let len = Int(u16(v, off))
-            let term = String(data: v.subdata(in: (off + 2)..<(off + 2 + len)),
-                              encoding: .utf8) ?? ""
-            let idfH = u16(v, off + 2 + len)
-            idfs[i] = halfToFloat(idfH)
-            map[term] = i
-        }
-        entityTermIndexCache = map
-        entityVocabIdfs = idfs
+        guard idx >= 0 && idx < n else { return 0 }
+        let offArrStart = v.count - (n + 1) * 4
+        let off = Int(u32(v, offArrStart + idx * 4))
+        let len = Int(u16(v, off))
+        return halfToFloat(u16(v, off + 2 + len))
     }
 
     /// Pre-built (term_idx -> tf) PROPN bag for source row from entity_bags.bin.
@@ -224,7 +236,6 @@ actor TopicalReader {
     }
 
     func entityKnn(srcRowIdx: Int, queryTf: [Int: Int], K: Int, minSim: Float) -> [Hit] {
-        ensureEntityTermIndex()
         ensureNamePools()
         guard srcRowIdx >= 0 && srcRowIdx < passageCount, !queryTf.isEmpty,
               let iv = loadEntityInvIdx() else { return [] }
@@ -232,11 +243,12 @@ actor TopicalReader {
         let postingsOffset = Int(u32(iv, 12))
         let src = rowMeta(srcRowIdx)
 
+        let evSize = entityVocabSize
         var qWeights = [Int: Float]()
         var nrm: Double = 0
         for (idx, c) in queryTf {
-            guard idx < entityVocabIdfs.count else { continue }
-            let w = (1.0 + log(Double(c))) * Double(entityVocabIdfs[idx])
+            guard idx >= 0 && idx < evSize else { continue }
+            let w = (1.0 + log(Double(c))) * Double(entityVocabIdf(idx))
             qWeights[idx] = Float(w)
             nrm += w * w
         }
@@ -245,16 +257,23 @@ actor TopicalReader {
         for k in qWeights.keys { qWeights[k] = qWeights[k]! / scale }
 
         var sims = [Int: Float]()
+        let ivCount = iv.count
         for (termIdx, qw) in qWeights {
             let base = 16 + termIdx * 4
+            // Offset-table read must itself stay in bounds.
+            guard base + 8 <= ivCount else { continue }
             let start = postingsOffset + Int(u32(iv, base))
             let end = postingsOffset + Int(u32(iv, base + 4))
+            // Clamp to the mapped buffer — corrupt pack degrades, never crashes.
+            guard start >= 0, start <= end, end <= ivCount else { continue }
             iv.withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
                 let basePtr = raw.baseAddress!
                 var off = start
-                while off < end {
-                    let rowIdx = Int(basePtr.advanced(by: off).load(as: UInt32.self))
-                    let docH = basePtr.advanced(by: off + 4).load(as: UInt16.self)
+                while off + 6 <= end {
+                    // 6-byte stride → UInt32 is unaligned every other record.
+                    // loadUnaligned is mandatory (see tfidfKnn).
+                    let rowIdx = Int(basePtr.loadUnaligned(fromByteOffset: off, as: UInt32.self))
+                    let docH = basePtr.loadUnaligned(fromByteOffset: off + 4, as: UInt16.self)
                     off += 6
                     if rowIdx == srcRowIdx { continue }
                     let docW = halfToFloat(docH)
@@ -298,14 +317,20 @@ actor TopicalReader {
 
     // ----- positions.bin parser -----
 
+    // Allocation-free little-endian reads. The earlier `subdata(in:)` form
+    // copied a fresh Data on every call; on the wide tfidf/entity scoring loops
+    // (one rowMeta() per candidate row, hundreds of thousands of rows for common
+    // terms) that was ~1M throwaway allocations and the cause of the lexical
+    // hang. loadUnaligned reads straight from the mmap'd buffer, like Android's
+    // ByteBuffer.
     private func u32(_ d: Data, _ offset: Int) -> UInt32 {
-        d.subdata(in: offset..<(offset + 4)).withUnsafeBytes { $0.load(as: UInt32.self) }
+        d.withUnsafeBytes { $0.loadUnaligned(fromByteOffset: offset, as: UInt32.self) }
     }
     private func i32(_ d: Data, _ offset: Int) -> Int32 {
-        d.subdata(in: offset..<(offset + 4)).withUnsafeBytes { $0.load(as: Int32.self) }
+        d.withUnsafeBytes { $0.loadUnaligned(fromByteOffset: offset, as: Int32.self) }
     }
     private func u16(_ d: Data, _ offset: Int) -> UInt16 {
-        d.subdata(in: offset..<(offset + 2)).withUnsafeBytes { $0.load(as: UInt16.self) }
+        d.withUnsafeBytes { $0.loadUnaligned(fromByteOffset: offset, as: UInt16.self) }
     }
 
     private func ensureBookIds() {
@@ -395,18 +420,22 @@ actor TopicalReader {
     }
 
     private func rowMeta(_ rowIdx: Int) -> RowMeta {
-        guard let r = loadRowmeta() else {
-            return RowMeta(authorIdx: 0, workIdx: 0, anchorBookIdIdx: 0,
+        let zero = RowMeta(authorIdx: 0, workIdx: 0, anchorBookIdIdx: 0,
                            anchorLine: 0, anchorSeq: 0)
-        }
+        guard let r = loadRowmeta() else { return zero }
         let off = 16 + rowIdx * 20
-        return RowMeta(
-            authorIdx: Int(u32(r, off)),
-            workIdx: Int(u32(r, off + 4)),
-            anchorBookIdIdx: Int(u32(r, off + 8)),
-            anchorLine: Int(i32(r, off + 12)),
-            anchorSeq: Int(i32(r, off + 16))
-        )
+        // rowIdx can come from postings data; an out-of-range value must not
+        // read past the mapped buffer.
+        guard rowIdx >= 0, off + 20 <= r.count else { return zero }
+        return r.withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
+            RowMeta(
+                authorIdx: Int(raw.loadUnaligned(fromByteOffset: off, as: UInt32.self)),
+                workIdx: Int(raw.loadUnaligned(fromByteOffset: off + 4, as: UInt32.self)),
+                anchorBookIdIdx: Int(raw.loadUnaligned(fromByteOffset: off + 8, as: UInt32.self)),
+                anchorLine: Int(raw.loadUnaligned(fromByteOffset: off + 12, as: Int32.self)),
+                anchorSeq: Int(raw.loadUnaligned(fromByteOffset: off + 16, as: Int32.self))
+            )
+        }
     }
 
     private func ensureNamePools() {
@@ -486,27 +515,19 @@ actor TopicalReader {
         (manifest["vocab_size"] as? NSNumber)?.intValue ?? 0
     }
 
-    private func ensureTermIndex() {
-        if termIndexCache != nil { return }
-        guard let v = loadVocab() else { return }
+    /// idf for a single vocab term, read on demand (mirrors Android's per-query
+    /// `vocabEntry(idx).idf`). Returns 0 for an out-of-range index. Replaces the
+    /// old full-vocab term-index build, which decoded a string per term into a
+    /// map that was never read — the cause of the lexical-query hang.
+    private func vocabIdf(_ idx: Int) -> Float {
+        guard let v = loadVocab() else { return 0 }
         let n = vocabSize
-        let fileSize = v.count
-        let offArrStart = fileSize - (n + 1) * 4
-        var map = [String: Int](minimumCapacity: n)
-        var idfs = [Float](repeating: 0, count: n)
-        for i in 0..<n {
-            let off = Int(u32(v, offArrStart + i * 4))
-            let len = Int(u16(v, off))
-            let term = String(data: v.subdata(in: (off + 2)..<(off + 2 + len)),
-                              encoding: .utf8) ?? ""
-            let idfH = u16(v, off + 2 + len)
-            idfs[i] = halfToFloat(idfH)
-            map[term] = i
-        }
-        termIndexCache = map
-        vocabIdfs = idfs
+        guard idx >= 0 && idx < n else { return 0 }
+        let offArrStart = v.count - (n + 1) * 4
+        let off = Int(u32(v, offArrStart + idx * 4))
+        let len = Int(u16(v, off))
+        return halfToFloat(u16(v, off + 2 + len))
     }
-    private var vocabIdfs: [Float] = []
 
     // ----- invidx.bin parser -----
 
@@ -580,6 +601,7 @@ actor TopicalReader {
         let rowsBase = offsetsOffset + (nlist + 1) * 4
         t.withUnsafeBytes { (rawT: UnsafeRawBufferPointer) in
             let tBase = rawT.baseAddress!.assumingMemoryBound(to: UInt16.self)
+            let listsCount = lists.count
             lists.withUnsafeBytes { (rawL: UnsafeRawBufferPointer) in
                 let lBaseU8 = rawL.baseAddress!
                 for c in pickedCentroids {
@@ -587,10 +609,17 @@ actor TopicalReader {
                     let endIdx = Int(u32(lists, offsetsOffset + (c + 1) * 4))
                     var off = rowsBase + startIdx * 4
                     let end = rowsBase + endIdx * 4
-                    while off < end {
-                        let i = Int(lBaseU8.advanced(by: off).load(as: UInt32.self))
+                    // Clamp to the mapped buffer — never read past it.
+                    guard off >= 0, off <= end, end <= listsCount else { continue }
+                    while off + 4 <= end {
+                        // loadUnaligned: rowsBase derives from a file-supplied
+                        // offset, so 4-alignment isn't guaranteed. Never crash.
+                        let i = Int(lBaseU8.loadUnaligned(fromByteOffset: off, as: UInt32.self))
                         off += 4
                         if i == srcRowIdx { continue }
+                        // `i` indexes the T matrix below; reject out-of-range
+                        // values so a corrupt list can't read past T.f16.
+                        guard i >= 0, i < passageCount else { continue }
                         let m = rowMeta(i)
                         if m.workIdx == src.workIdx { continue }
                         let rowOff = i * Kdim
@@ -607,16 +636,17 @@ actor TopicalReader {
     }
 
     func tfidfKnn(srcRowIdx: Int, queryTf: [Int: Int], K: Int, minSim: Float) -> [Hit] {
-        ensureTermIndex()
         ensureNamePools()
         guard srcRowIdx >= 0 && srcRowIdx < passageCount, !queryTf.isEmpty,
               let iv = loadInvIdx() else { return [] }
         let src = rowMeta(srcRowIdx)
         let tf = queryTf
+        let vSize = vocabSize
         var qWeights = [Int: Float]()
         var nrm: Double = 0
         for (idx, c) in tf {
-            let w = (1.0 + log(Double(c))) * Double(vocabIdfs[idx])
+            guard idx >= 0 && idx < vSize else { continue }
+            let w = (1.0 + log(Double(c))) * Double(vocabIdf(idx))
             qWeights[idx] = Float(w)
             nrm += w * w
         }
@@ -625,14 +655,25 @@ actor TopicalReader {
         for k in qWeights.keys { qWeights[k] = qWeights[k]! / scale }
 
         var sims = [Int: Float]()
+        let ivCount = iv.count
         for (termIdx, qw) in qWeights {
             guard let range = invPostingsRange(termIdx) else { continue }
+            // Clamp the postings range to the mapped buffer. A truncated or
+            // corrupt pack must degrade to fewer results, never an OOB crash.
+            guard range.start >= 0, range.start <= range.end, range.end <= ivCount
+                else { continue }
             iv.withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
                 let base = raw.baseAddress!
                 var off = range.start
-                while off < range.end {
-                    let rowIdx = Int(base.advanced(by: off).load(as: UInt32.self))
-                    let docH = base.advanced(by: off + 4).load(as: UInt16.self)
+                // `off + 6 <= end` guarantees both reads stay in bounds even if
+                // the range length isn't an exact multiple of the 6-byte stride.
+                while off + 6 <= range.end {
+                    // Postings are a 6-byte stride (UInt32 row + UInt16 weight),
+                    // so the UInt32 lands on non-4-aligned offsets every other
+                    // record. loadUnaligned is mandatory — `.load(as:)` would
+                    // crash with "load from misaligned raw pointer".
+                    let rowIdx = Int(base.loadUnaligned(fromByteOffset: off, as: UInt32.self))
+                    let docH = base.loadUnaligned(fromByteOffset: off + 4, as: UInt16.self)
                     off += 6
                     if rowIdx == srcRowIdx { continue }
                     let docW = halfToFloat(docH)

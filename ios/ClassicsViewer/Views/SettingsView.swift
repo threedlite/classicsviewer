@@ -111,6 +111,15 @@ struct SettingsView: View {
                             ReferencesStatusBadge()
                         }
                     }
+
+                    NavigationLink(destination: TopicalDownloadView()) {
+                        HStack {
+                            Image(systemName: "camera.filters")
+                            Text("Topical Links (Beta)")
+                            Spacer()
+                            TopicalStatusBadge()
+                        }
+                    }
                 }
 
                 // Learning Section
@@ -233,6 +242,10 @@ struct SettingsView: View {
                         .foregroundColor(.secondary)
 
                     Text("Sentence tree: Tap the morphology line (e.g. 'ψυχή acc s') to see how words relate grammatically within the sentence.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+
+                    Text("Topical Links: From a bookmark, tap the Topical Links link to see related passages from other works. The match is built from the text surrounding the bookmarked line (roughly a ten-line window), not the line alone — so neighbours reflect the broader passage's vocabulary, themes, and named people or places. Use the dropdown to switch between Topical (shared themes), Lexical (shared content vocabulary), and Names (shared people / places).")
                         .font(.footnote)
                         .foregroundColor(.secondary)
 
@@ -590,6 +603,29 @@ struct ExtendedDatabaseStatusBadge: View {
 
 struct ReferencesStatusBadge: View {
     @StateObject private var manager = ReferencesAssetDownloadManager.shared
+
+    var body: some View {
+        Group {
+            switch manager.status {
+            case .installed:
+                Text("Installed")
+                    .font(.caption)
+                    .foregroundColor(.green)
+            case .downloading:
+                ProgressView()
+                    .scaleEffect(0.7)
+            default:
+                EmptyView()
+            }
+        }
+        .task {
+            await manager.checkStatus()
+        }
+    }
+}
+
+struct TopicalStatusBadge: View {
+    @StateObject private var manager = TopicalAssetDownloadManager.shared
 
     var body: some View {
         Group {
