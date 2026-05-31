@@ -136,6 +136,11 @@ struct TopicalLinksView: View {
             let minSim = await r.tfidfMinSim
             hits = await r.tfidfKnn(srcRowIdx: srcRow, queryTf: queryTf,
                                     K: candidateLimit, minSim: minSim)
+        case "entity":
+            let queryTf = await r.entitySourceBag(rowIdx: srcRow)
+            let minSim = await r.entityMinSim
+            hits = await r.entityKnn(srcRowIdx: srcRow, queryTf: queryTf,
+                                     K: candidateLimit, minSim: minSim)
         default:
             hits = []
         }
@@ -165,11 +170,12 @@ struct TopicalLinksView: View {
                     ?? work?.title ?? ""
                 let authorName = author?.name ?? ""
                 // Drop the interlinear translator's rows — that's per-token
-                // lemma+POS text, not human-readable English.
-                let interlinearTranslator = LemmaBagBuilder.translatorFor(language)
+                // lemma+POS text, not human-readable English. Prefix-match
+                // so legacy Latin "...AI-generated from app dictionary"
+                // rows in unrebuilt on-device DBs are still excluded.
                 let translation = (try? await translationDAO.getTranslations(
                     bookId: h.bookId, startLine: h.lineNumber, endLine: h.lineNumber)
-                )?.first(where: { $0.translator != interlinearTranslator })?.translationText
+                )?.first(where: { !LemmaBagBuilder.isInterlinearTranslator($0.translator) })?.translationText
                 out.append(TopicalRelatedPassage(
                     reference: buildReference(authorName, workName, book.label, h.lineNumber),
                     originalSnippet: String(line.lineText.prefix(160)),

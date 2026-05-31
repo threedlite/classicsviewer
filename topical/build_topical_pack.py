@@ -62,7 +62,10 @@ LANGUAGE_REGISTRY = {
     "latin": {
         "authors_language": "latin",
         "db_file_stem": "topical_latin",
-        "translator": "Interlinear (Beta, AI-generated from app dictionary)",
+        # Post LATIN_POS_PLAN.md: Latin interlinear now carries POS via
+        # LDT + Stanza overlay, so the translator string matches Greek
+        # convention. The parser is also Greek-shaped (POS-gated).
+        "translator": "Interlinear (Beta, generated from app dictionary and treebank)",
         "parser": "latin",
     },
 }
@@ -117,22 +120,38 @@ def parse_interlinear_greek(text: str) -> list[str]:
 
 
 def parse_interlinear_latin(text: str) -> list[str]:
+    """Latin parser for the POS-bearing format (post LATIN_POS_PLAN.md).
+
+    The Latin interlinear is now generated with LDT + Stanza POS overlay
+    (see `latin/build_modules/interlinear/generate_latin_interlinear.py`),
+    so each token's table is shaped exactly like Greek's:
+
+        | surface |
+        | **gloss** |
+        | LEMMA MORPH ~  POS DEPREL HEAD sent_pos sent_id |   (Stanza)
+        | LEMMA MORPH ~* POS DEPREL HEAD sent_pos sent_id |   (LDT)
+
+    This parser is therefore identical in shape to parse_interlinear_greek:
+    pick the lemma from the left of `~`, keep only content POS, drop the
+    Latin light-lemmata stoplist.
+    """
     out: list[str] = []
-    next_is_lemma = False
     for part in text.split("|"):
-        ps = part.strip()
-        if not ps:
+        if "~" not in part:
             continue
-        if ps.startswith("**") and ps.endswith("**"):
-            next_is_lemma = True
+        left, right = part.split("~", 1)
+        lt = left.split()
+        rt = right.lstrip("*").split()
+        if not lt or not rt or rt[0] not in CONTENT_POS:
             continue
-        if next_is_lemma:
-            toks = ps.split()
-            if toks:
-                lem = unicodedata.normalize("NFC", toks[0]).lower()
-                if len(lem) >= 2 and lem.isalpha() and lem not in LIGHT_LEMMATA_LATIN:
-                    out.append(lem)
-            next_is_lemma = False
+        lem = unicodedata.normalize("NFC", lt[0]).lower()
+        if not lem or lem in ("?", "???", "-") or lem in LIGHT_LEMMATA_LATIN:
+            continue
+        # Drop trailing punctuation just in case (Stanza occasionally glues a
+        # trailing period to a lemma if the input wasn't perfectly cleaned).
+        lem = lem.strip(".,;:!?")
+        if len(lem) >= 2 and lem.isalpha():
+            out.append(lem)
     return out
 
 
@@ -140,19 +159,104 @@ PARSERS = {"greek": parse_interlinear_greek, "latin": parse_interlinear_latin}
 
 
 # --------------------------------------------------------------------------- #
+# Entity (proper-noun) parsers
+#
+# Latin: Stanza's UD-Latin output distinguishes PROPN from NOUN, so we can
+#        gate on `POS == "PROPN"` directly.
+#
+# Greek: the OGA/GLAUx treebanks DO NOT distinguish PROPN — both Achilles
+#        and "anger" come through tagged NOUN. We approximate PROPN with
+#        an orthographic heuristic: a NOUN whose lemma's first letter is
+#        an uppercase Greek letter is treated as a proper noun. In Perseus's
+#        Greek texts proper nouns are reliably capitalised, so this is a
+#        clean signal even though it's heuristic.
+# --------------------------------------------------------------------------- #
+def parse_entities_greek(text: str) -> list[str]:
+    """Greek entity parser — NOUN tokens whose lemma starts with an uppercase
+    Greek letter. Approximates PROPN since OGA/GLAUx don't tag it."""
+    out: list[str] = []
+    for part in text.split("|"):
+        if "~" not in part:
+            continue
+        left, right = part.split("~", 1)
+        lt = left.split()
+        rt = right.lstrip("*").split()
+        # Greek: gate on NOUN + uppercase-Greek-letter first char.
+        if not lt or not rt or rt[0] != "NOUN":
+            continue
+        lem = unicodedata.normalize("NFC", lt[0])
+        if not lem or lem in ("?", "???", "-"):
+            continue
+        # Uppercase check: first character is Greek uppercase ("Lu"
+        # category) OR an uppercase ASCII letter. Strip leading punctuation
+        # before the check.
+        lem_str = lem.lstrip(".,;:!?\"'()[]{}«»“”‘’")
+        if not lem_str:
+            continue
+        first = lem_str[0]
+        if unicodedata.category(first) != "Lu":
+            continue
+        if len(lem_str) >= 2:
+            out.append(lem_str)
+    return out
+
+
+# Stoplist for Latin entity parser: editorial abbreviations Stanza sometimes
+# mis-tags as PROPN ("Gen.", "Nom.", "Acc." case markers in scholarly Latin).
+# These are NOT proper nouns; drop them at parse time.
+LATIN_ENTITY_STOPLIST = {
+    "gen", "nom", "acc", "dat", "abl", "voc", "loc",   # case abbreviations
+    "sg", "pl", "sing",                                # number abbreviations
+    "masc", "fem", "neut",                             # gender abbreviations
+    "ind", "subj", "imp",                              # mood abbreviations
+    "prs", "pst", "fut",                               # tense abbreviations
+}
+
+
+def parse_entities_latin(text: str) -> list[str]:
+    """Latin entity parser — Stanza's PROPN tag is reliable for real proper
+    nouns; we additionally filter out editorial abbreviations Stanza
+    occasionally mis-tags as PROPN."""
+    out: list[str] = []
+    for part in text.split("|"):
+        if "~" not in part:
+            continue
+        left, right = part.split("~", 1)
+        lt = left.split()
+        rt = right.lstrip("*").split()
+        if not lt or not rt or rt[0] != "PROPN":
+            continue
+        lem = unicodedata.normalize("NFC", lt[0]).lower()
+        if not lem or lem in ("?", "???", "-"):
+            continue
+        # Strip trailing punctuation.
+        lem = lem.strip(".,;:!?")
+        if len(lem) < 2 or not lem.isalpha():
+            continue
+        if lem in LATIN_ENTITY_STOPLIST:
+            continue
+        out.append(lem)
+    return out
+
+
+ENTITY_PARSERS = {"greek": parse_entities_greek, "latin": parse_entities_latin}
+
+
+# --------------------------------------------------------------------------- #
 # Step 1: enumerate positions, form passages, build content-lemma bags
 # --------------------------------------------------------------------------- #
-def enumerate_and_passage(src, lang_val, n, max_books, translator, parse_lemmas):
-    """For each book in `lang_val`, yield per-book lists of:
-      - positions: [(book_id, line_number, sequence_number)]
-      - passage rows: [(book_id_idx, line, seq, row_idx)] flattened to one row per
-        passage's anchor position
-      - bag for each passage
-      - author_id, work_id, anchor book_id, anchor line/seq per row
+def enumerate_and_passage(src, lang_val, n, max_books, translator,
+                          parse_lemmas, parse_entities=None):
+    """For each book in `lang_val`, walk text_lines + translation_segments
+    and build per-passage data.
+
     Returns:
-      positions_list: list of (book_id_str, line, seq, row_idx) sorted globally
-      passage_rows: list of (author_id, work_id, anchor_book_id, anchor_line, anchor_seq)
-      bags: list of list[str] per passage
+      positions: list of (book_id, line, seq, row_idx)
+      rowmeta:   list of (author_id, work_id, anchor_book_id, anchor_line, seq)
+      bags:      content-lemma bag per passage (NOUN/PROPN/VERB/ADJ filter)
+      ent_bags:  PROPN-only bag per passage (entity kind) — same row indexing
+                 as `bags`. Empty list per passage when parse_entities is None
+                 (back-compat for callers that don't want the entity bag).
     """
     if max_books:
         books_cur = src.execute(
@@ -174,6 +278,7 @@ def enumerate_and_passage(src, lang_val, n, max_books, translator, parse_lemmas)
     positions_out: list[tuple[str, int, int, int]] = []  # (book_id, line, seq, row_idx)
     rowmeta_out: list[tuple[str, str, str, int, int]] = []  # (author_id, work_id, anchor_book_id, anchor_line, anchor_seq)
     bags_out: list[list[str]] = []
+    ent_bags_out: list[list[str]] = []
     row_idx_counter = 0
     dup_skipped = 0
     n_books_done = 0
@@ -197,8 +302,10 @@ def enumerate_and_passage(src, lang_val, n, max_books, translator, parse_lemmas)
         if not positions:
             continue
 
-        # 2) per-book interlinear: line_number -> content lemmas
+        # 2) per-book interlinear: line_number -> content lemmas (and PROPN
+        # lemmas in parallel, when the caller asked for the entity bag).
         il: dict[int, list[str]] = {}
+        il_ent: dict[int, list[str]] = {}
         for ln, txt in src.execute(
             "SELECT start_line, translation_text FROM translation_segments "
             "WHERE book_id = ? AND translator = ?",
@@ -207,6 +314,10 @@ def enumerate_and_passage(src, lang_val, n, max_books, translator, parse_lemmas)
             lems = parse_lemmas(txt)
             if lems:
                 il.setdefault(ln, []).extend(lems)
+            if parse_entities is not None:
+                ents = parse_entities(txt)
+                if ents:
+                    il_ent.setdefault(ln, []).extend(ents)
 
         # 3) windows of N consecutive positions -> passages
         for start in range(0, len(positions), n):
@@ -214,12 +325,16 @@ def enumerate_and_passage(src, lang_val, n, max_books, translator, parse_lemmas)
             anchor_line, anchor_seq = window[0]
             min_ln, max_ln = window[0][0], window[-1][0]
             bag: list[str] = []
+            ent_bag: list[str] = []
             for ln in range(min_ln, max_ln + 1):
                 if ln in il:
                     bag.extend(il[ln])
+                if ln in il_ent:
+                    ent_bag.extend(il_ent[ln])
             row_idx = row_idx_counter
             row_idx_counter += 1
             bags_out.append(bag)
+            ent_bags_out.append(ent_bag)
             rowmeta_out.append((author_id, work_id, book_id, anchor_line, anchor_seq))
             # Map ALL positions in window to this row_idx so position lookups for
             # any line in the window resolve to the same passage.
@@ -235,15 +350,17 @@ def enumerate_and_passage(src, lang_val, n, max_books, translator, parse_lemmas)
         log(f"  collapsed {dup_skipped} duplicate position triples (kept first)")
     log(f"  totals: positions={len(positions_out):,}  passages={row_idx_counter:,}  "
         f"non-empty bags={sum(1 for b in bags_out if b):,}")
-    return positions_out, rowmeta_out, bags_out
+    return positions_out, rowmeta_out, bags_out, ent_bags_out
 
 
 # --------------------------------------------------------------------------- #
 # Step 2: vectorise once -> count matrix + L2-normalised TF-IDF + vocab list
 # --------------------------------------------------------------------------- #
-def vectorize(bags: list[list[str]], min_bag: int):
+def vectorize(bags: list[list[str]], min_bag: int,
+              min_df: int = 3, max_df: float = 0.30):
     bags_eff = [b if len(b) >= min_bag else [] for b in bags]
-    cv = CountVectorizer(analyzer=lambda x: x, max_df=0.30, min_df=3, dtype=np.int32)
+    cv = CountVectorizer(analyzer=lambda x: x, max_df=max_df, min_df=min_df,
+                         dtype=np.int32)
     X_counts = cv.fit_transform(bags_eff)
     tfidf = TfidfTransformer(sublinear_tf=True)
     X_tfidf = tfidf.fit_transform(X_counts).astype(np.float32)
@@ -695,7 +812,7 @@ def write_manifest(out_dir: Path, language: str, params: dict,
         "lda_iter": params["lda_iter"],
         "min_bag": params["min_bag"],
         "n": params["n"],
-        "kinds_available": ["lda", "tfidf"],
+        "kinds_available": ["lda", "tfidf", "entity"],
         "kind_labels": {
             "lda": {
                 "ui": "Topical",
@@ -705,10 +822,17 @@ def write_manifest(out_dir: Path, language: str, params: dict,
                 "ui": "Lexical",
                 "hint": "Shared content vocabulary — same case / treatise / lexicon references",
             },
+            "entity": {
+                "ui": "Names",
+                "hint": "Shared named entities — passages mentioning the same people or places",
+            },
         },
         "default_kind": "lda",
         "tfidf_min_sim": params["tfidf_min_sim"],
         "lda_min_sim": params["lda_min_sim"],
+        "entity_min_sim": params["entity_min_sim"],
+        "entity_vocab_size": params["entity_vocab_size"],
+        "entity_min_bag": params["entity_min_bag"],
         "exclude_scope": params["exclude_scope"],
         "ivf_nlist": params["ivf_nlist"],
         "ivf_nprobe": params["ivf_nprobe"],
@@ -781,6 +905,15 @@ def main() -> None:
     ap.add_argument("--lda-iter", type=int, default=200)
     ap.add_argument("--tfidf-min-sim", type=float, default=0.15)
     ap.add_argument("--lda-min-sim", type=float, default=0.5)
+    ap.add_argument("--entity-min-bag", type=int, default=2,
+                    help="entity kind: minimum PROPN tokens per passage "
+                         "(much smaller than --min-bag because PROPNs are rare)")
+    ap.add_argument("--entity-min-df", type=int, default=2,
+                    help="entity-kind CountVectorizer min_df (loose because "
+                         "PROPNs are rare; 2 means a name must appear in at "
+                         "least 2 distinct passages to survive)")
+    ap.add_argument("--entity-min-sim", type=float, default=0.20,
+                    help="runtime entity-kind cosine floor (manifest default)")
     ap.add_argument("--exclude-scope", choices=["book", "work", "none"], default="work")
     ap.add_argument("--ivf-nprobe", type=int, default=10,
                     help="runtime IVF probe count (build-time default the reader respects)")
@@ -813,21 +946,39 @@ def main() -> None:
     src = sqlite3.connect(f"file:{source_db}?mode=ro", uri=True)
     text_build_time = read_source_build_time(src)
 
-    log(f"enumerating positions, parsing interlinear ({entry['parser']}) ...")
-    positions, rowmeta, bags = enumerate_and_passage(
+    log(f"enumerating positions, parsing interlinear ({entry['parser']}) "
+        f"and entity bags ...")
+    positions, rowmeta, bags, ent_bags = enumerate_and_passage(
         src, entry["authors_language"], args.n, args.max_books,
         entry["translator"], PARSERS[entry["parser"]],
+        parse_entities=ENTITY_PARSERS[entry["parser"]],
     )
     src.close()
     if not positions:
         die("no positions enumerated -- source DB or language filter wrong")
     if not any(bags):
         die("no passages have any content lemmas -- interlinear lookup is broken")
+    n_passages_with_entity = sum(1 for b in ent_bags if b)
+    log(f"  entity-bearing passages: {n_passages_with_entity:,} "
+        f"of {len(ent_bags):,} ({100*n_passages_with_entity/max(1,len(ent_bags)):.1f}%)")
 
-    log(f"vectorising ...")
+    log(f"vectorising content lemmas ...")
     X_counts, X_tfidf, vocab, idf, n_dropped = vectorize(bags, args.min_bag)
     log(f"  vocab={len(vocab):,}  X.shape={X_tfidf.shape}  nnz={X_tfidf.nnz:,}  "
         f"dropped_tiny={n_dropped:,}")
+
+    # Entity kind has a more permissive min_bag (proper-noun counts per
+    # passage are much smaller than content-lemma counts; min_bag=8 would
+    # drop almost every passage). A passage needs at least ent_min_bag
+    # PROPN tokens for its entity row to count.
+    log(f"vectorising entity (PROPN) lemmas, min_bag={args.entity_min_bag} "
+        f"min_df={args.entity_min_df} ...")
+    X_ent_counts, X_ent_tfidf, ent_vocab, ent_idf, n_ent_dropped = vectorize(
+        ent_bags, args.entity_min_bag,
+        min_df=args.entity_min_df, max_df=0.30,
+    )
+    log(f"  entity vocab={len(ent_vocab):,}  X.shape={X_ent_tfidf.shape}  "
+        f"nnz={X_ent_tfidf.nnz:,}  dropped_tiny={n_ent_dropped:,}")
 
     log("training LDA ...")
     if len(seeds) == 1:
@@ -874,6 +1025,20 @@ def main() -> None:
     log(f"  invidx.bin     {sz_iv/1e6:.1f} MB")
     log(f"  vocab.bin      {sz_vb/1e6:.1f} MB")
 
+    # Entity kind binaries: parallel to bags / invidx / vocab but populated
+    # from PROPN tokens only. Same on-disk shapes as the content equivalents.
+    p_ent_bags = out_dir / "entity_bags.bin"
+    sz_eb = write_bags(p_ent_bags, X_ent_counts)
+    log(f"  entity_bags.bin   {sz_eb/1e6:.1f} MB")
+
+    p_ent_invidx = out_dir / "entity_invidx.bin"
+    p_ent_vocab = out_dir / "entity_vocab.bin"
+    sz_eiv, sz_evb = write_invidx_and_vocab(
+        p_ent_invidx, p_ent_vocab, X_ent_tfidf, ent_vocab, ent_idf
+    )
+    log(f"  entity_invidx.bin {sz_eiv/1e6:.1f} MB")
+    log(f"  entity_vocab.bin  {sz_evb/1e6:.1f} MB")
+
     # tomotopy version
     try:
         import tomotopy as tp
@@ -892,6 +1057,9 @@ def main() -> None:
         "n": args.n,
         "tfidf_min_sim": args.tfidf_min_sim,
         "lda_min_sim": args.lda_min_sim,
+        "entity_min_sim": args.entity_min_sim,
+        "entity_vocab_size": len(ent_vocab),
+        "entity_min_bag": args.entity_min_bag,
         "exclude_scope": args.exclude_scope,
         "text_build_time": text_build_time,
         "sklearn_version": sklearn.__version__,
@@ -903,7 +1071,8 @@ def main() -> None:
         out_dir, lang, params,
         ["positions.bin", "rowmeta.bin", "T.f16",
          "ivf.centroids", "ivf.lists",
-         "bags.bin", "invidx.bin", "vocab.bin"],
+         "bags.bin", "invidx.bin", "vocab.bin",
+         "entity_bags.bin", "entity_invidx.bin", "entity_vocab.bin"],
     )
     log(f"  manifest.json  ({manifest_path.stat().st_size} bytes)")
 

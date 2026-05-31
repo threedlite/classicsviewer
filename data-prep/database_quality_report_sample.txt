@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-05-21T18:57:53.073809
+Generated: 2026-05-30T22:56:06.898409
 Mode: sample
 
 Total Authors: 12
@@ -8,7 +8,7 @@ Total Books: 667
 Total Lines: 222,709
 Translation Segments: 126,094
 Build Time: 3.9 minutes
-Database Size: 631.7MB → 155.4MB compressed (24.6%)
+Database Size: 633.5MB → 155.7MB compressed (24.6%)
 Dictionary Entries: 62,810
 Lemma Mappings: 828,057
 
@@ -887,29 +887,29 @@ New Testament / Titus translations: Rainbow Missions, Inc. 15 segments [Excellen
 [P. Vergilius Maro (Virgil)]
 P. Vergilius Maro (Virgil) / Aeneid - 9,843 lines total, 12 books, max_lines/book=948, max_char=60 [Perseus]
 P. Vergilius Maro (Virgil) / Aeneid / Book 1 - 754 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 754 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 754 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 2 - 780 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 780 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 780 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 3 - 717 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 717 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 717 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 4 - 703 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 702 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 702 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 5 - 871 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 871 segments [Excellent (100% coverage)], Theodore C. Williams 1136 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 871 segments [Excellent (100% coverage)], Theodore C. Williams 1136 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 6 - 896 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 896 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 896 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 7 - 816 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 816 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 816 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 8 - 724 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 724 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 724 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 9 - 813 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 813 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 813 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 10 - 907 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 907 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 907 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 11 - 914 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 914 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 914 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 948 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary) 948 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 948 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Eclogues - 828 lines total, 10 books, max_lines/book=111, max_char=56 [Perseus]
 P. Vergilius Maro (Virgil) / Eclogues / Ode 1 - 83 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 12 segments [Excellent-Section (100% coverage)]

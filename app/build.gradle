@@ -314,8 +314,38 @@ task copyReferencesToAssets {
     }
 }
 
+// Abort the build if a Python data-prep build is running. Gradle reads the
+// debug DB zip from src/debug/assets/ which assemble_database.py writes; a
+// concurrent assembly could either be read mid-write (corrupting the APK) or
+// have its atomic rename collide with gradle's open file handle. The
+// shared/build_lock.py mutex covers Python builds only; this task closes the
+// gap for gradle. See BUILD.md §"Concurrent-build mutex" and
+// "NEVER run builds in parallel".
+task checkNoConcurrentDataBuild {
+    doLast {
+        def pattern = 'assemble_database\\.py|run_build\\.sh|create_.*_database\\.py'
+        def proc = ['bash', '-c', "ps -Ao pid=,command= | grep -E '${pattern}' | grep -v grep || true"].execute()
+        proc.waitFor()
+        def out = proc.in.text.trim()
+        if (!out.isEmpty()) {
+            throw new GradleException("""
+                ERROR: A data-prep build is currently running. Refusing to build the APK
+                because gradle and assemble_database.py share src/debug/assets/perseus_texts.db.zip
+                and a concurrent build can corrupt the APK or fail with an atomic-rename collision.
+
+                Running process(es):
+                ${out}
+
+                Wait for the running build to finish (check its log), then re-run gradle.
+                See BUILD.md §"Concurrent-build mutex" and "NEVER run builds in parallel".
+            """.stripIndent())
+        }
+    }
+}
+
 // Make sure database and audio checks run before building
 // Also copy font, audio, and reference files before build
+preBuild.dependsOn checkNoConcurrentDataBuild
 preBuild.dependsOn checkDatabaseExists
 preBuild.dependsOn copyFontToAssets
 preBuild.dependsOn copyAudioToAssets

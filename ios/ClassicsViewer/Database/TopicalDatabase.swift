@@ -61,6 +61,11 @@ actor TopicalReader {
     private var ivfCentroids: Data?
     private var ivfLists: Data?
     private var bags: Data?
+    private var entityBags: Data?
+    private var entityInvidx: Data?
+    private var entityVocab: Data?
+    private var entityVocabIdfs: [Float] = []
+    private var entityTermIndexCache: [String: Int]? = nil
 
     private var bookIdsCache: [String]?
     private var bookIdToIdxCache: [String: Int]?
@@ -156,6 +161,116 @@ actor TopicalReader {
         let url = packDir.appendingPathComponent("bags.bin")
         bags = try? Data(contentsOf: url, options: .alwaysMapped)
         return bags
+    }
+    private func loadEntityBags() -> Data? {
+        if let p = entityBags { return p }
+        let url = packDir.appendingPathComponent("entity_bags.bin")
+        entityBags = try? Data(contentsOf: url, options: .alwaysMapped)
+        return entityBags
+    }
+    private func loadEntityInvIdx() -> Data? {
+        if let p = entityInvidx { return p }
+        let url = packDir.appendingPathComponent("entity_invidx.bin")
+        entityInvidx = try? Data(contentsOf: url, options: .alwaysMapped)
+        return entityInvidx
+    }
+    private func loadEntityVocab() -> Data? {
+        if let p = entityVocab { return p }
+        let url = packDir.appendingPathComponent("entity_vocab.bin")
+        entityVocab = try? Data(contentsOf: url, options: .alwaysMapped)
+        return entityVocab
+    }
+
+    private func ensureEntityTermIndex() {
+        if entityTermIndexCache != nil { return }
+        guard let v = loadEntityVocab() else { return }
+        guard u32(v, 0) == 0x564F4331 else { return }
+        let n = Int(u32(v, 8))
+        let fileSize = v.count
+        let offArrStart = fileSize - (n + 1) * 4
+        var map = [String: Int](minimumCapacity: n)
+        var idfs = [Float](repeating: 0, count: n)
+        for i in 0..<n {
+            let off = Int(u32(v, offArrStart + i * 4))
+            let len = Int(u16(v, off))
+            let term = String(data: v.subdata(in: (off + 2)..<(off + 2 + len)),
+                              encoding: .utf8) ?? ""
+            let idfH = u16(v, off + 2 + len)
+            idfs[i] = halfToFloat(idfH)
+            map[term] = i
+        }
+        entityTermIndexCache = map
+        entityVocabIdfs = idfs
+    }
+
+    /// Pre-built (term_idx -> tf) PROPN bag for source row from entity_bags.bin.
+    func entitySourceBag(rowIdx: Int) -> [Int: Int] {
+        guard let b = loadEntityBags(), rowIdx >= 0, rowIdx < passageCount else { return [:] }
+        guard u32(b, 0) == 0x42414731 else { return [:] }
+        let recordCount = Int(u32(b, 8))
+        if rowIdx >= recordCount { return [:] }
+        let entriesOffset = Int(u32(b, 12))
+        let rowOffsetsBase = 16
+        let startIdx = Int(u32(b, rowOffsetsBase + rowIdx * 4))
+        let endIdx = Int(u32(b, rowOffsetsBase + (rowIdx + 1) * 4))
+        var out = [Int: Int]()
+        out.reserveCapacity(endIdx - startIdx)
+        var off = entriesOffset + startIdx * 6
+        for _ in startIdx..<endIdx {
+            out[Int(u32(b, off))] = Int(u16(b, off + 4))
+            off += 6
+        }
+        return out
+    }
+
+    func entityKnn(srcRowIdx: Int, queryTf: [Int: Int], K: Int, minSim: Float) -> [Hit] {
+        ensureEntityTermIndex()
+        ensureNamePools()
+        guard srcRowIdx >= 0 && srcRowIdx < passageCount, !queryTf.isEmpty,
+              let iv = loadEntityInvIdx() else { return [] }
+        guard u32(iv, 0) == 0x494E5631 else { return [] }
+        let postingsOffset = Int(u32(iv, 12))
+        let src = rowMeta(srcRowIdx)
+
+        var qWeights = [Int: Float]()
+        var nrm: Double = 0
+        for (idx, c) in queryTf {
+            guard idx < entityVocabIdfs.count else { continue }
+            let w = (1.0 + log(Double(c))) * Double(entityVocabIdfs[idx])
+            qWeights[idx] = Float(w)
+            nrm += w * w
+        }
+        let scale = Float(sqrt(nrm))
+        if scale == 0 { return [] }
+        for k in qWeights.keys { qWeights[k] = qWeights[k]! / scale }
+
+        var sims = [Int: Float]()
+        for (termIdx, qw) in qWeights {
+            let base = 16 + termIdx * 4
+            let start = postingsOffset + Int(u32(iv, base))
+            let end = postingsOffset + Int(u32(iv, base + 4))
+            iv.withUnsafeBytes { (raw: UnsafeRawBufferPointer) in
+                let basePtr = raw.baseAddress!
+                var off = start
+                while off < end {
+                    let rowIdx = Int(basePtr.advanced(by: off).load(as: UInt32.self))
+                    let docH = basePtr.advanced(by: off + 4).load(as: UInt16.self)
+                    off += 6
+                    if rowIdx == srcRowIdx { continue }
+                    let docW = halfToFloat(docH)
+                    sims[rowIdx, default: 0] += qw * docW
+                }
+            }
+        }
+        if sims.isEmpty { return [] }
+        var heap = TopKHeap(K: K)
+        for (rowIdx, s) in sims {
+            if s <= minSim { continue }
+            let m = rowMeta(rowIdx)
+            if m.workIdx == src.workIdx { continue }
+            heap.offer(rowIdx: rowIdx, sim: s)
+        }
+        return heap.sortedDescending()
     }
 
     /// Pre-built (term_idx -> tf) source-passage bag, read from bags.bin.
@@ -611,6 +726,9 @@ actor TopicalReader {
     }
     var tfidfMinSim: Float {
         Float((manifest["tfidf_min_sim"] as? NSNumber)?.doubleValue ?? 0.15)
+    }
+    var entityMinSim: Float {
+        Float((manifest["entity_min_sim"] as? NSNumber)?.doubleValue ?? 0.20)
     }
     func kindUiLabel(_ kind: String) -> String {
         guard let labels = manifest["kind_labels"] as? [String: Any],

@@ -59,6 +59,11 @@ class TopicalLinksActivity : AppCompatActivity() {
         // floor needs to come down. TF-IDF stays close to the manifest value.
         private const val LDA_MIN_SIM = 0.30f
         private const val TFIDF_MIN_SIM = 0.12f
+        // Entity kind: typically higher cosines than TF-IDF because PROPN
+        // bags are sparser. 0.20 surfaces "two passages mention 2+ of the
+        // same entity"; lower would surface single-entity collisions which
+        // tend to be noise on common gods/places.
+        private const val ENTITY_MIN_SIM = 0.20f
         // IVF probe count. Higher = better recall, ~linear cost.
         private const val IVF_NPROBE = 24
 
@@ -259,6 +264,10 @@ class TopicalLinksActivity : AppCompatActivity() {
                     val queryTf = r.sourceBag(srcRow)
                     r.tfidfKnn(srcRow, queryTf, CANDIDATE_LIMIT, TFIDF_MIN_SIM)
                 }
+                "entity" -> {
+                    val queryTf = r.entitySourceBag(srcRow)
+                    r.entityKnn(srcRow, queryTf, CANDIDATE_LIMIT, ENTITY_MIN_SIM)
+                }
                 else -> emptyList()
             }
             android.util.Log.d("TopicalQuery",
@@ -282,9 +291,11 @@ class TopicalLinksActivity : AppCompatActivity() {
                     // Drop interlinear-translator rows — those are the per-token
                     // lemma+POS lines we feed into TF-IDF, not human-readable
                     // English. Pick the first remaining segment (if any).
-                    val interlinearTranslator = LemmaBagBuilder.translatorFor(language)
+                    // Use prefix-match so on-device DBs built before the
+                    // Latin POS rename ("AI-generated from app dictionary")
+                    // are still excluded until they're rebuilt.
                     tsDao.getTranslationSegments(h.bookId, h.anchorLine, h.anchorLine)
-                        .firstOrNull { it.translator != interlinearTranslator }
+                        .firstOrNull { !LemmaBagBuilder.isInterlinearTranslator(it.translator) }
                         ?.translationText?.let { limit(it, TRANS_CHARS) }
                 } catch (e: Exception) {
                     null

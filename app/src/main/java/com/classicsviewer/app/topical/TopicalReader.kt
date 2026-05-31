@@ -161,6 +161,9 @@ class TopicalReader private constructor(
     private val ivfCentroidsFile = File(packDir, "ivf.centroids")
     private val ivfListsFile = File(packDir, "ivf.lists")
     private val bagsFile = File(packDir, "bags.bin")
+    private val entityBagsFile = File(packDir, "entity_bags.bin")
+    private val entityInvidxFile = File(packDir, "entity_invidx.bin")
+    private val entityVocabFile = File(packDir, "entity_vocab.bin")
 
     private val posBuf: ByteBuffer by lazy { mmap(positionsFile) }
     private val rmBuf: ByteBuffer by lazy { mmap(rowmetaFile) }
@@ -175,6 +178,15 @@ class TopicalReader private constructor(
     }
     private val bagsBuf: ByteBuffer? by lazy {
         if (bagsFile.exists()) mmap(bagsFile) else null
+    }
+    private val entityBagsBuf: ByteBuffer? by lazy {
+        if (entityBagsFile.exists()) mmap(entityBagsFile) else null
+    }
+    private val entityInvBuf: ByteBuffer? by lazy {
+        if (entityInvidxFile.exists()) mmap(entityInvidxFile) else null
+    }
+    private val entityVocBuf: ByteBuffer? by lazy {
+        if (entityVocabFile.exists()) mmap(entityVocabFile) else null
     }
 
     private fun mmap(f: File): ByteBuffer =
@@ -596,6 +608,119 @@ class TopicalReader private constructor(
         return heap.toList()
     }
 
+    // ----- entity kind: PROPN-only inverted index, parallel to TF-IDF -----
+
+    private val entityVocabSize: Int by lazy {
+        val v = entityVocBuf ?: return@lazy 0
+        require(v.getInt(0) == 0x564F4331) { "entity_vocab.bin bad magic" }
+        v.getInt(8)
+    }
+
+    private val entityVocabOffsets: IntArray by lazy {
+        val v = entityVocBuf ?: return@lazy IntArray(0)
+        val n = entityVocabSize
+        val fileSize = v.capacity()
+        val offArrayStart = fileSize - (n + 1) * 4
+        val arr = IntArray(n + 1)
+        for (i in 0..n) arr[i] = v.getInt(offArrayStart + i * 4)
+        arr
+    }
+
+    private fun entityVocabEntry(idx: Int): VocabEntry {
+        val v = entityVocBuf ?: error("entity_vocab.bin not loaded")
+        val off = entityVocabOffsets[idx]
+        val len = v.getShort(off).toInt() and 0xFFFF
+        val b = ByteArray(len)
+        val dup = v.duplicate(); dup.position(off + 2); dup.get(b)
+        val term = String(b, Charsets.UTF_8)
+        val idfH = v.getShort(off + 2 + len).toInt() and 0xFFFF
+        return VocabEntry(term, halfToFloat(idfH))
+    }
+
+    private val entityInvPostingsOffset: Int by lazy {
+        val iv = entityInvBuf ?: return@lazy 0
+        require(iv.getInt(0) == 0x494E5631) { "entity_invidx.bin bad magic" }
+        iv.getInt(12)
+    }
+
+    private fun entityInvPostingsRange(termIdx: Int): IntArray? {
+        val iv = entityInvBuf ?: return null
+        val base = 16 + termIdx * 4
+        val start = iv.getInt(base)
+        val end = iv.getInt(base + 4)
+        return intArrayOf(entityInvPostingsOffset + start, entityInvPostingsOffset + end)
+    }
+
+    /** Pre-built (term_idx -> tf) PROPN bag for source row from
+     *  `entity_bags.bin`. Empty if the file isn't shipped or the row has no
+     *  proper nouns. */
+    fun entitySourceBag(rowIdx: Int): Map<Int, Int> {
+        val buf = entityBagsBuf ?: return emptyMap()
+        if (rowIdx < 0 || rowIdx >= passageCount) return emptyMap()
+        require(buf.getInt(0) == 0x42414731) { "entity_bags.bin bad magic" }
+        val recordCount = buf.getInt(8)
+        if (rowIdx >= recordCount) return emptyMap()
+        val entriesOffset = buf.getInt(12)
+        val rowOffsetsBase = 16
+        val startIdx = buf.getInt(rowOffsetsBase + rowIdx * 4)
+        val endIdx = buf.getInt(rowOffsetsBase + (rowIdx + 1) * 4)
+        val out = HashMap<Int, Int>((endIdx - startIdx) * 2)
+        var off = entriesOffset + startIdx * 6
+        for (i in startIdx until endIdx) {
+            val termIdx = buf.getInt(off)
+            val tf = buf.getShort(off + 4).toInt() and 0xFFFF
+            out[termIdx] = tf
+            off += 6
+        }
+        return out
+    }
+
+    /** Entity-kind KNN. Identical algorithm to `tfidfKnn` but reads from
+     *  entity_invidx.bin / entity_vocab.bin. Returns empty if any of the
+     *  entity files are missing or the source bag is empty. */
+    fun entityKnn(srcRowIdx: Int, queryTf: Map<Int, Int>, K: Int, minSim: Float): List<Hit> {
+        if (srcRowIdx < 0 || srcRowIdx >= passageCount) return emptyList()
+        if (queryTf.isEmpty()) return emptyList()
+        val iv = entityInvBuf ?: return emptyList()
+        val srcMeta = rowMeta(srcRowIdx)
+        val qWeights = HashMap<Int, Float>(queryTf.size * 2)
+        var norm = 0.0
+        for ((idx, c) in queryTf) {
+            val w = (1.0 + Math.log(c.toDouble())) * entityVocabEntry(idx).idf
+            qWeights[idx] = w.toFloat()
+            norm += w * w
+        }
+        val nrm = Math.sqrt(norm).toFloat()
+        if (nrm == 0f) return emptyList()
+        for (idx in qWeights.keys.toList()) qWeights[idx] = qWeights[idx]!! / nrm
+
+        val sims = HashMap<Int, Float>()
+        for ((termIdx, qw) in qWeights) {
+            val range = entityInvPostingsRange(termIdx) ?: continue
+            var off = range[0]
+            val end = range[1]
+            while (off < end) {
+                val rowIdx = iv.getInt(off)
+                val docW = halfToFloat(iv.getShort(off + 4).toInt() and 0xFFFF)
+                off += 6
+                if (rowIdx == srcRowIdx) continue
+                sims.merge(rowIdx, qw * docW) { a, b -> a + b }
+            }
+        }
+        if (sims.isEmpty()) return emptyList()
+
+        val heap = TopKHeap(K)
+        for ((rowIdx, s) in sims) {
+            if (s <= minSim) continue
+            val meta = rowMeta(rowIdx)
+            if (meta.workIdx == srcMeta.workIdx) continue
+            heap.offer(rowIdx, s)
+        }
+        return heap.toList()
+    }
+
+    // ----- end entity -----
+
     /** Top-K min-heap; offer keeps the K highest sims seen, returns sorted desc. */
     private class TopKHeap(val K: Int) {
         private val rows = IntArray(K)
@@ -675,4 +800,5 @@ class TopicalReader private constructor(
 
     val ldaMinSim: Float by lazy { manifest.optDouble("lda_min_sim", 0.5).toFloat() }
     val tfidfMinSim: Float by lazy { manifest.optDouble("tfidf_min_sim", 0.15).toFloat() }
+    val entityMinSim: Float by lazy { manifest.optDouble("entity_min_sim", 0.20).toFloat() }
 }

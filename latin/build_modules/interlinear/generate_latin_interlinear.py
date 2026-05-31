@@ -1,19 +1,38 @@
 #!/usr/bin/env python3
 """
-Generate line-by-line interlinear translation for Latin works
+Generate line-by-line interlinear translation for Latin works.
 
-Uses the Latin dictionary lookup implementation from latin_dictionary_lookup.py.
-Modeled after generate_interlinear.py for Greek but adapted for Latin orthography.
+POS / dependency tagging strategy (mirrors `sanskrit/generate_sanskrit_interlinear.py`):
+
+  1. Run Stanza UD-Latin on every line (PROIEL package) to get a baseline
+     POS / lemma / head / deprel for every token. Stanza covers 100% of
+     the Latin corpus.
+  2. Overlay Perseus LDT v2.1 gold annotations on the works it aligns
+     (Vergil Aeneid book 6 + Ovid Metamorphoses book 1 in v1 — see
+     `latin/LATIN_POS_PLAN.md` §Appendix A for the alignment scope).
+     Where LDT has a token, its lemma / POS / deprel / head replace
+     Stanza's and the emitted format uses `~*` instead of `~`.
+
+  3. English glosses still come from the dictionary lookup as before.
+     Only POS / lemma / dependency structure is sourced from LDT/Stanza.
 
 Output formats:
-1. Plain text format (.interlinear.txt)
-2. TEI XML format (.perseus-eng99.xml)
+  - Plain text (`.interlinear.txt`)
+  - TEI XML (`.perseus-eng99.xml`) — per-token table is now:
+        | surface |
+        | **gloss** |
+        | LEMMA MORPH ~  POS DEPREL HEAD sent_pos sent_id |    (Stanza)
+        | LEMMA MORPH ~* POS DEPREL HEAD sent_pos sent_id |    (LDT)
+
+This matches the Greek treebank-derived format and the Sanskrit format,
+so `topical/build_topical_pack.py`'s parser can use the same POS gate
+across all three languages.
 """
 
 import sqlite3
 import re
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 import html
 from functools import lru_cache
 import time
@@ -21,9 +40,42 @@ import time
 # Import the Latin dictionary lookup
 try:
     from .latin_dictionary_lookup import LatinRepository, DictionaryEntry, extract_gloss
+    from .latin_treebank_loader import LdtLoader, LdtWord
+    from .latin_stanza_nlp import (
+        get_stanza_nlp,
+        ensure_model_downloaded,
+        STANZA_AVAILABLE,
+    )
 except ImportError:
     # Fallback for direct execution (testing)
     from latin_dictionary_lookup import LatinRepository, DictionaryEntry, extract_gloss
+    from latin_treebank_loader import LdtLoader, LdtWord
+    from latin_stanza_nlp import (
+        get_stanza_nlp,
+        ensure_model_downloaded,
+        STANZA_AVAILABLE,
+    )
+
+
+# Pre-download the Stanza Latin model at module-import time. This avoids the
+# race where N parallel workers all try to fetch the same model into the
+# same cache dir. ensure_model_downloaded() is idempotent (no-op if cached).
+if STANZA_AVAILABLE:
+    ensure_model_downloaded()
+
+
+# Module-level LDT loader — load once per process, share via singleton.
+_ldt_loader: Optional[LdtLoader] = None
+
+
+def get_ldt_loader() -> LdtLoader:
+    """Process-singleton LDT loader; lazy-init on first call."""
+    global _ldt_loader
+    if _ldt_loader is None:
+        _ldt_loader = LdtLoader()
+        _ldt_loader.load()
+    return _ldt_loader
+
 
 # Database path - will be set when called from build script
 DB_PATH = None
@@ -159,7 +211,8 @@ class LatinInterlinearGenerator:
     def lookup_word(self, word: str, book_id: str, line_number: int, position: int) -> Dict:
         """
         Lookup word using cached dictionary lookup.
-        Returns a dict with latin, position, gloss, lemma, morph
+        Returns a dict with latin, position, gloss, lemma, morph.
+        POS / deprel / head get filled in later by resolve_line_pos_tags().
         """
         # Get cached result (gloss, lemma, morph) - instant for repeated words!
         gloss, lemma, morph = self._cached_lookup_word(word)
@@ -169,8 +222,100 @@ class LatinInterlinearGenerator:
             'position': position,
             'gloss': gloss,
             'lemma': lemma,
-            'morph': morph
+            'morph': morph,
+            # Default POS fields — overwritten by resolve_line_pos_tags below.
+            'pos': '',
+            'deprel': '',
+            'head': 0,
+            'sent_pos': position,
+            'sent_id': '',
+            'is_treebank': False,
         }
+
+    def resolve_line_pos_tags(
+        self,
+        book_id: str,
+        line_number: int,
+        words: List[Dict],
+    ) -> None:
+        """
+        Mutate each word dict in `words` with POS / lemma / deprel / head /
+        sent_pos / sent_id / is_treebank, sourced from Stanza for every token
+        and overlaid with Perseus LDT where it covers this (book_id, line).
+
+        Words whose `latin` field has no Latin letters (numbers, milestone
+        markers like "[1.1]") are left untouched — they have no linguistic
+        POS to assign.
+
+        Strategy:
+          - Pretokenize the line's Latin tokens and pass them to Stanza as
+            a single sentence. Stanza returns per-token POS / lemma / head /
+            deprel.
+          - For each token position, check the LDT loader: if an LDT word
+            matches the surface form for (book_id, line_number), use its
+            lemma / postag / deprel / head and mark is_treebank=True.
+          - sent_id is "L<line_number>" (one sentence per line in v1).
+        """
+        # Collect the Latin-letter-bearing tokens that need linguistic
+        # analysis, preserving their indices in `words` so we can copy
+        # results back.
+        analyzable = [
+            (i, w['latin']) for i, w in enumerate(words)
+            if re.search(r'[a-zA-ZāēīōūĀĒĪŌŪ]', w['latin'])
+        ]
+        if not analyzable:
+            return
+
+        token_strings = [t for _, t in analyzable]
+        sent_id = f"L{line_number}"
+
+        # --- 1) Stanza baseline pass ---
+        nlp = get_stanza_nlp()
+        stanza_words = []
+        if nlp is not None:
+            try:
+                doc = nlp([token_strings])
+                # Pretokenized + one input sentence → exactly one sentence
+                # out, with words 1:1 to our tokens.
+                if doc.sentences:
+                    stanza_words = list(doc.sentences[0].words)
+            except Exception as e:
+                # Stanza failure for one line: leave POS fields blank rather
+                # than crash the whole work.
+                print(f"  [stanza] WARN: failed on {book_id} L{line_number}: {e}")
+
+        for sent_pos, (orig_idx, _surface) in enumerate(analyzable, 1):
+            if sent_pos - 1 < len(stanza_words):
+                sw = stanza_words[sent_pos - 1]
+                # Stanza's `head` is 1-based within the sentence; 0 = root.
+                # We keep the same convention.
+                words[orig_idx]['pos'] = sw.upos or ''
+                # Don't overwrite the dictionary lemma if Stanza's is blank.
+                if sw.lemma:
+                    words[orig_idx]['lemma'] = sw.lemma
+                words[orig_idx]['deprel'] = sw.deprel or ''
+                words[orig_idx]['head'] = sw.head if sw.head is not None else 0
+            words[orig_idx]['sent_pos'] = sent_pos
+            words[orig_idx]['sent_id'] = sent_id
+
+        # --- 2) LDT overlay ---
+        loader = get_ldt_loader()
+        for orig_idx, surface in analyzable:
+            ldt_word = loader.lookup_token(book_id, line_number, surface)
+            if ldt_word is None:
+                continue
+            if ldt_word.upos:
+                words[orig_idx]['pos'] = ldt_word.upos
+            if ldt_word.lemma:
+                words[orig_idx]['lemma'] = ldt_word.lemma
+            if ldt_word.deprel:
+                words[orig_idx]['deprel'] = ldt_word.deprel
+            words[orig_idx]['head'] = ldt_word.head
+            # The morph field stays as the dictionary's morph string — LDT's
+            # postag would be more accurate, but the dictionary morph is
+            # already validated by downstream code. Future v2: convert
+            # ldt_word.postag → UD-style morph features ("Case=Acc|Num=Sing").
+            words[orig_idx]['is_treebank'] = True
 
     def generate_interlinear(self, book_id: str, start_line: int, end_line: int) -> List[Dict]:
         """Main function to generate interlinear translation"""
@@ -195,22 +340,33 @@ class LatinInterlinearGenerator:
             # Tokenize
             tokens = self.tokenize_latin(text)
 
-            # Lookup each word
+            # Lookup each word (gloss + dictionary lemma/morph).
             words = []
             for pos, token in enumerate(tokens, 1):
-                # Skip non-Latin tokens (numbers, milestone references)
-                # Any token without Latin letter characters is a reference marker, not a word to gloss
+                # Skip non-Latin tokens (numbers, milestone references).
+                # Any token without Latin letter characters is a reference
+                # marker, not a word to gloss.
                 if not re.search(r'[a-zA-ZāēīōūĀĒĪŌŪ]', token):
                     word_data = {
                         'latin': token,
                         'position': pos,
                         'gloss': '',
                         'lemma': '',
-                        'morph': ''
+                        'morph': '',
+                        'pos': '',
+                        'deprel': '',
+                        'head': 0,
+                        'sent_pos': pos,
+                        'sent_id': '',
+                        'is_treebank': False,
                     }
                 else:
                     word_data = self.lookup_word(token, book_id, line_num, pos)
                 words.append(word_data)
+
+            # Stanza POS pass + LDT overlay. Single call per line; safe to
+            # invoke even if Stanza is unavailable (fields stay blank).
+            self.resolve_line_pos_tags(book_id, line_num, words)
 
             # Create word-by-word gloss
             word_gloss = ' '.join([w['gloss'] if w['gloss'] else '???' for w in words])
@@ -275,8 +431,13 @@ def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
     f.write('            <titleStmt>\n')
     f.write(f'                <title>{work_title_escaped} - Interlinear Translation</title>\n')
     f.write(f'                <author>{author_name_escaped}</author>\n')
-    f.write('                <editor role="translator">Interlinear (Beta, AI-generated from app dictionary)</editor>\n')
-    f.write('                <sponsor>Derived from Whitaker\'s Words, Perseus</sponsor>\n')
+    # Translator string matches the Greek convention exactly, because the
+    # token format is now also identical (LEMMA MORPH ~/~* POS DEPREL HEAD
+    # sent_pos sent_id). Greek and Latin can share parser code at the
+    # client end (see app/.../topical/LemmaBagBuilder.kt parseLatin
+    # post-LATIN_POS_PLAN.md).
+    f.write('                <editor role="translator">Interlinear (Beta, generated from app dictionary and treebank)</editor>\n')
+    f.write('                <sponsor>Derived from Whitaker\'s Words, Perseus LDT v2.1, Stanza UD-Latin (PROIEL)</sponsor>\n')
     f.write('                <principal></principal>\n')
     f.write('                <respStmt>\n')
     f.write('                    <resp>AI-generated interlinear translation</resp>\n')
@@ -344,7 +505,7 @@ def _write_book_to_xml(f, book_num: int, book_results: List[Dict]):
     for line_data in book_results:
         line_num = line_data['line_number']
 
-        # Build interlinear text efficiently using list comprehension
+        # Build interlinear text efficiently using list comprehension.
         word_tables = []
         for w in line_data['words']:
             latin = w['latin'] if w['latin'] else '???'
@@ -352,16 +513,42 @@ def _write_book_to_xml(f, book_num: int, book_results: List[Dict]):
             lemma = w['lemma'] if w['lemma'] else '?'
             morph = w['morph'] if w['morph'] else ''
 
-            # CRITICAL: Escape XML special characters to prevent malformed XML
-            # Latin texts may contain <word> for editorial additions which break XML parsing
-            # Use quote=False to avoid escaping apostrophes (&#x27;) which are valid in XML text content
+            # POS / dep fields (filled by resolve_line_pos_tags). For tokens
+            # that aren't real Latin (milestones, numerals) these stay blank
+            # and we emit the dictionary-only format.
+            pos = w.get('pos') or ''
+            deprel = w.get('deprel') or ''
+            head = w.get('head', 0)
+            sent_pos = w.get('sent_pos', 0)
+            sent_id = w.get('sent_id') or ''
+            is_treebank = w.get('is_treebank', False)
+            marker = '~*' if is_treebank else '~'
+
+            # Escape XML special chars; Latin texts have <word>...</word>
+            # editorial markers that would otherwise break the XML.
             latin = html.escape(latin, quote=False)
             gloss = html.escape(gloss, quote=False)
             lemma = html.escape(lemma, quote=False)
             morph = html.escape(morph, quote=False)
+            pos_esc = html.escape(pos, quote=False)
+            deprel_esc = html.escape(deprel, quote=False)
+            sent_id_esc = html.escape(sent_id, quote=False)
 
             lemma_morph = f'{lemma} {morph}' if morph else lemma
-            table = f'| {latin} |\n| **{gloss}** |\n| {lemma_morph} |'
+            if pos_esc:
+                # New POS-bearing format. Matches the Sanskrit shape:
+                #     LEMMA MORPH ~  POS DEPREL HEAD sent_pos sent_id   (Stanza)
+                #     LEMMA MORPH ~* POS DEPREL HEAD sent_pos sent_id   (LDT)
+                lemma_block = (
+                    f'{lemma_morph} {marker} {pos_esc} {deprel_esc} '
+                    f'{head} {sent_pos} {sent_id_esc}'
+                )
+            else:
+                # No POS available (Stanza failed or token wasn't analyzable).
+                # Fall back to the old format with just lemma + morph.
+                lemma_block = lemma_morph
+
+            table = f'| {latin} |\n| **{gloss}** |\n| {lemma_block} |'
             word_tables.append(table)
 
         interlinear_text = '  '.join(word_tables)

@@ -137,6 +137,23 @@ App has 100% local operation on phone; no internet access or other android permi
 
 ## CRITICAL: Database Schema and Room Compatibility
 
+### Major database refactors — always offer a text-integrity snapshot first
+
+Before starting any **major refactor that touches the database build pipeline**
+(new column families, swapping a data source, adding POS to an interlinear,
+re-segmenting text, changing tokenisation, anything that regenerates
+`translation_segments` or `text_lines` at scale, etc.), **ask the user whether
+to run a `data-prep/text_integrity/audit.py` snapshot against the current
+extended DB first.** That report is the only mechanical way to catch
+"refactor accidentally moved or dropped source text / translation segments"
+later — after the rebuild the same audit is rerun and diffed against the
+baseline, and any per-work regression outside the explicit scope of the
+refactor blocks release.
+
+Skip the ask only when the user has already committed a baseline (e.g. they
+told you "snapshot is taken"). Default behaviour: surface the option, let the
+user decide.
+
 **EXTREMELY IMPORTANT**: When making ANY data structure changes:
 1. **ALWAYS** fully analyze and validate that the database schema matches Room entities
 2. **NEVER** make schema changes without checking ALL Room entity files in the Android app

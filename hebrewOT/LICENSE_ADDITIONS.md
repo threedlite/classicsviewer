@@ -78,6 +78,47 @@ The Open Scriptures Hebrew Lexicon provides digitized lexical data from classica
 Digital compilation and XML encoding: Open Scriptures Hebrew Lexicon Project
 License: CC BY 4.0
 
+## Sefaria — Pirkei Avot (Mishnah)
+
+**Source:** Sefaria text library (https://www.sefaria.org)
+**Work:** Pirkei Avot (פרקי אבות, "Ethics of the Fathers"), Mishnah Seder Nezikin
+**Access:** Sefaria API v3 (https://www.sefaria.org/api/v3/texts/Pirkei_Avot)
+**Cached at:** `data-sources/sefaria/pirkei_avot/`
+
+The Hebrew module ships Pirkei Avot in two aligned versions, one mishnah per row,
+with 1:1 Hebrew↔English segment alignment across all six chapters (108 mishnayot).
+
+### Hebrew Base Text — Torat Emet 357
+
+**Version Title:** Torat Emet 357 (תורת אמת 357)
+**License:** Public Domain
+**Source URL:** http://www.toratemetfreeware.com/index.html?downloads
+**Format:** Fully vocalized (nikud) Hebrew, consistent with the WLC style used for the OT books
+
+### English Translation — Mishnah Yomit by Dr. Joshua Kulp
+
+**Version Title:** Mishnah Yomit by Dr. Joshua Kulp
+**License:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+**License URL:** https://creativecommons.org/licenses/by/4.0/
+**Source URL:** http://learn.conservativeyeshiva.org/mishnah/
+**Author:** Dr. Joshua Kulp, Conservative Yeshiva (Jerusalem)
+
+### Attribution Statement
+
+Pirkei Avot Hebrew text (Torat Emet 357) is in the Public Domain.
+English translation © Dr. Joshua Kulp, licensed under CC BY 4.0.
+Distributed via the Sefaria text library (https://www.sefaria.org); refresh
+the local cache by running `data-sources/sefaria/pirkei_avot/fetch.py`.
+
+### Compliance (CC BY 4.0)
+
+The Kulp translation meets CC BY 4.0 requirements via:
+
+1. ✅ Attribution to Dr. Joshua Kulp in `translation_segments.translator`
+2. ✅ License and source documented here and in `data-sources/sefaria/pirkei_avot/manifest.json`
+3. ✅ Attribution surfaced in the app's license screen (LicenseActivity.kt)
+4. ✅ No additional restrictions imposed on the licensed material
+
 ## Processing and Integration
 
 The data from these sources has been processed for integration into the ClassicsViewer app:

@@ -16,9 +16,21 @@ enum LemmaBagBuilder {
     static func translatorFor(_ language: String) -> String? {
         switch language.lowercased() {
         case "greek": return "Interlinear (Beta, generated from app dictionary and treebank)"
-        case "latin": return "Interlinear (Beta, AI-generated from app dictionary)"
+        // Post LATIN_POS_PLAN.md Latin uses the same string as Greek — the
+        // formats are now identical.
+        case "latin": return "Interlinear (Beta, generated from app dictionary and treebank)"
         default: return nil
         }
+    }
+
+    /// Whether a `translation_segments.translator` value is one of our
+    /// app-generated interlinear translators (any language, any version).
+    /// Used to exclude interlinear rows from the English-translation slot
+    /// in topical-links results — matches all current names and the
+    /// legacy Latin "...AI-generated from app dictionary" still present
+    /// in unrebuilt on-device DBs.
+    static func isInterlinearTranslator(_ translator: String?) -> Bool {
+        translator?.hasPrefix("Interlinear (Beta") == true
     }
 
     private static let CONTENT_POS: Set<String> = ["NOUN", "PROPN", "VERB", "ADJ"]
@@ -57,26 +69,31 @@ enum LemmaBagBuilder {
     }
 
     static func parseLatin(_ text: String) -> [String] {
+        // Post LATIN_POS_PLAN.md: Latin interlinear uses the same Greek-shaped
+        // POS-bearing format. Each token's data block is:
+        //   LEMMA MORPH ~  POS DEPREL HEAD sent_pos sent_id   (Stanza)
+        //   LEMMA MORPH ~* POS DEPREL HEAD sent_pos sent_id   (LDT)
+        // Identical structure to parseGreek; only the stoplist differs.
         var out: [String] = []
-        var nextIsLemma = false
         for part in text.split(separator: "|", omittingEmptySubsequences: false) {
-            let ps = part.trimmingCharacters(in: .whitespaces)
-            if ps.isEmpty { continue }
-            if ps.hasPrefix("**") && ps.hasSuffix("**") {
-                nextIsLemma = true
-                continue
+            guard let tildeIdx = part.firstIndex(of: "~") else { continue }
+            let left = String(part[..<tildeIdx])
+            var right = String(part[part.index(after: tildeIdx)...])
+            if right.hasPrefix("*") { right.removeFirst() }
+            let lt = left.split(whereSeparator: { $0.isWhitespace })
+                .map(String.init).filter { !$0.isEmpty }
+            let rt = right.split(whereSeparator: { $0.isWhitespace })
+                .map(String.init).filter { !$0.isEmpty }
+            guard !lt.isEmpty, !rt.isEmpty, CONTENT_POS.contains(rt[0]) else { continue }
+            var lem = lt[0].precomposedStringWithCanonicalMapping.lowercased()
+            if lem.isEmpty || lem == "?" || lem == "???" || lem == "-" { continue }
+            if LIGHT_LEMMATA_LATIN.contains(lem) { continue }
+            // Trim trailing punctuation Stanza occasionally glues on.
+            while let last = lem.last, ".,;:!?".contains(last) {
+                lem.removeLast()
             }
-            if nextIsLemma {
-                let toks = ps.split(whereSeparator: { $0.isWhitespace })
-                    .map(String.init).filter { !$0.isEmpty }
-                if let first = toks.first {
-                    let lem = first.precomposedStringWithCanonicalMapping.lowercased()
-                    if lem.count >= 2 && lem.allSatisfy({ $0.isLetter })
-                        && !LIGHT_LEMMATA_LATIN.contains(lem) {
-                        out.append(lem)
-                    }
-                }
-                nextIsLemma = false
+            if lem.count >= 2 && lem.allSatisfy({ $0.isLetter }) {
+                out.append(lem)
             }
         }
         return out

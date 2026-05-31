@@ -16,12 +16,25 @@ object LemmaBagBuilder {
     }
 
     /** Translator string in `translation_segments.translator` that the build
-     *  pipeline parses for this language's content lemmas. */
+     *  pipeline parses for this language's content lemmas. Post
+     *  LATIN_POS_PLAN.md Latin uses the same string as Greek — the formats
+     *  are now identical. */
     fun translatorFor(language: String): String? = when (language.lowercase()) {
         "greek" -> "Interlinear (Beta, generated from app dictionary and treebank)"
-        "latin" -> "Interlinear (Beta, AI-generated from app dictionary)"
+        "latin" -> "Interlinear (Beta, generated from app dictionary and treebank)"
         else -> null
     }
+
+    /** Whether a `translation_segments.translator` value is one of our
+     *  app-generated interlinear translators (any language, any version).
+     *  Used to exclude interlinear rows from the English-translation slot
+     *  in topical-links results, where the per-token lemma+POS text would
+     *  otherwise leak through. Matches all current names (Greek/Latin
+     *  "...treebank)", Sanskrit "...Stanza NLP)") and the legacy Latin
+     *  "...AI-generated from app dictionary" still present in unrebuilt
+     *  on-device DBs. */
+    fun isInterlinearTranslator(translator: String?): Boolean =
+        translator?.startsWith("Interlinear (Beta") == true
 
     // ----- parsers (mirror Python) -----
 
@@ -59,24 +72,28 @@ object LemmaBagBuilder {
     }
 
     fun parseLatin(text: String): List<String> {
+        // Post LATIN_POS_PLAN.md: Latin interlinear uses the same Greek-shaped
+        // POS-bearing format. Each token's data block is:
+        //   LEMMA MORPH ~  POS DEPREL HEAD sent_pos sent_id   (Stanza)
+        //   LEMMA MORPH ~* POS DEPREL HEAD sent_pos sent_id   (LDT)
+        // Identical structure to parseGreek; only the stoplist differs.
         val out = ArrayList<String>()
-        var nextIsLemma = false
         for (part in text.split("|")) {
-            val ps = part.trim()
-            if (ps.isEmpty()) continue
-            if (ps.startsWith("**") && ps.endsWith("**")) {
-                nextIsLemma = true
-                continue
-            }
-            if (nextIsLemma) {
-                val toks = ps.split(Regex("\\s+")).filter { it.isNotEmpty() }
-                if (toks.isNotEmpty()) {
-                    val lem = Normalizer.normalize(toks[0], Normalizer.Form.NFC).lowercase()
-                    if (lem.length >= 2 && lem.all { it.isLetter() } && lem !in LIGHT_LEMMATA_LATIN) {
-                        out += lem
-                    }
-                }
-                nextIsLemma = false
+            val tildeIdx = part.indexOf('~')
+            if (tildeIdx < 0) continue
+            val left = part.substring(0, tildeIdx)
+            var right = part.substring(tildeIdx + 1)
+            if (right.startsWith("*")) right = right.substring(1)
+            val lt = left.trim().split(Regex("\\s+")).filter { it.isNotEmpty() }
+            val rt = right.trim().split(Regex("\\s+")).filter { it.isNotEmpty() }
+            if (lt.isEmpty() || rt.isEmpty() || rt[0] !in CONTENT_POS) continue
+            var lem = Normalizer.normalize(lt[0], Normalizer.Form.NFC).lowercase()
+            if (lem.isBlank() || lem == "?" || lem == "???" || lem == "-") continue
+            if (lem in LIGHT_LEMMATA_LATIN) continue
+            // Strip trailing punctuation Stanza may have glued on.
+            lem = lem.trimEnd('.', ',', ';', ':', '!', '?')
+            if (lem.length >= 2 && lem.all { it.isLetter() }) {
+                out += lem
             }
         }
         return out
