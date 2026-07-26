@@ -70,11 +70,9 @@ Reading texts, searching, word analysis, and bookmarks never involve a connectio
 
 ## Permissions
 
-The app's own manifest declares one permission:
+The app's own manifest declares **no permissions at all**. Opening and saving files — importing a database, importing or exporting bookmarks as CSV — uses Android's system file picker, which grants access only to the specific file you choose and requires no permission.
 
-- **Storage Access** (`READ_EXTERNAL_STORAGE`): to read the packaged database file containing classical texts, and for the import/export bookmarks to CSV function
-
-The following additional permissions are contributed automatically by the bundled Google Play and AndroidX libraries and appear in the installed app:
+The following permissions are contributed automatically by the bundled Google Play and AndroidX libraries and appear in the installed app:
 
 - `ACCESS_NETWORK_STATE` — used by Play Asset Delivery to check connectivity
 - `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_DATA_SYNC` — used by Play Asset Delivery for content downloads

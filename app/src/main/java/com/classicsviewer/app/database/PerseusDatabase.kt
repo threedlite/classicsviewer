@@ -11,11 +11,6 @@ import com.classicsviewer.app.utils.PreferencesManager
 import android.widget.Toast
 import java.io.File
 import android.content.Intent
-import android.os.Environment
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import kotlinx.coroutines.runBlocking
 
 @Database(
     entities = [
@@ -121,17 +116,10 @@ abstract class PerseusDatabase : RoomDatabase() {
                     android.util.Log.e("PerseusDatabase", "DB Exists: ${context.getDatabasePath("perseus_texts.db").exists()}")
                     android.util.Log.e("PerseusDatabase", "DB Size: ${context.getDatabasePath("perseus_texts.db").length()}")
                     
-                    // Try to export bookmarks if using bundled database
-                    var backupPath: String? = null
-                    if (externalDbUri == null) {
-                        backupPath = tryExportBookmarks(context)
-                    }
-                    
                     // Show error activity
                     val intent = Intent(context, com.classicsviewer.app.DatabaseErrorActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.putExtra("is_external_db", externalDbUri != null)
-                    intent.putExtra("backup_path", backupPath)
                     intent.putExtra("error_details", "${e.javaClass.simpleName}: ${e.message}")
                     context.startActivity(intent)
                     
@@ -173,75 +161,5 @@ abstract class PerseusDatabase : RoomDatabase() {
         
         // Removed copyFromAssets - we only load from OBB now
         
-        private fun tryExportBookmarks(context: Context): String? {
-            return try {
-                android.util.Log.d("PerseusDatabase", "Attempting to export bookmarks")
-                
-                // Try to get bookmarks from UserDatabase
-                val userDb = UserDatabase.getInstance(context)
-                val bookmarkDao = userDb.bookmarkDao()
-                
-                // Use runBlocking since we're already in a critical error path
-                val bookmarks = runBlocking {
-                    try {
-                        bookmarkDao.getAllBookmarksForExport()
-                    } catch (e: Exception) {
-                        android.util.Log.e("PerseusDatabase", "Failed to retrieve bookmarks", e)
-                        emptyList()
-                    }
-                }
-                
-                if (bookmarks.isEmpty()) {
-                    android.util.Log.d("PerseusDatabase", "No bookmarks to export")
-                    return null
-                }
-                
-                // Build CSV content (matching existing export format from BookmarksActivity)
-                val csvContent = buildString {
-                    // CSV Header
-                    appendLine("work_id,book_id,line_number,sequence_number,author_name,work_title,book_label,line_text,note,created_at,last_accessed")
-                    
-                    // CSV Data
-                    bookmarks.forEach { bookmark ->
-                        append("\"${escapeCSV(bookmark.workId)}\",")
-                        append("\"${escapeCSV(bookmark.bookId)}\",")
-                        append("${bookmark.lineNumber},")
-                        append("${bookmark.sequenceNumber},")
-                        append("\"${escapeCSV(bookmark.authorName)}\",")
-                        append("\"${escapeCSV(bookmark.workTitle)}\",")
-                        append("\"${escapeCSV(bookmark.bookLabel ?: "")}\",")
-                        append("\"${escapeCSV(bookmark.lineText)}\",")
-                        append("\"${escapeCSV(bookmark.note ?: "")}\",")
-                        append("${bookmark.createdAt},")
-                        appendLine("${bookmark.lastAccessed}")
-                    }
-                }
-                
-                // Save to Download folder
-                val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-                val filename = "bookmarks_${timestamp}.csv"
-                val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                
-                if (!downloadsDir.exists()) {
-                    downloadsDir.mkdirs()
-                }
-                
-                val backupFile = File(downloadsDir, filename)
-                backupFile.writeText(csvContent)
-                
-                android.util.Log.i("PerseusDatabase", "Bookmarks exported successfully to: ${backupFile.absolutePath}")
-                return "Download/$filename"
-                
-            } catch (e: Exception) {
-                android.util.Log.e("PerseusDatabase", "Failed to export bookmarks", e)
-                android.util.Log.e("PerseusDatabase", "Export error type: ${e.javaClass.name}")
-                android.util.Log.e("PerseusDatabase", "Export error message: ${e.message}")
-                null
-            }
-        }
-        
-        private fun escapeCSV(value: String): String {
-            return value.replace("\"", "\"\"")
-        }
     }
 }

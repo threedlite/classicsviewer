@@ -49,7 +49,6 @@ class DatabaseErrorActivity : AppCompatActivity() {
         
         // Get error details from intent
         val isExternalDb = intent.getBooleanExtra("is_external_db", false)
-        val backupPath = intent.getStringExtra("backup_path")
         val errorDetails = intent.getStringExtra("error_details")
         
         // Log the error details for debugging
@@ -67,17 +66,7 @@ class DatabaseErrorActivity : AppCompatActivity() {
             """.trimIndent()
         } else {
             binding.errorTitle.text = "Database Update Required"
-            val message = if (!backupPath.isNullOrEmpty()) {
-                """
-                Your bookmarks have been saved to:
-                $backupPath
-                
-                Please uninstall and reinstall the app.
-                """.trimIndent()
-            } else {
-                "Please uninstall and reinstall the app."
-            }
-            binding.errorMessage.text = message
+            binding.errorMessage.text = "Please uninstall and reinstall the app."
         }
         
         // OK button exits the app

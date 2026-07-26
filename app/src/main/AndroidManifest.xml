@@ -2,8 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permission to read OBB files from external storage -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--
+      No storage permission is declared. The app's own OBB directory is reachable
+      permission-free via context.obbDir, document import/export goes through the
+      Storage Access Framework, and the bookmarks rescue export uses MediaStore.
+      READ_EXTERNAL_STORAGE was removed as dead state: it was never requested at
+      runtime, so it was never granted on any supported API level, and it is not
+      grantable at all on API 33+.
+    -->
 
     <application
         android:allowBackup="true"
