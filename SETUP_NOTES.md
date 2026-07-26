@@ -227,7 +227,8 @@ To test what's implemented:
 
 ### 10. Important Constraints
 
-- NO internet permissions (100% offline)
+- NO internet permission (reading is fully offline; age verification at launch and Play Asset
+  Delivery downloads are performed by the Google Play Store app on the device)
 - Do NOT modify data-sources/ directory
 - Must handle large text files efficiently
 - Support both Greek (tlg) and Latin (phi) texts

@@ -132,7 +132,28 @@ nohup [COMMAND] > output.log 2>&1 &
   - `app/src/debug/assets/perseus_texts.db.zip` (for debug builds)
   - `app/src/main/assets/perseus_texts.db.zip` (for release builds)
 
-App has 100% local operation on phone; no internet access or other android permissions are required.
+App has 100% local operation on phone: no internet permission is declared and the app makes no
+network calls of its own. Offline use in airplane mode, indefinitely, is a design goal for
+reading, search, word analysis and bookmarks.
+
+**Priority order — decided, do not re-litigate:** age verification outranks offline operation. If
+the two ever conflict, the age gate wins and access is denied. Never weaken the gate to preserve
+offline use.
+
+Two operations are delegated to the Google Play Store app on the device:
+- **Age verification at launch** (release builds only) via the Play Age Signals API. The gate is
+  fail-closed — access is denied unless Play reports an age range of 18+. Debug builds bypass it,
+  so fail-closed behaviour is only observable in a release build installed through Play. See
+  `AGE_VERIFICATION_IMPLEMENTATION.md`.
+  **NEVER cache or persist age signals.** No "already verified" flag, no stored age range, no
+  age values in release logs. Every launch asks Play afresh. This is a hard constraint.
+  **UNVERIFIED:** whether the Play Store answers this from its own local cache when the device is
+  offline. If it does not, a release build will deny access in airplane mode. Per the priority
+  order above that outcome is accepted — it is not a bug to be worked around, and app-side
+  caching is forbidden regardless. Worth measuring on a Play-installed release build so the store
+  listing's offline claims can be stated accurately, but it does not block shipping the gate.
+- **Content downloads** via Play Asset Delivery (database, audio, references, topical packs) —
+  user-initiated, one-time.
 
 
 ## CRITICAL: Database Schema and Room Compatibility

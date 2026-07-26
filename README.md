@@ -1,7 +1,9 @@
 # Classics Viewer
 Note: If you have trouble loading the app after an update, save bookmarks, uninstall and reinstall.  Only updating the app will not update the data.  
 
-An Android and iOS app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required.
+An Android and iOS app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required. The app holds no internet permission and can be used indefinitely in airplane mode.
+
+The app is restricted to users 18 and older. On Android, age is confirmed through your Google Play account.
 
 NOTE - NEW: There is now a download option within the menu to optionally retrieve the large full db from Google Play Store and Apple App Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
@@ -61,13 +63,14 @@ NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
 - 🔍 **Tap any word** to see dictionary definitions and find other occurrences
 - 🌐 **English translations** available for most texts
 - 📱 **100% offline** - no internet connection needed
+- 🔞 **18+ only** - age confirmed via your Google Play account
 - 🎨 **Customizable display** - adjust text size, colors, and reading preferences
 
 ## Quick Start
 
 ### Prerequisites for building app
 - Android Studio
-- Android device or emulator (Android 5.0+)
+- Android device or emulator (Android 6.0+, minSdk 23)
 - Python 3 (for building the database)
 - ~2GB free disk space
 

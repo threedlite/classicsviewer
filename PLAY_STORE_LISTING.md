@@ -58,10 +58,14 @@ Classics Viewer brings the treasures of ancient Greek and Latin literature to yo
 - Readers interested in ancient literature
 - Researchers needing offline access to primary sources
 
+**Age Requirement:**
+- This app is restricted to users 18 years of age and older
+- Age is confirmed through your Google Play account; the app never sees your date of birth or account details
+
 **Technical Details:**
 - Database downloaded after installation (one-time download)
 - No ads, no tracking, no analytics
-- No permissions required except storage for database and bookmarks
+- No internet permission; downloads are handled by Google Play
 - Open source project
 
 **Note:** This sample edition includes 14 major authors. The texts are from the Perseus Digital Library, one of the most trusted sources for classical texts.
