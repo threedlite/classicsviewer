@@ -151,29 +151,36 @@ Two operations are delegated to the Google Play Store app on the device:
   Play. See `AGE_VERIFICATION_IMPLEMENTATION.md` — that document and
   `AgeVerificationActivity.kt` are the source of truth; the summary here is deliberately short.
 
-  The gate restricts users **under 18**, which is not the same as denying every user Play cannot
-  describe. Play is asked fresh on every launch and always evaluated first:
-  - Play reports a range below 18, or `VERIFICATION_REQUIRED` → **denied, no fallback, no
-    override.** Do not add one.
+  This activity acts **only on what Play asserts**. It does not try to establish an age Play has
+  not reported, because the app has no means of doing so. Play is asked fresh on every launch:
   - Play reports 18+ → access granted.
-  - Play returns *nothing usable* (`NOT_SHARED`, no range, unrecognised status, or an error that
-    survives bounded retries) → the user declares a date of birth in-app.
+  - Play reports a range below 18 → **denied, terminal, app exits.** No override. Do not add one.
+  - `VERIFICATION_REQUIRED` → **denied**, with an Open Google Play button. Play has identified the
+    user as being somewhere verification is legally mandatory; the user clears it in the Store.
+  - `APP_NOT_OWNED` / `SDK_VERSION_OUTDATED` → **denied.** This is also what stops a sideloaded
+    release build.
+  - Anything else (`NOT_SHARED`, no age range, unrecognised status, errors surviving bounded
+    retries) → **access granted.** Play produced no information; the store-level restriction above
+    already gated acquisition, and nothing here can add to it.
 
-  The last branch is not an edge case: Play returns signals only in Brazil and a few US states, so
-  before 0.8.134 every account elsewhere in the world was denied — which restricted no additional
-  minor and blocked essentially the whole audience. **Do not "restore" fail-closed-on-everything.**
+  That last branch is the common case, not an edge case: Play returns signals only in Brazil and a
+  few US states, and even inside a covered state only for accounts created after its cutoff — a
+  Texas account predating 2026-05-28 still gets `NOT_SHARED`. Denying on it, as 0.8.131–0.8.133
+  did, locks out essentially the whole audience while identifying no additional minor.
+  **Do not "restore" fail-closed-on-everything.**
 
-  **NEVER cache or persist age signals.** No stored age range, no "Play said yes" flag, no age
-  values in release logs. Every launch asks Play afresh. This is a hard constraint. The
-  `age_declaration_confirmed` boolean is *not* a Play signal and must never become one — it records
-  only the app's own fallback outcome, is read only on the branch where Play returned nothing, and
-  can therefore never admit someone Play reports as under age. The date of birth behind it is never
-  stored or logged.
+  **A self-declared date of birth shipped in 0.8.134 and was removed in 0.8.135 — do not
+  reintroduce it.** It stops only honest minors, who were already stopped at the store, and it
+  costs either persisted state (forbidden, below) or a prompt on every launch. It bought nothing
+  either way.
 
-  **Offline is resolved.** Airplane mode yields `NETWORK_ERROR` → bounded retry → declaration
-  fallback, so a release build no longer denies access offline. The previously open question about
-  whether Play answers from a local cache is now moot, and the offline design goal holds without
-  weakening the gate.
+  **NEVER cache or persist age signals.** No stored age range, no "already verified" flag, no age
+  values in release logs. Every launch asks Play afresh. This is a hard constraint, and with the
+  declaration removed the app now stores **nothing** age-related at all.
+
+  **Offline is resolved.** Airplane mode yields `NETWORK_ERROR` → bounded retry → access granted,
+  so a release build no longer denies access offline. The previously open question about whether
+  Play answers from a local cache is now moot.
 - **Content downloads** via Play Asset Delivery (database, audio, references, topical packs) —
   user-initiated, one-time.
 

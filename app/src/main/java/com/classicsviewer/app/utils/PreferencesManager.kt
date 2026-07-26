@@ -30,7 +30,6 @@ object PreferencesManager {
     private const val KEY_REF_ZOOM = "references.zoom."
     private const val KEY_REF_SCROLLX = "references.scrollX."
     private const val KEY_REF_SCROLLY = "references.scrollY."
-    private const val KEY_AGE_DECLARATION_CONFIRMED = "age_declaration_confirmed"
 
     data class ReferenceState(
         val page: Int,
@@ -85,23 +84,6 @@ object PreferencesManager {
         getPrefs(context).edit().putBoolean(KEY_INVERT_COLORS, invert).apply()
     }
     
-    // Age declaration fallback.
-    //
-    // This is NOT a cache of a Play age signal and must never become one. Play signals are still
-    // fetched fresh on every launch and remain authoritative: this flag is only ever consulted on
-    // the path where Play returned no usable answer at all (see AgeVerificationActivity). A stored
-    // "true" can therefore never admit a user Play has confirmed to be under age.
-    //
-    // Only the boolean outcome is stored. The date of birth the user enters is used to compute an
-    // age, then discarded - it is never written to preferences, logs, or anywhere else.
-    fun getAgeDeclarationConfirmed(context: Context): Boolean {
-        return getPrefs(context).getBoolean(KEY_AGE_DECLARATION_CONFIRMED, false)
-    }
-
-    fun setAgeDeclarationConfirmed(context: Context, confirmed: Boolean) {
-        getPrefs(context).edit().putBoolean(KEY_AGE_DECLARATION_CONFIRMED, confirmed).apply()
-    }
-
     // Word underline preference
     fun getShowWordUnderlines(context: Context): Boolean {
         return getPrefs(context).getBoolean(KEY_SHOW_WORD_UNDERLINES, false)

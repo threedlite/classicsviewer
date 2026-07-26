@@ -66,50 +66,6 @@
                 android:visibility="gone"
                 android:layout_marginTop="16dp" />
 
-            <!--
-                Age declaration fallback. Shown only when Google Play returns no usable age signal
-                for this account. Hidden by default so it can never be the first thing a user sees:
-                Play is always asked first.
-            -->
-            <LinearLayout
-                android:id="@+id/declarationGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:visibility="gone"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                    android:id="@+id/declarationPrompt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enter your date of birth to continue."
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:layout_marginTop="8dp" />
-
-                <!--
-                    Defaults to today's date rather than a plausible adult birth date. Nothing is
-                    pre-filled toward passing, so a user who taps Continue without changing anything
-                    is denied rather than admitted.
-                -->
-                <DatePicker
-                    android:id="@+id/birthDatePicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
-
-                <Button
-                    android:id="@+id/declarationContinue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue"
-                    android:layout_marginTop="16dp" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

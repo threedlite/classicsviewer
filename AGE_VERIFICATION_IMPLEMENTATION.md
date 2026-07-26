@@ -12,29 +12,25 @@ The Play Age Signals API lets an app ask the Google Play Store for the age range
 the user's Play account. The app never sees a date of birth or account identity — only a range
 such as "18 and over", plus an indicator of how that range was established.
 
-**The objective is to restrict users under the minimum age.** That is deliberately not the same
-as denying every user Play cannot describe, and the implementation distinguishes the two.
+**This is not the app's primary 18+ control.** That is Play Console's Restrict Minor Access
+(§10), enabled since 2025-08-07, which blocks minors from searching for, downloading, or purchasing
+the app worldwide — before any of this code runs. Everyone reaching this screen already passed it.
 
-Play's answer is authoritative wherever Play gives one. A reported range below the minimum age is
-a hard denial with no fallback and no override. `VERIFICATION_REQUIRED` is likewise a denial,
-because that status means Play has identified the user as being in a jurisdiction where
-verification is mandatory — self-declaration must not become an escape hatch in exactly the place
-the law applies.
+This activity's job is therefore narrow: **act on what Play asserts, and nothing more.** It does
+not attempt to establish an age Play has not reported, because the app has no means of doing so.
 
-Where Play gives *no* answer — `NOT_SHARED`, no age range, an unrecognised status, or an
-unrecoverable error — the app falls back to asking the user to declare a date of birth. Play's
-silence is an absence of information, not evidence that a user is under age.
+| Play says | Action |
+|---|---|
+| range >= minimum age | access granted |
+| range < minimum age | **denied, terminal, app exits** — authoritative, no override |
+| `VERIFICATION_REQUIRED` | **denied**, with a route into Play (§3a) |
+| `APP_NOT_OWNED`, `SDK_VERSION_OUTDATED` | **denied** — structural; also stops sideloaded builds |
+| anything else | access granted — Play gave no information (§4a) |
 
-**This distinction is load-bearing, not an edge case.** Play returns age signals only in a short
-and slowly growing list of jurisdictions — Brazil and a handful of US states (see §9). Treating
-silence as denial locks out every account everywhere else while identifying no additional minor,
-which is what versions 0.8.131–0.8.133 did.
-
-A store-level control, **Restrict Minor Access**, covers the same objective worldwide and is
-independent of both this code and the app's content rating. See §10.
-
-Ordering preserves the guarantee: Play is always asked first, so a declaration can only fill a
-gap Play left, never contradict an answer Play gave.
+**The last row is the common case, not an edge case.** Play returns signals only in Brazil and a
+few US states, and even inside a covered state only for accounts created after its cutoff — a Texas
+account predating 2026-05-28 still gets `NOT_SHARED`. Denying on it locks out essentially the whole
+audience while identifying no additional minor. That is what versions 0.8.131–0.8.133 did.
 
 ## 1. Dependency
 
@@ -99,9 +95,9 @@ may surface Play's in-app age-sharing prompt. Returns an `ageSignalsStatus`:
 | Status | Handling in this app |
 |---|---|
 | `SHARED` | proceed to step 2 |
-| `NOT_SHARED` | **age declaration fallback** (§4a) |
+| `NOT_SHARED` | **access granted** — no information (§4a) |
 | `VERIFICATION_REQUIRED` | deny, with an **Open Google Play** button (§3a) |
-| `UNSPECIFIED` or an unrecognised value | **age declaration fallback** (§4a) |
+| `UNSPECIFIED` or an unrecognised value | **access granted** — no information (§4a) |
 
 `NOT_SHARED` is ambiguous by construction. Google documents it as covering "user didn't share age
 range, parent rejected the request, **or not eligible**" — and "not eligible" is every account
@@ -127,9 +123,9 @@ launcher entry, then to an explanatory message if Play is absent entirely. Witho
 screen only instructs the user to go and verify "in the Google Play Store", which in practice is
 not discoverable.
 
-The declaration fallback is deliberately **not** offered here. This is the one status where Play
-has positively told us the user is somewhere verification is legally required, so a self-declared
-date of birth must not substitute for it.
+This is deliberately the one status that is **not** waved through. Everywhere else Play's silence
+means "no information"; here Play is positively telling us the user is somewhere verification is
+legally required. That denial is meaningful and is the user's to clear.
 
 **Step 2 — `checkAgeSignals(AgeSignalsRequest)`.** Only called when status is `SHARED`. Returns
 the age range.
@@ -145,35 +141,40 @@ The single grant condition:
 if (ageLower != null && ageLower >= MINIMUM_AGE) { proceedToApp() }
 ```
 
-`ageLower == null` carries no age information, so it routes to the declaration fallback rather
-than to a denial. An open-ended range is expressed as `ageLower = 18, ageUpper = null`.
+`ageLower == null` carries no age information, so it grants access rather than denying. An
+open-ended range is expressed as `ageLower = 18, ageUpper = null`.
 
 A reported `ageLower` *below* the minimum is a terminal denial: `allowRetry = false`,
-`exitApp = true`, and no declaration is offered. This is the one place the app has positive
-evidence about age, and nothing the user can enter overrides it.
+`exitApp = true`. This is the one place the app has positive evidence about age, and nothing
+overrides it.
 
-## 4a. Age declaration fallback
+## 4a. No signal means access is granted
 
-Reached only when Play produced no usable answer. Implemented by `requireAgeDeclaration()`.
+Implemented by `proceedWithoutSignal()`. Reached for `NOT_SHARED`, an unrecognised status, a
+missing age range, a manager that cannot be constructed, and any transient error that survives
+bounded retries.
 
-The user is shown a `DatePicker` and enters a date of birth. `completedYearsSince()` converts it
-to an age; the age is compared against `MINIMUM_AGE`; the date is then discarded. Design points:
+Access is granted, because **Restrict Minor Access (§10) has already gated acquisition at the
+store**, worldwide, and there is nothing further this app can establish. This is not a weakening of
+the age requirement — it is declining to deny an audience the API was never able to describe.
 
-- **The picker defaults to today's date**, not to a plausible adult birth date. Nothing is
-  pre-filled toward passing, so a user who taps Continue without changing anything computes to
-  age 0 and is denied. `maxDate` is set to now, so future dates cannot be entered.
-- **A neutral date entry is used rather than an "I am 18 or older" button**, which would state the
-  answer that passes.
-- **Only the boolean outcome is persisted**, as `age_declaration_confirmed` in
-  `PreferencesManager`. The date of birth is never written to preferences, never logged, and never
-  leaves the method.
-- **The stored flag is read only on the fallback path.** Play is still queried fresh on every
-  launch, and its answer is evaluated first. A stored `true` therefore cannot admit a user Play
-  has since reported as under age.
+### A self-declared date of birth was tried and removed
 
-The flag is **not** a cache of a Play age signal and must not be allowed to become one. The
-prohibition in `CLAUDE.md` on persisting age signals is intact: no age range, no age value, and no
-"Play said yes" flag is stored.
+0.8.134 shipped a date-of-birth picker on this path. It was removed in 0.8.135 and **should not
+be reintroduced.** It never even rendered in the field: as an inline `<DatePicker>` under
+`Theme.MaterialComponents` it laid out at zero height, so users saw the explanatory text with no
+control beneath it. That was a fixable bug, but fixing it was not worth doing, because:
+
+- **It adds no assurance.** A minor who lied to Google about their birthday will also lie to a
+  date picker. It stops only honest minors — who were already stopped at the store.
+- **Both ways of shipping it are unacceptable.** Persisting the outcome would mean an
+  "already verified" flag, which `CLAUDE.md` forbids outright. Not persisting it means prompting
+  on every single launch.
+- **It was solving a problem that no longer existed** once Restrict Minor Access was confirmed
+  enabled. The picker was designed before that was known.
+
+Removing it also makes the never-persist rule absolute rather than argued: the app now stores
+nothing age-related whatsoever.
 
 ### Offline behaviour
 
@@ -197,13 +198,13 @@ fallback rather than locking the user out.
 |---|---|
 | `APP_NOT_OWNED` (-9) | **deny, terminal, no fallback** — app was not installed by Play |
 | `SDK_VERSION_OUTDATED` (-10) | **deny, terminal, no fallback** — prompt to update the app |
-| `NETWORK_ERROR` (-3) | bounded auto-retry → declaration fallback |
-| `PLAY_STORE_NOT_FOUND` (-2), `PLAY_SERVICES_NOT_FOUND` (-4) | bounded auto-retry → declaration fallback |
-| `API_NOT_AVAILABLE` (-1), `PLAY_STORE_VERSION_OUTDATED` (-6) | bounded auto-retry → declaration fallback |
-| `PLAY_SERVICES_VERSION_OUTDATED` (-7) | bounded auto-retry → declaration fallback |
-| `CANNOT_BIND_TO_SERVICE` (-5), `CLIENT_TRANSIENT_ERROR` (-8), `INTERNAL_ERROR` (-100) | bounded auto-retry → declaration fallback |
-| unknown code, or a non-`AgeSignalsException` | bounded auto-retry → declaration fallback |
-| manager construction throws | declaration fallback |
+| `NETWORK_ERROR` (-3) | bounded auto-retry → access granted |
+| `PLAY_STORE_NOT_FOUND` (-2), `PLAY_SERVICES_NOT_FOUND` (-4) | bounded auto-retry → access granted |
+| `API_NOT_AVAILABLE` (-1), `PLAY_STORE_VERSION_OUTDATED` (-6) | bounded auto-retry → access granted |
+| `PLAY_SERVICES_VERSION_OUTDATED` (-7) | bounded auto-retry → access granted |
+| `CANNOT_BIND_TO_SERVICE` (-5), `CLIENT_TRANSIENT_ERROR` (-8), `INTERNAL_ERROR` (-100) | bounded auto-retry → access granted |
+| unknown code, or a non-`AgeSignalsException` | bounded auto-retry → access granted |
+| manager construction throws | access granted |
 
 `APP_NOT_OWNED` stays terminal on purpose: it is the check that stops a sideloaded release build
 from reaching the declaration path, so the fallback cannot be used to bypass Play distribution.
@@ -275,10 +276,11 @@ there is no seam to inject the fake. Exhaustive branch testing would require int
   Integrity is the countermeasure and is not currently integrated.
 - **`TIER_A` age ranges are self-declared** on the Google account, so the gate does not stop a
   minor who entered a false birthday. Enforcing a higher tier is possible but excludes many adults.
-- **The declaration fallback is self-attested and can be lied about.** This is inherent to any age
-  gate operating without a verified signal, and is the same weakness `TIER_A` already carries on
-  the Play path. It is a floor, not a ceiling: it restricts minors who answer honestly, and it
-  never weakens the verified path, since Play is asked first and overrides it.
+- **The runtime gate cannot restrict a minor Play does not identify.** Outside the rollout regions
+  the app receives no age information at all, so its only real protection there is the store-level
+  Restrict Minor Access (§10). The Console copy concedes the residual gap directly: *"Google Play
+  may not be able to block all minor users who have not declared themselves to be under the age of
+  18."* No in-app mechanism closes that gap — see §4a for why a date-of-birth prompt does not.
 - **`significantChangeStatus()` / `significantChangeApprovalDate()` are not handled.** They relate
   to parent-approved changes for supervised accounts.
 - **Regional and jurisdictional behaviour has not been verified by this project.** The statements
