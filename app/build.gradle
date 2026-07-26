@@ -36,8 +36,8 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk 23  // Increased from 21 to support Age Signals API
         targetSdk 36
-        versionCode 130
-        versionName "0.8.130"
+        versionCode 131
+        versionName "0.8.131"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -129,7 +129,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
 
     // Play Age Signals API for age verification
-    implementation 'com.google.android.play:age-signals:0.0.3'
+    implementation 'com.google.android.play:age-signals:0.0.4'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
