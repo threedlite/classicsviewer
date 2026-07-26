@@ -6,53 +6,113 @@
     android:layout_height="match_parent"
     android:padding="32dp">
 
-    <TextView
-        android:id="@+id/verificationTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Age Verification"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/verificationMessage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/verificationMessage"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Verifying age requirements...\nThis app is only available for users 18 and older."
-        android:textSize="16sp"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/verificationTitle"
-        app:layout_constraintBottom_toTopOf="@+id/verificationProgress"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/verificationProgress"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/verificationMessage"
-        app:layout_constraintBottom_toTopOf="@+id/retryButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/retryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retry"
-        android:visibility="gone"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/verificationProgress"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/verificationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age Verification"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/verificationMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verifying age requirements...\nThis app is only available for users 18 and older."
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginTop="16dp" />
+
+            <ProgressBar
+                android:id="@+id/verificationProgress"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp" />
+
+            <!--
+                Shown for VERIFICATION_REQUIRED, which is the one denial a user can act on
+                themselves. Without it the screen only tells them to go and verify somewhere in the
+                Play Store, which is not discoverable.
+            -->
+            <Button
+                android:id="@+id/playStoreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Open Google Play"
+                android:visibility="gone"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retry"
+                android:visibility="gone"
+                android:layout_marginTop="16dp" />
+
+            <!--
+                Age declaration fallback. Shown only when Google Play returns no usable age signal
+                for this account. Hidden by default so it can never be the first thing a user sees:
+                Play is always asked first.
+            -->
+            <LinearLayout
+                android:id="@+id/declarationGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/declarationPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter your date of birth to continue."
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp" />
+
+                <!--
+                    Defaults to today's date rather than a plausible adult birth date. Nothing is
+                    pre-filled toward passing, so a user who taps Continue without changing anything
+                    is denied rather than admitted.
+                -->
+                <DatePicker
+                    android:id="@+id/birthDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner" />
+
+                <Button
+                    android:id="@+id/declarationContinue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Continue"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -136,22 +136,44 @@ App has 100% local operation on phone: no internet permission is declared and th
 network calls of its own. Offline use in airplane mode, indefinitely, is a design goal for
 reading, search, word analysis and bookmarks.
 
-**Priority order — decided, do not re-litigate:** age verification outranks offline operation. If
-the two ever conflict, the age gate wins and access is denied. Never weaken the gate to preserve
-offline use.
+**Priority order — decided, do not re-litigate:** age verification outranks offline operation.
+Never weaken age verification to preserve offline use. As of 0.8.134 the two no longer conflict
+(see below), but if they ever do again, age verification wins.
+
+**The app's primary 18+ control is Play Console's Restrict Minor Access**, enabled since
+2025-08-07. Google blocks minors from searching for, downloading, or purchasing the app, worldwide
+and independent of the Age Signals rollout. This is a store-level setting, invisible in the Kotlin,
+and it is the reason the runtime gate is defence-in-depth rather than the only line.
 
 Two operations are delegated to the Google Play Store app on the device:
-- **Age verification at launch** (release builds only) via the Play Age Signals API. The gate is
-  fail-closed — access is denied unless Play reports an age range of 18+. Debug builds bypass it,
-  so fail-closed behaviour is only observable in a release build installed through Play. See
-  `AGE_VERIFICATION_IMPLEMENTATION.md`.
-  **NEVER cache or persist age signals.** No "already verified" flag, no stored age range, no
-  age values in release logs. Every launch asks Play afresh. This is a hard constraint.
-  **UNVERIFIED:** whether the Play Store answers this from its own local cache when the device is
-  offline. If it does not, a release build will deny access in airplane mode. Per the priority
-  order above that outcome is accepted — it is not a bug to be worked around, and app-side
-  caching is forbidden regardless. Worth measuring on a Play-installed release build so the store
-  listing's offline claims can be stated accurately, but it does not block shipping the gate.
+- **Age verification at launch** (release builds only) via the Play Age Signals API. Debug builds
+  bypass it entirely, so real behaviour is only observable in a release build installed through
+  Play. See `AGE_VERIFICATION_IMPLEMENTATION.md` — that document and
+  `AgeVerificationActivity.kt` are the source of truth; the summary here is deliberately short.
+
+  The gate restricts users **under 18**, which is not the same as denying every user Play cannot
+  describe. Play is asked fresh on every launch and always evaluated first:
+  - Play reports a range below 18, or `VERIFICATION_REQUIRED` → **denied, no fallback, no
+    override.** Do not add one.
+  - Play reports 18+ → access granted.
+  - Play returns *nothing usable* (`NOT_SHARED`, no range, unrecognised status, or an error that
+    survives bounded retries) → the user declares a date of birth in-app.
+
+  The last branch is not an edge case: Play returns signals only in Brazil and a few US states, so
+  before 0.8.134 every account elsewhere in the world was denied — which restricted no additional
+  minor and blocked essentially the whole audience. **Do not "restore" fail-closed-on-everything.**
+
+  **NEVER cache or persist age signals.** No stored age range, no "Play said yes" flag, no age
+  values in release logs. Every launch asks Play afresh. This is a hard constraint. The
+  `age_declaration_confirmed` boolean is *not* a Play signal and must never become one — it records
+  only the app's own fallback outcome, is read only on the branch where Play returned nothing, and
+  can therefore never admit someone Play reports as under age. The date of birth behind it is never
+  stored or logged.
+
+  **Offline is resolved.** Airplane mode yields `NETWORK_ERROR` → bounded retry → declaration
+  fallback, so a release build no longer denies access offline. The previously open question about
+  whether Play answers from a local cache is now moot, and the offline design goal holds without
+  weakening the gate.
 - **Content downloads** via Play Asset Delivery (database, audio, references, topical packs) —
   user-initiated, one-time.
 

@@ -1,6 +1,8 @@
 package com.classicsviewer.app
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,22 +23,39 @@ import com.google.android.play.agesignals.model.AgeSignalsErrorCode
 import com.google.android.play.agesignals.model.AgeSignalsStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 /**
  * Age gate backed by the Play Age Signals API (com.google.android.play:age-signals:0.0.4).
  *
- * Policy is fail-closed: access is granted only when Play affirmatively reports an age range
- * whose lower bound is at least [MINIMUM_AGE]. Every other outcome - signals not shared,
- * verification required, no age range returned, or any API error - denies access. The app
- * cannot establish an age that Play does not report, so "unknown" is treated as "not eligible".
+ * The goal is to restrict users under [MINIMUM_AGE], which is not the same thing as denying every
+ * user Play cannot describe. The two are distinguished deliberately:
  *
- * The only exception is [BuildConfig.DEBUG]: sideloaded debug builds are not owned by Play and
- * can never obtain signals, so they bypass the gate to keep local development possible. Release
- * builds have no bypass.
+ *  - Play affirmatively reports an age range >= [MINIMUM_AGE]  -> access granted.
+ *  - Play affirmatively reports an age range <  [MINIMUM_AGE]  -> denied, authoritatively, with
+ *    no fallback and no way to override.
+ *  - VERIFICATION_REQUIRED -> denied. Play has identified the user as being in a jurisdiction
+ *    where verification is mandatory, so declaring must not be an escape hatch there.
+ *  - APP_NOT_OWNED / SDK_VERSION_OUTDATED -> denied. Structural problems with the install.
+ *  - Everything else (NOT_SHARED, no age range, unrecognised status, unrecoverable errors) means
+ *    Play produced no information at all. That is not evidence of being under age, so the user is
+ *    asked to declare a date of birth instead.
+ *
+ * The last case is not an edge case: Play returns age signals only in Brazil and for Texas
+ * accounts created after 2026-05-28. Treating its silence as a denial locks out every account
+ * elsewhere in the world while identifying no additional minor.
+ *
+ * The ordering is what preserves the guarantee. Play is always asked first, so a declaration can
+ * only ever fill a gap Play left, never contradict an answer Play gave.
+ *
+ * [BuildConfig.DEBUG] additionally bypasses the gate for sideloaded builds, which are not owned
+ * by Play and can never obtain signals. Release builds have no bypass.
  *
  * Nothing returned by the API is cached or persisted. The age range, its source, and the install
- * id are read, used to make one allow/deny decision, and discarded. There is deliberately no
- * "already verified" flag: every launch asks Play afresh. Do not add one.
+ * id are read, used to make one decision, and discarded; every launch asks Play afresh. The
+ * declaration flag stored in PreferencesManager is not a Play signal and must never become a
+ * cache of one - it records only the outcome of the app's own fallback, and the date of birth
+ * behind it is never stored or logged.
  */
 class AgeVerificationActivity : AppCompatActivity() {
 
@@ -65,15 +84,29 @@ class AgeVerificationActivity : AppCompatActivity() {
             binding.root.setBackgroundColor(0xFFFFFFFF.toInt())
             binding.verificationTitle.setTextColor(0xFF000000.toInt())
             binding.verificationMessage.setTextColor(0xFF000000.toInt())
+            binding.declarationPrompt.setTextColor(0xFF000000.toInt())
         } else {
             binding.root.setBackgroundColor(0xFF000000.toInt())
             binding.verificationTitle.setTextColor(0xFFFFFFFF.toInt())
             binding.verificationMessage.setTextColor(0xFFFFFFFF.toInt())
+            binding.declarationPrompt.setTextColor(0xFFFFFFFF.toInt())
         }
+
+        // A future date of birth is not a meaningful input, and allowing one would only produce
+        // a negative age that the minimum-age check would reject anyway.
+        binding.birthDatePicker.maxDate = System.currentTimeMillis()
 
         binding.retryButton.setOnClickListener {
             retryAttempts = 0
             startVerification()
+        }
+
+        binding.declarationContinue.setOnClickListener {
+            onDeclarationSubmitted()
+        }
+
+        binding.playStoreButton.setOnClickListener {
+            openPlayStore()
         }
 
         startVerification()
@@ -90,8 +123,9 @@ class AgeVerificationActivity : AppCompatActivity() {
                 ageSignalsManager = AgeSignalsManagerFactory.create(applicationContext)
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to create AgeSignalsManager", e)
-                // No manager means no way to establish age. Deny, but let the user retry.
-                denyRetryable("Age verification is unavailable on this device.")
+                // No manager means Play can never answer on this device. That is an absence of
+                // information, not evidence the user is under age, so fall back to declaring.
+                requireAgeDeclaration("manager unavailable")
                 return
             }
         }
@@ -118,22 +152,27 @@ class AgeVerificationActivity : AppCompatActivity() {
                 when (status) {
                     AgeSignalsStatus.SHARED -> fetchAgeSignals()
 
-                    AgeSignalsStatus.NOT_SHARED -> denyFinal(
-                        "This app is restricted to users $MINIMUM_AGE years of age and older.\n\n" +
-                            "Your age range has not been shared with this app, so access cannot be granted.\n\n" +
-                            "You can change age sharing in the Google Play Store settings, then tap Retry.",
-                        allowRetry = true
-                    )
+                    // Ambiguous by design: this is returned both when a user declines sharing and
+                    // when the account is simply not eligible - which is every account outside
+                    // Brazil and post-2026-05-28 Texas. The API cannot distinguish the two, so it
+                    // carries no evidence about age and cannot stand in for a denial.
+                    AgeSignalsStatus.NOT_SHARED -> requireAgeDeclaration("NOT_SHARED")
 
+                    // Deliberately NOT given the declaration fallback. This status means Play has
+                    // identified the user as being in a jurisdiction where age verification is
+                    // mandatory, so self-declaration must not become an escape hatch in exactly
+                    // the place the law applies. Remediation is to resolve status in the Play Store.
                     AgeSignalsStatus.VERIFICATION_REQUIRED -> denyFinal(
                         "This app is restricted to users $MINIMUM_AGE years of age and older.\n\n" +
-                            "Your age has not been verified with Google Play.\n\n" +
-                            "Complete age verification in the Google Play Store, then tap Retry.",
-                        allowRetry = true
+                            "Google Play requires you to verify your age before it can confirm this.\n\n" +
+                            "Tap Open Google Play to verify (you may be asked for ID, a card, or a " +
+                            "selfie), then return here and tap Retry.",
+                        allowRetry = true,
+                        showPlayStore = true
                     )
 
-                    // UNSPECIFIED or a value added by a future SDK: no usable signal, so deny.
-                    else -> denyRetryable("Age verification returned an unrecognized status ($status).")
+                    // UNSPECIFIED or a value added by a future SDK: no usable signal either way.
+                    else -> requireAgeDeclaration("status $status")
                 }
             }
             .addOnFailureListener { exception ->
@@ -176,12 +215,10 @@ class AgeVerificationActivity : AppCompatActivity() {
         }
 
         if (ageLower == null) {
-            Log.w(TAG, "No age range returned - denying access")
-            denyFinal(
-                "This app is restricted to users $MINIMUM_AGE years of age and older.\n\n" +
-                    "Google Play did not provide an age range for this account, so access cannot be granted.",
-                allowRetry = true
-            )
+            // Access was granted but no range came back. Again an absence of information, not a
+            // statement that the user is under age.
+            Log.w(TAG, "No age range returned")
+            requireAgeDeclaration("no age range")
         } else {
             Log.w(TAG, "Age requirement not met - denying access")
             denyFinal(
@@ -289,12 +326,75 @@ class AgeVerificationActivity : AppCompatActivity() {
                 retryAction()
             }
         } else {
-            denyFinal("$message\n\nAccess cannot be granted until age verification succeeds.", allowRetry = true)
+            // Retries are exhausted and Play still has not answered. A device that is offline or
+            // a Play service that is failing tells us nothing about the user's age, so fall back
+            // rather than locking the user out permanently.
+            requireAgeDeclaration("retries exhausted")
         }
     }
 
-    private fun denyRetryable(message: String) {
-        denyFinal("$message\n\nAccess cannot be granted until age verification succeeds.", allowRetry = true)
+    /**
+     * Fallback for the case where Play produced no usable age signal at all.
+     *
+     * Play is always asked first and always wins. This path is reached only for NOT_SHARED, an
+     * unrecognised status, a missing age range, or an unrecoverable error. A user Play has
+     * affirmatively reported as under age is denied in [handleAgeSignalsResult] and never reaches
+     * here, so a declaration can never override a Play answer.
+     *
+     * This exists because Play returns age signals only in Brazil and for Texas accounts created
+     * after 2026-05-28. Treating "Play has no information" as "user is under age" denies every
+     * account elsewhere in the world while identifying no additional minor.
+     */
+    private fun requireAgeDeclaration(reason: String) {
+        Log.d(TAG, "No usable Play age signal ($reason) - falling back to age declaration")
+
+        if (PreferencesManager.getAgeDeclarationConfirmed(this)) {
+            Log.d(TAG, "Age already declared as $MINIMUM_AGE+, proceeding to app")
+            proceedToApp()
+            return
+        }
+
+        binding.verificationProgress.visibility = View.GONE
+        binding.retryButton.visibility = View.GONE
+        binding.playStoreButton.visibility = View.GONE
+        binding.verificationMessage.text =
+            "This app is restricted to users $MINIMUM_AGE years of age and older.\n\n" +
+                "Google Play did not provide an age range for this account."
+        binding.declarationGroup.visibility = View.VISIBLE
+    }
+
+    /**
+     * Applies the declared date of birth. The date itself is used to compute an age and then
+     * discarded - only the resulting decision is stored, and the date is never logged.
+     */
+    private fun onDeclarationSubmitted() {
+        val picker = binding.birthDatePicker
+        val age = completedYearsSince(picker.year, picker.month, picker.dayOfMonth)
+
+        if (age >= MINIMUM_AGE) {
+            PreferencesManager.setAgeDeclarationConfirmed(this, true)
+            Log.d(TAG, "Declared age meets requirement, proceeding to app")
+            proceedToApp()
+            return
+        }
+
+        PreferencesManager.setAgeDeclarationConfirmed(this, false)
+        Log.w(TAG, "Declared age below minimum - denying access")
+        binding.declarationGroup.visibility = View.GONE
+        denyFinal(
+            "This app is restricted to users $MINIMUM_AGE years of age and older.\n\n" +
+                "You do not meet the age requirement to use this application.",
+            allowRetry = false,
+            exitApp = true
+        )
+    }
+
+    /** Completed years between the given date and today. */
+    private fun completedYearsSince(year: Int, month: Int, dayOfMonth: Int): Int {
+        val now = Calendar.getInstance()
+        val birthdayPassedThisYear = now.get(Calendar.MONTH) > month ||
+            (now.get(Calendar.MONTH) == month && now.get(Calendar.DAY_OF_MONTH) >= dayOfMonth)
+        return now.get(Calendar.YEAR) - year - if (birthdayPassedThisYear) 0 else 1
     }
 
     /**
@@ -305,10 +405,16 @@ class AgeVerificationActivity : AppCompatActivity() {
      * @param exitApp closes the app after [EXIT_DELAY_MS] instead of leaving the user on this
      *   screen. Used for a confirmed under-age result, matching 0.8.130 behaviour.
      */
-    private fun denyFinal(message: String, allowRetry: Boolean, exitApp: Boolean = false) {
+    private fun denyFinal(
+        message: String,
+        allowRetry: Boolean,
+        exitApp: Boolean = false,
+        showPlayStore: Boolean = false,
+    ) {
         binding.verificationProgress.visibility = View.GONE
         binding.verificationMessage.text = message
         binding.retryButton.visibility = if (allowRetry) View.VISIBLE else View.GONE
+        binding.playStoreButton.visibility = if (showPlayStore) View.VISIBLE else View.GONE
 
         if (exitApp) {
             lifecycleScope.launch {
@@ -318,9 +424,38 @@ class AgeVerificationActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Sends the user to Google Play so they can resolve a VERIFICATION_REQUIRED status.
+     *
+     * Google documents no deep link to the age verification flow itself, so this opens this app's
+     * store listing - the place Play surfaces the age check for an age-restricted title - and falls
+     * back to the Play Store's own launcher entry if that cannot be resolved.
+     */
+    private fun openPlayStore() {
+        val listing = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+        try {
+            startActivity(listing)
+            return
+        } catch (e: ActivityNotFoundException) {
+            Log.w(TAG, "Could not open Play Store listing", e)
+        }
+
+        val playStore = packageManager.getLaunchIntentForPackage(PLAY_STORE_PACKAGE)
+        if (playStore != null) {
+            startActivity(playStore)
+        } else {
+            Log.w(TAG, "Play Store is not installed; cannot direct user to verification")
+            binding.verificationMessage.text =
+                "The Google Play Store is not available on this device, so your age cannot be " +
+                    "verified. Install or enable the Play Store, then tap Retry."
+            binding.playStoreButton.visibility = View.GONE
+        }
+    }
+
     private fun showChecking() {
         binding.verificationProgress.visibility = View.VISIBLE
         binding.retryButton.visibility = View.GONE
+        binding.playStoreButton.visibility = View.GONE
         binding.verificationMessage.text =
             "Verifying age requirements...\nThis app is only available for users $MINIMUM_AGE and older."
     }
@@ -340,6 +475,7 @@ class AgeVerificationActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "AgeVerification"
         private const val MINIMUM_AGE = 18
+        private const val PLAY_STORE_PACKAGE = "com.android.vending"
         private const val MAX_RETRY_ATTEMPTS = 3
         private const val RETRY_DELAY_MS = 2000L
         private const val EXIT_DELAY_MS = 3000L
