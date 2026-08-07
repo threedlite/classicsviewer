@@ -5,20 +5,12 @@ An Android and iOS app for reading ancient Greek and Latin texts offline. Browse
 
 The app is restricted to users 18 and older. On Android, age is confirmed through your Google Play account.
 
-NOTE - NEW: There is now a download option within the menu to optionally retrieve the large full db from Google Play Store and Apple App Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
+There is a download option within the menu to optionally retrieve the large full db from Google Play Store and Apple App Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
  
-NEW: 34 additional aligned translations, Marcus Aurelius Meditations, Xenophon Anabasis, Achilles Tatius
-NEW: Improved Greek interlinear March 17, 2026.
-NEW: Added Alphabet practice option for learning alphabets.
-NEW: Align button on text view takes you to same place in first transalation and vice versa. The settings option to put interlinear translation first will work with as well.   Export function saves current source or translation to file.
-
-
-NOTE: Patreon page may be disabled at some point while pending Patreon site support for new age verification requirements.
-
 Patreon links below added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
 
-Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. perseus_texts_extended.db.zip   https://www.patreon.com/posts/classics-viewer-141298606  (free)
+Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. Download module from Apple store, or on Android, install external db perseus_texts_extended.db.zip from  https://www.patreon.com/posts/classics-viewer-141298606  (free) or build locally.
 
 
   SAMPLE DATABASE (673MB, 162MB compressed):
@@ -54,53 +46,22 @@ Beta: Extended db support with First1k data (https://github.com/OpenGreekAndLati
   - Total: 780 authors, 2,663 works, 3.1M lines, 49.7M words
 
 
-NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
  
-
 ## Features
 
 - 📚 **100+ Greek and Latin authors** with complete works
 - 🔍 **Tap any word** to see dictionary definitions and find other occurrences
 - 🌐 **English translations** available for most texts
 - 📱 **100% offline** - no internet connection needed
-- 🔞 **18+ only** - age confirmed via your Google Play account
 - 🎨 **Customizable display** - adjust text size, colors, and reading preferences
 
-## Quick Start
+## To build locally, point your AI at BUILD.md
 
 ### Prerequisites for building app
 - Android Studio
 - Android device or emulator (Android 6.0+, minSdk 23)
 - Python 3 (for building the database)
 - ~2GB free disk space
-
-### Building the App
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/threedlite/classicsviewer.git
-   cd classicsviewer
-   ```
-
-2. **Build the database** (required first time only)
-   ```bash
-   cd data-prep
-   python3 create_perseus_database.py sample
-   cd ..
-   ```
-   This creates a sample database with selected authors. Takes about 3-4 minutes.
-
-3. **Deploy to your Android device**
-   ```bash
-   ./deploy_simple.sh
-   ```
-   The app will install and launch automatically.
-
-### Alternative: Build in Android Studio
-
-1. Open the project in Android Studio
-2. Make sure the database exists: `app/src/debug/assets/perseus_texts.db.zip`
-3. Click "Run" to build and deploy
 
 ### iOS
 
@@ -109,51 +70,10 @@ NEW: Suggested reading list bookmarks to import READING_LIST_GREEK.csv
 - macOS 15.6 or later
 - iOS 16.1+ deployment target
 
-#### Building the App
 
-1. **Navigate to iOS directory**
-   ```bash
-   cd ios
-   ```
+3. **Database**: A sample database is bundled in `ClassicsViewer/Resources/perseus_texts.db.zip`. The app extracts it automatically on first launch.
 
-2. **Build and deploy to simulator**
-   Open `ClassicsViewer.xcodeproj` in Xcode and press Cmd+R.
-
-3. **Database**: A sample database is bundled in `ClassicsViewer/Resources/perseus_texts.db.zip`. The app extracts it automatically on first launch (~5-10 seconds).
-
-#### Physical Device Testing
-1. Connect iPhone/iPad via USB
-2. Open `ClassicsViewer.xcodeproj` in Xcode
-3. Select your device and set a valid development team
-4. Build and run (Cmd+R)
-
-See `ios/iOS_README.md` and `ios/BUILD_INSTRUCTIONS.md` for full details.
-
-## Using the App
-
-1. **Select a language** - Choose Greek or Latin
-2. **Browse authors** - Tap an author to see their works
-3. **Select a work** - Choose from available books/sections
-4. **Read and explore** - Tap any word for definitions, swipe for translations
-
-## Troubleshooting
-
-**App crashes on startup?**
-- Clear app data: `adb shell pm clear com.classicsviewer.app.debug`
-- Reinstall: `adb uninstall com.classicsviewer.app.debug` then redeploy
-
-**Build fails?**
-- Make sure you have Android SDK installed
-- Check that `./gradlew` is executable: `chmod +x gradlew`
-
-- *.md files are mostly genereated by Claude and may not be entirely up-to-date.
-
-## Data Sources
-
-Texts are from the Perseus Digital Library:
-- Greek texts from canonical-greekLit
-- Latin texts from canonical-latinLit
-- Morphological data from Wiktionary
+- Repo *.md files are mostly genereated by Claude and may not be entirely up-to-date.
 
 ## License
 
