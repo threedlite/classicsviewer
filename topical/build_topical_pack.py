@@ -59,16 +59,15 @@ LANGUAGE_REGISTRY = {
     "greek": {
         "authors_language": "greek",
         "db_file_stem": "topical_greek",
-        "translator": "Interlinear (Beta, generated from app dictionary and treebank)",
+        "translator": "Interlinear (Beta, AI-generated from app dictionary and treebank)",
         "parser": "greek",
     },
     "latin": {
         "authors_language": "latin",
         "db_file_stem": "topical_latin",
         # Post LATIN_POS_PLAN.md: Latin interlinear now carries POS via
-        # LDT + Stanza overlay, so the translator string matches Greek
-        # convention. The parser is also Greek-shaped (POS-gated).
-        "translator": "Interlinear (Beta, generated from app dictionary and treebank)",
+        # LDT + Stanza overlay, so the parser is Greek-shaped (POS-gated).
+        "translator": "Interlinear (Beta, AI-generated from app dictionary and treebank)",
         "parser": "latin",
     },
 }

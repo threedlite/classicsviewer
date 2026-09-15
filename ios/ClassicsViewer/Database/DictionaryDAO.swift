@@ -33,6 +33,47 @@ class DictionaryDAO: DictionaryDAOProtocol {
     private let normalizationDAO = NormalizationPatternDAO()
     private let userNormalizationHelper = UserNormalizationPatternHelper()
 
+    /// lemma_map has no language column, and every language's mappings share
+    /// the table, so a Latin word_form can match another language's entry.
+    /// 2,182 Latin surface forms collide this way: "terra" maps to terr
+    /// (Whitaker), terra (IcePaHC, Old Norse) and taru (RINAP, Akkadian).
+    ///
+    /// `source` does identify the owning module - no source string is shared
+    /// between language modules - so filtering on it needs no schema change.
+    ///
+    /// Returns a SQL fragment for Latin and an empty string for every other
+    /// language, so non-Latin queries are byte-identical to before.
+    /// The names are compile-time constants, never user input.
+    /// Source ranking used by the ORDER BY blocks below, mirroring
+    /// PerseusRepository.kt's entry comparator so iOS and Android present the
+    /// same order:
+    ///
+    ///   Kotlin  lsj 0, whitaker* 0 | cunliffe 1, lewis-short 1 | wiktionary 2 | else 3
+    ///   Swift   lsj 1, whitaker* 1 | cunliffe 2, lewis-short 2 | wiktionary 3 | else 4
+    ///
+    /// Whitaker and Lewis-Short were previously absent, so both fell into
+    /// ELSE 4 - tied, with no tiebreak, leaving their relative order arbitrary
+    /// for any Latin word carrying both.
+    ///
+    /// A searched CASE (not `CASE source`) is required because Whitaker's rows
+    /// use two source strings, "Whitaker" and "Whitaker UNIQUES"; Kotlin
+    /// matches them with startsWith("whitaker"), and LIKE 'whitaker%' is the
+    /// SQL equivalent.
+    ///
+    /// Greek and Latin source names are disjoint, so sharing rank values
+    /// between the two groups can never interleave results from one language
+    /// with the other.
+    ///
+    /// NOTE: unlike Android, iOS does not truncate the entry list
+    /// (DictionaryActivity.kt takes only the top 5), so ranking here affects
+    /// display order only - nothing is dropped either way.
+
+    private func lemmaSourceFilter(_ language: String) -> String {
+        return language == "latin"
+            ? " AND source IN ('Whitaker', 'Whitaker UNIQUES', 'Lewis-Short')"
+            : ""
+    }
+
     func getDictionaryEntry(_ word: String, language: String) async throws -> DictionaryResult? {
         print("DictionaryDAO: Looking up word='\(word)', language='\(language)'")
 
@@ -99,10 +140,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 FROM dictionary_entries
                 WHERE headword_normalized_ultra = ? AND language = ?
                 ORDER BY
-                    CASE source
-                        WHEN 'lsj' THEN 1
-                        WHEN 'cunliffe' THEN 2
-                        WHEN 'wiktionary' THEN 3
+                    CASE
+                        WHEN LOWER(source) = 'lsj' THEN 1
+                        WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                        WHEN LOWER(source) = 'cunliffe' THEN 2
+                        WHEN LOWER(source) = 'lewis-short' THEN 2
+                        WHEN LOWER(source) = 'wiktionary' THEN 3
                         ELSE 4
                     END
                 LIMIT 1
@@ -115,10 +158,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 FROM dictionary_entries
                 WHERE headword = ? AND language = ?
                 ORDER BY
-                    CASE source
-                        WHEN 'lsj' THEN 1
-                        WHEN 'cunliffe' THEN 2
-                        WHEN 'wiktionary' THEN 3
+                    CASE
+                        WHEN LOWER(source) = 'lsj' THEN 1
+                        WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                        WHEN LOWER(source) = 'cunliffe' THEN 2
+                        WHEN LOWER(source) = 'lewis-short' THEN 2
+                        WHEN LOWER(source) = 'wiktionary' THEN 3
                         ELSE 4
                     END
                 LIMIT 1
@@ -180,7 +225,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
             // First try with the original word
             let lemmaQuery = """
                 SELECT DISTINCT lemma FROM lemma_map 
-                WHERE word_form = ? 
+                WHERE word_form = ? \(lemmaSourceFilter(language))
                 ORDER BY confidence DESC
                 LIMIT 10
             """
@@ -198,7 +243,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 print("DictionaryDAO: No lemma found with word_form, trying word_form_normalized_ultra = '\(normalizedWord)'")
                 let normalizedLemmaQuery = """
                     SELECT DISTINCT lemma FROM lemma_map 
-                    WHERE word_form_normalized_ultra = ? 
+                    WHERE word_form_normalized_ultra = ? \(lemmaSourceFilter(language))
                     ORDER BY confidence DESC
                     LIMIT 10
                 """
@@ -257,10 +302,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 FROM dictionary_entries
                 WHERE (headword = ? OR headword_normalized_ultra = ?) AND language = ?
                 ORDER BY
-                    CASE source
-                        WHEN 'lsj' THEN 1
-                        WHEN 'cunliffe' THEN 2
-                        WHEN 'wiktionary' THEN 3
+                    CASE
+                        WHEN LOWER(source) = 'lsj' THEN 1
+                        WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                        WHEN LOWER(source) = 'cunliffe' THEN 2
+                        WHEN LOWER(source) = 'lewis-short' THEN 2
+                        WHEN LOWER(source) = 'wiktionary' THEN 3
                         ELSE 4
                     END
                 LIMIT 1
@@ -274,10 +321,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 FROM dictionary_entries
                 WHERE headword = ? AND language = ?
                 ORDER BY
-                    CASE source
-                        WHEN 'lsj' THEN 1
-                        WHEN 'cunliffe' THEN 2
-                        WHEN 'wiktionary' THEN 3
+                    CASE
+                        WHEN LOWER(source) = 'lsj' THEN 1
+                        WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                        WHEN LOWER(source) = 'cunliffe' THEN 2
+                        WHEN LOWER(source) = 'lewis-short' THEN 2
+                        WHEN LOWER(source) = 'wiktionary' THEN 3
                         ELSE 4
                     END
                 LIMIT 1
@@ -379,7 +428,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
         // Check if this lemma appears as a word_form that maps to another lemma
         let nextLemmaQuery = """
             SELECT DISTINCT lemma, confidence FROM lemma_map 
-            WHERE word_form = ? AND lemma != ?
+            WHERE word_form = ? AND lemma != ? \(lemmaSourceFilter(language))
             ORDER BY confidence DESC
             LIMIT 1
         """
@@ -492,10 +541,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
             FROM dictionary_entries
             WHERE headword = ? AND language = ?
             ORDER BY
-                CASE source
-                    WHEN 'lsj' THEN 1
-                    WHEN 'cunliffe' THEN 2
-                    WHEN 'wiktionary' THEN 3
+                CASE
+                    WHEN LOWER(source) = 'lsj' THEN 1
+                    WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                    WHEN LOWER(source) = 'cunliffe' THEN 2
+                    WHEN LOWER(source) = 'lewis-short' THEN 2
+                    WHEN LOWER(source) = 'wiktionary' THEN 3
                     ELSE 4
                 END
         """
@@ -593,7 +644,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
             let lemmaMapQuery = """
                 SELECT DISTINCT lemma, confidence, morph_info, source
                 FROM lemma_map
-                WHERE word_form = ?
+                WHERE word_form = ? \(lemmaSourceFilter(language))
                 ORDER BY confidence DESC
             """
             
@@ -655,7 +706,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 let normalizedLemmaQuery = """
                     SELECT DISTINCT lemma, confidence, morph_info, source
                     FROM lemma_map
-                    WHERE word_form_normalized_ultra = ?
+                    WHERE word_form_normalized_ultra = ? \(lemmaSourceFilter(language))
                     ORDER BY confidence DESC
                 """
                 
@@ -694,7 +745,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
                 let prefixQuery = """
                     SELECT DISTINCT lemma, confidence, morph_info, source
                     FROM lemma_map
-                    WHERE word_form LIKE ? || '%'
+                    WHERE word_form LIKE ? || '%' \(lemmaSourceFilter(language))
                     ORDER BY LENGTH(word_form), confidence DESC
                 """
 
@@ -792,10 +843,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                             FROM dictionary_entries
                             WHERE (headword = ? OR headword_normalized_ultra = ?) AND language = ?
                             ORDER BY
-                                CASE source
-                                    WHEN 'lsj' THEN 1
-                                    WHEN 'cunliffe' THEN 2
-                                    WHEN 'wiktionary' THEN 3
+                                CASE
+                                    WHEN LOWER(source) = 'lsj' THEN 1
+                                    WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                                    WHEN LOWER(source) = 'cunliffe' THEN 2
+                                    WHEN LOWER(source) = 'lewis-short' THEN 2
+                                    WHEN LOWER(source) = 'wiktionary' THEN 3
                                     ELSE 4
                                 END
                         """
@@ -807,10 +860,12 @@ class DictionaryDAO: DictionaryDAOProtocol {
                             FROM dictionary_entries
                             WHERE headword = ? AND language = ?
                             ORDER BY
-                                CASE source
-                                    WHEN 'lsj' THEN 1
-                                    WHEN 'cunliffe' THEN 2
-                                    WHEN 'wiktionary' THEN 3
+                                CASE
+                                    WHEN LOWER(source) = 'lsj' THEN 1
+                                    WHEN LOWER(source) LIKE 'whitaker%' THEN 1
+                                    WHEN LOWER(source) = 'cunliffe' THEN 2
+                                    WHEN LOWER(source) = 'lewis-short' THEN 2
+                                    WHEN LOWER(source) = 'wiktionary' THEN 3
                                     ELSE 4
                                 END
                         """
@@ -942,7 +997,7 @@ class DictionaryDAO: DictionaryDAOProtocol {
             let ultraLemmaQuery = """
                 SELECT DISTINCT lemma, confidence, morph_info, source
                 FROM lemma_map
-                WHERE word_form_normalized_ultra = ?
+                WHERE word_form_normalized_ultra = ? \(lemmaSourceFilter(language))
                 ORDER BY confidence DESC
                 LIMIT 5
             """

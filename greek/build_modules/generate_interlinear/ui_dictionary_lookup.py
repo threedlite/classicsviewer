@@ -844,10 +844,39 @@ class PerseusRepository:
 
             # Try direct dictionary lookup with ultra-normalized form
             cursor = self.conn.cursor()
+            # Ultra-normalisation strips accents, so DISTINCT WORDS collapse
+            # onto one key: εἰμί ("to be") and εἶμι ("to go") both become
+            # "ειμι", which matches 7 rows. Measured over the extended DB,
+            # 12,460 of 45,716 Greek ultra keys (27.3%) match more than one row
+            # and 2,111 (4.6%) match more than one distinct headword — where the
+            # choice changes the MEANING.
+            #
+            # This query had no ORDER BY, so which row fetchone() returned
+            # depended on index traversal and shifted as the table grew.
+            # Regenerating one work twice produced "1. To be, exist" on one run
+            # and "1. a. To go, go one's way" on the next, from identical
+            # inputs.
+            #
+            # ORDER BY id: insertion order, matching the sibling headword query
+            # below. Chosen by measurement over all 2,111 ambiguous keys — it
+            # yields a usable definition 76.6% of the time, against 78.4% for a
+            # source-rank ordering and 69.8% for one mirroring the app's full
+            # entry sort. The 1.8-point gap to source-rank costs 37 keys, but
+            # source-rank picks the gutted "ἄν1" LSJ stub over Cunliffe's
+            # "Conditional or limiting particle" for ἄν, and loses ειμι and ιων
+            # too. `id` gets all three right.
+            #
+            # This buys REPRODUCIBILITY, not correctness: the accent that
+            # distinguishes εἰμί from εἶμι is exactly what normalisation removed,
+            # so no ordering over these columns can choose semantically. Still
+            # one row, as before — returning all matches was tried and reverted,
+            # because it let structurally-gutted entries compete in the
+            # downstream sort and changed 414 lines in a single work.
             cursor.execute("""
                 SELECT headword, entry_html, entry_plain, source
                 FROM dictionary_entries
                 WHERE headword_normalized_ultra = ? AND language = ?
+                ORDER BY id
             """, (ultra_normalized, normalized_language))
 
             ultra_direct = cursor.fetchone()

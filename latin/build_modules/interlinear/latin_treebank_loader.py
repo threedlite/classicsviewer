@@ -29,7 +29,9 @@ NOT a standalone script — imported by generate_latin_interlinear.py.
 from __future__ import annotations
 
 import re
+import sqlite3
 import unicodedata
+from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -136,11 +138,15 @@ def _unalignable(subdoc: str) -> Optional[tuple[str, int]]:
 # them with broad-Latin POS so we don't lose POS coverage, only the
 # gold-tag accuracy bump.
 #
-# Verified-aligning works (smoke test against extended DB confirmed):
-#   - phi0448.phi001 (Caesar BG)        BOOK.LINE → matches text_lines exactly
-#   - phi0631.phi001 (Sallust Catiline) single int = section → ✓
-#   - phi0690.phi003 (Vergil Aeneid)    BOOK.LINE = book.verse → ✓
-#   - phi0959.phi006 (Ovid Metamorphoses) BOOK.LINE same shape → ✓
+# Actually enabled below (see SUBDOC_RESOLVERS) — TWO works, not four:
+#   - phi0690.phi003 (Vergil Aeneid)      BOOK.LINE = book.verse
+#   - phi0959.phi006 (Ovid Metamorphoses) BOOK.LINE same shape
+#
+# Caesar BG and Sallust Catiline were listed here as "verified-aligning" while
+# the resolver table below mapped them to _unalignable, and the note under that
+# table says they were verified NOT to align. The two claims contradicted each
+# other; the code has always followed the second. Corrected rather than
+# resolved in favour of either, because see the warning below.
 #
 # Unalignable in v1 (reasons):
 #   - phi0474.phi013 (Cicero):      SECT.SUBSECT doesn't map to line_number
@@ -157,9 +163,23 @@ def _unalignable(subdoc: str) -> Optional[tuple[str, int]]:
 #   - tlg0031.tlg027 (Vulgate):     single int = verse, but text_lines may
 #                                   use chapter+verse merged; unverified
 #
-# Promoting any unalignable work to a real resolver in v2 requires
-# spot-verification that subdoc N's first token text equals text_lines
-# line_number=N's first token text in the extended DB.
+# ⚠ THE SPOT-CHECK DESCRIBED ABOVE DOES NOT WORK. Do not promote a work on
+# the strength of it.
+#
+# "subdoc N's first token equals line N's first token" fails on works that
+# demonstrably DO align: measured over the first 40 subdocs of each file, the
+# Aeneid scores 8% and Ovid 68%, yet both are enabled and between them supply
+# every gold tag the build has. The reason is in the SENTENCE-RANGE SPANNING
+# note at the top of this file — LDT records the line a sentence STARTS on, and
+# in verse a sentence usually starts mid-line, so its first word is not the
+# line's first word. A low score means "sentences start mid-line", not
+# "misaligned".
+#
+# A valid promotion test has to compare the whole token multiset of the
+# sentence against the span of lines it covers, not first-token against
+# first-token. Until someone writes that, the resolver table stays as it is:
+# a wrong resolver silently attaches gold POS and lemmas to the wrong words,
+# which is worse than falling back to Stanza.
 SUBDOC_RESOLVERS: dict[str, "callable"] = {
     # ----- v1 verified aligning works -----
     # Only verse works where text_lines.line_number = canonical verse number.
@@ -274,17 +294,252 @@ def _extract_work_id(document_id: str) -> Optional[str]:
     return m.group(1) if m else None
 
 
+class LdtLexicon:
+    """Surface form -> lemma, learned from every LDT file at once.
+
+    The per-line LdtLoader below can only apply treebank data to lines it can
+    align to a (book_id, line_number). That reaches 0.14% of Latin corpus
+    tokens, because `text_lines.line_number` is a paragraph counter for most
+    works while LDT's `subdoc` is a canonical citation.
+
+    But a surface-form -> lemma mapping is not location-dependent. "oris ->
+    ora", annotated by hand in Aeneid 6, is just as true in Aeneid 1. Reading
+    all 12 files as one lexicon gives 67,108 tokens over 18,897 distinct forms,
+    83% of which have exactly one lemma.
+
+    Corpus coverage by agreement threshold (measured over 4,813,689 tokens):
+
+        100% (unambiguous)   14.8%
+         90%                 19.7%
+         80%                 27.9%     <- default
+         75%                 36.6%
+         50% (plain majority) 60.7%
+
+    The default of 0.8 includes `oris` (ora1 4x vs os1 1x = 80%) and excludes
+    `ora` itself (os1 12x vs ora1 3x = 75%), where the majority reading is
+    wrong in some contexts. Raising coverage past this trades accuracy for
+    reach; it is a threshold, not a word list.
+
+    This does NOT override in-context treebank data - LdtLoader still wins
+    where it covers a line. It only replaces Stanza's guess elsewhere.
+    """
+
+    def __init__(self, ldt_dir: Path = LDT_DIR_DEFAULT,
+                 min_agreement: float = 0.8) -> None:
+        self.ldt_dir = Path(ldt_dir)
+        self.min_agreement = min_agreement
+        self._lemma: dict[str, str] = {}
+        # surface -> [(lemma, upos, share)] sorted by share desc, for the
+        # dual-gloss path: a form like `ora` is annotated `os` (mouth) 81% and
+        # `ora` (shore) 19%, and showing both is more use to a reader than
+        # silently picking the majority.
+        self._readings: dict[str, list[tuple[str, str, float]]] = {}
+        self._loaded = False
+        self.stats: dict[str, int] = {}
+
+    def load(self) -> None:
+        if self._loaded:
+            return
+        if not self.ldt_dir.is_dir():
+            raise FileNotFoundError(f"LDT directory missing: {self.ldt_dir}")
+        counts: dict[str, Counter] = defaultdict(Counter)
+        pos_counts: dict[str, Counter] = defaultdict(Counter)
+        tokens = 0
+        for xml_path in sorted(self.ldt_dir.glob("*.xml")):
+            try:
+                root = ET.parse(str(xml_path)).getroot()
+            except ET.ParseError as exc:
+                raise ValueError(f"LDT file unparseable: {xml_path}: {exc}")
+            for w in root.iter("word"):
+                form = _normalize_form(w.get("form") or "")
+                lemma = _strip_lemma((w.get("lemma") or "").strip())
+                postag = w.get("postag") or ""
+                if not form or not lemma or postag[:1] == "u":
+                    continue
+                counts[form][lemma] += 1
+                upos = perseus_postag_to_upos(postag)
+                if upos:
+                    pos_counts[form][(lemma, upos)] += 1
+                tokens += 1
+        kept = 0
+        for form, c in counts.items():
+            top, n = c.most_common(1)[0]
+            if n / sum(c.values()) >= self.min_agreement:
+                self._lemma[form] = top
+                kept += 1
+        for form, c in pos_counts.items():
+            total = sum(c.values())
+            self._readings[form] = [
+                (lem, up, n / total) for (lem, up), n in c.most_common(3)
+            ]
+        self.stats = {
+            "tokens": tokens,
+            "forms": len(counts),
+            "kept": kept,
+            "min_agreement_pct": int(self.min_agreement * 100),
+        }
+        self._loaded = True
+
+    def readings_for(self, surface: str) -> list[tuple[str, str, float]]:
+        """Every attested (lemma, POS, share) for this form, most common first.
+
+        Used to show both readings of a genuinely ambiguous form. Empty list if
+        LDT has not seen it.
+        """
+        if not self._loaded:
+            self.load()
+        return self._readings.get(_normalize_form(surface), [])
+
+    def lemma_for(self, surface: str) -> Optional[str]:
+        """Hand-annotated lemma for this surface form, or None if LDT has not
+        seen it or its annotators disagree beyond the threshold."""
+        if not self._loaded:
+            self.load()
+        return self._lemma.get(_normalize_form(surface))
+
+
 class LdtLoader:
     """Loads all LDT XML files under `ldt_dir` once; offers per-line lookup
     that handles sentence-range spanning."""
 
-    def __init__(self, ldt_dir: Path = LDT_DIR_DEFAULT) -> None:
+    # Content alignment. A sentence is located by finding its own words in the
+    # work's text, not by trusting the subdoc citation.
+    #
+    # The subdoc route reaches 2 works of 12. Measured 2026-09-03 with a test
+    # that scores the two known-good works correctly (Aeneid 0.99, Ovid 0.90 --
+    # the test the file used to prescribe scored the Aeneid at 0.08): Tibullus,
+    # Sallust, Petronius and Phaedrus sit at chance level, so their subdocs
+    # genuinely do not map to line_number. Their TEXT does. Matching on content
+    # instead reaches 38,011 gold words against 5,143, with zero ambiguous
+    # matches across the corpus.
+    _NGRAM = 5              # candidate key length
+    _MIN_COVER = 0.90       # fraction of the sentence that must be recovered
+    _MAX_GAP = 6            # tokens skipped while matching (editions differ)
+    _RIVAL_DIST = 10        # a second match this far away makes it ambiguous
+
+    def __init__(self, ldt_dir: Path = LDT_DIR_DEFAULT,
+                 db_path: Optional[str] = None) -> None:
         self.ldt_dir = Path(ldt_dir)
+        self.db_path = db_path
         # book_id -> sorted list of LdtSentence by start_line
         self._book_sentences: dict[str, list[LdtSentence]] = {}
         # work_id -> stats
         self._stats: dict[str, dict[str, int]] = {}
+        # work_id -> (tokens, positions, ngram index); built on first use
+        self._work_index: dict[str, Optional[tuple]] = {}
         self._loaded = False
+
+    # ----- content alignment -----
+
+    def _index_work(self, work_id: str):
+        """(tokens, positions, ngram_index) for a work, or None if unavailable.
+
+        `positions[i]` is the (book_id, line_number) the i-th token came from,
+        so a matched span yields an exact line range instead of the
+        next-sentence-start guess the subdoc route has to make.
+        """
+        if work_id in self._work_index:
+            return self._work_index[work_id]
+        if not self.db_path:
+            self._work_index[work_id] = None
+            return None
+        try:
+            con = sqlite3.connect(f"file:{self.db_path}?mode=ro", uri=True)
+        except sqlite3.Error:
+            self._work_index[work_id] = None
+            return None
+        toks: list[str] = []
+        pos: list[tuple[str, int]] = []
+        try:
+            rows = con.execute(
+                "SELECT tl.book_id, tl.line_number, tl.line_text "
+                "FROM text_lines tl JOIN books b ON tl.book_id = b.id "
+                "WHERE b.work_id = ? ORDER BY tl.book_id, tl.line_number",
+                (work_id,)).fetchall()
+        except sqlite3.Error:
+            rows = []
+        finally:
+            con.close()
+        for book_id, line_number, line_text in rows:
+            # Caesar carries a canonical "[1.1]" prefix on most lines; it is
+            # citation apparatus, not text, and would pollute the match.
+            body = re.sub(r"^\[[^\]]*\]\s*", "", line_text or "")
+            for w in re.findall(r"[A-Za-z\u00C0-\u024F]+", body):
+                n = _normalize_form(w)
+                if n:
+                    toks.append(n)
+                    pos.append((book_id, line_number))
+        if len(toks) < self._NGRAM:
+            self._work_index[work_id] = None
+            return None
+        ix: dict[tuple, list[int]] = {}
+        k = self._NGRAM
+        for i in range(len(toks) - k + 1):
+            ix.setdefault(tuple(toks[i:i + k]), []).append(i)
+        self._work_index[work_id] = (toks, pos, ix)
+        return self._work_index[work_id]
+
+    @staticmethod
+    def _rejoin_enclitics(forms: list[str]) -> list[str]:
+        """LDT splits `classique` into `classi` + `-que`; the text has one word."""
+        out: list[str] = []
+        for f in forms:
+            if f.startswith("-") and out:
+                out[-1] = out[-1] + f[1:]
+            else:
+                out.append(f)
+        return [_normalize_form(x) for x in out if _normalize_form(x)]
+
+    def _cover(self, sent_toks, toks, start) -> int:
+        """Tokens of the sentence recovered in order from `start`."""
+        i = start
+        hit = 0
+        for t in sent_toks:
+            j = i
+            while j < min(i + self._MAX_GAP, len(toks)):
+                if toks[j] == t:
+                    hit += 1
+                    i = j + 1
+                    break
+                j += 1
+        return hit
+
+    def _locate(self, work_id: str, sent_toks: list[str]):
+        """(book_id, first_line, last_line) for this sentence, or None.
+
+        Requires the whole sentence, not a keyword hit: >= _MIN_COVER of its
+        tokens recovered in order, and no rival position _RIVAL_DIST or more
+        tokens away scoring as well (so a repeated formula cannot land on the
+        wrong passage).
+        """
+        idx = self._index_work(work_id)
+        if not idx or len(sent_toks) < self._NGRAM + 2:
+            return None
+        toks, pos, ix = idx
+        k = self._NGRAM
+        cands: set[int] = set()
+        for i in range(0, min(len(sent_toks) - k, 12)):
+            for p in ix.get(tuple(sent_toks[i:i + k]), []):
+                cands.add(max(0, p - i))
+        if not cands:
+            return None
+        scored = sorted(((c, self._cover(sent_toks, toks, c)) for c in cands),
+                        key=lambda kv: -kv[1])
+        best, hit = scored[0]
+        if hit / len(sent_toks) < self._MIN_COVER:
+            return None
+        for c, h in scored[1:]:
+            if (h / len(sent_toks) >= self._MIN_COVER
+                    and abs(c - best) >= self._RIVAL_DIST):
+                return None                      # ambiguous, refuse
+        end = min(best + int(len(sent_toks) * 1.5), len(toks) - 1)
+        book_id, first_line = pos[best]
+        last_line = first_line
+        for j in range(best, end + 1):
+            if pos[j][0] != book_id:
+                break
+            last_line = pos[j][1]
+        return (book_id, first_line, last_line)
 
     def load(self) -> None:
         if self._loaded:
@@ -321,6 +576,8 @@ class LdtLoader:
             unique_starts = sorted({s.start_line for s in sents})
             start_index = {ls: i for i, ls in enumerate(unique_starts)}
             for s in sents:
+                if s.end_line >= 0:
+                    continue        # exact range from the content match
                 idx = start_index[s.start_line]
                 if idx + 1 < len(unique_starts):
                     nxt = unique_starts[idx + 1]
@@ -356,22 +613,35 @@ class LdtLoader:
         )
         stats["sentences"] += 1
 
-        resolver = SUBDOC_RESOLVERS.get(work_id)
-        if resolver is None:
-            stats["dropped"] += 1
-            return
-        resolved = resolver(subdoc)
-        if resolved is None:
-            stats["dropped"] += 1
-            return
-        book_suffix, line_number = resolved
-        book_id = f"{work_id}{book_suffix}"
+        # Content alignment first. The subdoc resolvers stay as a fallback so
+        # that nothing which aligns today can be lost: the Aeneid and Ovid
+        # resolve mechanically, and short sentences (< _NGRAM + 2 tokens) are
+        # below the content matcher's evidence threshold.
+        forms = [w.get("form", "") or "" for w in sentence_el.iter("word")]
+        located = self._locate(work_id, self._rejoin_enclitics(forms))
+        end_line = -1
+        if located is not None:
+            book_id, line_number, end_line = located
+            stats["by_content"] = stats.get("by_content", 0) + 1
+        else:
+            resolver = SUBDOC_RESOLVERS.get(work_id)
+            if resolver is None:
+                stats["dropped"] += 1
+                return
+            resolved = resolver(subdoc)
+            if resolved is None:
+                stats["dropped"] += 1
+                return
+            book_suffix, line_number = resolved
+            book_id = f"{work_id}{book_suffix}"
+            stats["by_subdoc"] = stats.get("by_subdoc", 0) + 1
 
         sent = LdtSentence(
             sentence_id=sent_id,
             work_id=work_id,
             book_id=book_id,
             start_line=line_number,
+            end_line=end_line,
         )
 
         for w in sentence_el.iter("word"):

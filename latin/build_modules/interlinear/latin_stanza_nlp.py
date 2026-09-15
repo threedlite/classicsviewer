@@ -24,16 +24,31 @@ from __future__ import annotations
 import threading
 
 
-# Stanza is *required* for full Latin POS coverage (LDT covers <10% of
-# tokens in v1). If it isn't installed the generator's --strict mode
-# should fail; non-strict mode emits interlinear without POS tags.
+# Stanza is REQUIRED. LDT covers under 10% of tokens, so without Stanza every
+# other token loses its "~ POS DEPREL HEAD sentPos sentId" block entirely.
+#
+# This used to be a warning, and the failure mode was ugly: a full run reported
+# "Successful: 230, Failed: 0", exited 0, and finished in 20 seconds instead of
+# an hour, having written 230 files with no POS data at all. The XML looked
+# plausible and would have flowed into the DB, breaking the topical pack, the
+# dependency-tree view and parse_interlinear_latin. Nothing failed loudly.
+#
+# The usual cause is invoking the generator with the system `python3` rather
+# than the project venv, which is why the wrapper now checks too. Per CLAUDE.md,
+# a required component that fails to load must fail the build, not warn.
 try:
     import stanza  # type: ignore
     STANZA_AVAILABLE = True
-except ImportError:
-    print("WARNING: Stanza not installed. Latin interlinear will be missing "
-          "POS / dependency tags for all tokens outside LDT coverage.")
-    STANZA_AVAILABLE = False
+except ImportError as _exc:
+    raise ImportError(
+        "Stanza is required for Latin interlinear generation but is not "
+        "importable.\n"
+        "Without it every token outside LDT coverage loses its POS, deprel "
+        "and head fields, and the run still reports success.\n"
+        "Run the generator with the project venv:\n"
+        "  <repo>/venv/bin/python3 latin_interlinear_list.py ...\n"
+        "or use run_latin_interlinear_no_sleep.sh, which now enforces this."
+    ) from _exc
 
 
 # Per-process singleton state. After multiprocessing fork these are reset
@@ -88,7 +103,23 @@ def get_stanza_nlp():
                         download_method=None,
                     )
                 except Exception as e:
-                    print(f"WARNING: Failed to load Stanza Latin pipeline: {e}")
+                    # HARD FAIL. Returning None here degrades every downstream
+                    # gloss silently: the POS layer simply stops contributing
+                    # and the run still "succeeds", producing a full set of
+                    # XMLs with no Stanza tags in them. That is precisely the
+                    # failure this build already shipped once, when the driver
+                    # invoked bare `python3` and Stanza was not importable.
+                    # CLAUDE.md: never use a warning for a critical component.
+                    raise RuntimeError(
+                        f"Stanza Latin pipeline ({_LA_PACKAGE}) failed to "
+                        f"load: {e}\n"
+                        f"The interlinear POS/lemma layer cannot run without "
+                        f"it. Fetch the model with:\n"
+                        f"  python3 -c \"import stanza; "
+                        f"stanza.download('la', package='{_LA_PACKAGE}')\"\n"
+                        f"Do NOT proceed without it -- the output would be "
+                        f"silently degraded, not obviously broken."
+                    ) from e
                 _stanza_initialized = True
 
     return _stanza_nlp
@@ -105,7 +136,14 @@ def ensure_model_downloaded() -> bool:
         stanza.download("la", package=_LA_PACKAGE, verbose=False)
         return True
     except Exception as e:
-        print(f"WARNING: stanza.download('la', package={_LA_PACKAGE!r}) failed: {e}")
+        # Reported, not raised: an offline machine with the model ALREADY
+        # cached is a legitimate state, and the authoritative check is whether
+        # the pipeline loads. get_stanza_nlp() raises if it does not, so a
+        # genuinely missing model still fails the build -- one step later, and
+        # on the condition that actually matters.
+        print(f"NOTE: stanza.download('la', package={_LA_PACKAGE!r}) could not "
+              f"refresh the model ({e}). Continuing only if it is already "
+              f"cached; pipeline construction will fail hard if it is not.")
         return False
 
 

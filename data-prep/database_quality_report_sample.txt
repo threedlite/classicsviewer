@@ -1,5 +1,5 @@
 === PERSEUS TEXTS DATABASE QUALITY REPORT ===
-Generated: 2026-05-30T22:56:06.898409
+Generated: 2026-09-14T18:21:21.510870
 Mode: sample
 
 Total Authors: 12
@@ -7,8 +7,8 @@ Total Works: 265
 Total Books: 667
 Total Lines: 222,709
 Translation Segments: 126,094
-Build Time: 3.9 minutes
-Database Size: 633.5MB → 155.7MB compressed (24.6%)
+Build Time: 4.0 minutes
+Database Size: 633.2MB → 155.7MB compressed (24.6%)
 Dictionary Entries: 62,810
 Lemma Mappings: 828,057
 
@@ -189,137 +189,137 @@ Hesiod / Works and Days translations: Hugh G. Evelyn-White 179 segments [Excelle
 [Homer]
 Homer / Epigrams - 109 lines total, 17 books, max_lines/book=23, max_char=52 [Perseus]
 Homer / Epigrams / Ode 1 - 5 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 5 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 5 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 5 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 5 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 2 - 2 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 3 - 6 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 6 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 6 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 4 - 17 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 17 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 17 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 17 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 17 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 5 - 2 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 6 - 8 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 8 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 8 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 8 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 7 - 3 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 3 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 3 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 3 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 3 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 8 - 4 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 9 - 2 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 10 - 4 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 11 - 4 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 12 - 4 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 4 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 13 - 6 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 6 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 6 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 6 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 14 - 23 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 23 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 23 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 23 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 23 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 15 - 13 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 12 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 12 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 13 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 16 - 2 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 2 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 2 segments [Excellent (100% coverage)]
 Homer / Epigrams / Ode 17 - 4 lines
-Homer / Epigrams translations: Hugh G. Evelyn-White 3 segments [Excellent (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
+Homer / Epigrams translations: Hugh G. Evelyn-White 3 segments [Excellent (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 4 segments [Excellent (100% coverage)]
 Homer / Iliad - 15,687 lines total, 24 books, max_lines/book=909, max_char=56 [Perseus]
 Homer / Iliad / Book 1 - 611 lines
-Homer / Iliad translations: Augustus Taber Murray 17 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 611 segments [Excellent (100% coverage)], Samuel Butler 123 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 17 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 611 segments [Excellent (100% coverage)], Samuel Butler 123 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 2 - 877 lines
-Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 877 segments [Excellent (100% coverage)], Samuel Butler 176 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 877 segments [Excellent (100% coverage)], Samuel Butler 176 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 3 - 461 lines
-Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 461 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 461 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 4 - 544 lines
-Homer / Iliad translations: Augustus Taber Murray 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 544 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 544 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 5 - 909 lines
-Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 909 segments [Excellent (100% coverage)], Samuel Butler 75 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 909 segments [Excellent (100% coverage)], Samuel Butler 75 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 6 - 529 lines
-Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 529 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 529 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 7 - 482 lines
-Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 482 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 482 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 8 - 565 lines
-Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 565 segments [Excellent (100% coverage)], Samuel Butler 50 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 565 segments [Excellent (100% coverage)], Samuel Butler 50 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 9 - 709 lines
-Homer / Iliad translations: Augustus Taber Murray 17 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 709 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 17 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 709 segments [Excellent (100% coverage)], Samuel Butler 47 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 10 - 579 lines
-Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 579 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 579 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 11 - 847 lines
-Homer / Iliad translations: Augustus Taber Murray 21 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 847 segments [Excellent (100% coverage)], Samuel Butler 67 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 21 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 847 segments [Excellent (100% coverage)], Samuel Butler 67 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 12 - 471 lines
-Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 471 segments [Excellent (100% coverage)], Samuel Butler 27 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 471 segments [Excellent (100% coverage)], Samuel Butler 27 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 13 - 837 lines
-Homer / Iliad translations: Augustus Taber Murray 25 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 837 segments [Excellent (100% coverage)], Samuel Butler 66 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 25 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 837 segments [Excellent (100% coverage)], Samuel Butler 66 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 14 - 521 lines
-Homer / Iliad translations: Augustus Taber Murray 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 521 segments [Excellent (100% coverage)], Samuel Butler 44 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 521 segments [Excellent (100% coverage)], Samuel Butler 44 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 15 - 746 lines
-Homer / Iliad translations: Augustus Taber Murray 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 746 segments [Excellent (100% coverage)], Samuel Butler 59 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 746 segments [Excellent (100% coverage)], Samuel Butler 59 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 16 - 867 lines
-Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 867 segments [Excellent (100% coverage)], Samuel Butler 62 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 867 segments [Excellent (100% coverage)], Samuel Butler 62 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 17 - 761 lines
-Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 761 segments [Excellent (100% coverage)], Samuel Butler 58 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 761 segments [Excellent (100% coverage)], Samuel Butler 58 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 18 - 617 lines
-Homer / Iliad translations: Augustus Taber Murray 19 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 617 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 19 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 617 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 19 - 424 lines
-Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 424 segments [Excellent (100% coverage)], Samuel Butler 30 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 424 segments [Excellent (100% coverage)], Samuel Butler 30 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 20 - 503 lines
-Homer / Iliad translations: Augustus Taber Murray 16 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 503 segments [Excellent (100% coverage)], Samuel Butler 36 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 16 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 503 segments [Excellent (100% coverage)], Samuel Butler 36 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 21 - 611 lines
-Homer / Iliad translations: Augustus Taber Murray 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 611 segments [Excellent (100% coverage)], Samuel Butler 49 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 18 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 611 segments [Excellent (100% coverage)], Samuel Butler 49 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 22 - 515 lines
-Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 515 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 515 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 23 - 897 lines
-Homer / Iliad translations: Augustus Taber Murray 25 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 897 segments [Excellent (100% coverage)], Samuel Butler 75 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 25 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 897 segments [Excellent (100% coverage)], Samuel Butler 75 segments [Excellent-Section (100% coverage)]
 Homer / Iliad / Book 24 - 804 lines
-Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 804 segments [Excellent (100% coverage)], Samuel Butler 66 segments [Excellent-Section (100% coverage)]
+Homer / Iliad translations: Augustus Taber Murray 23 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 804 segments [Excellent (100% coverage)], Samuel Butler 66 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey - 12,107 lines total, 24 books, max_lines/book=847, max_char=57 [Perseus]
 Homer / Odyssey / Book 1 - 444 lines
-Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 444 segments [Excellent (100% coverage)], Samuel Butler 32 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 444 segments [Excellent (100% coverage)], Samuel Butler 32 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 2 - 434 lines
-Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 434 segments [Excellent (100% coverage)], Samuel Butler 35 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 434 segments [Excellent (100% coverage)], Samuel Butler 35 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 3 - 497 lines
-Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 497 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 497 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 4 - 847 lines
-Homer / Odyssey translations: Augustus Taber Murray 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 847 segments [Excellent (100% coverage)], Samuel Butler 81 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 20 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 847 segments [Excellent (100% coverage)], Samuel Butler 81 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 5 - 493 lines
-Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 493 segments [Excellent (100% coverage)], Samuel Butler 37 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 493 segments [Excellent (100% coverage)], Samuel Butler 37 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 6 - 331 lines
-Homer / Odyssey translations: Augustus Taber Murray 8 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 331 segments [Excellent (100% coverage)], Samuel Butler 26 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 8 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 331 segments [Excellent (100% coverage)], Samuel Butler 26 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 7 - 347 lines
-Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 347 segments [Excellent (100% coverage)], Samuel Butler 29 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 347 segments [Excellent (100% coverage)], Samuel Butler 29 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 8 - 586 lines
-Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 586 segments [Excellent (100% coverage)], Samuel Butler 50 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 586 segments [Excellent (100% coverage)], Samuel Butler 50 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 9 - 566 lines
-Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 566 segments [Excellent (100% coverage)], Samuel Butler 44 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 566 segments [Excellent (100% coverage)], Samuel Butler 44 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 10 - 573 lines
-Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 573 segments [Excellent (100% coverage)], Samuel Butler 49 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 573 segments [Excellent (100% coverage)], Samuel Butler 49 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 11 - 640 lines
-Homer / Odyssey translations: Augustus Taber Murray 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 640 segments [Excellent (100% coverage)], Samuel Butler 54 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 15 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 640 segments [Excellent (100% coverage)], Samuel Butler 54 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 12 - 453 lines
-Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 453 segments [Excellent (100% coverage)], Samuel Butler 39 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 453 segments [Excellent (100% coverage)], Samuel Butler 39 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 13 - 440 lines
-Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 440 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 440 segments [Excellent (100% coverage)], Samuel Butler 38 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 14 - 533 lines
-Homer / Odyssey translations: Augustus Taber Murray 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 533 segments [Excellent (100% coverage)], Samuel Butler 35 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 13 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 533 segments [Excellent (100% coverage)], Samuel Butler 35 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 15 - 557 lines
-Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 557 segments [Excellent (100% coverage)], Samuel Butler 48 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 557 segments [Excellent (100% coverage)], Samuel Butler 48 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 16 - 480 lines
-Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 480 segments [Excellent (100% coverage)], Samuel Butler 45 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 480 segments [Excellent (100% coverage)], Samuel Butler 45 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 17 - 606 lines
-Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 606 segments [Excellent (100% coverage)], Samuel Butler 63 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 606 segments [Excellent (100% coverage)], Samuel Butler 63 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 18 - 428 lines
-Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 428 segments [Excellent (100% coverage)], Samuel Butler 41 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 11 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 428 segments [Excellent (100% coverage)], Samuel Butler 41 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 19 - 604 lines
-Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 604 segments [Excellent (100% coverage)], Samuel Butler 39 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 14 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 604 segments [Excellent (100% coverage)], Samuel Butler 39 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 20 - 394 lines
-Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 394 segments [Excellent (100% coverage)], Samuel Butler 36 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 394 segments [Excellent (100% coverage)], Samuel Butler 36 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 21 - 434 lines
-Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 434 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 10 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 434 segments [Excellent (100% coverage)], Samuel Butler 42 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 22 - 501 lines
-Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 501 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 501 segments [Excellent (100% coverage)], Samuel Butler 52 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 23 - 371 lines
-Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 371 segments [Excellent (100% coverage)], Samuel Butler 29 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 9 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 371 segments [Excellent (100% coverage)], Samuel Butler 29 segments [Excellent-Section (100% coverage)]
 Homer / Odyssey / Book 24 - 548 lines
-Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, generated from app dictionary and treebank) 548 segments [Excellent (100% coverage)], Samuel Butler 45 segments [Excellent-Section (100% coverage)]
+Homer / Odyssey translations: Augustus Taber Murray 12 segments [Excellent-Section (100% coverage)], Interlinear (Beta, AI-generated from app dictionary and treebank) 548 segments [Excellent (100% coverage)], Samuel Butler 45 segments [Excellent-Section (100% coverage)]
 
 [Horace]
 Horace / Odes - 3,034 lines total, 4 books, max_lines/book=1,004, max_char=54 [Perseus]
@@ -887,29 +887,29 @@ New Testament / Titus translations: Rainbow Missions, Inc. 15 segments [Excellen
 [P. Vergilius Maro (Virgil)]
 P. Vergilius Maro (Virgil) / Aeneid - 9,843 lines total, 12 books, max_lines/book=948, max_char=60 [Perseus]
 P. Vergilius Maro (Virgil) / Aeneid / Book 1 - 754 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 754 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 754 segments [Excellent (100% coverage)], Theodore C. Williams 1066 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 2 - 780 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 780 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 780 segments [Excellent (100% coverage)], Theodore C. Williams 1081 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 3 - 717 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 717 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 717 segments [Excellent (100% coverage)], Theodore C. Williams 985 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 4 - 703 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 702 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 702 segments [Excellent (100% coverage)], Theodore C. Williams 992 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 5 - 871 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 871 segments [Excellent (100% coverage)], Theodore C. Williams 1136 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 871 segments [Excellent (100% coverage)], Theodore C. Williams 1136 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 6 - 896 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 896 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 896 segments [Excellent (100% coverage)], Theodore C. Williams 1179 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 7 - 816 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 816 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 816 segments [Excellent (100% coverage)], Theodore C. Williams 1069 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 8 - 724 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 724 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 724 segments [Excellent (100% coverage)], Theodore C. Williams 986 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 9 - 813 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 813 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 813 segments [Excellent (100% coverage)], Theodore C. Williams 1114 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 10 - 907 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 907 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 907 segments [Excellent (100% coverage)], Theodore C. Williams 1223 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 11 - 914 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 914 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 914 segments [Excellent (100% coverage)], Theodore C. Williams 1218 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Aeneid / Book 12 - 948 lines
-P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, generated from app dictionary and treebank) 948 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
+P. Vergilius Maro (Virgil) / Aeneid translations: Interlinear (Beta, AI-generated from app dictionary and treebank) 948 segments [Excellent (100% coverage)], Theodore C. Williams 1287 segments [Excellent (100% coverage)]
 P. Vergilius Maro (Virgil) / Eclogues - 828 lines total, 10 books, max_lines/book=111, max_char=56 [Perseus]
 P. Vergilius Maro (Virgil) / Eclogues / Ode 1 - 83 lines
 P. Vergilius Maro (Virgil) / Eclogues translations: James Rhoades 12 segments [Excellent-Section (100% coverage)]

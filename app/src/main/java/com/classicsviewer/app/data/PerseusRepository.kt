@@ -26,6 +26,23 @@ class PerseusRepository(private val context: Context) : DataRepository {
     private val wordDao = database.wordDao()
     private val lemmaDao = database.lemmaDao()
     private val lemmaMapDao = database.lemmaMapDao()
+
+    /**
+     * Latin's own lemma_map sources. Whitaker is the only one present today;
+     * the other two are listed so that adding them later cannot be silently
+     * filtered out. No other language module writes any of these strings.
+     */
+    private val latinLemmaSources = listOf("Whitaker", "Whitaker UNIQUES", "Lewis-Short")
+
+    /**
+     * Lemma lookup that keeps other languages' mappings out of a Latin result.
+     * Non-Latin languages take the original unfiltered path unchanged.
+     */
+    private suspend fun lemmaMappingsFor(wordForm: String, language: String) =
+        if (language == "latin")
+            database.lemmaMapDao().getAllLemmaMappingsForWordFiltered(wordForm, latinLemmaSources)
+        else
+            database.lemmaMapDao().getAllLemmaMappingsForWord(wordForm)
     private val dictionaryDao = database.dictionaryDao()
     private val translationSegmentDao = database.translationSegmentDao()
     private val userDictionaryDao = userDatabase.userDictionaryDao()
@@ -541,7 +558,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                 android.util.Log.d("PerseusRepository", "Checking Perseus database lemma_map for $normalizedLanguage word: '$cleanedWord' (normalized: '$normalizedWord')")
 
                 // First try exact match with diacritics (preserves meaning distinctions)
-                var perseusLemmaMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(cleanedWord)
+                var perseusLemmaMappings = lemmaMappingsFor(cleanedWord, normalizedLanguage)
                 android.util.Log.d("PerseusRepository", "Found ${perseusLemmaMappings.size} exact matches in Perseus lemma_map")
 
                 // If no exact match, try normalized lookup (without diacritics)
@@ -638,7 +655,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                 // For Greek, use the word with normalized apostrophes (cleanedWord already has normalized apostrophes)
                 val normalizedForLookup = if (normalizedLanguage == "latin") cleanedWord.lowercase() else cleanedWord
                 android.util.Log.d("PerseusRepository", "Looking up lemma mappings for: '$normalizedForLookup' (original cleaned: '$cleanedWord')")
-                var lemmaMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(normalizedForLookup)
+                var lemmaMappings = lemmaMappingsFor(normalizedForLookup, normalizedLanguage)
                 android.util.Log.d("PerseusRepository", "Found ${lemmaMappings.size} built-in lemma mappings for word: $cleanedWord (normalized: $normalizedForLookup)")
                 
                 // Log the lemmas found
@@ -653,7 +670,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                     
                     for (variant in latinVariants) {
                         if (variant != normalizedForLookup) {
-                            val variantMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(variant)
+                            val variantMappings = lemmaMappingsFor(variant, normalizedLanguage)
                             if (variantMappings.isNotEmpty()) {
                                 android.util.Log.d("PerseusRepository", "Found ${variantMappings.size} mappings for Latin variant: $variant")
                                 lemmaMappings = lemmaMappings + variantMappings
@@ -723,7 +740,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                 
                 // If we have an acute variant and found no mappings, try that too
                 if (lemmaMappings.isEmpty() && acuteVariant != null && acuteVariant != cleanedWord) {
-                    lemmaMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(acuteVariant)
+                    lemmaMappings = lemmaMappingsFor(acuteVariant, normalizedLanguage)
                     android.util.Log.d("PerseusRepository", "Found ${lemmaMappings.size} lemma mappings for acute variant: $acuteVariant")
                 }
                 
@@ -889,7 +906,7 @@ class PerseusRepository(private val context: Context) : DataRepository {
                 val relatedForms = findMorphologicallyRelatedForms(cleanedWord, normalizedLanguage)
                 
                 for (relatedForm in relatedForms) {
-                    val relatedMappings = database.lemmaMapDao().getAllLemmaMappingsForWord(relatedForm)
+                    val relatedMappings = lemmaMappingsFor(relatedForm, normalizedLanguage)
                     for (relatedMapping in relatedMappings) {
                         val relatedLemma = relatedMapping.lemma
                         
@@ -986,6 +1003,16 @@ class PerseusRepository(private val context: Context) : DataRepository {
                         entry.source?.lowercase() == "lsj" -> 0
                         entry.source?.lowercase() == "cunliffe" -> 1
                         entry.source?.lowercase() == "wiktionary" -> 2
+                        // Latin sources. The source namespaces are disjoint by
+                        // language, so these values can never interleave with
+                        // the Greek ones above and no renumbering is needed.
+                        // Whitaker's ranks ABOVE Lewis & Short deliberately:
+                        // DictionaryActivity keeps only the top 5 entries, and
+                        // a word with several L&S homographs plus alt-spelling
+                        // and bridge-alias rows would otherwise push Whitaker's
+                        // one-line gloss off the screen entirely.
+                        entry.source?.lowercase()?.startsWith("whitaker") == true -> 0
+                        entry.source?.lowercase() == "lewis-short" -> 1
                         else -> 3
                     }
                 },

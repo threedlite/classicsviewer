@@ -6,9 +6,155 @@ This integrates Latin definitions and inflections directly into the main diction
 
 import os
 import re
+import itertools
 from functools import cmp_to_key
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
+
+# Whitaker's DICTLINE.GEN gives four principal-part stem columns per entry and
+# writes "zzz" where a principal part DOES NOT EXIST. It is a null marker, not
+# a stem: 2,170 of the 39,338 entries carry it.
+#
+# Treating it as real did two things, both visible to readers:
+#
+#  1. Forms were generated as "zzz" + ending, minting nonsense word_forms.
+#  2. In 23 entries "zzz" occupies the FIRST column, and the loader took
+#     lemma = stems[0] - so 23 unrelated defective words all collapsed onto the
+#     single junk lemma "zzz", which ended up with 1,349 lemma_map rows and 23
+#     dictionary entries. Those 23 are exactly the words whose first principal
+#     part is suppletive:
+#
+#         zzz  Ad        N   -> Adam
+#         zzz  mult      N   -> multa, "a fine"
+#         zzz  deterius  ADV -> deterius, comparative with no positive
+#
+#     The interlinear then resolved that pile arbitrarily, so Aeneid 1.3's
+#     "multum" was glossed "much, fine, Adam". 1,575 segments carried an
+#     ", Adam" tail this way.
+#
+# Positions must be PRESERVED, not compacted: inflection patterns index stems by
+# stem_pos, so dropping an element would silently shift every later stem. NULL
+# them in place instead - the existing `if not stem_to_use: continue` then skips
+# exactly the principal parts that do not exist.
+_WHITAKER_NULL_STEM = "zzz"
+
+
+_STEM_COLUMNS = ((0, 19), (19, 38), (38, 57), (57, 76))
+
+
+def _parse_stem_columns(stem_block):
+    """Stems by COLUMN, so an empty one keeps its position.
+
+    `_parse_stems` splits on whitespace, which drops an empty column and
+    shifts every later stem one place left. That is correct for all 39,338
+    DICTLINE rows -- none has an interior blank, they use "zzz" -- but wrong
+    for Whitaker's ESSE entry, whose SECOND principal part is deliberately
+    blank. A zero-length stem is what generates es, est, eram, erat, ero,
+    esse. Shifted, its `fu` and `fut` landed in positions 2 and 3 and
+    generated fuest, fuesse, futisse, futeram.
+
+    An interior blank is therefore a real zero-length stem; a trailing blank
+    is an unused column, as in every two-stem noun. Verified against
+    DICTLINE.GEN: 0 rows of 39,338 have an interior blank, so this changes
+    nothing that the file already contains.
+    """
+    raw = [stem_block[a:b].strip() if len(stem_block) > a else ""
+           for a, b in _STEM_COLUMNS]
+    last_real = max((i for i, x in enumerate(raw) if x), default=-1)
+    stems = []
+    for i, x in enumerate(raw):
+        if i > last_real:
+            continue                     # trailing, unused
+        stems.append(None if x == _WHITAKER_NULL_STEM else x)
+    lemma = next((x for x in stems if x), None)
+    return stems, lemma
+
+
+def _parse_stems(stems_part):
+    """Stem columns with Whitaker's "zzz" null marker replaced by None.
+
+    Returns (stems, lemma). `lemma` is the first REAL stem, so a defective word
+    whose first principal part is absent is keyed on its own next stem rather
+    than on the shared "zzz" bucket. Returns (stems, None) if no stem is real.
+    """
+    stems = [None if s == _WHITAKER_NULL_STEM else s
+             for s in stems_part.split() if s]
+    lemma = next((s for s in stems if s), None)
+    return stems, lemma
+
+
+# ---------------------------------------------------------------------------
+# Citation-form keying
+# ---------------------------------------------------------------------------
+# Whitaker keys its data on STEMS ("mult", "ed", "qu", "sit"), not on the
+# dictionary form a reader would look up. Storing stems in
+# dictionary_entries.headword makes the Latin lookup structurally wrong in three
+# ways, all measured:
+#
+#  * A surface that coincides with a stem gets a step-1 exact match and
+#    short-circuits lemma resolution. 30.1% of Latin corpus tokens have a
+#    surface equal to some stem. "tibi" hits the stem of tibia -> "flute, pipe".
+#  * One stem serves unrelated words. "mult" covers multus / multa / multo, so
+#    the dual-gloss printed "much, fine, punish"; "ed" covers both edo verbs.
+#  * Treebank lemmas and Lewis & Short headwords are dictionary FORMS, so they
+#    cannot join to stems. "est" has the correct lemma "sum" recorded in the
+#    interlinear yet glosses as "eject/emit", because the gloss is resolved from
+#    the surface and "sum" as a Whitaker headword is the stem of sumo.
+#
+# The citation form is recoverable from the paradigm we already generate:
+# a verb's is its 1st person singular present active indicative, a nominal's is
+# its nominative singular. Measured over the built DB, 29,371 of 29,562 stems
+# (99.4%) yield one; the 191 that do not are indeclinables and abbreviations
+# (A, Abba, Adonai, Baal) which already ARE their own citation form.
+#
+# Keying on it aligns Whitaker with the treebank and with L&S:
+#     sum(stem) -> sumo      frees the string "sum" for L&S's "to be"
+#     mult      -> multus / multa / multo   as separate entries
+#     ed        -> edo
+# It must be computed PER ENTRY, not per stem: a stem serves several entries
+# with different parts of speech, and a per-stem map picks the wrong one
+# (mult -> multo rather than multus, tu -> tuo rather than tu).
+_CIT_VERB = "1 s pres active ind"
+
+
+# Whitaker's noun genders, as written in the DICTLINE POS columns.
+_NOUN_GENDERS = ("m", "f", "n", "c")
+
+
+def _citation_form(morph_entries, fallback, gender=None):
+    """Dictionary form for an entry, from the paradigm it just generated.
+
+    `gender` is the entry's DECLARED gender, and it matters. The noun block
+    filters inflection patterns by declension but not by gender, so a
+    2nd-declension NEUTER noun generates both the masculine "-us" and the
+    neuter "-um" nominative. Taking whichever came first filed *bellum* "war"
+    under the headword "bellus" (which is the adjective "pretty"), *aurum*
+    under "aurus", *vitium* under "vitius", *praesidium* under "praesidius".
+
+    Two things went wrong downstream. The headword the reader would look up did
+    not exist, so `bellum` fell back to a placeholder; and
+    select_entry_for_pos() separates same-POS candidates by testing whether the
+    lemma starts with a candidate's stem, which "bellum" vs "bellus" fails, so
+    it declined and the wrong gloss stood. `bello` glossed as "fight, wage war"
+    for 1,815 tokens because of this.
+
+    Preferring the nominative singular that MATCHES the declared gender fixes
+    the key at source. Verbs are unaffected: they have no gender and still take
+    the first-person present indicative.
+    """
+    verb = nominal = gendered = None
+    g = (gender or "").strip().lower()
+    want = f"nom s {g}" if g in _NOUN_GENDERS else None
+    for m in morph_entries:
+        mi = (m.get('morph_info') or '')
+        if verb is None and mi == _CIT_VERB:
+            verb = m['word_form']
+        if want and gendered is None and mi.startswith(want):
+            gendered = m['word_form']
+        if nominal is None and 'nom s' in mi:
+            nominal = m['word_form']
+    return verb or gendered or nominal or fallback
+
 
 class LatinInflectionEngine:
     """Latin inflection engine based on Whitaker's Words INFLECTS.LAT"""
@@ -19,8 +165,17 @@ class LatinInflectionEngine:
     def parse_inflects(self, file_path: str):
         """Parse INFLECTS.LAT for inflection patterns"""
         if not os.path.exists(file_path):
-            print(f"Warning: INFLECTS.LAT not found at {file_path}")
-            return
+            # HARD FAIL. Without INFLECTS.LAT there are no inflection patterns,
+            # so lemma_map is built from headwords alone and every inflected
+            # surface form in the corpus stops resolving. The build would still
+            # exit 0 with a plausible-looking DB. CLAUDE.md: fail the build for
+            # anything missing, never warn and continue.
+            raise FileNotFoundError(
+                f"Whitaker's INFLECTS.LAT not found at {file_path}. "
+                f"Latin inflection patterns cannot be built without it. "
+                f"Clone the source: cd data-sources && "
+                f"git clone https://github.com/mk270/whitakers-words.git"
+            )
         
         print("Loading Latin inflection patterns...")
         pattern_count = 0
@@ -100,6 +255,35 @@ class LatinInflectionEngine:
                     }
                     self.inflection_patterns.append(pattern)
                     pattern_count += 1
+                elif parts[0] == 'ADV' and len(parts) >= 4:
+                    # Format: ADV degree stem_pos ending_len [ending] age freq
+                    #
+                    # Whitaker stores an adverb's three degrees as three STEMS,
+                    # not as endings:
+                    #
+                    #     bene       melius       optime          ADV X
+                    #     generose   generosius   generosissime   ADV X
+                    #
+                    # and the patterns emit each stem with a zero-length ending
+                    # (ADV X 1 0 / 2 0 / 3 0). An entry declared with a single
+                    # degree (ADV POS, as `stulte` is) has only stem 1.
+                    #
+                    # The parser handled V, VPAR, N, ADJ and PRON but never ADV,
+                    # so adverbs generated NO morphology at all and every
+                    # comparative and superlative stem was dropped. 387 of the
+                    # 2,204 ADV entries carry one.
+                    pattern = {
+                        'pos': 'ADV',
+                        'declension': 0,
+                        'variant': 0,
+                        'degree': parts[1],
+                        'stem_pos': int(parts[2]),
+                        'ending_len': int(parts[3]),
+                        'ending': parts[4] if len(parts) > 4 and parts[4].isalpha() else ''
+                    }
+                    self.inflection_patterns.append(pattern)
+                    pattern_count += 1
+
                 elif parts[0] == 'PRON' and len(parts) >= 8:
                     # Parse pronoun inflections
                     # Format: PRON decl variant case number gender stem_pos ending_len [ending] age freq
@@ -122,6 +306,23 @@ class LatinInflectionEngine:
                     }
                     self.inflection_patterns.append(pattern)
                     pattern_count += 1
+
+        # Whitaker writes "X" in the ending column to mean ZERO ENDING - the
+        # form is the bare stem. The loader concatenated it literally, so every
+        # such pattern minted a word_form like "visX" / "osX" / "abacX";
+        # 26,048 of them are sitting in the shipped lemma_map. Harmless while
+        # lemmas were stems, but citation-form keying surfaces them as lemmas.
+        #
+        # Normalised once here rather than at each of the five append sites.
+        # NOT done by stripping a trailing "X" from finished forms: 33,701 real
+        # Latin corpus tokens end in capital X (Roman numerals).
+        zeroed = 0
+        for pattern in self.inflection_patterns:
+            if pattern.get('ending') == 'X':
+                pattern['ending'] = ''
+                zeroed += 1
+        if zeroed:
+            print(f"  Normalised {zeroed} zero-ending ('X') inflection patterns")
 
         print(f"Loaded {pattern_count} inflection patterns")
     
@@ -147,26 +348,40 @@ class LatinInflectionEngine:
         confidence = freq_confidence_map.get(freq_code, 0.65)
 
         morphology_entries = []
+        # Bound before the POS dispatch: a part of speech with no block below
+        # still reaches the citation-form rewrite at the end.
+        entry_lemma = None
         pos_info = pos_part.split()
         
         if pos_info[0] == 'V':
             # Verb: V conj variant
             conjugation = int(pos_info[1]) if len(pos_info) > 1 and pos_info[1].isdigit() else 0
+            variant = int(pos_info[2]) if len(pos_info) > 2 and pos_info[2].isdigit() else 0
             
-            # Extract stems
-            stems = [s for s in stems_part.split() if s]
-            if len(stems) >= 1:
+            # Extract stems. By COLUMN, not by split: the ESSE entry's second
+            # principal part is an intentional zero-length stem.
+            stems, entry_lemma = _parse_stem_columns(dictionary_line[0:76])
+            if entry_lemma:
                 # Generate verb forms using inflection patterns
                 for pattern in self.inflection_patterns:
                     if pattern['pos'] != 'V':
                         continue
                     if pattern['conjugation'] != conjugation and pattern['conjugation'] != 0:
                         continue
+                    # Same keying, on (conjugation, variant).
+                    if (pattern['variant'] != 0 and variant != 0
+                            and pattern['variant'] != variant):
+                        continue
                     
                     # Apply the ending to the appropriate stem
                     stem_to_use = stems[pattern['stem_pos'] - 1] if pattern['stem_pos'] - 1 < len(stems) else None
                     
-                    if not stem_to_use:
+                    # `is None`, not falsy: an empty string is a real
+                    # ZERO-LENGTH stem (Whitaker's ESSE second principal
+                    # part), and it is what generates es, est, eram, ero,
+                    # esse. `None` is a suppressed principal part ("zzz")
+                    # and still skips.
+                    if stem_to_use is None:
                         continue
                     
                     form = stem_to_use + pattern['ending']
@@ -186,7 +401,7 @@ class LatinInflectionEngine:
                     
                     morphology_entries.append({
                         'word_form': form,
-                        'lemma': stems[0],
+                        'lemma': entry_lemma,
                         'morph_info': ' '.join(morph_info),
                         'confidence': confidence,
                         'source': "Whitaker"
@@ -198,10 +413,19 @@ class LatinInflectionEngine:
                         continue
                     if pattern['conjugation'] != conjugation and pattern['conjugation'] != 0:
                         continue
+                    # Same keying, on (conjugation, variant).
+                    if (pattern['variant'] != 0 and variant != 0
+                            and pattern['variant'] != variant):
+                        continue
                     
                     stem_to_use = stems[pattern['stem_pos'] - 1] if pattern['stem_pos'] - 1 < len(stems) else None
                     
-                    if not stem_to_use:
+                    # `is None`, not falsy: an empty string is a real
+                    # ZERO-LENGTH stem (Whitaker's ESSE second principal
+                    # part), and it is what generates es, est, eram, ero,
+                    # esse. `None` is a suppressed principal part ("zzz")
+                    # and still skips.
+                    if stem_to_use is None:
                         continue
                     
                     form = stem_to_use + pattern['ending']
@@ -222,7 +446,7 @@ class LatinInflectionEngine:
                     
                     morphology_entries.append({
                         'word_form': form,
-                        'lemma': stems[0],
+                        'lemma': entry_lemma,
                         'morph_info': ' '.join(morph_info),
                         'confidence': confidence,
                         'source': "Whitaker"
@@ -231,17 +455,46 @@ class LatinInflectionEngine:
         elif pos_info[0] == 'N':
             # Noun: N decl variant gender
             declension = int(pos_info[1]) if len(pos_info) > 1 and pos_info[1].isdigit() else 0
+            variant = int(pos_info[2]) if len(pos_info) > 2 and pos_info[2].isdigit() else 0
             
-            stems = [s for s in stems_part.split() if s]
-            if len(stems) >= 1:
+            stems, entry_lemma = _parse_stems(stems_part)
+            if entry_lemma:
                 # Generate noun forms using inflection patterns
                 for pattern in self.inflection_patterns:
                     if pattern['pos'] != 'N':
                         continue
                     if pattern['declension'] != declension and pattern['declension'] != 0:
                         continue
+                    # Whitaker keys inflection patterns on (declension,
+                    # VARIANT), and the variant is what distinguishes words
+                    # with identical stems. Declension 2 has ten variants with
+                    # ten different nominative endings:
+                    #
+                    #   N 2 1 NOM S      us     dominus
+                    #   N 2 2 NOM S N    um     bellum
+                    #   N 2 3 NOM S      <none> vir, puer  (nominative = stem)
+                    #
+                    # Filtering on declension alone generated every variant's
+                    # endings for every entry, so DICTLINE's three "vir vir"
+                    # nouns -- N 2 1 N "venom", N 2 2 N "virus", N 2 3 M "man"
+                    # -- each produced the whole set and the citation-form
+                    # picker had to guess between them. It guessed backwards:
+                    # "man" was filed under the headword `virus` and "venom"
+                    # under `virum`, so *viri* glossed as "venom" for ~2,000
+                    # tokens. The same gap filed *bellum* under `bellus`.
+                    #
+                    # It also polluted lemma_map with forms that do not exist,
+                    # since a variant-3 noun was given variant-1 endings.
+                    #
+                    # Variant 0 means "applies to every variant", so it is
+                    # always kept. Idiom copied from the PRON block below,
+                    # which has always filtered this way. Verified against the
+                    # source files: no DICTLINE entry loses all its patterns.
+                    if (pattern['variant'] != 0 and variant != 0
+                            and pattern['variant'] != variant):
+                        continue
                     
-                    stem_to_use = stems[pattern['stem_pos'] - 1] if pattern.get('stem_pos') and pattern['stem_pos'] - 1 < len(stems) else stems[0]
+                    stem_to_use = stems[pattern['stem_pos'] - 1] if pattern.get('stem_pos') and pattern['stem_pos'] - 1 < len(stems) else entry_lemma
                     
                     if not stem_to_use:
                         continue
@@ -259,7 +512,7 @@ class LatinInflectionEngine:
                     
                     morphology_entries.append({
                         'word_form': form,
-                        'lemma': stems[0],
+                        'lemma': entry_lemma,
                         'morph_info': ' '.join(morph_info),
                         'confidence': confidence,
                         'source': "Whitaker"
@@ -270,11 +523,11 @@ class LatinInflectionEngine:
             declension = int(pos_info[1]) if len(pos_info) > 1 and pos_info[1].isdigit() else 0
             variant = int(pos_info[2]) if len(pos_info) > 2 and pos_info[2].isdigit() else 0
             
-            stems = [s for s in stems_part.split() if s]
-            if len(stems) >= 1:
+            stems, entry_lemma = _parse_stems(stems_part)
+            if entry_lemma:
                 # For ADJ 1 1 (first/second declension), expand stems if needed
                 if declension == 1 and variant == 1 and len(stems) == 1:
-                    masc_stem = stems[0]
+                    masc_stem = entry_lemma
                     fem_stem = masc_stem
                     neut_stem = masc_stem
                     stems = [masc_stem, fem_stem, neut_stem, masc_stem]
@@ -285,8 +538,12 @@ class LatinInflectionEngine:
                         continue
                     if pattern['declension'] != declension and pattern['declension'] != 0:
                         continue
+                    # Same (declension, variant) keying as the noun block above.
+                    if (pattern['variant'] != 0 and variant != 0
+                            and pattern['variant'] != variant):
+                        continue
                     
-                    stem_to_use = stems[pattern['stem_pos'] - 1] if pattern['stem_pos'] - 1 < len(stems) and pattern.get('stem_pos') else stems[0]
+                    stem_to_use = stems[pattern['stem_pos'] - 1] if pattern['stem_pos'] - 1 < len(stems) and pattern.get('stem_pos') else entry_lemma
                     
                     if not stem_to_use:
                         continue
@@ -304,8 +561,40 @@ class LatinInflectionEngine:
                     
                     morphology_entries.append({
                         'word_form': form,
-                        'lemma': stems[0],
+                        'lemma': entry_lemma,
                         'morph_info': ' '.join(morph_info),
+                        'confidence': confidence,
+                        'source': "Whitaker"
+                    })
+
+        elif pos_info[0] == 'ADV':
+            # Degree as DICTLINE declares it: X (all three stems present),
+            # or POS / COMP / SUPER for a single-degree entry.
+            degree = pos_info[1] if len(pos_info) > 1 else 'X'
+            stems, entry_lemma = _parse_stem_columns(dictionary_line[0:76])
+            if entry_lemma:
+                _DEG = {1: 'positive', 2: 'comparative', 3: 'superlative'}
+                for pattern in self.inflection_patterns:
+                    if pattern['pos'] != 'ADV':
+                        continue
+                    if pattern.get('degree') != degree:
+                        continue
+                    idx = pattern['stem_pos'] - 1
+                    if idx >= len(stems):
+                        continue
+                    stem_to_use = stems[idx]
+                    if stem_to_use is None or not stem_to_use:
+                        continue
+                    form = stem_to_use + pattern['ending']
+                    morph = 'adv'
+                    if degree == 'X':
+                        morph = f"adv {_DEG.get(pattern['stem_pos'], '')}".strip()
+                    elif degree in ('COMP', 'SUPER'):
+                        morph = f"adv {degree.lower()}"
+                    morphology_entries.append({
+                        'word_form': form,
+                        'lemma': entry_lemma,
+                        'morph_info': morph,
                         'confidence': confidence,
                         'source': "Whitaker"
                     })
@@ -322,9 +611,13 @@ class LatinInflectionEngine:
             declension = int(pos_info[1]) if len(pos_info) > 1 and pos_info[1].isdigit() else 0
             variant = int(pos_info[2]) if len(pos_info) > 2 and pos_info[2].isdigit() else 0
 
-            stems = [s for s in stems_part.split() if s and s != 'zzz']
+            # Was `[s for s in stems_part.split() if s and s != 'zzz']`, which
+            # dropped null stems and COMPACTED the list - silently shifting every
+            # stem_pos after the removed one onto the wrong column. _parse_stems
+            # nulls them in place instead, preserving positions.
+            stems, entry_lemma = _parse_stems(stems_part)
 
-            if len(stems) >= 1:
+            if entry_lemma:
                 # Generate pronoun forms using inflection patterns
                 for pattern in self.inflection_patterns:
                     if pattern['pos'] != 'PRON':
@@ -344,7 +637,7 @@ class LatinInflectionEngine:
                     # Get the appropriate stem
                     stem_idx = pattern['stem_pos'] - 1
                     if stem_idx < 0 or stem_idx >= len(stems):
-                        stem_to_use = stems[0] if stems else None
+                        stem_to_use = entry_lemma
                     else:
                         stem_to_use = stems[stem_idx]
 
@@ -366,13 +659,102 @@ class LatinInflectionEngine:
 
                     morphology_entries.append({
                         'word_form': form,
-                        'lemma': stems[0],
+                        'lemma': entry_lemma,
                         'morph_info': ' '.join(morph_info),
                         'confidence': confidence,
                         'source': "Whitaker"
                     })
 
+        # Re-key onto the citation form. Every POS block funnels through here,
+        # so one rewrite covers verbs, nouns, adjectives, pronouns and numerals.
+        # Gender is only meaningful for nouns; for other parts of speech the
+        # DICTLINE column at this position means something else entirely.
+        declared_gender = (pos_info[3] if pos_info and pos_info[0] == 'N'
+                           and len(pos_info) > 3 else None)
+        cit = _citation_form(morphology_entries, entry_lemma, declared_gender)
+        if cit:
+            for m in morphology_entries:
+                m['lemma'] = cit
         return morphology_entries
+
+
+def _esse_dictline_from_ada(base_dir):
+    """The ESSE row Whitaker's own build appends to the general dictionary.
+
+    `sum` is not in DICTLINE.GEN. It is not missing from Whitaker's dictionary
+    either -- `src/commands/makedict_main.adb` prints "This version inserts
+    ESSE when D_K = GEN" and constructs the entry in code before writing
+    DICTFILE:
+
+        Be_Ve      : constant Verb_Entry := (Con => (5, 1), Kind => To_Be);
+        Mean_To_Be : constant Meaning_Type := Head ("be; exist; ...");
+        De.Stems (1) := "s";  De.Stems (2) := "";
+        De.Stems (3) := "fu"; De.Stems (4) := "fut";
+        De.Tran := (X, X, X, A, X);
+
+    Reading DICTLINE.GEN and stopping there reproduces his data files but not
+    his build, so the commonest verb in Latin arrives with no entry. Every
+    downstream symptom follows from that one hole: `est` resolved to *edo*
+    ("eject/emit", 55,286 tokens), `sit` to *sitio*, `sint` to *sino*, `esto`
+    to *sumo* ("take up"), because the selector falls through to whatever else
+    shares the surface.
+
+    The values are PARSED from the Ada, not transcribed here, so they stay
+    Whitaker's. Nothing about this is specific to `sum` beyond the fact that
+    his build is where the entry lives.
+
+    Returns one line in DICTLINE.GEN's own column layout, to be read by the
+    same parser as every other entry. The inflection engine takes it from
+    there: conjugation (5, 1) with those four stems generates sum/es/est/
+    sumus/estis/sunt, eram/ero/eris, fui/fuisse, futurus -- exactly as it
+    already does for the compounds absum, adsum, desum, insum, intersum,
+    which ARE in DICTLINE and carry the same (5, 1).
+    """
+    ada = base_dir / "src" / "commands" / "makedict_main.adb"
+    if not ada.exists():
+        raise FileNotFoundError(
+            f"Whitaker's makedict_main.adb not found at {ada}. It carries the "
+            f"ESSE entry that DICTLINE.GEN does not: without it `sum` has no "
+            f"dictionary entry and every form of the verb to be resolves to "
+            f"another word. An incomplete checkout reaches here."
+        )
+    src = ada.read_text(encoding="utf-8", errors="replace")
+
+    con = re.search(r"Be_Ve\s*:\s*constant\s+Verb_Entry\s*:=\s*\(Con\s*=>\s*"
+                    r"\((\d+)\s*,\s*(\d+)\)\s*,\s*Kind\s*=>\s*(\w+)\s*\)", src)
+    # Up to Max_Meaning_Size, NOT to the first ";" -- the gloss itself is
+    # "be; exist; ...", so a semicolon terminator truncates it to "be".
+    mean = re.search(r"Mean_To_Be\s*:\s*constant\s+Meaning_Type\s*:=\s*"
+                     r"Head\s*\((.*?),\s*Max_Meaning_Size\s*\)", src, re.S)
+    block = re.search(r"--\s*First construct ESSE(.*?)De\.Mean", src, re.S)
+    if not (con and mean and block):
+        raise ValueError(
+            f"Could not read the ESSE entry from {ada}. Expected Be_Ve, "
+            f"Mean_To_Be and the 'First construct ESSE' block. Whitaker's "
+            f"source has changed shape; re-read it rather than hard-coding "
+            f"the entry here."
+        )
+    stems = re.findall(r'De\.Stems\s*\((\d)\)\s*:=\s*"([^"]*)"', block.group(1))
+    tran = re.search(r"De\.Tran\s*:=\s*\(([^)]*)\)", block.group(1))
+    if len(stems) != 4 or not tran:
+        raise ValueError(f"ESSE block in {ada} has {len(stems)} stems and "
+                         f"tran={bool(tran)}; expected 4 stems and a Tran.")
+
+    by_key = {int(k): v.strip() for k, v in stems}
+    text = " ".join(re.findall(r'"([^"]*)"', mean.group(1)))
+    text = re.sub(r"\s+", " ", text).strip()
+    flags = " ".join(t.strip() for t in tran.group(1).split(","))
+    decl, conj, kind = con.group(1), con.group(2), con.group(3).upper()
+
+    line = ("".join(by_key.get(i, "").ljust(19) for i in (1, 2, 3, 4))
+            + "V".ljust(7)
+            + f"{decl} {conj} " + kind.ljust(13) + flags + " "
+            + text)
+    if len(line) < 110:
+        raise ValueError(f"Synthesised ESSE line is {len(line)} chars, "
+                         f"shorter than DICTLINE's 110-column definition "
+                         f"offset: {line!r}")
+    return line + "\n"
 
 
 def load_whitakers_latin(cursor, include_full_morphology=True):
@@ -389,21 +771,31 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
     # Find the Whitaker's Words directory in data-sources
     base_dir = Path(__file__).parent.parent.parent / "data-sources" / "whitakers-words"
     if not base_dir.exists():
-        print(f"Warning: Whitaker's Words directory not found at {base_dir}")
-        return
+        raise FileNotFoundError(
+            f"Whitaker's Words directory not found at {base_dir}. "
+            f"Clone it: cd data-sources && "
+            f"git clone https://github.com/mk270/whitakers-words.git"
+        )
     
     dictline_path = base_dir / "DICTLINE.GEN"
     inflects_path = base_dir / "INFLECTS.LAT"
     uniques_path = base_dir / "UNIQUES.LAT"
     
     if not dictline_path.exists():
-        print(f"Warning: DICTLINE.GEN not found at {dictline_path}")
-        return
+        raise FileNotFoundError(
+            f"Whitaker's DICTLINE.GEN not found at {dictline_path}. "
+            f"This is THE Latin dictionary: without it the build produces a "
+            f"database with zero Latin dictionary entries and every "
+            f"interlinear gloss becomes '???'. Note create_latin_database.py "
+            f"only checks that the whitakers-words DIRECTORY exists, so an "
+            f"incomplete checkout reaches here."
+        )
     
     # Initialize inflection engine
     inflection_engine = LatinInflectionEngine()
-    if inflects_path.exists():
-        inflection_engine.parse_inflects(str(inflects_path))
+    # Unconditional: parse_inflects raises if the file is absent. The previous
+    # `if inflects_path.exists()` turned a missing required input into a no-op.
+    inflection_engine.parse_inflects(str(inflects_path))
     
     # Process DICTLINE.GEN
     print("\nParsing Whitaker's DICTLINE.GEN...")
@@ -415,14 +807,24 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
     # Lower number = more frequent (for sorting)
     freq_priority = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'X': 7}
 
+    # Whitaker's build appends ESSE to the general dictionary; his data files
+    # do not carry it. Read through the SAME parser, so it gets the same stem
+    # handling, citation form, frequency sort and morphology generation.
+    esse_line = _esse_dictline_from_ada(base_dir)
+
     with open(dictline_path, 'r', encoding='utf-8') as f:
-        for line in f:
+        for line in itertools.chain(f, [esse_line]):
             if not line.strip():
                 continue
 
             if len(line) > 90:
                 lemma_part = line[0:76].strip()
-                lemma = lemma_part.split()[0] if lemma_part else None
+                # First REAL stem, not simply the first column: 23 entries carry
+                # Whitaker's "zzz" null marker in column 1 (Adam, multa,
+                # deterius - words whose first principal part is suppletive).
+                # Taking column 1 blindly keyed all 23 on the junk headword
+                # "zzz", which the interlinear then resolved arbitrarily.
+                _, lemma = _parse_stems(lemma_part)
 
                 # Extract part of speech (position 76-82 in Whitaker's format)
                 pos_part = line[76:83].strip() if len(line) > 82 else None
@@ -481,6 +883,13 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                     if len(definition) > 400:
                         definition = definition[:400] + "..."
 
+                    # Generate the paradigm FIRST: the citation form is derived
+                    # from it, and the dictionary entry must be keyed on the same
+                    # string the morphology points at, or the join breaks.
+                    morph_entries = inflection_engine.generate_morphology_for_dictionary(line)
+                    if morph_entries:
+                        lemma = morph_entries[0]['lemma']   # already the citation form
+
                     if lemma and len(lemma) > 0 and not re.match(r'^[0-9]+$', lemma):
                         # Add dictionary entry with frequency and noun_priority for sorting
                         dictionary_entries.append({
@@ -494,8 +903,8 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
                         })
                         definitions_count += 1
 
-                        # Generate morphology entries for this dictionary entry
-                        morph_entries = inflection_engine.generate_morphology_for_dictionary(line)
+                        # Already generated above, so the headword and the
+                        # morphology lemma are the same citation form.
                         morphology_entries.extend(morph_entries)
 
     # Custom comparator: freq is primary, noun_priority only used when comparing two nouns
@@ -525,46 +934,51 @@ def load_whitakers_latin(cursor, include_full_morphology=True):
     print(f"Generated {len(morphology_entries)} morphology entries")
     
     # Process UNIQUES.LAT for special forms
-    if uniques_path.exists():
-        print("\nParsing UNIQUES.LAT...")
-        uniques_count = 0
+    if not uniques_path.exists():
+        raise FileNotFoundError(
+            f"Whitaker's UNIQUES.LAT not found at {uniques_path}. It supplies "
+            f"the irregular forms (sum, eo, fero and their paradigms) that no "
+            f"inflection pattern generates."
+        )
+    print("\nParsing UNIQUES.LAT...")
+    uniques_count = 0
+    
+    with open(uniques_path, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+    
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
         
-        with open(uniques_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
+        if not line or line.startswith('--'):
+            i += 1
+            continue
         
-        i = 0
-        while i < len(lines):
-            line = lines[i].strip()
-            
-            if not line or line.startswith('--'):
-                i += 1
-                continue
-            
-            if re.match(r'^[a-z]+$', line):
-                word_form = line
-                
-                i += 1
-                if i < len(lines) and re.match(r'^[A-Z]', lines[i].strip()):
-                    i += 1
-                    
-                    if i < len(lines) and lines[i].strip():
-                        definition = lines[i].strip()
-                        
-                        # Add as both dictionary entry and special form
-                        dictionary_entries.append({
-                            'headword': word_form,
-                            'language': 'latin',
-                            'definition': definition,
-                            'source': 'Whitaker UNIQUES',
-                            'freq_sort': 4,  # D = lesser frequency for special forms
-                            'noun_priority': 1,  # same as thing nouns
-                            'is_noun': False  # UNIQUES are typically not nouns
-                        })
-                        uniques_count += 1
+        if re.match(r'^[a-z]+$', line):
+            word_form = line
             
             i += 1
+            if i < len(lines) and re.match(r'^[A-Z]', lines[i].strip()):
+                i += 1
+                
+                if i < len(lines) and lines[i].strip():
+                    definition = lines[i].strip()
+                    
+                    # Add as both dictionary entry and special form
+                    dictionary_entries.append({
+                        'headword': word_form,
+                        'language': 'latin',
+                        'definition': definition,
+                        'source': 'Whitaker UNIQUES',
+                        'freq_sort': 4,  # D = lesser frequency for special forms
+                        'noun_priority': 1,  # same as thing nouns
+                        'is_noun': False  # UNIQUES are typically not nouns
+                    })
+                    uniques_count += 1
         
-        print(f"Extracted {uniques_count} special forms from UNIQUES.LAT")
+        i += 1
+    
+    print(f"Extracted {uniques_count} special forms from UNIQUES.LAT")
 
     # Re-sort after adding UNIQUES entries using same custom comparator
     dictionary_entries.sort(key=cmp_to_key(compare_entries))

@@ -181,6 +181,22 @@ Two operations are delegated to the Google Play Store app on the device:
   **Offline is resolved.** Airplane mode yields `NETWORK_ERROR` → bounded retry → access granted,
   so a release build no longer denies access offline. The previously open question about whether
   Play answers from a local cache is now moot.
+
+  **`com.google.android.play:age-signals` MUST ALWAYS BE THE NEWEST PUBLISHED VERSION.**
+  Google ships behaviour and signal changes through this library, so a stale version is the
+  risk — an update is not. Its `0.0.x` version number reflects where the library is in its own
+  lifecycle and is NOT a reason to hold back. Do not apply the usual caution about pre-1.0
+  dependencies here, and never pin it to an older release for stability.
+
+  Check before any build or release work:
+  ```bash
+  curl -s https://dl.google.com/dl/android/maven2/com/google/android/play/age-signals/maven-metadata.xml \
+    | grep -oE "<release>[^<]*</release>"
+  ```
+  Compare against `app/build.gradle`. As of 2026-08-27 both are **0.0.4**.
+
+  A version change cannot be verified in a debug build — age verification is release-only and
+  Play-dependent, so it needs a release installed through Play (an internal track is enough).
 - **Content downloads** via Play Asset Delivery (database, audio, references, topical packs) —
   user-initiated, one-time.
 
@@ -366,20 +382,63 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 
 **CRITICAL**: ALWAYS use `run_interlinear_no_sleep.sh`. NEVER run without the no-sleep script as sleep delays waste hours of processing time.
 
+**Greek and Latin generators live in different directories and take different
+databases.** Run each from its own directory; paths below are from the repo root.
+
 ```bash
-# Always run from build_modules/generate_interlinear directory
-cd build_modules/generate_interlinear
+# --- Greek (Perseus + First1K) ---
+# DB MUST be the ASSEMBLED extended DB, not greek/greek_texts_extended.db: the
+# generator checks for OGA lemma entries on startup and aborts if absent, and
+# OGA is inserted by assemble_database.py, not by greek/run_build.sh.
+# (Authoritative copy of this command: BUILD.md Step 5.)
+cd greek/build_modules/generate_interlinear
+./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv \
+    ../../../data-prep/perseus_texts_extended.db 8
 
-# For all Greek works (Perseus + First1K):
-./run_interlinear_no_sleep.sh INTERLINEAR_ALL_GREEK_WITH_IDS.csv ../../perseus_texts_extended.db 8
-
-# For all Latin works:
-./run_latin_interlinear_no_sleep.sh INTERLINEAR_ALL_LATIN_WITH_IDS.csv ../../perseus_texts_full.db 8
+# --- Latin ---
+# Also the ASSEMBLED DB (BUILD.md's phase list: "Both read dictionary ... data
+# from the assembled DB"). Use the one matching the mode being built.
+# The old form `../../perseus_texts_full.db` was correct when this script lived
+# under data-prep/; after the move to latin/build_modules/interlinear/ the same
+# file is three levels up.
+cd latin/build_modules/interlinear
+./run_latin_interlinear_no_sleep.sh INTERLINEAR_ALL_LATIN_WITH_IDS.csv \
+    ../../../data-prep/perseus_texts_extended.db 8
 ```
+
+Both scripts write XML to `<module>/interlinear_output/`, which the module
+database build then imports. **Neither module build generates the XML** — see
+BUILD.md Step 5.
+
+**Interlinear sits in the middle of a 3-pass rhythm, not at the start** — the
+generator reads the *assembled* DB, which is built from the module DBs:
+
+```
+module builds (pass 1, empty interlinear_output/)
+  → first assembly  → data-prep/perseus_texts_extended.db
+  → interlinear generation (Greek ~7 h, Latin ~51 min) → <module>/interlinear_output/
+  → Greek + Latin module rebuild (pass 2, imports the XMLs)
+  → second assembly → shippable DB
+```
+
+Both module builds bootstrap on pass 1, but **the two guards differ — do not
+assume they behave the same**:
+
+| | Bootstrap (pass 1) succeeds when | Aborts when |
+|---|---|---|
+| **Greek** (`create_greek_database.py:192`) | **0 XMLs found**, whether or not `interlinear_output/` exists | extended mode with **1–99** XMLs |
+| **Latin** (`create_latin_database.py:273`) | `latin/interlinear_output/` is **absent** | full/extended with the directory **present** and **fewer than 50** XMLs — *including 0* |
+
+So an empty-but-existing `latin/interlinear_output/` aborts pass 1, while the
+same state is fine for Greek. On a from-scratch build leave the Latin directory
+uncreated; after an interrupted generation, clear it rather than leaving it
+partial.
 
 ### Interlinear Build Times (8 workers):
 - **Greek (2,049 works, 35.0M words)**: ~5 hours (compound word decomposition disabled; was ~13 hours with it enabled)
-- **Latin (230 works, 228 XML files)**: ~17 seconds
+- **Latin (230 works, 228 XML files)**: ~51 minutes (the former "~17 seconds"
+  was measured when the driver used bare `python3` and Stanza never loaded;
+  a sub-minute run means the POS layer is silently doing nothing)
 - **Sanskrit (270 works, 203K lines, 13.4M words)**: ~90 seconds
 
 Output locations:

@@ -15,10 +15,10 @@ enum LemmaBagBuilder {
 
     static func translatorFor(_ language: String) -> String? {
         switch language.lowercased() {
-        case "greek": return "Interlinear (Beta, generated from app dictionary and treebank)"
-        // Post LATIN_POS_PLAN.md Latin uses the same string as Greek — the
-        // formats are now identical.
-        case "latin": return "Interlinear (Beta, generated from app dictionary and treebank)"
+        case "greek": return "Interlinear (Beta, AI-generated from app dictionary and treebank)"
+        // Both languages say "AI-generated": several jurisdictions require
+        // AI-generated content to be labelled as such.
+        case "latin": return "Interlinear (Beta, AI-generated from app dictionary and treebank)"
         default: return nil
         }
     }

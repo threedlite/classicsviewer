@@ -302,9 +302,22 @@ class OptimizedZimGenerator:
             SELECT start_line, end_line, translation_text
             FROM translation_segments
             WHERE book_id = ?
-            AND translator = 'Interlinear (Beta, AI-generated from app dictionary)'
+            AND translator LIKE 'Interlinear%'
             ORDER BY start_line
         """, (book_id,))
+
+        # Remember the actual translator string for this book so the UI label
+        # is taken from the data instead of hardcoded. The literal previously
+        # used here ("...from app dictionary") no longer exists in the DB --
+        # the real values are "...from app dictionary and treebank" (Greek and
+        # Latin) and "...from DCS dictionary and Stanza NLP" (Sanskrit), so the
+        # equality match above returned zero rows and interlinear silently
+        # vanished from every ZIM page.
+        row_t = self.db.execute(
+            "SELECT translator FROM translation_segments "
+            "WHERE book_id = ? AND translator LIKE 'Interlinear%' LIMIT 1",
+            (book_id,)).fetchone()
+        self.interlinear_translator = row_t['translator'] if row_t else None
 
         interlinear_data = {}
         for row in cursor:
@@ -1515,7 +1528,9 @@ class OptimizedZimGenerator:
 
         # Add interlinear as LAST option if available
         if interlinear_data:
-            translator_options.append('Interlinear (Beta, AI-generated from app dictionary)')
+            translator_options.append(
+                getattr(self, 'interlinear_translator', None)
+                or 'Interlinear (Beta, AI-generated)')
 
         # Build dropdown
         if translator_options:

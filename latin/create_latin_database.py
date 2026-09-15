@@ -74,6 +74,12 @@ from monolith_fn import (  # noqa: E402
     write_xml_patterns_file,
 )
 from load_whitakers_latin import load_whitakers_latin  # noqa: E402
+from load_ldt_lemmas import load_ldt_lemmas  # noqa: E402
+from load_gloss_package import load_gloss_package  # noqa: E402
+from load_lewis_short import (  # noqa: E402
+    load_lewis_short,
+    backfill_whitaker_ultra,
+)
 from shared.database_schema import create_schema  # noqa: E402
 
 
@@ -102,6 +108,11 @@ def discover_latin_authors(latin_dir: Path) -> dict:
     return authors
 
 
+# Floor for the curated gloss package, mirroring the Whitaker and LDT
+# checks below it. Measured 50,828 on the package this was written for.
+EXPECTED_MIN_PACKAGE_ENTRIES = 45_000
+
+
 def load_work_csv(csv_path: Path) -> tuple:
     """Return (author_names_set, author_to_works_dict) from a CSV."""
     authors = set()
@@ -125,8 +136,10 @@ def load_work_csv(csv_path: Path) -> tuple:
 def load_latin_prefix_assimilation_rules(cursor: sqlite3.Cursor):
     rules_file = SCRIPT_DIR / "data" / "latin_prefix_assimilation_rules.csv"
     if not rules_file.exists():
-        print(f"  ! prefix_assimilation_rules CSV not found: {rules_file}")
-        return
+        # Repo-tracked data, not an optional extra: without it Latin prefix
+        # assimilation (ad+f -> aff, in+p -> imp) stops resolving and the
+        # affected lookups quietly fail. A missing file is a broken checkout.
+        sys.exit(f"ERROR: prefix_assimilation_rules CSV not found: {rules_file}")
     n = 0
     with open(rules_file) as f:
         for row in csv.DictReader(f):
@@ -236,6 +249,84 @@ def build(mode: str, output_db: Path, csv_path: Path = None):
         print("\n=== LOADING WHITAKER'S LATIN DICTIONARY ===")
         load_whitakers_latin(cur, include_full_morphology=True)
         conn.commit()
+
+        # Verify it actually loaded. load_whitakers_latin() returns None, so
+        # without this the caller has no signal at all -- a parse that produced
+        # nothing looked identical to a successful one, and the build carried on
+        # to write a DB whose every Latin gloss would be "???".
+        #
+        # Floors, not exact counts: the source is a third-party checkout that
+        # may legitimately gain entries. They are set well below the measured
+        # values (31,982 Whitaker headwords / 1.9M lemma_map rows) so they catch
+        # "nothing loaded" and "loaded a fraction", never normal drift.
+        n_dict = cur.execute(
+            "SELECT COUNT(*) FROM dictionary_entries "
+            "WHERE language='latin' AND source LIKE 'Whitaker%'").fetchone()[0]
+        n_morph = cur.execute(
+            "SELECT COUNT(*) FROM lemma_map WHERE source LIKE 'Whitaker%'").fetchone()[0]
+        if n_dict < 25000 or n_morph < 1_000_000:
+            sys.exit(
+                f"ERROR: Whitaker's load produced {n_dict:,} dictionary entries "
+                f"and {n_morph:,} lemma_map rows, below the sanity floor "
+                f"(25,000 / 1,000,000). Expected ~31,982 / ~1,955,715. "
+                f"The source checkout in data-sources/whitakers-words is "
+                f"probably incomplete."
+            )
+        print(f"  Whitaker check: {n_dict:,} dictionary entries, "
+              f"{n_morph:,} lemma_map rows")
+
+        # Lewis & Short. Second dictionary source alongside Whitaker's, under
+        # the same mode guard: `sample` ships no Latin dictionary at all, and
+        # adding one would break its bit-for-bit parity with the monolith.
+        # See latin/LEWIS_SHORT_PLAN.md. Fails the build loudly on a missing or
+        # unexpected source rather than warning and continuing.
+        # Perseus treebank form->lemma pairs. Must run AFTER Whitaker's (it
+        # adds to the same lemma_map) and BEFORE Lewis & Short, whose bridge
+        # reads lemma_map to find which stems can reach an L&S headword.
+        load_ldt_lemmas(cur)
+        conn.commit()
+
+        # 4,877 measured. The treebank yields 18,393 form->lemma pairs, but
+        # only those where Whitaker's stem names a DIFFERENT word are inserted;
+        # the other 13,516 are agreements that would displace a working route
+        # with a dead one (see load_ldt_lemmas.py). The floor guards against a
+        # truncated treebank checkout, so it is set well below the measured
+        # value, not next to it.
+        n_ldt = cur.execute(
+            "SELECT COUNT(*) FROM lemma_map WHERE source = 'Perseus LDT'").fetchone()[0]
+        if n_ldt < 3500:
+            sys.exit(f"ERROR: Perseus LDT contributed only {n_ldt:,} lemma_map "
+                     f"rows, expected ~4,877 after filtering.")
+        print(f"  LDT check: {n_ldt:,} lemma_map rows")
+
+        print("\n=== LOADING LEWIS & SHORT LATIN DICTIONARY ===")
+        load_lewis_short(cur)
+        conn.commit()
+
+        # Curated gloss package in the app's import format. Supplies the
+        # entries Whitaker's data files simply do not have -- above all `sum`,
+        # whose paradigm Whitaker handles in Ada code rather than in DICTLINE,
+        # leaving `est` to gloss as "eject/emit" (edo) for 55,286 tokens.
+        print("\n=== LOADING DICTIONARY PACKAGE (import format) ===")
+        pkg = load_gloss_package(cur)
+        conn.commit()
+        n_pkg = cur.execute(
+            "SELECT COUNT(*) FROM dictionary_entries WHERE source = ?",
+            (pkg["source"],)).fetchone()[0]
+        if n_pkg < EXPECTED_MIN_PACKAGE_ENTRIES:
+            sys.exit(f"ERROR: dictionary package contributed only {n_pkg:,} "
+                     f"entries, expected at least "
+                     f"{EXPECTED_MIN_PACKAGE_ENTRIES:,}.")
+        print(f"  Package check: {n_pkg:,} dictionary entries")
+
+        # Populate headword_normalized_ultra for the Latin Whitaker rows.
+        # Nothing reads it for Latin yet (the ultra fallback in
+        # PerseusRepository is Greek-gated), but it is the correct value.
+        # Scoped to language='latin' inside the helper.
+        n_ultra = backfill_whitaker_ultra(cur)
+        conn.commit()
+        print(f"  Backfilled headword_normalized_ultra for {n_ultra:,} "
+              f"Whitaker rows")
     else:
         print(f"\n=== SKIPPING WHITAKER'S (mode={mode} matches monolith sample) ===")
 

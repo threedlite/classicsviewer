@@ -57,6 +57,32 @@ git clone https://github.com/PerseusDL/treebank_data.git
 cd ..
 ```
 
+**Required: Latin gloss package (`lsgloss/lewis-short-glosses.zip`)**
+
+⚠ **The Latin module build FAILS without this file.**
+`latin/build_modules/load_gloss_package.py` reads it and exits with
+`ERROR: dictionary package not found` if it is absent.
+
+It is a curated Lewis & Short gloss set in the app's own importable format
+(`DICTIONARY_IMPORT_FORMAT.md`) — three CSVs at the archive root:
+`dictionary.csv`, `morphology.csv`, `normalization_rules.csv`. It is consumed
+**unmodified**; nothing in this repo writes to it.
+
+It exists because Whitaker's data files contain no `sum` at all — the Ada
+program handles irregular verbs in code — so without the package `est` glosses
+as "eject/emit" (*edo*) for 55,286 tokens. See
+`latin/LATIN_GLOSS_PIPELINE.md` §5.
+
+The zip is a build artifact of a separate `lsgloss` repository and is **not yet
+wired into this setup step**. Obtain it and place it at
+`lsgloss/lewis-short-glosses.zip` before building Latin. Once the source repo is
+published, add its clone + build here alongside the sources above.
+
+Verify with:
+```bash
+unzip -l lsgloss/lewis-short-glosses.zip   # expect the three CSVs at the root
+```
+
 **Extract included dictionaries:**
 ```bash
 cd data-sources
@@ -204,11 +230,56 @@ The extended build has a strict four-phase pipeline. Each phase depends on the p
 1. **Prerequisites** (Steps 2-4) — clone all repos, download and extract OGA, download Wiktionary dumps, set up venv
 2. **Module builds** (Step 6) — build all language module DBs (Greek, Latin, Sanskrit, etc.). OGA must be installed first.
 3. **First assembly** (Step 7) — `assemble_database.py extended` merges all module DBs, inserts OGA lemmas, builds the base extended DB (~500K translations)
-4. **Interlinear generation** (Step 5) — generates interlinear XMLs for both Greek (~7 hours, 2,048 works) and Latin (~17 seconds, 231 works). Both read dictionary and OGA lemma data from the assembled DB to produce glosses. Without OGA in the DB, glosses will be incomplete.
+4. **Interlinear generation** (Step 5) — generates interlinear XMLs for both Greek (~7 hours, 2,048 works) and Latin (**~51 min**, 230 works). Both read dictionary and OGA lemma data from the assembled DB to produce glosses. Without OGA in the DB, glosses will be incomplete.
 5. **Greek and Latin rebuild** (Step 6 again) — rebuild Greek and Latin module DBs importing their new interlinear XMLs
 6. **Second assembly** (Step 7 again) — re-assembles with interlinear, bringing translations to ~3.3M
 
 **Do NOT start a later phase before the previous one is fully complete.**
+
+## Why four interlinear files are committed
+
+Four generated interlinear files are tracked in git, out of ~4,400 that are not:
+
+```
+greek/interlinear_output/tlg0012.tlg001.perseus-eng99.xml   Homer, Iliad
+greek/interlinear_output/tlg0012.tlg002.perseus-eng99.xml   Homer, Odyssey
+latin/interlinear_output/phi0690.phi003.perseus-eng99.xml   Vergil, Aeneid
+latin/interlinear_output/phi0690.phi003.interlinear.txt
+```
+
+**This is deliberate.** They are exactly the works the *sample* builds import:
+
+```python
+# latin/create_latin_database.py
+if mode == "sample":
+    sample_interlinear_allowlist = {"phi0690.phi003"}   # Aeneid
+
+# greek/create_greek_database.py:15
+#   sample — SAMPLE_AUTHORS.csv curated authors, Homer interlinear only
+```
+
+Committing them lets the **sample build reproduce from a clean clone without
+running interlinear generation first** — which otherwise costs ~47 min for Latin
+and ~6 h for Greek. Since the sample database is what ships inside the APK, that
+matters.
+
+Do not delete or gitignore them.
+
+**Consequence to be aware of for `full` / `extended`:** both module builds abort
+when the interlinear directory holds *more than zero but implausibly few* files,
+which is the signature of a partial generation:
+
+```
+latin/create_latin_database.py:342   aborts if 0 < available < 50
+greek/create_greek_database.py:192   aborts if 0 < work_ids < 100
+```
+
+On a clean clone those directories hold the four sample files, so a first
+`full`/`extended` module build will hit that guard until interlinear generation
+has been run. That is the documented three-pass order (Step 5 before the pass-2
+module builds); the guard is doing its job, not misfiring.
+
+---
 
 ## Step 5: Generate Interlinear Translations (Extended Mode Only)
 
@@ -239,7 +310,52 @@ cd ../../..
 
 Output: ~2,000 XML files in `greek/interlinear_output/` (mirroring `latin/interlinear_output/` — Greek is self-contained). These are imported by the extended database build in Step 7.
 
-**Latin interlinear is no longer generated here** — it is produced automatically by the Latin module (Step 6) and lives under `latin/interlinear_output/`.
+### Latin interlinear — a separate generator, in the Latin module
+
+**The Latin module has its own interlinear generator, entirely separate from Greek's.** It is not the Greek tooling above pointed at Latin data — different directory, different code, different driver:
+
+| | Greek | Latin |
+|---|---|---|
+| Generator | `greek/build_modules/generate_interlinear/generate_interlinear.py` (2,079 lines) | `latin/build_modules/interlinear/generate_latin_interlinear.py` (725 lines) |
+| Driver | `run_interlinear_no_sleep.sh` | `run_latin_interlinear_no_sleep.sh` |
+| Own modules | GLAUx / OGA readers | `latin_dictionary_lookup.py`, `latin_treebank_loader.py` (Perseus LDT), `latin_stanza_nlp.py` |
+| Runtime | ~7 h, ~2,048 works | **~51 min**, ~230 works |
+| Output | `greek/interlinear_output/` | `latin/interlinear_output/` |
+
+> **Latin runtime — corrected 2026-08-19.** This step was documented as
+> "~17 seconds". That figure was measured while
+> `run_latin_interlinear_no_sleep.sh` invoked bare `python3` instead of the
+> project venv, so `import stanza` failed, the POS/lemma layer silently
+> contributed nothing, and the run "succeeded" in seconds. With Stanza
+> actually loading the `la`/`proiel` model, the measured time is **~51 min**
+> for 230 works on 8 workers. A sub-minute Latin interlinear run is a
+> symptom, not a success — check that Stanza loaded.
+
+They share no code. Latin's POS/lemma layer comes from Perseus LDT + Stanza (see `latin/LATIN_POS_PLAN.md`), not from OGA or GLAUx.
+
+**But it is still not run automatically.** `create_latin_database.py` only **imports** pre-existing XML from `latin/interlinear_output/`, and hard-exits in full/extended if that directory exists with fewer than 50 files. Run the generator explicitly:
+
+```bash
+cd latin/build_modules/interlinear
+# MUST be the ASSEMBLED DB. The script hard-exits on a raw module DB — it checks
+# lemma_map for source='oga' rows, which only assemble_database.py inserts, and
+# prints "Do NOT use a raw module DB" (latin_interlinear_list.py:489-503).
+# Use the assembled DB matching the mode you are building (…_full.db for full).
+./run_latin_interlinear_no_sleep.sh INTERLINEAR_ALL_LATIN_WITH_IDS.csv \
+    ../../../data-prep/perseus_texts_extended.db 8
+# Check: ls ../../interlinear_output/*.perseus-eng99.xml | wc -l   (target ~228)
+cd ../../..
+```
+
+The OGA row count is used purely as a marker that the DB has been through assembly; Latin glossing does not otherwise consult OGA.
+
+Note the path depth: this script used to live under `data-prep/build_modules/generate_interlinear/`, where the same DB was reached as `../../perseus_texts_*.db`. That older two-level form is still quoted in the script's own usage line and, from the current location, resolves to a nonexistent `latin/perseus_texts_full.db` — the generator exits with "Database not found" rather than doing anything silently wrong.
+
+Output lives under `latin/interlinear_output/` and is imported by the Latin module build in Step 6.
+
+⚠ **Latin has the same chicken-and-egg as Greek, but a stricter bootstrap guard.** `create_latin_database.py:273` hard-exits in `full`/`extended` whenever `latin/interlinear_output/` **exists** and holds **fewer than 50** XMLs — *including zero*. Only an **absent** directory bootstraps (it prints a warning and continues). Greek is more forgiving: `create_greek_database.py:192` accepts **0 XMLs** whether or not the directory exists, and aborts only on a partial 1–99.
+
+So on a from-scratch extended build, leave `latin/interlinear_output/` uncreated for pass 1; after an interrupted generation, clear it rather than leaving it partial. An empty-but-existing directory aborts the Latin module build before assembly can produce the DB the generator needs.
 
 ### Rebuilding after a Perseus / First1K / PTA update or on a from-scratch clone
 
@@ -265,7 +381,8 @@ cd ../../..
 # Pass 3 — Greek extended rebuild importing the fresh XMLs.
 cd greek && ./run_build.sh extended && cd ..
 
-# Latin extended (independent — has its own built-in interlinear, ~2 min).
+# Latin extended (~2 min). Imports the XMLs already in latin/interlinear_output/;
+# it does not generate them — see Step 5.
 cd latin && ./run_build.sh extended && cd ..
 
 # Second assembly — full extended DB with all interlinear translations.

@@ -1,12 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
-    namespace 'com.classicsviewer.app'
-    compileSdk 36
+    namespace = 'com.classicsviewer.app'
+    compileSdk = 36
 
     // On-demand asset pack for full database download
     // The AAB will be ~1.4GB total, but Google Play handles this:
@@ -34,10 +34,10 @@ android {
 
     defaultConfig {
         applicationId "com.classicsviewer.app"
-        minSdk 23  // Increased from 21 to support Age Signals API
-        targetSdk 36
-        versionCode 135
-        versionName "0.8.135"
+        minSdk = 23  // Increased from 21 to support Age Signals API
+        targetSdk = 36
+        versionCode 138
+        versionName "0.8.138"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
@@ -56,10 +56,10 @@ android {
         release {
             buildConfigField "boolean", "USE_MOCK_DATA", "false"
             minifyEnabled true
-            shrinkResources true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (keystorePropertiesFile.exists()) {
-                signingConfig signingConfigs.release
+                signingConfig = signingConfigs.release
             }
         }
     }
@@ -71,8 +71,8 @@ android {
         jvmTarget = '17'
     }
     buildFeatures {
-        viewBinding true
-        buildConfig true
+        viewBinding = true
+        buildConfig = true
     }
     
     // Include database files in APK
@@ -103,7 +103,7 @@ dependencies {
     // Room database
     implementation 'androidx.room:room-runtime:2.6.1'
     implementation 'androidx.room:room-ktx:2.6.1'
-    kapt 'androidx.room:room-compiler:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
     
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
@@ -271,6 +271,13 @@ task checkAudioExists {
 // Task to copy reference PDFs + manifest into the references_pack asset pack
 // (and into app/src/debug/assets/references/ so debug APK builds can read them
 // directly, since asset packs are AAB-only).
+// Project.exec {} was removed in Gradle 9. The replacement is the injected
+// ExecOperations service, obtained through a small @Inject interface; fully
+// qualified so no import has to precede the plugins {} block. Behaviour is the
+// same: the build still throws if build_manifest.py does not produce the file.
+interface ExecOps { @javax.inject.Inject org.gradle.process.ExecOperations getExecOperations() }
+def execOps = objects.newInstance(ExecOps).execOperations
+
 task copyReferencesToAssets {
     doLast {
         def referencesDir = file("$rootDir/references")
@@ -298,9 +305,9 @@ task copyReferencesToAssets {
         // Regenerate the manifest via the bundled Python script.
         def venvPython = file("$rootDir/venv/bin/python3")
         def python = venvPython.exists() ? venvPython.absolutePath : 'python3'
-        exec {
-            workingDir rootDir
-            commandLine python, "$rootDir/references_pack/build_manifest.py"
+        execOps.exec { spec ->
+            spec.workingDir = rootDir
+            spec.commandLine python, "$rootDir/references_pack/build_manifest.py"
         }
 
         // Copy the freshly-generated manifest into debug assets too.

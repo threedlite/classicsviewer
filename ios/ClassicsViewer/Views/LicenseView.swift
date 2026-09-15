@@ -51,27 +51,84 @@ named-entity anchoring.
 DICTIONARIES
 ============
 
-Greek-English Lexicon (LSJ)
----------------------------
-Title: A Greek-English Lexicon
+Intermediate Greek-English Lexicon ("Middle Liddell")
+-----------------------------------------------------
+Title: An Intermediate Greek-English Lexicon
 Authors: Henry George Liddell, Robert Scott
-Revised by: Sir Henry Stuart Jones with the assistance of Roderick McKenzie
 Publisher: Clarendon Press, Oxford
-First Edition: 1843
-Ninth Edition: 1940
-ISBN: 978-0-19-864226-8
+Edition: 1889
 
-The digital version is provided by the Perseus Digital Library under the same Creative Commons license as above.
+Digital text from the Perseus Digital Library
+(PerseusDL/canonical-pdlrefwk, viaf66541464.001.perseus-eng1).
+Digital edition published by the Trustees of Tufts University, Medford MA.
+
+This is the Intermediate edition of 1889, not the ninth edition of 1940
+revised by Jones and McKenzie. The 1889 text is in the public domain; the
+digital encoding is provided by Perseus under the same Creative Commons
+license as above.
 
 
 Whitaker's Words Latin Dictionary
 ---------------------------------
-Public domain Latin morphological analyzer and dictionary.
-Original work by William Whitaker (1936-2010).
+Latin morphological analyzer and dictionary.
+Copyright William A. Whitaker (1936-2010).
+
+Not public domain: the author asserts copyright and grants permission
+freely. From the accompanying LICENCE.txt — "Permission is hereby freely
+given for any and all use of program and data" and "All parts of the WORDS
+system, source code and data files, are made freely available to anyone who
+wishes to use them, for whatever purpose."
+
 License: https://github.com/mk270/whitakers-words/blob/master/LICENCE.txt
 
 Whitaker's Words provides comprehensive Latin dictionary entries and
 morphological analysis, enabling lookup of inflected Latin forms.
+
+
+Lewis & Short Latin Dictionary
+------------------------------
+Title: A Latin Dictionary
+Authors: Charlton T. Lewis, Charles Short
+Publisher: Clarendon Press, Oxford
+First Edition: 1879
+ISBN: 0198642016
+Funding: National Endowment for the Humanities
+
+Digital text from the Perseus Digital Library (PerseusDL/lexica),
+accessed 2026-08-16.
+License: Creative Commons Attribution-ShareAlike 4.0 International
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The digital edition is available from https://github.com/PerseusDL/lexica
+Modifications made for this application (orthographic normalisation of
+headwords for lookup, and rendering of the sense hierarchy as plain text)
+are offered back to the Perseus Digital Library under the same license.
+
+
+OPERA GRAECA ADNOTATA
+=====================
+
+Giuseppe G. A. Celano. Opera Graeca Adnotata: Building a 34M+ Token Multilayer Corpus for Ancient Greek. arXiv https://arxiv.org/abs/2404.00739.
+https://github.com/OperaGraecaAdnotata/OGA
+
+
+Perseus Latin Dependency Treebank (LDT) - Latin Morphology
+-----------------------------------------------------------
+Source: Perseus Latin Dependency Treebank, v2.1
+License: Creative Commons Attribution-ShareAlike 3.0 United States (CC BY-SA 3.0 US)
+http://creativecommons.org/licenses/by-sa/3.0/us/
+
+Copyright 2014 The Perseus Digital Library, Tufts University
+Repository: https://github.com/PerseusDL/treebank_data
+
+Hand-annotated syntactic and morphological analyses of Latin texts by Caesar,
+Cicero, Ovid, Petronius, Propertius, Sallust, Vergil and others. Used to supply
+part-of-speech tags and form-to-lemma mappings for the Latin interlinear
+display, including irregular verbs whose paradigms are absent from Whitaker's
+data files.
+
+All materials in the treebank to which third parties do not hold copyright are
+copyright of The Perseus Digital Library, Tufts University.
 
 
 SCAIFE VIEWER
@@ -638,8 +695,8 @@ The CLTK Old Norse corpus includes:
 Attribution: Classical Language Toolkit (cltk.org)
 
 
-English Translations (Project Gutenberg)
------------------------------------------
+Old Norse English Translations (Project Gutenberg)
+----------------------------------------------------
 License: Public Domain
 Source: Project Gutenberg (https://www.gutenberg.org/)
 

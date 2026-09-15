@@ -39,8 +39,11 @@ import time
 
 # Import the Latin dictionary lookup
 try:
-    from .latin_dictionary_lookup import LatinRepository, DictionaryEntry, extract_gloss
-    from .latin_treebank_loader import LdtLoader, LdtWord
+    from .latin_dictionary_lookup import (
+        LatinRepository, DictionaryEntry, extract_gloss, select_entry_for_pos,
+        first_sense, lemmas_related, normalize_latin_headword,
+    )
+    from .latin_treebank_loader import LdtLoader, LdtWord, LdtLexicon
     from .latin_stanza_nlp import (
         get_stanza_nlp,
         ensure_model_downloaded,
@@ -48,8 +51,11 @@ try:
     )
 except ImportError:
     # Fallback for direct execution (testing)
-    from latin_dictionary_lookup import LatinRepository, DictionaryEntry, extract_gloss
-    from latin_treebank_loader import LdtLoader, LdtWord
+    from latin_dictionary_lookup import (
+        LatinRepository, DictionaryEntry, extract_gloss, select_entry_for_pos,
+        first_sense, lemmas_related, normalize_latin_headword,
+    )
+    from latin_treebank_loader import LdtLoader, LdtWord, LdtLexicon
     from latin_stanza_nlp import (
         get_stanza_nlp,
         ensure_model_downloaded,
@@ -62,17 +68,31 @@ except ImportError:
 # same cache dir. ensure_model_downloaded() is idempotent (no-op if cached).
 if STANZA_AVAILABLE:
     ensure_model_downloaded()
+    # Prove the model is USABLE in the parent before forking workers. Without
+    # this, a missing model surfaces once per worker, mid-run, after the build
+    # has already been going for hours. get_stanza_nlp() raises on failure.
+    if get_stanza_nlp() is None:
+        raise RuntimeError(
+            "Stanza Latin pipeline is unavailable and the interlinear POS "
+            "layer would silently produce nothing. Refusing to start."
+        )
 
 
 # Module-level LDT loader — load once per process, share via singleton.
 _ldt_loader: Optional[LdtLoader] = None
 
 
-def get_ldt_loader() -> LdtLoader:
-    """Process-singleton LDT loader; lazy-init on first call."""
+def get_ldt_loader(db_path: Optional[str] = None) -> LdtLoader:
+    """Process-singleton LDT loader; lazy-init on first call.
+
+    `db_path` lets the loader align sentences by CONTENT -- finding a
+    sentence's own words in the work's text -- instead of trusting the subdoc
+    citation, which only maps to line numbers for 2 of the 12 LDT works.
+    Without it the loader still works and falls back to the subdoc resolvers.
+    """
     global _ldt_loader
     if _ldt_loader is None:
-        _ldt_loader = LdtLoader()
+        _ldt_loader = LdtLoader(db_path=db_path or DB_PATH)
         _ldt_loader.load()
     return _ldt_loader
 
@@ -81,11 +101,103 @@ def get_ldt_loader() -> LdtLoader:
 DB_PATH = None
 
 
+_LDT_LEXICON = None
+_LDT_LEXICON_TRIED = False
+
+
+def get_ldt_lexicon():
+    """Process-wide LdtLexicon, built once per worker.
+
+    Returns None if LDT is unavailable, so the generator degrades to Stanza
+    lemmas rather than failing - the lexicon is an improvement, not a
+    prerequisite.
+    """
+    global _LDT_LEXICON, _LDT_LEXICON_TRIED
+    if _LDT_LEXICON_TRIED:
+        return _LDT_LEXICON
+    _LDT_LEXICON_TRIED = True
+    try:
+        lex = LdtLexicon()
+        lex.load()
+        print(f"  [LDT lexicon] {lex.stats['kept']:,} surface forms "
+              f"at >={lex.stats['min_agreement_pct']}% annotator agreement "
+              f"(from {lex.stats['tokens']:,} treebank tokens)")
+        _LDT_LEXICON = lex
+    except Exception as exc:
+        print(f"  [LDT lexicon] unavailable ({exc}); using Stanza lemmas only")
+        _LDT_LEXICON = None
+    return _LDT_LEXICON
+
+
 class LatinInterlinearGenerator:
+
+    # Imported dictionary package (DICTIONARY_IMPORT_FORMAT.md), loaded at build
+    # time by load_gloss_package.py. Deliberately NOT in DEFAULT_GLOSS_SOURCES:
+    # letting it compete on a straight headword match wrecked ~46,000 tokens of
+    # common words, because it carries headwords for the prefixes se-/re- and
+    # for huc that shadow Whitaker's pronouns. It is consulted only where it can
+    # help -- to fill a blank, and to supply the treebank's lemma when Whitaker
+    # has no entry for it.
+    PACKAGE_SOURCES = (LatinRepository.GLOSS_PACKAGE_SOURCE,)
+
+    # A synthesised "form of X" is a PLACEHOLDER, not a definition.
+    # latin_dictionary_lookup emits it when lemma_map resolves a lemma but the
+    # join finds no dictionary entry for it under the gloss sources. Zero real
+    # entries in dictionary_entries begin with that string, so treating it as
+    # an absent gloss is unambiguous.
+    _PLACEHOLDER_PREFIX = "form of "
+
+    @classmethod
+    def _usable_gloss(cls, gloss, source=None):
+        """The gloss if it is a real definition, else None.
+
+        The two-character cutoff is SOURCE-SCOPED, and that matters. Measured
+        over the Latin module DB, 96 entries have a gloss of two characters or
+        fewer, and they fall into two unlike groups:
+
+            Lewis-Short (70)        ad -> "ad", as -> "as", ah -> "ah"
+            L&S package (10)        accumulate -> "in", catulinus2 -> "of"
+            Whitaker (13 + 3)       sum -> "be", bos -> "ox", nulla -> "no",
+                                    bito -> "go", cata -> "by", eugae -> "oh"
+
+        The first two are echoes of the headword and truncation artifacts, and
+        suppressing them is what this cutoff is for. Whitaker's are ordinary
+        English words.
+
+        Applying one length rule to both discarded Whitaker's gloss for the
+        commonest verb in Latin. `sum` -> "be" is two characters, so the ESSE
+        entry loaded, generated its 105 forms, and was selected correctly by
+        POS and lemma -- then was thrown away here. 154,368 tokens of the
+        copula fell through to *edo*, *sitio*, *erus* and the package as a
+        result, and `_whitaker_defines("sum")` answered False for the same
+        reason, so the package rescue kept firing for the word the fix was
+        supposed to hand back to Whitaker.
+
+        No entry from any source has a gloss of ONE character, so nothing is
+        protected below two.
+        """
+        if not gloss or gloss == "???":
+            return None
+        # A gloss whose only content is the enclitic marker says nothing. It
+        # survives every other test here because "+ and" is seven characters,
+        # and it reached the reader: `eoque` shipped as literally "+ and" for
+        # 397 tokens, because one `eo` entry reads "(adv.) ; there, ..." and
+        # the first sense before that ";" is empty.
+        body = re.sub(r"\+\s*(and|or|\?)\s*$", "", gloss).strip(" ,;")
+        if not body:
+            return None
+        if len(gloss) <= 2 and not (source or "").startswith("Whitaker"):
+            return None
+        if gloss.startswith(cls._PLACEHOLDER_PREFIX):
+            return None
+        return gloss
+
     def __init__(self, db_path: str):
         self.db_path = db_path
         self.conn = None
         self.repo = LatinRepository(db_path)
+        # surface -> form handed to Stanza (see _tagging_form)
+        self._enclitic_tagging_cache: Dict[str, str] = {}
         # Performance tracking
         self.lookup_count = 0
         self.total_db_time = 0.0
@@ -182,14 +294,57 @@ class LatinInterlinearGenerator:
             # Get morph info from database
             preferred_morph = self.repo.get_morph_info(word)
 
-            # Find best entry with a good definition
+            # Find the best entry that carries a real definition.
+            #
+            # Entries come back with treebank-resolved rows first, and the
+            # treebank sometimes names a lemma Whitaker files under a different
+            # headword: the noun *bellum* is stored as "bellus", because the
+            # citation-form picker takes the masculine nominative for a neuter
+            # noun. Looking up "bellum" therefore yields the LDT row first,
+            # which synthesises "form of bellum", while the Whitaker row two
+            # places later holds "war, warfare".
+            #
+            # So a placeholder must not end the search -- but falling through
+            # unconditionally is worse. For "est" the treebank says `sum`,
+            # Whitaker has no `sum` entry at all, and the next candidate is
+            # `edo` "eject/emit": a real analysis of the surface, but the wrong
+            # word, and it is 28,971 tokens. Whitaker's own paradigm gap for
+            # `sum` is the whole reason the treebank rows were added.
+            #
+            # A later entry may therefore stand in only if it names the SAME
+            # lexeme as the treebank lemma. bellum/bellus qualifies; sum/edo
+            # does not. Where nothing qualifies the word stays blank, which is
+            # the correct outcome: Whitaker simply has no entry for it.
+            placeholder_lemma = None
             for entry in entries:
-                extracted_gloss = self.extract_gloss_from_entry(entry)
-                if extracted_gloss and extracted_gloss != "???" and len(extracted_gloss) > 2:
-                    lemma = entry.lemma
-                    morph = entry.morph_info
-                    gloss = extracted_gloss
-                    break
+                raw = self.extract_gloss_from_entry(entry)
+                if raw and raw.startswith(self._PLACEHOLDER_PREFIX):
+                    named = (raw[len(self._PLACEHOLDER_PREFIX):].strip()
+                             or entry.lemma or "")
+                    # A placeholder that names the surface itself is a
+                    # self-mapping and says nothing about which word this is.
+                    # An imported package supplies one for every form it knows
+                    # (hoc -> hoc, te -> te, me -> me), and letting those
+                    # constrain the search blocked Whitaker's correct entry:
+                    # `hoc` lost "this" to hic being judged unrelated to hoc,
+                    # `te` lost "you (sing.)". Only a placeholder naming a
+                    # DIFFERENT lemma is evidence -- that is the `est` -> `sum`
+                    # case this guard exists for.
+                    if (placeholder_lemma is None and named
+                            and normalize_latin_headword(named).lower()
+                            != normalize_latin_headword(word).lower()):
+                        placeholder_lemma = named
+                    continue
+                extracted_gloss = self._usable_gloss(raw, entry.source)
+                if not extracted_gloss:
+                    continue
+                if placeholder_lemma and not lemmas_related(
+                        entry.lemma, placeholder_lemma):
+                    continue
+                lemma = entry.lemma
+                morph = entry.morph_info
+                gloss = extracted_gloss
+                break
 
             # If still no good gloss, use first entry's lemma at least
             if not gloss and entries:
@@ -201,6 +356,57 @@ class LatinInterlinearGenerator:
             # Use preferred morphology if we didn't get it from entries
             if not morph:
                 morph = preferred_morph
+
+        # "form of X" is a PLACEHOLDER, not a definition.
+        # latin_dictionary_lookup synthesises it when lemma_map resolves a
+        # lemma but the join finds no dictionary entry for it under the gloss
+        # sources. Zero real entries in dictionary_entries begin with that
+        # string, so treating it as an absent gloss is unambiguous.
+        #
+        # It matters because Whitaker's data has no entry for several very
+        # common lemmas -- above all `sum`, whose paradigm Whitaker handles in
+        # program code rather than in DICTLINE. Once the treebank routes `est`
+        # to `sum`, the join finds nothing and invents "form of sum".
+        #
+        # Latin glosses come from Whitaker's ONLY, deliberately and for now.
+        #
+        # A Lewis & Short fallback used to sit here, consulted wherever
+        # Whitaker's produced nothing. It was taken out to establish a clean
+        # Whitaker-only baseline that can be compared against the shipped
+        # release, so the Whitaker parsing fixes can be measured on their own
+        # rather than through an L&S layer that moved at the same time.
+        #
+        # L&S is expected back, but as an imported dictionary package
+        # (DICTIONARY_IMPORT_FORMAT.md) rather than as an article scraper. The
+        # scraper is why it has to go: an L&S article's opening line is as
+        # often a Latin quotation or a section rubric as it is a definition --
+        # "colla" -> "nec collos mihi Calvus persuas", "utrumque" -> "Esp., in
+        # apposit. with nouns", "sunt" -> "As a verb substantive, to be".
+        #
+        # Cost of removing it, measured over Aeneid / Gallic War / Pro Milone /
+        # Epodi: blanks rise about 2-3 points (Aeneid 3.84% -> 6.89%).
+        #
+        # Re-adding a gloss source here means re-running the comparison in
+        # latin/tools/README.md, not just restoring the code.
+        if gloss and gloss.startswith("form of "):
+            gloss = None
+
+        # Package fallback: consulted ONLY where Whitaker produced nothing, so
+        # it cannot displace an existing gloss -- it can only fill a blank.
+        if not gloss or gloss == "???":
+            pkg = self.repo.get_all_dictionary_entries(
+                word, "latin", sources=self.PACKAGE_SOURCES)
+            if not pkg and word and word[0].isupper():
+                pkg = self.repo.get_all_dictionary_entries(
+                    word.lower(), "latin", sources=self.PACKAGE_SOURCES)
+            for entry in pkg:
+                cand = self._usable_gloss(
+                    self.extract_gloss_from_entry(entry), entry.source)
+                if cand:
+                    gloss = cand
+                    if not lemma:
+                        lemma = entry.lemma
+                    break
 
         # Fallback if no gloss found
         if not gloss or gloss == "???":
@@ -231,6 +437,407 @@ class LatinInterlinearGenerator:
             'sent_id': '',
             'is_treebank': False,
         }
+
+    def _whitaker_defines(self, lemma):
+        """True when Whitaker really defines this lemma.
+
+        Two traps, both hit while getting `sum` right:
+
+        - The package must be excluded. It supplies `sum`, so asking "does any
+          source define this?" answers yes and the rescue never fires for the
+          word it exists for.
+        - Row count is not enough. Querying Whitaker for lemma `sum` returns
+          five rows, but four are `sumo` ("take up") reached through lemma_map
+          and the fifth is a synthesised "form of sum" placeholder. So the test
+          is: a row KEYED on this lemma that carries a real definition.
+        """
+        target = normalize_latin_headword(lemma or "").lower()
+        for e in self.repo.get_all_dictionary_entries(
+                lemma, "latin",
+                sources=LatinRepository.DEFAULT_GLOSS_SOURCES):
+            if (normalize_latin_headword(e.lemma or "").lower() == target
+                    and self._usable_gloss(
+                        self.extract_gloss_from_entry(e), e.source)):
+                return True
+        return False
+
+    def _tagging_form(self, surface: str) -> str:
+        """The form to hand Stanza: an enclitic's BASE, else the surface.
+
+        Stanza never splits `-que`. It sees `virumque` as one unseen word and
+        guesses a lemma from the `-um` -> `-us` noun pattern, producing
+        `virusque` -- not a Latin word -- and tagging it ADJ. That fake lemma
+        then blocks every lemma-keyed correction downstream, which is why
+        Aeneid 1.1 glossed `virumque` as "poison, venom" while plain `virum`
+        on line 10 came out "man": Stanza lemmatises `virum` correctly as
+        `vir`.
+
+        Sending the base keeps the 1:1 token mapping Stanza requires (one
+        token in, one word out) while giving it a word it knows. The surface
+        the reader sees is unchanged, and the gloss path already appends the
+        enclitic's meaning.
+
+        Guarded by the same test as the lookup: a fused word whose own lemma
+        ends in -que (`quisque`, `uterque`) is left alone. `-ne` is excluded
+        for the same reason it is excluded there.
+        """
+        if not surface or len(surface) < 5:
+            return surface
+        cached = self._enclitic_tagging_cache.get(surface)
+        if cached is not None:
+            return cached
+        out = surface
+        try:
+            info = self.repo._strip_enclitic(self.repo.normalize_latin(surface))
+            if (info and info[1] != '-ne (?)'
+                    and not self.repo._has_fused_enclitic_lemma(surface)):
+                base = info[0]
+                if self.repo.get_all_dictionary_entries(base, "latin"):
+                    # Keep the original capitalisation: Stanza uses it to
+                    # decide PROPN, so `Troiaeque` must not become `troiae`.
+                    out = base.capitalize() if surface[:1].isupper() else base
+        except sqlite3.Error:
+            pass
+        self._enclitic_tagging_cache[surface] = out
+        return out
+
+    def _enclitic_suffix(self, surface: str) -> Optional[str]:
+        """"and" / "or" if this surface is a true enclitic form, else None."""
+        if self._tagging_form(surface) == surface:
+            return None
+        try:
+            info = self.repo._strip_enclitic(self.repo.normalize_latin(surface))
+        except sqlite3.Error:
+            return None
+        if not info:
+            return None
+        return {"-que (and)": "and", "-ve (or)": "or"}.get(info[1])
+
+    def refine_glosses_with_pos(self, words: List[Dict]) -> None:
+        """Re-pick each token's gloss using its resolved POS and lemma.
+
+        Conservative by construction — it can only choose differently WITHIN the
+        candidate set the original lookup already returned:
+          * no candidates, no POS, or no candidate carrying that POS -> unchanged
+          * exactly one candidate of that POS -> forced, no judgement involved
+          * several -> tie-broken by the stem that best prefixes the lemma
+        So a token whose gloss is already right cannot be made wrong by a
+        selection that has nothing to select between.
+        """
+        for w in words:
+            surface = w.get('latin')
+            upos = w.get('pos')
+            if not surface or not upos:
+                continue
+            try:
+                entries = self.repo.get_all_dictionary_entries(surface, "latin")
+            except sqlite3.Error:
+                # Narrowed from `except Exception`. A DB error on one surface is
+                # survivable, but the blanket form also swallowed TypeError,
+                # AttributeError and the like -- i.e. real code defects in the
+                # lookup path -- and every affected word silently became "???".
+                # Anything that is not a DB error now propagates.
+                continue
+            picked = select_entry_for_pos(entries, upos, w.get('lemma'))
+
+            # A surface that is ALSO another word's headword never reaches
+            # lemma resolution: get_all_dictionary_entries() gates its
+            # lemma_map step on `if not entries`, so the direct match wins and
+            # the treebank's answer is never consulted. `bello` is the headword
+            # of the VERB bello, so an ablative of bellum "war" glossed as
+            # "fight, wage war"; likewise animo -> "animate", populo ->
+            # "ravage", multa -> "fine", meo -> "go along", tuo -> "see".
+            #
+            # Detectable here and nowhere else: this is the only place the
+            # token's own POS and lemma are known. When no candidate carries
+            # the token's POS, look the LEMMA up instead and let the same
+            # selector choose among its entries. Requires a different lemma and
+            # a usable result, so a token whose gloss is already right is
+            # untouched.
+            # Retry against the token's own lemma when NO candidate carries it.
+            #
+            # Two ways that happens, both because the surface is some other
+            # word's headword and so the direct match short-circuits before
+            # lemma_map is ever consulted:
+            #   - nothing was picked (bello: only the verb *bello* matched)
+            #   - something was picked, but it is a different word (virum: the
+            #     rare N-2-2 entry glossed "virus" beat the accusative of *vir*)
+            # The retry is Whitaker-only, so it cannot pull in a package gloss;
+            # that is the package rescue's job further down, and conflating the
+            # two is what made `a` gloss as "departure from a fixed point".
+            # `has_lemma` below is the whole guard: if any candidate already
+            # names the treebank's lemma, the pick stands.
+            lem = w.get('lemma')
+            target = normalize_latin_headword(lem or "").lower()
+            has_lemma = any(
+                normalize_latin_headword(e.lemma or "").lower() == target
+                for e in entries)
+            if lem and not has_lemma and lem.lower() != surface.lower():
+                try:
+                    by_lemma = self.repo.get_all_dictionary_entries(
+                        lem, "latin")
+                except sqlite3.Error:
+                    by_lemma = []
+                alt = select_entry_for_pos(by_lemma, upos, lem)
+                if alt is not None and self._usable_gloss(
+                        self.extract_gloss_from_entry(alt), alt.source):
+                    picked = alt
+
+            # When every POS-matching candidate names a DIFFERENT word from the
+            # one the treebank resolved, Whitaker has no entry for that lemma
+            # and the pick is a guess. That is how `est` shipped as "eject/emit"
+            # (edo) for 55,286 tokens, `sit` as "be thirsty" (sitio) and `sint`
+            # as "allow, permit" (sino): the treebank said `sum` every time, and
+            # Whitaker's data files carry no `sum` at all.
+            #
+            # Prefer an exact headword match from the package. Failing that,
+            # decline rather than guess. This cannot touch a token whose
+            # Whitaker candidate already agrees with the treebank, so
+            # bellum/bellus, Asia/Asia and pietas/pietas are unaffected.
+            # Two cases only, so the rescue cannot displace a good Whitaker
+            # gloss the lookup already found: the POS pick names a different
+            # word from the treebank's lemma, or there was no pick at all AND
+            # the token is still blank.
+            tok_lemma = w.get('lemma')
+            current = w.get('gloss')
+            blank_now = not current or current == "???"
+            rescued = False
+            # An EXACT lemma match beats a merely prefix-related one.
+            #
+            # lemmas_related() answers "same lexeme?" generously so that
+            # bellum/bellus and aurum/aurus pass. That generosity let `sumo`
+            # stand in for `sum` -- "sum" is a prefix of "sumo" -- so the
+            # surface *sum* tagged AUX glossed as "take up". Whitaker has no
+            # `sum` at all, which is exactly the gap the package fills, but the
+            # rescue never fired because the wrong candidate looked related.
+            # Package rescue.
+            #
+            # Narrow on purpose: it fires ONLY where Whitaker has no usable
+            # definition keyed on the treebank's lemma AND the surface itself
+            # is not a Whitaker headword. That is the `sum` hole -- Whitaker's
+            # Ada program handles the verb in code, so `sum`, `est`, `sunt` and
+            # the rest resolve to a lemma with no entry and the selector falls
+            # through to whatever else shares the surface (`edo`, `sitio`,
+            # `sino`, `sumo`).
+            #
+            # Five earlier versions of this condition each fixed two cases and
+            # broke two others, because they asked about lemma SHAPE --
+            # exact-match, prefix-relatedness, whether the pick differed from
+            # the lemma. Shape cannot separate these: `sum`/`sumo` and
+            # `potius`/`potis` look identical to any prefix test, but in the
+            # first Whitaker has nothing and in the second it has the right
+            # adverb already. Asking about the DATA instead ("does Whitaker
+            # actually define this?") separates them cleanly and needs no
+            # special cases.
+            #
+            # Consequence worth stating: where Whitaker defines the surface,
+            # its gloss stands even if the package's is arguably better
+            # (`Cotta` keeps "Cotta"). That is the conservative direction --
+            # this rescue has already caused two regressions by being eager.
+            # For an enclitic the meaningful surface is its BASE: `seque` is
+            # not a Whitaker headword, so the rescue fired and handed back the
+            # package's `se-` PREFIX entry, turning "him/her/it/ones-self" into
+            # "sine, without, aside". Judge the base instead.
+            rescue_surface = self._tagging_form(surface)
+            # An enclitic whose base already produced a usable gloss is done.
+            # Letting the rescue run anyway handed `seque` the package's `se-`
+            # PREFIX entry -- "sine, without, aside" in place of
+            # "him/her/it/ones-self". The rescue exists to fill blanks, not to
+            # overrule a Whitaker answer the split already found.
+            enclitic_resolved = (rescue_surface != surface and not blank_now)
+            if (tok_lemma and not enclitic_resolved
+                    and not self._whitaker_defines(tok_lemma)
+                    and not self._whitaker_defines(rescue_surface)):
+                rescue = next(
+                    (e for e in self.repo.get_all_dictionary_entries(
+                        tok_lemma, "latin", sources=self.PACKAGE_SOURCES)
+                     if self._usable_gloss(
+                         self.extract_gloss_from_entry(e), e.source)),
+                    None)
+                if rescue is not None:
+                    picked = rescue
+                    rescued = True
+                elif picked is not None and tok_lemma and not lemmas_related(
+                        picked.lemma, tok_lemma):
+                    # Pick names a different word and nothing can replace it.
+                    continue
+
+            if picked is None:
+                continue
+            new_gloss = self.extract_gloss_from_entry(picked)
+            # An entry whose definition opens with a separator -- `eo` has
+            # "(adv.) ; there, to/toward that place" -- extracts to an empty
+            # first sense. Empty is truthy enough to survive the checks below
+            # and the enclitic marker was then appended to nothing, so `eoque`
+            # shipped as literally "+ and" for 397 tokens. Gate on the same
+            # usability test the rest of the pipeline uses.
+            if not self._usable_gloss(new_gloss, getattr(picked, "source", None)):
+                new_gloss = None
+
+
+            # Genuinely ambiguous forms get BOTH readings, first sense each.
+            #
+            # `ora` is annotated `os` (mouth) 81% of the time and `ora` (shore)
+            # 19% in LDT, and both are common in Vergil - only context
+            # separates them, which a lexicon does not have. Printing "mouth,
+            # shore" tells the reader the form is ambiguous instead of
+            # silently committing to the majority and being wrong 19% of the
+            # time. Applies to ~5.8% of corpus tokens.
+            # ...but not on a token the package rescued. The rescue fires
+            # only where Whitaker has no entry for the treebank's lemma, and
+            # `_dual_gloss` is built ENTIRELY from Whitaker entries, so every
+            # reading it could print for such a token belongs to some other
+            # word. Letting it run overwrote the rescue on 26 surfaces /
+            # 4,062 tokens, every one of them for the worse: `esto` and `eras`
+            # "to be, exist, live" -> "take up, eject, eat", `armis`
+            # "defensive armor and weapons" -> "forequarter (of an animal)",
+            # `qualis` "of what sort" -> "what kind, wicker basket".
+            dual = None if rescued else self._dual_gloss(w.get('latin'), entries)
+            if dual:
+                new_gloss = dual
+
+            # The lemma retry swaps in an entry keyed on the BASE word, which
+            # carries no enclitic marker — so `virumque` came out "man" rather
+            # than "man + and". Re-attach it.
+            enc = self._enclitic_suffix(surface)
+            if (enc and new_gloss and new_gloss != "???"
+                    and not re.search(r"\+\s*(and|or)\s*$", new_gloss)):
+                new_gloss = f"{new_gloss} + {enc}"
+
+            if new_gloss and new_gloss != "???":
+                w['gloss'] = new_gloss
+                # Keep lemma and morph consistent with the entry that supplied
+                # the gloss, unless the treebank already gave a gold lemma.
+                if not w.get('is_treebank'):
+                    if picked.morph_info:
+                        w['morph'] = picked.morph_info
+
+    # A second reading below this share is treated as noise, not ambiguity.
+    DUAL_GLOSS_MIN_SHARE = 0.15
+
+    # Cap on readings shown. The interlinear gloss sits under each word and
+    # has to stay short; beyond three it stops being a gloss.
+    MAX_READINGS = 3
+
+    @staticmethod
+    def _first_sense(gloss: Optional[str]) -> Optional[str]:
+        """First sense only - see first_sense() in latin_dictionary_lookup.
+
+        Kept as a thin wrapper because callers here pass Optional[str] and
+        expect None (not "") for an empty result.
+        """
+        if not gloss:
+            return None
+        return first_sense(gloss) or None
+
+    def _dual_gloss(self, surface: Optional[str], entries) -> Optional[str]:
+        """"mouth, shore" for a form LDT annotates two different ways.
+
+        Returns None unless there really are two readings, each above
+        DUAL_GLOSS_MIN_SHARE, that resolve to two DIFFERENT glosses. So an
+        unambiguous form is untouched, and a form whose two readings happen to
+        share a gloss does not get it printed twice.
+        """
+        if not surface:
+            return None
+        lexicon = get_ldt_lexicon()
+        if lexicon is None:
+            return None
+        senses: List[str] = []
+
+        def add(lemma, upos):
+            """Append this reading's first sense. True if it contributed one."""
+            if len(senses) >= self.MAX_READINGS:
+                return False
+            entry = select_entry_for_pos(entries, upos, lemma)
+            if entry is None:
+                by_lemma = self.repo.get_all_dictionary_entries(lemma, "latin")
+                entry = select_entry_for_pos(by_lemma, upos, lemma)
+            sense = self._first_sense(
+                self.extract_gloss_from_entry(entry) if entry else None)
+            if sense and sense != "???" and sense.lower() not in {
+                    x.lower() for x in senses}:
+                senses.append(sense)
+                return True
+            return False
+
+        # 1) Readings LDT actually attests, ranked by annotator agreement.
+        #    This is evidence of USAGE.
+        readings = lexicon.readings_for(surface)
+        for i, (lemma, upos, share) in enumerate(readings):
+            if share >= self.DUAL_GLOSS_MIN_SHARE:
+                got = add(lemma, upos)
+                # ORDER INTEGRITY. What this prints is a list ordered by
+                # annotator agreement, and the reader has no way to see that
+                # the most-attested reading dropped out. It drops out when the
+                # two lexica cite the same word differently -- LDT says `arma`,
+                # Whitaker's headword is `armum`, and nothing joins them -- so
+                # the leftover minority reading ends up first and looks like
+                # the majority one. `armis` printed "forequarter (of an
+                # animal), arms (pl.)" for the 19% reading. When the top
+                # reading contributes nothing the order means nothing, so
+                # print no list at all and let the single-gloss path answer.
+                # Measured: 19 shipped surfaces, ~7,000 tokens, e.g. `liber`
+                # "children (pl.), nibble" -> "children (pl.)", `remis`
+                # "oar, party in law suit" -> "oar", `quale` "what kind,
+                # wicker basket" -> "what kind/sort/condition (of)".
+                if i == 0 and not got:
+                    return None
+
+        # 2) Readings Whitaker's inflection engine considers morphologically
+        #    possible but LDT's works never happened to contain. This is
+        #    evidence of POSSIBILITY, not of usage.
+        #
+        #    ONLY when LDT is genuinely split. Measured on a 996-token Vergil
+        #    sample, adding these unconditionally polluted 10.7% of glosses
+        #    while helping 8.4%: `furor` became "madness, steal", `venientem`
+        #    "go for sale, come", `volvis` "womb, roll", `obversus` "enemy
+        #    (pl.), turn or direct towards". Whitaker's stems collapse
+        #    unrelated words, so a possibility with no attested usage behind it
+        #    is usually just a different word.
+        #
+        #    Where LDT IS split it is already telling us the form is ambiguous
+        #    in practice, and a further possible reading is worth showing -
+        #    that is the `ora` case ("mouth, shore, beg"), where "pray" is real
+        #    but absent from LDT's five works.
+        if len(readings) >= 2 and readings[1][2] >= self.DUAL_GLOSS_MIN_SHARE:
+            for lemma, upos in self._whitaker_readings(surface):
+                add(lemma, upos)
+
+        return ", ".join(senses) if len(senses) >= 2 else None
+
+    # POS implied by a Whitaker morph string. Verb markers are checked first
+    # because a verb morph never carries a case, but a participle carries both.
+    _MORPH_VERB = re.compile(
+        r"\b(pres|perf|fut|impf|imp|ind|sub|inf|part|active|passive)\b")
+    _MORPH_CASE = re.compile(r"\b(nom|acc|gen|dat|abl|voc|loc)\b")
+
+    def _whitaker_readings(self, surface: str):
+        """(lemma, POS) pairs Whitaker's inflection engine allows for a form.
+
+        Read from lemma_map.morph_info, which is what the engine generated, so
+        these are morphologically checked rather than guessed.
+        """
+        out = []
+        try:
+            cur = self.repo.conn.cursor()
+            cur.execute(
+                "SELECT lemma, morph_info FROM lemma_map "
+                "WHERE word_form = ? AND source = 'Whitaker'", (surface,))
+            for lemma, morph in cur.fetchall():
+                if not morph:
+                    continue
+                if self._MORPH_VERB.search(morph):
+                    out.append((lemma, "VERB"))
+                elif self._MORPH_CASE.search(morph):
+                    out.append((lemma, "NOUN"))
+        except (AttributeError, TypeError, ValueError):
+            # Narrowed from `except Exception`, which returned a PARTIAL list
+            # and let the caller treat it as complete. Restricted to the parse
+            # errors malformed morph strings actually raise; anything else is a
+            # defect and must surface.
+            pass
+        return out
 
     def resolve_line_pos_tags(
         self,
@@ -267,6 +874,8 @@ class LatinInterlinearGenerator:
             return
 
         token_strings = [t for _, t in analyzable]
+        # Enclitics are resolved BEFORE tagging, not after — see _tagging_form.
+        tagging_strings = [self._tagging_form(t) for t in token_strings]
         sent_id = f"L{line_number}"
 
         # --- 1) Stanza baseline pass ---
@@ -274,7 +883,7 @@ class LatinInterlinearGenerator:
         stanza_words = []
         if nlp is not None:
             try:
-                doc = nlp([token_strings])
+                doc = nlp([tagging_strings])
                 # Pretokenized + one input sentence → exactly one sentence
                 # out, with words 1:1 to our tokens.
                 if doc.sentences:
@@ -299,7 +908,7 @@ class LatinInterlinearGenerator:
             words[orig_idx]['sent_id'] = sent_id
 
         # --- 2) LDT overlay ---
-        loader = get_ldt_loader()
+        loader = get_ldt_loader(self.db_path)
         for orig_idx, surface in analyzable:
             ldt_word = loader.lookup_token(book_id, line_number, surface)
             if ldt_word is None:
@@ -316,6 +925,29 @@ class LatinInterlinearGenerator:
             # already validated by downstream code. Future v2: convert
             # ldt_word.postag → UD-style morph features ("Case=Acc|Num=Sing").
             words[orig_idx]['is_treebank'] = True
+
+        # --- 3) LDT lexicon pass -------------------------------------------
+        # The overlay above only reaches lines whose canonical citation happens
+        # to match text_lines.line_number, which is 0.14% of Latin tokens. But
+        # a hand-annotated surface -> lemma mapping is not location-dependent:
+        # "oris -> ora", annotated in Aeneid 6, is equally true in Aeneid 1.
+        #
+        # So for every token the overlay did NOT cover, prefer LDT's lemma for
+        # that surface form over Stanza's guess. In-context treebank data still
+        # wins - this only replaces a machine guess with a human annotation.
+        # Raises gold-lemma reach from 0.14% to ~28% of tokens at the default
+        # 80% agreement threshold. See LdtLexicon and LATIN_POS_PLAN.md §9.2.
+        lexicon = get_ldt_lexicon()
+        if lexicon is not None:
+            for w in words:
+                if w.get('is_treebank'):
+                    continue
+                surface = w.get('latin')
+                if not surface:
+                    continue
+                lex_lemma = lexicon.lemma_for(surface)
+                if lex_lemma and lex_lemma != w.get('lemma'):
+                    w['lemma'] = lex_lemma
 
     def generate_interlinear(self, book_id: str, start_line: int, end_line: int) -> List[Dict]:
         """Main function to generate interlinear translation"""
@@ -367,6 +999,17 @@ class LatinInterlinearGenerator:
             # Stanza POS pass + LDT overlay. Single call per line; safe to
             # invoke even if Stanza is unavailable (fields stay blank).
             self.resolve_line_pos_tags(book_id, line_num, words)
+
+            # Re-select each gloss now that POS and lemma are known.
+            #
+            # `_cached_lookup_word` is keyed on the surface form alone and runs
+            # BEFORE this point, so it had to pick blind — entries[0] — from a
+            # candidate set where Whitaker's stems collapse unrelated words.
+            # That is why Aeneid 1.1 glossed `oris` as "rise (sun/river)" and
+            # 1.3 glossed `alto` as "wing". Now that resolve_line_pos_tags has
+            # filled in POS and the LDT/Stanza lemma, the choice can be made on
+            # evidence. See latin/LATIN_GLOSS_PLAN.md §5.2-5.3.
+            self.refine_glosses_with_pos(words)
 
             # Create word-by-word gloss
             word_gloss = ' '.join([w['gloss'] if w['gloss'] else '???' for w in words])
@@ -436,7 +1079,7 @@ def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
     # sent_pos sent_id). Greek and Latin can share parser code at the
     # client end (see app/.../topical/LemmaBagBuilder.kt parseLatin
     # post-LATIN_POS_PLAN.md).
-    f.write('                <editor role="translator">Interlinear (Beta, generated from app dictionary and treebank)</editor>\n')
+    f.write('                <editor role="translator">Interlinear (Beta, AI-generated from app dictionary and treebank)</editor>\n')
     f.write('                <sponsor>Derived from Whitaker\'s Words, Perseus LDT v2.1, Stanza UD-Latin (PROIEL)</sponsor>\n')
     f.write('                <principal></principal>\n')
     f.write('                <respStmt>\n')

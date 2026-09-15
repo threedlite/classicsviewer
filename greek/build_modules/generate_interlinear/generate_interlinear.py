@@ -1785,7 +1785,7 @@ def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
     f.write('            <titleStmt>\n')
     f.write(f'                <title>{work_title_escaped} - Interlinear Translation</title>\n')
     f.write(f'                <author>{author_name_escaped}</author>\n')
-    f.write('                <editor role="translator">Interlinear (Beta, generated from app dictionary and treebank)</editor>\n')
+    f.write('                <editor role="translator">Interlinear (Beta, AI-generated from app dictionary and treebank)</editor>\n')
     f.write('                <sponsor>Derived from LSJ, Murray, Cunliffe, Wiktionary, Perseus</sponsor>\n')
     f.write('                <principal></principal>\n')
     f.write('                <respStmt>\n')

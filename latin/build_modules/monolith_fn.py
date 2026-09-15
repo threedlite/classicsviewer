@@ -5075,7 +5075,11 @@ def process_perseus_author(author_dir, language, cursor, sample_works=None, work
                 if 'groupname' in elem.tag.lower():
                     author_name = elem.text or author_id
                     break
-        except:
+        except (ET.ParseError, OSError):
+            # Falling back to author_id here is legitimate -- a malformed or
+            # unreadable CTS file just means we show the id. But the bare
+            # `except:` also caught KeyboardInterrupt and SystemExit, so Ctrl-C
+            # during this loop was swallowed and the build carried on.
             pass
     
     

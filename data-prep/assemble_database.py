@@ -277,6 +277,10 @@ def assemble(mode: str, skip_oga: bool = False) -> None:
         raise RuntimeError("Assembled DB does not match canonical schema")
     print("\n✓ Assembled DB matches canonical schema")
 
+    # 6b. Stamp THIS assembly's build time over any module's inherited row.
+    _stamp_build_time(db_path, mode)
+    _checkpoint_wal(db_path)
+
     # 7. Compress + copy to APK assets.
     #    iOS mode: pass output_name='ios' so compress_and_copy_database takes
     #    its iOS-only branch (writes perseus_texts_ios.db.zip, copies to
@@ -304,6 +308,40 @@ def assemble(mode: str, skip_oga: bool = False) -> None:
     print(f"ASSEMBLY COMPLETE ({mode} mode, {elapsed:.1f} min)")
     print(f"Output: {db_path}")
     print(f"{'=' * 60}")
+
+
+def _stamp_build_time(db_path: str, mode: str) -> None:
+    """Record when THIS assembly ran, replacing any row inherited from a module.
+
+    `build_time` is written by each module build, so the assembled DB simply
+    kept whichever module happened to supply it — in practice Greek's. A
+    database assembled on 9 September reported "Build Time:
+    2026-08-21T15:50:05", the date of the Greek module it merged, and the
+    released extended DB reports 2026-05-21 for the same reason.
+
+    That is the field anyone reaches for to ask which build a file is, so it
+    has to describe the assembly, not one of its inputs. Written after the
+    schema check and before compression, so the zip carries it.
+    """
+    from datetime import datetime
+    ts = datetime.now().isoformat()
+    conn = sqlite3.connect(db_path)
+    try:
+        conn.execute("DELETE FROM dictionary_entries "
+                     "WHERE language = 'system' AND headword = 'build_time'")
+        conn.execute(
+            "INSERT INTO dictionary_entries (headword, headword_normalized_ultra,"
+            " language, entry_xml, entry_html, entry_plain, source) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            ('build_time', None, 'system',
+             f'<entry><timestamp>{ts}</timestamp><mode>{mode}</mode></entry>',
+             f'Build Time: {ts}<br>Mode: {mode}',
+             f'Build Time: {ts}\nMode: {mode}',
+             'database_build_metadata'))
+        conn.commit()
+    finally:
+        conn.close()
+    print(f"✓ Build time stamped: {ts} (mode: {mode})")
 
 
 def main():

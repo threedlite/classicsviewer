@@ -16,12 +16,12 @@ object LemmaBagBuilder {
     }
 
     /** Translator string in `translation_segments.translator` that the build
-     *  pipeline parses for this language's content lemmas. Post
-     *  LATIN_POS_PLAN.md Latin uses the same string as Greek — the formats
-     *  are now identical. */
+     *  pipeline parses for this language's content lemmas. The formats are
+     *  identical between Greek and Latin. Both say "AI-generated": several
+     *  jurisdictions require AI-generated content to be labelled as such. */
     fun translatorFor(language: String): String? = when (language.lowercase()) {
-        "greek" -> "Interlinear (Beta, generated from app dictionary and treebank)"
-        "latin" -> "Interlinear (Beta, generated from app dictionary and treebank)"
+        "greek" -> "Interlinear (Beta, AI-generated from app dictionary and treebank)"
+        "latin" -> "Interlinear (Beta, AI-generated from app dictionary and treebank)"
         else -> null
     }
 
