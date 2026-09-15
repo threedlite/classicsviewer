@@ -233,7 +233,6 @@ struct InterlinearTextView: View {
         let (displayMorph, treeData) = parseEnhancedMorph(rows[2])
         let wordCase = extractCase(rows[2])
         let borderBackground = getCaseBackgroundColor(caseColoring ? wordCase : nil, isLight: isLight)
-        let hasTreeData = treeData != nil
 
         VStack(alignment: .center, spacing: 0) {
             // Row 0: Greek word - slightly larger, tappable for dictionary

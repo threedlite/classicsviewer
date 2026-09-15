@@ -84,7 +84,7 @@ targets:
             else
               echo "error: Database source not found at: $DATABASE_SOURCE"
               echo "error: Please build the sample database first:"
-              echo "error: cd ../data-prep && python3 create_perseus_database.py sample"
+              echo "error: cd ../latin && ./run_build.sh sample && cd ../greek && ./run_build.sh sample && cd ../data-prep && python3 assemble_database.py sample"
               exit 1
             fi
           fi
@@ -100,3 +100,6 @@ targets:
               echo "Audio file copied successfully"
             fi
           fi
+        outputFiles:
+          - $(SRCROOT)/ClassicsViewer/Resources/perseus_texts.db.zip
+          - $(SRCROOT)/ClassicsViewer/Resources/homer_iliad_chamberlain_audio_7.zip

@@ -58,7 +58,7 @@ struct TopicalLinksView: View {
                         }
                     }
                     .pickerStyle(.menu)
-                    .onChange(of: selectedKind) { newValue in
+                    .onChange(of: selectedKind) { _, newValue in
                         UserDefaults.standard.set(
                             newValue, forKey: "topical_selected_kind_\(language.lowercased())"
                         )

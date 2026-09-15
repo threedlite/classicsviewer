@@ -867,8 +867,10 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 # Activate Python environment
 source venv/bin/activate
 
-# Build sample database
-cd data-prep && python3 create_perseus_database.py sample && cd ..
+# Build sample database (module builds, then assembly — see Step 7)
+cd latin && ./run_build.sh sample && cd ..
+cd greek && ./run_build.sh sample && cd ..
+cd data-prep && python3 assemble_database.py sample && cd ..
 
 # Build APK
 ./gradlew clean assembleDebug
