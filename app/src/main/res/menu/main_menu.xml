@@ -65,6 +65,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_practice_vocabulary"
+        android:title="@string/vocabulary_title"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_rhetoric"
         android:title="@string/rhetoric_title"
         app:showAsAction="never" />

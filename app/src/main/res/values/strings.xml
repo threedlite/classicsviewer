@@ -21,6 +21,13 @@
     <string name="rhetoric_load_error">Could not load the rhetoric reference.</string>
     <string name="rhetoric_entry_unavailable">Entry unavailable.</string>
     <string name="rhetoric_about_title">About this reference</string>
+
+    <string name="vocabulary_title">Practice Vocabulary</string>
+    <string name="vocabulary_about_title">About these word lists</string>
+    <string name="vocabulary_reset_progress">Reset progress</string>
+    <string name="vocabulary_reset_confirm">Clear the record of which words you have mastered in this language? Points for this session are also reset.</string>
+    <string name="vocabulary_open_dictionary">Open in dictionary</string>
+    <string name="vocabulary_about_text">Both word lists are the Core Vocabularies from Dickinson College Commentaries (DCC), ordered by frequency, with definitions shown as published.\n\nGreek: the DCC Greek Core Vocabulary (dcc.dickinson.edu/greek-core-list), about 500 of the most frequent words in ancient Greek. Compiled in 2012–13 by Christopher Francese with Wilfred Major, Eric Casey, Meghan Reedy, Marc Mastrangelo, Alice Ettling, James Martin, Meredith Wilson and Lara Frymark, from frequency data supplied by the Thesaurus Linguae Graecae and the Perseus Project. Retrieved 2026-09-24.\n\nLatin: the DCC Latin Core Vocabulary (dcc.dickinson.edu/latin-vocabulary-list), about 1,000 of the most frequent words in Latin. Retrieved 2026-09-26.\n\nBoth lists are licensed under Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0):\nhttps://creativecommons.org/licenses/by-sa/3.0/\n\nThe lists are bundled for offline use.</string>
     <string name="rhetoric_about_text">This rhetoric reference is adapted from \"Silva Rhetoricae\" (rhetoric.byu.edu) by Dr. Gideon O. Burton, Brigham Young University.\n\nLicensed under Creative Commons Attribution 3.0 (CC BY 3.0):\nhttps://creativecommons.org/licenses/by/3.0/\n\nThe content was adapted from its original HTML into a structured database for offline use in this app.</string>
 
     <!-- References asset pack -->

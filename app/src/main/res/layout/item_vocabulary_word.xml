@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wordText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="48dp"
+    android:minWidth="56dp"
+    android:gravity="center"
+    android:textSize="24sp"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:layout_margin="4dp"
+    android:background="@drawable/letter_background"
+    android:textColor="#000000"
+    android:elevation="4dp" />

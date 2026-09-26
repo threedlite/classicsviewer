@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="64dp"
+    android:paddingBottom="8dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    tools:context=".vocabulary.VocabularyGameActivity">
+
+    <!-- Header with controls -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@drawable/rounded_background"
+        android:layout_marginBottom="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/languageLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Language:"
+                    android:textSize="12sp"
+                    android:textColor="#888888" />
+
+                <Spinner
+                    android:id="@+id/languageSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/countLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Words:"
+                    android:textSize="12sp"
+                    android:textColor="#888888" />
+
+                <Spinner
+                    android:id="@+id/countSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/setLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set (by frequency):"
+            android:textSize="12sp"
+            android:textColor="#888888"
+            android:layout_marginTop="4dp" />
+
+        <Spinner
+            android:id="@+id/setSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp" />
+
+    </LinearLayout>
+
+    <!-- Points display -->
+    <TextView
+        android:id="@+id/pointsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Points: 0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="6dp" />
+
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Game area: word chips above, definitions below; only this part scrolls -->
+    <ScrollView
+        android:id="@+id/gameScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:background="@drawable/rounded_background">
+
+        <LinearLayout
+            android:id="@+id/gameArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/wordsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Words"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="4dp" />
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/wordsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                app:justifyContent="center"
+                app:alignItems="center"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/definitionsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Definitions"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:id="@+id/definitionsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Message display -->
+    <TextView
+        android:id="@+id/messageText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="#4CAF50"
+        android:minHeight="24dp"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>

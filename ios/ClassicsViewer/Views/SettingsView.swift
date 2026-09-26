@@ -130,6 +130,12 @@ struct SettingsView: View {
                             Text("Practice Alphabets")
                         }
                     }
+                    NavigationLink(destination: PracticeVocabularyView()) {
+                        HStack {
+                            Image(systemName: "text.word.spacing")
+                            Text("Practice Vocabulary")
+                        }
+                    }
                     NavigationLink(destination: RhetoricSectionListView()) {
                         HStack {
                             Image(systemName: "text.book.closed")

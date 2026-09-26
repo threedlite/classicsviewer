@@ -77,6 +77,8 @@
 		98620FDC41EABBBDCB2BE25D /* BookmarkDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D827E5A1FB474AE1717F34A6 /* BookmarkDAO.swift */; };
 		991343CF84FB8C3A0FC0EF98 /* ExtendedDatabaseDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A6E5551D88B5BAC7BA15CC /* ExtendedDatabaseDownloadManager.swift */; };
 		99388F0772C48A571CF5EC3B /* rhetoric.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = E220003E52FFAF1B90072B4D /* rhetoric.db.zip */; };
+		97E59A2DD6C376B605FF7BA0 /* greek_core_vocabulary.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E7481B24A814B0827BC9257 /* greek_core_vocabulary.json */; };
+		D0BEB71847B8771BBDC76C30 /* latin_core_vocabulary.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CA5A777A44EE466179D285 /* latin_core_vocabulary.json */; };
 		9B522D2FC93BD8AF2EA9BB11 /* DatabaseAssetDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452975E604232ECEFC78D27A /* DatabaseAssetDownloadManager.swift */; };
 		9C1B9D3C343AFB7033497C89 /* ImprovedWordDetailView_fixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD566F9D2C1F2E60AB018416 /* ImprovedWordDetailView_fixed.swift */; };
 		9ED99FF828AAA77212952CA9 /* DefaultAudioExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9B80674F8AC57982FC533 /* DefaultAudioExtractor.swift */; };
@@ -90,6 +92,8 @@
 		AA91742BF6EEA0A7E6CFC66C /* AuthorListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F487C1765DD6F6623712823 /* AuthorListViewModel.swift */; };
 		ABCE00C649313E511C58258C /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F530A6DC6D295A94433C /* SearchType.swift */; };
 		AD50576B6A191AF157F6E3D4 /* PracticeAlphabetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5199B6DECDDD6CA32762E4 /* PracticeAlphabetsView.swift */; };
+		A58C9B5E55484A47BA0A0A41 /* PracticeVocabularyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322736377EF9DF3F468DC904 /* PracticeVocabularyView.swift */; };
+		96C79795D06FDFC3442D3D88 /* VocabularyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E74F9C58DF0C14F2B9E28B /* VocabularyData.swift */; };
 		AD83D06CF2EA2E84E32BA3FA /* WordDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6853075EEC57845B47304212 /* WordDAO.swift */; };
 		AFC9C68C19AA78888FC14300 /* ImprovedWordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A0EB3310AFF245D70339F3 /* ImprovedWordDetailView.swift */; };
 		B204B18E0148470962FBA37E /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C589961389802A035D7DA8 /* BookListView.swift */; };
@@ -168,6 +172,10 @@
 		668E7F7C3AB1C4BE19A52616 /* AuthorDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDAO.swift; sourceTree = "<group>"; };
 		6853075EEC57845B47304212 /* WordDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDAO.swift; sourceTree = "<group>"; };
 		6A5199B6DECDDD6CA32762E4 /* PracticeAlphabetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeAlphabetsView.swift; sourceTree = "<group>"; };
+		322736377EF9DF3F468DC904 /* PracticeVocabularyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeVocabularyView.swift; sourceTree = "<group>"; };
+		53E74F9C58DF0C14F2B9E28B /* VocabularyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyData.swift; sourceTree = "<group>"; };
+		8E7481B24A814B0827BC9257 /* greek_core_vocabulary.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = greek_core_vocabulary.json; sourceTree = "<group>"; };
+		98CA5A777A44EE466179D285 /* latin_core_vocabulary.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = latin_core_vocabulary.json; sourceTree = "<group>"; };
 		6CF1C1A5242953546FACD86A /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		6D0331154E2DF99EF5C94910 /* homer_iliad_chamberlain_audio.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = homer_iliad_chamberlain_audio.zip; sourceTree = "<group>"; };
 		72244D2F6819A90C3C9B0892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -397,6 +405,8 @@
 				F63C4F8B4A8E70F62CBA251F /* ManageLanguagesView.swift */,
 				374D24542169E1828A6C4D0B /* OccurrenceDetailView.swift */,
 				6A5199B6DECDDD6CA32762E4 /* PracticeAlphabetsView.swift */,
+				322736377EF9DF3F468DC904 /* PracticeVocabularyView.swift */,
+				53E74F9C58DF0C14F2B9E28B /* VocabularyData.swift */,
 				59A437DD254FF072DDC14795 /* ReaderView.swift */,
 				653E2B7519773ECDFA4837E3 /* RhetoricViews.swift */,
 				A3E134B2F2A96D67078B01B4 /* SearchNavigationBar.swift */,
@@ -419,6 +429,8 @@
 				3B15C4299AB3D812B88F2C8E /* homer_iliad_chamberlain_audio_7.zip */,
 				61F4711E7801A1480E27CC18 /* perseus_texts.db.zip */,
 				E220003E52FFAF1B90072B4D /* rhetoric.db.zip */,
+				8E7481B24A814B0827BC9257 /* greek_core_vocabulary.json */,
+				98CA5A777A44EE466179D285 /* latin_core_vocabulary.json */,
 				F592998D00DF010C98ED58C6 /* OnDemand */,
 			);
 			path = Resources;
@@ -551,6 +563,8 @@
 				E77AFFF10FF935E8E6C1B6BF /* perseus_texts_extended.db.zip in Resources */,
 				D46E5D36620E57BC9703CE2C /* perseus_texts_full.db.zip in Resources */,
 				99388F0772C48A571CF5EC3B /* rhetoric.db.zip in Resources */,
+				97E59A2DD6C376B605FF7BA0 /* greek_core_vocabulary.json in Resources */,
+				D0BEB71847B8771BBDC76C30 /* latin_core_vocabulary.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +666,8 @@
 				BE53CA0A9702BB6578DFA17F /* OccurrenceDetailView.swift in Sources */,
 				1AD46BB21F5EB6FB38B5B9FD /* PatternBasedNormalizer.swift in Sources */,
 				AD50576B6A191AF157F6E3D4 /* PracticeAlphabetsView.swift in Sources */,
+				A58C9B5E55484A47BA0A0A41 /* PracticeVocabularyView.swift in Sources */,
+				96C79795D06FDFC3442D3D88 /* VocabularyData.swift in Sources */,
 				981B9B19653822D281979C19 /* PrefixAssimilationRuleDAO.swift in Sources */,
 				66D7C1FB87DDBC9592DCBA9C /* ReaderView.swift in Sources */,
 				064AD62192B34C85556DEAFE /* ReaderViewModel.swift in Sources */,

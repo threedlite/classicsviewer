@@ -915,6 +915,19 @@ adapted from its original HTML into a structured database for offline use. This
 license is CC BY 3.0 (attribution only) and carries no ShareAlike obligation.
 
 
+VOCABULARY LISTS
+================
+
+Dickinson College Commentaries Core Vocabularies
+------------------------------------------------
+Greek Core Vocabulary (dcc.dickinson.edu/greek-core-list)
+Latin Core Vocabulary (dcc.dickinson.edu/latin-vocabulary-list)
+Publisher: Dickinson College Commentaries, Dickinson College
+
+License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+https://creativecommons.org/licenses/by-sa/3.0/
+
+
 REFERENCE GRAMMARS
 ==================
 

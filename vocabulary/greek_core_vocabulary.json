@@ -1,0 +1,4203 @@
+{
+ "language": "greek",
+ "source": "Dickinson College Commentaries, Greek Core Vocabulary",
+ "url": "https://dcc.dickinson.edu/greek-core-list",
+ "license": "CC BY-SA 3.0",
+ "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+ "retrieved": "2026-09-24",
+ "count": 524,
+ "entries": [
+  {
+   "rank": 1,
+   "headword": "ὁ ἡ τό",
+   "lemma": "ὁ",
+   "definition": "the",
+   "pos": "definite article",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 2,
+   "headword": "αὐτός αὐτή αὐτό",
+   "lemma": "αὐτός",
+   "definition": "him- her- itself etc. (for emphasis); the same (with article); (pron.) him, her, it etc. (in oblique cases)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 3,
+   "headword": "καί",
+   "lemma": "καί",
+   "definition": "and, also, even; καί...καί both...and",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 4,
+   "headword": "δέ",
+   "lemma": "δέ",
+   "definition": "and; but",
+   "pos": "conjunction: coordinating",
+   "group": "Particles"
+  },
+  {
+   "rank": 5,
+   "headword": "τίς τί",
+   "lemma": "τίς",
+   "definition": "who? what? which? (interrog. pron./adj.)",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 6,
+   "headword": "εἰμί, ἔσομαι, impf. ἦν, infin. εἶναι",
+   "lemma": "εἰμί",
+   "definition": "be, exist",
+   "pos": "verb: irregular",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 7,
+   "headword": "οὗτος αὕτη τοῦτο",
+   "lemma": "οὗτος",
+   "definition": "this, these; μετὰ ταῦτα after this",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 8,
+   "headword": "ἤ",
+   "lemma": "ἤ",
+   "definition": "or; than (after a comparative); ἤ...ἤ either...or",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 9,
+   "headword": "ἐν",
+   "lemma": "ἐν",
+   "definition": "in, among (+dat.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 10,
+   "headword": "μέν...δέ",
+   "lemma": "μέν",
+   "definition": "on the one hand...on the other hand (often untranslated); μέν (by itself) indeed",
+   "pos": "conjunction: coordinating",
+   "group": "Particles"
+  },
+  {
+   "rank": 11,
+   "headword": "τις τι",
+   "lemma": "τις",
+   "definition": "someone, something, anyone, anything, some, any (enclitic indef. pron./adj.)",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 12,
+   "headword": "ὅς ἥ ὅ",
+   "lemma": "ὅς",
+   "definition": "who, which, that",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 13,
+   "headword": "γάρ",
+   "lemma": "γάρ",
+   "definition": "for (explanatory), indeed, in fact (confirming)",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 14,
+   "headword": "οὐ, οὐκ, οὐχ",
+   "lemma": "οὐ",
+   "definition": "not (with indicative verbs)",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 15,
+   "headword": "λέγω, ἐρῶ, εἶπον, εἴρηκα, λέλεγμαι, ἐλέχθην and ἐρρήθην",
+   "lemma": "λέγω",
+   "definition": "say, speak (of), recount; pick up, collect, count",
+   "pos": "verb: irregular",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 16,
+   "headword": "ὡς",
+   "lemma": "ὡς",
+   "definition": "as, since; (introducing purpose clause) so that (+subj./opt.); (introducing indir. statement) that",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 17,
+   "headword": "τε",
+   "lemma": "τε",
+   "definition": "and; τε…τε both…and",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 18,
+   "headword": "εἰς",
+   "lemma": "εἰς",
+   "definition": "into, to, towards (+acc.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 19,
+   "headword": "ἐπί",
+   "lemma": "ἐπί",
+   "definition": "at (+gen.); on (+dat.); on to, against (+acc.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 20,
+   "headword": "κατά",
+   "lemma": "κατά",
+   "definition": "down, down (from or along), throughout, according to; κατὰ γῆν by land; κατὰ φύσιν in accordance with nature; κατ’ ἔθνη by nations; καθ᾿ἕνα one by one.",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 21,
+   "headword": "ἐγώ ἐμοῦ, (pl.) ἡμεῖς, ἡμῶν",
+   "lemma": "ἐγώ",
+   "definition": "I, we",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 22,
+   "headword": "πρός",
+   "lemma": "πρός",
+   "definition": "from the side of, in the presence of (+gen.); near, at, in addition to (+dat.); to, towards, in relation to (+acc.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 23,
+   "headword": "γίγνομαι, γενήσομαι, 2 aor. ἐγενόμην, γέγονα, γεγένημαι, ἐγενήθην",
+   "lemma": "γίγνομαι",
+   "definition": "become; be born; happen, be",
+   "pos": "verb: deponent",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 24,
+   "headword": "ἐάν (εἰ-ἄν)",
+   "lemma": "ἐάν",
+   "definition": "if (+subj.)",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 25,
+   "headword": "διά",
+   "lemma": "διά",
+   "definition": "through, during, because of (+gen., acc.)",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 26,
+   "headword": "ἀλλά",
+   "lemma": "ἀλλά",
+   "definition": "but",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 27,
+   "headword": "πᾶς πᾶσα πᾶν",
+   "lemma": "πᾶς",
+   "definition": "every, all; whole (with article)",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 28,
+   "headword": "ἔχω, ἕξω or σχήσω, 2 aor. ἔσχον, ἔσχηκα, impf. εἶχον",
+   "lemma": "ἔχω",
+   "definition": "have, hold, keep",
+   "pos": "verb: irregular",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 29,
+   "headword": "ἐκ, ἐξ",
+   "lemma": "ἐκ",
+   "definition": "from, out of (+gen.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 30,
+   "headword": "πολύς πολλή πολύ",
+   "lemma": "πολύς",
+   "definition": "much, many; ὡς ἐπὶ τὸ πολύ for the most part",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 31,
+   "headword": "περί",
+   "lemma": "περί",
+   "definition": "around, about; concerning (+gen.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 32,
+   "headword": "μή",
+   "lemma": "μή",
+   "definition": "not (marks the negative as subjective or conditional); εἰ μή if not, except",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 33,
+   "headword": "ὅστις ἥτις ὅ τι",
+   "lemma": "ὅστις",
+   "definition": "anyone who, anything which; (in indir. quest.) who, which, what",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 34,
+   "headword": "ἄν",
+   "lemma": "ἄν",
+   "definition": "[marks verbs as potential (with optative), or generalizing (with subjunctive)]",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 35,
+   "headword": "σύ, σοῦ, (pl.) ὑμεῖς, ὑμῶν",
+   "lemma": "σύ",
+   "definition": "you",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 36,
+   "headword": "ἀνά",
+   "lemma": "ἀνά",
+   "definition": "up, on; throughout",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 37,
+   "headword": "ὅτι",
+   "lemma": "ὅτι",
+   "definition": "because, that; (with superl.) as...as possible",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 38,
+   "headword": "εἰ",
+   "lemma": "εἰ",
+   "definition": "if (+indic. or opt.); εἴπερ if indeed",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 39,
+   "headword": "ἄλλος ἄλλη ἄλλο",
+   "lemma": "ἄλλος",
+   "definition": "other, another",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 40,
+   "headword": "ἀπό",
+   "lemma": "ἀπό",
+   "definition": "from (+gen.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 41,
+   "headword": "φημί, φήσω, impf. ἔφην",
+   "lemma": "φημί",
+   "definition": "say, assert, declare; οὐ φημί deny, refuse, say that...not",
+   "pos": "verb: -μι",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 42,
+   "headword": "ὑπό",
+   "lemma": "ὑπό",
+   "definition": "under (+gen., dat.); by (+gen. of personal agent); down under (+acc.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 43,
+   "headword": "ποιέω, ποιήσω, ἐποίησα, πεποίηκα, πεποίημαι, ἐποιήθην",
+   "lemma": "ποιέω",
+   "definition": "make, produce, cause, do; (mid.) consider, reckon",
+   "pos": "verb: contracted",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 44,
+   "headword": "οὖν",
+   "lemma": "οὖν",
+   "definition": "therefore, accordingly; at any rate",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 45,
+   "headword": "λόγος λόγου, ὁ",
+   "lemma": "λόγος",
+   "definition": "word, speech, discourse; thought, reason, account",
+   "pos": "noun: 2nd declension",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 46,
+   "headword": "παρά",
+   "lemma": "παρά",
+   "definition": "from (+gen.); beside (+dat.); to, to the side of, contrary to (+acc.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 47,
+   "headword": "οὕτως",
+   "lemma": "οὕτως",
+   "definition": "in this way",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 48,
+   "headword": "πρότερος προτέρα πρότερον",
+   "lemma": "πρότερος",
+   "definition": "before, earlier; τὸ πρότερον previously, before",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Time"
+  },
+  {
+   "rank": 49,
+   "headword": "θεός θεοῦ, ὁ/ἡ",
+   "lemma": "θεός",
+   "definition": "god, goddess",
+   "pos": "noun: 2nd declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 50,
+   "headword": "μετά",
+   "lemma": "μετά",
+   "definition": "with (+gen.); after (+acc.)",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 51,
+   "headword": "ἑαυτοῦ ἑαυτῆς ἑαυτοῦ",
+   "lemma": "ἑαυτοῦ",
+   "definition": "him- her- itself (reflexive pron.)",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 52,
+   "headword": "μέγας μεγάλη μέγα",
+   "lemma": "μέγας",
+   "definition": "big, great, powerful",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 53,
+   "headword": "οὐδέ",
+   "lemma": "οὐδέ",
+   "definition": "and not, but not, nor; οὐδέ...οὐδέ not even...nor yet",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 54,
+   "headword": "ἐκεῖνος ἐκείνη ἐκεῖνο",
+   "lemma": "ἐκεῖνος",
+   "definition": "that person or thing; ἐκεῖνος…οὗτος the former…the latter",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 55,
+   "headword": "τοιοῦτος τοιαύτη τοιοῦτο",
+   "lemma": "τοιοῦτος",
+   "definition": "such, of such a sort",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 56,
+   "headword": "οὐδείς οὐδεμία οὐδέν",
+   "lemma": "οὐδείς",
+   "definition": "no one, nothing",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 57,
+   "headword": "εἶπον",
+   "lemma": "εἶπον",
+   "definition": "I said, I spoke, 2 aor. → λέγω, φημί",
+   "pos": "verb: irregular",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 58,
+   "headword": "ἀγαθός ἀγαθή ἀγαθόν",
+   "lemma": "ἀγαθός",
+   "definition": "good, virtuous, brave, noble",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 59,
+   "headword": "γε",
+   "lemma": "γε",
+   "definition": "(enclitic) indeed; at least, at any rate",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 60,
+   "headword": "δή",
+   "lemma": "δή",
+   "definition": "surely, really, now, in fact, indeed (gives greater exactness)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 61,
+   "headword": "πόλις πόλεως, ἡ",
+   "lemma": "πόλις",
+   "definition": "city, city-state",
+   "pos": "noun: 3rd declension ι-stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 62,
+   "headword": "εἷς μία ἕν",
+   "lemma": "εἷς",
+   "definition": "one",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 63,
+   "headword": "ἵημι, ἥσω, ἧκα, -εἷκα, εἷμαι, -εἵθην",
+   "lemma": "ἵημι",
+   "definition": "put in motion, let go, shoot; (mid.) hasten, rush",
+   "pos": "verb: -μι",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 64,
+   "headword": "δέω, δεήσω, ἐδέησα, δεδέηκα, δεδέημαι, ἐδεήθην",
+   "lemma": "δέω",
+   "definition": "lack, miss, stand in need of (+gen.)",
+   "pos": "verb: contracted",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 65,
+   "headword": "ἄνθρωπος –ου, ὁ/ἡ",
+   "lemma": "ἄνθρωπος",
+   "definition": "human being",
+   "pos": "noun: 2nd declension",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 66,
+   "headword": "ὁράω, ὄψομαι, 2 aor. εἶδον, ἑόρακα and ἑώρακα, ὤφθην, impf. ἑώρων",
+   "lemma": "ὁράω",
+   "definition": "see, look (to)",
+   "pos": "verb: irregular",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 67,
+   "headword": "μόνος μόνη μόνον",
+   "lemma": "μόνος",
+   "definition": "alone, single",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 68,
+   "headword": "οὔτε...οὔτε",
+   "lemma": "οὔτε",
+   "definition": "neither...nor",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 69,
+   "headword": "οἷος οἵα οἷον",
+   "lemma": "οἷος",
+   "definition": "such as, of what sort, like, (exclam.) what a!, how! ; οἷός τε (+infin.) fit or able to; οἷόν τε (+infin.) it is possible to",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 70,
+   "headword": "λαμβάνω, λήψομαι, ἔλαβον, εἴληφα, εἴλημμαι, ἐλήφθην",
+   "lemma": "λαμβάνω",
+   "definition": "take, grasp, seize; receive, get",
+   "pos": "verb: -ω labial stem",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 71,
+   "headword": "δοκέω, δόξω, ἔδοξα",
+   "lemma": "δοκέω",
+   "definition": "think, suppose, imagine (+acc. and infin.); seem, seem good; (impers.) δοκεῖ μοι it seems to me",
+   "pos": "verb: contracted",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 72,
+   "headword": "ἕτερος ἑτέρα ἕτερον",
+   "lemma": "ἕτερος",
+   "definition": "the other (of two); other, another",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 73,
+   "headword": "κακός –ή –όν",
+   "lemma": "κακός",
+   "definition": "bad, wicked, cowardly",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 74,
+   "headword": "ἀνήρ ἀνδρός, ὁ",
+   "lemma": "ἀνήρ",
+   "definition": "man, husband",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 75,
+   "headword": "ἐπεί",
+   "lemma": "ἐπεί",
+   "definition": "after, since, when",
+   "pos": "conjunction: subordinating",
+   "group": "Time"
+  },
+  {
+   "rank": 76,
+   "headword": "ὅσος ὅση ὅσον",
+   "lemma": "ὅσος",
+   "definition": "however much; as great as; (in pl.) as many as; ὅσον (adv.) as much as",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 77,
+   "headword": "καλέω, καλῶ, ἐκάλεσα, κέκληκα, κέκλημαι, ἐκλήθην",
+   "lemma": "καλέω",
+   "definition": "call, summon",
+   "pos": "verb: contracted",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 78,
+   "headword": "σῶμα σώματος, τό",
+   "lemma": "σῶμα",
+   "definition": "body",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 79,
+   "headword": "δεῖ, δεήσει, impf. ἔδει",
+   "lemma": "δεῖ",
+   "definition": "it is necessary, one must, one ought (+acc. and infin.)",
+   "pos": "verb: impersonal",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 80,
+   "headword": "ὥσπερ",
+   "lemma": "ὥσπερ",
+   "definition": "just as, as if",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 81,
+   "headword": "δίδωμι, δώσω, ἔδωκα, δέδωκα, δέδομαι, ἐδόθην",
+   "lemma": "δίδωμι",
+   "definition": "give, grant, offer",
+   "pos": "verb: -μι",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 82,
+   "headword": "ἔτι",
+   "lemma": "ἔτι",
+   "definition": "still, yet",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 83,
+   "headword": "φύσις φύσεως, ἡ",
+   "lemma": "φύσις",
+   "definition": "nature; (of the mind) one’s nature or disposition; regular order of nature",
+   "pos": "noun: 3rd declension ι-stem",
+   "group": "World Order"
+  },
+  {
+   "rank": 84,
+   "headword": "μικρός –ά –όν",
+   "lemma": "μικρός",
+   "definition": "small, little, short",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 85,
+   "headword": "δύναμαι, δυνήσομαι, ἐδυνήθην, δεδύνημαι",
+   "lemma": "δύναμαι",
+   "definition": "(+infin.) to be able (to), be strong enough (to)",
+   "pos": "verb: deponent",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 86,
+   "headword": "ὥστε",
+   "lemma": "ὥστε",
+   "definition": "(introducing natural or actual result clause) so as, so that, (with the result) that",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 87,
+   "headword": "ἀρχή ἀρχῆς, ἡ",
+   "lemma": "ἀρχή",
+   "definition": "beginning, origin; rule, empire, realm; magistracy",
+   "pos": "noun: 1st declension",
+   "group": "Time"
+  },
+  {
+   "rank": 88,
+   "headword": "ἕκαστος ἑκάστη ἕκαστον",
+   "lemma": "ἕκαστος",
+   "definition": "each (of several)",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 89,
+   "headword": "ἡμέρα ἡμέρας, ἡ",
+   "lemma": "ἡμέρα",
+   "definition": "day",
+   "pos": "noun: 1st declension",
+   "group": "World Order"
+  },
+  {
+   "rank": 90,
+   "headword": "φύω, φύσω, ἔφυσα",
+   "lemma": "φύω",
+   "definition": "bring forth, produce, beget; 2 aor. ἔφυν grew, pf. πέφυκα be by nature",
+   "pos": "verb: -ω vowel stem",
+   "group": "World Order"
+  },
+  {
+   "rank": 91,
+   "headword": "ἅπας ἅπασα ἅπαν",
+   "lemma": "ἅπας",
+   "definition": "all together",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 92,
+   "headword": "ὅμοιος ὁμοία ὅμοιον",
+   "lemma": "ὅμοιος",
+   "definition": "like, resembling (+dat.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 93,
+   "headword": "νῦν, νυνί",
+   "lemma": "νῦν",
+   "definition": "now",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 94,
+   "headword": "γῆ γῆς, ἡ",
+   "lemma": "γῆ",
+   "definition": "earth",
+   "pos": "noun: 1st declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 95,
+   "headword": "δύναμις δυνάμεως, ἡ",
+   "lemma": "δύναμις",
+   "definition": "power, strength, ability",
+   "pos": "noun: 3rd declension ι-stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 96,
+   "headword": "καλός –ή –όν",
+   "lemma": "καλός",
+   "definition": "beautiful, noble, honorable",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 97,
+   "headword": "κύριος κυρίου, ὁ",
+   "lemma": "κύριος",
+   "definition": "lord, master",
+   "pos": "noun: 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 98,
+   "headword": "μᾶλλον",
+   "lemma": "μᾶλλον",
+   "definition": "more, rather; μᾶλλον...ἤ rather than",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 99,
+   "headword": "ὅδε ἥδε τόδε",
+   "lemma": "ὅδε",
+   "definition": "this",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 100,
+   "headword": "ὅλος ὅλη ὅλον",
+   "lemma": "ὅλος",
+   "definition": "whole, entire, complete",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 101,
+   "headword": "μέρος μέρους, τό",
+   "lemma": "μέρος",
+   "definition": "part, share",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 102,
+   "headword": "ἄρα",
+   "lemma": "ἄρα",
+   "definition": "therefore, then (drawing an inference)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 103,
+   "headword": "ἐμός ἐμή ἐμόν",
+   "lemma": "ἐμός",
+   "definition": "my, mine",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 104,
+   "headword": "χράομαι, χρήσομαι, ἐχρησάμην, κέχρημαι, ἐχρήσθην",
+   "lemma": "χράομαι",
+   "definition": "use, experience, suffer (+dat.); treat someone in a certain way (+dat. and adv.)",
+   "pos": "verb: deponent",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 105,
+   "headword": "δύο",
+   "lemma": "δύο",
+   "definition": "two",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 106,
+   "headword": "χρόνος χρόνου, ὁ",
+   "lemma": "χρόνος",
+   "definition": "time",
+   "pos": "noun: 2nd declension",
+   "group": "Time"
+  },
+  {
+   "rank": 107,
+   "headword": "ἴσος ἴση ἴσον",
+   "lemma": "ἴσος",
+   "definition": "equal, the same as (+dat.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 108,
+   "headword": "ὅταν (ὅτε-ἄν)",
+   "lemma": "ὅταν",
+   "definition": "whenever (+subj.)",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 109,
+   "headword": "μόνον",
+   "lemma": "μόνον",
+   "definition": "only",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 110,
+   "headword": "οἶδα, infin. εἰδέναι, imper. ἴσθι, plupf. used as impf. ᾔδειν",
+   "lemma": "οἶδα",
+   "definition": "to know (pf. in pres. sense); to know how to (+infin.)",
+   "pos": "verb: irregular",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 111,
+   "headword": "βασιλεύς βασιλέως, ὁ",
+   "lemma": "βασιλεύς",
+   "definition": "king",
+   "pos": "noun: 3rd declension -εύς, -έως",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 112,
+   "headword": "ὦ",
+   "lemma": "ὦ",
+   "definition": "oh! (unemphatic when with the vocative)",
+   "pos": "interjection",
+   "group": "Particles"
+  },
+  {
+   "rank": 113,
+   "headword": "βούλομαι, βουλήσομαι, βεβούλημαι, ἐβουλήθην",
+   "lemma": "βούλομαι",
+   "definition": "(+infin.) will, wish (to); be willing (to); ὁ βουλόμενος anyone who likes",
+   "pos": "verb: deponent",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 114,
+   "headword": "φαίνω, φανῶ, ἔφηνα, πέφηνα, πέφασμαι, ἐφάνην",
+   "lemma": "φαίνω",
+   "definition": "bring to light, make appear, make clear; (pass.) come to light, be seen, appear, appear to be (+ptc. or infin.)",
+   "pos": "verb: -ω liquid stem",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 115,
+   "headword": "γράφω, γράψω, ἔγραψα, γέγραφα, γέγραμμαι, ἐγράφην",
+   "lemma": "γράφω",
+   "definition": "write",
+   "pos": "verb: -ω labial stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 116,
+   "headword": "φέρω, οἴσω, 1 aor. ἤνεγκα, 2 aor. ἤνεγκον, ἐνήνοχα, ἐνήνεγμαι, ἠνέχθην",
+   "lemma": "φέρω",
+   "definition": "carry, bring, fetch; carry off or away; φέρε come now, well",
+   "pos": "verb: irregular",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 117,
+   "headword": "ψυχή ψυχῆς, ἡ",
+   "lemma": "ψυχή",
+   "definition": "breath, life, soul",
+   "pos": "noun: 1st declension",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 118,
+   "headword": "μηδείς μηδεμία μηδέν",
+   "lemma": "μηδείς",
+   "definition": "no one, nothing",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 119,
+   "headword": "αἴτιος αἰτία αἴτιον",
+   "lemma": "αἴτιος",
+   "definition": "responsible, guilty",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 120,
+   "headword": "πάλιν",
+   "lemma": "πάλιν",
+   "definition": "back, backwards; again",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 121,
+   "headword": "μάλιστα",
+   "lemma": "μάλιστα",
+   "definition": "most, most of all; (in replies) certainly",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 122,
+   "headword": "ὑπάρχω, ὑπάρξω, ὑπῆρξα, ὑπῆργμαι, ὑπήρχθην",
+   "lemma": "ὑπάρχω",
+   "definition": "exist, be, belong to; τὰ ὑπάρχοντα existing circumstances",
+   "pos": "verb: -ω palatal stem",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 123,
+   "headword": "ἄρχω, ἄρξω, ἦρξα, ἦργμαι, ἤρχθην",
+   "lemma": "ἄρχω",
+   "definition": "begin (+gen.); lead, rule, govern (+gen.)",
+   "pos": "verb: -ω palatal stem",
+   "group": "Time"
+  },
+  {
+   "rank": 124,
+   "headword": "γυνή γυναικός, ἡ",
+   "lemma": "γυνή",
+   "definition": "woman, wife",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 125,
+   "headword": "ποτε (enclitic)",
+   "lemma": "ποτε",
+   "definition": "at some time, ever, in the world",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 126,
+   "headword": "ἵνα",
+   "lemma": "ἵνα",
+   "definition": "in order that (conj. +subj. or opt.); where (rel. adv. +indic.)",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 127,
+   "headword": "ὄνομα ὀνόματος, τό",
+   "lemma": "ὄνομα",
+   "definition": "name; fame",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 128,
+   "headword": "ὑπέρ",
+   "lemma": "ὑπέρ",
+   "definition": "for (+gen), beyond (+acc.)",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 129,
+   "headword": "ἤδη",
+   "lemma": "ἤδη",
+   "definition": "already, now (of the immediate past); presently (of the immediate future)",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 130,
+   "headword": "πατήρ πατρός, ὁ",
+   "lemma": "πατήρ",
+   "definition": "father",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 131,
+   "headword": "ἀκούω, ἀκούσομαι, ἤκουσα, ἀκήκοα, plup. ἠκηκόη or ἀκηκόη, ἠκούσθην",
+   "lemma": "ἀκούω",
+   "definition": "listen (to), hear (of)",
+   "pos": "verb: -ω vowel stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 132,
+   "headword": "γένος γένους, τό",
+   "lemma": "γένος",
+   "definition": "race, family; kind, class",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 133,
+   "headword": "τόπος τόπου, ὁ",
+   "lemma": "τόπος",
+   "definition": "place; topic",
+   "pos": "noun: 2nd declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 134,
+   "headword": "πράσσω, πράξω, ἔπραξα, πέπραχα, πέπραγμαι, ἐπράχθην",
+   "lemma": "πράσσω",
+   "definition": "do, achieve, accomplish; do or fare in a certain way (+adv.)",
+   "pos": "verb: -ω dental stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 135,
+   "headword": "πρῶτος πρώτη πρῶτον",
+   "lemma": "πρῶτος",
+   "definition": "first, foremost, earliest; (adv.) τὸ πρῶτον in the first place",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 136,
+   "headword": "εὑρίσκω, εὑρήσω, 2 aor. ηὗρον or εὗρον, ηὕρηκα or εὕρηκα, εὕρημαι, εὑρέθην",
+   "lemma": "εὑρίσκω",
+   "definition": "find (out), discover, devise",
+   "pos": "verb: -ω palatal stem",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 137,
+   "headword": "παῖς παιδός, ὁ/ἡ",
+   "lemma": "παῖς",
+   "definition": "son, daughter, child; slave",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 138,
+   "headword": "ἔρχομαι, fut. εἶμι or ἐλεύσομαι, 2 aor. ἦλθον, ἐλήλυθα",
+   "lemma": "ἔρχομαι",
+   "definition": "come, go",
+   "pos": "verb: deponent",
+   "group": "Movement"
+  },
+  {
+   "rank": 139,
+   "headword": "υἱός υἱοῦ, ὁ",
+   "lemma": "υἱός",
+   "definition": "son",
+   "pos": "noun: 2nd declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 140,
+   "headword": "ὕδωρ ὕδατος, τό",
+   "lemma": "ὕδωρ",
+   "definition": "water",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "World Order"
+  },
+  {
+   "rank": 141,
+   "headword": "ἴδιος ἰδία ἴδιον",
+   "lemma": "ἴδιος",
+   "definition": "one’s own; peculiar, separate, distinct",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 142,
+   "headword": "σός σή σόν",
+   "lemma": "σός",
+   "definition": "your, yours (sg.; ὑμέτερος = pl.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 143,
+   "headword": "γιγνώσκω, γνώσομαι, ἔγνων, ἔγνωκα, ἔγνωσμαι, ἐγνώσθην",
+   "lemma": "γιγνώσκω",
+   "definition": "come to know, learn; judge, think, or determine that (+acc. and infin.)",
+   "pos": "verb: irregular",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 144,
+   "headword": "τυγχάνω, τεύξομαι, ἔτυχον, τετύχηκα, τέτυγμαι, ἐτύχθην",
+   "lemma": "τυγχάνω",
+   "definition": "hit, light upon, meet by chance (+gen.); reach, gain, obtain; happen to be (+ptc.)",
+   "pos": "verb: -ω palatal stem",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 145,
+   "headword": "ἵστημι στήσω will set, ἔστησα set, caused to stand, 2 aor. ἔστην stood, ἕστηκα stand, plup. εἱστήκη stood, ἐστάθην stood",
+   "lemma": "ἵστημι",
+   "definition": "make to stand, set",
+   "pos": "verb: -μι",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 146,
+   "headword": "ἅμα",
+   "lemma": "ἅμα",
+   "definition": "at the same time; (prep.) together with (+dat.)",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 147,
+   "headword": "ἄγω, ἄξω, ἤγαγον, ἦχα, ἦγμαι, ἤχθην",
+   "lemma": "ἄγω",
+   "definition": "lead, carry, bring; pass (time)",
+   "pos": "verb: -ω palatal stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 148,
+   "headword": "τρόπος τρόπου, ὁ",
+   "lemma": "τρόπος",
+   "definition": "way, manner, fashion; way of life, habit, custom",
+   "pos": "noun: 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 149,
+   "headword": "μήτε...μήτε",
+   "lemma": "μήτε",
+   "definition": "neither...nor",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 150,
+   "headword": "μέσος μέση μέσον",
+   "lemma": "μέσος",
+   "definition": "middle, in the middle, moderate; τὸ μέσον midst",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 151,
+   "headword": "ἀλλήλων –οις",
+   "lemma": "ἀλλήλων",
+   "definition": "(oblique cases plural only) one another, each other",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 152,
+   "headword": "ἀεί",
+   "lemma": "ἀεί",
+   "definition": "always",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 153,
+   "headword": "φίλος φίλη φίλον",
+   "lemma": "φίλος",
+   "definition": "beloved, dear; friendly",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 154,
+   "headword": "συμβαίνω, συμβήσομαι, 2 aor. συνέβην, συμβέβηκα",
+   "lemma": "συμβαίνω",
+   "definition": "meet, come to an agreement, correspond; happen, occur, come to pass; turn out in a certain way (+adv.), result",
+   "pos": "verb: -ω liquid stem",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 155,
+   "headword": "ἔργον ἔργου, τό",
+   "lemma": "ἔργον",
+   "definition": "work, achievement, exploit",
+   "pos": "noun: 2nd declension",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 156,
+   "headword": "πλέω, πλεύσομαι, ἔπλευσα, πέπλευκα, πέπλευσμαι, ἐπλεύσθην",
+   "lemma": "πλέω",
+   "definition": "sail",
+   "pos": "verb: contracted",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 157,
+   "headword": "τότε",
+   "lemma": "τότε",
+   "definition": "then, at that time; οἱ τότε the men of that time (opp. οἱ νῦν)",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 158,
+   "headword": "μήν",
+   "lemma": "μήν",
+   "definition": "[emphasizes preceding particle]",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 159,
+   "headword": "χρή, impf. χρῆν or ἐχρῆν, infin. χρῆναι",
+   "lemma": "χρή",
+   "definition": "it is necessary, it is fated, one ought (+infin. or +acc. and infin.)",
+   "pos": "verb: impersonal",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 160,
+   "headword": "δείκνυμι, δείξω, ἔδειξα, δέδειχα, δέδειγμαι, ἐδείχθην",
+   "lemma": "δείκνυμι",
+   "definition": "show, point out",
+   "pos": "verb: -μι",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 161,
+   "headword": "ζῷον ζῴου, τό",
+   "lemma": "ζῷον",
+   "definition": "living being, animal",
+   "pos": "noun: 2nd declension",
+   "group": "Animals and Plants"
+  },
+  {
+   "rank": 162,
+   "headword": "πρᾶγμα πράγματος, τό",
+   "lemma": "πρᾶγμα",
+   "definition": "thing; (pl.) circumstances, affairs, business",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 163,
+   "headword": "ἐναντίος ἐναντία ἐναντίον",
+   "lemma": "ἐναντίος",
+   "definition": "opposite, facing; opposing",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Direction"
+  },
+  {
+   "rank": 164,
+   "headword": "τίθημι, θήσω, ἔθηκα, τέθηκα, τέθειμαι (but usu. κεῖμαι instead), ἐτέθην",
+   "lemma": "τίθημι",
+   "definition": "to put, place; establish, ordain, institute; put in a certain state",
+   "pos": "verb: -μι",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 165,
+   "headword": "εἶδον, 2 aor. of ὁράω, act. infin. ἰδεῖν, mid.infin. ἰδέσθαι",
+   "lemma": "εἶδον",
+   "definition": "I saw",
+   "pos": "verb: irregular",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 166,
+   "headword": "χείρ χειρός, ἡ",
+   "lemma": "χείρ",
+   "definition": "hand",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 167,
+   "headword": "μηδέ",
+   "lemma": "μηδέ",
+   "definition": "and not",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 168,
+   "headword": "ὀλίγος ὀλίγη ὀλίγον",
+   "lemma": "ὀλίγος",
+   "definition": "little, small, few",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 169,
+   "headword": "νόμος νόμου, ὁ",
+   "lemma": "νόμος",
+   "definition": "custom, tradition, law",
+   "pos": "noun: 2nd declension",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 170,
+   "headword": "κοινός –ή –όν",
+   "lemma": "κοινός",
+   "definition": "common, shared, mutual",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 171,
+   "headword": "οἴομαι or οἶμαι, οἰήσομαι, impf. ᾤμην, aor. ᾠήθην",
+   "lemma": "οἴομαι",
+   "definition": "think, suppose, imagine (+acc. and infin.)",
+   "pos": "verb: deponent",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 172,
+   "headword": "κινέω, κινήσω, ἐκίνησα, κεκίνηκα, κεκίνημαι, ἐκινήθην",
+   "lemma": "κινέω",
+   "definition": "set in motion, move, rouse",
+   "pos": "verb: contracted",
+   "group": "Movement"
+  },
+  {
+   "rank": 173,
+   "headword": "πάσχω, πείσομαι, ἔπαθον, πέπονθα",
+   "lemma": "πάσχω",
+   "definition": "suffer, experience, be affected in a certain way (+adv.)",
+   "pos": "verb: -ω dental stem",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 174,
+   "headword": "πῶς",
+   "lemma": "πῶς",
+   "definition": "how?",
+   "pos": "adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 175,
+   "headword": "ὅσπερ ἥπερ ὅπερ",
+   "lemma": "ὅσπερ",
+   "definition": "the very one who, the very thing which",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 176,
+   "headword": "τοσοῦτος –αύτη –οῦτο(ν)",
+   "lemma": "τοσοῦτος",
+   "definition": "so large, so much",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 177,
+   "headword": "σύν",
+   "lemma": "σύν",
+   "definition": "with (+ dat. of accompaniment or means)",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 178,
+   "headword": "εἶτα",
+   "lemma": "εἶτα",
+   "definition": "then, next",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 179,
+   "headword": "ἀληθής –ές",
+   "lemma": "ἀληθής",
+   "definition": "true",
+   "pos": "adjective: 3rd declension -ης, -ες",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 180,
+   "headword": "δίκαιος δικαία δίκαιον",
+   "lemma": "δίκαιος",
+   "definition": "right, just",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 181,
+   "headword": "μέλλω, μελλήσω, ἐμέλλησα",
+   "lemma": "μέλλω",
+   "definition": "(+infin.) think of doing, intend to, be about to",
+   "pos": "verb: -ω liquid stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 182,
+   "headword": "ἐθέλω, ἐθελήσω, ἠθέλησα, ἠθέληκα",
+   "lemma": "ἐθέλω",
+   "definition": "(+infin.) wish (to); be willing (to)",
+   "pos": "verb: -ω liquid stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 183,
+   "headword": "λοιπός –ή –όν",
+   "lemma": "λοιπός",
+   "definition": "rest, remaining, rest-of-the",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 184,
+   "headword": "ἀνάγκη ἀνάγκης, ἡ",
+   "lemma": "ἀνάγκη",
+   "definition": "necessity",
+   "pos": "noun: 1st declension",
+   "group": "World Order"
+  },
+  {
+   "rank": 185,
+   "headword": "ὅτε",
+   "lemma": "ὅτε",
+   "definition": "when, whenever (+indic. or opt.)",
+   "pos": "conjunction: subordinating",
+   "group": "Time"
+  },
+  {
+   "rank": 186,
+   "headword": "δεύτερος –α –ον",
+   "lemma": "δεύτερος",
+   "definition": "second",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 187,
+   "headword": "πόλεμος πολέμου ὁ",
+   "lemma": "πόλεμος",
+   "definition": "war",
+   "pos": "noun: 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 188,
+   "headword": "χώρα χώρας, ἡ",
+   "lemma": "χώρα",
+   "definition": "land; place",
+   "pos": "noun: 1st declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 189,
+   "headword": "ζάω, ζήσω, ἔζησα, ἔζηκα",
+   "lemma": "ζάω",
+   "definition": "live",
+   "pos": "verb: contracted",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 190,
+   "headword": "πλῆθος πλήθους, τό",
+   "lemma": "πλῆθος",
+   "definition": "mass, throng, crowd; number",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 191,
+   "headword": "ἥλιος ἡλίου, ὁ",
+   "lemma": "ἥλιος",
+   "definition": "sun",
+   "pos": "noun: 2nd declension",
+   "group": "World Order"
+  },
+  {
+   "rank": 192,
+   "headword": "αἰτία αἰτίας, ἡ",
+   "lemma": "αἰτία",
+   "definition": "cause, origin; charge, accusation",
+   "pos": "noun: 1st declension",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 193,
+   "headword": "πείθω, πείσω, ἔπεισα, πέποιθα, πέπεισμαι, ἐπείσθην",
+   "lemma": "πείθω",
+   "definition": "persuade, win over; (mid. and pass.) obey, believe in, trust in (+dat.)",
+   "pos": "verb: -ω dental stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 194,
+   "headword": "πάρειμι",
+   "lemma": "πάρειμι",
+   "definition": "be present, be ready or at hand; (impers.) πάρεστί μοι it depends on me, it is in my power; τὰ παρόντα the present circumstances; τὸ παρόν just now",
+   "pos": "verb: irregular",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 195,
+   "headword": "πλεῖστος πλείστη πλεῖστον",
+   "lemma": "πλεῖστος",
+   "definition": "most, greatest, largest (superl. of πολύς)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 196,
+   "headword": "εἶδος εἴδους, τό",
+   "lemma": "εἶδος",
+   "definition": "form, shape, figure; class, kind, sort",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 197,
+   "headword": "ὅπως",
+   "lemma": "ὅπως",
+   "definition": "how, as; so that, in order that (+subj. or opt.)",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 198,
+   "headword": "τρεῖς τρία",
+   "lemma": "τρεῖς",
+   "definition": "three",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 199,
+   "headword": "βίος βίου, ὁ",
+   "lemma": "βίος",
+   "definition": "life",
+   "pos": "noun: 2nd declension",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 200,
+   "headword": "νομίζω, νομιῶ, ἐνόμισα, νενόμικα, νενόμισμαι, ἐνομίσθην",
+   "lemma": "νομίζω",
+   "definition": "think, believe that (+acc. and infin.); hold as a custom, be accustomed to (+infin.)",
+   "pos": "verb: -ω dental stem",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 201,
+   "headword": "κύκλος κύκλου, ὁ",
+   "lemma": "κύκλος",
+   "definition": "circle, ring, orb, disc, circular motion",
+   "pos": "noun: 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 202,
+   "headword": "πάθος πάθους, τό",
+   "lemma": "πάθος",
+   "definition": "incident, accident, misfortune, experience; passion, emotion; state, condition",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 203,
+   "headword": "πρό",
+   "lemma": "πρό",
+   "definition": "before, in front of (+gen.)",
+   "pos": "preposition",
+   "group": "Time"
+  },
+  {
+   "rank": 204,
+   "headword": "ὀνομάζω, ὀνομάσω, ὠνόμασα, ὠνόμακα, ὠνόμασμαι, ὠνομάσθην",
+   "lemma": "ὀνομάζω",
+   "definition": "call by name",
+   "pos": "verb: -ω dental stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 205,
+   "headword": "μέντοι",
+   "lemma": "μέντοι",
+   "definition": "however; of course",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 206,
+   "headword": "ἀρετή ἀρετῆς, ἡ",
+   "lemma": "ἀρετή",
+   "definition": "goodness, excellence; virtue; valor, bravery",
+   "pos": "noun: 1st declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 207,
+   "headword": "ὑμέτερος ὑμετέρα ὑμέτερον",
+   "lemma": "ὑμέτερος",
+   "definition": "your, yours (pl.; σός = sg.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 208,
+   "headword": "ἔτος ἔτους, τό",
+   "lemma": "ἔτος",
+   "definition": "year",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Time"
+  },
+  {
+   "rank": 209,
+   "headword": "ἀντί",
+   "lemma": "ἀντί",
+   "definition": "opposite (+gen.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 210,
+   "headword": "ναῦς νεώς, ἡ",
+   "lemma": "ναῦς",
+   "definition": "ship",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 211,
+   "headword": "τρίτος –η –ον",
+   "lemma": "τρίτος",
+   "definition": "third",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 212,
+   "headword": "πνεῦμα πνεύματος, τό",
+   "lemma": "πνεῦμα",
+   "definition": "wind, breath, spirit",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Earth"
+  },
+  {
+   "rank": 213,
+   "headword": "ὀρθός –ή –όν",
+   "lemma": "ὀρθός",
+   "definition": "upright, straight, true, regular",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 214,
+   "headword": "θάλασσα θαλάσσης, ἡ",
+   "lemma": "θάλασσα",
+   "definition": "the sea",
+   "pos": "noun: 1st declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 215,
+   "headword": "διαφέρω, διοίσω, 1 aor. διήνεγκα, 2 aor. διήνεγκον, διενήνοχα, διενήνεγμαι",
+   "lemma": "διαφέρω",
+   "definition": "carry in different ways, spread; differ; (impers.) διαφέρει it makes a difference to (+dat.)",
+   "pos": "verb: -ω liquid stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 216,
+   "headword": "μέχρι",
+   "lemma": "μέχρι",
+   "definition": "until (conj.); as far as, up to (prep. +gen.)",
+   "pos": "preposition",
+   "group": "Time"
+  },
+  {
+   "rank": 217,
+   "headword": "δόξα δόξης, ἡ",
+   "lemma": "δόξα",
+   "definition": "opinion, judgment; reputation, honor, glory",
+   "pos": "noun: 1st declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 218,
+   "headword": "κεφαλή –ῆς, ἡ",
+   "lemma": "κεφαλή",
+   "definition": "head",
+   "pos": "noun: 1st declension",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 219,
+   "headword": "πῦρ πυρός, τό",
+   "lemma": "πῦρ",
+   "definition": "fire",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "World Order"
+  },
+  {
+   "rank": 220,
+   "headword": "ἐλάσσων ἔλασσον",
+   "lemma": "ἐλάσσων",
+   "definition": "smaller, less, fewer (comp. of μικρός)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 221,
+   "headword": "πούς ποδός, ὁ",
+   "lemma": "πούς",
+   "definition": "foot",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 222,
+   "headword": "ἱερός –ά –όν",
+   "lemma": "ἱερός",
+   "definition": "holy, venerated, divine",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 223,
+   "headword": "εὐθύς εὐθεῖα εὐθύ",
+   "lemma": "εὐθύς",
+   "definition": "straight, direct; (adv.) immediately",
+   "pos": "adjective: -ύς, -εῖα, -ύ",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 224,
+   "headword": "εἶμι, infin. ἰέναι, ptc. ἰών, ἰοῦσα, ἰόν",
+   "lemma": "εἶμι",
+   "definition": "I will go (fut. of ἔρχομαι)",
+   "pos": "verb: -μι",
+   "group": "Movement"
+  },
+  {
+   "rank": 225,
+   "headword": "ταχύς ταχεῖα ταχύ",
+   "lemma": "ταχύς",
+   "definition": "quick, fast; (adv.) τάχα quickly; perhaps",
+   "pos": "adjective: -ύς, -εῖα, -ύ",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 226,
+   "headword": "ποταμός –οῦ, ὁ",
+   "lemma": "ποταμός",
+   "definition": "river, stream",
+   "pos": "noun: 2nd declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 227,
+   "headword": "οὐσία οὐσίας, ἡ",
+   "lemma": "οὐσία",
+   "definition": "substance, property; essence",
+   "pos": "noun: 1st declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 228,
+   "headword": "ἀριθμός –οῦ, ὁ",
+   "lemma": "ἀριθμός",
+   "definition": "number",
+   "pos": "noun: 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 229,
+   "headword": "ὕστερος ὑστέρα ὕστερον",
+   "lemma": "ὕστερος",
+   "definition": "coming after, following (+gen.); next, later; (adv.) ὕστερον afterwards",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Direction"
+  },
+  {
+   "rank": 230,
+   "headword": "φυλάσσω, φυλάξω, ἐφύλαξα, πεφύλαχα, πεφύλαγμαι, ἐφυλάχθην",
+   "lemma": "φυλάσσω",
+   "definition": "watch, guard, defend; (mid.) be on one’s guard against (+acc.)",
+   "pos": "verb: -ω palatal stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 231,
+   "headword": "καιρός καιροῦ, ὁ",
+   "lemma": "καιρός",
+   "definition": "the right time",
+   "pos": "noun: 2nd declension",
+   "group": "Time"
+  },
+  {
+   "rank": 232,
+   "headword": "οἰκέω, οἰκήσω, ᾤκησα, ᾤκηκα, ᾠκήθην",
+   "lemma": "οἰκέω",
+   "definition": "inhabit, occupy",
+   "pos": "verb: contracted",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 233,
+   "headword": "ἀμφότερος ἀμφοτέρα ἀμφότερον",
+   "lemma": "ἀμφότερος",
+   "definition": "both",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 234,
+   "headword": "σημεῖον σημείου, τό",
+   "lemma": "σημεῖον",
+   "definition": "sign, signal, mark",
+   "pos": "noun: 2nd declension",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 235,
+   "headword": "παρέχω, παρέξω, παρέσχον, παρέσχηκα, impf. παρεῖχον",
+   "lemma": "παρέχω",
+   "definition": "provide, present, offer; allow, grant",
+   "pos": "verb: -ω palatal stem",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 236,
+   "headword": "ἑκάτερος ἑκατέρα ἑκάτερον",
+   "lemma": "ἑκάτερος",
+   "definition": "each (of two)",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 237,
+   "headword": "δηλόω, δηλώσω, ἐδήλωσα, δεδήλωκα, ἐδηλώθην",
+   "lemma": "δηλόω",
+   "definition": "show, declare, explain",
+   "pos": "verb: contracted",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 238,
+   "headword": "οἰκεῖος οἰκεία οἰκεῖον",
+   "lemma": "οἰκεῖος",
+   "definition": "domestic, of the house; one’s own; fitting, suitable",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 239,
+   "headword": "κελεύω, κελεύσω, ἐκέλευσα, κεκέλευκα, κεκέλευσμαι, ἐκελεύσθην",
+   "lemma": "κελεύω",
+   "definition": "order, bid, command (+acc. and infin.)",
+   "pos": "verb: -ω vowel stem",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 240,
+   "headword": "τέλος τέλους, τό",
+   "lemma": "τέλος",
+   "definition": "end, fulfillment, achievement",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 241,
+   "headword": "ἡγέομαι, ἡγήσομαι, ἡγησάμην, ἥγημαι",
+   "lemma": "ἡγέομαι",
+   "definition": "lead, be the leader; regard, believe, think",
+   "pos": "verb: deponent",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 242,
+   "headword": "ἄξιος ἀξία ἄξιον",
+   "lemma": "ἄξιος",
+   "definition": "worthy, deserving",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 243,
+   "headword": "ἦ",
+   "lemma": "ἦ",
+   "definition": "truly (emphasizes what follows)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 244,
+   "headword": "δῆλος δήλη δῆλον",
+   "lemma": "δῆλος",
+   "definition": "visible, clear, manifest",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 245,
+   "headword": "τοίνυν (τοί-νυν)",
+   "lemma": "τοίνυν",
+   "definition": "therefore, accordingly (inferential); further, moreover (transitional)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 246,
+   "headword": "πολέμιος πολεμία πολέμιον",
+   "lemma": "πολέμιος",
+   "definition": "hostile; οἱ πολέμιοι the enemy",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 247,
+   "headword": "ἔρομαι, ἐρήσομαι, 2 aor. ἠρόμην",
+   "lemma": "ἔρομαι",
+   "definition": "ask, ask one about (+double acc.)",
+   "pos": "verb: deponent",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 248,
+   "headword": "ἀδελφός –οῦ, ὁ",
+   "lemma": "ἀδελφός",
+   "definition": "brother",
+   "pos": "noun: 2nd declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 249,
+   "headword": "μέγεθος μεγέθους, τό",
+   "lemma": "μέγεθος",
+   "definition": "greatness, size, magnitude",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 250,
+   "headword": "εἴτε…εἴτε",
+   "lemma": "εἴτε",
+   "definition": "whether…or",
+   "pos": "conjunction: coordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 251,
+   "headword": "κεῖμαι, κείσομαι",
+   "lemma": "κεῖμαι",
+   "definition": "to lie, be situated, be laid up in store, be set up, be established or ordained (used as pf. pass. of τίθημι)",
+   "pos": "verb: deponent",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 252,
+   "headword": "πολλάκις",
+   "lemma": "πολλάκις",
+   "definition": "often",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 253,
+   "headword": "πίνω, πίομαι, 2 aor. ἔπιον, πέπωκα, -πέπομαι, -επόθην",
+   "lemma": "πίνω",
+   "definition": "drink",
+   "pos": "verb: -ω liquid stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 254,
+   "headword": "χάρις χάριτος, ἡ",
+   "lemma": "χάρις",
+   "definition": "splendor, honor, glory; favor, goodwill, gratitude, thanks",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 255,
+   "headword": "ἔπειτα",
+   "lemma": "ἔπειτα",
+   "definition": "then, next",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 256,
+   "headword": "ζητέω, ζητήσω, ἐζήτησα, ἐζήτηκα",
+   "lemma": "ζητέω",
+   "definition": "seek",
+   "pos": "verb: contracted",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 257,
+   "headword": "σχῆμα σχήματος, τό",
+   "lemma": "σχῆμα",
+   "definition": "form, figure, appearance, character",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 258,
+   "headword": "τροφή τροφῆς, ἡ",
+   "lemma": "τροφή",
+   "definition": "nourishment, food",
+   "pos": "noun: 1st declension",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 259,
+   "headword": "μανθάνω, μαθήσομαι, ἔμαθον, μεμάθηκα",
+   "lemma": "μανθάνω",
+   "definition": "learn, ascertain",
+   "pos": "verb: -ω liquid stem",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 260,
+   "headword": "ἐνταῦθα",
+   "lemma": "ἐνταῦθα",
+   "definition": "here, there",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 261,
+   "headword": "φεύγω, φεύξομαι, ἔφυγον, πέφευγα",
+   "lemma": "φεύγω",
+   "definition": "flee, run away, avoid, shun",
+   "pos": "verb: -ω palatal stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 262,
+   "headword": "ἵππος ἵππου, ὁ",
+   "lemma": "ἵππος",
+   "definition": "horse",
+   "pos": "noun: 2nd declension",
+   "group": "Animals and Plants"
+  },
+  {
+   "rank": 263,
+   "headword": "κόσμος κόσμου, ὁ",
+   "lemma": "κόσμος",
+   "definition": "order; ornament, decoration, adornment; world, universe",
+   "pos": "noun: 2nd declension",
+   "group": "World Order"
+  },
+  {
+   "rank": 264,
+   "headword": "αἷμα αἵματος, τό",
+   "lemma": "αἷμα",
+   "definition": "blood",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 265,
+   "headword": "αἱρέω, αἱρήσω, 2 aor. εἷλον, ᾕρηκα, ᾕρημαι, ᾑρέθην",
+   "lemma": "αἱρέω",
+   "definition": "take, grasp, take by force; (mid.) choose",
+   "pos": "verb: contracted",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 266,
+   "headword": "προστίθημι, προσθήσω, προσέθηκα, προστέθηκα, προστέθειμαι (but commonly προσκεῖμαι instead), προσετέθην",
+   "lemma": "προστίθημι",
+   "definition": "add; (med.) join",
+   "pos": "verb: -μι",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 267,
+   "headword": "ἀξιόω, ἀξιώσω, ἠξίωσα, ἠξίωκα, ἠξίωμαι, ἠξιώθην",
+   "lemma": "ἀξιόω",
+   "definition": "consider worthy; require, demand, ask, claim",
+   "pos": "verb: contracted",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 268,
+   "headword": "ἕως",
+   "lemma": "ἕως",
+   "definition": "until; while, so long as",
+   "pos": "conjunction: subordinating",
+   "group": "Time"
+  },
+  {
+   "rank": 269,
+   "headword": "νέος νέα νέον",
+   "lemma": "νέος",
+   "definition": "young, new, fresh",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 270,
+   "headword": "ἔοικα, ptc. εἰκώς",
+   "lemma": "ἔοικα",
+   "definition": "be like, look like (+dat.); seem; befit",
+   "pos": "verb: irregular",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 271,
+   "headword": "κἄν (καὶ-ἄν)",
+   "lemma": "κἄν",
+   "definition": "even if (+subj.)",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 272,
+   "headword": "καθίστημι, καταστήσω, κατέστησα, κατέστην, καθέστηκα, plupf. καθειστήκη, κατεστάθην",
+   "lemma": "καθίστημι",
+   "definition": "set down, establish; bring into a certain state, render",
+   "pos": "verb: -μι",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 273,
+   "headword": "τέχνη τέχνης, ἡ",
+   "lemma": "τέχνη",
+   "definition": "art, skill, craft",
+   "pos": "noun: 1st declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 274,
+   "headword": "χρῆμα χρήματος, τό",
+   "lemma": "χρῆμα",
+   "definition": "thing, matter; (more commonly in pl.) goods or property, esp. money",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 275,
+   "headword": "σῴζω, σώσω, ἔσωσα, σέσωκα, ἐσώθην",
+   "lemma": "σῴζω",
+   "definition": "save",
+   "pos": "verb: -ω dental stem",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 276,
+   "headword": "πέμπω, πέμψω, ἔπεμψα, πέπομφα, πέπεμμαι, ἐπέμφθην",
+   "lemma": "πέμπω",
+   "definition": "send",
+   "pos": "verb: -ω labial stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 277,
+   "headword": "φωνή φωνῆς, ἡ",
+   "lemma": "φωνή",
+   "definition": "sound, voice",
+   "pos": "noun: 1st declension",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 278,
+   "headword": "ἕνεκα",
+   "lemma": "ἕνεκα",
+   "definition": "on account of, for the sake of (+gen.)",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 279,
+   "headword": "ἀπόλλυμι, ἀπολῶ, ἀπώλεσα, 2 aor. mid. ἀπωλόμην, pf. ἀπολώλεκα (“I have utterly destroyed”) or ἀπόλωλα (“I am undone”)",
+   "lemma": "ἀπόλλυμι",
+   "definition": "kill, destroy; (mid.) perish, die",
+   "pos": "verb: -μι",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 280,
+   "headword": "θάνατος θανάτου, ὁ",
+   "lemma": "θάνατος",
+   "definition": "death",
+   "pos": "noun: 2nd declension",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 281,
+   "headword": "νύξ νυκτός, ἡ",
+   "lemma": "νύξ",
+   "definition": "night",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "World Order"
+  },
+  {
+   "rank": 282,
+   "headword": "ὁδός ὁδοῦ, ἡ",
+   "lemma": "ὁδός",
+   "definition": "road, way, path",
+   "pos": "noun: 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 283,
+   "headword": "ἔθνος ἔθνους, τό",
+   "lemma": "ἔθνος",
+   "definition": "nation",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 284,
+   "headword": "ἀποδίδωμι, ἀποδώσω, ἀπέδωκα, ἀποδέδωκα, ἀποδέδομαι, ἀπεδόθην",
+   "lemma": "ἀποδίδωμι",
+   "definition": "give back; render; allow; (mid.) sell",
+   "pos": "verb: -μι",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 285,
+   "headword": "νοῦς, νοῦ, ὁ (other dialects: νόος, νόου, ὁ)",
+   "lemma": "νοῦς",
+   "definition": "mind, perception, sense",
+   "pos": "noun: 2nd declension",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 286,
+   "headword": "μένω, μενῶ, ἔμεινα, μεμένηκα",
+   "lemma": "μένω",
+   "definition": "stay, remain, endure, await",
+   "pos": "verb: -ω liquid stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 287,
+   "headword": "ἀποθνῄσκω, ἀποθανοῦμαι, 2 aor. ἀπέθανον, ἀποτέθνηκα",
+   "lemma": "ἀποθνῄσκω",
+   "definition": "die",
+   "pos": "verb: -ω palatal stem",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 288,
+   "headword": "πάνυ",
+   "lemma": "πάνυ",
+   "definition": "altogether, entirely",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 289,
+   "headword": "εὖ",
+   "lemma": "εὖ",
+   "definition": "well (opp. κακῶς); thoroughly, competently; happily, fortunately",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 290,
+   "headword": "κρίνω, κρινῶ, ἔκρινα, κέκρικα, κέκριμαι, ἐκρίθην",
+   "lemma": "κρίνω",
+   "definition": "judge, decide, determine",
+   "pos": "verb: -ω liquid stem",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 291,
+   "headword": "ἀναιρέω, ἀναιρήσω, ἀνεῖλον, ἀνῄρηκα, ἀνῄρημαι, ἀνῃρέθην",
+   "lemma": "ἀναιρέω",
+   "definition": "raise, take up; kill, destroy",
+   "pos": "verb: contracted",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 292,
+   "headword": "μακρός –ά –όν",
+   "lemma": "μακρός",
+   "definition": "long, tall, large, long-lasting",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 293,
+   "headword": "ἥκω, ἥξω, pf. ἧκα",
+   "lemma": "ἥκω",
+   "definition": "I have come, I am present",
+   "pos": "verb: -ω palatal stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 294,
+   "headword": "ἡδονή –ῆς, ἡ",
+   "lemma": "ἡδονή",
+   "definition": "pleasure, enjoyment",
+   "pos": "noun: 1st declension",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 295,
+   "headword": "μήτηρ μητρός, ἡ",
+   "lemma": "μήτηρ",
+   "definition": "mother",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 296,
+   "headword": "δεινός –ή –όν",
+   "lemma": "δεινός",
+   "definition": "awesome, terrible; clever, clever at (+infin.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 297,
+   "headword": "διαφορά –ᾶς, ἡ",
+   "lemma": "διαφορά",
+   "definition": "difference, disagreement",
+   "pos": "noun: 1st declension",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 298,
+   "headword": "κρατέω, κρατήσω, ἐκράτησα, κεκράτηκα, κεκράτημαι, ἐκρατήθην",
+   "lemma": "κρατέω",
+   "definition": "be victorious, conquer, rule, surpass, excel (+gen.)",
+   "pos": "verb: contracted",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 299,
+   "headword": "δῆμος δήμου, ὁ",
+   "lemma": "δῆμος",
+   "definition": "the (common) people; country district (opp. πόλις)",
+   "pos": "noun: 2nd declension",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 300,
+   "headword": "οὐρανός –οῦ, ὁ",
+   "lemma": "οὐρανός",
+   "definition": "sky, heaven",
+   "pos": "noun: 2nd declension",
+   "group": "World Order"
+  },
+  {
+   "rank": 301,
+   "headword": "ἕπομαι ἕψομαι, 2 aor. ἑσπόμην",
+   "lemma": "ἕπομαι",
+   "definition": "follow",
+   "pos": "verb: deponent",
+   "group": "Movement"
+  },
+  {
+   "rank": 302,
+   "headword": "ἥσσων ἧσσον",
+   "lemma": "ἥσσων",
+   "definition": "less, weaker (comp. of κακός or μικρός)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 303,
+   "headword": "ὄρος ὄρους, τό",
+   "lemma": "ὄρος",
+   "definition": "mountain, hill",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Earth"
+  },
+  {
+   "rank": 304,
+   "headword": "πλήν",
+   "lemma": "πλήν",
+   "definition": "(prep.) except (+gen.); (conj.) except that, unless, but",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 305,
+   "headword": "τέσσαρες τέσσαρα",
+   "lemma": "τέσσαρες",
+   "definition": "four",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 306,
+   "headword": "δυνατός –ή –όν",
+   "lemma": "δυνατός",
+   "definition": "strong, powerful, able",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 307,
+   "headword": "οἶκος οἴκου, ὁ",
+   "lemma": "οἶκος",
+   "definition": "house, home, family",
+   "pos": "noun: 2nd declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 308,
+   "headword": "ἄριστος ἀρίστη ἄριστον",
+   "lemma": "ἄριστος",
+   "definition": "best, noblest (superl. of ἀγαθός)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 309,
+   "headword": "ῥᾴδιος ῥᾳδία ῥᾴδιον",
+   "lemma": "ῥᾴδιος",
+   "definition": "easy",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 310,
+   "headword": "ἀφαιρέω, ἀφαιρήσω, ἀφεῖλον, ἀφῄρηκα, ἀφῄρημαι, ἀφῃρέθην",
+   "lemma": "ἀφαιρέω",
+   "definition": "take from, take away",
+   "pos": "verb: contracted",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 311,
+   "headword": "τύχη τύχης, ἡ",
+   "lemma": "τύχη",
+   "definition": "luck, fortune (good or bad), fate, chance",
+   "pos": "noun: 1st declension",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 312,
+   "headword": "φανερός –ά –όν",
+   "lemma": "φανερός",
+   "definition": "clear, evident",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 313,
+   "headword": "πρόσωπον προσώπου, τό",
+   "lemma": "πρόσωπον",
+   "definition": "face, mask, person",
+   "pos": "noun: 2nd declension",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 314,
+   "headword": "πιστεύω, πιστεύσω, ἐπίστευσα, πεπίστευκα, πεπίστευμαι, ἐπιστεύθην",
+   "lemma": "πιστεύω",
+   "definition": "trust, rely on, believe in (+dat.)",
+   "pos": "verb: -ω vowel stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 315,
+   "headword": "διδάσκω, διδάξω, ἐδίδαξα, δεδίδαχα, δεδίδαγμαι, ἐδιδάχθην",
+   "lemma": "διδάσκω",
+   "definition": "teach",
+   "pos": "verb: -ω palatal stem",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 316,
+   "headword": "ἄνω",
+   "lemma": "ἄνω",
+   "definition": "up, upwards",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 317,
+   "headword": "τάσσω, τάξω, ἔταξα, τέταχα, τέταγμαι, ἐτάχθην",
+   "lemma": "τάσσω",
+   "definition": "arrange, put in order",
+   "pos": "verb: -ω palatal stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 318,
+   "headword": "ὀφθαλμός –οῦ, ὁ",
+   "lemma": "ὀφθαλμός",
+   "definition": "eye",
+   "pos": "noun: 2nd declension",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 319,
+   "headword": "δέχομαι, δέξομαι, ἐδεξάμην, δέδεγμαι, -εδέχθην",
+   "lemma": "δέχομαι",
+   "definition": "take, accept; welcome, entertain",
+   "pos": "verb: deponent",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 320,
+   "headword": "ἀφικνέομαι, ἀφίξομαι, 2 aor. ἀφικόμην, ἀφῖγμαι",
+   "lemma": "ἀφικνέομαι",
+   "definition": "come to, arrive at",
+   "pos": "verb: deponent",
+   "group": "Movement"
+  },
+  {
+   "rank": 321,
+   "headword": "ἱκανός –ή –όν",
+   "lemma": "ἱκανός",
+   "definition": "sufficient, enough; competent, able to (+infin.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 322,
+   "headword": "ἐργάζομαι, ἐργάσομαι, εἰργασάμην, εἴργασμαι",
+   "lemma": "ἐργάζομαι",
+   "definition": "work, labor",
+   "pos": "verb: deponent",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 323,
+   "headword": "μάχη μάχης, ἡ",
+   "lemma": "μάχη",
+   "definition": "battle",
+   "pos": "noun: 1st declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 324,
+   "headword": "τρέφω, θρέψω, ἔθρεψα, τέθραμμαι, ἐτράφην",
+   "lemma": "τρέφω",
+   "definition": "nourish, feed, support, maintain; rear, educate",
+   "pos": "verb: -ω labial stem",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 325,
+   "headword": "ἀδύνατος –ον",
+   "lemma": "ἀδύνατος",
+   "definition": "impossible; powerless",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 326,
+   "headword": "ἀκριβής –ές",
+   "lemma": "ἀκριβής",
+   "definition": "exact, accurate, precise",
+   "pos": "adjective: 3rd declension -ης, -ες",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 327,
+   "headword": "που",
+   "lemma": "που",
+   "definition": "(enclitic) somewhere; I suppose, perhaps (to qualify an assertion)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 328,
+   "headword": "ὅθεν",
+   "lemma": "ὅθεν",
+   "definition": "from where, whence",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 329,
+   "headword": "στόμα στόματος, τό",
+   "lemma": "στόμα",
+   "definition": "mouth, face, opening",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 330,
+   "headword": "χωρίς",
+   "lemma": "χωρίς",
+   "definition": "separately, apart; (+gen.) without, separate from",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 331,
+   "headword": "κρείσσων κρεῖσσον",
+   "lemma": "κρείσσων",
+   "definition": "stronger, mightier; better, more excellent (comp. of ἀγαθός)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 332,
+   "headword": "βραχύς βραχεῖα βραχύ",
+   "lemma": "βραχύς",
+   "definition": "brief, short",
+   "pos": "adjective: -ύς, -εῖα, -ύ",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 333,
+   "headword": "ἰσχυρός –ά –όν",
+   "lemma": "ἰσχυρός",
+   "definition": "strong",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 334,
+   "headword": "ἀλήθεια ἀληθείας, ἡ",
+   "lemma": "ἀλήθεια",
+   "definition": "truth",
+   "pos": "noun: 1st declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 335,
+   "headword": "δίκη δίκης, ἡ",
+   "lemma": "δίκη",
+   "definition": "justice, lawsuit, trial, penalty",
+   "pos": "noun: 1st declension",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 336,
+   "headword": "χωρίον χωρίου, τό",
+   "lemma": "χωρίον",
+   "definition": "place, spot, district",
+   "pos": "noun: 2nd declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 337,
+   "headword": "ἡδύς ἡδεῖα ἡδύ",
+   "lemma": "ἡδύς",
+   "definition": "sweet, pleasant",
+   "pos": "adjective: -ύς, -εῖα, -ύ",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 338,
+   "headword": "νόσος νόσου, ἡ",
+   "lemma": "νόσος",
+   "definition": "disease, sickness",
+   "pos": "noun: 2nd declension",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 339,
+   "headword": "λίθος λίθου, ὁ",
+   "lemma": "λίθος",
+   "definition": "stone",
+   "pos": "noun: 2nd declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 340,
+   "headword": "παλαιός –ά –όν",
+   "lemma": "παλαιός",
+   "definition": "old, ancient",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 341,
+   "headword": "ἀφίημι, ἀφήσω, ἀφῆκα, ἀφεῖκα, ἀφεῖμαι, ἀφείθην",
+   "lemma": "ἀφίημι",
+   "definition": "send away, let go; let alone, neglect",
+   "pos": "verb: -μι",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 342,
+   "headword": "ἄλλως",
+   "lemma": "ἄλλως",
+   "definition": "otherwise",
+   "pos": "adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 343,
+   "headword": "πρᾶξις πράξεως, ἡ",
+   "lemma": "πρᾶξις",
+   "definition": "action, transaction, business",
+   "pos": "noun: 3rd declension ι-stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 344,
+   "headword": "σαφής σαφές",
+   "lemma": "σαφής",
+   "definition": "clear, distinct, plain",
+   "pos": "adjective: 3rd declension -ης, -ες",
+   "group": "Showing and Finding"
+  },
+  {
+   "rank": 345,
+   "headword": "σοφός –ή –όν",
+   "lemma": "σοφός",
+   "definition": "wise, clever, skilled",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 346,
+   "headword": "νικάω, νικήσω, ἐνίκησα, νενίκηκα, νενίκημαι, ἐνικήθην",
+   "lemma": "νικάω",
+   "definition": "conquer, win",
+   "pos": "verb: contracted",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 347,
+   "headword": "ὁμολογέω, ὁμολογήσω, ὡμολόγησα, ὡμολόγηκα, ὡμολόγημαι, ὡμολογήθην",
+   "lemma": "ὁμολογέω",
+   "definition": "agree with, say the same thing as (+dat.)",
+   "pos": "verb: contracted",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 348,
+   "headword": "ναός (νεώς) ναοῦ (νεώ), ὁ",
+   "lemma": "ναός",
+   "definition": "temple",
+   "pos": "noun: 2nd declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 349,
+   "headword": "αὖ, αὖθις",
+   "lemma": "αὖ",
+   "definition": "moreover; on the other hand; back (again)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 350,
+   "headword": "πατρίς πατρίδος, ἡ",
+   "lemma": "πατρίς",
+   "definition": "fatherland",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 351,
+   "headword": "ὀξύς ὀξεῖα ὀξύ",
+   "lemma": "ὀξύς",
+   "definition": "sharp, keen, shrill, pungent",
+   "pos": "adjective: -ύς, -εῖα, -ύ",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 352,
+   "headword": "καίτοι (καί-τοι)",
+   "lemma": "καίτοι",
+   "definition": "and indeed, and yet",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 353,
+   "headword": "πλέον",
+   "lemma": "πλέον",
+   "definition": "more, rather",
+   "pos": "adverb",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 354,
+   "headword": "πλέων πλέον",
+   "lemma": "πλέων",
+   "definition": "more, larger (comp. of πολύς)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 355,
+   "headword": "γνώμη γνώμης, ἡ",
+   "lemma": "γνώμη",
+   "definition": "thought, intelligence, opinion, purpose",
+   "pos": "noun: 1st declension",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 356,
+   "headword": "τιμή τιμῆς, ἡ",
+   "lemma": "τιμή",
+   "definition": "honor, esteem; price, value; office, magistracy",
+   "pos": "noun: 1st declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 357,
+   "headword": "μεταξύ",
+   "lemma": "μεταξύ",
+   "definition": "between (prep. + gen.); in the midst of (adv.)",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 358,
+   "headword": "προσήκω προσήξω",
+   "lemma": "προσήκω",
+   "definition": "belong to, have to do with; be fitting for (+dat.); arrive at; οἱ προσήκοντες relatives; τὰ προσήκoντα duties",
+   "pos": "verb: -ω palatal stem",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 359,
+   "headword": "πρίν",
+   "lemma": "πρίν",
+   "definition": "before, until",
+   "pos": "conjunction: subordinating",
+   "group": "Time"
+  },
+  {
+   "rank": 360,
+   "headword": "ἀδικέω, ἀδικήσω, ἠδίκησα, ἠδίκηκα, ἠδίκημαι, ἠδικήθην",
+   "lemma": "ἀδικέω",
+   "definition": "do wrong; injure",
+   "pos": "verb: contracted",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 361,
+   "headword": "στρατηγός –οῦ, ὁ",
+   "lemma": "στρατηγός",
+   "definition": "leader of an army, commander, general",
+   "pos": "noun: 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 362,
+   "headword": "οὐκέτι",
+   "lemma": "οὐκέτι",
+   "definition": "no longer, no more",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 363,
+   "headword": "πρέσβυς πρέσβεως, ὁ",
+   "lemma": "πρέσβυς",
+   "definition": "old man; (pl.) ambassadors",
+   "pos": "noun: 3rd declension -εύς, -έως",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 364,
+   "headword": "παύω, παύσω, ἔπαυσα, πέπαυκα, πέπαυμαι, ἐπαύθην",
+   "lemma": "παύω",
+   "definition": "stop, put an end to; (mid.) cease",
+   "pos": "verb: -ω vowel stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 365,
+   "headword": "τελευτάω, τελευτήσω, ἐτελεύτησα, τετελεύτηκα, τετελεύτημαι, ἐτελευτήθην",
+   "lemma": "τελευτάω",
+   "definition": "finish; die",
+   "pos": "verb: contracted",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 366,
+   "headword": "μίγνυμι, μίξω, ἔμιξα, μέμιχα,μέμιγμαι, ἐμίχθην",
+   "lemma": "μίγνυμι",
+   "definition": "mix, mingle",
+   "pos": "verb: -μι",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 367,
+   "headword": "λαός λαοῦ, ὁ",
+   "lemma": "λαός",
+   "definition": "the people, folk",
+   "pos": "noun: 2nd declension",
+   "group": "Humanity and Being"
+  },
+  {
+   "rank": 368,
+   "headword": "θυγάτηρ θυγατρός, ἡ",
+   "lemma": "θυγάτηρ",
+   "definition": "daughter",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 369,
+   "headword": "οἰκία οἰκίας, ἡ",
+   "lemma": "οἰκία",
+   "definition": "building, house, dwelling",
+   "pos": "noun: 1st declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 370,
+   "headword": "παραδίδωμι, παραδώσω, παρέδωκα, παραδέδωκα, παραδέδομαι, παρεδόθην",
+   "lemma": "παραδίδωμι",
+   "definition": "transmit, hand over, surrender",
+   "pos": "verb: -μι",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 371,
+   "headword": "ἔξω",
+   "lemma": "ἔξω",
+   "definition": "outside; except",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 372,
+   "headword": "νῆσος νήσου, ἡ",
+   "lemma": "νῆσος",
+   "definition": "island",
+   "pos": "noun: 2nd declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 373,
+   "headword": "ἐκεῖ",
+   "lemma": "ἐκεῖ",
+   "definition": "there",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 374,
+   "headword": "ἐπιστήμη –ης, ἡ",
+   "lemma": "ἐπιστήμη",
+   "definition": "knowledge, understanding, skill",
+   "pos": "noun: 1st declension",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 375,
+   "headword": "ἐάω, ἐάσω, εἴασα",
+   "lemma": "ἐάω",
+   "definition": "allow, permit (+acc. and infin.); let be, let alone",
+   "pos": "verb: contracted",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 376,
+   "headword": "θαυμάζω, θαυμάσομαι, ἐθαύμασα, τεθαύμακα, τεθαύμασμαι, ἐθαυμάσθην",
+   "lemma": "θαυμάζω",
+   "definition": "to be in awe (of), be astonished (at)",
+   "pos": "verb: -ω dental stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 377,
+   "headword": "αἰσθάνομαι, αἰσθήσομαι, 2 aor. ᾐσθόμην, ᾔσθημαι",
+   "lemma": "αἰσθάνομαι",
+   "definition": "perceive, understand, hear, learn",
+   "pos": "verb: deponent",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 378,
+   "headword": "χαίρω, χαιρήσω, κεχάρηκα, κεχάρημαι, ἐχάρην",
+   "lemma": "χαίρω",
+   "definition": "to be happy, rejoice at (+dat.), take joy in (+ptc.); χαῖρε, (pl.) χαίρετε hello, goodbye",
+   "pos": "verb: -ω liquid stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 379,
+   "headword": "χαλεπός –ή –όν",
+   "lemma": "χαλεπός",
+   "definition": "difficult, troublesome",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 380,
+   "headword": "τέκνον τέκνου, τό",
+   "lemma": "τέκνον",
+   "definition": "child",
+   "pos": "noun: 2nd declension",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 381,
+   "headword": "καταλαμβάνω, καταλήψομαι, κατέλαβον, κατείληφα, κατείλημμαι, κατελήφθην",
+   "lemma": "καταλαμβάνω",
+   "definition": "seize, catch up with, arrest, compel",
+   "pos": "verb: -ω labial stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 382,
+   "headword": "μάχομαι, μαχοῦμαι, ἐμαχεσάμην, μεμάχημαι",
+   "lemma": "μάχομαι",
+   "definition": "fight (against) (+dat.)",
+   "pos": "verb: deponent",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 383,
+   "headword": "μιμνήσκω, -μνήσω, -έμνησα, pf. μέμνημαι, ἐμνήσθην",
+   "lemma": "μιμνήσκω",
+   "definition": "remind; (in pf. mid.) remember",
+   "pos": "verb: -ω palatal stem",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 384,
+   "headword": "θνῄσκω, 2 aor. -έθανον, τέθνηκα, θανοῦμαι",
+   "lemma": "θνῄσκω",
+   "definition": "to die, be dying",
+   "pos": "verb: -ω palatal stem",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 384,
+   "headword": "λύω, λύσω, ἔλυσα, λέλυκα, λέλυμαι, ἐλύθην",
+   "lemma": "λύω",
+   "definition": "loosen, unbind, set free; undo, destroy",
+   "pos": "verb: -ω vowel stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 386,
+   "headword": "τιμάω, τιμήσω, ἐτίμησα, τετίμηκα, τετίμημαι, ἐτιμήθην",
+   "lemma": "τιμάω",
+   "definition": "to honor",
+   "pos": "verb: contracted",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 387,
+   "headword": "τεῖχος τείχους, τό",
+   "lemma": "τεῖχος",
+   "definition": "wall",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 388,
+   "headword": "ἴσως",
+   "lemma": "ἴσως",
+   "definition": "equally, probably, perhaps",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 389,
+   "headword": "αἴρω, ἀρῶ, ἦρα, ἦρκα, ἦρμαι, ἤρθην",
+   "lemma": "αἴρω",
+   "definition": "take up, lift up; remove",
+   "pos": "verb: -ω palatal stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 390,
+   "headword": "ἀποκτείνω, ἀποκτενῶ, ἀπέκτεινα, ἀπέκτονα",
+   "lemma": "ἀποκτείνω",
+   "definition": "kill",
+   "pos": "verb: -ω liquid stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 391,
+   "headword": "στρατιώτης –ου, ὁ",
+   "lemma": "στρατιώτης",
+   "definition": "soldier",
+   "pos": "noun: 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 392,
+   "headword": "ἄνευ",
+   "lemma": "ἄνευ",
+   "definition": "without (+gen.)",
+   "pos": "preposition",
+   "group": "Prepositions without Direction"
+  },
+  {
+   "rank": 393,
+   "headword": "πότερος ποτέρα πότερον",
+   "lemma": "πότερος",
+   "definition": "which of the two? πότερον whether",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 394,
+   "headword": "ἁπλῶς",
+   "lemma": "ἁπλῶς",
+   "definition": "simply, singly, in one way",
+   "pos": "adverb",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 395,
+   "headword": "πίπτω, πεσοῦμαι, ἔπεσον, πέπτωκα",
+   "lemma": "πίπτω",
+   "definition": "fall, fall down",
+   "pos": "verb: -ω dental stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 396,
+   "headword": "τέταρτος –η –ον",
+   "lemma": "τέταρτος",
+   "definition": "fourth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 397,
+   "headword": "κατασκευάζω, κατασκευάσω, κατεσκεύασα",
+   "lemma": "κατασκευάζω",
+   "definition": "equip, furnish, make ready",
+   "pos": "verb: -ω dental stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 398,
+   "headword": "ἐχθρός –ά –όν",
+   "lemma": "ἐχθρός",
+   "definition": "hated, hateful; hostile to (+dat.)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 399,
+   "headword": "ἀγών ἀγῶνος, ὁ",
+   "lemma": "ἀγών",
+   "definition": "contest; struggle",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 400,
+   "headword": "κωλύω, κωλύσω, ἐκώλυσα, κεκώλυκα, κεκώλυμαι, ἐκωλύθην",
+   "lemma": "κωλύω",
+   "definition": "hinder, check, prevent (+acc. and infin.)",
+   "pos": "verb: -ω vowel stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 401,
+   "headword": "ἁμαρτάνω, ἁμαρτήσομαι, ἡμάρτησα, 2 aor. ἥμαρτον, ἡμάρτηκα, ἡμάρτημαι, ἡμαρτήθην",
+   "lemma": "ἁμαρτάνω",
+   "definition": "miss the mark (+gen.); fail, be wrong, make a mistake",
+   "pos": "verb: -ω dental stem",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 402,
+   "headword": "διαφθείρω, διαφθερῶ, διέφθειρα, διέφθαρκα, διέφθαρμαι, διεφθάρην",
+   "lemma": "διαφθείρω",
+   "definition": "destroy; corrupt",
+   "pos": "verb: -ω liquid stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 403,
+   "headword": "πως",
+   "lemma": "πως",
+   "definition": "(enclitic) somehow, in some way, in any way",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 404,
+   "headword": "πόνος πόνου, ὁ",
+   "lemma": "πόνος",
+   "definition": "work, labor; stress, trouble, pain",
+   "pos": "noun: 2nd declension",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 405,
+   "headword": "ἔνθα",
+   "lemma": "ἔνθα",
+   "definition": "there",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 406,
+   "headword": "τάξις τάξεως, ἡ",
+   "lemma": "τάξις",
+   "definition": "arrangement, order; military unit",
+   "pos": "noun: 3rd declension ι-stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 407,
+   "headword": "πειράω (usually mid. πειράομαι), πειράσομαι, ἐπείρασα, πεπείραμαι, ἐπειράθην",
+   "lemma": "πειράω",
+   "definition": "attempt, try, make a trial of (+gen.)",
+   "pos": "verb: contracted",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 408,
+   "headword": "φοβέω, φοβήσω, ἐφόβησα, πεφόβημαι, ἐφοβήθην",
+   "lemma": "φοβέω",
+   "definition": "put to flight; (mid. and pass.) flee, fear",
+   "pos": "verb: contracted",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 409,
+   "headword": "βάλλω, βαλῶ, 2 aor. ἔβαλον, βέβληκα, βέβλημαι, ἐβλήθην",
+   "lemma": "βάλλω",
+   "definition": "throw, hurl; throw at, hit (acc.) with (dat.)",
+   "pos": "verb: -ω liquid stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 410,
+   "headword": "πονηρός –ά –όν",
+   "lemma": "πονηρός",
+   "definition": "worthless, bad, wicked",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 411,
+   "headword": "ξένος ξένου, ὁ",
+   "lemma": "ξένος",
+   "definition": "guest-friend; foreigner, stranger",
+   "pos": "noun: 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 412,
+   "headword": "βάρβαρος –ον",
+   "lemma": "βάρβαρος",
+   "definition": "non-Greek, foreign; barbarous",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 413,
+   "headword": "ὅπου",
+   "lemma": "ὅπου",
+   "definition": "where, wherever",
+   "pos": "conjunction: subordinating",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 414,
+   "headword": "συμφέρω, συνοίσω, 1 aor. συνήνεγκα",
+   "lemma": "συμφέρω",
+   "definition": "benefit, be useful or profitable to (+dat.); (impers.) συμφέρει it is of use, expedient (+infin.); τὸ συμφέρον use, profit, advantage",
+   "pos": "verb: irregular",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 415,
+   "headword": "πυνθάνομαι, πεύσομαι, 2 aor. ἐπυθόμην, πέπυσμαι",
+   "lemma": "πυνθάνομαι",
+   "definition": "learn, hear, inquire concerning (+gen.)",
+   "pos": "verb: deponent",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 416,
+   "headword": "δοῦλος δούλου, ὁ",
+   "lemma": "δοῦλος",
+   "definition": "slave",
+   "pos": "noun: 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 417,
+   "headword": "τέμνω, τεμῶ, 2 aor. ἔτεμον, -τέτμηκα, τέτμημαι, ἐτμήθην",
+   "lemma": "τέμνω",
+   "definition": "cut, cut down, cut to pieces",
+   "pos": "verb: -ω liquid stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 418,
+   "headword": "χρήσιμος χρησίμη χρήσιμον",
+   "lemma": "χρήσιμος",
+   "definition": "useful, serviceable",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 419,
+   "headword": "ποῖος ποία ποῖον",
+   "lemma": "ποῖος",
+   "definition": "what sort of?",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 420,
+   "headword": "ὅπλον ὅπλου, τό",
+   "lemma": "ὅπλον",
+   "definition": "weapon, tool, implement (mostly pl.)",
+   "pos": "noun: 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 421,
+   "headword": "πίστις πίστεως, ἡ",
+   "lemma": "πίστις",
+   "definition": "trust in others, faith; that which gives confidence, assurance, pledge, guarantee",
+   "pos": "noun: 3rd declension ι-stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 422,
+   "headword": "ὑπολαμβάνω, ὑπολήψομαι, ὑπέλαβον, ὑπείληφα, ὑπείλημμαι, ὑπελήφθην",
+   "lemma": "ὑπολαμβάνω",
+   "definition": "take up, seize; answer, reply; assume, suppose",
+   "pos": "verb: -ω labial stem",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 423,
+   "headword": "ποιητής –οῦ, ὁ",
+   "lemma": "ποιητής",
+   "definition": "creator, poet",
+   "pos": "noun: 2nd declension",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 424,
+   "headword": "λανθάνω, λήσω, ἔλαθον, λέληθα",
+   "lemma": "λανθάνω",
+   "definition": "escape the notice of (+acc. and nom. participle), be unknown; (mid. and pass.) forget",
+   "pos": "verb: -ω liquid stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 425,
+   "headword": "βελτίων βέλτιον",
+   "lemma": "βελτίων",
+   "definition": "better (comp. of ἀγαθός)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 426,
+   "headword": "πάντως",
+   "lemma": "πάντως",
+   "definition": "altogether, in all ways; at any rate",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 427,
+   "headword": "πορεύω, πορεύσω, ἐπόρευσα, πεπόρευμαι, ἐπορεύθην",
+   "lemma": "πορεύω",
+   "definition": "carry; (mid. and pass) go, walk, march",
+   "pos": "verb: -ω vowel stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 428,
+   "headword": "ἀποκρίνω, ἀποκρινῶ, ἀπεκρινάμην, ἀπεκρίθη",
+   "lemma": "ἀποκρίνω",
+   "definition": "separate, set apart, choοse; (mid.) answer, reply",
+   "pos": "verb: -ω liquid stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 429,
+   "headword": "πέντε",
+   "lemma": "πέντε",
+   "definition": "five",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 430,
+   "headword": "κίνδυνος κινδύνου, ὁ",
+   "lemma": "κίνδυνος",
+   "definition": "danger",
+   "pos": "noun: 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 431,
+   "headword": "κατηγορέω, κατηγορήσω, κατηγόρησα, κατηγόρηκα, κατηγόρημαι, κατηγορήθην",
+   "lemma": "κατηγορέω",
+   "definition": "to speak against, to accuse (+gen.)",
+   "pos": "verb: contracted",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 432,
+   "headword": "τρέπω, τρέψω, ἔτρεψα, τέτροφα, ἐτράπην",
+   "lemma": "τρέπω",
+   "definition": "turn, direct towards a thing; put to flight, defeat; (pass.) turn one’s steps in a certain direction, go",
+   "pos": "verb: -ω labial stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 433,
+   "headword": "ὅμως",
+   "lemma": "ὅμως",
+   "definition": "nevertheless, all the same, notwithstanding",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 434,
+   "headword": "θεῖος θεία θεῖον",
+   "lemma": "θεῖος",
+   "definition": "divine",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 435,
+   "headword": "ἱππεύς ἱππέως, ὁ",
+   "lemma": "ἱππεύς",
+   "definition": "horseman, rider, charioteer",
+   "pos": "noun: 3rd declension -εύς, -έως",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 436,
+   "headword": "κτάομαι, κτήσομαι, ἐκτησάμην, κέκτημαι",
+   "lemma": "κτάομαι",
+   "definition": "get, gain, acquire",
+   "pos": "verb: deponent",
+   "group": "Taking and Giving"
+  },
+  {
+   "rank": 437,
+   "headword": "λείπω, λείψω, ἔλιπον, λέλοιπα, λέλειμμαι, ἐλείφθην",
+   "lemma": "λείπω",
+   "definition": "leave, abandon",
+   "pos": "verb: -ω labial stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 438,
+   "headword": "βουλή βουλῆς, ἡ",
+   "lemma": "βουλή",
+   "definition": "will, determination; counsel, piece of advice; council of elders",
+   "pos": "noun: 1st declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 439,
+   "headword": "ἐλπίς ἐλπίδος, ἡ",
+   "lemma": "ἐλπίς",
+   "definition": "hope; expectation",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 440,
+   "headword": "γραφή γραφῆς, ἡ",
+   "lemma": "γραφή",
+   "definition": "a drawing, painting, writing; indictment",
+   "pos": "noun: 1st declension",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 441,
+   "headword": "τίκτω, τέξω or τέξομαι, ἔτεκον, τέτοκα, τέτεγμαι, ἐτέχθην",
+   "lemma": "τίκτω",
+   "definition": "beget, give birth to, produce",
+   "pos": "verb: -ω palatal stem",
+   "group": "Family and Friendship and the Home"
+  },
+  {
+   "rank": 442,
+   "headword": "κομίζω, κομιῶ, ἐκόμισα, κεκόμικα, κεκόμισμαι, ἐκομίσθην",
+   "lemma": "κομίζω",
+   "definition": "take care of, provide for",
+   "pos": "verb: -ω dental stem",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 443,
+   "headword": "θυμός θυμοῦ, ὁ",
+   "lemma": "θυμός",
+   "definition": "life, spirit; soul, heart, mind",
+   "pos": "noun: 2nd declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 444,
+   "headword": "βλέπω, βλέψομαι, ἔβλεψα",
+   "lemma": "βλέπω",
+   "definition": "see, look (at)",
+   "pos": "verb: -ω labial stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 445,
+   "headword": "φόβος φόβου, ὁ",
+   "lemma": "φόβος",
+   "definition": "panic, fear, flight",
+   "pos": "noun: 2nd declension",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 446,
+   "headword": "πολιτεία –ας, ἡ",
+   "lemma": "πολιτεία",
+   "definition": "constitution, citizenship, republic",
+   "pos": "noun: 1st declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 447,
+   "headword": "στάδιον σταδίου, τό (pl. στάδια and στάδιοι)",
+   "lemma": "στάδιον",
+   "definition": "stadion or stade, the longest Greek unit of linear measure, about 185 meters",
+   "pos": "noun: 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 448,
+   "headword": "φρονέω, φρονήσω, ἐφρόνησα",
+   "lemma": "φρονέω",
+   "definition": "think, intend to (+infin.); be minded towards (+adv. and dat.)",
+   "pos": "verb: contracted",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 449,
+   "headword": "τοιόσδε τοιάδε τοιόνδε",
+   "lemma": "τοιόσδε",
+   "definition": "such (as this), of such a sort (as this)",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 450,
+   "headword": "ὁρμάω, ὁρμήσω, ὥρμησα, ὥρμηκα, ὥρμημαι, ὡρμήθην",
+   "lemma": "ὁρμάω",
+   "definition": "set in motion, urge on; (intrans.) start, hasten on",
+   "pos": "verb: contracted",
+   "group": "Movement"
+  },
+  {
+   "rank": 451,
+   "headword": "παρασκευάζω, παρασκευάσω, παρεσκεύασα",
+   "lemma": "παρασκευάζω",
+   "definition": "get ready, prepare, provide",
+   "pos": "verb: -ω dental stem",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 452,
+   "headword": "λαλέω, λαλήσω, ἐλάλησα, λελάληκα, ἐλαλήθην",
+   "lemma": "λαλέω",
+   "definition": "talk, chatter, babble",
+   "pos": "verb: contracted",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 453,
+   "headword": "δράω, δράσω, ἔδρασα, δέδρακα, δέδραμαι, ἐδράσθην",
+   "lemma": "δράω",
+   "definition": "do, accomplish",
+   "pos": "verb: contracted",
+   "group": "Work and Leisure"
+  },
+  {
+   "rank": 454,
+   "headword": "σκοπέω, σκοπήσω, ἐσκόπησα",
+   "lemma": "σκοπέω",
+   "definition": "look at, watch; look into, consider, examine",
+   "pos": "verb: contracted",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 455,
+   "headword": "βοῦς βοός, ὁ/ἡ",
+   "lemma": "βοῦς",
+   "definition": "bull, ox, cow",
+   "pos": "noun: 3rd declension irregular",
+   "group": "Animals and Plants"
+  },
+  {
+   "rank": 456,
+   "headword": "ἡμέτερος ἡμετέρα ἡμέτρον",
+   "lemma": "ἡμέτερος",
+   "definition": "our",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 457,
+   "headword": "γράμμα γράμματος, τό",
+   "lemma": "γράμμα",
+   "definition": "letter, written character; (pl.) piece of writing, document(s)",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 458,
+   "headword": "ἐρωτάω, ἐρήσομαι, 2 aor. ἠρόμην",
+   "lemma": "ἐρωτάω",
+   "definition": "ask someone (acc.) something (acc.); question, beg",
+   "pos": "verb: contracted",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 459,
+   "headword": "πολεμέω, πολεμήσω, ἐπολέμησα, πεπολέμηκα",
+   "lemma": "πολεμέω",
+   "definition": "make war",
+   "pos": "verb: contracted",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 460,
+   "headword": "θύω, θύσω, ἔθυσα, τέθυκα, τέθυμαι, ἐτύθην",
+   "lemma": "θύω",
+   "definition": "sacrifice",
+   "pos": "verb: -ω vowel stem",
+   "group": "Religion"
+  },
+  {
+   "rank": 461,
+   "headword": "ἐλαύνω, ἐλῶ, ἤλασα, -ελήλακα, ἐλήλαμαι, ἠλάθην",
+   "lemma": "ἐλαύνω",
+   "definition": "drive, set in motion",
+   "pos": "verb: -ω liquid stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 462,
+   "headword": "δέδοικα, δείσομαι, ἔδεισα",
+   "lemma": "δέδοικα",
+   "definition": "fear",
+   "pos": "verb: -ω dental stem",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 463,
+   "headword": "σύμμαχος –ον",
+   "lemma": "σύμμαχος",
+   "definition": "allied with (+dat.); οἱ σύμμαχοι allies",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 464,
+   "headword": "ἡγεμών ἡγεμόνος, ὁ",
+   "lemma": "ἡγεμών",
+   "definition": "guide, leader, commander",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 465,
+   "headword": "βαρύς βαρεῖα βαρύ",
+   "lemma": "βαρύς",
+   "definition": "heavy, grievous, tiresome",
+   "pos": "adjective: -ύς, -εῖα, -ύ",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 466,
+   "headword": "ὧδε",
+   "lemma": "ὧδε",
+   "definition": "thus, in this way; hither, here",
+   "pos": "adverb",
+   "group": "Direction"
+  },
+  {
+   "rank": 467,
+   "headword": "αἰσχρός –ά –όν",
+   "lemma": "αἰσχρός",
+   "definition": "ugly, shameful, disgraceful",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 468,
+   "headword": "εἰρήνη εἰρήνης, ἡ",
+   "lemma": "εἰρήνη",
+   "definition": "peace",
+   "pos": "noun: 1st declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 469,
+   "headword": "ἁλίσκομαι, ἁλώσομαι, 2 aor. ἑάλων, ἑάλωκα",
+   "lemma": "ἁλίσκομαι",
+   "definition": "to be taken, conquered (act. supplied by αἱρέω)",
+   "pos": "verb: deponent",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 470,
+   "headword": "δέκα",
+   "lemma": "δέκα",
+   "definition": "ten",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 471,
+   "headword": "ἀμείνων ἄμεινον",
+   "lemma": "ἀμείνων",
+   "definition": "better, abler, stronger, braver (comp. of ἀγαθός)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 472,
+   "headword": "χείρων χεῖρον",
+   "lemma": "χείρων",
+   "definition": "worse, inferior (comp. of κακός)",
+   "pos": "adjective: 3rd declension -ων, -ον",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 473,
+   "headword": "βοηθέω, βοηθήσω, ἐβοήθησα, βεβοήθηκα",
+   "lemma": "βοηθέω",
+   "definition": "help, assist (+dat.)",
+   "pos": "verb: contracted",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 474,
+   "headword": "λαμπρός –ά –όν",
+   "lemma": "λαμπρός",
+   "definition": "bright, brilliant; well-known, illustrious",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Characteristics"
+  },
+  {
+   "rank": 475,
+   "headword": "ἀπαλλάσσω, ἀπαλλάξω, ἀπήλλαξα, ἀπήλλαχα, ἀπήλλαγμαι, ἀπηλλάχθην or ἀπηλλάγην",
+   "lemma": "ἀπαλλάσσω",
+   "definition": "set free, release, deliver",
+   "pos": "verb: -ω palatal stem",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 476,
+   "headword": "βουλεύω βουλεύσω, ἐβούλευσα, βεβούλευκα, βεβούλευμαι, ἐβουλεύθην",
+   "lemma": "βουλεύω",
+   "definition": "plan (to), decide (to); (mid.) deliberate",
+   "pos": "verb: -ω vowel stem",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 477,
+   "headword": "μάλα",
+   "lemma": "μάλα",
+   "definition": "very, very much",
+   "pos": "adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 478,
+   "headword": "αἰτέω, αἰτήσω, ᾔτησα, ᾔτηκα, ᾔτημαι, ᾐτήθην",
+   "lemma": "αἰτέω",
+   "definition": "ask (for), beg",
+   "pos": "verb: contracted",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 479,
+   "headword": "σωτηρία σωτηρίας, ἡ",
+   "lemma": "σωτηρία",
+   "definition": "safety, deliverance",
+   "pos": "noun: 1st declension",
+   "group": "Help and Safety"
+  },
+  {
+   "rank": 480,
+   "headword": "ἆρα",
+   "lemma": "ἆρα",
+   "definition": "[introduces a question]",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 481,
+   "headword": "διώκω, διώξομαι, ἐδίωξα, δεδίωχα, ἐδιώχθην",
+   "lemma": "διώκω",
+   "definition": "pursue",
+   "pos": "verb: -ω palatal stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 482,
+   "headword": "δαίμων δαίμονος, ὁ/ἡ",
+   "lemma": "δαίμων",
+   "definition": "spirit, god, demon",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Religion"
+  },
+  {
+   "rank": 483,
+   "headword": "οὐκοῦν",
+   "lemma": "οὐκοῦν",
+   "definition": "surely then (inviting assent to an inference)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 484,
+   "headword": "γλῶσσα γλώσσης, ἡ",
+   "lemma": "γλῶσσα",
+   "definition": "tongue; language",
+   "pos": "noun: 1st declension",
+   "group": "Body Parts"
+  },
+  {
+   "rank": 485,
+   "headword": "ἑπτά",
+   "lemma": "ἑπτά",
+   "definition": "seven",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 486,
+   "headword": "τολμάω, τολμήσω, ἐτόλμησα, τετόλμηκα, τετόλμημαι, ἐτολμήθην",
+   "lemma": "τολμάω",
+   "definition": "have the courage, dare; undertake, undergo",
+   "pos": "verb: contracted",
+   "group": "The Senses and Feelings"
+  },
+  {
+   "rank": 487,
+   "headword": "δεσπότης –ου, ὁ",
+   "lemma": "δεσπότης",
+   "definition": "master (of the household); absolute ruler",
+   "pos": "noun: 1st declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 488,
+   "headword": "εἰκός εἰκότος, τό",
+   "lemma": "εἰκός",
+   "definition": "likelihood, probability; εἰκός (ἐστι) it is likely (+infin.) →ἔοικα",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "The Mind, Perceiving and Learning"
+  },
+  {
+   "rank": 489,
+   "headword": "ἄδικος ἄδικον",
+   "lemma": "ἄδικος",
+   "definition": "unjust",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Ethics and Morals"
+  },
+  {
+   "rank": 490,
+   "headword": "εἴκοσι(ν)",
+   "lemma": "εἴκοσι",
+   "definition": "twenty",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 491,
+   "headword": "μυρίος μυρία μυρίον",
+   "lemma": "μυρίος",
+   "definition": "countless; μύριοι 10,000; μυριάς -άδος ἡ 10,000, a countless amount",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 492,
+   "headword": "αὐτίκα",
+   "lemma": "αὐτίκα",
+   "definition": "at once, immediately",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 493,
+   "headword": "δέκατος –η –ον",
+   "lemma": "δέκατος",
+   "definition": "tenth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 494,
+   "headword": "βαίνω, βήσομαι, 2 aor. ἔβην, βέβηκα",
+   "lemma": "βαίνω",
+   "definition": "walk, come, go",
+   "pos": "verb: -ω liquid stem",
+   "group": "Movement"
+  },
+  {
+   "rank": 495,
+   "headword": "περ",
+   "lemma": "περ",
+   "definition": "[enclitic added to pronouns and other particles for emphasis]",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 496,
+   "headword": "ἐλεύθερος ἐλευθέρα ἐλεύθερον",
+   "lemma": "ἐλεύθερος",
+   "definition": "free, independent",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 497,
+   "headword": "στρατιά –ᾶς, ἡ",
+   "lemma": "στρατιά",
+   "definition": "army",
+   "pos": "noun: 1st declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 498,
+   "headword": "ἀμφί",
+   "lemma": "ἀμφί",
+   "definition": "about, around",
+   "pos": "preposition",
+   "group": "Direction"
+  },
+  {
+   "rank": 499,
+   "headword": "συμφορά –ᾶς, ἡ",
+   "lemma": "συμφορά",
+   "definition": "event, circumstance, misfortune",
+   "pos": "noun: 1st declension",
+   "group": "Life and Death"
+  },
+  {
+   "rank": 500,
+   "headword": "ἑκατόν",
+   "lemma": "ἑκατόν",
+   "definition": "hundred",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 501,
+   "headword": "νίκη νίκης, ἡ",
+   "lemma": "νίκη",
+   "definition": "victory",
+   "pos": "noun: 1st declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 502,
+   "headword": "ἔπος ἔπους, τό",
+   "lemma": "ἔπος",
+   "definition": "word, speech, tale; prophecy",
+   "pos": "noun: 3rd declension σ-stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 503,
+   "headword": "στρατός –οῦ, ὁ",
+   "lemma": "στρατός",
+   "definition": "army",
+   "pos": "noun: 2nd declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 504,
+   "headword": "φράζω, φράσω, ἔφρασα, πέφρακα, πέφρασμαι, ἐφράσθην",
+   "lemma": "φράζω",
+   "definition": "tell, declare; (mid. and pass.) think (about)",
+   "pos": "verb: -ω dental stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 505,
+   "headword": "ἀργύριον ἀργυρίου, τό",
+   "lemma": "ἀργύριον",
+   "definition": "money",
+   "pos": "noun: 2nd declension",
+   "group": "Government and Society"
+  },
+  {
+   "rank": 506,
+   "headword": "τριάκοντα",
+   "lemma": "τριάκοντα",
+   "definition": "thirty",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 507,
+   "headword": "ἕξ",
+   "lemma": "ἕξ",
+   "definition": "six",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 508,
+   "headword": "πεμπτός –ή –όν",
+   "lemma": "πεμπτός",
+   "definition": "fifth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 509,
+   "headword": "μάρτυς μάρτυρος, ὁ/ἡ",
+   "lemma": "μάρτυς",
+   "definition": "witness",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "Law and Judgment"
+  },
+  {
+   "rank": 510,
+   "headword": "χαλκοῦς –ῆ –οῦν",
+   "lemma": "χαλκοῦς",
+   "definition": "of copper or bronze",
+   "pos": "adjective: 1st and 2nd declension",
+   "group": "Earth"
+  },
+  {
+   "rank": 511,
+   "headword": "ἕβδομος –η –ον",
+   "lemma": "ἕβδομος",
+   "definition": "seventh",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 512,
+   "headword": "ποῦ",
+   "lemma": "ποῦ",
+   "definition": "where",
+   "pos": "pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 513,
+   "headword": "ναί",
+   "lemma": "ναί",
+   "definition": "indeed, yes (used in strong affirmation)",
+   "pos": "adverb",
+   "group": "Particles"
+  },
+  {
+   "rank": 514,
+   "headword": "φῶς φωτός, τό",
+   "lemma": "φῶς",
+   "definition": "light, daylight",
+   "pos": "noun: 3rd declension consonant stem",
+   "group": "World Order"
+  },
+  {
+   "rank": 515,
+   "headword": "ὀκτώ",
+   "lemma": "ὀκτώ",
+   "definition": "eight",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 516,
+   "headword": "ἕκτος –η –ον",
+   "lemma": "ἕκτος",
+   "definition": "sixth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 517,
+   "headword": "τριακοστός –ή –όν",
+   "lemma": "τριακοστός",
+   "definition": "thirtieth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 518,
+   "headword": "ἐννέα",
+   "lemma": "ἐννέα",
+   "definition": "nine",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 519,
+   "headword": "πότε",
+   "lemma": "πότε",
+   "definition": "when?",
+   "pos": "adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 520,
+   "headword": "ὄγδοος –η –ον",
+   "lemma": "ὄγδοος",
+   "definition": "eighth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 521,
+   "headword": "ἔνατος –α –ον",
+   "lemma": "ἔνατος",
+   "definition": "ninth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 522,
+   "headword": "εἰκοστός –ή –όν",
+   "lemma": "εἰκοστός",
+   "definition": "twentieth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  },
+  {
+   "rank": 523,
+   "headword": "ἀγγέλλω, ἀγγελῶ, ἤγγειλα, ἤγγελκα, ἤγγελμαι, ἠγγέλθην",
+   "lemma": "ἀγγέλλω",
+   "definition": "report, tell",
+   "pos": "verb: -ω liquid stem",
+   "group": "Writing and Talking"
+  },
+  {
+   "rank": 524,
+   "headword": "ἑκατοστός –ή –όν",
+   "lemma": "ἑκατοστός",
+   "definition": "hundredth",
+   "pos": "adjective: numeral",
+   "group": "Measurements and Numerals"
+  }
+ ]
+}

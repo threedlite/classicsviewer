@@ -1,0 +1,7979 @@
+{
+ "language": "latin",
+ "source": "Dickinson College Commentaries, Latin Core Vocabulary",
+ "url": "https://dcc.dickinson.edu/latin-vocabulary-list",
+ "license": "CC BY-SA 3.0",
+ "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+ "retrieved": "2026-09-26",
+ "count": 996,
+ "entries": [
+  {
+   "rank": 1,
+   "headword": "et",
+   "lemma": "et",
+   "definition": "and",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 2,
+   "headword": "sum esse fuī futūrum",
+   "lemma": "sum",
+   "definition": "be, exist; fut. infin. often = fore, impf. subj. often = forem for essem",
+   "pos": "Verb: Irregular",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 3,
+   "headword": "quī quae quod",
+   "lemma": "quī",
+   "definition": "who, which, what",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 4,
+   "headword": "que",
+   "lemma": "que",
+   "definition": "and (postpositive enclitic)",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 5,
+   "headword": "in",
+   "lemma": "in",
+   "definition": "in, on (+ abl.); into, onto (+ acc)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 6,
+   "headword": "nōn",
+   "lemma": "nōn",
+   "definition": "not",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 7,
+   "headword": "hic haec hoc",
+   "lemma": "hic",
+   "definition": "this, these",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 8,
+   "headword": "ille illa illud",
+   "lemma": "ille",
+   "definition": "that",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 9,
+   "headword": "tū tuī tibi tē",
+   "lemma": "tū",
+   "definition": "you (sing.)",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 10,
+   "headword": "cum",
+   "lemma": "cum",
+   "definition": "with (prep. + abl.); when, since, although (conjunction + subj.)",
+   "pos": "Preposition",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 11,
+   "headword": "ego meī mihi mē",
+   "lemma": "ego",
+   "definition": "I, me",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 13,
+   "headword": "is ea id",
+   "lemma": "is",
+   "definition": "he, she, it",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 14,
+   "headword": "ad",
+   "lemma": "ad",
+   "definition": "to, up to, towards (+acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 15,
+   "headword": "ut, utī",
+   "lemma": "ut",
+   "definition": "as (+ indic.); so that, with the result that (+ subj.); (in questions) in what manner, how; (exclam.) to what an extent! how!",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 16,
+   "headword": "sī",
+   "lemma": "sī",
+   "definition": "if",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 17,
+   "headword": "sui sibi sē/sēsē",
+   "lemma": "sui",
+   "definition": "him- her- itself, themselves",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 18,
+   "headword": "omnis -e",
+   "lemma": "omnis",
+   "definition": "all, every, as a whole",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 19,
+   "headword": "nec",
+   "lemma": "nec",
+   "definition": "and not, nor; nec ... nec, neither ... nor; → neque",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 20,
+   "headword": "sed",
+   "lemma": "sed",
+   "definition": "but",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 21,
+   "headword": "ā ab abs",
+   "lemma": "ā",
+   "definition": "from, by (+abl.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 22,
+   "headword": "ipse ipsa ipsum",
+   "lemma": "ipse",
+   "definition": "him- her- itself",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 23,
+   "headword": "possum posse potuī",
+   "lemma": "possum",
+   "definition": "be able",
+   "pos": "Verb: Irregular",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 24,
+   "headword": "aut",
+   "lemma": "aut",
+   "definition": "or",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 25,
+   "headword": "māgnus -a -um",
+   "lemma": "māgnus",
+   "definition": "great",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 26,
+   "headword": "ex, ē",
+   "lemma": "ex",
+   "definition": "out of, from (+ abl.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 27,
+   "headword": "suus -a -um",
+   "lemma": "suus",
+   "definition": "his own, her own, its own",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 28,
+   "headword": "dō dare dedī datum",
+   "lemma": "dō",
+   "definition": "give",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 29,
+   "headword": "quam",
+   "lemma": "quam",
+   "definition": "how?; (after comparative) than",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 30,
+   "headword": "per",
+   "lemma": "per",
+   "definition": "through (+acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 31,
+   "headword": "videō vidēre vīdī vīsum",
+   "lemma": "videō",
+   "definition": "see",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Vision"
+  },
+  {
+   "rank": 32,
+   "headword": "faciō facere fēcī factum",
+   "lemma": "faciō",
+   "definition": "do, make",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 33,
+   "headword": "dīcō dīcere dīxī dictum",
+   "lemma": "dīcō",
+   "definition": "say; causam dīcere, plead a case; diem dīcere, appoint a day",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 34,
+   "headword": "iam",
+   "lemma": "iam",
+   "definition": "now; already",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 35,
+   "headword": "atque",
+   "lemma": "atque",
+   "definition": "and in addition, and also, and; (after comparatives) than; simul atque, as soon as; → ac",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 36,
+   "headword": "ac",
+   "lemma": "ac",
+   "definition": "and in addition, and also, and; (after comparatives) than; simul ac, as soon as; → atque",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 37,
+   "headword": "alius -a -ud",
+   "lemma": "alius",
+   "definition": "other, another; ālias: at another time",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 38,
+   "headword": "rēs reī f.",
+   "lemma": "rēs",
+   "definition": "thing (rēs pūblica, commonwealth; rēs familiāris, family property, estate; rēs mīlitāris, art of war; rēs novae, revolution)",
+   "pos": "Noun: 5th Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 39,
+   "headword": "habeō habēre habuī habitum",
+   "lemma": "habeō",
+   "definition": "have, hold",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 40,
+   "headword": "animus -ī m.",
+   "lemma": "animus",
+   "definition": "spirit, mind",
+   "pos": "Noun: 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 41,
+   "headword": "meus -a -um",
+   "lemma": "meus",
+   "definition": "my",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 42,
+   "headword": "deus -ī m.; dea -ae f.",
+   "lemma": "deus",
+   "definition": "god; goddess",
+   "pos": "Noun: 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 43,
+   "headword": "multus -a -um",
+   "lemma": "multus",
+   "definition": "much, many; multō, by far",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 44,
+   "headword": "tuus -a -um",
+   "lemma": "tuus",
+   "definition": "your",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 45,
+   "headword": "ferō ferre tulī lātum",
+   "lemma": "ferō",
+   "definition": "bear, carry, endure",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 46,
+   "headword": "dē",
+   "lemma": "dē",
+   "definition": "down from, about, concerning (+ abl.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 47,
+   "headword": "nē",
+   "lemma": "nē",
+   "definition": "lest, that not",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 48,
+   "headword": "manus -ūs f.",
+   "lemma": "manus",
+   "definition": "hand; band of men",
+   "pos": "Noun: 4th Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 49,
+   "headword": "nūllus -a -um",
+   "lemma": "nūllus",
+   "definition": "not any, no one",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 50,
+   "headword": "nunc",
+   "lemma": "nunc",
+   "definition": "now",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 51,
+   "headword": "nōs nostrum/nostrī nōbīs nōs",
+   "lemma": "nōs",
+   "definition": "we",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 52,
+   "headword": "noster nostra nostrum",
+   "lemma": "noster",
+   "definition": "our",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 53,
+   "headword": "ūnus -a -um",
+   "lemma": "ūnus",
+   "definition": "one",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 54,
+   "headword": "diēs diēī m./f.",
+   "lemma": "diēs",
+   "definition": "day",
+   "pos": "Noun: 5th Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 55,
+   "headword": "nihil, nīl",
+   "lemma": "nihil",
+   "definition": "nothing; not at all",
+   "pos": "Noun: Indeclinable",
+   "group": "Measurement"
+  },
+  {
+   "rank": 56,
+   "headword": "tum or tunc",
+   "lemma": "tum",
+   "definition": "then",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 57,
+   "headword": "enim",
+   "lemma": "enim",
+   "definition": "for, indeed",
+   "pos": "Conjunction",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 58,
+   "headword": "tamen",
+   "lemma": "tamen",
+   "definition": "nevertheless, still",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 59,
+   "headword": "īdem eadem idem",
+   "lemma": "īdem",
+   "definition": "the same",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 60,
+   "headword": "rēx rēgis m.",
+   "lemma": "rēx",
+   "definition": "king",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 61,
+   "headword": "nam or namque",
+   "lemma": "nam",
+   "definition": "for, indeed, really",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 62,
+   "headword": "locus -ī m.",
+   "lemma": "locus",
+   "definition": "place; loca (n. pl.) region",
+   "pos": "Noun: 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 63,
+   "headword": "veniō venīre vēnī ventum",
+   "lemma": "veniō",
+   "definition": "come",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Motion"
+  },
+  {
+   "rank": 64,
+   "headword": "inter",
+   "lemma": "inter",
+   "definition": "between, among; during (+ acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 65,
+   "headword": "pars partis f.",
+   "lemma": "pars",
+   "definition": "part",
+   "pos": "Noun: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 66,
+   "headword": "volō velle voluī",
+   "lemma": "volō",
+   "definition": "wish, be willing",
+   "pos": "Verb: Irregular",
+   "group": "Emotions"
+  },
+  {
+   "rank": 67,
+   "headword": "etiam",
+   "lemma": "etiam",
+   "definition": "also, even",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 68,
+   "headword": "bonus -a -um",
+   "lemma": "bonus",
+   "definition": "good",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 69,
+   "headword": "agō agere ēgī āctum",
+   "lemma": "agō",
+   "definition": "drive, do, act",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 70,
+   "headword": "terra -ae f.",
+   "lemma": "terra",
+   "definition": "land",
+   "pos": "Noun: 1st Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 71,
+   "headword": "pater patris m.",
+   "lemma": "pater",
+   "definition": "father, ancestor",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 72,
+   "headword": "neque",
+   "lemma": "neque",
+   "definition": "and not, nor; neque ... neque, neither ... nor; → nec",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 73,
+   "headword": "domus -ūs f.",
+   "lemma": "domus",
+   "definition": "house, home",
+   "pos": "Noun: 4th Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 74,
+   "headword": "at",
+   "lemma": "at",
+   "definition": "but, but yet",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 75,
+   "headword": "corpus corporis n.",
+   "lemma": "corpus",
+   "definition": "body",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 76,
+   "headword": "quoque",
+   "lemma": "quoque",
+   "definition": "also, too",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 77,
+   "headword": "aliquis -quae -quod",
+   "lemma": "aliquis",
+   "definition": "some, any; si quis, si quid: anyone who, anything that",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 78,
+   "headword": "tōtus -a -um",
+   "lemma": "tōtus",
+   "definition": "whole, entire",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 79,
+   "headword": "sīc",
+   "lemma": "sīc",
+   "definition": "in this manner, thus; sīc ... ut: in the same way as",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 80,
+   "headword": "hīc",
+   "lemma": "hīc",
+   "definition": "here; hinc: from here",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 81,
+   "headword": "iste ista istud",
+   "lemma": "iste",
+   "definition": "that, that of yours; adv. istīc or istūc: over there; istinc: from over there",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 82,
+   "headword": "urbs urbis f.",
+   "lemma": "urbs",
+   "definition": "city",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 83,
+   "headword": "petō petere petīvī petītum",
+   "lemma": "petō",
+   "definition": "seek, aim at",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 84,
+   "headword": "iubeō iubēre iussī iussum",
+   "lemma": "iubeō",
+   "definition": "bid, order",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Justice"
+  },
+  {
+   "rank": 85,
+   "headword": "vir virī m.",
+   "lemma": "vir",
+   "definition": "man",
+   "pos": "Noun: 2nd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 86,
+   "headword": "bellum -ī n.",
+   "lemma": "bellum",
+   "definition": "war",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 87,
+   "headword": "vīta -ae f.",
+   "lemma": "vīta",
+   "definition": "life",
+   "pos": "Noun: 1st Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 88,
+   "headword": "homō hominis m.",
+   "lemma": "homō",
+   "definition": "human being",
+   "pos": "Noun: 3rd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 89,
+   "headword": "tempus -oris n.",
+   "lemma": "tempus",
+   "definition": "time",
+   "pos": "Noun: 3rd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 90,
+   "headword": "magis",
+   "lemma": "magis",
+   "definition": "more",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 91,
+   "headword": "prīmus -a -um",
+   "lemma": "prīmus",
+   "definition": "first",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 92,
+   "headword": "ubi",
+   "lemma": "ubi",
+   "definition": "where, when",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 93,
+   "headword": "hostis -is m./f.",
+   "lemma": "hostis",
+   "definition": "stranger, enemy",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 94,
+   "headword": "an",
+   "lemma": "an",
+   "definition": "or (in questions); utrum ... an: whether ... or",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 95,
+   "headword": "mors mortis f.",
+   "lemma": "mors",
+   "definition": "death",
+   "pos": "Noun: 3rd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 96,
+   "headword": "tam",
+   "lemma": "tam",
+   "definition": "so, so much",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 97,
+   "headword": "eō īre iī/īvī itum",
+   "lemma": "eō",
+   "definition": "go",
+   "pos": "Verb: Irregular",
+   "group": "Motion"
+  },
+  {
+   "rank": 98,
+   "headword": "arma -ōrum n. pl.",
+   "lemma": "arma",
+   "definition": "arms, weapons",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 99,
+   "headword": "superus -a -um",
+   "lemma": "superus",
+   "definition": "situated above, upper",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 100,
+   "headword": "nisi, nī",
+   "lemma": "nisi",
+   "definition": "if not, unless",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 101,
+   "headword": "vincō vincere vīcī victum",
+   "lemma": "vincō",
+   "definition": "conquer",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 102,
+   "headword": "pōnō pōnere posuī positum",
+   "lemma": "pōnō",
+   "definition": "put, place; put aside",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 103,
+   "headword": "dum",
+   "lemma": "dum",
+   "definition": "while (+ indic.); until (+ subj.); provided that (+ subj.)",
+   "pos": "Conjunction",
+   "group": "Time"
+  },
+  {
+   "rank": 104,
+   "headword": "sine",
+   "lemma": "sine",
+   "definition": "without (+ abl.)",
+   "pos": "Preposition",
+   "group": "Non-Directional Prepositions"
+  },
+  {
+   "rank": 105,
+   "headword": "tantus -a -um",
+   "lemma": "tantus",
+   "definition": "so great, so much; (as pronoun) such a quantity, so much; tantī, at such a price, of such worth",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 106,
+   "headword": "teneō -ēre -uī tentum",
+   "lemma": "teneō",
+   "definition": "hold, keep",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 107,
+   "headword": "causa -ae f.",
+   "lemma": "causa",
+   "definition": "cause, reason; causā + preceding genitive, for the sake of",
+   "pos": "Noun: 1st Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 108,
+   "headword": "sequor sequī secūtus sum",
+   "lemma": "sequor",
+   "definition": "follow",
+   "pos": "Verb: Deponent",
+   "group": "Motion"
+  },
+  {
+   "rank": 109,
+   "headword": "crēdō crēdere crēdidī crēditum",
+   "lemma": "crēdō",
+   "definition": "believe",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 110,
+   "headword": "accipiō -cipere -cēpī -ceptum",
+   "lemma": "accipiō",
+   "definition": "receive",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Social Life"
+  },
+  {
+   "rank": 111,
+   "headword": "virtūs -ūtis f.",
+   "lemma": "virtūs",
+   "definition": "valor, manliness, virtue",
+   "pos": "Noun: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 112,
+   "headword": "ante",
+   "lemma": "ante",
+   "definition": "before, in front of (adv. and prep. + acc.)",
+   "pos": "Preposition",
+   "group": "Time"
+  },
+  {
+   "rank": 113,
+   "headword": "quaerō -rere -sīvī -sītum",
+   "lemma": "quaerō",
+   "definition": "seek, inquire",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 114,
+   "headword": "mittō mittere mīsī missum",
+   "lemma": "mittō",
+   "definition": "send, let go",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 115,
+   "headword": "vīs f.",
+   "lemma": "vīs",
+   "definition": "force; (acc.) vim, (abl.) vī; (pl.) vīrēs, strength",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 116,
+   "headword": "amor -ōris m.",
+   "lemma": "amor",
+   "definition": "love",
+   "pos": "Noun: 3rd Declension",
+   "group": "Love"
+  },
+  {
+   "rank": 117,
+   "headword": "caelum -ī n.",
+   "lemma": "caelum",
+   "definition": "sky, heavens",
+   "pos": "Noun: 2nd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 118,
+   "headword": "sub",
+   "lemma": "sub",
+   "definition": "under, close to (+acc. or abl.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 119,
+   "headword": "nox noctis f.",
+   "lemma": "nox",
+   "definition": "night",
+   "pos": "Noun: 3rd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 120,
+   "headword": "ita",
+   "lemma": "ita",
+   "definition": "thus, so",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 121,
+   "headword": "rēgnum -ī n.",
+   "lemma": "rēgnum",
+   "definition": "kingship, kingdom",
+   "pos": "Noun: 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 122,
+   "headword": "populus -ī m.",
+   "lemma": "populus",
+   "definition": "people",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 123,
+   "headword": "autem",
+   "lemma": "autem",
+   "definition": "moreover, but, however",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 124,
+   "headword": "caput capitis n.",
+   "lemma": "caput",
+   "definition": "head",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 125,
+   "headword": "mare -is n.",
+   "lemma": "mare",
+   "definition": "sea",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 126,
+   "headword": "quīdam quaedam quoddam",
+   "lemma": "quīdam",
+   "definition": "a certain one, someone",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 127,
+   "headword": "māter mātris f.",
+   "lemma": "māter",
+   "definition": "mother",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 128,
+   "headword": "prō",
+   "lemma": "prō",
+   "definition": "for, on behalf of, in proportion to (+abl.)",
+   "pos": "Preposition",
+   "group": "Non-Directional Prepositions"
+  },
+  {
+   "rank": 129,
+   "headword": "quisquis quidquid",
+   "lemma": "quisquis",
+   "definition": "whoever, whichever",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 130,
+   "headword": "vōs",
+   "lemma": "vōs",
+   "definition": "you (pl.); (gen.) vestrum/vestrī, (dat./abl.) vōbīs, (acc.) vōs",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 131,
+   "headword": "capiō capere cēpī captum",
+   "lemma": "capiō",
+   "definition": "seize",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 132,
+   "headword": "quia",
+   "lemma": "quia",
+   "definition": "because",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 133,
+   "headword": "dūcō dūcere dūxī ductum",
+   "lemma": "dūcō",
+   "definition": "lead; uxōrem dūcere, marry",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 134,
+   "headword": "ergō",
+   "lemma": "ergō",
+   "definition": "therefore",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 135,
+   "headword": "nōmen -inis n.",
+   "lemma": "nōmen",
+   "definition": "name",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 136,
+   "headword": "quidem",
+   "lemma": "quidem",
+   "definition": "certainly, at least",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 137,
+   "headword": "miser misera miserum",
+   "lemma": "miser",
+   "definition": "wretched, pitiable",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 138,
+   "headword": "fortūna -ae f.",
+   "lemma": "fortūna",
+   "definition": "fortune",
+   "pos": "Noun: 1st Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 139,
+   "headword": "novus -a -um",
+   "lemma": "novus",
+   "definition": "new",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 140,
+   "headword": "gravis -e",
+   "lemma": "gravis",
+   "definition": "heavy, serious",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 141,
+   "headword": "vel",
+   "lemma": "vel",
+   "definition": "or else, or; even; vel ... vel: either … or",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 142,
+   "headword": "longus -a -um",
+   "lemma": "longus",
+   "definition": "long, far",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 143,
+   "headword": "parvus -a -um",
+   "lemma": "parvus",
+   "definition": "small",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 144,
+   "headword": "relinquō -linquere -līquī -lictum",
+   "lemma": "relinquō",
+   "definition": "abandon",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 145,
+   "headword": "saepe",
+   "lemma": "saepe",
+   "definition": "often",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 146,
+   "headword": "fīō fierī factus sum",
+   "lemma": "fīō",
+   "definition": "become, happen, be done",
+   "pos": "Verb: Irregular",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 147,
+   "headword": "ōs ōris n.",
+   "lemma": "ōs",
+   "definition": "mouth, face",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 148,
+   "headword": "alter altera alterum",
+   "lemma": "alter",
+   "definition": "other of two",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 149,
+   "headword": "semper",
+   "lemma": "semper",
+   "definition": "always, ever",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 150,
+   "headword": "deinde/dein",
+   "lemma": "deinde",
+   "definition": "then, next",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 151,
+   "headword": "ignis -is m.",
+   "lemma": "ignis",
+   "definition": "fire",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 152,
+   "headword": "modo",
+   "lemma": "modo",
+   "definition": "just, just now; modo ... modo: now ... now, at one moment ... at another, sometimes ... sometimes",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 153,
+   "headword": "timeō -ēre -uī",
+   "lemma": "timeō",
+   "definition": "to fear, to dread",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 154,
+   "headword": "scelus -eris n.",
+   "lemma": "scelus",
+   "definition": "crime, sin",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 155,
+   "headword": "dēbeō dēbēre dēbuī dēbitum",
+   "lemma": "dēbeō",
+   "definition": "owe, be obliged",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 156,
+   "headword": "vīvō vīvere vīxī vīctum",
+   "lemma": "vīvō",
+   "definition": "live",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 157,
+   "headword": "fātum -ī n.",
+   "lemma": "fātum",
+   "definition": "fate; death",
+   "pos": "Noun: 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 158,
+   "headword": "vocō -āre",
+   "lemma": "vocō",
+   "definition": "call",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 159,
+   "headword": "altus -a -um",
+   "lemma": "altus",
+   "definition": "high, lofty; deep",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 160,
+   "headword": "parō -āre",
+   "lemma": "parō",
+   "definition": "prepare, acquire; parātus -a -um, ready",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 161,
+   "headword": "mīles -itis m.",
+   "lemma": "mīles",
+   "definition": "soldier",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 162,
+   "headword": "medius -a -um",
+   "lemma": "medius",
+   "definition": "middle, central",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Place"
+  },
+  {
+   "rank": 163,
+   "headword": "inquam, inquis, inquit, inquiunt:",
+   "lemma": "inquam",
+   "definition": "say (used with direct speech)",
+   "pos": "Verb: Irregular",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 164,
+   "headword": "post",
+   "lemma": "post",
+   "definition": "after (adv. and prep. +acc.)",
+   "pos": "Preposition",
+   "group": "Time"
+  },
+  {
+   "rank": 165,
+   "headword": "audiō -īre -īvī/-iī -ītum",
+   "lemma": "audiō",
+   "definition": "hear, listen to",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 166,
+   "headword": "putō -āre",
+   "lemma": "putō",
+   "definition": "think, suppose",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 167,
+   "headword": "annus -ī m.",
+   "lemma": "annus",
+   "definition": "year",
+   "pos": "Noun: 2nd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 168,
+   "headword": "stō stāre stetī statum",
+   "lemma": "stō",
+   "definition": "stand",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 169,
+   "headword": "vōx vōcis f.",
+   "lemma": "vōx",
+   "definition": "voice, utterance",
+   "pos": "Noun: 3rd Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 170,
+   "headword": "genus generis n.",
+   "lemma": "genus",
+   "definition": "origin, lineage, kind",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 171,
+   "headword": "referō referre rettulī relātum",
+   "lemma": "referō",
+   "definition": "bring back; report",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 172,
+   "headword": "sciō -īre -īvī/-iī -ītum",
+   "lemma": "sciō",
+   "definition": "know",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 173,
+   "headword": "mēns mentis f.",
+   "lemma": "mēns",
+   "definition": "mind",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 174,
+   "headword": "reddō -dere -didī -ditum",
+   "lemma": "reddō",
+   "definition": "return, give back",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 175,
+   "headword": "licet licēre licuit licitum est",
+   "lemma": "licet",
+   "definition": "it is permitted (+ dat. + infin.)",
+   "pos": "Verb: Impersonal",
+   "group": "Justice"
+  },
+  {
+   "rank": 176,
+   "headword": "sōlus -a -um",
+   "lemma": "sōlus",
+   "definition": "only, alone",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 177,
+   "headword": "fugiō fugere fūgī fugitum",
+   "lemma": "fugiō",
+   "definition": "flee, escape",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Travel"
+  },
+  {
+   "rank": 178,
+   "headword": "ūllus -a -um",
+   "lemma": "ūllus",
+   "definition": "any, anyone",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 179,
+   "headword": "nēmō",
+   "lemma": "nēmō",
+   "definition": "no one (gen. nūllīus, dat. nūllī, abl. nūllō or nūllā → nūllus -a -um)",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 180,
+   "headword": "nātūra -ae f.",
+   "lemma": "nātūra",
+   "definition": "nature",
+   "pos": "Noun: 1st Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 181,
+   "headword": "mōs mōris m.",
+   "lemma": "mōs",
+   "definition": "custom, habit; (pl.) character",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 182,
+   "headword": "beneficium -ī n.",
+   "lemma": "beneficium",
+   "definition": "service, kindness",
+   "pos": "Noun: 2nd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 183,
+   "headword": "pectus -oris n.",
+   "lemma": "pectus",
+   "definition": "chest, breast",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 184,
+   "headword": "fidēs -eī f.",
+   "lemma": "fidēs",
+   "definition": "trust, faith",
+   "pos": "Noun: 5th Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 185,
+   "headword": "patior patī passus sum",
+   "lemma": "patior",
+   "definition": "permit, endure",
+   "pos": "Verb: Deponent",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 186,
+   "headword": "cūra -ae f.",
+   "lemma": "cūra",
+   "definition": "care, concern",
+   "pos": "Noun: 1st Declension",
+   "group": "Love"
+  },
+  {
+   "rank": 187,
+   "headword": "īra irae f.",
+   "lemma": "īra",
+   "definition": "wrath, anger",
+   "pos": "Noun: 1st Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 188,
+   "headword": "verbum -ī n.",
+   "lemma": "verbum",
+   "definition": "word",
+   "pos": "Noun: 2nd Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 189,
+   "headword": "prope",
+   "lemma": "prope",
+   "definition": "near, next; (comp.) propior, (superl.) proximus; (adv.) prope, nearly, almost",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 190,
+   "headword": "parēns -ntis m./f.",
+   "lemma": "parēns",
+   "definition": "parent",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 191,
+   "headword": "puer puerī m.",
+   "lemma": "puer",
+   "definition": "boy; slave",
+   "pos": "Noun: 2nd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 192,
+   "headword": "moveō -ēre mōvī mōtum",
+   "lemma": "moveō",
+   "definition": "move",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Motion"
+  },
+  {
+   "rank": 193,
+   "headword": "dolor -ōris m.",
+   "lemma": "dolor",
+   "definition": "pain, grief",
+   "pos": "Noun: 3rd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 194,
+   "headword": "gēns gentis f.",
+   "lemma": "gēns",
+   "definition": "family, clan",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 195,
+   "headword": "modus -ī m.",
+   "lemma": "modus",
+   "definition": "measure, manner, kind",
+   "pos": "Noun: 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 196,
+   "headword": "via -ae f.",
+   "lemma": "via",
+   "definition": "way, street",
+   "pos": "Noun: 1st Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 197,
+   "headword": "quisque quaeque quidque",
+   "lemma": "quisque",
+   "definition": "each one, everyone",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 198,
+   "headword": "amīcus -a -um",
+   "lemma": "amīcus",
+   "definition": "friendly; (as subst.) friend",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 199,
+   "headword": "pēs pedis m.",
+   "lemma": "pēs",
+   "definition": "foot",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 200,
+   "headword": "imperium -ī n.",
+   "lemma": "imperium",
+   "definition": "command, power",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 201,
+   "headword": "labor -ōris m.",
+   "lemma": "labor",
+   "definition": "toil, exertion",
+   "pos": "Noun: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 202,
+   "headword": "ingēns ingentis",
+   "lemma": "ingēns",
+   "definition": "huge, enormous",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 203,
+   "headword": "tālis tāle",
+   "lemma": "tālis",
+   "definition": "such",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 204,
+   "headword": "parum",
+   "lemma": "parum",
+   "definition": "too little",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 205,
+   "headword": "apud",
+   "lemma": "apud",
+   "definition": "near, in the presence of (+acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 206,
+   "headword": "oculus -ī m.",
+   "lemma": "oculus",
+   "definition": "eye",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 207,
+   "headword": "unda -ae f.",
+   "lemma": "unda",
+   "definition": "wave, flowing water, water",
+   "pos": "Noun: 1st Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 208,
+   "headword": "itaque",
+   "lemma": "itaque",
+   "definition": "and so, therefore",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 209,
+   "headword": "vultus -ūs m.",
+   "lemma": "vultus",
+   "definition": "look, expression, face",
+   "pos": "Noun: 4th Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 210,
+   "headword": "cadō cadere cecidī cāsum",
+   "lemma": "cadō",
+   "definition": "fall, be killed",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 211,
+   "headword": "nātus -ī m.",
+   "lemma": "nātus",
+   "definition": "son",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 212,
+   "headword": "quis quid",
+   "lemma": "quis",
+   "definition": "who? what? which?",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 213,
+   "headword": "trahō trahere trāxī trāctum",
+   "lemma": "trahō",
+   "definition": "drag, draw",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 214,
+   "headword": "sanguis -inis m.",
+   "lemma": "sanguis",
+   "definition": "blood",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 215,
+   "headword": "metus -ūs m.",
+   "lemma": "metus",
+   "definition": "fear, dread",
+   "pos": "Noun: 4th Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 216,
+   "headword": "tantum, tantummodo",
+   "lemma": "tantum",
+   "definition": "only",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 217,
+   "headword": "cōnsilium -ī n.",
+   "lemma": "cōnsilium",
+   "definition": "plan; council, group of advisors",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 218,
+   "headword": "coniunx coniugis m./f.",
+   "lemma": "coniunx",
+   "definition": "spouse, husband, wife",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 219,
+   "headword": "amō -āre",
+   "lemma": "amō",
+   "definition": "to love; amāns -ntis m./f.: lover",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Love"
+  },
+  {
+   "rank": 220,
+   "headword": "levis -e",
+   "lemma": "levis",
+   "definition": "light, trivial",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 221,
+   "headword": "duo duae duo",
+   "lemma": "duo",
+   "definition": "two",
+   "pos": "Adjective: Numeral",
+   "group": "Measurement"
+  },
+  {
+   "rank": 222,
+   "headword": "ferus -a -um",
+   "lemma": "ferus",
+   "definition": "wild, fierce; fera -ae f.: wild animal",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 223,
+   "headword": "poena -ae f.",
+   "lemma": "poena",
+   "definition": "penalty, punishment",
+   "pos": "Noun: 1st Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 224,
+   "headword": "castrum -ī n.",
+   "lemma": "castrum",
+   "definition": "fortress, (regularly plural, castra camp)",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 225,
+   "headword": "frāter frātris m.",
+   "lemma": "frāter",
+   "definition": "brother",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 226,
+   "headword": "haud",
+   "lemma": "haud",
+   "definition": "not",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 227,
+   "headword": "malus -a -um",
+   "lemma": "malus",
+   "definition": "bad, evil",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 228,
+   "headword": "iaceō iacēre iacuī",
+   "lemma": "iaceō",
+   "definition": "lie",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "The House"
+  },
+  {
+   "rank": 229,
+   "headword": "līber lībera līberum",
+   "lemma": "līber",
+   "definition": "free; līberī (m. pl.): freeborn children",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 230,
+   "headword": "iter itineris n.",
+   "lemma": "iter",
+   "definition": "journey, route",
+   "pos": "Noun: 3rd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 231,
+   "headword": "ferrum -ī n.",
+   "lemma": "ferrum",
+   "definition": "iron, iron weapon or implement",
+   "pos": "Noun: 2nd Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 232,
+   "headword": "spēs speī f.",
+   "lemma": "spēs",
+   "definition": "hope",
+   "pos": "Noun: 5th Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 233,
+   "headword": "puella -ae f.",
+   "lemma": "puella",
+   "definition": "girl; girl-friend",
+   "pos": "Noun: 1st Declension",
+   "group": "People"
+  },
+  {
+   "rank": 234,
+   "headword": "silva -ae f.",
+   "lemma": "silva",
+   "definition": "forest, grove",
+   "pos": "Noun: 1st Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 235,
+   "headword": "bene",
+   "lemma": "bene",
+   "definition": "well",
+   "pos": "Adverb",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 236,
+   "headword": "fīnis -is m.",
+   "lemma": "fīnis",
+   "definition": "end, boundary",
+   "pos": "Noun: 3rd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 237,
+   "headword": "gerō gerere gessī gestum",
+   "lemma": "gerō",
+   "definition": "bear, manage; bellum gerere, wage war",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 238,
+   "headword": "ne (enclitic)",
+   "lemma": "ne",
+   "definition": "interrogative particle attached to the emphatic word in a question",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 239,
+   "headword": "dux ducis m./f.",
+   "lemma": "dux",
+   "definition": "leader, general",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 240,
+   "headword": "premō premere pressī pressum",
+   "lemma": "premō",
+   "definition": "press, pursue, overwhelm",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 241,
+   "headword": "dominus -ī m.; domina -ae f.",
+   "lemma": "dominus",
+   "definition": "household master, lord; mistress",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 242,
+   "headword": "mōns montis m.",
+   "lemma": "mōns",
+   "definition": "mountain",
+   "pos": "Noun: 3rd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 243,
+   "headword": "uterque utraque utrumque",
+   "lemma": "uterque",
+   "definition": "each of two",
+   "pos": "Conjunction",
+   "group": "Measurement"
+  },
+  {
+   "rank": 244,
+   "headword": "saevus -a -um",
+   "lemma": "saevus",
+   "definition": "fierce, raging, wrathful",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 245,
+   "headword": "lītus -oris n.",
+   "lemma": "lītus",
+   "definition": "shore",
+   "pos": "Noun: 3rd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 246,
+   "headword": "soleō -ēre -uī -itum",
+   "lemma": "soleō",
+   "definition": "be accustomed",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 247,
+   "headword": "mīlle (pl.) mīlia",
+   "lemma": "mīlle",
+   "definition": "thousand",
+   "pos": "Adjective: Numeral",
+   "group": "Measurement"
+  },
+  {
+   "rank": 248,
+   "headword": "equus -ī m.",
+   "lemma": "equus",
+   "definition": "horse",
+   "pos": "Noun: 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 249,
+   "headword": "dūrus -a -um",
+   "lemma": "dūrus",
+   "definition": "hard, tough, harsh",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 250,
+   "headword": "cōgō cōgere coēgī coāctum",
+   "lemma": "cōgō",
+   "definition": "drive together; compel",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 251,
+   "headword": "numquam",
+   "lemma": "numquam",
+   "definition": "never",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 252,
+   "headword": "prīmum",
+   "lemma": "prīmum",
+   "definition": "at first, firstly",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 253,
+   "headword": "morior morī mortuus sum",
+   "lemma": "morior",
+   "definition": "die",
+   "pos": "Verb: Deponent",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 254,
+   "headword": "carmen -inis n.",
+   "lemma": "carmen",
+   "definition": "song",
+   "pos": "Noun: 3rd Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 255,
+   "headword": "tēlum -ī n.",
+   "lemma": "tēlum",
+   "definition": "missile, weapon, spear",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 256,
+   "headword": "ratiō -ōnis f.",
+   "lemma": "ratiō",
+   "definition": "method, plan, reason",
+   "pos": "Noun: 3rd Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 257,
+   "headword": "umbra -ae f.",
+   "lemma": "umbra",
+   "definition": "shade, shadow",
+   "pos": "Noun: 1st Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 258,
+   "headword": "ars artis f.",
+   "lemma": "ars",
+   "definition": "skill",
+   "pos": "Noun: 3rd Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 259,
+   "headword": "tot",
+   "lemma": "tot",
+   "definition": "so many",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 260,
+   "headword": "dexter -tra -trum",
+   "lemma": "dexter",
+   "definition": "right; dextera -ae f.: right hand",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Place"
+  },
+  {
+   "rank": 261,
+   "headword": "sīgnum -ī n.",
+   "lemma": "sīgnum",
+   "definition": "sign, standard, mark",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 262,
+   "headword": "laetus -a -um",
+   "lemma": "laetus",
+   "definition": "glad, joyful",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 263,
+   "headword": "quālis -e",
+   "lemma": "quālis",
+   "definition": "of what kind? what?",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 264,
+   "headword": "lēx lēgis f.",
+   "lemma": "lēx",
+   "definition": "law",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 265,
+   "headword": "perīculum -ī n.",
+   "lemma": "perīculum",
+   "definition": "danger",
+   "pos": "Noun: 2nd Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 266,
+   "headword": "nāscor nāscī nātus sum",
+   "lemma": "nāscor",
+   "definition": "be born",
+   "pos": "Verb: Deponent",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 267,
+   "headword": "exercitus -ūs m.",
+   "lemma": "exercitus",
+   "definition": "army",
+   "pos": "Noun: 4th Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 268,
+   "headword": "pereō -īre -iī -itum",
+   "lemma": "pereō",
+   "definition": "perish, be lost",
+   "pos": "Verb: Irregular",
+   "group": "Violence"
+  },
+  {
+   "rank": 269,
+   "headword": "ventus -ī m.",
+   "lemma": "ventus",
+   "definition": "wind",
+   "pos": "Noun: 2nd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 270,
+   "headword": "audeō audēre ausus sum",
+   "lemma": "audeō",
+   "definition": "dare, be eager",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 271,
+   "headword": "contrā",
+   "lemma": "contrā",
+   "definition": "against, opposite (adv. and prep. +acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 272,
+   "headword": "aqua -ae f.",
+   "lemma": "aqua",
+   "definition": "water",
+   "pos": "Noun: 1st Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 273,
+   "headword": "rapiō rapere rapuī raptum",
+   "lemma": "rapiō",
+   "definition": "seize, tear away",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Violence"
+  },
+  {
+   "rank": 274,
+   "headword": "simul",
+   "lemma": "simul",
+   "definition": "at the same time",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 275,
+   "headword": "trīstis -e",
+   "lemma": "trīstis",
+   "definition": "sad, solemn, grim",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 276,
+   "headword": "mūnus mūneris n.",
+   "lemma": "mūnus",
+   "definition": "gift, offering; duty, obligation; (pl.) gladiatorial show",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 277,
+   "headword": "iuvenis -is m.",
+   "lemma": "iuvenis",
+   "definition": "youth",
+   "pos": "Noun: 3rd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 278,
+   "headword": "fāma -ae f.",
+   "lemma": "fāma",
+   "definition": "rumor, fame",
+   "pos": "Noun: 1st Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 279,
+   "headword": "adsum adesse affuī",
+   "lemma": "adsum",
+   "definition": "be present",
+   "pos": "Verb: Irregular",
+   "group": "Place"
+  },
+  {
+   "rank": 280,
+   "headword": "quisquam quicquam/quidquam",
+   "lemma": "quisquam",
+   "definition": "any (single) person, anyone at all",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 280,
+   "headword": "vērō",
+   "lemma": "vērō",
+   "definition": "in fact, certainly, without doubt",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 281,
+   "headword": "pār paris",
+   "lemma": "pār",
+   "definition": "equal",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 282,
+   "headword": "vester vestra vestrum",
+   "lemma": "vester",
+   "definition": "your",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 283,
+   "headword": "flūmen -inis n.",
+   "lemma": "flūmen",
+   "definition": "stream, river",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 284,
+   "headword": "quīcumque quaecumque quodcumque",
+   "lemma": "quīcumque",
+   "definition": "who-, whatever",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 285,
+   "headword": "certus -a -um",
+   "lemma": "certus",
+   "definition": "sure, fixed",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 286,
+   "headword": "fortis -e",
+   "lemma": "fortis",
+   "definition": "brave",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 287,
+   "headword": "placeō placēre placuī placitum",
+   "lemma": "placeō",
+   "definition": "please",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 288,
+   "headword": "vertō vertere vertī versum",
+   "lemma": "vertō",
+   "definition": "turn",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 289,
+   "headword": "servō -āre",
+   "lemma": "servō",
+   "definition": "save, watch over",
+   "pos": "Verb: 1st Conjugation",
+   "group": "The Household"
+  },
+  {
+   "rank": 290,
+   "headword": "honor -ōris m.",
+   "lemma": "honor",
+   "definition": "honor, glory; office, post",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 291,
+   "headword": "dīgnus -a -um",
+   "lemma": "dīgnus",
+   "definition": "worthy",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 292,
+   "headword": "cūnctus -a -um",
+   "lemma": "cūnctus",
+   "definition": "entire all together",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 293,
+   "headword": "tollō tollere sustulī sublātum",
+   "lemma": "tollō",
+   "definition": "raise up, destroy",
+   "pos": "Verb: Irregular",
+   "group": "Violence"
+  },
+  {
+   "rank": 294,
+   "headword": "negō -āre",
+   "lemma": "negō",
+   "definition": "deny, refuse",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 295,
+   "headword": "vetus veteris",
+   "lemma": "vetus",
+   "definition": "old",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 296,
+   "headword": "eques equitis m.",
+   "lemma": "eques",
+   "definition": "horseman, knight",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 297,
+   "headword": "trādō -dere -didī -ditum",
+   "lemma": "trādō",
+   "definition": "hand over, yield",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 298,
+   "headword": "flamma -ae f.",
+   "lemma": "flamma",
+   "definition": "flame, fire",
+   "pos": "Noun: 1st Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 299,
+   "headword": "lūx lūcis f.",
+   "lemma": "lūx",
+   "definition": "light of day",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 300,
+   "headword": "unde",
+   "lemma": "unde",
+   "definition": "from where",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 301,
+   "headword": "redeō -īre -iī -itum",
+   "lemma": "redeō",
+   "definition": "go back, return",
+   "pos": "Verb: Irregular",
+   "group": "Motion"
+  },
+  {
+   "rank": 302,
+   "headword": "sentiō sentīre sēnsī sēnsum",
+   "lemma": "sentiō",
+   "definition": "perceive, feel, hear, see",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 303,
+   "headword": "aurum -ī n.",
+   "lemma": "aurum",
+   "definition": "gold",
+   "pos": "Noun: 2nd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 304,
+   "headword": "cēdō cēdere cessī cessum",
+   "lemma": "cēdō",
+   "definition": "go, move; yield",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 305,
+   "headword": "quō",
+   "lemma": "quō",
+   "definition": "for which reason; to or in what place; to what end, for what purpose?",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 306,
+   "headword": "saxum -ī n.",
+   "lemma": "saxum",
+   "definition": "rock, cliff, crag",
+   "pos": "Noun: 2nd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 307,
+   "headword": "ve",
+   "lemma": "ve",
+   "definition": "or (postpositive enclitic)",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 308,
+   "headword": "aetās -tātis f.",
+   "lemma": "aetās",
+   "definition": "age, time of life",
+   "pos": "Noun: 3rd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 309,
+   "headword": "fēlīx -īcis",
+   "lemma": "fēlīx",
+   "definition": "lucky",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 310,
+   "headword": "loquor loquī locūtus sum",
+   "lemma": "loquor",
+   "definition": "speak, talk",
+   "pos": "Verb: Deponent",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 311,
+   "headword": "quantus -a -um",
+   "lemma": "quantus",
+   "definition": "(interr.) how great? (rel.) of what size, amount, etc. (as subst.) what amount? (rel.) which amount; quantī, at what price? (rel.) at which price",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 312,
+   "headword": "coepī coepisse coeptus",
+   "lemma": "coepī",
+   "definition": "begin",
+   "pos": "Verb: Irregular",
+   "group": "Time"
+  },
+  {
+   "rank": 313,
+   "headword": "igitur",
+   "lemma": "igitur",
+   "definition": "therefore",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 314,
+   "headword": "iūs iūris n.",
+   "lemma": "iūs",
+   "definition": "right, justice, law",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 315,
+   "headword": "mūtō -āre",
+   "lemma": "mūtō",
+   "definition": "change",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 316,
+   "headword": "inveniō -venīre -vēnī -ventum",
+   "lemma": "inveniō",
+   "definition": "find; discover",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Travel"
+  },
+  {
+   "rank": 317,
+   "headword": "prīnceps -cipis",
+   "lemma": "prīnceps",
+   "definition": "first, chief; (as subst.) leader, person in charge",
+   "pos": "Adjective: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 318,
+   "headword": "ops opis f.",
+   "lemma": "ops",
+   "definition": "assistance, resources",
+   "pos": "Noun: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 319,
+   "headword": "recipiō -cipere -cēpī -ceptum",
+   "lemma": "recipiō",
+   "definition": "take back, receive; sē recipere, betake oneself, go",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 320,
+   "headword": "sōl sōlis m.",
+   "lemma": "sōl",
+   "definition": "sun",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 321,
+   "headword": "cōnsul -ulis m.",
+   "lemma": "cōnsul",
+   "definition": "consul",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 322,
+   "headword": "orbis -is m.",
+   "lemma": "orbis",
+   "definition": "circle; orbis terrārum: world",
+   "pos": "Noun: 3rd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 323,
+   "headword": "turba -ae f.",
+   "lemma": "turba",
+   "definition": "crowd, uproar",
+   "pos": "Noun: 1st Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 324,
+   "headword": "ager agrī m.",
+   "lemma": "ager",
+   "definition": "field",
+   "pos": "Noun: 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 325,
+   "headword": "solvō solvere solvī solūtum",
+   "lemma": "solvō",
+   "definition": "release, set sail",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 326,
+   "headword": "vitium -ī n.",
+   "lemma": "vitium",
+   "definition": "flaw, fault, crime",
+   "pos": "Noun: 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 327,
+   "headword": "vulnus -eris n.",
+   "lemma": "vulnus",
+   "definition": "wound",
+   "pos": "Noun: 3rd Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 328,
+   "headword": "inde",
+   "lemma": "inde",
+   "definition": "from there, from then",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 329,
+   "headword": "senātus -ūs m.",
+   "lemma": "senātus",
+   "definition": "senate",
+   "pos": "Noun: 4th Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 330,
+   "headword": "ūtor ūtī ūsus sum",
+   "lemma": "ūtor",
+   "definition": "use, consume, employ (+ abl.)",
+   "pos": "Verb: Deponent",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 331,
+   "headword": "cōpia -ae f.",
+   "lemma": "cōpia",
+   "definition": "abundance; (pl.) troops",
+   "pos": "Noun: 1st Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 332,
+   "headword": "opus operis n.",
+   "lemma": "opus",
+   "definition": "work",
+   "pos": "Noun: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 333,
+   "headword": "colō colere coluī cultum",
+   "lemma": "colō",
+   "definition": "inhabit, cultivate",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 334,
+   "headword": "vōtum -ī n.",
+   "lemma": "vōtum",
+   "definition": "solemn promise, vow; hope",
+   "pos": "Noun: 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 335,
+   "headword": "iugum -ī n.",
+   "lemma": "iugum",
+   "definition": "yoke; ridge, chain of hills",
+   "pos": "Noun: 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 336,
+   "headword": "quā",
+   "lemma": "quā",
+   "definition": "where, how",
+   "pos": "Pronoun",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 337,
+   "headword": "tellus tellūris f.",
+   "lemma": "tellus",
+   "definition": "earth",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 338,
+   "headword": "numerus -ī m.",
+   "lemma": "numerus",
+   "definition": "number, amount",
+   "pos": "Noun: 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 339,
+   "headword": "cōgnōscō -gnōscere -gnōvī -gnitum",
+   "lemma": "cōgnōscō",
+   "definition": "learn, understand",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 340,
+   "headword": "victor -ōris m.",
+   "lemma": "victor",
+   "definition": "conqueror",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 341,
+   "headword": "satis, sat",
+   "lemma": "satis",
+   "definition": "enough, sufficient, sufficiently",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 342,
+   "headword": "patria -ae f.",
+   "lemma": "patria",
+   "definition": "fatherland, country",
+   "pos": "Noun: 1st Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 343,
+   "headword": "seu",
+   "lemma": "seu",
+   "definition": "whether; seu ... seu: whether ... or → sīve",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 344,
+   "headword": "cāsus -ūs m.",
+   "lemma": "cāsus",
+   "definition": "a fall; chance, accident",
+   "pos": "Noun: 4th Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 345,
+   "headword": "frangō frangere frēgī frāctum",
+   "lemma": "frangō",
+   "definition": "break, shatter",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 346,
+   "headword": "cīvitās -ātis f.",
+   "lemma": "cīvitās",
+   "definition": "citizenship, state",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 347,
+   "headword": "nōscō nōscere nōvī nōtum",
+   "lemma": "nōscō",
+   "definition": "learn, know",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 348,
+   "headword": "proelium -ī n.",
+   "lemma": "proelium",
+   "definition": "battle",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 349,
+   "headword": "ēripiō -ripere -ripuī -reptum",
+   "lemma": "ēripiō",
+   "definition": "snatch away, rescue, save",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 350,
+   "headword": "mundus -ī m.",
+   "lemma": "mundus",
+   "definition": "world, universe, heavens",
+   "pos": "Noun: 2nd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 351,
+   "headword": "cursus -ūs m.",
+   "lemma": "cursus",
+   "definition": "course, advance",
+   "pos": "Noun: 4th Declension",
+   "group": "Athletics"
+  },
+  {
+   "rank": 352,
+   "headword": "vix",
+   "lemma": "vix",
+   "definition": "scarcely",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 353,
+   "headword": "nāvis -is f.",
+   "lemma": "nāvis",
+   "definition": "ship",
+   "pos": "Noun: 3rd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 354,
+   "headword": "lacrima -ae f.",
+   "lemma": "lacrima",
+   "definition": "tear",
+   "pos": "Noun: 1st Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 355,
+   "headword": "hūmānus -a -um",
+   "lemma": "hūmānus",
+   "definition": "human",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 356,
+   "headword": "mollis -e",
+   "lemma": "mollis",
+   "definition": "soft, yielding, gentle",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 357,
+   "headword": "maneō manēre mānsī mānsum",
+   "lemma": "maneō",
+   "definition": "remain",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Travel"
+  },
+  {
+   "rank": 358,
+   "headword": "āgmen -minis n.",
+   "lemma": "āgmen",
+   "definition": "line of march",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 359,
+   "headword": "sīdus -eris n.",
+   "lemma": "sīdus",
+   "definition": "star, constellation",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 360,
+   "headword": "glōria -ae f.",
+   "lemma": "glōria",
+   "definition": "glory, fame",
+   "pos": "Noun: 1st Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 361,
+   "headword": "diū:",
+   "lemma": "diū",
+   "definition": "for a long time",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 362,
+   "headword": "sīve",
+   "lemma": "sīve",
+   "definition": "whether; sīve ... sīve: whether ... or → seu",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 363,
+   "headword": "tamquam",
+   "lemma": "tamquam",
+   "definition": "so as, just as",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 364,
+   "headword": "fuga -ae f.",
+   "lemma": "fuga",
+   "definition": "flight, route",
+   "pos": "Noun: 1st Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 365,
+   "headword": "tūtus -a -um",
+   "lemma": "tūtus",
+   "definition": "safe, protected",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 366,
+   "headword": "auris -is f.",
+   "lemma": "auris",
+   "definition": "ear",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 367,
+   "headword": "aliēnus -a -um",
+   "lemma": "aliēnus",
+   "definition": "foreign, strange",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 368,
+   "headword": "hūc",
+   "lemma": "hūc",
+   "definition": "to this place",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 369,
+   "headword": "taceō -ēre -uī -itum",
+   "lemma": "taceō",
+   "definition": "be silent; tacitus -a -um, silent",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 370,
+   "headword": "legiō -ōnis f.",
+   "lemma": "legiō",
+   "definition": "legion",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 371,
+   "headword": "ostendō ostendere ostendī ostentum",
+   "lemma": "ostendō",
+   "definition": "show, hold out",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 372,
+   "headword": "socius -a -um",
+   "lemma": "socius",
+   "definition": "friendly, allied; socius -ī m.: partner, comrade",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 373,
+   "headword": "prōsum prodesse profuī",
+   "lemma": "prōsum",
+   "definition": "be of use, do good, help (+ dat.)",
+   "pos": "Verb: Irregular",
+   "group": "Social Life"
+  },
+  {
+   "rank": 374,
+   "headword": "āra -ae f.",
+   "lemma": "āra",
+   "definition": "altar",
+   "pos": "Noun: 1st Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 375,
+   "headword": "lūmen luminis n.",
+   "lemma": "lūmen",
+   "definition": "light",
+   "pos": "Noun: 3rd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 376,
+   "headword": "tegō tegere tēxī tēctum",
+   "lemma": "tegō",
+   "definition": "cover, conceal",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Deception"
+  },
+  {
+   "rank": 377,
+   "headword": "turpis -e",
+   "lemma": "turpis",
+   "definition": "ugly, unsightly; disgraceful",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 378,
+   "headword": "voluptās -ātis f.",
+   "lemma": "voluptās",
+   "definition": "pleasure, enjoyment",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 379,
+   "headword": "adhūc",
+   "lemma": "adhūc",
+   "definition": "thus far, to this point",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 380,
+   "headword": "grātia -ae f.",
+   "lemma": "grātia",
+   "definition": "favor, influence, gratitude",
+   "pos": "Noun: 1st Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 381,
+   "headword": "iniūria -ae f.:",
+   "lemma": "iniūria",
+   "definition": "injustice, wrong, affront",
+   "pos": "Noun: 1st Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 382,
+   "headword": "latus -eris n.",
+   "lemma": "latus",
+   "definition": "side, flank",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 383,
+   "headword": "dulcis -e",
+   "lemma": "dulcis",
+   "definition": "sweet",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 384,
+   "headword": "postquam",
+   "lemma": "postquam",
+   "definition": "after",
+   "pos": "Conjunction",
+   "group": "Time"
+  },
+  {
+   "rank": 385,
+   "headword": "extrēmus -a -um",
+   "lemma": "extrēmus",
+   "definition": "farthest, situated at the end or tip, extreme",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 386,
+   "headword": "tēctum -ī n.",
+   "lemma": "tēctum",
+   "definition": "roof; building, house",
+   "pos": "Noun: 2nd Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 387,
+   "headword": "ingenium -ī n.",
+   "lemma": "ingenium",
+   "definition": "disposition, ability, talent",
+   "pos": "Noun: 2nd Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 388,
+   "headword": "pāx pācis f.",
+   "lemma": "pāx",
+   "definition": "peace",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 389,
+   "headword": "canō canere cecinī cantum",
+   "lemma": "canō",
+   "definition": "sing",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 390,
+   "headword": "iuvō iuvāre iūvī iūtum",
+   "lemma": "iuvō",
+   "definition": "help, assist; please, delight",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 391,
+   "headword": "campus -ī m.",
+   "lemma": "campus",
+   "definition": "plain, field",
+   "pos": "Noun: 2nd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 392,
+   "headword": "claudō claudere clausī clausum",
+   "lemma": "claudō",
+   "definition": "close, shut",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "The House"
+  },
+  {
+   "rank": 393,
+   "headword": "doceō -ēre -uī doctum",
+   "lemma": "doceō",
+   "definition": "teach",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 394,
+   "headword": "excipiō -cipere -cēpī -ceptum",
+   "lemma": "excipiō",
+   "definition": "take out",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 395,
+   "headword": "clārus -a -um",
+   "lemma": "clārus",
+   "definition": "clear, distinguished",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 396,
+   "headword": "illīc",
+   "lemma": "illīc",
+   "definition": "at that place, there; illinc: from that place",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 397,
+   "headword": "procul",
+   "lemma": "procul",
+   "definition": "at a distance",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 398,
+   "headword": "sacer sacra sacrum",
+   "lemma": "sacer",
+   "definition": "holy, sacred",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 399,
+   "headword": "mora -ae f.",
+   "lemma": "mora",
+   "definition": "delay, hindrance",
+   "pos": "Noun: 1st Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 400,
+   "headword": "longē",
+   "lemma": "longē",
+   "definition": "far, far off",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 401,
+   "headword": "super",
+   "lemma": "super",
+   "definition": "over (adv. and prep. +acc.)",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 402,
+   "headword": "errō -āre",
+   "lemma": "errō",
+   "definition": "go astray, wander",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Travel"
+  },
+  {
+   "rank": 403,
+   "headword": "sēdēs -is f.",
+   "lemma": "sēdēs",
+   "definition": "seat, abode, habitation",
+   "pos": "Noun: 3rd Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 404,
+   "headword": "cūr",
+   "lemma": "cūr",
+   "definition": "why?",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 405,
+   "headword": "coma -ae f.",
+   "lemma": "coma",
+   "definition": "hair, tresses",
+   "pos": "Noun: 1st Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 406,
+   "headword": "aiō",
+   "lemma": "aiō",
+   "definition": "say, affirm, say yes; ut āiunt: as they say",
+   "pos": "Verb: Irregular",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 407,
+   "headword": "gaudeō gaudēre gāvīsus sum",
+   "lemma": "gaudeō",
+   "definition": "rejoice",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 408,
+   "headword": "beātus -a -um",
+   "lemma": "beātus",
+   "definition": "happy, blessed, prosperous, fortunate",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 409,
+   "headword": "perveniō -venīre -vēnī -ventum",
+   "lemma": "perveniō",
+   "definition": "arrive, reach",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Travel"
+  },
+  {
+   "rank": 410,
+   "headword": "vērus -a -um",
+   "lemma": "vērus",
+   "definition": "true",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 411,
+   "headword": "incipiō -cipere -cēpī -ceptum",
+   "lemma": "incipiō",
+   "definition": "begin",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Time"
+  },
+  {
+   "rank": 412,
+   "headword": "parcō parcere pepercī parsum",
+   "lemma": "parcō",
+   "definition": "spare, be sparing of (+ dat.)",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 413,
+   "headword": "vestis -is f.",
+   "lemma": "vestis",
+   "definition": "garment, robe, clothing",
+   "pos": "Noun: 3rd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 414,
+   "headword": "similis -e",
+   "lemma": "similis",
+   "definition": "like, similar",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 415,
+   "headword": "caedēs -is f.",
+   "lemma": "caedēs",
+   "definition": "killing, slaughter",
+   "pos": "Noun: 3rd Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 416,
+   "headword": "ōrdō -īnis m.",
+   "lemma": "ōrdō",
+   "definition": "order, rank",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 417,
+   "headword": "optō -āre",
+   "lemma": "optō",
+   "definition": "choose, select",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 418,
+   "headword": "virgō -inis f.",
+   "lemma": "virgō",
+   "definition": "maiden, virgin, girl",
+   "pos": "Noun: 3rd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 419,
+   "headword": "legō legere lēgī lēctum",
+   "lemma": "legō",
+   "definition": "gather, choose, read",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 420,
+   "headword": "aura -ae f.",
+   "lemma": "aura",
+   "definition": "breeze",
+   "pos": "Noun: 1st Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 421,
+   "headword": "impetus -ūs m.",
+   "lemma": "impetus",
+   "definition": "attack",
+   "pos": "Noun: 4th Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 422,
+   "headword": "fōrma -ae f.",
+   "lemma": "fōrma",
+   "definition": "shape; beauty",
+   "pos": "Noun: 1st Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 423,
+   "headword": "praestō -stāre -stitī -stitum",
+   "lemma": "praestō",
+   "definition": "excel, exhibit",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 424,
+   "headword": "aequor aequoris n.",
+   "lemma": "aequor",
+   "definition": "level surface, sea, plain",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 425,
+   "headword": "misceō miscēre miscuī mixtum",
+   "lemma": "misceō",
+   "definition": "mix",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 426,
+   "headword": "spatium -ī n.",
+   "lemma": "spatium",
+   "definition": "space",
+   "pos": "Noun: 2nd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 427,
+   "headword": "tandem",
+   "lemma": "tandem",
+   "definition": "finally",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 428,
+   "headword": "īnferus -a -um",
+   "lemma": "īnferus",
+   "definition": "low; īnferior: lower; īnfimus or īmus: lowest",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 429,
+   "headword": "metuō metuere metuī",
+   "lemma": "metuō",
+   "definition": "to fear, to dread",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Emotions"
+  },
+  {
+   "rank": 430,
+   "headword": "temptō -āre",
+   "lemma": "temptō",
+   "definition": "try, test",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 431,
+   "headword": "trānseō -īre -iī -itum",
+   "lemma": "trānseō",
+   "definition": "go across",
+   "pos": "Verb: Irregular",
+   "group": "Travel"
+  },
+  {
+   "rank": 432,
+   "headword": "ultimus -a -um",
+   "lemma": "ultimus",
+   "definition": "farthest, final, last, ultimate",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 433,
+   "headword": "addō -dere -didī -ditum",
+   "lemma": "addō",
+   "definition": "give to",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Social Life"
+  },
+  {
+   "rank": 434,
+   "headword": "grātus -a -um",
+   "lemma": "grātus",
+   "definition": "pleasant; grateful",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 435,
+   "headword": "laudō -āre",
+   "lemma": "laudō",
+   "definition": "praise",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 436,
+   "headword": "nōndum",
+   "lemma": "nōndum",
+   "definition": "not yet",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 437,
+   "headword": "impōnō -ere -posuī -positum",
+   "lemma": "impōnō",
+   "definition": "put in, put on, impose, levy upon",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Measurement"
+  },
+  {
+   "rank": 438,
+   "headword": "somnus -ī m.",
+   "lemma": "somnus",
+   "definition": "sleep, slumber; (pl.) dreams",
+   "pos": "Noun: 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 439,
+   "headword": "aciēs -ēī f.",
+   "lemma": "aciēs",
+   "definition": "edge; line of battle",
+   "pos": "Noun: 5th Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 440,
+   "headword": "rūrsus",
+   "lemma": "rūrsus",
+   "definition": "back, again",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 441,
+   "headword": "cupiō -ere -īvī -ītum",
+   "lemma": "cupiō",
+   "definition": "desire",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Love"
+  },
+  {
+   "rank": 442,
+   "headword": "exspectō -āre",
+   "lemma": "exspectō",
+   "definition": "watch, wait, expect",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Vision"
+  },
+  {
+   "rank": 443,
+   "headword": "compōnō -pōnere posuī positum",
+   "lemma": "compōnō",
+   "definition": "build, construct, arrange",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 444,
+   "headword": "laus laudis f.",
+   "lemma": "laus",
+   "definition": "praise, glory",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 445,
+   "headword": "absum abesse āfuī",
+   "lemma": "absum",
+   "definition": "be away, absent",
+   "pos": "Verb: Irregular",
+   "group": "Travel"
+  },
+  {
+   "rank": 446,
+   "headword": "ūsus -ūs m.",
+   "lemma": "ūsus",
+   "definition": "use, experience",
+   "pos": "Noun: 4th Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 447,
+   "headword": "velut",
+   "lemma": "velut",
+   "definition": "even as, just as",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 448,
+   "headword": "comes comitis m./f.",
+   "lemma": "comes",
+   "definition": "companion, comrade; attendant, follower",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 449,
+   "headword": "ob",
+   "lemma": "ob",
+   "definition": "against, on account of (+acc)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 450,
+   "headword": "studium -ī n.",
+   "lemma": "studium",
+   "definition": "eagerness, zeal",
+   "pos": "Noun: 2nd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 451,
+   "headword": "facilis -e",
+   "lemma": "facilis",
+   "definition": "easy",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 452,
+   "headword": "nūmen -inis n.",
+   "lemma": "nūmen",
+   "definition": "divine will, deity",
+   "pos": "Noun: 3rd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 453,
+   "headword": "sapiēns -ntis",
+   "lemma": "sapiēns",
+   "definition": "wise; (as subst.) wise man, sage, philosopher",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 454,
+   "headword": "sūmō sūmere sūmpsī sūmptum",
+   "lemma": "sūmō",
+   "definition": "take up",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 455,
+   "headword": "nōbilis -e",
+   "lemma": "nōbilis",
+   "definition": "distinguished, noble; (as subst.) a nobleman or woman",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 456,
+   "headword": "quīn",
+   "lemma": "quīn",
+   "definition": "(adv.) indeed, in fact; (conjunction) so that ... not (+ subj.)",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 457,
+   "headword": "fleō flēre flēvī flētum",
+   "lemma": "fleō",
+   "definition": "weep",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 458,
+   "headword": "nōlō nōlle nōluī",
+   "lemma": "nōlō",
+   "definition": "be unwilling",
+   "pos": "Verb: Irregular",
+   "group": "Emotions"
+  },
+  {
+   "rank": 459,
+   "headword": "plēnus -a -um",
+   "lemma": "plēnus",
+   "definition": "full",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 460,
+   "headword": "adversus (-um)",
+   "lemma": "adversus",
+   "definition": "(adv. and prep.) facing, opposite, against, opposed (to)",
+   "pos": "Adverb",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 461,
+   "headword": "nemus nemoris n.",
+   "lemma": "nemus",
+   "definition": "grove, forest",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 462,
+   "headword": "cārus -a -um",
+   "lemma": "cārus",
+   "definition": "dear",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 463,
+   "headword": "dēsum -esse -fuī",
+   "lemma": "dēsum",
+   "definition": "be lacking",
+   "pos": "Verb: Irregular",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 464,
+   "headword": "lēgātus -ī m.",
+   "lemma": "lēgātus",
+   "definition": "lieutenant, envoy",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 465,
+   "headword": "discō -ere didicī",
+   "lemma": "discō",
+   "definition": "learn",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 466,
+   "headword": "furor -ōris m.",
+   "lemma": "furor",
+   "definition": "rage, fury",
+   "pos": "Noun: 3rd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 467,
+   "headword": "amnis -is m.",
+   "lemma": "amnis",
+   "definition": "river, torrent",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 468,
+   "headword": "arbor arboris f.",
+   "lemma": "arbor",
+   "definition": "tree",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 469,
+   "headword": "mox",
+   "lemma": "mox",
+   "definition": "soon",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 470,
+   "headword": "eō",
+   "lemma": "eō",
+   "definition": "(adv.) there, to that place",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 471,
+   "headword": "cīvis -is m./f.",
+   "lemma": "cīvis",
+   "definition": "citizen",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 472,
+   "headword": "occupō -āre",
+   "lemma": "occupō",
+   "definition": "seize, occupy; anticipate, do a thing first (+ infin.)",
+   "pos": "Verb: 1st Conjugation",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 473,
+   "headword": "spectō -āre",
+   "lemma": "spectō",
+   "definition": "look at, consider",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Vision"
+  },
+  {
+   "rank": 474,
+   "headword": "tergum -ī n.",
+   "lemma": "tergum",
+   "definition": "back, rear; ā tergō: from the rear",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 475,
+   "headword": "crīmen -inis n.",
+   "lemma": "crīmen",
+   "definition": "verdict, accusation",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 476,
+   "headword": "dōnum -ī n.",
+   "lemma": "dōnum",
+   "definition": "gift, present",
+   "pos": "Noun: 2nd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 477,
+   "headword": "nōtus -a -um",
+   "lemma": "nōtus",
+   "definition": "well-known",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 478,
+   "headword": "sinus -ūs m.",
+   "lemma": "sinus",
+   "definition": "fold of a garment; lap, bay, gulf",
+   "pos": "Noun: 4th Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 479,
+   "headword": "faciēs -ēī f.",
+   "lemma": "faciēs",
+   "definition": "form, appearance",
+   "pos": "Noun: 5th Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 480,
+   "headword": "rumpō rumpere rūpī ruptum",
+   "lemma": "rumpō",
+   "definition": "break, rupture",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 481,
+   "headword": "membrum -ī n.",
+   "lemma": "membrum",
+   "definition": "limb, member of the body",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 482,
+   "headword": "umquam",
+   "lemma": "umquam",
+   "definition": "ever",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 483,
+   "headword": "aspiciō -ere -spēxī -spectum",
+   "lemma": "aspiciō",
+   "definition": "look to or at, behold",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Vision"
+  },
+  {
+   "rank": 484,
+   "headword": "prius or priusquam",
+   "lemma": "prius",
+   "definition": "before",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 485,
+   "headword": "templum -ī n.",
+   "lemma": "templum",
+   "definition": "consecrated ground; temple",
+   "pos": "Noun: 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 486,
+   "headword": "āmittō -mittere -mīsī -missum",
+   "lemma": "āmittō",
+   "definition": "let go, send away",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 487,
+   "headword": "pōscō pōscere popōscī",
+   "lemma": "pōscō",
+   "definition": "demand, claim; inquire into",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 488,
+   "headword": "perdō -dere -didī -ditum",
+   "lemma": "perdō",
+   "definition": "destroy",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 489,
+   "headword": "quamvīs",
+   "lemma": "quamvīs",
+   "definition": "however you like; although",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 490,
+   "headword": "tener -era -erum",
+   "lemma": "tener",
+   "definition": "tender",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 491,
+   "headword": "currus -ūs m.",
+   "lemma": "currus",
+   "definition": "chariot",
+   "pos": "Noun: 4th Declension",
+   "group": "Athletics"
+  },
+  {
+   "rank": 492,
+   "headword": "precor -ārī",
+   "lemma": "precor",
+   "definition": "pray, invoke",
+   "pos": "Verb: Deponent",
+   "group": "Religion"
+  },
+  {
+   "rank": 493,
+   "headword": "anima -ae f.",
+   "lemma": "anima",
+   "definition": "breath, spirit",
+   "pos": "Noun: 1st Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 494,
+   "headword": "contingō -tingere -tigī -tactum",
+   "lemma": "contingō",
+   "definition": "touch, be contiguous to",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Place"
+  },
+  {
+   "rank": 495,
+   "headword": "lībertās -ātis f.",
+   "lemma": "lībertās",
+   "definition": "freedom",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 496,
+   "headword": "servus -ī m.",
+   "lemma": "servus",
+   "definition": "slave",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 497,
+   "headword": "soror -ōris f.",
+   "lemma": "soror",
+   "definition": "sister",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 498,
+   "headword": "fluctus -ūs m",
+   "lemma": "fluctus",
+   "definition": "flood, billow, surf",
+   "pos": "Noun: 4th Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 499,
+   "headword": "quīppe",
+   "lemma": "quīppe",
+   "definition": "(adv.) indeed, surely",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 500,
+   "headword": "exigō -igere -ēgī -āctum",
+   "lemma": "exigō",
+   "definition": "drive out; collect",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 501,
+   "headword": "fēmina -ae f.",
+   "lemma": "fēmina",
+   "definition": "woman",
+   "pos": "Noun: 1st Declension",
+   "group": "People"
+  },
+  {
+   "rank": 502,
+   "headword": "nimius -a -um",
+   "lemma": "nimius",
+   "definition": "too much, excessive",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 503,
+   "headword": "fallō fallere fefellī falsum",
+   "lemma": "fallō",
+   "definition": "deceive",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Deception"
+  },
+  {
+   "rank": 504,
+   "headword": "mīror mīrārī mīrātus sum",
+   "lemma": "mīror",
+   "definition": "wonder at, marvel at (+ acc.)",
+   "pos": "Verb: Deponent",
+   "group": "Emotions"
+  },
+  {
+   "rank": 505,
+   "headword": "classis -is f.",
+   "lemma": "classis",
+   "definition": "class, division, fleet",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 506,
+   "headword": "sedeō sedēre sēdī sessum",
+   "lemma": "sedeō",
+   "definition": "sit",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "The House"
+  },
+  {
+   "rank": 507,
+   "headword": "singulī -ae -a",
+   "lemma": "singulī",
+   "definition": "one each",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 508,
+   "headword": "mūrus -ī m.",
+   "lemma": "mūrus",
+   "definition": "wall",
+   "pos": "Noun: 2nd Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 509,
+   "headword": "noceō nocēre nocuī",
+   "lemma": "noceō",
+   "definition": "harm",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Violence"
+  },
+  {
+   "rank": 510,
+   "headword": "quoniam",
+   "lemma": "quoniam",
+   "definition": "since, seeing that",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 511,
+   "headword": "fax facis f.",
+   "lemma": "fax",
+   "definition": "torch",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 512,
+   "headword": "intellegō -legere -lēxī -lēctum:",
+   "lemma": "intellegō",
+   "definition": "understand",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 513,
+   "headword": "iungō iungere iūnxī iūnctum",
+   "lemma": "iungō",
+   "definition": "join",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 514,
+   "headword": "afferō afferre attulī allātum",
+   "lemma": "afferō",
+   "definition": "bring to",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 515,
+   "headword": "cōgitō -āre",
+   "lemma": "cōgitō",
+   "definition": "think, reflect",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 516,
+   "headword": "līmen līminis n.",
+   "lemma": "līmen",
+   "definition": "threshold",
+   "pos": "Noun: 3rd Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 517,
+   "headword": "pūblicus -a -um",
+   "lemma": "pūblicus",
+   "definition": "public, belonging to the state",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 518,
+   "headword": "queror querī questus sum",
+   "lemma": "queror",
+   "definition": "complain of, lament",
+   "pos": "Verb: Deponent",
+   "group": "Emotions"
+  },
+  {
+   "rank": 519,
+   "headword": "exemplum -ī n.",
+   "lemma": "exemplum",
+   "definition": "example, sample, copy",
+   "pos": "Noun: 2nd Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 520,
+   "headword": "prex precis f.",
+   "lemma": "prex",
+   "definition": "prayers, entreaties",
+   "pos": "Noun: 3rd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 521,
+   "headword": "dubitō -āre",
+   "lemma": "dubitō",
+   "definition": "hesitate, doubt",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 522,
+   "headword": "odium -ī n.",
+   "lemma": "odium",
+   "definition": "hatred",
+   "pos": "Noun: 2nd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 523,
+   "headword": "fundō fundere fūdī fūsum",
+   "lemma": "fundō",
+   "definition": "pour, scatter",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 524,
+   "headword": "fūnus fūneris n.",
+   "lemma": "fūnus",
+   "definition": "funeral; death; dead body",
+   "pos": "Noun: 3rd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 525,
+   "headword": "nesciō -scīre",
+   "lemma": "nesciō",
+   "definition": "not know, be ignorant",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 526,
+   "headword": "prior prius",
+   "lemma": "prior",
+   "definition": "earlier, preceding",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 527,
+   "headword": "ūsque",
+   "lemma": "ūsque",
+   "definition": "up to; continuously",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 528,
+   "headword": "dubius -a -um",
+   "lemma": "dubius",
+   "definition": "doubtful; (as subst.) a doubt; sine dubiō, without a doubt, certainly",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Deception"
+  },
+  {
+   "rank": 529,
+   "headword": "tendō tendere tetendī tentum",
+   "lemma": "tendō",
+   "definition": "stretch, extend, direct (one’s steps or course)",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 530,
+   "headword": "pecūnia -ae f.",
+   "lemma": "pecūnia",
+   "definition": "money",
+   "pos": "Noun: 1st Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 531,
+   "headword": "quemadmodum",
+   "lemma": "quemadmodum",
+   "definition": "in what manner, how",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 532,
+   "headword": "spargō spargere sparsī sparsum",
+   "lemma": "spargō",
+   "definition": "scatter",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 533,
+   "headword": "trēs tria",
+   "lemma": "trēs",
+   "definition": "three",
+   "pos": "Adjective: Numeral",
+   "group": "Measurement"
+  },
+  {
+   "rank": 534,
+   "headword": "tangō tangere tetigī tāctum",
+   "lemma": "tangō",
+   "definition": "touch",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 535,
+   "headword": "respondeō -spondēre -spondī -spōnsum",
+   "lemma": "respondeō",
+   "definition": "answer",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 536,
+   "headword": "timor -ōris m.",
+   "lemma": "timor",
+   "definition": "fear",
+   "pos": "Noun: 3rd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 537,
+   "headword": "properō -āre",
+   "lemma": "properō",
+   "definition": "hasten, speed",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Motion"
+  },
+  {
+   "rank": 538,
+   "headword": "subeō -īre -iī -itum",
+   "lemma": "subeō",
+   "definition": "go under; endure",
+   "pos": "Verb: Irregular",
+   "group": "Motion"
+  },
+  {
+   "rank": 539,
+   "headword": "valeō valēre valuī",
+   "lemma": "valeō",
+   "definition": "be strong, excel, be valid, prevail; valē: farewell!",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 540,
+   "headword": "condō -dere -didī -ditum",
+   "lemma": "condō",
+   "definition": "build, found; store up; hide, conceal",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "The City"
+  },
+  {
+   "rank": 541,
+   "headword": "nefās n. indecl.",
+   "lemma": "nefās",
+   "definition": "impiety, wickedness",
+   "pos": "Noun: Indeclinable",
+   "group": "Justice"
+  },
+  {
+   "rank": 542,
+   "headword": "quondam",
+   "lemma": "quondam",
+   "definition": "formerly, once",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 543,
+   "headword": "auxilium -ī n.",
+   "lemma": "auxilium",
+   "definition": "support, assistance; (pl.) auxiliary forces",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 544,
+   "headword": "dēserō -ere dēseruī dēsertum",
+   "lemma": "dēserō",
+   "definition": "leave, desert, abandon",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 545,
+   "headword": "nūdus -a -um",
+   "lemma": "nūdus",
+   "definition": "naked, bare",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 546,
+   "headword": "auctor -ōris m.",
+   "lemma": "auctor",
+   "definition": "originator, founder",
+   "pos": "Noun: 3rd Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 547,
+   "headword": "animal -ālis n.",
+   "lemma": "animal",
+   "definition": "a living being, an animal",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 548,
+   "headword": "decus decoris n.",
+   "lemma": "decus",
+   "definition": "beauty, grace; ornament, glory, honor",
+   "pos": "Noun: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 549,
+   "headword": "salūs -ūtis f.",
+   "lemma": "salūs",
+   "definition": "health, safety",
+   "pos": "Noun: 3rd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 550,
+   "headword": "pateō patēre patuī",
+   "lemma": "pateō",
+   "definition": "lie open, extend; be evident or obvious",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Geography"
+  },
+  {
+   "rank": 551,
+   "headword": "rogō -āre",
+   "lemma": "rogō",
+   "definition": "ask",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 552,
+   "headword": "uxor uxōris f.",
+   "lemma": "uxor",
+   "definition": "wife",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 553,
+   "headword": "abeō -īre -iī -itum",
+   "lemma": "abeō",
+   "definition": "go away",
+   "pos": "Verb: Irregular",
+   "group": "Motion"
+  },
+  {
+   "rank": 554,
+   "headword": "regō regere rēxī rēctum",
+   "lemma": "regō",
+   "definition": "guide, rule",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "The City"
+  },
+  {
+   "rank": 555,
+   "headword": "adeō",
+   "lemma": "adeō",
+   "definition": "(adv.) to such a degree, so",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 556,
+   "headword": "auferō auferre abstulī ablātum",
+   "lemma": "auferō",
+   "definition": "take away",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 557,
+   "headword": "quantum",
+   "lemma": "quantum",
+   "definition": "(adv.) how much? how greatly? how much! how greatly! as much as",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 558,
+   "headword": "senex -is m.",
+   "lemma": "senex",
+   "definition": "old man, elder; senior, older",
+   "pos": "Noun: 3rd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 559,
+   "headword": "frōns frontis f.",
+   "lemma": "frōns",
+   "definition": "forehead, brow; front",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 560,
+   "headword": "propter",
+   "lemma": "propter",
+   "definition": "because of (+ acc.)",
+   "pos": "Preposition",
+   "group": "Non-Directional Prepositions"
+  },
+  {
+   "rank": 561,
+   "headword": "rēgius -a -um",
+   "lemma": "rēgius",
+   "definition": "kingly, royal",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 562,
+   "headword": "currō currere cucurrī cursum",
+   "lemma": "currō",
+   "definition": "run",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Athletics"
+  },
+  {
+   "rank": 563,
+   "headword": "pellō pellere pepulī pulsum",
+   "lemma": "pellō",
+   "definition": "strike, beat, push, drive",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 564,
+   "headword": "dīves dīvitis",
+   "lemma": "dīves",
+   "definition": "rich (poet. dīs, dītis)",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 565,
+   "headword": "iūdicō -āre",
+   "lemma": "iūdicō",
+   "definition": "judge, decide",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Justice"
+  },
+  {
+   "rank": 566,
+   "headword": "pecus -oris n.",
+   "lemma": "pecus",
+   "definition": "cattle, sheep",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 567,
+   "headword": "potēns potentis",
+   "lemma": "potēns",
+   "definition": "able, powerful",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 568,
+   "headword": "scrībō scrībere scrīpsī scrīptum",
+   "lemma": "scrībō",
+   "definition": "write",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 569,
+   "headword": "pulcher -chra -chrum",
+   "lemma": "pulcher",
+   "definition": "beautiful",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 570,
+   "headword": "surgō surgere surrēxī surrēctum",
+   "lemma": "surgō",
+   "definition": "rise",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 571,
+   "headword": "cēterum",
+   "lemma": "cēterum",
+   "definition": "for the rest, in addition, however that may be",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 572,
+   "headword": "careō -ēre -uī",
+   "lemma": "careō",
+   "definition": "lack (+ abl.)",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 573,
+   "headword": "efficiō -ficere -fēcī -fectum",
+   "lemma": "efficiō",
+   "definition": "bring about, complete; render (+ ut + subj.)",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 574,
+   "headword": "ōlim",
+   "lemma": "ōlim",
+   "definition": "formerly, at that time",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 575,
+   "headword": "sermō -ōnis m.",
+   "lemma": "sermō",
+   "definition": "conversation, discourse",
+   "pos": "Noun: 3rd Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 576,
+   "headword": "exerceō -ercēre -ercuī -ercitum",
+   "lemma": "exerceō",
+   "definition": "train, exercise, carry on",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Athletics"
+  },
+  {
+   "rank": 577,
+   "headword": "gradus -ūs m.",
+   "lemma": "gradus",
+   "definition": "step, pace; grade, rank",
+   "pos": "Noun: 4th Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 578,
+   "headword": "agitō -āre",
+   "lemma": "agitō",
+   "definition": "drive",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 579,
+   "headword": "forte",
+   "lemma": "forte",
+   "definition": "by chance",
+   "pos": "Adverb",
+   "group": "Religion"
+  },
+  {
+   "rank": 580,
+   "headword": "honestus -a -um",
+   "lemma": "honestus",
+   "definition": "honorable",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 581,
+   "headword": "moror morārī morātus sum",
+   "lemma": "moror",
+   "definition": "delay",
+   "pos": "Verb: Deponent",
+   "group": "Time"
+  },
+  {
+   "rank": 582,
+   "headword": "praesidium -ī n.",
+   "lemma": "praesidium",
+   "definition": "garrison, protection",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 583,
+   "headword": "sonō sonāre sonuī sonitum",
+   "lemma": "sonō",
+   "definition": "sound, resound",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 584,
+   "headword": "praebeō -ēre -uī -itum",
+   "lemma": "praebeō",
+   "definition": "furnish, supply, render",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 585,
+   "headword": "regiō -ōnis f.",
+   "lemma": "regiō",
+   "definition": "boundary, region",
+   "pos": "Noun: 3rd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 586,
+   "headword": "sententia -ae f.",
+   "lemma": "sententia",
+   "definition": "opinion, judgment",
+   "pos": "Noun: 1st Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 587,
+   "headword": "ācer ācris ācre",
+   "lemma": "ācer",
+   "definition": "sharp, piercing",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 588,
+   "headword": "suprā",
+   "lemma": "suprā",
+   "definition": "above, beyond (adv. and prep. +acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 589,
+   "headword": "brevis -e",
+   "lemma": "brevis",
+   "definition": "short, shallow, brief",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 590,
+   "headword": "citus -a -um",
+   "lemma": "citus",
+   "definition": "swift; citō swiftly",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 591,
+   "headword": "cornu -ūs n.",
+   "lemma": "cornu",
+   "definition": "horn",
+   "pos": "Noun: 4th Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 592,
+   "headword": "ingrātus -a -um:",
+   "lemma": "ingrātus",
+   "definition": "unpleasant, disagreeable",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 593,
+   "headword": "moenia -ium n. pl.",
+   "lemma": "moenia",
+   "definition": "walls, fortifications",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 594,
+   "headword": "vinculum -ī n.",
+   "lemma": "vinculum",
+   "definition": "bond, fetter, tie",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 595,
+   "headword": "adeō -īre -iī -itum",
+   "lemma": "adeō",
+   "definition": "go to",
+   "pos": "Verb: Irregular",
+   "group": "Motion"
+  },
+  {
+   "rank": 596,
+   "headword": "cēterus -a -um",
+   "lemma": "cēterus",
+   "definition": "the other, the others, the rest",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 597,
+   "headword": "exeō -īre -iī -itum",
+   "lemma": "exeō",
+   "definition": "go forth",
+   "pos": "Verb: Irregular",
+   "group": "Motion"
+  },
+  {
+   "rank": 598,
+   "headword": "mālō mālle māluī",
+   "lemma": "mālō",
+   "definition": "prefer",
+   "pos": "Verb: Irregular",
+   "group": "Emotions"
+  },
+  {
+   "rank": 599,
+   "headword": "speciēs -ēī f.",
+   "lemma": "speciēs",
+   "definition": "aspect, appearance",
+   "pos": "Noun: 5th Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 600,
+   "headword": "ultrā",
+   "lemma": "ultrā",
+   "definition": "beyond, further (adv. and prep. + acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 601,
+   "headword": "certē",
+   "lemma": "certē",
+   "definition": "certainly, surely",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 602,
+   "headword": "imperō -āre",
+   "lemma": "imperō",
+   "definition": "command, control",
+   "pos": "Verb: 1st Conjugation",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 603,
+   "headword": "male",
+   "lemma": "male",
+   "definition": "(adv.) badly",
+   "pos": "Adverb",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 604,
+   "headword": "prohibeō -ēre -uī -itum",
+   "lemma": "prohibeō",
+   "definition": "restrain, keep away",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 605,
+   "headword": "clāmor -ōris m.",
+   "lemma": "clāmor",
+   "definition": "outcry, shout",
+   "pos": "Noun: 3rd Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 606,
+   "headword": "dōnō -āre",
+   "lemma": "dōnō",
+   "definition": "present with a gift (+ acc. of person and abl. of thing)",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 607,
+   "headword": "officium -ī n.",
+   "lemma": "officium",
+   "definition": "service, duty",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 608,
+   "headword": "committō -mittere -mīsī -missum",
+   "lemma": "committō",
+   "definition": "join, entrust to (+ dat.); perform, do",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Social Life"
+  },
+  {
+   "rank": 609,
+   "headword": "crēscō crēscere crēvī crētum",
+   "lemma": "crēscō",
+   "definition": "grow, increase",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 610,
+   "headword": "aequus -a -um",
+   "lemma": "aequus",
+   "definition": "equal",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 611,
+   "headword": "factum -ī n.",
+   "lemma": "factum",
+   "definition": "deed, accomplishment",
+   "pos": "Noun: 2nd Declension",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 612,
+   "headword": "caedō caedere cecīdī caesum",
+   "lemma": "caedō",
+   "definition": "strike, kill, cut down",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 613,
+   "headword": "exīstimō -āre",
+   "lemma": "exīstimō",
+   "definition": "think, believe",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 614,
+   "headword": "accēdō -cēdere -cessī -cessum",
+   "lemma": "accēdō",
+   "definition": "approach",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 615,
+   "headword": "contemnō -temnere -tempsī -temptum",
+   "lemma": "contemnō",
+   "definition": "despise, scorn, disdain",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Emotions"
+  },
+  {
+   "rank": 616,
+   "headword": "pudor pudōris m.",
+   "lemma": "pudor",
+   "definition": "sense of shame, modesty, propriety",
+   "pos": "Noun: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 617,
+   "headword": "antīquus -a -um",
+   "lemma": "antīquus",
+   "definition": "ancient, old-time, former",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 618,
+   "headword": "ārdeō ārdēre ārsī ārsum",
+   "lemma": "ārdeō",
+   "definition": "blaze, glow; be eager",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 619,
+   "headword": "ibi",
+   "lemma": "ibi",
+   "definition": "there",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 620,
+   "headword": "prōvincia -ae f.",
+   "lemma": "prōvincia",
+   "definition": "province; official duty",
+   "pos": "Noun: 1st Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 621,
+   "headword": "quandō",
+   "lemma": "quandō",
+   "definition": "when?; since; sī quandō: if ever",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 622,
+   "headword": "custōs custōdis m.",
+   "lemma": "custōs",
+   "definition": "guardian",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 623,
+   "headword": "supersum -esse -fuī",
+   "lemma": "supersum",
+   "definition": "remain, survive; be superfluous (to)",
+   "pos": "Verb: Irregular",
+   "group": "Place"
+  },
+  {
+   "rank": 624,
+   "headword": "dēsinō -sinere -siī -situm",
+   "lemma": "dēsinō",
+   "definition": "leave off, cease",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 625,
+   "headword": "fessus -a -um",
+   "lemma": "fessus",
+   "definition": "weary, tired",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 626,
+   "headword": "praeda -ae f.",
+   "lemma": "praeda",
+   "definition": "booty, prey",
+   "pos": "Noun: 1st Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 627,
+   "headword": "memoria -ae f.",
+   "lemma": "memoria",
+   "definition": "recollection, memory",
+   "pos": "Noun: 1st Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 628,
+   "headword": "dīvidō -ere dīvīsī dīvīsum",
+   "lemma": "dīvidō",
+   "definition": "divide, separate",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 629,
+   "headword": "pretium -ī n.",
+   "lemma": "pretium",
+   "definition": "price, worth, reward; pretium operae: a reward for trouble",
+   "pos": "Noun: 2nd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 630,
+   "headword": "pontus -ī m.",
+   "lemma": "pontus",
+   "definition": "the open sea, the deep",
+   "pos": "Noun: 2nd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 631,
+   "headword": "varius -a -um",
+   "lemma": "varius",
+   "definition": "changing, varied, various",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 632,
+   "headword": "vehō vehere vēxī vectum",
+   "lemma": "vehō",
+   "definition": "carry; vehor vehī vectus sum: travel, ride",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 633,
+   "headword": "falsus -a -um",
+   "lemma": "falsus",
+   "definition": "deceptive, false",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Deception"
+  },
+  {
+   "rank": 634,
+   "headword": "niger nigra nigrum",
+   "lemma": "niger",
+   "definition": "black",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 635,
+   "headword": "oppidum -ī n.",
+   "lemma": "oppidum",
+   "definition": "town",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 636,
+   "headword": "pondus ponderis n.",
+   "lemma": "pondus",
+   "definition": "weight",
+   "pos": "Noun: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 637,
+   "headword": "arvum -ī n.",
+   "lemma": "arvum",
+   "definition": "ploughed land, field",
+   "pos": "Noun: 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 638,
+   "headword": "arx arcis f.",
+   "lemma": "arx",
+   "definition": "citadel, castle; summit",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 639,
+   "headword": "sors sortis f.",
+   "lemma": "sors",
+   "definition": "lot, fate, destiny; oracle",
+   "pos": "Noun: 3rd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 640,
+   "headword": "vīnum -ī n.",
+   "lemma": "vīnum",
+   "definition": "vine, wine",
+   "pos": "Noun: 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 641,
+   "headword": "dīversus -a -um",
+   "lemma": "dīversus",
+   "definition": "different, diverse",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 642,
+   "headword": "orior orīrī ortus sum",
+   "lemma": "orior",
+   "definition": "arise, begin",
+   "pos": "Verb: Deponent",
+   "group": "Time"
+  },
+  {
+   "rank": 643,
+   "headword": "ecce",
+   "lemma": "ecce",
+   "definition": "behold!",
+   "pos": "Adverb",
+   "group": "Vision"
+  },
+  {
+   "rank": 644,
+   "headword": "quamquam",
+   "lemma": "quamquam",
+   "definition": "however, although",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 645,
+   "headword": "cōnferō cōnferre contulī collātum",
+   "lemma": "cōnferō",
+   "definition": "collect, bring to",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 646,
+   "headword": "facinus facinoris n.",
+   "lemma": "facinus",
+   "definition": "deed, crime",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 647,
+   "headword": "retineō -tinēre -tinuī -tentum",
+   "lemma": "retineō",
+   "definition": "hold back, keep",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 648,
+   "headword": "spērō -āre",
+   "lemma": "spērō",
+   "definition": "to hope",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 649,
+   "headword": "plēbs plēbis f.",
+   "lemma": "plēbs",
+   "definition": "the common people",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 650,
+   "headword": "pūgna -ae f.",
+   "lemma": "pūgna",
+   "definition": "fist-fight; battle",
+   "pos": "Noun: 1st Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 651,
+   "headword": "repetō -petere -petīvī -petītum",
+   "lemma": "repetō",
+   "definition": "demand, exact; revisit; call to mind, recollect; repeat",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 652,
+   "headword": "cōnstituō -stituere -stituī -stitūtum",
+   "lemma": "cōnstituō",
+   "definition": "establish, put together",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 653,
+   "headword": "dēfendō -fendere -fendī -fēnsum",
+   "lemma": "dēfendō",
+   "definition": "defend, ward off",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 654,
+   "headword": "marītus -ī m.",
+   "lemma": "marītus",
+   "definition": "husband",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 655,
+   "headword": "cernō cernere crēvī crētum",
+   "lemma": "cernō",
+   "definition": "discern, separate",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 656,
+   "headword": "superbus -a -um",
+   "lemma": "superbus",
+   "definition": "overbearing, proud, haughty",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 657,
+   "headword": "adversus -a -um",
+   "lemma": "adversus",
+   "definition": "facing, opposed; unfavorable",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 658,
+   "headword": "morbus -ī m.",
+   "lemma": "morbus",
+   "definition": "sickness, disease",
+   "pos": "Noun: 2nd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 659,
+   "headword": "sānctus -a -um",
+   "lemma": "sānctus",
+   "definition": "sacred, inviolable",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 660,
+   "headword": "commūnis -e",
+   "lemma": "commūnis",
+   "definition": "common, general",
+   "pos": "Adjective: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 661,
+   "headword": "dēdūcō -dūcere -dūxī -ductum",
+   "lemma": "dēdūcō",
+   "definition": "launch, lead away",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 662,
+   "headword": "rīpa -ae f.",
+   "lemma": "rīpa",
+   "definition": "bank of a river",
+   "pos": "Noun: 1st Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 663,
+   "headword": "concēdō -cēdere -cessī -cessum",
+   "lemma": "concēdō",
+   "definition": "yield, withdraw",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 664,
+   "headword": "hōra -ae f.",
+   "lemma": "hōra",
+   "definition": "hour",
+   "pos": "Noun: 1st Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 665,
+   "headword": "vetō -āre vetuī vetītum",
+   "lemma": "vetō",
+   "definition": "forbid",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 666,
+   "headword": "cohors cohortis f.",
+   "lemma": "cohors",
+   "definition": "cohort, band, troop",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 667,
+   "headword": "gīgnō gīgnere genuī genitum",
+   "lemma": "gīgnō",
+   "definition": "beget, bear, bring forth",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 668,
+   "headword": "superō -āre",
+   "lemma": "superō",
+   "definition": "overcome, surpass, defeat",
+   "pos": "Verb: 1st Conjugation",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 669,
+   "headword": "maestus -a -um",
+   "lemma": "maestus",
+   "definition": "sad, sorrowful; depressing",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 670,
+   "headword": "meminī meminisse",
+   "lemma": "meminī",
+   "definition": "remember, recollect",
+   "pos": "Verb: Irregular",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 671,
+   "headword": "impleō -ēre -plēvī -plētum",
+   "lemma": "impleō",
+   "definition": "fill in, fill up",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 672,
+   "headword": "māgnitūdō -inis f.",
+   "lemma": "māgnitūdō",
+   "definition": "greatness, size",
+   "pos": "Noun: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 673,
+   "headword": "vacuus -a -um",
+   "lemma": "vacuus",
+   "definition": "empty",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 674,
+   "headword": "vagus -a -um",
+   "lemma": "vagus",
+   "definition": "wandering, shifting",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 675,
+   "headword": "vulgus -ī n. and m.",
+   "lemma": "vulgus",
+   "definition": "the common people",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 676,
+   "headword": "deficiō -ficere -fēcī -fectum",
+   "lemma": "deficiō",
+   "definition": "fail, give out; revolt from",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 677,
+   "headword": "occurrō -currere -cucurrī -cursum",
+   "lemma": "occurrō",
+   "definition": "run to meet; come into one’s mind",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 678,
+   "headword": "statuō -ere -uī -ūtum",
+   "lemma": "statuō",
+   "definition": "set up, determine",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Justice"
+  },
+  {
+   "rank": 679,
+   "headword": "ideō",
+   "lemma": "ideō",
+   "definition": "for this reason",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 680,
+   "headword": "praemium -ī n.",
+   "lemma": "praemium",
+   "definition": "bounty, reward",
+   "pos": "Noun: 2nd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 681,
+   "headword": "praetereā",
+   "lemma": "praetereā",
+   "definition": "besides, moreover",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 682,
+   "headword": "tertius -a -um",
+   "lemma": "tertius",
+   "definition": "third",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 683,
+   "headword": "supplicium -ī n.",
+   "lemma": "supplicium",
+   "definition": "punishment, penalty",
+   "pos": "Noun: 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 684,
+   "headword": "vātēs -is m.",
+   "lemma": "vātēs",
+   "definition": "poet, bard",
+   "pos": "Noun: 3rd Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 685,
+   "headword": "astrum -ī n.",
+   "lemma": "astrum",
+   "definition": "star; constellation",
+   "pos": "Noun: 2nd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 686,
+   "headword": "undique",
+   "lemma": "undique",
+   "definition": "from all sides, on all sides",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 687,
+   "headword": "canis -is m./f.",
+   "lemma": "canis",
+   "definition": "dog",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 688,
+   "headword": "ēdō ēdere ēdidī ēditum",
+   "lemma": "ēdō",
+   "definition": "put forth, state, explain",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 689,
+   "headword": "fateor fatērī fassus sum",
+   "lemma": "fateor",
+   "definition": "admit, confess; profess, declare; assent, say yes",
+   "pos": "Verb: Deponent",
+   "group": "Justice"
+  },
+  {
+   "rank": 690,
+   "headword": "amīcitia -ae f.",
+   "lemma": "amīcitia",
+   "definition": "friendship",
+   "pos": "Noun: 1st Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 691,
+   "headword": "aureus -a -um",
+   "lemma": "aureus",
+   "definition": "golden; splendid",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 692,
+   "headword": "candidus -a -um",
+   "lemma": "candidus",
+   "definition": "white, fair",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 693,
+   "headword": "interim",
+   "lemma": "interim",
+   "definition": "meanwhile",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 694,
+   "headword": "frūstrā",
+   "lemma": "frūstrā",
+   "definition": "in vain",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 695,
+   "headword": "lateō latēre latuī",
+   "lemma": "lateō",
+   "definition": "lie hidden, be hidden",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Deception"
+  },
+  {
+   "rank": 696,
+   "headword": "os ossis n.",
+   "lemma": "os",
+   "definition": "bone",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 697,
+   "headword": "sēcūrus -a -um",
+   "lemma": "sēcūrus",
+   "definition": "free from care, tranquil; careless",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 698,
+   "headword": "conveniō -venīre -vēnī -ventum",
+   "lemma": "conveniō",
+   "definition": "assemble, meet; agree",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 699,
+   "headword": "interficiō -ficere -fēcī -fectum",
+   "lemma": "interficiō",
+   "definition": "kill",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Violence"
+  },
+  {
+   "rank": 700,
+   "headword": "appellō -pellāre",
+   "lemma": "appellō",
+   "definition": "call, address, name",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 701,
+   "headword": "dolus -ī m.",
+   "lemma": "dolus",
+   "definition": "artifice, device, trick",
+   "pos": "Noun: 2nd Declension",
+   "group": "Deception"
+  },
+  {
+   "rank": 702,
+   "headword": "permittō -mittere -mīsī -missum",
+   "lemma": "permittō",
+   "definition": "yield, allow, permit",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 703,
+   "headword": "spīritus -ūs m.",
+   "lemma": "spīritus",
+   "definition": "breath, life, spirit",
+   "pos": "Noun: 4th Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 704,
+   "headword": "intrā",
+   "lemma": "intrā",
+   "definition": "within (+ acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 705,
+   "headword": "terreō terrēre terruī territum",
+   "lemma": "terreō",
+   "definition": "terrify, frighten",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 706,
+   "headword": "fōns fontis m.",
+   "lemma": "fōns",
+   "definition": "spring, fountain",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 707,
+   "headword": "invidia -ae f.",
+   "lemma": "invidia",
+   "definition": "envy, jealousy, hatred",
+   "pos": "Noun: 1st Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 708,
+   "headword": "pugnō -āre",
+   "lemma": "pugnō",
+   "definition": "fight",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Violence"
+  },
+  {
+   "rank": 709,
+   "headword": "augeō augēre auxī auctum",
+   "lemma": "augeō",
+   "definition": "increase",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 710,
+   "headword": "littera -ae f.",
+   "lemma": "littera",
+   "definition": "letter, (pl.) literature",
+   "pos": "Noun: 1st Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 711,
+   "headword": "moneō monēre monuī monitum",
+   "lemma": "moneō",
+   "definition": "warn, advise",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 712,
+   "headword": "dīvitiae -ārum f. pl.",
+   "lemma": "dīvitiae",
+   "definition": "riches, wealth",
+   "pos": "Noun: 1st Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 713,
+   "headword": "experior -perīrī -pertus sum",
+   "lemma": "experior",
+   "definition": "try thoroughly, test, experience",
+   "pos": "Verb: Deponent",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 714,
+   "headword": "superī -ōrum m. pl.",
+   "lemma": "superī",
+   "definition": "those above, i.e. the gods",
+   "pos": "Noun: 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 715,
+   "headword": "ōtium -ī n.",
+   "lemma": "ōtium",
+   "definition": "leisure",
+   "pos": "Noun: 2nd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 716,
+   "headword": "vestīgium -ī n.",
+   "lemma": "vestīgium",
+   "definition": "footstep, footprint, track",
+   "pos": "Noun: 2nd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 717,
+   "headword": "sinō sinere sīvī situm",
+   "lemma": "sinō",
+   "definition": "allow, let go",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 718,
+   "headword": "decet decēre decuīt",
+   "lemma": "decet",
+   "definition": "it is right, proper, fitting (+ acc. + infin.)",
+   "pos": "Verb: Impersonal",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 719,
+   "headword": "effundō -fundere -fūdī -fūsum",
+   "lemma": "effundō",
+   "definition": "pour out",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 720,
+   "headword": "prōmittō -mittere -mīsī -missum",
+   "lemma": "prōmittō",
+   "definition": "send forth, offer",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 721,
+   "headword": "fingō fingere fīnxī fīctum",
+   "lemma": "fingō",
+   "definition": "shape; invent",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 722,
+   "headword": "respicio -ere -spēxī -spectum",
+   "lemma": "respicio",
+   "definition": "look back, regard, consider",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Vision"
+  },
+  {
+   "rank": 723,
+   "headword": "imperātor -ōris m.",
+   "lemma": "imperātor",
+   "definition": "commander",
+   "pos": "Noun: 3rd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 724,
+   "headword": "vacō vacāre",
+   "lemma": "vacō",
+   "definition": "be empty, open, unoccupied",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Measurement"
+  },
+  {
+   "rank": 725,
+   "headword": "color -ōris m.",
+   "lemma": "color",
+   "definition": "color",
+   "pos": "Noun: 3rd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 726,
+   "headword": "discēdō -ere -cessī -cessum",
+   "lemma": "discēdō",
+   "definition": "go away, depart",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 727,
+   "headword": "gaudium -ī n.",
+   "lemma": "gaudium",
+   "definition": "delight, joy, pleasure",
+   "pos": "Noun: 2nd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 728,
+   "headword": "caecus -a -um",
+   "lemma": "caecus",
+   "definition": "blind, unseeing; dark, obscure",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 729,
+   "headword": "libet libēre libuit or libitum est",
+   "lemma": "libet",
+   "definition": "it is pleasing (+ dat. + infin.)",
+   "pos": "Verb: Impersonal",
+   "group": "Social Life"
+  },
+  {
+   "rank": 730,
+   "headword": "centum",
+   "lemma": "centum",
+   "definition": "one hundred",
+   "pos": "Adjective: Numeral",
+   "group": "Measurement"
+  },
+  {
+   "rank": 731,
+   "headword": "cōnstō -stāre -stitī",
+   "lemma": "cōnstō",
+   "definition": "agree; constat, it is established that (+ acc. and infin.)",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 732,
+   "headword": "lingua -ae f.",
+   "lemma": "lingua",
+   "definition": "tongue; language",
+   "pos": "Noun: 1st Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 733,
+   "headword": "multitūdō -inis f.",
+   "lemma": "multitūdō",
+   "definition": "multitude, number",
+   "pos": "Noun: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 734,
+   "headword": "aeternus -a -um",
+   "lemma": "aeternus",
+   "definition": "everlasting, eternal",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 735,
+   "headword": "circā",
+   "lemma": "circā",
+   "definition": "around (adv. and prep. +acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 736,
+   "headword": "ōrātiō -ōnis f.",
+   "lemma": "ōrātiō",
+   "definition": "speech, address",
+   "pos": "Noun: 3rd Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 737,
+   "headword": "potestās -ātis f.",
+   "lemma": "potestās",
+   "definition": "power",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 738,
+   "headword": "tardus -a -um",
+   "lemma": "tardus",
+   "definition": "slow, sluggish, lingering",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 739,
+   "headword": "for fārī fātus sum",
+   "lemma": "for",
+   "definition": "report, say",
+   "pos": "Verb: Deponent",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 740,
+   "headword": "humus -ī f.",
+   "lemma": "humus",
+   "definition": "ground; humī: on the ground",
+   "pos": "Noun: 2nd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 741,
+   "headword": "testis -is m.",
+   "lemma": "testis",
+   "definition": "witness",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 742,
+   "headword": "īnferō īnferre intulī illātum",
+   "lemma": "īnferō",
+   "definition": "bring upon, against; bellum īnferre: make war on",
+   "pos": "Verb: Irregular",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 743,
+   "headword": "cūrō -āre",
+   "lemma": "cūrō",
+   "definition": "watch over, look after, care for (+ acc.)",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Love"
+  },
+  {
+   "rank": 744,
+   "headword": "aes aeris n.",
+   "lemma": "aes",
+   "definition": "copper, bronze",
+   "pos": "Noun: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 745,
+   "headword": "celer -is -e",
+   "lemma": "celer",
+   "definition": "swift",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 746,
+   "headword": "prōcēdō -cēdere -cessī -cessum",
+   "lemma": "prōcēdō",
+   "definition": "go forth, advance",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 747,
+   "headword": "mēnsa -ae f.",
+   "lemma": "mēnsa",
+   "definition": "table",
+   "pos": "Noun: 1st Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 748,
+   "headword": "pius -a -um",
+   "lemma": "pius",
+   "definition": "dutiful, devoted, just, pious",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 749,
+   "headword": "iūdicium -ī n.",
+   "lemma": "iūdicium",
+   "definition": "judgment, decision, trial",
+   "pos": "Noun: 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 750,
+   "headword": "victōria -ae f.",
+   "lemma": "victōria",
+   "definition": "victory",
+   "pos": "Noun: 1st Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 751,
+   "headword": "damnō -āre",
+   "lemma": "damnō",
+   "definition": "condemn",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Justice"
+  },
+  {
+   "rank": 752,
+   "headword": "rārus -a -um",
+   "lemma": "rārus",
+   "definition": "wide apart, loose, thin; rare, seldom",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 753,
+   "headword": "tempestas -tātis f.",
+   "lemma": "tempestas",
+   "definition": "period of time, season; bad weather, storm",
+   "pos": "Noun: 3rd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 754,
+   "headword": "imāgō -inis f.",
+   "lemma": "imāgō",
+   "definition": "image, form, figure",
+   "pos": "Noun: 3rd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 755,
+   "headword": "ōrō -āre",
+   "lemma": "ōrō",
+   "definition": "pray",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Religion"
+  },
+  {
+   "rank": 756,
+   "headword": "praeter",
+   "lemma": "praeter",
+   "definition": "by, along, past; besides, except (+ acc.)",
+   "pos": "Preposition",
+   "group": "Place"
+  },
+  {
+   "rank": 757,
+   "headword": "cōnsulō -sulere -suluī -sultum",
+   "lemma": "cōnsulō",
+   "definition": "consult, plan (+ acc.); consider the interests of (+dat)",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "The City"
+  },
+  {
+   "rank": 758,
+   "headword": "iterum",
+   "lemma": "iterum",
+   "definition": "again",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 759,
+   "headword": "porta -ae f.",
+   "lemma": "porta",
+   "definition": "gate",
+   "pos": "Noun: 1st Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 760,
+   "headword": "intersum -esse -fuī",
+   "lemma": "intersum",
+   "definition": "to be between; take part in, attend (+dat.); interest, it is in the interest of (+ gen.)",
+   "pos": "Verb: Irregular",
+   "group": "Place"
+  },
+  {
+   "rank": 761,
+   "headword": "libīdō -inis f.",
+   "lemma": "libīdō",
+   "definition": "passion, lust",
+   "pos": "Noun: 3rd Declension",
+   "group": "Love"
+  },
+  {
+   "rank": 762,
+   "headword": "sustineō sustinēre sustinuī sustentum",
+   "lemma": "sustineō",
+   "definition": "hold up, sustain",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 763,
+   "headword": "aliquandō",
+   "lemma": "aliquandō",
+   "definition": "at some time, at length",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 764,
+   "headword": "māiōrēs māiōrum m.",
+   "lemma": "māiōrēs",
+   "definition": "ancestors",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 765,
+   "headword": "reperiō -perīre -pperī -pertum",
+   "lemma": "reperiō",
+   "definition": "find, find out",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 766,
+   "headword": "intrō -āre",
+   "lemma": "intrō",
+   "definition": "enter",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Motion"
+  },
+  {
+   "rank": 767,
+   "headword": "pietās -tātis f.",
+   "lemma": "pietās",
+   "definition": "sense of duty, devotion, esp. between parents and children",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 768,
+   "headword": "barbarus -ī m.",
+   "lemma": "barbarus",
+   "definition": "foreigner, barbarian",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 769,
+   "headword": "culpa -ae f.",
+   "lemma": "culpa",
+   "definition": "guilt, fault, blame",
+   "pos": "Noun: 1st Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 770,
+   "headword": "iūstus -a -um",
+   "lemma": "iūstus",
+   "definition": "right, just, fair",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 771,
+   "headword": "dōnec",
+   "lemma": "dōnec",
+   "definition": "until",
+   "pos": "Conjunction",
+   "group": "Time"
+  },
+  {
+   "rank": 772,
+   "headword": "fluō fluere fluxī fluxum",
+   "lemma": "fluō",
+   "definition": "flow",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 773,
+   "headword": "necesse (indecl. adj.)",
+   "lemma": "necesse",
+   "definition": "necessary",
+   "pos": "Adjective: Indeclinable",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 774,
+   "headword": "reor rērī rātus sum",
+   "lemma": "reor",
+   "definition": "think, imagine, suppose, deem",
+   "pos": "Verb: Deponent",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 775,
+   "headword": "tenebrae -brārum f. pl.",
+   "lemma": "tenebrae",
+   "definition": "darkness, the shadows",
+   "pos": "Noun: 1st Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 776,
+   "headword": "saeculum -ī n.",
+   "lemma": "saeculum",
+   "definition": "generation, age, century",
+   "pos": "Noun: 2nd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 777,
+   "headword": "dīmittō -mittere -mīsī -missum",
+   "lemma": "dīmittō",
+   "definition": "send away",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 778,
+   "headword": "licet",
+   "lemma": "licet",
+   "definition": "even though",
+   "pos": "Conjunction",
+   "group": "Justice"
+  },
+  {
+   "rank": 779,
+   "headword": "cinis cineris m./f.",
+   "lemma": "cinis",
+   "definition": "ashes, embers",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 780,
+   "headword": "cōnsistō -sistere -stitī",
+   "lemma": "cōnsistō",
+   "definition": "take position; consist in, be composed of",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 781,
+   "headword": "recēns -ntis",
+   "lemma": "recēns",
+   "definition": "fresh, new",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 782,
+   "headword": "aliter",
+   "lemma": "aliter",
+   "definition": "otherwise, differently",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 783,
+   "headword": "laedō laedere laesī laesum",
+   "lemma": "laedō",
+   "definition": "injure by striking, hurt",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 784,
+   "headword": "probō -āre",
+   "lemma": "probō",
+   "definition": "approve, prove; convince one (dat.) of a thing (acc.)",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 785,
+   "headword": "doleō -ēre doluī",
+   "lemma": "doleō",
+   "definition": "feel pain or grief, grieve",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 786,
+   "headword": "quārē",
+   "lemma": "quārē",
+   "definition": "how? why?",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 787,
+   "headword": "antequam",
+   "lemma": "antequam",
+   "definition": "before",
+   "pos": "Conjunction",
+   "group": "Time"
+  },
+  {
+   "rank": 788,
+   "headword": "reliquus -a -um",
+   "lemma": "reliquus",
+   "definition": "remaining, rest",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 789,
+   "headword": "semel",
+   "lemma": "semel",
+   "definition": "once",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 790,
+   "headword": "ōdī ōdisse",
+   "lemma": "ōdī",
+   "definition": "hate",
+   "pos": "Verb: Irregular",
+   "group": "Emotions"
+  },
+  {
+   "rank": 791,
+   "headword": "sīcut",
+   "lemma": "sīcut",
+   "definition": "just as",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 792,
+   "headword": "peccō -āre",
+   "lemma": "peccō",
+   "definition": "commit a wrong, injure",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Justice"
+  },
+  {
+   "rank": 793,
+   "headword": "sēnsus -ūs m.",
+   "lemma": "sēnsus",
+   "definition": "feeling, emotion, sense",
+   "pos": "Noun: 4th Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 794,
+   "headword": "exsilium -ī n.",
+   "lemma": "exsilium",
+   "definition": "exile, banishment",
+   "pos": "Noun: 2nd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 795,
+   "headword": "cor cordis n.",
+   "lemma": "cor",
+   "definition": "heart; cordī est, it is pleasing to (+ dat.)",
+   "pos": "Noun: 3rd Declension",
+   "group": "The Body"
+  },
+  {
+   "rank": 796,
+   "headword": "dēnique",
+   "lemma": "dēnique",
+   "definition": "finally",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 797,
+   "headword": "sapientia -ae f.",
+   "lemma": "sapientia",
+   "definition": "wisdom",
+   "pos": "Noun: 1st Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 798,
+   "headword": "statim",
+   "lemma": "statim",
+   "definition": "immediately",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 799,
+   "headword": "accidō -cidere -cidī",
+   "lemma": "accidō",
+   "definition": "fall; happen",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 800,
+   "headword": "dēcernō -cernere -crēvī -crētum",
+   "lemma": "dēcernō",
+   "definition": "determine, decide",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 801,
+   "headword": "occīdō -cīdere -cīdī -cīsum",
+   "lemma": "occīdō",
+   "definition": "kill, cut down",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 802,
+   "headword": "dēscendō -scendere -scendī -scēnsum",
+   "lemma": "dēscendō",
+   "definition": "climb down, descend",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 803,
+   "headword": "hiems hiemis f.",
+   "lemma": "hiems",
+   "definition": "winter",
+   "pos": "Noun: 3rd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 804,
+   "headword": "contineō -tinēre -tinuī -tentum",
+   "lemma": "contineō",
+   "definition": "contain, restrain",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 805,
+   "headword": "dēferō -ferre -tulī -lātum",
+   "lemma": "dēferō",
+   "definition": "carry away, report",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 806,
+   "headword": "oportet -ēre -uit",
+   "lemma": "oportet",
+   "definition": "it is proper, right (+ acc. + infin.)",
+   "pos": "Verb: Impersonal",
+   "group": "Social Life"
+  },
+  {
+   "rank": 807,
+   "headword": "tribūnus -ī m.",
+   "lemma": "tribūnus",
+   "definition": "tribune, title of various Roman officials, as mīlitum, plēbis, aerāriī",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 808,
+   "headword": "bōs bovis m.",
+   "lemma": "bōs",
+   "definition": "ox; gen. pl. boum",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 809,
+   "headword": "īrāscor īrāscī īrātus sum",
+   "lemma": "īrāscor",
+   "definition": "grow angry; īrātus -a -um: angry",
+   "pos": "Verb: Deponent",
+   "group": "Emotions"
+  },
+  {
+   "rank": 810,
+   "headword": "aeger aegra aegrum",
+   "lemma": "aeger",
+   "definition": "sick",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 811,
+   "headword": "forum -ī n.",
+   "lemma": "forum",
+   "definition": "market-place, forum",
+   "pos": "Noun: 2nd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 812,
+   "headword": "offerō offerre obtulī oblātum",
+   "lemma": "offerō",
+   "definition": "present, offer, expose",
+   "pos": "Verb: Irregular",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 813,
+   "headword": "revocō -āre",
+   "lemma": "revocō",
+   "definition": "call back, recall",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 814,
+   "headword": "cingō cingere cīnxī cīnctum",
+   "lemma": "cingō",
+   "definition": "encircle, surround, gird",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 815,
+   "headword": "integer -gra -grum:",
+   "lemma": "integer",
+   "definition": "untouched, fresh, complete, whole",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 816,
+   "headword": "validus -a -um",
+   "lemma": "validus",
+   "definition": "strong",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 817,
+   "headword": "alō alere aluī alitum",
+   "lemma": "alō",
+   "definition": "nourish",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 818,
+   "headword": "flōs flōris m.",
+   "lemma": "flōs",
+   "definition": "flower, bloom",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 819,
+   "headword": "īctus -ūs m.",
+   "lemma": "īctus",
+   "definition": "blow, stroke",
+   "pos": "Noun: 4th Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 820,
+   "headword": "colligō -ere -lēgī -lēctum",
+   "lemma": "colligō",
+   "definition": "gather together, collect",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 821,
+   "headword": "pergō pergere perrēxī perrēctum",
+   "lemma": "pergō",
+   "definition": "continue, proceed; awaken",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 822,
+   "headword": "praesēns -ntis",
+   "lemma": "praesēns",
+   "definition": "present, in person, ready",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Place"
+  },
+  {
+   "rank": 823,
+   "headword": "rēctus -a -um",
+   "lemma": "rēctus",
+   "definition": "straight, direct",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 824,
+   "headword": "lātus -a -um",
+   "lemma": "lātus",
+   "definition": "broad, wide",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 825,
+   "headword": "praeceptum -ī n.",
+   "lemma": "praeceptum",
+   "definition": "rule, precept; command",
+   "pos": "Noun: 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 826,
+   "headword": "recēdō -cēdere -cessī -cessum",
+   "lemma": "recēdō",
+   "definition": "step back, recoil, recede, withdraw",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 827,
+   "headword": "utrum",
+   "lemma": "utrum",
+   "definition": "whether; utrum ... an: whether ... or",
+   "pos": "Conjunction",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 828,
+   "headword": "famēs -is f.",
+   "lemma": "famēs",
+   "definition": "hunger, famine",
+   "pos": "Noun: 3rd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 829,
+   "headword": "pariō parere peperī partum",
+   "lemma": "pariō",
+   "definition": "bring forth, give birth to; accomplish",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 830,
+   "headword": "appāreō -ēre -uī",
+   "lemma": "appāreō",
+   "definition": "appear, become visible",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Vision"
+  },
+  {
+   "rank": 831,
+   "headword": "quōmodo",
+   "lemma": "quōmodo",
+   "definition": "in what way, how?",
+   "pos": "Conjunction",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 832,
+   "headword": "error -ōris m.",
+   "lemma": "error",
+   "definition": "wandering; error, mistake",
+   "pos": "Noun: 3rd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 833,
+   "headword": "forsitan, fortasse",
+   "lemma": "forsitan",
+   "definition": "perhaps, perchance",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 834,
+   "headword": "convertō -vertere -vertī -versum",
+   "lemma": "convertō",
+   "definition": "turn about, turn, change",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 835,
+   "headword": "proficīscor -ficīscī -fectus sum",
+   "lemma": "proficīscor",
+   "definition": "set forth, go",
+   "pos": "Verb: Deponent",
+   "group": "Travel"
+  },
+  {
+   "rank": 836,
+   "headword": "secundus -a -um",
+   "lemma": "secundus",
+   "definition": "following; favorable; (as numeral) second",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 837,
+   "headword": "aperiō aperīre aperuī apertum",
+   "lemma": "aperiō",
+   "definition": "open",
+   "pos": "Verb: 4th Conjugation",
+   "group": "The House"
+  },
+  {
+   "rank": 838,
+   "headword": "castus -a -um",
+   "lemma": "castus",
+   "definition": "pure, spotless, chaste",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 839,
+   "headword": "iūdex iūdicis m.",
+   "lemma": "iūdex",
+   "definition": "judge, juror",
+   "pos": "Noun: 3rd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 840,
+   "headword": "lapis lapidis m.",
+   "lemma": "lapis",
+   "definition": "stone",
+   "pos": "Noun: 3rd Declension",
+   "group": "Earth and Water"
+  },
+  {
+   "rank": 841,
+   "headword": "nimis or nimium",
+   "lemma": "nimis",
+   "definition": "excessively",
+   "pos": "Adverb",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 842,
+   "headword": "onus oneris n.",
+   "lemma": "onus",
+   "definition": "load, burden",
+   "pos": "Noun: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 843,
+   "headword": "opera -ae f.",
+   "lemma": "opera",
+   "definition": "labor, activity, work",
+   "pos": "Noun: 1st Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 844,
+   "headword": "pauper -eris",
+   "lemma": "pauper",
+   "definition": "poor, lowly",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 845,
+   "headword": "āēr āeris m.",
+   "lemma": "āēr",
+   "definition": "air",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 846,
+   "headword": "negōtium -ī n.",
+   "lemma": "negōtium",
+   "definition": "business",
+   "pos": "Noun: 2nd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 847,
+   "headword": "pāreō pārēre pāruī",
+   "lemma": "pāreō",
+   "definition": "obey",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 848,
+   "headword": "subitō",
+   "lemma": "subitō",
+   "definition": "suddenly, unexpectedly",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 849,
+   "headword": "argentum -ī n.",
+   "lemma": "argentum",
+   "definition": "silver, money",
+   "pos": "Noun: 2nd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 850,
+   "headword": "ūtilis -e",
+   "lemma": "ūtilis",
+   "definition": "useful",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 851,
+   "headword": "aethēr aetheris n.",
+   "lemma": "aethēr",
+   "definition": "pure upper air, ether, heaven, sky",
+   "pos": "Noun: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 852,
+   "headword": "mereō merēre meruī meritum",
+   "lemma": "mereō",
+   "definition": "deserve, merit; serve as a soldier",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 853,
+   "headword": "portō -āre",
+   "lemma": "portō",
+   "definition": "carry a load",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Measurement"
+  },
+  {
+   "rank": 854,
+   "headword": "proprius -a -um",
+   "lemma": "proprius",
+   "definition": "one’s own, peculiar",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 855,
+   "headword": "avis -is f.",
+   "lemma": "avis",
+   "definition": "bird",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 856,
+   "headword": "vanus -a -um",
+   "lemma": "vanus",
+   "definition": "empty; false, deceitful",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Deception"
+  },
+  {
+   "rank": 857,
+   "headword": "māteria -ae f.",
+   "lemma": "māteria",
+   "definition": "material, subject matter; timber, lumber",
+   "pos": "Noun: 1st Declension",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 858,
+   "headword": "paucī -ae -a",
+   "lemma": "paucī",
+   "definition": "few, a few",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 859,
+   "headword": "voluntās -ātis f.",
+   "lemma": "voluntās",
+   "definition": "wish, desire",
+   "pos": "Noun: 3rd Declension",
+   "group": "Emotions"
+  },
+  {
+   "rank": 860,
+   "headword": "ēgregius -a -um",
+   "lemma": "ēgregius",
+   "definition": "distinguished, uncommon",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 861,
+   "headword": "difficilis -e",
+   "lemma": "difficilis",
+   "definition": "not easy, hard, difficult",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 862,
+   "headword": "gladius -ī m.",
+   "lemma": "gladius",
+   "definition": "sword",
+   "pos": "Noun: 2nd Declension",
+   "group": "War and Peace"
+  },
+  {
+   "rank": 863,
+   "headword": "cibus -ī m.",
+   "lemma": "cibus",
+   "definition": "food",
+   "pos": "Noun: 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 864,
+   "headword": "certō -āre",
+   "lemma": "certō",
+   "definition": "decide by contest; fight, compete, vie",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Athletics"
+  },
+  {
+   "rank": 865,
+   "headword": "initium -ī n.:",
+   "lemma": "initium",
+   "definition": "beginning",
+   "pos": "Noun: 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 866,
+   "headword": "pertineō -tinēre -tinuī",
+   "lemma": "pertineō",
+   "definition": "extend over, reach; refer to, pertain to, be the business of",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 867,
+   "headword": "quattuor",
+   "lemma": "quattuor",
+   "definition": "four",
+   "pos": "Adjective: Numeral",
+   "group": "Measurement"
+  },
+  {
+   "rank": 868,
+   "headword": "turbō -āre",
+   "lemma": "turbō",
+   "definition": "disturb, confuse",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 869,
+   "headword": "cōnsūmō -sūmere -sūmpsī -sūmptum",
+   "lemma": "cōnsūmō",
+   "definition": "to use up, consume",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 870,
+   "headword": "corrumpō -rumpere -rūpī -ruptum",
+   "lemma": "corrumpō",
+   "definition": "break up, destroy, ruin",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Violence"
+  },
+  {
+   "rank": 871,
+   "headword": "incidō incidere incidī",
+   "lemma": "incidō",
+   "definition": "fall upon, fall into; happen",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 872,
+   "headword": "paulō, paulum",
+   "lemma": "paulō",
+   "definition": "to only a small extent, slightly, a little",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 873,
+   "headword": "hospes hospitis m.",
+   "lemma": "hospes",
+   "definition": "guest, guest-friend; stranger; host",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 874,
+   "headword": "rīdeō -ēre rīsī rīsum",
+   "lemma": "rīdeō",
+   "definition": "laugh, laugh at",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 875,
+   "headword": "aevum -ī n.",
+   "lemma": "aevum",
+   "definition": "eternity; lifetime, age",
+   "pos": "Noun: 2nd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 876,
+   "headword": "audāx audācis",
+   "lemma": "audāx",
+   "definition": "bold, daring; reckless",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 877,
+   "headword": "posterus -a -um",
+   "lemma": "posterus",
+   "definition": "next, later",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 878,
+   "headword": "praetor -ōris m.",
+   "lemma": "praetor",
+   "definition": "praetor, one of the chief Roman magistrates",
+   "pos": "Noun: 3rd Declension",
+   "group": "The City"
+  },
+  {
+   "rank": 879,
+   "headword": "rūs rūris n.",
+   "lemma": "rūs",
+   "definition": "country",
+   "pos": "Noun: 3rd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 880,
+   "headword": "differō differre distulī dīlātum",
+   "lemma": "differō",
+   "definition": "scatter; publish, divulge; differ; defer, postpone",
+   "pos": "Verb: Irregular",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 881,
+   "headword": "vītō -āre",
+   "lemma": "vītō",
+   "definition": "avoid, shun",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Social Life"
+  },
+  {
+   "rank": 882,
+   "headword": "prīvātus -a -um",
+   "lemma": "prīvātus",
+   "definition": "personal, private",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 883,
+   "headword": "serviō -īre",
+   "lemma": "serviō",
+   "definition": "be a slave, serve (+ dat.)",
+   "pos": "Verb: 4th Conjugation",
+   "group": "The Household"
+  },
+  {
+   "rank": 884,
+   "headword": "vereor verērī veritus sum",
+   "lemma": "vereor",
+   "definition": "fear, stand in awe of",
+   "pos": "Verb: Deponent",
+   "group": "Emotions"
+  },
+  {
+   "rank": 885,
+   "headword": "ingredior -gredī -gressus sum:",
+   "lemma": "ingredior",
+   "definition": "step in, enter",
+   "pos": "Verb: Deponent",
+   "group": "Motion"
+  },
+  {
+   "rank": 886,
+   "headword": "addūcō -ere -dūxī -ductum",
+   "lemma": "addūcō",
+   "definition": "lead to, induce",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 887,
+   "headword": "hortor hortārī hortātus sum",
+   "lemma": "hortor",
+   "definition": "urge strongly, advise, exhort",
+   "pos": "Verb: Deponent",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 888,
+   "headword": "reus -ī m.",
+   "lemma": "reus",
+   "definition": "defendant",
+   "pos": "Noun: 2nd Declension",
+   "group": "Justice"
+  },
+  {
+   "rank": 889,
+   "headword": "scīlicet",
+   "lemma": "scīlicet",
+   "definition": "certainly, of course",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 890,
+   "headword": "comparō -āre",
+   "lemma": "comparō",
+   "definition": "get ready, provide; compare",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 891,
+   "headword": "perpetuus -a -um",
+   "lemma": "perpetuus",
+   "definition": "unbroken, perpetual",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 892,
+   "headword": "dēsīderō -āre",
+   "lemma": "dēsīderō",
+   "definition": "long for, desire greatly",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Love"
+  },
+  {
+   "rank": 893,
+   "headword": "celebrō -āre",
+   "lemma": "celebrō",
+   "definition": "frequent, throng, crowd",
+   "pos": "Verb: 1st Conjugation",
+   "group": "The City"
+  },
+  {
+   "rank": 894,
+   "headword": "cōnficiō -ficere -fēcī -fectum",
+   "lemma": "cōnficiō",
+   "definition": "complete, accomplish; destroy, kill, consume",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Violence"
+  },
+  {
+   "rank": 895,
+   "headword": "intendō -tendere -tendī -tentum:",
+   "lemma": "intendō",
+   "definition": "stretch out, strain",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 896,
+   "headword": "iūrō -āre",
+   "lemma": "iūrō",
+   "definition": "take an oath, swear; iūs iūrandum, oath",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Justice"
+  },
+  {
+   "rank": 897,
+   "headword": "sōlum",
+   "lemma": "sōlum",
+   "definition": "only, merely",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 898,
+   "headword": "auctōritās -ātis f.",
+   "lemma": "auctōritās",
+   "definition": "influence, clout, authority",
+   "pos": "Noun: 3rd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 899,
+   "headword": "iaciō iacere iēcī iactum",
+   "lemma": "iaciō",
+   "definition": "throw, hurl",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Athletics"
+  },
+  {
+   "rank": 900,
+   "headword": "labōrō -āre",
+   "lemma": "labōrō",
+   "definition": "toil, work; be in trouble or distress",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 901,
+   "headword": "liber librī m.",
+   "lemma": "liber",
+   "definition": "book",
+   "pos": "Noun: 2nd Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 902,
+   "headword": "lūna -ae f.",
+   "lemma": "lūna",
+   "definition": "moon",
+   "pos": "Noun: 1st Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 903,
+   "headword": "prōtinus",
+   "lemma": "prōtinus",
+   "definition": "at once, forthwith",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 904,
+   "headword": "aequē",
+   "lemma": "aequē",
+   "definition": "equally",
+   "pos": "Adverb",
+   "group": "Justice"
+  },
+  {
+   "rank": 905,
+   "headword": "cōnor cōnārī cōnātus sum",
+   "lemma": "cōnor",
+   "definition": "try, attempt",
+   "pos": "Verb: Deponent",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 906,
+   "headword": "cupīdō -inis f.",
+   "lemma": "cupīdō",
+   "definition": "desire, eagerness, craving",
+   "pos": "Noun: 3rd Declension",
+   "group": "Love"
+  },
+  {
+   "rank": 907,
+   "headword": "ferē",
+   "lemma": "ferē",
+   "definition": "almost",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 908,
+   "headword": "īnsula -ae f.:",
+   "lemma": "īnsula",
+   "definition": "island",
+   "pos": "Noun: 1st Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 909,
+   "headword": "fīlia -ae f.; fīlius -ī m.",
+   "lemma": "fīlia",
+   "definition": "daughter; son",
+   "pos": "Noun: 1st Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 910,
+   "headword": "narrō -āre",
+   "lemma": "narrō",
+   "definition": "relate, recount",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 911,
+   "headword": "necessitās -tātis f.",
+   "lemma": "necessitās",
+   "definition": "necessity, need",
+   "pos": "Noun: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 912,
+   "headword": "ēgredior ēgredī ēgressus sum",
+   "lemma": "ēgredior",
+   "definition": "stride out, depart, disembark from (+ abl.)",
+   "pos": "Verb: Deponent",
+   "group": "Travel"
+  },
+  {
+   "rank": 913,
+   "headword": "poēta -ae m.",
+   "lemma": "poēta",
+   "definition": "poet",
+   "pos": "Noun: 1st Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 914,
+   "headword": "decem",
+   "lemma": "decem",
+   "definition": "ten",
+   "pos": "Adjective: Numeral",
+   "group": "Measurement"
+  },
+  {
+   "rank": 915,
+   "headword": "amplus -a -um",
+   "lemma": "amplus",
+   "definition": "large, spacious",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 916,
+   "headword": "aptus -a -um",
+   "lemma": "aptus",
+   "definition": "fit, suitable",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 917,
+   "headword": "cōnsequor -sequī -secūtus sum",
+   "lemma": "cōnsequor",
+   "definition": "follow up, overtake, attain",
+   "pos": "Verb: Deponent",
+   "group": "Motion"
+  },
+  {
+   "rank": 918,
+   "headword": "frequēns -ntis",
+   "lemma": "frequēns",
+   "definition": "in large numbers, often",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 919,
+   "headword": "nūntius -ī m.",
+   "lemma": "nūntius",
+   "definition": "messenger; news",
+   "pos": "Noun: 2nd Declension",
+   "group": "Travel"
+  },
+  {
+   "rank": 920,
+   "headword": "condīciō -ōnis f.",
+   "lemma": "condīciō",
+   "definition": "agreement, condition",
+   "pos": "Noun: 3rd Declension",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 921,
+   "headword": "convīvium -iī n.",
+   "lemma": "convīvium",
+   "definition": "banquet, feast",
+   "pos": "Noun: 2nd Declension",
+   "group": "Social Life"
+  },
+  {
+   "rank": 922,
+   "headword": "foedus -a -um",
+   "lemma": "foedus",
+   "definition": "foul",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Other Senses"
+  },
+  {
+   "rank": 923,
+   "headword": "fruor fruī frūctus sum",
+   "lemma": "fruor",
+   "definition": "enjoy the produce of, profit by, use (+ abl.)",
+   "pos": "Verb: Deponent",
+   "group": "Emotions"
+  },
+  {
+   "rank": 924,
+   "headword": "num",
+   "lemma": "num",
+   "definition": "interrogative particle implying negative answer",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 925,
+   "headword": "albus -a -um",
+   "lemma": "albus",
+   "definition": "white",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Vision"
+  },
+  {
+   "rank": 926,
+   "headword": "damnum -ī n.",
+   "lemma": "damnum",
+   "definition": "damage, injury",
+   "pos": "Noun: 2nd Declension",
+   "group": "Violence"
+  },
+  {
+   "rank": 927,
+   "headword": "frūctus -ūs m.",
+   "lemma": "frūctus",
+   "definition": "fruit, crops; enjoyment, delight",
+   "pos": "Noun: 4th Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 928,
+   "headword": "cēnseō cēnsēre cēnsuī cēnsum",
+   "lemma": "cēnseō",
+   "definition": "assess, rate; think, decide",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 929,
+   "headword": "prōdō prōdere prōdidī prōditum",
+   "lemma": "prōdō",
+   "definition": "publish, hand down; give over, betray",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 930,
+   "headword": "prōpōnō -pōnere -posuī -positum",
+   "lemma": "prōpōnō",
+   "definition": "put forth, propose, present",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 931,
+   "headword": "īnstituō -stituere -stituī -stitūtum:",
+   "lemma": "īnstituō",
+   "definition": "undertake; equip",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 932,
+   "headword": "item",
+   "lemma": "item",
+   "definition": "likewise",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 933,
+   "headword": "magister magistrī m.",
+   "lemma": "magister",
+   "definition": "master, chief",
+   "pos": "Noun: 2nd Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 934,
+   "headword": "stella -ae f.",
+   "lemma": "stella",
+   "definition": "star",
+   "pos": "Noun: 1st Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 935,
+   "headword": "ēdūcō -dūcere -dūxī -ductum",
+   "lemma": "ēdūcō",
+   "definition": "lead forth",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Verbs of Compelling/Directing"
+  },
+  {
+   "rank": 936,
+   "headword": "frūmentum -ī n.",
+   "lemma": "frūmentum",
+   "definition": "grain",
+   "pos": "Noun: 2nd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 937,
+   "headword": "suscipiō -cipere -cēpī ceptum",
+   "lemma": "suscipiō",
+   "definition": "take up",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Verbs of Transport"
+  },
+  {
+   "rank": 938,
+   "headword": "quasi",
+   "lemma": "quasi",
+   "definition": "as if",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 939,
+   "headword": "sacerdōs -dōtis m./f.",
+   "lemma": "sacerdōs",
+   "definition": "priest, priestess",
+   "pos": "Noun: 3rd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 940,
+   "headword": "vīcīnus -a -um",
+   "lemma": "vīcīnus",
+   "definition": "neighboring, near",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Geography"
+  },
+  {
+   "rank": 941,
+   "headword": "caveō cavēre cāvī cautum",
+   "lemma": "caveō",
+   "definition": "be on guard, beware",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Violence"
+  },
+  {
+   "rank": 942,
+   "headword": "ēligō ēligere ēlēgī ēlēctum",
+   "lemma": "ēligō",
+   "definition": "pick out, select",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "The City"
+  },
+  {
+   "rank": 943,
+   "headword": "familia -ae f.",
+   "lemma": "familia",
+   "definition": "household, family",
+   "pos": "Noun: 1st Declension",
+   "group": "The Household"
+  },
+  {
+   "rank": 944,
+   "headword": "paene",
+   "lemma": "paene",
+   "definition": "almost",
+   "pos": "Adverb",
+   "group": "Conjunctions/Adverbs"
+  },
+  {
+   "rank": 945,
+   "headword": "praecipiō -cipere -cēpī -ceptum",
+   "lemma": "praecipiō",
+   "definition": "anticipate, advise, warn",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 946,
+   "headword": "sānus -a -um",
+   "lemma": "sānus",
+   "definition": "sound, sane",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 947,
+   "headword": "potis -e",
+   "lemma": "potis",
+   "definition": "powerful, able",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 948,
+   "headword": "prīncipium -ī n.",
+   "lemma": "prīncipium",
+   "definition": "beginning",
+   "pos": "Noun: 2nd Declension",
+   "group": "Time"
+  },
+  {
+   "rank": 949,
+   "headword": "sepulcrum -ī n.",
+   "lemma": "sepulcrum",
+   "definition": "place of burial, tomb, grave",
+   "pos": "Noun: 2nd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 950,
+   "headword": "mortālis -e",
+   "lemma": "mortālis",
+   "definition": "liable to death, mortal; (as subst.) a mortal",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 951,
+   "headword": "epistula -ae f.",
+   "lemma": "epistula",
+   "definition": "letter",
+   "pos": "Noun: 1st Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 952,
+   "headword": "inimīcus -a -um:",
+   "lemma": "inimīcus",
+   "definition": "unfriendly; (as subst.) enemy",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 953,
+   "headword": "interrogō -āre",
+   "lemma": "interrogō",
+   "definition": "put a question to, ask (+ acc.)",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 954,
+   "headword": "cōnsuētūdo -inis f.",
+   "lemma": "cōnsuētūdo",
+   "definition": "custom, habit",
+   "pos": "Noun: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 955,
+   "headword": "illūc",
+   "lemma": "illūc",
+   "definition": "to that place",
+   "pos": "Adverb",
+   "group": "Place"
+  },
+  {
+   "rank": 956,
+   "headword": "dīgnitās -ātis f.",
+   "lemma": "dīgnitās",
+   "definition": "worth, reputation, honor",
+   "pos": "Noun: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 957,
+   "headword": "fugō -āre",
+   "lemma": "fugō",
+   "definition": "put to flight",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Travel"
+  },
+  {
+   "rank": 958,
+   "headword": "afficiō -ficere -fēcī -fectum",
+   "lemma": "afficiō",
+   "definition": "affect, visit with (+ abl.)",
+   "pos": "Verb: 3rd Conjugation -iō",
+   "group": "Social Life"
+  },
+  {
+   "rank": 959,
+   "headword": "adhibeō -hibēre -hibuī -hibitum",
+   "lemma": "adhibeō",
+   "definition": "apply",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 960,
+   "headword": "caelestis -e",
+   "lemma": "caelestis",
+   "definition": "from or of heaven; caelestēs, the gods",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Air and Fire"
+  },
+  {
+   "rank": 961,
+   "headword": "mulier -eris f.",
+   "lemma": "mulier",
+   "definition": "woman",
+   "pos": "Noun: 3rd Declension",
+   "group": "People"
+  },
+  {
+   "rank": 962,
+   "headword": "dīvus -a -um",
+   "lemma": "dīvus",
+   "definition": "divine, godlike; (as subst.) a god",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 963,
+   "headword": "arbitror arbitrārī arbitrātus sum",
+   "lemma": "arbitror",
+   "definition": "consider, think",
+   "pos": "Verb: Deponent",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 964,
+   "headword": "posteā",
+   "lemma": "posteā",
+   "definition": "afterwards",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 965,
+   "headword": "aedēs -is f.",
+   "lemma": "aedēs",
+   "definition": "building; (pl.) house",
+   "pos": "Noun: 3rd Declension",
+   "group": "The House"
+  },
+  {
+   "rank": 966,
+   "headword": "fābula -ae f.",
+   "lemma": "fābula",
+   "definition": "account, tale, story",
+   "pos": "Noun: 1st Declension",
+   "group": "Writing/Poetry"
+  },
+  {
+   "rank": 967,
+   "headword": "celeriter",
+   "lemma": "celeriter",
+   "definition": "quickly",
+   "pos": "Adverb",
+   "group": "Time"
+  },
+  {
+   "rank": 968,
+   "headword": "plērus- plēra- plērumque",
+   "lemma": "plērus",
+   "definition": "the greater part, very many, most, the majority",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Measurement"
+  },
+  {
+   "rank": 969,
+   "headword": "quiēscō quiēscere quiēvī quiētum",
+   "lemma": "quiēscō",
+   "definition": "keep quiet; sleep",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 970,
+   "headword": "quotiēns",
+   "lemma": "quotiēns",
+   "definition": "interr. how many times? how often? rel. as often as, whenever",
+   "pos": "Adverb",
+   "group": "Pronouns/Interrogatives"
+  },
+  {
+   "rank": 971,
+   "headword": "scientia -ae f.",
+   "lemma": "scientia",
+   "definition": "knowledge",
+   "pos": "Noun: 1st Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 972,
+   "headword": "cōnfiteor cōnfitērī cōnfessus sum",
+   "lemma": "cōnfiteor",
+   "definition": "admit (a fact), confess (a crime); reveal, disclose",
+   "pos": "Verb: Deponent",
+   "group": "Justice"
+  },
+  {
+   "rank": 973,
+   "headword": "dīligō -ligere -lēxī -lēctum",
+   "lemma": "dīligō",
+   "definition": "choose, cherish, love",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Love"
+  },
+  {
+   "rank": 974,
+   "headword": "plērumque",
+   "lemma": "plērumque",
+   "definition": "generally",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 975,
+   "headword": "dormiō -īre",
+   "lemma": "dormiō",
+   "definition": "sleep",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 976,
+   "headword": "volucris -is f./m.",
+   "lemma": "volucris",
+   "definition": "bird",
+   "pos": "Noun: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 977,
+   "headword": "volucer -cris -cre",
+   "lemma": "volucer",
+   "definition": "flying",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Animals/Plants"
+  },
+  {
+   "rank": 978,
+   "headword": "creō -āre",
+   "lemma": "creō",
+   "definition": "produce, create; elect, choose",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Making/Doing"
+  },
+  {
+   "rank": 979,
+   "headword": "fidēlis -e",
+   "lemma": "fidēlis",
+   "definition": "faithful",
+   "pos": "Adjective: 3rd Declension",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 980,
+   "headword": "indicō -āre",
+   "lemma": "indicō",
+   "definition": "point out, show, make known",
+   "pos": "Verb: 1st Conjugation",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 981,
+   "headword": "hodiē",
+   "lemma": "hodiē",
+   "definition": "today",
+   "pos": "Adverb",
+   "group": "Lengths of Time"
+  },
+  {
+   "rank": 982,
+   "headword": "disciplīna -ae f.",
+   "lemma": "disciplīna",
+   "definition": "training, instruction; learning, discipline",
+   "pos": "Noun: 1st Declension",
+   "group": "Education/Knowledge"
+  },
+  {
+   "rank": 983,
+   "headword": "vērē",
+   "lemma": "vērē",
+   "definition": "truly",
+   "pos": "Adverb",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 984,
+   "headword": "aegrē",
+   "lemma": "aegrē",
+   "definition": "with difficulty",
+   "pos": "Adverb",
+   "group": "Life and Being"
+  },
+  {
+   "rank": 986,
+   "headword": "advertō -vertere -vertī -versum",
+   "lemma": "advertō",
+   "definition": "turn towards",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 987,
+   "headword": "adveniō -īre -vēnī -ventum",
+   "lemma": "adveniō",
+   "definition": "come to, arrive at",
+   "pos": "Verb: 4th Conjugation",
+   "group": "Travel"
+  },
+  {
+   "rank": 988,
+   "headword": "pendō pendere pependī pēnsum",
+   "lemma": "pendō",
+   "definition": "weigh, hang, suspend; pay",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Business/Money"
+  },
+  {
+   "rank": 989,
+   "headword": "studeō -ēre -uī",
+   "lemma": "studeō",
+   "definition": "be eager, be zealous, care for (+ dat.)",
+   "pos": "Verb: 2nd Conjugation",
+   "group": "Emotions"
+  },
+  {
+   "rank": 990,
+   "headword": "ascendō -ere -scendī -scēnsum",
+   "lemma": "ascendō",
+   "definition": "climb up, ascend",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Travel"
+  },
+  {
+   "rank": 991,
+   "headword": "vulgō",
+   "lemma": "vulgō",
+   "definition": "commonly",
+   "pos": "Adverb",
+   "group": "The City"
+  },
+  {
+   "rank": 992,
+   "headword": "breviter",
+   "lemma": "breviter",
+   "definition": "briefly",
+   "pos": "Adverb",
+   "group": "Measurement"
+  },
+  {
+   "rank": 993,
+   "headword": "fors fortis f.",
+   "lemma": "fors",
+   "definition": "chance",
+   "pos": "Noun: 3rd Declension",
+   "group": "Religion"
+  },
+  {
+   "rank": 994,
+   "headword": "fēlīciter",
+   "lemma": "fēlīciter",
+   "definition": "luckily",
+   "pos": "Adverb",
+   "group": "Personality Traits/Characteristics"
+  },
+  {
+   "rank": 995,
+   "headword": "revertō -vertere -vertī",
+   "lemma": "revertō",
+   "definition": "turn back",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Motion"
+  },
+  {
+   "rank": 996,
+   "headword": "ēdīcō -dīcere -dīxī -dictum",
+   "lemma": "ēdīcō",
+   "definition": "declare",
+   "pos": "Verb: 3rd Conjugation -ō",
+   "group": "Speech/Oratory"
+  },
+  {
+   "rank": 997,
+   "headword": "mundus -a -um",
+   "lemma": "mundus",
+   "definition": "clean, neat, elegant",
+   "pos": "Adjective: 1st and 2nd Declension",
+   "group": "Personality Traits/Characteristics"
+  }
+ ]
+}

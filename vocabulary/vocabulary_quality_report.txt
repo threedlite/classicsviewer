@@ -1,0 +1,60 @@
+Vocabulary build report
+Built: 2026-09-26
+
+=== greek ===
+Source: vocabulary/sources/dcc_greek_core_list.csv
+Entries: 524
+Rows skipped for empty definition: none
+Rank range: 1-524
+Duplicate ranks: [384]
+Unused ranks: [385]
+Headwords not in NFC in source (normalised on output): ['ζῷον ζῴου, τό']
+Distinct parts of speech: 29
+Distinct semantic groups: 28
+Lemmas shared by more than one entry (homographs): 0
+Definitions shared by more than one entry: 5
+  'army': στρατιά, στρατός
+  'neither...nor': οὔτε, μήτε
+  'no one, nothing': οὐδείς, μηδείς
+  'then, next': εἶτα, ἔπειτα
+  'there': ἐκεῖ, ἔνθα
+
+Dictionary coverage against perseus_texts_sample.db: 522/524 (99.6%)
+  unresolved: rank 353 lemma 'πλέον' from headword 'πλέον'
+  unresolved: rank 462 lemma 'δέδοικα' from headword 'δέδοικα, δείσομαι, ἔδεισα'
+
+=== latin ===
+Source: vocabulary/sources/dcc_latin_core_list.csv
+Entries: 996
+Rows skipped for empty definition: line 361 'fore'
+Rank range: 1-997
+Duplicate ranks: [280]
+Unused ranks: [12, 985]
+Headwords not in NFC in source (normalised on output): none
+Distinct parts of speech: 22
+Distinct semantic groups: 38
+Lemmas shared by more than one entry (homographs): 5
+  'adeō': adeō | adeō -īre -iī -itum
+  'adversus': adversus (-um) | adversus -a -um
+  'eō': eō īre iī/īvī itum | eō
+  'licet': licet licēre licuit licitum est | licet
+  'mundus': mundus -ī m. | mundus -a -um
+Definitions shared by more than one entry: 14
+  'almost': ferē, paene
+  'before': prius, antequam
+  'begin': coepī, incipiō
+  'beginning': initium, prīncipium
+  'bird': avis, volucris
+  'equal': pār, aequus
+  'finally': tandem, dēnique
+  'not': nōn, haud
+  'take up': sūmō, suscipiō
+  'the common people': plēbs, vulgus
+  'therefore': ergō, igitur
+  'to fear, to dread': timeō, metuō
+  'woman': fēmina, mulier
+  'your': tuus, vester
+
+Dictionary coverage against perseus_texts_full.db: 995/996 (99.9%)
+  unresolved: rank 312 lemma 'coepī' from headword 'coepī coepisse coeptus'
+

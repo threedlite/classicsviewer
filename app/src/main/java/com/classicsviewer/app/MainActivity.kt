@@ -385,6 +385,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, AlphabetGameActivity::class.java))
                 true
             }
+            R.id.action_practice_vocabulary -> {
+                startActivity(Intent(this, com.classicsviewer.app.vocabulary.VocabularyGameActivity::class.java))
+                true
+            }
             R.id.action_rhetoric -> {
                 startActivity(Intent(this, com.classicsviewer.app.rhetoric.RhetoricActivity::class.java))
                 true
