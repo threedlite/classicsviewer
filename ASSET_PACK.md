@@ -11,15 +11,18 @@ size is the download size.
 | Base module | 500 MB |
 | One asset pack | 1.5 GB |
 | Base module + install-time packs, cumulative | 4 GB |
-| On-demand + fast-follow packs, cumulative | 30 GB as printed; **plan against 4 GB** (see below) |
+| On-demand + fast-follow packs, cumulative | 30 GB as printed; **10 GB probed and accepted for this account 2026-09-27**, which is what the build plans against |
 | Whole app, compressed | 34 GB |
 | Asset packs per bundle | 100 |
 
-The 30 GB on-demand figure has no eligibility note on the live page, but as
-recently as October 2025 Google described 30 GB as the Android XR and
-Partner Program figure "instead of a cumulative total of 4 GB". Until an
-internal-track upload above 4 GB is accepted, treat 4 GB as the limit.
-Details and sources: `ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`, section 2.
+The 30 GB on-demand figure carried no eligibility note on the live page,
+while Google described it in October 2025 as the Android XR and Partner
+Program figure "instead of a cumulative total of 4 GB". It was settled for
+this account on 2026-09-27 by uploading a 10.26 GB on-demand probe bundle to
+the internal testing track and taking it to the production review screen:
+accepted, no errors. The build's budget constant is the probed 10 GB, not
+the published 30 GB (`shared/pack_layout.py`). Details:
+`ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`, sections 2 and 12.
 
 ## Install-time pool (4 GB with the base module)
 
@@ -27,28 +30,26 @@ Details and sources: `ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`, section 2.
 |---|---|---|
 | (none; base module only, about 160 MB) | | 0.16 |
 
-## On-demand pool (plan against 4 GB)
+## On-demand pool (probed 2026-09-27: a 10.26 GB on-demand bundle was accepted on the internal track and passed the production review screen; the build plans against 10 GB)
 
 | Asset pack | Delivery | Bytes | GB |
 |---|---|---|---|
-| full_database_pack (`perseus_texts_full.db.zip`) | on-demand | 1,085,755,158 | 1.09 |
+| full_database_pack (`perseus_texts_full.db.zip`, filtered from extended, compacted) | on-demand | 968,329,540 | 0.97 |
 | audio_pack (`homer_iliad_chamberlain_audio.zip`) | on-demand | 1,022,816,561 | 1.02 |
 | topical_pack (`topical_greek.db.zip` + `topical_latin.db.zip`) | on-demand | 522,664,811 | 0.52 |
 | references_pack (three PDFs + `references_manifest.json`) | on-demand | 101,865,562 | 0.10 |
-| **Total** | | **2,733,102,092** | **2.73** |
-| **Remaining under 4 GB** | | | **1.27** |
+| db_extended_part1_pack (First1K + PTA Greek, Hebrew, Syriac, Chinese, Arabic) | on-demand | 1,139,801,674 | 1.14 |
+| db_extended_part2_pack (Sanskrit, Pali, Coptic, Norse, Persian) | on-demand | 642,654,891 | 0.64 |
+| **Total** | | **4,398,133,039** | **4.40** |
+| **Remaining under the 10 GB probed budget** | | | **5.60** |
 
-No pack is near the 1.5 GB per-pack cap.
+No pack is near the 1.5 GB per-pack cap. `bundleRelease` on 2026-09-27
+produced a 4.42 GB bundle with all six packs.
 
 ## Extended database
 
-The extended DB zip is 3,134,906,462 bytes (3.13 GB). It exceeds the 1.5 GB
-per-pack cap on its own, and added to the packs above it would also exceed
-a 4 GB on-demand total (5.86 GB). It ships to iOS only today.
-
-The plan for Android is two supplement packs cut as the complement of the
-full DB, merged on the device: a Greek supplement (First1KGreek + PTA,
-about 1.2 GB estimated) on Play, which brings the on-demand total to about
-3.93 GB, and a languages supplement (Sanskrit + eight small languages,
-about 0.6 GB) through the external download until the 30 GB limit is
-confirmed. See `ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`.
+The extended DB zip is 2,752,045,666 bytes (2.75 GB, compacted). It exceeds
+the 1.5 GB per-pack cap on its own, so it ships to iOS and the external
+download as one file, and to Android as the two delta parts above, which
+merge onto the full pack on the device. See
+`ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`.

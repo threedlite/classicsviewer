@@ -24,6 +24,17 @@ object PreferencesManager {
     private const val KEY_INTERLINEAR_FIRST = "interlinear_first"
     private const val KEY_USE_FULL_DATABASE = "use_full_database"
     private const val KEY_FULL_AUDIO_INSTALLED = "full_audio_installed"
+    // Extended delta parts (ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md, section 8).
+    // The state is a handful of values; it must not live in perseus_texts.db,
+    // which every rebuild deletes.
+    private const val KEY_DB_TARGET = "db_target"                              // sample | full | extended
+    private const val KEY_EXTENDED_PACK_STATE = "extended_pack_state"          // JSON: packId -> {state, build_time, at}
+    private const val KEY_EXTENDED_FAILURES_BUILD = "extended_failures_build"  // build_time the counter is for
+    private const val KEY_EXTENDED_FAILURES = "extended_failures"
+    private const val KEY_EXTENDED_LAST_FAILURE = "extended_last_failure"
+    private const val KEY_EXTENDED_JOB_ACTIVE = "extended_job_active"        // an install job has begun and not ended
+    private const val KEY_EXTENDED_JOB_PREV_FULL = "extended_job_prev_full"  // use_full_database before the job
+    private const val KEY_EXTENDED_JOB_PREV_TARGET = "extended_job_prev_target"
     private const val KEY_ENABLE_DEPENDENCY_TREE = "enable_dependency_tree"
     private const val KEY_CASE_COLORING = "case_coloring"
     private const val KEY_REF_PAGE = "references.page."
@@ -146,6 +157,71 @@ object PreferencesManager {
     fun setFullAudioInstalled(context: Context, installed: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_FULL_AUDIO_INSTALLED, installed).apply()
     }
+
+    // ---- Extended delta parts ------------------------------------------------
+    fun getDbTarget(context: Context): String =
+        getPrefs(context).getString(KEY_DB_TARGET, null)
+            ?: if (getUseFullDatabase(context)) "full" else "sample"
+
+    fun setDbTarget(context: Context, target: String) {
+        getPrefs(context).edit().putString(KEY_DB_TARGET, target).apply()
+    }
+
+    /** Whole JSON object, replaced as one string so a half-written record cannot occur. */
+    fun getExtendedPackState(context: Context): String =
+        getPrefs(context).getString(KEY_EXTENDED_PACK_STATE, "{}") ?: "{}"
+
+    fun setExtendedPackState(context: Context, json: String) {
+        getPrefs(context).edit().putString(KEY_EXTENDED_PACK_STATE, json).apply()
+    }
+
+    /** Consecutive failed extended installs for the given release. */
+    fun getExtendedFailures(context: Context, buildTime: String?): Int {
+        val p = getPrefs(context)
+        return if (p.getString(KEY_EXTENDED_FAILURES_BUILD, null) == buildTime) p.getInt(KEY_EXTENDED_FAILURES, 0) else 0
+    }
+
+    fun recordExtendedFailure(context: Context, buildTime: String?, reason: String) {
+        val n = getExtendedFailures(context, buildTime) + 1
+        getPrefs(context).edit()
+            .putString(KEY_EXTENDED_FAILURES_BUILD, buildTime)
+            .putInt(KEY_EXTENDED_FAILURES, n)
+            .putString(KEY_EXTENDED_LAST_FAILURE, reason)
+            .apply()
+    }
+
+    fun clearExtendedFailures(context: Context) {
+        getPrefs(context).edit()
+            .remove(KEY_EXTENDED_FAILURES_BUILD).remove(KEY_EXTENDED_FAILURES).remove(KEY_EXTENDED_LAST_FAILURE)
+            .apply()
+    }
+
+    /** Marks an install job as begun, remembering what to go back to. */
+    fun beginExtendedJob(context: Context) {
+        getPrefs(context).edit()
+            .putBoolean(KEY_EXTENDED_JOB_ACTIVE, true)
+            .putBoolean(KEY_EXTENDED_JOB_PREV_FULL, getUseFullDatabase(context))
+            .putString(KEY_EXTENDED_JOB_PREV_TARGET, getDbTarget(context))
+            .apply()
+    }
+
+    fun isExtendedJobActive(context: Context): Boolean =
+        getPrefs(context).getBoolean(KEY_EXTENDED_JOB_ACTIVE, false)
+
+    fun extendedJobPrevFull(context: Context): Boolean =
+        getPrefs(context).getBoolean(KEY_EXTENDED_JOB_PREV_FULL, false)
+
+    fun extendedJobPrevTarget(context: Context): String =
+        getPrefs(context).getString(KEY_EXTENDED_JOB_PREV_TARGET, "sample") ?: "sample"
+
+    fun endExtendedJob(context: Context) {
+        getPrefs(context).edit()
+            .remove(KEY_EXTENDED_JOB_ACTIVE).remove(KEY_EXTENDED_JOB_PREV_FULL).remove(KEY_EXTENDED_JOB_PREV_TARGET)
+            .apply()
+    }
+
+    fun getExtendedLastFailure(context: Context): String? =
+        getPrefs(context).getString(KEY_EXTENDED_LAST_FAILURE, null)
 
     // Dependency tree display preference (experimental)
     fun getEnableDependencyTree(context: Context): Boolean {

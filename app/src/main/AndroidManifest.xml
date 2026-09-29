@@ -54,6 +54,7 @@
         <activity android:name=".ui.UserDictionaryImportActivity" />
         <activity android:name=".ManageLanguagesActivity" />
         <activity android:name=".FullDatabaseDownloadActivity" />
+        <activity android:name=".ExtendedDatabaseDownloadActivity" />
         <activity android:name=".AudioDownloadActivity" />
         <activity android:name=".alphabet.AlphabetGameActivity" />
         <activity android:name=".vocabulary.VocabularyGameActivity" />

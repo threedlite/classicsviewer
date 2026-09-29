@@ -224,6 +224,12 @@ class FullDatabaseDownloadActivity : AppCompatActivity() {
 
                 // Set preference to indicate full database is now installed
                 PreferencesManager.setUseFullDatabase(this@FullDatabaseDownloadActivity, true)
+                // A fresh full base: any extended parts merged before are gone with
+                // the old file, so their state resets and the target is full.
+                PreferencesManager.setDbTarget(this@FullDatabaseDownloadActivity, "full")
+                PreferencesManager.setExtendedPackState(this@FullDatabaseDownloadActivity, "{}")
+                PreferencesManager.endExtendedJob(this@FullDatabaseDownloadActivity)
+                java.io.File(getDatabasePath("perseus_texts.db").path + ".pre_extended").delete()
 
                 runOnUiThread {
                     binding.tvStatus.text = "Full database installed!"

@@ -4,6 +4,12 @@ plugins {
     id 'com.google.devtools.ksp'
 }
 
+// Extended delta parts (ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md, section 15):
+// one flag gates the pack modules AND the app code behind
+// BuildConfig.EXTENDED_PARTS_ENABLED, so the backout is this line alone.
+def extendedPartsEnabled = true
+def extendedPartModules = [":db_extended_part1_pack", ":db_extended_part2_pack"]
+
 android {
     namespace = 'com.classicsviewer.app'
     compileSdk = 36
@@ -12,7 +18,8 @@ android {
     // The AAB will be ~1.4GB total, but Google Play handles this:
     // - Base APK (~170MB) downloads on install
     // - Asset pack (~1.3GB) downloads only when user requests it
-    assetPacks = [":full_database_pack", ":audio_pack", ":references_pack", ":topical_pack"]
+    assetPacks = [":full_database_pack", ":audio_pack", ":references_pack", ":topical_pack"] +
+        (extendedPartsEnabled ? extendedPartModules : [])
 
     // Load keystore properties if available
     def keystorePropertiesFile = file("keystore.properties")
@@ -36,13 +43,15 @@ android {
         applicationId "com.classicsviewer.app"
         minSdk = 23  // Increased from 21 to support Age Signals API
         targetSdk = 36
-        versionCode 139
-        versionName "0.8.139"
+        versionCode 141
+        versionName "0.8.141"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
         // Add build timestamp
         buildConfigField "String", "BUILD_TIME", "\"${new Date().format('yyyy-MM-dd HH:mm:ss')}\""
+        buildConfigField "boolean", "EXTENDED_PARTS_ENABLED", "${extendedPartsEnabled}"
+        buildConfigField "String", "EXTENDED_PART_PACKS", "\"${extendedPartModules.collect { it.substring(1) }.join(',')}\""
         
         // Only include English and Greek languages
         resourceConfigurations += ["en", "el"]
@@ -156,6 +165,35 @@ task checkDatabaseExists {
             """)
         }
         println "✓ Database found at: ${dbFile.absolutePath} (${dbFile.length() / 1024 / 1024}MB)"
+
+        // Extended delta parts: every enabled part module must hold the zip and
+        // manifest written by `assemble_database.py full`, and the manifests must
+        // agree with the module count, or the bundle would ship an empty or
+        // mismatched part. (ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md, section 9)
+        if (extendedPartsEnabled) {
+            def problems = []
+            extendedPartModules.eachWithIndex { mod, i ->
+                def name = mod.substring(1)
+                def dir = rootProject.file("${name}/src/main/assets")
+                def zip = new File(dir, "${name}.db.zip")
+                def manifest = new File(dir, "${name}.manifest.json")
+                if (!zip.exists() || zip.length() < 1024 * 1024) problems << "${zip} missing or empty"
+                if (!manifest.exists()) {
+                    problems << "${manifest} missing"
+                } else {
+                    def m = new groovy.json.JsonSlurper().parse(manifest)
+                    if (m.pack_id != name) problems << "${manifest}: pack_id ${m.pack_id} != ${name}"
+                    if (m.part != i + 1) problems << "${manifest}: part ${m.part} != ${i + 1}"
+                    if (m.parts != extendedPartModules.size()) problems << "${manifest}: parts ${m.parts} != ${extendedPartModules.size()} modules"
+                    if (zip.exists() && m.zip_bytes != zip.length()) problems << "${zip}: ${zip.length()} bytes but manifest says ${m.zip_bytes}"
+                }
+            }
+            if (!problems.isEmpty()) {
+                throw new GradleException("ERROR: extended delta parts do not match their modules:\n  " + problems.join("\n  ") +
+                    "\n  Run `cd data-prep && python3 assemble_database.py full` (or `--copy-parts`) first.")
+            }
+            println "✓ Extended delta parts present: ${extendedPartModules.join(', ')}"
+        }
     }
 }
 
@@ -354,6 +392,23 @@ task checkNoConcurrentDataBuild {
 // Also copy font, audio, and reference files before build
 preBuild.dependsOn checkNoConcurrentDataBuild
 preBuild.dependsOn checkDatabaseExists
+
+// The extended-delta merge statements have one source, shared/delta_merge.sql,
+// which the data build's round trip runs on the desktop. The app runs the same
+// file, copied into assets at build time so it cannot drift.
+task copyDeltaMergeSql {
+    doLast {
+        def src = file("$rootDir/shared/delta_merge.sql")
+        if (!src.exists()) {
+            throw new GradleException("ERROR: shared/delta_merge.sql not found; it is the app's merge SQL")
+        }
+        def dest = file("$projectDir/src/main/assets/delta_merge.sql")
+        dest.parentFile.mkdirs()
+        dest.text = src.text
+        println "✓ delta_merge.sql copied to assets"
+    }
+}
+preBuild.dependsOn copyDeltaMergeSql
 preBuild.dependsOn copyFontToAssets
 preBuild.dependsOn copyAudioToAssets
 preBuild.dependsOn checkAudioExists
@@ -422,20 +477,27 @@ task checkAabSize {
                 println "✓ AAB structure is valid for Play Asset Delivery"
             }
 
-            // Check total AAB size is under 4GB (Google Play limit)
-            def aabSizeGB = aabFile.length() / 1024 / 1024 / 1024
-            if (aabSizeGB > 4) {
-                throw new GradleException("""
-                    ERROR: AAB exceeds Google Play's 4GB limit!
-
-                    AAB size: ${String.format('%.2f', aabSizeGB)}GB
-                    Maximum allowed: 4GB
-
-                    Consider reducing asset pack sizes.
-                """)
-            } else {
-                println "✓ AAB size is within Google Play limits (${String.format('%.2f', aabSizeGB)}GB < 4GB)"
+            // Play limits, from the same registry the data build uses
+            // (shared/pack_layout.py): 1.5 GB per asset pack, and a cumulative
+            // on-demand budget that was probed on the internal track
+            // (ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md, sections 2 and 12).
+            def layout = rootProject.file("shared/pack_layout.py").text
+            def perPackCap = (layout =~ /PLAY_PER_PACK_CAP_BYTES\s*=\s*([\d_]+)/)[0][1].replace("_", "") as long
+            def onDemandBudget = (layout =~ /PLAY_ON_DEMAND_BUDGET_BYTES\s*=\s*([\d_]+)/)[0][1].replace("_", "") as long
+            def onDemandTotal = 0L
+            assetPackSizes.each { packName, size ->
+                if (packName != "base" && packName != "META-INF") {
+                    onDemandTotal += size
+                    if (size > perPackCap) {
+                        throw new GradleException("ERROR: asset pack '${packName}' is ${String.format('%.2f', size / 1e9)} GB, over the ${perPackCap / 1e9} GB per-pack cap")
+                    }
+                }
             }
+            println "On-demand total: ${String.format('%.2f', onDemandTotal / 1e9)} GB of ${String.format('%.0f', onDemandBudget / 1e9)} GB budget"
+            if (onDemandTotal > onDemandBudget) {
+                throw new GradleException("ERROR: on-demand asset packs total ${String.format('%.2f', onDemandTotal / 1e9)} GB, over PLAY_ON_DEMAND_BUDGET_BYTES (${onDemandBudget / 1e9} GB) in shared/pack_layout.py")
+            }
+            println "✓ AAB within the Play limits in shared/pack_layout.py"
         }
     }
 }

@@ -82,6 +82,26 @@ class MainActivity : AppCompatActivity() {
             binding.root.setBackgroundColor(0xFF000000.toInt())
         }
         
+        // Extended delta: an interrupted merge leaves perseus_texts.db unusable
+        // (indexes dropped, foreign keys unchecked). Decided: no in-place repair;
+        // return to the sample database at once, before Room is opened, and
+        // let the user start Extended again from the menu.
+        // (ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md, section 8, scenario 12)
+        if (BuildConfig.EXTENDED_PARTS_ENABLED) {
+            // A job running in this process: the database is being written; the
+            // reader must not open it. Show the job instead.
+            if (com.classicsviewer.app.data.ExtendedInstallJob.running) {
+                startActivity(Intent(this, ExtendedDatabaseDownloadActivity::class.java))
+                finish()
+                return
+            }
+            val parts = com.classicsviewer.app.data.ExtendedPartsManager(this)
+            if (parts.anyMerging() || PreferencesManager.isExtendedJobActive(this)) {
+                recoverInterruptedExtendedMerge(parts)
+                return
+            }
+        }
+
         // Check if database extraction is needed
         if (needsDatabaseExtraction()) {
             val intent = Intent(this, DatabaseExtractionActivity::class.java)
@@ -340,6 +360,8 @@ class MainActivity : AppCompatActivity() {
         val referencesInstalled = com.classicsviewer.app.data.ReferencesPackManager(this).isInstalled()
         menu.findItem(R.id.action_references)?.isVisible = referencesInstalled
         menu.findItem(R.id.action_download_references)?.isVisible = true
+        menu.findItem(R.id.action_download_extended_database)?.isVisible =
+            com.classicsviewer.app.data.ExtendedPartsManager.enabled
     }
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -370,6 +392,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_manage_languages -> {
                 startActivity(Intent(this, ManageLanguagesActivity::class.java))
+                true
+            }
+            R.id.action_download_extended_database -> {
+                startActivity(Intent(this, ExtendedDatabaseDownloadActivity::class.java))
                 true
             }
             R.id.action_download_full_database -> {
@@ -409,6 +435,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
+    private fun recoverInterruptedExtendedMerge(parts: com.classicsviewer.app.data.ExtendedPartsManager) {
+        val progressDialog = ProgressDialog(this).apply {
+            setMessage("The extended database install was interrupted. Restoring the database you had before...")
+            setCancelable(false)
+            show()
+        }
+        lifecycleScope.launch {
+            val installer = com.classicsviewer.app.data.ExtendedDeltaInstaller(this@MainActivity, parts)
+            val reason = "install interrupted before it completed"
+            PreferencesManager.recordExtendedFailure(this@MainActivity, installer.baseBuildTime(), reason)
+            val restored = runCatching { installer.restorePrevious(reason) }.getOrElse { "nothing; restore failed: ${it.message}" }
+            withContext(Dispatchers.Main) {
+                progressDialog.dismiss()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Extended install was interrupted. Went back to $restored; you can start it again from the menu.",
+                    Toast.LENGTH_LONG
+                ).show()
+                // Same process, fresh MainActivity: Room was closed by the restore,
+                // and no exit(), which on the device killed the relaunch with it.
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
+
     private fun needsDatabaseExtraction(): Boolean {
         // If using external database, no extraction needed
         if (PreferencesManager.getExternalDatabaseUri(this) != null) {
@@ -455,6 +509,12 @@ class MainActivity : AppCompatActivity() {
     
     override fun onResume() {
         super.onResume()
+        // Never sit on top of a running Extended job: its merge is writing the
+        // database this screen would read. Go back to the job's screen.
+        if (BuildConfig.EXTENDED_PARTS_ENABLED && com.classicsviewer.app.data.ExtendedInstallJob.running) {
+            startActivity(Intent(this, ExtendedDatabaseDownloadActivity::class.java))
+            return
+        }
         
         // Reapply color inversion setting in case it changed
         val inverted = PreferencesManager.getInvertColors(this)
@@ -778,6 +838,10 @@ class MainActivity : AppCompatActivity() {
                 // Clear preferences
                 PreferencesManager.clearExternalDatabaseUri(this@MainActivity)
                 PreferencesManager.setUseFullDatabase(this@MainActivity, false)
+                PreferencesManager.setDbTarget(this@MainActivity, "sample")
+                PreferencesManager.setExtendedPackState(this@MainActivity, "{}")
+                PreferencesManager.endExtendedJob(this@MainActivity)
+                File(getDatabasePath("perseus_texts.db").path + ".pre_extended").delete()
 
                 // Close database
                 PerseusDatabase.destroyInstance()

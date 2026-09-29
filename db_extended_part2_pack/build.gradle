@@ -1,0 +1,13 @@
+plugins {
+    id 'com.android.asset-pack'
+}
+
+// Part 2 of the extended delta (ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md).
+// Contents: db_extended_part2_pack.db.zip + db_extended_part2_pack.manifest.json,
+// both written by data-prep/assemble_database.py full. Never edited by hand.
+assetPack {
+    packName = "db_extended_part2_pack"
+    dynamicDelivery {
+        deliveryType = "on-demand"
+    }
+}

@@ -412,8 +412,7 @@ An additional `ios` variant builds the curated iOS base-app DB (`ios/ClassicsVie
 ```bash
 # Latin — MODE MUST MATCH your release target:
 cd latin && ./run_build.sh sample   && cd ..   # for sample release
-cd latin && ./run_build.sh full     && cd ..   # for full release
-cd latin && ./run_build.sh extended && cd ..   # for extended release
+cd latin && ./run_build.sh extended && cd ..   # for extended AND full release (full is filtered from extended, see Step 7)
 # For iOS curated, see the "iOS curated-sample build" section below — uses a custom CSV.
 
 # Sanskrit (~10 hours full mode, 270 works, uses Stanza NLP)
@@ -495,8 +494,7 @@ Greek has its own module (`greek/run_build.sh`, mirroring `latin/run_build.sh`).
 
 ```bash
 cd greek && ./run_build.sh sample   && cd ..   # for sample release (~5 min)
-cd greek && ./run_build.sh full     && cd ..   # for full release (~8 min, Perseus Greek only)
-cd greek && ./run_build.sh extended && cd ..   # for extended release (~30-40 min: Wiktionary + First1K + PTA + Greek interlinear import)
+cd greek && ./run_build.sh extended && cd ..   # for extended AND full release (~30-40 min: Wiktionary + First1K + PTA + Greek interlinear import)
 cd greek && ./run_build.sh ios      && cd ..   # for iOS curated build (uses IOS_SAMPLE_AUTHORS.csv)
 ```
 
@@ -506,7 +504,9 @@ Greek is fully self-contained under `greek/`: processing code lives at `greek/bu
 
 ## Step 7: Assemble the Perseus Database
 
-`data-prep/assemble_database.py` is the single build entry point. It merges the per-language module DBs from Step 6, runs the OGA lemma pass, lexicon imports, a schema-drift check, translation_lookup rebuild, quality report, compression, and deployment copy to platform-specific destinations. The mode you pass here **must** match the mode you used for each module's build.
+`data-prep/assemble_database.py` is the single build entry point. For `sample`, `ios` and `extended` it merges the per-language module DBs from Step 6, runs the OGA lemma pass, lexicon imports, translation_lookup rebuild, a schema-drift check, `VACUUM` (packs the pages; the zips are about 10 percent smaller for it), quality report, compression, and deployment copy to platform-specific destinations. The mode you pass here **must** match the mode you used for each module's build.
+
+**`full` is different since 2026-09-27: it is not assembled from module DBs at all.** `assemble_database.py full` opens the extended DB of the same release and copies the full set of works and lexicon languages into a new file with the extended DB's ids preserved, then verifies the result is exactly the extended DB restricted to that scope (all twelve tables, ids included). This is what lets the Android extended delta be merged onto the full pack without id collisions (`ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`, sections 6 and 9; the rule for what is "full" lives in `shared/pack_layout.py`). The extended run also writes `data-prep/perseus_texts_extended.lexicon_ranges.json`, which the full run needs, and fails if any lexicon row cannot be attributed to a language or any id reaches 2^31.
 
 **NEVER run builds in parallel** — they share intermediate files and will corrupt each other. The build lock enforces this; attempting a second build while one is running aborts immediately.
 
@@ -526,18 +526,16 @@ Expected: 12 authors, 265 works, 667 books, ~154 MB zip, ~8 min total (including
 
 ### Full release (Android Play Asset Delivery full pack + iOS on-demand)
 
-Requires Step 6 Latin in full mode. Does NOT require other non-Greek/Latin language modules (those are extended-only).
+**Requires the extended assembly of the same release to have completed first** (below). The full DB is filtered out of `data-prep/perseus_texts_extended.db`; no module is built in `full` mode any more, and the Greek and Latin `full` module modes are unused.
 
 ```bash
-cd latin && ./run_build.sh full && cd ..
-cd greek && ./run_build.sh full && cd ..
-cd data-prep && python3 assemble_database.py full && cd ..
+cd data-prep && python3 assemble_database.py full && cd ..   # after assemble_database.py extended
 ```
 Deploys:
-- `full_database_pack/src/main/assets/perseus_texts_full.db.zip` (Android Play Asset Delivery)
+- `full_database_pack/src/main/assets/perseus_texts_full.db.zip` (Android Play Asset Delivery) plus `full.manifest.json` beside it (release identity and row counts, read by the app without extracting the zip)
 - `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip` (iOS on-demand)
 
-Expected: ~138 authors (Greek + Latin, no other languages), ~1,021 works, ~1M text_lines, ~930 MB zip, ~15 min total.
+Expected: 138 authors (Greek + Latin, Italian, Old English, Sumerian, Akkadian), 1,021 works, 1,010,513 text_lines, ~0.97 GB zip, ~5 min. The run aborts if the extended DB or its `lexicon_ranges.json` is missing or older than any extended module DB, and if the filtered result differs from the extended DB in any table.
 
 ### Extended release (iOS on-demand only — too large for Android)
 
@@ -583,17 +581,17 @@ because they share intermediate state inside that module's directory.
 # Assumes Step 2-6 prerequisites are met (module DBs for sample/full/extended
 # already exist, OGA extracted, venv set up, Greek interlinear XMLs present).
 
-# --- sample (~5-8 min) ---
-cd data-prep && nohup ../venv/bin/python3 assemble_database.py sample > /tmp/build_sample.log 2>&1 &
-wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_sample.log; cd ..
+# --- extended (~30 min) — FIRST, because full is cut from it ---
+cd data-prep && nohup ../venv/bin/python3 assemble_database.py extended > /tmp/build_extended.log 2>&1 &
+wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_extended.log; cd ..
 
-# --- full (~6-15 min) ---
+# --- full (~5 min; filtered from the extended DB just built) ---
 cd data-prep && nohup ../venv/bin/python3 assemble_database.py full > /tmp/build_full.log 2>&1 &
 wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_full.log; cd ..
 
-# --- extended (~20-40 min; iOS-only deploy) ---
-cd data-prep && nohup ../venv/bin/python3 assemble_database.py extended > /tmp/build_extended.log 2>&1 &
-wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_extended.log; cd ..
+# --- sample (~5 min) ---
+cd data-prep && nohup ../venv/bin/python3 assemble_database.py sample > /tmp/build_sample.log 2>&1 &
+wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_sample.log; cd ..
 
 # --- ios curated (~10-15 min; needs greek+latin ios module DBs first) ---
 cd greek && nohup ./run_build.sh ios > /tmp/build_greek_ios.log 2>&1 & wait; cd ..
@@ -805,18 +803,18 @@ Or use the convenience script:
 
 | Mode | Release? | Corpus scale | DB Size | ZIP Size | Build Time (incl. OGA) | Deploys to |
 |------|----------|--------------|---------|----------|------------------------|------------|
-| **sample** | ✅ | 12 authors | ~670 MB | ~154 MB | ~8 min | `app/src/{debug,main}/assets/`, `perseus_database/src/main/assets/` |
-| **full** | ✅ | ~138 authors (Greek+Latin only) | ~4.3 GB | ~930 MB | ~15 min | `full_database_pack/src/main/assets/`, `ios/ClassicsViewer/Resources/OnDemand/` |
-| **extended** | ✅ | ~786 authors (all langs) | ~13 GB | ~2.8 GB | ~45-55 min | `ios/ClassicsViewer/Resources/OnDemand/` (iOS only — too large for Android) |
-| ios (curated) | ✅ | 11 authors (IOS_SAMPLE_AUTHORS.csv) | ~370 MB | ~84 MB | ~8 min | `ios/ClassicsViewer/Resources/` (iOS base app) |
+| **sample** | ✅ | 12 authors | ~630 MB | ~143 MB | ~5 min | `app/src/{debug,main}/assets/`, `perseus_database/src/main/assets/` |
+| **full** | ✅ | 138 authors (Greek+Latin, plus Italian, Old English, Sumerian, Akkadian); filtered from extended | ~4.8 GB | ~0.97 GB | ~5 min after extended | `full_database_pack/src/main/assets/` (+ `full.manifest.json`), `ios/ClassicsViewer/Resources/OnDemand/` |
+| **extended** | ✅ | 791 authors (all langs) | ~14.4 GB | ~2.75 GB | ~35 min | `ios/ClassicsViewer/Resources/OnDemand/`, the external download; Android delta parts to follow (`ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`) |
+| ios (curated) | ✅ | 11 authors (IOS_SAMPLE_AUTHORS.csv) | ~360 MB | ~79 MB | ~3 min | `ios/ClassicsViewer/Resources/` (iOS base app) |
 
-All four are real release builds with distinct deployment destinations. `full` ships as Android's Play Asset Delivery "full pack" + iOS on-demand pack; `extended` ships only to iOS on-demand (too large for the Android Play Store).
+All four are real release builds with distinct deployment destinations. `full` ships as Android's Play Asset Delivery "full pack" + iOS on-demand pack; `extended` ships to iOS on-demand and the external download, and its difference from full is planned to ship to Android as on-demand delta parts.
 
 **`--skip-oga` is dev-only.** All release builds MUST include OGA (268,065 Greek lemma mappings). The flag exists so developers without the 8.6 GB OGA corpus can still get a usable test DB; it must not be passed for release builds.
 
 **Build prerequisites by release target**:
 - **sample**: OGA corpus (Step 2) + `latin/run_build.sh sample` + `greek/run_build.sh sample`
-- **full**: OGA corpus (Step 2) + `latin/run_build.sh full` + `greek/run_build.sh full` (NO other language modules)
+- **full**: a completed `assemble_database.py extended` of the same release (everything the extended target needs); no module builds of its own
 - **extended**: OGA corpus (Step 2) + every Step 6 language module built in its extended/full mode, plus `latin/run_build.sh extended` + `greek/run_build.sh extended`, plus Greek interlinear XMLs from Step 5
 - **ios (curated)**: OGA corpus (Step 2) + `greek/run_build.sh ios` + latin with iOS CSV (see Step 7 iOS section)
 

@@ -43,18 +43,33 @@ class FullDatabaseDownloadManager(private val context: Context) {
      * Check if full database asset pack is already downloaded
      */
     fun isFullDatabaseDownloaded(): Boolean {
-        val location = assetPackManager.getPackLocation(ASSET_PACK_NAME)
-        return location != null && location.assetsPath() != null
+        return getFullDatabaseZipPath() != null
     }
 
     /**
-     * Get path to downloaded full database ZIP
+     * Get path to downloaded full database ZIP.
+     *
+     * Debug builds cannot carry asset packs; if the zip has been pushed to
+     * getExternalFilesDir("packs") it is used instead (the same fallback
+     * ExtendedPartsManager and TopicalPackManager use), so the full and
+     * extended flows can be exercised from an APK.
      */
     fun getFullDatabaseZipPath(): String? {
-        val location = assetPackManager.getPackLocation(ASSET_PACK_NAME) ?: return null
-        val assetsPath = location.assetsPath() ?: return null
-        return "$assetsPath/$FULL_DB_ZIP_NAME"
+        val location = assetPackManager.getPackLocation(ASSET_PACK_NAME)
+        val assetsPath = location?.assetsPath()
+        if (assetsPath != null) return "$assetsPath/$FULL_DB_ZIP_NAME"
+        if (com.classicsviewer.app.BuildConfig.DEBUG) {
+            val dir = context.getExternalFilesDir(ExtendedPartsManager.DEBUG_PACKS_DIR) ?: return null
+            val f = File(dir, FULL_DB_ZIP_NAME)
+            if (f.exists()) return f.path
+        }
+        return null
     }
+
+    private fun debugFallbackPresent(): Boolean =
+        com.classicsviewer.app.BuildConfig.DEBUG &&
+            assetPackManager.getPackLocation(ASSET_PACK_NAME) == null &&
+            getFullDatabaseZipPath() != null
 
     /**
      * Check if device has enough free space (25GB required)
@@ -84,6 +99,10 @@ class FullDatabaseDownloadManager(private val context: Context) {
         onError: (errorCode: Int, message: String) -> Unit,
         onRequiresConfirmation: () -> Unit
     ) {
+        if (debugFallbackPresent()) {
+            onComplete()
+            return
+        }
         stateUpdateListener = AssetPackStateUpdateListener { state ->
             handleStateUpdate(state, onProgress, onComplete, onError, onRequiresConfirmation)
         }
