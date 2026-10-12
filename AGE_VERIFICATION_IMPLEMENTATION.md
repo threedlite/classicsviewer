@@ -43,7 +43,7 @@ dependencies {
 
 android {
     defaultConfig {
-        minSdk 23   // required floor: the age-signals AAR declares minSdkVersion 23
+        minSdk 24   // the age-signals AAR declares minSdkVersion 23; Play automatic protection raises the app floor to 24
     }
 }
 ```

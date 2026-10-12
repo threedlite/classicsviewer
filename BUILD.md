@@ -23,7 +23,7 @@ Before starting, ensure you have:
     # Option 2: Create local.properties in project root
     echo "sdk.dir=$HOME/Library/Android/sdk" > local.properties
     ```
-- **Android device or emulator** - Android 6.0+ (API 23+; minSdk was raised from 21 to 23 for the Play Age Signals API)
+- **Android device or emulator** - Android 7.0+ (API 24+; minSdk was raised from 21 to 23 for the Play Age Signals API, then to 24 because Play automatic protection requires it)
 - **~15GB free disk space** - for data sources, build artifacts, and optional OGA corpus
 
 ## Step 1: Clone the Repository

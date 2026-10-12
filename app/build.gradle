@@ -41,10 +41,10 @@ android {
 
     defaultConfig {
         applicationId "com.classicsviewer.app"
-        minSdk = 23  // Increased from 21 to support Age Signals API
+        minSdk = 24  // Play automatic protection (Play Integrity) requires minSdk 24; was 23 for Age Signals
         targetSdk = 36
-        versionCode 142
-        versionName "0.8.142"
+        versionCode 143
+        versionName "0.8.143"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         

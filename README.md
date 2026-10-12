@@ -58,7 +58,7 @@ Extended db support with First1k data (https://github.com/OpenGreekAndLatin/Firs
 
 ### Prerequisites for building app
 - Android Studio
-- Android device or emulator (Android 6.0+, minSdk 23)
+- Android device or emulator (Android 7.0+, minSdk 24)
 - Python 3 (for building the database)
 - ~50GB free disk space
 
