@@ -88,7 +88,7 @@ All sources are downloaded automatically by the build script.
 
 | Work | Translator | Year | Gutenberg ID | Coverage |
 |------|------------|------|--------------|----------|
-| Poetic Edda + Prose Edda (Gylfaginning, Prologus) | Benjamin Thorpe | 1866 | [14726](https://www.gutenberg.org/ebooks/14726) | 1042/1083 stanzas, 59/59 chapters |
+| Poetic Edda + Prose Edda (Gylfaginning, Prologus) | Benjamin Thorpe (Elder Edda); I. A. Blackwell (Younger Edda) | 1866 | [14726](https://www.gutenberg.org/ebooks/14726) | 1042/1083 stanzas, 59/59 chapters |
 | Völsunga saga | Eiríkr Magnússon & William Morris | 1888 | [1152](https://www.gutenberg.org/ebooks/1152) | 42/42 chapters |
 | Grettis saga | George Ainslie Hight | 1914 | [347](https://www.gutenberg.org/ebooks/347) | 93/93 chapters |
 

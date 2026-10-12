@@ -116,6 +116,7 @@ SOURCE_LANGUAGE: Dict[str, str] = {
     "coptic_scriptorium": "coptic",
     "comprehensive_coptic_lexicon": "coptic",
     "Statistical Dictionary": "pali",
+    "Wiktionary (syc)": "syriac",
 }
 
 # The build-time marker row the assembly writes; it is the release identity.

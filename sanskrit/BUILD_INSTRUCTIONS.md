@@ -11,13 +11,18 @@ cd sanskrit
 # Or manually with venv Python (required for multiprocessing):
 nohup ./venv/bin/python3 create_sanskrit_database_interlinear.py > build_sanskrit.log 2>&1 &
 tail -f build_sanskrit.log
+
+# Build only the works listed in a CSV, into a separately named database
+# (sanskrit_texts_<name>.db, interlinear_output_<name>/, build_sanskrit_<name>.log);
+# the main database is untouched.  Used to test a change on a few works:
+./run_build.sh full SANSKRIT_MAHABHARATA_TEST.csv mbhtest
 ```
 
-**Output**: `sanskrit_texts.db.zip` (~554MB) with:
-- 270 Sanskrit works with texts
+**Output**: `sanskrit_texts.db.zip` (~486MB) with:
+- 272 Sanskrit works with texts
 - 179,806 dictionary entries
 - 4,705,160 lemma mappings
-- 203,713 interlinear translations with **Stanza NLP morph data** (case/number/gender, POS, dependencies)
+- 494,931 interlinear translations with **Stanza NLP morph data** (case/number/gender, POS, dependencies)
 
 **Build time**: ~95 minutes (fully automated, no manual intervention)
 - DCS loading phase: ~75 minutes (8 parallel workers)
@@ -37,33 +42,38 @@ tail -f build_sanskrit.log
 
 The `create_sanskrit_database_interlinear.py` script is a **complete automated pipeline**:
 
-1. ✅ **Creates database** with 270 Sanskrit texts (~75 min with 8 workers)
+1. ✅ **Creates database** with 272 Sanskrit texts (~96 min with 8 workers)
    - Bhagavad Gita from Wikisource JSON
    - Rig Veda from DCS pada format
-   - 268 works from DCS CoNLL-U files
+   - 270 works from DCS CoNLL-U files, parsed by 8 worker processes that
+     run Stanza on sentences without treebank data (see "Stanza models" below)
 
 2. ✅ **Imports lexicon** from `dcs_sanskrit_lexicon.zip` (2 min)
    - 179,806 dictionary entries with transliterations
    - 4,705,160 word form → lemma mappings
    - 6 normalization patterns for text matching
 
-3. ✅ **Generates interlinear XML with Stanza NLP** for all 270 works (~20 min)
+3. ✅ **Generates interlinear XML with Stanza NLP** for all 272 works (~2 h)
    - Creates TEI XML files with word-by-word glosses
    - Uses **Stanza NLP** to add morphological data:
      - Case/number/gender (e.g., "acc s m" = accusative singular masculine)
      - POS tags (NOUN, VERB, ADJ, etc.)
      - Dependency relations (nsubj, obj, compound:coord, etc.)
-   - Outputs to `interlinear_output/` directory
+   - Outputs to `interlinear_output/` directory: `.interlinear.txt` and
+     `.dcs-eng99.xml` per work, written in one pass (each line fetched,
+     Stanza-parsed and glossed once), to `.tmp` siblings that are renamed
+     into place only when both are complete, so a killed worker never
+     leaves a truncated XML for the import step
    - Uses parallel processing (8 workers) with `fork` start method
    - Pre-loads Stanza models before spawning workers
 
 4. ✅ **Imports interlinear** into database (2 min)
    - Parses XML files to extract translations with morph data
-   - Creates 203,713 interlinear segments (one per line)
+   - Creates 494,931 interlinear segments (one per line)
    - Builds translation lookup table for efficient retrieval
 
 5. ✅ **Compresses to ZIP** (1 min)
-   - Creates `sanskrit_texts.db.zip` (~554 MB)
+   - Creates `sanskrit_texts.db.zip` (~486 MB)
    - Ready for standalone use or merging into extended database
 
 **No manual steps required! NEVER run intermediate scripts manually.**
@@ -73,11 +83,11 @@ The `create_sanskrit_database_interlinear.py` script is a **complete automated p
 - **Schema**: Identical to extended database (100% compatible for merging)
 - **Standalone**: Database includes all lexicon data, works without extended DB
 - **Merge-ready**: Can be merged into extended database using `merge_database.py`
-- **Interlinear**: All 270 works have word-by-word interlinear translations
+- **Interlinear**: All 272 works have word-by-word interlinear translations
 
 ## Database Contents
 
-**Full mode** includes all 270 works total:
+**Full mode** includes all 272 works total:
 - **Bhagavad Gita** (18 chapters, Wikisource with English translations)
   - Source: Sanskrit Wikisource (CC BY-SA 4.0)
   - Parsed from downloaded HTML via `data-sources/parse_bhagavad_gita_sanskrit.py`
@@ -86,13 +96,39 @@ The `create_sanskrit_database_interlinear.py` script is a **complete automated p
   - Work ID: `bhagavad_gita_wikisource`, Author ID: `vyasa_wikisource`
 - **Rig Veda** (10 maṇḍalas, complete with Griffith translation)
   - Source: DCS pada-and-analysis.dat format from `../data-sources/sanskrit/dcs/data/rigveda/`
-  - Translation: Ralph T.H. Griffith (1896, Public Domain) from text file
+  - Translation: Ralph T.H. Griffith (1896, Public Domain), English Wikisource
+    transcription fetched and parsed by `data-sources/download_rigveda_griffith.py`
+    and `parse_rigveda_griffith.py` (the build runs them when the file is missing)
   - Work ID: `rigveda_pada`, Author ID: `rishis_pada`
-- **268 DCS works**: Including Upanishads, Vedas, epics, philosophical texts, and more
+- **270 DCS works**: Including Upanishads, Vedas, epics, philosophical texts, and more
   - Source: DCS CoNLL-U files from `../data-sources/sanskrit/dcs/conllu/`
   - Most works are Sanskrit-only (no English translations)
-  - ~738K verses total
-  - ~5.6M words total
+  - Works whose DCS chapter headers have three or more parts (97 three-part,
+    23 four-part, 2 five-part) are loaded one line per DCS verse
+    (`# sent_counter`), with a `[book.chapter.verse]` citation prefix on the
+    line like the Rig Veda; two-part works are one line per sentence.
+    Books and chapters follow DCS file order; non-numeric labels keep their
+    text (e.g. `[6.BhaGī 1.1]`) and books with non-numeric labels are
+    numbered by order of appearance (label kept for display).
+  - **Mahābhārata**: Ganguli's English translation (Project Gutenberg
+    15474–15477) is attached per critical-edition chapter through
+    `data-sources/mbh_ce_ganguli_concordance.csv`; see
+    `mahabharata_ganguli.py` and `data-sources/SOURCES.md`. The Gutenberg
+    files are downloaded by the build when missing. Any inconsistency in
+    the texts or the table fails the build.
+  - **Chāndogyopaniṣad**: Müller's translation (Sacred Books of the East
+    vol. 1, Wikisource) is attached per khaṇḍa through `translation_map`;
+    the files are fetched and parsed by `data-sources/download_chandogya_mueller.sh`
+    and `parse_chandogya_mueller.py` when missing. A mapped translation that
+    yields no segment fails the build. The translation files in the DCS
+    repository itself are not used (`LICENSE_COMPLIANCE.md` section 9).
+  - **Thirteen further works** take their English translation from the
+    registry in `data-sources/translation_sources.py` (Project Gutenberg and
+    English Wikisource; the Rāmāyaṇa through `data-sources/ramayana_dutt.py`).
+    The build fetches and parses them on demand for the works it includes;
+    `python3 data-sources/translation_sources.py --check` compares each
+    parser's keys with the DCS labels. Coverage per work is in
+    `data-sources/SOURCES.md`.
 
 ## Lexicon Generation (One-Time Setup)
 
@@ -155,11 +191,11 @@ rm -rf interlinear_output
 
 # Build everything automatically
 nohup python3 create_sanskrit_database_interlinear.py full > build.log 2>&1 &
-tail -f build.log  # Monitor (~15-20 min)
+tail -f build.log  # Monitor (~3 h 45 min)
 
 # Verify output
-ls -lh sanskrit_texts.db.zip  # Should be ~371 MB
-ls -lh interlinear_output/*.dcs-eng99.xml | wc -l  # Should be 270 files
+ls -lh sanskrit_texts.db.zip  # Should be ~486 MB
+ls -lh interlinear_output/*.dcs-eng99.xml | wc -l  # Should be 272 files
 ```
 
 ## Output Format
@@ -233,14 +269,14 @@ This will:
 
 ## Stats
 
-**Full Database**: 270 works, 203K verses, 13.4M words, ~554MB compressed
-**Build time**: ~95 minutes total (fully automated)
-  - DCS loading phase: ~75 minutes (8 parallel workers)
-  - Interlinear generation with Stanza NLP: ~20 minutes
+**Full Database**: 272 works, 495K verse lines, 5.9M words, ~486MB compressed
+**Build time**: ~3 h 45 min total (fully automated; measured 2026-10-10)
+  - DCS loading phase: ~96 minutes (8 parallel workers)
+  - Interlinear generation with Stanza NLP: ~2 hours (7,297 s)
   - Import and compression: ~2 minutes
 
 **Interlinear Coverage**:
-- Dictionary coverage: **95.9%** words found
+- Dictionary coverage: **99.8%** words found
 - Morph data (case/number/gender): Available for all words processed by Stanza
 - POS tags and dependencies: Added by Stanza NLP
 
@@ -254,12 +290,12 @@ Example: `| पूर्व voc s m ~ ADJ conj 1 3 |`
 - `conj 1 3` = conjunction relation, head word 1, sentence position 3
 
 **Data Sources**:
-- DCS CoNLL-U corpus: 15,733 files, 5.5M words, 268 works
+- DCS CoNLL-U corpus: 15,900 files, 270 works
 - DCS dictionary: 164K lemmas
 - DCS morphology: 4.7M mappings (with sandhi)
 - Bhagavad Gita: Wikisource (parsed from HTML to JSON)
 - Rig Veda: DCS pada-and-analysis.dat (TSV format)
-- English translations: Available for ~7 works (Bhagavad Gita, Rig Veda, 5 Upanishads/Vedas)
+- English translations: Bhagavad Gita (Arnold, Besant), Rig Veda (Griffith), Mahabharata (Ganguli), Chāndogya Upaniṣad (Müller)
 
 ## Data Pipeline Architecture
 
@@ -280,7 +316,7 @@ The Sanskrit database build uses three different data sources with different pro
 - **Source**: Pre-existing TSV file from DCS corpus
 - **Import**: `create_sanskrit_database_interlinear.py` reads directly
 - **Location**: `../data-sources/sanskrit/dcs/data/rigveda/pada-and-analysis.dat`
-- **Translation**: `../data-sources/sanskrit/translations/RV-Griffith.txt`
+- **Translation**: `data-sources/wikisource/rigveda_griffith.txt` (generated from Wikisource by `data-sources/download_rigveda_griffith.py` + `parse_rigveda_griffith.py`)
 - **Format**: Tab-separated with columns: book, hymn, stanza, pada, text
 - **Workflow**: `load_rigveda()` function reads TSV, converts IAST to Devanagari, creates work with author `rishis_pada`
 
@@ -289,9 +325,24 @@ The Sanskrit database build uses three different data sources with different pro
 - **Import**: `create_sanskrit_database_interlinear.py` reads directly
 - **Location**: `../data-sources/sanskrit/dcs/conllu/`
 - **Format**: CoNLL-U morphological annotation format
-- **Workflow**: `load_dcs_texts()` function processes all 268 works
+- **Workflow**: `load_dcs_texts()` function processes all 270 works
 
-All three sources are integrated into a single `sanskrit_texts.db` with consistent schema.
+### 4. Mahabharata translation (Gutenberg text + concordance CSV → Database)
+- **Download**: `data-sources/download_ganguli.sh` fetches the four Gutenberg
+  volumes into `data-sources/ganguli/` (the build runs it when they are missing)
+- **Verify**: `mahabharata_ganguli.py` strips the Gutenberg boilerplate and
+  checks a SHA-256 of the remaining text
+- **Parse**: books, section headings (roman or bare arabic), footnotes
+- **Align**: `data-sources/mbh_ce_ganguli_concordance.csv` (generated once
+  by `data-sources/extract_mbh_concordance.py` from the Brodbeck & Black
+  appendix) maps critical-edition chapters to Ganguli sections; segments
+  span the lines of the chapters each section is attached to
+- **Workflow**: `write_parsed_work_to_db()` calls
+  `mahabharata_ganguli.write_ganguli_translation()` after writing the
+  Mahābhārata lines; the report it prints lists every merged heading,
+  interval placement and rejected row
+
+All four sources are integrated into a single `sanskrit_texts.db` with consistent schema.
 
 ## Interlinear Generation Pipeline
 
@@ -332,7 +383,29 @@ python3 batch_generate_interlinear.py sanskrit_texts.db \
 - Pre-loads Stanza before `mp.Pool()` creation
 - Without this fix, workers spawn with system Python and can't access Stanza
 
-**Performance**: ~20 minutes with 8 parallel workers for all 270 works (slower due to Stanza NLP processing)
+**Performance**: ~2 hours with 8 parallel workers for all 272 works (slower due to Stanza NLP processing)
+
+### Stanza models
+
+Stanza's Sanskrit models live in `~/Library/Caches/stanza/<version>/resources/sa/`
+(or `~/stanza_resources/` on Linux). The rule in every build step is:
+
+- **Only the main process downloads.** Before a worker pool starts, the main
+  process calls `stanza.download('sa')` once and loads a pipeline to verify the
+  files. `stanza.download` rewrites every model file it fetches, so it must
+  never run while another process is reading the models.
+- **Workers never download.** Worker processes create their pipeline with
+  `stanza.Pipeline('sa', ..., download_method=None)`, which loads the files
+  the main process verified and refuses to fetch anything.
+- **A model that fails to load stops the build.** There is no fallback to an
+  empty parse: a worker, the pre-load, or the serial loader raises, the pool
+  propagates the error, and the build exits with a traceback in the log. A
+  database with missing trees must never be produced silently.
+
+Symptom this rule prevents: a line `ERROR: Cannot load model from .../sa/depparse/vedic_nocharlm.pt`
+in the log while the model files' modification times keep changing. That means
+a process is re-downloading the models while others read them; if you see it,
+the build script has regressed on this rule.
 
 ### Stage 2: Import Interlinear into Extended Database (create_perseus_database.py)
 
@@ -344,7 +417,7 @@ python3 create_perseus_database.py extended
 ```
 
 **What it does**:
-1. Merges `sanskrit/sanskrit_texts.db` into Perseus database (all 270 works)
+1. Merges `sanskrit/sanskrit_texts.db` into Perseus database (all 272 works)
 2. Scans `../data-sources/classicsviewer_interlinear/` for `*.dcs-eng99.xml` files
 3. Parses TEI XML to extract word-by-word glosses
 4. Creates `translation_segments` with translator "Interlinear (Beta, AI-generated from app dictionary)"

@@ -282,49 +282,19 @@ For each text with DCS translation:
 
 ## License Compliance
 
-**All DCS translations are CC BY 4.0** (same as existing DCS data)
-
-**Attribution required**:
-```
-Digital Corpus of Sanskrit (DCS)
-Author: Oliver Hellwig
-License: CC BY 4.0
-Source: http://www.sanskrit-linguistics.org/dcs/
-Translations by: [Translator Name]
-```
-
-Individual translators:
-- **Ralph T.H. Griffith** (1896) - Rig Veda, Atharvaveda, Yajur Veda - Public Domain
-- **Patrick Olivelle** - Upanishads - Permission granted for DCS inclusion
-- **Julius Eggeling** - Śatapathabrāhmaṇa - Public Domain
-- **Hermann Oldenberg** - Gṛhyasūtras - Public Domain
-- **E.B. Cowell** - Harṣacarita - Public Domain
-- **Whitney & Lanman** - Atharvaveda - Public Domain
-- **Maurice Bloomfield** - Atharvaveda - Public Domain
-- **Jan Gonda** - Ṛgvidhāna - Permission status to verify
+The translation files in the DCS repository are **not used** by the build.
+The Olivelle files carry no statement releasing the English translations;
+the Griffith, Eggeling and Oldenberg files were digitised by sacred-texts.com
+under non-commercial terms; the Jamison & Brereton file is under copyright.
+The build takes its English translations from Project Gutenberg and
+Wikisource instead (Ganguli, Griffith's Rig Veda, Müller's Chāndogya). See
+`LICENSE_COMPLIANCE.md` sections 6–9.
 
 ---
 
-## Recommended Immediate Action
+## Status
 
-**Start with Phase 1 & 2** (6-8 texts):
-
-1. **Atharvaveda** (Whitney translation)
-2. **Vājasaneyi Saṃhitā** (Griffith)
-3. **Chāndogyopaniṣad** (Olivelle)
-4. **Aitareyopaniṣad** (Olivelle)
-5. **Śvetāśvataropaniṣad** (Olivelle)
-
-**Total effort**: ~2 weeks
-**Impact**:
-- All 4 Vedas ✓
-- 3 major Upanishads ✓
-- Solid foundation for Sanskrit classical education
-
-This gives comprehensive Vedic coverage using only DCS-provided translations.
-
----
-
-**Last Updated**: October 6, 2025
-**DCS Texts with Translations**: 16 total (1 implemented, 15 available)
-**Recommended Priority Additions**: 5 texts (Atharvaveda + Yajur Veda + 3 Upanishads)
+- Chāndogyopaniṣad: English translation shipped (Müller, Wikisource), one segment per khaṇḍa.
+- Aitareyopaniṣad, Śvetāśvataropaniṣad: no English translation shipped; no transcribed public-domain translation exists on Gutenberg or Wikisource (Müller's versions are untranscribed scans there).
+- Atharvaveda, Vājasaneyi Saṃhitā, Śatapathabrāhmaṇa, Gṛhyasūtras: no English translation shipped; the available transcriptions are sacred-texts.com files under non-commercial terms.
+- Mahābhārata: Ganguli translation shipped from Project Gutenberg (see `MAHABHARATA_GANGULI_PROPOSAL.md`).

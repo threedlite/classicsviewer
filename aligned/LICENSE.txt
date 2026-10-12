@@ -1,7 +1,7 @@
 # Licenses
 
 ## Code
-All code MIT licensed.
+All code dual-licensed under the MIT License or the Apache License 2.0, at your option (see ../LICENSE.txt).
 
 ## Data Source Licenses
 

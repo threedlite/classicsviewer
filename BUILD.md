@@ -93,7 +93,7 @@ unzip -o cunliffe.zip.reference
 cd ..
 ```
 
-**Required for extended database** (778 authors, 14 languages):
+**Required for extended database** (791 authors, 15 languages):
 
 ```bash
 cd data-sources
@@ -164,6 +164,24 @@ ls glaux/metadata.txt glaux/xml/ | head -5
 cd ..
 ```
 If absent, `generate_interlinear.py` prints `GLAUx directory not found` and falls back to heuristics; the build still completes, but gloss quality is degraded for compound forms.
+
+**GLAUx licence filter.** GLAUx records, per text, the licence of the source
+text it annotated (`metadata.txt`, column `SOURCE_LICENSE`; the column
+`TREEBANK_ANNOTATIONS` names the treebank the annotations came from).
+`glaux_loader.py` uses a GLAUx text only when its source licence is CC BY,
+CC BY-SA, CC BY-NC or CC BY-NC-SA (any version), or when the `SOURCE` column
+states the source edition is public domain (the `Loeb (public domain)` rows,
+which carry no licence). Other texts with no licence recorded (`NA`), the GPL
+and OpenEdition texts and every ND licence are
+excluded, and an excluded work is not used for gap-filling beside the Perseus
+treebank either; CLTK annotates those works. NonCommercial material is kept
+on purpose: this project is not commercial. A downstream commercial use would
+have to drop the NC source texts and the PROIEL / Gorman annotations
+(CC BY-NC-SA) itself; the annotation source is not a filter criterion here,
+and the licence screen names both treebanks and their licences. The loader
+prints an exclusion report at start-up (172 of 1,408 works with
+the 2026 clone: 166 `NA`, 6 other) and raises if the metadata
+lacks the three columns. The rule lives in the loader, not in a per-work list.
 
 **Required for Coptic dictionary** (11,284 entries — build succeeds without it but produces 0 dictionary entries):
 ```bash
@@ -400,8 +418,8 @@ There are **three distinct release builds** — each with its own assembly mode,
 | Mode | Corpus | Destination(s) | Purpose |
 |---|---|---|---|
 | **sample** | 12 authors (Greek + Latin curated) | `app/src/{debug,main}/assets/perseus_texts.db.zip` + `perseus_database/src/main/assets/perseus_texts.db.zip` | Small-footprint Android APK (install-time) |
-| **full** | ~138 authors (all Perseus Greek + Latin) | `full_database_pack/src/main/assets/perseus_texts_full.db.zip` + `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip` | Android Play Asset Delivery "full" pack + iOS on-demand |
-| **extended** | ~786 authors (Perseus + First1K + PTA + Sanskrit + Pali + Hebrew + Arabic + ...) | `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip` | iOS on-demand only (too large for Android) |
+| **full** | 138 authors (all Perseus Greek + Latin, plus Italian, Old English, Sumerian, Akkadian) | `full_database_pack/src/main/assets/perseus_texts_full.db.zip` + `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip` | Android Play Asset Delivery "full" pack + iOS on-demand |
+| **extended** | 791 authors (Perseus + First1K + PTA + Sanskrit + Pali + Hebrew + Arabic + ...) | `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip` | iOS on-demand only (too large for Android) |
 
 An additional `ios` variant builds the curated iOS base-app DB (`ios/ClassicsViewer/Resources/perseus_texts.db.zip`) — see the iOS section below. It is a sample-size DB driven by `IOS_SAMPLE_AUTHORS.csv`, not a separate corpus scale.
 
@@ -415,7 +433,7 @@ cd latin && ./run_build.sh sample   && cd ..   # for sample release
 cd latin && ./run_build.sh extended && cd ..   # for extended AND full release (full is filtered from extended, see Step 7)
 # For iOS curated, see the "iOS curated-sample build" section below — uses a custom CSV.
 
-# Sanskrit (~10 hours full mode, 270 works, uses Stanza NLP)
+# Sanskrit (~3 h 45 min full mode, 272 works, uses Stanza NLP)
 # ⚠ Ensure BG data exists first (see Step 2 — "Sanskrit Bhagavad Gita")
 cd sanskrit && ./run_build.sh full && cd ..
 
@@ -435,7 +453,12 @@ cd ..
 # ⚠ Without the lexicon XML, build succeeds but produces 0 dictionary entries.
 cd coptic && python3 create_coptic_database.py && cd ..
 
-# Syriac (~10 seconds, requires data-sources/pta_data)
+# Syriac (~10 seconds plus a one-time ~5 minute scan of the English Wiktionary
+# dump for the Classical Syriac lexicon; requires data-sources/pta_data and
+# data-sources/enwiktionary-latest-pages-articles.xml.bz2. The scan is cached in
+# syriac/all_syriac_enwiktionary_pages.json; the build fails without dump or cache.
+# Also imports the PTA English translations that each work's __cts__.xml relates
+# to the Syriac editions: John of Ephesus and Michael the Syrian.)
 cd syriac && python3 create_syriac_database.py && cd ..
 
 # Pali (~2 minutes, auto-clones bilara-data from SuttaCentral)
@@ -535,7 +558,7 @@ Deploys:
 - `full_database_pack/src/main/assets/perseus_texts_full.db.zip` (Android Play Asset Delivery) plus `full.manifest.json` beside it (release identity and row counts, read by the app without extracting the zip)
 - `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip` (iOS on-demand)
 
-Expected: 138 authors (Greek + Latin, Italian, Old English, Sumerian, Akkadian), 1,021 works, 1,010,513 text_lines, ~0.97 GB zip, ~5 min. The run aborts if the extended DB or its `lexicon_ranges.json` is missing or older than any extended module DB, and if the filtered result differs from the extended DB in any table.
+Expected: 138 authors (Greek + Latin, Italian, Old English, Sumerian, Akkadian), 1,021 works, 1,010,513 text_lines, ~0.97 GB zip, ~25 min including the two Android delta parts (2026-10-10). The run aborts if the extended DB or its `lexicon_ranges.json` is missing or older than any extended module DB, and if the filtered result differs from the extended DB in any table.
 
 ### Extended release (iOS on-demand only — too large for Android)
 
@@ -549,7 +572,7 @@ cd data-prep && python3 assemble_database.py extended && cd ..
 Deploys:
 - `ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip` (iOS only)
 
-Expected: ~786 authors, ~2,734 works, ~3.16M text_lines, ~2.8 GB zip, ~45-55 min including Greek extended build.
+Expected: 791 authors, 2,743 works, 3,453,964 text_lines, ~2.74 GB zip, ~35 min for the assembly alone (2026-10-10), plus the Greek extended build.
 
 ### iOS curated base app (separate from extended)
 
@@ -683,8 +706,8 @@ modules; `extended` adds all language lexicons.
 | Mode     | authors | works | books  | text_lines | translation_segments | translation_lookup | dict_entries | lemma_map | DB size  | ZIP size |
 |----------|---------|-------|--------|------------|----------------------|--------------------|--------------|-----------|----------|----------|
 | sample   | 12      | 265   | 667    | ~223K      | ~126K                | ~377K              | ~96K         | ~853K     | ~641 MB  | ~158 MB  |
-| full     | 138     | 1,021 | 3,407  | ~1.01M     | ~1.26M               | ~1.73M             | ~233K        | ~3.14M    | ~4.00 GB | ~907 MB  |
-| extended | 786     | 2,734 | 172,795| ~3.17M     | ~3.32M               | ~3.91M             | ~660K        | ~12.81M   | ~13.3 GB | ~2.80 GB |
+| full     | 138     | 1,021 | 3,407  | ~1.01M     | ~1.25M               | ~1.73M             | ~342K        | ~5.52M    | ~4.81 GB | ~968 MB  |
+| extended | 791     | 2,743 | 178,361| ~3.45M     | ~3.61M               | ~4.31M             | ~769K        | ~15.19M   | ~14.4 GB | ~2.74 GB |
 | ios      | 11      | 41    | 358    | ~60K       | ~89K                 | ~113K              | ~96K         | ~853K     | ~371 MB  | ~87 MB   |
 
 Red flags:
@@ -764,7 +787,8 @@ cp audio/homer_iliad_chamberlain_audio.zip audio_pack/src/main/assets/
 
 # AAB lands here:
 ls -lh app/build/outputs/bundle/release/app-release.aab
-# Expected: ~2.07 GB (159 MB base + 907 MB full_database_pack + ~975 MB audio_pack + ~75 MB references_pack)
+# Expected: ~4.41 GB with all six packs (2026-10-11: base module + 968 MB full_database_pack + 1.02 GB audio_pack
+#           + 102 MB references_pack + 523 MB topical_pack + 1.14 GB db_extended_part1_pack + 634 MB db_extended_part2_pack)
 ```
 
 Verify the version bundled into the AAB matches what you expect before uploading to Play Console:
@@ -804,8 +828,8 @@ Or use the convenience script:
 | Mode | Release? | Corpus scale | DB Size | ZIP Size | Build Time (incl. OGA) | Deploys to |
 |------|----------|--------------|---------|----------|------------------------|------------|
 | **sample** | ✅ | 12 authors | ~630 MB | ~143 MB | ~5 min | `app/src/{debug,main}/assets/`, `perseus_database/src/main/assets/` |
-| **full** | ✅ | 138 authors (Greek+Latin, plus Italian, Old English, Sumerian, Akkadian); filtered from extended | ~4.8 GB | ~0.97 GB | ~5 min after extended | `full_database_pack/src/main/assets/` (+ `full.manifest.json`), `ios/ClassicsViewer/Resources/OnDemand/` |
-| **extended** | ✅ | 791 authors (all langs) | ~14.4 GB | ~2.75 GB | ~35 min | `ios/ClassicsViewer/Resources/OnDemand/`, the external download; Android delta parts to follow (`ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`) |
+| **full** | ✅ | 138 authors (Greek+Latin, plus Italian, Old English, Sumerian, Akkadian); filtered from extended | ~4.8 GB | ~0.97 GB | ~25 min after extended (cuts the two Android delta parts) | `full_database_pack/src/main/assets/` (+ `full.manifest.json`), `ios/ClassicsViewer/Resources/OnDemand/` |
+| **extended** | ✅ | 791 authors (all langs) | ~14.4 GB | ~2.74 GB | ~35 min | `ios/ClassicsViewer/Resources/OnDemand/`, the external download; on Android as the two delta parts `db_extended_part1_pack` + `db_extended_part2_pack` cut by the full assembly (`ANDROID_EXTENDED_LANGUAGE_PACKS_PROPOSAL.md`) |
 | ios (curated) | ✅ | 11 authors (IOS_SAMPLE_AUTHORS.csv) | ~360 MB | ~79 MB | ~3 min | `ios/ClassicsViewer/Resources/` (iOS base app) |
 
 All four are real release builds with distinct deployment destinations. `full` ships as Android's Play Asset Delivery "full pack" + iOS on-demand pack; `extended` ships to iOS on-demand and the external download, and its difference from full is planned to ship to Android as on-demand delta parts.
@@ -887,7 +911,7 @@ adb logcat | grep -E "classicsviewer|Perseus"
 | Wiktionary cache (download + extract) | ~12 min |
 | Greek interlinear (2,049 works, 8 workers) | ~7 hours |
 | Latin module full (`latin/run_build.sh full`, 230 works, includes interlinear) | ~2 min |
-| Sanskrit full (270 works, 8 workers) | ~10 hours |
+| Sanskrit full (272 works, 8 workers) | ~3 h 45 min |
 | Chinese (downloads from Wikisource) | ~75 seconds |
 | All other language modules combined | ~2 minutes |
 | Sample DB | ~8 min |

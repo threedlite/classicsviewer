@@ -1,6 +1,7 @@
 {
   "name": "classicsviewer-web",
   "version": "1.0.0",
+  "license": "(MIT OR Apache-2.0)",
   "description": "Web interface for viewing classical texts from Perseus Digital Library",
   "main": "server.js",
   "scripts": {

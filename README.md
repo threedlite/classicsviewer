@@ -1,49 +1,48 @@
 # Classics Viewer
 Note: If you have trouble loading the app after an update, save bookmarks, uninstall and reinstall.  Only updating the app will not update the data.  
 
-An Android and iOS app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required. The app holds no internet permission and can be used indefinitely in airplane mode.
+An Android and iOS app for reading ancient Greek and Latin texts offline. Browse works from Homer, Plato, Virgil, Cicero and many other classical authors - all stored locally on your phone with no internet required. Using the app requires no internet connection and it can be used indefinitely in airplane mode.
 
-The app is restricted to users 18 and older. On Android, age is confirmed through your Google Play account.
+The app is restricted to users 18 and older. On Apple and Android, age is confirmed through your account. App contains some AI-derived data, mistakes may be present.
 
 There is a download option within the menu to optionally retrieve the large full db from Google Play Store and Apple App Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
  
-Patreon links below added for production hosting purposes. All db files are free and can be also be generated locally using create_perseus_database.py script after data-sources repo links are cloned.
 
-Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. Download module from Apple store, or on Android, install external db perseus_texts_extended.db.zip from  https://www.patreon.com/posts/classics-viewer-141298606  (free) or build locally.
+Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. Download extended db module from within app on both app stores, or on Android, install external db perseus_texts_extended.db.zip from  https://www.patreon.com/posts/classics-viewer-141298606  (free) or build locally.  Patreon links are for production hosting purposes. All files there are free, and where my copyright, licensed CC-BY.
 
 
-  SAMPLE DATABASE (673MB, 162MB compressed):
+  SAMPLE DATABASE (632MB, 143MB compressed):
   - Greek: 10 authors, 259 works
   - Latin: 2 authors, 6 works
-  - Total: 12 authors, 265 works, 238K lines, 3.2M words
+  - Total: 12 authors, 265 works, 223K lines, 2.8M words
 
-  FULL DATABASE (4.2GB, 929MB compressed):
+  FULL DATABASE (4.8GB, 968MB compressed):
   - Akkadian: 1 author, 1 work
   - Greek: 91 authors, 772 works
   - Italian: 1 author, 3 works
-  - Latin: 40 authors, 230 works
+  - Latin: 43 authors, 233 works
   - Old English: 1 author, 1 work
   - Sumerian: 1 author, 11 works
-  - Total: 135 authors, 953 works, 1.0M lines, 15.4M words
+  - Total: 138 authors, 1,021 works, 1.0M lines, 14.7M words
 
-  EXTENDED DATABASE (13GB, 2.8GB compressed):
+  EXTENDED DATABASE (14.4GB, 2.74GB compressed):
   - Akkadian: 1 author, 1 work
   - Arabic: 1 author, 1 work
   - Chinese: 2 authors, 2 works
   - Coptic: 29 authors, 51 works
-  - Greek: 388 authors, 2,049 works
-  - Hebrew: 39 authors, 39 works
+  - Greek: 392 authors, 2,056 works
+  - Hebrew: 40 authors, 40 works
   - Italian: 1 author, 3 works
-  - Latin: 40 authors, 230 works
+  - Latin: 43 authors, 233 works
   - Norse: 1 author, 25 works
   - Old English: 1 author, 1 work
   - Pali: 1 author, 5 works
   - Persian: 1 author, 1 work
-  - Sanskrit: 270 authors, 270 works
+  - Sanskrit: 272 authors, 272 works
   - Sumerian: 1 author, 11 works
-  - Syriac: 4 authors, 39 works
-  - Total: 780 authors, 2,663 works, 3.1M lines, 49.7M words
+  - Syriac: 5 authors, 41 works
+  - Total: 791 authors, 2,743 works, 3.45M lines, 48.2M words
 
 
  
@@ -61,7 +60,7 @@ Extended db support with First1k data (https://github.com/OpenGreekAndLatin/Firs
 - Android Studio
 - Android device or emulator (Android 6.0+, minSdk 23)
 - Python 3 (for building the database)
-- ~2GB free disk space
+- ~50GB free disk space
 
 ### iOS
 
@@ -77,7 +76,9 @@ Extended db support with First1k data (https://github.com/OpenGreekAndLatin/Firs
 
 ## License
 
-This project uses texts from the Perseus Digital Library. See LicenseActivity.kt and individual text files for specific licensing information.
+The Classics Viewer code is dual-licensed under the MIT License or the Apache License, Version 2.0, at your option (`LICENSE.txt`, `LICENSE-MIT`, `LICENSE-APACHE`; SPDX `MIT OR Apache-2.0`).
+
+The texts, translations, dictionaries and other data the app displays are third-party works under their own licences (Perseus CC BY-SA, public domain, Project Gutenberg License and others). The full notice is in `THIRD_PARTY_LICENSES.txt` and on the licence screen of each app (`LicenseActivity.kt`).
 
 ## Other unaffiliated projects
 A more in-depth morphological system, which I have not incorporated but is likely to be more accurate, is here: https://bitbucket.org/ben-crowell/lemming/src/master/README.md

@@ -398,6 +398,12 @@ Dutt adds about 3.7 MB of English uncompressed. [verified]
 
 ---
 
+**Decided 2026-10-10.** The four kāṇḍas whose Dutt section counts differ
+from the vulgate's (Ayodhyā, Sundara, Yuddha, Uttara) are attached too:
+vulgate sarga v gets the Dutt section at the same proportional position,
+and every English segment in those kāṇḍas begins with a note saying the
+alignment is approximate and why. Implemented in `ramayana_dutt.py`.
+
 ## 9. Verification log (2026-09-15)
 
 Local: `sanskrit/sanskrit_texts.db` (counts, book identities by first line,

@@ -122,9 +122,8 @@ def process_work_sequential(db_path: str, work_info: Dict, output_dir: Path) -> 
         tei_file = output_dir / f"{work_id}.dcs-eng99.xml"
 
         with SanskritInterlinearGenerator(db_path) as gen:
-            gen.write_interlinear_file(work_id, interlinear_file)
-            gen.write_tei_file(work_id, tei_file)
-            print(f"  ✓ Created TEI XML: {tei_file.name}")
+            # One pass over the lines writes both files (see write_work_files)
+            gen.write_work_files(work_id, interlinear_file, tei_file)
 
             stats['lines'] = gen.stats['lines_processed']
             stats['words_total'] = gen.stats['words_total']
@@ -179,8 +178,8 @@ def process_work_parallel(args: Tuple[str, Dict, Path]) -> Dict:
         tei_file = output_dir / f"{work_id}.dcs-eng99.xml"
 
         with SanskritInterlinearGenerator(db_path) as gen:
-            gen.write_interlinear_file(work_id, interlinear_file)
-            gen.write_tei_file(work_id, tei_file)
+            # One pass over the lines writes both files (see write_work_files)
+            gen.write_work_files(work_id, interlinear_file, tei_file)
 
             stats['lines'] = gen.stats['lines_processed']
             stats['words_total'] = gen.stats['words_total']

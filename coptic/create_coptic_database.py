@@ -498,7 +498,14 @@ def make_safe_id(text):
     safe = re.sub(r'_+', '_', safe)
     # Remove leading/trailing underscores
     safe = safe.strip('_')
-    return safe or 'unknown'
+    # An empty or "unknown" name gets a language-specific id: the merge keys
+    # authors, works and books by id across every module, and the bare
+    # 'unknown' that both this script and the Syriac one produced for an
+    # unnamed author collided (nine Coptic works were listed under a Syriac
+    # author until 2026-10-12).
+    if safe in ('', 'unknown'):
+        return 'unknown_coptic'
+    return safe
 
 
 def populate_database(conn, tt_files):

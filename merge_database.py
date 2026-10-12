@@ -146,6 +146,22 @@ def merge_databases(source_db, target_db):
                     print(f"  ✓ Mapped IDs: {min(id_mappings[table].keys())}..{max(id_mappings[table].keys())} -> {min(id_mappings[table].values())}..{max(id_mappings[table].values())}")
 
             else:
+                # authors/works/books are keyed by text ids that every module
+                # chooses for itself. A duplicate id would be dropped by the
+                # INSERT OR IGNORE below and the second module's rows would
+                # silently attach to the first module's row (nine Coptic works
+                # sat under a Syriac 'unknown' author until 2026-10-12), so a
+                # collision fails the merge.
+                if table in ('authors', 'works', 'books') and 'id' in common_cols:
+                    target_ids = {r[0] for r in cur_tgt.execute(f"SELECT id FROM {table}")}
+                    clashes = sorted(r[0] for r in cur_src.execute(f"SELECT id FROM {table}")
+                                     if r[0] in target_ids)[:20]
+                    if clashes:
+                        raise RuntimeError(
+                            f"{table} id collision: {source_db} reuses ids already "
+                            f"in {target_db}: {clashes}. Module ids must be unique "
+                            f"across modules (prefix the language).")
+
                 # For non-AUTOINCREMENT tables, insert all columns
                 select_cols = ', '.join(common_cols)
                 placeholders = ', '.join(['?' for _ in common_cols])

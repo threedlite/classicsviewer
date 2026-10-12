@@ -7,12 +7,19 @@
 #   ./run_build.sh test     # Test build (BG + RV only)
 #   ./run_build.sh sample   # Sample build (BG + RV + selected works)
 #   ./run_build.sh full     # Full build (all 268 works)
+#   ./run_build.sh full WORKS.csv name
+#                           # Only the works in WORKS.csv, written to
+#                           # sanskrit_texts_<name>.db (+ interlinear_output_<name>/,
+#                           # build_sanskrit_<name>.log); the main DB is untouched
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-# Get build mode from argument, default to full
+# Get build mode from argument, default to full; optional works CSV and output name
 BUILD_MODE="${1:-full}"
+WORKS_CSV="${2:-}"
+OUTPUT_NAME="${3:-}"
+LOG_FILE="build_sanskrit${OUTPUT_NAME:+_$OUTPUT_NAME}.log"
 
 # Locate project venv (sanskrit/ → project root)
 PROJECT_VENV_PY="$(cd "$SCRIPT_DIR/.." && pwd)/venv/bin/python3"
@@ -32,12 +39,12 @@ fi
 # Run the build
 echo "Starting Sanskrit database build (${BUILD_MODE} mode)..."
 echo "Using Python: $($PROJECT_VENV_PY --version)"
-echo "Log file: build_sanskrit.log"
+echo "Log file: $LOG_FILE"
 echo ""
 
-nohup "$PROJECT_VENV_PY" create_sanskrit_database_interlinear.py "$BUILD_MODE" > build_sanskrit.log 2>&1 &
+nohup "$PROJECT_VENV_PY" create_sanskrit_database_interlinear.py "$BUILD_MODE" ${WORKS_CSV:+"$WORKS_CSV"} ${OUTPUT_NAME:+"$OUTPUT_NAME"} > "$LOG_FILE" 2>&1 &
 BUILD_PID=$!
 echo "Build started with PID: $BUILD_PID"
 echo ""
-echo "Monitor progress with: tail -f build_sanskrit.log"
+echo "Monitor progress with: tail -f $LOG_FILE"
 echo "Check if running: ps -p $BUILD_PID"

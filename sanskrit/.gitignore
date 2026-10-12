@@ -33,3 +33,18 @@ bhagavad_gita/
 build.log
 interlinear.log
 extended_build*.log
+
+# Ganguli Mahabharata translation, fetched by data-sources/download_ganguli.sh (the build runs it when missing)
+data-sources/ganguli/*.txt
+
+# Mueller Chandogya translation, fetched by data-sources/download_chandogya_mueller.sh (the build runs it when missing)
+data-sources/mueller/
+
+# Griffith Rig Veda translation, fetched by data-sources/download_rigveda_griffith.py (the build runs it when missing)
+data-sources/wikisource/
+
+# Registry translations (data-sources/translation_sources.py): fetched pages and parsed files, rebuilt on demand
+data-sources/generated/
+
+# Interlinear generation output (one directory per build name)
+interlinear_output*/

@@ -2,7 +2,8 @@
 """
 Sanskrit Interlinear and TEI XML Generation
 
-Generates word-by-word interlinear translations for Sanskrit texts in two formats:
+Generates word-by-word interlinear translations for Sanskrit texts in two formats,
+written together in a single pass over each line (write_work_files):
 1. Plain text format (.interlinear.txt) - matching Greek interlinear format
 2. TEI XML format (.dcs-eng99.xml) - matching Greek TEI XML format
 
@@ -28,6 +29,7 @@ contain multiple sentences (e.g., "Verse1.Sentence1", "Verse1.Sentence2"), and t
 UI uses this to group words correctly when building dependency trees.
 """
 
+import os
 import sqlite3
 import time
 import re
@@ -994,13 +996,23 @@ class SanskritInterlinearGenerator:
 
         return gloss
 
+    def _gloss_words(self, words: List[WordData]) -> List[str]:
+        """Look up the gloss of every word in a line exactly once.
+
+        Both output formats (.interlinear.txt and .dcs-eng99.xml) are built from
+        this one list, so the dictionary statistics count each word once.
+        """
+        return [self.lookup_word_gloss(word_data) for word_data in words]
+
+    @staticmethod
+    def _format_line_text(words: List[WordData], glosses: List[str]) -> Tuple[str, str]:
+        """Plain-text pair for one line: ("word1 | word2", "gloss1 | gloss2")."""
+        return (" | ".join(w.word for w in words), " | ".join(glosses))
+
     def generate_line_interlinear(self, book_id: str, line_number: int) -> Tuple[str, str]:
         """
-        Generate interlinear for a single line.
-
-        Args:
-            book_id: Work identifier
-            line_number: Line number
+        Generate the plain-text interlinear for a single line (debugging helper;
+        the build uses write_work_files, which does this and the XML in one pass).
 
         Returns:
             Tuple of (words_line, glosses_line) in Greek format:
@@ -1008,140 +1020,31 @@ class SanskritInterlinearGenerator:
             - glosses_line: "gloss1 | gloss2 | gloss3"
         """
         words = self.get_line_words(book_id, line_number)
-
         if not words:
             return ("", "")
-
-        word_parts = []
-        gloss_parts = []
-        for word_data in words:
-            gloss = self.lookup_word_gloss(word_data)  # words_total tracked inside
-            word_parts.append(word_data.word)
-            gloss_parts.append(gloss)
-
         self.stats['lines_processed'] += 1
-        words_line = " | ".join(word_parts)
-        glosses_line = " | ".join(gloss_parts)
-        return (words_line, glosses_line)
+        return self._format_line_text(words, self._gloss_words(words))
 
-    def generate_work_interlinear(self, work_id: str) -> Dict[str, Dict[int, Tuple[str, str]]]:
-        """
-        Generate interlinear for all books in a work.
-
-        Args:
-            work_id: Work identifier
-
-        Returns:
-            Dictionary mapping book_id -> {line_number -> (words_line, glosses_line)}
-        """
+    def _get_line_numbers(self, book_id: str) -> List[int]:
+        """All line numbers of a book, ascending."""
         cursor = self.conn.cursor()
-
-        # Get all books for this work
-        cursor.execute("""
-            SELECT id FROM books WHERE work_id = ? ORDER BY id
-        """, (work_id,))
-
-        books = [row['id'] for row in cursor.fetchall()]
-
-        if not books:
-            raise ValueError(f"No books found for work: {work_id}")
-
-        # Generate interlinear for each book
-        result = {}
-        for book_id in books:
-            result[book_id] = self._generate_book_interlinear(book_id)
-
-        return result
-
-    def _generate_book_interlinear(self, book_id: str) -> Dict[int, Tuple[str, str]]:
-        """Generate interlinear for a single book.
-
-        Returns:
-            Dictionary mapping line_number -> (words_line, glosses_line)
-        """
-        cursor = self.conn.cursor()
-
-        # Get all line numbers for this book
         cursor.execute("""
             SELECT DISTINCT line_number
             FROM text_lines
             WHERE book_id = ?
             ORDER BY line_number
         """, (book_id,))
-
-        line_numbers = [row['line_number'] for row in cursor.fetchall()]
-
-        # Generate interlinear for each line
-        interlinear_map = {}
-        for line_num in line_numbers:
-            words_line, glosses_line = self.generate_line_interlinear(book_id, line_num)
-            if words_line:  # Only add if non-empty
-                interlinear_map[line_num] = (words_line, glosses_line)
-
-        return interlinear_map
-
-    def write_interlinear_file(self, work_id: str, output_path: Path):
-        """
-        Generate interlinear for all books in a work and write to plain text file.
-
-        Format matches Greek interlinear EXACTLY:
-        ================================================================================
-        BOOK 1
-        ================================================================================
-
-        1. word1 | word2 | word3
-        gloss1 | gloss2 | gloss3
-
-        2. word1 | word2 | word3
-        gloss2 | gloss2 | gloss3
-
-        NO English interpretive translations - only word-by-word glosses
-
-        Args:
-            work_id: Work identifier
-            output_path: Path to output file
-        """
-        work_info = self.get_work_info(work_id)
-
-        print(f"\nGenerating interlinear for: {work_info['title_english']}")
-        print(f"  Work ID: {work_id}")
-
-        start_time = time.time()
-        books_interlinear = self.generate_work_interlinear(work_id)
-        elapsed = time.time() - start_time
-
-        # Write to file in Greek-style format
-        total_lines = 0
-        with open(output_path, 'w', encoding='utf-8') as f:
-            for book_idx, book_id in enumerate(sorted(books_interlinear.keys())):
-                # Extract book number from book_id (e.g., "aitareyopanishad.1" -> "1")
-                book_num = book_id.split('.')[-1]
-
-                # Book header (skip initial newline for first book)
-                if book_idx > 0:
-                    f.write("\n")
-                f.write("=" * 80 + "\n")
-                f.write(f"BOOK {book_num}\n")
-                f.write("=" * 80 + "\n\n")
-
-                interlinear_map = books_interlinear[book_id]
-                for line_num in sorted(interlinear_map.keys()):
-                    words_line, glosses_line = interlinear_map[line_num]
-
-                    # Line 1: Line number + Sanskrit words separated by " | "
-                    f.write(f"{line_num}. {words_line}\n")
-
-                    # Line 2: Glosses separated by " | "
-                    f.write(f"{glosses_line}\n")
-
-                    # Blank line between entries (NO translation text)
-                    f.write("\n")
-                    total_lines += 1
-
-        print(f"  ✓ Generated {total_lines:,} lines in {elapsed:.2f}s")
-        print(f"    Output: {output_path}")
+        return [row['line_number'] for row in cursor.fetchall()]
 
     def generate_line_xml(self, book_id: str, line_number: int) -> str:
+        """XML for a single line (debugging helper; the build uses write_work_files)."""
+        words = self.get_line_words(book_id, line_number)
+        if not words:
+            return ""
+        return self._format_line_xml(words, self._gloss_words(words), line_number)
+
+    @staticmethod
+    def _format_line_xml(words: List[WordData], glosses: List[str], line_number: int) -> str:
         """
         Generate XML for a complete line in Greek format:
         <l n="1">| word1 |
@@ -1155,23 +1058,18 @@ class SanskritInterlinearGenerator:
         For works without treebank, just: | lemma |
 
         Args:
-            book_id: Book identifier
+            words: The line's words (from get_line_words), non-empty
+            glosses: One gloss per word (from _gloss_words)
             line_number: Line number
 
         Returns:
             Complete XML string for the line
         """
-        words = self.get_line_words(book_id, line_number)
-
-        if not words:
-            return ""
-
         # Build content parts (without tags)
         xml_parts = []
 
-        for i, word_data in enumerate(words):
-            # Lookup gloss and sanitize all text for XML
-            gloss = self.lookup_word_gloss(word_data)
+        for i, (word_data, gloss) in enumerate(zip(words, glosses)):
+            # Sanitize all text for XML
             word_clean = sanitize_xml_text(word_data.word)
             gloss_clean = sanitize_xml_text(gloss)
             lemma_clean = sanitize_xml_text(word_data.lemma) if word_data.lemma else "?"
@@ -1220,52 +1118,12 @@ class SanskritInterlinearGenerator:
 
         return "\n".join(xml_parts)
 
-    def generate_book_xml(self, book_id: str) -> str:
-        """Generate XML for all lines in a book."""
-        cursor = self.conn.cursor()
-        cursor.execute("""
-            SELECT DISTINCT line_number
-            FROM text_lines
-            WHERE book_id = ?
-            ORDER BY line_number
-        """, (book_id,))
-
-        line_numbers = [row['line_number'] for row in cursor.fetchall()]
-
-        # Extract book number from book_id
-        book_num = book_id.split('.')[-1]
-
-        xml_parts = []
-        xml_parts.append(f'                <div type="textpart" subtype="Book" n="{book_num}">')
-
-        for line_num in line_numbers:
-            line_xml = self.generate_line_xml(book_id, line_num)
-            if line_xml:
-                # Add line XML without indentation (matches Greek format)
-                xml_parts.append(f"                    {line_xml}")
-
-        xml_parts.append("                </div>")
-
-        return "\n".join(xml_parts)
-
-    def write_tei_file(self, work_id: str, output_path: Path):
+    @staticmethod
+    def _tei_header_lines(work_id: str, title: str, author: str) -> List[str]:
         """
-        Generate TEI XML file for a work.
-
-        Creates word-by-word interlinear XML in the exact format as Greek interlinear.
-        Format matches tlg0093.tlg001_OGL.perseus-eng99.xml structure.
-
-        Args:
-            work_id: Work identifier
-            output_path: Path to output TEI XML file
+        TEI header of the .dcs-eng99.xml file, up to and including the opening
+        <div type="translation"> tag. Matches tlg0093.tlg001_OGL.perseus-eng99.xml.
         """
-        work_info = self.get_work_info(work_id)
-        books = self.get_books_for_work(work_id)
-
-        # Sanitize work metadata for XML
-        title = sanitize_xml_text(work_info["title_english"] or work_info["title"])
-        author = sanitize_xml_text(work_info["author"])
-
         xml_lines = []
 
         # XML declaration and TEI header
@@ -1338,21 +1196,126 @@ class SanskritInterlinearGenerator:
         xml_lines.append('    <text xml:lang="eng">')
         xml_lines.append('        <body>')
         xml_lines.append(f'            <div type="translation" n="urn:cts:sanskritLit:{work_id}.dcs-eng" xml:lang="eng">')
+        return xml_lines
 
-        # Add books
-        for book_id in books:
-            book_xml = self.generate_book_xml(book_id)
-            xml_lines.append(book_xml)
+    _TEI_FOOTER_LINES = [
+        '            </div>',
+        '        </body>',
+        '    </text>',
+        '</TEI>',
+    ]
 
-        # Close tags
-        xml_lines.append('            </div>')
-        xml_lines.append('        </body>')
-        xml_lines.append('    </text>')
-        xml_lines.append('</TEI>')
+    def write_work_files(self, work_id: str, txt_path: Path, xml_path: Path):
+        """
+        Write the plain-text interlinear and the TEI XML for a work in ONE pass.
 
-        # Write to file
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(xml_lines))
+        Every line is fetched (get_line_words, which may run Stanza) and glossed
+        once; the result is written to both files, as the Greek generator does.
+        The two outputs are byte-identical to the former two-pass writers.
+
+        Both files are written to ".tmp" siblings and renamed into place only
+        after both are complete and closed (os.replace is atomic on POSIX). A
+        worker killed mid-write (SIGKILL, OOM, Ctrl+C) therefore never leaves a
+        truncated .dcs-eng99.xml for import_sanskrit_interlinear.py to glob; a
+        valid file from an earlier run stays untouched. On any exception the
+        .tmp files are removed and the exception is re-raised, so the batch
+        driver records the work as failed.
+
+        Plain text (matches the Greek interlinear format exactly):
+            ================================================================================
+            BOOK 1
+            ================================================================================
+
+            1. word1 | word2 | word3
+            gloss1 | gloss2 | gloss3
+
+        TEI XML: <l n="N"> elements inside one <div subtype="Book"> per book.
+
+        Args:
+            work_id: Work identifier
+            txt_path: Output .interlinear.txt path
+            xml_path: Output .dcs-eng99.xml path
+        """
+        work_info = self.get_work_info(work_id)
+        books = self.get_books_for_work(work_id)
+        if not books:
+            raise ValueError(f"No books found for work: {work_id}")
+
+        print(f"\nGenerating interlinear for: {work_info['title_english']}")
+        print(f"  Work ID: {work_id}")
+        start_time = time.time()
+
+        title = sanitize_xml_text(work_info["title_english"] or work_info["title"])
+        author = sanitize_xml_text(work_info["author"])
+
+        # Write to .tmp siblings; rename into place only on full success.
+        txt_tmp = txt_path.with_suffix(txt_path.suffix + ".tmp")
+        xml_tmp = xml_path.with_suffix(xml_path.suffix + ".tmp")
+        # Clean up any .tmp left behind by a prior interrupted run before we
+        # start a new attempt, so we never mix partial state.
+        for stale in (txt_tmp, xml_tmp):
+            if stale.exists():
+                stale.unlink()
+
+        total_lines = 0
+        try:
+            with open(txt_tmp, 'w', encoding='utf-8') as txt_file, \
+                 open(xml_tmp, 'w', encoding='utf-8') as xml_file:
+
+                # XML: lines are '\n'-joined with no trailing newline, so every
+                # element after the header is written with a leading newline.
+                xml_file.write('\n'.join(self._tei_header_lines(work_id, title, author)))
+
+                for book_idx, book_id in enumerate(books):
+                    # Extract book number from book_id (e.g., "aitareyopanishad.1" -> "1")
+                    book_num = book_id.split('.')[-1]
+
+                    # Text: book header (skip initial newline for first book)
+                    if book_idx > 0:
+                        txt_file.write("\n")
+                    txt_file.write("=" * 80 + "\n")
+                    txt_file.write(f"BOOK {book_num}\n")
+                    txt_file.write("=" * 80 + "\n\n")
+
+                    xml_file.write(f'\n                <div type="textpart" subtype="Book" n="{book_num}">')
+
+                    for line_num in self._get_line_numbers(book_id):
+                        words = self.get_line_words(book_id, line_num)
+                        if not words:
+                            continue
+                        glosses = self._gloss_words(words)
+                        self.stats['lines_processed'] += 1
+                        total_lines += 1
+
+                        words_line, glosses_line = self._format_line_text(words, glosses)
+                        txt_file.write(f"{line_num}. {words_line}\n")
+                        txt_file.write(f"{glosses_line}\n")
+                        txt_file.write("\n")
+
+                        line_xml = self._format_line_xml(words, glosses, line_num)
+                        xml_file.write(f"\n                    {line_xml}")
+
+                    xml_file.write("\n                </div>")
+
+                for footer_line in self._TEI_FOOTER_LINES:
+                    xml_file.write("\n" + footer_line)
+
+            # Both files are closed and flushed: rename atomically into place.
+            # The final files either appear fully formed or not at all.
+            os.replace(txt_tmp, txt_path)
+            os.replace(xml_tmp, xml_path)
+        except BaseException:
+            # Remove partial .tmp files. Leave the final files untouched: a
+            # valid output from an earlier run is better than none.
+            for stale in (txt_tmp, xml_tmp):
+                if stale.exists():
+                    stale.unlink()
+            raise
+
+        elapsed = time.time() - start_time
+        print(f"  ✓ Generated {total_lines:,} lines in {elapsed:.2f}s")
+        print(f"    Output: {txt_path}")
+        print(f"    Output: {xml_path}")
 
     def print_statistics(self):
         """Print generation statistics."""
@@ -1409,13 +1372,8 @@ def test_single_work(db_path: str, work_id: str, output_dir: Path):
     xml_file = output_dir / f"{work_id}.dcs-eng99.xml"
 
     with SanskritInterlinearGenerator(db_path) as generator:
-        # Generate text format
-        generator.write_interlinear_file(work_id, txt_file)
-
-        # Generate XML format
-        print(f"\nGenerating TEI XML for: {work_id}")
-        generator.write_tei_file(work_id, xml_file)
-        print(f"  ✓ Created: {xml_file}")
+        # One pass writes both the text and the XML format
+        generator.write_work_files(work_id, txt_file, xml_file)
 
         # Print statistics
         generator.print_statistics()

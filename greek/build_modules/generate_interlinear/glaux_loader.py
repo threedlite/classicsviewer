@@ -122,7 +122,7 @@ class GlauxLoader:
             return
 
         self._xml_dir = xml_dir
-        self._work_to_files = self._parse_metadata(metadata_file)
+        self._work_to_files, self.excluded_works = self._parse_metadata(metadata_file)
 
         # Verify which XML files actually exist
         valid_works = {}
@@ -132,21 +132,58 @@ class GlauxLoader:
                 valid_works[work_id] = existing
         self._work_to_files = valid_works
 
+        by_reason = {}
+        for reason in self.excluded_works.values():
+            by_reason[reason] = by_reason.get(reason, 0) + 1
         print(f"  GLAUx metadata loaded: {len(self._work_to_files)} works available (on-demand loading)")
+        print(f"  GLAUx works excluded for licence: {len(self.excluded_works)}")
+        for reason, n in sorted(by_reason.items()):
+            print(f"    {n:4d}  {reason}")
 
-    def _parse_metadata(self, metadata_file: Path) -> Dict[str, List[str]]:
-        """Parse metadata.txt to build TLG work_id -> XML filename mapping."""
+    # Licence rule (see BUILD.md, "GLAUx licence filter"). GLAUx records, per
+    # text, the licence of the source text it annotated. A GLAUx text is used
+    # only when that licence is a Creative Commons Attribution licence without
+    # a NoDerivatives clause: CC BY, CC BY-SA, CC BY-NC or CC BY-NC-SA (any
+    # version), or when GLAUx's SOURCE column states that the source edition
+    # is public domain (its "Loeb (public domain)" rows carry no licence).
+    # "NA" (no licence recorded, source not stated as public domain), GPL,
+    # OpenEdition and every ND licence are excluded. NonCommercial material is
+    # kept on purpose: this
+    # project is not commercial; a downstream commercial use would have to
+    # filter NC material (and the PROIEL / Gorman annotations, which are
+    # CC BY-NC-SA) itself. The annotation source is not a filter criterion.
+    # A work with more than one row is excluded if any row fails. Works the
+    # Perseus treebank covers are not treated specially: an excluded work is
+    # excluded for gap-filling too.
+    ALLOWED_SOURCE_LICENSE = re.compile(r'^CC[- ]BY(?:[- ]NC)?(?:[- ]SA)?[ -]\d')
+    PUBLIC_DOMAIN_SOURCE = re.compile(r'public domain', re.IGNORECASE)
+
+    def _parse_metadata(self, metadata_file: Path):
+        """Parse metadata.txt: TLG work_id -> XML filenames for works that pass
+        the licence rule, plus {work_id: reason} for the excluded ones.
+        Raises if the licence columns are missing: the filter must not be
+        skipped silently."""
         tlg_to_files: Dict[str, List[str]] = {}
+        excluded: Dict[str, str] = {}
 
         with open(metadata_file, 'r', encoding='utf-8') as f:
-            header = f.readline()
+            header = f.readline().rstrip('\n').split('\t')
+            try:
+                col_license = header.index('SOURCE_LICENSE')
+                col_annot = header.index('TREEBANK_ANNOTATIONS')
+                col_source = header.index('SOURCE')
+            except ValueError:
+                raise RuntimeError(
+                    f"GLAUx metadata {metadata_file} lacks the SOURCE / SOURCE_LICENSE / "
+                    f"TREEBANK_ANNOTATIONS columns needed for the licence filter; "
+                    f"header: {header}")
             for line in f:
-                line = line.strip()
-                if not line:
+                line = line.rstrip('\n')
+                if not line.strip():
                     continue
 
                 fields = line.split('\t')
-                if len(fields) < 2:
+                if len(fields) <= max(col_license, col_annot, col_source):
                     continue
 
                 glaux_text_id = fields[0].strip()
@@ -162,12 +199,25 @@ class GlauxLoader:
                 work_id = f"tlg{tlg_match.group(1)}.tlg{tlg_match.group(2)}"
                 xml_filename = f"{tlg_raw}.xml"
 
+                source_license = fields[col_license].strip()
+                source = fields[col_source].strip()
+                if (not self.ALLOWED_SOURCE_LICENSE.match(source_license)
+                        and not self.PUBLIC_DOMAIN_SOURCE.search(source)):
+                    excluded[work_id] = (f"source text licence '{source_license}' is not "
+                                         f"CC BY / BY-SA / BY-NC / BY-NC-SA and the source "
+                                         f"is not stated as public domain")
+                    continue
+
                 if work_id not in tlg_to_files:
                     tlg_to_files[work_id] = []
                 if xml_filename not in tlg_to_files[work_id]:
                     tlg_to_files[work_id].append(xml_filename)
 
-        return tlg_to_files
+        # A work excluded on any row is excluded entirely
+        for work_id in excluded:
+            tlg_to_files.pop(work_id, None)
+
+        return tlg_to_files, excluded
 
     def _ensure_loaded(self, work_id: str):
         """Load a work's XML on demand if not already loaded."""

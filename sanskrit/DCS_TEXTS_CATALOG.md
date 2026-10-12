@@ -44,9 +44,14 @@ This catalog lists all 268 texts by priority, but **clearly marks which have DCS
 - **Significance**: India's longest epic, includes Bhagavad Gita
 - **Content**: Philosophy, ethics, mythology, history
 - **Educational Value**: ⭐⭐⭐⭐⭐
-- **DCS Translation**: ⚠️ **NO** - Would need external translation (Kisari Mohan Ganguli)
+- **DCS Translation**: ⚠️ **NO** - Kisari Mohan Ganguli's translation is
+  attached by the build instead (2026-10-09): Project Gutenberg text,
+  chapter-level alignment through the Brodbeck & Black concordance; see
+  `mahabharata_ganguli.py`, `data-sources/SOURCES.md`,
+  `MAHABHARATA_GANGULI_PROPOSAL.md`
 - **Implementation Complexity**: High (requires external translation integration)
-- **Recommendation**: **HIGH** - Essential classical text (but needs external work)
+- **Recommendation**: **HIGH** - Essential classical text
+- **Status**: ✅ Implemented (verse-level lines, Ganguli translation per chapter)
 
 ### ⚠️ Rāmāyaṇa
 - **Files**: 606 CoNLL-U files

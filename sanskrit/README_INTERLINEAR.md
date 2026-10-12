@@ -29,7 +29,8 @@ The build pipeline:
 
 ## Files Generated
 
-For each work, two files are created in `interlinear_output/`:
+For each work, two files are created in `interlinear_output/` in a single pass
+(written as `.tmp` files and renamed into place on completion):
 - `*.interlinear.txt` - Plain text word-by-word glosses
 - `*.dcs-eng99.xml` - TEI XML with morph data
 

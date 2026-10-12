@@ -301,7 +301,7 @@ fun getNewTableHelper(context: Context): NewTableHelper {
 
 ### Goal: Fast-Follow Delivery
 - **Production Goal**: Use fast-follow delivery type (downloads after app install)
-- **Database Size**: Sample: 671MB/163MB, Full: 3.7GB/838MB, Extended: 13GB/2.7GB (uncompressed/compressed)
+- **Database Size**: Sample: 632MB/143MB, Full: 4.8GB/968MB, Extended: 14.4GB/2.74GB (uncompressed/compressed)
 - **Current Status**: Using install-time delivery for easier local testing
 
 ### CRITICAL: Database Size Limits and Multi-Part Strategy
@@ -355,20 +355,20 @@ cp perseus_database/src/main/assets/perseus_texts.db.zip app/src/debug/assets/
 1. **`data-prep/perseus_texts_sample.db`** - Sample database source
    - Created by `create_perseus_database.py sample`
    - Contains only authors from SAMPLE_AUTHORS.csv
-   - 12 authors, 265 works, 667 books, 238K lines, 3.2M words, 126K translation segments
-   - Original uncompressed SQLite (673MB), compressed ZIP (162MB)
+   - 12 authors, 265 works, 667 books, 223K lines, 2.8M words, 126K translation segments
+   - Original uncompressed SQLite (632MB), compressed ZIP (143MB)
    - Smaller size for initial Play Store release
 
 2. **`data-prep/perseus_texts_full.db`** - Full database source
    - Created by `create_perseus_database.py full`
-   - 135 authors (Greek and Latin), 953 works, 3,514 books, 1.0M lines, 15.4M words, 1.3M translation segments
-   - Original uncompressed SQLite (4.2GB), compressed ZIP (929MB)
+   - 138 authors (Greek and Latin, plus Italian, Old English, Sumerian, Akkadian), 1,021 works, 3,407 books, 1.0M lines, 14.7M words, 1.25M translation segments
+   - Original uncompressed SQLite (4.8GB), compressed ZIP (968MB)
    - For local debugging and future release
 
 3. **`data-prep/perseus_texts_extended.db`** - Extended database source
    - Created by `create_perseus_database.py extended`
-   - 780 authors (Perseus + First1KGreek + other languages), 2,663 works, 173K books, 3.1M lines, 49.7M words, 3.3M translation segments
-   - Original uncompressed SQLite (13GB), compressed ZIP (2.8GB)
+   - 791 authors (Perseus + First1KGreek + other languages), 2,743 works, 178K books, 3.45M lines, 48.2M words, 3.6M translation segments
+   - Original uncompressed SQLite (14.4GB), compressed ZIP (2.74GB)
    - For comprehensive Greek text coverage
 
 4. **`/data/data/.../databases/perseus_texts.db`** - Final extracted database
@@ -439,7 +439,7 @@ partial.
 - **Latin (230 works, 228 XML files)**: ~51 minutes (the former "~17 seconds"
   was measured when the driver used bare `python3` and Stanza never loaded;
   a sub-minute run means the POS layer is silently doing nothing)
-- **Sanskrit (270 works, 203K lines, 13.4M words)**: ~90 seconds
+- **Sanskrit (272 works, 495K lines, 5.9M words)**: ~2 hours (7,297 s on 2026-10-10; runs inside `sanskrit/run_build.sh`, never separately)
 
 Output locations:
 - Greek/Latin: `/Users/user1/git/classicsviewer/data-sources/classicsviewer_interlinear`
@@ -501,6 +501,8 @@ sqlite3 sanskrit_texts.db "SELECT word FROM words LIMIT 5;"
 
 **NEVER run these steps manually** - if the build output is wrong, fix the build scripts and re-run `./run_build.sh` from scratch.
 
+**Stanza models**: only the main process calls `stanza.download('sa')`, once, before any worker pool starts. Workers load with `stanza.Pipeline('sa', ..., download_method=None)` and never download, because `stanza.download` rewrites the model files and a concurrent reader then fails with `Cannot load model from ...`. A failed model load raises and stops the build; never catch it and return an empty parse. Details: `sanskrit/BUILD_INSTRUCTIONS.md`, "Stanza models".
+
 ### CSV-Driven Build Modes
 
 The Sanskrit build uses CSV files to control which works are included (like Greek uses SAMPLE_AUTHORS.csv):
@@ -509,7 +511,7 @@ The Sanskrit build uses CSV files to control which works are included (like Gree
 |------|----------|----------|------------|
 | `test` | SANSKRIT_TEST.csv | BG + RV only | ~5 min |
 | `sample` | SANSKRIT_SAMPLE.csv | BG + RV + selected DCS | ~20 min |
-| `full` | SANSKRIT_FULL.csv | BG + RV + all 268 DCS works | ~3 hours |
+| `full` | SANSKRIT_FULL.csv | BG + RV + all 270 DCS works | ~3 h 45 min |
 
 CSV format:
 ```csv
@@ -527,7 +529,7 @@ cd sanskrit
 ./run_build.sh           # Default: full mode
 ./run_build.sh test      # Quick test build
 ./run_build.sh sample    # Medium build
-./run_build.sh full      # Full 268 works
+./run_build.sh full      # Full: BG + RV + all 270 DCS works
 
 # Alternative: Use venv python directly
 nohup ./venv/bin/python3 create_sanskrit_database_interlinear.py full > build_sanskrit.log 2>&1 &
@@ -547,12 +549,12 @@ adb push sanskrit_texts.db.zip /sdcard/Download/
 - **Content**: 11K verses, 171K words
 - **Database size**: ~200MB compressed
 
-**Full mode** (all 268 DCS works):
-- **Build time**: ~3 hours (includes DCS treebank processing + Stanza NLP)
-- **Works**: 270 (Bhagavad Gita, Rig Veda, all DCS corpus)
-- **Content**: 203K verses, 13.4M words
-- **Interlinear**: 203K segments with morph data (case/number/gender, POS, dependencies)
-- **Database size**: 2.7GB uncompressed, 554MB compressed
+**Full mode** (all 270 DCS works):
+- **Build time**: ~3 h 45 min (DCS loading ~96 min, interlinear ~2 h, import + ZIP ~2 min; measured 2026-10-10)
+- **Works**: 272 (Bhagavad Gita, Rig Veda, all DCS corpus), 2,227 books
+- **Content**: 494,931 verse lines (one line per DCS verse), 5.86M words
+- **Interlinear**: 494,931 segments with morph data (208,185 from the DCS treebank, 286,746 from Stanza); plus 14,882 human-translation segments in 17 works
+- **Database size**: 2.35GB uncompressed, 486MB compressed
 - **Lexicon**: 180K dictionary entries, 4.7M morphology forms
 
 ### Sanskrit Interlinear Format
@@ -850,14 +852,14 @@ cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1
 5. **Test immediately after deployment** - schema mismatches crash on startup
 6. **TIMEOUT = CORRUPTION**: If any script times out during compression, the ZIP file is corrupted
 7. **Always verify ZIP integrity**: Use `unzip -t` before deployment
-8. **Database size check**: Extracted database should match expected size (sample: ~673MB, full: ~4.2GB, extended: ~13GB), not 4KB
+8. **Database size check**: Extracted database should match expected size (sample: ~632MB, full: ~4.8GB, extended: ~14.4GB), not 4KB
 9. **Never, ever, EVER, add word-specific fixes!!!!!!!!**: Always use the most general solution possible that covers all cases.
 10. Don't create ad-hoc scripts for data fixes as one-offs.  Integrate into the main db creation flow so it happens in future runs also.
 
 ### Database Build Process
-- **Sample database creation**: ~5 minutes, 673MB uncompressed, 162MB ZIP (12 authors, 265 works, 667 books, 238K lines, 3.2M words)
-- **Full database creation**: ~7 minutes, 4.2GB uncompressed, 929MB ZIP (135 authors, 953 works, 3,514 books, 1.0M lines, 15.4M words)
-- **Extended database creation**: ~35 minutes, 13GB uncompressed, 2.8GB ZIP (780 authors, 2,663 works, 173K books, 3.1M lines, 49.7M words)
+- **Sample database creation**: ~5 minutes, 632MB uncompressed, 143MB ZIP (12 authors, 265 works, 667 books, 223K lines, 2.8M words)
+- **Full database creation**: ~25 minutes (filtered from extended, including the two Android delta parts), 4.8GB uncompressed, 968MB ZIP (138 authors, 1,021 works, 3,407 books, 1.0M lines, 14.7M words)
+- **Extended database creation**: ~35 minutes, 14.4GB uncompressed, 2.74GB ZIP (791 authors, 2,743 works, 178K books, 3.45M lines, 48.2M words)
 - **iOS database creation**: ~3 minutes, 347MB uncompressed, 82MB ZIP (11 authors, 358 books, 60K lines, 769K words)
   - Command: `cd data-prep && python3 create_perseus_database.py sample IOS_SAMPLE_AUTHORS.csv ios`
 - Creates comprehensive translation lookup table for all texts
@@ -865,10 +867,10 @@ cd data-prep && nohup python3 create_perseus_database.py sample > build.log 2>&1
 
 ### Extended Mode Details
 The extended mode includes Perseus + First1KGreek + additional languages:
-- **778 total authors** (vs 135 in full mode)
-- **172,544 total books**
-- **3.1 million text lines**, **48.7 million words**
-- **Database size**: 13GB uncompressed, 2.7GB compressed ZIP
+- **791 total authors** (vs 138 in full mode)
+- **178,361 total books**
+- **3.45 million text lines**, **48.2 million words**
+- **Database size**: 14.4GB uncompressed, 2.74GB compressed ZIP
 - Includes Arabic, Hebrew, Persian, Sanskrit texts
 - Works include: Byzantine texts, patristic writings, commentaries, scholiasts
 - **Source tracking**: Database quality report shows `[Perseus]` or `[First1KGreek]` at work level
@@ -904,8 +906,8 @@ The extended mode includes Perseus + First1KGreek + additional languages:
 
 **Before launching the app, verify:**
 1. `unzip -t perseus_database/src/main/assets/perseus_texts.db.zip` returns "OK"
-2. ZIP file size matches expected (sample: ~162MB, full: ~929MB, extended: ~2.8GB)
-3. Source database exists with expected size (sample: ~673MB, full: ~4.2GB, extended: ~13GB)
+2. ZIP file size matches expected (sample: ~143MB, full: ~968MB, extended: ~2.74GB)
+3. Source database exists with expected size (sample: ~632MB, full: ~4.8GB, extended: ~14.4GB)
 4. App launches without crash
 5. Database extraction completes (watch for progress dialog)
 6. Authors list shows 100+ Greek and Latin authors
@@ -921,7 +923,7 @@ The extended mode includes Perseus + First1KGreek + additional languages:
 - **App stuck on splash**: Clear data with `adb shell pm clear com.classicsviewer.app.debug`
 
 ### Directory Structure Reference:
-- **Source databases**: `data-prep/perseus_texts_sample.db` (671MB), `perseus_texts_full.db` (3.7GB), `perseus_texts_extended.db` (13GB)
+- **Source databases**: `data-prep/perseus_texts_sample.db` (632MB), `perseus_texts_full.db` (4.8GB), `perseus_texts_extended.db` (14.4GB)
 - **Device database**: `/data/data/.../databases/perseus_texts.db` (size matches deployed version)
 
 

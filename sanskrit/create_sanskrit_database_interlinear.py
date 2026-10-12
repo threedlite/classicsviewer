@@ -7,8 +7,10 @@ Modes:
 - full: All 268 DCS works (~738,000 verses, 5.6M words)
 
 Usage:
-  python3 create_sanskrit_database.py sample   # Create sample database (default)
-  python3 create_sanskrit_database.py full     # Create full database with all DCS works
+  python3 create_sanskrit_database_interlinear.py sample                 # sample database
+  python3 create_sanskrit_database_interlinear.py full                   # all DCS works
+  python3 create_sanskrit_database_interlinear.py full WORKS.csv name    # custom work list,
+                                                   # written to sanskrit_texts_<name>.db
 
 Sources:
 - Bhagavad Gita: Sanskrit Wikisource (CC BY-SA 4.0)
@@ -17,6 +19,10 @@ Sources:
   - English translation: Ralph T.H. Griffith (1896) (Public Domain)
 - Sample DCS texts with English translations:
   - Atharvaveda (Śaunaka), Vājasaneyisaṃhitā, Upanishads
+- Mahabharata: DCS text, English translation by Kisari Mohan Ganguli
+  (1883-1896, Public Domain, Project Gutenberg 15474-15477) attached per
+  chapter through the critical-edition/Ganguli concordance; see
+  mahabharata_ganguli.py and MAHABHARATA_GANGULI_PROPOSAL.md
 - Full DCS corpus: 268 works (CC BY 4.0)
   - Most works do not have English translations
 
@@ -35,6 +41,8 @@ import time
 import glob
 from collections import defaultdict
 from pathlib import Path
+
+import mahabharata_ganguli
 
 # Import indic-transliteration (required for Devanagari conversion)
 try:
@@ -69,8 +77,7 @@ def get_stanza_nlp():
             _stanza_nlp = stanza.Pipeline('sa', processors='tokenize,pos,lemma,depparse', verbose=False)
             print("  ✓ Stanza pipeline ready")
         except Exception as e:
-            print(f"  Warning: Failed to initialize Stanza: {e}")
-            return None
+            raise RuntimeError(f"Failed to initialize Stanza; the build cannot continue without the parser: {e}")
     return _stanza_nlp
 
 def is_sanskrit_punctuation(text: str) -> bool:
@@ -804,8 +811,21 @@ def load_rigveda(cursor):
 
     print(f"  Loaded {len(rigveda_data)} mandalas, {total_hymns} hymns, {total_stanzas} stanzas")
 
-    # Load Griffith translation
-    translation_file = '../data-sources/sanskrit/translations/RV-Griffith.txt'
+    # Load Griffith translation: the English Wikisource transcription of
+    # The Hymns of the Rigveda (1896), fetched and parsed by
+    # data-sources/download_rigveda_griffith.py + parse_rigveda_griffith.py
+    # when the file is missing (no manual step).
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    translation_file = os.path.join(script_dir, 'data-sources', 'wikisource', 'rigveda_griffith.txt')
+    if not os.path.exists(translation_file):
+        print("  Griffith Rig Veda translation missing; downloading and parsing it from Wikisource...")
+        sys.path.insert(0, os.path.join(script_dir, 'data-sources'))
+        import download_rigveda_griffith
+        import parse_rigveda_griffith
+        download_rigveda_griffith.main()
+        parse_rigveda_griffith.main()
+        if not os.path.exists(translation_file):
+            raise RuntimeError(f'{translation_file} was not produced')
     translations = defaultdict(lambda: defaultdict(dict))
 
     if os.path.exists(translation_file):
@@ -1046,13 +1066,18 @@ def parse_dcs_work_worker(args):
     _worker_stanza_nlp = None
 
     def get_worker_stanza_nlp():
+        # The main process downloads and verifies the models before the pool
+        # starts; workers only load them (download_method=None).  A worker
+        # that called stanza.download() itself re-fetched every model file
+        # while other workers were reading them, which made their loads fail
+        # ("Cannot load model from ..."), after which the failed worker
+        # re-downloaded on every sentence and returned no parse at all.
+        # A load failure here is fatal: it ends the build instead of
+        # silently producing a database without trees.
         nonlocal _worker_stanza_nlp
         if _worker_stanza_nlp is None and HAS_STANZA:
-            try:
-                stanza.download('sa', verbose=False)
-                _worker_stanza_nlp = stanza.Pipeline('sa', processors='tokenize,pos,lemma,depparse', verbose=False)
-            except Exception as e:
-                return None
+            _worker_stanza_nlp = stanza.Pipeline('sa', processors='tokenize,pos,lemma,depparse',
+                                                 verbose=False, download_method=None)
         return _worker_stanza_nlp
 
     def worker_iast_to_devanagari(text):
@@ -1170,26 +1195,22 @@ def parse_dcs_work_worker(args):
         except Exception as e:
             return []
 
-    def worker_parse_citation_part(part_str):
-        part_str = part_str.strip()
-        try:
-            return int(part_str)
-        except ValueError:
-            pass
-        try:
-            return int(float(part_str))
-        except ValueError:
-            pass
-        return abs(hash(part_str)) % 100000
-
     # Start processing
     sys.stdout.flush()
 
     if not os.path.exists(text_dir):
         return None
 
-    # Structure: book → chapter → verse → {'text': str, 'words': [(word, lemma)]}
-    text_data = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: {'text': [], 'words': []})))
+    # Structure, in DCS file order (dict insertion order is preserved):
+    #   text_data[book_label]['chapters'][chapter_label]['verses'] = [
+    #       {'label': verse label, 'text': [devanagari sentences], 'words': [...]}, ...]
+    # Labels are the DCS "## chapter:" header parts as written (no hash or
+    # float conversion): book_label = part 2, chapter_label = parts 3.. joined
+    # with '.', '' for 2-part headers.  2-part headers give one line per
+    # sentence (verse label '').  3-part and longer headers give one line per
+    # DCS verse, i.e. per run of sentences sharing a "# sent_counter"; a
+    # sentence without a counter joins the verse before it.
+    text_data = {}
 
     conllu_files = [f for f in os.listdir(text_dir) if f.endswith('.conllu') and not f.endswith('_parsed')]
     conllu_files.sort()
@@ -1202,46 +1223,62 @@ def parse_dcs_work_worker(args):
         file_path = os.path.join(text_dir, conllu_file)
 
         with open(file_path, 'r', encoding='utf-8') as f:
-            current_chapter = None
-            verse_counter = 0
+            current_chapter = None          # (book_label, chapter_label, multipart)
+            current_verse = None            # verse dict receiving sentences
+            pending_counter = None          # "# sent_counter" of the sentence being read
             current_sentence_words = []
             current_text_iast = None
+            current_text_devanagari = None
+
+            def commit_sentence():
+                """Attach the sentence just read (text + words) to its verse."""
+                nonlocal current_verse, pending_counter, current_sentence_words, current_text_iast, current_text_devanagari
+                book_label, chapter_label, multipart = current_chapter
+                verses = text_data[book_label]['chapters'][chapter_label]['verses']
+                if not multipart:
+                    current_verse = {'label': '', 'text': [], 'words': []}
+                    verses.append(current_verse)
+                elif pending_counter is not None and (current_verse is None or current_verse['label'] != pending_counter):
+                    current_verse = {'label': pending_counter, 'text': [], 'words': []}
+                    verses.append(current_verse)
+                elif current_verse is None:
+                    current_verse = {'label': '', 'text': [], 'words': []}
+                    verses.append(current_verse)
+                if current_text_devanagari is not None:
+                    current_verse['text'].append(current_text_devanagari)
+                current_verse['words'].extend((w[0], w[1], w[2], w[3], w[4], w[5]) for w in current_sentence_words)
+                pending_counter = None
+                current_sentence_words = []
+                current_text_iast = None
+                current_text_devanagari = None
 
             for line in f:
                 line = line.strip()
 
                 if line.startswith('## chapter:'):
+                    if current_chapter and current_text_iast is not None:
+                        commit_sentence()
                     chapter_str = line.replace('## chapter:', '').strip()
                     parts = [p.strip() for p in chapter_str.split(',')]
+                    if len(parts) < 2:
+                        raise ValueError(f'{file_path}: cannot read chapter header {line!r}')
+                    book_label = parts[1]
+                    chapter_label = '.'.join(parts[2:])
+                    current_chapter = (book_label, chapter_label, len(parts) >= 3)
+                    text_data.setdefault(book_label, {'chapters': {}})['chapters'].setdefault(chapter_label, {'verses': []})
+                    current_verse = None
+                    pending_counter = None
 
-                    if len(parts) == 2:
-                        prefix = parts[0]
-                        book_num = worker_parse_citation_part(parts[1])
-                        current_chapter = (book_num, None, None)
-                        verse_counter = 0
-                    elif len(parts) >= 3:
-                        prefix = parts[0]
-                        book_num = worker_parse_citation_part(parts[1])
-                        chapter_num = worker_parse_citation_part(parts[2])
-                        verse_num = worker_parse_citation_part(parts[3]) if len(parts) > 3 else chapter_num
-                        current_chapter = (book_num, chapter_num, verse_num)
-                        verse_counter = None
+                elif line.startswith('# sent_counter') and current_chapter:
+                    value = line.split('=', 1)[1].strip() if '=' in line else ''
+                    pending_counter = value or None
 
                 elif line.startswith('# text =') and current_chapter:
+                    if current_text_iast is not None:
+                        commit_sentence()
                     text_iast = line.replace('# text =', '').strip()
                     current_text_iast = text_iast
-                    text_devanagari = worker_iast_to_devanagari(text_iast)
-
-                    book_num, chapter_num, verse_num = current_chapter
-
-                    if verse_counter is not None:
-                        verse_counter += 1
-                        verse_num = verse_counter
-                        chapter_num = 1
-                        text_data[book_num][chapter_num][verse_num]['text'].append(text_devanagari)
-                    else:
-                        text_data[book_num][chapter_num][verse_num]['text'].append(text_devanagari)
-
+                    current_text_devanagari = worker_iast_to_devanagari(text_iast)
                     current_sentence_words = []
 
                 elif line and not line.startswith('#') and current_chapter:
@@ -1287,12 +1324,12 @@ def parse_dcs_work_worker(args):
 
                             current_sentence_words.append((unsandhied, lemma, head, deprel, pos_tag, sentence_position, unsandhied_iast_form))
 
-                elif line == '' and current_sentence_words and current_chapter:
-                    book_num, chapter_num, verse_num = current_chapter
-
+                elif line == '' and current_chapter and current_text_iast is not None:
                     has_treebank = any(w[2] is not None for w in current_sentence_words)
 
-                    if has_treebank:
+                    if not current_sentence_words:
+                        sentences_no_tree += 1
+                    elif has_treebank:
                         sentences_with_treebank += 1
                     elif HAS_STANZA:
                         unsandhied_iast_forms = [w[6] for w in current_sentence_words if w[6]]
@@ -1322,17 +1359,18 @@ def parse_dcs_work_worker(args):
                     else:
                         sentences_no_tree += 1
 
-                    words_for_db = [(w[0], w[1], w[2], w[3], w[4], w[5]) for w in current_sentence_words]
+                    commit_sentence()
 
-                    if verse_counter is not None:
-                        text_data[book_num][chapter_num][verse_num]['words'].extend(words_for_db)
-                    else:
-                        text_data[book_num][chapter_num][verse_num]['words'].extend(words_for_db)
+            # A file that does not end with a blank line still has a sentence pending.
+            if current_chapter and current_text_iast is not None:
+                commit_sentence()
 
-                    current_sentence_words = []
-                    current_text_iast = None
-
-    # Load translations
+    # Load translations, keyed by the DCS book and chapter labels as strings.
+    # A key "b.c1.c2....v text" has the book first and the verse last; the
+    # chapter key is everything between, joined with '.', so that it equals
+    # the DCS chapter label of works with 3-part ("1.2.3" -> ['1']['2']) and
+    # 4-part ("1.3.2.1" -> ['1']['3.2']) headers.  "1.2 text" (no chapter
+    # part) goes to chapter '1', the key the writer uses for 2-part headers.
     translations = defaultdict(lambda: defaultdict(list))
 
     if translation_file and os.path.exists(translation_file):
@@ -1342,36 +1380,37 @@ def parse_dcs_work_worker(args):
                 if not line or line.startswith('@') or line.startswith(';;;'):
                     continue
 
-                match = re.match(r'^(\d+)\.(\d+)\.(\d+)\s+(.+)$', line)
-                if match:
-                    book = int(match.group(1))
-                    chapter = int(match.group(2))
-                    verse = int(match.group(3))
-                    translation_text = match.group(4).strip()
-                    translations[book][chapter].append(translation_text)
+                # Tab-separated form (data-sources/translation_sources.py):
+                # book<TAB>chapter<TAB>verse<TAB>text, labels as in the DCS.
+                if '\t' in line:
+                    fields = line.split('\t', 3)
+                    if len(fields) == 4 and fields[3].strip():
+                        text = fields[3].strip().replace('\\n', '\n')
+                        translations[fields[0]][fields[1] or '1'].append((fields[2], text))
                     continue
 
-                match = re.match(r'^(\d+)\.(\d+)\s+(.+)$', line)
+                # Dotted form: "b.c.v text".  The verse part may be a range
+                # ("2.13.1-2") when the translator renders several verses as
+                # one unit; the label is kept and shown as given.
+                match = re.match(r'^(\d+(?:\.\d+)+(?:-\d+)?)\s+(.+)$', line)
                 if match:
-                    book = int(match.group(1))
-                    chapter = 1
-                    verse = int(match.group(2))
-                    translation_text = match.group(3).strip()
-                    translations[book][chapter].append(translation_text)
+                    numbers = match.group(1).split('.')
+                    chapter_key = '.'.join(numbers[1:-1]) or '1'
+                    translations[numbers[0]][chapter_key].append((numbers[-1], match.group(2).strip()))
 
     # Calculate stats
     total_books = len(text_data)
-    total_chapters = sum(len(chapters) for chapters in text_data.values())
+    total_chapters = sum(len(book['chapters']) for book in text_data.values())
     total_verses = sum(
-        len(verses)
-        for chapters in text_data.values()
-        for verses in chapters.values()
+        len(chapter['verses'])
+        for book in text_data.values()
+        for chapter in book['chapters'].values()
     )
     total_words = sum(
-        len(verses[v]['words'])
-        for chapters in text_data.values()
-        for verses in chapters.values()
-        for v in verses
+        len(verse['words'])
+        for book in text_data.values()
+        for chapter in book['chapters'].values()
+        for verse in chapter['verses']
     )
 
     # Update progress tracker
@@ -1401,24 +1440,13 @@ def parse_dcs_work_worker(args):
         print(f"  [{completed_count}/{total_works}] {pct_complete:.1f}%{eta_str} - {text_name}: {total_verses} verses, {total_words:,} words, {sentences_with_stanza} trees")
         sys.stdout.flush()
 
-    # Convert text_data to serializable format
-    serializable_data = {}
-    for book_num, chapters in text_data.items():
-        serializable_data[book_num] = {}
-        for chapter_num, verses in chapters.items():
-            serializable_data[book_num][chapter_num] = {}
-            for verse_num, verse_data in verses.items():
-                serializable_data[book_num][chapter_num][verse_num] = {
-                    'text': verse_data['text'],
-                    'words': verse_data['words']
-                }
+    # text_data is plain dicts and lists already (picklable, order preserved)
+    serializable_data = text_data
 
-    # Convert translations to serializable format
+    # Convert translations to plain dicts
     serializable_translations = {}
-    for book_num, chapters in translations.items():
-        serializable_translations[book_num] = {}
-        for chapter_num, trans_list in chapters.items():
-            serializable_translations[book_num][chapter_num] = trans_list
+    for book_label, chapters in translations.items():
+        serializable_translations[book_label] = dict(chapters)
 
     return {
         'work_meta': work_meta,
@@ -1463,12 +1491,22 @@ def process_worker_chunk(args):
     return results
 
 
-def write_parsed_work_to_db(cursor, parsed_data, translation_map):
+def write_parsed_work_to_db(cursor, parsed_data, translation_map, section_translations=None):
     """
     Write parsed work data to database.
 
     This function takes the output from parse_dcs_work_worker and writes it to the database.
     Should be called from main process only (single-threaded DB writes).
+
+    Books are numbered by their DCS label when every book label of the work
+    is numeric, otherwise by order of first appearance (label kept as the
+    book's display label).  Chapters and verses are written in DCS file
+    order.  Lines of works with 3-part or longer chapter headers carry a
+    "[book.chapter.verse]" citation prefix, as the Rig Veda loader does.
+
+    section_translations: {work_id: callable(cursor, book_structure) -> (count, report_lines)}
+    for translations attached at section level (the Ganguli Mahabharata).
+    Any exception raised there fails the build.
     """
     work_meta = parsed_data['work_meta']
     translation_info = parsed_data['translation_info']
@@ -1488,14 +1526,14 @@ def write_parsed_work_to_db(cursor, parsed_data, translation_map):
     except:
         text_devanagari = text_name
 
-    # Check if author already exists
+    # Check if author already exists.  has_translations is set below, once
+    # translation rows have actually been written.
     cursor.execute('SELECT id FROM authors WHERE id = ?', (work_id,))
     if not cursor.fetchone():
-        has_translations = 1 if translation_file else 0
         cursor.execute('''
             INSERT INTO authors (id, name, name_alt, language, has_translations)
             VALUES (?, ?, ?, ?, ?)
-        ''', (work_id, text_devanagari, text_name, 'sanskrit', has_translations))
+        ''', (work_id, text_devanagari, text_name, 'sanskrit', 0))
 
     # Insert work
     cursor.execute('''
@@ -1507,31 +1545,36 @@ def write_parsed_work_to_db(cursor, parsed_data, translation_map):
     total_verse_count = 0
     total_word_count = 0
     total_translation_count = 0
+    report_lines = []
 
-    # Process each book
-    for book_num in sorted(text_data.keys(), key=lambda x: int(x) if str(x).isdigit() else x):
-        chapters = text_data[book_num]
+    book_labels = list(text_data.keys())
+    numeric_books = all(re.fullmatch(r'\d+', label) for label in book_labels)
+    if not numeric_books:
+        report_lines.append(f'{text_name}: book labels {book_labels} are not all numeric; books numbered by order of appearance')
+    book_structure = {}   # book_label -> {'book_id', 'chapters': [(chapter_label, start_line, end_line)]}
 
-        book_id = f"{work_id}.{book_num}"
-        book_label = f"Book {book_num}"
+    for ordinal, book_label in enumerate(book_labels, 1):
+        chapters = text_data[book_label]['chapters']
+        book_number = int(book_label) if numeric_books else ordinal
+        book_id = f"{work_id}.{book_number}"
+        book_display = f"Book {book_number}" if numeric_books else book_label
 
-        line_count = sum(len(verses) for verses in chapters.values())
+        line_count = sum(len(chapter['verses']) for chapter in chapters.values())
 
         cursor.execute('''
             INSERT INTO books (id, work_id, book_number, label, start_line, end_line, line_count)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (book_id, work_id, int(book_num) if str(book_num).isdigit() else 1, book_label, 1, line_count, line_count))
+        ''', (book_id, work_id, book_number, book_display, 1, line_count, line_count))
 
         line_number = 1
+        chapter_ranges = []
 
-        for chapter_num in sorted(chapters.keys(), key=lambda x: int(x) if x is not None and str(x).isdigit() else (x if x is not None else 0)):
-            verses = chapters[chapter_num]
+        for chapter_label, chapter in chapters.items():
             chapter_start_line = line_number
 
-            for verse_num in sorted(verses.keys(), key=lambda x: int(x) if str(x).isdigit() else x):
-                verse_data = verses[verse_num]
-                verse_text = ' '.join(verse_data['text'])
-                verse_words = verse_data['words']
+            for verse in chapter['verses']:
+                verse_text = ' '.join(verse['text'])
+                verse_words = verse['words']
 
                 if not verse_words:
                     # Tokenize if no words
@@ -1539,6 +1582,9 @@ def write_parsed_work_to_db(cursor, parsed_data, translation_map):
                     verse_words = [(w.strip(), None, None, None, None, i+1) for i, w in enumerate(text_clean.split()) if w.strip()]
 
                 display_text = ' '.join(word_tuple[0] for word_tuple in verse_words)
+                if chapter_label != '':
+                    citation = '.'.join([book_label, chapter_label] + ([verse['label']] if verse['label'] else []))
+                    display_text = f"[{citation}] {display_text}"
 
                 cursor.execute('''
                     INSERT INTO text_lines (id, book_id, line_number, sequence_number, line_text, line_xml, speaker)
@@ -1546,12 +1592,7 @@ def write_parsed_work_to_db(cursor, parsed_data, translation_map):
                 ''', (None, book_id, line_number, line_number, display_text, None, None))
 
                 for word_pos, word_tuple in enumerate(verse_words, 1):
-                    if len(word_tuple) >= 6:
-                        word, lemma, head, deprel, pos_tag, sentence_position = word_tuple[:6]
-                    else:
-                        word, lemma = word_tuple[0], word_tuple[1] if len(word_tuple) > 1 else None
-                        head, deprel, pos_tag, sentence_position = None, None, None, None
-
+                    word = word_tuple[0]
                     cursor.execute('''
                         INSERT INTO words (id, word, book_id, line_number, sequence_number, word_position)
                         VALUES (?, ?, ?, ?, ?, ?)
@@ -1561,22 +1602,47 @@ def write_parsed_work_to_db(cursor, parsed_data, translation_map):
                 total_verse_count += 1
                 line_number += 1
 
-            # Insert translation for chapter
-            chapter_end_line = line_number - 1
-            book_num_int = int(book_num) if str(book_num).isdigit() else book_num
-            chapter_num_int = int(chapter_num) if chapter_num is not None and str(chapter_num).isdigit() else chapter_num
+            chapter_ranges.append((chapter_label, chapter_start_line, line_number - 1))
 
-            if str(book_num_int) in translations and str(chapter_num_int) in translations[str(book_num_int)]:
-                translation_list = translations[str(book_num_int)][str(chapter_num_int)]
+        book_structure[book_label] = {'book_id': book_id, 'chapters': chapter_ranges}
+
+        # Chapter-level translations from the translation_map files.  Their
+        # chapter key is matched against the DCS chapter label ('1' for
+        # 2-part headers, whose label is '').
+        book_translations = translations.get(book_label, {})
+        if book_translations:
+            groups = [[chapter_label or '1', start, end] for chapter_label, start, end in chapter_ranges]
+            unmatched = [k for k in book_translations if k not in {g[0] for g in groups}]
+            if unmatched:
+                report_lines.append(f'{text_name}: book {book_label}: translation chapters {unmatched} match no DCS chapter label and are not written')
+            for key, start, end in groups:
+                translation_list = book_translations.get(key)
+                if translation_list and end < start:
+                    report_lines.append(f'{text_name}: book {book_label} chapter {key} has no text lines; its translation is not written')
+                    continue
                 if translation_list:
-                    numbered_translations = [f"[{i+1}] {text}" for i, text in enumerate(translation_list)]
+                    numbered_translations = [f"[{label}] {text}" for label, text in translation_list]
                     translation_text = ' '.join(numbered_translations)
-
                     cursor.execute('''
                         INSERT INTO translation_segments (id, book_id, start_line, end_line, sequence_number, translation_text, translator, speaker)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                    ''', (None, book_id, chapter_start_line, chapter_end_line, chapter_start_line, translation_text, translator_name, None))
+                    ''', (None, book_id, start, end, start, translation_text, translator_name, None))
                     total_translation_count += 1
+
+    if translation_file and total_translation_count == 0:
+        raise RuntimeError(f'{text_name}: translation file {translation_file} produced no segments; '
+                           f'its book/chapter numbering does not match the DCS labels {list(text_data.keys())[:5]}')
+
+    if section_translations and work_id in section_translations:
+        count, lines = section_translations[work_id](cursor, book_structure)
+        total_translation_count += count
+        report_lines.extend(lines)
+
+    if total_translation_count:
+        cursor.execute('UPDATE authors SET has_translations = 1 WHERE id = ?', (work_id,))
+
+    for line in report_lines:
+        print(f'    {line}')
 
     return total_verse_count, total_word_count, total_translation_count
 
@@ -2245,17 +2311,23 @@ def load_works_csv(csv_path):
 
 
 def main():
-    # Parse command line arguments
+    # Parse command line arguments:
+    #   create_sanskrit_database_interlinear.py [test|sample|full] [works.csv [name]]
+    # A custom CSV builds only the works it lists; with a name the outputs are
+    # sanskrit_texts_<name>.db and interlinear_output_<name>/, so a test build
+    # never overwrites the main database (same pattern as the Greek build).
     build_mode = 'full'  # Default to full
     if len(sys.argv) > 1:
         build_mode = sys.argv[1].lower()
 
     if build_mode not in ['test', 'sample', 'full']:
         print(f"Invalid build mode: {build_mode}")
-        print("Usage: python3 create_sanskrit_database_interlinear.py [test|sample|full]")
+        print("Usage: python3 create_sanskrit_database_interlinear.py [test|sample|full] [works.csv [name]]")
         print("  test:   BG + RV only (quick test)")
         print("  sample: BG + RV + selected DCS works with translations")
         print("  full:   All 268 DCS works")
+        print("  works.csv: build only the works listed (Source,Work rows)")
+        print("  name:   write sanskrit_texts_<name>.db and interlinear_output_<name>/")
         return 1
 
     # Load works CSV for all modes
@@ -2264,12 +2336,18 @@ def main():
         'sample': 'SANSKRIT_SAMPLE.csv',
         'full': 'SANSKRIT_FULL.csv'
     }
-    csv_path = csv_map[build_mode]
+    csv_path = sys.argv[2] if len(sys.argv) > 2 else csv_map[build_mode]
+    output_name = sys.argv[3] if len(sys.argv) > 3 else None
+    if not os.path.exists(csv_path):
+        print(f"\nERROR: works CSV not found: {csv_path}")
+        sys.exit(1)
     works_config = load_works_csv(csv_path)
 
     print("=" * 70)
     print(f"Sanskrit Texts Database Creation ({build_mode.upper()} mode)")
     print(f"Using CSV: {csv_path}")
+    if output_name:
+        print(f"Output name: {output_name}")
     print("=" * 70)
 
     # Check prerequisites
@@ -2290,8 +2368,14 @@ def main():
         print("For full functionality: pip install indic-transliteration\n")
 
     # Create database
-    db_path = 'sanskrit_texts.db'
+    db_path = f'sanskrit_texts_{output_name}.db' if output_name else 'sanskrit_texts.db'
     conn, cursor = create_database(db_path)
+
+    # Translations attached at section level by a dedicated loader
+    # (DCS work id -> callable).  See mahabharata_ganguli.py.
+    section_translations = {
+        'Mahābhārata': mahabharata_ganguli.write_ganguli_translation,
+    }
 
     # Track all statistics
     all_stats = []
@@ -2312,17 +2396,38 @@ def main():
 
     # Mapping of DCS work names to translation files
     # Based on DCS translations directory
+    # Müller's Chandogya translation is generated from Wikisource by
+    # data-sources/download_chandogya_mueller.sh + parse_chandogya_mueller.py;
+    # fetch and parse it here when the file is missing so a fresh clone builds
+    # without a manual step.
+    mueller_txt = os.path.join(str(script_dir), 'data-sources', 'mueller', 'chandogya_mueller.txt')
+    if not os.path.exists(mueller_txt):
+        print("\nMüller Chandogya translation missing; downloading and parsing it...")
+        import subprocess
+        subprocess.run(['bash', os.path.join(str(script_dir), 'data-sources', 'download_chandogya_mueller.sh')], check=True)
+        sys.path.insert(0, os.path.join(str(script_dir), 'data-sources'))
+        import parse_chandogya_mueller
+        parse_chandogya_mueller.main()
+        if not os.path.exists(mueller_txt):
+            raise RuntimeError(f'{mueller_txt} was not produced')
+
     translation_map = {
-        'Aitareyopaniṣad': ('../data-sources/sanskrit/translations/AU-Olivelle.txt', 'Patrick Olivelle'),
-        'Chāndogyopaniṣad': ('../data-sources/sanskrit/translations/ChUp-Olivelle.txt', 'Patrick Olivelle'),
-        'Śvetāśvataropaniṣad': ('../data-sources/sanskrit/translations/SvetUp-Olivelle.txt', 'Patrick Olivelle'),
-        'Āpastambagṛhyasūtra': ('../data-sources/sanskrit/translations/ApGS-Oldenberg.txt', 'H. Oldenberg'),
-        'Gobhilagṛhyasūtra': ('../data-sources/sanskrit/translations/GobhGS-Oldenberg.txt', 'H. Oldenberg'),
-        'Hiraṇyakeśigṛhyasūtra': ('../data-sources/sanskrit/translations/HirGS-Oldenberg.txt', 'Hermann Oldenberg'),
-        'Śāṅkhāyanagṛhyasūtra': ('../data-sources/sanskrit/translations/SankhGS-Oldenberg.txt', 'Hermann Oldenberg'),
-        'Śatapathabrāhmaṇa': ('../data-sources/sanskrit/translations/SB-Eggeling.txt', 'Eggeling'),
-        'Vājasaneyīsaṃhitā': ('../data-sources/sanskrit/translations/VS-Griffith.txt', 'Griffith'),
+        'Chāndogyopaniṣad': ('data-sources/mueller/chandogya_mueller.txt', 'F. Max Müller'),
     }
+
+    # Translations from Project Gutenberg and Wikisource registered in
+    # data-sources/translation_sources.py: fetched and parsed on demand for
+    # the works this build includes (see that module for sources and licences).
+    sys.path.insert(0, os.path.join(str(script_dir), 'data-sources'))
+    import translation_sources
+    selected_names = None
+    if works_config and not works_config.get('include_all_dcs'):
+        selected_names = set(works_config.get('dcs_works', set()))
+    for work_name in translation_sources.SOURCES:
+        if selected_names is not None and work_name not in selected_names:
+            continue
+        path, translator = translation_sources.ensure_translation(work_name)
+        translation_map[work_name] = (path, translator)
 
     # Load DCS works based on CSV configuration
     dcs_works_to_process = []
@@ -2437,7 +2542,7 @@ def main():
                 del _pre_nlp  # Release memory; workers create their own instances
                 print("  ✓ Stanza models downloaded and verified\n")
             except Exception as e:
-                print(f"  Warning: Stanza pre-load failed: {e}\n")
+                raise RuntimeError(f"Stanza pre-load failed; the build cannot continue without the parser: {e}")
 
         # Process in parallel
         print("Workers are processing... Progress will be logged by workers.\n")
@@ -2472,13 +2577,11 @@ def main():
             stats = parsed_data['stats']
             print(f"  [{i}/{len(all_parsed_results)}] Writing {text_name}...")
 
-            try:
-                verses, words, translations = write_parsed_work_to_db(cursor, parsed_data, translation_map)
-                all_stats.append((text_name, verses, words, translations))
-                conn.commit()  # Commit after each work
-            except Exception as e:
-                print(f"    ✗ Error writing {text_name}: {e}")
-                continue
+            # Any error here fails the build: a work silently left out or
+            # left without its translation must not reach the device.
+            verses, words, translations = write_parsed_work_to_db(cursor, parsed_data, translation_map, section_translations)
+            all_stats.append((text_name, verses, words, translations))
+            conn.commit()  # Commit after each work
     else:
         print("\nNo DCS works to process")
 
@@ -2538,7 +2641,7 @@ def main():
     print("GENERATING INTERLINEAR TRANSLATIONS")
     print("=" * 70)
 
-    interlinear_dir = 'interlinear_output'
+    interlinear_dir = f'interlinear_output_{output_name}' if output_name else 'interlinear_output'
     os.makedirs(interlinear_dir, exist_ok=True)
 
     # Import the batch generation script
@@ -2616,6 +2719,7 @@ def main():
     print(f"  ✓ Rig Veda English (Griffith): Public Domain")
     print(f"  ✓ DCS Sanskrit texts: CC BY 4.0 (Oliver Hellwig)")
     print(f"  ✓ DCS Lexicon: CC BY 4.0 (Oliver Hellwig)")
+    print(f"  ✓ Mahabharata English (Ganguli, 1883-1896): Public Domain")
     print(f"\nReady for ClassicsViewer integration!")
     print(f"This database can be used standalone or merged into extended database.")
 

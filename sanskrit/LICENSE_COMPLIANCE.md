@@ -2,9 +2,26 @@
 
 ## Summary
 
-All Sanskrit resources used in ClassicsViewer are properly licensed for commercial use.
+All Sanskrit texts and English translations shipped in the app are public
+domain, CC BY or CC BY-SA. Policy:
 
-**Status**: ✅ **FULLY COMPLIANT**
+- The app is free, but app-store distribution may count as commercial use,
+  so sources with a NonCommercial clause are not used.
+- A text that is on Project Gutenberg is included on that basis, under the
+  Project Gutenberg License. The app's licence screen (Android
+  `LicenseActivity.kt`, iOS `LicenseView.swift`) names Project Gutenberg
+  and the ebook number for every such text, carries the licence's
+  required notice (paragraph 1.E.1) with a link to the full licence, states
+  that no fee is charged (1.E.7), and points to gutenberg.org for the
+  original files (1.E.6). The build strips the Gutenberg header, footer
+  and licence text from the file that ships; only the body is used.
+- Transcribed e-texts only (Gutenberg, Wikisource, DCS); OCR output is never
+  a source.
+- Preferred order when choosing a source: Project Gutenberg, then
+  Wikisource, then another transcription with an explicit public-domain,
+  CC BY or CC BY-SA statement.
+
+**Status**: ✅ **COMPLIANT** with the policy above.
 
 ---
 
@@ -83,7 +100,7 @@ Repository: https://github.com/kmadathil/sanskrit_parser
 
 **License Terms**:
 - ✅ Commercial use allowed
-- ✅ Share-alike requirement (our app is MIT/open source ✓)
+- ✅ Share-alike requirement (our app is open source, MIT OR Apache-2.0 ✓)
 - ✅ Requires attribution
 
 **Attribution**:
@@ -128,19 +145,116 @@ URL: https://sa.wikisource.org/wiki/भगवद्गीता
 
 ### 6. Rig Veda Translation - Ralph T.H. Griffith
 
-**Source**: Sacred-texts.com / English translation
-**Translator**: Ralph T.H. Griffith (1896)
-**License**: Public Domain
-**URL**: http://www.sacred-texts.com/hin/rigveda/
+**Source**: English Wikisource, *The Hymns of the Rigveda* (2nd ed., 1896),
+1,028 hymn pages, Books 1–10
+**Translator**: Ralph T.H. Griffith (1826–1906)
+**License**: Public Domain translation; Wikisource contributions CC BY-SA
+**URL**: https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda
 
 **What we use**:
-- English translation of Rig Veda
-- 10,218 translated verses (94.6% coverage of 10,551 total verses)
-- Citation-based format matching DCS structure
+- The complete translation, one segment per stanza, matched to the DCS
+  Rig Veda by book, hymn and stanza number
+- Fetched and parsed by `data-sources/download_rigveda_griffith.py` and
+  `data-sources/parse_rigveda_griffith.py`; the build runs them when the
+  parsed file is missing
 
 **License Terms**:
-- ✅ Public Domain (no restrictions)
-- Published 1896, well before copyright cutoff
+- ✅ Public Domain translation (published 1896; translator died 1906)
+- ✅ Wikisource's transcription terms (CC BY-SA) are already accepted for
+  the Bhagavad Gita text
+
+---
+
+### 7. Mahabharata Translation - Kisari Mohan Ganguli
+
+**Source**: Project Gutenberg, ebooks 15474, 15475, 15476, 15477
+**Translator**: Kisari Mohan Ganguli (1883–1896), published by P. C. Roy
+**License**: Public Domain
+**URL**: https://www.gutenberg.org/ebooks/15474 (and 15475–15477)
+
+**What we use**:
+- The complete English prose translation, 18 books, 2,106 section units
+- Attached to the DCS critical-edition text chapter by chapter through the
+  Brodbeck & Black concordance (see `data-sources/SOURCES.md`)
+- Ganguli's footnotes, appended to the section that cites them
+
+**License Terms**:
+- ✅ Public Domain: the translator died in 1908; Gutenberg marks the texts
+  "Public domain in the USA"; included under the Gutenberg rule above
+- Project Gutenberg License: the build uses only the text between the
+  `*** START OF` / `*** END OF` markers (header, footer and licence text
+  removed); the licence screen credits ebooks 15474–15477 to Project
+  Gutenberg and shows the licence notice, as the rule above requires
+
+**Note on the Sanskrit side**: the DCS Mahābhārata derives from the
+Tokunaga/Smith electronic critical edition, whose file header carries a
+BORI copyright notice without a licence grant; DCS licenses its corpus
+CC BY 4.0 and the app ships the DCS text.
+
+---
+
+### 8. Chāndogya Upaniṣad Translation - F. Max Müller
+
+**Source**: English Wikisource, *Sacred Books of the East*, vol. 1 (1879),
+Khândogya-upanishad, eight prapāṭhaka pages transcluded from validated scans
+**Translator**: Friedrich Max Müller (1823–1900)
+**License**: Public Domain translation; Wikisource contributions CC BY-SA
+**URL**: https://en.wikisource.org/wiki/Sacred_Books_of_the_East/Volume_1/Khândogya-upanishad
+
+**What we use**:
+- All 8 prapāṭhakas, numbered prapāṭhaka.khaṇḍa.verse like the DCS text;
+  each khaṇḍa's verses form one segment on the DCS chapter with the same
+  label (Müller's khaṇḍa 7.26 has no DCS counterpart and is not written)
+- Fetched and parsed by `data-sources/download_chandogya_mueller.sh` and
+  `data-sources/parse_chandogya_mueller.py`; the build runs them when the
+  parsed file is missing
+- The only entry in the build's `translation_map`
+
+**License Terms**:
+- ✅ Public Domain translation (published 1879; translator died 1900)
+
+---
+
+### 9. Translation files in the DCS repository that are not used
+
+The DCS repository (`data-sources/sanskrit/translations/`) carries English
+translations beside its corpus. None of them is used, for these reasons:
+
+| Files | Translator | Reason not used |
+|---|---|---|
+| `AU-`, `ChUp-`, `SvetUp-Olivelle.txt`, `GautDhS-Olivelle.txt` | Patrick Olivelle (Oxford 1996–2000) | No statement releasing the English translations was found: not in the files, the folder readme, or the DCS readmes (`dcs/data/readme.md` states CC BY 4.0 for `dcs/data` and its child directories; the `translations/` folder is outside it). Olivelle's own CC BY 4.0 / CC BY-SA 4.0 releases at the University of Texas cover his Sanskrit editions, not the translations. |
+| `RV-Griffith.txt`, `VS-Griffith.txt`, `SB-Eggeling.txt`, `ApGS-`, `GobhGS-`, `HirGS-`, `SankhGS-Oldenberg.txt` | Griffith, Eggeling, Oldenberg (public-domain translations) | Digitised by sacred-texts.com, whose title pages (SBE 12, 26, 29) state "These files may be used for any non-commercial purpose" and whose terms of service apply the same restriction to all texts on its produced-texts list (`stbib.htm`), which includes all of these. The Rig Veda is taken from Wikisource instead (section 6); no transcribed alternative exists for the others. |
+| `RV-Jamison, Brereton.csv` | Jamison & Brereton (Oxford 2014) | Copyright. |
+| `AVŚ-Griffith.txt`, `Harshacarita-Cowell.txt`, `ParGS-Oldenberg.txt`, `Rgvidhana-Gonda.txt` and the Atharvaveda translations under `dcs/data/atharvaveda-shaunaka/` | various | Not mapped to any work in the build. |
+
+---
+
+### 10. Translations registered in `data-sources/translation_sources.py`
+
+One entry per DCS work; see `data-sources/SOURCES.md` for alignment and
+coverage. All are public-domain translations; Project Gutenberg texts are
+included under the Gutenberg rule, Wikisource transcriptions under
+Wikisource's CC BY-SA terms (already accepted for the Gītā text).
+
+| DCS work | Translator (dates) | Source | Licence |
+|---|---|---|---|
+| Rāmāyaṇa | Manmatha Nath Dutt (1855–1912), 1891–94 | Project Gutenberg 57265, 57826, 60188, 62496 | Public Domain |
+| Viṣṇupurāṇa | M. N. Dutt after H. H. Wilson, 1894–96 | Project Gutenberg 66208 | Public Domain |
+| Saddharmapuṇḍarīkasūtra | Hendrik Kern (1833–1917), SBE 21, 1884 | English Wikisource | Public Domain |
+| Atharvaveda (Śaunaka) | W. D. Whitney (1827–1894), ed. Lanman 1905 | English Wikisource | Public Domain |
+| Kathāsaritsāgara | C. H. Tawney (1837–1922), 1880–84 | English Wikisource | Public Domain |
+| Arthaśāstra | R. Shamasastry (1868–1944), 1915 | English Wikisource | Public Domain |
+| Kāmasūtra | R. F. Burton and F. F. Arbuthnot, 1883 | English Wikisource | Public Domain |
+| Suśrutasaṃhitā | K. L. Bhishagratna, 1907–16 | English Wikisource | Public Domain |
+| Yogasūtra | Charles Johnston (1867–1931), 1912 | Project Gutenberg 2526 | Public Domain |
+| Kumārasaṃbhava | R. T. H. Griffith (1826–1906), 1853 | Project Gutenberg 31968 | Public Domain |
+| Gītagovinda | Edwin Arnold (1832–1904), 1875 | Project Gutenberg 25965 | Public Domain |
+| Sarvadarśanasaṃgraha | E. B. Cowell and A. E. Gough, 1882 | Project Gutenberg 34125 | Public Domain |
+| Hitopadeśa | Edwin Arnold, 1861 | Project Gutenberg 13268 | Public Domain |
+
+The Rāmāyaṇa pairing uses the Sanskrit text of the vulgate on Sanskrit
+Wikisource (रामायणम्, CC BY-SA) only to match sarga openings; none of that
+text is shipped.
 
 ---
 
@@ -154,11 +268,14 @@ URL: https://sa.wikisource.org/wiki/भगवद्गीता
 | Bhagavad Gita Sanskrit | CC BY-SA 4.0 | ✅ Yes | ✅ Yes | ✅ Yes |
 | Arnold Translation | Public Domain | ✅ Yes | ❌ No | ❌ No |
 | Besant Translation | Public Domain | ✅ Yes | ❌ No | ❌ No |
-| Griffith Translation | Public Domain | ✅ Yes | ❌ No | ❌ No |
+| Griffith Rig Veda Translation (Wikisource) | Public Domain | ✅ Yes | ❌ No | ❌ No |
+| Ganguli Mahabharata Translation (Gutenberg) | Public Domain | ✅ Yes | ❌ No | ❌ No |
+| Müller Chāndogya Translation (Wikisource) | Public Domain | ✅ Yes | ❌ No | ❌ No |
+| Registry translations, section 10 (Gutenberg, Wikisource) | Public Domain | ✅ Yes | ❌ No | ❌ No |
 
-**ClassicsViewer App License**: MIT (open source, commercial use allowed)
+**ClassicsViewer App License**: MIT OR Apache-2.0, at the user's option (open source, commercial use allowed)
 
-**Compliance**: ✅ All share-alike requirements satisfied (app is MIT/open source)
+**Compliance**: ✅ All share-alike requirements satisfied (app is open source, MIT OR Apache-2.0)
 
 ---
 
@@ -175,8 +292,13 @@ The following sources were evaluated and rejected due to license incompatibility
 - **Reason**: NonCommercial clause
 
 ### ❌ SARIT (Search and Retrieval of Indic Texts)
-- **License**: CC BY-NC-SA
-- **Reason**: NonCommercial clause
+- **License**: per file. The Mahābhārata file (`mahabharata-devanagari.xml`)
+  carries CC BY-SA 3.0 Unported in its TEI header, with no NonCommercial
+  clause; other files may differ.
+- **Reason**: not the licence but the edition: SARIT's Mahābhārata is the
+  Kumbhakonam Southern recension (2,318 chapters), which matches neither the
+  critical edition that DCS annotates nor the published concordance to
+  Ganguli. See `MAHABHARATA_GANGULI_PROPOSAL.md` section 2.
 
 ### ❌ sanskritdocuments.org
 - **License**: "Personal study and research only"
@@ -206,9 +328,25 @@ Before using any new Sanskrit source:
 
 **Rig Veda**:
 - Sanskrit: CC BY 4.0 (DCS - Oliver Hellwig)
-- English (Griffith): Public Domain
+- English (Griffith, Wikisource transcription): Public Domain
 
-**Combined**:
+**Mahabharata**:
+- Sanskrit: CC BY 4.0 (DCS - Oliver Hellwig)
+- English (Ganguli, Project Gutenberg): Public Domain, 2,106 section segments attached per chapter
+
+**Chāndogya Upaniṣad**:
+- Sanskrit: CC BY 4.0 (DCS - Oliver Hellwig)
+- English (Müller, Wikisource transcription): Public Domain, one segment per khaṇḍa
+
+**Thirteen further DCS works** (section 10: Rāmāyaṇa in all seven kāṇḍas (four of them approximately, with a note in each segment), Viṣṇupurāṇa, Lotus Sūtra, Atharvaveda, Kathāsaritsāgara, Arthaśāstra, Kāmasūtra, Suśruta, Yogasūtra, Kumārasaṃbhava, Gītagovinda, Sarvadarśanasaṃgraha, Hitopadeśa):
+- Sanskrit: CC BY 4.0 (DCS - Oliver Hellwig)
+- English: public-domain translations from Project Gutenberg and Wikisource, one segment per chapter
+
+**All other DCS works**:
+- Sanskrit: CC BY 4.0 (DCS - Oliver Hellwig)
+- English: machine-generated interlinear glosses only
+
+**Combined** (Bhagavad Gita + Rig Veda, historical figures):
 - 11,251 verses
 - 171,351 words
 - 10,694 translation segments
@@ -256,7 +394,42 @@ URL: http://www.sanskrit-linguistics.org/dcs/
 
 Rig Veda (English)
 Translator: Ralph T.H. Griffith (1896)
+Source: English Wikisource, The Hymns of the Rigveda
 License: Public Domain
+
+Mahabharata (Sanskrit)
+Source: Digital Corpus of Sanskrit (DCS)
+Author: Oliver Hellwig
+License: CC BY 4.0
+
+Mahabharata (English)
+Translator: Kisari Mohan Ganguli (1883-1896)
+Source: Project Gutenberg ebooks 15474, 15475, 15476, 15477
+License: Public Domain (Project Gutenberg License notice on the licence screen)
+Chapter correspondences from the concordance in S. Brodbeck and
+B. Black (eds), Gender and Narrative in the Mahabharata (2007)
+
+Chandogya Upanishad (English)
+Translator: F. Max Müller (Sacred Books of the East, vol. 1, 1879)
+Source: English Wikisource
+License: Public Domain
+
+Further English translations (all Public Domain)
+Ramayana: Manmatha Nath Dutt (1891-94), Project Gutenberg 57265, 57826, 60188, 62496
+Vishnu Purana: M. N. Dutt after H. H. Wilson, Project Gutenberg 66208
+Saddharma-pundarika: Hendrik Kern (1884), English Wikisource
+Atharva-Veda: W. D. Whitney (1905), English Wikisource
+Katha Sarit Sagara: C. H. Tawney (1880-84), English Wikisource
+Arthashastra: R. Shamasastry (1915), English Wikisource
+Kama Sutra: R. F. Burton and F. F. Arbuthnot (1883), English Wikisource
+Sushruta Samhita: K. L. Bhishagratna (1907-16), English Wikisource
+Yoga Sutras: Charles Johnston (1912), Project Gutenberg 2526
+Kumarasambhava: R. T. H. Griffith (1853), Project Gutenberg 31968
+Gita Govinda: Edwin Arnold (1875), Project Gutenberg 25965
+Sarva-darsana-samgraha: E. B. Cowell and A. E. Gough (1882), Project Gutenberg 34125
+Hitopadesa: Edwin Arnold (1861, abridged), Project Gutenberg 13268
+All Project Gutenberg texts: see the Project Gutenberg section of the
+licence screen for the licence notice and the full list of ebooks used
 
 === Sanskrit Lexicon ===
 
