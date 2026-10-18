@@ -9,7 +9,7 @@ struct TopicalDownloadView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Topical Links (Beta)")
+            Text("Topical Links")
                 .font(.title2.bold())
 
             Text("Finds passages elsewhere in the corpus related to the one you're reading, for Greek and Latin. Works offline once installed.")

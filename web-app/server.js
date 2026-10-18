@@ -659,7 +659,7 @@ app.get('/api/interlinear/:bookId', (req, res) => {
         SELECT ts.start_line, ts.end_line, ts.translation_text
         FROM translation_segments ts
         WHERE ts.book_id = ?
-        AND ts.translator = 'Interlinear (Beta, AI-generated from app dictionary)'
+        AND ts.translator LIKE 'Interlinear (%'
         ORDER BY ts.start_line
     `;
 

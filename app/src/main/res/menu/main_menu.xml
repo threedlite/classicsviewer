@@ -46,7 +46,7 @@
 
     <item
         android:id="@+id/action_download_topical_links"
-        android:title="Download Topical Links (Beta)"
+        android:title="Download Topical Links"
         app:showAsAction="never" />
 
     <item

@@ -31,7 +31,7 @@ following were already committed when that line was still in the file:
 | `topical/build_topical_pack.py:parse_interlinear_latin` — "to modify" | Done; its docstring cites this plan as completed |
 | `LemmaBagBuilder.kt:parseLatin` / `.swift` — "to modify" | Both done |
 | §3.2 "No POS, no dependency, no `~` marker" | The DB has carried `~ POS DEPREL HEAD sentPos sentId` since the 0.8.129 rebuild |
-| §3.1 translator string `Interlinear (Beta, AI-generated from app dictionary)` | Actual string is `Interlinear (Beta, generated from app dictionary and treebank)` |
+| §3.1 translator string `Interlinear (AI-generated from app dictionary)` | Actual string is `Interlinear (generated from app dictionary and treebank)` |
 
 Anyone following revision 1's §8 order of operations would have re-implemented
 finished work against a design that differs from what shipped.
@@ -327,7 +327,7 @@ pack.
 
 ### 3.2 Output format as shipped
 
-Translator string: `Interlinear (Beta, generated from app dictionary and treebank)`.
+Translator string: `Interlinear (generated from app dictionary and treebank)`.
 
 ```
 | surface |

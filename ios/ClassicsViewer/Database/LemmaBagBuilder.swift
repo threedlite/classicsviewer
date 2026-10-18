@@ -15,10 +15,10 @@ enum LemmaBagBuilder {
 
     static func translatorFor(_ language: String) -> String? {
         switch language.lowercased() {
-        case "greek": return "Interlinear (Beta, AI-generated from app dictionary and treebank)"
+        case "greek": return "Interlinear (AI-generated from app dictionary and treebank)"
         // Both languages say "AI-generated": several jurisdictions require
         // AI-generated content to be labelled as such.
-        case "latin": return "Interlinear (Beta, AI-generated from app dictionary and treebank)"
+        case "latin": return "Interlinear (AI-generated from app dictionary and treebank)"
         default: return nil
         }
     }
@@ -30,7 +30,7 @@ enum LemmaBagBuilder {
     /// legacy Latin "...AI-generated from app dictionary" still present
     /// in unrebuilt on-device DBs.
     static func isInterlinearTranslator(_ translator: String?) -> Bool {
-        translator?.hasPrefix("Interlinear (Beta") == true
+        translator?.hasPrefix("Interlinear (") == true
     }
 
     private static let CONTENT_POS: Set<String> = ["NOUN", "PROPN", "VERB", "ADJ"]

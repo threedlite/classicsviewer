@@ -1530,7 +1530,7 @@ class OptimizedZimGenerator:
         if interlinear_data:
             translator_options.append(
                 getattr(self, 'interlinear_translator', None)
-                or 'Interlinear (Beta, AI-generated)')
+                or 'Interlinear (AI-generated)')
 
         # Build dropdown
         if translator_options:

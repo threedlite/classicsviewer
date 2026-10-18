@@ -83,6 +83,12 @@ class SettingsActivity : BaseActivity() {
             PreferencesManager.setShowWordUnderlines(this, isChecked)
         }
         
+        // Setup tap-line-number-to-bookmark switch
+        binding.tapLineNumberToBookmarkSwitch.isChecked = PreferencesManager.getTapLineNumberToBookmark(this)
+        binding.tapLineNumberToBookmarkSwitch.setOnCheckedChangeListener { _, isChecked ->
+            PreferencesManager.setTapLineNumberToBookmark(this, isChecked)
+        }
+        
         // Setup Sinaiticus font switch
         val useSinaiticusFont = PreferencesManager.getUseSinaiticusFont(this)
         binding.useSinaiticusFontSwitch.isChecked = useSinaiticusFont

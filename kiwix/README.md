@@ -163,7 +163,7 @@ The ZIM files include word-by-word interlinear translations for select works:
 
 Access interlinear via the translation dropdown:
 1. Navigate to a work with interlinear data (e.g., Homer → Iliad → Book 1)
-2. In the translation panel, select "Interlinear (Beta, AI-generated from app dictionary)"
+2. In the translation panel, select "Interlinear (AI-generated from app dictionary)"
 3. View word-by-word breakdowns with:
    - **Word**: The Greek word in its original form
    - **Gloss**: English translation/meaning

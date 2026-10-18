@@ -251,6 +251,7 @@ The extended build has a strict four-phase pipeline. Each phase depends on the p
 4. **Interlinear generation** (Step 5) — generates interlinear XMLs for both Greek (~7 hours, 2,048 works) and Latin (**~51 min**, 230 works). Both read dictionary and OGA lemma data from the assembled DB to produce glosses. Without OGA in the DB, glosses will be incomplete.
 5. **Greek and Latin rebuild** (Step 6 again) — rebuild Greek and Latin module DBs importing their new interlinear XMLs
 6. **Second assembly** (Step 7 again) — re-assembles with interlinear, bringing translations to ~3.3M
+7. **Topical packs** (Step 7, "Topical packs") — `topical/build_topical_pack.py greek` then `latin` (~12 min + ~1.5 min). Reads passages and interlinear bags from the assembled extended DB, selecting interlinear rows by the exact translator name, so it must be rebuilt after every second assembly. This is part of the sequence, not a follow-up.
 
 **Do NOT start a later phase before the previous one is fully complete.**
 
@@ -405,6 +406,11 @@ cd latin && ./run_build.sh extended && cd ..
 
 # Second assembly — full extended DB with all interlinear translations.
 cd data-prep && python3 assemble_database.py extended && cd ..
+
+# Topical packs (~12 min Greek, ~1.5 min Latin). Read the assembled extended
+# DB; run after every second assembly. See Step 7, "Topical packs".
+./venv/bin/python3 topical/build_topical_pack.py greek
+./venv/bin/python3 topical/build_topical_pack.py latin
 ```
 
 ⚠ **Gloss quality depends on dictionary quality.** The interlinear generator uses the Wiktionary definitions from `wiktionary_definitions_complete.json`, which is regenerated during each database build. If you update the Wiktionary extraction code, rebuild the databases first, then regenerate interlinear to pick up the improved definitions.
@@ -608,6 +614,11 @@ because they share intermediate state inside that module's directory.
 cd data-prep && nohup ../venv/bin/python3 assemble_database.py extended > /tmp/build_extended.log 2>&1 &
 wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_extended.log; cd ..
 
+# --- topical packs (~14 min; read the extended DB just built) — see "Topical packs" below ---
+nohup ./venv/bin/python3 topical/build_topical_pack.py greek > /tmp/build_topical_greek.log 2>&1 & wait
+nohup ./venv/bin/python3 topical/build_topical_pack.py latin > /tmp/build_topical_latin.log 2>&1 & wait
+grep -E "DONE in|Traceback|Error" /tmp/build_topical_greek.log /tmp/build_topical_latin.log
+
 # --- full (~5 min; filtered from the extended DB just built) ---
 cd data-prep && nohup ../venv/bin/python3 assemble_database.py full > /tmp/build_full.log 2>&1 &
 wait; grep -E "ASSEMBLY COMPLETE|❌|Traceback|CRITICAL" /tmp/build_full.log; cd ..
@@ -629,6 +640,47 @@ Each log ends with `ASSEMBLY COMPLETE (<mode> mode, X.X min)` on success
 or one of the `❌` / `Traceback` / `CRITICAL` markers on failure. If a
 build fails, do **not** continue to the next mode — fix the root cause
 per `BUILD.md` Step 6 troubleshooting and re-run just that stage.
+
+### Topical packs (required after every extended assembly)
+
+The Topical Links feature ships two packs built from the **assembled extended
+DB** (`data-prep/perseus_texts_extended.db`): `topical_greek.db.zip` and
+`topical_latin.db.zip`. They are the `topical_pack` Play Asset Delivery pack
+on Android and On-Demand Resources on iOS. Design and file formats:
+`topical/TOPICAL.md`.
+
+The build enumerates text positions and reads the interlinear
+`translation_segments` rows for each book by **exact translator name**
+(`LANGUAGE_REGISTRY` in `topical/build_topical_pack.py`, currently
+`Interlinear (AI-generated from app dictionary and treebank)`). Any extended
+rebuild that changes text positions, interlinear content, or that translator
+name therefore requires rebuilding both packs. Do not defer this step: a pack
+built against a previous extended DB is stale, and a translator-name mismatch
+produces empty bags (`non-empty bags=0` in the log).
+
+Run only after the second extended assembly has printed `ASSEMBLY COMPLETE`,
+and never in parallel with another build. Defaults match the shipped packs
+(LDA K=1000, 200 iterations, window N=10, `exclude_scope=work`).
+
+```bash
+# Greek (~12 min: 331,767 passages; measured 2026-10-17 11.5 min)
+./venv/bin/python3 topical/build_topical_pack.py greek
+# Latin (~1.5 min: 36,639 passages)
+./venv/bin/python3 topical/build_topical_pack.py latin
+```
+
+Each run ends with `DONE in X min` and places byte-identical copies of the
+zip in three destinations (the script does this itself — never copy by hand):
+
+- `topical_pack/src/main/assets/topical_<lang>.db.zip` (release AAB)
+- `app/src/debug/assets/topical/topical_<lang>.db.zip` (debug APK; rebuild
+  and redeploy the debug APK afterwards so the device has the new pack)
+- `ios/ClassicsViewer/Resources/OnDemand/topical_<lang>.db.zip` (iOS ODR;
+  tag must survive project regeneration — see `project_ios_odr_asset_tags`)
+
+Check: `topical/dist/<lang>/manifest.json` shows the new `topical_build_time`
+and a `passage_count` close to the values above; verification item 4 below
+tests the zips.
 
 ### `--skip-oga` (dev only)
 
@@ -693,6 +745,16 @@ ls -la app/src/debug/assets/perseus_texts.db.zip \
        ios/ClassicsViewer/Resources/OnDemand/perseus_texts_full.db.zip \
        ios/ClassicsViewer/Resources/OnDemand/perseus_texts_extended.db.zip \
        ios/ClassicsViewer/Resources/perseus_texts.db.zip
+
+# 4. Topical packs (after an extended assembly) — must print "No errors
+#    detected", and all three copies must match topical/dist/ byte for byte
+for l in greek latin; do
+  unzip -t "topical/dist/topical_${l}.db.zip" | tail -1
+  shasum -a 256 topical/dist/topical_${l}.db.zip \
+         topical_pack/src/main/assets/topical_${l}.db.zip \
+         app/src/debug/assets/topical/topical_${l}.db.zip \
+         ios/ClassicsViewer/Resources/OnDemand/topical_${l}.db.zip
+done
 ```
 
 Expected values (measured Apr 2026). If a row is off by more than ~5%,
@@ -917,6 +979,8 @@ adb logcat | grep -E "classicsviewer|Perseus"
 | Sample DB | ~8 min |
 | Full DB | ~12 min |
 | Extended DB | ~70 min |
+| Topical pack Greek (331,767 passages, LDA K=1000) | ~12 min |
+| Topical pack Latin (36,639 passages) | ~1.5 min |
 | **Total (worst case, sequential)** | **~19 hours** |
 
 Greek interlinear and Sanskrit can run in parallel if you have CPU/RAM headroom (each uses 8 workers). All other language modules can run in parallel with everything.
@@ -933,6 +997,7 @@ Greek interlinear and Sanskrit can run in parallel if you have CPU/RAM headroom 
 | OGA extraction fails with "End-of-central-directory signature not found" | ZIP64 file, standard `unzip` can't handle it | Use `ditto -x -k` (macOS) or `7z x` (Linux) |
 | Syriac Philippians has 10 chapters of 1 line each | PTA work code collision (pta0001/pta073 vs pta9999/pta073) | Verify syriac build checks author-level code is pta9999 for NT books |
 | Interlinear glosses show "epi ...", leading commas, or "adjective" | Stale `wiktionary_definitions_complete.json` | Rebuild databases (Step 7) to regenerate the definitions file, then regenerate interlinear (Step 5) |
+| Topical build logs `non-empty bags=0`, or Topical Links return nothing / point at wrong passages | Pack built against a different extended DB, or the translator name in `LANGUAGE_REGISTRY` does not match `translation_segments.translator` in the extended DB | Rebuild both topical packs from the current extended DB (Step 7, "Topical packs"); fix the registry name if the generators changed it |
 
 ## Next Steps
 

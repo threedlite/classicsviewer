@@ -420,7 +420,7 @@ python3 create_perseus_database.py extended
 1. Merges `sanskrit/sanskrit_texts.db` into Perseus database (all 272 works)
 2. Scans `../data-sources/classicsviewer_interlinear/` for `*.dcs-eng99.xml` files
 3. Parses TEI XML to extract word-by-word glosses
-4. Creates `translation_segments` with translator "Interlinear (Beta, AI-generated from app dictionary)"
+4. Creates `translation_segments` with translator "Interlinear (AI-generated from app dictionary)"
 5. Uses book_id lookup that handles both:
    - Greek/Latin format: `tlg0012.tlg001.001` (tries work_id + book_number lookup)
    - Sanskrit/DCS format: Direct book_id like `21312` (tries direct construction first)

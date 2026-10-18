@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="32dp"
-            android:text="No bookmarks yet.\n\nLong press on any line number\nwhile reading to add a bookmark."
+            android:text="No bookmarks yet.\n\nLong press on any line number\nwhile reading to add a bookmark\n(or enable tapping line numbers\nin Settings)."
             android:textSize="16sp"
             android:textColor="@android:color/darker_gray"
             android:visibility="gone" />

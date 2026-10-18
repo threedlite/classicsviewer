@@ -20,8 +20,8 @@ object LemmaBagBuilder {
      *  identical between Greek and Latin. Both say "AI-generated": several
      *  jurisdictions require AI-generated content to be labelled as such. */
     fun translatorFor(language: String): String? = when (language.lowercase()) {
-        "greek" -> "Interlinear (Beta, AI-generated from app dictionary and treebank)"
-        "latin" -> "Interlinear (Beta, AI-generated from app dictionary and treebank)"
+        "greek" -> "Interlinear (AI-generated from app dictionary and treebank)"
+        "latin" -> "Interlinear (AI-generated from app dictionary and treebank)"
         else -> null
     }
 
@@ -30,11 +30,11 @@ object LemmaBagBuilder {
      *  Used to exclude interlinear rows from the English-translation slot
      *  in topical-links results, where the per-token lemma+POS text would
      *  otherwise leak through. Matches all current names (Greek/Latin
-     *  "...treebank)", Sanskrit "...Stanza NLP)") and the legacy Latin
-     *  "...AI-generated from app dictionary" still present in unrebuilt
-     *  on-device DBs. */
+     *  "...treebank)", Sanskrit "...Stanza NLP)") and the legacy names
+     *  ("Interlinear (Beta, ..." and "...AI-generated from app dictionary")
+     *  still present in unrebuilt on-device DBs. */
     fun isInterlinearTranslator(translator: String?): Boolean =
-        translator?.startsWith("Interlinear (Beta") == true
+        translator?.startsWith("Interlinear (") == true
 
     // ----- parsers (mirror Python) -----
 

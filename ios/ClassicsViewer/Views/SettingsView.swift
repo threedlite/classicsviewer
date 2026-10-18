@@ -88,7 +88,7 @@ struct SettingsView: View {
                     NavigationLink(destination: ExtendedDatabaseDownloadView()) {
                         HStack {
                             Image(systemName: "cylinder.split.1x2.fill")
-                            Text("Extended Database (Beta)")
+                            Text("Extended Database")
                             Spacer()
                             ExtendedDatabaseStatusBadge()
                         }
@@ -115,7 +115,7 @@ struct SettingsView: View {
                     NavigationLink(destination: TopicalDownloadView()) {
                         HStack {
                             Image(systemName: "camera.filters")
-                            Text("Topical Links (Beta)")
+                            Text("Topical Links")
                             Spacer()
                             TopicalStatusBadge()
                         }
@@ -236,6 +236,10 @@ struct SettingsView: View {
                 // Help Section
                 Section(header: Text("Help")) {
                     Text("On the text view, tap the view label at the bottom (e.g. 'Greek') to switch to a translation (if available), tap a word to view the dictionary, or tap a line number to add a bookmark note.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+
+                    Text("Contains some AI-processed or third party text which may contain errors.")
                         .font(.footnote)
                         .foregroundColor(.secondary)
 

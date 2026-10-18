@@ -306,6 +306,22 @@ class TextLineWithSpeakerAdapter(
                 true
             }
         }
+
+        // Optionally make the line number a tappable link to the bookmark editor
+        // (for systems where long press does not work)
+        val tapLineNumber = onLineLongClick != null &&
+            PreferencesManager.getTapLineNumberToBookmark(holder.itemView.context)
+        if (tapLineNumber) {
+            holder.binding.lineNumber.paintFlags =
+                holder.binding.lineNumber.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
+            holder.binding.lineNumber.setTextColor(holder.binding.lineNumber.linkTextColors)
+            holder.binding.lineNumber.setOnClickListener { onLineLongClick?.invoke(line) }
+        } else {
+            holder.binding.lineNumber.paintFlags =
+                holder.binding.lineNumber.paintFlags and android.graphics.Paint.UNDERLINE_TEXT_FLAG.inv()
+            holder.binding.lineNumber.setOnClickListener(null)
+            holder.binding.lineNumber.isClickable = false
+        }
     }
     
     private fun shouldShowSpeaker(position: Int): Boolean {

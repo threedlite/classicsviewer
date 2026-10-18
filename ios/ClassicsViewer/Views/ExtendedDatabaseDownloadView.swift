@@ -26,7 +26,7 @@ struct ExtendedDatabaseDownloadView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Extended Database (Beta)")
+            .navigationTitle("Extended Database")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -130,7 +130,7 @@ struct ExtendedDatabaseDownloadView: View {
         VStack(spacing: 16) {
             // Description
             VStack(alignment: .leading, spacing: 8) {
-                Text("Extended Database (Beta)")
+                Text("Extended Database")
                     .font(.headline)
                 Text("Includes Perseus + First1KGreek + PTA (~2,600 works). This is the most comprehensive collection of Greek and Latin texts available.")
                     .font(.caption)

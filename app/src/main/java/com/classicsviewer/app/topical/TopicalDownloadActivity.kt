@@ -49,7 +49,7 @@ class TopicalDownloadActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.title = "Topical Links (Beta)"
+        supportActionBar?.title = "Topical Links"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val pad = (24 * resources.displayMetrics.density).toInt()
@@ -62,7 +62,7 @@ class TopicalDownloadActivity : AppCompatActivity() {
         }
         statusView = TextView(this).apply {
             textSize = 16f
-            text = "Beta. Finds passages elsewhere in the corpus related to a " +
+            text = "Finds passages elsewhere in the corpus related to a " +
                 "bookmarked line. Optional ~520 MB download; needs ~2 GB free " +
                 "to install."
         }

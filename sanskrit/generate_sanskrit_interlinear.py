@@ -1136,7 +1136,7 @@ class SanskritInterlinearGenerator:
         xml_lines.append('            <titleStmt>')
         xml_lines.append(f'                <title>{title} - Interlinear Translation</title>')
         xml_lines.append(f'                <author>{author}</author>')
-        xml_lines.append('                <editor role="translator">Interlinear (Beta, AI-generated from DCS dictionary and Stanza NLP)</editor>')
+        xml_lines.append('                <editor role="translator">Interlinear (AI-generated from DCS dictionary and Stanza NLP)</editor>')
         xml_lines.append('                <sponsor>Derived from DCS dictionary, Stanza Sanskrit NLP models</sponsor>')
         xml_lines.append('                <principal></principal>')
         xml_lines.append('                <respStmt>')

@@ -1079,7 +1079,7 @@ def _write_xml_header(f, work_id: str, work_title: str, author_name: str):
     # sent_pos sent_id). Greek and Latin can share parser code at the
     # client end (see app/.../topical/LemmaBagBuilder.kt parseLatin
     # post-LATIN_POS_PLAN.md).
-    f.write('                <editor role="translator">Interlinear (Beta, AI-generated from app dictionary and treebank)</editor>\n')
+    f.write('                <editor role="translator">Interlinear (AI-generated from app dictionary and treebank)</editor>\n')
     f.write('                <sponsor>Derived from Whitaker\'s Words, Perseus LDT v2.1, Stanza UD-Latin (PROIEL)</sponsor>\n')
     f.write('                <principal></principal>\n')
     f.write('                <respStmt>\n')

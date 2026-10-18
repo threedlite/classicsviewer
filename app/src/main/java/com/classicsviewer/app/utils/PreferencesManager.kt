@@ -16,6 +16,7 @@ object PreferencesManager {
     private const val KEY_EXTERNAL_DATABASE_COPIED_TIME = "external_database_copied_time"
     private const val KEY_OCCURRENCE_LIMIT = "occurrence_limit"
     private const val KEY_USE_SINAITICUS_FONT = "use_sinaiticus_font"
+    private const val KEY_TAP_LINE_NUMBER_TO_BOOKMARK = "tap_line_number_to_bookmark"
     private const val KEY_CUSTOM_LANGUAGES = "custom_languages"
     private const val KEY_SUPPRESSED_LANGUAGES = "suppressed_languages"
     private const val KEY_HAS_RUN_AUTO_DETECT_LANGUAGES = "has_run_auto_detect_languages"
@@ -120,6 +121,16 @@ object PreferencesManager {
 
     fun setUseSinaiticusFont(context: Context, use: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_USE_SINAITICUS_FONT, use).apply()
+    }
+
+    // Tap line number to open bookmark editor (alternative to long press,
+    // which does not work on some systems)
+    fun getTapLineNumberToBookmark(context: Context): Boolean {
+        return getPrefs(context).getBoolean(KEY_TAP_LINE_NUMBER_TO_BOOKMARK, false)
+    }
+
+    fun setTapLineNumberToBookmark(context: Context, enabled: Boolean) {
+        getPrefs(context).edit().putBoolean(KEY_TAP_LINE_NUMBER_TO_BOOKMARK, enabled).apply()
     }
 
     // Wrap interlinear text preference

@@ -1,36 +1,11 @@
 XML STRUCTURAL PATTERNS - WORKS BY PATTERN
 ============================================================
 
-Total unique patterns: 5
-Total works analyzed: 6
-
-============================================================
-PATTERN: edition → textpart(book) → textpart(poem) → l
-COUNT: 2 works
-------------------------------------------------------------
-  phi0893.phi001 - Horace: Odes [Perseus Latin]
-  phi0893.phi004 - Horace: Satires [Perseus Latin]
-
-============================================================
-PATTERN: edition → textpart(book) → l
-COUNT: 1 works
-------------------------------------------------------------
-  phi0690.phi002 - P. Vergilius Maro (Virgil): Georgics [Perseus Latin]
+Total unique patterns: 1
+Total works analyzed: 1
 
 ============================================================
 PATTERN: edition(book) → textpart(book) → l
 COUNT: 1 works
 ------------------------------------------------------------
   phi0690.phi003 - P. Vergilius Maro (Virgil): Aeneid [Perseus Latin]
-
-============================================================
-PATTERN: edition → textpart(poem) → sp
-COUNT: 1 works
-------------------------------------------------------------
-  phi0690.phi001 - P. Vergilius Maro (Virgil): Eclogues [Perseus Latin]
-
-============================================================
-PATTERN: edition → l
-COUNT: 1 works
-------------------------------------------------------------
-  phi0893.phi006 - Horace: The Art of Poetry: To the Pisos [Perseus Latin]

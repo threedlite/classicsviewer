@@ -104,7 +104,7 @@ def import_sanskrit_interlinear(db_path, interlinear_dir):
                         break
 
             if not translator:
-                translator = "Interlinear (Beta, AI-generated from DCS dictionary and Stanza NLP)"
+                translator = "Interlinear (AI-generated from DCS dictionary and Stanza NLP)"
 
             # Find all books in the translation
             segments_imported = 0
