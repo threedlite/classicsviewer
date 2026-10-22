@@ -8,8 +8,9 @@ The app is restricted to users 18 and older. On Apple and Android, age is confir
 There is a download option within the menu to optionally retrieve the large full db from Google Play Store and Apple App Store. This has interlinear for all Greek and Latin plus a latin dictionary in addition to the Greek one. A few Akkadian and Sumerian texts are there as well. Another option exists to download the full Chamberlain Iliad audio.
 Audio licensed as CC-BY, © 2016, 2017 by David Chamberlain. https://creativecommons.org/licenses/by/4.0/  Source: https://hypotactic.com/my-reading-of-homer-work-in-progress/ 
  
+Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. Download extended db module from within app on both app stores.
 
-Extended db support with First1k data (https://github.com/OpenGreekAndLatin/First1KGreek/tree/master). 300+ authors, 900+ works, some untranslated. 40G free on device needed. Download extended db module from within app on both app stores, or on Android, install external db perseus_texts_extended.db.zip from  https://www.patreon.com/posts/classics-viewer-141298606  (free) or build locally.  Patreon links are for production hosting purposes. All files there are free, and where my copyright, licensed CC-BY.
+The GitHub release https://github.com/threedlite/classicsviewer/releases/tag/data-2026-10-17 (see fetch_release.sh) is not a runnable program and not an app download. It holds only intermediate build components (the assembled database zips, asset packs, module databases, generated interlinear XML and caches) so that someone building the app from this repo can skip some lengthy steps. The built app itself is obtainable on Google or Apple App Stores. 
 
 
   SAMPLE DATABASE (632MB, 143MB compressed):
